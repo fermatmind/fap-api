@@ -1,12 +1,1879 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "适合先体验：愿意把图样要求转成装配和测试步骤，分析结果并清楚描述制造问题与建议；下方尺寸公差核对只是测量质量切片。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "慎重观察：如果在期限压力下容易跳过版本、单位或例外条件，先用下方机械工程技师与技术员纸面材料测试自己的错误模式。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "体验方法：只用下方给出的记录和规则完成“计算每项上下限和偏差，形成检验记录。”，再按参考答案逐条检查。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.quick-decision.fit-decision-checklist.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "安全边界：图样、零件和读数均虚构；不操作机床、压力设备或带电样机，不批准工程设计。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.quick-decision.fit-decision-checklist.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "职业身份：机械工程技师与技术员对应美国O*NET代码17-3027.00。本页用它限定职业任务，不把美国代码当作中国职称或执业许可。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.profile.work-context-block.1",
+          "source_refs": [
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "美国O*NET描述的机械工程技师与技术员会准备图样和布置、装配或修改设备、开展测试、分析结果、支持制造并提出设计或流程建议；具体分工可随technologist/technician岗位和雇主变化。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.profile.work-context-block.2",
+          "source_refs": [
+            "onet-detail",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "典型工作链可能从图样和布置开始，延伸到装配、测量与测试、结果分析、制造问题处理和建议记录；工程人员按组织权限审查设计变更或放行。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.profile.work-context-block.3",
+          "source_refs": [
+            "onet-detail",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断：判断测量是否在公差内、测量条件是否有效，以及异常应重测还是升级。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.profile.work-context-block.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "常见环境：制造、工程服务、研发实验室或试验现场，部分任务靠近运行设备。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.profile.work-context-block.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "常用工具：卡尺/千分尺等量具、CAD查看、测试采集、电子表格与问题跟踪；工具输出必须回到原材料验证。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.profile.work-context-block.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "该职业通常在工程师、工程技师或物理科学家指导下支持设备的修改、开发、测试或调整；技术建议不自动等于设计批准或产品放行。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.profile.work-context-block.7",
+          "source_refs": [
+            "onet-detail",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：图号版次、特征、单位、公差、量具状态、读数、判定和复核签字完整。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.profile.work-context-block.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "机械工程师更侧重分析、设计和对系统方案承担工程责任；技术员的装配、测试和制造经验可迁移，但通常还需更深入的工程理论与设计职责准备。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "bls-mechanical"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "工业工程技师与技术员更聚焦生产流程、效率、质量和成本数据；机械测试与制造经验可迁移，但分析对象从设备结构转向系统化运营改进。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "bls-mechanical"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "校准技术员以测量设备的精度、校准和可追溯性为核心；量具与测试经验可迁移，但工作产出不是机械设备设计或整机开发。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "bls-mechanical"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "航空航天工程师负责飞行器系统设计与验证，试验记录可迁移但安全关键设计能力差距大。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "adj-1",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "电气工程师设计电气系统，测量与问题单经验可迁移，电路分析和专业责任不同。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "adj-2",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "电子工程师（计算机除外）交付电子设备设计，测试习惯可迁移，电子设计知识是缺口。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.direction-comparison.adjacent-career-comparison-table.6",
+          "source_refs": [
+            "adj-3",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "工业工程师优化生产系统与效率，制造数据可迁移，但流程建模与系统级决策更重。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.direction-comparison.adjacent-career-comparison-table.7",
+          "source_refs": [
+            "adj-4",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "航空航天工程师",
+                "id": "adj-link-1",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/aerospace-engineers"
+              },
+              {
+                "entity": "电气工程师",
+                "id": "adj-link-2",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/electrical-engineers"
+              },
+              {
+                "entity": "电子工程师（计算机除外）",
+                "id": "adj-link-3",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/electronics-engineers-except-computer"
+              },
+              {
+                "entity": "工业工程师",
+                "id": "adj-link-4",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/industrial-engineers"
+              }
+            ]
+          },
+          "id": "mechanical-engineering-technicians.direction-comparison.adjacent-career-comparison-table.8",
+          "source_refs": [
+            "adj-1",
+            "onet-main"
+          ],
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可从图样和读数生成初步检验表"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "若图号版次或量具单位错误，自动判定会批量出错"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用前需受控图纸、校准状态、规则版本和工程复核"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "输入端确认图号、版次、mm单位和量具有效期"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "输出端复算偏差并抽查临界值"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工负责重测、停机升级、设计解释和批准"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "没有该职业AI采用率或净就业因果证据"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "应学习测量不确定性、测试记录和工程变更流程"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "NIST的生成式AI风险画像可用于检查虚构、隐私、信息完整性和过度依赖等通用风险；它不是本职业采用率或事故率。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.ai-impact.ai-impact-table.9",
+          "source_refs": [
+            "nist"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据。本次核对国家统计局2025年城镇单位工资发布；该页按地区、行业、登记类型和人员大类统计，未提供机械工程技师与技术员这一O*NET详细职业的全国同口径工资。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "因此本页不提供中国全国点估计，也不拿宽行业均值替代个人工资；这只是本次来源范围内未取得，不宣称全国不存在其他资料。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较具体岗位时应记录城市、税前/税后、月薪/年薪、固定/浮动、工时、经验和实际职责。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "若使用招聘报价，应保留职位原文、日期和样本范围；本页未做招聘计数，不声称市场频率。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2026年O*NET精确职业数据代码：17-3027.00。O*NET/BLS数据与机械工程技师与技术员的SOC职业口径一致。"
+            ]
+          },
+          "fact_refs": [
+            "identity"
+          ],
+          "id": "mechanical-engineering-technicians.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据的2025年工资中位数为74,510美元/年；覆盖受雇者，不是税后收入或新人起薪。"
+            ]
+          },
+          "fact_refs": [
+            "median"
+          ],
+          "id": "mechanical-engineering-technicians.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "us-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据的2025年小时工资中位数为35.82美元/小时；不在未知工时下自行换算个人年收入。"
+            ]
+          },
+          "fact_refs": [
+            "low"
+          ],
+          "id": "mechanical-engineering-technicians.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "us-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据的2024年就业规模为38,300名受雇者；这是存量，不是当年招聘数。"
+            ]
+          },
+          "fact_refs": [
+            "high"
+          ],
+          "id": "mechanical-engineering-technicians.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "us-employment"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据的2024—2034年预计年均职位空缺为3,200个/年；包含增长与替补，不等于净新增。"
+            ]
+          },
+          "fact_refs": [
+            "trend"
+          ],
+          "id": "mechanical-engineering-technicians.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "us-projections"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "当前来源没有单独的新毕业生工资；经验、地区、行业和职责仍需在具体职位中核对。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "能把工程图样和技术要求转成装配、测试与记录步骤"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.fit.personality-fit-block.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "愿意依据测试结果定位设备或制造问题，而不是只判合格与否"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.fit.personality-fit-block.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "会确认图纸版次、设备配置、试验条件与量具状态"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.fit.personality-fit-block.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "能分析测试结果，并把观察、推测和设计或流程建议分开写"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.fit.personality-fit-block.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "愿意向工程师清楚描述异常"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.fit.personality-fit-block.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "可接受重复测量与文档工作"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.fit.personality-fit-block.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "面对异响或裂纹会停止而非继续试验"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.fit.personality-fit-block.7",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "纸面检验可测试细节负担，不代表设备操作授权"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.fit.personality-fit-block.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：使用v1图样检验v2零件。影响：判定标准错误。控制：停止并确认有效图号版次。复核/责任：工程配置负责人确认。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.risk.career-risk-cards.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：卡尺校准已过期。影响：读数可信度不足。控制：标记无效并用合格量具重测。复核/责任：质量负责人决定接受性。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.risk.career-risk-cards.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：轴径读数20.06mm超过上限。影响：装配可能干涉。控制：记录不合格，不自行修磨。复核/责任：工程师决定返工/偏差处置。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.risk.career-risk-cards.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：技术员把建议改成批准版图样。影响：未经授权的设计进入制造。控制：恢复受控版本并提交变更建议。复核/责任：工程师批准设计变更。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.risk.career-risk-cards.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "本页只训练虚构图样与读数的纸面判断；不操作设备、不自行修磨、不批准设计或产品放行，真实职责和复核权限按雇主流程执行。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.risk.career-risk-cards.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "本页没有招聘样本或频率统计；下面是依据职业任务整理的能力展示建议，不代表普遍录用门槛。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.path.recruitment-sample.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-role-comparison",
+          "data": {
+            "column_keys": [
+              "stage",
+              "possible_check",
+              "observed_evidence"
+            ],
+            "rows": [
+              [
+                "副学士/专上训练",
+                "机械基础、制图、测量和测试作品",
+                "美国典型路径，不等于统一许可"
+              ],
+              [
+                "入门技术岗位",
+                "在工程人员指导下装配、测量、测试并记录",
+                "异常与建议须可追溯"
+              ],
+              [
+                "成熟技术支持",
+                "分析测试数据、改进制造或提出设计建议",
+                "设计批准与产品放行按组织权限执行"
+              ]
+            ]
+          },
+          "id": "mechanical-engineering-technicians.path.entry-role-comparison.1",
+          "source_refs": [
+            "bls-mechanical",
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.employer-evidence",
+          "data": {
+            "entries": [
+              {
+                "id": "card-1",
+                "values": [
+                  "任务依据",
+                  "来自O*NET职业任务，不是雇主频率"
+                ]
+              },
+              {
+                "id": "card-2",
+                "values": [
+                  "展示方式",
+                  "保存输入、规则、判断与复核轨迹"
+                ]
+              }
+            ]
+          },
+          "id": "mechanical-engineering-technicians.path.employer-evidence.1",
+          "source_refs": [
+            "editor",
+            "onet-detail",
+            "onet-main"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-portfolio",
+          "data": {
+            "entries": [
+              {
+                "id": "card-1",
+                "values": [
+                  "原始材料",
+                  "保留页面给出的虚构记录"
+                ]
+              },
+              {
+                "id": "card-2",
+                "values": [
+                  "判断记录",
+                  "逐项写规则、结果与未知"
+                ]
+              },
+              {
+                "id": "card-3",
+                "values": [
+                  "交接摘要",
+                  "写结论、限制与复核人"
+                ]
+              }
+            ]
+          },
+          "id": "mechanical-engineering-technicians.path.entry-portfolio.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.interview-probation",
+          "data": {
+            "column_keys": [
+              "stage",
+              "possible_check",
+              "observed_evidence"
+            ],
+            "rows": [
+              [
+                "面试",
+                "讲清一处错误如何发现",
+                "材料行与规则"
+              ],
+              [
+                "试用",
+                "先核版本和权限",
+                "未决项清单"
+              ],
+              [
+                "交付",
+                "说明限制和下一步",
+                "复核记录"
+              ]
+            ]
+          },
+          "id": "mechanical-engineering-technicians.path.interview-probation.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-decision",
+          "data": {
+            "column_keys": [
+              "stage",
+              "possible_check",
+              "observed_evidence"
+            ],
+            "rows": [
+              [
+                "学历/课程",
+                "可展示相关知识与学习经历",
+                "不能单独证明岗位胜任或法定授权"
+              ],
+              [
+                "软件证书",
+                "可展示特定工具训练",
+                "不等于职业许可或项目授权"
+              ],
+              [
+                "单位培训",
+                "可展示本机构流程训练",
+                "不自动形成跨机构授权"
+              ],
+              [
+                "职业许可/注册",
+                "仅在签发法域与范围内有效",
+                "仍须核对雇主及具体项目要求"
+              ]
+            ]
+          },
+          "id": "mechanical-engineering-technicians.path.credential-decision.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-boundary",
+          "data": {
+            "paragraphs": [
+              "学历、课程、软件证书、单位培训、职业许可和项目授权是不同概念；具体要求按职位和法域核对。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.path.credential-boundary.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "美国BLS称机械工程技师与技术员通常需要副学士学位或其他专上训练；课程和作品可展示机械基础、制图、测量与测试能力，但具体学历、工具要求和放行权限由雇主岗位决定。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.path.career-path-block.1",
+          "source_refs": [
+            "bls-mechanical"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转各工程师岗位需相应工程教育与设计责任；转工业工程可利用制造数据经验但需系统分析。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.path.career-path-block.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "以下机械工程技师与技术员纸面材料全部虚构并完整显示。任务：计算每项上下限和偏差，形成检验记录。 安全边界：图样、零件和读数均虚构；不操作机床、压力设备或带电样机，不批准工程设计。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.path.entry-work-sample-data.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "material-1-1",
+                "values": [
+                  "检验特征：F1孔距",
+                  "图样要求：要求50.00±0.10 mm",
+                  "测量读数：读数50.08 mm",
+                  "量具状态：量具C-1有效",
+                  "待判状态：待判"
+                ]
+              },
+              {
+                "id": "material-1-2",
+                "values": [
+                  "检验特征：F2轴径",
+                  "图样要求：要求20.00±0.05 mm",
+                  "测量读数：读数20.06 mm",
+                  "量具状态：量具M-2有效",
+                  "待判状态：待判"
+                ]
+              },
+              {
+                "id": "material-1-3",
+                "values": [
+                  "检验特征：F3板厚",
+                  "图样要求：要求3.00±0.10 mm",
+                  "测量读数：读数2.92 mm",
+                  "量具状态：量具C-1有效",
+                  "待判状态：待判"
+                ]
+              }
+            ]
+          },
+          "id": "mechanical-engineering-technicians.path.entry-work-sample-data.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "material-2-1",
+                "values": [
+                  "规则类别：判定",
+                  "检验规则：下限≤读数≤上限为合格；不做额外舍入"
+                ]
+              },
+              {
+                "id": "material-2-2",
+                "values": [
+                  "规则类别：版本",
+                  "检验规则：图样D-17 v2为唯一练习依据"
+                ]
+              },
+              {
+                "id": "material-2-3",
+                "values": [
+                  "规则类别：权限",
+                  "检验规则：只写检验记录；不操作设备、不批准设计或偏差放行"
+                ]
+              }
+            ]
+          },
+          "id": "mechanical-engineering-technicians.path.entry-work-sample-data.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "任务：计算每项上下限和偏差，形成检验记录。",
+              "参考答案：F1范围49.90–50.10，50.08合格；F2范围19.95–20.05，20.06超上限0.01，不合格；F3范围2.90–3.10，2.92合格。F2交工程师/质量负责人，不自行修磨或放行。",
+              "边界：图样、零件和读数均虚构；不操作机床、压力设备或带电样机，不批准工程设计。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.path.entry-work-sample-data.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "day-1",
+                "values": [
+                  "第1日",
+                  "理解材料",
+                  "标出字段、单位与版本"
+                ]
+              },
+              {
+                "id": "day-2",
+                "values": [
+                  "第2日",
+                  "按规则初判",
+                  "完成第一版记录"
+                ]
+              },
+              {
+                "id": "day-3",
+                "values": [
+                  "第3日",
+                  "复算/复读",
+                  "找出算术、时间或逻辑错误"
+                ]
+              },
+              {
+                "id": "day-4",
+                "values": [
+                  "第4日",
+                  "写异常清单",
+                  "区分可确认与待确认"
+                ]
+              },
+              {
+                "id": "day-5",
+                "values": [
+                  "第5日",
+                  "写交接",
+                  "指定复核人与限制"
+                ]
+              },
+              {
+                "id": "day-6",
+                "values": [
+                  "第6日",
+                  "对照答案修订",
+                  "保留初稿与改动原因"
+                ]
+              },
+              {
+                "id": "day-7",
+                "values": [
+                  "第7日",
+                  "复盘负担",
+                  "记录最耗注意力的步骤"
+                ]
+              }
+            ]
+          },
+          "id": "mechanical-engineering-technicians.path.seven-day-trial.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "能否仅依材料复现答案",
+              "是否会漏单位、版本或例外",
+              "能否解释为何暂停并升级",
+              "是否愿意继续练习同类任务"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.path.seven-day-decision.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国官方预测：Mechanical Engineering Technologists and Technicians在2024—2034年预计年均空缺为3,200个/年，该指标含增长与替补。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.market-signals.market-signal-card.1",
+          "source_refs": [
+            "us-projections"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "本页没有雇主样本或招聘频率统计，不把O*NET任务或软件页面写成当前招聘热度。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.market-signals.market-signal-card.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "本页没有该职业AI实际采用率或净就业因果证据；任务可辅助不等于职位减少。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.market-signals.market-signal-card.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "转向选择：转各工程师岗位需相应工程教育与设计责任；转工业工程可利用制造数据经验但需系统分析。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "决策时应分别看官方预测、具体职位原文、个人作品和资格/授权差距，不能把不同市场和时期合成一个增长结论。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "美国O*NET描述的机械工程技师与技术员会准备图样和布置、装配或修改设备、开展测试、分析结果、支持制造并提出设计或流程建议；具体分工可随technologist/technician岗位和雇主变化。",
+                "id": "mechanical-engineering-technicians.faq.1",
+                "question_key": "career.faq.mechanical-engineering-technicians.daily-work",
+                "source_refs": [
+                  "onet-detail",
+                  "onet-main"
+                ]
+              },
+              {
+                "answer": "机械工程师更侧重分析、设计和对系统方案承担工程责任；技术员的装配、测试和制造经验可迁移，但通常还需更深入的工程理论与设计职责准备。",
+                "id": "mechanical-engineering-technicians.faq.2",
+                "question_key": "career.faq.mechanical-engineering-technicians.role-comparison",
+                "source_refs": [
+                  "bls-mechanical"
+                ]
+              },
+              {
+                "answer": "能把工程图样和技术要求转成装配、测试与记录步骤",
+                "id": "mechanical-engineering-technicians.faq.3",
+                "question_key": "career.faq.mechanical-engineering-technicians.fit",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "可从图样和读数生成初步检验表",
+                "id": "mechanical-engineering-technicians.faq.4",
+                "question_key": "career.faq.mechanical-engineering-technicians.ai-impact",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "可从图样和读数生成初步检验表",
+                "id": "mechanical-engineering-technicians.faq.5",
+                "question_key": "career.faq.mechanical-engineering-technicians.automatable-tasks",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "人工负责重测、停机升级、设计解释和批准",
+                "id": "mechanical-engineering-technicians.faq.6",
+                "question_key": "career.faq.mechanical-engineering-technicians.human-control",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "暂无可安全使用的数据。本次核对国家统计局2025年城镇单位工资发布；该页按地区、行业、登记类型和人员大类统计，未提供机械工程技师与技术员这一O*NET详细职业的全国同口径工资。",
+                "id": "mechanical-engineering-technicians.faq.7",
+                "question_key": "career.faq.mechanical-engineering-technicians.china-pay",
+                "source_refs": [
+                  "nbs"
+                ]
+              },
+              {
+                "answer": "Mechanical Engineering Technologists and Technicians的年工资中位数为74,510美元/年。",
+                "id": "mechanical-engineering-technicians.faq.8",
+                "question_key": "career.faq.mechanical-engineering-technicians.us-pay",
+                "source_refs": [
+                  "us-wage"
+                ]
+              },
+              {
+                "answer": "美国BLS称机械工程技师与技术员通常需要副学士学位或其他专上训练；课程和作品可展示机械基础、制图、测量与测试能力，但具体学历、工具要求和放行权限由雇主岗位决定。",
+                "id": "mechanical-engineering-technicians.faq.9",
+                "question_key": "career.faq.mechanical-engineering-technicians.education-path",
+                "source_refs": [
+                  "bls-mechanical"
+                ]
+              },
+              {
+                "answer": "本页只训练虚构图样与读数的纸面判断；不操作设备、不自行修磨、不批准设计或产品放行，真实职责和复核权限按雇主流程执行。",
+                "id": "mechanical-engineering-technicians.faq.10",
+                "question_key": "career.faq.mechanical-engineering-technicians.risk-boundary",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "转向选择：转各工程师岗位需相应工程教育与设计责任；转工业工程可利用制造数据经验但需系统分析。",
+                "id": "mechanical-engineering-technicians.faq.11",
+                "question_key": "career.faq.mechanical-engineering-technicians.outlook-transition",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "适合先体验：愿意把图样要求转成装配和测试步骤，分析结果并清楚描述制造问题与建议；下方尺寸公差核对只是测量质量切片。",
+                "id": "mechanical-engineering-technicians.faq.12",
+                "question_key": "career.faq.mechanical-engineering-technicians.career-worth",
+                "source_refs": [
+                  "editor"
+                ]
+              }
+            ]
+          },
+          "id": "mechanical-engineering-technicians.sources.faq.1",
+          "source_refs": [
+            "bls-mechanical",
+            "editor",
+            "nbs",
+            "onet-detail",
+            "onet-main",
+            "us-wage"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "美国职业身份为O*NET 17-3027.00；中国职位名称、资格和授权按具体雇主与法域核验。",
+              "中国工资为本次指定官方来源中的有界缺口；美国统计按Mechanical Engineering Technologists and Technicians及各自数据期解释。",
+              "练习材料和数值均为编辑设计：图样、零件和读数均虚构；不操作机床、压力设备或带电样机，不批准工程设计。"
+            ]
+          },
+          "id": "mechanical-engineering-technicians.sources.boundary.1",
+          "source_refs": [
+            "adj-1",
+            "adj-2",
+            "adj-3",
+            "adj-4",
+            "bls-mechanical",
+            "editor",
+            "nbs",
+            "nist",
+            "onet-detail",
+            "onet-main",
+            "us-employment",
+            "us-projections",
+            "us-wage"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "机械工程技师与技术员",
+                "id": "mechanical-engineering-technicians.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "机械工程技师与技术员",
+                "id": "mechanical-engineering-technicians.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "机械工程技师与技术员",
+                "id": "mechanical-engineering-technicians.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "机械工程技师与技术员",
+                "id": "mechanical-engineering-technicians.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "机械工程技师与技术员",
+                "id": "mechanical-engineering-technicians.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "机械工程技师与技术员",
+                "id": "mechanical-engineering-technicians.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "机械工程技师与技术员",
+                "id": "mechanical-engineering-technicians.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "机械工程技师与技术员",
+                "id": "mechanical-engineering-technicians.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "机械工程技师与技术员",
+                "id": "mechanical-engineering-technicians.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "机械工程技师与技术员",
+                "id": "mechanical-engineering-technicians.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "机械工程技师与技术员",
+                "id": "mechanical-engineering-technicians.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "mechanical-engineering-technicians.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业航空航天工程师（17-2011.00）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-1",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "航空航天工程师 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业电气工程师（17-2071.00）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-2",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "电气工程师 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2071.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业电子工程师（计算机除外）（17-2072.00）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-3",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "电子工程师（计算机除外）O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2072.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业工业工程师（17-2112.00）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-4",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "工业工程师 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2112.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "美国BLS说明该职业通常需要副学士或其他专上训练，并概述图样、装配、测试、数据分析、制造支持和设计建议等职责。",
+                  "美国官方职业资料不能直接外推为中国或其他法域的统一学历、许可或录用要求。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "bls-mechanical",
+                "limitation": "美国官方职业资料不能直接外推为中国或其他法域的统一学历、许可或录用要求。",
+                "market": "美国",
+                "name": "美国BLS职业展望：机械工程技师与技术员",
+                "period": "2026访问的职业展望",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/mechanical-engineering-technicians.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "基于已列职业事实设计判断提示、风险控制和完整虚构练习；模拟数字不是现实统计。",
+                  "不代表雇主政策、执业授权、真实事故、招聘频率或统计调查。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "editor",
+                "limitation": "不代表雇主政策、执业授权、真实事故、招聘频率或统计调查。",
+                "market": "全球",
+                "name": "机械工程技师与技术员内容与模拟练习编辑设计",
+                "period": "2026-09-06",
+                "publisher": "本任务编辑",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "按地区、行业、登记类型和五类人员发布平均工资，未提供本O*NET详细职业同口径工资。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nbs",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025年",
+                "publisher": "国家统计局",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "通用生成式AI风险类别与治理框架，不报告本职业部署或就业影响。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nist",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "全球",
+                "name": "生成式人工智能风险管理画像",
+                "period": "2024 NIST AI 600-1",
+                "publisher": "美国国家标准与技术研究院",
+                "scope": "exact",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "任务、活动、工作环境与准备信息。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet-detail",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "机械工程技师与技术员 O*NET详细档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-3027.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "职业代码17-3027.00、定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet-main",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "机械工程技师与技术员 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-3027.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "就业存量覆盖：Mechanical Engineering Technologists and Technicians。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-employment",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "机械工程技师与技术员美国就业规模",
+                "period": "2024 BLS就业规模",
+                "publisher": "O*NET OnLine（展示BLS）",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/17-3027.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "年均空缺覆盖：Mechanical Engineering Technologists and Technicians，包含增长与替补。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-projections",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "机械工程技师与技术员美国就业预测",
+                "period": "2024—2034 BLS就业预测",
+                "publisher": "O*NET OnLine（展示BLS）",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/17-3027.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "工资数据覆盖：Mechanical Engineering Technologists and Technicians；不是新人薪酬。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-wage",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "机械工程技师与技术员美国工资",
+                "period": "2025 BLS OEWS",
+                "publisher": "O*NET OnLine（展示BLS OEWS）",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/17-3027.00"
+              }
+            ]
+          },
+          "id": "mechanical-engineering-technicians.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "17-3027.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业代码",
+        "occupation_scope": "精确职业数据：Mechanical Engineering Technologists and Technicians；O*NET 17-3027.00",
+        "period": "2026 O*NET职业档案",
+        "source_refs": [
+          "onet-main"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "74,510美元/年",
+        "fact_id": "median",
+        "market": "美国",
+        "measure": "年工资中位数",
+        "occupation_scope": "精确职业数据；BLS/O*NET统计覆盖：Mechanical Engineering Technologists and Technicians；页面主题：机械工程技师与技术员（17-3027.00）",
+        "period": "2025 BLS OEWS",
+        "source_refs": [
+          "us-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "35.82美元/小时",
+        "fact_id": "low",
+        "market": "美国",
+        "measure": "小时工资中位数",
+        "occupation_scope": "精确职业数据；BLS/O*NET统计覆盖：Mechanical Engineering Technologists and Technicians；页面主题：机械工程技师与技术员（17-3027.00）",
+        "period": "2025 BLS OEWS",
+        "source_refs": [
+          "us-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "38,300名受雇者",
+        "fact_id": "high",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "精确职业数据；BLS/O*NET统计覆盖：Mechanical Engineering Technologists and Technicians；页面主题：机械工程技师与技术员（17-3027.00）",
+        "period": "2024 BLS就业规模",
+        "source_refs": [
+          "us-employment"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "3,200个/年",
+        "fact_id": "trend",
+        "market": "美国",
+        "measure": "年均职位空缺",
+        "occupation_scope": "精确职业数据；BLS/O*NET统计覆盖：Mechanical Engineering Technologists and Technicians；页面主题：机械工程技师与技术员（17-3027.00）",
+        "period": "2024—2034 BLS就业预测",
+        "source_refs": [
+          "us-projections"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "755406810340f9ddd0c7ebbdae44add4d9ec5823a98b9b9281fc05d65309c6bb",
+  "source_content_sha256": "adea781a48294d6ceba3fb8a61f4d4ec73a276edf84fa6c13745880f6ab6057b",
   "subject": {
     "canonical_slug": "mechanical-engineering-technicians",
     "name": "机械工程技师与技术员",
-    "summary": null
+    "summary": "机械工程技师与技术员依据工程图样和技术要求支持设备设计开发，准备布置，装配或修改设备，执行测试、分析结果并协助解决制造问题。页面另以虚构尺寸检验提供低风险体验，明确设计批准、偏差放行和设备操作边界。"
   }
 }

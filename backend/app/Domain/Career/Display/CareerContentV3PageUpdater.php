@@ -59,7 +59,10 @@ final class CareerContentV3PageUpdater
             $manifest['files'],
         );
         $manifest['set_hashes']['source_semantic_aggregate_sha256'] = CareerCurrentAuthorityPackage::hashValue($semanticHashes);
-        $manifest['source_registry_sha256'] = $this->sourceRegistryHash($currentRoot, $manifest, $slug, $locale, $page);
+        $sourceSummary = $this->sourceSummary($currentRoot, $manifest, $slug, $locale, $page);
+        $manifest['source_registry_sha256'] = $sourceSummary['sha256'];
+        $manifest['coverage']['enhanced_locale_pages'] = $sourceSummary['enhanced'];
+        $manifest['coverage']['legacy_locale_pages'] = $sourceSummary['legacy'];
         $projection = array_intersect_key($manifest, array_flip([
             'authority_path', 'compiler_version', 'contract_version', 'coverage', 'files', 'locales',
             'schema_version', 'set_hashes', 'source_registry_sha256',
@@ -124,14 +127,20 @@ final class CareerContentV3PageUpdater
     }
 
     /** @param array<string,mixed> $manifest @param array<string,mixed> $candidate */
-    private function sourceRegistryHash(string $currentRoot, array $manifest, string $slug, string $locale, array $candidate): string
+    private function sourceSummary(string $currentRoot, array $manifest, string $slug, string $locale, array $candidate): array
     {
         $registries = [];
+        $counts = ['enhanced' => 0, 'legacy' => 0];
         foreach ($manifest['files'] as $entry) {
             $identity = $entry['canonical_slug'].'|'.$entry['locale'];
             $page = $entry['canonical_slug'] === $slug && $entry['locale'] === $locale
                 ? $candidate
                 : $this->read($currentRoot.'/'.$entry['path'], 'CURRENT_CONTENT_V3_JSON_INVALID');
+            $state = $page['content_state'] ?? null;
+            if (! is_string($state) || ! array_key_exists($state, $counts)) {
+                throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_INVALID');
+            }
+            $counts[$state]++;
             $sources = [];
             foreach ((array) ($page['blocks'] ?? []) as $block) {
                 foreach ((array) ($block['items'] ?? []) as $item) {
@@ -143,7 +152,7 @@ final class CareerContentV3PageUpdater
             $registries[] = [$identity, CareerCurrentAuthorityPackage::hashValue($sources)];
         }
 
-        return CareerCurrentAuthorityPackage::hashValue($registries);
+        return ['sha256' => CareerCurrentAuthorityPackage::hashValue($registries)] + $counts;
     }
 
     /** @return array<string,mixed> */

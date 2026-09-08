@@ -1,12 +1,1640 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：这份工作不是临时陪玩，而是在私人家庭中持续照护儿童。你需要按家长约定准备膳食、安排作息和活动、观察变化并完成清楚交接；若更喜欢可中断、低责任的任务，应先谨慎试做。"
+            ]
+          },
+          "id": "nannies.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "可观察信号：能同时留意儿童的饮食、情绪、活动和环境变化，按约定调整安排，并把发生了什么、做了什么和仍需家长确认什么写清楚。若容易忽略连续观察或不愿在不确定时主动求助，实际照护会有较高风险。"
+            ]
+          },
+          "id": "nannies.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "onet-context",
+            "onet-tasks"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全小体验：只用虚构材料，为一名学龄前儿童安排半天照护。材料包括家长给出的饮食禁忌、午睡窗口、可选室内活动和两个待确认事项；输出一页时间表、一份风险清单和一段交接记录，不接触真实儿童或真实家庭信息。"
+            ]
+          },
+          "id": "nannies.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "复核时逐项检查：时间表是否遵守已知条件，禁忌是否转成明确停止点，两个未知项是否仍标为待确认，交接记录是否区分观察、行动和建议。不要把未提供的信息补成事实，也不要把纸面练习当成真实照护能力证明。"
+            ]
+          },
+          "id": "nannies.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial-exercise",
+            "onet-tasks"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "本页的精确职业范围是美国 O*NET 39-9011.01 Nannies：在私人家庭照护儿童，并协助家长满足儿童在身体、情绪、认知与社交方面的需要。它不包含幼儿园管理、社会工作或医疗诊断。"
+            ]
+          },
+          "id": "nannies.profile.definition-block.1",
+          "source_refs": [
+            "onet-context",
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "工作输入包括家长交代的饮食禁忌、作息、接送安排、活动选择、家庭规则，以及儿童当下的状态与环境变化。"
+            ]
+          },
+          "id": "nannies.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-context",
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "日常流程通常是接班确认—准备膳食与用品—组织活动和休息—持续观察—处理例外—向家长交接；任何未确认条件都应保留为未知。"
+            ]
+          },
+          "id": "nannies.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-context",
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "主要产出不是一张通用记录表，而是安全、连续的实际照护，以及能让家长理解当日饮食、睡眠、活动、情绪、异常和待办的交接信息。"
+            ]
+          },
+          "id": "nannies.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-context",
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断集中在活动是否适龄、饮食是否触及已知禁忌、环境是否安全、儿童状态是否偏离约定，以及何时停止活动并联系家长或紧急服务。"
+            ]
+          },
+          "id": "nannies.profile.work-context-block.1",
+          "source_refs": [
+            "onet-context",
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作地点多为私人家庭，也可能随儿童前往学校、活动地点或户外；节奏受儿童年龄、人数、作息、接送和家庭约定影响。"
+            ]
+          },
+          "id": "nannies.profile.work-context-block.2",
+          "source_refs": [
+            "onet-context",
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "常用材料包括餐食与饮水用品、衣物、清洁与照护用品、玩具和活动材料、出行物品，以及家长批准的联系与记录方式。"
+            ]
+          },
+          "id": "nannies.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-context",
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "协作对象主要是家长或监护人；涉及接送、学校、其他照护者或紧急情况时，先核对授权联系人和交接规则。"
+            ]
+          },
+          "id": "nannies.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "onet-context",
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量首先看儿童是否得到连续且符合约定的照护，其次看风险是否及时识别、处置是否未越权、交接是否准确可追溯。"
+            ]
+          },
+          "id": "nannies.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "onet-context",
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "保姆可以观察、执行家长授权的日常照护并报告变化；不能自行作医疗诊断、改变未授权安排或把工具建议当成现场决定。"
+            ]
+          },
+          "id": "nannies.profile.definition-block.2",
+          "source_refs": [
+            "onet-context",
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "education-and-childcare-administrators-preschool-and-daycare",
+                "id": "nannies.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/education-and-childcare-administrators-preschool-and-daycare"
+              },
+              {
+                "entity": "child-family-and-school-social-workers",
+                "id": "nannies.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/child-family-and-school-social-workers"
+              },
+              {
+                "entity": "healthcare-social-workers",
+                "id": "nannies.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/healthcare-social-workers"
+              },
+              {
+                "entity": "social-and-human-service-assistants",
+                "id": "nannies.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/social-and-human-service-assistants"
+              },
+              {
+                "entity": "preschool-teachers-except-special-education",
+                "id": "nannies.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/preschool-teachers-except-special-education"
+              }
+            ]
+          },
+          "id": "nannies.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "adjacent-admin",
+            "adjacent-child-social",
+            "adjacent-health-social",
+            "adjacent-human-assistant",
+            "adjacent-preschool",
+            "onet-details"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "学前与日托管理方向负责机构或项目活动的规划与协调；保姆则在私人家庭持续照护儿童并向家长交接。"
+            ]
+          },
+          "id": "nannies.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "adjacent-admin"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "儿童、家庭与学校社会工作方向提供改善儿童及家庭社会和心理功能的社会服务，不能由日常照护观察替代。"
+            ]
+          },
+          "id": "nannies.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "adjacent-child-social"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "医疗社会工作方向提供与疾病应对相关的社会心理支持；保姆面对健康异常时不能承担该专业判断。"
+            ]
+          },
+          "id": "nannies.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "adjacent-health-social"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "社会与人类服务助理协助连接福利、社会和社区服务；学前教师依据课程或教案组织群体学习。两者与私人家庭照护的产出、资格和责任均不同。"
+            ]
+          },
+          "id": "nannies.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "adjacent-human-assistant",
+            "adjacent-preschool"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "工具可以帮助整理家长提供的日程、生成采购或活动清单、把照护笔记改成结构化交接草稿；这只是信息处理能力，不是替代现场照护。"
+            ]
+          },
+          "id": "nannies.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial-ai-control",
+            "ilo-genai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "能否采用取决于家庭是否同意、输入是否完整、是否会暴露儿童和家庭隐私，以及输出能否由照护者在现场核对。"
+            ]
+          },
+          "id": "nannies.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial-ai-control",
+            "ilo-genai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "饮食禁忌、接送授权、异常症状和紧急联系人必须回到家长原始信息核对；模型不得补写未知条件。"
+            ]
+          },
+          "id": "nannies.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial-ai-control",
+            "ilo-genai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "涉及儿童照片、健康、位置和家庭日程时，应优先不用外部工具；确需使用时只进入家长批准的环境并最小化信息。"
+            ]
+          },
+          "id": "nannies.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial-ai-control",
+            "ilo-genai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "活动建议需要由人结合儿童年龄、当日状态、场地和家长规则筛选；生成建议不能证明活动安全或适龄。"
+            ]
+          },
+          "id": "nannies.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial-ai-control",
+            "ilo-genai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "自动提醒可能降低漏项，但照护者仍要观察真实儿童、发现冲突并决定停止、调整或升级。"
+            ]
+          },
+          "id": "nannies.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial-ai-control",
+            "ilo-genai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "交接草稿最终由当班照护者确认事实与措辞；责任不会因由工具生成文本而转移。"
+            ]
+          },
+          "id": "nannies.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial-ai-control",
+            "ilo-genai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "现有任务暴露研究不能推出保姆岗位的采用率、替代概率或具体消失时间；就业判断还需结合地区、家庭需求和服务安排。"
+            ]
+          },
+          "id": "nannies.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial-ai-control",
+            "ilo-genai"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：本轮既有中国大陆公开材料未建立与美国 O*NET 39-9011.01 Nannies 一一对应的全国工资分布。"
+            ]
+          },
+          "id": "nannies.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "mohrss-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "因此本页不提供“全国中位月薪”或分位数，也不把经济和金融专业人员等父类职业数据当作保姆工资。"
+            ]
+          },
+          "id": "nannies.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "mohrss-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较具体机会时，应另核地点、住家或通勤、工时、儿童人数、夜间与接送安排、食宿、社保及费用是否税前；这些条件不能从全国缺口中推断。"
+            ]
+          },
+          "id": "nannies.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "mohrss-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "该缺口只表示本次所核材料没有安全的精确对应值，不表示中国市场不存在工资数据或任何报价都不可用。"
+            ]
+          },
+          "id": "nannies.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "mohrss-wage"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：既有材料只保留美国 O*NET 39-9011.01 的地方工资查询入口，本页未转录可复核的静态全国数值。"
+            ]
+          },
+          "id": "nannies.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "查询时必须保留地区、统计期、小时或年薪单位、覆盖人群与精确职业范围；地方结果不能直接改写成个人报价。"
+            ]
+          },
+          "id": "nannies.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "低分位工资不能自动解释为新手工资，高分位也不能自动解释为资深工资，因为分位并不编码经验年限。"
+            ]
+          },
+          "id": "nannies.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "住家、通勤、夜间、接送、儿童人数、加班和食宿安排会改变合同条件，但本页未用这些因素虚构统一加价。"
+            ]
+          },
+          "id": "nannies.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "就业人数、增长率、净变化和年度空缺是不同指标，不能与工资拼成个人就业或收入保证。"
+            ]
+          },
+          "id": "nannies.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "需要决策时，应在 O*NET 地方工资入口选择实际地区并记录查询日期，再与书面工作范围和总工时一起比较。"
+            ]
+          },
+          "id": "nannies.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "正向信号：你能持续观察儿童的饮食、情绪、活动和环境，而不是只在收到指令时被动完成一件事。"
+            ]
+          },
+          "id": "nannies.fit.riasec-fit-block.1",
+          "source_refs": [
+            "onet-context"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "正向信号：你愿意按家长约定执行，同时在条件冲突或信息缺失时明确提问，不自行补全。"
+            ]
+          },
+          "id": "nannies.fit.riasec-fit-block.2",
+          "source_refs": [
+            "onet-context"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "正向信号：你能把一天的事实、采取的行动和仍需确认的事项分开交接。"
+            ]
+          },
+          "id": "nannies.fit.riasec-fit-block.3",
+          "source_refs": [
+            "onet-context"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "正向信号：你能为同一目标准备备选活动，并根据儿童状态与场地变化安全调整。"
+            ]
+          },
+          "id": "nannies.fit.riasec-fit-block.4",
+          "source_refs": [
+            "onet-context"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "可训练能力包括时间安排、儿童沟通、基础餐食准备、环境整理、观察记录和清楚升级。"
+            ]
+          },
+          "id": "nannies.fit.riasec-fit-block.5",
+          "source_refs": [
+            "onet-context"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "可能的消耗包括长时间保持注意、重复日常任务、应对情绪波动，以及在家长规则下工作。"
+            ]
+          },
+          "id": "nannies.fit.riasec-fit-block.6",
+          "source_refs": [
+            "onet-context"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "若你容易因熟悉而跳过核对，或不愿处理排泄、清洁、哭闹与临时变化，应先做纸面情境和短时受监督体验。"
+            ]
+          },
+          "id": "nannies.fit.riasec-fit-block.7",
+          "source_refs": [
+            "onet-context"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "兴趣或人格测评只能帮助提出问题；是否适合要看你在具体照护任务中的行为、准确性、耐心和精力反应。"
+            ]
+          },
+          "id": "nannies.fit.riasec-fit-block.8",
+          "source_refs": [
+            "onet-context"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "饮食禁忌不清：儿童可能接触不合适食物。停止准备或喂食，核对家长原始说明并记录未确认项；不得凭经验猜测。"
+            ]
+          },
+          "id": "nannies.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial-risk-control",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "接送授权不清：把儿童交给错误人员会造成严重安全风险。保持儿童在安全位置，按已确认联系人清单联系家长，不自行放行。"
+            ]
+          },
+          "id": "nannies.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial-risk-control",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "活动中出现受伤或异常状态：先停止活动并保障现场安全，按家庭紧急计划联系有权限人员；只做自己受训且获授权的措施。"
+            ]
+          },
+          "id": "nannies.risk.career-risk-cards.3",
+          "source_refs": [
+            "editorial-risk-control",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "儿童离开视线或环境出现危险物：立即恢复直接看护、隔离危险并说明发生时间与行动；不能先补记录再处理现场。"
+            ]
+          },
+          "id": "nannies.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial-risk-control",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "交接遗漏：下一位照护者可能重复喂食、错过用药提示或误解状态。按饮食、睡眠、活动、异常、已做行动和待确认事项逐项口头加书面交接。"
+            ]
+          },
+          "id": "nannies.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial-risk-control",
+            "onet-details"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "现实入口：先比较家庭助理、白天通勤保姆、住家保姆和临时照护的儿童人数、时段、接送、夜间责任与监督方式，不用同一职位名推定相同工作。"
+            ]
+          },
+          "id": "nannies.path.career-path-block.1",
+          "source_refs": [
+            "editorial-exercise",
+            "onet-education"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "雇主证据：用书面工作范围证明你理解膳食、作息、活动、接送、记录和异常升级，而不是只列课程名称或泛称“有爱心”。"
+            ]
+          },
+          "id": "nannies.path.career-path-block.2",
+          "source_refs": [
+            "editorial-exercise",
+            "onet-education"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "虚构材料：4岁儿童；花生禁忌；12:30—14:00午睡；可选拼图、绘画和楼下步行；16:30由父亲接回；是否可吃新零食、雨天是否可外出两项未确认。"
+            ]
+          },
+          "id": "nannies.path.career-path-block.3",
+          "source_refs": [
+            "editorial-exercise",
+            "onet-education"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品任务：排出11:30—17:00条件化时间表，列出至少四个风险与停止点，并写一段交接记录；不得为两个未知项自行给答案。"
+            ]
+          },
+          "id": "nannies.path.career-path-block.4",
+          "source_refs": [
+            "editorial-exercise",
+            "onet-education"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "参考思路：先固定午睡与接回时间；餐食排除花生且新零食保持待确认；外出建立“仅在家长确认且天气允许时”的分支，否则选室内活动。"
+            ]
+          },
+          "id": "nannies.path.career-path-block.5",
+          "source_refs": [
+            "editorial-exercise",
+            "onet-education"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "面试或试用期可说明你如何复述家长要求、发现冲突、维持连续观察并交接；不要在无人监督时演示急救、用药或真实儿童照护。"
+            ]
+          },
+          "id": "nannies.path.career-path-block.6",
+          "source_refs": [
+            "editorial-exercise",
+            "onet-education"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七日安全体验都复用上述材料：第1日提取条件，第2日排时间表，第3日写风险清单，第4日做变更情境，第5日写交接，第6日找矛盾，第7日复做并比较准确性与精力。"
+            ]
+          },
+          "id": "nannies.path.career-path-block.7",
+          "source_refs": [
+            "editorial-exercise",
+            "onet-education"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "成长以能独立处理更复杂的日程、多个儿童、出行协同和高质量交接来体现；具体培训、急救要求、驾驶和用药权限必须按雇主及所在地规则另核。"
+            ]
+          },
+          "id": "nannies.path.career-path-block.8",
+          "source_refs": [
+            "editorial-exercise",
+            "onet-education"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "市场判断先固定精确职业代码、地区和统计期间；O*NET 页面提供职业与地方工资查询入口，但不能直接预测个人就业结果。"
+            ]
+          },
+          "id": "nannies.market-signals.market-signal-card.1",
+          "source_refs": [
+            "ilo-genai",
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "家庭需求、儿童年龄、照护时段和服务安排会改变岗位组合；本轮材料没有给出可安全概括为全国需求增减的单一指标。"
+            ]
+          },
+          "id": "nannies.market-signals.market-signal-card.2",
+          "source_refs": [
+            "ilo-genai",
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "生成式 AI 主要影响日程、清单和记录草稿等信息任务，不能据任务暴露推导现场照护岗位的净增减。"
+            ]
+          },
+          "id": "nannies.market-signals.market-signal-card.3",
+          "source_refs": [
+            "ilo-genai",
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "观察招聘信息时，应记录地区、儿童人数、住家条件、时段、接送、培训和去重方式；少量职位不能声称普遍门槛。"
+            ]
+          },
+          "id": "nannies.market-signals.market-signal-card.4",
+          "source_refs": [
+            "ilo-genai",
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "转向学前教育、家庭服务或照护管理前，应补核相应课程、个案、机构运营或监管责任；照护经验可迁移，但资格和授权不会自动迁移。"
+            ]
+          },
+          "id": "nannies.market-signals.market-signal-card.5",
+          "source_refs": [
+            "ilo-genai",
+            "onet-wages"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "该职业需要在私人家庭持续观察儿童状态，根据家长约定和现场变化调整膳食、作息与活动，并维护安全边界和交接记录。",
+                "id": "nannies.faq.1",
+                "question_key": "career.faq.nannies.daily-work",
+                "source_refs": [
+                  "onet-context"
+                ]
+              },
+              {
+                "answer": "保姆在私人家庭完成连续儿童照护与家长交接，不能仅因都服务儿童就与机构管理、社会工作、服务助理或学前教学互换；学前与托育管理者规划、指导或协调学前或托育中心及项目的活动，核心产出不同于私人家庭中的连续儿童照护；儿童、家庭与学校社会工作者提供社会服务与协助，以改善儿童及家庭的社会和心理功能；医疗社会工作者为个人与家庭提供应对慢性、急性或终末期疾病所需的社会心理支持；社会与人类服务助理协助其他服务提供者连接福利、社会和社区服务；学前教师依据课程或教案指导学前儿童开展促进社会、身体与智力发展的活动。",
+                "id": "nannies.faq.2",
+                "question_key": "career.faq.nannies.role-comparison",
+                "source_refs": [
+                  "adjacent-admin",
+                  "adjacent-child-social",
+                  "adjacent-health-social",
+                  "adjacent-human-assistant",
+                  "adjacent-preschool",
+                  "onet-details"
+                ]
+              },
+              {
+                "answer": "可观察的适配信号包括持续观察、按约定照护、清楚交接和在不确定时升级；这些行为可以通过虚构情境与受监督体验验证。",
+                "id": "nannies.faq.3",
+                "question_key": "career.faq.nannies.fit",
+                "source_refs": [
+                  "onet-context"
+                ]
+              },
+              {
+                "answer": "生成式 AI 更可能辅助保姆的文字整理、信息归纳和记录草案；任务暴露不等于岗位自动消失或具体采用率。",
+                "id": "nannies.faq.4",
+                "question_key": "career.faq.nannies.ai-impact",
+                "source_refs": [
+                  "ilo-genai"
+                ]
+              },
+              {
+                "answer": "涉及饮食、儿童安全和现场处置时，保姆仍需设置人的控制点、人工复核与明确授权，最终责任不能交给工具。",
+                "id": "nannies.faq.5",
+                "question_key": "career.faq.nannies.human-control",
+                "source_refs": [
+                  "editorial-ai-control"
+                ]
+              },
+              {
+                "answer": "本轮中国大陆公开来源未建立与 Nannies（39-9011.01）一一对应的全国工资分布，因此不能给出精确中位数、分位数或稳定月薪。",
+                "id": "nannies.faq.6",
+                "question_key": "career.faq.nannies.china-pay",
+                "source_refs": [
+                  "mohrss-wage"
+                ]
+              },
+              {
+                "answer": "美国工资应通过 Nannies（39-9011.01）的当前地方工资页面按地区与期间查询；本轮不转录静态数值，不能把地区数据当作个人报价。",
+                "id": "nannies.faq.7",
+                "question_key": "career.faq.nannies.us-pay",
+                "source_refs": [
+                  "onet-wages"
+                ]
+              },
+              {
+                "answer": "入门准备应围绕膳食、作息、活动、观察和交接形成可复核的安全作品，不接触真实儿童或家庭隐私；学历、培训证书、雇主录用、急救能力、驾驶或用药安排和实际岗位授权必须分别核对。",
+                "id": "nannies.faq.8",
+                "question_key": "career.faq.nannies.education-path",
+                "source_refs": [
+                  "editorial-exercise",
+                  "onet-education"
+                ]
+              },
+              {
+                "answer": "保姆遇到儿童安全相关异常时，应先停止活动或隔离风险，再核对家长约定、记录事实并联系有权限人员；不能越过专业意见或家庭授权。",
+                "id": "nannies.faq.9",
+                "question_key": "career.faq.nannies.risk-boundary",
+                "source_refs": [
+                  "editorial-risk-control"
+                ]
+              },
+              {
+                "answer": "保姆的市场判断应同时查看精确职业代码、地区、行业与统计期间；官方职业页面提供范围和查询入口，但不能推出个人就业结果。",
+                "id": "nannies.faq.10",
+                "question_key": "career.faq.nannies.outlook-transition",
+                "source_refs": [
+                  "onet-wages"
+                ]
+              },
+              {
+                "answer": "技术变化可能重排保姆的记录与信息处理任务，但现场判断、儿童安全控制、沟通和责任归属仍需结合岗位与法域核验。",
+                "id": "nannies.faq.11",
+                "question_key": "career.faq.nannies.career-worth",
+                "source_refs": [
+                  "ilo-genai"
+                ]
+              }
+            ]
+          },
+          "id": "nannies.sources.faq.1",
+          "source_refs": [
+            "adjacent-admin",
+            "adjacent-child-social",
+            "adjacent-health-social",
+            "adjacent-human-assistant",
+            "adjacent-preschool",
+            "editorial-ai-control",
+            "editorial-exercise",
+            "editorial-risk-control",
+            "ilo-genai",
+            "mohrss-wage",
+            "onet-context",
+            "onet-details",
+            "onet-education",
+            "onet-wages"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "本页职业身份是美国 O*NET 39-9011.01 Nannies；中国与美国的工资、资格和用工条件必须按各自地区与时期另核。",
+              "练习只使用虚构材料，不接触真实儿童、家庭隐私、用药、驾驶或急救实操；真实异常按家长计划和所在地紧急程序处理。",
+              "暂无可安全使用的数据仅表示本轮指定材料没有精确对应值，不表示客观不存在数据。"
+            ]
+          },
+          "id": "nannies.sources.boundary.1",
+          "source_refs": [
+            "adjacent-admin",
+            "adjacent-child-social",
+            "adjacent-health-social",
+            "adjacent-human-assistant",
+            "adjacent-preschool",
+            "editorial-ai-control",
+            "editorial-exercise",
+            "editorial-risk-control",
+            "ilo-genai",
+            "mohrss-wage",
+            "onet-context",
+            "onet-details",
+            "onet-education",
+            "onet-summary",
+            "onet-tasks",
+            "onet-wages"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "保姆",
+                "id": "nannies.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "保姆",
+                "id": "nannies.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "保姆",
+                "id": "nannies.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "保姆",
+                "id": "nannies.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "保姆",
+                "id": "nannies.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "保姆",
+                "id": "nannies.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "保姆",
+                "id": "nannies.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "保姆",
+                "id": "nannies.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "保姆",
+                "id": "nannies.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "保姆",
+                "id": "nannies.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "保姆",
+                "id": "nannies.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "nannies.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "本轮通过 web search 打开 O*NET 页面；定义段：规划、指导或协调学前或托育中心及项目的学术或非学术活动。",
+                  "仅支持该美国 O*NET 职业的定义与本页相邻比较，不建立中国资格或工资结论。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adjacent-admin",
+                "limitation": "仅支持该美国 O*NET 职业的定义与本页相邻比较，不建立中国资格或工资结论。",
+                "market": "美国",
+                "name": "Education and Childcare Administrators, Preschool and Daycare 11-9031.00",
+                "period": "O*NET page updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-9031.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "本轮通过 web search 打开 O*NET 页面；定义段：提供社会服务与协助，改善儿童及家庭的社会和心理功能。",
+                  "仅支持该美国 O*NET 职业的定义与本页相邻比较，不建立中国资格或工资结论。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adjacent-child-social",
+                "limitation": "仅支持该美国 O*NET 职业的定义与本页相邻比较，不建立中国资格或工资结论。",
+                "market": "美国",
+                "name": "Child, Family, and School Social Workers 21-1021.00",
+                "period": "O*NET page updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/custom/21-1021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "本轮通过 web search 打开 O*NET 页面；定义段：为个人、家庭和群体提供应对慢性、急性或终末期疾病所需的社会心理支持。",
+                  "仅支持该美国 O*NET 职业的定义与本页相邻比较，不建立中国资格或工资结论。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adjacent-health-social",
+                "limitation": "仅支持该美国 O*NET 职业的定义与本页相邻比较，不建立中国资格或工资结论。",
+                "market": "美国",
+                "name": "Healthcare Social Workers 21-1022.00",
+                "period": "O*NET page updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/custom/21-1022.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "本轮通过 web search 打开 O*NET 页面；定义段：协助其他社会与人类服务提供者为客户提供服务并连接福利、社会和社区服务。",
+                  "仅支持该美国 O*NET 职业的定义与本页相邻比较，不建立中国资格或工资结论。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adjacent-human-assistant",
+                "limitation": "仅支持该美国 O*NET 职业的定义与本页相邻比较，不建立中国资格或工资结论。",
+                "market": "美国",
+                "name": "Social and Human Service Assistants 21-1093.00",
+                "period": "O*NET page updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/custom/21-1093.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "本轮通过 web search 打开 O*NET 页面；定义段：依据课程或教案指导学前儿童开展促进社会、身体与智力发展的活动。",
+                  "仅支持该美国 O*NET 职业的定义与本页相邻比较，不建立中国资格或工资结论。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adjacent-preschool",
+                "limitation": "仅支持该美国 O*NET 职业的定义与本页相邻比较，不建立中国资格或工资结论。",
+                "market": "美国",
+                "name": "Preschool Teachers, Except Special Education 25-2011.00",
+                "period": "O*NET page updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/25-2011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "基于已核验的职业任务和通用生成式 AI 任务研究，编辑形成工具边界与人工控制建议。",
+                  "这是编辑判断，不是采用率、失业概率、监管要求或 O*NET 原文。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-ai-control",
+                "limitation": "这是编辑判断，不是采用率、失业概率、监管要求或 O*NET 原文。",
+                "market": "编辑综合",
+                "name": "保姆职业 AI 人工控制点编辑综合",
+                "period": "2026-09-06",
+                "publisher": "FermatMind editorial synthesis",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "依据已核实的儿童照护任务设计离线虚构材料、未知项和复核步骤。",
+                  "不是雇主程序、资格训练或真实儿童照护证明。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-exercise",
+                "limitation": "不是雇主程序、资格训练或真实儿童照护证明。",
+                "market": "全球",
+                "name": "保姆安全纸面体验设计",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "基于已核验的保姆任务与工作情境，编辑形成停止、记录、复核和升级的安全控制建议。",
+                  "这是通用安全建议，不替代雇主规则、医疗意见、急救规范或当地法律。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-risk-control",
+                "limitation": "这是通用安全建议，不替代雇主规则、医疗意见、急救规范或当地法律。",
+                "market": "编辑综合",
+                "name": "保姆职业风险控制编辑综合",
+                "period": "2026-09-06",
+                "publisher": "FermatMind editorial synthesis",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "支持把生成式 AI 影响解释为任务暴露与岗位转型。",
+                  "不提供该职业采用率、失业概率或替代日期。"
+                ],
+                "evidence_type": "institutional task research",
+                "id": "ilo-genai",
+                "limitation": "不提供该职业采用率、失业概率或替代日期。",
+                "market": "全球任务研究",
+                "name": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "period": "ILO Working Paper 140, 2025; accessed 2026-08-31",
+                "publisher": "International Labour Organization",
+                "scope": "market_signal",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "用于核查中国工资公开口径。",
+                  "未建立与该 O*NET 精确职业一一对应的全国工资分布。"
+                ],
+                "evidence_type": "official occupation and labor-market source",
+                "id": "mohrss-wage",
+                "limitation": "未建立与该 O*NET 精确职业一一对应的全国工资分布。",
+                "market": "中国大陆",
+                "name": "企业薪酬调查信息",
+                "period": "2024 enterprise wage survey information published 2025; accessed 2026-08-31",
+                "publisher": "中华人民共和国人力资源和社会保障部",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "支持工作环境、适配信号与风险控制。",
+                  "工作情境为调查结果；非精确映射时仅作父职业代理。"
+                ],
+                "evidence_type": "official occupation and labor-market source",
+                "id": "onet-context",
+                "limitation": "工作情境为调查结果；非精确映射时仅作父职业代理。",
+                "market": "美国",
+                "name": "Nannies work context",
+                "period": "O*NET 31.0 profile; accessed 2026-08-31",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/39-9011.01#WorkContext"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "支持职业身份映射与官方职责范围。",
+                  "美国职业资料，不建立中国工资或授权；非精确映射时仅作父职业代理。"
+                ],
+                "evidence_type": "official occupation and labor-market source",
+                "id": "onet-details",
+                "limitation": "美国职业资料，不建立中国工资或授权；非精确映射时仅作父职业代理。",
+                "market": "美国",
+                "name": "Nannies 39-9011.01",
+                "period": "O*NET 31.0 profile; accessed 2026-08-31",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/39-9011.01"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "支持美国入门准备信息边界。",
+                  "教育分布不是法定资格；非精确映射时仅作父职业代理。"
+                ],
+                "evidence_type": "official occupation and labor-market source",
+                "id": "onet-education",
+                "limitation": "教育分布不是法定资格；非精确映射时仅作父职业代理。",
+                "market": "美国",
+                "name": "Nannies education",
+                "period": "O*NET 31.0 profile; accessed 2026-08-31",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/39-9011.01#Education"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "支持相邻职业与职业范围比较。",
+                  "相邻职业链接不代表授权等同；非精确映射时仅作父职业代理。"
+                ],
+                "evidence_type": "official occupation and labor-market source",
+                "id": "onet-summary",
+                "limitation": "相邻职业链接不代表授权等同；非精确映射时仅作父职业代理。",
+                "market": "美国",
+                "name": "Nannies summary",
+                "period": "O*NET 31.0 profile; accessed 2026-08-31",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/39-9011.01"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "支持工作流程与安全练习样本。",
+                  "任务列表不等于每个雇主的完整岗位说明；非精确映射时仅作父职业代理。"
+                ],
+                "evidence_type": "official occupation and labor-market source",
+                "id": "onet-tasks",
+                "limitation": "任务列表不等于每个雇主的完整岗位说明；非精确映射时仅作父职业代理。",
+                "market": "美国",
+                "name": "Nannies tasks",
+                "period": "O*NET 31.0 profile; accessed 2026-08-31",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/39-9011.01#Tasks"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "提供美国地方工资检索入口。",
+                  "工资随地区与统计期变化；非精确映射时仅作父职业代理。"
+                ],
+                "evidence_type": "official occupation and labor-market source",
+                "id": "onet-wages",
+                "limitation": "工资随地区与统计期变化；非精确映射时仅作父职业代理。",
+                "market": "美国",
+                "name": "Nannies local wages",
+                "period": "current O*NET local wages route; accessed 2026-08-31",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/39-9011.01"
+              }
+            ]
+          },
+          "id": "nannies.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "保姆的职业范围与 education-and-childcare-administrators-preschool-and-daycare、child-family-and-school-social-workers 不同；比较时应分别核对核心对象、工作产出、责任边界和进入路径。",
+        "fact_id": "adjacent-boundary",
+        "market": "美国",
+        "measure": "来源支持的职业事实",
+        "occupation_scope": "精确职业数据：美国 O*NET 39-9011.01 Nannies",
+        "period": "O*NET 31.0 profile; accessed 2026-08-31",
+        "source_refs": [
+          "onet-summary"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "进入保姆前应把雇主要求、岗位培训和实际授权分开核对；O*NET 教育信息描述美国从业准备，不构成中国法定资格结论。",
+        "fact_id": "entry-boundary",
+        "market": "美国",
+        "measure": "来源支持的职业事实",
+        "occupation_scope": "精确职业数据：美国 O*NET 39-9011.01 Nannies",
+        "period": "O*NET 31.0 profile; accessed 2026-08-31",
+        "source_refs": [
+          "onet-education"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "可观察的适配信号包括：能持续留意儿童状态，按家长约定组织膳食、作息和活动，清楚交接事实，并在安全风险或信息缺失时及时求助。",
+        "fact_id": "fit-signals",
+        "market": "美国",
+        "measure": "来源支持的职业事实",
+        "occupation_scope": "精确职业数据：美国 O*NET 39-9011.01 Nannies",
+        "period": "O*NET 31.0 profile; accessed 2026-08-31",
+        "source_refs": [
+          "onet-context"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "保姆对应美国 O*NET 精确职业 Nannies（39-9011.01）；官方职责范围为：Care for children in private households and provide support and expertise to parents in satisfying children's physical, emotional, intellectual, and social needs. Duties may include meal planning and preparation, laundry and clothing care, organization of play activities and outings, discipline, intellectual stimulation, language activities, and transportation.",
+        "fact_id": "occupation-identity",
+        "market": "美国",
+        "measure": "来源支持的职业事实",
+        "occupation_scope": "精确职业数据：美国 O*NET 39-9011.01 Nannies",
+        "period": "O*NET 31.0 profile; accessed 2026-08-31",
+        "source_refs": [
+          "onet-details"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "保姆围绕儿童膳食、作息、活动、出行与持续观察开展日常照护，并形成可交接的事实记录。",
+        "fact_id": "occupation-workflow",
+        "market": "美国",
+        "measure": "来源支持的职业事实",
+        "occupation_scope": "精确职业数据：美国 O*NET 39-9011.01 Nannies",
+        "period": "O*NET 31.0 profile; accessed 2026-08-31",
+        "source_refs": [
+          "onet-tasks"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "7898c9a38445858503c8f04b3e3f69eb08fc0571c044a62bbae68a74f1ce1523",
+  "source_content_sha256": "03bece7e1d1f48bd82d88495469653b2d8186f3eaac5d3084a1f1326f9eb2ce1",
   "subject": {
     "canonical_slug": "nannies",
     "name": "保姆",
-    "summary": null
+    "summary": "保姆在私人家庭中照护儿童，围绕膳食、衣物、作息、活动与出行持续观察并与家长交接；适合愿意承担现场照护责任、记录变化并在安全边界处及时求助的人。"
   }
 }

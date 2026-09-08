@@ -1,12 +1,1859 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "适合先体验：愿意依据明确规则核对订单、发运单、费率表、客户账户和贷项记录，并把未知项留给复核人。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "慎重观察：如果在期限压力下容易跳过版本、单位或例外条件，先用下方账单过账文员纸面材料测试自己的错误模式。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "体验方法：只用下方给出的记录和规则完成“计算可确认金额，列出暂挂项与确认人，并形成账单草稿摘要。”，再按参考答案逐条检查。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.quick-decision.fit-decision-checklist.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "安全边界：所有订单、单位与金额均为虚构；不登录客户账户、不发送账单、不处理支付或税务。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.quick-decision.fit-decision-checklist.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "职业身份：账单过账文员对应美国O*NET代码43-3021.00。本页用它限定职业任务，不把美国代码当作中国职称或执业许可。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.profile.work-context-block.1",
+          "source_refs": [
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "主要材料：订单、发运单、费率表、客户账户和贷项记录。接手任务先确认来源、期间、版本与缺项。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.profile.work-context-block.2",
+          "source_refs": [
+            "onet-detail",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作链：逐项匹配订单与发运数量，按有效日期选择费率，标出缺凭证或重复单据，形成待复核账单草稿；主管确认例外后才能进入发送流程。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.profile.work-context-block.3",
+          "source_refs": [
+            "onet-detail",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断：判断一项收费是否具备完整依据，以及差异应更正、暂挂还是交主管处理。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.profile.work-context-block.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "常见环境：共享服务、医疗、物流或专业服务后台；高峰期常有批量截止时间。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.profile.work-context-block.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "常用工具：账单系统、电子表格、文档影像和客户主数据查询；工具输出必须回到原材料验证。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.profile.work-context-block.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "协作与复核：文员按既定规则准备与更正账单；会计处理总账、确认和会计政策；催收负责逾期沟通，三者责任不能因系统权限混同。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.profile.work-context-block.7",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：订单号、数量、费率版本、税费/折扣依据和更正链都能回到原记录。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.profile.work-context-block.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "财务经理交付预算、控制与经营决策并承担管理责任；账单文员的核对记录可迁移，但需补财务分析、管理与决策经验。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "adj-1",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "会计师和审计师交付账务处理、报表或审计结论，需理解准则与控制；账单文员的凭证追溯可迁移，但不能直接等同会计判断。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "adj-2",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "税务稽查与征收人员依据税法审查申报并行使公共职能；账单差异核对经验有限可迁移，税法与法定权限是主要缺口。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "adj-3",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "非旅行服务销售代表以开发客户和成交为主要产出；账单文员熟悉合同/费率可帮助解释价格，但销售目标与对外承诺责任不同。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "adj-4",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "财务经理",
+                "id": "adj-link-1",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/financial-managers"
+              },
+              {
+                "entity": "会计师和审计师",
+                "id": "adj-link-2",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/accountants-and-auditors"
+              },
+              {
+                "entity": "税务审查、征收与税务代理人员",
+                "id": "adj-link-3",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/tax-examiners-and-collectors-and-revenue-agents"
+              },
+              {
+                "entity": "服务销售代表（广告、保险、金融、旅游除外）",
+                "id": "adj-link-4",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel"
+              }
+            ]
+          },
+          "id": "billing-and-posting-clerks.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "adj-1",
+            "onet-main"
+          ],
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助从订单与发运单抽取字段并生成匹配清单"
+            ]
+          },
+          "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "若订单号相近、扫描件模糊或费率有追溯生效日，自动匹配容易把错误变成整齐表格"
+            ]
+          },
+          "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "只有主数据、费率版本和例外流程稳定时才适合进入真实账单流程"
+            ]
+          },
+          "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "输入端抽查订单号、数量、服务期间和费率生效日"
+            ]
+          },
+          "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "输出端逐笔追到凭证，并把无依据字段保持待确认"
+            ]
+          },
+          "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工仍决定例外归类、贷项关联、客户沟通和是否升级"
+            ]
+          },
+          "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "本页没有该职业统一AI采用率或岗位净影响证据"
+            ]
+          },
+          "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "更有价值的能力是设计异常队列、抽样规则和可追溯更正，而不是只会批量生成账单"
+            ]
+          },
+          "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "NIST的生成式AI风险画像可用于检查虚构、隐私、信息完整性和过度依赖等通用风险；它不是本职业采用率或事故率。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.ai-impact.ai-impact-table.9",
+          "source_refs": [
+            "nist"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据。本次核对国家统计局2025年城镇单位工资发布；该页按地区、行业、登记类型和人员大类统计，未提供账单过账文员这一O*NET详细职业的全国同口径工资。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "因此本页不提供中国全国点估计，也不拿宽行业均值替代个人工资；这只是本次来源范围内未取得，不宣称全国不存在其他资料。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较具体岗位时应记录城市、税前/税后、月薪/年薪、固定/浮动、工时、经验和实际职责。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "若使用招聘报价，应保留职位原文、日期和样本范围；本页未做招聘计数，不声称市场频率。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2026年O*NET精确职业数据代码：43-3021.00。O*NET/BLS数据与账单过账文员的SOC职业口径一致。"
+            ]
+          },
+          "fact_refs": [
+            "identity"
+          ],
+          "id": "billing-and-posting-clerks.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据的2025年工资中位数为48,500美元/年；覆盖受雇者，不是税后收入或新人起薪。"
+            ]
+          },
+          "fact_refs": [
+            "median"
+          ],
+          "id": "billing-and-posting-clerks.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "us-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据的2025年小时工资中位数为23.32美元/小时；不在未知工时下自行换算个人年收入。"
+            ]
+          },
+          "fact_refs": [
+            "low"
+          ],
+          "id": "billing-and-posting-clerks.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "us-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据的2024年就业规模为429,800名受雇者；这是存量，不是当年招聘数。"
+            ]
+          },
+          "fact_refs": [
+            "high"
+          ],
+          "id": "billing-and-posting-clerks.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "us-employment"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据的2024—2034年预计年均职位空缺为42,200个/年；包含增长与替补，不等于净新增。"
+            ]
+          },
+          "fact_refs": [
+            "trend"
+          ],
+          "id": "billing-and-posting-clerks.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "us-projections"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "当前来源没有单独的新毕业生工资；经验、地区、行业和职责仍需在具体职位中核对。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "能长时间比较相似编号而不凭印象跳过"
+            ]
+          },
+          "id": "billing-and-posting-clerks.fit.personality-fit-block.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "愿意把金额差异追到费率版本或原始凭证"
+            ]
+          },
+          "id": "billing-and-posting-clerks.fit.personality-fit-block.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "可以把未知项暂挂，而不是为赶截止时间补猜"
+            ]
+          },
+          "id": "billing-and-posting-clerks.fit.personality-fit-block.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "能向业务同事说明缺哪张凭证以及影响哪笔收费"
+            ]
+          },
+          "id": "billing-and-posting-clerks.fit.personality-fit-block.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "愿意接受主管退回并保留修改轨迹"
+            ]
+          },
+          "id": "billing-and-posting-clerks.fit.personality-fit-block.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "对重复批次容易疲劳时会用分段核对和异常清单"
+            ]
+          },
+          "id": "billing-and-posting-clerks.fit.personality-fit-block.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "不把客户催促当作越过授权发送账单的理由"
+            ]
+          },
+          "id": "billing-and-posting-clerks.fit.personality-fit-block.7",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "希望体验后再判断自己能否适应月末批量节奏"
+            ]
+          },
+          "id": "billing-and-posting-clerks.fit.personality-fit-block.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：发运单S-102被两张订单同时引用。影响：客户被重复收费，后续贷项与对账成本增加。控制：暂停两笔账单，比较订单与发运唯一键并标记重复。复核/责任：账单主管确认保留哪一笔及更正方式。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.risk.career-risk-cards.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：7月服务误用8月1日才生效的费率。影响：金额多收或少收，合同解释出现争议。控制：回到服务期间与费率生效日，保留旧/新版本。复核/责任：合同或计费负责人确认例外。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.risk.career-risk-cards.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：服务项只有订单、没有完成凭证。影响：账单缺少可验证依据。控制：状态保持待确认，不填完成日期或可发送标记。复核/责任：业务负责人补证，账单主管决定后续。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.risk.career-risk-cards.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：更正金额但贷项未关联原账单。影响：客户账户与审计轨迹断裂。控制：记录原账单号、原因和贷项号后再提交。复核/责任：主管复核更正链。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.risk.career-risk-cards.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同边界：文员按既定规则准备与更正账单；会计处理总账、确认和会计政策；催收负责逾期沟通，三者责任不能因系统权限混同；不同雇主和法域的具体流程需另核。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.risk.career-risk-cards.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "本页没有招聘样本或频率统计；下面是依据职业任务整理的能力展示建议，不代表普遍录用门槛。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.path.recruitment-sample.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-role-comparison",
+          "data": {
+            "column_keys": [
+              "stage",
+              "possible_check",
+              "observed_evidence"
+            ],
+            "rows": [
+              [
+                "基础准备",
+                "算术、表格、订单与凭证核对练习",
+                "高中毕业是美国典型值，不保证录用"
+              ],
+              [
+                "在岗培训",
+                "在复核下录入、核对并暂挂异常",
+                "学习雇主系统和行业规则"
+              ],
+              [
+                "熟练岗位",
+                "处理更正、复杂费率与批量截止",
+                "会计确认、税务与催收权限仍分开"
+              ]
+            ]
+          },
+          "id": "billing-and-posting-clerks.path.entry-role-comparison.1",
+          "source_refs": [
+            "bls-education-table",
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.employer-evidence",
+          "data": {
+            "entries": [
+              {
+                "id": "card-1",
+                "values": [
+                  "任务依据",
+                  "来自O*NET职业任务，不是雇主频率"
+                ]
+              },
+              {
+                "id": "card-2",
+                "values": [
+                  "展示方式",
+                  "保存输入、规则、判断与复核轨迹"
+                ]
+              }
+            ]
+          },
+          "id": "billing-and-posting-clerks.path.employer-evidence.1",
+          "source_refs": [
+            "editor",
+            "onet-detail",
+            "onet-main"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-portfolio",
+          "data": {
+            "entries": [
+              {
+                "id": "card-1",
+                "values": [
+                  "原始材料",
+                  "保留页面给出的虚构记录"
+                ]
+              },
+              {
+                "id": "card-2",
+                "values": [
+                  "判断记录",
+                  "逐项写规则、结果与未知"
+                ]
+              },
+              {
+                "id": "card-3",
+                "values": [
+                  "交接摘要",
+                  "写结论、限制与复核人"
+                ]
+              }
+            ]
+          },
+          "id": "billing-and-posting-clerks.path.entry-portfolio.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.interview-probation",
+          "data": {
+            "column_keys": [
+              "stage",
+              "possible_check",
+              "observed_evidence"
+            ],
+            "rows": [
+              [
+                "面试",
+                "讲清一处错误如何发现",
+                "材料行与规则"
+              ],
+              [
+                "试用",
+                "先核版本和权限",
+                "未决项清单"
+              ],
+              [
+                "交付",
+                "说明限制和下一步",
+                "复核记录"
+              ]
+            ]
+          },
+          "id": "billing-and-posting-clerks.path.interview-probation.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-decision",
+          "data": {
+            "column_keys": [
+              "stage",
+              "possible_check",
+              "observed_evidence"
+            ],
+            "rows": [
+              [
+                "学历/课程",
+                "可展示相关知识与学习经历",
+                "不能单独证明岗位胜任或法定授权"
+              ],
+              [
+                "软件证书",
+                "可展示特定工具训练",
+                "不等于职业许可或项目授权"
+              ],
+              [
+                "单位培训",
+                "可展示本机构流程训练",
+                "不自动形成跨机构授权"
+              ],
+              [
+                "职业许可/注册",
+                "仅在签发法域与范围内有效",
+                "仍须核对雇主及具体项目要求"
+              ]
+            ]
+          },
+          "id": "billing-and-posting-clerks.path.credential-decision.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-boundary",
+          "data": {
+            "paragraphs": [
+              "学历、课程、软件证书、单位培训、职业许可和项目授权是不同概念；具体要求按职位和法域核对。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.path.credential-boundary.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "美国BLS职业教育与培训分类表将账单过账文员列为典型入门教育高中毕业、通常需要中等时长在岗培训；这只是美国职业分类层面的典型值，具体岗位仍可能要求行业系统、医疗计费或客户流程经验。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.path.career-path-block.1",
+          "source_refs": [
+            "bls-education-table"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转向会计需补会计准则与账务处理；转向催收需补逾期沟通与授权；转向计费分析需补数据质量和规则维护；转向销售运营需补合同/报价流程。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.path.career-path-block.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "以下账单过账文员纸面材料全部虚构并完整显示。任务：计算可确认金额，列出暂挂项与确认人，并形成账单草稿摘要。 安全边界：所有订单、单位与金额均为虚构；不登录客户账户、不发送账单、不处理支付或税务。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.path.entry-work-sample-data.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "material-1-1",
+                "values": [
+                  "订单编号：O-101",
+                  "品项与数量：纸张10箱",
+                  "履约凭证：发运S-101：10箱",
+                  "履约日期：2026-07-15",
+                  "适用费率：¥42/箱",
+                  "核对状态：可计¥420"
+                ]
+              },
+              {
+                "id": "material-1-2",
+                "values": [
+                  "订单编号：O-102",
+                  "品项与数量：墨盒4个",
+                  "履约凭证：发运S-102：4个",
+                  "履约日期：2026-07-20",
+                  "适用费率：¥180/个",
+                  "核对状态：可计¥720"
+                ]
+              },
+              {
+                "id": "material-1-3",
+                "values": [
+                  "订单编号：O-103",
+                  "品项与数量：墨盒4个",
+                  "履约凭证：发运S-102：4个",
+                  "履约日期：2026-07-20",
+                  "适用费率：¥180/个",
+                  "核对状态：疑似重复引用，暂挂"
+                ]
+              },
+              {
+                "id": "material-1-4",
+                "values": [
+                  "订单编号：O-104",
+                  "品项与数量：维护2小时",
+                  "履约凭证：无服务完成单",
+                  "履约日期：2026-07-31",
+                  "适用费率：7月¥300/小时；8月起¥330",
+                  "核对状态：缺凭证，暂挂"
+                ]
+              }
+            ]
+          },
+          "id": "billing-and-posting-clerks.path.entry-work-sample-data.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "material-2-1",
+                "values": [
+                  "规则编号：R1",
+                  "核对规则：同一发运单只能支持一笔货物收费"
+                ]
+              },
+              {
+                "id": "material-2-2",
+                "values": [
+                  "规则编号：R2",
+                  "核对规则：按服务/发运日期选择当期费率"
+                ]
+              },
+              {
+                "id": "material-2-3",
+                "values": [
+                  "规则编号：R3",
+                  "核对规则：缺完成凭证不得标记可发送"
+                ]
+              },
+              {
+                "id": "material-2-4",
+                "values": [
+                  "规则编号：R4",
+                  "核对规则：更正必须关联原账单与贷项原因"
+                ]
+              }
+            ]
+          },
+          "id": "billing-and-posting-clerks.path.entry-work-sample-data.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "任务：计算可确认金额，列出暂挂项与确认人，并形成账单草稿摘要。",
+              "参考答案：O-101与O-102可确认合计¥1,140；O-103因S-102重复引用暂挂；O-104即使按7月费率为¥600也因缺完成单暂挂，不能计入可发送金额。",
+              "边界：所有订单、单位与金额均为虚构；不登录客户账户、不发送账单、不处理支付或税务。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.path.entry-work-sample-data.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "day-1",
+                "values": [
+                  "第1日",
+                  "理解材料",
+                  "标出字段、单位与版本"
+                ]
+              },
+              {
+                "id": "day-2",
+                "values": [
+                  "第2日",
+                  "按规则初判",
+                  "完成第一版记录"
+                ]
+              },
+              {
+                "id": "day-3",
+                "values": [
+                  "第3日",
+                  "复算/复读",
+                  "找出算术、时间或逻辑错误"
+                ]
+              },
+              {
+                "id": "day-4",
+                "values": [
+                  "第4日",
+                  "写异常清单",
+                  "区分可确认与待确认"
+                ]
+              },
+              {
+                "id": "day-5",
+                "values": [
+                  "第5日",
+                  "写交接",
+                  "指定复核人与限制"
+                ]
+              },
+              {
+                "id": "day-6",
+                "values": [
+                  "第6日",
+                  "对照答案修订",
+                  "保留初稿与改动原因"
+                ]
+              },
+              {
+                "id": "day-7",
+                "values": [
+                  "第7日",
+                  "复盘负担",
+                  "记录最耗注意力的步骤"
+                ]
+              }
+            ]
+          },
+          "id": "billing-and-posting-clerks.path.seven-day-trial.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "能否仅依材料复现答案",
+              "是否会漏单位、版本或例外",
+              "能否解释为何暂停并升级",
+              "是否愿意继续练习同类任务"
+            ]
+          },
+          "id": "billing-and-posting-clerks.path.seven-day-decision.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国官方预测：Billing and Posting Clerks在2024—2034年预计年均空缺为42,200个/年，该指标含增长与替补。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.market-signals.market-signal-card.1",
+          "source_refs": [
+            "us-projections"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "本页没有雇主样本或招聘频率统计，不把O*NET任务或软件页面写成当前招聘热度。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.market-signals.market-signal-card.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "本页没有该职业AI实际采用率或净就业因果证据；任务可辅助不等于职位减少。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.market-signals.market-signal-card.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "转向选择：转向会计需补会计准则与账务处理；转向催收需补逾期沟通与授权；转向计费分析需补数据质量和规则维护；转向销售运营需补合同/报价流程。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "决策时应分别看官方预测、具体职位原文、个人作品和资格/授权差距，不能把不同市场和时期合成一个增长结论。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "该职业处理订单、发运单、费率表、客户账户和贷项记录；工作链为：逐项匹配订单与发运数量，按有效日期选择费率，标出缺凭证或重复单据，形成待复核账单草稿；主管确认例外后才能进入发送流程。",
+                "id": "billing-and-posting-clerks.faq.1",
+                "question_key": "career.faq.billing-and-posting-clerks.daily-work",
+                "source_refs": [
+                  "onet-detail",
+                  "onet-main"
+                ]
+              },
+              {
+                "answer": "财务经理交付预算、控制与经营决策并承担管理责任；账单文员的核对记录可迁移，但需补财务分析、管理与决策经验。",
+                "id": "billing-and-posting-clerks.faq.2",
+                "question_key": "career.faq.billing-and-posting-clerks.role-comparison",
+                "source_refs": [
+                  "adj-1",
+                  "onet-main"
+                ]
+              },
+              {
+                "answer": "能长时间比较相似编号而不凭印象跳过",
+                "id": "billing-and-posting-clerks.faq.3",
+                "question_key": "career.faq.billing-and-posting-clerks.fit",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "可辅助从订单与发运单抽取字段并生成匹配清单",
+                "id": "billing-and-posting-clerks.faq.4",
+                "question_key": "career.faq.billing-and-posting-clerks.ai-impact",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "可辅助从订单与发运单抽取字段并生成匹配清单",
+                "id": "billing-and-posting-clerks.faq.5",
+                "question_key": "career.faq.billing-and-posting-clerks.automatable-tasks",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "人工仍决定例外归类、贷项关联、客户沟通和是否升级",
+                "id": "billing-and-posting-clerks.faq.6",
+                "question_key": "career.faq.billing-and-posting-clerks.human-control",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "暂无可安全使用的数据。本次核对国家统计局2025年城镇单位工资发布；该页按地区、行业、登记类型和人员大类统计，未提供账单过账文员这一O*NET详细职业的全国同口径工资。",
+                "id": "billing-and-posting-clerks.faq.7",
+                "question_key": "career.faq.billing-and-posting-clerks.china-pay",
+                "source_refs": [
+                  "nbs"
+                ]
+              },
+              {
+                "answer": "Billing and Posting Clerks的年工资中位数为48,500美元/年。",
+                "id": "billing-and-posting-clerks.faq.8",
+                "question_key": "career.faq.billing-and-posting-clerks.us-pay",
+                "source_refs": [
+                  "us-wage"
+                ]
+              },
+              {
+                "answer": "美国BLS职业教育与培训分类表将账单过账文员列为典型入门教育高中毕业、通常需要中等时长在岗培训；这只是美国职业分类层面的典型值，具体岗位仍可能要求行业系统、医疗计费或客户流程经验。",
+                "id": "billing-and-posting-clerks.faq.9",
+                "question_key": "career.faq.billing-and-posting-clerks.education-path",
+                "source_refs": [
+                  "bls-education-table"
+                ]
+              },
+              {
+                "answer": "共同边界：文员按既定规则准备与更正账单；会计处理总账、确认和会计政策；催收负责逾期沟通，三者责任不能因系统权限混同；不同雇主和法域的具体流程需另核。",
+                "id": "billing-and-posting-clerks.faq.10",
+                "question_key": "career.faq.billing-and-posting-clerks.risk-boundary",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "转向选择：转向会计需补会计准则与账务处理；转向催收需补逾期沟通与授权；转向计费分析需补数据质量和规则维护；转向销售运营需补合同/报价流程。",
+                "id": "billing-and-posting-clerks.faq.11",
+                "question_key": "career.faq.billing-and-posting-clerks.outlook-transition",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "适合先体验：愿意依据明确规则核对订单、发运单、费率表、客户账户和贷项记录，并把未知项留给复核人。",
+                "id": "billing-and-posting-clerks.faq.12",
+                "question_key": "career.faq.billing-and-posting-clerks.career-worth",
+                "source_refs": [
+                  "editor"
+                ]
+              }
+            ]
+          },
+          "id": "billing-and-posting-clerks.sources.faq.1",
+          "source_refs": [
+            "adj-1",
+            "bls-education-table",
+            "editor",
+            "nbs",
+            "onet-detail",
+            "onet-main",
+            "us-wage"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "美国职业身份为O*NET 43-3021.00；中国职位名称、资格和授权按具体雇主与法域核验。",
+              "中国工资为本次指定官方来源中的有界缺口；美国统计按Billing and Posting Clerks及各自数据期解释。",
+              "练习材料和数值均为编辑设计：所有订单、单位与金额均为虚构；不登录客户账户、不发送账单、不处理支付或税务。"
+            ]
+          },
+          "id": "billing-and-posting-clerks.sources.boundary.1",
+          "source_refs": [
+            "adj-1",
+            "adj-2",
+            "adj-3",
+            "adj-4",
+            "bls-education-table",
+            "editor",
+            "nbs",
+            "nist",
+            "onet-detail",
+            "onet-main",
+            "us-employment",
+            "us-projections",
+            "us-wage"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "账单过账文员",
+                "id": "billing-and-posting-clerks.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "账单过账文员",
+                "id": "billing-and-posting-clerks.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "账单过账文员",
+                "id": "billing-and-posting-clerks.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "账单过账文员",
+                "id": "billing-and-posting-clerks.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "账单过账文员",
+                "id": "billing-and-posting-clerks.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "账单过账文员",
+                "id": "billing-and-posting-clerks.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "账单过账文员",
+                "id": "billing-and-posting-clerks.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "账单过账文员",
+                "id": "billing-and-posting-clerks.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "账单过账文员",
+                "id": "billing-and-posting-clerks.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "账单过账文员",
+                "id": "billing-and-posting-clerks.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "账单过账文员",
+                "id": "billing-and-posting-clerks.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "billing-and-posting-clerks.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业财务经理（11-3031.00）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-1",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "财务经理 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-3031.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业会计师和审计师（13-2011.00）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-2",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "会计师和审计师 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-2011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业税务审查、征收与税务代理人员（13-2081.00）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-3",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "税务审查、征收与税务代理人员 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-2081.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业服务销售代表（广告、保险、金融、旅游除外）（41-3091.00）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-4",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "服务销售代表（广告、保险、金融、旅游除外） O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/41-3091.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "美国BLS职业教育与培训分类表将Billing and posting clerks列为典型入门教育高中毕业、通常需要中等时长在岗培训。",
+                  "美国官方职业资料不能直接外推为中国或其他法域的统一学历、许可或录用要求。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "bls-education-table",
+                "limitation": "美国官方职业资料不能直接外推为中国或其他法域的统一学历、许可或录用要求。",
+                "market": "美国",
+                "name": "美国BLS职业教育与培训分类表",
+                "period": "2026访问的职业展望",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/education-and-training-by-occupation.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "基于已列职业事实设计判断提示、风险控制和完整虚构练习；模拟数字不是现实统计。",
+                  "不代表雇主政策、执业授权、真实事故、招聘频率或统计调查。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "editor",
+                "limitation": "不代表雇主政策、执业授权、真实事故、招聘频率或统计调查。",
+                "market": "全球",
+                "name": "账单过账文员内容与模拟练习编辑设计",
+                "period": "2026-09-06",
+                "publisher": "本任务编辑",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "按地区、行业、登记类型和五类人员发布平均工资，未提供本O*NET详细职业同口径工资。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nbs",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025年",
+                "publisher": "国家统计局",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "通用生成式AI风险类别与治理框架，不报告本职业部署或就业影响。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nist",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "全球",
+                "name": "生成式人工智能风险管理画像",
+                "period": "2024 NIST AI 600-1",
+                "publisher": "美国国家标准与技术研究院",
+                "scope": "exact",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "任务、活动、工作环境与准备信息。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet-detail",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "账单过账文员 O*NET详细档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/43-3021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "职业代码43-3021.00、定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet-main",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "账单过账文员 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/43-3021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "就业存量覆盖：Billing and Posting Clerks。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-employment",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "账单过账文员美国就业规模",
+                "period": "2024 BLS就业规模",
+                "publisher": "O*NET OnLine（展示BLS）",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/43-3021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "年均空缺覆盖：Billing and Posting Clerks，包含增长与替补。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-projections",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "账单过账文员美国就业预测",
+                "period": "2024—2034 BLS就业预测",
+                "publisher": "O*NET OnLine（展示BLS）",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/43-3021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "工资数据覆盖：Billing and Posting Clerks；不是新人薪酬。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-wage",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "账单过账文员美国工资",
+                "period": "2025 BLS OEWS",
+                "publisher": "O*NET OnLine（展示BLS OEWS）",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/43-3021.00"
+              }
+            ]
+          },
+          "id": "billing-and-posting-clerks.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "43-3021.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业代码",
+        "occupation_scope": "精确职业数据：Billing and Posting Clerks；O*NET 43-3021.00",
+        "period": "2026 O*NET职业档案",
+        "source_refs": [
+          "onet-main"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "48,500美元/年",
+        "fact_id": "median",
+        "market": "美国",
+        "measure": "年工资中位数",
+        "occupation_scope": "精确职业数据；BLS/O*NET统计覆盖：Billing and Posting Clerks；页面主题：账单过账文员（43-3021.00）",
+        "period": "2025 BLS OEWS",
+        "source_refs": [
+          "us-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "23.32美元/小时",
+        "fact_id": "low",
+        "market": "美国",
+        "measure": "小时工资中位数",
+        "occupation_scope": "精确职业数据；BLS/O*NET统计覆盖：Billing and Posting Clerks；页面主题：账单过账文员（43-3021.00）",
+        "period": "2025 BLS OEWS",
+        "source_refs": [
+          "us-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "429,800名受雇者",
+        "fact_id": "high",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "精确职业数据；BLS/O*NET统计覆盖：Billing and Posting Clerks；页面主题：账单过账文员（43-3021.00）",
+        "period": "2024 BLS就业规模",
+        "source_refs": [
+          "us-employment"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "42,200个/年",
+        "fact_id": "trend",
+        "market": "美国",
+        "measure": "年均职位空缺",
+        "occupation_scope": "精确职业数据；BLS/O*NET统计覆盖：Billing and Posting Clerks；页面主题：账单过账文员（43-3021.00）",
+        "period": "2024—2034 BLS就业预测",
+        "source_refs": [
+          "us-projections"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "bbea51aab129b941e71241fa2891b86f7aa9021e50cbe5bfa902e2acee149445",
+  "source_content_sha256": "b14a4cde5c654ed2b45e56f6e6506f81d03ec9cdb689fe38868648a8697b309e",
   "subject": {
     "canonical_slug": "billing-and-posting-clerks",
     "name": "账单过账文员",
-    "summary": null
+    "summary": "账单过账文员处理订单、发运单、费率表、客户账户和贷项记录，核心是判断一项收费是否具备完整依据，以及差异应更正、暂挂还是交主管处理。页面提供可完成的虚构纸面材料、明确答案、美国统计范围与安全复核边界。"
   }
 }

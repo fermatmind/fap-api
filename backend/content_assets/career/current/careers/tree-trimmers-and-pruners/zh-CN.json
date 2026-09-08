@@ -1,12 +1,1555 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "树木修剪工使用攀爬、绳索、升降设备和手动或动力工具清除枯死或多余枝条，以维护道路、人行道或公用设施通行空间，或改善树木外观、健康与价值；真正核心是受风险控制约束的现场判断。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "值得探索的信号是：喜欢户外和体力工作，能持续检查树体、天气、地面、行人车辆、电线、设备和沟通信号，并在条件不明时停止而不是逞强。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "需要谨慎的信号是：恐高或难以承受体力负荷，不愿遵守隔离与口令，容易在赶工时省略检查，或把个人经验当成带电、高处和设备作业授权。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全试做只审六个指定字段，不攀爬、不切割、不启动设备。A卡：架空线路存在，线路状态未记录，公用事业协调未记录，公共区域隔离未记录，天气记为干燥无强风，树体缺陷记为一根枯枝，设备检查记为完成，现场负责人记为陈组长。B卡：无架空线路，公共区域已隔离，天气记为阵风，树体缺陷记为裂枝，设备检查未记录，现场负责人记为王组长。C卡：无架空线路，公共区域已隔离，天气记为干燥无强风，树体缺陷记为低垂枯枝，设备检查记为完成，现场负责人记为李组长。请只列这六类字段的资料缺口，不批准任何作业。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考答案：按题面限定的六类字段，A缺线路状态、公用事业协调和公共区域隔离三项记录；天气、树体缺陷、设备检查和负责人已给出。B只缺设备检查记录；其余指定字段已给出。C在这六类字段内无缺项。三卡都不能据此批准作业，仍需现场合格负责人依据实际条件重新评估；输出仅为缺口表和升级清单。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.quick-decision.fermat-decision-card.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据（O*NET当前页，2026年9月6日复核）：{{fact:occupation-identity}}。"
+            ]
+          },
+          "fact_refs": [
+            "occupation-identity"
+          ],
+          "id": "tree-trimmers-and-pruners.profile.definition-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "典型流程从查看工单与现场、识别树体缺陷和周边目标开始，再划定工作区、安排人员设备、执行修剪或处理、清理木料，并记录异常与完成情况。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.profile.definition-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "O*NET任务包括用手锯、修枝剪、动力修枝设备等切除枯死或多余枝条，也可能使用链锯、碎枝机、树桩研磨机和车载升降设备。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.profile.definition-block.3",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "攀爬和绳索工作需要判断枝条重量、受力、落区、锚点与团队信号；真实方法必须由合格培训、现场计划和适用标准决定。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.profile.definition-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "工作目的可能是道路、人行道或公用设施通行空间，也可能是树木健康、外观和价值；客户目标不能覆盖公共安全与权限边界。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.profile.definition-block.5",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "BLS描述场地维护工作通常在各种天气的户外进行，重复且体力要求高，需要弯腰、跪姿、抬举等；树木修剪还增加高处和动力设备风险。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.profile.definition-block.6",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "常见角色包括地面人员、攀爬人员、升降设备操作员、现场负责人、交通控制与公用事业协调方；每人必须知道停止信号和责任范围。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.profile.definition-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "可复核产出包括现场风险记录、树木与目标标识、设备检查、人员与通信安排、照片或工单记录、木料处理和未解决问题。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.profile.definition-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "质量不仅看枝条是否移除，还看切口和树木目标、落区保护、财产与公共区域、清理、记录以及作业后是否留下新风险。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.profile.definition-block.9",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业代码和纸面知识不授予攀爬、链锯、升降设备、线路净空、交通控制或农药施用权限；具体要求由雇主、设备、项目和所在地规则决定。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.profile.definition-block.10",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "地面辅助岗位可能侧重隔离、绳索与木料整理、工具传递和清理；攀爬或升降操作承担不同的高处、受力和设备责任。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "园林绿化工更常负责草坪、灌木、种植和一般场地维护；树木修剪工的显著对象是树冠、较大枝条及其高处与落物风险。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-landscape"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "NIOSH把线路净空树木修剪人员单列，并要求与带电导体保持规定距离；因此一般住宅修剪经验不能自动等同于线路净空作业权限，现行要求仍须按所在地规则和雇主程序核对。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "niosh-tree"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "树艺师可能承担树木健康评估、客户建议和工作规划；具体称谓、认证、诊断或签署能力随雇主与法域变化。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "施药岗位涉及化学品标签、个人防护和当地许可，不能因同在树木养护团队就与修剪权限互换。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "选择方向时比较地面、高处、线路、设备、树木健康与客户沟通所占比例，再核对所需训练、体能、班次和责任。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.direction-comparison.adjacent-career-comparison-table.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "本页不提供树木修剪工的AI暴露分数；工具能力、企业采用、现场可靠性、自动化率与就业结果是不同问题，不能由单一指标相互推出。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数字工具可辅助公开资料整理、路线排程、工单草稿、照片归档和非敏感清单检查，但不能远程确认树体、天气、线路、锚点、落区或设备状态。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "照片或模型可能漏掉腐朽、裂缝、遮挡线路、深度距离和现场变化；输出只能作为待现场核实的线索。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "天气与地图数据可能延迟、分辨率不足或与微环境不同；现场负责人必须按实时条件和组织规则决定是否停止。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "客户地址、人员、车辆、门禁和设施信息只能进入获准系统，公开AI服务不得接收未经批准的敏感工单。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "作业计划、线路判断、人员部署、设备选择、锚点、切割、停止与恢复必须由具备相应资格和现场信息的人负责。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "保留工具版本、输入来源、时间、输出、人工修改和最终负责人，遇到与现场观察不一致时以停止、复查和升级为先。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "更有韧性的能力是树体与现场观察、绳索和设备技能、团队通信、风险识别、体能管理以及在压力下执行停止规则。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "截至2026年9月6日本次复核，公开一致来源不足以给出与O*NET 37-3013.00精确对应的中国大陆全国树木修剪工工资分布；精确职业工资暂无可安全使用的数据，本模块记为documented_unavailable。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "国家统计局2024年工资资料按城镇单位、行业和人员大类汇总，任何相关行业平均都不能当作树木修剪工单职业工资。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国岗位收入可能按月薪、日薪、项目、计件或综合工资表达，并受城市、雇主、季节、技能、设备、高处或线路资格和工时影响。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较岗位时分别确认固定工资、工时与加班、淡旺季、食宿交通、保险、设备与防护由谁提供、培训是否带薪及事故责任安排。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "美国工资不能按汇率外推中国报价，因为用工、工时、福利、保险、行业结构和统计覆盖不同。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.china-salary.career-snapshot-primary-locale.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中文页面和美国职业代码不建立中国资格；高处、特种设备、线路、交通或施药要求须按雇主与所在地当前规则分别确认。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.china-salary.career-snapshot-primary-locale.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据（2025年）：年工资中位数为{{fact:us-wage-2025}}，时薪中位数24.50美元；不是起薪。"
+            ]
+          },
+          "fact_refs": [
+            "us-wage-2025"
+          ],
+          "id": "tree-trimmers-and-pruners.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数表示一半从业者高于、一半低于该值；它不是起薪、平均值、承包报价或个人收入保证。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "O*NET工资页显示的全国分位数描述受调查雇员分布，不自动覆盖自营者、所有加班、季节波动或福利。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "具体报酬受地区、雇主、经验、攀爬或设备职责、线路工作、班次、季节、工时和证书要求影响。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "比较报价应同时看时薪或年薪、保证工时、加班、季节停工、出差、工具防护、保险、培训和事故报告机制。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "BLS 2025—2035分类把高中学历或同等水平列为典型入门教育、短期在职培训列为典型训练；危险任务仍需充分岗位训练与授权。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "bls-training"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "50,960美元与24.50美元只描述美国精确职业统计，不应外推到中国、相邻场地维护职业或个人报价。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.us-salary.career-snapshot-secondary-locale.7",
+          "source_refs": [
+            "onet-wage"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "适配信号：能接受冷热、风、潮湿、噪声、泥土、早班和季节变化，并在不利条件下保持注意力。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.fit.riasec-fit-block.1",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "适配信号：愿意持续维护力量、耐力、平衡和活动度，并能诚实报告疲劳、眩晕或不适。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "适配信号：会同时观察树体、线路、落区、行人车辆、同伴位置、工具和通信，而不是只盯着切割点。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "适配信号：能使用明确口令、复述关键信息、接受地面人员提醒，并在任何人发出停止信号时立即响应。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "适配信号：愿意从地面任务开始，在监督下逐步学习树木、绳索、切割、设备和急救相关能力。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "现实消耗包括体力疲劳、高处压力、重复动作、噪声、天气中断和高后果风险；恢复与长期身体负担要纳入选择。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.fit.riasec-fit-block.6",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "跟岗前询问地面与攀爬比例、班前会、停止规则、设备检查、线路作业、事故复盘、培训和淡旺季工时，不进入作业区。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "安全自测只能用虚构工单检查自己是否会找缺项、限制结论和升级；它不证明现场判断、攀爬或设备能力。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "树木、工具、绳索或设备接近带电线路可导致触电、烧伤和坠落；NIOSH警示多起死亡，线路状态不明时不得凭目测或经验假定安全。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.risk.career-risk-cards.1",
+          "source_refs": [
+            "niosh-tree"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "树冠、梯具或升降设备作业存在坠落风险；真实防坠系统、锚点、救援和操作方法必须按培训、设备说明、标准和现场计划执行。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.risk.career-risk-cards.2",
+          "source_refs": [
+            "niosh-tree"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "枝条、树干、工具或设备可能打击人员和财产；需要受控工作区、团队通信和经批准的受力与落区方案。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.risk.career-risk-cards.3",
+          "source_refs": [
+            "niosh-tree"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "NIOSH要求树木修剪安全计划覆盖移动设备、手持与便携动力工具，并要求相关人员接受训练。具体检查、启动、停机和故障处理必须遵循现行规则、雇主程序与设备说明，未受训或未授权者不得操作。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.risk.career-risk-cards.4",
+          "source_refs": [
+            "niosh-tree"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "道路、人行道、车辆和旁观者使公共区域风险扩大；隔离、交通控制和现场协调必须在开工前由责任人确认。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "纸面练习、职业介绍或普通证书不授予带电、高处、链锯、升降设备、交通控制或施药权限；条件变化时停止并交现场负责人。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.risk.career-risk-cards.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "BLS把高中学历或同等水平列为美国典型入门教育，并列出短期在职培训；这只是统计分类，不代表可立即承担高风险任务。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.path.career-path-block.1",
+          "source_refs": [
+            "bls-training"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "可从受监督的地面整理、工具识别、隔离观察、工单记录和清理开始，只有在能力被验证且明确授权后才增加任务。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.path.career-path-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "学习主题可包括树木基本结构与缺陷、绳索设备识别、工具维护、通信、急救、公共区域控制和异常报告；具体课程由雇主与法域决定。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.path.career-path-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "O*NET列出树艺师、树木外科和线路净空树木修剪等注册学徒称谓；列名用于发现路径，不保证当地开放、录用或授权。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.path.career-path-block.4",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品集只用公开或虚构材料：现场字段清单、缺口表、设备维护记录样例和复盘，不包含客户地址、门禁或真实事故资料。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.path.career-path-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "按题面限定的六类字段，把A/B/C虚构工单做成三列表：逐卡列已给值、缺失项和升级对象；A有三项缺口，B有一项缺口，C只能写“指定字段无缺项”，任何一张都不能写“可以开工”。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.path.career-path-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七天独立试做：第1天识别工单字段，第2天列缺口，第3天从空白表重做，第4天比较差异，第5天写停止边界，第6天修订留痕，第7天评估体力、户外和纪律适配。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.path.career-path-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "求职时确认谁培训、谁评估能力、何时可操作设备、线路和高处任务如何授权、个人防护由谁提供、事故与险情如何报告。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.path.career-path-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "认证、培训结业、雇主授权、设备资质和所在地许可是不同状态；真实工作以当前规则、现场计划和直接监督为准。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.path.career-path-block.9",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据（2025年）：就业人数为{{fact:us-employment-2025}}。"
+            ]
+          },
+          "fact_refs": [
+            "us-employment-2025"
+          ],
+          "id": "tree-trimmers-and-pruners.market-signals.market-signal-card.1",
+          "source_refs": [
+            "bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据（2025至2035年）：预计增长{{fact:us-growth-2025-2035}}，从70,600人增至73,600人。"
+            ]
+          },
+          "fact_refs": [
+            "us-growth-2025-2035"
+          ],
+          "id": "tree-trimmers-and-pruners.market-signals.market-signal-card.2",
+          "source_refs": [
+            "bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "2025至2035年就业基数净增约3,000人；这是十年净变化，不是年均空缺。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.market-signals.market-signal-card.3",
+          "source_refs": [
+            "bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据（2025至2035年）：平均每年约{{fact:us-openings-2025-2035}}个职位空缺；不是十年净增。"
+            ]
+          },
+          "fact_refs": [
+            "us-openings-2025-2035"
+          ],
+          "id": "tree-trimmers-and-pruners.market-signals.market-signal-card.4",
+          "source_refs": [
+            "bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "BLS 2025矩阵显示约24.4%从业者为自营；自营比例不代表创业成功率、收入或保险覆盖。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.market-signals.market-signal-card.5",
+          "source_refs": [
+            "bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "真实机会受地区树木与天气、城市绿化、公用设施、住房与商业服务、季节、合同、设备、保险和资格影响；全国预测不能替代目标岗位核验。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.market-signals.market-signal-card.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "典型流程从查看工单与现场、识别树体缺陷和周边目标开始，再划定工作区、安排人员设备、执行修剪或处理、清理木料，并记录异常与完成情况。",
+                "id": "tree-trimmers-and-pruners.faq.1",
+                "question_key": "career.faq.tree-trimmers-and-pruners.daily-work",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "园林绿化工更常负责草坪、灌木、种植和一般场地维护；树木修剪工的显著对象是树冠、较大枝条及其高处与落物风险。",
+                "id": "tree-trimmers-and-pruners.faq.2",
+                "question_key": "career.faq.tree-trimmers-and-pruners.role-comparison",
+                "source_refs": [
+                  "onet-landscape"
+                ]
+              },
+              {
+                "answer": "适配信号：会同时观察树体、线路、落区、行人车辆、同伴位置、工具和通信，而不是只盯着切割点。",
+                "id": "tree-trimmers-and-pruners.faq.3",
+                "question_key": "career.faq.tree-trimmers-and-pruners.fit",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "本页不提供树木修剪工的AI暴露分数；工具能力、企业采用、现场可靠性、自动化率与就业结果是不同问题，不能由单一指标相互推出。",
+                "id": "tree-trimmers-and-pruners.faq.4",
+                "question_key": "career.faq.tree-trimmers-and-pruners.ai-impact",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "作业计划、线路判断、人员部署、设备选择、锚点、切割、停止与恢复必须由具备相应资格和现场信息的人负责。",
+                "id": "tree-trimmers-and-pruners.faq.5",
+                "question_key": "career.faq.tree-trimmers-and-pruners.human-control",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "截至2026年9月6日本次复核，公开一致来源不足以给出与O*NET 37-3013.00精确对应的中国大陆全国树木修剪工工资分布；精确职业工资暂无可安全使用的数据，本模块记为documented_unavailable。",
+                "id": "tree-trimmers-and-pruners.faq.6",
+                "question_key": "career.faq.tree-trimmers-and-pruners.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "美国精确职业数据：O*NET展示BLS 2025数据，树木修剪工工资中位数为每年50,960美元、每小时24.50美元。",
+                "fact_refs": [
+                  "us-wage-2025"
+                ],
+                "id": "tree-trimmers-and-pruners.faq.7",
+                "question_key": "career.faq.tree-trimmers-and-pruners.us-pay",
+                "source_refs": [
+                  "onet-wage"
+                ]
+              },
+              {
+                "answer": "认证、培训结业、雇主授权、设备资质和所在地许可是不同状态；真实工作以当前规则、现场计划和直接监督为准。",
+                "id": "tree-trimmers-and-pruners.faq.8",
+                "question_key": "career.faq.tree-trimmers-and-pruners.credentials",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "美国精确职业数据：BLS预计树木修剪工就业在2025至2035年增长4.2%，从70,600人增至73,600人。",
+                "fact_refs": [
+                  "us-growth-2025-2035"
+                ],
+                "id": "tree-trimmers-and-pruners.faq.9",
+                "question_key": "career.faq.tree-trimmers-and-pruners.outlook-transition",
+                "source_refs": [
+                  "bls-outlook"
+                ]
+              },
+              {
+                "answer": "纸面练习、职业介绍或普通证书不授予带电、高处、链锯、升降设备、交通控制或施药权限；条件变化时停止并交现场负责人。",
+                "id": "tree-trimmers-and-pruners.faq.10",
+                "question_key": "career.faq.tree-trimmers-and-pruners.risk-boundary",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "值得探索的信号是：喜欢户外和体力工作，能持续检查树体、天气、地面、行人车辆、电线、设备和沟通信号，并在条件不明时停止而不是逞强。",
+                "id": "tree-trimmers-and-pruners.faq.11",
+                "question_key": "career.faq.tree-trimmers-and-pruners.career-worth",
+                "source_refs": [
+                  "editorial"
+                ]
+              }
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.sources.faq.1",
+          "source_refs": [
+            "bls-outlook",
+            "editorial",
+            "nbs-wages",
+            "onet-landscape",
+            "onet-wage"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "中国大陆精确职业工资暂无可安全使用的数据，行业平均不能冒充单职业工资。",
+              "美国工资与2025—2035预测仅按37-3013精确职业口径解释。",
+              "本页不是树木、高处、带电、设备、交通或施药操作指南；虚构工单完整也不等于现场安全或开工许可。"
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.sources.boundary.1",
+          "source_refs": [
+            "bls-ooh",
+            "bls-outlook",
+            "bls-training",
+            "editorial",
+            "nbs-wages",
+            "niosh-tree",
+            "onet-details",
+            "onet-landscape",
+            "onet-wage"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "树木修剪工",
+                "id": "tree-trimmers-and-pruners.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "树木修剪工",
+                "id": "tree-trimmers-and-pruners.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "树木修剪工",
+                "id": "tree-trimmers-and-pruners.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "树木修剪工",
+                "id": "tree-trimmers-and-pruners.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "树木修剪工",
+                "id": "tree-trimmers-and-pruners.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "树木修剪工",
+                "id": "tree-trimmers-and-pruners.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "树木修剪工",
+                "id": "tree-trimmers-and-pruners.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "树木修剪工",
+                "id": "tree-trimmers-and-pruners.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "树木修剪工",
+                "id": "tree-trimmers-and-pruners.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "树木修剪工",
+                "id": "tree-trimmers-and-pruners.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "树木修剪工",
+                "id": "tree-trimmers-and-pruners.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06使用本任务联网全文结果复核；turn27view6 lines 246-310确认任务、环境、危险、训练与能力，lines 389-403确认专业预测。",
+                  "合并页面支持户外、体力、工具和总体入门语境，精确树木修剪数据另行标注。"
+                ],
+                "evidence_type": "official occupational outlook",
+                "id": "bls-ooh",
+                "limitation": "合并页面支持户外、体力、工具和总体入门语境，精确树木修剪数据另行标注。",
+                "market": "美国",
+                "name": "Grounds Maintenance Workers",
+                "period": "current page; updated 2026",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "combined_official",
+                "url": "https://www.bls.gov/ooh/building-and-grounds-cleaning/grounds-maintenance-workers.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06使用本任务联网全文结果复核；turn27view4 lines 755-760给出37-3013就业、增长、自营、年均空缺、工资与训练分类。",
+                  "预测不是个人录用概率；净增和年均空缺不可混用。"
+                ],
+                "evidence_type": "official employment projection",
+                "id": "bls-outlook",
+                "limitation": "预测不是个人录用概率；净增和年均空缺不可混用。",
+                "market": "美国",
+                "name": "Occupational projections and worker characteristics: 37-3013",
+                "period": "2025-2035 projection; published 2026",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06使用本任务联网全文结果复核；turn27view5 lines 604-608确认37-3013典型入门教育、经验与在职培训分类。",
+                  "典型教育和在职培训是统计分类，不代表雇主录用、技能成熟或危险作业授权。"
+                ],
+                "evidence_type": "official entry education and training assignment",
+                "id": "bls-training",
+                "limitation": "典型教育和在职培训是统计分类，不代表雇主录用、技能成熟或危险作业授权。",
+                "market": "美国",
+                "name": "Education and training assignments by detailed occupation",
+                "period": "2025-2035 assignments; published 2026",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/education-and-training-by-occupation.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06已复核；只支持明确绑定的职业、法域、时期和指标。",
+                  "仅支持页面组织、虚构桌面练习和审慎边界；不是现场操作指南或许可。"
+                ],
+                "evidence_type": "editorial exercise and decision framework",
+                "id": "editorial",
+                "limitation": "仅支持页面组织、虚构桌面练习和审慎边界；不是现场操作指南或许可。",
+                "market": "编辑设计",
+                "name": "树木修剪工候选页编辑与虚构练习设计",
+                "period": "2026-09-06",
+                "publisher": "FermatMind 编辑设计",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06使用本任务联网全文结果复核；turn27view2 lines 48-69给出行业聚合工资，turn24view5 lines 204-218给出统计定义与口径。",
+                  "行业和人员大类工资不能当作树木修剪工单职业工资。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "nbs-wages",
+                "limitation": "行业和人员大类工资不能当作树木修剪工单职业工资。",
+                "market": "中国大陆",
+                "name": "Average Annual Wages of Persons Employed in Urban Units in 2024",
+                "period": "2024 wages; published 2025-05-17",
+                "publisher": "National Bureau of Statistics of China",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/english/PressRelease/202505/t20250520_1959885.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06使用本任务联网全文结果复核；turn27view7 lines 18-24给出风险背景，turn28view3 lines 25-36确认线路净空规则范围，turn28view1 lines 71-130确认安全计划、训练、线路与现场调查要求。",
+                  "历史警示用于说明坠落和触电危险及安全计划范围；现行要求须按最新法规、标准和现场规则核对。"
+                ],
+                "evidence_type": "official occupational safety alert",
+                "id": "niosh-tree",
+                "limitation": "历史警示用于说明坠落和触电危险及安全计划范围；现行要求须按最新法规、标准和现场规则核对。",
+                "market": "美国",
+                "name": "Preventing Falls and Electrocutions During Tree Trimming",
+                "period": "August 1992 alert; accessed 2026-09-06",
+                "publisher": "NIOSH",
+                "scope": "combined_official",
+                "url": "https://archive.cdc.gov/www_cdc_gov/niosh/docs/92-106/default.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06使用本任务联网全文结果复核；turn26view0 lines 50-232确认身份、任务与工作活动，lines 235-272确认工作环境暴露。",
+                  "支持美国精确职业身份、任务、环境和工具，不授予高处、带电、设备或施药权限。"
+                ],
+                "evidence_type": "official occupation details",
+                "id": "onet-details",
+                "limitation": "支持美国精确职业身份、任务、环境和工具，不授予高处、带电、设备或施药权限。",
+                "market": "美国",
+                "name": "37-3013.00 - Tree Trimmers and Pruners",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/37-3013.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06使用本任务联网全文结果复核；turn29view0 lines 50-56和124-145确认园林绿化工的草坪、种植、灌溉、花坛与一般场地维护任务。",
+                  "仅用于与37-3013.00比较任务对象，不授予任何设备、施药或高处作业权限。"
+                ],
+                "evidence_type": "official adjacent occupation details",
+                "id": "onet-landscape",
+                "limitation": "仅用于与37-3013.00比较任务对象，不授予任何设备、施药或高处作业权限。",
+                "market": "美国",
+                "name": "37-3011.00 - Landscaping and Groundskeeping Workers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/37-3011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06使用本任务联网全文结果复核；turn27view3 lines 50-80给出2025年全国年薪与时薪分位。",
+                  "中位数不是起薪、报价或个人收入保证。"
+                ],
+                "evidence_type": "official occupational wage",
+                "id": "onet-wage",
+                "limitation": "中位数不是起薪、报价或个人收入保证。",
+                "market": "美国",
+                "name": "National Wages: Tree Trimmers and Pruners",
+                "period": "2025 BLS OEWS wage data",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/37-3013.00"
+              }
+            ]
+          },
+          "id": "tree-trimmers-and-pruners.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "O*NET 37-3013.00",
+        "fact_id": "occupation-identity",
+        "market": "美国",
+        "measure": "官方职业代码",
+        "occupation_scope": "美国精确职业数据：Tree Trimmers and Pruners 37-3013.00",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-details"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "50,960美元/年",
+        "fact_id": "us-wage-2025",
+        "market": "美国",
+        "measure": "工资中位数",
+        "occupation_scope": "美国精确职业数据：Tree Trimmers and Pruners 37-3013.00",
+        "period": "2025 BLS OEWS wage data",
+        "source_refs": [
+          "onet-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "70,600人",
+        "fact_id": "us-employment-2025",
+        "market": "美国",
+        "measure": "就业人数",
+        "occupation_scope": "美国精确职业数据：Tree Trimmers and Pruners 37-3013.00",
+        "period": "2025-2035 projection; published 2026",
+        "source_refs": [
+          "bls-outlook"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "4.2%",
+        "fact_id": "us-growth-2025-2035",
+        "market": "美国",
+        "measure": "就业增长率",
+        "occupation_scope": "美国精确职业数据：Tree Trimmers and Pruners 37-3013.00",
+        "period": "2025-2035 projection; published 2026",
+        "source_refs": [
+          "bls-outlook"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "7,900个/年",
+        "fact_id": "us-openings-2025-2035",
+        "market": "美国",
+        "measure": "平均年度职位空缺",
+        "occupation_scope": "美国精确职业数据：Tree Trimmers and Pruners 37-3013.00",
+        "period": "2025-2035 projection; published 2026",
+        "source_refs": [
+          "bls-outlook"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "547e2be13f42f3bad2781e3bd6397b63140e09c75a674fcccd3d59538509730b",
+  "source_content_sha256": "026867dffecd4cbeb1bec81714961900cd9b1162e04f40b866f39ae15df0755e",
   "subject": {
     "canonical_slug": "tree-trimmers-and-pruners",
     "name": "树木修剪工",
-    "summary": null
+    "summary": "在户外、高处、落物与潜在带电风险下评估和修剪树木，并通过隔离、设备检查、团队通信和停止规则保护人员、设施与树木。"
   }
 }

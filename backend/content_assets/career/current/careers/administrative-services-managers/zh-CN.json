@@ -1,12 +1,2006 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "值得考虑的信号：你愿意把“办公室总有杂事”拆成需求、截止时间和责任人，持续追到服务真正可用。成就感往往来自别人顺利工作，而不是自己完成一份漂亮文档。先问岗位是否给你预算、供应商和流程改进权限，否则“经理”头衔可能只是独自承担全部执行工作。"
+            ]
+          },
+          "id": "administrative-services-managers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "可以观察的能力：面对两项同时到期的请求，先确认谁会停工、是否有替代方案，再解释排序；收到模糊报价时主动澄清范围和验收条件；服务结束后能把投诉、变更与付款依据对应起来。这些行为可训练，不用人格标签决定是否适合。"
+            ]
+          },
+          "id": "administrative-services-managers.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "应慎重的情境：你难以接受工作被打断、只能在完全明确的需求下行动，或所在组织要求你承担费用责任却不给审批权限。前者可以通过小任务练习，后者应在入职前谈清岗位边界。"
+            ]
+          },
+          "id": "administrative-services-managers.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "editor",
+            "employer",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "安全小体验：直接使用入行模块的A1采购请求、A2/A3报价、A4延期和A5审批规则，完成范围比较、升级与交接。先独立填写，再对照示例；只处理纸面虚构材料，不采购、不提交真实合同。记录首次遗漏与修订原因，无需他人配合也可按复核清单进行。"
+            ]
+          },
+          "id": "administrative-services-managers.quick-decision.fit-decision-checklist.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "这里的职业是组织办公支持服务的管理者。美国官方代码为11-3012.00；职责中心是记录信息、邮件、物资与其他办公支持。中文名称用于解释这一职业范围，不宣称对应中国一个同名法定职业或一套统一资格。"
+            ]
+          },
+          "id": "administrative-services-managers.profile.definition-block.1",
+          "source_refs": [
+            "cnclass",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "相近词不能直接对号入座：中国目录中的行政办事员（政务服务综合窗口办事员）面向政务业务办理；企业行政服务经理面向组织内部支持。本页Audinate案例属于混合办公支持岗位，应逐项看职责与授权。"
+            ]
+          },
+          "id": "administrative-services-managers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "cnclass",
+            "employer"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "输入：用量与库存、部门需求、供应商报价、合同到期日、服务投诉和预算余额；缺少预算或需求确认时先补信息。",
+              "判断：区分必须持续的服务与可延后的体验需求，检查报价是否包含交付、维护和退出条件；不只按最低价格排序。",
+              "输出：采购建议、服务排期、行政流程和异常清单；每项写明接收人、验收依据与需要批准的事项。",
+              "复核：让实际使用部门确认服务是否可用，财务按授权复核付款依据，合同和隐私问题由相应专业人员处理；经理追踪问题是否闭环。"
+            ]
+          },
+          "id": "administrative-services-managers.profile.responsibilities-block.1",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "记录管理不只是把文件放进文件夹。按组织制度明确版本、保存位置、访问者与到期处理；发现同一合同存在多个版本时，先确认有效版本再发给使用者。流程建议是编辑示例，实际保留期限和销毁权限须遵从适用规则与组织授权。"
+            ]
+          },
+          "id": "administrative-services-managers.profile.work-context-block.1",
+          "source_refs": [
+            "editor",
+            "onet",
+            "privacy"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "供应商协作的实物是服务说明、报价差异、交付记录和投诉。经理把“服务不好”翻译成可观察问题，例如预约时间未到场或交付清单缺项，先确认事实再谈补救；供应商承担合同内交付，需求部门确认使用效果，批准人决定预算外变更。"
+            ]
+          },
+          "id": "administrative-services-managers.profile.work-context-block.2",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工具服务于可追踪的工作：表格承载清单与预算，协作文档保存制度版本，工单或共享任务表记录负责人和状态。Audinate职位确实列出办公软件与信用卡核对，但不能由此推导每位行政经理都必须掌握同一软件套件。"
+            ]
+          },
+          "id": "administrative-services-managers.profile.work-context-block.3",
+          "source_refs": [
+            "editor",
+            "employer"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量不是“今天处理了很多事”，而是关键服务有没有断、记录能否解释费用、异常是否及时上报。可在面试中要求举一个未按计划交付的案例：原需求是什么，谁判断影响，谁批准替代方案，如何确认恢复；这些问题帮助辨认实际管理职责。"
+            ]
+          },
+          "id": "administrative-services-managers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "设施经理重点面对建筑、设备、维护及项目；行政服务经理可以协调报修和使用需求，但不因接到报修就获得电气维修或工程验收资格。两者可以在小组织兼岗，兼岗仍需分别确认专业人员、合同与授权。"
+            ]
+          },
+          "id": "administrative-services-managers.profile.definition-block.2",
+          "source_refs": [
+            "editor",
+            "facilities",
+            "onet"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "设施经理：产出是可安全运行的建筑设备与维护项目，常需和技术承包商协作。行政服务的供应商沟通能力可迁移，但设备与施工判断必须另补；更喜欢技术运行与现场协调者可进一步调查此方向。"
+            ]
+          },
+          "id": "administrative-services-managers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "editor",
+            "facilities"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "综合与运营经理：关注跨部门资源和运营结果，决策范围通常超出办公室支持。可迁移的是预算解释和流程协调；需要补业务指标、经营取舍和跨职能决策经验，不能把行政成本改善等同于全面运营管理。"
+            ]
+          },
+          "id": "administrative-services-managers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "editor",
+            "operations"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "人力资源经理：对象是招聘、人员政策和组织的人力资源活动。行政的入职物资准备与沟通经验有帮助，但不能代替劳动关系、招聘评价和人事制度能力；想转向者应区分员工服务与人事决定。"
+            ]
+          },
+          "id": "administrative-services-managers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "editor",
+            "hr"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "医疗卫生服务经理：面对医疗机构或部门的服务运营。行政流程经验可以支持协调，但医疗场景的质量、隐私与监管知识是额外要求；一般办公室管理经验不授权诊疗或临床监督。"
+            ]
+          },
+          "id": "administrative-services-managers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "editor",
+            "health"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "设施经理",
+                "id": "adj-facilities",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/facilities-managers"
+              },
+              {
+                "entity": "综合与运营经理",
+                "id": "adj-operations",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/general-and-operations-managers"
+              },
+              {
+                "entity": "人力资源经理",
+                "id": "adj-hr",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/human-resources-managers"
+              },
+              {
+                "entity": "医疗卫生服务经理",
+                "id": "adj-health",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/medical-and-health-services-managers"
+              }
+            ]
+          },
+          "id": "administrative-services-managers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "facilities",
+            "health",
+            "hr",
+            "operations"
+          ],
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "文档起草能力：工具可以给服务通知、流程说明和会议材料出初稿。可先限定读者与已批准事实，再逐句核对日期、承诺和责任人；文字通顺并不证明安排真实可执行。"
+            ]
+          },
+          "id": "administrative-services-managers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "copilot",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "文件摘要能力：可用摘要帮助定位合同或制度中的候选段落，复核时仍回到有效原文。采购时尤其应核对范围、排除项与到期条件，不能把遗漏条件的摘要当成合同解释。"
+            ]
+          },
+          "id": "administrative-services-managers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "copilot",
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实际采用条件：文件必须有可靠版本、清楚权限和可用的组织工具。若审批只留在口头沟通中，AI无法补出未记录的授权；先补齐记录和负责人，再考虑把重复文字工作接入流程。此处为工作设计建议。"
+            ]
+          },
+          "id": "administrative-services-managers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editor",
+            "nist"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工控制点：预算数字使用可复算表格，合同条件由负责人员确认，外发邮件由发件人决定。遇到生成内容与记录不一致，暂停使用并回查来源；不让工具自动把推荐供应商变成付款或签约指令。"
+            ]
+          },
+          "id": "administrative-services-managers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editor",
+            "nist",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "中国数据边界：访客、员工和费用材料可能含个人信息。使用前由组织确认目的、处理范围和操作权限；训练体验一律改用虚构数据。工具能读取文件不表示组织有权把这些信息交给任意外部服务。"
+            ]
+          },
+          "id": "administrative-services-managers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editor",
+            "privacy"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余责任：服务优先级、利益冲突、变更批准和对使用部门的解释仍要由组织内有权限的人承担。AI可以帮助列选项；供应商未到场或员工无法使用设施时，还需要现场核实、协调和恢复安排。"
+            ]
+          },
+          "id": "administrative-services-managers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editor",
+            "nist",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用证据：美国BTOS观察的是企业在业务职能中使用AI，覆盖2025年末至2026年春；企业规模与行业之间存在差异。这支持“采用取决于组织环境”的谨慎判断，不能写成行政经理普遍使用或已被替代。"
+            ]
+          },
+          "id": "administrative-services-managers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "census"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业证据：BLS预测和厂商功能说明回答不同问题。行政服务经理的增长预测不是AI因果研究；本页没有本职业受控任务实验或可直接估计裁员效应的证据，因此不报自动化百分比或失业概率。"
+            ]
+          },
+          "id": "administrative-services-managers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "bls",
+            "copilot",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "全球行业代理数据（跨行业知识工作研究，2025-04发表）：研究以6000名知识工作者进行为期6个月的随机现场实验，一半获配集成办公AI工具。作者报告邮件用时的意向治疗估计每周减少1.4小时；会议用时未显著改变。这为邮件任务提供量化线索，但研究没有给出行政服务经理的独立效果，也不证明服务质量、整岗净效率或就业变化。"
+            ]
+          },
+          "id": "administrative-services-managers.ai-impact.ai-impact-table.9",
+          "source_refs": [
+            "r2-ai"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国行政服务经理的全国单职业工资：本页暂无可安全使用的数据。已查国家统计局2025年公报，但其岗位分类较宽，没有行政服务经理单列；这只说明本次所用公报的范围，不等于全国任何调查都没有该岗位数据。"
+            ]
+          },
+          "id": "administrative-services-managers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "不要将“中层及以上管理人员”年平均工资当成行政经理报价，也不要把办事人员收入当成管理岗起薪。均值、职业范围和雇主类型都不同，即使单位同为人民币/年，也不具备直接替换条件。"
+            ]
+          },
+          "id": "administrative-services-managers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "editor",
+            "nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较这些报价，先确认城市、固定税前工资、发放月数、奖金条件、工时与值班安排，并区分劳动合同雇员和外包派遣。招聘区间提供具体谈薪线索，但尚不足以给出本职业全国可比的税后或新人收入分布。"
+            ]
+          },
+          "id": "administrative-services-managers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "美国工资仅供理解美国市场；本页不做汇率换算或中美收入倍数。判断中国岗位是否划算，应同时看授权、兼岗范围和实际可支配时间，并用同城同职责的可访问职位核对。"
+            ]
+          },
+          "id": "administrative-services-managers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国招聘代理数据：云南弥勒沐心谷碧朗湾温泉康养度假村的人事行政经理，2026-05-12公告报价8000–10000元/月，并列食宿及六险一金。该岗同时统筹招聘、培训、薪酬等人事工作，要求酒店人事行政经验；不是纯办公服务经理的同口径工资。"
+            ]
+          },
+          "id": "administrative-services-managers.china-salary.career-snapshot-primary-locale.5",
+          "source_refs": [
+            "r2-pay-1"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国招聘代理数据：江西海济融资租赁综合办公室行政经理，2026-03-05公告综合薪酬12–22万元/年，包含基础薪资与绩效奖金。职责兼有人事、工资核算、党务与内容发布；该金额不是固定月薪，不能除以月份后充当保底收入。投递截止2026-03-31，现为历史报价。"
+            ]
+          },
+          "id": "administrative-services-managers.china-salary.career-snapshot-primary-locale.6",
+          "source_refs": [
+            "r2-pay-2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国招聘代理数据：2026-01-14政府招聘信息中的北京海王中新药业办公室副主任，报价5000–6000元/月，有经验者可面谈，工作条件涉及办公室经验与公文材料起草。这是副职且偏文字事务的相邻岗位，只用于提醒读者比较职责和权限层级，不并入行政经理工资区间。"
+            ]
+          },
+          "id": "administrative-services-managers.china-salary.career-snapshot-primary-locale.7",
+          "source_refs": [
+            "r2-pay-3"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国行政服务经理2025年5月年工资中位数为114,130美元，来自BLS的精确职业数据。中位数表示工资分布的中点，不是入门承诺、到手工资或每位经理收入。"
+            ]
+          },
+          "fact_refs": [
+            "wage"
+          ],
+          "id": "administrative-services-managers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2025年5月该职业最低10%工资低于67,100美元/年。这个分位混合不同地区、雇主与经验人群；不能直接命名为“初级工资”。本页没有独立核实的全美新人起薪区间。 以上为精确职业数据。"
+            ]
+          },
+          "fact_refs": [
+            "low"
+          ],
+          "id": "administrative-services-managers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "bls"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2025年5月该职业最高10%工资高于207,720美元/年。高分位不等于达到某个年限就能取得；需要把管理范围、行业、地区和工资结构放回具体岗位比较。 以上为精确职业数据。"
+            ]
+          },
+          "fact_refs": [
+            "high"
+          ],
+          "id": "administrative-services-managers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国OEWS工资口径不覆盖自雇人员。统计工资不等于税后所得，年薪也不应除以任意工时制造个人时薪；这里直接保留官方年工资单位，没有做月均换算。"
+            ]
+          },
+          "id": "administrative-services-managers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "editor",
+            "oews"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国行政服务经理2025–2035就业预测增长5%，官方净变化为14,400。表列基期和期末就业人数经过独立四舍五入，直接相减可能不同于官方净变化；本页采用官方变化列，不伪造重算一致。 以上为精确职业数据。"
+            ]
+          },
+          "fact_refs": [
+            "outlook"
+          ],
+          "id": "administrative-services-managers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "bls"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "空缺与新增要分开：BLS页面给出的年均空缺是行政服务与设施经理合并口径，不能贴到本职业单项。本页未提供行政服务经理单项年均空缺数。"
+            ]
+          },
+          "id": "administrative-services-managers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "兴趣可以从工作环境观察：是否愿意组织资源、解释规则并帮助别人把事情办成；喜欢整洁并不足以判断能否做经理，还要看能否处理需求冲突。"
+            ]
+          },
+          "id": "administrative-services-managers.fit.personality-fit-block.1",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "听需求：让对方描述不能正常工作的具体环节，再复述你理解的影响与截止时间；对方能纠正你，是有效沟通的一部分。"
+            ]
+          },
+          "id": "administrative-services-managers.fit.personality-fit-block.2",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "书面表达：把A4延期通知整理成事实、活动影响和须许宁决定的事项；隔一段时间重读，确认仅凭正文就能指出下一步，无需他人配合。"
+            ]
+          },
+          "id": "administrative-services-managers.fit.personality-fit-block.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "数字与细节：练习把报价范围、数量、费用和审批依据对应起来；不追求算得快，先保证比较的是相同服务内容。"
+            ]
+          },
+          "id": "administrative-services-managers.fit.personality-fit-block.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "规则与弹性：临时需求可以讨论替代方案，但不能靠跳过权限解决；记录拒绝或升级的原因，比一味答应更可持续。"
+            ]
+          },
+          "id": "administrative-services-managers.fit.personality-fit-block.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "中断成本：先比较A2/A3，再加入A4延期，记录哪些原判断需要修订；恢复时回查规格、金额与到货条件，不以自称抗压替代记录。"
+            ]
+          },
+          "id": "administrative-services-managers.fit.personality-fit-block.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "冲突消耗：当两个部门都认为自己最急，先比较服务中断影响并提出选择，不把冲突变成对人的评价；无法协调时明确交给谁裁决。"
+            ]
+          },
+          "id": "administrative-services-managers.fit.personality-fit-block.7",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "测评仅可帮助自我提问，不在这里用人格类型决定录用或适合度。把相同体验重复一次，观察错误是否减少、解释是否更清楚、精力是否可承受，再作选择。"
+            ]
+          },
+          "id": "administrative-services-managers.fit.personality-fit-block.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "费用争议：供应商报价省略维护内容，实际使用部门临时加需求，财务最终收到更高账单。先核对已批准范围与变更记录，把未批准部分交批准人决定；行政经理提供事实和建议，不自行承诺预算外付款。"
+            ]
+          },
+          "id": "administrative-services-managers.risk.career-risk-cards.1",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "记录误删：有人把“旧版本”当成可清理文件，却没有确认业务与保留要求，可能让同事失去合同或投诉依据。先限定清理权限、核对有效版本和保留规则，有争议时交法务或记录负责人；不凭AI摘要决定销毁。"
+            ]
+          },
+          "id": "administrative-services-managers.risk.career-risk-cards.2",
+          "source_refs": [
+            "editor",
+            "nist",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "信息误发：中国办公场景中，访客或员工清单被发到无关群组会影响个人信息权益。依组织制度限定接收者和用途，发现误发及时报告信息保护负责人并按应急流程处理；经理不能自行把删除消息等同于事件已经解决。"
+            ]
+          },
+          "id": "administrative-services-managers.risk.career-risk-cards.3",
+          "source_refs": [
+            "editor",
+            "privacy"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "维修越界：使用部门要求马上恢复电气设备，行政人员可能承受催促。先协调受影响人员、联系获授权的设施或专业维修人员，并传达可替代办公安排；行政协调不等于亲自带电维修或签署专业验收。此为保守体验边界，不提供维修步骤。"
+            ]
+          },
+          "id": "administrative-services-managers.risk.career-risk-cards.4",
+          "source_refs": [
+            "editor",
+            "facilities"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "服务中断与兼岗：兼职或单人行政岗位缺少替补时，休假可能造成申请无人响应。入职前核对服务时段、交接和升级联系人；把紧急服务与普通请求分开约定。雇主样本中的兼职安排不能推广为全行业。"
+            ]
+          },
+          "id": "administrative-services-managers.risk.career-risk-cards.5",
+          "source_refs": [
+            "editor",
+            "employer"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "招聘观察分开记录美国Audinate混合兼职办公室经理，以及中国度假村人事行政经理、海济综合办公室行政经理、海王中新办公室副主任。采集日2026-09-05，按雇主与岗位去重；中国条目为历史发布的报价，海济明确已截止，另外两条未确认仍有空缺。美国职责观察合入雇主卡，中国报价与职责见中国薪资模块。仅作有目的案例比较，不计算行业占比。"
+            ]
+          },
+          "id": "administrative-services-managers.path.recruitment-sample.1",
+          "source_refs": [
+            "employer",
+            "r2-pay-1",
+            "r2-pay-2",
+            "r2-pay-3"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-role-comparison",
+          "data": {
+            "column_keys": [
+              "role",
+              "initial_tasks"
+            ],
+            "rows": [
+              [
+                "行政助理或协调",
+                "先交付什么：清晰任务记录与交接；如何复核：接手人不追问也能继续处理；需另补的能力：预算与服务优先级判断"
+              ],
+              [
+                "办公室综合支持",
+                "先交付什么：物资与供应商服务记录；如何复核：用量、到货、验收能对应；需另补的能力：授权内处理异常与团队协调"
+              ],
+              [
+                "记录管理支持",
+                "先交付什么：版本与访问清单；如何复核：能找回有效文件并解释权限；需另补的能力：适用保存规则与合规协作"
+              ]
+            ]
+          },
+          "id": "administrative-services-managers.path.entry-role-comparison.1",
+          "source_refs": [
+            "bls",
+            "editor",
+            "employer"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.employer-evidence",
+          "data": {
+            "entries": [
+              {
+                "id": "employer-0",
+                "values": [
+                  "雇主真正会看什么",
+                  "美国Audinate混合兼职办公室经理案例涉及采购、供应商、资产标记及公司信用卡核对；该条可读原文未说明薪资。单条混合职责不代表普遍要求，也不授予会计或审计签字权。"
+                ]
+              },
+              {
+                "id": "employer-1",
+                "values": [
+                  "编辑建议：展示范围与复核",
+                  "用A1–A3指出规格、税费、配送和搬运差异；以A4说明原到货条件已改变。"
+                ]
+              },
+              {
+                "id": "employer-2",
+                "values": [
+                  "编辑建议：展示责任边界",
+                  "用A5区分需求人确认与负责人批准，交接未知、未批准状态及下一步。无需另编费用单或资产台账。"
+                ]
+              }
+            ]
+          },
+          "id": "administrative-services-managers.path.employer-evidence.1",
+          "source_refs": [
+            "editor",
+            "employer"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-portfolio",
+          "data": {
+            "entries": [
+              {
+                "id": "portfolio-procure",
+                "values": [
+                  "范围比较包",
+                  "用A1–A3填写范围表",
+                  "标出同规格与未包含服务，不强排最低价"
+                ]
+              },
+              {
+                "id": "portfolio-service",
+                "values": [
+                  "异常升级包",
+                  "用A4/A5填写升级单",
+                  "说明活动影响、预算条件、待批准事项"
+                ]
+              },
+              {
+                "id": "portfolio-record",
+                "values": [
+                  "交接包",
+                  "按正文交接字段记录材料版本、状态和下一步",
+                  "接手者凭材料编号能找到依据；本练习不要求额外合同或工单"
+                ]
+              }
+            ]
+          },
+          "id": "administrative-services-managers.path.entry-portfolio.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.interview-probation",
+          "data": {
+            "column_keys": [
+              "description",
+              "observed_evidence",
+              "possible_check"
+            ],
+            "rows": [
+              [
+                "面试追问费用差异",
+                "解释范围变动与审批边界",
+                "能指出哪项信息未确认"
+              ],
+              [
+                "试用交接",
+                "将未完事项交给明确接收人",
+                "对方能按记录继续推进"
+              ],
+              [
+                "服务投诉",
+                "先澄清事实再提出补救",
+                "使用部门确认恢复、异常有责任人"
+              ]
+            ]
+          },
+          "id": "administrative-services-managers.path.interview-probation.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-decision",
+          "data": {
+            "column_keys": [
+              "description",
+              "boundary"
+            ],
+            "rows": [
+              [
+                "美国常见教育",
+                "BLS称通常本科及相关经验，存在其他入行路径；将其视为统计性职业说明，逐雇主核对"
+              ],
+              [
+                "专业认证",
+                "BLS称认证通常非必需，可能帮助求职；先核对目标职位偏好和认证适用范围"
+              ],
+              [
+                "中国行政办事员标准",
+                "目录中的政务窗口职业不等于企业行政经理；不据该名称购买所谓通用经理执业证"
+              ],
+              [
+                "设施或专业工作",
+                "行政头衔不说明具体技术权限；另核任务、专业资格和组织授权"
+              ]
+            ]
+          },
+          "id": "administrative-services-managers.path.credential-decision.1",
+          "source_refs": [
+            "bls",
+            "cnclass",
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-boundary",
+          "data": {
+            "paragraphs": [
+              "通过培训、考试或取得协会认证，与雇主录用、法定执业资格和某笔采购的批准权是不同事项。本页不承诺证书能换来签约、付款或技术验收权限；具体任务进入受监管领域时，须另行确认适用要求。"
+            ]
+          },
+          "id": "administrative-services-managers.path.credential-boundary.1",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "能力进阶可以按产出理解：先能维护准确清单和交接，再能独立解释异常与方案，随后在授权内管理预算和服务商，最后承担跨部门流程改善。每一步都应拿出可复核成果和接收方反馈；不以“做满几年”保证升经理。"
+            ]
+          },
+          "id": "administrative-services-managers.path.career-path-block.1",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "练习简报：你是虚构“青禾办公室”的行政协调人，目标是在活动前提出有依据的纸品供应建议并交接异常。只允许比较、算模拟预算、提出澄清问题与申请审批；不联系真实供应商、不付款、不代批准人决定。本节金额、日期、机构和规则全部为编辑设计，不是工资、市场报价或真实组织制度。先完成A1–A5及正文产出字段，再看示范；写在纸上或普通文本文件即可。"
+            ]
+          },
+          "id": "administrative-services-managers.path.entry-work-sample-data.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "material-12-0",
+                "values": [
+                  "A1 采购请求 v1｜虚构9月8日09:00",
+                  "培训组林岚：9月12日09:00活动需要A4、80克、每包500张的打印纸20包，送至三层资料间；希望9月11日17:00前验收。现有同规格库存4包可以用于活动，是否从本次采购数量扣除尚未确认。"
+                ]
+              },
+              {
+                "id": "material-12-1",
+                "values": [
+                  "A2 甲商报价 v1｜9月8日10:00",
+                  "同规格纸20包，每包22元，货款440元；含税、配送与搬至三层，不含后续加单。确认订单后两日内送达；报价有效至9月10日17:00。尚未下单，无订单确认。"
+                ]
+              },
+              {
+                "id": "material-12-2",
+                "values": [
+                  "A3 乙商报价 v1｜9月8日11:00",
+                  "A4、70克、每包500张纸20包，每包18元，货款360元；仅仓库自提。税费未写明，配送与搬运未报价，最早备货时间需确认。报价未写有效期。"
+                ]
+              },
+              {
+                "id": "material-12-3",
+                "values": [
+                  "A4 甲商延期通知｜9月9日15:00",
+                  "纸张补货延迟；本次报价对应库存尚不能锁定。若今天确认订单，预计9月12日14:00送达，不能承诺活动前送达；可否分批提前配送需另询。"
+                ]
+              },
+              {
+                "id": "material-12-4",
+                "values": [
+                  "A5 预算与审批规则 v1｜练习专用",
+                  "本次费用上限500元，须包含税费、配送和搬运；不因单价低自动批准。协调人只能提出建议；负责人许宁书面批准后才可下单。规格改变须先由需求人林岚确认；超预算或迟于9月11日17:00均须向许宁升级。内部角色均虚构，本练习只写请求、不实际发送。"
+                ]
+              }
+            ]
+          },
+          "id": "administrative-services-managers.path.entry-work-sample-data.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "任务与产出：依据A1–A5，写两行报价比较：规格/数量｜已知金额与包含服务｜到货条件｜未知与材料编号。再写给许宁的升级请求和交给下一班协调人的记录，分别列活动影响、待林岚确认、待许宁批准、下一动作及不可承诺事项。回复期限可自行建议并说明理由。详细模板见扩展练习；本页字段即可完成。"
+            ]
+          },
+          "id": "administrative-services-managers.path.entry-work-sample-data.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "对照区：请先完成正文产出再阅读下列示范。示范是合理处理之一，允许有依据的不同优先级；原始材料没有的答复不能由示范替供应商补全。",
+              "范围示范：甲商22×20=440元，含税送至三层，已知金额在500元内，但A4使原到货条件失效；乙商18×20=360元仅为70克纸自提货款，税、运、搬运和备货均未知。规格不同、服务范围不同，不可直接宣布乙更便宜或满足需求。库存4包能否抵采购数量须问林岚，不能自动把20包改为16包。",
+              "升级示范：向许宁说明甲预计9月12日14:00到、晚于活动；先向林岚确认规格能否变更及库存用法，同时询问甲能否分批、乙补齐费用和时间。建议9月10日中午前获得关键答复，以留出审批和到货安排时间；这个回复点是练习者建议，不是原规则。当前不下单、不承诺赶上活动。",
+              "交接示范：接手人写“下一班协调人”；有效材料A1/A2/A3/A5 v1及A4延期通知，甲到货计划以A4为准。状态为未下单、未获批准、关键条件未答复；下一步是发拟稿给许宁审阅并整理给两商及林岚的问题。不能把报价有效期等同交付保证。",
+              "复核依据：检查算式、纸张克重、费用范围、期限、库存疑问和两级确认是否均有记录。不同采购建议可以接受；凡把未知补成确定或代批准下单，都应返工。"
+            ]
+          },
+          "id": "administrative-services-managers.path.entry-work-sample-data.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "day-1",
+                "values": [
+                  "第一日",
+                  "读简报与A1/A5；写角色边界卡",
+                  "产出：可做、须审批、禁止动作各一栏；检查没有代签或采购"
+                ]
+              },
+              {
+                "id": "day-2",
+                "values": [
+                  "第二日",
+                  "读A1–A3；填写范围比较表",
+                  "产出：规格、数量、费用和缺项；检查A3未披露的项目写未知"
+                ]
+              },
+              {
+                "id": "day-3",
+                "values": [
+                  "第三日",
+                  "按两报价计算已知金额并列问题",
+                  "产出：算式与澄清单；检查不把未知运费填零"
+                ]
+              },
+              {
+                "id": "day-4",
+                "values": [
+                  "第四日",
+                  "读A4；填写异常升级单",
+                  "产出：受影响需求、选项与批准请求；检查没有保证供应商赶得上"
+                ]
+              },
+              {
+                "id": "day-5",
+                "values": [
+                  "第五日",
+                  "按正文交接字段汇总A1–A5",
+                  "产出：材料版本、状态、负责人、下一步；逐项回查原文定位"
+                ]
+              },
+              {
+                "id": "day-6",
+                "values": [
+                  "第六日",
+                  "先封存初稿，再打开示范逐项对照",
+                  "产出：遗漏与修订表；检查新增确定结论均有原始材料支持"
+                ]
+              },
+              {
+                "id": "day-7",
+                "values": [
+                  "第七日",
+                  "重读初稿及修订稿，填写复盘记录",
+                  "产出：遗漏、解释变化、修改理由和主观精力描述；不计算适合分数"
+                ]
+              }
+            ]
+          },
+          "id": "administrative-services-managers.path.seven-day-trial.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "保留初稿与修改稿。按“遗漏了哪条材料—原先解释—现在解释—修改依据”逐项记录，不只写完成。",
+              "检查是否把A3未报费用默认为零、把报价有效期当到货保证、把模拟审批请求当批准。",
+              "记录各日投入时间及精力感受，例如容易专注、反复回查、被打断后难恢复；描述变化，不转成职业适合分。",
+              "再做一遍范围表，比较遗漏是否减少、未知是否仍保留。若仍不清楚，问题清单就是有效产出，不需要编造答复。"
+            ]
+          },
+          "id": "administrative-services-managers.path.seven-day-decision.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "官方预测：美国BLS将行政服务经理需求与效率和流程改善联系起来；2025–2035增长5%是全国职业预测，不代表每个城市或每类行政岗位都增长。"
+            ]
+          },
+          "id": "administrative-services-managers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "bls"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "企业调查：BTOS关于AI的结果属于美国企业层面的采用观察。它能帮助提出“目标公司具备什么数据与工具条件”的问题，不能用来估算行政服务经理减少多少岗位。"
+            ]
+          },
+          "id": "administrative-services-managers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "census",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "招聘观察：Audinate兼职办公室经理展示了物资、费用、资产与协作的混合职责；投递前应追问哪些事项自己执行、哪些管理他人，以及兼职时段外谁接手。单条职位不构成招聘热度趋势。"
+            ]
+          },
+          "id": "administrative-services-managers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "editor",
+            "employer"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "任务与转型：文档辅助能力出现后，可把作品重点放在需求澄清、异常处理与可追踪记录。当前没有本职业净节省工时或就业因果估计；转向流程改善时仍要补业务理解和效果评价，而非只学提示词。"
+            ]
+          },
+          "id": "administrative-services-managers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "copilot",
+            "editor",
+            "r2-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "方向选择：转设施要补建筑设备与专业承包商协作，转人力资源要补人员制度，转综合运营要补业务指标与资源决策。先选一个可控项目验证能力缺口，不能把当前协调经验写成已经具备全部管理资格。"
+            ]
+          },
+          "id": "administrative-services-managers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editor",
+            "facilities",
+            "hr",
+            "operations"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "主要是协调办公支持、复核预算和运行记录、处理服务异常；具体分工取决于组织授权。",
+                "id": "administrative-services-managers.faq.1",
+                "question_key": "career.faq.administrative-services-managers.daily-work",
+                "source_refs": [
+                  "editor",
+                  "onet"
+                ]
+              },
+              {
+                "answer": "设施经理重点面对建筑设备和维护项目；行政服务侧重办公支持。兼岗也要分别确认专业边界。",
+                "id": "administrative-services-managers.faq.2",
+                "question_key": "career.faq.administrative-services-managers.role-comparison",
+                "source_refs": [
+                  "editor",
+                  "facilities"
+                ]
+              },
+              {
+                "answer": "先观察自己能否听清需求、安排优先级并维持准确记录，再用虚构体验判断沟通消耗。",
+                "id": "administrative-services-managers.faq.3",
+                "question_key": "career.faq.administrative-services-managers.fit",
+                "source_refs": [
+                  "editor",
+                  "onet"
+                ]
+              },
+              {
+                "answer": "已有跨职业办公任务随机实验可供参考，但没有行政服务经理的独立效果；任务用时下降不等于整岗效率提高或岗位减少。",
+                "id": "administrative-services-managers.faq.4",
+                "question_key": "career.faq.administrative-services-managers.ai-impact",
+                "source_refs": [
+                  "r2-ai"
+                ]
+              },
+              {
+                "answer": "正文已列中国地方岗位的招聘报价，并标明人事兼岗、副职及历史公告边界；全国单职业实际工资仍不能由这些案例推算。",
+                "id": "administrative-services-managers.faq.5",
+                "question_key": "career.faq.administrative-services-managers.china-pay",
+                "source_refs": [
+                  "nbs",
+                  "r2-pay-1",
+                  "r2-pay-2",
+                  "r2-pay-3"
+                ]
+              },
+              {
+                "answer": "美国2025年5月年工资中位数为114,130美元；这是职业分布中点，不是个人或新人的收入承诺。",
+                "fact_refs": [
+                  "wage"
+                ],
+                "id": "administrative-services-managers.faq.6",
+                "question_key": "career.faq.administrative-services-managers.us-pay",
+                "source_refs": [
+                  "bls",
+                  "editor"
+                ]
+              },
+              {
+                "answer": "美国BLS描述的常见路径是本科学历和相关经验，也存在其他入行路径；实际录用要求要逐雇主核对。",
+                "id": "administrative-services-managers.faq.7",
+                "question_key": "career.faq.administrative-services-managers.education-path",
+                "source_refs": [
+                  "bls"
+                ]
+              },
+              {
+                "answer": "BLS称专业认证通常不是必需条件。认证与具体任务授权不同，不能由此推导付款或专业签字权。",
+                "id": "administrative-services-managers.faq.8",
+                "question_key": "career.faq.administrative-services-managers.credentials",
+                "source_refs": [
+                  "bls",
+                  "editor"
+                ]
+              },
+              {
+                "answer": "主要关注预算合同、记录处理和个人信息边界；组织应明确权限与应急安排。",
+                "id": "administrative-services-managers.faq.9",
+                "question_key": "career.faq.administrative-services-managers.risk-boundary",
+                "source_refs": [
+                  "editor",
+                  "onet",
+                  "privacy"
+                ]
+              },
+              {
+                "answer": "美国BLS对2025–2035行政服务经理就业预测增长5%，需求解释强调效率和流程改善；不能当作个人求职保证。",
+                "id": "administrative-services-managers.faq.10",
+                "question_key": "career.faq.administrative-services-managers.outlook-transition",
+                "source_refs": [
+                  "bls"
+                ]
+              }
+            ]
+          },
+          "id": "administrative-services-managers.sources.faq.1",
+          "source_refs": [
+            "bls",
+            "editor",
+            "facilities",
+            "nbs",
+            "onet",
+            "privacy",
+            "r2-ai",
+            "r2-pay-1",
+            "r2-pay-2",
+            "r2-pay-3"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "本页中文用于解释美国官方职业范围；中国岗位按具体职责理解，不建立未经核实的同名职业或资格互认。",
+              "事实沿用前版实际访问核对记录，本轮未重新研究；编辑体验和控制建议均为虚构设计，不是雇主标准或实证效果。",
+              "美国工资、预测和企业调查分别保留期间与人群，中国全国单职业工资保留有据缺口；不合成全球收入或AI替代率。"
+            ]
+          },
+          "id": "administrative-services-managers.sources.boundary.1",
+          "source_refs": [
+            "bls",
+            "census",
+            "cnclass",
+            "copilot",
+            "editor",
+            "employer",
+            "facilities",
+            "health",
+            "hr",
+            "nbs",
+            "nist",
+            "oews",
+            "onet",
+            "operations",
+            "privacy",
+            "r2-ai",
+            "r2-pay-1",
+            "r2-pay-2",
+            "r2-pay-3"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "行政服务经理",
+                "id": "administrative-services-managers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "行政服务经理",
+                "id": "administrative-services-managers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "行政服务经理",
+                "id": "administrative-services-managers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "行政服务经理",
+                "id": "administrative-services-managers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "行政服务经理",
+                "id": "administrative-services-managers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "行政服务经理",
+                "id": "administrative-services-managers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "行政服务经理",
+                "id": "administrative-services-managers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "行政服务经理",
+                "id": "administrative-services-managers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "行政服务经理",
+                "id": "administrative-services-managers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "行政服务经理",
+                "id": "administrative-services-managers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "行政服务经理",
+                "id": "administrative-services-managers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "administrative-services-managers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "仅提取行政服务经理独立行11-3012：工资114130美元、低高十分位67100/207720；279000→293300，净变化14400为官方独立四舍五入值。",
+                  "页面标题为合并职业；36100年均空缺属于合并职业，不能用作行政服务经理单项；分位不是入门工资。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "bls",
+                "limitation": "页面标题为合并职业；36100年均空缺属于合并职业，不能用作行政服务经理单项；分位不是入门工资。",
+                "market": "美国",
+                "name": "行政服务与设施经理职业展望",
+                "period": "2025工资；2025–2035预测",
+                "publisher": "美国劳工统计局",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/management/administrative-services-managers.htm"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "BTOS调查企业任何业务职能的AI使用；按企业规模与行业存在差异，问题措辞于2025年11月改变。",
+                  "单位是企业，不是行政经理；不能推算岗位采用率、裁员率，不能无校正比较旧问法。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "census",
+                "limitation": "单位是企业，不是行政经理；不能推算岗位采用率、裁员率，不能无校正比较旧问法。",
+                "market": "美国",
+                "name": "企业AI使用情况调查分析",
+                "period": "2025-12-14至2026-05-03",
+                "publisher": "美国人口普查局",
+                "scope": "industry_proxy",
+                "url": "https://www.census.gov/library/stories/2026/05/ai-use-businesses.html"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "列出行政办事员（政务服务综合窗口办事员）3-01-01-01，与企业办公支持经理不可因词名相近等同。",
+                  "历史标准目录仅用于排除错误名称映射，不声称覆盖所有现行管理职业。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cnclass",
+                "limitation": "历史标准目录仅用于排除错误名称映射，不声称覆盖所有现行管理职业。",
+                "market": "中国",
+                "name": "国家职业标准目录",
+                "period": "2022发布的职业标准目录",
+                "publisher": "江苏省人力资源和社会保障厅",
+                "scope": "exact",
+                "url": "https://jshrss.jiangsu.gov.cn/art/2022/5/19/art_85534_10454317.html"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "工具可创建、总结、问答和改写文档；用户需复核生成内容。",
+                  "厂商能力说明，不是本职业效率实验或采用率；许可和组织设置影响可用性。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "copilot",
+                "limitation": "厂商能力说明，不是本职业效率实验或采用率；许可和组织设置影响可用性。",
+                "market": "全球",
+                "name": "Word中Copilot常见问题",
+                "period": "2026访问的产品说明",
+                "publisher": "Microsoft",
+                "scope": "exact",
+                "url": "https://support.microsoft.com/en-us/word/frequently-asked-questions-about-copilot-in-word"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "虚构工作体验、岗位选择问题和控制建议；所有事实前提另引外部claim。",
+                  "不是雇主标准、验证量表、法律规定或真实业务事件；不承诺就业结果。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "editor",
+                "limitation": "不是雇主标准、验证量表、法律规定或真实业务事件；不承诺就业结果。",
+                "market": "全球",
+                "name": "行政服务经理候选内容编辑设计",
+                "period": "2026-09-05",
+                "publisher": "本任务编辑",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "波特兰兼职办公室经理，原文要求采购、供应商协作、信用卡核对、资产标记及办公软件经验。",
+                  "单个雇主、混合办公支持范围，不代表中国招聘或行业普遍要求；职位可能下线。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "employer",
+                "limitation": "单个雇主、混合办公支持范围，不代表中国招聘或行业普遍要求；职位可能下线。",
+                "market": "美国",
+                "name": "Audinate波特兰办公室经理职位",
+                "period": "2026-09-05访问的职位原文",
+                "publisher": "Audinate",
+                "scope": "recruitment_proxy",
+                "url": "https://jobs.lever.co/audinate/c73d95c7-b23f-463e-a4a9-70d80a57328f"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "核实相邻职业对象及责任，不把本职业范围外的专业权限归给行政经理。",
+                  "美国相邻职业比较，不构成中国资格互认。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "facilities",
+                "limitation": "美国相邻职业比较，不构成中国资格互认。",
+                "market": "美国",
+                "name": "设施经理职业档案",
+                "period": "2026访问的职业档案",
+                "publisher": "O*NET / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-3013.00"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "核实相邻职业对象及责任，不把本职业范围外的专业权限归给行政经理。",
+                  "美国相邻职业比较，不构成中国资格互认。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "health",
+                "limitation": "美国相邻职业比较，不构成中国资格互认。",
+                "market": "美国",
+                "name": "医疗卫生服务经理职业档案",
+                "period": "2026访问的职业档案",
+                "publisher": "O*NET / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-9111.00"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "核实相邻职业对象及责任，不把本职业范围外的专业权限归给行政经理。",
+                  "美国相邻职业比较，不构成中国资格互认。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "hr",
+                "limitation": "美国相邻职业比较，不构成中国资格互认。",
+                "market": "美国",
+                "name": "人力资源经理职业档案",
+                "period": "2026访问的职业档案",
+                "publisher": "O*NET / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-3121.00"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "发布按单位类型、行业及宽岗位类别的年平均工资和统计方法，没有行政服务经理单列。",
+                  "不能把中层及以上管理人员或办事人员均值当本职业收入；不证明其他地区调查没有数据。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nbs",
+                "limitation": "不能把中层及以上管理人员或办事人员均值当本职业收入；不证明其他地区调查没有数据。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025",
+                "publisher": "国家统计局",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "描述虚构、数据隐私、人机配置风险与测试、监控等风险管理措施。",
+                  "跨场景自愿风险框架，不是职业准入法规或行政经理事故率。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nist",
+                "limitation": "跨场景自愿风险框架，不是职业准入法规或行政经理事故率。",
+                "market": "美国",
+                "name": "生成式人工智能风险管理画像",
+                "period": "2024",
+                "publisher": "NIST",
+                "scope": "exact",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "工资统计覆盖受薪雇员，不包括自雇；工资与预测就业范围不同。",
+                  "方法来源不提供本职业当前工资数值。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "oews",
+                "limitation": "方法来源不提供本职业当前工资数值。",
+                "market": "美国",
+                "name": "职业就业工资统计常见问题",
+                "period": "当前方法，2026访问",
+                "publisher": "美国劳工统计局",
+                "scope": "exact",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "核实代码、办公支持范围、预算与记录、工作环境；工资栏2025，预测栏仍2024–2034。",
+                  "职业任务不是所有雇主的共同岗位说明；不继承其旧预测到新期间。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet",
+                "limitation": "职业任务不是所有雇主的共同岗位说明；不继承其旧预测到新期间。",
+                "market": "美国",
+                "name": "行政服务经理职业档案",
+                "period": "2026职业档案；预测栏2024–2034",
+                "publisher": "O*NET / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-3012.00"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "核实相邻职业对象及责任，不把本职业范围外的专业权限归给行政经理。",
+                  "美国相邻职业比较，不构成中国资格互认。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "operations",
+                "limitation": "美国相邻职业比较，不构成中国资格互认。",
+                "market": "美国",
+                "name": "综合与运营经理职业档案",
+                "period": "2026访问的职业档案",
+                "publisher": "O*NET / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-1021.00"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "第六条目的明确、最小范围；第五十一条分类、权限、培训与应急措施。",
+                  "法律义务面向个人信息处理者；具体经理依组织授权执行，不能把本页当独立法律意见。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "privacy",
+                "limitation": "法律义务面向个人信息处理者；具体经理依组织授权执行，不能把本页当独立法律意见。",
+                "market": "中国",
+                "name": "中华人民共和国个人信息保护法",
+                "period": "2021法律文本，2026核读",
+                "publisher": "工业和信息化部公布法律原文",
+                "scope": "exact",
+                "url": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12f430eab54bb4f56d89f56.html"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "全球行业代理数据（跨行业知识工作研究，2025-04发表）：研究以6000名知识工作者进行为期6个月的随机现场实验，一半获配集成办公AI工具。作者报告邮件用时的意向治疗估计每周减少1.4小时；会议用时未显著改变。这为邮件任务提供量化线索，但研究没有给出行政服务经理的独立效果，也不证明服务质量、整岗净效率或就业变化。",
+                  "跨职业任务证据；意向治疗与实际使用者效果不同；不外推职业替代率。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "r2-ai",
+                "limitation": "跨职业任务证据；意向治疗与实际使用者效果不同；不外推职业替代率。",
+                "market": "全球",
+                "name": "Shifting Work Patterns with Generative AI",
+                "period": "2025-04",
+                "publisher": "Microsoft Research / 原研究作者",
+                "scope": "industry_proxy",
+                "url": "https://www.microsoft.com/en-us/research/publication/shifting-work-patterns-with-generative-ai/"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "中国招聘代理数据：云南弥勒沐心谷碧朗湾温泉康养度假村的人事行政经理，2026-05-12公告报价8000–10000元/月，并列食宿及六险一金。该岗同时统筹招聘、培训、薪酬等人事工作，要求酒店人事行政经验；不是纯办公服务经理的同口径工资。",
+                  "报价不等于实发；未注明税前税后或当前空缺状态；人事行政混合岗。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "r2-pay-1",
+                "limitation": "报价不等于实发；未注明税前税后或当前空缺状态；人事行政混合岗。",
+                "market": "中国",
+                "name": "弥勒市2026年第十六期招聘信息",
+                "period": "2026-05-12",
+                "publisher": "弥勒市人社局",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hhml.gov.cn/info/35871/918242.htm"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "中国招聘代理数据：江西海济融资租赁综合办公室行政经理，2026-03-05公告综合薪酬12–22万元/年，包含基础薪资与绩效奖金。职责兼有人事、工资核算、党务与内容发布；该金额不是固定月薪，不能除以月份后充当保底收入。投递截止2026-03-31，现为历史报价。",
+                  "具体办公地点、固定与浮动比例未明确；不代表仍在招聘或行政服务经理全国工资。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "r2-pay-2",
+                "limitation": "具体办公地点、固定与浮动比例未明确；不代表仍在招聘或行政服务经理全国工资。",
+                "market": "中国",
+                "name": "海济融资租赁2026社会招聘：综合办公室行政经理",
+                "period": "2026-03-05",
+                "publisher": "江西省人才测评中心转载企业公告",
+                "scope": "recruitment_proxy",
+                "url": "https://www.jxrcrsksta.com/content/5820?categoryId=18"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "中国招聘代理数据：2026-01-14政府招聘信息中的北京海王中新药业办公室副主任，报价5000–6000元/月，有经验者可面谈，工作条件涉及办公室经验与公文材料起草。这是副职且偏文字事务的相邻岗位，只用于提醒读者比较职责和权限层级，不并入行政经理工资区间。",
+                  "历史发布报价；未确认现仍缺员；未说明税口径和奖金；副职不是本职业等价样本。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "r2-pay-3",
+                "limitation": "历史发布报价；未确认现仍缺员；未说明税口径和奖金；副职不是本职业等价样本。",
+                "market": "中国",
+                "name": "省外招聘第六十四期：北京海王中新办公室副主任",
+                "period": "2026-01-14",
+                "publisher": "承德市退役军人事务局",
+                "scope": "recruitment_proxy",
+                "url": "https://tyjr.chengde.gov.cn/art/2026/1/14/art_11448_1101207.html"
+              }
+            ]
+          },
+          "id": "administrative-services-managers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "11-3012.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "O*NET职业代码",
+        "occupation_scope": "美国行政服务经理11-3012 / 11-3012.00精确职业数据",
+        "period": "2026职业档案；预测栏2024–2034",
+        "source_refs": [
+          "onet"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "114,130美元/年",
+        "fact_id": "wage",
+        "market": "美国",
+        "measure": "工资中位数",
+        "occupation_scope": "美国行政服务经理11-3012 / 11-3012.00精确职业数据",
+        "period": "2025工资；2025–2035预测",
+        "source_refs": [
+          "bls"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "低于67,100美元/年",
+        "fact_id": "low",
+        "market": "美国",
+        "measure": "低端十分位边界",
+        "occupation_scope": "美国行政服务经理11-3012 / 11-3012.00精确职业数据",
+        "period": "2025工资；2025–2035预测",
+        "source_refs": [
+          "bls"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "高于207,720美元/年",
+        "fact_id": "high",
+        "market": "美国",
+        "measure": "高端十分位边界",
+        "occupation_scope": "美国行政服务经理11-3012 / 11-3012.00精确职业数据",
+        "period": "2025工资；2025–2035预测",
+        "source_refs": [
+          "bls"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "5%；净变化14,400",
+        "fact_id": "outlook",
+        "market": "美国",
+        "measure": "就业增长率与官方净变化",
+        "occupation_scope": "美国行政服务经理11-3012 / 11-3012.00精确职业数据",
+        "period": "2025工资；2025–2035预测",
+        "source_refs": [
+          "bls"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "9693b6c40f6e0e1609b7d561a3298e2c902067fdc1f3ecd047706fd5e6ec1244",
+  "source_content_sha256": "b0c5474102e0dbdccaed0d8a9ba0222c0b30cca4ad08ec1d4a5b230e2f83b9dd",
   "subject": {
     "canonical_slug": "administrative-services-managers",
     "name": "行政服务经理",
-    "summary": null
+    "summary": "行政服务经理把办公支持需求转成可执行的预算、供应商安排和记录流程，并对服务连续性与异常升级负责。选择岗位时要分清设施、财务和人事权限；可先用虚构采购与服务记录制作一份能被复核的改进方案，再判断是否愿意长期承担协调和追责工作。"
   }
 }

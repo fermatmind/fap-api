@@ -1,12 +1,1861 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：这份工作把航空器过站服务单变成可核验的加油、除冰、水和卫生服务记录；机号、服务项、区域或授权冲突时必须停止。喜欢现场协作、严格核对和清楚交接的人值得先做纸面试验。"
+            ]
+          },
+          "id": "aircraft-service-attendants.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial-aircraft-decision",
+            "editorial-aircraft-simulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "可观察信号：能在时间压力下核对机号、停机位、服务单、车辆设备和完成状态，发现差异会保留现场停止状态，不凭经验补写完成。"
+            ]
+          },
+          "id": "aircraft-service-attendants.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "editorial-aircraft-decision",
+            "editorial-aircraft-simulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "安全工作样本（60分钟，仅纸面）：计划10:00离位；燃油需求3,200升，票据表显差3,100升；饮用水完成栏未勾，实际是否完成未知；污水已完成但舱盖确认空白；09:35更新冻雨而卡片仍写无需除冰；拖行路线批准和通信频道为空。不得接触真实航空器、燃油、除冰液或车辆。"
+            ]
+          },
+          "id": "aircraft-service-attendants.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "editorial-aircraft-decision",
+            "editorial-aircraft-simulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考推演：不得标记服务完成或可离位。燃油少100升；水任务未闭环；污水舱盖未知；天气与除冰指令冲突；拖行授权和通信未知。标出事实、计算、冲突、未知及对应授权角色，由其核实后再决定。"
+            ]
+          },
+          "id": "aircraft-service-attendants.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial-aircraft-decision",
+            "editorial-aircraft-simulation"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业边界：O*NET 53-6032.00，核心是为航空器加油，并可能执行除冰、补水、排污、空气或氧气系统服务和外表清洁；不扩张为机械维修或航班签放。"
+            ]
+          },
+          "id": "aircraft-service-attendants.profile.definition-block.1",
+          "source_refs": [
+            "onet-aircraft-service"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "投入：过站任务单、机号与停机位、服务需求、人员设备状态和区域信息。",
+              "对象：燃油与除冰液、饮用水与污水系统、空气或氧气服务接口、航空器外表。",
+              "产出：完成/未完成状态、用量或异常、设备状态和可追溯交接。",
+              "流程：接单—核对—检查区域与设备—执行获授权服务—监看—停止异常—记录交接。"
+            ]
+          },
+          "id": "aircraft-service-attendants.profile.responsibilities-block.1",
+          "source_refs": [
+            "editorial-aircraft-decision",
+            "onet-aircraft-service"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "环境与节奏：常见于户外机坪、昼夜班和航班波峰；会面对噪声、天气、车辆、危险设备、高处或污染物，实际暴露随任务变化。"
+            ]
+          },
+          "id": "aircraft-service-attendants.profile.work-context-block.1",
+          "source_refs": [
+            "onet-aircraft-service"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "完整闭环：先确认航空器和服务单，再确认人员、设备、区域与通信；执行中持续观察，任何差异保持停止，最后只记录真实完成项和未决条件。"
+            ]
+          },
+          "id": "aircraft-service-attendants.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "editorial-aircraft-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "关键判断：是否为正确航空器、介质和服务量，连接或舱盖状态是否确认，车辆路线和净空是否有效，天气变化是否改变除冰需求，谁有恢复或放行权限。"
+            ]
+          },
+          "id": "aircraft-service-attendants.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "editorial-aircraft-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "相邻边界：汽车与船艇服务面向其他载具；飞机机械师和航空电子技师执行维修；货运主管监督装卸团队。本职业负责航空器地面补给与外部服务。"
+            ]
+          },
+          "id": "aircraft-service-attendants.profile.definition-block.2",
+          "source_refs": [
+            "onet-aircraft-mechanics",
+            "onet-auto-watercraft",
+            "onet-avionics",
+            "onet-cargo-supervisors"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "工具与材料：服务单或移动终端、加油车与软管、除冰车、饮用水和污水服务车、拖车或牵引设备、通信工具和检查表。",
+              "工具名称不代表已受训或获准操作，真实清单以雇主和机场为准。"
+            ]
+          },
+          "id": "aircraft-service-attendants.profile.responsibilities-block.2",
+          "source_refs": [
+            "editorial-aircraft-decision",
+            "onet-aircraft-service"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "协作链：地服协调分派任务，加油/水务/除冰/拖行人员报告状态，机组或运行控制接收服务信息，维护处理设备或航空器异常，授权角色决定恢复与放行。"
+            ]
+          },
+          "id": "aircraft-service-attendants.profile.work-context-block.2",
+          "source_refs": [
+            "editorial-aircraft-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：机号、停机位、介质、数量或状态、时间、异常和责任人一致且可追溯；未完成项不能被速度压力掩盖。"
+            ]
+          },
+          "id": "aircraft-service-attendants.profile.onet-structured-fields-block.2",
+          "source_refs": [
+            "editorial-aircraft-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "常见任务还可能包括手势引导航空器、无线电协调、牵引航空器、装载行李或货物、检查可见裂纹或泄漏以及填写任务表；具体岗位不会同时包含所有任务。"
+            ]
+          },
+          "id": "aircraft-service-attendants.profile.definition-block.3",
+          "source_refs": [
+            "onet-aircraft-service"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "准备边界：O*NET将其列为Job Zone 1—2，训练可能从数天到一年；这不是任何机场的统一准入、燃油、驾驶、拖行或除冰授权。"
+            ]
+          },
+          "id": "aircraft-service-attendants.profile.onet-structured-fields-block.3",
+          "source_refs": [
+            "editorial-aircraft-decision",
+            "onet-aircraft-service"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "汽车与船艇服务员也可能加油和清洁，但对象、机坪区域、航空器接口和运行交接不同。"
+            ]
+          },
+          "id": "aircraft-service-attendants.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-aircraft-mechanics",
+            "onet-aircraft-service",
+            "onet-auto-watercraft",
+            "onet-avionics",
+            "onet-cargo-supervisors"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "飞机与航空电子设备维修技师方向合并机械与航电维修能力；本职业的补给、清洁和过站服务不自动包含故障诊断、维修签放或航电测试。"
+            ]
+          },
+          "id": "aircraft-service-attendants.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-aircraft-mechanics",
+            "onet-aircraft-service",
+            "onet-auto-watercraft",
+            "onet-avionics",
+            "onet-cargo-supervisors"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "飞机机械师技术员检查、修理和维护机体、发动机及系统；本职业发现可见异常时应记录升级，不能把服务动作写成维修批准。"
+            ]
+          },
+          "id": "aircraft-service-attendants.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-aircraft-mechanics",
+            "onet-aircraft-service",
+            "onet-auto-watercraft",
+            "onet-avionics",
+            "onet-cargo-supervisors"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "飞机货物装卸主管计划并监督货物与地勤团队；本职业可能搬运行李或货物，但不自动承担主管的配载、人员与运行监督责任。"
+            ]
+          },
+          "id": "aircraft-service-attendants.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-aircraft-mechanics",
+            "onet-aircraft-service",
+            "onet-auto-watercraft",
+            "onet-avionics",
+            "onet-cargo-supervisors"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "汽车与船艇服务员",
+                "id": "aircraft-service-attendants.direction.1",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/automotive-and-watercraft-service-attendants"
+              },
+              {
+                "entity": "飞机与航空电子设备维修技师",
+                "id": "aircraft-service-attendants.direction.2",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/aircraft-and-avionics-equipment-mechanics-and-technicians"
+              },
+              {
+                "entity": "飞机机械师技术员",
+                "id": "aircraft-service-attendants.direction.3",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/aircraft-mechanics-and-service-technicians"
+              },
+              {
+                "entity": "飞机货物装卸主管",
+                "id": "aircraft-service-attendants.direction.4",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/aircraft-cargo-handling-supervisors"
+              }
+            ]
+          },
+          "id": "aircraft-service-attendants.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-aircraft-mechanics",
+            "onet-aircraft-service",
+            "onet-auto-watercraft",
+            "onet-avionics",
+            "onet-cargo-supervisors"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "选择方向时比较核心对象、最终产出、设备训练、机场准入、维修或监督责任；职位名相近不能替代授权核验。"
+            ]
+          },
+          "id": "aircraft-service-attendants.direction-comparison.adjacent-career-comparison-table.6",
+          "source_refs": [
+            "onet-aircraft-mechanics",
+            "onet-aircraft-service",
+            "onet-auto-watercraft",
+            "onet-avionics",
+            "onet-cargo-supervisors"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助：任务排序、机号与服务单交叉检查、车辆位置提示、用量差异、异常归类和交接记录草稿。"
+            ]
+          },
+          "id": "aircraft-service-attendants.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial-aircraft-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "entries": [
+              "采用门槛：任务、机号、设备和时间数据可靠。",
+              "系统权限、版本、断网回退和人工停止通道已验证。",
+              "告警责任人与响应时限明确。"
+            ]
+          },
+          "id": "aircraft-service-attendants.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial-aircraft-ai"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数据门槛：航空器标识、停机位、服务项、单位、设备号、时间戳和人员身份要一致；缺字段时不能用自动补全制造假闭环。"
+            ]
+          },
+          "id": "aircraft-service-attendants.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial-aircraft-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "entries": [
+              "人工核实真实航空器与接口。",
+              "观察人员、车辆、发动机和区域净空。",
+              "确认泄漏、污染、天气和设备状态。",
+              "由获授权者决定恢复或放行。"
+            ]
+          },
+          "id": "aircraft-service-attendants.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial-aircraft-ai"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余责任：数字工具不能闻到燃油、确认软管或舱盖、判断真实净空，也不持有机场驾驶、燃油、拖行或维修授权。"
+            ]
+          },
+          "id": "aircraft-service-attendants.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial-aircraft-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "entries": [
+              "低风险：格式整理和提醒。",
+              "中风险：差异候选与排程，需人工核对。",
+              "高风险：启动设备、解除停止、维修或放行，必须由现场授权链处理。"
+            ]
+          },
+          "id": "aircraft-service-attendants.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial-aircraft-ai"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "失败风险：错机号、旧任务、错误单位、位置漂移、状态回写延迟或把“已分派”当“已完成”都会制造危险的虚假一致。"
+            ]
+          },
+          "id": "aircraft-service-attendants.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial-aircraft-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业边界：软件清单、自动化试验和任务可辅助性都不等于机场采用率、净岗位变化或个人失业概率。"
+            ]
+          },
+          "id": "aircraft-service-attendants.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial-aircraft-ai"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：中国大陆暂无可安全使用的数据来表示与O*NET 53-6032.00精确对应的全国职业工资分布。"
+            ]
+          },
+          "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：国家统计局2025年资料按行业和宽泛岗位大类发布，不能替代该细分职业的同期中位数。"
+            ]
+          },
+          "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "单位边界：行业年平均、月薪、时薪、夜班补贴、加班和外包计价不可直接混用。"
+            ]
+          },
+          "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "覆盖边界：城镇单位统计范围与机场一线具体用工、承包关系和个人到手收入不同。"
+            ]
+          },
+          "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "求职用法：比较报价时统一地区、机场、雇主/承包商、班次、工时、补贴、试用期和税前口径。"
+            ]
+          },
+          "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.5",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "跨市场边界：美国O*NET/BLS工资不能换算为中国大陆同名岗位收入。"
+            ]
+          },
+          "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.6",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：O*NET展示美国53-6032.00全国工资。"
+            ]
+          },
+          "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-aircraft-service"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：2025年BLS工资数据。"
+            ]
+          },
+          "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-aircraft-service"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数：时薪19.45美元、年薪40,450美元，不是起薪。"
+            ]
+          },
+          "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-aircraft-service"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "计量单位：时薪与年薪同源，个人总收入仍受工时、轮班、季节和加班影响。"
+            ]
+          },
+          "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-aircraft-service"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "覆盖人群：全国受雇者统计不能代表每个机场、航空公司、承包商和地区。"
+            ]
+          },
+          "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "onet-aircraft-service"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "报价比较：同时核对基本工资、班次差、加班、福利、工会或合同条件及准入训练。"
+            ]
+          },
+          "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "onet-aircraft-service"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "决策限制：统计值不是个人报价、录用或收入保证，也不能外推到中国。"
+            ]
+          },
+          "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.7",
+          "source_refs": [
+            "onet-aircraft-service"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "任务信号：愿意反复核对机号、停机位、服务项和完成状态。"
+            ]
+          },
+          "id": "aircraft-service-attendants.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial-aircraft-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "entries": [
+              "注意信号：持续观察车辆、航空器、人员和天气变化。",
+              "记录信号：只写真实完成项，能保留未决状态。",
+              "沟通信号：用短句复述指令、差异、停止原因和所需角色。"
+            ]
+          },
+          "id": "aircraft-service-attendants.fit.personality-fit-block.1",
+          "source_refs": [
+            "editorial-aircraft-decision"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "节奏信号：在航班波峰和多任务切换时仍能守住核对顺序，不因催促跳步。"
+            ]
+          },
+          "id": "aircraft-service-attendants.fit.personality-fit-block.2",
+          "source_refs": [
+            "editorial-aircraft-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "体力信号：愿意了解户外、噪声、天气、攀爬、弯腰和重复动作，再用真实岗位观察验证承受度。"
+            ]
+          },
+          "id": "aircraft-service-attendants.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial-aircraft-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "entries": [
+              "谨慎条件：依赖记忆、讨厌记录或习惯默认“已完成”。",
+              "谨慎条件：看到泄漏、错机或路线冲突仍为赶时间继续。"
+            ]
+          },
+          "id": "aircraft-service-attendants.fit.personality-fit-block.3",
+          "source_refs": [
+            "editorial-aircraft-decision"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "验证方法：独立完成本页固定过站卡，再用“燃油相符但机号错”和“机号正确但天气更新”的两张固定变体卡复盘。"
+            ]
+          },
+          "id": "aircraft-service-attendants.fit.personality-fit-block.4",
+          "source_refs": [
+            "editorial-aircraft-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "协作边界：适合明确交接的人；需要单独工作不等于可以绕过无线电、服务单或授权链。"
+            ]
+          },
+          "id": "aircraft-service-attendants.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial-aircraft-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "人格边界：兴趣、自评或喜欢飞机不证明胜任；受监督训练中的准确率、停止判断和记录质量更有证据价值。"
+            ]
+          },
+          "id": "aircraft-service-attendants.fit.personality-fit-block.5",
+          "source_refs": [
+            "editorial-aircraft-decision"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "entries": [
+              "错机错服务：机号、停机位、介质或任务冲突时停止，不连接、不启动、不补写。",
+              "后果：错误补给、污染、航空器损伤或运行中断。"
+            ]
+          },
+          "id": "aircraft-service-attendants.risk.career-risk-cards.1",
+          "source_refs": [
+            "ecfr-part139-fuel",
+            "editorial-aircraft-risk",
+            "faa-ground-vehicles"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "entries": [
+              "燃油与泄漏：用量、设备、连接或泄漏状态异常时保持停止并启动机场/雇主应急链。",
+              "Part 139条文只在其适用机场和关系内使用。"
+            ]
+          },
+          "id": "aircraft-service-attendants.risk.career-risk-cards.2",
+          "source_refs": [
+            "ecfr-part139-fuel",
+            "editorial-aircraft-risk",
+            "faa-ground-vehicles"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "entries": [
+              "车辆与航空器：路线、通信、净空或驾驶授权未知时不得移动。",
+              "FAA地面车辆通告是训练指导，不代替本机场程序。"
+            ]
+          },
+          "id": "aircraft-service-attendants.risk.career-risk-cards.3",
+          "source_refs": [
+            "ecfr-part139-fuel",
+            "editorial-aircraft-risk",
+            "faa-ground-vehicles"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "entries": [
+              "除冰与天气：天气更新、液体、区域或完成状态冲突时不宣告完成，由相应授权角色复核。",
+              "纸面任务不教授真实除冰操作。"
+            ]
+          },
+          "id": "aircraft-service-attendants.risk.career-risk-cards.4",
+          "source_refs": [
+            "ecfr-part139-fuel",
+            "editorial-aircraft-risk",
+            "faa-ground-vehicles"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "entries": [
+              "水务、污水与舱盖：服务项、接口或关闭确认未知时保持未完成并升级。",
+              "不得用一项勾选替代所有接口状态。"
+            ]
+          },
+          "id": "aircraft-service-attendants.risk.career-risk-cards.5",
+          "source_refs": [
+            "ecfr-part139-fuel",
+            "editorial-aircraft-risk",
+            "faa-ground-vehicles"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "entries": [
+              "共同规则：任何关键条件、程序或权限不明即停止、隔离任务状态、记录并交接。",
+              "本页不授予燃油、车辆、拖行、除冰、维修或放行权限。"
+            ]
+          },
+          "id": "aircraft-service-attendants.risk.career-risk-cards.6",
+          "source_refs": [
+            "ecfr-part139-fuel",
+            "editorial-aircraft-risk",
+            "faa-ground-vehicles"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "现实入口：从机场与雇主入场安全、服务单、机坪区域、设备检查、通信和受监督训练开始；用本页虚构过站卡展示停止、记录和交接。"
+            ]
+          },
+          "id": "aircraft-service-attendants.path.recruitment-sample.1",
+          "source_refs": [
+            "editorial-aircraft-path",
+            "faa-aircraft-fueling"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-role-comparison",
+          "data": {
+            "column_keys": [
+              "role",
+              "initial_tasks",
+              "boundary"
+            ],
+            "rows": [
+              [
+                "受监督入门",
+                "核对机号、服务单、设备和区域",
+                "不独立解除停止或放行"
+              ],
+              [
+                "获授权执行",
+                "完成限定的加油、水务、除冰或拖行任务",
+                "只在训练、设备和机场权限范围内"
+              ],
+              [
+                "协调或带班",
+                "分派任务、管理冲突与交接",
+                "不自动获得维修签放或运行放行权"
+              ]
+            ]
+          },
+          "id": "aircraft-service-attendants.path.entry-role-comparison.1",
+          "source_refs": [
+            "editorial-aircraft-path",
+            "faa-aircraft-fueling"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.employer-evidence",
+          "data": {
+            "column_keys": [
+              "work_evidence",
+              "proof_method"
+            ],
+            "rows": [
+              [
+                "固定过站卡",
+                "计算、冲突和未知可追溯"
+              ],
+              [
+                "异常清单",
+                "能保持停止并找对授权角色"
+              ],
+              [
+                "交接记录",
+                "完成与未完成状态不混淆"
+              ]
+            ]
+          },
+          "id": "aircraft-service-attendants.path.employer-evidence.1",
+          "source_refs": [
+            "editorial-aircraft-path",
+            "faa-aircraft-fueling"
+          ],
+          "type": "matrix"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-portfolio",
+          "data": {
+            "entries": [
+              {
+                "id": "aircraft-service-attendants.portfolio.one",
+                "values": [
+                  "纸面过站卡",
+                  "虚构材料",
+                  "任务核对与停止记录"
+                ]
+              },
+              {
+                "id": "aircraft-service-attendants.portfolio.two",
+                "values": [
+                  "固定变体卡",
+                  "错机号与天气更新",
+                  "差异、升级和复盘"
+                ]
+              }
+            ]
+          },
+          "id": "aircraft-service-attendants.path.entry-portfolio.1",
+          "source_refs": [
+            "editorial-aircraft-path",
+            "faa-aircraft-fueling"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.interview-probation",
+          "data": {
+            "column_keys": [
+              "possible_check",
+              "observed_evidence"
+            ],
+            "rows": [
+              [
+                "燃油票据差100升",
+                "保持未完成，复核工单和票据"
+              ],
+              [
+                "天气从正常变冻雨",
+                "停止沿用旧除冰状态，升级协调"
+              ],
+              [
+                "拖行路线或频道为空",
+                "不移动车辆或航空器，补授权和通信"
+              ]
+            ]
+          },
+          "id": "aircraft-service-attendants.path.interview-probation.1",
+          "source_refs": [
+            "editorial-aircraft-path",
+            "faa-aircraft-fueling"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "aircraft-service-attendants.trial.day1",
+                "values": [
+                  "第1天",
+                  "明确职业边界与相邻职责"
+                ]
+              },
+              {
+                "id": "aircraft-service-attendants.trial.day3",
+                "values": [
+                  "第3天",
+                  "完成固定过站卡和两张变体卡"
+                ]
+              },
+              {
+                "id": "aircraft-service-attendants.trial.day7",
+                "values": [
+                  "第7天",
+                  "复盘错误、停止理由和交接质量"
+                ]
+              }
+            ]
+          },
+          "id": "aircraft-service-attendants.path.seven-day-trial.1",
+          "source_refs": [
+            "editorial-aircraft-path",
+            "faa-aircraft-fueling"
+          ],
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-decision",
+          "data": {
+            "column_keys": [
+              "credential",
+              "job_value",
+              "boundary"
+            ],
+            "rows": [
+              [
+                "雇主训练",
+                "掌握特定设备、程序和区域",
+                "不自动跨机场或跨雇主有效"
+              ],
+              [
+                "课程或证书",
+                "提供学习或发现线索",
+                "不自动等于驾驶、燃油或拖行授权"
+              ],
+              [
+                "机场/雇主授权",
+                "限定人员、设备、区域和任务",
+                "不自动包含维修签放或航空器放行"
+              ]
+            ]
+          },
+          "id": "aircraft-service-attendants.path.credential-decision.1",
+          "source_refs": [
+            "editorial-aircraft-path",
+            "faa-aircraft-fueling"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-boundary",
+          "data": {
+            "paragraphs": [
+              "资格决策：核实机场准入、背景或安保要求、驾驶区域、燃油/除冰/拖行训练、监督和复训；职位名或证书不能替代实际授权记录。"
+            ]
+          },
+          "id": "aircraft-service-attendants.path.credential-boundary.1",
+          "source_refs": [
+            "editorial-aircraft-path",
+            "faa-aircraft-fueling"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-boundary",
+          "data": {
+            "paragraphs": [
+              "FAA AC 150/5230-4C涵盖机场航空燃油储存、操作、加注和人员训练指导；具体适用、课程、复训和授权由机场、雇主及适用规则确认。"
+            ]
+          },
+          "id": "aircraft-service-attendants.path.credential-boundary.2",
+          "source_refs": [
+            "editorial-aircraft-path",
+            "faa-aircraft-fueling"
+          ],
+          "type": "notice"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "官方信号：O*NET提供美国职业、工资、就业、行业和预测资料，不证明本地机场正在招聘。"
+            ]
+          },
+          "id": "aircraft-service-attendants.market-signals.market-signal-card.1",
+          "source_refs": [
+            "editorial-aircraft-market",
+            "onet-aircraft-service"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "就业预测：2024—2034为快于平均（5%至6%），年度空缺约4,300；空缺包含增长与替换。"
+            ]
+          },
+          "id": "aircraft-service-attendants.market-signals.market-signal-card.2",
+          "source_refs": [
+            "editorial-aircraft-market",
+            "onet-aircraft-service"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "招聘信号：职位样本只代表采样时间、机场、雇主或承包商、班次和资格条件。"
+            ]
+          },
+          "id": "aircraft-service-attendants.market-signals.market-signal-card.3",
+          "source_refs": [
+            "editorial-aircraft-market",
+            "onet-aircraft-service"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "业务信号：航班量、季节天气和承包变化可能改变工时与岗位组合，不能直接换算为录用人数。"
+            ]
+          },
+          "id": "aircraft-service-attendants.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editorial-aircraft-market",
+            "onet-aircraft-service"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "技术信号：车辆定位、任务调度和自动化试验可能改变部分任务，不等于组织已全面采用或净岗位变化。"
+            ]
+          },
+          "id": "aircraft-service-attendants.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editorial-aircraft-market",
+            "onet-aircraft-service"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "相邻转型：可比较汽车/船艇服务、飞机维修、航空电子或货运监督，但要补相应设备、资格、维修或管理证据。"
+            ]
+          },
+          "id": "aircraft-service-attendants.market-signals.market-signal-card.6",
+          "source_refs": [
+            "editorial-aircraft-market",
+            "onet-aircraft-service"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "工作闭环是接收过站任务、核对航空器与服务项目、检查人员设备和作业区域、执行获授权服务、监看异常、停止并升级冲突、记录完成状态并交接。",
+                "id": "aircraft-service-attendants.faq.1",
+                "question_key": "career.faq.aircraft-service-attendants.daily-work",
+                "source_refs": [
+                  "editorial-aircraft-decision"
+                ]
+              },
+              {
+                "answer": "本职业围绕航空器地面补给和外部服务；汽车与船艇服务、飞机机械维修、航空电子维修和飞机货运监督分别以其他载具、维修签放、电子系统或货运团队监督为核心，职责不能互换。",
+                "id": "aircraft-service-attendants.faq.2",
+                "question_key": "career.faq.aircraft-service-attendants.role-comparison",
+                "source_refs": [
+                  "onet-aircraft-mechanics",
+                  "onet-aircraft-service",
+                  "onet-auto-watercraft",
+                  "onet-avionics",
+                  "onet-cargo-supervisors"
+                ]
+              },
+              {
+                "answer": "适配度通过能否准确核对航空器和服务单、保持区域观察、遵守停止线、记录完成与未完成项并清楚交接来观察，不是人格或录用结论。",
+                "id": "aircraft-service-attendants.faq.3",
+                "question_key": "career.faq.aircraft-service-attendants.fit",
+                "source_refs": [
+                  "editorial-aircraft-decision"
+                ]
+              },
+              {
+                "answer": "数字工具可辅助任务排序、服务单核对、车辆位置提示、用量差异和交接记录；它不能确认现场净空、接头状态、污染、泄漏或操作授权。",
+                "id": "aircraft-service-attendants.faq.4",
+                "question_key": "career.faq.aircraft-service-attendants.ai-impact",
+                "source_refs": [
+                  "editorial-aircraft-ai"
+                ]
+              },
+              {
+                "answer": "人工控制点包括核实机号和停机位、复核服务要求和设备状态、观察人员车辆与航空器、响应泄漏或告警，并由授权角色决定恢复、维护或放行。",
+                "id": "aircraft-service-attendants.faq.5",
+                "question_key": "career.faq.aircraft-service-attendants.human-control",
+                "source_refs": [
+                  "editorial-aircraft-ai"
+                ]
+              },
+              {
+                "answer": "国家统计局2025年工资资料提供行业和宽泛岗位大类，不能给出与O*NET 53-6032.00精确对应的中国大陆全国职业中位数、统一起薪或个人到手收入。",
+                "id": "aircraft-service-attendants.faq.6",
+                "question_key": "career.faq.aircraft-service-attendants.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "O*NET展示2025年美国全国中位时薪19.45美元、年薪40,450美元；该美国全国中位数不是起薪或个人报价，不能替代地区、机场、班次、工时、福利和雇主条件。",
+                "id": "aircraft-service-attendants.faq.7",
+                "question_key": "career.faq.aircraft-service-attendants.us-pay",
+                "source_refs": [
+                  "onet-aircraft-service"
+                ]
+              },
+              {
+                "answer": "课程或证书只能作为发现线索；具体机场准入、车辆驾驶、燃油、除冰、拖行、维护和签放权限由适用规则、机场与雇主核验；FAA将AC 150/5230-4C列为有效，内容涵盖机场航空燃油储存、操作、加注和相关人员训练；它不证明某个人已完成训练或获授权。",
+                "id": "aircraft-service-attendants.faq.8",
+                "question_key": "career.faq.aircraft-service-attendants.credentials",
+                "source_refs": [
+                  "editorial-aircraft-path",
+                  "faa-aircraft-fueling"
+                ]
+              },
+              {
+                "answer": "O*NET/BLS将53-6032.00的2024—2034增长列为快于平均（5%至6%）；这不是个人就业概率；O*NET/BLS显示53-6032.00在2024—2034年的年度空缺约4,300个；空缺含增长与替换，不等于净新增。",
+                "id": "aircraft-service-attendants.faq.9",
+                "question_key": "career.faq.aircraft-service-attendants.outlook-transition",
+                "source_refs": [
+                  "onet-aircraft-service"
+                ]
+              },
+              {
+                "answer": "关键风险包括错机错服务、燃油差异或泄漏、车辆与航空器冲突、除冰状态冲突、污水或饮用水交叉污染、记录遗漏和越权放行；任一关键条件不明即停止并升级；在14 CFR 139.321适用范围内，机场证书持有人须建立经批准的燃油防火防爆标准，并要求加油代理遵守；条文还规定加油人员的初始和复训安排；FAA AC 150/5210-20A是面向机场运营人的地面车辆、航空器拖行与人员控制训练指导，不能替代具体机场的路线、通信和驾驶授权。",
+                "id": "aircraft-service-attendants.faq.10",
+                "question_key": "career.faq.aircraft-service-attendants.risk-boundary",
+                "source_refs": [
+                  "ecfr-part139-fuel",
+                  "editorial-aircraft-risk",
+                  "faa-ground-vehicles"
+                ]
+              },
+              {
+                "answer": "职业工资、就业预测、年度空缺、机场业务量、招聘样本和自动化试验是不同信号，不能合并为个人录用或收入保证；适配度通过能否准确核对航空器和服务单、保持区域观察、遵守停止线、记录完成与未完成项并清楚交接来观察，不是人格或录用结论。",
+                "id": "aircraft-service-attendants.faq.11",
+                "question_key": "career.faq.aircraft-service-attendants.career-worth",
+                "source_refs": [
+                  "editorial-aircraft-decision",
+                  "editorial-aircraft-market"
+                ]
+              }
+            ]
+          },
+          "id": "aircraft-service-attendants.sources.faq.1",
+          "source_refs": [
+            "ecfr-part139-fuel",
+            "editorial-aircraft-ai",
+            "editorial-aircraft-decision",
+            "editorial-aircraft-market",
+            "editorial-aircraft-path",
+            "editorial-aircraft-risk",
+            "faa-aircraft-fueling",
+            "faa-ground-vehicles",
+            "nbs-wages",
+            "onet-aircraft-mechanics",
+            "onet-aircraft-service",
+            "onet-auto-watercraft",
+            "onet-avionics",
+            "onet-cargo-supervisors"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "O*NET职业事实、美国统计、Part 139条文、FAA咨询通告和编辑建议分别陈述，不跨范围拼接。",
+              "本页只供职业决策和纸面模拟，不构成真实航空器、燃油、除冰、污水、车辆或拖行操作指导。",
+              "中国精确职业工资暂无可安全使用的数据，不用行业或宽泛岗位均值填补。",
+              "机场、雇主、设备、培训、准入、维护、签放和放行权限必须按所在地与具体组织核验。"
+            ]
+          },
+          "id": "aircraft-service-attendants.sources.boundary.1",
+          "source_refs": [
+            "ecfr-part139-fuel",
+            "editorial-aircraft-ai",
+            "editorial-aircraft-decision",
+            "editorial-aircraft-market",
+            "editorial-aircraft-path",
+            "editorial-aircraft-risk",
+            "editorial-aircraft-simulation",
+            "faa-aircraft-fueling",
+            "faa-ground-vehicles",
+            "nbs-wages",
+            "onet-aircraft-mechanics",
+            "onet-aircraft-service",
+            "onet-auto-watercraft",
+            "onet-avionics",
+            "onet-cargo-supervisors"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "飞机服务服务员",
+                "id": "aircraft-service-attendants.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "飞机服务服务员",
+                "id": "aircraft-service-attendants.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "飞机服务服务员",
+                "id": "aircraft-service-attendants.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "飞机服务服务员",
+                "id": "aircraft-service-attendants.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "飞机服务服务员",
+                "id": "aircraft-service-attendants.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "飞机服务服务员",
+                "id": "aircraft-service-attendants.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "飞机服务服务员",
+                "id": "aircraft-service-attendants.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "飞机服务服务员",
+                "id": "aircraft-service-attendants.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "飞机服务服务员",
+                "id": "aircraft-service-attendants.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "飞机服务服务员",
+                "id": "aircraft-service-attendants.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "飞机服务服务员",
+                "id": "aircraft-service-attendants.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "aircraft-service-attendants.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对Part 139机场燃油标准、监督与训练边界。",
+                  "仅限该条适用的机场证书持有人和加油代理关系，不是所有岗位的通用个人许可。"
+                ],
+                "evidence_type": "current eCFR regulation text",
+                "id": "ecfr-part139-fuel",
+                "limitation": "仅限该条适用的机场证书持有人和加油代理关系，不是所有岗位的通用个人许可。",
+                "market": "美国",
+                "name": "14 CFR 139.321 - Handling and storing of hazardous substances and materials",
+                "period": "current regulation; accessed 2026-09-06",
+                "publisher": "eCFR / Office of the Federal Register",
+                "scope": "exact",
+                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-G/part-139/subpart-D/section-139.321"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成机场程序、设备操作、签放、培训或授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-aircraft-ai",
+                "limitation": "不构成机场程序、设备操作、签放、培训或授权。",
+                "market": "全球",
+                "name": "飞机地面勤务数字工具控制建议",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成机场程序、设备操作、签放、培训或授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-aircraft-decision",
+                "limitation": "不构成机场程序、设备操作、签放、培训或授权。",
+                "market": "全球",
+                "name": "飞机地面勤务职业决策",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成机场程序、设备操作、签放、培训或授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-aircraft-market",
+                "limitation": "不构成机场程序、设备操作、签放、培训或授权。",
+                "market": "全球",
+                "name": "飞机地面勤务市场信号边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成机场程序、设备操作、签放、培训或授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-aircraft-path",
+                "limitation": "不构成机场程序、设备操作、签放、培训或授权。",
+                "market": "全球",
+                "name": "飞机地面勤务入门试做路径",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成机场程序、设备操作、签放、培训或授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-aircraft-risk",
+                "limitation": "不构成机场程序、设备操作、签放、培训或授权。",
+                "market": "全球",
+                "name": "飞机地面勤务非监管风险建议",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成机场程序、设备操作、签放、培训或授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-aircraft-simulation",
+                "limitation": "不构成机场程序、设备操作、签放、培训或授权。",
+                "market": "全球",
+                "name": "飞机地面勤务纸面过站模拟",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对航空燃油储存、操作、加注与人员训练指导范围。",
+                  "咨询通告提供可接受的标准和指导，不自动证明个人已受训或获授权。"
+                ],
+                "evidence_type": "active advisory circular landing page",
+                "id": "faa-aircraft-fueling",
+                "limitation": "咨询通告提供可接受的标准和指导，不自动证明个人已受训或获授权。",
+                "market": "美国",
+                "name": "AC 150/5230-4C - Aircraft Fuel Storage, Handling, and Dispensing on Airports",
+                "period": "active guidance; accessed 2026-09-06",
+                "publisher": "Federal Aviation Administration",
+                "scope": "exact",
+                "url": "https://www.faa.gov/airports/resources/advisory_circulars/index.cfm/go/document.current/documentNumber/150_5230-4"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对机坪车辆、拖行与人员训练指导范围。",
+                  "咨询通告是面向机场运营人的指导，不能替代具体机场程序或驾驶授权。"
+                ],
+                "evidence_type": "active advisory circular landing page",
+                "id": "faa-ground-vehicles",
+                "limitation": "咨询通告是面向机场运营人的指导，不能替代具体机场程序或驾驶授权。",
+                "market": "美国",
+                "name": "AC 150/5210-20A - Ground Vehicle Operations to include Taxiing or Towing an Aircraft on Airports",
+                "period": "active guidance; accessed 2026-09-06",
+                "publisher": "Federal Aviation Administration",
+                "scope": "exact",
+                "url": "https://www.faa.gov/airports/resources/advisory_circulars/index.cfm/go/document.information/documentID/1028089"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对中国工资表的行业与宽泛岗位大类口径。",
+                  "行业和宽泛岗位大类均值不能替代本职业精确工资。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "nbs-wages",
+                "limitation": "行业和宽泛岗位大类均值不能替代本职业精确工资。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wages; published 2026-05-15; accessed 2026-09-06",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业身份和职责。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-aircraft-mechanics",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "49-3011.00 - Aircraft Mechanics and Service Technicians",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/49-3011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对职业身份、任务、环境、准备、工资与预测。",
+                  "仅限该O*NET职业和美国统计。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-aircraft-service",
+                "limitation": "仅限该O*NET职业和美国统计。",
+                "market": "美国",
+                "name": "53-6032.00 - Aircraft Service Attendants",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/53-6032.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业身份和职责。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-auto-watercraft",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "53-6031.00 - Automotive and Watercraft Service Attendants",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/53-6031.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业身份和职责。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-avionics",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "49-2091.00 - Avionics Technicians",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/49-2091.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业身份和职责。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-cargo-supervisors",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "53-1041.00 - Aircraft Cargo Handling Supervisors",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/53-1041.00"
+              }
+            ]
+          },
+          "id": "aircraft-service-attendants.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "精确职业数据：O*NET 53-6032.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业代码与身份",
+        "occupation_scope": "飞机服务服务员 / 53-6032.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-aircraft-service"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "精确职业数据：O*NET 53-6032.00；过站服务单、航空器、介质、地面设备与记录",
+        "fact_id": "task-object",
+        "market": "美国",
+        "measure": "任务与对象",
+        "occupation_scope": "飞机服务服务员 / 53-6032.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-aircraft-service"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "精确职业数据：O*NET 53-6032.00；接单—核对—检查—服务—停止异常—记录交接",
+        "fact_id": "workflow",
+        "market": "全球",
+        "measure": "核心职责",
+        "occupation_scope": "飞机服务服务员的候选纸面工作流（编辑综合）",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "editorial-aircraft-decision"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "核对、现场观察、停止、记录与交接",
+        "fact_id": "fit",
+        "market": "全球",
+        "measure": "可观察适配信号",
+        "occupation_scope": "飞机服务服务员 / 53-6032.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "editorial-aircraft-decision"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "错机错服务、燃油、车辆、除冰、水务与授权",
+        "fact_id": "risk",
+        "market": "全球",
+        "measure": "风险控制边界",
+        "occupation_scope": "飞机服务服务员 / 53-6032.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "editorial-aircraft-risk"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "11857f296ebd89289ba759745eb43f8a5b2ce74021b13b124e3c1a4c0270ab24",
+  "source_content_sha256": "5761d5ca7786e307b621d7f332749f068daca4300df34c0cc80ec542cb05d365",
   "subject": {
     "canonical_slug": "aircraft-service-attendants",
     "name": "飞机服务服务员",
-    "summary": null
+    "summary": "按过站服务单核对航空器、人员、设备和区域，完成获授权的加油、除冰、水务、排污或外部服务，并记录异常与交接。"
   }
 }

@@ -1,12 +1,1581 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：核心是按区域清单完成楼宇清洁、垃圾处理与补给，并把未知污染、损坏、未完成项和维修需求如实交接。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "ed-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "可观察信号：逐区核对、区分完成与未知、发现异常不猜测；材料、设备、锐物、高处或权限不明时停止受影响步骤并升级。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "ed-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "纸面练习：虚构A层有卫生间、走廊、会议室三处；每处须记录“完成／待处理／封闭”、异常和交接人。记录显示卫生间完成、走廊有未知液体待处理、会议室未填状态。不得接触真实污染物或设备。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "ed-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考答案：A层未闭环。走廊只能记“未知液体、区域待处理并升级”，会议室状态未知；不能把空白推定为完成，也不能自行判断液体成分。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "ed-exercise"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业边界：O*NET 37-2011.00保持建筑清洁有序并承担较重清洁；官方标题明确排除女佣及客房清洁员。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.profile.definition-block.1",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "主要对象：楼宇公共区域、卫生间、地面、玻璃、垃圾、耗材和设施异常。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "核心任务：清洁与补给卫生间、收集垃圾，以及扫、拖、刷洗或吸尘地面。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "扩展任务：遵循程序使用清洁剂和动力设备，发现建筑系统重大维修需求时通知管理人员。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作闭环：核对区域与限制—确认材料设备—执行获授权任务—标记状态—隔离异常—记录耗材与维修需求—交接。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.profile.work-context-block.1",
+          "source_refs": [
+            "ed-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作情境：走动、站立、重复动作和手部操作较多，防护用品常见；部分岗位可能频繁接触疾病或感染风险。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.profile.work-context-block.2",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "准备边界：岗位准备要求会变化；化学品、动力设备、高处、害虫处理、锅炉和维修任务的培训与权限须逐项核验。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "可检查产出：区域清单、完成状态、异常位置、耗材、维修通知和交接记录。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "ed-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：不漏区域、不混状态、不猜污染、不把空白写成完成，异常位置与接收人可追踪。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "ed-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "相邻边界：洗碗工、清洁主管、客房清洁员、绿化工与地毯安装工在对象、产出或监督责任上均不同。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.profile.definition-block.2",
+          "source_refs": [
+            "onet-carpet",
+            "onet-dishwashers",
+            "onet-landscaping",
+            "onet-maids",
+            "onet-supervisors"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "dishwashers",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/dishwashers"
+              },
+              {
+                "entity": "first-line-supervisors-of-housekeeping-and-janitorial-workers",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/first-line-supervisors-of-housekeeping-and-janitorial-workers"
+              },
+              {
+                "entity": "maids-and-housekeeping-cleaners",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/maids-and-housekeeping-cleaners"
+              },
+              {
+                "entity": "landscaping-and-groundskeeping-workers",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/landscaping-and-groundskeeping-workers"
+              },
+              {
+                "entity": "carpet-installers",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/carpet-installers"
+              }
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-carpet",
+            "onet-dishwashers",
+            "onet-landscaping",
+            "onet-maids",
+            "onet-supervisors"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "洗碗工清洁餐具、厨房和食物准备设备；本职业面向楼宇及其公共区域。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-dishwashers"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "清洁与勤杂主管直接监督、协调并检查他人工作；本职业主要执行具体区域任务并上报异常。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-supervisors"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "女佣与客房清洁员侧重私人住宅或住宿、医疗等场所的较轻清洁；本页职业官方范围将其排除。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-maids"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "绿化工维护场地植被，地毯安装工铺设地毯与衬垫；二者都不等同于楼宇日常清洁。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-carpet",
+            "onet-landscaping"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助任务：排班、区域清单、耗材库存、工单分派和异常照片归档。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用前提：区域编码、任务标准、班次、材料、权限和状态定义可靠。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "记录门槛：地点、状态、异常、时间、照片归属和交接对象可追踪。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工控制：现场人员核对真实区域、污染、损坏、耗材和完成质量。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余责任：工具不能确认未知液体成分、材料兼容、带电设备安全或高处条件。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "失败风险：错区域、空白自动补完成、照片串单或异常被普通任务覆盖。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业边界：自动洗地或排班系统的任务辅助性不等于全行业采用率或岗位净变化。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "ed-ai",
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实践响应：先用纸面清单验证状态规则；真实工作服从雇主程序、培训与权限。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：中国大陆暂无可安全使用的数据来表示与O*NET 37-2011.00精确对应的全国职业工资分布。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：国家统计局公开资料对应2024年，并按行业门类和宽泛岗位类别发布，不能替代该职业中位数。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "计量口径：平均工资为报告期工资总额除以平均就业人数，且工资总额为税前口径，不能直接换算个人月薪或到手收入。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "求职用法：比较同地区、建筑类型、班次、合同、工时、外包方式和福利，不用行业均值或美国工资填补职业缺口。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：O*NET页面报告美国37-2011.00的全国职业工资统计。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：工资数值对应2025年。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "时薪中位数：每小时17.71美元。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "年薪中位数：每年36,840美元。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "覆盖边界：全国中位数不代表每个地区、建筑类型、班次、合同或经验水平。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "决策限制：统计值不是起薪、到手收入、个人报价或录用保证。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "区域信号：能按清单逐处核对，不凭记忆跳项。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.fit.riasec-fit-block.1",
+          "source_refs": [
+            "ed-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "状态信号：完成、待处理、封闭和未知明确分开。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.fit.riasec-fit-block.2",
+          "source_refs": [
+            "ed-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "异常信号：能描述位置与现象，不猜污染物或故障原因。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.fit.riasec-fit-block.3",
+          "source_refs": [
+            "ed-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "交接信号：记录时间、受影响区域和接收人。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.fit.riasec-fit-block.4",
+          "source_refs": [
+            "ed-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "体力信号：愿意面对较多走动、站立、手部操作和重复动作。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.fit.riasec-fit-block.5",
+          "source_refs": [
+            "ed-decision",
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "边界信号：不为赶进度绕过防护、区域隔离、材料说明或授权。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.fit.riasec-fit-block.6",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "固定变体：只把题面“会议室未填”改为“会议室完成”，其余不变；走廊仍有未知液体待处理，所以A层仍未闭环。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.fit.riasec-fit-block.7",
+          "source_refs": [
+            "ed-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "人格边界：爱整洁不能证明胜任；稳定记录、边界意识和受监督表现更重要。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.fit.riasec-fit-block.8",
+          "source_refs": [
+            "ed-decision"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "未知污染：不触碰、不猜成分，停止受影响步骤，按场所程序保护现场并升级。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.risk.career-risk-cards.1",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "化学品与动力设备：只执行已培训且获授权的步骤；本页不提供配制或设备操作指令。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.risk.career-risk-cards.2",
+          "source_refs": [
+            "ed-risk",
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "锐物、生物污染、高处、搬运和带电设备涉及不同防护与权限，不能相互替代。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.risk.career-risk-cards.3",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "维修需求：记录位置与现象并通知管理人员，不自行扩大到未经授权的维修。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.risk.career-risk-cards.4",
+          "source_refs": [
+            "ed-risk",
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同规则：材料、设备、区域状态、防护或权限任一不明，停止受影响步骤并升级。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.risk.career-risk-cards.5",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "现实入口：先练区域清单、状态编码、耗材记录和异常交接，再核具体岗位的现场培训。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.path.career-path-block.1",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "面试核实：建筑类型、班次、人员配置、化学品与设备培训、防护、垃圾处理和维修边界。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.path.career-path-block.2",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品：完成本页三处区域纸面题，展示未知与未完成如何区分。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.path.career-path-block.3",
+          "source_refs": [
+            "ed-exercise",
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "试用表达：空白只代表状态未知，不能写成已完成；异常只描述观察到的位置与现象。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.path.career-path-block.4",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七天练习：区域编码、任务清单、状态表、耗材表、异常卡、交接摘要和复盘各一天，全部使用虚构材料。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.path.career-path-block.5",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "资格边界：化学品、动力设备、高处、害虫处理、锅炉或电气维修的培训、资格和授权须逐项核验。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.path.career-path-block.6",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "能力阶梯：先稳定清单与状态，再承担更多区域和设备，最后在权限内做异常协调。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.path.career-path-block.7",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转向选择：主管、客房、绿化或铺装岗位需补其特定对象、工具、训练和责任证据。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.path.career-path-block.8",
+          "source_refs": [
+            "ed-path",
+            "onet-carpet",
+            "onet-landscaping",
+            "onet-maids",
+            "onet-supervisors"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "官方信号：O*NET提供美国该职业的任务、工资、就业和预测，不证明本地正在招聘。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.market-signals.market-signal-card.1",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "就业存量：2024年为2,447,700人；这是全国存量，不是新增岗位。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.market-signals.market-signal-card.2",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "预测变化：2024至2034年增长1%至2%；不是个人录用概率。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.market-signals.market-signal-card.3",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "年度空缺：预测年均351,300个，包含增长与离职替换，不等于净新增。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.market-signals.market-signal-card.4",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "招聘与技术边界：单条职位、外包方式和设备采用要分别采样，不能推成全行业条件或替代概率。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.market-signals.market-signal-card.5",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "O*NET列出的任务包括清洁和补给卫生间、收集垃圾、清扫拖洗或吸尘地面、清洁玻璃，并把建筑系统重大维修需求通知管理人员；可检查的工作闭环可整理为核对区域与限制、确认材料和设备、执行获授权任务、标记状态、隔离异常、记录耗材或维修需求并交接；这是编辑建议，不代表每个雇主流程相同。",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.faq.1",
+                "question_key": "career.faq.janitors-and-cleaners-except-maids-and-housekeeping-cleaners.daily-work",
+                "source_refs": [
+                  "ed-profile",
+                  "onet-target"
+                ]
+              },
+              {
+                "answer": "洗碗工负责餐饮器皿和厨房后场；清洁主管监督与检查人员；客房清洁员侧重私人住宅或住宿、医疗场所的较轻清洁；绿化工维护植被；地毯安装工完成铺装。本职业则以楼宇及公共区域的日常与较重清洁为核心。",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.faq.2",
+                "question_key": "career.faq.janitors-and-cleaners-except-maids-and-housekeeping-cleaners.role-comparison",
+                "source_refs": [
+                  "onet-carpet",
+                  "onet-dishwashers",
+                  "onet-landscaping",
+                  "onet-maids",
+                  "onet-supervisors"
+                ]
+              },
+              {
+                "answer": "可观察适配度来自稳定清单、准确状态、异常描述、可追踪交接和对体力节奏的耐受；爱整洁本身不能证明胜任。",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.faq.3",
+                "question_key": "career.faq.janitors-and-cleaners-except-maids-and-housekeeping-cleaners.fit",
+                "source_refs": [
+                  "ed-decision"
+                ]
+              },
+              {
+                "answer": "数字工具可辅助排班、区域清单、耗材库存、工单和异常照片归档，但不能确认真实污染、材料兼容、设备安全或完成质量。",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.faq.4",
+                "question_key": "career.faq.janitors-and-cleaners-except-maids-and-housekeeping-cleaners.ai-impact",
+                "source_refs": [
+                  "ed-ai"
+                ]
+              },
+              {
+                "answer": "采用数字工具时要由人核对区域编码、任务标准、班次、材料、权限、状态、照片归属和异常；空白不得自动补为完成。",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.faq.5",
+                "question_key": "career.faq.janitors-and-cleaners-except-maids-and-housekeeping-cleaners.human-control",
+                "source_refs": [
+                  "ed-ai"
+                ]
+              },
+              {
+                "answer": "国家统计局2024年工资资料按行业门类和宽泛岗位类别发布，未给出与O*NET 37-2011.00精确对应的中国大陆全国职业工资分布；国家统计局把平均工资定义为报告期工资总额除以平均就业人数，并说明工资总额为税前口径；该口径不能替代个人月薪或到手收入。",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.faq.6",
+                "question_key": "career.faq.janitors-and-cleaners-except-maids-and-housekeeping-cleaners.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "O*NET页面报告美国该职业2025年工资中位数为每小时17.71美元、每年36,840美元；该全国职业中位数不是起薪、到手收入、当地报价或个人收入保证。",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.faq.7",
+                "question_key": "career.faq.janitors-and-cleaners-except-maids-and-housekeeping-cleaners.us-pay",
+                "source_refs": [
+                  "onet-target"
+                ]
+              },
+              {
+                "answer": "低风险入门可用虚构区域清单展示状态编码、耗材记录、异常卡和交接摘要，再在面试中核实建筑类型、班次、人员配置、培训、防护和维修边界；化学品、动力设备、高处、害虫处理、锅炉、电气或其他维修任务的培训、资格与授权须逐项核验；纸面作品不会授予现场权限。",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.faq.8",
+                "question_key": "career.faq.janitors-and-cleaners-except-maids-and-housekeeping-cleaners.education-path",
+                "source_refs": [
+                  "ed-path"
+                ]
+              },
+              {
+                "answer": "O*NET任务资料要求使用化学清洁剂和动力设备时遵循程序；页面还列有按规格配制清洁溶液等任务，但这些任务描述不构成读者可直接执行的配制或设备操作指南；面对未知液体、锐物、生物污染、化学品、动力设备、高处、搬运、带电设备或维修任务时，只执行已培训且获授权的步骤；条件不明应停止受影响步骤、保护现场并按雇主程序升级。",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.faq.9",
+                "question_key": "career.faq.janitors-and-cleaners-except-maids-and-housekeeping-cleaners.risk-boundary",
+                "source_refs": [
+                  "ed-risk",
+                  "onet-target"
+                ]
+              },
+              {
+                "answer": "O*NET页面列出美国该职业2024年就业人数为2,447,700；O*NET页面列出美国该职业2024至2034年就业增长为1%至2%；O*NET页面列出美国该职业2024至2034年预测年均空缺351,300个；页面说明空缺来自就业增长与离职替换。",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.faq.10",
+                "question_key": "career.faq.janitors-and-cleaners-except-maids-and-housekeeping-cleaners.outlook-transition",
+                "source_refs": [
+                  "onet-target"
+                ]
+              },
+              {
+                "answer": "适配信号包括愿意逐区核对、如实记录完成、待处理与未知，并在材料、设备、污染或权限不明时停止受影响步骤和升级；全国工资、就业存量、预测增长、年度空缺、单条招聘、外包方式和设备采用是不同信号，不能合并为个人录用、收入或岗位替代概率。",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.faq.11",
+                "question_key": "career.faq.janitors-and-cleaners-except-maids-and-housekeeping-cleaners.career-worth",
+                "source_refs": [
+                  "ed-decision",
+                  "ed-market"
+                ]
+              }
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.sources.faq.1",
+          "source_refs": [
+            "ed-ai",
+            "ed-decision",
+            "ed-market",
+            "ed-path",
+            "ed-profile",
+            "ed-risk",
+            "nbs-wages",
+            "onet-carpet",
+            "onet-dishwashers",
+            "onet-landscaping",
+            "onet-maids",
+            "onet-supervisors",
+            "onet-target"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "O*NET美国职业事实、国家统计局中国工资边界和编辑练习分别陈述，不跨市场、职业或时期外推。",
+              "A层任务只用于纸面职业试做，不构成污染物识别、化学品配制、设备操作、维修、安全许可或雇主授权。",
+              "中国大陆暂无该精确职业的安全全国工资分布，不用行业或宽泛岗位均值填补。"
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.sources.boundary.1",
+          "source_refs": [
+            "ed-ai",
+            "ed-decision",
+            "ed-exercise",
+            "ed-market",
+            "ed-path",
+            "ed-profile",
+            "ed-risk",
+            "nbs-wages",
+            "onet-carpet",
+            "onet-dishwashers",
+            "onet-landscaping",
+            "onet-maids",
+            "onet-supervisors",
+            "onet-target"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "保洁员与楼宇清洁工（不含女佣及客房清洁员）",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "保洁员与楼宇清洁工（不含女佣及客房清洁员）",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "保洁员与楼宇清洁工（不含女佣及客房清洁员）",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "保洁员与楼宇清洁工（不含女佣及客房清洁员）",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "保洁员与楼宇清洁工（不含女佣及客房清洁员）",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "保洁员与楼宇清洁工（不含女佣及客房清洁员）",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "保洁员与楼宇清洁工（不含女佣及客房清洁员）",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "保洁员与楼宇清洁工（不含女佣及客房清洁员）",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "保洁员与楼宇清洁工（不含女佣及客房清洁员）",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "保洁员与楼宇清洁工（不含女佣及客房清洁员）",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "保洁员与楼宇清洁工（不含女佣及客房清洁员）",
+                "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "数字工具辅助与人工控制建议。",
+                  "编辑综合不构成化学品操作、设备操作、维修、安全许可或雇主授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-ai",
+                "limitation": "编辑综合不构成化学品操作、设备操作、维修、安全许可或雇主授权。",
+                "market": "全球",
+                "name": "保洁数字工具边界",
+                "period": "current task analysis; reviewed 2026-09-07",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "职业适配与决策综合。",
+                  "编辑综合不构成化学品操作、设备操作、维修、安全许可或雇主授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-decision",
+                "limitation": "编辑综合不构成化学品操作、设备操作、维修、安全许可或雇主授权。",
+                "market": "全球",
+                "name": "保洁职业决策",
+                "period": "current task analysis; reviewed 2026-09-07",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "虚构、低风险、自足练习与答案。",
+                  "编辑综合不构成化学品操作、设备操作、维修、安全许可或雇主授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-exercise",
+                "limitation": "编辑综合不构成化学品操作、设备操作、维修、安全许可或雇主授权。",
+                "market": "全球",
+                "name": "A层区域状态纸面练习",
+                "period": "current task analysis; reviewed 2026-09-07",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "统计、招聘样本与个人决策的区分。",
+                  "编辑综合不构成化学品操作、设备操作、维修、安全许可或雇主授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-market",
+                "limitation": "编辑综合不构成化学品操作、设备操作、维修、安全许可或雇主授权。",
+                "market": "全球",
+                "name": "保洁市场信号边界",
+                "period": "current task analysis; reviewed 2026-09-07",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "作品、面试核验、七日计划和能力成长建议。",
+                  "编辑综合不构成化学品操作、设备操作、维修、安全许可或雇主授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-path",
+                "limitation": "编辑综合不构成化学品操作、设备操作、维修、安全许可或雇主授权。",
+                "market": "全球",
+                "name": "保洁入门路径",
+                "period": "current task analysis; reviewed 2026-09-07",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "把职业任务整理为可检查流程、产出和交接建议。",
+                  "编辑综合不构成化学品操作、设备操作、维修、安全许可或雇主授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-profile",
+                "limitation": "编辑综合不构成化学品操作、设备操作、维修、安全许可或雇主授权。",
+                "market": "全球",
+                "name": "保洁工作流与质量控制",
+                "period": "current task analysis; reviewed 2026-09-07",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "未知污染、材料、设备与权限的保守处理建议。",
+                  "编辑综合不构成化学品操作、设备操作、维修、安全许可或雇主授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-risk",
+                "limitation": "编辑综合不构成化学品操作、设备操作、维修、安全许可或雇主授权。",
+                "market": "全球",
+                "name": "保洁风险与升级边界",
+                "period": "current task analysis; reviewed 2026-09-07",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "中国工资数据的统计范围、定义与精确职业缺口。",
+                  "仅用于所述实体、范围与用途；不跨法域外推。"
+                ],
+                "evidence_type": "official source",
+                "id": "nbs-wages",
+                "limitation": "仅用于所述实体、范围与用途；不跨法域外推。",
+                "market": "中国大陆",
+                "name": "2024年城镇单位就业人员年平均工资情况",
+                "period": "2024 annual wages; published 2025-05-16; accessed 2026-09-07",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202505/t20250516_1959826.html"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "相邻职业范围。",
+                  "仅用于所述实体、范围与用途；不跨法域外推。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-carpet",
+                "limitation": "仅用于所述实体、范围与用途；不跨法域外推。",
+                "market": "美国",
+                "name": "47-2041.00 - Carpet Installers",
+                "period": "current page; accessed 2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-2041.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "相邻职业范围。",
+                  "仅用于所述实体、范围与用途；不跨法域外推。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-dishwashers",
+                "limitation": "仅用于所述实体、范围与用途；不跨法域外推。",
+                "market": "美国",
+                "name": "35-9021.00 - Dishwashers",
+                "period": "current page; accessed 2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/35-9021.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "相邻职业范围。",
+                  "仅用于所述实体、范围与用途；不跨法域外推。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-landscaping",
+                "limitation": "仅用于所述实体、范围与用途；不跨法域外推。",
+                "market": "美国",
+                "name": "37-3011.00 - Landscaping and Groundskeeping Workers",
+                "period": "current page; accessed 2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/37-3011.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "相邻且被排除职业范围。",
+                  "仅用于所述实体、范围与用途；不跨法域外推。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-maids",
+                "limitation": "仅用于所述实体、范围与用途；不跨法域外推。",
+                "market": "美国",
+                "name": "37-2012.00 - Maids and Housekeeping Cleaners",
+                "period": "current page; accessed 2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/37-2012.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "相邻职业范围。",
+                  "仅用于所述实体、范围与用途；不跨法域外推。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-supervisors",
+                "limitation": "仅用于所述实体、范围与用途；不跨法域外推。",
+                "market": "美国",
+                "name": "37-1011.00 - First-Line Supervisors of Housekeeping and Janitorial Workers",
+                "period": "current page; accessed 2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/37-1011.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "身份、任务、工作情境、美国工资与就业预测。",
+                  "仅用于所述实体、范围与用途；不跨法域外推。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-target",
+                "limitation": "仅用于所述实体、范围与用途；不跨法域外推。",
+                "market": "美国",
+                "name": "37-2011.00 - Janitors and Cleaners, Except Maids and Housekeeping Cleaners",
+                "period": "O*NET updated 2026; 2025 wage and 2024-2034 outlook; accessed 2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/37-2011.00"
+              }
+            ]
+          },
+          "id": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "O*NET 37-2011.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业身份",
+        "occupation_scope": "保洁员与楼宇清洁工（不含女佣及客房清洁员）/ O*NET 37-2011.00（精确职业数据）",
+        "period": "O*NET updated 2026; 2025 wage and 2024-2034 outlook; accessed 2026-09-07",
+        "source_refs": [
+          "onet-target"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "17.71美元/小时；36,840美元/年（2025）",
+        "fact_id": "us-wage",
+        "market": "美国",
+        "measure": "美国工资中位数",
+        "occupation_scope": "保洁员与楼宇清洁工（不含女佣及客房清洁员）/ O*NET 37-2011.00（精确职业数据）",
+        "period": "O*NET updated 2026; 2025 wage and 2024-2034 outlook; accessed 2026-09-07",
+        "source_refs": [
+          "onet-target"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2,447,700（2024）",
+        "fact_id": "employment",
+        "market": "美国",
+        "measure": "美国就业人数",
+        "occupation_scope": "保洁员与楼宇清洁工（不含女佣及客房清洁员）/ O*NET 37-2011.00（精确职业数据）",
+        "period": "O*NET updated 2026; 2025 wage and 2024-2034 outlook; accessed 2026-09-07",
+        "source_refs": [
+          "onet-target"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2024—2034年增长1%至2%",
+        "fact_id": "growth",
+        "market": "美国",
+        "measure": "美国就业预测",
+        "occupation_scope": "保洁员与楼宇清洁工（不含女佣及客房清洁员）/ O*NET 37-2011.00（精确职业数据）",
+        "period": "O*NET updated 2026; 2025 wage and 2024-2034 outlook; accessed 2026-09-07",
+        "source_refs": [
+          "onet-target"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "351,300（2024—2034）",
+        "fact_id": "openings",
+        "market": "美国",
+        "measure": "美国预测年均空缺",
+        "occupation_scope": "保洁员与楼宇清洁工（不含女佣及客房清洁员）/ O*NET 37-2011.00（精确职业数据）",
+        "period": "O*NET updated 2026; 2025 wage and 2024-2034 outlook; accessed 2026-09-07",
+        "source_refs": [
+          "onet-target"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "当前官方资料未提供",
+        "fact_id": "cn-gap",
+        "market": "中国大陆",
+        "measure": "中国精确职业工资",
+        "occupation_scope": "行业代理数据：中国大陆行业和宽泛岗位资料仅用于证明精确职业工资缺口",
+        "period": "2024 annual wages; published 2025-05-16; accessed 2026-09-07",
+        "source_refs": [
+          "nbs-wages"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "31936537fa3dc321cd93d568f223526b0e4b1f451f262d0eaddf0c09543fc7e6",
+  "source_content_sha256": "2a12c84e7d724594efa42bbf15e4d3b3d532242ae9f1f552070d9be3b3688e55",
   "subject": {
     "canonical_slug": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners",
-    "name": "清洁员清洁工、客房清洁员清洁工",
-    "summary": null
+    "name": "保洁员与楼宇清洁工（不含女佣及客房清洁员）",
+    "summary": "保持楼宇及公共区域清洁有序，处理卫生间、地面、垃圾与耗材，并把未知污染、设施异常和未完成项准确记录与交接；现场化学品、设备、高处和维修任务须匹配培训与授权。"
   }
 }

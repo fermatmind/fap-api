@@ -1,12 +1,1839 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "先看真实职业：识别异常模式，整理证据，访谈相关人员，记录调查链并把结论交给授权的合规、法务或执法人员。典型可复核产出包括案件时间线、异常交易清单、证据索引、假设与反证及升级建议；调查团队形成事实和建议；企业处置、法务披露及司法认定分别由相应授权主体决定，任何线索都不能直接写成定罪结论。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "安全试做材料（全部虚构）：虚构报销案：T1 09:02 机场餐费86美元；T2 09:04 同卡同商户86美元；T3 11:30 酒店420美元；T4 次日08:10 出租车64美元；T5 次日08:12 出租车64美元；T6 次日14:00 办公用品310美元。审批记录显示经理10:00批准整单；登录日志显示申请人09:00在上海、09:03有北京IP；客服记录称商户可能重复预授权。练习规则：同额近时交易只标重复风险，IP地点不直接证明本人位置。 任务：按记录编号建立时间线，列三条异常线索、每条至少一个非欺诈替代解释、下一份所需证据及不能下的结论。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "参考思路：T1/T2、T4/T5是同额近时重复线索，需交易状态、撤销/预授权和最终入账记录；上海登录与北京IP是地点记录差异，IP不证明本人位置，需设备、VPN、时区和认证日志。10:00批准早于T3–T6是流程/时间线冲突，需核对审批对象版本、时区、批次规则和审计日志；“批量预批”只能列为待核替代假设。不得写“已欺诈”。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "适合信号：愿意承担大量敏感材料、访谈冲突、证据保全、对抗性审查、截止和潜在出庭压力，并能把证据、未知、专业判断和权限分开。慎重信号：只喜欢纸面整理，却不接受真实场景、训练和责任。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.quick-decision.fit-decision-checklist.3",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "官方身份：欺诈审查员、调查员和分析师（13-2099.04），围绕交易流水、账户关系、访谈记录、规则命中与数字证据副本工作；中文用于解释美国分类，不建立资格互认。 这是2026职业档案中的精确职业数据。"
+            ]
+          },
+          "fact_refs": [
+            "identity"
+          ],
+          "id": "fraud-examiners-investigators-and-analysts.profile.definition-block.1",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "真实输入：交易和账户记录、审批与访问日志、合同票据、通信、设备/认证记录、访谈陈述、政策规则和外部公开资料。处理前先核对来源、时点、版本、权限和缺口。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.profile.responsibilities-block.1",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "典型流程：明确调查范围，保全与索引材料，分析模式并建立时间线，访谈和交叉核验，记录支持与反证，形成事实报告、风险结论和升级建议。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.profile.work-context-block.1",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "主要产出：案件时间线、异常交易清单、证据索引、假设与反证及升级建议。每项交付应写明证据、限制、责任人和下一步。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "关键判断：区分异常线索、证据和法律/纪律认定，检验非欺诈替代解释，评估来源可靠性与证据链，并避免确认偏误或越权披露。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "协作与权限：案件主管确定调查范围和资源；合规、法务或管理层决定企业处置与披露；司法或监管主体在其权限内作法律认定，各环节需保持证据链和独立责任。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.profile.work-context-block.2",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "环境与工具：金融、保险、政府、企业调查或咨询场景；长时间审阅数据与文档，处理敏感信息、访谈冲突和截止压力，可能需要出差或出庭说明。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：证据来源与保全链完整，时间线和计算可复现，事实/推断/未知分开，替代假设得到检验，隐私和披露受控，报告不超出证据和授权。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.profile.definition-block.2",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "金融审查员检查机构是否遵守金融法规并形成监管结论；欺诈分析师围绕具体指控组织证据，不自动拥有监管处罚权。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "adj1",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "合规官设计或监测政策执行并报告违规风险；欺诈调查更强调案件时间线、访谈和证据保全。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "adj2",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "刑事侦查人员具有法定侦查权限；企业欺诈分析师只能在组织授权内收集资料并移交。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "adj3",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "会计师和审计师评价账务及控制并出具审计产物；欺诈调查从异常指控出发，结论标准和证据保全要求不同。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "adj4",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "金融审查员",
+                "id": "adj-link-1",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/financial-examiners"
+              },
+              {
+                "entity": "合规专员",
+                "id": "adj-link-2",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/compliance-officers"
+              },
+              {
+                "entity": "侦探与刑事调查员",
+                "id": "adj-link-3",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/detectives-and-criminal-investigators"
+              },
+              {
+                "entity": "会计师和审计师",
+                "id": "adj-link-4",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/accountants-and-auditors"
+              }
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "adj1",
+            "adj2",
+            "adj3",
+            "adj4"
+          ],
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助：AI可在获批环境中帮助整理交易与日志查询、电子取证/案件管理、电子表格/SQL、可视化和受控报告系统导出的文本或结构化数据，生成候选摘要、分类或缺项提示；输出必须回到原始证据并由人复核。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "ai",
+            "editor",
+            "hot",
+            "ilo"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "高暴露低授权任务是转录、分类、模板草稿和初步异常提示；调查团队形成事实和建议；企业处置、法务披露及司法认定分别由相应授权主体决定，任何线索都不能直接写成定罪结论。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "ai",
+            "editor",
+            "hot",
+            "ilo"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用前提：组织需定义数据权限、版本、允许字段和停止条件；含个人或受限资料时不得上传未批准工具。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "ai",
+            "editor",
+            "hot",
+            "ilo"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可靠性测试：用已知答案样本检查漏项、错配和引用漂移；发现编号或单位丢失即退回人工流程。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "ai",
+            "editor",
+            "hot",
+            "ilo"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "控制点：调查团队形成事实和建议；企业处置、法务披露及司法认定分别由相应授权主体决定，任何线索都不能直接写成定罪结论。工具建议不能替代资格、授权、原始证据和责任签署。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "ai",
+            "editor",
+            "hot",
+            "ilo"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余责任：AI不能承担来源真实性、利益冲突、授权或交接责任；责任人仍需签名并保留修改记录。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "ai",
+            "editor",
+            "hot",
+            "ilo"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "证据边界：NIST支持生成式AI风险管理，ILO描述任务暴露；两者都不证明该职业已普遍部署或节省固定工时。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "ai",
+            "editor",
+            "hot",
+            "ilo"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业边界：当前没有可把AI能力直接换算为欺诈审查员、调查员和分析师净岗位变化的职业级因果证据；不报告替代率。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "ai",
+            "editor",
+            "hot",
+            "ilo"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国精确职业工资：本页不提供。国家统计局2025数据按城镇单位、行业和五类岗位发布，不能替代欺诈审查员、调查员和分析师全国单职业工资。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "cnclass",
+            "cnwage",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "这是一项统计粒度限制，不代表中国各地区或雇主没有相关岗位数据；分类大典入口也不是工资数据库。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "cnclass",
+            "cnwage",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较具体offer时记录城市、单位性质、岗位职责、税前固定薪资、奖金条件、工时值班和福利；职责先与本页职业范围对齐。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "cnclass",
+            "cnwage",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "不以美国工资或中国行业均值补位，也不做汇率倍数。中国回报判断需回到同地区、同职责、同雇佣形式的实际offer。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "cnclass",
+            "cnwage",
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "父类职业数据口径：美国工资代理：$81,100/年（2025），数据来自上位职业其他金融专业人员（13-2099）；不是欺诈审查员、调查员和分析师精确工资分布。"
+            ]
+          },
+          "fact_refs": [
+            "us-pay"
+          ],
+          "id": "fraud-examiners-investigators-and-analysts.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "editor",
+            "oews",
+            "wage-parent"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "父类职业数据口径：美国展望代理：2024–2034增长3%，年均10,300个岗位空缺，同样来自其他金融专业人员（13-2099）；岗位空缺含增长与替补，不等于净新增。"
+            ]
+          },
+          "fact_refs": [
+            "us-outlook"
+          ],
+          "id": "fraud-examiners-investigators-and-analysts.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "editor",
+            "oews",
+            "wage-parent"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "代理可用于量级提问，不能当新人报价、个人收入或该子职业的确定前景。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "editor",
+            "oews",
+            "wage-parent"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "比较岗位时另核州、行业、工时、雇佣形式和职责是否落在精确职业范围。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "editor",
+            "oews",
+            "wage-parent"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "工资与预测使用不同统计对象或期间时分别展示，不合成个人回报率。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "editor",
+            "oews",
+            "wage-parent"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "不从分位数推断经验等级；没有精确子职业样本时保留代理标签。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editor",
+            "oews",
+            "wage-parent"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "工作对象：愿意长期处理交易和账户记录、审批与访问日志、合同票据、通信、设备/认证记录、访谈陈述、政策规则和外部公开资料，而不是只对职业名称或一次练习感兴趣。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.fit.personality-fit-block.1",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "判断习惯：能做到区分异常线索、证据和法律/纪律认定，检验非欺诈替代解释，评估来源可靠性与证据链，并避免确认偏误或越权披露。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.fit.personality-fit-block.2",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "交付能力：能稳定产出案件时间线、异常交易清单、证据索引、假设与反证及升级建议，让下一责任人可复核并继续。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.fit.personality-fit-block.3",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "协作负担：能在以下分工中准确记录责任：案件主管确定调查范围和资源；合规、法务或管理层决定企业处置与披露；司法或监管主体在其权限内作法律认定，各环节需保持证据链和独立责任。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.fit.personality-fit-block.4",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "错误恢复：发现编号、单位、版本或解释错误时愿意撤回结论、保留旧版并重做。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.fit.personality-fit-block.5",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "边界意识：调查团队形成事实和建议；企业处置、法务披露及司法认定分别由相应授权主体决定，任何线索都不能直接写成定罪结论。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.fit.personality-fit-block.6",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "工具学习：愿意掌握交易与日志查询、电子取证/案件管理、电子表格/SQL、可视化和受控报告系统，同时保留原始记录和人工复核路线。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.fit.personality-fit-block.7",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "真实负担验证：通过访谈、跟岗或课程核对了解大量敏感材料、访谈冲突、证据保全、对抗性审查、截止和潜在出庭压力；纸面试做只验证基础习惯，不替代资格或真实工作体验。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.fit.personality-fit-block.8",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "重复交易命中：先查撤销/预授权，不冻结账户或指控客户；案件主管复核处置。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.risk.career-risk-cards.1",
+          "source_refs": [
+            "ai",
+            "editor",
+            "onet",
+            "privacy"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "日志时区不一致：保留原始时区和导出参数，暂停拼接结论，由系统管理员确认。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.risk.career-risk-cards.2",
+          "source_refs": [
+            "ai",
+            "editor",
+            "onet",
+            "privacy"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "访谈陈述冲突：逐字记录来源与时间，不用诱导问题填补空白，必要时由法务参与。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.risk.career-risk-cards.3",
+          "source_refs": [
+            "ai",
+            "editor",
+            "onet",
+            "privacy"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "证据导出可能改变元数据：使用批准的只读流程并记录哈希，异常交数字取证人员。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.risk.career-risk-cards.4",
+          "source_refs": [
+            "ai",
+            "editor",
+            "onet",
+            "privacy"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "业务要求快速“定性”：把事实、推断和未知分栏，未经授权不联系执法或对外披露。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.risk.career-risk-cards.5",
+          "source_refs": [
+            "ai",
+            "editor",
+            "onet",
+            "privacy"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "招聘核对不做频率推断。面试时确认真实工作对象、日常任务、监督与决定主体、工具、现场/轮班安排和资格要求；重点核对大量敏感材料、访谈冲突、证据保全、对抗性审查、截止和潜在出庭压力是否与职位描述一致。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.path.recruitment-sample.1",
+          "source_refs": [
+            "editor",
+            "hot"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "完整纸面材料沿用本页虚构案例。练习者只做信息核对、计算或安全摘要，不执行受监管动作。参考：T1/T2、T4/T5是同额近时重复线索，需交易状态、撤销/预授权和最终入账记录；上海登录与北京IP是地点记录差异，IP不证明本人位置，需设备、VPN、时区和认证日志。10:00批准早于T3–T6是流程/时间线冲突，需核对审批对象版本、时区、批次规则和审计日志；“批量预批”只能列为待核替代假设。不得写“已欺诈”。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.path.entry-work-sample-data.1",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-role-comparison",
+          "data": {
+            "column_keys": [
+              "role",
+              "initial_tasks"
+            ],
+            "rows": [
+              [
+                "进入前试做",
+                "用虚构材料验证记录、计算、来源和边界意识；不冒充正式训练或执业"
+              ],
+              [
+                "受监督入门",
+                "按目标岗位训练处理交易和账户记录、审批与访问日志、合同票据、通信、设备/认证记录、访谈陈述、政策规则和外部公开资料，所有超出能力或授权的动作交给负责人"
+              ],
+              [
+                "独立岗位",
+                "在已满足教育、经验、许可/认证及雇主授权后，承担识别异常模式，整理证据，访谈相关人员，记录调查链并把结论交给授权的合规、法务或执法人员"
+              ]
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.path.entry-role-comparison.1",
+          "source_refs": [
+            "editor",
+            "wage"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.employer-evidence",
+          "data": {
+            "entries": [
+              {
+                "id": "e1",
+                "values": [
+                  "职业任务样例",
+                  "用脱敏或虚构材料展示案件时间线、异常交易清单、证据索引、假设与反证及升级建议",
+                  "注明证据、未知和不能推出的结论"
+                ]
+              },
+              {
+                "id": "e2",
+                "values": [
+                  "复核记录",
+                  "请有经验者按原始材料重走判断",
+                  "保留反馈、修改原因和版本"
+                ]
+              },
+              {
+                "id": "e3",
+                "values": [
+                  "路径核对",
+                  "O*NET将该职业列为较高准备度职业；许多岗位需要本科层级准备或相当的相关经验。可从会计/审计、金融保险、合规、刑事司法、数据分析或企业调查中的基础岗位建立领域知识、访谈、证据链和报告能力，具体学历、认证与权限随场景而异。",
+                  "逐项标记已满足、待核和未满足"
+                ]
+              }
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.path.employer-evidence.1",
+          "source_refs": [
+            "editor",
+            "hot",
+            "wage"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-portfolio",
+          "data": {
+            "entries": [
+              {
+                "id": "p1",
+                "values": [
+                  "纸面试做",
+                  "完成本页虚构案例",
+                  "验证基础习惯，不代表职业资格"
+                ]
+              },
+              {
+                "id": "p2",
+                "values": [
+                  "真实核对",
+                  "访谈课程、从业者或雇主",
+                  "记录法域、岗位、来源和日期"
+                ]
+              },
+              {
+                "id": "p3",
+                "values": [
+                  "申请证据",
+                  "整理教育、经验、作品、资格和授权状态",
+                  "不把课程或证书夸大为执业权"
+                ]
+              }
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.path.entry-portfolio.1",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.interview-probation",
+          "data": {
+            "column_keys": [
+              "description",
+              "observed_evidence",
+              "possible_check"
+            ],
+            "rows": [
+              [
+                "职业判断",
+                "区分异常线索、证据和法律/纪律认定，检验非欺诈替代解释，评估来源可靠性与证据链，并避免确认偏误或越权披露",
+                "追问证据、替代解释和升级条件"
+              ],
+              [
+                "权限边界",
+                "调查团队形成事实和建议；企业处置、法务披露及司法认定分别由相应授权主体决定，任何线索都不能直接写成定罪结论",
+                "核对法域、岗位和雇主分别授权什么"
+              ],
+              [
+                "错误恢复",
+                "修订案件时间线、异常交易清单、证据索引、假设与反证及升级建议",
+                "核对是否保留原始记录和修改原因"
+              ]
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.path.interview-probation.1",
+          "source_refs": [
+            "editor",
+            "wage"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "d1",
+                "values": [
+                  "第1日",
+                  "阅读虚构材料并给全部记录编号"
+                ]
+              },
+              {
+                "id": "d2",
+                "values": [
+                  "第2日",
+                  "只按材料列事实、陈述、未知和限制"
+                ]
+              },
+              {
+                "id": "d3",
+                "values": [
+                  "第3日",
+                  "完成计算或信息对照并检查替代解释"
+                ]
+              },
+              {
+                "id": "d4",
+                "values": [
+                  "第4日",
+                  "写不越权的摘要和升级请求"
+                ]
+              },
+              {
+                "id": "d5",
+                "values": [
+                  "第5日",
+                  "请他人只看材料复核"
+                ]
+              },
+              {
+                "id": "d6",
+                "values": [
+                  "第6日",
+                  "访谈一个课程或岗位，核对真实负担"
+                ]
+              },
+              {
+                "id": "d7",
+                "values": [
+                  "第7日",
+                  "按教育、经验、资格、环境和责任决定下一步"
+                ]
+              }
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.path.seven-day-trial.1",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "能否不补造事实，并让复核者回到材料编号？",
+              "是否愿意承担大量敏感材料、访谈冲突、证据保全、对抗性审查、截止和潜在出庭压力？",
+              "教育、经验、认证/许可和雇主授权分别还缺什么？",
+              "如果目标岗位与本页统计职业不完全一致，是否已缩小结论并重新核对？"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.path.seven-day-decision.1",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-decision",
+          "data": {
+            "column_keys": [
+              "description",
+              "boundary"
+            ],
+            "rows": [
+              [
+                "基础准备",
+                "较高准备度岗位常看重本科层级学习或相当相关经验；按金融、保险、政府或企业调查场景核对"
+              ],
+              [
+                "入门经验",
+                "从会计/审计、理赔、合规、风控、数据分析、调查支持或案件运营建立可验证经验"
+              ],
+              [
+                "核心能力",
+                "练习证据索引、时间线、数据核对、访谈记录、替代假设和中性报告"
+              ],
+              [
+                "认证与权限",
+                "行业认证可提供能力信号，但不自动授予取证、披露、纪律处置或法律认定权限"
+              ]
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.path.credential-decision.1",
+          "source_refs": [
+            "editor",
+            "wage"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-boundary",
+          "data": {
+            "paragraphs": [
+              "资格与入行边界：O*NET将该职业列为较高准备度职业；许多岗位需要本科层级准备或相当的相关经验。可从会计/审计、金融保险、合规、刑事司法、数据分析或企业调查中的基础岗位建立领域知识、访谈、证据链和报告能力，具体学历、认证与权限随场景而异。 本页不承诺资格互认、固定成本/时长或就业结果；申请前以目标项目、监管机构和雇主当前要求为准。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.path.credential-boundary.1",
+          "source_refs": [
+            "editor",
+            "onet",
+            "wage"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "成长应从受监督地处理真实对象，进阶到稳定交付案件时间线、异常交易清单、证据索引、假设与反证及升级建议，再承担复杂判断、质量复核、项目或团队责任。年限和职位名称不会自动扩大受监管权限。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.path.career-path-block.1",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "职业任务面：识别异常模式，整理证据，访谈相关人员，记录调查链并把结论交给授权的合规、法务或执法人员；求职时按真实对象、流程、产出和责任核对是否属于同一职业，而不是用纸面练习替代职业画像。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.market-signals.market-signal-card.1",
+          "source_refs": [
+            "editor",
+            "hot",
+            "ilo",
+            "onet",
+            "wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国工资信号：$81,100/年（2025）；统计期间为2025工资；2024–2034就业预测。这是父类职业数据（代理），不是新人、地区或到手工资，父职业代理也不能冒充本职业精确值。"
+            ]
+          },
+          "fact_refs": [
+            "us-pay"
+          ],
+          "id": "fraud-examiners-investigators-and-analysts.market-signals.market-signal-card.2",
+          "source_refs": [
+            "editor",
+            "hot",
+            "ilo",
+            "onet",
+            "wage",
+            "wage-parent"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "技术面：交易与日志查询、电子取证/案件管理、电子表格/SQL、可视化和受控报告系统说明可准备的工作环境；O*NET招聘技术信号只是美国职位文本代理，不是普遍门槛。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.market-signals.market-signal-card.3",
+          "source_refs": [
+            "editor",
+            "hot",
+            "ilo",
+            "onet",
+            "wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "AI面：整理、分类和候选摘要可能被辅助，但采用率、节省工时和净就业影响没有职业级因果证据；不报告替代率。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editor",
+            "hot",
+            "ilo",
+            "onet",
+            "wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "转向面：先验证是否接受大量敏感材料、访谈冲突、证据保全、对抗性审查、截止和潜在出庭压力，再分别确认教育、相关经验、认证/许可和雇主授权；不编造固定转岗时长或费用。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editor",
+            "hot",
+            "ilo",
+            "onet",
+            "wage"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "典型流程：明确调查范围，保全与索引材料，分析模式并建立时间线，访谈和交叉核验，记录支持与反证，形成事实报告、风险结论和升级建议。",
+                "id": "fraud-examiners-investigators-and-analysts.faq.1",
+                "question_key": "career.faq.fraud-examiners-investigators-and-analysts.daily-work",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "金融审查员检查机构是否遵守金融法规并形成监管结论；欺诈分析师围绕具体指控组织证据，不自动拥有监管处罚权。",
+                "id": "fraud-examiners-investigators-and-analysts.faq.2",
+                "question_key": "career.faq.fraud-examiners-investigators-and-analysts.role-comparison",
+                "source_refs": [
+                  "adj1"
+                ]
+              },
+              {
+                "answer": "判断习惯：能做到区分异常线索、证据和法律/纪律认定，检验非欺诈替代解释，评估来源可靠性与证据链，并避免确认偏误或越权披露。",
+                "id": "fraud-examiners-investigators-and-analysts.faq.3",
+                "question_key": "career.faq.fraud-examiners-investigators-and-analysts.fit",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "可辅助：AI可在获批环境中帮助整理交易与日志查询、电子取证/案件管理、电子表格/SQL、可视化和受控报告系统导出的文本或结构化数据，生成候选摘要、分类或缺项提示；输出必须回到原始证据并由人复核。",
+                "id": "fraud-examiners-investigators-and-analysts.faq.4",
+                "question_key": "career.faq.fraud-examiners-investigators-and-analysts.ai-impact",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "中国精确职业工资：本页不提供。国家统计局2025数据按城镇单位、行业和五类岗位发布，不能替代欺诈审查员、调查员和分析师全国单职业工资。",
+                "id": "fraud-examiners-investigators-and-analysts.faq.5",
+                "question_key": "career.faq.fraud-examiners-investigators-and-analysts.china-pay",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "上位职业代理工资为$81,100/年（2025），不是欺诈审查员、调查员和分析师精确分布。",
+                "fact_refs": [
+                  "us-pay"
+                ],
+                "id": "fraud-examiners-investigators-and-analysts.faq.6",
+                "question_key": "career.faq.fraud-examiners-investigators-and-analysts.us-pay",
+                "source_refs": [
+                  "wage-parent"
+                ]
+              },
+              {
+                "answer": "基础准备｜较高准备度岗位常看重本科层级学习或相当相关经验；按金融、保险、政府或企业调查场景核对；入门经验｜从会计/审计、理赔、合规、风控、数据分析、调查支持或案件运营建立可验证经验；核心能力｜练习证据索引、时间线、数据核对、访谈记录、替代假设和中性报告；认证与权限｜行业认证可提供能力信号，但不自动授予取证、披露、纪律处置或法律认定权限",
+                "id": "fraud-examiners-investigators-and-analysts.faq.7",
+                "question_key": "career.faq.fraud-examiners-investigators-and-analysts.education-path",
+                "source_refs": [
+                  "editor",
+                  "wage"
+                ]
+              },
+              {
+                "answer": "资格与入行边界：O*NET将该职业列为较高准备度职业；许多岗位需要本科层级准备或相当的相关经验。可从会计/审计、金融保险、合规、刑事司法、数据分析或企业调查中的基础岗位建立领域知识、访谈、证据链和报告能力，具体学历、认证与权限随场景而异。 本页不承诺资格互认、固定成本/时长或就业结果；申请前以目标项目、监管机构和雇主当前要求为准。",
+                "id": "fraud-examiners-investigators-and-analysts.faq.8",
+                "question_key": "career.faq.fraud-examiners-investigators-and-analysts.credentials",
+                "source_refs": [
+                  "editor",
+                  "wage"
+                ]
+              },
+              {
+                "answer": "重复交易命中：先查撤销/预授权，不冻结账户或指控客户；案件主管复核处置。",
+                "id": "fraud-examiners-investigators-and-analysts.faq.9",
+                "question_key": "career.faq.fraud-examiners-investigators-and-analysts.risk-boundary",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "转向面：先验证是否接受大量敏感材料、访谈冲突、证据保全、对抗性审查、截止和潜在出庭压力，再分别确认教育、相关经验、认证/许可和雇主授权；不编造固定转岗时长或费用。",
+                "id": "fraud-examiners-investigators-and-analysts.faq.10",
+                "question_key": "career.faq.fraud-examiners-investigators-and-analysts.outlook-transition",
+                "source_refs": [
+                  "editor"
+                ]
+              }
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.sources.faq.1",
+          "source_refs": [
+            "adj1",
+            "editor",
+            "wage",
+            "wage-parent"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "本页美国职业身份、工资、预测和资格路径按所列来源及期间解释；其他法域与机构要求需单独核对，不建立资格互认。",
+              "纸面练习材料全部虚构，只供普通读者测试记录、计算和边界意识，不构成正式训练、执业授权或专业结论。",
+              "工资、就业预测、招聘技术信号和AI研究分别解释，不合成个人收入、岗位承诺或替代率。"
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.sources.boundary.1",
+          "source_refs": [
+            "adj1",
+            "adj2",
+            "adj3",
+            "adj4",
+            "ai",
+            "cnclass",
+            "cnwage",
+            "editor",
+            "hot",
+            "ilo",
+            "oews",
+            "onet",
+            "privacy",
+            "wage",
+            "wage-parent"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "欺诈审查员、调查员和分析师",
+                "id": "fraud-examiners-investigators-and-analysts.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "欺诈审查员、调查员和分析师",
+                "id": "fraud-examiners-investigators-and-analysts.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "欺诈审查员、调查员和分析师",
+                "id": "fraud-examiners-investigators-and-analysts.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "欺诈审查员、调查员和分析师",
+                "id": "fraud-examiners-investigators-and-analysts.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "欺诈审查员、调查员和分析师",
+                "id": "fraud-examiners-investigators-and-analysts.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "欺诈审查员、调查员和分析师",
+                "id": "fraud-examiners-investigators-and-analysts.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "欺诈审查员、调查员和分析师",
+                "id": "fraud-examiners-investigators-and-analysts.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "欺诈审查员、调查员和分析师",
+                "id": "fraud-examiners-investigators-and-analysts.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "欺诈审查员、调查员和分析师",
+                "id": "fraud-examiners-investigators-and-analysts.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "欺诈审查员、调查员和分析师",
+                "id": "fraud-examiners-investigators-and-analysts.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "欺诈审查员、调查员和分析师",
+                "id": "fraud-examiners-investigators-and-analysts.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "直接职业档案用于比较金融审查员的任务与责任范围。",
+                  "美国职业比较，不构成资格互认。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj1",
+                "limitation": "美国职业比较，不构成资格互认。",
+                "market": "美国",
+                "name": "金融审查员职业档案",
+                "period": "2026-09-06访问的当前O*NET职业档案",
+                "publisher": "O*NET / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/13-2061.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "直接职业档案用于比较合规专员的任务与责任范围。",
+                  "美国职业比较，不构成资格互认。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj2",
+                "limitation": "美国职业比较，不构成资格互认。",
+                "market": "美国",
+                "name": "合规专员职业档案",
+                "period": "2026-09-06访问的当前O*NET职业档案",
+                "publisher": "O*NET / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/13-1041.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "直接职业档案用于比较侦探与刑事调查员的任务与责任范围。",
+                  "美国职业比较，不构成资格互认。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj3",
+                "limitation": "美国职业比较，不构成资格互认。",
+                "market": "美国",
+                "name": "侦探与刑事调查员职业档案",
+                "period": "2026-09-06访问的当前O*NET职业档案",
+                "publisher": "O*NET / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/33-3021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "直接职业档案用于比较会计师和审计师的任务与责任范围。",
+                  "美国职业比较，不构成资格互认。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj4",
+                "limitation": "美国职业比较，不构成资格互认。",
+                "market": "美国",
+                "name": "会计师和审计师职业档案",
+                "period": "2026-09-06访问的当前O*NET职业档案",
+                "publisher": "O*NET / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/13-2011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "虚构、隐私、人机配置、测试与监控风险。",
+                  "自愿风险框架，不是职业法规、效率实验或替代率。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ai",
+                "limitation": "自愿风险框架，不是职业法规、效率实验或替代率。",
+                "market": "美国",
+                "name": "生成式人工智能风险管理画像",
+                "period": "2024",
+                "publisher": "NIST",
+                "scope": "exact",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "用于提示中国职业映射应回到正式分类与具体职责核实。",
+                  "共享分类入口，不证明本职业有精确中国映射。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cnclass",
+                "limitation": "共享分类入口，不证明本职业有精确中国映射。",
+                "market": "中国",
+                "name": "国家职业分类大典发布说明",
+                "period": "2022版职业分类大典",
+                "publisher": "中华人民共和国人力资源和社会保障部",
+                "scope": "combined_official",
+                "url": "https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "公布城镇单位、行业门类和五类岗位平均工资，不提供本页O*NET精确职业工资。",
+                  "行业/五类岗位平均数不能替代单一职业、城市或个人offer。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cnwage",
+                "limitation": "行业/五类岗位平均数不能替代单一职业、城市或个人offer。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025年",
+                "publisher": "中华人民共和国国家统计局",
+                "scope": "combined_official",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "虚构材料、七日体验、作品与控制建议。",
+                  "不是雇主标准、临床/法律/工程意见或真实事件。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "editor",
+                "limitation": "不是雇主标准、临床/法律/工程意见或真实事件。",
+                "market": "全球",
+                "name": "欺诈审查员、调查员和分析师候选编辑设计",
+                "period": "2026-09-06",
+                "publisher": "本任务编辑",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "岗位技术名称来自美国招聘信息映射，用于提出作品与面试核对问题。",
+                  "招聘代理，不是普遍要求、采用率或因果就业证据。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "hot",
+                "limitation": "招聘代理，不是普遍要求、采用率或因果就业证据。",
+                "market": "美国",
+                "name": "O*NET岗位技术信号",
+                "period": "2025招聘技术信号",
+                "publisher": "O*NET / 美国劳工部",
+                "scope": "recruitment_proxy",
+                "url": "https://www.onetonline.org/link/hot_tech/13-2099.04"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "任务暴露不等于岗位自动消失；采用与转型取决于工作和制度条件。",
+                  "全球任务指数不能给出本职业个人失业概率。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ilo",
+                "limitation": "全球任务指数不能给出本职业个人失业概率。",
+                "market": "全球",
+                "name": "生成式AI与工作的全球指数",
+                "period": "2025",
+                "publisher": "国际劳工组织",
+                "scope": "industry_proxy",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "工资统计覆盖范围和限制。",
+                  "方法页不提供本职业具体数值。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "oews",
+                "limitation": "方法页不提供本职业具体数值。",
+                "market": "美国",
+                "name": "OEWS统计方法",
+                "period": "2026访问的当前方法",
+                "publisher": "美国劳工统计局",
+                "scope": "exact",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "代码13-2099.04；核实职业范围、任务、工作活动与相邻职业。",
+                  "美国职业档案，不自动建立中国资格或雇主通用流程。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet",
+                "limitation": "美国职业档案，不自动建立中国资格或雇主通用流程。",
+                "market": "美国",
+                "name": "欺诈审查员、调查员和分析师职业档案",
+                "period": "2026职业档案",
+                "publisher": "O*NET / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/13-2099.04"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "个人信息处理的目的、范围、权限与安全措施边界。",
+                  "面向处理者；不替代具体岗位法律意见。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "privacy",
+                "limitation": "面向处理者；不替代具体岗位法律意见。",
+                "market": "中国",
+                "name": "中华人民共和国个人信息保护法",
+                "period": "2021法律文本；2026核读",
+                "publisher": "工业和信息化部",
+                "scope": "exact",
+                "url": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12f430eab54bb4f56d89f56.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "本职业O*NET详情页支持职业身份、任务与准入信息；工资和展望另由wage-parent记录标注上位职业代理。",
+                  "没有精确值时明确缺口；分位或合并数据不当新人报价。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "wage",
+                "limitation": "没有精确值时明确缺口；分位或合并数据不当新人报价。",
+                "market": "美国",
+                "name": "BLS职业展望或O*NET工资入口",
+                "period": "2026职业档案页面",
+                "publisher": "美国劳工统计局 / O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/13-2099.04"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "O*NET明确标注工资和就业来自上位职业Financial Specialists, All Other（13-2099）。",
+                  "没有精确值时明确缺口；分位或合并数据不当新人报价。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "wage-parent",
+                "limitation": "没有精确值时明确缺口；分位或合并数据不当新人报价。",
+                "market": "美国",
+                "name": "BLS职业展望或O*NET工资入口（上位职业劳动力统计）",
+                "period": "2025工资；2024–2034就业预测",
+                "publisher": "美国劳工统计局 / O*NET",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.onetonline.org/link/details/13-2099.04"
+              }
+            ]
+          },
+          "id": "fraud-examiners-investigators-and-analysts.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "13-2099.04",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "O*NET-SOC代码",
+        "occupation_scope": "欺诈审查员、调查员和分析师（13-2099.04）精确职业数据",
+        "period": "2026职业档案",
+        "source_refs": [
+          "onet"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "识别异常模式，整理证据，访谈相关人员，记录调查链并把结论交给授权的合规、法务或执法人员",
+        "fact_id": "tasks",
+        "market": "美国",
+        "measure": "核心任务",
+        "occupation_scope": "欺诈审查员、调查员和分析师（13-2099.04）精确职业数据",
+        "period": "2026职业档案",
+        "source_refs": [
+          "onet"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "案件时间线、异常交易清单、证据索引、假设与反证及升级建议",
+        "fact_id": "outputs",
+        "market": "美国",
+        "measure": "主要产出",
+        "occupation_scope": "欺诈审查员、调查员和分析师（13-2099.04）精确职业数据",
+        "period": "2026职业档案",
+        "source_refs": [
+          "onet"
+        ]
+      },
+      {
+        "derivation": "O*NET明确标注parent occupation wage",
+        "display_value": "$81,100/年（2025）",
+        "fact_id": "us-pay",
+        "market": "美国",
+        "measure": "美国工资边界",
+        "occupation_scope": "父类职业数据：Financial Specialists, All Other（13-2099）上位职业代理",
+        "period": "2025工资；2024–2034就业预测",
+        "source_refs": [
+          "wage-parent"
+        ]
+      },
+      {
+        "derivation": "O*NET明确标注parent occupation projection",
+        "display_value": "2024–2034增长3%",
+        "fact_id": "us-outlook",
+        "market": "美国",
+        "measure": "美国就业展望边界",
+        "occupation_scope": "父类职业数据：Financial Specialists, All Other（13-2099）上位职业代理",
+        "period": "2025工资；2024–2034就业预测",
+        "source_refs": [
+          "wage-parent"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "dcf219372bc1db319bc348960817c940327068038f3ddd9cb9afc96589c5c832",
+  "source_content_sha256": "14d532d3004de0275d6d843a5843a2b86a0df6caad761af257180ae9ff55fa8e",
   "subject": {
     "canonical_slug": "fraud-examiners-investigators-and-analysts",
     "name": "欺诈审查员、调查员和分析师",
-    "summary": null
+    "summary": "欺诈审查员、调查员和分析师识别异常模式、收集并保全证据、访谈相关人员、重建交易和事件时间线、检验替代假设，并把事实与建议交给合规、法务、管理层或执法主体。结论必须中性、可追溯且不把线索直接写成欺诈认定。"
   }
 }

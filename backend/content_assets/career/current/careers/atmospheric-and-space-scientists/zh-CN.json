@@ -1,12 +1,1643 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：这份工作不是‘看模型报天气’，而是把时空范围、观测时效、质量标记、模型分歧、不确定性、复核和发布权限闭环。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "ed-fit",
+            "ed-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "可观察信号：核站点/时区/单位；不补写缺测；区分模型输入与正式结论；写清未知；发布权限不明时停在草稿。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "ed-fit",
+            "ed-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "60分钟纸面样本：A/B/C降雨30%/50%/40%，风速18/28/缺失km/h，运行时间08:00/08:30/08:10；须三套风速齐全、运行跨度≤1小时且地面观测时间已知才可送审。仅用虚构数据。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考答案：降雨中位数40%，已有风速最大值28km/h；C风速和地面观测时间未知，所以未闭环，不得标为可送审或真实预报。输出输入表、计算、未知、状态与升级项。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "ed-sim"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业边界：O*NET 19-2021.00，研究大气现象，解释多源气象数据并准备报告和预报。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.profile.definition-block.1",
+          "source_refs": [
+            "onet-atmospheric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "观测对象：地面与高空站、卫星、雷达及相关环境数据；输入必须带地点、时区、单位、有效期和质量状态。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-atmospheric"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "分析任务：使用或开发数学/计算机模型，解释数据、地图和图表，分析天气或气候过程。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-atmospheric"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "沟通任务：准备面向行业、政府或公众的预报、简报、地图或报告；任务存在不等于个人自动拥有发布/预警权限。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-atmospheric"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "完整流程：定范围—核观测—做质控—比模型—记分歧假设—形成草稿—独立复核—授权发布或升级。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.profile.work-context-block.1",
+          "source_refs": [
+            "ed-work",
+            "nws-process"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作情境：受控室内、坐姿、准确性、时间压力、团队沟通与部分公众沟通并存，岗位差异显著。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.profile.work-context-block.2",
+          "source_refs": [
+            "onet-atmospheric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "准备程度：O*NET列Job Zone 4；教育调查以本科为主，也有硕博回答，不是统一法定门槛。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-atmospheric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "可检查产出：数据与时间戳清单、质量标记、模型比较、不确定性、适用范围、复核和状态记录。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "ed-output"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：地点时区单位一致，缺测不伪造，模型分歧可见，结论可追溯，草稿与发布状态分明。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "ed-output"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "相邻边界：GIS、统计、数据科学、大地测量和测绘技术共享数据技能，但核心对象与交付责任不同。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.profile.definition-block.2",
+          "source_refs": [
+            "onet-atmospheric",
+            "onet-data-scientist",
+            "onet-geodetic",
+            "onet-gis",
+            "onet-mapping-tech",
+            "onet-statistician"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "geographic-information-systems-technologists-and-technicians",
+                "id": "atmospheric-and-space-scientists.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/geographic-information-systems-technologists-and-technicians"
+              },
+              {
+                "entity": "statisticians",
+                "id": "atmospheric-and-space-scientists.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/statisticians"
+              },
+              {
+                "entity": "data-scientists",
+                "id": "atmospheric-and-space-scientists.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/data-scientists"
+              },
+              {
+                "entity": "geodetic-surveyors",
+                "id": "atmospheric-and-space-scientists.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/geodetic-surveyors"
+              },
+              {
+                "entity": "surveying-and-mapping-technicians",
+                "id": "atmospheric-and-space-scientists.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/surveying-and-mapping-technicians"
+              }
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-atmospheric",
+            "onet-data-scientist",
+            "onet-geodetic",
+            "onet-gis",
+            "onet-mapping-tech",
+            "onet-statistician"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "GIS技术人员建设、维护、修改或使用GIS数据库，也可做定制应用或用户支持；本职业以大气现象解释和气象预报/研究为核心。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-atmospheric",
+            "onet-data-scientist",
+            "onet-geodetic",
+            "onet-gis",
+            "onet-mapping-tech",
+            "onet-statistician"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "统计学家开发或应用统计理论与方法处理数值数据；本职业还需大气物理、观测和气象影响解释。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-atmospheric",
+            "onet-data-scientist",
+            "onet-geodetic",
+            "onet-gis",
+            "onet-mapping-tech",
+            "onet-statistician"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "数据科学家用编程、建模和可视化把原始数据转为信息；本职业的对象、物理约束和预报责任更专门。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-atmospheric",
+            "onet-data-scientist",
+            "onet-geodetic",
+            "onet-gis",
+            "onet-mapping-tech",
+            "onet-statistician"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "大地测量员测量大范围地表；测绘技术员通常在工程师、测量师等指导下获取数据或制图，两者不承担气象预报核心责任。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-atmospheric",
+            "onet-data-scientist",
+            "onet-geodetic",
+            "onet-gis",
+            "onet-mapping-tech",
+            "onet-statistician"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助：观测接入、异常标记、模型批量比较、制图和简报草稿。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "ed-ai",
+            "nws-process"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用条件：站点、时间、时区、单位、模型版本和数据谱系可靠。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "ed-ai",
+            "nws-process"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数据门槛：原始值、缺测、质控标记、运行时间、版本和人工修改可追溯。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "ed-ai",
+            "nws-process"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工控制：核验物理一致性、模型适用性、局地影响、不确定性和异常。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "ed-ai",
+            "nws-process"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余责任：工具不能自行取得正式预报或预警授权，也不能保证观测代表性。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "ed-ai",
+            "nws-process"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "失败风险：错站点、错时区、单位换算、迟到数据、版本混用、隐藏模型分歧或幻觉解释。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "ed-ai",
+            "nws-process"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业边界：任务可自动化不等于岗位被替代比例或本地采用率。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "ed-ai",
+            "nws-process"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实践响应：先用固定纸面数据验证规则，真实系统服从机构质控、复核和发布程序。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "ed-ai",
+            "nws-process"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：中国大陆暂无可安全使用的数据表示与O*NET 19-2021.00精确对应的全国工资。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：国家统计局2025资料按行业和宽泛岗位大类发布，不能替代精确职业中位数。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "计量口径：年薪、月薪、时薪、基本工资、值班补贴和项目经费不可混用。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "求职用法：统一地区、机构、研究/业务方向、班次、学历经验、岗位口径和福利后再比较。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：O*NET展示美国19-2021.00全国工资。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-atmospheric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：2025年BLS工资数据。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-atmospheric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数：时薪47.63美元、年薪99,070美元，不是起薪。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-atmospheric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "计量单位：时薪与年薪同源，不能与中国月薪或补贴直接混用。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-atmospheric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "覆盖人群：精确职业全国统计，不代表每个研究、业务、媒体或政府岗位。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "onet-atmospheric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "决策限制：统计值不是个人报价、录用或收入保证。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "onet-atmospheric"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "范围信号：先写清地点、时区、变量、单位和有效期。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.fit.riasec-fit-block.1",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "数据诚信：缺测保留未知，不凭经验补值。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.fit.riasec-fit-block.2",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "分析信号：能说明模型为何分歧以及哪些假设受影响。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.fit.riasec-fit-block.3",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "沟通信号：把中心判断、范围、不确定性和适用边界分开表达。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.fit.riasec-fit-block.4",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：不愿复核时间单位或在压力下省略未知，会放大错误。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.fit.riasec-fit-block.5",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：把单一模型图当确定事实，不适合承担发布责任。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.fit.riasec-fit-block.6",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "验证方法：完成本页固定练习及“补齐C风速24、观测08:20”和“B改为10:00”两张变体。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.fit.riasec-fit-block.7",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "人格边界：喜欢天气不证明胜任；可追溯分析、解释分歧和受监督表现更重要。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.fit.riasec-fit-block.8",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "输入错位：站点、坐标、时区、单位或有效期不一致即暂停受影响结论。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.risk.career-risk-cards.1",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "数据缺口：迟到、缺失或质控失败须显式标记，不得默认为正常或零。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.risk.career-risk-cards.2",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "模型分歧：保留各模型版本与结果，记录选择或融合理由，不用单一输出冒充共识。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.risk.career-risk-cards.3",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "沟通风险：说明不确定部分和情景变化；避免把已有模型最大值写成正式预报。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.risk.career-risk-cards.4",
+          "source_refs": [
+            "ed-risk",
+            "nws-process"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同规则：数据、模型、物理解释、复核或发布授权任一不明，停止发布，保存记录并升级给有权角色。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.risk.career-risk-cards.5",
+          "source_refs": [
+            "ed-risk",
+            "nws-process"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "现实入口：从数学、物理、气象基础、数据处理、时空单位核对和技术写作开始。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.path.career-path-block.1",
+          "source_refs": [
+            "ed-path",
+            "onet-atmospheric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "雇主证据：核实岗位方向、值守、工具链、质控、同伴复核、发布/预警权限和继续培训。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.path.career-path-block.2",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品：完成本页纸面题，展示输入表、计算、缺口、不确定性和状态判断。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.path.career-path-block.3",
+          "source_refs": [
+            "ed-path",
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "面试与试用：解释为何40%与28km/h仍不能使草稿闭环，以及最大值为何不是正式预报。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.path.career-path-block.4",
+          "source_refs": [
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七天试验：数据字典、时间单位核对、缺测表、模型比较、两张变体、风险清单和复盘各一天。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.path.career-path-block.5",
+          "source_refs": [
+            "ed-path",
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "资格决策：课程、分析、内部草稿、业务值守、公众发布与预警授权须逐项核验。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.path.career-path-block.6",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "能力阶梯：先稳输入与记录，再做受监督分析和简报，最后承担复杂判断与授权范围内发布。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.path.career-path-block.7",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转型路径：GIS、统计、数据科学、大地测量或测绘方向需补各自对象、方法、工具与资格证据。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.path.career-path-block.8",
+          "source_refs": [
+            "ed-path",
+            "onet-atmospheric",
+            "onet-data-scientist",
+            "onet-geodetic",
+            "onet-gis",
+            "onet-mapping-tech",
+            "onet-statistician"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "官方信号：O*NET提供美国职业、工资、就业、预测和行业资料，不证明某地正在招聘。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.market-signals.market-signal-card.1",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "就业预测：2024—2034增长1%至2%（慢于平均）；2024就业约9,400，年度空缺约700。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.market-signals.market-signal-card.2",
+          "source_refs": [
+            "onet-atmospheric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "空缺边界：年度空缺包含增长和替补，不等于新增岗位或个人录用概率。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.market-signals.market-signal-card.3",
+          "source_refs": [
+            "ed-market",
+            "onet-atmospheric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "行业信号：政府及专业、科学和技术服务是页面列示的主要行业；不代表唯一去向。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.market-signals.market-signal-card.4",
+          "source_refs": [
+            "ed-market",
+            "onet-atmospheric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "技术信号：自动数据处理与模型辅助会改变任务组合，但不消除输入核验、物理判断、不确定性沟通和发布责任。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.market-signals.market-signal-card.5",
+          "source_refs": [
+            "ed-ai",
+            "ed-market"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "可复核工作闭环是界定时空范围、核对观测来源与时效、做质量检查、比较模型、记录分歧与假设、形成草稿、独立复核，并由有权角色发布或升级；任务包括使用或开发天气模型、解释数据与图表、收集观测、分析气候数据集、准备预报或简报，以及在部分岗位发布天气信息或预警。",
+                "id": "atmospheric-and-space-scientists.faq.1",
+                "question_key": "career.faq.atmospheric-and-space-scientists.daily-work",
+                "source_refs": [
+                  "ed-work",
+                  "onet-atmospheric"
+                ]
+              },
+              {
+                "answer": "本职业解释气象观测并形成预报或研究；GIS技术人员建设或维护GIS数据库，统计学家开发或应用统计方法，数据科学家用编程与分析把原始数据转为信息，大地测量员测量大范围地表，测绘技术员通常在专业人员指导下获取或制图。",
+                "id": "atmospheric-and-space-scientists.faq.2",
+                "question_key": "career.faq.atmospheric-and-space-scientists.role-comparison",
+                "source_refs": [
+                  "onet-atmospheric",
+                  "onet-data-scientist",
+                  "onet-geodetic",
+                  "onet-gis",
+                  "onet-mapping-tech",
+                  "onet-statistician"
+                ]
+              },
+              {
+                "answer": "适配度可通过能否核对时空与单位、保留缺测、解释模型分歧、写清不确定性，并在发布权限或数据完整性不明时停止升级来观察。",
+                "id": "atmospheric-and-space-scientists.faq.3",
+                "question_key": "career.faq.atmospheric-and-space-scientists.fit",
+                "source_refs": [
+                  "ed-fit"
+                ]
+              },
+              {
+                "answer": "数字工具可辅助数据接入、质量标记、模型对比、制图和简报草稿；不能独立确认观测代表性、模型适用性、局地影响或正式预警授权；NWS明确将人工判断和不确定性沟通置于模型输出之后；模型有分歧时由预报员判断表现或寻求融合方案。",
+                "id": "atmospheric-and-space-scientists.faq.4",
+                "question_key": "career.faq.atmospheric-and-space-scientists.ai-impact",
+                "source_refs": [
+                  "ed-ai",
+                  "nws-process"
+                ]
+              },
+              {
+                "answer": "人工控制点包括输入与时效核验、物理一致性检查、模型适用性和异常判断、影响解释、同伴复核，以及由有权角色发布预报或预警。",
+                "id": "atmospheric-and-space-scientists.faq.5",
+                "question_key": "career.faq.atmospheric-and-space-scientists.human-control",
+                "source_refs": [
+                  "ed-ai"
+                ]
+              },
+              {
+                "answer": "国家统计局2025资料只有行业和宽泛岗位大类，不能给出与O*NET 19-2021.00精确对应的中国大陆全国中位数或统一起薪。",
+                "id": "atmospheric-and-space-scientists.faq.6",
+                "question_key": "career.faq.atmospheric-and-space-scientists.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "O*NET展示2025年美国全国中位时薪47.63美元、年薪99,070美元；该值对应美国19-2021.00全国中位数，不是起薪、个人报价或中国工资。",
+                "id": "atmospheric-and-space-scientists.faq.7",
+                "question_key": "career.faq.atmospheric-and-space-scientists.us-pay",
+                "source_refs": [
+                  "onet-atmospheric"
+                ]
+              },
+              {
+                "answer": "入门可先练数据字典、时间与单位核对、缺测标记、模型比较和可追溯简报，只使用固定虚构数据，不发布真实天气建议；课程学习、数据分析、内部草稿、业务值守、面向公众发布和预警授权是不同能力与权限，须按雇主、岗位和所在地逐项核验。",
+                "id": "atmospheric-and-space-scientists.faq.8",
+                "question_key": "career.faq.atmospheric-and-space-scientists.education-path",
+                "source_refs": [
+                  "ed-path"
+                ]
+              },
+              {
+                "answer": "关键风险包括错站点/时区/单位、迟到或缺失观测、模型版本混用、把单一模型当结论、隐藏分歧、过度确定表达，以及未经授权发布；NWS指出大气系统混沌性和不完整采样会带来不确定性，且较长时效通常更不确定；预报须沟通不确定部分及情景变化。",
+                "id": "atmospheric-and-space-scientists.faq.9",
+                "question_key": "career.faq.atmospheric-and-space-scientists.risk-boundary",
+                "source_refs": [
+                  "ed-risk",
+                  "nws-process"
+                ]
+              },
+              {
+                "answer": "O*NET/BLS显示该职业2024—2034增长1%至2%，慢于平均；O*NET/BLS显示2024就业约9,400，2024—2034年度空缺约700；空缺包括增长和替补。",
+                "id": "atmospheric-and-space-scientists.faq.10",
+                "question_key": "career.faq.atmospheric-and-space-scientists.outlook-transition",
+                "source_refs": [
+                  "onet-atmospheric"
+                ]
+              },
+              {
+                "answer": "工资、就业存量、预测、年度空缺、行业分布和招聘样本是不同信号，不能合并为个人录用概率或本地需求结论；适配度可通过能否核对时空与单位、保留缺测、解释模型分歧、写清不确定性，并在发布权限或数据完整性不明时停止升级来观察。",
+                "id": "atmospheric-and-space-scientists.faq.11",
+                "question_key": "career.faq.atmospheric-and-space-scientists.career-worth",
+                "source_refs": [
+                  "ed-fit",
+                  "ed-market"
+                ]
+              }
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.sources.faq.1",
+          "source_refs": [
+            "ed-ai",
+            "ed-fit",
+            "ed-market",
+            "ed-path",
+            "ed-risk",
+            "ed-work",
+            "nbs-wages",
+            "nws-process",
+            "onet-atmospheric",
+            "onet-data-scientist",
+            "onet-geodetic",
+            "onet-gis",
+            "onet-mapping-tech",
+            "onet-statistician"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "O*NET事实、美国统计、NWS流程、中国行业代理和编辑建议分别陈述。",
+              "本页只供职业决策与虚构纸面练习，不构成真实天气预报、预警或现场处置指令。",
+              "中国精确职业工资暂无可安全使用的数据。"
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.sources.boundary.1",
+          "source_refs": [
+            "ed-ai",
+            "ed-fit",
+            "ed-market",
+            "ed-output",
+            "ed-path",
+            "ed-risk",
+            "ed-sim",
+            "ed-work",
+            "nbs-wages",
+            "nws-process",
+            "onet-atmospheric",
+            "onet-data-scientist",
+            "onet-geodetic",
+            "onet-gis",
+            "onet-mapping-tech",
+            "onet-statistician"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "大气与空间科学家",
+                "id": "atmospheric-and-space-scientists.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "大气与空间科学家",
+                "id": "atmospheric-and-space-scientists.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "大气与空间科学家",
+                "id": "atmospheric-and-space-scientists.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "大气与空间科学家",
+                "id": "atmospheric-and-space-scientists.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "大气与空间科学家",
+                "id": "atmospheric-and-space-scientists.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "大气与空间科学家",
+                "id": "atmospheric-and-space-scientists.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "大气与空间科学家",
+                "id": "atmospheric-and-space-scientists.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "大气与空间科学家",
+                "id": "atmospheric-and-space-scientists.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "大气与空间科学家",
+                "id": "atmospheric-and-space-scientists.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "大气与空间科学家",
+                "id": "atmospheric-and-space-scientists.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "大气与空间科学家",
+                "id": "atmospheric-and-space-scientists.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实天气预警、业务预报或现场处置指令。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-ai",
+                "limitation": "不构成真实天气预警、业务预报或现场处置指令。",
+                "market": "全球",
+                "name": "气象数字工具边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实天气预警、业务预报或现场处置指令。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-fit",
+                "limitation": "不构成真实天气预警、业务预报或现场处置指令。",
+                "market": "全球",
+                "name": "气象岗位适配观察",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实天气预警、业务预报或现场处置指令。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-market",
+                "limitation": "不构成真实天气预警、业务预报或现场处置指令。",
+                "market": "全球",
+                "name": "气象职业市场边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实天气预警、业务预报或现场处置指令。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-output",
+                "limitation": "不构成真实天气预警、业务预报或现场处置指令。",
+                "market": "全球",
+                "name": "气象分析产出质量",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实天气预警、业务预报或现场处置指令。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-path",
+                "limitation": "不构成真实天气预警、业务预报或现场处置指令。",
+                "market": "全球",
+                "name": "气象职业入门路径",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实天气预警、业务预报或现场处置指令。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-risk",
+                "limitation": "不构成真实天气预警、业务预报或现场处置指令。",
+                "market": "全球",
+                "name": "气象工作风险边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实天气预警、业务预报或现场处置指令。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-sim",
+                "limitation": "不构成真实天气预警、业务预报或现场处置指令。",
+                "market": "全球",
+                "name": "虚构预报纸面练习",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实天气预警、业务预报或现场处置指令。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-work",
+                "limitation": "不构成真实天气预警、业务预报或现场处置指令。",
+                "market": "全球",
+                "name": "气象分析闭环",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对中国行业和宽泛岗位工资口径。",
+                  "不能替代本职业精确工资。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "nbs-wages",
+                "limitation": "不能替代本职业精确工资。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wages; published 2026-05-15; accessed 2026-09-06",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对观测、模型分歧、人工判断与不确定性沟通。",
+                  "描述美国NWS流程，不代表所有机构的发布程序。"
+                ],
+                "evidence_type": "official technical guidance",
+                "id": "nws-process",
+                "limitation": "描述美国NWS流程，不代表所有机构的发布程序。",
+                "market": "美国",
+                "name": "Forecast Process",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "NOAA National Weather Service",
+                "scope": "exact",
+                "url": "https://www.weather.gov/about/forecast-process"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对身份、任务、环境、准备、工资、就业和预测。",
+                  "仅限该职业及美国统计。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-atmospheric",
+                "limitation": "仅限该职业及美国统计。",
+                "market": "美国",
+                "name": "19-2021.00 - Atmospheric and Space Scientists",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/19-2021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-data-scientist",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "15-2051.00 - Data Scientists",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-2051.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-geodetic",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "17-1022.01 - Geodetic Surveyors",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-1022.01"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-gis",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "15-1299.02 - Geographic Information Systems Technologists and Technicians",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-1299.02"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-mapping-tech",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "17-3031.00 - Surveying and Mapping Technicians",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-3031.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-statistician",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "15-2041.00 - Statisticians",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-2041.00"
+              }
+            ]
+          },
+          "id": "atmospheric-and-space-scientists.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "精确职业数据：O*NET 19-2021.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业身份",
+        "occupation_scope": "大气与空间科学家 / 19-2021.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-atmospheric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "观测、模型、解释、简报与预报",
+        "fact_id": "tasks",
+        "market": "美国",
+        "measure": "核心任务",
+        "occupation_scope": "大气与空间科学家 / 19-2021.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-atmospheric"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "范围—观测—质控—模型—不确定性—复核—授权",
+        "fact_id": "workflow",
+        "market": "全球",
+        "measure": "工作闭环",
+        "occupation_scope": "大气与空间科学家 / 19-2021.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "ed-work"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "时空单位、缺测、分歧、边界与升级",
+        "fact_id": "fit",
+        "market": "全球",
+        "measure": "适配信号",
+        "occupation_scope": "大气与空间科学家 / 19-2021.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "ed-fit"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "错位、缺测、版本、分歧、表达与授权",
+        "fact_id": "risk",
+        "market": "全球",
+        "measure": "风险边界",
+        "occupation_scope": "大气与空间科学家 / 19-2021.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "ed-risk"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "d9546ba2d032ac959b21918a4816d2d136a31cd263a9ad9b1bcce9c7f3d94500",
+  "source_content_sha256": "423ffb549f14365d3ae73f05e50b4a5cd939548a10d8552e567e742b1dcd48fd",
   "subject": {
     "canonical_slug": "atmospheric-and-space-scientists",
     "name": "大气与空间科学家",
-    "summary": null
+    "summary": "核验多源大气观测和模型，解释天气或气候过程，形成可追溯报告或预报，并清楚标注不确定性与发布权限。"
   }
 }

@@ -174,6 +174,27 @@ final class CareerContentV3AuthorityPackageTest extends TestCase
         self::assertStringNotContainsString('poison-downstream', $downstream);
     }
 
+    public function test_dynamic_coverage_rejects_counts_that_disagree_with_page_states(): void
+    {
+        $root = $this->fixture();
+        try {
+            $manifest = self::read($root.'/manifest.json');
+            $manifest['coverage']['enhanced_locale_pages'] = 1;
+            $manifest['coverage']['legacy_locale_pages'] = 1;
+            $projection = $manifest;
+            unset($projection['aggregate_sha256']);
+            $manifest['aggregate_sha256'] = CareerCurrentAuthorityPackage::hashValue($projection);
+            self::write($root.'/manifest.json', $manifest);
+
+            $this->expectException(CareerCurrentAuthorityPackageFailure::class);
+            $this->expectExceptionMessage('CURRENT_CONTENT_V3_COVERAGE_INVALID');
+            (new CareerContentV3AuthorityPackage(1, 2, null, CareerCurrentAuthorityPackage::hashValue(['actors'])))
+                ->loadRoot($root);
+        } finally {
+            $this->deleteDirectory($root);
+        }
+    }
+
     private function fixture(): string
     {
         $root = tempnam(sys_get_temp_dir(), 'career-v3-package-');

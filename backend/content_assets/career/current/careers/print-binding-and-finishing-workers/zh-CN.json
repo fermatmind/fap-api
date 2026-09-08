@@ -1,12 +1,1558 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：装订工把工单、书芯或印刷品、装订材料和设备设置转成页序、尺寸与装订质量合格的成品。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "print-onet-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "适合信号：你能在重复节拍中持续核对页序、尺寸、线迹或胶合，并在发现缺陷时停止当前批次。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "print-onet-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：如果工单、设备状态或安全条件不明，可先用纸面检查表记录未知项与升级点；真实操作仍按现场程序。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "osha-print-loto",
+            "print-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全试做：只用本页四张虚构首件记录做纸面分流，不操作机器，不接触刀具或热胶。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业范围：本页对应O*NET 51-5113.00，覆盖手工或机器装订书籍和出版物、整饰印刷品，以及可能的设备设置。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.profile.definition-block.1",
+          "source_refs": [
+            "print-onet-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "读取工单与规格，准备书芯、封面、胶线材料和首件样张。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.profile.responsibilities-block.1",
+          "source_refs": [
+            "print-onet-current"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "设置刀具、导轨、滚轮或夹具，操作裁切、折页、配页、缝订、胶订或压合步骤。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.profile.responsibilities-block.2",
+          "source_refs": [
+            "print-onet-current"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "检查缺页、错页、松页、破损、污点和未裁线头，记录产量与异常。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.profile.responsibilities-block.3",
+          "source_refs": [
+            "print-onet-current"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断是规格、页序、尺寸、线迹和胶合是否达标，以及卡纸、异响或防护异常是否需要停机。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.profile.work-context-block.1",
+          "source_refs": [
+            "osha-print-loto",
+            "print-onet-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "可把官方任务整理为：读工单→核材料与设置→做首件→检验→运行与抽检→分隔不合格品→记录交接。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.profile.work-context-block.2",
+          "source_refs": [
+            "print-editorial",
+            "print-onet-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "求职或培训比较时，建议记录雇主实际使用的设备、量具、样张、胶黏剂和标签流程；具体配置需向雇主核实。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "交接记录可区分工单、批次、异常、接收岗位和维修授权状态；具体协作边界按雇主流程核实。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "osha-print-loto",
+            "print-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "可复核产出包括合格成品、首件和过程检验记录、不合格品状态及异常交接。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "print-onet-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "边界：本职业负责印后装订整饰；印刷图文形成、跨材料粘合或切割、手工表面研磨属于相邻职业范围。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.profile.definition-block.2",
+          "source_refs": [
+            "print-adj-adhesive",
+            "print-adj-cutting",
+            "print-adj-grinding",
+            "print-adj-press",
+            "print-onet-current"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "grinding-and-polishing-workers-hand",
+                "id": "grinding-and-polishing-workers-hand",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/grinding-and-polishing-workers-hand"
+              },
+              {
+                "entity": "printing-press-operators",
+                "id": "printing-press-operators",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/printing-press-operators"
+              },
+              {
+                "entity": "adhesive-bonding-machine-operators-and-tenders",
+                "id": "adhesive-bonding-machine-operators-and-tenders",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/adhesive-bonding-machine-operators-and-tenders"
+              },
+              {
+                "entity": "cutting-and-slicing-machine-setters-operators-and-tenders",
+                "id": "cutting-and-slicing-machine-setters-operators-and-tenders",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/cutting-and-slicing-machine-setters-operators-and-tenders"
+              }
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "print-adj-adhesive",
+            "print-adj-cutting",
+            "print-adj-grinding",
+            "print-adj-press",
+            "print-onet-current"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "手工研磨抛光工51-9022.00用手工或手持动力工具研磨、砂磨或抛光多种材料；装订工51-5113.00形成书籍与印刷品的装订和整饰结果。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "print-adj-grinding",
+            "print-onet-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "印刷机操作员51-5112.00设置并操作印刷设备形成图文印迹；装订工在印后完成装订和整饰。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "print-adj-press",
+            "print-onet-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "粘合机操作员51-9191.00用胶黏剂连接纸张、橡胶、塑料等多类材料；装订工的上胶服务于书籍和印刷品装订。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "print-adj-adhesive",
+            "print-onet-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "切割分切机操作员51-9032.00设置或操作切割多类材料的机器；装订工的裁切是完整印刷品装订整饰流程的一部分。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "print-adj-cutting",
+            "print-onet-current"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "工具可协助整理工单字段、排程、检查表和缺陷记录草稿。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "缺陷图像或文本建议不能替代对首件实物的检查。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "设备设置、材料批次和实际尺寸必须回到受控工单与实物核验。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "卡纸、异响、防护和危险能量状态必须由现场有职责人员判断。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "osha-print-loto",
+            "print-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "不得向通用工具输入客户未授权的图稿、订单或生产资料。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "工具输出与原始记录冲突时停止采用，记录差异并升级。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "本页不提供自动化采用率、替代率或岗位损失概率。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "最小留痕包括输入版本、人工核对项、差异、处理人和批次状态。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国大陆装订工精确职业工资暂无可安全使用的数据；现有材料不能建立全国统计值。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages-2025"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "行业或单位类型平均工资不能写成装订工中位数、分位数或统一起薪。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages-2025"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "求职记录应分别写地区、产品类型、设备、班次、经验要求、计薪周期和样本量。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "样本口径不一致时保留缺口，不用单个招聘报价外推全国范围。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2025年年薪中位数为42,290美元，时薪中位数为20.33美元。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "print-wage-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数不是起薪或个人报价。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "print-editorial",
+            "print-wage-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2025年第10百分位年薪为32,220美元。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "print-wage-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2025年第90百分位年薪为59,150美元。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "print-wage-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "比较岗位时还要记录地区、班次、设备、经验与计薪单位。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "工资期为2025年，就业预测期为2024至2034年，不能混成同一期间。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "print-trends-current",
+            "print-wage-current"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "能按工单逐个核查规格和材料。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.fit.riasec-fit-block.1",
+          "source_refs": [
+            "print-onet-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "能在重复操作中持续保持页序和尺寸精度。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.fit.riasec-fit-block.2",
+          "source_refs": [
+            "print-onet-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "愿意检查缺页、松页、污点和线迹等细节。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.fit.riasec-fit-block.3",
+          "source_refs": [
+            "print-onet-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "发现异常时能停止当前批次并保留记录。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.fit.riasec-fit-block.4",
+          "source_refs": [
+            "osha-print-loto",
+            "print-onet-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "能区分操作、清障、换刀和维修的权限。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.fit.riasec-fit-block.5",
+          "source_refs": [
+            "osha-print-loto"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "能与印刷、质检、维修和包装岗位清楚交接。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.fit.riasec-fit-block.6",
+          "source_refs": [
+            "print-onet-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "适配判断看工单拆解、首件检验和异常记录，不靠“手快”自评。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.fit.riasec-fit-block.7",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "纸面练习不能证明真实设备能力或授权。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.fit.riasec-fit-block.8",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "刀具、夹点、输送部件或防护异常时停止受影响步骤，不伸手进入运动部件。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.risk.career-risk-cards.1",
+          "source_refs": [
+            "osha-print-loto"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "换刀、清障、清洁或维修可能释放危险能量，应交受训或授权人员按现场程序处理。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.risk.career-risk-cards.2",
+          "source_refs": [
+            "osha-print-loto"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "首件或抽检不合格时停止当前批次、分隔产品并保留工单和缺陷记录。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.risk.career-risk-cards.3",
+          "source_refs": [
+            "print-onet-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "工具建议与实物或受控工单冲突时，以原始资料和现场核验为准。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.risk.career-risk-cards.4",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "停机后记录时间、已知事实、未知项、隔离状态与接收人，不越权宣布恢复。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.risk.career-risk-cards.5",
+          "source_refs": [
+            "osha-print-loto",
+            "print-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "入门纸面练习可先训练读工单、识别材料、核页序和尺寸，再在有职责人员监督及现场程序下接触上料、首件和常用设备；实际培训顺序由雇主、设备和授权范围决定。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.path.career-path-block.1",
+          "source_refs": [
+            "print-editorial",
+            "print-onet-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "雇主证据可展示带批注的虚构工单、首件检验表和异常交接；不得包含真实客户机密。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.path.career-path-block.2",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "题内规则要求页序、成品尺寸、装订状态和批次标签四项全部已知且符合，才记为“纸面检查通过”。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.path.career-path-block.3",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "任一已知项不符合即“留置”；没有已知不符合但必填项缺失即“信息不全”。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.path.career-path-block.4",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "优先级是留置高于信息不全，高于纸面检查通过；任何分类都不授权真实生产。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.path.career-path-block.5",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "四张记录结论：A纸面检查通过，B和C留置，D信息不全。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.path.career-path-block.6",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "输出样品号、逐项证据、分类、缺失或不符合项和下一步，不补造未知信息。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.path.career-path-block.7",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "纸面作品不替代在岗训练、设备评价、维修资格或现场授权。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.path.career-path-block.8",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国该职业2024年就业35,800人，2034年预计30,000人。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "print-trends-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "2024至2034年预计下降16%。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "print-trends-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "同期平均每年预计有2,800个职位空缺。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "print-trends-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "年均空缺包含增长变化与替补，不等于每年净增2,800人。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "print-editorial",
+            "print-trends-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "这些是美国全国数据，不能外推为中国需求或个人录用保证。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "若你能接受重复而精细的设备工作、遵守停机边界，并能在目标地区核实培训入口与真实岗位，可把本职业列入候选；若更看重增长性或难以适应重复节拍，应同时比较相邻方向。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.market-signals.market-signal-card.6",
+          "source_refs": [
+            "print-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "职业任务包括读取工单、设置或操作装订整饰设备、裁切、缝订或上胶、检查缺页松页污点等缺陷、记录产量并进行清洁或小修。",
+                "id": "print-binding-and-finishing-workers.faq.1",
+                "question_key": "career.faq.print-binding-and-finishing-workers.daily-work",
+                "source_refs": [
+                  "print-onet-current"
+                ]
+              },
+              {
+                "answer": "装订工负责书籍和印刷品的印后装订整饰；四个相邻职业分别以手工表面研磨、图文印刷、跨材料胶黏连接或多材料机器切割为核心。",
+                "id": "print-binding-and-finishing-workers.faq.2",
+                "question_key": "career.faq.print-binding-and-finishing-workers.role-comparison",
+                "source_refs": [
+                  "print-adj-adhesive",
+                  "print-adj-cutting",
+                  "print-adj-grinding",
+                  "print-adj-press",
+                  "print-onet-current"
+                ]
+              },
+              {
+                "answer": "工具可协助整理工单、检查表、缺陷记录和排程草稿，但不得替代首件实物、设备状态与安全条件的人工核验。 受控工单、材料批次、实测尺寸、设备状态和安全条件由现场有职责人员核验；工具冲突或输入缺失时停止采用并升级。",
+                "id": "print-binding-and-finishing-workers.faq.3",
+                "question_key": "career.faq.print-binding-and-finishing-workers.ai-impact",
+                "source_refs": [
+                  "print-editorial"
+                ]
+              },
+              {
+                "answer": "工具可协助整理工单、检查表、缺陷记录和排程草稿，但不得替代首件实物、设备状态与安全条件的人工核验。",
+                "id": "print-binding-and-finishing-workers.faq.4",
+                "question_key": "career.faq.print-binding-and-finishing-workers.automatable-tasks",
+                "source_refs": [
+                  "print-editorial"
+                ]
+              },
+              {
+                "answer": "受控工单、材料批次、实测尺寸、设备状态和安全条件由现场有职责人员核验；工具冲突或输入缺失时停止采用并升级。 装订整饰设备换刀、清障或维修可能涉及危险能量；真实停机和能源隔离须按现场程序由受训或授权人员执行。",
+                "id": "print-binding-and-finishing-workers.faq.5",
+                "question_key": "career.faq.print-binding-and-finishing-workers.human-control",
+                "source_refs": [
+                  "osha-print-loto",
+                  "print-editorial"
+                ]
+              },
+              {
+                "answer": "现有国家统计局行业或单位类型工资资料不能建立中国大陆装订工精确职业的全国中位数、分位数或统一起薪。 中国求职记录应分别写地区、产品类型、设备、班次、经验要求、计薪周期和样本量；不能把单个招聘报价外推为全国工资。",
+                "id": "print-binding-and-finishing-workers.faq.6",
+                "question_key": "career.faq.print-binding-and-finishing-workers.china-pay",
+                "source_refs": [
+                  "nbs-wages-2025",
+                  "print-editorial"
+                ]
+              },
+              {
+                "answer": "美国该职业2025年年薪中位数为42,290美元，时薪中位数为20.33美元。 美国该职业2025年第10百分位年薪为32,220美元。 美国该职业2025年第90百分位年薪为59,150美元。 美国全国工资分位不是起薪或个人报价；比较岗位时还要记录地区、班次、设备、经验与计薪单位。",
+                "id": "print-binding-and-finishing-workers.faq.7",
+                "question_key": "career.faq.print-binding-and-finishing-workers.us-pay",
+                "source_refs": [
+                  "print-editorial",
+                  "print-wage-current"
+                ]
+              },
+              {
+                "answer": "O*NET任务和工作情境显示，这项工作需要按规格设置设备、检查缺陷、监控过程并重视精确性。",
+                "id": "print-binding-and-finishing-workers.faq.8",
+                "question_key": "career.faq.print-binding-and-finishing-workers.fit",
+                "source_refs": [
+                  "print-onet-current"
+                ]
+              },
+              {
+                "answer": "美国该职业2024—2034年预计下降16%，但同期平均每年仍预计有2,800个职位空缺。若你能接受重复而精细的设备工作、遵守停机边界，并能在目标地区核实培训入口与真实岗位，可把本职业列入候选；若更看重增长性或难以适应重复节拍，应同时比较相邻方向。美国全国预测不能外推为中国需求或个人录用保证。",
+                "id": "print-binding-and-finishing-workers.faq.9",
+                "question_key": "career.faq.print-binding-and-finishing-workers.career-worth",
+                "source_refs": [
+                  "print-editorial",
+                  "print-trends-current"
+                ]
+              },
+              {
+                "answer": "装订整饰设备换刀、清障或维修可能涉及危险能量；真实停机和能源隔离须按现场程序由受训或授权人员执行。",
+                "id": "print-binding-and-finishing-workers.faq.10",
+                "question_key": "career.faq.print-binding-and-finishing-workers.risk-boundary",
+                "source_refs": [
+                  "osha-print-loto"
+                ]
+              },
+              {
+                "answer": "O*NET将该职业列为Job Zone 1-2，通常需要高中学历或同等学历，并可能需要数天至一年的在岗培训。 作品可展示虚构工单拆解、首件检验和异常交接；它不替代在岗训练、设备评价、维修资格或现场授权。",
+                "id": "print-binding-and-finishing-workers.faq.11",
+                "question_key": "career.faq.print-binding-and-finishing-workers.education-path",
+                "source_refs": [
+                  "print-editorial",
+                  "print-onet-current"
+                ]
+              },
+              {
+                "answer": "美国该职业2024年就业35,800人，2034年预计30,000人。 美国该职业2024至2034年预计下降16%。 美国该职业2024至2034年平均每年预计有2,800个职位空缺。 就业存量、十年净变化与年均空缺是不同指标；美国全国预测不能外推为中国需求或个人录用保证。",
+                "id": "print-binding-and-finishing-workers.faq.12",
+                "question_key": "career.faq.print-binding-and-finishing-workers.outlook-transition",
+                "source_refs": [
+                  "print-editorial",
+                  "print-trends-current"
+                ]
+              }
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.sources.faq.1",
+          "source_refs": [
+            "nbs-wages-2025",
+            "osha-print-loto",
+            "print-adj-adhesive",
+            "print-adj-cutting",
+            "print-adj-grinding",
+            "print-adj-press",
+            "print-editorial",
+            "print-onet-current",
+            "print-trends-current",
+            "print-wage-current"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "本页对应O*NET 51-5113.00；页面列出的四个相邻职业仅用于职责比较，不并入本职业。",
+              "中国工资缺口、美国统计、编辑性方法和安全边界分别陈述。",
+              "虚构练习不操作真实设备，也不构成生产放行、维修资格或现场授权。"
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.sources.boundary.1",
+          "source_refs": [
+            "nbs-wages-2025",
+            "osha-print-loto",
+            "print-adj-adhesive",
+            "print-adj-cutting",
+            "print-adj-grinding",
+            "print-adj-press",
+            "print-editorial",
+            "print-onet-current",
+            "print-trends-current",
+            "print-wage-current"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "装订工",
+                "id": "print-binding-and-finishing-workers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "装订工",
+                "id": "print-binding-and-finishing-workers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "装订工",
+                "id": "print-binding-and-finishing-workers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "装订工",
+                "id": "print-binding-and-finishing-workers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "装订工",
+                "id": "print-binding-and-finishing-workers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "装订工",
+                "id": "print-binding-and-finishing-workers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "装订工",
+                "id": "print-binding-and-finishing-workers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "装订工",
+                "id": "print-binding-and-finishing-workers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "装订工",
+                "id": "print-binding-and-finishing-workers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "装订工",
+                "id": "print-binding-and-finishing-workers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "装订工",
+                "id": "print-binding-and-finishing-workers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-08-30",
+                "details": [
+                  "行业与岗位大类支持精确职业工资缺口。",
+                  "制造业平均数不是装订工精确工资。"
+                ],
+                "evidence_type": "official source",
+                "id": "nbs-wages-2025",
+                "limitation": "制造业平均数不是装订工精确工资。",
+                "market": "中国大陆",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wages released 2026-05-15",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-08-30",
+                "details": [
+                  "印刷装订整饰系统换刀等维修的危险能量控制边界。",
+                  "美国联邦职业安全规则，不建立中国法律义务。"
+                ],
+                "evidence_type": "official safety interpretation",
+                "id": "osha-print-loto",
+                "limitation": "美国联邦职业安全规则，不建立中国法律义务。",
+                "market": "美国",
+                "name": "Printing Industry Lockout/Tagout Interpretation",
+                "period": "current interpretation; accessed 2026-08-30",
+                "publisher": "U.S. Occupational Safety and Health Administration",
+                "scope": "combined_official",
+                "url": "https://www.osha.gov/laws-regs/standardinterpretations/2004-04-07"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "实际打开完整详情页，共1282行；定位职业定义。",
+                  "只支持列明职业身份、职责或统计口径。"
+                ],
+                "evidence_type": "official source",
+                "id": "print-adj-adhesive",
+                "limitation": "只支持列明职业身份、职责或统计口径。",
+                "market": "美国",
+                "name": "O*NET 51-9191.00 Adhesive Bonding Machine Operators and Tenders",
+                "period": "updated 2026",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-9191.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "实际打开完整详情页，共1314行；定位职业定义。",
+                  "只支持列明职业身份、职责或统计口径。"
+                ],
+                "evidence_type": "official source",
+                "id": "print-adj-cutting",
+                "limitation": "只支持列明职业身份、职责或统计口径。",
+                "market": "美国",
+                "name": "O*NET 51-9032.00 Cutting and Slicing Machine Setters, Operators, and Tenders",
+                "period": "updated 2026",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-9032.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "实际打开完整详情页，共854行；定位职业定义和任务。",
+                  "只支持列明职业身份、职责或统计口径。"
+                ],
+                "evidence_type": "official source",
+                "id": "print-adj-grinding",
+                "limitation": "只支持列明职业身份、职责或统计口径。",
+                "market": "美国",
+                "name": "O*NET 51-9022.00 Grinding and Polishing Workers, Hand",
+                "period": "updated 2026",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-9022.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "实际打开完整详情页，共1334行；定位职业定义。",
+                  "只支持列明职业身份、职责或统计口径。"
+                ],
+                "evidence_type": "official source",
+                "id": "print-adj-press",
+                "limitation": "只支持列明职业身份、职责或统计口径。",
+                "market": "美国",
+                "name": "O*NET 51-5112.00 Printing Press Operators",
+                "period": "updated 2026",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-5112.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "支持求职记录法、工具边界、适配观察与虚构纸面练习。",
+                  "不支持真实设备授权、维修资格、工资或外部统计。"
+                ],
+                "evidence_type": "editorial analysis",
+                "id": "print-editorial",
+                "limitation": "不支持真实设备授权、维修资格、工资或外部统计。",
+                "market": "编辑设计",
+                "name": "装订工候选页编辑设计",
+                "period": "2026-09-07",
+                "publisher": "FermatMind candidate editorial",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "实际打开完整详情页，共1318行；定位职业定义、任务、工作活动与工作情境。",
+                  "只支持列明职业身份、职责或统计口径。"
+                ],
+                "evidence_type": "official source",
+                "id": "print-onet-current",
+                "limitation": "只支持列明职业身份、职责或统计口径。",
+                "market": "美国",
+                "name": "O*NET 51-5113.00 Print Binding and Finishing Workers",
+                "period": "updated 2026",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-5113.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "实际打开完整趋势页，共107行；定位2024就业、2034预测、变化率与年均空缺。",
+                  "只支持列明职业身份、职责或统计口径。"
+                ],
+                "evidence_type": "official source",
+                "id": "print-trends-current",
+                "limitation": "只支持列明职业身份、职责或统计口径。",
+                "market": "美国",
+                "name": "O*NET National Employment Trends 51-5113.00",
+                "period": "2024-2034",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/51-5113.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "实际打开完整工资页，共142行；仅采用美国全国行的2025年工资中位与分位。",
+                  "只支持列明职业身份、职责或统计口径。"
+                ],
+                "evidence_type": "official source",
+                "id": "print-wage-current",
+                "limitation": "只支持列明职业身份、职责或统计口径。",
+                "market": "美国",
+                "name": "O*NET National Wages 51-5113.00",
+                "period": "BLS May 2025 wage data",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/51-5113.00?st=NJ"
+              }
+            ]
+          },
+          "id": "print-binding-and-finishing-workers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "51-5113.00",
+        "fact_id": "print-identity",
+        "market": "美国",
+        "measure": "O*NET-SOC code",
+        "occupation_scope": "精确职业数据：美国O*NET-SOC 51-5113.00装订工",
+        "period": "updated 2026",
+        "source_refs": [
+          "print-onet-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Job Zone 1-2：通常高中学历或同等学历，可能需数天至一年在岗培训",
+        "fact_id": "print-entry",
+        "market": "美国",
+        "measure": "entry preparation",
+        "occupation_scope": "精确职业数据：美国O*NET-SOC 51-5113.00装订工",
+        "period": "updated 2026",
+        "source_refs": [
+          "print-onet-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2024年35,800人；2034年预计30,000人",
+        "fact_id": "print-employment",
+        "market": "美国",
+        "measure": "employment context",
+        "occupation_scope": "精确职业数据：美国O*NET-SOC 51-5113.00装订工",
+        "period": "2024-2034",
+        "source_refs": [
+          "print-trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "下降16%",
+        "fact_id": "print-outlook",
+        "market": "美国",
+        "measure": "projected employment change",
+        "occupation_scope": "精确职业数据：美国O*NET-SOC 51-5113.00装订工",
+        "period": "2024-2034",
+        "source_refs": [
+          "print-trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "平均每年2,800个",
+        "fact_id": "print-openings",
+        "market": "美国",
+        "measure": "average annual openings",
+        "occupation_scope": "精确职业数据：美国O*NET-SOC 51-5113.00装订工",
+        "period": "2024-2034",
+        "source_refs": [
+          "print-trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "42,290美元/年（20.33美元/小时）",
+        "fact_id": "print-wage-median",
+        "market": "美国",
+        "measure": "annual and hourly median wage",
+        "occupation_scope": "精确职业数据：美国O*NET-SOC 51-5113.00装订工",
+        "period": "BLS May 2025 wage data",
+        "source_refs": [
+          "print-wage-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "32,220美元/年（第10百分位）",
+        "fact_id": "print-wage-p10",
+        "market": "美国",
+        "measure": "annual wage percentile",
+        "occupation_scope": "精确职业数据：美国O*NET-SOC 51-5113.00装订工",
+        "period": "BLS May 2025 wage data",
+        "source_refs": [
+          "print-wage-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "59,150美元/年（第90百分位）",
+        "fact_id": "print-wage-p90",
+        "market": "美国",
+        "measure": "annual wage percentile",
+        "occupation_scope": "精确职业数据：美国O*NET-SOC 51-5113.00装订工",
+        "period": "BLS May 2025 wage data",
+        "source_refs": [
+          "print-wage-current"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "71826a72a0588edb1f5215575ab2535780be00be9d08fa5f1144a95e57a9d38f",
+  "source_content_sha256": "f765b34108a49af0a24e1531aa7dab3c43ed8149aa536dfc5a30c4a721db0c74",
   "subject": {
     "canonical_slug": "print-binding-and-finishing-workers",
     "name": "装订工",
-    "summary": null
+    "summary": "装订工依据工单设置和操作装订整饰流程，检查页序、尺寸、线迹与胶合质量，并记录首件、过程缺陷和异常交接。"
   }
 }

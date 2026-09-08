@@ -1,12 +1,1835 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "适合先体验：愿意在地质、产能、成本、设施和安全约束之间比较采矿方法与系统方案，并保留假设和审查记录；下方钻孔核对只是资料质量切片。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "慎重观察：如果在期限压力下容易跳过版本、单位或例外条件，先用下方采矿与地质工程师纸面材料测试自己的错误模式。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "体验方法：只用下方给出的记录和规则完成“列出冲突、缺项、可比较部分和禁止下结论的部分。”，再按参考答案逐条检查。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.quick-decision.fit-decision-checklist.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "安全边界：全部钻孔与坐标均虚构；不进入矿区、不设计爆破/通风/支护、不作资源或安全结论。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.quick-decision.fit-decision-checklist.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "职业身份：采矿与地质工程师对应美国O*NET代码17-2151.00。本页用它限定职业任务，不把美国代码当作中国职称或执业许可。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.profile.work-context-block.1",
+          "source_refs": [
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "美国O*NET所列职责包括选择和开发采矿方法，规划、设计和实施矿山设施与系统，解释地质和工程数据，协调安全并检查不安全状况；资料一致性核对只是其中一个基础环节。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.profile.work-context-block.2",
+          "source_refs": [
+            "onet-detail",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作链会因项目而异：解释地质与工程数据，比较开采方法，设计或改进设施与系统，跟踪运行和安全约束，并把假设、风险与审查意见带入工程决策。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.profile.work-context-block.3",
+          "source_refs": [
+            "onet-detail",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断：区分观测值、插值假设和必须补测的数据，不把概念图当施工或通风结论。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.profile.work-context-block.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "常见环境：办公室、实验室与矿区现场结合，现场环境和安全制度随矿山与法域变化。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.profile.work-context-block.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "常用工具：矿图/GIS、地质建模、钻孔数据库、工程计算与监测记录；工具输出必须回到原材料验证。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.profile.work-context-block.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "采矿与地质工程师需与地质、安全、运营和设备团队协作；美国BLS称入门通常不要求执照，而有经验工程师的PE监督、签署和对公众服务权限及州要求另行适用。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.profile.work-context-block.7",
+          "source_refs": [
+            "bls-mining"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：坐标、高程基准、深度、岩性、假设和版本可以回到原始钻孔与审查记录。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.profile.work-context-block.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "地热生产经理负责电站运行与产量，地质背景可迁移但需运营、人员和设备责任。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "adj-1",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "施工经理交付工期、成本与现场协调，图纸阅读可迁移但不替代施工管理经验。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "adj-2",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "化学工程师设计化学过程与设备，材料/安全分析可迁移，过程工程知识是缺口。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "adj-3",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "土木工程师设计基础设施与结构，工程分析可迁移，但专业设计领域和许可范围不同。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "adj-4",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "地热生产经理",
+                "id": "adj-link-1",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/geothermal-production-managers"
+              },
+              {
+                "entity": "施工经理",
+                "id": "adj-link-2",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/construction-managers"
+              },
+              {
+                "entity": "化学工程师",
+                "id": "adj-link-3",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/chemical-engineers"
+              },
+              {
+                "entity": "土木工程师",
+                "id": "adj-link-4",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/civil-engineers"
+              }
+            ]
+          },
+          "id": "mining-and-geological-engineers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "adj-1",
+            "onet-main"
+          ],
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可帮助检查钻孔区间、单位和版本并列出异常"
+            ]
+          },
+          "id": "mining-and-geological-engineers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "模型能生成平滑矿体，不代表钻孔之外已被观测"
+            ]
+          },
+          "id": "mining-and-geological-engineers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "只有数据治理、专业验证和审查流程明确时才能进入工程工作"
+            ]
+          },
+          "id": "mining-and-geological-engineers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "输入端确认坐标系、高程基准、深度单位和孔号"
+            ]
+          },
+          "id": "mining-and-geological-engineers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "输出端将观测与插值分层并保留不确定区"
+            ]
+          },
+          "id": "mining-and-geological-engineers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "合格工程师负责模型取舍、现场风险和批准"
+            ]
+          },
+          "id": "mining-and-geological-engineers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "没有该职业AI采用率或净就业因果证据"
+            ]
+          },
+          "id": "mining-and-geological-engineers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "学习目标是发现资料边界和解释假设，不是让AI设计矿山"
+            ]
+          },
+          "id": "mining-and-geological-engineers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "NIST的生成式AI风险画像可用于检查虚构、隐私、信息完整性和过度依赖等通用风险；它不是本职业采用率或事故率。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.ai-impact.ai-impact-table.9",
+          "source_refs": [
+            "nist"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据。本次核对国家统计局2025年城镇单位工资发布；该页按地区、行业、登记类型和人员大类统计，未提供采矿与地质工程师这一O*NET详细职业的全国同口径工资。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "因此本页不提供中国全国点估计，也不拿宽行业均值替代个人工资；这只是本次来源范围内未取得，不宣称全国不存在其他资料。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较具体岗位时应记录城市、税前/税后、月薪/年薪、固定/浮动、工时、经验和实际职责。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "若使用招聘报价，应保留职位原文、日期和样本范围；本页未做招聘计数，不声称市场频率。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2026年O*NET精确职业数据代码：17-2151.00。O*NET/BLS数据与采矿与地质工程师的SOC职业口径一致。"
+            ]
+          },
+          "fact_refs": [
+            "identity"
+          ],
+          "id": "mining-and-geological-engineers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据的2025年工资中位数为106,220美元/年；覆盖受雇者，不是税后收入或新人起薪。"
+            ]
+          },
+          "fact_refs": [
+            "median"
+          ],
+          "id": "mining-and-geological-engineers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "us-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据的2025年小时工资中位数为51.07美元/小时；不在未知工时下自行换算个人年收入。"
+            ]
+          },
+          "fact_refs": [
+            "low"
+          ],
+          "id": "mining-and-geological-engineers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "us-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据的2024年就业规模为7,000名受雇者；这是存量，不是当年招聘数。"
+            ]
+          },
+          "fact_refs": [
+            "high"
+          ],
+          "id": "mining-and-geological-engineers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "us-employment"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据的2024—2034年预计年均职位空缺为400个/年；包含增长与替补，不等于净新增。"
+            ]
+          },
+          "fact_refs": [
+            "trend"
+          ],
+          "id": "mining-and-geological-engineers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "us-projections"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "当前来源没有单独的新毕业生工资；经验、地区、行业和职责仍需在具体职位中核对。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "愿意在地质、产能、成本与安全约束间比较采矿方法和设施方案"
+            ]
+          },
+          "id": "mining-and-geological-engineers.fit.personality-fit-block.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "能把现场观测、地质解释、工程假设和尚需追加测量的信息分开"
+            ]
+          },
+          "id": "mining-and-geological-engineers.fit.personality-fit-block.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "能结合设备通行、生产目标和风险控制审查系统方案"
+            ]
+          },
+          "id": "mining-and-geological-engineers.fit.personality-fit-block.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "能在生产压力下保留安全疑点"
+            ]
+          },
+          "id": "mining-and-geological-engineers.fit.personality-fit-block.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "接受现场、办公室和跨专业协作"
+            ]
+          },
+          "id": "mining-and-geological-engineers.fit.personality-fit-block.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "愿意记录模型版本与审查意见"
+            ]
+          },
+          "id": "mining-and-geological-engineers.fit.personality-fit-block.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "对空间关系和工程约束有持续兴趣"
+            ]
+          },
+          "id": "mining-and-geological-engineers.fit.personality-fit-block.7",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "纸面资料检查不能替代矿区现场体验"
+            ]
+          },
+          "id": "mining-and-geological-engineers.fit.personality-fit-block.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：BH-02深度20–30m与30–40m岩性记录冲突。影响：地层解释可能错误。控制：保留两条原记录并标冲突，不自行平滑。复核/责任：地质负责人核查原始日志。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.risk.career-risk-cards.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：BH-03缺高程基准。影响：三个孔的标高不能可靠比较。控制：停止跨孔剖面对齐并补问基准。复核/责任：测量/地质负责人确认。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.risk.career-risk-cards.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：仅两个孔却将矿体外推到整个网格。影响：资源与工程判断失真。控制：明确插值范围并把外围标未知。复核/责任：合格工程师决定补钻。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.risk.career-risk-cards.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：概念图被标记为现场可用版本。影响：现场可能使用未经审查资料。控制：加概念/非施工标识并阻止下发。复核/责任：具备相应授权者审查批准。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.risk.career-risk-cards.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同边界：本页只训练资料一致性；美国BLS说明入门通常不要求执照，但有经验工程师取得PE后可监督、签字及直接向公众提供服务，州要求不同；不同雇主和法域的具体流程需另核。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.risk.career-risk-cards.5",
+          "source_refs": [
+            "bls-mining"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "本页没有招聘样本或频率统计；下面是依据职业任务整理的能力展示建议，不代表普遍录用门槛。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.path.recruitment-sample.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-role-comparison",
+          "data": {
+            "column_keys": [
+              "stage",
+              "possible_check",
+              "observed_evidence"
+            ],
+            "rows": [
+              [
+                "工程本科学习",
+                "采矿/地质工程基础、数据分析与设计项目",
+                "典型美国入门学历，不等于全球统一许可"
+              ],
+              [
+                "入门工程岗位",
+                "在复核下分析地质数据、方案与安全约束",
+                "保留假设、版本与审查记录"
+              ],
+              [
+                "有经验工程职责",
+                "设施/系统设计、运行改进与安全协调",
+                "监督、签署和对公众服务按PE与州规则核对"
+              ]
+            ]
+          },
+          "id": "mining-and-geological-engineers.path.entry-role-comparison.1",
+          "source_refs": [
+            "bls-mining",
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.employer-evidence",
+          "data": {
+            "entries": [
+              {
+                "id": "card-1",
+                "values": [
+                  "任务依据",
+                  "来自O*NET职业任务，不是雇主频率"
+                ]
+              },
+              {
+                "id": "card-2",
+                "values": [
+                  "展示方式",
+                  "保存输入、规则、判断与复核轨迹"
+                ]
+              }
+            ]
+          },
+          "id": "mining-and-geological-engineers.path.employer-evidence.1",
+          "source_refs": [
+            "editor",
+            "onet-detail",
+            "onet-main"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-portfolio",
+          "data": {
+            "entries": [
+              {
+                "id": "card-1",
+                "values": [
+                  "原始材料",
+                  "保留页面给出的虚构记录"
+                ]
+              },
+              {
+                "id": "card-2",
+                "values": [
+                  "判断记录",
+                  "逐项写规则、结果与未知"
+                ]
+              },
+              {
+                "id": "card-3",
+                "values": [
+                  "交接摘要",
+                  "写结论、限制与复核人"
+                ]
+              }
+            ]
+          },
+          "id": "mining-and-geological-engineers.path.entry-portfolio.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.interview-probation",
+          "data": {
+            "column_keys": [
+              "stage",
+              "possible_check",
+              "observed_evidence"
+            ],
+            "rows": [
+              [
+                "面试",
+                "讲清一处错误如何发现",
+                "材料行与规则"
+              ],
+              [
+                "试用",
+                "先核版本和权限",
+                "未决项清单"
+              ],
+              [
+                "交付",
+                "说明限制和下一步",
+                "复核记录"
+              ]
+            ]
+          },
+          "id": "mining-and-geological-engineers.path.interview-probation.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-decision",
+          "data": {
+            "column_keys": [
+              "stage",
+              "possible_check",
+              "observed_evidence"
+            ],
+            "rows": [
+              [
+                "学历/课程",
+                "可展示相关知识与学习经历",
+                "不能单独证明岗位胜任或法定授权"
+              ],
+              [
+                "软件证书",
+                "可展示特定工具训练",
+                "不等于职业许可或项目授权"
+              ],
+              [
+                "单位培训",
+                "可展示本机构流程训练",
+                "不自动形成跨机构授权"
+              ],
+              [
+                "职业许可/注册",
+                "仅在签发法域与范围内有效",
+                "仍须核对雇主及具体项目要求"
+              ]
+            ]
+          },
+          "id": "mining-and-geological-engineers.path.credential-decision.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-boundary",
+          "data": {
+            "paragraphs": [
+              "学历、课程、软件证书、单位培训、职业许可和项目授权是不同概念；具体要求按职位和法域核对。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.path.credential-boundary.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "美国BLS称采矿与地质工程师的典型入门学历是采矿工程、地质工程或相关工程领域学士学位；入门职位通常不要求执照，但有经验工程师的PE权限和州要求另行适用。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.path.career-path-block.1",
+          "source_refs": [
+            "bls-mining"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转生产管理重运营；转施工管理重现场交付；转化工/土木需补各自专业设计与可能许可。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.path.career-path-block.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "以下采矿与地质工程师纸面材料全部虚构并完整显示。任务：列出冲突、缺项、可比较部分和禁止下结论的部分。 安全边界：全部钻孔与坐标均虚构；不进入矿区、不设计爆破/通风/支护、不作资源或安全结论。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.path.entry-work-sample-data.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "material-1-1",
+                "values": [
+                  "钻孔编号：BH-01",
+                  "坐标与高程：坐标(100,100)，高程500m",
+                  "岩性区间记录：0–20m覆盖层；20–40m矿化岩",
+                  "资料状态：版本v2"
+                ]
+              },
+              {
+                "id": "material-1-2",
+                "values": [
+                  "钻孔编号：BH-02",
+                  "坐标与高程：坐标(140,100)，高程502m",
+                  "岩性区间记录：20–30m矿化；30–40m同时记为矿化/废石",
+                  "资料状态：冲突"
+                ]
+              },
+              {
+                "id": "material-1-3",
+                "values": [
+                  "钻孔编号：BH-03",
+                  "坐标与高程：坐标(100,140)，高程空白",
+                  "岩性区间记录：0–25m覆盖层；25–40m矿化",
+                  "资料状态：缺基准"
+                ]
+              }
+            ]
+          },
+          "id": "mining-and-geological-engineers.path.entry-work-sample-data.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "material-2-1",
+                "values": [
+                  "检查项：一致性",
+                  "资料规则：深度区间不得重叠冲突，坐标与高程基准必须明确"
+                ]
+              },
+              {
+                "id": "material-2-2",
+                "values": [
+                  "检查项：解释范围",
+                  "资料规则：练习只比较三个孔，不向网格外推资源量"
+                ]
+              },
+              {
+                "id": "material-2-3",
+                "values": [
+                  "检查项：用途",
+                  "资料规则：输出标‘概念资料检查，非设计/施工/通风依据’"
+                ]
+              }
+            ]
+          },
+          "id": "mining-and-geological-engineers.path.entry-work-sample-data.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "任务：列出冲突、缺项、可比较部分和禁止下结论的部分。",
+              "参考答案：BH-02在30–40m冲突；BH-03缺高程基准，不能做可靠跨孔高程对齐；可比较孔号、平面坐标及无冲突区间，但不能估资源量或形成安全设计。",
+              "边界：全部钻孔与坐标均虚构；不进入矿区、不设计爆破/通风/支护、不作资源或安全结论。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.path.entry-work-sample-data.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "day-1",
+                "values": [
+                  "第1日",
+                  "理解材料",
+                  "标出字段、单位与版本"
+                ]
+              },
+              {
+                "id": "day-2",
+                "values": [
+                  "第2日",
+                  "按规则初判",
+                  "完成第一版记录"
+                ]
+              },
+              {
+                "id": "day-3",
+                "values": [
+                  "第3日",
+                  "复算/复读",
+                  "找出算术、时间或逻辑错误"
+                ]
+              },
+              {
+                "id": "day-4",
+                "values": [
+                  "第4日",
+                  "写异常清单",
+                  "区分可确认与待确认"
+                ]
+              },
+              {
+                "id": "day-5",
+                "values": [
+                  "第5日",
+                  "写交接",
+                  "指定复核人与限制"
+                ]
+              },
+              {
+                "id": "day-6",
+                "values": [
+                  "第6日",
+                  "对照答案修订",
+                  "保留初稿与改动原因"
+                ]
+              },
+              {
+                "id": "day-7",
+                "values": [
+                  "第7日",
+                  "复盘负担",
+                  "记录最耗注意力的步骤"
+                ]
+              }
+            ]
+          },
+          "id": "mining-and-geological-engineers.path.seven-day-trial.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "能否仅依材料复现答案",
+              "是否会漏单位、版本或例外",
+              "能否解释为何暂停并升级",
+              "是否愿意继续练习同类任务"
+            ]
+          },
+          "id": "mining-and-geological-engineers.path.seven-day-decision.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国官方预测：Mining and Geological Engineers, Including Mining Safety Engineers在2024—2034年预计年均空缺为400个/年，该指标含增长与替补。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "us-projections"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "本页没有雇主样本或招聘频率统计，不把O*NET任务或软件页面写成当前招聘热度。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "本页没有该职业AI实际采用率或净就业因果证据；任务可辅助不等于职位减少。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "转向选择：转生产管理重运营；转施工管理重现场交付；转化工/土木需补各自专业设计与可能许可。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "决策时应分别看官方预测、具体职位原文、个人作品和资格/授权差距，不能把不同市场和时期合成一个增长结论。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "美国O*NET所列职责包括选择和开发采矿方法，规划、设计和实施矿山设施与系统，解释地质和工程数据，协调安全并检查不安全状况；资料一致性核对只是其中一个基础环节。",
+                "id": "mining-and-geological-engineers.faq.1",
+                "question_key": "career.faq.mining-and-geological-engineers.daily-work",
+                "source_refs": [
+                  "onet-detail",
+                  "onet-main"
+                ]
+              },
+              {
+                "answer": "地热生产经理负责电站运行与产量，地质背景可迁移但需运营、人员和设备责任。",
+                "id": "mining-and-geological-engineers.faq.2",
+                "question_key": "career.faq.mining-and-geological-engineers.role-comparison",
+                "source_refs": [
+                  "adj-1",
+                  "onet-main"
+                ]
+              },
+              {
+                "answer": "愿意在地质、产能、成本与安全约束间比较采矿方法和设施方案",
+                "id": "mining-and-geological-engineers.faq.3",
+                "question_key": "career.faq.mining-and-geological-engineers.fit",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "可帮助检查钻孔区间、单位和版本并列出异常",
+                "id": "mining-and-geological-engineers.faq.4",
+                "question_key": "career.faq.mining-and-geological-engineers.ai-impact",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "可帮助检查钻孔区间、单位和版本并列出异常",
+                "id": "mining-and-geological-engineers.faq.5",
+                "question_key": "career.faq.mining-and-geological-engineers.automatable-tasks",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "合格工程师负责模型取舍、现场风险和批准",
+                "id": "mining-and-geological-engineers.faq.6",
+                "question_key": "career.faq.mining-and-geological-engineers.human-control",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "暂无可安全使用的数据。本次核对国家统计局2025年城镇单位工资发布；该页按地区、行业、登记类型和人员大类统计，未提供采矿与地质工程师这一O*NET详细职业的全国同口径工资。",
+                "id": "mining-and-geological-engineers.faq.7",
+                "question_key": "career.faq.mining-and-geological-engineers.china-pay",
+                "source_refs": [
+                  "nbs"
+                ]
+              },
+              {
+                "answer": "Mining and Geological Engineers, Including Mining Safety Engineers的年工资中位数为106,220美元/年。",
+                "id": "mining-and-geological-engineers.faq.8",
+                "question_key": "career.faq.mining-and-geological-engineers.us-pay",
+                "source_refs": [
+                  "us-wage"
+                ]
+              },
+              {
+                "answer": "美国BLS称采矿与地质工程师的典型入门学历是采矿工程、地质工程或相关工程领域学士学位；入门职位通常不要求执照，但有经验工程师的PE权限和州要求另行适用。",
+                "id": "mining-and-geological-engineers.faq.9",
+                "question_key": "career.faq.mining-and-geological-engineers.education-path",
+                "source_refs": [
+                  "bls-mining"
+                ]
+              },
+              {
+                "answer": "共同边界：本页只训练资料一致性；美国BLS说明入门通常不要求执照，但有经验工程师取得PE后可监督、签字及直接向公众提供服务，州要求不同；不同雇主和法域的具体流程需另核。",
+                "id": "mining-and-geological-engineers.faq.10",
+                "question_key": "career.faq.mining-and-geological-engineers.risk-boundary",
+                "source_refs": [
+                  "bls-mining"
+                ]
+              },
+              {
+                "answer": "转向选择：转生产管理重运营；转施工管理重现场交付；转化工/土木需补各自专业设计与可能许可。",
+                "id": "mining-and-geological-engineers.faq.11",
+                "question_key": "career.faq.mining-and-geological-engineers.outlook-transition",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "适合先体验：愿意在地质、产能、成本、设施和安全约束之间比较采矿方法与系统方案，并保留假设和审查记录；下方钻孔核对只是资料质量切片。",
+                "id": "mining-and-geological-engineers.faq.12",
+                "question_key": "career.faq.mining-and-geological-engineers.career-worth",
+                "source_refs": [
+                  "editor"
+                ]
+              }
+            ]
+          },
+          "id": "mining-and-geological-engineers.sources.faq.1",
+          "source_refs": [
+            "adj-1",
+            "bls-mining",
+            "editor",
+            "nbs",
+            "onet-detail",
+            "onet-main",
+            "us-wage"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "美国职业身份为O*NET 17-2151.00；中国职位名称、资格和授权按具体雇主与法域核验。",
+              "中国工资为本次指定官方来源中的有界缺口；美国统计按Mining and Geological Engineers, Including Mining Safety Engineers及各自数据期解释。",
+              "练习材料和数值均为编辑设计：全部钻孔与坐标均虚构；不进入矿区、不设计爆破/通风/支护、不作资源或安全结论。"
+            ]
+          },
+          "id": "mining-and-geological-engineers.sources.boundary.1",
+          "source_refs": [
+            "adj-1",
+            "adj-2",
+            "adj-3",
+            "adj-4",
+            "bls-mining",
+            "editor",
+            "nbs",
+            "nist",
+            "onet-detail",
+            "onet-main",
+            "us-employment",
+            "us-projections",
+            "us-wage"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "采矿与地质工程师",
+                "id": "mining-and-geological-engineers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "采矿与地质工程师",
+                "id": "mining-and-geological-engineers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "采矿与地质工程师",
+                "id": "mining-and-geological-engineers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "采矿与地质工程师",
+                "id": "mining-and-geological-engineers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "采矿与地质工程师",
+                "id": "mining-and-geological-engineers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "采矿与地质工程师",
+                "id": "mining-and-geological-engineers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "采矿与地质工程师",
+                "id": "mining-and-geological-engineers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "采矿与地质工程师",
+                "id": "mining-and-geological-engineers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "采矿与地质工程师",
+                "id": "mining-and-geological-engineers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "采矿与地质工程师",
+                "id": "mining-and-geological-engineers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "采矿与地质工程师",
+                "id": "mining-and-geological-engineers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "mining-and-geological-engineers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业地热生产经理（11-3051.02）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-1",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "地热生产经理 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-3051.02"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业施工经理（11-9021.00）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-2",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "施工经理 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-9021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业化学工程师（17-2041.00）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-3",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "化学工程师 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2041.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业土木工程师（17-2051.00）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-4",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "土木工程师 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2051.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "BLS说明入门通常不要求执照；有经验工程师可取得PE并监督、签字及直接向公众提供服务，州要求不同。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "bls-mining",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "采矿与地质工程师执照边界",
+                "period": "2026访问的职业展望",
+                "publisher": "美国劳工统计局",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/mining-and-geological-engineers.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "基于已列职业事实设计判断提示、风险控制和完整虚构练习；模拟数字不是现实统计。",
+                  "不代表雇主政策、执业授权、真实事故、招聘频率或统计调查。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "editor",
+                "limitation": "不代表雇主政策、执业授权、真实事故、招聘频率或统计调查。",
+                "market": "全球",
+                "name": "采矿与地质工程师内容与模拟练习编辑设计",
+                "period": "2026-09-06",
+                "publisher": "本任务编辑",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "按地区、行业、登记类型和五类人员发布平均工资，未提供本O*NET详细职业同口径工资。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nbs",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025年",
+                "publisher": "国家统计局",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "通用生成式AI风险类别与治理框架，不报告本职业部署或就业影响。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nist",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "全球",
+                "name": "生成式人工智能风险管理画像",
+                "period": "2024 NIST AI 600-1",
+                "publisher": "美国国家标准与技术研究院",
+                "scope": "exact",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "任务、活动、工作环境与准备信息。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet-detail",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "采矿与地质工程师 O*NET详细档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-2151.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "职业代码17-2151.00、定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet-main",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "采矿与地质工程师 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2151.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "就业存量覆盖：Mining and Geological Engineers, Including Mining Safety Engineers。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-employment",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "采矿与地质工程师美国就业规模",
+                "period": "2024 BLS就业规模",
+                "publisher": "O*NET OnLine（展示BLS）",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/17-2151.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "年均空缺覆盖：Mining and Geological Engineers, Including Mining Safety Engineers，包含增长与替补。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-projections",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "采矿与地质工程师美国就业预测",
+                "period": "2024—2034 BLS就业预测",
+                "publisher": "O*NET OnLine（展示BLS）",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/17-2151.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "工资数据覆盖：Mining and Geological Engineers, Including Mining Safety Engineers；不是新人薪酬。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-wage",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "采矿与地质工程师美国工资",
+                "period": "2025 BLS OEWS",
+                "publisher": "O*NET OnLine（展示BLS OEWS）",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/17-2151.00"
+              }
+            ]
+          },
+          "id": "mining-and-geological-engineers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "17-2151.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业代码",
+        "occupation_scope": "精确职业数据：Mining and Geological Engineers, Including Mining Safety Engineers；O*NET 17-2151.00",
+        "period": "2026 O*NET职业档案",
+        "source_refs": [
+          "onet-main"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "106,220美元/年",
+        "fact_id": "median",
+        "market": "美国",
+        "measure": "年工资中位数",
+        "occupation_scope": "精确职业数据；BLS/O*NET统计覆盖：Mining and Geological Engineers, Including Mining Safety Engineers；页面主题：采矿与地质工程师（17-2151.00）",
+        "period": "2025 BLS OEWS",
+        "source_refs": [
+          "us-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "51.07美元/小时",
+        "fact_id": "low",
+        "market": "美国",
+        "measure": "小时工资中位数",
+        "occupation_scope": "精确职业数据；BLS/O*NET统计覆盖：Mining and Geological Engineers, Including Mining Safety Engineers；页面主题：采矿与地质工程师（17-2151.00）",
+        "period": "2025 BLS OEWS",
+        "source_refs": [
+          "us-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "7,000名受雇者",
+        "fact_id": "high",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "精确职业数据；BLS/O*NET统计覆盖：Mining and Geological Engineers, Including Mining Safety Engineers；页面主题：采矿与地质工程师（17-2151.00）",
+        "period": "2024 BLS就业规模",
+        "source_refs": [
+          "us-employment"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "400个/年",
+        "fact_id": "trend",
+        "market": "美国",
+        "measure": "年均职位空缺",
+        "occupation_scope": "精确职业数据；BLS/O*NET统计覆盖：Mining and Geological Engineers, Including Mining Safety Engineers；页面主题：采矿与地质工程师（17-2151.00）",
+        "period": "2024—2034 BLS就业预测",
+        "source_refs": [
+          "us-projections"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "03e4849b20e0d263d1e4c6588de5d679bc633c612184cab8155486afd4facdf5",
+  "source_content_sha256": "3e954656c9e26c90ae98579d6b0dc438020863c6bcd5b4d6f17ba8047f2fc117",
   "subject": {
     "canonical_slug": "mining-and-geological-engineers",
     "name": "采矿与地质工程师",
-    "summary": null
+    "summary": "采矿与地质工程师选择和开发采矿方法，规划、设计并实施矿山设施与系统，在地质、产能、成本、设备通行和安全约束间作工程判断。页面另以虚构钻孔记录提供低风险资料体验，不把该切片当作资源估算、施工、通风或支护设计。"
   }
 }

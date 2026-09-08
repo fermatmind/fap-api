@@ -1,12 +1,1631 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：这份工作不是“会看电路就行”，而是把对象、版本、工程指令、仪器条件、原始读数、偏差、变更、复测与验收状态闭环。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "ed-fit",
+            "ed-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "可观察信号：核对象版本；保留每个读数；不让平均值掩盖越界；电气状态、仪器、指令或授权不明时停止升级。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "ed-fit",
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "60分钟虚构纸面样本：规格4.90—5.10V，读数5.02、5.08、5.18V；资产E-204，图纸E-240；身份一致且每次读数合格才通过。不得接触真实电路、仪器或设备。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考答案：均值5.09V不能抵消5.18V越界0.08V，且身份矛盾；记录未闭环，应隔离升级，不能调整或放行。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "ed-sim"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业边界：O*NET 17-3023.00，通常在工程人员指导下实施电气电子设计支持、构建、测试、维护、调整和记录。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.profile.definition-block.1",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "工作对象：电气电子部件、电路、控制、机械、图纸、工程指令、测试设备和运行记录。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "技术任务：审查计划规范，读蓝图/接线图/原理图，按工程指令组装、测试或维护。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "异常任务：设置测试设备、识别故障、解释测试信息、维修或修改原型；实际执行受培训与权限约束。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "完整流程：核对象版本—确认指令方案—核仪器条件—授权执行—记录读数—对照规格—隔离偏差—授权变更—复测验收。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.profile.work-context-block.1",
+          "source_refs": [
+            "ed-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作情境：准确性、团队协作、电子沟通和受控室内环境突出，部分岗位涉及防护、非受控环境和较严重错误后果。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.profile.work-context-block.2",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "准备程度：O*NET列Job Zone 3；职校、经验或副学士较常见，但不是统一录用或安全授权保证。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "可检查产出：对象ID、图纸版本、配置、仪器、条件、读数、准则、偏差、变更、复测与验收状态。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "ed-output"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：身份版本一致、单位条件明确、逐次读数保留、偏差不掩盖、变更有权限、复测不冒充验收。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "ed-output"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "相邻边界：工程师偏研究设计与工程责任；本职业通常在工程人员指导下实施、测试、维护和形成可复核记录。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.profile.definition-block.2",
+          "source_refs": [
+            "onet-electrical",
+            "onet-electronics",
+            "onet-hardware",
+            "onet-mechanical",
+            "onet-mechatronics",
+            "onet-target"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "computer-hardware-engineers",
+                "id": "electrical-and-electronics-engineering-technicians.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/computer-hardware-engineers"
+              },
+              {
+                "entity": "electrical-engineers",
+                "id": "electrical-and-electronics-engineering-technicians.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/electrical-engineers"
+              },
+              {
+                "entity": "electronics-engineers-except-computer",
+                "id": "electrical-and-electronics-engineering-technicians.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/electronics-engineers-except-computer"
+              },
+              {
+                "entity": "mechanical-engineers",
+                "id": "electrical-and-electronics-engineering-technicians.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/mechanical-engineers"
+              },
+              {
+                "entity": "mechatronics-engineers",
+                "id": "electrical-and-electronics-engineering-technicians.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/mechatronics-engineers"
+              }
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-electrical",
+            "onet-electronics",
+            "onet-hardware",
+            "onet-mechanical",
+            "onet-mechatronics",
+            "onet-target"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "计算机硬件工程师研究、设计、开发或测试计算机及相关设备；本职业范围更广，且通常受工程人员指导。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-electrical",
+            "onet-electronics",
+            "onet-hardware",
+            "onet-mechanical",
+            "onet-mechatronics",
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "电气工程师研究、设计、开发、测试或监督制造安装电气设备系统；本职业侧重按工程输入实施和验证。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-electrical",
+            "onet-electronics",
+            "onet-hardware",
+            "onet-mechanical",
+            "onet-mechatronics",
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "电子工程师（计算机除外）研究设计开发测试电子部件和系统；本职业承担相应构建、测试、维护与记录支持。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-electrical",
+            "onet-electronics",
+            "onet-hardware",
+            "onet-mechanical",
+            "onet-mechatronics",
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "机械工程师规划设计机械设备；机电工程师研究设计开发测试自动化、智能系统与工业控制。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-electrical",
+            "onet-electronics",
+            "onet-hardware",
+            "onet-mechanical",
+            "onet-mechatronics",
+            "onet-target"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助：图纸版本比对、物料表、日志解析、异常标记和报告草稿。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用条件：对象ID、版本、数据格式、仪器记录和权限模型可靠。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数据门槛：保留原始读数、单位、条件、配置、人员和时间。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工控制：核物理对象、接线、仪器和测量条件，复现异常。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余责任：工具不能确认真实能量状态、安全进入条件或故障因果。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "失败风险：错版本、错单位、日志串对象、平均值掩盖越界或自动放行。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业边界：软件技能和自动测试不等于任务采用率或岗位净变化。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实践响应：先用虚构记录验证规则，真实设备服从雇主训练、工程指令和权限。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：中国大陆暂无可安全使用的数据表示与O*NET 17-3023.00精确对应的全国工资。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：国家统计局2025资料按行业和宽泛岗位大类发布，不能替代精确职业中位数。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "计量口径：年薪、月薪、时薪、加班、津贴和奖金不可混用。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "求职用法：统一地区、行业、班次、学历经验、出差、防护、仪器责任、加班和福利。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：O*NET展示美国17-3023.00全国工资。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：2025年BLS工资数据。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数：时薪37.59美元、年薪78,190美元，不是起薪。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "计量单位：时薪与年薪同源，不与项目报价或奖金混用。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "覆盖人群：精确职业全国统计，不代表每个行业、地区或班次。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "决策限制：统计值不是个人报价、录用或收入保证。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "版本信号：先比对象、工单、图纸和工程指令。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.fit.riasec-fit-block.1",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "测量信号：保留每个原始读数、单位、条件和仪器状态。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.fit.riasec-fit-block.2",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "异常信号：逐项比准则，不用平均值掩盖单点越界。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.fit.riasec-fit-block.3",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "协作信号：能把偏差、未知项和复测状态交接给工程人员。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.fit.riasec-fit-block.4",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：不愿记录条件或接受复核，容易放大误判。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.fit.riasec-fit-block.5",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：为赶进度绕过权限、隔离或验收会放大安全与质量风险。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.fit.riasec-fit-block.6",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "验证方法：做本页题及“标签改E-240”“第三次读数改5.06V”两张变体。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.fit.riasec-fit-block.7",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "人格边界：喜欢电子产品不证明胜任；可复核记录、安全边界和受监督表现更重要。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.fit.riasec-fit-block.8",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "电气/储能：真实接线、测试、维修和调校只按雇主程序、工程指令、防护和岗位授权执行。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.risk.career-risk-cards.1",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "对象/版本：标签、图纸、配置或工单不一致时隔离受影响工作。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.risk.career-risk-cards.2",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "测量质量：仪器状态、单位、条件或逐次读数缺失时不得用平均值替代。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.risk.career-risk-cards.3",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "能源边界：美国1910.147适用且维护可能发生意外启动或储能释放时，遵守雇主能源控制程序，只由授权人员执行。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.risk.career-risk-cards.4",
+          "source_refs": [
+            "ecfr-loto"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同规则：电气状态、仪器、指令、权限、偏差、复测或验收任一不明，停止受影响步骤、记录并升级。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.risk.career-risk-cards.5",
+          "source_refs": [
+            "ecfr-loto",
+            "ed-risk"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "现实入口：从对象和版本核对、测试记录、单位条件、接受准则、偏差单与交接摘要开始。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.path.career-path-block.1",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "雇主证据：核实学历经验、测试设备培训、电气安全、能源控制、工程变更、复工和验收权限。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.path.career-path-block.2",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品：完成本页纸面题，展示均值、单点越界、身份矛盾和状态。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.path.career-path-block.3",
+          "source_refs": [
+            "ed-path",
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "面试与试用：解释为何均值合格不能覆盖5.18V越界，也不能忽略E-204/E-240矛盾。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.path.career-path-block.4",
+          "source_refs": [
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七天试验：抄规则、做记录表、算均值偏差、画闭环、改标签变体、改读数变体、复盘停止条件各一天。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.path.career-path-block.5",
+          "source_refs": [
+            "ed-path",
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "资格决策：接线、通电测试、仪器、维修调校、能源隔离、质量判定、复工和工程放行逐项核验。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.path.career-path-block.6",
+          "source_refs": [
+            "ecfr-loto",
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "能力阶梯：先稳版本和记录，再做受监督组装测试，最后承担权限内排故、变更和交接。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.path.career-path-block.7",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转型路径：硬件、电气、电子、机械或机电工程师路径需补更高层次设计分析、学历和责任证据。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.path.career-path-block.8",
+          "source_refs": [
+            "ed-path",
+            "onet-electrical",
+            "onet-electronics",
+            "onet-hardware",
+            "onet-mechanical",
+            "onet-mechatronics",
+            "onet-target"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "官方信号：O*NET提供美国职业、工资、就业和预测资料，不证明本地正在招聘。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.market-signals.market-signal-card.1",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "就业预测：2024—2034增长1%至2%；2024就业约93,700，年度空缺约8,400。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.market-signals.market-signal-card.2",
+          "source_refs": [
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "空缺边界：年度空缺含增长和替补，不等于新增岗位或个人录用概率。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.market-signals.market-signal-card.3",
+          "source_refs": [
+            "ed-market",
+            "onet-target"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "技术信号：CAD、PLC、测试和日志工具可能改变任务，不证明全行业采用。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.market-signals.market-signal-card.4",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "剩余责任：物理对象核验、真实电气安全、故障因果、变更和工程验收责任不会因辅助工具自动转移。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.market-signals.market-signal-card.5",
+          "source_refs": [
+            "ed-ai",
+            "ed-market"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "可复核闭环是核对象和图纸版本、确认工程指令与测试方案、核仪器状态和条件、按授权组装或检查、记录原始读数、对照规格、隔离偏差、仅在权限内调整、复测并交由工程或有权角色验收；任务包括审查工程计划与规范、读蓝图/接线图/原理图、按工程说明组装测试维护电路或元件、维护测试运行日志、设置测试设备、排故维修、修改原型与解释测试信息。",
+                "id": "electrical-and-electronics-engineering-technicians.faq.1",
+                "question_key": "career.faq.electrical-and-electronics-engineering-technicians.daily-work",
+                "source_refs": [
+                  "ed-work",
+                  "onet-target"
+                ]
+              },
+              {
+                "answer": "本职业通常在工程人员指导下实施、测试、维护和记录；计算机硬件工程师研究设计开发测试计算机设备，电气工程师研究设计开发测试或监督制造安装电气系统，电子工程师设计开发测试电子部件系统，机械工程师规划设计机械设备，机电工程师研究设计开发测试自动化和控制系统。",
+                "id": "electrical-and-electronics-engineering-technicians.faq.2",
+                "question_key": "career.faq.electrical-and-electronics-engineering-technicians.role-comparison",
+                "source_refs": [
+                  "onet-electrical",
+                  "onet-electronics",
+                  "onet-hardware",
+                  "onet-mechanical",
+                  "onet-mechatronics",
+                  "onet-target"
+                ]
+              },
+              {
+                "answer": "适配度可通过能否稳定核版本、记录原始读数和条件、发现越界或身份矛盾，并在电气状态、仪器状态、指令或授权不明时停止升级来观察。",
+                "id": "electrical-and-electronics-engineering-technicians.faq.3",
+                "question_key": "career.faq.electrical-and-electronics-engineering-technicians.fit",
+                "source_refs": [
+                  "ed-fit"
+                ]
+              },
+              {
+                "answer": "数字工具可辅助图纸版本比对、物料表整理、日志解析、异常标记和报告草稿；不能确认真实接线、仪器校准、能量状态、测量条件、故障原因或安全进入条件。",
+                "id": "electrical-and-electronics-engineering-technicians.faq.4",
+                "question_key": "career.faq.electrical-and-electronics-engineering-technicians.ai-impact",
+                "source_refs": [
+                  "ed-ai"
+                ]
+              },
+              {
+                "answer": "人工控制点包括核实物理对象和接线、仪器与条件、异常复现、故障因果，并由有权角色决定变更、复工和工程验收。",
+                "id": "electrical-and-electronics-engineering-technicians.faq.5",
+                "question_key": "career.faq.electrical-and-electronics-engineering-technicians.human-control",
+                "source_refs": [
+                  "ed-ai"
+                ]
+              },
+              {
+                "answer": "国家统计局2025资料只有行业和宽泛岗位大类，不能给出与O*NET 17-3023.00精确对应的中国大陆全国中位数或统一起薪。",
+                "id": "electrical-and-electronics-engineering-technicians.faq.6",
+                "question_key": "career.faq.electrical-and-electronics-engineering-technicians.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "O*NET显示2025年美国全国中位时薪37.59美元、年薪78,190美元；该全国中位数不是起薪、个人报价或中国工资。",
+                "id": "electrical-and-electronics-engineering-technicians.faq.7",
+                "question_key": "career.faq.electrical-and-electronics-engineering-technicians.us-pay",
+                "source_refs": [
+                  "onet-target"
+                ]
+              },
+              {
+                "answer": "入门先练图纸版本核对、虚构测试记录、单位与条件、接受准则、偏差单和交接摘要，不接触真实电路、仪器或设备；真实接线、通电测试、维修调校、危险能源控制、质量判定、复工和工程放行是不同训练与权限，须由雇主逐项核验。",
+                "id": "electrical-and-electronics-engineering-technicians.faq.8",
+                "question_key": "career.faq.electrical-and-electronics-engineering-technicians.education-path",
+                "source_refs": [
+                  "ed-path"
+                ]
+              },
+              {
+                "answer": "关键风险包括错对象/错版本、带电或储能状态未知、仪器或单位错误、接线/配置偏差、平均值掩盖越界、未经授权调整，以及把复测误写成验收；在29 CFR 1910.147适用的美国机器设备维护场景，如意外启动或储能释放可能伤人，雇主须建立能源控制程序并由相应授权人员执行；条文另有范围和例外。",
+                "id": "electrical-and-electronics-engineering-technicians.faq.9",
+                "question_key": "career.faq.electrical-and-electronics-engineering-technicians.risk-boundary",
+                "source_refs": [
+                  "ecfr-loto",
+                  "ed-risk"
+                ]
+              },
+              {
+                "answer": "O*NET/BLS显示2024—2034增长1%至2%，慢于平均；O*NET/BLS显示2024就业约93,700，2024—2034年度空缺约8,400；空缺含增长和替补。",
+                "id": "electrical-and-electronics-engineering-technicians.faq.10",
+                "question_key": "career.faq.electrical-and-electronics-engineering-technicians.outlook-transition",
+                "source_refs": [
+                  "onet-target"
+                ]
+              },
+              {
+                "answer": "工资、就业、增长、空缺、软件技能和自动化采用是不同信号，不能合并为个人录用、收入或岗位替代概率；适配度可通过能否稳定核版本、记录原始读数和条件、发现越界或身份矛盾，并在电气状态、仪器状态、指令或授权不明时停止升级来观察。",
+                "id": "electrical-and-electronics-engineering-technicians.faq.11",
+                "question_key": "career.faq.electrical-and-electronics-engineering-technicians.career-worth",
+                "source_refs": [
+                  "ed-fit",
+                  "ed-market"
+                ]
+              }
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.sources.faq.1",
+          "source_refs": [
+            "ecfr-loto",
+            "ed-ai",
+            "ed-fit",
+            "ed-market",
+            "ed-path",
+            "ed-risk",
+            "ed-work",
+            "nbs-wages",
+            "onet-electrical",
+            "onet-electronics",
+            "onet-hardware",
+            "onet-mechanical",
+            "onet-mechatronics",
+            "onet-target"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "O*NET职业事实、美国统计、eCFR条件式安全边界、中国行业代理和编辑建议分别陈述。",
+              "本页只供职业决策和虚构纸面核算，不构成真实接线、带电测试、维修调校、能源隔离或工程放行指导。",
+              "中国精确职业工资暂无可安全使用的数据。"
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.sources.boundary.1",
+          "source_refs": [
+            "ecfr-loto",
+            "ed-ai",
+            "ed-fit",
+            "ed-market",
+            "ed-output",
+            "ed-path",
+            "ed-risk",
+            "ed-sim",
+            "ed-work",
+            "nbs-wages",
+            "onet-electrical",
+            "onet-electronics",
+            "onet-hardware",
+            "onet-mechanical",
+            "onet-mechatronics",
+            "onet-target"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "电气与电子工程技师与技术员",
+                "id": "electrical-and-electronics-engineering-technicians.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "电气与电子工程技师与技术员",
+                "id": "electrical-and-electronics-engineering-technicians.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "电气与电子工程技师与技术员",
+                "id": "electrical-and-electronics-engineering-technicians.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "电气与电子工程技师与技术员",
+                "id": "electrical-and-electronics-engineering-technicians.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "电气与电子工程技师与技术员",
+                "id": "electrical-and-electronics-engineering-technicians.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "电气与电子工程技师与技术员",
+                "id": "electrical-and-electronics-engineering-technicians.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "电气与电子工程技师与技术员",
+                "id": "electrical-and-electronics-engineering-technicians.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "电气与电子工程技师与技术员",
+                "id": "electrical-and-electronics-engineering-technicians.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "电气与电子工程技师与技术员",
+                "id": "electrical-and-electronics-engineering-technicians.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "电气与电子工程技师与技术员",
+                "id": "electrical-and-electronics-engineering-technicians.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "电气与电子工程技师与技术员",
+                "id": "electrical-and-electronics-engineering-technicians.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对美国机器设备维护时危险能源控制的条件式边界。",
+                  "只在该条适用的美国维护场景使用；本任务较早已读正文，后续重开受限。"
+                ],
+                "evidence_type": "current eCFR regulation text",
+                "id": "ecfr-loto",
+                "limitation": "只在该条适用的美国维护场景使用；本任务较早已读正文，后续重开受限。",
+                "market": "美国",
+                "name": "29 CFR 1910.147 - Control of hazardous energy",
+                "period": "current regulation; accessed 2026-09-06",
+                "publisher": "eCFR / Office of the Federal Register",
+                "scope": "exact",
+                "url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1910/subpart-J/section-1910.147"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于官方任务的编辑建议。",
+                  "不构成真实带电测试、接线、维修、调校、能源隔离或工程放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-ai",
+                "limitation": "不构成真实带电测试、接线、维修、调校、能源隔离或工程放行指导。",
+                "market": "全球",
+                "name": "数字工具边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于官方任务的编辑建议。",
+                  "不构成真实带电测试、接线、维修、调校、能源隔离或工程放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-fit",
+                "limitation": "不构成真实带电测试、接线、维修、调校、能源隔离或工程放行指导。",
+                "market": "全球",
+                "name": "适配观察",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于官方任务的编辑建议。",
+                  "不构成真实带电测试、接线、维修、调校、能源隔离或工程放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-market",
+                "limitation": "不构成真实带电测试、接线、维修、调校、能源隔离或工程放行指导。",
+                "market": "全球",
+                "name": "市场边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于官方任务的编辑建议。",
+                  "不构成真实带电测试、接线、维修、调校、能源隔离或工程放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-output",
+                "limitation": "不构成真实带电测试、接线、维修、调校、能源隔离或工程放行指导。",
+                "market": "全球",
+                "name": "技术记录质量",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于官方任务的编辑建议。",
+                  "不构成真实带电测试、接线、维修、调校、能源隔离或工程放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-path",
+                "limitation": "不构成真实带电测试、接线、维修、调校、能源隔离或工程放行指导。",
+                "market": "全球",
+                "name": "入门路径",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于官方任务的编辑建议。",
+                  "不构成真实带电测试、接线、维修、调校、能源隔离或工程放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-risk",
+                "limitation": "不构成真实带电测试、接线、维修、调校、能源隔离或工程放行指导。",
+                "market": "全球",
+                "name": "电气与授权风险",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于官方任务的编辑建议。",
+                  "不构成真实带电测试、接线、维修、调校、能源隔离或工程放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-sim",
+                "limitation": "不构成真实带电测试、接线、维修、调校、能源隔离或工程放行指导。",
+                "market": "全球",
+                "name": "虚构低压记录练习",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于官方任务的编辑建议。",
+                  "不构成真实带电测试、接线、维修、调校、能源隔离或工程放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-work",
+                "limitation": "不构成真实带电测试、接线、维修、调校、能源隔离或工程放行指导。",
+                "market": "全球",
+                "name": "电气电子技术工作闭环",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对中国行业和宽泛岗位工资口径。",
+                  "不能替代本职业精确工资。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "nbs-wages",
+                "limitation": "不能替代本职业精确工资。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wages; published 2026-05-15; accessed 2026-09-06",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业职责。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-electrical",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "17-2071.00 - Electrical Engineers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2071.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业职责。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-electronics",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "17-2072.00 - Electronics Engineers, Except Computer",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2072.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业职责。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-hardware",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "17-2061.00 - Computer Hardware Engineers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2061.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业职责。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-mechanical",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "17-2141.00 - Mechanical Engineers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2141.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业职责。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-mechatronics",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "17-2199.05 - Mechatronics Engineers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2199.05"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对身份、任务、工作情境、准备、工资与预测。",
+                  "只适用于该美国职业。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-target",
+                "limitation": "只适用于该美国职业。",
+                "market": "美国",
+                "name": "17-3023.00 - Electrical and Electronic Engineering Technologists and Technicians",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-3023.00"
+              }
+            ]
+          },
+          "id": "electrical-and-electronics-engineering-technicians.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "精确职业数据：O*NET 17-3023.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业身份",
+        "occupation_scope": "电气与电子工程技师与技术员 / 17-3023.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-target"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "工程输入、组装测试、维护排故与记录",
+        "fact_id": "tasks",
+        "market": "美国",
+        "measure": "核心任务",
+        "occupation_scope": "电气与电子工程技师与技术员 / 17-3023.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-target"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "版本—方案—仪器—执行—读数—偏差—变更—验收",
+        "fact_id": "workflow",
+        "market": "全球",
+        "measure": "工作闭环",
+        "occupation_scope": "电气与电子工程技师与技术员 / 17-3023.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "ed-work"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "版本、原始读数、异常与停止判断",
+        "fact_id": "fit",
+        "market": "全球",
+        "measure": "适配信号",
+        "occupation_scope": "电气与电子工程技师与技术员 / 17-3023.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "ed-fit"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "电气储能、版本、仪器、权限与验收",
+        "fact_id": "risk",
+        "market": "全球",
+        "measure": "风险边界",
+        "occupation_scope": "电气与电子工程技师与技术员 / 17-3023.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "ed-risk"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "a73eeb856d8d76f5135e12ccb9902ab01315ff5d45b0c5cd5a358712277412a8",
+  "source_content_sha256": "492853540f203e5476fa61469491cd4b2bc5bfc7b51abe82dc0aebc5e5194fc0",
   "subject": {
     "canonical_slug": "electrical-and-electronics-engineering-technicians",
     "name": "电气与电子工程技师与技术员",
-    "summary": null
+    "summary": "通常在工程人员指导下，把对象和图纸版本、工程指令、仪器条件、原始读数、偏差、授权变更、复测与验收状态做成可追溯闭环。"
   }
 }

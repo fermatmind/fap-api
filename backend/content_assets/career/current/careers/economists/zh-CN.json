@@ -1,12 +1,1533 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "先判断你是否愿意长期处理定义、数据质量、模型假设、不确定性和反驳，而不只追求漂亮结论。"
+            ]
+          },
+          "id": "economists.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "正向信号：会先界定问题和口径，再检查数据、方法与替代解释。"
+            ]
+          },
+          "id": "economists.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "谨慎信号：把相关性当因果，把单次显著结果当最终答案，或不愿记录限制。"
+            ]
+          },
+          "id": "economists.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "练习审三张虚构研究卡的七字段：问题、数据来源、样本/范围、时期、方法、结果、审阅安排（不确定性+升级对象）。A：问题=指标甲变化；来源=数据集甲；范围=样本甲；时期=时期甲；方法=未知；结果=估计甲；审阅安排=记录不确定性并将未知交研究负责人，缺1。B：问题=指标乙变化；来源=数据集乙；范围=样本乙；时期=时期乙；方法=未知；结果=估计乙；审阅安排=未知，缺2。C：问题=指标丙变化；来源=数据集丙；范围=样本丙；时期=时期丙；方法=描述比较；结果=估计丙；审阅安排=记录不确定性并将异常交指定审阅者，缺0。答案1、2、0。"
+            ]
+          },
+          "id": "economists.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业定义：研究经济与统计数据，准备报告或制定计划，处理生产分配、货币或财政政策等问题。"
+            ]
+          },
+          "id": "economists.profile.definition-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "研究金融、劳动力、农业等领域数据。",
+              "用数学模型和统计技术解释现象并预测趋势。",
+              "评估政策影响并提供经济关系咨询。"
+            ]
+          },
+          "id": "economists.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "输入：调查、行政、市场或企业数据与制度背景。",
+              "处理：定义指标、建模、估计、验证和解释。",
+              "输出：报告、图表、预测、建议或政策方案。"
+            ]
+          },
+          "id": "economists.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "先区分描述、预测和因果问题。",
+              "保留数据字典、代码、假设和版本。",
+              "把不确定性与限制和结论一起交付。"
+            ]
+          },
+          "id": "economists.profile.responsibilities-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "BLS说明经济学家还会做调查、收集数据并向企业、政府和个人提供建议。"
+            ]
+          },
+          "id": "economists.profile.work-context-block.1",
+          "source_refs": [
+            "bls-duties"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作通常在办公室独立或协作进行，部分岗位每周超过40小时。"
+            ]
+          },
+          "id": "economists.profile.work-context-block.2",
+          "source_refs": [
+            "bls-duties"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "O*NET任务覆盖政策影响、市场预测、咨询、研究发表与经济标准制定。"
+            ]
+          },
+          "id": "economists.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "经济学家交付的不只是模型，还包括可解释的结论、限制和可复核材料。"
+            ]
+          },
+          "id": "economists.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "对外建议必须区分模型估计与最终政策价值判断。"
+            ]
+          },
+          "id": "economists.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业代码19-3011.00不包含以销售潜力或证券估值为核心的相邻角色。"
+            ]
+          },
+          "id": "economists.profile.definition-block.2",
+          "source_refs": [
+            "onet-details",
+            "onet-financial",
+            "onet-market"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "investment-fund-managers",
+                "id": "economists.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/investment-fund-managers"
+              },
+              {
+                "entity": "market-research-analysts-and-marketing-specialists",
+                "id": "economists.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/market-research-analysts-and-marketing-specialists"
+              },
+              {
+                "entity": "financial-and-investment-analysts",
+                "id": "economists.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/financial-and-investment-analysts"
+              },
+              {
+                "entity": "personal-financial-advisors",
+                "id": "economists.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/personal-financial-advisors"
+              },
+              {
+                "entity": "financial-risk-specialists",
+                "id": "economists.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/financial-risk-specialists"
+              }
+            ]
+          },
+          "id": "economists.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-details",
+            "onet-financial",
+            "onet-market"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "经济学家：解释宏观、政策或跨领域经济现象，并形成研究、预测或建议。"
+            ]
+          },
+          "id": "economists.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-details",
+            "onet-financial",
+            "onet-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "市场研究分析师：研究消费者、竞争、价格和营销条件，以判断产品或服务潜在销售。"
+            ]
+          },
+          "id": "economists.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-details",
+            "onet-financial",
+            "onet-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "金融投资分析师：分析投资项目或机构金融数据，并做企业估值等量化判断。"
+            ]
+          },
+          "id": "economists.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-details",
+            "onet-financial",
+            "onet-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "三者都用数据，但研究对象、最终消费者、风险责任和建议用途不同，不能因工具相同而互换。"
+            ]
+          },
+          "id": "economists.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-details",
+            "onet-financial",
+            "onet-market"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "招聘信息中Excel、R、Python各27%，SQL 15%、SAS 14%，这是软件需求而非AI采用率。"
+            ]
+          },
+          "id": "economists.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "onet-tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助：数据清理代码、变量说明、图表和报告结构草稿。"
+            ]
+          },
+          "id": "economists.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助：列出替代模型、稳健性检查与复现清单。"
+            ]
+          },
+          "id": "economists.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "不可替代：判断变量定义是否对应理论问题。"
+            ]
+          },
+          "id": "economists.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "不可替代：确认因果识别、政策取舍与利益影响。"
+            ]
+          },
+          "id": "economists.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "复核应回到原始数据、抽样、代码、假设、估计和不确定性。"
+            ]
+          },
+          "id": "economists.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "质量看复现、稳健性、误差、解释一致性和决策后果，不只看生成速度。"
+            ]
+          },
+          "id": "economists.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "工具可加快分析环节，但不会自动承担研究诚信或政策建议责任。"
+            ]
+          },
+          "id": "economists.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "本页所核国家统计局资料未提供与19-3011.00一一对应的中国精确职业分位。"
+            ]
+          },
+          "id": "economists.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "国家统计局行业和人员大类均值只能作为背景，不能冒充经济学家个人报价。"
+            ]
+          },
+          "id": "economists.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较岗位时要拆机构类型、研究领域、学位、地区、项目责任与成果要求。"
+            ]
+          },
+          "id": "economists.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "缺少精确职业分位时保留数据范围说明，并直接核真实岗位薪酬结构。"
+            ]
+          },
+          "id": "economists.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "2025年美国年薪10分位为67,360美元。"
+            ]
+          },
+          "id": "economists.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "25分位89,330美元，中位数124,720美元。"
+            ]
+          },
+          "id": "economists.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "75分位174,720美元，90分位238,060美元。"
+            ]
+          },
+          "id": "economists.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "同口径时薪中位数59.96美元。"
+            ]
+          },
+          "id": "economists.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "全国职业分布不是个人起薪承诺。"
+            ]
+          },
+          "id": "economists.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "行业、地区、学位、研究领域和责任范围会影响具体报价。"
+            ]
+          },
+          "id": "economists.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "bls-pay",
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "适配度看能否把问题定义、数据、模型、解释和限制连成可审查链条。"
+            ]
+          },
+          "id": "economists.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "正向信号：能分析数据模式，并主动寻找相反证据。"
+            ]
+          },
+          "id": "economists.fit.riasec-fit-block.2",
+          "source_refs": [
+            "bls-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "正向信号：能向非专业读者解释估计、图表与不确定性。"
+            ]
+          },
+          "id": "economists.fit.riasec-fit-block.3",
+          "source_refs": [
+            "bls-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "正向信号：愿意维护代码、数据字典和复现记录。"
+            ]
+          },
+          "id": "economists.fit.riasec-fit-block.4",
+          "source_refs": [
+            "bls-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎信号：只追显著性，不检查样本、口径或模型设定。"
+            ]
+          },
+          "id": "economists.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎信号：用复杂术语掩盖无法回答的问题。"
+            ]
+          },
+          "id": "economists.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "BLS强调分析、沟通、计算机与批判性思维能力。"
+            ]
+          },
+          "id": "economists.fit.riasec-fit-block.7",
+          "source_refs": [
+            "bls-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "一周练习能否复现结果并清楚陈述限制，比性格标签更有用。"
+            ]
+          },
+          "id": "economists.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "数据口径变更；每次分析前由数据责任人核定义、时期和版本，差异交研究负责人。"
+            ]
+          },
+          "id": "economists.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "样本选择偏差；建模前记录纳入排除规则和覆盖范围，关键缺口交项目负责人决定是否继续。"
+            ]
+          },
+          "id": "economists.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "模型设定不稳；出报告前由分析者运行替代设定与敏感性检查，结论变化显著时升级独立审阅。"
+            ]
+          },
+          "id": "economists.risk.career-risk-cards.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "相关性被写成因果；对外发布前由审阅者核识别假设和证据强度，证据不足则降级措辞。"
+            ]
+          },
+          "id": "economists.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "工具生成错误代码或引用；每次交付前由具名责任人复现结果并核原始来源，工具不拥有发布或政策签字权。"
+            ]
+          },
+          "id": "economists.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "BLS称典型入行至少硕士学位，部分政府入门岗位可接受相关学士背景。"
+            ]
+          },
+          "id": "economists.path.career-path-block.1",
+          "source_refs": [
+            "bls-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "商业、研究或国际组织岗位可能要求硕士或博士及工作经验。"
+            ]
+          },
+          "id": "economists.path.career-path-block.2",
+          "source_refs": [
+            "bls-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "入门先练数据清理、描述统计、可视化和清楚的问题定义。"
+            ]
+          },
+          "id": "economists.path.career-path-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "进阶再承担计量模型、因果设计、预测、政策评估与对外解释。"
+            ]
+          },
+          "id": "economists.path.career-path-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七日练习只用公开或虚构数据：定问题、写数据字典、复现结果、做稳健性检查。"
+            ]
+          },
+          "id": "economists.path.career-path-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品应含问题、数据、方法、代码、结果、限制和复现步骤。"
+            ]
+          },
+          "id": "economists.path.career-path-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "学位和软件证书不自动赋予机构发布、政策签字或投资建议权限。"
+            ]
+          },
+          "id": "economists.path.career-path-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "求职时核研究领域、数据权限、方法要求、发表或交付标准和最终责任人。"
+            ]
+          },
+          "id": "economists.path.career-path-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国经济学家2025年就业18,600人，2035预计19,500人。"
+            ]
+          },
+          "id": "economists.market-signals.market-signal-card.1",
+          "source_refs": [
+            "bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "2025—2035预计增长5%，快于全职业3%。"
+            ]
+          },
+          "id": "economists.market-signals.market-signal-card.2",
+          "source_refs": [
+            "bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "预计年均约1,100个空缺，许多来自转岗或退休替补。"
+            ]
+          },
+          "id": "economists.market-signals.market-signal-card.3",
+          "source_refs": [
+            "bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "BLS认为大数据定价、广告分析和全球经济复杂性支持需求，但政府预算变化会影响岗位。"
+            ]
+          },
+          "id": "economists.market-signals.market-signal-card.4",
+          "source_refs": [
+            "bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "预测描述全国总体，不等于个人录用概率；机构、领域、学位和方法能力仍是关键。"
+            ]
+          },
+          "id": "economists.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "核心工作包括研究数据、用数学模型和统计技术解释现象与预测趋势、评估政策影响、提供咨询并形成报告或建议。",
+                "id": "economists.faq.1",
+                "question_key": "career.faq.economists.daily-work",
+                "source_refs": [
+                  "onet-details"
+                ]
+              },
+              {
+                "answer": "经济学家解释经济现象与政策；市场研究分析师聚焦产品服务潜在销售和营销市场；金融投资分析师聚焦投资项目和机构金融数据及估值。",
+                "id": "economists.faq.2",
+                "question_key": "career.faq.economists.role-comparison",
+                "source_refs": [
+                  "onet-details",
+                  "onet-financial",
+                  "onet-market"
+                ]
+              },
+              {
+                "answer": "BLS指出经济学家需分析数据、观察模式、解释研究、使用软件并以审慎推理解决复杂问题。",
+                "id": "economists.faq.3",
+                "question_key": "career.faq.economists.fit",
+                "source_refs": [
+                  "bls-path"
+                ]
+              },
+              {
+                "answer": "数字工具可辅助数据清理、代码草稿、稳健性检查和图表初稿，但不能自动证明因果关系或承担政策建议责任。",
+                "id": "economists.faq.4",
+                "question_key": "career.faq.economists.ai-impact",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "分析者须回看数据定义、样本、代码、假设、估计与不确定性，并由明确责任人审查对外结论。",
+                "id": "economists.faq.5",
+                "question_key": "career.faq.economists.human-control",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "本页所核国家统计局工资资料按行业和人员大类聚合，未提供与19-3011.00一一对应的中国精确职业工资；该来源不能用于生成本职业精确分位。",
+                "id": "economists.faq.6",
+                "question_key": "career.faq.economists.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "2025年美国经济学家年薪10/25/50/75/90分位为67,360、89,330、124,720、174,720、238,060美元。",
+                "id": "economists.faq.7",
+                "question_key": "career.faq.economists.us-pay",
+                "source_refs": [
+                  "onet-wages"
+                ]
+              },
+              {
+                "answer": "BLS称典型入行至少硕士学位；部分主要在政府的入门岗位可接受含足够经济学、统计或数学课程的学士学位，其他岗位需要博士。",
+                "id": "economists.faq.8",
+                "question_key": "career.faq.economists.education-path",
+                "source_refs": [
+                  "bls-path"
+                ]
+              },
+              {
+                "answer": "经济分析须区分数据观察、模型假设、估计结果、因果解释和政策判断，并记录复核与升级责任。",
+                "id": "economists.faq.9",
+                "question_key": "career.faq.economists.risk-boundary",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "美国经济学家2025—2035预计增长5%，快于全职业3%。",
+                "id": "economists.faq.10",
+                "question_key": "career.faq.economists.outlook-transition",
+                "source_refs": [
+                  "bls-outlook"
+                ]
+              },
+              {
+                "answer": "美国经济学家预计十年内年均约1,100个职位空缺，许多来自转岗或退出劳动力市场的替补。",
+                "id": "economists.faq.11",
+                "question_key": "career.faq.economists.career-worth",
+                "source_refs": [
+                  "bls-outlook"
+                ]
+              }
+            ]
+          },
+          "id": "economists.sources.faq.1",
+          "source_refs": [
+            "bls-outlook",
+            "bls-path",
+            "editorial",
+            "nbs-wages",
+            "onet-details",
+            "onet-financial",
+            "onet-market",
+            "onet-wages"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "本页所核中国来源仅提供行业和人员大类背景，不用于生成19-3011.00精确报价。",
+              "相关性、预测与因果解释分开；工具输出须经数据、代码和假设复核。",
+              "作品练习不替代机构数据权限、对外发布或政策签字。"
+            ]
+          },
+          "id": "economists.sources.boundary.1",
+          "source_refs": [
+            "bls-duties",
+            "bls-outlook",
+            "bls-path",
+            "bls-pay",
+            "editorial",
+            "nbs-wages",
+            "onet-details",
+            "onet-financial",
+            "onet-market",
+            "onet-tech",
+            "onet-wages"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "经济学家",
+                "id": "economists.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "经济学家",
+                "id": "economists.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "经济学家",
+                "id": "economists.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "经济学家",
+                "id": "economists.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "经济学家",
+                "id": "economists.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "经济学家",
+                "id": "economists.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "经济学家",
+                "id": "economists.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "经济学家",
+                "id": "economists.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "经济学家",
+                "id": "economists.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "经济学家",
+                "id": "economists.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "经济学家",
+                "id": "economists.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "economists.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn68view3 lines 219-238。",
+                  "仅用于所列职业、市场、时期和口径。"
+                ],
+                "evidence_type": "official duties and work context",
+                "id": "bls-duties",
+                "limitation": "仅用于所列职业、市场、时期和口径。",
+                "market": "美国",
+                "name": "BLS OOH — Economists duties",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/economists.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn68view5 lines 321-352。",
+                  "仅用于所列职业、市场、时期和口径。"
+                ],
+                "evidence_type": "official employment projection",
+                "id": "bls-outlook",
+                "limitation": "仅用于所列职业、市场、时期和口径。",
+                "market": "美国",
+                "name": "BLS OOH — Economists outlook",
+                "period": "2025-2035 projections",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/economists.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn68view4 lines 256-282。",
+                  "仅用于所列职业、市场、时期和口径。"
+                ],
+                "evidence_type": "official entry path",
+                "id": "bls-path",
+                "limitation": "仅用于所列职业、市场、时期和口径。",
+                "market": "美国",
+                "name": "BLS OOH — Economists education and qualities",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/economists.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn68view2 lines 178-202; turn68view5 lines 311-320。",
+                  "仅用于所列职业、市场、时期和口径。"
+                ],
+                "evidence_type": "official wage data",
+                "id": "bls-pay",
+                "limitation": "仅用于所列职业、市场、时期和口径。",
+                "market": "美国",
+                "name": "BLS OOH — Economists pay",
+                "period": "May 2025 wages",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/economists.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "用于读者职业探索与虚构桌面练习。",
+                  "只支持虚构研究审阅，不替代机构审查、政策决定或专业责任。"
+                ],
+                "evidence_type": "editorial desktop exercise",
+                "id": "editorial",
+                "limitation": "只支持虚构研究审阅，不替代机构审查、政策决定或专业责任。",
+                "market": "编辑设计",
+                "name": "FermatMind — 经济学家职业探索框架",
+                "period": "2026-09-06",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn48view0 lines 39-51, 229-274, 338-360。",
+                  "按行业和人员大类聚合，不是19-3011.00精确职业工资。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "nbs-wages",
+                "limitation": "按行业和人员大类聚合，不是19-3011.00精确职业工资。",
+                "market": "中国大陆",
+                "name": "国家统计局 — 2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 wage aggregates published 2026",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn68view0 lines 50-59; turn68view1 lines 123-139。",
+                  "仅用于所列职业、市场、时期和口径。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-details",
+                "limitation": "仅用于所列职业、市场、时期和口径。",
+                "market": "美国",
+                "name": "O*NET OnLine — Economists 19-3011.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/19-3011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn68view9 lines 50-59。",
+                  "仅用于所列职业、市场、时期和口径。"
+                ],
+                "evidence_type": "official adjacent occupation profile",
+                "id": "onet-financial",
+                "limitation": "仅用于所列职业、市场、时期和口径。",
+                "market": "美国",
+                "name": "O*NET OnLine — Financial and Investment Analysts 13-2051.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-2051.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn68view8 lines 50-58。",
+                  "仅用于所列职业、市场、时期和口径。"
+                ],
+                "evidence_type": "official adjacent occupation profile",
+                "id": "onet-market",
+                "limitation": "仅用于所列职业、市场、时期和口径。",
+                "market": "美国",
+                "name": "O*NET OnLine — Market Research Analysts 13-1161.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-1161.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn68view7 lines 50-80。",
+                  "仅用于所列职业、市场、时期和口径。"
+                ],
+                "evidence_type": "official job-posting software signals",
+                "id": "onet-tech",
+                "limitation": "仅用于所列职业、市场、时期和口径。",
+                "market": "美国",
+                "name": "O*NET OnLine — Economists hot technologies",
+                "period": "2025 US job postings",
+                "publisher": "O*NET / Lightcast",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/19-3011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn68view6 lines 62-88。",
+                  "仅用于所列职业、市场、时期和口径。"
+                ],
+                "evidence_type": "official national wage distribution",
+                "id": "onet-wages",
+                "limitation": "仅用于所列职业、市场、时期和口径。",
+                "market": "美国",
+                "name": "O*NET OnLine — National wages for Economists",
+                "period": "2025 BLS wage data",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/19-3011.00"
+              }
+            ]
+          },
+          "id": "economists.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "18,600人（2025）",
+        "fact_id": "employment",
+        "market": "美国",
+        "measure": "employment",
+        "occupation_scope": "精确职业数据：19-3011.00",
+        "period": "2025-2035 projections",
+        "source_refs": [
+          "bls-outlook"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "典型至少硕士；部分政府入门岗位可接受相关学士",
+        "fact_id": "entry-path",
+        "market": "美国",
+        "measure": "typical entry education",
+        "occupation_scope": "精确职业数据：19-3011.00",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "bls-path"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "5%（2025—2035）",
+        "fact_id": "growth",
+        "market": "美国",
+        "measure": "projected growth",
+        "occupation_scope": "精确职业数据：19-3011.00",
+        "period": "2025-2035 projections",
+        "source_refs": [
+          "bls-outlook"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET 19-3011.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "O*NET-SOC code",
+        "occupation_scope": "精确职业数据：19-3011.00",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-details"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "1,100个/年",
+        "fact_id": "openings",
+        "market": "美国",
+        "measure": "projected annual openings",
+        "occupation_scope": "精确职业数据：19-3011.00",
+        "period": "2025-2035 projections",
+        "source_refs": [
+          "bls-outlook"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "67,360 / 89,330 / 124,720 / 174,720 / 238,060美元（2025）",
+        "fact_id": "us-annual",
+        "market": "美国",
+        "measure": "annual median wage",
+        "occupation_scope": "精确职业数据：19-3011.00",
+        "period": "2025 BLS wage data",
+        "source_refs": [
+          "onet-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "59.96美元/小时（2025中位数）",
+        "fact_id": "us-hourly",
+        "market": "美国",
+        "measure": "hourly median wage",
+        "occupation_scope": "精确职业数据：19-3011.00",
+        "period": "2025 BLS wage data",
+        "source_refs": [
+          "onet-wages"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "3bc2dafff8986fd765528f05b921c8c1558533c6d2640c29513c0115182c0484",
+  "source_content_sha256": "219a86f1b3346feb732ed821556e52cb2b7058cff79a1252dbfb9b80fb2fab17",
   "subject": {
     "canonical_slug": "economists",
     "name": "经济学家",
-    "summary": null
+    "summary": "用数据、模型和经济理论解释现象、评估政策或市场问题，并把假设、不确定性与建议写成可审查报告。"
   }
 }

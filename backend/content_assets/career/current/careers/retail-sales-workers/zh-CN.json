@@ -1,12 +1,1640 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "是否值得进入，应看你能否澄清需求、准确核价、复核记录，并在价格冲突或越权请求出现时停手。"
+            ]
+          },
+          "id": "retail-sales-workers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "适合信号：愿意持续面对顾客，同时把商品信息、付款和记录核对准确。"
+            ]
+          },
+          "id": "retail-sales-workers.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：若会用未经核实的话术促成交易，或擅自承诺退款、维修和赔偿，应先练边界。"
+            ]
+          },
+          "id": "retail-sales-workers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial",
+            "samr-consumer-regulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全试做只用四条虚构记录做纸面分流，不接触真实顾客、账户或付款系统。"
+            ]
+          },
+          "id": "retail-sales-workers.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "范围：本页组合呈现收银员41-2011.00、柜台与租赁文员41-2021.00、零售销售员41-2031.00。"
+            ]
+          },
+          "id": "retail-sales-workers.profile.definition-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "收银员核定价格、接收付款、出具收据并处理退款。"
+            ]
+          },
+          "id": "retail-sales-workers.profile.definition-block.2",
+          "source_refs": [
+            "onet-cashiers"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "柜台与租赁文员接收服务或租赁订单，说明费用，准备记录并接受归还。"
+            ]
+          },
+          "id": "retail-sales-workers.profile.definition-block.3",
+          "source_refs": [
+            "onet-counter-rental"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "零售销售员识别需求、推荐和演示商品，处理付款与退换货。"
+            ]
+          },
+          "id": "retail-sales-workers.profile.definition-block.4",
+          "source_refs": [
+            "onet-retail-salespersons"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "共同输入包括顾客请求、商品或服务信息、价格、促销条件和门店授权。"
+            ]
+          },
+          "id": "retail-sales-workers.profile.definition-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "共同流程是澄清需求、核对信息、执行获准交易、留存记录并处理异常。"
+            ]
+          },
+          "id": "retail-sales-workers.profile.definition-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "常见工具是收银或POS设备、扫码器、商品目录、订单或租赁记录。"
+            ]
+          },
+          "id": "retail-sales-workers.profile.definition-block.7",
+          "source_refs": [
+            "onet-cashiers",
+            "onet-counter-rental",
+            "onet-retail-salespersons"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "关键判断是价格与条件是否一致、请求是否在授权范围、记录是否完整。"
+            ]
+          },
+          "id": "retail-sales-workers.profile.definition-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "交付物是可复核的交易、订单、退款、租赁或销售记录。"
+            ]
+          },
+          "id": "retail-sales-workers.profile.definition-block.9",
+          "source_refs": [
+            "onet-cashiers",
+            "onet-counter-rental",
+            "onet-retail-salespersons"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "边界：不编造商品信息，不绕过付款控制，不自行扩大退换修理或赔偿承诺。"
+            ]
+          },
+          "id": "retail-sales-workers.profile.definition-block.10",
+          "source_refs": [
+            "samr-consumer-regulation",
+            "samr-price-regulation"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "pharmacy-aides",
+                "id": "retail-sales-workers.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/pharmacy-aides"
+              },
+              {
+                "entity": "first-line-supervisors-of-retail-sales-workers",
+                "id": "retail-sales-workers.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/first-line-supervisors-of-retail-sales-workers"
+              },
+              {
+                "entity": "first-line-supervisors-of-non-retail-sales-workers",
+                "id": "retail-sales-workers.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/first-line-supervisors-of-non-retail-sales-workers"
+              },
+              {
+                "entity": "gambling-change-persons-and-booth-cashiers",
+                "id": "retail-sales-workers.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/gambling-change-persons-and-booth-cashiers"
+              },
+              {
+                "entity": "counter-and-rental-clerks",
+                "id": "retail-sales-workers.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/counter-and-rental-clerks"
+              }
+            ]
+          },
+          "id": "retail-sales-workers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "adj-gambling",
+            "adj-nonretail-supervisor",
+            "adj-pharmacy",
+            "adj-retail-supervisor",
+            "onet-counter-rental"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "药房助理处理药品入库记录和处方接收，具有药房支持边界。"
+            ]
+          },
+          "id": "retail-sales-workers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "adj-pharmacy"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "零售与非零售销售主管负责监督人员、绩效和授权，不是一线交易执行。"
+            ]
+          },
+          "id": "retail-sales-workers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "adj-nonretail-supervisor",
+            "adj-retail-supervisor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "博彩换筹与柜台收银员处理筹码兑换、钱柜审计和博彩身份核验。"
+            ]
+          },
+          "id": "retail-sales-workers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "adj-gambling"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "柜台与租赁文员是本页组合内细分实体；相邻链接用于深入查看，不表示排除。"
+            ]
+          },
+          "id": "retail-sales-workers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "editorial",
+            "onet-counter-rental"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "AI可辅助检索批准的商品信息、检查记录缺项和草拟答复。"
+            ]
+          },
+          "id": "retail-sales-workers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用前必须限定批准资料、数据权限、人工复核和停用条件。"
+            ]
+          },
+          "id": "retail-sales-workers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "AI不能隔着记录确认现场价签、商品状态或付款结果。"
+            ]
+          },
+          "id": "retail-sales-workers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人员必须回看价签、促销条件、顾客请求和交易原始记录。"
+            ]
+          },
+          "id": "retail-sales-workers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "价格冲突、敏感信息和越权承诺由有权限人员处理。"
+            ]
+          },
+          "id": "retail-sales-workers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "错误商品信息或退款建议可能造成消费者和财务损失。"
+            ]
+          },
+          "id": "retail-sales-workers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "任务辅助不等于三个组成职业会按同一速度变化。"
+            ]
+          },
+          "id": "retail-sales-workers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "先用虚构记录测试，不连接真实账户或付款系统。"
+            ]
+          },
+          "id": "retail-sales-workers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "本次未建立中国全国三个组成职业的一一对应工资分布。"
+            ]
+          },
+          "id": "retail-sales-workers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-2025-migrant-monitoring"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "2025年批发和零售业农民工月均收入为4,382元。"
+            ]
+          },
+          "id": "retail-sales-workers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-2025-migrant-monitoring"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "该数字仅是特定人群的行业代理，不是个人起薪或统一职业中位数。"
+            ]
+          },
+          "id": "retail-sales-workers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "nbs-2025-migrant-monitoring"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "核对岗位报价时记录城市、门店类型、组成职业、班次、计薪单位、提成、期间和样本量。"
+            ]
+          },
+          "id": "retail-sales-workers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国收银员2025年年薪中位数32,880美元、时薪15.81美元。"
+            ]
+          },
+          "id": "retail-sales-workers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "wage-cashier"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "收银员年薪10%/90%边界为24,530/40,410美元。"
+            ]
+          },
+          "id": "retail-sales-workers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "wage-cashier"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国柜台与租赁文员2025年年薪中位数41,300美元、时薪19.86美元。"
+            ]
+          },
+          "id": "retail-sales-workers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "wage-counter"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "该职业年薪10%/90%边界为29,800/65,370美元。"
+            ]
+          },
+          "id": "retail-sales-workers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "wage-counter"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国零售销售员2025年年薪中位数35,410美元、时薪17.03美元；年薪10%/90%边界为27,210/47,890美元。"
+            ]
+          },
+          "id": "retail-sales-workers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "wage-retail"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "三组数据不得相加、平均或当作个人起薪；比较时保持实体、地区、期间和计薪单位一致。"
+            ]
+          },
+          "id": "retail-sales-workers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "能先澄清顾客要买、租或退的对象和条件。"
+            ]
+          },
+          "id": "retail-sales-workers.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "能从批准资料核对价格、促销、库存与售后规则。"
+            ]
+          },
+          "id": "retail-sales-workers.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "能把商品事实、顾客偏好和推销话术分开。"
+            ]
+          },
+          "id": "retail-sales-workers.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "能复核付款、退款、订单和交接记录。"
+            ]
+          },
+          "id": "retail-sales-workers.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "遇到价签、系统和促销冲突时愿意暂停。"
+            ]
+          },
+          "id": "retail-sales-workers.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial",
+            "samr-price-regulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "遇到超权限请求时能说明边界并升级。"
+            ]
+          },
+          "id": "retail-sales-workers.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial",
+            "samr-consumer-regulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "持续顾客互动与交易准确性都需要真实岗位预览。"
+            ]
+          },
+          "id": "retail-sales-workers.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "兴趣量表只用于提问，最终看纸面样本和受监督绩效。"
+            ]
+          },
+          "id": "retail-sales-workers.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "价签、系统价和促销条件不一致时暂停承诺并核验。"
+            ]
+          },
+          "id": "retail-sales-workers.risk.career-risk-cards.1",
+          "source_refs": [
+            "samr-price-regulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "不得用虚假折价、误导性价格或拒不履行价格承诺促成交易。"
+            ]
+          },
+          "id": "retail-sales-workers.risk.career-risk-cards.2",
+          "source_refs": [
+            "samr-price-regulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "退款、维修、押金和预付款只按已批准规则处理。"
+            ]
+          },
+          "id": "retail-sales-workers.risk.career-risk-cards.3",
+          "source_refs": [
+            "samr-consumer-regulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "顾客个人信息只在必要、获准的范围内处理。"
+            ]
+          },
+          "id": "retail-sales-workers.risk.career-risk-cards.4",
+          "source_refs": [
+            "samr-consumer-regulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "发现冲突时保留原始记录、停止受影响步骤并交有权限人员。"
+            ]
+          },
+          "id": "retail-sales-workers.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial",
+            "samr-consumer-regulation",
+            "samr-price-regulation"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "典型入口通常不要求正式学历凭证，多数技能在岗学习；具体商品或法域可能另有要求。"
+            ]
+          },
+          "id": "retail-sales-workers.path.career-path-block.1",
+          "source_refs": [
+            "bls-ooh-retail-sales"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "雇主证据应展示需求澄清、商品比较、核价、交易复核和异常升级。"
+            ]
+          },
+          "id": "retail-sales-workers.path.career-path-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "虚构记录：A价签与系统均100元且无促销；B价签100元而系统90元；C促销写八折但系统九折；D退款请求缺原交易凭证。"
+            ]
+          },
+          "id": "retail-sales-workers.path.career-path-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "规则：信息一致才形成纸面交易计划；价格冲突、促销冲突和凭证缺失分别暂缓。"
+            ]
+          },
+          "id": "retail-sales-workers.path.career-path-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "独立推演：A纸面通过，B价格冲突，C促销冲突，D信息暂缓；四条守恒。"
+            ]
+          },
+          "id": "retail-sales-workers.path.career-path-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七天试验只用同一虚构材料练核对、分流、记录和复盘。"
+            ]
+          },
+          "id": "retail-sales-workers.path.career-path-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "入职、培训、门店授权和特定商品或法域许可是不同状态。"
+            ]
+          },
+          "id": "retail-sales-workers.path.career-path-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "成长依据是交易准确性、顾客沟通和受监督责任，不承诺固定年限。"
+            ]
+          },
+          "id": "retail-sales-workers.path.career-path-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "BLS较窄组合就业由2025年4,271,400人变为2035年4,265,700人。"
+            ]
+          },
+          "id": "retail-sales-workers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "bls-ooh-retail-sales"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "该变化四舍五入为0%，即总体少有或无变化。"
+            ]
+          },
+          "id": "retail-sales-workers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "bls-ooh-retail-sales"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "期间年均约550,600个开岗，主要来自转岗或退出劳动力市场后的替补。"
+            ]
+          },
+          "id": "retail-sales-workers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "bls-ooh-retail-sales"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "该BLS父类职业组合不包含本页收银员和柜台与租赁文员，不能当作三实体统一预测。"
+            ]
+          },
+          "id": "retail-sales-workers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "bls-ooh-retail-sales",
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "总体预测不等于个人录用概率；应按组成职业、地区和门店类型核对机会。"
+            ]
+          },
+          "id": "retail-sales-workers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "收银员处理付款与退款；柜台租赁文员处理服务或租赁订单；零售销售员识别需求、推荐商品并完成销售。",
+                "id": "retail-sales-workers.faq.1",
+                "question_key": "career.faq.retail-sales-workers.daily-work",
+                "source_refs": [
+                  "onet-cashiers",
+                  "onet-counter-rental",
+                  "onet-retail-salespersons"
+                ]
+              },
+              {
+                "answer": "药房助理有药房支持边界，两类销售主管监督人员，博彩柜台处理筹码与钱柜；柜台租赁文员则是本页组合内可深入查看的细分实体。",
+                "id": "retail-sales-workers.faq.2",
+                "question_key": "career.faq.retail-sales-workers.role-comparison",
+                "source_refs": [
+                  "adj-gambling",
+                  "adj-nonretail-supervisor",
+                  "adj-pharmacy",
+                  "adj-retail-supervisor",
+                  "editorial",
+                  "onet-counter-rental"
+                ]
+              },
+              {
+                "answer": "适配证据是能澄清需求、准确核价、复核交易记录，并在价格冲突或越权请求时停手。",
+                "id": "retail-sales-workers.faq.3",
+                "question_key": "career.faq.retail-sales-workers.fit",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "AI可辅助批准信息检索和记录检查，但不能确认现场价签、商品状态或付款结果。",
+                "id": "retail-sales-workers.faq.4",
+                "question_key": "career.faq.retail-sales-workers.ai-impact",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "人员必须核对原始价签、促销条件、顾客请求和交易结果；冲突交有权限人员。",
+                "id": "retail-sales-workers.faq.5",
+                "question_key": "career.faq.retail-sales-workers.human-control",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "中国精确三职业工资分布未建立；4,382元/月仅是2025年批发和零售业农民工的特定人群行业代理。",
+                "fact_refs": [
+                  "cn-pay"
+                ],
+                "id": "retail-sales-workers.faq.6",
+                "question_key": "career.faq.retail-sales-workers.china-pay",
+                "source_refs": [
+                  "nbs-2025-migrant-monitoring"
+                ]
+              },
+              {
+                "answer": "2025年美国中位工资分别为：收银员32,880美元/年，柜台与租赁文员41,300美元/年，零售销售员35,410美元/年；三者不可合并。",
+                "fact_refs": [
+                  "wage-cashier",
+                  "wage-counter",
+                  "wage-retail"
+                ],
+                "id": "retail-sales-workers.faq.7",
+                "question_key": "career.faq.retail-sales-workers.us-pay",
+                "source_refs": [
+                  "editorial",
+                  "wage-cashier",
+                  "wage-counter",
+                  "wage-retail"
+                ]
+              },
+              {
+                "answer": "典型入口通常不要求正式学历凭证，多数技能在岗学习；特定商品或法域可能另有要求。",
+                "id": "retail-sales-workers.faq.8",
+                "question_key": "career.faq.retail-sales-workers.education-path",
+                "source_refs": [
+                  "bls-ooh-retail-sales",
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "价格或促销冲突时暂停；退款、维修、押金和个人信息只按批准规则处理并留存原始记录。",
+                "id": "retail-sales-workers.faq.9",
+                "question_key": "career.faq.retail-sales-workers.risk-boundary",
+                "source_refs": [
+                  "samr-consumer-regulation",
+                  "samr-price-regulation"
+                ]
+              },
+              {
+                "answer": "BLS父类职业组合2025—2035年增长率为0%、年均约550,600个开岗；该组合只含parts salespersons与retail salespersons，不包含本页收银员或柜台与租赁文员，因此不能当作三实体统一预测，也不能推导个人录用概率。",
+                "fact_refs": [
+                  "market"
+                ],
+                "id": "retail-sales-workers.faq.10",
+                "question_key": "career.faq.retail-sales-workers.outlook-transition",
+                "source_refs": [
+                  "bls-ooh-retail-sales",
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "是否值得进入，应看纸面核价、需求澄清、记录复核和边界意识的表现。",
+                "id": "retail-sales-workers.faq.11",
+                "question_key": "career.faq.retail-sales-workers.career-worth",
+                "source_refs": [
+                  "editorial"
+                ]
+              }
+            ]
+          },
+          "id": "retail-sales-workers.sources.faq.1",
+          "source_refs": [
+            "adj-gambling",
+            "adj-nonretail-supervisor",
+            "adj-pharmacy",
+            "adj-retail-supervisor",
+            "bls-ooh-retail-sales",
+            "editorial",
+            "nbs-2025-migrant-monitoring",
+            "onet-cashiers",
+            "onet-counter-rental",
+            "onet-retail-salespersons",
+            "samr-consumer-regulation",
+            "samr-price-regulation",
+            "wage-cashier",
+            "wage-counter",
+            "wage-retail"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "中国、美国和编辑方法分别陈述，不跨市场拼接工资或就业结论。",
+              "柜台与租赁文员虽同时出现在相邻链接中，仍是本页组合内实体；该链接仅供细分阅读。",
+              "本文不替代具体门店规则、合同、消费者权益或价格合规意见。"
+            ]
+          },
+          "id": "retail-sales-workers.sources.boundary.1",
+          "source_refs": [
+            "adj-gambling",
+            "adj-nonretail-supervisor",
+            "adj-pharmacy",
+            "adj-retail-supervisor",
+            "bls-ooh-retail-sales",
+            "editorial",
+            "nbs-2025-migrant-monitoring",
+            "onet-cashiers",
+            "onet-counter-rental",
+            "onet-retail-salespersons",
+            "samr-consumer-regulation",
+            "samr-price-regulation",
+            "wage-cashier",
+            "wage-counter",
+            "wage-retail"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "零售销售人员",
+                "id": "retail-sales-workers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "零售销售人员",
+                "id": "retail-sales-workers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "零售销售人员",
+                "id": "retail-sales-workers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "零售销售人员",
+                "id": "retail-sales-workers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "零售销售人员",
+                "id": "retail-sales-workers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "零售销售人员",
+                "id": "retail-sales-workers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "零售销售人员",
+                "id": "retail-sales-workers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "零售销售人员",
+                "id": "retail-sales-workers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "零售销售人员",
+                "id": "retail-sales-workers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "零售销售人员",
+                "id": "retail-sales-workers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "零售销售人员",
+                "id": "retail-sales-workers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "retail-sales-workers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2026-09-07实际打开O*NET博彩换筹与柜台收银员全文；定位筹码兑换、钱柜审计与博彩身份核验。",
+                  "仅用于博彩换筹与柜台收银员相邻职责比较。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adj-gambling",
+                "limitation": "仅用于博彩换筹与柜台收银员相邻职责比较。",
+                "market": "美国",
+                "name": "41-2012.00 - Gambling Change Persons and Booth Cashiers",
+                "period": "O*NET updated 2026",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/41-2012.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2026-09-07实际打开O*NET非零售销售主管全文；定位非零售团队监督与协调职责。",
+                  "仅用于非零售销售主管相邻职责比较。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adj-nonretail-supervisor",
+                "limitation": "仅用于非零售销售主管相邻职责比较。",
+                "market": "美国",
+                "name": "41-1012.00 - First-Line Supervisors of Non-Retail Sales Workers",
+                "period": "O*NET updated 2026",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/41-1012.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2026-09-07实际打开O*NET药房助理全文；定位药品入库记录、库存与接收处方的支持边界。",
+                  "仅用于药房助理相邻职责比较。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adj-pharmacy",
+                "limitation": "仅用于药房助理相邻职责比较。",
+                "market": "美国",
+                "name": "31-9095.00 - Pharmacy Aides",
+                "period": "O*NET updated 2026",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/31-9095.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2026-09-07实际打开O*NET零售销售主管全文；定位直接监督、排班、绩效与授权职责。",
+                  "仅用于零售销售主管相邻职责比较。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adj-retail-supervisor",
+                "limitation": "仅用于零售销售主管相邻职责比较。",
+                "market": "美国",
+                "name": "41-1011.00 - First-Line Supervisors of Retail Sales Workers",
+                "period": "O*NET updated 2026",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/41-1011.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2026-09-07实际打开BLS Retail Sales Workers全文，共583行；定位较窄组合定义、2025工资、路径与2025—2035预测。",
+                  "BLS父类组合只含parts salespersons与retail salespersons，不覆盖本页三实体组合。"
+                ],
+                "evidence_type": "official occupational outlook profile",
+                "id": "bls-ooh-retail-sales",
+                "limitation": "BLS父类组合只含parts salespersons与retail salespersons，不覆盖本页三实体组合。",
+                "market": "美国",
+                "name": "Retail Sales Workers",
+                "period": "May 2025 wages; 2025-2035 projections",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/ooh/sales/retail-sales-workers.htm"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "支持组合范围说明、AI与人工控制、求职方法及完全虚构的纸面练习。",
+                  "编辑控制不作为外部职业事实或法律意见。"
+                ],
+                "evidence_type": "official source",
+                "id": "editorial",
+                "limitation": "编辑控制不作为外部职业事实或法律意见。",
+                "market": "编辑设计",
+                "name": "零售交易虚构核对练习",
+                "period": "2026-09-07",
+                "publisher": "FermatMind 编辑设计",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2026-09-07实际打开国家统计局2025年农民工监测调查报告全文；仅保留批发零售业特定人群行业代理。",
+                  "特定人群×行业平均收入，不是精确职业工资。"
+                ],
+                "evidence_type": "official migrant worker monitoring survey",
+                "id": "nbs-2025-migrant-monitoring",
+                "limitation": "特定人群×行业平均收入，不是精确职业工资。",
+                "market": "中国大陆",
+                "name": "2025年农民工监测调查报告",
+                "period": "2025 migrant worker monitoring survey; published 2026-04-30",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202604/t20260430_1963472.html"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2026-09-07实际打开O*NET 41-2011.00完整详情页，共1308行；定位身份、付款、收据退款、价格和交易任务。",
+                  "美国 41-2011.00 细分职业，不覆盖全部零售销售。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-cashiers",
+                "limitation": "美国 41-2011.00 细分职业，不覆盖全部零售销售。",
+                "market": "美国",
+                "name": "41-2011.00 Cashiers",
+                "period": "O*NET updated 2026",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/41-2011.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2026-09-07实际打开O*NET 41-2021.00完整详情页，共1289行；定位身份、租赁/服务订单、费用、合同和归还任务。",
+                  "美国 41-2021.00 细分职业，不等于零售销售主管。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-counter-rental",
+                "limitation": "美国 41-2021.00 细分职业，不等于零售销售主管。",
+                "market": "美国",
+                "name": "41-2021.00 Counter and Rental Clerks",
+                "period": "O*NET updated 2026",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/41-2021.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2026-09-07实际打开O*NET 41-2031.00完整页面，共616行；定位身份、需求识别、商品建议、付款和退换货任务。",
+                  "美国 41-2031.00 细分职业，不覆盖收银或租赁柜台全部任务。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-retail-salespersons",
+                "limitation": "美国 41-2031.00 细分职业，不覆盖收银或租赁柜台全部任务。",
+                "market": "美国",
+                "name": "41-2031.00 Retail Salespersons",
+                "period": "O*NET updated 2026",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/41-2031.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2026-09-07实际打开《消费者权益保护法实施条例》全文；定位退换修理、押金、预付款和个人信息边界。",
+                  "适用于经营者，不代替个案法律判断。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "samr-consumer-regulation",
+                "limitation": "适用于经营者，不代替个案法律判断。",
+                "market": "中国大陆",
+                "name": "中华人民共和国消费者权益保护法实施条例",
+                "period": "effective 2024-07-01; retrieved 2026-08-30",
+                "publisher": "国家市场监督管理总局",
+                "scope": "industry_proxy",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2024/art_0aea188276a44f0baf940ab95ee00e0a.html"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2026-09-07实际打开《明码标价和禁止价格欺诈规定》全文；定位价格比较、折价与价格欺诈条款。",
+                  "适用于经营者的合规规则，不代替个案法律意见。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "samr-price-regulation",
+                "limitation": "适用于经营者的合规规则，不代替个案法律意见。",
+                "market": "中国大陆",
+                "name": "明码标价和禁止价格欺诈规定",
+                "period": "effective 2022-07-01; retrieved 2026-08-30",
+                "publisher": "国家市场监督管理总局",
+                "scope": "industry_proxy",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2023/art_9a1f82a007964950a1a0f6c056f2fedf.html"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2026-09-07实际打开收银员全国工资全文；定位2025中位和10/90边界。",
+                  "美国41-2011.00精确职业工资，不覆盖另两个组成职业。"
+                ],
+                "evidence_type": "official wage table",
+                "id": "wage-cashier",
+                "limitation": "美国41-2011.00精确职业工资，不覆盖另两个组成职业。",
+                "market": "美国",
+                "name": "National Wages: 41-2011.00 - Cashiers",
+                "period": "2025",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/41-2011.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2026-09-07实际打开柜台与租赁文员全国工资全文；定位2025中位和10/90边界。",
+                  "美国41-2021.00精确职业工资，不覆盖另两个组成职业。"
+                ],
+                "evidence_type": "official wage table",
+                "id": "wage-counter",
+                "limitation": "美国41-2021.00精确职业工资，不覆盖另两个组成职业。",
+                "market": "美国",
+                "name": "National Wages: 41-2021.00 - Counter and Rental Clerks",
+                "period": "2025",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/41-2021.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2026-09-07实际打开零售销售员全国工资全文；定位2025中位和10/90边界。",
+                  "美国41-2031.00精确职业工资，不覆盖另两个组成职业。"
+                ],
+                "evidence_type": "official wage table",
+                "id": "wage-retail",
+                "limitation": "美国41-2031.00精确职业工资，不覆盖另两个组成职业。",
+                "market": "美国",
+                "name": "National Wages: 41-2031.00 - Retail Salespersons",
+                "period": "2025",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/41-2031.00"
+              }
+            ]
+          },
+          "id": "retail-sales-workers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "41-2011.00",
+        "fact_id": "identity-cashier",
+        "market": "美国",
+        "measure": "O*NET职业代码",
+        "occupation_scope": "精确职业数据：美国收银员",
+        "period": "O*NET updated 2026",
+        "source_refs": [
+          "onet-cashiers"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "41-2021.00",
+        "fact_id": "identity-counter",
+        "market": "美国",
+        "measure": "O*NET职业代码",
+        "occupation_scope": "精确职业数据：美国柜台与租赁文员",
+        "period": "O*NET updated 2026",
+        "source_refs": [
+          "onet-counter-rental"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "41-2031.00",
+        "fact_id": "identity-retail",
+        "market": "美国",
+        "measure": "O*NET职业代码",
+        "occupation_scope": "精确职业数据：美国零售销售员",
+        "period": "O*NET updated 2026",
+        "source_refs": [
+          "onet-retail-salespersons"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "4,382元/月",
+        "fact_id": "cn-pay",
+        "market": "中国大陆",
+        "measure": "批发和零售业农民工月均收入",
+        "occupation_scope": "特定人群行业代理，非精确职业",
+        "period": "2025 migrant worker monitoring survey; published 2026-04-30",
+        "source_refs": [
+          "nbs-2025-migrant-monitoring"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "32,880美元/年；15.81美元/时",
+        "fact_id": "wage-cashier",
+        "market": "美国",
+        "measure": "工资中位数",
+        "occupation_scope": "精确职业数据：美国收银员41-2011.00",
+        "period": "2025",
+        "source_refs": [
+          "wage-cashier"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "41,300美元/年；19.86美元/时",
+        "fact_id": "wage-counter",
+        "market": "美国",
+        "measure": "工资中位数",
+        "occupation_scope": "精确职业数据：美国柜台与租赁文员41-2021.00",
+        "period": "2025",
+        "source_refs": [
+          "wage-counter"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "35,410美元/年；17.03美元/时",
+        "fact_id": "wage-retail",
+        "market": "美国",
+        "measure": "工资中位数",
+        "occupation_scope": "精确职业数据：美国零售销售员41-2031.00",
+        "period": "2025",
+        "source_refs": [
+          "wage-retail"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "0%；550,600个/年",
+        "fact_id": "market",
+        "market": "美国",
+        "measure": "较窄BLS组合增长率与年均开岗",
+        "occupation_scope": "父类职业数据：parts salespersons与retail salespersons，非本页三实体组合",
+        "period": "May 2025 wages; 2025-2035 projections",
+        "source_refs": [
+          "bls-ooh-retail-sales"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "41872b1e88e189b7b8f879befd870f7073a4bf29dfad16eb410934778d2543eb",
+  "source_content_sha256": "0e0a8d2b13c19af714c2ea68df2cb5d754a14f44618de3051250f90d4c454e66",
   "subject": {
     "canonical_slug": "retail-sales-workers",
     "name": "零售销售人员",
-    "summary": null
+    "summary": "零售销售人员页面组合呈现收银员、柜台与租赁文员、零售销售员：共同连接顾客需求、商品或服务信息、价格、付款和可复核记录，但三个实体的工资与统计必须分开。"
   }
 }

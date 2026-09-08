@@ -1,12 +1,1645 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：这份工作不是‘找违规’，而是把范围、要求、证据、危害、优先级、纠正、验证、残余风险和授权状态闭环。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "ed-fit",
+            "ed-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "可观察信号：不把缺项当安全；区分建议、已实施与已验证；追问系统原因；权限不明时升级。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "60分钟虚构桌面样本：H1=4×3、14人、控制未验证；H2=2×2、6人、已验证；H3严重度5但可能性缺失。≥10为A，其他为B，缺输入为UNSCORED。不得进入真实现场。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考答案：H1=12/A但未验证；H2=4/B且已验证；H3=UNSCORED。整体未闭环，不能宣称所有风险已排序或整改完成。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "ed-sim"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业边界：O*NET 17-2111.00，运用工程与健康安全知识促进工作场所或产品安全；排除矿山安全工程师和检查员。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.profile.definition-block.1",
+          "source_refs": [
+            "onet-health-safety"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "工作对象：产品设计、设施、机器、安全设备、事故资料、检查/测试记录和适用要求。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.profile.responsibilities-block.1",
+          "source_refs": [
+            "bls-ooh",
+            "onet-health-safety"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "核心任务：调查事故伤害或职业病、评估设计安全、识别危害并建议纠正。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.profile.responsibilities-block.2",
+          "source_refs": [
+            "bls-ooh",
+            "onet-health-safety"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "协作任务：培训、解释规定、访谈相关人员、审查安全项目并记录或复核发现。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.profile.responsibilities-block.3",
+          "source_refs": [
+            "bls-ooh",
+            "onet-health-safety"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "完整流程：定范围要求—收证据—识别危害—评优先级—提控制—跟踪纠正—验证—授权关闭或升级。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.profile.work-context-block.1",
+          "source_refs": [
+            "ed-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作情境：通常办公室工作，也可能去现场；多数全职，部分超过40小时。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.profile.work-context-block.2",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "准备程度：BLS典型入口为工程或相关领域学士；实习/合作教育可能有帮助。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "可检查产出：范围依据、危害登记、证据、假设、责任期限、验证、残余风险和授权状态。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "ed-output"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：对象版本一致、缺项未知、规则预声明、纠正不冒充验证、建议与签字分开。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "ed-output"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "相邻边界：质量体系、组织合规、环境执法、组织安保和网络渗透测试与本职业核心责任不同。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.profile.definition-block.2",
+          "source_refs": [
+            "onet-compliance",
+            "onet-env-inspector",
+            "onet-health-safety",
+            "onet-pentest",
+            "onet-quality",
+            "onet-security"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "quality-control-systems-managers",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/quality-control-systems-managers"
+              },
+              {
+                "entity": "compliance-managers",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/compliance-managers"
+              },
+              {
+                "entity": "environmental-compliance-inspectors",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/environmental-compliance-inspectors"
+              },
+              {
+                "entity": "security-management-specialists",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/security-management-specialists"
+              },
+              {
+                "entity": "penetration-testers",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/penetration-testers"
+              }
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-compliance",
+            "onet-env-inspector",
+            "onet-health-safety",
+            "onet-pentest",
+            "onet-quality",
+            "onet-security"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "质量控制系统经理规划、指挥或协调质量保证项目；本职业聚焦工作场所或产品安全工程。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-compliance",
+            "onet-env-inspector",
+            "onet-health-safety",
+            "onet-pentest",
+            "onet-quality",
+            "onet-security"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "合规经理协调组织活动以符合伦理或监管标准；本职业还需工程化识别与控制物理、化学等危害。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-compliance",
+            "onet-env-inspector",
+            "onet-health-safety",
+            "onet-pentest",
+            "onet-quality",
+            "onet-security"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "环境合规检查员调查污染源并确保环境法规符合；本职业范围更偏工作场所或产品安全。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-compliance",
+            "onet-env-inspector",
+            "onet-health-safety",
+            "onet-pentest",
+            "onet-quality",
+            "onet-security"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "安全管理专家设计组织安保系统；渗透测试员用模拟网络攻击评估系统安全，均不同于工业健康与产品安全工程。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-compliance",
+            "onet-env-inspector",
+            "onet-health-safety",
+            "onet-pentest",
+            "onet-quality",
+            "onet-security"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助：法规检索、记录去重、趋势分析、风险表和报告草稿。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用条件：对象、版本、法域、数据谱系和访问权限明确。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数据门槛：原始证据、缺项、假设、修改和验证状态可追溯。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工控制：确认范围、现场/采样条件、工程判断、控制优先级和残余风险。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余责任：工具不能确认真实现场、控制有效性、适用法条或签字权限。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "失败风险：旧版要求、错对象、缺项补零、伪精确评分、敏感资料泄露或自动关闭。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业边界：辅助任务可自动化不等于岗位替代比例或本地采用率。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实践响应：先用虚构风险表验证规则，真实工作服从机构程序和授权链。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：中国大陆暂无可安全使用的数据表示与美国17-2111.00精确对应的全国工资。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：国家统计局2025资料按行业和宽泛岗位大类发布，不能替代精确职业中位数。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "计量口径：年薪、月薪、基本工资、津贴、奖金和项目报酬不可混用。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "求职用法：统一地区、行业、产品/现场方向、班次出差、责任、学历证书与福利后比较。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：BLS/O*NET的美国17-2111.00全国工资。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "bls-ooh",
+            "onet-health-safety"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：2025年5月。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "bls-ooh",
+            "onet-health-safety"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数：年薪115,160美元；O*NET同时显示时薪55.36美元。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "bls-ooh",
+            "onet-health-safety"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "计量单位：年薪与时薪同属美国全国口径，不能与中国月薪直接混用。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "bls-ooh",
+            "onet-health-safety"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "覆盖人群：精确职业全国统计，不代表每个行业、州或责任级别。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "bls-ooh",
+            "onet-health-safety"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "决策限制：统计值不是起薪、个人报价、录用或收入保证。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "bls-ooh",
+            "onet-health-safety"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "事实信号：能区分观察、访谈、记录、推断和未知。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.fit.riasec-fit-block.1",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "系统信号：不止归因个人失误，还追设备、程序、培训和监督因素。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.fit.riasec-fit-block.2",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "闭环信号：纠正项有责任人、期限、验证证据和残余风险。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.fit.riasec-fit-block.3",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "边界信号：建议、批准、停复工与签字状态明确。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.fit.riasec-fit-block.4",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：为赶进度把缺项当零风险会放大伤害后果。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.fit.riasec-fit-block.5",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：只会套评分而不能解释证据与假设，不适合高责任判断。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.fit.riasec-fit-block.6",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "验证方法：做本页风险表及‘补H3可能性1’和‘H1控制改已实施但未验证’两张变体。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.fit.riasec-fit-block.7",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "人格边界：谨慎自评不证明胜任；证据链、系统分析和受监督表现更重要。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.fit.riasec-fit-block.8",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "对象错误：设备、产品、过程、版本或法域不明时停止受影响结论。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.risk.career-risk-cards.1",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "证据缺口：缺测、缺访谈或冲突记录保持未知，不填零、不删异常。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.risk.career-risk-cards.2",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "方法风险：评分矩阵须预声明；分数用于排序，不自动证明风险可接受。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.risk.career-risk-cards.3",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "闭环风险：建议、已实施、已验证和授权关闭是不同状态。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.risk.career-risk-cards.4",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同规则：现场条件、检测能力、工程判断、整改验证或签字权限不明时，保存记录并升级给有权角色。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.risk.career-risk-cards.5",
+          "source_refs": [
+            "ed-path",
+            "ed-risk"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "现实入口：工程基础、健康安全知识、要求检索、危害登记、根因分析、数据处理和技术写作。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.path.career-path-block.1",
+          "source_refs": [
+            "bls-ooh",
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "雇主证据：核实行业、现场、危害类型、检测培训、出差值守、复核、停复工和签字授权。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.path.career-path-block.2",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品：完成本页虚构风险表，展示计算、缺项、状态与升级。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.path.career-path-block.3",
+          "source_refs": [
+            "ed-path",
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "面试与试用：解释为何H1高分仍不能写成控制有效，H3也不能填零。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.path.career-path-block.4",
+          "source_refs": [
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七天试验：范围表、证据分类、风险计算、缺项表、两张变体、授权链和复盘各一天。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.path.career-path-block.5",
+          "source_refs": [
+            "ed-path",
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "资格决策：美国入门岗位通常不要求执照，但PE监督/签字及州要求另核；中国岗位另按实际法域核验。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.path.career-path-block.6",
+          "source_refs": [
+            "bls-ooh",
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "能力阶梯：先稳资料与记录，再做受监督分析，最后承担复杂控制设计与授权范围内的验收签字。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.path.career-path-block.7",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转型路径：质量、合规、环境检查、安保或网络安全方向须补相应对象、方法、法规和授权证据。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.path.career-path-block.8",
+          "source_refs": [
+            "ed-path",
+            "onet-compliance",
+            "onet-env-inspector",
+            "onet-health-safety",
+            "onet-pentest",
+            "onet-quality",
+            "onet-security"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "官方信号：BLS/O*NET提供美国职业资料，不证明某地正在招聘。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.market-signals.market-signal-card.1",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "当前预测：BLS以2025为基期，2025—2035增长5%，2025就业约22,300，年均空缺约1,200。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.market-signals.market-signal-card.2",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "周期边界：不与O*NET仍显示的2024—2034数字拼接；空缺也不等于新增岗位。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.market-signals.market-signal-card.3",
+          "source_refs": [
+            "bls-ooh",
+            "ed-market",
+            "onet-health-safety"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "需求信号：法规与风险防护可能影响需求，但不构成个人录用保证。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.market-signals.market-signal-card.4",
+          "source_refs": [
+            "bls-ooh",
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "技术信号：自动分析会改变记录与筛查任务，不消除现场核验、工程判断、整改验证和签字责任。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.market-signals.market-signal-card.5",
+          "source_refs": [
+            "ed-ai",
+            "ed-market"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "可复核闭环是确认项目与适用要求、收集受控资料、识别危害、记录证据和未知、评估优先级、提出控制选项、验证纠正状态，并由有权角色批准、签字或决定停复工；任务包括调查事故伤害或职业病、评估产品设计安全、审查设备计划、检查设施机械或安全设备、建议纠正措施、培训、记录并解释结果。",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.faq.1",
+                "question_key": "career.faq.health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.daily-work",
+                "source_refs": [
+                  "bls-ooh",
+                  "ed-work",
+                  "onet-health-safety"
+                ]
+              },
+              {
+                "answer": "本职业以工作场所或产品安全工程为核心；质量控制系统经理统筹质量体系，合规经理统筹组织合规，环境合规检查员调查污染源，安全管理专家设计组织安保系统，渗透测试员以模拟网络攻击评估系统安全。",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.faq.2",
+                "question_key": "career.faq.health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.role-comparison",
+                "source_refs": [
+                  "onet-compliance",
+                  "onet-env-inspector",
+                  "onet-health-safety",
+                  "onet-pentest",
+                  "onet-quality",
+                  "onet-security"
+                ]
+              },
+              {
+                "answer": "适配度可通过能否区分事实与假设、保留未知、追到系统根因、给纠正项设责任/期限/验证证据，并在权限不明时升级来观察。",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.faq.3",
+                "question_key": "career.faq.health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.fit",
+                "source_refs": [
+                  "ed-fit"
+                ]
+              },
+              {
+                "answer": "数字工具可辅助法规检索、记录去重、趋势分析、风险表和报告草稿；不能确认现场真实状态、控制有效性、适用法条或个人签字权限。",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.faq.4",
+                "question_key": "career.faq.health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.ai-impact",
+                "source_refs": [
+                  "ed-ai"
+                ]
+              },
+              {
+                "answer": "人工控制点包括确认适用范围、访问与采样条件、证据完整性、工程判断、控制优先级、整改验证、残余风险以及授权批准。",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.faq.5",
+                "question_key": "career.faq.health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.human-control",
+                "source_refs": [
+                  "ed-ai"
+                ]
+              },
+              {
+                "answer": "国家统计局2025资料只有行业和宽泛岗位大类，不能给出与美国17-2111.00精确对应的中国大陆全国中位数或统一起薪。",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.faq.6",
+                "question_key": "career.faq.health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "BLS显示该职业2025年5月美国年薪中位数为115,160美元；O*NET也显示时薪55.36美元；美国全国中位数不是起薪、个人报价、中国工资或每个行业结果。",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.faq.7",
+                "question_key": "career.faq.health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.us-pay",
+                "source_refs": [
+                  "bls-ooh",
+                  "onet-health-safety"
+                ]
+              },
+              {
+                "answer": "入门先练要求检索、版本核对、危害登记、证据链、缺项标记和纠正验证；只用虚构纸面资料，不进入真实危险区域或作停复工决定；资料整理、风险分析、现场进入、检测采样、控制设计、整改验收、停复工、监管申报和工程签字是不同能力与权限，须按雇主、项目与法域逐项核验；BLS称美国入门岗位不要求执照；有经验工程师可取得PE执照以监督其他工程师、签署项目并直接向公众提供服务，而具体要求由各州决定。",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.faq.8",
+                "question_key": "career.faq.health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.education-path",
+                "source_refs": [
+                  "bls-ooh",
+                  "ed-path"
+                ]
+              },
+              {
+                "answer": "关键风险包括错对象/旧版本、把缺项当零风险、只责怪个人而漏掉系统原因、评分模型伪精确、整改未验证即关闭、敏感事故资料泄露和越权签字。",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.faq.9",
+                "question_key": "career.faq.health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.risk-boundary",
+                "source_refs": [
+                  "ed-risk"
+                ]
+              },
+              {
+                "answer": "BLS当前OOH以2025为基期，预计2025—2035就业增长5%，快于全职业平均；BLS显示2025就业约22,300，未来十年平均每年约1,200个空缺，许多来自转职或退出劳动力市场的替补。",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.faq.10",
+                "question_key": "career.faq.health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.outlook-transition",
+                "source_refs": [
+                  "bls-ooh"
+                ]
+              },
+              {
+                "answer": "工资、就业、预测、年度空缺、行业结构、法规变化和自动化采用是不同信号，不能合并为个人录用概率；适配度可通过能否区分事实与假设、保留未知、追到系统根因、给纠正项设责任/期限/验证证据，并在权限不明时升级来观察。",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.faq.11",
+                "question_key": "career.faq.health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.career-worth",
+                "source_refs": [
+                  "ed-fit",
+                  "ed-market"
+                ]
+              }
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.sources.faq.1",
+          "source_refs": [
+            "bls-ooh",
+            "ed-ai",
+            "ed-fit",
+            "ed-market",
+            "ed-path",
+            "ed-risk",
+            "ed-work",
+            "nbs-wages",
+            "onet-compliance",
+            "onet-env-inspector",
+            "onet-health-safety",
+            "onet-pentest",
+            "onet-quality",
+            "onet-security"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "O*NET职业事实、BLS美国统计与资格边界、中国行业代理及编辑建议分别陈述。",
+              "本页只供职业决策和虚构桌面练习，不构成现场检查、停复工、监管申报或工程签字意见。",
+              "中国精确职业工资与具体法域资格须另核。"
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.sources.boundary.1",
+          "source_refs": [
+            "bls-ooh",
+            "ed-ai",
+            "ed-fit",
+            "ed-market",
+            "ed-output",
+            "ed-path",
+            "ed-risk",
+            "ed-sim",
+            "ed-work",
+            "nbs-wages",
+            "onet-compliance",
+            "onet-env-inspector",
+            "onet-health-safety",
+            "onet-pentest",
+            "onet-quality",
+            "onet-security"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "健康与安全工程师（矿山安全工程师与检查员除外）",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "健康与安全工程师（矿山安全工程师与检查员除外）",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "健康与安全工程师（矿山安全工程师与检查员除外）",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "健康与安全工程师（矿山安全工程师与检查员除外）",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "健康与安全工程师（矿山安全工程师与检查员除外）",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "健康与安全工程师（矿山安全工程师与检查员除外）",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "健康与安全工程师（矿山安全工程师与检查员除外）",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "健康与安全工程师（矿山安全工程师与检查员除外）",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "健康与安全工程师（矿山安全工程师与检查员除外）",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "健康与安全工程师（矿山安全工程师与检查员除外）",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "健康与安全工程师（矿山安全工程师与检查员除外）",
+                "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对职责、教育、美国资格边界、2025工资与2025—2035预测。",
+                  "美国全国职业资料；州执照要求需逐州核验。"
+                ],
+                "evidence_type": "official occupational outlook",
+                "id": "bls-ooh",
+                "limitation": "美国全国职业资料；州执照要求需逐州核验。",
+                "market": "美国",
+                "name": "Occupational Outlook Handbook - Health and Safety Engineers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/health-and-safety-engineers.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实现场检查、风险批准、停复工、监管申报或工程签字指令。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-ai",
+                "limitation": "不构成真实现场检查、风险批准、停复工、监管申报或工程签字指令。",
+                "market": "全球",
+                "name": "安全工程数字工具边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实现场检查、风险批准、停复工、监管申报或工程签字指令。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-fit",
+                "limitation": "不构成真实现场检查、风险批准、停复工、监管申报或工程签字指令。",
+                "market": "全球",
+                "name": "安全工程适配观察",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实现场检查、风险批准、停复工、监管申报或工程签字指令。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-market",
+                "limitation": "不构成真实现场检查、风险批准、停复工、监管申报或工程签字指令。",
+                "market": "全球",
+                "name": "安全工程市场边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实现场检查、风险批准、停复工、监管申报或工程签字指令。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-output",
+                "limitation": "不构成真实现场检查、风险批准、停复工、监管申报或工程签字指令。",
+                "market": "全球",
+                "name": "安全工程产出质量",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实现场检查、风险批准、停复工、监管申报或工程签字指令。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-path",
+                "limitation": "不构成真实现场检查、风险批准、停复工、监管申报或工程签字指令。",
+                "market": "全球",
+                "name": "安全工程入门路径",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实现场检查、风险批准、停复工、监管申报或工程签字指令。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-risk",
+                "limitation": "不构成真实现场检查、风险批准、停复工、监管申报或工程签字指令。",
+                "market": "全球",
+                "name": "安全工程风险边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实现场检查、风险批准、停复工、监管申报或工程签字指令。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-sim",
+                "limitation": "不构成真实现场检查、风险批准、停复工、监管申报或工程签字指令。",
+                "market": "全球",
+                "name": "虚构风险登记表练习",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实现场检查、风险批准、停复工、监管申报或工程签字指令。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-work",
+                "limitation": "不构成真实现场检查、风险批准、停复工、监管申报或工程签字指令。",
+                "market": "全球",
+                "name": "安全工程闭环",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对中国行业和宽泛岗位工资口径。",
+                  "不能替代本职业精确工资。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "nbs-wages",
+                "limitation": "不能替代本职业精确工资。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wages; published 2026-05-15; accessed 2026-09-06",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-compliance",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "11-9199.02 - Compliance Managers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-9199.02"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-env-inspector",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "13-1041.01 - Environmental Compliance Inspectors",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-1041.01"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对身份、任务、环境、准备、工资和旧预测周期。",
+                  "页面说明部分画像仍在采集中；只按已显示内容使用。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-health-safety",
+                "limitation": "页面说明部分画像仍在采集中；只按已显示内容使用。",
+                "market": "美国",
+                "name": "17-2111.00 - Health and Safety Engineers, Except Mining Safety Engineers and Inspectors",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2111.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-pentest",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "15-1299.04 - Penetration Testers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-1299.04"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-quality",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "11-3051.01 - Quality Control Systems Managers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-3051.01"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-security",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "13-1199.07 - Security Management Specialists",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-1199.07"
+              }
+            ]
+          },
+          "id": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "精确职业数据：O*NET 17-2111.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业身份",
+        "occupation_scope": "健康与安全工程师（矿山安全工程师与检查员除外） / 17-2111.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-health-safety"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "事故调查、设计审查、危害识别、纠正建议与培训",
+        "fact_id": "tasks",
+        "market": "美国",
+        "measure": "核心任务",
+        "occupation_scope": "健康与安全工程师（矿山安全工程师与检查员除外） / 17-2111.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "bls-ooh",
+          "onet-health-safety"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "范围—证据—危害—优先级—控制—验证—授权",
+        "fact_id": "workflow",
+        "market": "全球",
+        "measure": "工作闭环",
+        "occupation_scope": "健康与安全工程师（矿山安全工程师与检查员除外） / 17-2111.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "ed-work"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "事实假设、系统根因、纠正验证与权限升级",
+        "fact_id": "fit",
+        "market": "全球",
+        "measure": "适配信号",
+        "occupation_scope": "健康与安全工程师（矿山安全工程师与检查员除外） / 17-2111.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "ed-fit"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "对象、证据、方法、闭环、隐私与签字",
+        "fact_id": "risk",
+        "market": "全球",
+        "measure": "风险边界",
+        "occupation_scope": "健康与安全工程师（矿山安全工程师与检查员除外） / 17-2111.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "ed-risk"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "9609d31e51a3b365fc98a47aa5fd34b9a6da7e249e41449165daba207ea8df5e",
+  "source_content_sha256": "9e6dc3f42c3172883a0a638d0380be536dd2eeae1d7dd4d0a1c82cd4904f3657",
   "subject": {
     "canonical_slug": "health-and-safety-engineers-except-mining-safety-engineers-and-inspectors",
     "name": "健康与安全工程师（矿山安全工程师与检查员除外）",
-    "summary": null
+    "summary": "以工程方法识别工作场所或产品危害，形成可追溯建议并验证纠正状态，严格区分未知、已实施、已验证与授权签字。"
   }
 }

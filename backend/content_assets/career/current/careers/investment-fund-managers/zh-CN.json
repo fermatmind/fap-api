@@ -1,12 +1,1831 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：投资基金经理不是靠一次押中方向，而是把投资目标、风险承受、流动性和合规限制转成组合决策，并让每次配置、交易、例外和复盘都有证据可查。若你愿意在信息不完整时写清假设、主动寻找反证，并接受风控、合规和授权人的挑战，这条路径值得试做。"
+            ]
+          },
+          "id": "investment-fund-managers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial-decision",
+            "editorial-simulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "可观察信号：你能解释为什么某项资产进入或退出组合，能区分市场观点与授权边界，能在限额冲突、数据异常或利益冲突出现时暂停，而不是用资历或直觉掩盖不确定性。谨慎信号是只谈收益、不愿记录依据，或把审批与复核当作形式。"
+            ]
+          },
+          "id": "investment-fund-managers.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial-decision",
+            "editorial-simulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全工作样本（60分钟，完全虚构）：某基金净资产1,000万元，当前为股票65%、债券25%、现金10%。提案卖出相当于基金净资产5个百分点的债券和3个百分点的现金，买入占基金净资产8%的关联方产品；其管理费1.2%，同类非关联产品0.2%。限制为单一产品不超过5%、现金不低于5%、至少80%资产可在一天内变现。材料未提供现有三类资产和新产品的一日变现比例，也未提供既有单只产品持仓。不得使用真实客户或雇主数据。"
+            ]
+          },
+          "id": "investment-fund-managers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial-decision",
+            "editorial-simulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考思路：调整后股票65%、债券20%、现金7%、关联产品8%，合计100%。新产品本身超过5%上限，现金仍高于5%；整体一日流动性和既有产品集中度因材料缺失只能标“未知”，不能推定通过或失败；关联关系与1.0个百分点费用差需按机构政策识别和处理。结论应为停止当前提案，补齐流动性与既有持仓数据并处理冲突，或把新产品降到允许范围后重新检查。输出一页备忘录，区分已知、计算、未知、冲突和授权人。"
+            ]
+          },
+          "id": "investment-fund-managers.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial-decision",
+            "editorial-simulation"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业边界：本页对应 O*NET 11-3031.03 Investment Fund Managers，核心是为机构或个人投资者提供的大型流动资产池规划、指挥或协调投资策略与运作，不泛化为所有财务管理岗位。"
+            ]
+          },
+          "id": "investment-fund-managers.profile.definition-block.1",
+          "source_refs": [
+            "editorial-path",
+            "source-pack-onet-custom",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "投入对象：投资政策、风险预算、基准、现金流预测、持仓与交易数据、研究材料、估值、费用、客户或基金约束。"
+            ]
+          },
+          "id": "investment-fund-managers.profile.responsibilities-block.1",
+          "source_refs": [
+            "editorial-path",
+            "source-pack-onet-custom",
+            "source-pack-onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "可检查产出：资产配置与再平衡提案、投资委员会材料、交易依据、风险与绩效归因、限制与例外记录、利益冲突处理和定期报告。"
+            ]
+          },
+          "id": "investment-fund-managers.profile.responsibilities-block.2",
+          "source_refs": [
+            "editorial-path",
+            "source-pack-onet-custom",
+            "source-pack-onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "完整工作流程：确认目标与限制；组织研究和情景分析；形成配置或交易提案；完成风险、合规与冲突检查；按授权执行；持续监控暴露、流动性、绩效和例外；复盘并报告。"
+            ]
+          },
+          "id": "investment-fund-managers.profile.responsibilities-block.3",
+          "source_refs": [
+            "editorial-path",
+            "source-pack-onet-custom",
+            "source-pack-onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断：预期收益是否补偿风险，数据与估值是否可靠，组合是否仍符合目标和限制，冲突是否已消除或充分披露，异常是否需要停止或升级。"
+            ]
+          },
+          "id": "investment-fund-managers.profile.work-context-block.1",
+          "source_refs": [
+            "editorial-path",
+            "source-pack-onet-custom",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "环境与节奏：市场变化快，但决策不能跳过审查。日常在研究、组合监控、会议、交易协调和报告之间切换；压力常来自波动、赎回、信息缺口与期限。"
+            ]
+          },
+          "id": "investment-fund-managers.profile.work-context-block.2",
+          "source_refs": [
+            "editorial-path",
+            "source-pack-onet-custom",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "工具与材料：行情与持仓系统、组合分析和风险模型、订单或交易管理系统、电子表格、投资政策书、合规规则库、研究与会议记录。"
+            ]
+          },
+          "id": "investment-fund-managers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "editorial-path",
+            "source-pack-onet-custom",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "协作链：研究员和交易员提供输入与执行，运营和估值团队核对数据，风险与合规提出限制和挑战，投资委员会或授权人批准重大决定，客户或基金治理主体接收报告。"
+            ]
+          },
+          "id": "investment-fund-managers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "editorial-path",
+            "source-pack-onet-custom",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：决策与既定目标一致，约束检查完整，数据和模型可追溯，费用和冲突透明，审批与例外留痕，执行后结果可监控和复盘。"
+            ]
+          },
+          "id": "investment-fund-managers.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial-path",
+            "source-pack-onet-custom",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "相邻职责边界：财务经理管理组织财务活动，财务主管侧重现金、融资与控制，管理分析师提出组织改进建议；本职业的核心对象是投资组合及其策略与运作。"
+            ]
+          },
+          "id": "investment-fund-managers.profile.definition-block.2",
+          "source_refs": [
+            "editorial-path",
+            "source-pack-onet-custom",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "chief-executives",
+                "id": "investment-fund-managers.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/chief-executives"
+              },
+              {
+                "entity": "financial-managers",
+                "id": "investment-fund-managers.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/financial-managers"
+              },
+              {
+                "entity": "treasurers-and-controllers",
+                "id": "investment-fund-managers.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/treasurers-and-controllers"
+              },
+              {
+                "entity": "management-analysts",
+                "id": "investment-fund-managers.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/management-analysts"
+              },
+              {
+                "entity": "compensation-benefits-and-job-analysis-specialists",
+                "id": "investment-fund-managers.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/compensation-benefits-and-job-analysis-specialists"
+              }
+            ]
+          },
+          "id": "investment-fund-managers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-chief-executives",
+            "onet-financial-managers",
+            "onet-management-analysts",
+            "onet-treasurers-controllers",
+            "source-pack-onet-details"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "与首席执行官相比：两者都参与重大资源决策；首席执行官对整个组织战略和经营结果负责，投资基金经理聚焦资产池的投资目标、组合风险和执行。"
+            ]
+          },
+          "id": "investment-fund-managers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-chief-executives",
+            "onet-financial-managers",
+            "onet-management-analysts",
+            "onet-treasurers-controllers",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "与财务经理相比：财务经理覆盖预算、报告、融资和财务控制等组织级活动；投资基金经理交付资产配置、投资选择、风险监控和组合表现。"
+            ]
+          },
+          "id": "investment-fund-managers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-chief-executives",
+            "onet-financial-managers",
+            "onet-management-analysts",
+            "onet-treasurers-controllers",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "与财务主管及财务总监相比：后者更重现金、资本结构、会计控制和财务报告；投资基金经理更重证券与资产组合的研究、配置、交易和持续监督。"
+            ]
+          },
+          "id": "investment-fund-managers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-chief-executives",
+            "onet-financial-managers",
+            "onet-management-analysts",
+            "onet-treasurers-controllers",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "与管理分析师相比：管理分析师诊断流程和组织效率并提出改进方案；投资基金经理要在授权范围内承担组合决策、风险和执行结果。"
+            ]
+          },
+          "id": "investment-fund-managers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-chief-executives",
+            "onet-financial-managers",
+            "onet-management-analysts",
+            "onet-treasurers-controllers",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助任务：自动汇集行情、持仓与公司披露，扫描限制，生成情景和归因分析，整理会议材料初稿。收益主要是减少重复整理并扩大可比较范围，不代表自动获得更好收益。"
+            ]
+          },
+          "id": "investment-fund-managers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial-ai-controls",
+            "sec-conflicts-bulletin",
+            "source-pack-onet-hot_tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用条件：数据许可、口径和更新时间可追溯；模型用途、版本和误差已定义；输出能进入现有审批、记录与复核流程；敏感数据和权限受到控制。"
+            ]
+          },
+          "id": "investment-fund-managers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial-ai-controls",
+            "sec-conflicts-bulletin",
+            "source-pack-onet-hot_tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数据与系统门槛：证券标识、公司行动、现金流、估值和基准必须对齐；缺失值、陈旧价格、重复持仓和单位错误会让看似精确的结果失真。"
+            ]
+          },
+          "id": "investment-fund-managers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial-ai-controls",
+            "sec-conflicts-bulletin",
+            "source-pack-onet-hot_tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人类控制：基金经理提出和解释假设，风险与合规核对限制和冲突，授权人批准重大配置或例外，交易与运营团队核对执行和账实。工具不能替代这些责任。"
+            ]
+          },
+          "id": "investment-fund-managers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial-ai-controls",
+            "sec-conflicts-bulletin",
+            "source-pack-onet-hot_tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余责任：判断目标是否改变、模型是否适用于当前市场、流动性是否可兑现、冲突是否可接受，并在证据不足时缩小或停止决策。"
+            ]
+          },
+          "id": "investment-fund-managers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial-ai-controls",
+            "sec-conflicts-bulletin",
+            "source-pack-onet-hot_tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "失败风险：错误数据会制造虚假暴露，模型漂移会低估尾部风险，自动摘要可能遗漏限制，生成内容可能编造事实；控制是回到原始记录、双人复核、限额测试和可回滚发布。"
+            ]
+          },
+          "id": "investment-fund-managers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial-ai-controls",
+            "sec-conflicts-bulletin",
+            "source-pack-onet-hot_tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业证据边界：O*NET 的技术清单只能证明工具在职业资料中出现，不能推出组织采用率、自动化比例或净岗位变化。"
+            ]
+          },
+          "id": "investment-fund-managers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial-ai-controls",
+            "sec-conflicts-bulletin",
+            "source-pack-onet-hot_tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实践响应：先让工具处理低风险的数据核对和草稿，用已知答案集测错并记录例外；只有错误率、数据谱系和人工复核稳定后才扩大用途。"
+            ]
+          },
+          "id": "investment-fund-managers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial-ai-controls",
+            "sec-conflicts-bulletin",
+            "source-pack-onet-hot_tech"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：中国大陆暂无可安全使用的数据来表示与 O*NET 11-3031.03 精确一一对应的全国职业工资分布。国家统计局行业平均工资覆盖行业从业人员，不是投资基金经理这一岗位的中位数。"
+            ]
+          },
+          "id": "investment-fund-managers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "cn-nbs-industry-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：现有官方行业资料为2025年口径并于2026年发布；即使时期较新，也不能解决行业与具体职业不一致的问题。"
+            ]
+          },
+          "id": "investment-fund-managers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "cn-nbs-industry-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "计量单位：年平均工资、月薪、奖金、管理规模挂钩报酬和总薪酬口径不可混用；本页不把行业均值或招聘报价改写成职业工资。"
+            ]
+          },
+          "id": "investment-fund-managers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "cn-nbs-industry-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "求职用法：询问固定薪资、奖金递延与回拨、管理费或业绩报酬关联、地区、基金类型、管理规模和职责边界，再比较同口径报价。缺少这些字段时保留“无法比较”。"
+            ]
+          },
+          "id": "investment-fund-managers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "cn-nbs-industry-wages"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：O*NET 11-3031.03 的工资页调用 BLS 上位职业 Financial Managers（11-3031）的美国全国数据，因此可作管理类岗位参照，不能声称是投资基金经理细分岗位专属工资。"
+            ]
+          },
+          "id": "investment-fund-managers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "source-pack-onet-localwages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：页面标注为2025年 BLS OEWS 数据；使用时应保留年份和全国地理范围，不与其他年份、城市或招聘报价直接拼接。"
+            ]
+          },
+          "id": "investment-fund-managers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "source-pack-onet-localwages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "年薪分布：第10百分位94,310美元、第25百分位125,490美元、中位数166,570美元、第75百分位219,980美元、第90百分位323,270美元。分位数描述受雇者分布，不是晋升阶梯。"
+            ]
+          },
+          "id": "investment-fund-managers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "source-pack-onet-localwages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "时薪口径：对应页面展示45.34、60.33、80.08、105.76和155.42美元的分位时薪。金融岗位常含奖金或递延激励，这组工资统计不能当作总薪酬承诺。"
+            ]
+          },
+          "id": "investment-fund-managers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "source-pack-onet-localwages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "职业范围：底层统计覆盖 Financial Managers（11-3031），其范围宽于本页的 Investment Fund Managers；基金类型、资产规模、职责和地区可能造成显著差异。"
+            ]
+          },
+          "id": "investment-fund-managers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "source-pack-onet-localwages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "决策限制：个人报价还受经验、授权、绩效安排、奖金递延与回拨、工时和福利影响。比较时必须把固定薪资、可变薪酬、地区与统计口径分开。"
+            ]
+          },
+          "id": "investment-fund-managers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "source-pack-onet-localwages"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "任务信号：你能把模糊的收益目标转成基准、风险预算、流动性和持仓限制，并说明各约束冲突时如何取舍。"
+            ]
+          },
+          "id": "investment-fund-managers.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "证据信号：你会核对数据来源、估值时间和模型假设，能用一页备忘录让他人复现结论，而不是只给买卖观点。"
+            ]
+          },
+          "id": "investment-fund-managers.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "反证信号：你主动寻找可能推翻投资论点的信息，并能在市场走势与原判断相反时更新，而不是不断移动理由。"
+            ]
+          },
+          "id": "investment-fund-managers.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "协作信号：你能接受风险、合规、交易与运营团队的挑战，清楚区分建议、批准、执行和复核责任。"
+            ]
+          },
+          "id": "investment-fund-managers.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：若你追求即时确定性、厌恶记录过程，或认为高收益可以弥补越权与冲突，这一岗位的约束会持续造成压力。"
+            ]
+          },
+          "id": "investment-fund-managers.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：若长期市场波动、信息不完整、绩效比较和对外解释会让你仓促行动，应先用模拟组合观察自己的行为。"
+            ]
+          },
+          "id": "investment-fund-managers.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "验证方法：连续七天维护一个虚构组合的决策日志，记录假设、证据、反证、限制、批准状态与复盘，观察自己是否能稳定执行。"
+            ]
+          },
+          "id": "investment-fund-managers.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "人格边界：兴趣或人格量表只能帮助提出问题；是否适合应由工作样本、学习速度、判断质量、合规意识和反馈记录证明。"
+            ]
+          },
+          "id": "investment-fund-managers.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial-decision"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "越权或限制冲突：提案突破集中度、流动性或产品范围时，后果可能是基金偏离授权。控制是交易前规则检查、例外说明和授权人批准；未批准不得执行。"
+            ]
+          },
+          "id": "investment-fund-managers.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial-risk-controls",
+            "sec-compliance-programs",
+            "sec-conflicts-bulletin"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "利益冲突：关联产品、费用、个人持仓或激励可能让建议不再客观。应识别并记录冲突，按适用政策消除、缓解或充分披露；不能把“已披露”自动等同于已解决。"
+            ]
+          },
+          "id": "investment-fund-managers.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial-risk-controls",
+            "sec-compliance-programs",
+            "sec-conflicts-bulletin"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "数据、模型与估值错误：陈旧价格、错误标识或不适用模型会扭曲暴露和绩效。应核对原始数据、做独立估值或情景挑战，并隔离受影响的决定。"
+            ]
+          },
+          "id": "investment-fund-managers.risk.career-risk-cards.3",
+          "source_refs": [
+            "editorial-risk-controls",
+            "sec-compliance-programs",
+            "sec-conflicts-bulletin"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "流动性与执行风险：赎回、市场容量或交易成本可能让纸面配置无法成交。应做现金流与压力情景、分阶段执行并设置停止阈值，由交易和风险责任人复核。"
+            ]
+          },
+          "id": "investment-fund-managers.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial-risk-controls",
+            "sec-compliance-programs",
+            "sec-conflicts-bulletin"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同升级规则：一旦目标、数据、估值、冲突、权限或限制无法确认，暂停相关提案或订单，记录已知事实、潜在影响和待决问题，交给投资、风险、合规或治理链中的授权人。美国监管边界依机构、业务与州法而变，本页不赋予个人执业或交易权限。"
+            ]
+          },
+          "id": "investment-fund-managers.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial-risk-controls",
+            "sec-compliance-programs",
+            "sec-conflicts-bulletin"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "可选试做入口：先完成虚构组合的一页决策备忘录，再分别体验研究、风险、交易支持或运营视角；这用于比较任务偏好，不声称任何方向是普遍录用起点。"
+            ]
+          },
+          "id": "investment-fund-managers.path.career-path-block.1",
+          "source_refs": [
+            "editorial-path",
+            "sec-iard-registration",
+            "sec-private-funds",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "雇主证据：查看岗位是否要求维护模型与报告、参加投资委员会、监控风险和合规例外，以及谁批准交易；这些比泛泛课程清单更能说明第一年工作。"
+            ]
+          },
+          "id": "investment-fund-managers.path.career-path-block.2",
+          "source_refs": [
+            "editorial-path",
+            "sec-iard-registration",
+            "sec-private-funds",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品：完成本页虚构基金备忘录，再补一份一周监控日志，展示权重计算、风险约束、冲突处理、停止条件和决策变化。"
+            ]
+          },
+          "id": "investment-fund-managers.path.career-path-block.3",
+          "source_refs": [
+            "editorial-path",
+            "sec-iard-registration",
+            "sec-private-funds",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "面试与试用：用一个错误数据或利益冲突案例说明你如何发现、暂停、核验和升级；展示原始输入、计算、修改记录与最终结论。"
+            ]
+          },
+          "id": "investment-fund-managers.path.career-path-block.4",
+          "source_refs": [
+            "editorial-path",
+            "sec-iard-registration",
+            "sec-private-funds",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七天试验：第1天写目标和限制；第2天建立虚构组合与数据字典；第3天形成提案；第4天做反证与情景；第5天检查冲突和授权；第6天用固定清单逐项自查权重、来源、未知项、限制和升级，不依赖他人参与；第7天复盘是否继续。"
+            ]
+          },
+          "id": "investment-fund-managers.path.career-path-block.5",
+          "source_refs": [
+            "editorial-path",
+            "sec-iard-registration",
+            "sec-private-funds",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "资格决策：美国私募基金顾问通常需在 SEC 或适用州监管机构登记，除非符合豁免；个人代表资格与监督要求还可能由州法和机构决定。先核雇主 Form ADV、监管归属和岗位授权，证书本身不产生权限。"
+            ]
+          },
+          "id": "investment-fund-managers.path.career-path-block.6",
+          "source_refs": [
+            "editorial-path",
+            "sec-iard-registration",
+            "sec-private-funds",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "能力阶梯：先做到数据与计算准确，再做到研究结论可辩护、组合约束可执行、异常可升级，最后才是在明确授权下承担更大组合和治理责任。晋级不由固定年限保证。"
+            ]
+          },
+          "id": "investment-fund-managers.path.career-path-block.7",
+          "source_refs": [
+            "editorial-path",
+            "sec-iard-registration",
+            "sec-private-funds",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转型路径：研究员可迁移行业分析，风险岗位可迁移限额与情景能力，财务经理可迁移预算和治理经验；转入本职业仍要补组合构建、交易执行、绩效归因和适用资格。"
+            ]
+          },
+          "id": "investment-fund-managers.path.career-path-block.8",
+          "source_refs": [
+            "editorial-path",
+            "sec-iard-registration",
+            "sec-private-funds",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "官方信号：O*NET 将该职业列为11-3031.03，并提供美国行业、工资和训练资料；这些来源回答职业存在与上位统计口径，不等于实时招聘需求。"
+            ]
+          },
+          "id": "investment-fund-managers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "editorial-market",
+            "source-pack-onet-industry",
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "就业信号：就业人数、增长率、净变化与年度空缺是不同指标；阅读 O*NET 或 BLS 时必须保留职业代码、时期和地理范围。"
+            ]
+          },
+          "id": "investment-fund-managers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "editorial-market",
+            "source-pack-onet-industry",
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "招聘信号：职位样本可观察基金类型、资产类别、数据工具、资格和第一年任务，但只能代表采样时间和地区，不能外推全国录用率。"
+            ]
+          },
+          "id": "investment-fund-managers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "editorial-market",
+            "source-pack-onet-industry",
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "技术信号：工具清单反映任务可能使用的软件，不证明某机构已采用 AI，也不证明生产率或净岗位数量已经变化。"
+            ]
+          },
+          "id": "investment-fund-managers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editorial-market",
+            "source-pack-onet-industry",
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "相邻转型：研究、风险、交易、运营和组织财务岗位提供部分可迁移能力；每条转型仍需对照组合产出、授权、资格与责任补证。"
+            ]
+          },
+          "id": "investment-fund-managers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editorial-market",
+            "source-pack-onet-industry",
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "O*NET 11-3031.03 将本职业定义为为机构或个人投资者提供的大型流动资产池规划、指挥或协调投资策略或运作；可审计的模拟工作流可按目标与限制、研究与情景、提案、风险合规检查、授权执行、监控复盘组织；这是职业体验框架，不声称所有雇主流程相同。",
+                "id": "investment-fund-managers.faq.1",
+                "question_key": "career.faq.investment-fund-managers.daily-work",
+                "source_refs": [
+                  "editorial-path",
+                  "source-pack-onet-custom"
+                ]
+              },
+              {
+                "answer": "首席执行官制定组织政策并在治理框架下提供整体方向，其责任范围覆盖整个组织而非单一投资组合；财务经理规划、指挥或协调组织的会计、投资、银行、保险、证券及其他财务活动，范围宽于投资基金经理；财务主管与财务总监负责财务规划、采购和投资等活动；与基金组合管理的对象和治理链不应仅凭职称互换；管理分析师研究组织并设计系统与程序以提升效率，其核心产出是管理改进建议而非投资组合运作。",
+                "id": "investment-fund-managers.faq.2",
+                "question_key": "career.faq.investment-fund-managers.role-comparison",
+                "source_refs": [
+                  "onet-chief-executives",
+                  "onet-financial-managers",
+                  "onet-management-analysts",
+                  "onet-treasurers-controllers"
+                ]
+              },
+              {
+                "answer": "适配度可通过能否把目标转成约束、解释组合决策、主动寻找反证，并在证据或授权不足时停止升级来观察；这不是人格或录用结论。",
+                "id": "investment-fund-managers.faq.3",
+                "question_key": "career.faq.investment-fund-managers.fit",
+                "source_refs": [
+                  "editorial-decision"
+                ]
+              },
+              {
+                "answer": "O*NET热门技术页列出该职业招聘资料中出现的数字工具类别；该清单不证明具体机构已采用AI，也不建立自动化比例或控制有效性；在职业体验中，数字工具可先用于数据整理、约束扫描、情景草稿和记录；数据谱系、模型假设、冲突、批准与结果复核仍由明确责任人控制。",
+                "id": "investment-fund-managers.faq.4",
+                "question_key": "career.faq.investment-fund-managers.ai-impact",
+                "source_refs": [
+                  "editorial-ai-controls",
+                  "source-pack-onet-hot_tech"
+                ]
+              },
+              {
+                "answer": "SEC工作人员公告说明投资顾问须持续识别利益冲突，并按适用标准消除、缓解或充分公平披露；公告本身不替代机构的具体批准和监督安排；投资顾问应持续识别利益冲突；忠实义务要求消除冲突，或至少作充分、公平披露以支持知情同意，注意义务要求基于对客户目标的合理理解提供符合其最佳利益的建议；SEC 登记投资顾问须采用并实施合理设计的书面合规政策与程序；注册基金的董事会还负有批准基金及服务提供者相关政策、监督合规安排的职责。",
+                "id": "investment-fund-managers.faq.5",
+                "question_key": "career.faq.investment-fund-managers.human-control",
+                "source_refs": [
+                  "sec-compliance-programs",
+                  "sec-conflicts-bulletin"
+                ]
+              },
+              {
+                "answer": "本轮研究未建立投资基金经理在中国大陆的精确全国职业工资分布；行业平均或美国数据不能替代职业中位数、统一起薪或个人报价。",
+                "id": "investment-fund-managers.faq.6",
+                "question_key": "career.faq.investment-fund-managers.china-pay",
+                "source_refs": [
+                  "cn-nbs-industry-wages"
+                ]
+              },
+              {
+                "answer": "O*NET 工资页展示的是 BLS 对上位职业 Financial Managers（11-3031）的美国全国工资分布，不是投资基金经理这一细分岗位的专属薪资，也不是个人报价；O*NET 展示的 2025 年美国全国工资分位为年薪第10百分位94,310美元、第25百分位125,490美元、中位数166,570美元、第75百分位219,980美元、第90百分位323,270美元；底层范围是 Financial Managers（11-3031）。",
+                "id": "investment-fund-managers.faq.7",
+                "question_key": "career.faq.investment-fund-managers.us-pay",
+                "source_refs": [
+                  "source-pack-onet-localwages"
+                ]
+              },
+              {
+                "answer": "O*NET培训页仅提供美国教育项目发现入口；它不证明研究、风险或运营是普遍起点，也不产生录用、登记或授权；O*NET 认证页只用于发现可能相关的资格项目；资格是否适用、是否被雇主接受以及是否满足登记或授权要求，必须另行核验；私募基金顾问通常需在 SEC 或适用州监管机构登记，除非符合豁免；登记归属取决于顾问规模和投资活动，个人岗位授权还需由机构与州要求确认；SEC 的 Form ADV/IARD FAQ 说明，SEC 登记投资顾问的员工仍可能需要在一个或多个州登记为投资顾问代表；具体州要求不能从职业名称推定；入门试做可以组合备忘录、监控日志和错误案例来展示分析、约束、冲突与升级；七日自测可用固定检查表替代外部评审，不声称这是常见雇主录用途径。",
+                "id": "investment-fund-managers.faq.8",
+                "question_key": "career.faq.investment-fund-managers.education-path",
+                "source_refs": [
+                  "editorial-path",
+                  "sec-iard-registration",
+                  "sec-private-funds",
+                  "source-pack-onet-localcert",
+                  "source-pack-onet-localtraining"
+                ]
+              },
+              {
+                "answer": "职业体验可把数据与模型错误、估值和流动性未知、投资限制、利益冲突与记录缺口分开检查；发现关键未知项时暂停并升级，这是编辑控制建议；投资顾问应持续识别利益冲突；忠实义务要求消除冲突，或至少作充分、公平披露以支持知情同意，注意义务要求基于对客户目标的合理理解提供符合其最佳利益的建议；SEC 登记投资顾问须采用并实施合理设计的书面合规政策与程序；注册基金的董事会还负有批准基金及服务提供者相关政策、监督合规安排的职责；模拟练习可分别检查数据与模型错误、估值与流动性未知、投资限制、利益冲突和记录缺口；发现未知项时暂停并升级是编辑控制建议，不是法规原文。",
+                "id": "investment-fund-managers.faq.9",
+                "question_key": "career.faq.investment-fund-managers.risk-boundary",
+                "source_refs": [
+                  "editorial-risk-controls",
+                  "sec-compliance-programs",
+                  "sec-conflicts-bulletin"
+                ]
+              },
+              {
+                "answer": "O*NET 行业页只描述美国该职业的行业分布；它不能推出中国岗位规模、招聘热度或个人录用概率；O*NET 的就业趋势属于美国统计口径；就业人数、增长、净变化和年度空缺应分别阅读，不能转写为个人就业保证；行业分布、父类工资、就业预测、招聘样本和技术采用是不同信号，不能合并为职业前景评分或个人成功保证。",
+                "id": "investment-fund-managers.faq.10",
+                "question_key": "career.faq.investment-fund-managers.outlook-transition",
+                "source_refs": [
+                  "editorial-market",
+                  "source-pack-onet-industry",
+                  "source-pack-onet-summary"
+                ]
+              },
+              {
+                "answer": "是否继续投入可先由虚构组合样本验证：能否在不确定性、绩效压力和严格约束下留下可审计判断，再比较研究、风险、交易与运营方向。",
+                "id": "investment-fund-managers.faq.11",
+                "question_key": "career.faq.investment-fund-managers.career-worth",
+                "source_refs": [
+                  "editorial-decision"
+                ]
+              }
+            ]
+          },
+          "id": "investment-fund-managers.sources.faq.1",
+          "source_refs": [
+            "cn-nbs-industry-wages",
+            "editorial-ai-controls",
+            "editorial-decision",
+            "editorial-market",
+            "editorial-path",
+            "editorial-risk-controls",
+            "onet-chief-executives",
+            "onet-financial-managers",
+            "onet-management-analysts",
+            "onet-treasurers-controllers",
+            "sec-compliance-programs",
+            "sec-conflicts-bulletin",
+            "sec-iard-registration",
+            "sec-private-funds",
+            "source-pack-onet-custom",
+            "source-pack-onet-hot_tech",
+            "source-pack-onet-industry",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining",
+            "source-pack-onet-localwages",
+            "source-pack-onet-summary"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "美国职业身份、上位工资统计、SEC/州登记和机构内部授权分别陈述；任何一项都不能替代另一项。",
+              "本页仅用于职业决策与模拟练习，不构成投资建议、法律意见、登记确认、交易许可或收益承诺。",
+              "中国大陆精确职业工资为证据不足；不以行业均值、招聘报价或美国数据填补。"
+            ]
+          },
+          "id": "investment-fund-managers.sources.boundary.1",
+          "source_refs": [
+            "cn-nbs-industry-wages",
+            "editorial-ai-controls",
+            "editorial-decision",
+            "editorial-market",
+            "editorial-path",
+            "editorial-risk-controls",
+            "editorial-simulation",
+            "onet-chief-executives",
+            "onet-financial-managers",
+            "onet-management-analysts",
+            "onet-treasurers-controllers",
+            "sec-compliance-programs",
+            "sec-conflicts-bulletin",
+            "sec-iard-registration",
+            "sec-private-funds",
+            "source-pack-onet-custom",
+            "source-pack-onet-details",
+            "source-pack-onet-hot_tech",
+            "source-pack-onet-industry",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining",
+            "source-pack-onet-localwages",
+            "source-pack-onet-summary"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "投资基金经理",
+                "id": "investment-fund-managers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "投资基金经理",
+                "id": "investment-fund-managers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "投资基金经理",
+                "id": "investment-fund-managers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "投资基金经理",
+                "id": "investment-fund-managers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "投资基金经理",
+                "id": "investment-fund-managers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "投资基金经理",
+                "id": "investment-fund-managers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "投资基金经理",
+                "id": "investment-fund-managers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "投资基金经理",
+                "id": "investment-fund-managers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "投资基金经理",
+                "id": "investment-fund-managers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "投资基金经理",
+                "id": "investment-fund-managers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "投资基金经理",
+                "id": "investment-fund-managers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "investment-fund-managers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "已访问并核对该来源，仅用于其声明的中国市场、时期与职业范围。",
+                  "行业平均工资不是该职业的全国中位数、起薪或个人到手收入。"
+                ],
+                "evidence_type": "official industry wage statistics",
+                "id": "cn-nbs-industry-wages",
+                "limitation": "行业平均工资不是该职业的全国中位数、起薪或个人到手收入。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况 - 国家统计局",
+                "period": "2025 annual wages; published 2026-05-15; retrieved 2026-08-31",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "用于区分可辅助步骤、人工复核、失败模式和渐进采用。",
+                  "是基于已证实任务的编辑建议，不是采用率、性能或替代概率。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-ai-controls",
+                "limitation": "是基于已证实任务的编辑建议，不是采用率、性能或替代概率。",
+                "market": "全球",
+                "name": "投资基金经理数字工具控制建议",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "用于把已证实任务转成适配观察和职业试做问题。",
+                  "不是人格结论、录用门槛或绩效保证。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-decision",
+                "limitation": "不是人格结论、录用门槛或绩效保证。",
+                "market": "全球",
+                "name": "投资基金经理职业决策边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "用于区分行业、工资、就业、招聘与技术信号。",
+                  "不是招聘规模、职业前景评分或个人成功保证。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-market",
+                "limitation": "不是招聘规模、职业前景评分或个人成功保证。",
+                "market": "全球",
+                "name": "投资基金经理市场信号阅读边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "用于把职业任务转成作品、七日试验和转型差距检查。",
+                  "不是对常见履历、雇主偏好、录用或晋级年限的事实断言。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-path",
+                "limitation": "不是对常见履历、雇主偏好、录用或晋级年限的事实断言。",
+                "market": "全球",
+                "name": "投资基金经理入门试做路径",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "用于数据、模型、估值、流动性和记录的模拟控制设计。",
+                  "不替代基金文件、机构政策、法律意见、合规批准或个案判断。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-risk-controls",
+                "limitation": "不替代基金文件、机构政策、法律意见、合规批准或个案判断。",
+                "market": "全球",
+                "name": "投资基金经理非监管控制建议",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "用于承载完全虚构的组合、限制、冲突、输出与参考推演。",
+                  "仅用于职业体验，不构成投资建议、真实交易指令或合规批准。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-simulation",
+                "limitation": "仅用于职业体验，不构成投资建议、真实交易指令或合规批准。",
+                "market": "全球",
+                "name": "投资基金经理纸面模拟材料",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "已访问并核对相邻职业身份与职责边界。",
+                  "仅用于该相邻O*NET职业；不建立中国映射、薪资或个人授权。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-chief-executives",
+                "limitation": "仅用于该相邻O*NET职业；不建立中国映射、薪资或个人授权。",
+                "market": "美国",
+                "name": "11-1011.00 - Chief Executives",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-1011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "已访问并核对相邻职业身份与职责边界。",
+                  "仅用于该相邻O*NET职业；不建立中国映射、薪资或个人授权。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-financial-managers",
+                "limitation": "仅用于该相邻O*NET职业；不建立中国映射、薪资或个人授权。",
+                "market": "美国",
+                "name": "11-3031.00 - Financial Managers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-3031.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "已访问并核对相邻职业身份与职责边界。",
+                  "仅用于该相邻O*NET职业；不建立中国映射、薪资或个人授权。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-management-analysts",
+                "limitation": "仅用于该相邻O*NET职业；不建立中国映射、薪资或个人授权。",
+                "market": "美国",
+                "name": "13-1111.00 - Management Analysts",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-1111.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "已访问并核对相邻职业身份与职责边界。",
+                  "仅用于该相邻O*NET职业；不建立中国映射、薪资或个人授权。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-treasurers-controllers",
+                "limitation": "仅用于该相邻O*NET职业；不建立中国映射、薪资或个人授权。",
+                "market": "美国",
+                "name": "11-3031.01 - Treasurers and Controllers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-3031.01"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "已访问并核对投资顾问法规则206(4)-7和投资公司法规则38a-1的合规控制。",
+                  "仅在规则适用范围内使用；不向具体员工授予权限，也不替代当前法律与合规核查。"
+                ],
+                "evidence_type": "official final rule release",
+                "id": "sec-compliance-programs",
+                "limitation": "仅在规则适用范围内使用；不向具体员工授予权限，也不替代当前法律与合规核查。",
+                "market": "美国",
+                "name": "Compliance Programs of Investment Companies and Investment Advisers",
+                "period": "current rule framework; accessed 2026-09-06",
+                "publisher": "U.S. Securities and Exchange Commission",
+                "scope": "exact",
+                "url": "https://www.sec.gov/files/rules/final/ia-2204.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "已访问并核对注意义务、忠实义务及利益冲突识别、缓解、披露和监控。",
+                  "这是无约束力的 SEC 工作人员观点，不创设新义务；应结合适用法律、规则和委员会解释阅读。"
+                ],
+                "evidence_type": "official regulator staff guidance",
+                "id": "sec-conflicts-bulletin",
+                "limitation": "这是无约束力的 SEC 工作人员观点，不创设新义务；应结合适用法律、规则和委员会解释阅读。",
+                "market": "美国",
+                "name": "Staff Bulletin: Standards of Conduct—Conflicts of Interest",
+                "period": "staff bulletin; accessed 2026-09-06",
+                "publisher": "U.S. Securities and Exchange Commission staff",
+                "scope": "exact",
+                "url": "https://www.sec.gov/about/divisions-offices/division-trading-markets/broker-dealers/staff-bulletin-standards-conduct-broker-dealers-investment-advisers-conflicts-interest"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "已访问并核对 SEC、州登记及投资顾问代表边界。",
+                  "该页不能确定任何个人的登记状态；州级要求仍需向适用州监管机构核验。"
+                ],
+                "evidence_type": "official regulator FAQ",
+                "id": "sec-iard-registration",
+                "limitation": "该页不能确定任何个人的登记状态；州级要求仍需向适用州监管机构核验。",
+                "market": "美国",
+                "name": "Frequently Asked Questions on Form ADV and IARD",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "U.S. Securities and Exchange Commission",
+                "scope": "exact",
+                "url": "https://www.sec.gov/about/divisions-offices/division-investment-management/electronic-filing-investment-advisers-iard/frequently-asked-questions-form-adv-iard"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "已访问并核对私募基金顾问登记范围与反欺诈边界。",
+                  "该页是概览；具体 SEC 或州登记、豁免及个人权限取决于顾问事实与适用法律。"
+                ],
+                "evidence_type": "official regulator guidance",
+                "id": "sec-private-funds",
+                "limitation": "该页是概览；具体 SEC 或州登记、豁免及个人权限取决于顾问事实与适用法律。",
+                "market": "美国",
+                "name": "Private Funds",
+                "period": "updated 2026-04-24; accessed 2026-09-06",
+                "publisher": "U.S. Securities and Exchange Commission",
+                "scope": "exact",
+                "url": "https://www.sec.gov/resources-small-businesses/capital-raising-building-blocks/private-funds"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "已访问并核对该来源，仅用于其声明的美国市场、时期与职业范围。",
+                  "仅用于该 O*NET 职业及美国市场；不能建立中国职业映射、中国薪资或具体个人的法律授权。"
+                ],
+                "evidence_type": "official custom occupation profile",
+                "id": "source-pack-onet-custom",
+                "limitation": "仅用于该 O*NET 职业及美国市场；不能建立中国职业映射、中国薪资或具体个人的法律授权。",
+                "market": "美国",
+                "name": "11-3031.03 - Investment Fund Managers",
+                "period": "current page; accessed 2026-08-31",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/custom/11-3031.03"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "已访问并核对该来源，仅用于其声明的美国市场、时期与职业范围。",
+                  "仅用于该 O*NET 职业及美国市场；不能建立中国职业映射、中国薪资或具体个人的法律授权。"
+                ],
+                "evidence_type": "official occupation details",
+                "id": "source-pack-onet-details",
+                "limitation": "仅用于该 O*NET 职业及美国市场；不能建立中国职业映射、中国薪资或具体个人的法律授权。",
+                "market": "美国",
+                "name": "11-3031.03 - Investment Fund Managers",
+                "period": "current page; accessed 2026-08-31",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/11-3031.03"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "已访问并核对该来源，仅用于其声明的美国市场、时期与职业范围。",
+                  "仅用于该 O*NET 职业及美国市场；不能建立中国职业映射、中国薪资或具体个人的法律授权。"
+                ],
+                "evidence_type": "official technology profile",
+                "id": "source-pack-onet-hot_tech",
+                "limitation": "仅用于该 O*NET 职业及美国市场；不能建立中国职业映射、中国薪资或具体个人的法律授权。",
+                "market": "美国",
+                "name": "Hot Technologies: 11-3031.03 - Investment Fund Managers",
+                "period": "current page; accessed 2026-08-31",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/11-3031.03"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "已访问并核对该来源，仅用于其声明的美国市场、时期与职业范围。",
+                  "仅用于该 O*NET 职业及美国市场；不能建立中国职业映射、中国薪资或具体个人的法律授权。"
+                ],
+                "evidence_type": "official industry distribution",
+                "id": "source-pack-onet-industry",
+                "limitation": "仅用于该 O*NET 职业及美国市场；不能建立中国职业映射、中国薪资或具体个人的法律授权。",
+                "market": "美国",
+                "name": "Industries: 11-3031.03 - Investment Fund Managers",
+                "period": "current page; accessed 2026-08-31",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/11-3031.03"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "已访问并核对该来源，仅用于其声明的美国市场、时期与职业范围。",
+                  "仅用于该 O*NET 职业及美国市场；不能建立中国职业映射、中国薪资或具体个人的法律授权。"
+                ],
+                "evidence_type": "official certification discovery",
+                "id": "source-pack-onet-localcert",
+                "limitation": "仅用于该 O*NET 职业及美国市场；不能建立中国职业映射、中国薪资或具体个人的法律授权。",
+                "market": "美国",
+                "name": "National Certifications: 11-3031.03 - Investment Fund Managers",
+                "period": "current page; accessed 2026-08-31",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localcert/11-3031.03"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "已访问并核对该来源，仅用于其声明的美国市场、时期与职业范围。",
+                  "仅用于该 O*NET 职业及美国市场；不能建立中国职业映射、中国薪资或具体个人的法律授权。"
+                ],
+                "evidence_type": "official local training discovery",
+                "id": "source-pack-onet-localtraining",
+                "limitation": "仅用于该 O*NET 职业及美国市场；不能建立中国职业映射、中国薪资或具体个人的法律授权。",
+                "market": "美国",
+                "name": "National Training: 11-3031.03 - Investment Fund Managers",
+                "period": "current page; accessed 2026-08-31",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtraining/11-3031.03"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "已访问并核对该来源，仅用于其声明的美国市场、时期与职业范围。",
+                  "页面展示 BLS 上位职业 Financial Managers（11-3031）的美国全国工资；不是投资基金经理细分岗位的专属工资。"
+                ],
+                "evidence_type": "O*NET display of BLS OEWS wage data",
+                "id": "source-pack-onet-localwages",
+                "limitation": "页面展示 BLS 上位职业 Financial Managers（11-3031）的美国全国工资；不是投资基金经理细分岗位的专属工资。",
+                "market": "美国",
+                "name": "National Wages: 11-3031.03 - Investment Fund Managers",
+                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.onetonline.org/link/localwages/11-3031.03"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "已访问并核对该来源，仅用于其声明的美国市场、时期与职业范围。",
+                  "仅用于该 O*NET 职业及美国市场；不能建立中国职业映射、中国薪资或具体个人的法律授权。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "source-pack-onet-summary",
+                "limitation": "仅用于该 O*NET 职业及美国市场；不能建立中国职业映射、中国薪资或具体个人的法律授权。",
+                "market": "美国",
+                "name": "11-3031.03 - Investment Fund Managers",
+                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-3031.03"
+              }
+            ]
+          },
+          "id": "investment-fund-managers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "能把目标转成约束、解释组合决策并在证据或授权不足时停止升级",
+        "fact_id": "fit",
+        "market": "全球",
+        "measure": "observable_fit",
+        "occupation_scope": "编辑综合：投资基金经理职业体验",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "editorial-decision"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "精确职业身份：投资基金经理 / O*NET 11-3031.03",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "occupation_identity",
+        "occupation_scope": "精确职业数据：投资基金经理 / O*NET 11-3031.03",
+        "period": "current page; accessed 2026-08-31",
+        "source_refs": [
+          "source-pack-onet-details"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "编辑综合：分开检查限制、数据模型、估值流动性、冲突与记录未知项",
+        "fact_id": "risk",
+        "market": "全球",
+        "measure": "risk_and_control",
+        "occupation_scope": "编辑综合：投资基金经理职业体验",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "editorial-risk-controls"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "研究评估、投资信息与大型流动资产池策略或运作",
+        "fact_id": "work-output",
+        "market": "美国",
+        "measure": "task_objects_and_outputs",
+        "occupation_scope": "精确职业数据：投资基金经理 / O*NET 11-3031.03",
+        "period": "current page; accessed 2026-08-31",
+        "source_refs": [
+          "source-pack-onet-details"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "规划、指挥或协调大型流动资产池的投资策略或运作",
+        "fact_id": "workflow",
+        "market": "美国",
+        "measure": "duties_and_workflow",
+        "occupation_scope": "精确职业数据：投资基金经理 / O*NET 11-3031.03",
+        "period": "current page; accessed 2026-08-31",
+        "source_refs": [
+          "source-pack-onet-custom"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "32116367fb9894c92aaac489c03543f134e9dac525ff016155737ed92287d630",
+  "source_content_sha256": "68676e0e2ee08a5b465dcb0210a94a30b4877f997ea6825597b78ae477b08bef",
   "subject": {
     "canonical_slug": "investment-fund-managers",
     "name": "投资基金经理",
-    "summary": null
+    "summary": "投资基金经理把投资目标、风险预算、流动性与合规限制转成可执行的组合策略，并对研究、审批、交易、监控和复盘负责。适合度应通过可审计的决策样本验证，而不是用一次收益或人格标签判断。"
   }
 }

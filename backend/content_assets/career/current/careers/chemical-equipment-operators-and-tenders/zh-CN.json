@@ -1,12 +1,1622 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "适合继续了解：你愿意按受控记录逐字段核对、在信息缺口时停下并升级；若希望凭经验跳过记录、规范或授权边界，这条路径不合适。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "核心价值是持续监看化工设备与加工状态，留下可追溯记录，识别异常并按责任链交接。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全试做材料（完全虚构）：C-01为EQ-A/V2/观察已记录/已复核；C-02为设备标签空白/V1/观察已记录/已复核；C-03为EQ-C/版本空白/观察已记录/已复核；C-04为EQ-D/V3/观察状态空白/已复核。任务：按四字段共16格计算完整率，列缺失项和每条纸面状态。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考复核：16格中13格有值，完整率81.25%；缺失为C-02设备标签、C-03记录版本、C-04观察状态。C-01只表示题面四字段齐全，不代表设备或工艺安全、参数正确、允许操作或交接获批；C-02—04分别暂停本条纸面审查。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：O*NET 51-9011.00是化工设备操作与看护员，控制工业或消费产品加工中的化学变化或反应。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.profile.definition-block.1",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "投入可包括工厂规范、设备状态、仪表或产品观察、批次与版本信息、样品和交接要求。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "产出可包括运行记录、观察状态、样品或测试交接、异常报告、维护通知与复核状态。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "常见闭环是读取规范与交接→确认记录版本→监看设备与加工状态→记录数据→识别泄漏或故障→按程序报告或交接。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.profile.responsibilities-block.3",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断是记录是否完整、观察是否与规范一致、何时必须停止相关活动并联系授权责任人。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.profile.work-context-block.1",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作环境可能每天接触污染物、危险条件，并使用常见或专用防护装备；精确性很重要。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.profile.work-context-block.2",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "软件类别包括运行数据库、ERP、邮件、办公、表格和文字处理；具体系统由工厂决定。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "协作对象可包括班组、主管、实验室、质量、维护、安全和应急角色。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量看记录可追溯、版本明确、异常不被掩盖、交接对象和复核状态清楚。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "目标职业不等于化学工程设计、化学实验分析、金属精炼炉、热处理或电镀设备岗位。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.profile.definition-block.2",
+          "source_refs": [
+            "adj-engineers",
+            "adj-heat",
+            "adj-plating",
+            "adj-refining",
+            "adj-technicians",
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "chemical-engineers",
+                "id": "ce.adj.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/chemical-engineers"
+              },
+              {
+                "entity": "chemical-technicians",
+                "id": "ce.adj.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/chemical-technicians"
+              },
+              {
+                "entity": "metal-refining-furnace-operators-and-tenders",
+                "id": "ce.adj.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/metal-refining-furnace-operators-and-tenders"
+              },
+              {
+                "entity": "heat-treating-equipment-setters-operators-and-tenders-metal-and-plastic",
+                "id": "ce.adj.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/heat-treating-equipment-setters-operators-and-tenders-metal-and-plastic"
+              },
+              {
+                "entity": "plating-machine-setters-operators-and-tenders-metal-and-plastic",
+                "id": "ce.adj.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/plating-machine-setters-operators-and-tenders-metal-and-plastic"
+              }
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "adj-engineers",
+            "adj-heat",
+            "adj-plating",
+            "adj-refining",
+            "adj-technicians",
+            "onet-summary"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "化学工程师设计化工设备和制造过程；目标职业在既定流程与授权下操作或看护设备。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "adj-engineers",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "化学技术员实施化学和物理实验测试；目标职业的核心不是实验分析。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "adj-technicians",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "金属精炼炉岗位熔炼和精炼金属；目标职业控制产品加工中的化学变化或反应。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "adj-refining",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "热处理岗位改变金属或塑料的热处理状态，电镀岗位给产品覆金属层；两者都不是目标职业同义身份。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "adj-heat",
+            "adj-plating",
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可核技术事实：O*NET列出运行数据库、ERP与办公软件，但没有给出生成式AI采用率。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "较低风险用途只限完全虚构交接记录的查空值、格式检查或摘要草稿。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人的控制点包括真实设备状态、记录版本、观察、异常、参数、化学品、样品、维护、隔离、启停和应急决定。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "工具输出不能证明设备安全、工艺合格、参数正确、人员有资格或活动获授权。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "若工具补造设备状态、数值、版本、观察或批准，应停止并回到受控系统与责任人。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "软件清单、生成式AI采用、事故率、生产率和就业影响是不同测量对象，不能互推。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "真实工厂数据能否进入外部工具取决于组织的信息安全、工艺保密、权限与审计要求。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：所核页面没有生成式AI采用率、事故减少率、生产率因果或净就业影响，不量化替代概率。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：所核中国官方工资发布没有与O*NET 51-9011.00精确对应的中国大陆全国中位数或分位数。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "行业代理数据或宽岗位大类不能当作该精确职业工资。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "zh-CN只是内容语言；美国职业身份、进入要求、工资和展望不能代表中国资格、就业或收入。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editorial",
+            "nbs-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较具体岗位时记录地区、行业、装置或产品范围、班次、合同、培训、授权、工时和福利。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial",
+            "nbs-wage"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：2025年美国年薪中位数为{{fact:wage-annual}}。"
+            ]
+          },
+          "fact_refs": [
+            "wage-annual"
+          ],
+          "id": "chemical-equipment-operators-and-tenders.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-wage-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：2025年美国小时工资中位数为{{fact:wage-hourly}}。"
+            ]
+          },
+          "fact_refs": [
+            "wage-hourly"
+          ],
+          "id": "chemical-equipment-operators-and-tenders.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-wage-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：所核摘要页未展示第10和第90百分位；本页不发布推算分位范围。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-wage-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "全国中位数不是起薪、班次溢价、特定工厂报价或个人保证。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-wage-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业工资与中国行业代理数据不可换算或拼接。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "nbs-wage",
+            "onet-wage-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "比较岗位须另核地区、行业、班次、加班、合同、培训要求、授权范围和福利。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editorial",
+            "onet-wage-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "记录信号：愿意把标签、版本、观察和复核状态逐项写清。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "规范信号：会回到当前受控版本，而不是依赖记忆补空。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "异常信号：发现缺口、冲突或异常会保留原记录并追问。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "边界信号：不把纸面字段齐全误当成设备安全或操作批准。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "协作信号：能向主管、质量、实验室、维护或安全角色清楚交接。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎信号：不凭工具输出或未经核验的推断填补现场状态。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "若排斥程序、记录、防护或授权责任，先比较其他职业方向。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "本页练习只观察记录核对行为，不是资格、录用、现场操作或应急能力测试。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "环境：O*NET调查显示污染物、危险条件、危险设备和防护装备在该职业中常见。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.risk.career-risk-cards.1",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "精确：记录标签、版本或观察状态错误可能破坏追溯，发现冲突须保留并升级。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "工具：自动摘要或补全不得生成现场事实、参数、化学品、样品或批准状态。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.risk.career-risk-cards.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "授权：学历、训练、证明、任命和具体设备或任务授权不能互相替代。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同边界：真实设备、参数、阀门、泵、化学品、取样、维修、隔离、启停或应急响应不在本页练习范围，必须依现场程序与授权处理。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "O*NET将该职业归为Job Zone 1-2，通常要求高中毕业或同等学历，岗位训练从数天到一年不等；这只是美国职业概况。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.path.career-path-block.1",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "先核岗位的装置或产品范围、班次、受控记录、第一阶段允许观察和记录什么，以及停止与升级对象。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.path.career-path-block.2",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品只用本页四条合成记录，算完整率、列缺失项、写查询并标记每条纸面状态。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.path.career-path-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品必须注明81.25%只表示题面字段完整率；C-01字段齐全也不证明设备或工艺安全、参数正确、允许操作或交接获批。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.path.career-path-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七日试做：第1天读范围；第2天抄16格；第3天找3个空值；第4天算13/16；第5天写查询；第6天对答案；第7天记录继续、暂停或比较相邻方向。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.path.career-path-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "学历、岗位训练、资格证明、雇主任命、区域许可与具体设备或任务授权须分别核验。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.path.career-path-block.6",
+          "source_refs": [
+            "editorial",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "成长看能否保持受控版本、记录质量、异常交接和责任边界，不承诺统一年限或自动扩大授权。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.path.career-path-block.7",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转向化学工程、实验技术或金属加工设备岗位前，重新核核心产出、训练资格和最终责任。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.path.career-path-block.8",
+          "source_refs": [
+            "adj-engineers",
+            "adj-heat",
+            "adj-plating",
+            "adj-refining",
+            "adj-technicians",
+            "editorial",
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：2024年美国就业人数约{{fact:employment}}。"
+            ]
+          },
+          "fact_refs": [
+            "employment"
+          ],
+          "id": "chemical-equipment-operators-and-tenders.market-signals.market-signal-card.1",
+          "source_refs": [
+            "onet-trend-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：2024—2034年美国就业预计{{fact:growth}}。"
+            ]
+          },
+          "fact_refs": [
+            "growth"
+          ],
+          "id": "chemical-equipment-operators-and-tenders.market-signals.market-signal-card.2",
+          "source_refs": [
+            "onet-trend-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：2024—2034年美国预计年均有{{fact:openings}}岗位空缺。"
+            ]
+          },
+          "fact_refs": [
+            "openings"
+          ],
+          "id": "chemical-equipment-operators-and-tenders.market-signals.market-signal-card.3",
+          "source_refs": [
+            "bls-openings-definition-2024-34",
+            "onet-openings-summary-2024-34"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "该14,400个空缺是预测期年均值，包含就业增长和永久离开该职业形成的进入机会；14,400本身不是十年合计，也不能当作净新增。若用该年均发布值估算十年总量，须明确这是估算，不得冒充官方发布的精确十年总量。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.market-signals.market-signal-card.4",
+          "source_refs": [
+            "bls-openings-definition-2024-34",
+            "editorial",
+            "onet-openings-summary-2024-34"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "全国预测不能直接代表地区、行业、工厂、班次或个人机会。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.market-signals.market-signal-card.5",
+          "source_refs": [
+            "bls-openings-definition-2024-34",
+            "onet-openings-summary-2024-34",
+            "onet-trend-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "日常可包括读取规范与交接、巡查、监看仪表或产品状态、记录数据、识别泄漏或故障、取样或测试交接和异常报告；具体岗位只覆盖其中一部分。",
+                "id": "chemical-equipment-operators-and-tenders.faq.1",
+                "question_key": "career.faq.chemical-equipment-operators-and-tenders.daily-work",
+                "source_refs": [
+                  "onet-details",
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "目标职业操作或看护化工设备，不等同化学工程设计、化学实验分析、金属精炼炉、热处理或电镀设备岗位。",
+                "id": "chemical-equipment-operators-and-tenders.faq.2",
+                "question_key": "career.faq.chemical-equipment-operators-and-tenders.role-comparison",
+                "source_refs": [
+                  "adj-engineers",
+                  "adj-heat",
+                  "adj-plating",
+                  "adj-refining",
+                  "adj-technicians",
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "可观察自己能否按受控版本逐项记录，并在缺口或异常时暂停纸面推进和升级；这不是现场适任诊断。",
+                "id": "chemical-equipment-operators-and-tenders.faq.3",
+                "question_key": "career.faq.chemical-equipment-operators-and-tenders.fit",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "所核职业页没有生成式AI采用率、事故减少率、生产率因果或净就业影响，不能量化替代概率。",
+                "id": "chemical-equipment-operators-and-tenders.faq.4",
+                "question_key": "career.faq.chemical-equipment-operators-and-tenders.ai-impact",
+                "source_refs": [
+                  "onet-details",
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "真实设备状态、参数、化学品、样品、维护、隔离、启停和应急决定必须回到受控系统、现场程序与授权责任人。",
+                "id": "chemical-equipment-operators-and-tenders.faq.5",
+                "question_key": "career.faq.chemical-equipment-operators-and-tenders.human-control",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "暂无可安全使用的数据：所核中国官方工资发布没有与O*NET 51-9011.00精确对应的全国中位数或分位数。",
+                "id": "chemical-equipment-operators-and-tenders.faq.6",
+                "question_key": "career.faq.chemical-equipment-operators-and-tenders.china-pay",
+                "source_refs": [
+                  "nbs-wage"
+                ]
+              },
+              {
+                "answer": "精确职业数据：2025年美国年薪中位数58,040美元、时薪27.90美元。暂无可安全使用的数据：所核摘要页未展示第10和第90百分位，本页不推算。",
+                "fact_refs": [
+                  "wage-annual",
+                  "wage-hourly"
+                ],
+                "id": "chemical-equipment-operators-and-tenders.faq.7",
+                "question_key": "career.faq.chemical-equipment-operators-and-tenders.us-pay",
+                "source_refs": [
+                  "onet-wage-summary"
+                ]
+              },
+              {
+                "answer": "O*NET将该职业归为Job Zone 1-2，通常要求高中毕业或同等学历，岗位训练从数天到一年不等；学历或训练不自动等于现场授权。",
+                "id": "chemical-equipment-operators-and-tenders.faq.8",
+                "question_key": "career.faq.chemical-equipment-operators-and-tenders.education-path",
+                "source_refs": [
+                  "editorial",
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "污染物、危险条件、危险设备和防护装备可能常见；本页只做记录完整性练习，不提供现场操作。",
+                "id": "chemical-equipment-operators-and-tenders.faq.9",
+                "question_key": "career.faq.chemical-equipment-operators-and-tenders.risk-boundary",
+                "source_refs": [
+                  "editorial",
+                  "onet-details",
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "精确职业数据：2024—2034年美国预计增长3%—4%，年均有14,400个空缺；空缺包含增长和永久离职形成的进入机会，不是十年合计或净新增。",
+                "fact_refs": [
+                  "growth",
+                  "openings"
+                ],
+                "id": "chemical-equipment-operators-and-tenders.faq.10",
+                "question_key": "career.faq.chemical-equipment-operators-and-tenders.outlook-transition",
+                "source_refs": [
+                  "bls-openings-definition-2024-34",
+                  "onet-openings-summary-2024-34",
+                  "onet-trend-summary"
+                ]
+              },
+              {
+                "answer": "若你愿意按规范记录、发现缺口即停并清楚升级，可继续用低风险字段练习观察；这不是录用或授权保证。",
+                "id": "chemical-equipment-operators-and-tenders.faq.11",
+                "question_key": "career.faq.chemical-equipment-operators-and-tenders.career-worth",
+                "source_refs": [
+                  "editorial"
+                ]
+              }
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.sources.faq.1",
+          "source_refs": [
+            "adj-engineers",
+            "adj-heat",
+            "adj-plating",
+            "adj-refining",
+            "adj-technicians",
+            "bls-openings-definition-2024-34",
+            "editorial",
+            "nbs-wage",
+            "onet-details",
+            "onet-openings-summary-2024-34",
+            "onet-summary",
+            "onet-trend-summary",
+            "onet-wage-summary"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "页面显示名遵循冻结名称“设备操作员看护员”，但正文精确身份始终限定为O*NET 51-9011.00化工设备操作与看护员。",
+              "五个冻结相邻职业均依据各自O*NET页面比较，不与目标职业合并。",
+              "2025工资与2024—2034就业展望按不同期间分别绑定；14,400为2024—2034预测期年均空缺，不写成十年合计或净新增。",
+              "所引摘要页仅提供2025小时和年薪中位数，未提供第10和第90百分位；本页不推算分位数。",
+              "练习共16格、13格有值、3格缺失；81.25%只表示题面字段完整率。",
+              "本页不提供设备设定、化学品处理、取样、维修、隔离、启停或应急响应步骤，也不授予现场资格或权限。"
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.sources.boundary.1",
+          "source_refs": [
+            "adj-engineers",
+            "adj-heat",
+            "adj-plating",
+            "adj-refining",
+            "adj-technicians",
+            "bls-openings-definition-2024-34",
+            "editorial",
+            "nbs-wage",
+            "onet-details",
+            "onet-openings-summary-2024-34",
+            "onet-summary",
+            "onet-trend-summary",
+            "onet-wage-summary"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "设备操作员看护员",
+                "id": "chemical-equipment-operators-and-tenders.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "设备操作员看护员",
+                "id": "chemical-equipment-operators-and-tenders.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "设备操作员看护员",
+                "id": "chemical-equipment-operators-and-tenders.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "设备操作员看护员",
+                "id": "chemical-equipment-operators-and-tenders.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "设备操作员看护员",
+                "id": "chemical-equipment-operators-and-tenders.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "设备操作员看护员",
+                "id": "chemical-equipment-operators-and-tenders.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "设备操作员看护员",
+                "id": "chemical-equipment-operators-and-tenders.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "设备操作员看护员",
+                "id": "chemical-equipment-operators-and-tenders.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "设备操作员看护员",
+                "id": "chemical-equipment-operators-and-tenders.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "设备操作员看护员",
+                "id": "chemical-equipment-operators-and-tenders.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "设备操作员看护员",
+                "id": "chemical-equipment-operators-and-tenders.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "化工设备和制造过程设计职业边界。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-engineers",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET 17-2041.00化学工程师",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2041.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "金属与塑料热处理设备岗位边界。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-heat",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET 51-4191.00金属与塑料热处理设备操作岗位",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-4191.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "金属与塑料镀层设备岗位边界。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-plating",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET 51-4193.00金属与塑料电镀设备操作岗位",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-4193.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "熔炼和精炼金属的炉类岗位边界。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-refining",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET 51-4051.00金属精炼炉操作与看护员",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-4051.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "化学和物理实验测试支持职业边界。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-technicians",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET 19-4031.00化学技术员",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/19-4031.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "同一2024—2034预测期将occupational openings明确标为annual average，并说明主要来自永久离职替补。",
+                  "只用于解释2024—2034 occupational openings指标口径；目标职业14,400数值仍来自O*NET精确职业页，不混用新预测期数值。"
+                ],
+                "evidence_type": "official source",
+                "id": "bls-openings-definition-2024-34",
+                "limitation": "只用于解释2024—2034 occupational openings指标口径；目标职业14,400数值仍来自O*NET精确职业页，不混用新预测期数值。",
+                "market": "美国",
+                "name": "BLS Career Outlook：2024—2034职业空缺年均口径",
+                "period": "2024-2034 BLS projections; O*NET value plus BLS annual-average definition; accessed 2026-09-07",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/careeroutlook/2026/article/manufacturing.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "合成记录练习、适配、AI与安全责任边界。",
+                  "不是资格、许可、设备操作、化学品处理、维修、隔离或应急响应授权。"
+                ],
+                "evidence_type": "editorial exercise and guidance",
+                "id": "editorial",
+                "limitation": "不是资格、许可、设备操作、化学品处理、维修、隔离或应急响应授权。",
+                "market": "编辑设计",
+                "name": "化工设备操作与看护职业探索编辑说明",
+                "period": "editorial review 2026-09-06",
+                "publisher": "FermatMind editorial",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "中国大陆行业和宽岗位工资口径。",
+                  "没有与O*NET 51-9011.00精确对应的全国职业中位数或分位数。"
+                ],
+                "evidence_type": "official source",
+                "id": "nbs-wage",
+                "limitation": "没有与O*NET 51-9011.00精确对应的全国职业中位数或分位数。",
+                "market": "中国大陆",
+                "name": "国家统计局：2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wage release; published 2026-05-15; reused 2026-09-06",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "精确职业任务、活动与工作情境。",
+                  "不提供任何设备设定、化学品处理、维修、隔离或应急操作程序。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-details",
+                "limitation": "不提供任何设备设定、化学品处理、维修、隔离或应急操作程序。",
+                "market": "美国",
+                "name": "O*NET 51-9011.00详细页",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-9011.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "精确职业页面显示Projected job openings (2024-2034)为14,400。",
+                  "该页显示数值但未在标签中写出annual average；年均定义由同期间BLS官方材料补足。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-openings-summary-2024-34",
+                "limitation": "该页显示数值但未在标签中写出annual average；年均定义由同期间BLS官方材料补足。",
+                "market": "美国",
+                "name": "O*NET 51-9011.00：2024—2034预计空缺",
+                "period": "2024-2034 BLS projections; O*NET value plus BLS annual-average definition; accessed 2026-09-07",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-9011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "精确职业身份、任务、活动、情境、软件与教育调查。",
+                  "任务全集不表示每个岗位承担全部活动；不提供现场操作程序，也不建立中国职业映射。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-summary",
+                "limitation": "任务全集不表示每个岗位承担全部活动；不提供现场操作程序，也不建立中国职业映射。",
+                "market": "美国",
+                "name": "O*NET 51-9011.00摘要",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-9011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "精确职业2024就业、2024—2034预计增长和年均岗位空缺。",
+                  "全国预测不代表地区、工厂、班次或个人机会；14,400为预测期年均空缺，不是十年合计。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-trend-summary",
+                "limitation": "全国预测不代表地区、工厂、班次或个人机会；14,400为预测期年均空缺，不是十年合计。",
+                "market": "美国",
+                "name": "O*NET 51-9011.00就业展望摘要",
+                "period": "2024-2034 BLS projections displayed by O*NET; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-9011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "精确职业2025美国小时和年薪中位数。",
+                  "摘要页未展示第10和第90百分位；全国中位数不是具体岗位或个人收入保证。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-wage-summary",
+                "limitation": "摘要页未展示第10和第90百分位；全国中位数不是具体岗位或个人收入保证。",
+                "market": "美国",
+                "name": "O*NET 51-9011.00工资摘要",
+                "period": "2025 BLS OEWS data displayed by O*NET; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-9011.00"
+              }
+            ]
+          },
+          "id": "chemical-equipment-operators-and-tenders.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "58,040美元/年",
+        "fact_id": "wage-annual",
+        "market": "美国",
+        "measure": "年薪中位数",
+        "occupation_scope": "精确职业数据：Chemical Equipment Operators and Tenders（O*NET 51-9011.00）",
+        "period": "2025 BLS OEWS data displayed by O*NET; accessed 2026-09-06",
+        "source_refs": [
+          "onet-wage-summary"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "27.90美元/小时",
+        "fact_id": "wage-hourly",
+        "market": "美国",
+        "measure": "小时工资中位数",
+        "occupation_scope": "精确职业数据：Chemical Equipment Operators and Tenders（O*NET 51-9011.00）",
+        "period": "2025 BLS OEWS data displayed by O*NET; accessed 2026-09-06",
+        "source_refs": [
+          "onet-wage-summary"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "128,900人",
+        "fact_id": "employment",
+        "market": "美国",
+        "measure": "就业人数",
+        "occupation_scope": "精确职业数据：Chemical Equipment Operators and Tenders（O*NET 51-9011.00）",
+        "period": "2024-2034 BLS projections displayed by O*NET; accessed 2026-09-06",
+        "source_refs": [
+          "onet-trend-summary"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "增长3%—4%（2024—2034）",
+        "fact_id": "growth",
+        "market": "美国",
+        "measure": "预计就业变化",
+        "occupation_scope": "精确职业数据：Chemical Equipment Operators and Tenders（O*NET 51-9011.00）",
+        "period": "2024-2034 BLS projections displayed by O*NET; accessed 2026-09-06",
+        "source_refs": [
+          "onet-trend-summary"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "14,400个/年（2024—2034预测期年均）",
+        "fact_id": "openings",
+        "market": "美国",
+        "measure": "预计年均岗位空缺",
+        "occupation_scope": "精确职业数据：O*NET 51-9011.00；BLS同一预测期材料用于解释年均口径",
+        "period": "2024-2034 BLS projections; O*NET value plus BLS annual-average definition; accessed 2026-09-07",
+        "source_refs": [
+          "bls-openings-definition-2024-34",
+          "onet-openings-summary-2024-34"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "7d5346d139ff7e03e5e607103dc1a520488ea09bab9a42045b101f935eb3bebb",
+  "source_content_sha256": "cdb0a07b5d62ec6094f01cb0413235d0e6a9a6948fac71844742e684cf8e1c2e",
   "subject": {
     "canonical_slug": "chemical-equipment-operators-and-tenders",
     "name": "设备操作员看护员",
-    "summary": null
+    "summary": "本页精确讨论O*NET 51-9011.00化工设备操作与看护员：在既定流程与授权下操作或看护设备，监看状态、记录数据、识别异常并完成交接；不把化学工程设计、实验分析或金属加工设备岗位合并进来。"
   }
 }

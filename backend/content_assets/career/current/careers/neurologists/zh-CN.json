@@ -1,12 +1,1671 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：神经科医师以非手术方式评估和管理脑、脊髓、周围神经及相关肌肉疾病。核心不是背疾病名，而是把病史、神经检查、检查时序与功能变化整合成可解释且可交接的临床判断。"
+            ]
+          },
+          "id": "neurologists.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "onet-neuro-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "适合信号：你愿意长期学习医学，能在信息不完整和时间压力下保持准确、同理与克制，并愿意为记录、升级和治疗监测承担责任。"
+            ]
+          },
+          "id": "neurologists.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial-neuro",
+            "onet-neuro-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：如果你只对脑科学好奇，却不愿完成漫长医学训练、值班、受监督反馈和州级执照核对，应先比较研究、神经心理或健康信息方向。"
+            ]
+          },
+          "id": "neurologists.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "acgme-neurology",
+            "bls-physicians-duties",
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全试做：只用本页完全虚构的交接记录A，检查必填字段、计算时间差并按给定规则写升级摘要；不得接触真实患者，也不得作诊断、用药或检查解释。"
+            ]
+          },
+          "id": "neurologists.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "cdc-stroke",
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "身份：本页对应美国O*NET 29-1217.00神经科医师精确职业，重点是脑、脊髓和周围神经疾病的非手术诊断、管理与治疗。"
+            ]
+          },
+          "id": "neurologists.profile.definition-block.1",
+          "source_refs": [
+            "onet-neuro-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "输入：主诉与症状开始时间、病史、神经检查、生命体征、药物和过敏、实验室/影像/电生理结果、既往记录及患者目标。"
+            ]
+          },
+          "id": "neurologists.profile.responsibilities-block.1",
+          "source_refs": [
+            "editorial-neuro",
+            "onet-neuro-current"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "任务：采集病史和检查，形成鉴别判断，选择或解释检查，制定和调整管理方案，监测变化并协调支持性照护。"
+            ]
+          },
+          "id": "neurologists.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-neuro-current"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "产出：结构化病历、问题与鉴别清单、检查/治疗医嘱、会诊或转诊说明、风险沟通、随访计划和紧急交接。"
+            ]
+          },
+          "id": "neurologists.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-neuro-current"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断：哪些信息改变紧急程度，体征与病灶是否一致，检查能否回答问题，药物风险和功能目标如何权衡，以及何时升级。"
+            ]
+          },
+          "id": "neurologists.profile.work-context-block.1",
+          "source_refs": [
+            "cdc-stroke",
+            "onet-neuro-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "流程：确认身份与紧急信号 → 病史和神经检查 → 鉴别与检查计划 → 解释结果 → 获授权治疗与协调 → 监测和交接。"
+            ]
+          },
+          "id": "neurologists.profile.work-context-block.2",
+          "source_refs": [
+            "fsmb-licensure",
+            "onet-neuro-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "环境与工具：医院、门诊和非临床机构；使用电子病历、影像、电生理、实验室和常规办公工具。工具提供信息，不能取代完整临床上下文。"
+            ]
+          },
+          "id": "neurologists.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "cms-ai-care",
+            "onet-neuro-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "协作：与急诊、影像、神经外科、康复、护理、药学、心理、社会工作和初级照护团队协作；会诊意见不能模糊最终责任链。"
+            ]
+          },
+          "id": "neurologists.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "onet-neuro-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量：时间线、症状侧别、检查条件、药物剂量、影像序列、变化趋势和升级结果必须可追溯；未知项显式保留。"
+            ]
+          },
+          "id": "neurologists.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial-neuro",
+            "onet-neuro-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "责任边界：诊断、处方和治疗由有权限人员在所在地执照与机构规则内承担；学习者和工具都不能越权。"
+            ]
+          },
+          "id": "neurologists.profile.definition-block.2",
+          "source_refs": [
+            "cms-ai-care",
+            "fsmb-licensure"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "clinical-neuropsychologists",
+                "id": "neurologists.related.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/clinical-neuropsychologists"
+              },
+              {
+                "entity": "physician-assistants",
+                "id": "neurologists.related.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/physician-assistants"
+              },
+              {
+                "entity": "nurse-practitioners",
+                "id": "neurologists.related.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/nurse-practitioners"
+              },
+              {
+                "entity": "physical-medicine-and-rehabilitation-physicians",
+                "id": "neurologists.related.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/physical-medicine-and-rehabilitation-physicians"
+              }
+            ]
+          },
+          "id": "neurologists.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-cnp-current",
+            "onet-neuro-current",
+            "onet-np-current",
+            "onet-pa-current",
+            "onet-pmr-current"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "临床神经心理学家主要用标准化认知与心理测验形成详细评估报告；神经科医师接受医学训练，整合神经检查、影像和其他检查并承担医学管理。"
+            ]
+          },
+          "id": "neurologists.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-cnp-current",
+            "onet-neuro-current",
+            "onet-np-current",
+            "onet-pa-current",
+            "onet-pmr-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "医师助理可在医师监督下检查、治疗和咨询患者；神经科医师是完成神经科专科住院医训练的医师，授权和监督结构不同。"
+            ]
+          },
+          "id": "neurologists.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-cnp-current",
+            "onet-neuro-current",
+            "onet-np-current",
+            "onet-pa-current",
+            "onet-pmr-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "执业护士以注册护理和专门研究生教育为基础管理急慢性疾病；与神经科医师在临床团队中可有重叠，但训练路径和法域授权不同。"
+            ]
+          },
+          "id": "neurologists.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-cnp-current",
+            "onet-neuro-current",
+            "onet-np-current",
+            "onet-pa-current",
+            "onet-pmr-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "物理医学与康复医师更集中于功能、康复和残障管理；神经科医师更集中于神经系统疾病的诊断与医学管理，具体岗位可能协作。"
+            ]
+          },
+          "id": "neurologists.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-cnp-current",
+            "onet-neuro-current",
+            "onet-np-current",
+            "onet-pa-current",
+            "onet-pmr-current"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助：整理病史时间线、提示缺失字段、标记影像候选区域、汇总检查趋势或草拟交接；所有输出都需临床复核。"
+            ]
+          },
+          "id": "neurologists.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "cms-ai-care",
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "能力边界：模型可以生成候选模式，不能凭输出本身证明病因、紧急程度、诊断或最佳治疗。"
+            ]
+          },
+          "id": "neurologists.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "cms-ai-care",
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用条件：先定义任务、适用人群、错误指标、失败升级、隐私环境、责任人和停用标准，再进行获批验证。"
+            ]
+          },
+          "id": "neurologists.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "cms-ai-care",
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数据控制：真实病历、影像和遗传信息只能进入获批系统，并遵循适用隐私、安全、访问和留痕要求。"
+            ]
+          },
+          "id": "neurologists.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "cms-ai-care"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工控制点：核对患者身份、时间线、完整影像、检查条件、药物清单、症状变化和来源记录。"
+            ]
+          },
+          "id": "neurologists.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余责任：紧急升级、诊断、处方、知情沟通、执照范围和最终病历签署仍由有权限人员承担。"
+            ]
+          },
+          "id": "neurologists.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "cms-ai-care",
+            "fsmb-licensure"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业解释：CMS页面不提供神经科AI采用率、替代率或岗位增减，不能从可辅助任务直接推出职业前景。"
+            ]
+          },
+          "id": "neurologists.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "cms-ai-care"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "安全验证：用去标识且获批的回顾样本比较人工与工具结果，按漏检、误报、亚组差异、校准和处置时间持续监测。"
+            ]
+          },
+          "id": "neurologists.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "cms-ai-care",
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：列明的中国官方入口未提供与美国29-1217.00一一对应的全国神经科医师工资分布。"
+            ]
+          },
+          "id": "neurologists.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "cn-wage-attempt"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "不能外推：美国神经科中位数、中国卫生行业平均数或单个招聘报价都不能替代中国精确职业统计。"
+            ]
+          },
+          "id": "neurologists.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "cn-wage-attempt"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "核对岗位时分别记录城市、医院层级、亚专科、职称、排班和值班、固定与绩效薪酬、合同性质和统计时间。"
+            ]
+          },
+          "id": "neurologists.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "该缺口只表示当前列明来源不能安全回答全国精确分布，不表示没有相关岗位或任何报价。"
+            ]
+          },
+          "id": "neurologists.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "cn-wage-attempt",
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业口径：BLS在医师与外科医师职业页中单列SOC 29-1217神经科医师2025年5月年薪中位数。"
+            ]
+          },
+          "id": "neurologists.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "bls-neuro-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国SOC 29-1217神经科医师精确职业数据：2025年5月年薪中位数为248,560美元。"
+            ]
+          },
+          "fact_refs": [
+            "us-wage"
+          ],
+          "id": "neurologists.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "bls-neuro-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "页面未给神经科精确上下10%分位，因此不借用全部医师与外科医师的76,560和488,320美元分位。"
+            ]
+          },
+          "id": "neurologists.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "bls-neuro-wage",
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数不是入门工资，也不代表某州、医院、亚专科、排班、税后收入或个人报价。"
+            ]
+          },
+          "id": "neurologists.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "bls-neuro-wage",
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "比较岗位时同时记录基础薪酬、生产率或绩效、值班、福利、责任险、合同工时和地区成本。"
+            ]
+          },
+          "id": "neurologists.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "期间边界：2025年5月工资与2025—2035就业预测是不同数据面，增长率不能直接乘到个人工资。"
+            ]
+          },
+          "id": "neurologists.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "bls-neuro-outlook",
+            "bls-neuro-wage",
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "信息整合：你能把时间线、症状侧别、检查和功能变化放在同一结构里，不遗漏矛盾。"
+            ]
+          },
+          "id": "neurologists.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial-neuro",
+            "onet-neuro-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "准确与克制：信息不足时保留未知项，不把猜测写成病史或诊断。"
+            ]
+          },
+          "id": "neurologists.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial-neuro",
+            "onet-neuro-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "压力下升级：遇到突发红旗能先启动合适流程，而不是为了完整分析拖延。"
+            ]
+          },
+          "id": "neurologists.fit.riasec-fit-block.3",
+          "source_refs": [
+            "cdc-stroke",
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "同理沟通：愿意倾听患者和家属，并用可理解语言说明下一步与不确定性。"
+            ]
+          },
+          "id": "neurologists.fit.riasec-fit-block.4",
+          "source_refs": [
+            "onet-neuro-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "长期学习：接受医学知识更新、受监督复盘、夜间或不规则工作和持续认证要求。"
+            ]
+          },
+          "id": "neurologists.fit.riasec-fit-block.5",
+          "source_refs": [
+            "abpn-neurology",
+            "onet-neuro-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "团队协作：能和影像、康复、护理及其他专科清楚交接，同时维护责任边界。"
+            ]
+          },
+          "id": "neurologists.fit.riasec-fit-block.6",
+          "source_refs": [
+            "onet-neuro-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "反馈耐受：愿意让上级复核病史、检查、鉴别和记录，并修正认知偏差。"
+            ]
+          },
+          "id": "neurologists.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial-neuro",
+            "onet-neuro-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "测评边界：兴趣测评只能帮助提问，不能替代课程、临床训练、执照和监督评价。"
+            ]
+          },
+          "id": "neurologists.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial-neuro",
+            "fsmb-licensure"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "急性卒中警示：突发单侧无力或言语异常时，延迟可能伤害患者；记录开始时间，按所在地紧急流程立即升级。美国CDC面向公众的指引是立即呼叫911。"
+            ]
+          },
+          "id": "neurologists.risk.career-risk-cards.1",
+          "source_refs": [
+            "cdc-stroke",
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "药物和过敏不完整：漏掉剂量、最后一次用药或过敏反应可能改变安全判断；禁止猜测，标记未知并交由持证人员核对。"
+            ]
+          },
+          "id": "neurologists.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial-neuro",
+            "onet-neuro-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "检查解释越界：缺少完整影像序列、检查条件或原报告时，片段摘要可能误导；回到原始资料并请有权限人员复核。"
+            ]
+          },
+          "id": "neurologists.risk.career-risk-cards.3",
+          "source_refs": [
+            "editorial-neuro",
+            "onet-neuro-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "交接时间线错误：发作、观察、检查和用药时间混淆会破坏紧急程度判断；统一时区和格式，保留原始记录并复核。"
+            ]
+          },
+          "id": "neurologists.risk.career-risk-cards.4",
+          "source_refs": [
+            "cdc-stroke",
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "执业边界：学习者、未持证人员和工具不得独立诊断、处方或治疗；按州执照、训练许可、机构规则和监督链升级。"
+            ]
+          },
+          "id": "neurologists.risk.career-risk-cards.5",
+          "source_refs": [
+            "cms-ai-care",
+            "fsmb-licensure"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "美国典型路径：完成学士和医学学位，再进入专科实习/住院医训练，并按州要求取得执照；州规则和个体资格必须单独核对。"
+            ]
+          },
+          "id": "neurologists.path.career-path-block.1",
+          "source_refs": [
+            "bls-physicians-duties"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "美国ACGME神经科住院医项目精确职业数据：截至2026年9月访问的要求文件规定完整教育48个月，其中至少36个月为神经科教育；ABPN认证另有培训、临床技能评估和执照条件。"
+            ]
+          },
+          "fact_refs": [
+            "path-residency"
+          ],
+          "id": "neurologists.path.career-path-block.2",
+          "source_refs": [
+            "abpn-neurology",
+            "acgme-neurology"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "虚构材料｜交接记录A：09:40突然出现左臂无力和言语含糊；10:00记录。姓名用‘甲’，年龄67岁；过敏写‘未知’，当前用药空白，血糖未提供。给定规则：突发单侧无力或言语异常即标记红旗，记录开始时间并立即升级；不得诊断或给治疗建议。"
+            ]
+          },
+          "id": "neurologists.path.career-path-block.3",
+          "source_refs": [
+            "cdc-stroke",
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "任务与参考：列出已知字段和缺失字段；计算09:40至10:00为20分钟；交接摘要应写‘红旗存在，症状开始09:40，过敏未知、用药和血糖缺失，应按流程立即升级给持证临床人员；实际升级时间与接收人未提供’，不得写卒中诊断或用药。"
+            ]
+          },
+          "id": "neurologists.path.career-path-block.4",
+          "source_refs": [
+            "cdc-stroke",
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品交付：一页字段表、一条时间线、一段不超过80字的升级摘要和一张未知项清单；页首标注‘完全虚构，非医疗建议’。"
+            ]
+          },
+          "id": "neurologists.path.career-path-block.5",
+          "source_refs": [
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七日体验：第1天抄录交接记录A；第2天列字段；第3天复算20分钟；第4天按给定规则标红旗；第5天写摘要；第6天对照参考；第7天记录遗漏和职业感受。全程只用材料A。"
+            ]
+          },
+          "id": "neurologists.path.career-path-block.6",
+          "source_refs": [
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "资格边界：州级执照决定行医授权，ABPN专科认证是不同层级；训练许可、监督范围和最终签字责任也要分别核对。"
+            ]
+          },
+          "id": "neurologists.path.career-path-block.7",
+          "source_refs": [
+            "abpn-neurology",
+            "fsmb-licensure"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "成长证据：从准确记录和及时升级，推进到受监督病史/检查、鉴别推理、协调和获授权责任；不以固定年限保证晋升。"
+            ]
+          },
+          "id": "neurologists.path.career-path-block.8",
+          "source_refs": [
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国BLS精确职业数据：SOC 29-1217神经科医师就业从2025年约11,400人预计增至2035年约12,100人。"
+            ]
+          },
+          "fact_refs": [
+            "market-neuro"
+          ],
+          "id": "neurologists.market-signals.market-signal-card.1",
+          "source_refs": [
+            "bls-neuro-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国SOC 29-1217神经科医师精确职业数据：2025—2035年预测增长6%、净增约700人；增长率和净增人数是不同指标。"
+            ]
+          },
+          "fact_refs": [
+            "market-neuro"
+          ],
+          "id": "neurologists.market-signals.market-signal-card.2",
+          "source_refs": [
+            "bls-neuro-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据来展示神经科医师2025—2035年精确年均空缺；页面的22,100个年均空缺属于全部医师和外科医师，不能错配。"
+            ]
+          },
+          "id": "neurologists.market-signals.market-signal-card.3",
+          "source_refs": [
+            "bls-neuro-outlook",
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "需求背景：老年人口和慢性病支持医师服务需求；团队化照护和其他医疗人员分担任务也会影响需求。这是医师总体背景，不是神经科因果预测。"
+            ]
+          },
+          "id": "neurologists.market-signals.market-signal-card.4",
+          "source_refs": [
+            "bls-physicians-outlook-parent"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "判断边界：全国十年预测不保证某州、医院、亚专科或个人机会；还应核对当地人口、转诊网络、培训名额和岗位职责。"
+            ]
+          },
+          "id": "neurologists.market-signals.market-signal-card.5",
+          "source_refs": [
+            "bls-neuro-outlook",
+            "editorial-neuro"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "神经科医师采集病史并检查患者，订购和解释神经诊断检查或影像，形成鉴别判断，管理治疗，监测进展，协调支持性照护，并记录和沟通结果。",
+                "id": "neurologists.faq.1",
+                "question_key": "career.faq.neurologists.daily-work",
+                "source_refs": [
+                  "onet-neuro-current"
+                ]
+              },
+              {
+                "answer": "临床神经心理学家侧重标准化认知/心理评估与报告；医师助理在医师监督下提供医疗服务；执业护士以护理注册和研究生教育为基础诊疗；物理医学与康复医师更集中于功能和综合康复；神经科医师以神经系统疾病的专科医学管理为中心。",
+                "id": "neurologists.faq.2",
+                "question_key": "career.faq.neurologists.role-comparison",
+                "source_refs": [
+                  "onet-cnp-current",
+                  "onet-neuro-current",
+                  "onet-np-current",
+                  "onet-pa-current",
+                  "onet-pmr-current"
+                ]
+              },
+              {
+                "answer": "神经科工作要求主动倾听、严谨推理、问题敏感度、准确记录、复杂沟通、同理心、谨慎和压力下自我控制。 适配度应通过长期医学学习、受监督训练、非临床记录练习和反馈验证；单次兴趣或人格测评不能证明临床能力。",
+                "id": "neurologists.faq.3",
+                "question_key": "career.faq.neurologists.fit",
+                "source_refs": [
+                  "editorial-neuro",
+                  "onet-neuro-current"
+                ]
+              },
+              {
+                "answer": "CMS说明AI可辅助医生分析症状、影像或记录，但安全使用仍需隐私和安全保护、适用监管、执照与执业范围、人类监督及持续准确性监测。 任何摘要、分诊提示、影像候选或相互作用提示都必须回到原始记录、完整影像、药物清单、检查时序和适用标准，由有权限临床人员复核；工具输出不能成为自动诊断或治疗指令。",
+                "id": "neurologists.faq.4",
+                "question_key": "career.faq.neurologists.ai-impact",
+                "source_refs": [
+                  "cms-ai-care",
+                  "editorial-neuro"
+                ]
+              },
+              {
+                "answer": "任何摘要、分诊提示、影像候选或相互作用提示都必须回到原始记录、完整影像、药物清单、检查时序和适用标准，由有权限临床人员复核；工具输出不能成为自动诊断或治疗指令。 美国医师执照由州级医学委员会管理，核验医学学位、研究生医学培训、执照考试和其他州级要求；住院医通常在有限且受监督的训练许可内执业。",
+                "id": "neurologists.faq.5",
+                "question_key": "career.faq.neurologists.human-control",
+                "source_refs": [
+                  "editorial-neuro",
+                  "fsmb-licensure"
+                ]
+              },
+              {
+                "answer": "本次列明的中国官方检索入口未提供与美国29-1217.00一一对应的全国神经科医师工资中位数或分位数，因此不展示未经支持的精确数字。",
+                "id": "neurologists.faq.6",
+                "question_key": "career.faq.neurologists.china-pay",
+                "source_refs": [
+                  "cn-wage-attempt"
+                ]
+              },
+              {
+                "answer": "美国BLS数据显示，SOC 29-1217神经科医师2025年5月年薪中位数为248,560美元。 该全国职业中位数不是入门工资、地区报价、税后收入或个人保证；页面未给神经科医师精确上下10%分位，不应用全部医师分位数替代。",
+                "fact_refs": [
+                  "us-wage"
+                ],
+                "id": "neurologists.faq.7",
+                "question_key": "career.faq.neurologists.us-pay",
+                "source_refs": [
+                  "bls-neuro-wage",
+                  "editorial-neuro"
+                ]
+              },
+              {
+                "answer": "BLS说明美国医师通常先完成学士和医学学位，再按专科完成3至9年实习/住院医训练。 ACGME神经科项目要求完整住院医教育为48个月，其中至少36个月为神经科教育；其余结构包括广泛内科临床经验。",
+                "fact_refs": [
+                  "path-residency"
+                ],
+                "id": "neurologists.faq.8",
+                "question_key": "career.faq.neurologists.education-path",
+                "source_refs": [
+                  "acgme-neurology",
+                  "bls-physicians-duties"
+                ]
+              },
+              {
+                "answer": "美国医师执照由州级医学委员会管理，核验医学学位、研究生医学培训、执照考试和其他州级要求；住院医通常在有限且受监督的训练许可内执业。",
+                "id": "neurologists.faq.9",
+                "question_key": "career.faq.neurologists.credentials",
+                "source_refs": [
+                  "fsmb-licensure"
+                ]
+              },
+              {
+                "answer": "CDC把突发单侧面部/肢体无力、言语异常、视力或平衡问题等列为卒中警示信号，并要求记录症状开始时间、在美国立即呼叫911。 若症状开始时间、用药/过敏、检查来源、患者身份、影像序列或升级责任不清，应停止无依据补全，保留未知项，并按机构和所在地流程升级给持证临床人员。",
+                "id": "neurologists.faq.10",
+                "question_key": "career.faq.neurologists.risk-boundary",
+                "source_refs": [
+                  "cdc-stroke",
+                  "editorial-neuro"
+                ]
+              },
+              {
+                "answer": "美国BLS预计SOC 29-1217神经科医师就业从2025年约11,400人增至2035年约12,100人，增长6%，净增约700人。 增长率、净增就业和年均空缺是不同指标；BLS页面的年均22,100个空缺属于全部医师和外科医师，不能写成神经科精确空缺或个人就业概率。",
+                "fact_refs": [
+                  "market-neuro"
+                ],
+                "id": "neurologists.faq.11",
+                "question_key": "career.faq.neurologists.outlook-transition",
+                "source_refs": [
+                  "bls-neuro-outlook",
+                  "editorial-neuro"
+                ]
+              },
+              {
+                "answer": "神经科工作要求主动倾听、严谨推理、问题敏感度、准确记录、复杂沟通、同理心、谨慎和压力下自我控制。 增长率、净增就业和年均空缺是不同指标；BLS页面的年均22,100个空缺属于全部医师和外科医师，不能写成神经科精确空缺或个人就业概率。",
+                "id": "neurologists.faq.12",
+                "question_key": "career.faq.neurologists.career-worth",
+                "source_refs": [
+                  "editorial-neuro",
+                  "onet-neuro-current"
+                ]
+              }
+            ]
+          },
+          "id": "neurologists.sources.faq.1",
+          "source_refs": [
+            "acgme-neurology",
+            "bls-neuro-outlook",
+            "bls-neuro-wage",
+            "bls-physicians-duties",
+            "cdc-stroke",
+            "cms-ai-care",
+            "cn-wage-attempt",
+            "editorial-neuro",
+            "fsmb-licensure",
+            "onet-cnp-current",
+            "onet-neuro-current",
+            "onet-np-current",
+            "onet-pa-current",
+            "onet-pmr-current"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "本页对应美国O*NET 29-1217.00精确职业；美国工资和预测按SOC 29-1217呈现。",
+              "中国、美国、州级执照、专科认证与编辑练习分别陈述；统计不等于个人保证。",
+              "交接记录A完全虚构，只用于记录完整性和升级识别，不用于诊断、治疗、处方或真实患者沟通。"
+            ]
+          },
+          "id": "neurologists.sources.boundary.1",
+          "source_refs": [
+            "abpn-neurology",
+            "acgme-neurology",
+            "bls-neuro-outlook",
+            "bls-neuro-wage",
+            "bls-physicians-duties",
+            "bls-physicians-outlook-parent",
+            "cdc-stroke",
+            "cms-ai-care",
+            "cn-wage-attempt",
+            "editorial-neuro",
+            "fsmb-licensure",
+            "onet-cnp-current",
+            "onet-neuro-current",
+            "onet-np-current",
+            "onet-pa-current",
+            "onet-pmr-current"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "神经科医师",
+                "id": "neurologists.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "神经科医师",
+                "id": "neurologists.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "神经科医师",
+                "id": "neurologists.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "神经科医师",
+                "id": "neurologists.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "神经科医师",
+                "id": "neurologists.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "神经科医师",
+                "id": "neurologists.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "神经科医师",
+                "id": "neurologists.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "神经科医师",
+                "id": "neurologists.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "神经科医师",
+                "id": "neurologists.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "神经科医师",
+                "id": "neurologists.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "神经科医师",
+                "id": "neurologists.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "neurologists.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持ABPN神经科初始认证对培训、临床技能评估和有效无限制执照的要求。",
+                  "专科认证不等同州级行医执照，且申请期和个体路径需按当期规则核对。"
+                ],
+                "evidence_type": "官方职业、监管或安全资料",
+                "id": "abpn-neurology",
+                "limitation": "专科认证不等同州级行医执照，且申请期和个体路径需按当期规则核对。",
+                "market": "美国",
+                "name": "Initial Certification in Neurology",
+                "period": "2026认证页面；访问2026-09-06",
+                "publisher": "American Board of Psychiatry and Neurology",
+                "scope": "exact",
+                "url": "https://www.abpn.com/become-certified/taking-a-specialty-exam/neurology/"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持完整神经科住院医教育为48个月，其中至少36个月为神经科教育的训练结构。",
+                  "文件要求适用于ACGME项目；申请者需核对当前生效版本和具体项目。"
+                ],
+                "evidence_type": "官方职业、监管或安全资料",
+                "id": "acgme-neurology",
+                "limitation": "文件要求适用于ACGME项目；申请者需核对当前生效版本和具体项目。",
+                "market": "美国",
+                "name": "ACGME Program Requirements for Graduate Medical Education in Neurology",
+                "period": "要求文件；访问2026-09-06",
+                "publisher": "Accreditation Council for Graduate Medical Education",
+                "scope": "exact",
+                "url": "https://www.acgme.org/globalassets/pfassets/programrequirements/180_neurology_2023.pdf"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持美国SOC 29-1217神经科医师2025年11,400人、2035年12,100人、增长6%、净增700人。",
+                  "页面年均22,100个空缺是全部医师和外科医师总体，不能当作神经科精确空缺。"
+                ],
+                "evidence_type": "官方职业、监管或安全资料",
+                "id": "bls-neuro-outlook",
+                "limitation": "页面年均22,100个空缺是全部医师和外科医师总体，不能当作神经科精确空缺。",
+                "market": "美国",
+                "name": "Physicians and Surgeons, Occupational Outlook Handbook",
+                "period": "2025—2035年预测；访问2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/healthcare/physicians-and-surgeons.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持美国SOC 29-1217神经科医师2025年5月年薪中位数248,560美元。",
+                  "精确职业中位数，不是入门、地区、税后或个人报价；页面未给神经科精确上下10%分位。"
+                ],
+                "evidence_type": "官方职业、监管或安全资料",
+                "id": "bls-neuro-wage",
+                "limitation": "精确职业中位数，不是入门、地区、税后或个人报价；页面未给神经科精确上下10%分位。",
+                "market": "美国",
+                "name": "Physicians and Surgeons, Occupational Outlook Handbook",
+                "period": "2025年5月工资；访问2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/healthcare/physicians-and-surgeons.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持神经科医师职责，以及美国医师典型教育、住院医培训、工作环境和州执照边界。",
+                  "部分路径和环境信息是医师/外科医师总体口径；神经科职责另有明确段落。"
+                ],
+                "evidence_type": "官方职业、监管或安全资料",
+                "id": "bls-physicians-duties",
+                "limitation": "部分路径和环境信息是医师/外科医师总体口径；神经科职责另有明确段落。",
+                "market": "美国",
+                "name": "Physicians and Surgeons, Occupational Outlook Handbook",
+                "period": "BLS职业页2026-08-27更新；访问2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/healthcare/physicians-and-surgeons.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持美国医师和外科医师总体的老龄人口、慢性病与团队化照护需求背景。",
+                  "父职业背景不能作为神经科精确需求因果或个人机会。"
+                ],
+                "evidence_type": "官方职业、监管或安全资料",
+                "id": "bls-physicians-outlook-parent",
+                "limitation": "父职业背景不能作为神经科精确需求因果或个人机会。",
+                "market": "美国",
+                "name": "Physicians and Surgeons, Occupational Outlook Handbook",
+                "period": "2025—2035年预测；访问2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/ooh/healthcare/physicians-and-surgeons.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持突发单侧无力、言语异常等卒中警示信号、记录症状开始时间及立即呼叫美国911。",
+                  "面向美国公众的紧急信息，不用于本页练习作诊断或替代所在地急救流程。"
+                ],
+                "evidence_type": "官方职业、监管或安全资料",
+                "id": "cdc-stroke",
+                "limitation": "面向美国公众的紧急信息，不用于本页练习作诊断或替代所在地急救流程。",
+                "market": "美国",
+                "name": "Signs and Symptoms of Stroke",
+                "period": "网页2026-05-19更新；访问2026-09-06",
+                "publisher": "U.S. Centers for Disease Control and Prevention",
+                "scope": "exact",
+                "url": "https://www.cdc.gov/stroke/signs-symptoms/index.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持AI可辅助症状和影像分析，并需隐私、安全、监管、执照边界、人类监督及持续监测。",
+                  "示例不是神经科专用采用率、性能保证或执业授权。"
+                ],
+                "evidence_type": "官方职业、监管或安全资料",
+                "id": "cms-ai-care",
+                "limitation": "示例不是神经科专用采用率、性能保证或执业授权。",
+                "market": "美国",
+                "name": "Technology-Enabled Care and Artificial Intelligence",
+                "period": "当前页面；访问2026-09-06",
+                "publisher": "Centers for Medicare & Medicaid Services",
+                "scope": "combined_official",
+                "url": "https://www.cms.gov/priorities-innovation-key-concepts/technology-enabled-care-artificial-intelligence"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "用于记录中国大陆精确神经科医师全国工资分布的检索缺口。",
+                  "检索入口未提供与美国29-1217.00一一对应的全国职业工资分布。"
+                ],
+                "evidence_type": "official wage discovery attempt",
+                "id": "cn-wage-attempt",
+                "limitation": "检索入口未提供与美国29-1217.00一一对应的全国职业工资分布。",
+                "market": "中国大陆",
+                "name": "人社部工资信息有界检索",
+                "period": "bounded search; accessed 2026-08-31",
+                "publisher": "中华人民共和国人力资源和社会保障部",
+                "scope": "exact",
+                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持完全虚构的记录完整性练习、职业体验方法和安全边界。",
+                  "不支持外部工资、资格、法规、临床判断、AI性能或采用率。"
+                ],
+                "evidence_type": "编辑设计",
+                "id": "editorial-neuro",
+                "limitation": "不支持外部工资、资格、法规、临床判断、AI性能或采用率。",
+                "market": "编辑设计",
+                "name": "神经科医师候选页编辑设计",
+                "period": "2026-09-06",
+                "publisher": "FermatMind candidate editorial",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持美国医师州级执照、医学学位、研究生医学培训、USMLE/COMLEX和州差异。",
+                  "执照由各州委员会管理，必须核对目标州最新要求。"
+                ],
+                "evidence_type": "官方职业、监管或安全资料",
+                "id": "fsmb-licensure",
+                "limitation": "执照由各州委员会管理，必须核对目标州最新要求。",
+                "market": "美国",
+                "name": "About Physician Licensure",
+                "period": "当前页面；访问2026-09-06",
+                "publisher": "Federation of State Medical Boards",
+                "scope": "exact",
+                "url": "https://www.fsmb.org/u.s.-medical-regulatory-trends-and-actions/guide-to-medical-regulation-in-the-united-states/about-physician-licensure/"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持临床神经心理学家以标准化认知/心理评估和详细报告为核心的职责。",
+                  "只用于相邻职业比较。"
+                ],
+                "evidence_type": "官方职业、监管或安全资料",
+                "id": "onet-cnp-current",
+                "limitation": "只用于相邻职业比较。",
+                "market": "美国",
+                "name": "19-3039.03 - Clinical Neuropsychologists",
+                "period": "O*NET页面2026更新；访问2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/19-3039.03"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持神经科医师精确职业身份、任务、工作活动、情境和技术工具。",
+                  "美国29-1217.00职业资料，不替代具体法域执照或临床指南。"
+                ],
+                "evidence_type": "官方职业、监管或安全资料",
+                "id": "onet-neuro-current",
+                "limitation": "美国29-1217.00职业资料，不替代具体法域执照或临床指南。",
+                "market": "美国",
+                "name": "29-1217.00 - Neurologists",
+                "period": "O*NET页面2026更新；访问2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-1217.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持执业护士以护理注册背景和研究生教育开展急性、间歇或慢性疾病诊疗的职业范围。",
+                  "独立执业与处方权限因法域而异。"
+                ],
+                "evidence_type": "官方职业、监管或安全资料",
+                "id": "onet-np-current",
+                "limitation": "独立执业与处方权限因法域而异。",
+                "market": "美国",
+                "name": "29-1171.00 - Nurse Practitioners",
+                "period": "O*NET页面2026更新；访问2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-1171.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持医师助理在医师监督下提供医疗服务、检查、治疗和咨询的职业范围。",
+                  "监督与处方权限因法域和岗位而异。"
+                ],
+                "evidence_type": "官方职业、监管或安全资料",
+                "id": "onet-pa-current",
+                "limitation": "监督与处方权限因法域和岗位而异。",
+                "market": "美国",
+                "name": "29-1071.00 - Physician Assistants",
+                "period": "O*NET页面2026更新；访问2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-1071.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持物理医学与康复医师以功能、康复、残障和综合康复计划为中心的职责。",
+                  "只用于相邻职业比较；不替代神经科医师身份。"
+                ],
+                "evidence_type": "官方职业、监管或安全资料",
+                "id": "onet-pmr-current",
+                "limitation": "只用于相邻职业比较；不替代神经科医师身份。",
+                "market": "美国",
+                "name": "29-1229.04 - Physical Medicine and Rehabilitation Physicians",
+                "period": "O*NET页面2026更新；访问2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-1229.04"
+              }
+            ]
+          },
+          "id": "neurologists.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "美国O*NET 29-1217.00神经科医师",
+        "fact_id": "occupation-identity",
+        "market": "美国",
+        "measure": "职业身份",
+        "occupation_scope": "精确职业数据：美国O*NET 29-1217.00",
+        "period": "O*NET页面2026更新；访问2026-09-06",
+        "source_refs": [
+          "onet-neuro-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025年5月年薪中位数248,560美元",
+        "fact_id": "us-wage",
+        "market": "美国",
+        "measure": "年薪中位数",
+        "occupation_scope": "精确职业数据：美国SOC 29-1217",
+        "period": "2025年5月工资；访问2026-09-06",
+        "source_refs": [
+          "bls-neuro-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025年11,400人；2035年12,100人；增长6%",
+        "fact_id": "market-neuro",
+        "market": "美国",
+        "measure": "就业规模与预测",
+        "occupation_scope": "精确职业数据：美国SOC 29-1217",
+        "period": "2025—2035年预测；访问2026-09-06",
+        "source_refs": [
+          "bls-neuro-outlook"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "完整神经科住院医教育48个月，其中至少36个月为神经科教育",
+        "fact_id": "path-residency",
+        "market": "美国",
+        "measure": "ACGME训练时长",
+        "occupation_scope": "精确职业数据：美国ACGME神经科住院医项目",
+        "period": "要求文件；访问2026-09-06",
+        "source_refs": [
+          "acgme-neurology"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "ABPN认证要求培训、临床技能评估和有效无限制医学执照",
+        "fact_id": "path-board",
+        "market": "美国",
+        "measure": "ABPN初始认证条件",
+        "occupation_scope": "精确职业数据：美国ABPN神经科初始认证申请者",
+        "period": "2026认证页面；访问2026-09-06",
+        "source_refs": [
+          "abpn-neurology"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "ba6020b6e1c591004f5c74d39739f226c91a160864700685a47b205d565da029",
+  "source_content_sha256": "2240146aedbb97758ad9a4351e6ac338e2fd9ff181363d2f686882fa27c0c407",
   "subject": {
     "canonical_slug": "neurologists",
     "name": "神经科医师",
-    "summary": null
+    "summary": "神经科医师以非手术方式评估和管理脑、脊髓与周围神经疾病：整合病史、神经检查和检查时序，形成有证据边界的临床判断，协调治疗、监测与交接。"
   }
 }

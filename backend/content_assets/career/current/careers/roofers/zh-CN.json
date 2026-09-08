@@ -1,12 +1,1676 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "屋面工负责检查、安装、修理或更换建筑屋面覆盖与防水系统。选择它意味着接受户外、高处、搬运、弯曲跪姿和严格安全步骤，并对基层判断、材料匹配、节点处理与防水连续性负责。"
+            ]
+          },
+          "id": "roofers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "正向信号：愿意按步骤测量和复核，能在发现基层不稳、天气恶化或防坠条件不足时立即停工，并把缺陷说清楚。"
+            ]
+          },
+          "id": "roofers.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "roofers-editorial",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：难以接受高处、户外天气、体力负荷、反复细节检查或团队安全约束；不要用人格标签掩盖这些真实条件。"
+            ]
+          },
+          "id": "roofers.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "roofers-editorial",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全纸面试做：虚构单坡棚顶的水平投影为6米×4米，题设机械加10%损耗，每卷有效覆盖10平方米。只在该投影假设下计算理论卷数并列未知项；坡度、搭接、节点、基层、真实高度、天气和结构状态均未提供，结果不是实际屋面面积或采购量。禁止登高、拆除、用火和动力工具操作。"
+            ]
+          },
+          "id": "roofers.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "roofers-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "屋面工对应美国O*NET 47-2181.00：用瓦片、石板、沥青、金属、木材或相关材料覆盖建筑屋面，也可能喷涂用于粘结、密封、保温或隔音的材料。"
+            ]
+          },
+          "id": "roofers.profile.definition-block.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "检查问题屋面并确定修复程序。",
+              "按材料系统切割、铺设、固定或密封瓦片、卷材和节点。",
+              "安装或更换泛水、防潮层、隔热层并检查防水连续性。"
+            ]
+          },
+          "id": "roofers.profile.responsibilities-block.1",
+          "source_refs": [
+            "source-pack-onet-custom"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作通常从检查渗漏、破损、基层与坡度开始，再确定修理或更换范围、材料系统和施工顺序。"
+            ]
+          },
+          "id": "roofers.profile.work-context-block.1",
+          "source_refs": [
+            "source-pack-onet-custom",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "现场任务包括设置安全通道，拆除受损覆盖层，切割和铺设瓦片或卷材，安装泛水、防潮层或保温层，并处理墙根、通风口和交接缝。"
+            ]
+          },
+          "id": "roofers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "roofers-editorial",
+            "source-pack-onet-custom",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "工作多在户外和高处，频繁攀爬、搬运、弯曲、跪姿与手工操作；天气和表面状态会改变作业安排。"
+            ]
+          },
+          "id": "roofers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "source-pack-onet-custom",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "常见工具包括卷尺、粉线、刀具、锤具或钉枪、热风或粘结设备及个人防护装备；具体工具取决于材料系统和现场规则。"
+            ]
+          },
+          "id": "roofers.profile.definition-block.2",
+          "source_refs": [
+            "source-pack-onet-details",
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "班前确认天气、通道、防坠、工具和材料。",
+              "施工中记录基层缺陷、尺寸、搭接与固定。",
+              "发现不稳表面、未知结构或材料不兼容时立即停工并升级。"
+            ]
+          },
+          "id": "roofers.profile.responsibilities-block.2",
+          "source_refs": [
+            "roofers-editorial",
+            "source-pack-onet-hot_tech"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "质量检查关注基层是否适合覆盖、搭接和固定是否符合材料要求、泛水与穿透节点是否连续、排水路径是否通畅、成品是否有松脱或渗漏迹象。"
+            ]
+          },
+          "id": "roofers.profile.work-context-block.2",
+          "source_refs": [
+            "source-pack-onet-details",
+            "source-pack-onet-hot_tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "与团队交接时应记录区域、材料批次、已完成工序、发现缺陷、暂停原因和下一责任人，口头说明不能替代关键安全与质量记录。"
+            ]
+          },
+          "id": "roofers.profile.onet-structured-fields-block.2",
+          "source_refs": [
+            "source-pack-onet-custom",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "招聘中出现的屋面测算或绘图软件只说明可能的工具环境；现场观察、测量和材料判断仍要核验。"
+            ]
+          },
+          "id": "roofers.profile.definition-block.3",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "快速识别岗位：主要交付若是屋面覆盖与防水系统，属于本页范围；若主要做主体结构、砌筑、室内地面、板金制造或光伏电气，应按相邻职业另核。"
+            ]
+          },
+          "id": "roofers.profile.onet-structured-fields-block.3",
+          "source_refs": [
+            "source-pack-onet-details",
+            "source-pack-onet-hot_tech"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "屋面工完成屋面覆盖与防水；砖石与砌块工用砖、砌块和砂浆建造或修复墙体、隔墙和结构表面。"
+            ]
+          },
+          "id": "roofers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "木工切割、安装和修理木结构与构件；屋面工可能接触木基层，但主要责任仍是屋面覆盖、节点和防水。"
+            ]
+          },
+          "id": "roofers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "地毯与地板铺设工在室内或地面基面安装饰面材料；屋面工面对高处、天气、排水与防水系统。"
+            ]
+          },
+          "id": "roofers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "瓷砖和石材铺设工处理饰面铺贴与基层；即使材料外观相似，也不能代替屋面系统的防水和高处安全经验。"
+            ]
+          },
+          "id": "roofers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "砖石与砌块工",
+                "id": "roofers.direction.1",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/brickmasons-and-blockmasons"
+              },
+              {
+                "entity": "木工",
+                "id": "roofers.direction.2",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/carpenters"
+              },
+              {
+                "entity": "地毯安装工",
+                "id": "roofers.direction.3",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/carpet-installers"
+              },
+              {
+                "entity": "地板铺设工（非地毯、木地板与硬质瓷砖类）",
+                "id": "roofers.direction.4",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/floor-layers-except-carpet-wood-and-hard-tiles"
+              },
+              {
+                "entity": "瓷砖和石材铺设工",
+                "id": "roofers.direction.5",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/tile-and-stone-setters"
+              }
+            ]
+          },
+          "id": "roofers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "source-pack-onet-summary"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "选择方向时比较最终交付、主要材料、作业高度、天气暴露、资格和安全责任，不按职位名称相似度决定。"
+            ]
+          },
+          "id": "roofers.direction-comparison.adjacent-career-comparison-table.6",
+          "source_refs": [
+            "source-pack-onet-details",
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "AI可辅助整理测量记录、照片标签、材料清单和排程初稿，但不能确认屋面承载、基层缺陷、天气条件、防坠措施或最终防水质量；这些判断必须由现场人员按权限复核。"
+            ]
+          },
+          "id": "roofers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "roofers-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "entries": [
+              "可辅助：检索、分类、排程、检查候选和记录初稿。",
+              "采用门槛：数据权限、可靠输入、版本与审计。",
+              "不得自动放行：高影响判断、现场异常和最终交付。"
+            ]
+          },
+          "id": "roofers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "roofers-editorial"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "屋面工必须把生成内容追回到原始输入、规则和真实对象，不能把流畅文本当正确证据。"
+            ]
+          },
+          "id": "roofers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "roofers-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "entries": [
+              "核验来源与日期。",
+              "抽查边界案例。",
+              "记录人工修改和升级。"
+            ]
+          },
+          "id": "roofers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "roofers-editorial"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "屋面工使用技术时，应先划分低风险草拟与高风险决定，再配置不同复核强度。"
+            ]
+          },
+          "id": "roofers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "roofers-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "entries": [
+              "低风险：格式、清单与提醒。",
+              "中风险：候选分析，需抽查。",
+              "高风险：对人、资产或安全的决定，由授权者批准。"
+            ]
+          },
+          "id": "roofers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "roofers-editorial"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "屋面工的质量指标应关注错误率、返工、漏报、升级和结果，而非只看处理速度。"
+            ]
+          },
+          "id": "roofers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "roofers-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "屋面工的证书、许可、雇主任命或签字责任不会因为采用 AI 自动转移。"
+            ]
+          },
+          "id": "roofers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "roofers-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "当前未建立与美国O*NET 47-2181.00完全对应的中国大陆全国精确职业工资，暂无可安全使用的数据。"
+            ]
+          },
+          "id": "roofers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国公开工资统计常按行业或单位类型汇总，无法安全当作屋面工单职业中位数或起薪。"
+            ]
+          },
+          "id": "roofers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "因此这里的结论是‘暂无可安全使用的中国精确职业工资’，不是零工资，也不表示没有岗位。"
+            ]
+          },
+          "id": "roofers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中文页面语言不证明中国存在一一对应的职业统计口径；岗位名称、工种和责任需按所在地材料核对。"
+            ]
+          },
+          "id": "roofers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "不得用租赁和商务服务业或其他无关行业均值替代屋面工工资。"
+            ]
+          },
+          "id": "roofers.china-salary.career-snapshot-primary-locale.5",
+          "source_refs": [
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "美国工资不能按汇率直接外推中国个人收入；求职时应逐一核对城市、项目类型、计薪方式、工时、安全责任和福利。"
+            ]
+          },
+          "id": "roofers.china-salary.career-snapshot-primary-locale.6",
+          "source_refs": [
+            "bls-roofers-2026",
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2025年精确职业数据：屋面工工资中位数为{{fact:us-wage}}。"
+            ]
+          },
+          "fact_refs": [
+            "us-wage"
+          ],
+          "id": "roofers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "bls-roofers-2026"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数表示一半高于、一半低于，不是新手工资或个人保证。"
+            ]
+          },
+          "id": "roofers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "bls-roofers-2026"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "这是美国2025年全国精确职业数据，不是某城市、工会合同或季节性项目报价。"
+            ]
+          },
+          "id": "roofers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "bls-roofers-2026"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "比较岗位要确认时薪或计件、每周工时、加班、季节停工、福利和通勤。"
+            ]
+          },
+          "id": "roofers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "bls-roofers-2026"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "自雇比例、承包关系和项目周期会影响收入稳定性，不能只看年薪数字。"
+            ]
+          },
+          "id": "roofers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "bls-roofers-2026"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "跨国比较必须保留币种、税制、工时、保险和生活成本差异。"
+            ]
+          },
+          "id": "roofers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "bls-roofers-2026"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "面试时询问工资结构、安全培训是否计薪、恶劣天气停工及工具装备由谁承担。"
+            ]
+          },
+          "id": "roofers.us-salary.career-snapshot-secondary-locale.7",
+          "source_refs": [
+            "bls-roofers-2026"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "强匹配信号：能在高处和天气压力之外仍坚持防坠步骤、准确测量、整齐切割、复核搭接与固定，并接受停工决定。"
+            ]
+          },
+          "id": "roofers.fit.riasec-fit-block.1",
+          "source_refs": [
+            "roofers-editorial",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "entries": [
+              "愿意按清单确认安全条件和材料系统。",
+              "能准确测量、切割并复核节点。",
+              "发现未知或危险条件时能停工升级。"
+            ]
+          },
+          "id": "roofers.fit.personality-fit-block.1",
+          "source_refs": [
+            "roofers-editorial",
+            "source-pack-onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "消耗信号：长时间户外、搬运、攀爬、弯曲和跪姿会造成体力负荷；项目赶工和季节波动也可能影响节奏。"
+            ]
+          },
+          "id": "roofers.fit.personality-fit-block.2",
+          "source_refs": [
+            "roofers-editorial",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "判断适合度时用纸面测算、材料识别和地面模拟观察准确性、谨慎性与复盘能力，不把兴趣量表当录用结论。"
+            ]
+          },
+          "id": "roofers.fit.riasec-fit-block.2",
+          "source_refs": [
+            "roofers-editorial",
+            "source-pack-onet-details",
+            "source-pack-onet-localcert"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "entries": [
+              "纸面计算面积、损耗与向上取整。",
+              "用公开照片标记渗漏、泛水和穿透节点，不诊断真实结构。",
+              "隔日按检查表独立复算或请有经验者审阅。"
+            ]
+          },
+          "id": "roofers.fit.personality-fit-block.3",
+          "source_refs": [
+            "roofers-editorial",
+            "source-pack-onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "喜欢结构建造可比较木工或砌筑；喜欢室内饰面可比较地面铺设；喜欢电气与系统安装可比较光伏安装。"
+            ]
+          },
+          "id": "roofers.fit.personality-fit-block.4",
+          "source_refs": [
+            "roofers-editorial",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "如果你会为赶进度忽略安全检查、擅自判断未知基层或抗拒团队监督，应先解决这些风险再考虑真实现场。"
+            ]
+          },
+          "id": "roofers.fit.riasec-fit-block.3",
+          "source_refs": [
+            "roofers-editorial",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "完成一周安全试做后，记录最容易错的测量、最不愿重复的检查和对高处/天气条件的真实接受度，再决定继续、暂停或换方向。"
+            ]
+          },
+          "id": "roofers.fit.personality-fit-block.5",
+          "source_refs": [
+            "roofers-editorial",
+            "source-pack-onet-custom",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "entries": [
+              "检查判断风险：O*NET列有检查问题屋顶并确定修复程序；题面或现场资料不足时，纸面判断不能替代基层或结构评估。",
+              "编辑控制：把未知位置、观察事实和暂停动作写清，交给现场有权人员决定；不要把猜测写成已确认缺陷。"
+            ]
+          },
+          "id": "roofers.risk.career-risk-cards.1",
+          "source_refs": [
+            "roofers-editorial",
+            "source-pack-onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "entries": [
+              "通道与坠落风险：O*NET列有设置脚手架以提供安全屋顶通道；OSHA事实表说明美国住宅施工中距下层6英尺及以上通常须采用规定的防坠保护。",
+              "编辑控制：投入使用前按适用规则和现场方案核对通道与防护；条件未知时不进入屋面，并记录由谁复核。"
+            ]
+          },
+          "id": "roofers.risk.career-risk-cards.2",
+          "source_refs": [
+            "osha-roofing-fall",
+            "roofers-editorial",
+            "source-pack-onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "entries": [
+              "接缝与节点质量风险：O*NET列有切割适配节点材料及固定接缝使其防水。",
+              "编辑控制：依据材料说明和施工要求复核搭接、固定与防水连续性；信息不全时记录缺口并停止把纸面方案当作施工结论。"
+            ]
+          },
+          "id": "roofers.risk.career-risk-cards.3",
+          "source_refs": [
+            "roofers-editorial",
+            "source-pack-onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "entries": [
+              "资格判断风险：O*NET认证页是认证发现入口并带有非背书免责声明；它不直接回答所在地许可或雇主授权。",
+              "编辑控制：分别核实课程或认证、所在地许可、雇主任命和具体任务权限；未确认前不把目录条目当作现场授权。"
+            ]
+          },
+          "id": "roofers.risk.career-risk-cards.4",
+          "source_refs": [
+            "roofers-editorial",
+            "source-pack-onet-localcert"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "entries": [
+              "AI风险：照片标签、材料清单或排程初稿可能遗漏现场条件。",
+              "控制：回到原始测量、现场观察和批准记录，由现场人员作最终决定。"
+            ]
+          },
+          "id": "roofers.risk.career-risk-cards.5",
+          "source_refs": [
+            "roofers-editorial"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "entries": [
+              "本页纸面练习的停止条件：基层或结构状态未知、通道或适用防坠条件未确认、材料系统或节点要求不明，以及天气或工具条件尚未由现场方案核实。",
+              "升级记录至少写位置、观察事实、未知项、已暂停动作、记录责任人、复核责任人和升级对象；是否复工由现场有相应权限的人按适用规则决定。"
+            ]
+          },
+          "id": "roofers.risk.career-risk-cards.6",
+          "source_refs": [
+            "osha-roofing-fall",
+            "roofers-editorial",
+            "source-pack-onet-details"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "美国BLS指出屋面工通常无统一的正式学历门槛，主要通过在岗训练或学徒制学习；具体岗位仍要核对所在地规则、雇主安全要求和监督安排。"
+            ]
+          },
+          "id": "roofers.path.career-path-block.1",
+          "source_refs": [
+            "bls-roofers-entry"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "安全作品集从纸面和地面模拟开始：一张虚构屋面缺陷图、一份材料测算表、一份停工与升级记录；不得自行登高、拆屋面、用火或操作动力工具。"
+            ]
+          },
+          "id": "roofers.path.career-path-block.2",
+          "source_refs": [
+            "osha-roofing-fall",
+            "roofers-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "虚构练习：单坡棚顶的水平投影长6米、宽4米，题设在该投影值上机械加10%损耗；每卷有效覆盖10平方米。坡度、搭接、节点、基层、真实高度、天气和结构状态均未提供，因此只能做投影假设下的算术，不能求实际屋面面积或采购量。"
+            ]
+          },
+          "id": "roofers.path.career-path-block.3",
+          "source_refs": [
+            "roofers-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "独立复算：水平投影6×4=24平方米；按题设对该投影值加10%得到26.4平方米；26.4÷10=2.64卷，若只练习整数取整则为3卷。2.64和3都是题设投影假设下的算术结果，不是实际屋面面积、施工用量或采购数量。"
+            ]
+          },
+          "id": "roofers.path.career-path-block.4",
+          "source_refs": [
+            "roofers-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "输出一页检查单：写明水平投影24平方米、题设损耗后26.4平方米、理论2.64卷与整数算术取整3卷；同时标注实际采购量未知，并列出须由现场有权人员确认的坡度、搭接、节点、基层、天气与防坠条件。"
+            ]
+          },
+          "id": "roofers.path.career-path-block.5",
+          "source_refs": [
+            "roofers-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七天试做：第1天识别材料系统，第2天读缺陷示意，第3天做面积和损耗计算，第4天排纸面工序，第5天写停工条件，第6天复核遗漏，第7天请有经验者审阅；无人可审时，隔日隐藏答案按检查表独立复算。"
+            ]
+          },
+          "id": "roofers.path.career-path-block.6",
+          "source_refs": [
+            "roofers-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "资格判断要分开看：O*NET认证页可用于发现证书；课程或认证、所在地许可、雇主任命和具体任务授权则须分别核实。纸面练习和目录条目都不自动允许无监督高处作业，也不替代现场安全控制。"
+            ]
+          },
+          "id": "roofers.path.career-path-block.7",
+          "source_refs": [
+            "osha-roofing-fall",
+            "roofers-editorial",
+            "source-pack-onet-localcert"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "能力进阶以可验证表现为准：先在监督下完成测量、材料搬运和记录，再学习铺设、节点处理与缺陷修复；承担估算、带班或质量责任前需补足相应经验和授权，没有固定年限保证。"
+            ]
+          },
+          "id": "roofers.path.career-path-block.8",
+          "source_refs": [
+            "bls-roofers-entry"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国2025—2035年精确职业数据：{{fact:employment-projection}}。"
+            ]
+          },
+          "fact_refs": [
+            "employment-projection"
+          ],
+          "id": "roofers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "bls-roofers-projection"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "5.3%增长和约8,800人净增描述十年总就业变化；年均12,000个空缺还包含替补需求。"
+            ]
+          },
+          "id": "roofers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "bls-roofers-projection"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "就业基数、增长率、净增和年均空缺不能合并成个人录用概率。"
+            ]
+          },
+          "id": "roofers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "bls-roofers-projection"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "维修更换需求、天气事件和建设活动会影响项目量，但具体地区和雇主仍需单独核对。"
+            ]
+          },
+          "id": "roofers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "bls-roofers-projection"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "ILO的全球指数衡量任务层面的生成式AI暴露，不给出屋面工专属替代概率。本页的编辑建议是：只把AI用于测量记录、照片整理和估算初稿，实际采用与岗位净变化分开判断。"
+            ]
+          },
+          "id": "roofers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "ilo-genai-roofers",
+            "roofers-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "可迁移方向包括屋面估算、质检、带班、建筑维护或相关防水工种；每条路径都需补相应安全、材料和责任经验。"
+            ]
+          },
+          "id": "roofers.market-signals.market-signal-card.6",
+          "source_refs": [
+            "source-pack-onet-industry"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "屋面工检查屋面缺陷与基层，选择材料和修复方法，设置安全通道，铺设或更换瓦片、卷材、泛水板、隔汽层或保温层，并检查接缝和防水连续性。",
+                "id": "roofers.faq.1",
+                "question_key": "career.faq.roofers.daily-work",
+                "source_refs": [
+                  "source-pack-onet-custom"
+                ]
+              },
+              {
+                "answer": "屋面工必须与相邻职业按核心对象、交付物、设备或权限区分；首要比较方向为 砖石与砌块工 与 木工。",
+                "id": "roofers.faq.2",
+                "question_key": "career.faq.roofers.role-comparison",
+                "source_refs": [
+                  "source-pack-onet-summary"
+                ]
+              },
+              {
+                "answer": "适配看可观察行为：是否能遵守防坠与停工规则、准确测量切割、耐受户外和体力负荷，并持续复核防水节点；兴趣或人格标签不能决定胜任。",
+                "id": "roofers.faq.3",
+                "question_key": "career.faq.roofers.fit",
+                "source_refs": [
+                  "roofers-editorial",
+                  "source-pack-onet-details"
+                ]
+              },
+              {
+                "answer": "AI 可辅助 屋面工 的资料整理、初步检查、排程或记录草拟，但不能独立确认高影响判断、现场状态、异常升级或最终交付。",
+                "id": "roofers.faq.4",
+                "question_key": "career.faq.roofers.ai-impact",
+                "source_refs": [
+                  "roofers-editorial"
+                ]
+              },
+              {
+                "answer": "ILO的2025指数衡量任务层面的生成式AI职业暴露，并指出转型比整体替代更可能，但不能据此推算屋面工替代概率。实际使用时，AI输出只作草稿；安全、材料、现场状态与最终质量由有相应职责的人复核决定。",
+                "id": "roofers.faq.5",
+                "question_key": "career.faq.roofers.human-control",
+                "source_refs": [
+                  "ilo-genai-roofers",
+                  "roofers-editorial"
+                ]
+              },
+              {
+                "answer": "目前未建立与O*NET 47-2181.00完全对应的中国大陆全国精确职业工资；行业均值或美国工资都不能冒充个人起薪。",
+                "id": "roofers.faq.6",
+                "question_key": "career.faq.roofers.china-pay",
+                "source_refs": [
+                  "source-pack-onet-summary"
+                ]
+              },
+              {
+                "answer": "美国屋面工2025年工资中位数为每小时26.65美元、每年55,440美元；这是全国精确职业数据，不是起薪或个人保证。",
+                "fact_refs": [
+                  "us-wage"
+                ],
+                "id": "roofers.faq.7",
+                "question_key": "career.faq.roofers.us-pay",
+                "source_refs": [
+                  "bls-roofers-2026"
+                ]
+              },
+              {
+                "answer": "O*NET的Roofers认证页列出19项认证，并说明非美国劳工部链接不构成背书。目录只适合发现选项；所在地许可、雇主任命、签字责任和具体任务授权须分别向相应机构与雇主核实。",
+                "id": "roofers.faq.8",
+                "question_key": "career.faq.roofers.credentials",
+                "source_refs": [
+                  "roofers-editorial",
+                  "source-pack-onet-localcert"
+                ]
+              },
+              {
+                "answer": "美国屋面工2025年就业166,900人，BLS预计2035年175,600人、增长5.3%，年均空缺约12,000个；这些是市场统计，不是个人录用概率。",
+                "fact_refs": [
+                  "employment-projection"
+                ],
+                "id": "roofers.faq.9",
+                "question_key": "career.faq.roofers.outlook-transition",
+                "source_refs": [
+                  "bls-roofers-projection"
+                ]
+              },
+              {
+                "answer": "主要决策风险来自高处通道、基层或结构未知、节点材料要求不明，以及天气或工具条件尚未由现场方案核实。美国住宅施工的防坠要求以OSHA及适用条款为准；条件未知时先暂停对应动作、记录未知项并交由现场有权人员决定。",
+                "id": "roofers.faq.10",
+                "question_key": "career.faq.roofers.risk-boundary",
+                "source_refs": [
+                  "osha-roofing-fall",
+                  "roofers-editorial",
+                  "source-pack-onet-details"
+                ]
+              },
+              {
+                "answer": "是否值得选择取决于你能否接受高处、户外和体力负荷，并持续遵守安全控制、准确测量、复核节点；先完成不登高的纸面与地面试做再决定。",
+                "id": "roofers.faq.11",
+                "question_key": "career.faq.roofers.career-worth",
+                "source_refs": [
+                  "roofers-editorial",
+                  "source-pack-onet-details"
+                ]
+              }
+            ]
+          },
+          "id": "roofers.sources.faq.1",
+          "source_refs": [
+            "bls-roofers-2026",
+            "bls-roofers-projection",
+            "ilo-genai-roofers",
+            "osha-roofing-fall",
+            "roofers-editorial",
+            "source-pack-onet-custom",
+            "source-pack-onet-details",
+            "source-pack-onet-localcert",
+            "source-pack-onet-summary"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "中国大陆 屋面工 精确工资暂无可安全使用的数据；zh-CN 页面语言不建立中国等价职业，也不使用美国数字外推。",
+              "美国工资、趋势、训练与认证仅按 O*NET 当前页面及其精确职业数据口径解释。",
+              "本页不是法律、医疗、安全、军事、教育、财务或其他个案的专业意见；屋面工 的资格、许可、雇主授权和中国或所在地规则必须分别核对。"
+            ]
+          },
+          "id": "roofers.sources.boundary.1",
+          "source_refs": [
+            "bls-roofers-2026",
+            "bls-roofers-entry",
+            "bls-roofers-projection",
+            "ilo-genai-roofers",
+            "osha-roofing-fall",
+            "roofers-editorial",
+            "source-pack-onet-custom",
+            "source-pack-onet-details",
+            "source-pack-onet-hot_tech",
+            "source-pack-onet-industry",
+            "source-pack-onet-localcert",
+            "source-pack-onet-summary"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "屋面工",
+                "id": "roofers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "屋面工",
+                "id": "roofers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "屋面工",
+                "id": "roofers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "屋面工",
+                "id": "roofers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "屋面工",
+                "id": "roofers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "屋面工",
+                "id": "roofers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "屋面工",
+                "id": "roofers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "屋面工",
+                "id": "roofers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "屋面工",
+                "id": "roofers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "屋面工",
+                "id": "roofers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "屋面工",
+                "id": "roofers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "roofers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "BLS OOH正文支持2025年工资中位数及工资口径；同页也给出职业职责与工作环境。",
+                  "美国全国数据不是个人起薪、当地报价或录用概率。"
+                ],
+                "evidence_type": "official occupation outlook profile",
+                "id": "bls-roofers-2026",
+                "limitation": "美国全国数据不是个人起薪、当地报价或录用概率。",
+                "market": "美国",
+                "name": "Roofers — Occupational Outlook Handbook",
+                "period": "May 2025; updated 2026-08-27",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/construction-and-extraction/roofers.htm"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "BLS OOH正文支持典型教育、在岗训练和学徒制入口。",
+                  "美国全国数据不是个人起薪、当地报价或录用概率。"
+                ],
+                "evidence_type": "official occupation outlook profile",
+                "id": "bls-roofers-entry",
+                "limitation": "美国全国数据不是个人起薪、当地报价或录用概率。",
+                "market": "美国",
+                "name": "Roofers — Occupational Outlook Handbook",
+                "period": "current profile; updated 2026-08-27",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/construction-and-extraction/roofers.htm"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "BLS OOH正文支持2025就业基数、2025—2035预测、净变化及年均空缺。",
+                  "美国全国数据不是个人起薪、当地报价或录用概率。"
+                ],
+                "evidence_type": "official occupation outlook profile",
+                "id": "bls-roofers-projection",
+                "limitation": "美国全国数据不是个人起薪、当地报价或录用概率。",
+                "market": "美国",
+                "name": "Roofers — Occupational Outlook Handbook",
+                "period": "2025 base; 2025-2035 projections",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/construction-and-extraction/roofers.htm"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "ILO正文说明该指数结合任务数据、专家输入和AI预测衡量职业暴露；正文把工作转型而非替代列为更可能结果。",
+                  "全球职业暴露框架，不给出屋面工专属替代概率、企业采用率或现场控制程序。"
+                ],
+                "evidence_type": "official research working paper",
+                "id": "ilo-genai-roofers",
+                "limitation": "全球职业暴露框架，不给出屋面工专属替代概率、企业采用率或现场控制程序。",
+                "market": "全球",
+                "name": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "period": "published 2025-05-20; accessed 2026-09-07",
+                "publisher": "International Labour Organization",
+                "scope": "combined_official",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "正文说明美国住宅施工雇主通常须为距下层6英尺及以上的员工提供护栏、安全网或个人坠落制止系统，并说明低坡屋面可适用其他条款允许的措施。",
+                  "这是美国住宅施工事实表；页面说明其不新增合规义务，具体屋面类型、作业和法域须核适用标准与现场方案。"
+                ],
+                "evidence_type": "official safety guidance",
+                "id": "osha-roofing-fall",
+                "limitation": "这是美国住宅施工事实表；页面说明其不新增合规义务，具体屋面类型、作业和法域须核适用标准与现场方案。",
+                "market": "美国",
+                "name": "Fall Protection in Residential Construction",
+                "period": "OSHA fact sheet; accessed 2026-09-07",
+                "publisher": "Occupational Safety and Health Administration",
+                "scope": "combined_official",
+                "url": "https://www.osha.gov/construction/fall-protection-factsheet"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "支持本候选的编辑控制建议、资格决策边界，以及只在水平投影假设下成立的纸面算术练习。",
+                  "不是工程设计、采购单、安全标准、许可证解释、现场授权或真实施工方案。"
+                ],
+                "evidence_type": "editorial exercise and decision framework",
+                "id": "roofers-editorial",
+                "limitation": "不是工程设计、采购单、安全标准、许可证解释、现场授权或真实施工方案。",
+                "market": "编辑设计",
+                "name": "屋面工纸面体验设计",
+                "period": "2026-09-07",
+                "publisher": "FermatMind 编辑设计",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-04",
+                "details": [
+                  "支持O*NET 47-2181.00自定义页中的任务、技能和工作情境，不外推相邻职业或法域授权。",
+                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                ],
+                "evidence_type": "official custom occupation profile",
+                "id": "source-pack-onet-custom",
+                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "market": "美国",
+                "name": "47-2181.00 - Roofers",
+                "period": "current page; accessed 2026-09-04",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/custom/47-2181.00"
+              },
+              {
+                "accessed_at": "2026-09-04",
+                "details": [
+                  "支持O*NET 47-2181.00的职业定义、任务、工作活动与工作情境；本专项另实际打开详情页复核了身份及任务列表。",
+                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                ],
+                "evidence_type": "official occupation details",
+                "id": "source-pack-onet-details",
+                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "market": "美国",
+                "name": "47-2181.00 - Roofers",
+                "period": "current page; accessed 2026-09-04",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-2181.00"
+              },
+              {
+                "accessed_at": "2026-09-04",
+                "details": [
+                  "支持O*NET 47-2181.00招聘技术页面的工具信号；工具提及不等于AI采用率或自动化率。",
+                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                ],
+                "evidence_type": "official technology profile",
+                "id": "source-pack-onet-hot_tech",
+                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "market": "美国",
+                "name": "Hot Technologies: 47-2181.00 - Roofers",
+                "period": "current page; accessed 2026-09-04",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/47-2181.00"
+              },
+              {
+                "accessed_at": "2026-09-04",
+                "details": [
+                  "支持O*NET 47-2181.00的美国行业分布与工作市场范围，不用于推断个人录用概率。",
+                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                ],
+                "evidence_type": "official industry distribution",
+                "id": "source-pack-onet-industry",
+                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "market": "美国",
+                "name": "Industries: 47-2181.00 - Roofers",
+                "period": "current page; accessed 2026-09-04",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/47-2181.00"
+              },
+              {
+                "accessed_at": "2026-09-04",
+                "details": [
+                  "支持O*NET 47-2181.00认证发现页；本专项另实际打开该页复核了19项认证和非DOL链接不构成背书的声明。",
+                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                ],
+                "evidence_type": "official certification discovery",
+                "id": "source-pack-onet-localcert",
+                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "market": "美国",
+                "name": "National Certifications: 47-2181.00 - Roofers",
+                "period": "current page; accessed 2026-09-04",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localcert/47-2181.00"
+              },
+              {
+                "accessed_at": "2026-09-04",
+                "details": [
+                  "支持O*NET 47-2181.00摘要页所列的职业身份与页面统计口径；不用于中国工资或法律授权。",
+                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "source-pack-onet-summary",
+                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "market": "美国",
+                "name": "47-2181.00 - Roofers",
+                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-2181.00"
+              }
+            ]
+          },
+          "id": "roofers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "O*NET 47-2181.00",
+        "fact_id": "occupation-identity",
+        "market": "美国",
+        "measure": "官方职业代码",
+        "occupation_scope": "精确职业数据：O*NET 47-2181.00",
+        "period": "current page; accessed 2026-09-04",
+        "source_refs": [
+          "source-pack-onet-details"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$26.65/小时；$55,440/年",
+        "fact_id": "us-wage",
+        "market": "美国",
+        "measure": "职业页工资或可用性边界",
+        "occupation_scope": "美国精确职业数据：Roofers（SOC 47-2181）",
+        "period": "May 2025; updated 2026-08-27",
+        "source_refs": [
+          "bls-roofers-2026"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "招聘技术页面已复核",
+        "fact_id": "technology-context",
+        "market": "美国",
+        "measure": "技术页面可用性",
+        "occupation_scope": "精确职业数据：O*NET 47-2181.00",
+        "period": "current page; accessed 2026-09-04",
+        "source_refs": [
+          "source-pack-onet-hot_tech"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET认证页列出19项认证；非DOL链接不构成背书",
+        "fact_id": "credential-boundary",
+        "market": "美国",
+        "measure": "认证目录条目与免责声明",
+        "occupation_scope": "精确职业数据：O*NET 47-2181.00",
+        "period": "current page; accessed 2026-09-04",
+        "source_refs": [
+          "source-pack-onet-localcert"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025年166,900人；2035年175,600人；净增约8,800人；增长5.3%；年均空缺约12,000个",
+        "fact_id": "employment-projection",
+        "market": "美国",
+        "measure": "就业趋势或可用性边界",
+        "occupation_scope": "美国精确职业数据：Roofers（SOC 47-2181）",
+        "period": "2025 base; 2025-2035 projections",
+        "source_refs": [
+          "bls-roofers-projection"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "02faf0b58cc967f18e9869165a646ec0e4e15a9c1301c60a0a18d9dcd496c8d2",
+  "source_content_sha256": "eca967630cb79e1d32dcbed8a873ffcb02215f3e6c9d289594e181c85b23077e",
   "subject": {
     "canonical_slug": "roofers",
     "name": "屋面工",
-    "summary": null
+    "summary": "屋面工检查、安装、修理和更换建筑屋面覆盖与防水系统；工作涉及高处、户外和体力负荷，核心是安全进入、材料匹配、节点处理与防水连续性。"
   }
 }

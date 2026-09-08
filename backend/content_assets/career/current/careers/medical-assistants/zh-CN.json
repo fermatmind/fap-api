@@ -1,12 +1,1481 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：核心是在医师指导下准确衔接接诊、记录、检查准备、预约和收费信息。"
+            ]
+          },
+          "id": "medical-assistants.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "登记姓名、出生日期等信息时，应比较各处原值；字段空白或不一致时原样保留并交给执业人员。"
+            ]
+          },
+          "id": "medical-assistants.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全体验只使用MA-4虚构登记记录，不接触真实患者或执行临床操作。"
+            ]
+          },
+          "id": "medical-assistants.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "输出身份差异、缺失字段、暂缓项目和复核对象。"
+            ]
+          },
+          "id": "medical-assistants.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "本页覆盖美国O*NET 31-9092.00医疗助理精确职业，不包括医师助理、注册护士或执业护士。"
+            ]
+          },
+          "id": "medical-assistants.profile.definition-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "投入包括预约信息、患者身份、病史、生命体征、医师指示、标本和保险资料。"
+            ]
+          },
+          "id": "medical-assistants.profile.definition-block.2",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "产出包括更新后的记录、检查准备、预约与收费信息、标本日志和异常交接。"
+            ]
+          },
+          "id": "medical-assistants.profile.definition-block.3",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "流程从身份核对开始，经信息采集、记录、准备、获授权任务和交接。"
+            ]
+          },
+          "id": "medical-assistants.profile.definition-block.4",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "关键判断是身份是否一致、字段是否完整、指示与权限是否清楚。"
+            ]
+          },
+          "id": "medical-assistants.profile.definition-block.5",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "工作常在诊所、医师办公室、医院或门诊机构，行政与患者接触任务可能交替。"
+            ]
+          },
+          "id": "medical-assistants.profile.definition-block.6",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "常见对象包括电子病历、预约与收费表单、生命体征设备、诊室用品和标本标签。"
+            ]
+          },
+          "id": "medical-assistants.profile.definition-block.7",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "协作对象包括患者、医师、护士、实验室、收费和前台人员。"
+            ]
+          },
+          "id": "medical-assistants.profile.definition-block.8",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "质量看身份一致、记录准确、时间与单位清楚、隐私受控和交接可追溯。"
+            ]
+          },
+          "id": "medical-assistants.profile.definition-block.9",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "诊断、治疗决定、独立临床判断和超出授权的操作不属于本页练习。"
+            ]
+          },
+          "id": "medical-assistants.profile.definition-block.10",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "physician-assistants",
+                "id": "medical-assistants.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/physician-assistants"
+              },
+              {
+                "entity": "registered-nurses",
+                "id": "medical-assistants.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/registered-nurses"
+              },
+              {
+                "entity": "nurse-practitioners",
+                "id": "medical-assistants.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/nurse-practitioners"
+              },
+              {
+                "entity": "emergency-medicine-physicians",
+                "id": "medical-assistants.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/emergency-medicine-physicians"
+              },
+              {
+                "entity": "family-medicine-physicians",
+                "id": "medical-assistants.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/family-medicine-physicians"
+              }
+            ]
+          },
+          "id": "medical-assistants.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "editorial-medical-guidance",
+            "onet-details"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "先核对谁能独立评估、诊断或制定治疗与护理计划。"
+            ]
+          },
+          "id": "medical-assistants.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "再核对谁主要执行医师指导下的行政与基础临床任务。"
+            ]
+          },
+          "id": "medical-assistants.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "床旁生活照护、记录治理、处方与最终临床权限须逐职业查明。"
+            ]
+          },
+          "id": "medical-assistants.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "相邻名称只提供探索入口，不表示职责、资格或工资相同。"
+            ]
+          },
+          "id": "medical-assistants.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数字工具可协助整理预约、表单和记录候选内容。"
+            ]
+          },
+          "id": "medical-assistants.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "任何摘要都必须追回患者身份和原始记录。"
+            ]
+          },
+          "id": "medical-assistants.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "缺失字段不能由工具猜补，保持未知并升级。"
+            ]
+          },
+          "id": "medical-assistants.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "州法范围、机构权限和医师指示须人工核对。"
+            ]
+          },
+          "id": "medical-assistants.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "诊断、治疗、给药或检验解释不能交给本页工具建议。"
+            ]
+          },
+          "id": "medical-assistants.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "试用只用虚构数据，记录版本、修改、误报和漏报。"
+            ]
+          },
+          "id": "medical-assistants.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "效果评价同时看身份错误、遗漏、返工与交接质量。"
+            ]
+          },
+          "id": "medical-assistants.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "任务辅助能力不能直接推出岗位数量变化。"
+            ]
+          },
+          "id": "medical-assistants.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "本次核查材料没有中国大陆医疗助理全国精确职业工资，暂无可安全使用的数据，保持documented_unavailable。"
+            ]
+          },
+          "id": "medical-assistants.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "不能用护士、医师助理、医院行业或美国31-9092数字填补。"
+            ]
+          },
+          "id": "medical-assistants.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "招聘报价须核地区、机构、合同、班次、工时、资格和统计期。"
+            ]
+          },
+          "id": "medical-assistants.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "保存原公告、职责范围、工资组成和访问日期再比较。"
+            ]
+          },
+          "id": "medical-assistants.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国31-9092.00医疗助理精确职业数据：2025年年薪中位数45,690美元。"
+            ]
+          },
+          "fact_refs": [
+            "us-median-annual-2025"
+          ],
+          "id": "medical-assistants.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国31-9092.00医疗助理精确职业数据：2025年小时工资中位数21.97美元。"
+            ]
+          },
+          "fact_refs": [
+            "us-median-hourly-2025"
+          ],
+          "id": "medical-assistants.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "小时与年薪是同一分布的不同单位，不能相加。"
+            ]
+          },
+          "id": "medical-assistants.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数不是起薪、个人报价或加班后收入。"
+            ]
+          },
+          "id": "medical-assistants.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "地区、机构、班次、资历与职责会影响实际收入。"
+            ]
+          },
+          "id": "medical-assistants.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业工资不能直接换算为中国岗位工资。"
+            ]
+          },
+          "id": "medical-assistants.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "先看是否能耐心核对患者身份与记录字段。"
+            ]
+          },
+          "id": "medical-assistants.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "任务适配表现为能在行政与患者接触任务间准确切换。"
+            ]
+          },
+          "id": "medical-assistants.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "判断适配表现为发现不一致、缺失或权限不清时停止升级。"
+            ]
+          },
+          "id": "medical-assistants.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "交付适配表现为记录有时间、单位、来源和下一责任人。"
+            ]
+          },
+          "id": "medical-assistants.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "协作适配表现为能向患者与临床团队清楚传递信息。"
+            ]
+          },
+          "id": "medical-assistants.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "学习适配表现为持续掌握术语、流程、隐私和获授权技能。"
+            ]
+          },
+          "id": "medical-assistants.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "消耗点可能来自患者压力、站立、轮班、重复记录和高频切换。"
+            ]
+          },
+          "id": "medical-assistants.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "人格或兴趣标签不能替代课程、训练、授权和实际绩效。"
+            ]
+          },
+          "id": "medical-assistants.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "患者姓名或出生日期不一致：停止身份相关步骤并复核。"
+            ]
+          },
+          "id": "medical-assistants.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "医师指示、权限或州法范围不清：不执行相关临床任务。"
+            ]
+          },
+          "id": "medical-assistants.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "记录、单位或标本标签缺失：保持未知并交给执业人员。"
+            ]
+          },
+          "id": "medical-assistants.risk.career-risk-cards.3",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "真实用药、采血、检验和诊断不由本页提供操作步骤。"
+            ]
+          },
+          "id": "medical-assistants.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "恢复流程前由有权限人员按机构程序确认。"
+            ]
+          },
+          "id": "medical-assistants.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "BLS 2026资料显示，典型入门教育为非学位高等教育证书；也有人以高中学历入门并在岗学习，州与雇主要求另核。"
+            ]
+          },
+          "id": "medical-assistants.path.career-path-block.1",
+          "source_refs": [
+            "editorial-medical-guidance",
+            "onet-trends"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品只使用MA-4虚构登记记录，不接触真实患者。"
+            ]
+          },
+          "id": "medical-assistants.path.career-path-block.2",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "MA-4预约记录：姓名林宁、出生日期2000-04-12、预约09:30；虚构腕带：姓名林宁、出生日期2000-04-21；体温37.0摄氏度，脉搏字段空白。"
+            ]
+          },
+          "id": "medical-assistants.path.career-path-block.3",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "任务：逐字段比较身份，标出缺失，并列出可继续的行政整理与必须暂缓的身份或临床相关步骤。"
+            ]
+          },
+          "id": "medical-assistants.path.career-path-block.4",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "参考答案：姓名一致；出生日期不一致；脉搏缺失。可整理不依赖身份确认的空白表格，但身份相关步骤暂缓，出生日期交有权限人员复核；不猜补脉搏或作诊断。"
+            ]
+          },
+          "id": "medical-assistants.path.career-path-block.5",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "交付表包含字段、两处原值、一致性、缺失状态、下一步和复核对象。"
+            ]
+          },
+          "id": "medical-assistants.path.career-path-block.6",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七日体验可用新的虚构记录交换顺序复核并统计遗漏。"
+            ]
+          },
+          "id": "medical-assistants.path.career-path-block.7",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "成长看更可靠的身份核对、记录、流程协作和获授权技能，不承诺固定年限。"
+            ]
+          },
+          "id": "medical-assistants.path.career-path-block.8",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国31-9092医疗助理精确职业数据：2025年就业833,900人，2035年预计941,500人，官方净增107,600。"
+            ]
+          },
+          "fact_refs": [
+            "us-employment-2024",
+            "us-projected-employment-2034"
+          ],
+          "id": "medical-assistants.market-signals.market-signal-card.1",
+          "source_refs": [
+            "onet-trends"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国31-9092医疗助理精确职业数据：2025—2035增长13%。"
+            ]
+          },
+          "fact_refs": [
+            "us-growth-2024-2034"
+          ],
+          "id": "medical-assistants.market-signals.market-signal-card.2",
+          "source_refs": [
+            "onet-trends"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国31-9092医疗助理精确职业数据：2025—2035年均职位空缺约109,700个，包含增长与替换。"
+            ]
+          },
+          "fact_refs": [
+            "us-openings-2024-2034"
+          ],
+          "id": "medical-assistants.market-signals.market-signal-card.3",
+          "source_refs": [
+            "onet-trends"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "年均职位空缺不是十年净新增，也不是个人录用概率。"
+            ]
+          },
+          "id": "medical-assistants.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "预测不能替代地区、机构、资格与真实招聘核验。"
+            ]
+          },
+          "id": "medical-assistants.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editorial-medical-guidance"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "O*NET 31-9092.00医疗助理在医师指导下完成预约、病历、收费编码等行政任务，以及生命体征、病史、检查准备、标本采集和按指示给药等部分临床任务。",
+                "id": "medical-assistants.faq.1",
+                "question_key": "career.faq.medical-assistants.daily-work",
+                "source_refs": [
+                  "onet-details"
+                ]
+              },
+              {
+                "answer": "判断相邻医疗职业差异，需要查明谁能独立评估、诊断、制定护理或治疗计划、执行生活照护及管理记录；名称相近不能证明权限相同。",
+                "id": "medical-assistants.faq.2",
+                "question_key": "career.faq.medical-assistants.role-comparison",
+                "source_refs": [
+                  "editorial-medical-guidance"
+                ]
+              },
+              {
+                "answer": "适配证据来自准确记录、身份核对、隐私意识、清楚交接和在不确定时停止升级，而不是人格标签。",
+                "id": "medical-assistants.faq.3",
+                "question_key": "career.faq.medical-assistants.fit",
+                "source_refs": [
+                  "editorial-medical-guidance"
+                ]
+              },
+              {
+                "answer": "数字工具可整理预约、表单和记录候选内容；患者身份、原始记录、州法范围、雇主授权和最终临床判断必须由有权限人员核对。",
+                "id": "medical-assistants.faq.4",
+                "question_key": "career.faq.medical-assistants.ai-impact",
+                "source_refs": [
+                  "editorial-medical-guidance"
+                ]
+              },
+              {
+                "answer": "数字工具可整理预约、表单和记录候选内容；患者身份、原始记录、州法范围、雇主授权和最终临床判断必须由有权限人员核对。",
+                "id": "medical-assistants.faq.5",
+                "question_key": "career.faq.medical-assistants.human-control",
+                "source_refs": [
+                  "editorial-medical-guidance"
+                ]
+              },
+              {
+                "answer": "本次核查材料没有中国大陆医疗助理全国精确职业工资分布，因此保持documented_unavailable，不用其他职业或美国数字填补。",
+                "id": "medical-assistants.faq.6",
+                "question_key": "career.faq.medical-assistants.china-pay",
+                "source_refs": [
+                  "editorial-medical-guidance"
+                ]
+              },
+              {
+                "answer": "美国 Medical Assistants 的 2025 年全国年工资中位数为 45,690 美元。",
+                "id": "medical-assistants.faq.7",
+                "question_key": "career.faq.medical-assistants.us-pay",
+                "source_refs": [
+                  "onet-wages"
+                ]
+              },
+              {
+                "answer": "O*NET 将医疗助理列为 Job Zone Three，常见准备包括职业学校训练、相关在岗经验或副学士层级准备；这不是所有州统一法定门槛。",
+                "id": "medical-assistants.faq.8",
+                "question_key": "career.faq.medical-assistants.education-path",
+                "source_refs": [
+                  "editorial-medical-guidance",
+                  "onet-trends"
+                ]
+              },
+              {
+                "answer": "编辑性停止边界：患者身份、指示、权限、记录或标本标签不清时停止相应步骤，保持未知并交给执业人员；本页不提供临床操作。",
+                "id": "medical-assistants.faq.9",
+                "question_key": "career.faq.medical-assistants.risk-boundary",
+                "source_refs": [
+                  "editorial-medical-guidance"
+                ]
+              },
+              {
+                "answer": "BLS美国31-9092精确职业2025年就业833,900人，2035年预计941,500人，官方净增107,600，增长13%，2025—2035年均职位空缺约109,700个。",
+                "id": "medical-assistants.faq.10",
+                "question_key": "career.faq.medical-assistants.outlook-transition",
+                "source_refs": [
+                  "onet-trends"
+                ]
+              },
+              {
+                "answer": "BLS美国31-9092精确职业2025年就业833,900人，2035年预计941,500人，官方净增107,600，增长13%，2025—2035年均职位空缺约109,700个。",
+                "id": "medical-assistants.faq.11",
+                "question_key": "career.faq.medical-assistants.career-worth",
+                "source_refs": [
+                  "onet-trends"
+                ]
+              }
+            ]
+          },
+          "id": "medical-assistants.sources.faq.1",
+          "source_refs": [
+            "editorial-medical-guidance",
+            "onet-details",
+            "onet-trends",
+            "onet-wages"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "美国职业资料、中国工资缺口与通用编辑建议分别陈述，不跨市场或权限范围拼接。",
+              "本页只用于职业了解和虚构纸面练习，不替代临床判断、州法、机构程序或个人授权。",
+              "中国精确职业工资缺口保持可见，不用其他职业、行业或美国数据填补。"
+            ]
+          },
+          "id": "medical-assistants.sources.boundary.1",
+          "source_refs": [
+            "aama-eligibility",
+            "cms-clia",
+            "editorial-medical-guidance",
+            "mohrss-wage",
+            "onet-details",
+            "onet-summary",
+            "onet-trends",
+            "onet-wages",
+            "who-ai-ethics"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "医疗助理",
+                "id": "medical-assistants.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "医疗助理",
+                "id": "medical-assistants.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "医疗助理",
+                "id": "medical-assistants.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "医疗助理",
+                "id": "medical-assistants.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "医疗助理",
+                "id": "medical-assistants.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "医疗助理",
+                "id": "medical-assistants.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "医疗助理",
+                "id": "medical-assistants.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "医疗助理",
+                "id": "medical-assistants.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "医疗助理",
+                "id": "medical-assistants.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "医疗助理",
+                "id": "medical-assistants.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "医疗助理",
+                "id": "medical-assistants.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "medical-assistants.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-08-29",
+                "details": [
+                  "用于credential pathway的限定证据；只支持来源明确陈述的对象与范围。",
+                  "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。"
+                ],
+                "evidence_type": "professional certification eligibility",
+                "id": "aama-eligibility",
+                "limitation": "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。",
+                "market": "US",
+                "name": "Eligibility",
+                "period": "current CMA eligibility page; accessed 2026-08-29",
+                "publisher": "AAMA",
+                "scope": "exact",
+                "url": "https://aama-ntl.org/certification/eligibility"
+              },
+              {
+                "accessed_at": "2026-08-29",
+                "details": [
+                  "用于testing boundary、quality的限定证据；只支持来源明确陈述的对象与范围。",
+                  "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。"
+                ],
+                "evidence_type": "official laboratory regulation guidance",
+                "id": "cms-clia",
+                "limitation": "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。",
+                "market": "US",
+                "name": "Clinical Laboratory Improvement Amendments (CLIA) | CMS",
+                "period": "current page; accessed 2026-08-29",
+                "publisher": "CMS",
+                "scope": "combined_official",
+                "url": "https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "用于相邻比较、数字工具人工控制、停止升级和MA-4虚构纸面练习。",
+                  "不构成诊断、用药、采血、检验、隐私处理、州法解释或临床授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-medical-guidance",
+                "limitation": "不构成诊断、用药、采血、检验、隐私处理、州法解释或临床授权。",
+                "market": "全球",
+                "name": "医疗助理阅读与虚构记录练习编辑综合",
+                "period": "2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-08-29",
+                "details": [
+                  "用于China salary evidence boundary的限定证据；只支持来源明确陈述的对象与范围。",
+                  "中国来源仅用于所列制度或统计口径，不证明美国 Medical Assistants 与中国岗位一一对应。"
+                ],
+                "evidence_type": "official enterprise wage survey",
+                "id": "mohrss-wage",
+                "limitation": "中国来源仅用于所列制度或统计口径，不证明美国 Medical Assistants 与中国岗位一一对应。",
+                "market": "CN",
+                "name": "2024年企业薪酬调查信息",
+                "period": "2024 enterprise wage survey; accessed 2026-08-29",
+                "publisher": "中华人民共和国人力资源和社会保障部",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "用于identity、tasks、work context、fit、risk的限定证据；只支持来源明确陈述的对象与范围。",
+                  "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-details",
+                "limitation": "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。",
+                "market": "US",
+                "name": "31-9092.00 - Medical Assistants",
+                "period": "2026",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/31-9092.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "用于entry、wage、outlook的限定证据；只支持来源明确陈述的对象与范围。",
+                  "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-summary",
+                "limitation": "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。",
+                "market": "US",
+                "name": "31-9092.00 - Medical Assistants",
+                "period": "2025",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/31-9092.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "用于employment、projection、openings的限定证据；只支持来源明确陈述的对象与范围。",
+                  "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。"
+                ],
+                "evidence_type": "official employment projection",
+                "id": "onet-trends",
+                "limitation": "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。",
+                "market": "US",
+                "name": "BLS Occupational Outlook Handbook: Medical Assistants",
+                "period": "2025-2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/healthcare/medical-assistants.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "用于US wage percentiles的限定证据；只支持来源明确陈述的对象与范围。",
+                  "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。"
+                ],
+                "evidence_type": "official wage distribution",
+                "id": "onet-wages",
+                "limitation": "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。",
+                "market": "US",
+                "name": "Oklahoma Wages: 31-9092.00 - Medical Assistants",
+                "period": "2025",
+                "publisher": "O*NET / BLS OEWS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/31-9092.00?st=OK"
+              },
+              {
+                "accessed_at": "2026-08-29",
+                "details": [
+                  "用于AI governance、human control的限定证据；只支持来源明确陈述的对象与范围。",
+                  "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。"
+                ],
+                "evidence_type": "international health AI ethics guidance",
+                "id": "who-ai-ethics",
+                "limitation": "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。",
+                "market": "Global",
+                "name": "Ethics and governance of artificial intelligence for health",
+                "period": "WHO 2021 guidance; accessed 2026-08-29",
+                "publisher": "WHO",
+                "scope": "combined_official",
+                "url": "https://www.who.int/publications/i/item/9789240029200"
+              }
+            ]
+          },
+          "id": "medical-assistants.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "833,900 人",
+        "fact_id": "us-employment-2024",
+        "market": "US",
+        "measure": "就业人数",
+        "occupation_scope": "美国31-9092.00医疗助理精确职业数据",
+        "period": "2025-2035",
+        "source_refs": [
+          "onet-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "13%",
+        "fact_id": "us-growth-2024-2034",
+        "market": "US",
+        "measure": "就业增长率",
+        "occupation_scope": "美国31-9092.00医疗助理精确职业数据",
+        "period": "2025-2035",
+        "source_refs": [
+          "onet-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "45,690 美元/年",
+        "fact_id": "us-median-annual-2025",
+        "market": "US",
+        "measure": "全国年工资中位数",
+        "occupation_scope": "美国31-9092.00医疗助理精确职业数据",
+        "period": "2025",
+        "source_refs": [
+          "onet-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "21.97 美元/小时",
+        "fact_id": "us-median-hourly-2025",
+        "market": "US",
+        "measure": "全国小时工资中位数",
+        "occupation_scope": "美国31-9092.00医疗助理精确职业数据",
+        "period": "2025",
+        "source_refs": [
+          "onet-summary"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "109,700 个/年",
+        "fact_id": "us-openings-2024-2034",
+        "market": "US",
+        "measure": "平均年度岗位空缺",
+        "occupation_scope": "美国31-9092.00医疗助理精确职业数据",
+        "period": "2025-2035",
+        "source_refs": [
+          "onet-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "941,500 人",
+        "fact_id": "us-projected-employment-2034",
+        "market": "US",
+        "measure": "预计就业人数",
+        "occupation_scope": "美国31-9092.00医疗助理精确职业数据",
+        "period": "2025-2035",
+        "source_refs": [
+          "onet-trends"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "d5a3f0d647f118a88b8975d312fb030304b084a7226352b8b23fe2e4c8b9d2a2",
+  "source_content_sha256": "6a6a3a9161873504aae355db62bd56da873bfd46965bde65e1c53fd7bd42f10b",
   "subject": {
     "canonical_slug": "medical-assistants",
     "name": "医疗助理",
-    "summary": null
+    "summary": "医疗助理在医师指导下衔接门诊行政与部分临床任务，准确核对患者身份、记录生命体征与病史、准备检查，并把异常交给执业人员。"
   }
 }

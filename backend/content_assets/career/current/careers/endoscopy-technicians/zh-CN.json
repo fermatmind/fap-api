@@ -1,12 +1,1837 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "适合先体验：愿意依据明确规则核对器械标识、程序清单、再处理批次记录、设备状态和异常标签，并把未知项留给复核人。"
+            ]
+          },
+          "id": "endoscopy-technicians.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "慎重观察：如果在期限压力下容易跳过版本、单位或例外条件，先用下方内镜技术员纸面材料测试自己的错误模式。"
+            ]
+          },
+          "id": "endoscopy-technicians.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "体验方法：只用下方给出的记录和规则完成“仅做记录核对：列出不一致、缺项、影响状态和升级对象。”，再按参考答案逐条检查。"
+            ]
+          },
+          "id": "endoscopy-technicians.quick-decision.fit-decision-checklist.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "安全边界：全为虚构追溯记录；不接触患者、器械或化学品，不教授消毒参数，不作临床放行。"
+            ]
+          },
+          "id": "endoscopy-technicians.quick-decision.fit-decision-checklist.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "职业身份：内镜技术员对应美国O*NET代码31-9099.02。本页用它限定职业任务，不把美国代码当作中国职称或执业许可。"
+            ]
+          },
+          "id": "endoscopy-technicians.profile.work-context-block.1",
+          "source_refs": [
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "美国O*NET描述的内镜技术员会维护无菌区域，准备和维护内镜器械设备，协助医师与护士，并处理安全检查、库存和记录；具体再处理步骤须遵循机构政策和制造商说明。"
+            ]
+          },
+          "id": "endoscopy-technicians.profile.work-context-block.2",
+          "source_refs": [
+            "onet-detail",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "典型工作链可包括准备器械、维护无菌区域、协助程序、完成设备安全检查以及库存和记录维护；进入真实环境后，各步骤依机构政策、制造商说明和已确认能力执行。"
+            ]
+          },
+          "id": "endoscopy-technicians.profile.work-context-block.3",
+          "source_refs": [
+            "onet-detail",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断：识别身份、批次、时间或签名缺口并立即隔离升级，而不是推断缺失步骤已完成。"
+            ]
+          },
+          "id": "endoscopy-technicians.profile.work-context-block.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "常见环境：内镜单元与再处理区域，工作受机构感染防控流程、制造商说明和岗位能力确认约束。"
+            ]
+          },
+          "id": "endoscopy-technicians.profile.work-context-block.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "常用工具：追溯系统、器械清单、泄漏/设备状态记录和机构检查表；工具输出必须回到原材料验证。"
+            ]
+          },
+          "id": "endoscopy-technicians.profile.work-context-block.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "CDC建议再处理人员接受初始与持续实操培训和能力确认，并遵循制造商使用说明及机构政策。"
+            ]
+          },
+          "id": "endoscopy-technicians.profile.work-context-block.7",
+          "source_refs": [
+            "cdc-endoscope"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：器械ID、批次、每个必需节点、异常、执行/复核人及时间均可追溯。"
+            ]
+          },
+          "id": "endoscopy-technicians.profile.work-context-block.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "麻醉医师助理参与麻醉计划与患者监护，临床授权和教育要求远高于器械追溯支持。"
+            ]
+          },
+          "id": "endoscopy-technicians.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "adj-1",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "放射治疗师制定并实施放疗计划，交付治疗记录；设备核对习惯可迁移，但治疗资格与剂量责任不可迁移。"
+            ]
+          },
+          "id": "endoscopy-technicians.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "adj-2",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "呼吸治疗师评估和治疗心肺问题，需患者照护能力；内镜器械流程经验不能替代临床评估。"
+            ]
+          },
+          "id": "endoscopy-technicians.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "adj-3",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "急性护理护士承担患者评估、用药与护理协调；感染防控协作可迁移，护理执照与临床责任是关键差距。"
+            ]
+          },
+          "id": "endoscopy-technicians.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "adj-4",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "麻醉医师助理",
+                "id": "adj-link-1",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/anesthesiologist-assistants"
+              },
+              {
+                "entity": "放射治疗师",
+                "id": "adj-link-2",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/radiation-therapists"
+              },
+              {
+                "entity": "呼吸治疗师",
+                "id": "adj-link-3",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/respiratory-therapists"
+              },
+              {
+                "entity": "急症护理护士",
+                "id": "adj-link-4",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/acute-care-nurses"
+              }
+            ]
+          },
+          "id": "endoscopy-technicians.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "adj-1",
+            "onet-main"
+          ],
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可检查追溯表是否缺字段并生成异常清单"
+            ]
+          },
+          "id": "endoscopy-technicians.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "无法从一个勾选框判断实际清洗、消毒或储存步骤是否正确完成"
+            ]
+          },
+          "id": "endoscopy-technicians.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "只有经机构验证、符合隐私与设备流程的系统才能参与真实工作"
+            ]
+          },
+          "id": "endoscopy-technicians.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "输入端核对器械ID、批次、时间和执行人，不输入患者身份到练习"
+            ]
+          },
+          "id": "endoscopy-technicians.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "输出端逐项回到原记录，任何缺失保持异常状态"
+            ]
+          },
+          "id": "endoscopy-technicians.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工现场确认、隔离、升级及临床使用决定不可由生成工具替代"
+            ]
+          },
+          "id": "endoscopy-technicians.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "本页没有该职业AI采用率或就业净影响证据"
+            ]
+          },
+          "id": "endoscopy-technicians.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "应优先练习追溯完整性和停用升级，而非生成消毒参数"
+            ]
+          },
+          "id": "endoscopy-technicians.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "NIST的生成式AI风险画像可用于检查虚构、隐私、信息完整性和过度依赖等通用风险；它不是本职业采用率或事故率。"
+            ]
+          },
+          "id": "endoscopy-technicians.ai-impact.ai-impact-table.9",
+          "source_refs": [
+            "nist"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据。本次核对国家统计局2025年城镇单位工资发布；该页按地区、行业、登记类型和人员大类统计，未提供内镜技术员这一O*NET详细职业的全国同口径工资。"
+            ]
+          },
+          "id": "endoscopy-technicians.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "因此本页不提供中国全国点估计，也不拿宽行业均值替代个人工资；这只是本次来源范围内未取得，不宣称全国不存在其他资料。"
+            ]
+          },
+          "id": "endoscopy-technicians.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较具体岗位时应记录城市、税前/税后、月薪/年薪、固定/浮动、工时、经验和实际职责。"
+            ]
+          },
+          "id": "endoscopy-technicians.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "若使用招聘报价，应保留职位原文、日期和样本范围；本页未做招聘计数，不声称市场频率。"
+            ]
+          },
+          "id": "endoscopy-technicians.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2026年O*NET精确职业数据代码：31-9099.02。O*NET为内镜技术员显示的工资与就业采用其他医疗保健支持工作者父类口径。"
+            ]
+          },
+          "fact_refs": [
+            "identity"
+          ],
+          "id": "endoscopy-technicians.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国父类职业数据的2025年工资中位数为48,430美元/年；覆盖受雇者，不是税后收入或新人起薪。"
+            ]
+          },
+          "fact_refs": [
+            "median"
+          ],
+          "id": "endoscopy-technicians.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "us-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国父类职业数据的2025年小时工资中位数为23.28美元/小时；不在未知工时下自行换算个人年收入。"
+            ]
+          },
+          "fact_refs": [
+            "low"
+          ],
+          "id": "endoscopy-technicians.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "us-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国父类职业数据的2024年就业规模为109,700名受雇者；这是存量，不是当年招聘数。"
+            ]
+          },
+          "fact_refs": [
+            "high"
+          ],
+          "id": "endoscopy-technicians.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "us-employment"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国父类职业数据的2024—2034年预计年均职位空缺为14,400个/年；包含增长与替补，不等于净新增。"
+            ]
+          },
+          "fact_refs": [
+            "trend"
+          ],
+          "id": "endoscopy-technicians.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "us-projections"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "当前来源没有单独的新毕业生工资；经验、地区、行业和职责仍需在具体职位中核对。"
+            ]
+          },
+          "id": "endoscopy-technicians.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "能在相似器械编号中保持准确"
+            ]
+          },
+          "id": "endoscopy-technicians.fit.personality-fit-block.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "看到缺签名不会默认步骤已完成"
+            ]
+          },
+          "id": "endoscopy-technicians.fit.personality-fit-block.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "愿意按设备型号重新核说明"
+            ]
+          },
+          "id": "endoscopy-technicians.fit.personality-fit-block.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "能在临床节奏压力下暂停并升级记录异常"
+            ]
+          },
+          "id": "endoscopy-technicians.fit.personality-fit-block.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "可接受反复培训和能力评估"
+            ]
+          },
+          "id": "endoscopy-technicians.fit.personality-fit-block.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "对污染风险保持谨慎但不越权解释临床后果"
+            ]
+          },
+          "id": "endoscopy-technicians.fit.personality-fit-block.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "能与护士、技师、感染防控和主管清楚交接"
+            ]
+          },
+          "id": "endoscopy-technicians.fit.personality-fit-block.7",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "纸面追溯适合测试细节负担，不代表临床胜任"
+            ]
+          },
+          "id": "endoscopy-technicians.fit.personality-fit-block.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：器械E-204对应批次写成B-81，但清单要求B-82。影响：错误批次削弱追溯并可能影响患者安全。控制：立即标记不一致并隔离，不补写记录。复核/责任：再处理主管核查原始批次。"
+            ]
+          },
+          "id": "endoscopy-technicians.risk.career-risk-cards.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：高水平消毒节点缺执行人签名。影响：无法证明节点按流程完成。控制：保持未完成状态并停止交临床使用。复核/责任：机构授权复核人决定重做或处置。"
+            ]
+          },
+          "id": "endoscopy-technicians.risk.career-risk-cards.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：设备状态表标记维护到期。影响：继续使用可能违反机构流程。控制：停止排程并通知设备/主管人员。复核/责任：授权人员确认设备状态。"
+            ]
+          },
+          "id": "endoscopy-technicians.risk.career-risk-cards.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：程序清单出现患者姓名但练习者复制到个人表格。影响：造成隐私暴露。控制：本练习只用案例号，真实信息留在授权系统。复核/责任：隐私和临床负责人处理真实事件。"
+            ]
+          },
+          "id": "endoscopy-technicians.risk.career-risk-cards.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "本页练习只核对虚构追溯记录，不据纸面判断清洗消毒是否完成、器械是否可用于患者，也不替代机构培训和能力确认。"
+            ]
+          },
+          "id": "endoscopy-technicians.risk.career-risk-cards.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "本页没有招聘样本或频率统计；下面是依据职业任务整理的能力展示建议，不代表普遍录用门槛。"
+            ]
+          },
+          "id": "endoscopy-technicians.path.recruitment-sample.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-role-comparison",
+          "data": {
+            "column_keys": [
+              "stage",
+              "possible_check",
+              "observed_evidence"
+            ],
+            "rows": [
+              [
+                "基础准备",
+                "感染预防、器械识别与记录训练",
+                "学历背景多样，不能由单一证书推定胜任"
+              ],
+              [
+                "受控岗位训练",
+                "在监督下准备器械、维护无菌区域并完成追溯记录",
+                "按机构流程完成能力确认"
+              ],
+              [
+                "稳定独立支持",
+                "设备维护、库存、异常升级与团队协作",
+                "临床判断和使用决定不由纸面练习授权"
+              ]
+            ]
+          },
+          "id": "endoscopy-technicians.path.entry-role-comparison.1",
+          "source_refs": [
+            "editor",
+            "onet-detail"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.employer-evidence",
+          "data": {
+            "entries": [
+              {
+                "id": "card-1",
+                "values": [
+                  "任务依据",
+                  "来自O*NET职业任务，不是雇主频率"
+                ]
+              },
+              {
+                "id": "card-2",
+                "values": [
+                  "展示方式",
+                  "保存输入、规则、判断与复核轨迹"
+                ]
+              }
+            ]
+          },
+          "id": "endoscopy-technicians.path.employer-evidence.1",
+          "source_refs": [
+            "editor",
+            "onet-detail",
+            "onet-main"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-portfolio",
+          "data": {
+            "entries": [
+              {
+                "id": "card-1",
+                "values": [
+                  "原始材料",
+                  "保留页面给出的虚构记录"
+                ]
+              },
+              {
+                "id": "card-2",
+                "values": [
+                  "判断记录",
+                  "逐项写规则、结果与未知"
+                ]
+              },
+              {
+                "id": "card-3",
+                "values": [
+                  "交接摘要",
+                  "写结论、限制与复核人"
+                ]
+              }
+            ]
+          },
+          "id": "endoscopy-technicians.path.entry-portfolio.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.interview-probation",
+          "data": {
+            "column_keys": [
+              "stage",
+              "possible_check",
+              "observed_evidence"
+            ],
+            "rows": [
+              [
+                "面试",
+                "讲清一处错误如何发现",
+                "材料行与规则"
+              ],
+              [
+                "试用",
+                "先核版本和权限",
+                "未决项清单"
+              ],
+              [
+                "交付",
+                "说明限制和下一步",
+                "复核记录"
+              ]
+            ]
+          },
+          "id": "endoscopy-technicians.path.interview-probation.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-decision",
+          "data": {
+            "column_keys": [
+              "stage",
+              "possible_check",
+              "observed_evidence"
+            ],
+            "rows": [
+              [
+                "学历/课程",
+                "可展示相关知识与学习经历",
+                "不能单独证明岗位胜任或法定授权"
+              ],
+              [
+                "软件证书",
+                "可展示特定工具训练",
+                "不等于职业许可或项目授权"
+              ],
+              [
+                "单位培训",
+                "可展示本机构流程训练",
+                "不自动形成跨机构授权"
+              ],
+              [
+                "职业许可/注册",
+                "仅在签发法域与范围内有效",
+                "仍须核对雇主及具体项目要求"
+              ]
+            ]
+          },
+          "id": "endoscopy-technicians.path.credential-decision.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-boundary",
+          "data": {
+            "paragraphs": [
+              "学历、课程、软件证书、单位培训、职业许可和项目授权是不同概念；具体要求按职位和法域核对。"
+            ]
+          },
+          "id": "endoscopy-technicians.path.credential-boundary.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "美国O*NET的从业者教育调查显示，该职业存在高中毕业、专上证书和副学士等多种入行背景，并列为Job Zone 1–2；这不是全球统一门槛，医疗机构仍会按岗位配置培训、能力确认和监督。"
+            ]
+          },
+          "id": "endoscopy-technicians.path.career-path-block.1",
+          "source_refs": [
+            "onet-detail"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "临床职业需要独立教育和执照；器械追溯经验更接近无菌处理/质量支持，但具体资格由机构与法域决定。"
+            ]
+          },
+          "id": "endoscopy-technicians.path.career-path-block.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "以下内镜技术员纸面材料全部虚构并完整显示。任务：仅做记录核对：列出不一致、缺项、影响状态和升级对象。 安全边界：全为虚构追溯记录；不接触患者、器械或化学品，不教授消毒参数，不作临床放行。"
+            ]
+          },
+          "id": "endoscopy-technicians.path.entry-work-sample-data.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "material-1-1",
+                "values": [
+                  "记录对象：案例C-01",
+                  "记录内容一：器械E-204",
+                  "记录内容二：要求批次B-82",
+                  "核对发现：记录批次B-81",
+                  "处置状态：不一致"
+                ]
+              },
+              {
+                "id": "material-1-2",
+                "values": [
+                  "记录对象：批次B-82",
+                  "记录内容一：预清洁✓；泄漏测试✓；人工清洁✓；高水平消毒✓",
+                  "记录内容二：高水平消毒执行人空白",
+                  "核对发现：记录不完整",
+                  "处置状态：不适用"
+                ]
+              },
+              {
+                "id": "material-1-3",
+                "values": [
+                  "记录对象：设备AER-3",
+                  "记录内容一：维护有效至2026-09-01",
+                  "记录内容二：案例日期2026-09-03",
+                  "核对发现：维护状态待确认",
+                  "处置状态：不适用"
+                ]
+              }
+            ]
+          },
+          "id": "endoscopy-technicians.path.entry-work-sample-data.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "material-2-1",
+                "values": [
+                  "规则类别：追溯规则",
+                  "记录与安全规则：器械、批次、节点、执行/复核人和时间必须完整"
+                ]
+              },
+              {
+                "id": "material-2-2",
+                "values": [
+                  "规则类别：安全规则",
+                  "记录与安全规则：缺记录或设备状态不明即隔离升级；不得自行补写或临床放行"
+                ]
+              },
+              {
+                "id": "material-2-3",
+                "values": [
+                  "规则类别：训练依据",
+                  "记录与安全规则：真实再处理须按机构流程、设备/器械制造商IFU及能力评估执行"
+                ]
+              }
+            ]
+          },
+          "id": "endoscopy-technicians.path.entry-work-sample-data.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "任务：仅做记录核对：列出不一致、缺项、影响状态和升级对象。",
+              "参考答案：E-204批次不一致；B-82高水平消毒执行人缺失；AER-3维护日期已过。三项均保持未确认/隔离并交再处理主管，不能据纸面推断已安全完成。",
+              "边界：全为虚构追溯记录；不接触患者、器械或化学品，不教授消毒参数，不作临床放行。"
+            ]
+          },
+          "id": "endoscopy-technicians.path.entry-work-sample-data.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "day-1",
+                "values": [
+                  "第1日",
+                  "理解材料",
+                  "标出字段、单位与版本"
+                ]
+              },
+              {
+                "id": "day-2",
+                "values": [
+                  "第2日",
+                  "按规则初判",
+                  "完成第一版记录"
+                ]
+              },
+              {
+                "id": "day-3",
+                "values": [
+                  "第3日",
+                  "复算/复读",
+                  "找出算术、时间或逻辑错误"
+                ]
+              },
+              {
+                "id": "day-4",
+                "values": [
+                  "第4日",
+                  "写异常清单",
+                  "区分可确认与待确认"
+                ]
+              },
+              {
+                "id": "day-5",
+                "values": [
+                  "第5日",
+                  "写交接",
+                  "指定复核人与限制"
+                ]
+              },
+              {
+                "id": "day-6",
+                "values": [
+                  "第6日",
+                  "对照答案修订",
+                  "保留初稿与改动原因"
+                ]
+              },
+              {
+                "id": "day-7",
+                "values": [
+                  "第7日",
+                  "复盘负担",
+                  "记录最耗注意力的步骤"
+                ]
+              }
+            ]
+          },
+          "id": "endoscopy-technicians.path.seven-day-trial.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "能否仅依材料复现答案",
+              "是否会漏单位、版本或例外",
+              "能否解释为何暂停并升级",
+              "是否愿意继续练习同类任务"
+            ]
+          },
+          "id": "endoscopy-technicians.path.seven-day-decision.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国官方预测：其他医疗保健支持工作者父类在2024—2034年预计年均空缺为14,400个/年，该指标含增长与替补。"
+            ]
+          },
+          "id": "endoscopy-technicians.market-signals.market-signal-card.1",
+          "source_refs": [
+            "us-projections"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "本页没有雇主样本或招聘频率统计，不把O*NET任务或软件页面写成当前招聘热度。"
+            ]
+          },
+          "id": "endoscopy-technicians.market-signals.market-signal-card.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "本页没有该职业AI实际采用率或净就业因果证据；任务可辅助不等于职位减少。"
+            ]
+          },
+          "id": "endoscopy-technicians.market-signals.market-signal-card.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "转向选择：临床职业需要独立教育和执照；器械追溯经验更接近无菌处理/质量支持，但具体资格由机构与法域决定。"
+            ]
+          },
+          "id": "endoscopy-technicians.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "决策时应分别看官方预测、具体职位原文、个人作品和资格/授权差距，不能把不同市场和时期合成一个增长结论。"
+            ]
+          },
+          "id": "endoscopy-technicians.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "美国O*NET描述的内镜技术员会维护无菌区域，准备和维护内镜器械设备，协助医师与护士，并处理安全检查、库存和记录；具体再处理步骤须遵循机构政策和制造商说明。",
+                "id": "endoscopy-technicians.faq.1",
+                "question_key": "career.faq.endoscopy-technicians.daily-work",
+                "source_refs": [
+                  "onet-detail",
+                  "onet-main"
+                ]
+              },
+              {
+                "answer": "麻醉医师助理参与麻醉计划与患者监护，临床授权和教育要求远高于器械追溯支持。",
+                "id": "endoscopy-technicians.faq.2",
+                "question_key": "career.faq.endoscopy-technicians.role-comparison",
+                "source_refs": [
+                  "adj-1",
+                  "onet-main"
+                ]
+              },
+              {
+                "answer": "能在相似器械编号中保持准确",
+                "id": "endoscopy-technicians.faq.3",
+                "question_key": "career.faq.endoscopy-technicians.fit",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "可检查追溯表是否缺字段并生成异常清单",
+                "id": "endoscopy-technicians.faq.4",
+                "question_key": "career.faq.endoscopy-technicians.ai-impact",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "可检查追溯表是否缺字段并生成异常清单",
+                "id": "endoscopy-technicians.faq.5",
+                "question_key": "career.faq.endoscopy-technicians.automatable-tasks",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "人工现场确认、隔离、升级及临床使用决定不可由生成工具替代",
+                "id": "endoscopy-technicians.faq.6",
+                "question_key": "career.faq.endoscopy-technicians.human-control",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "暂无可安全使用的数据。本次核对国家统计局2025年城镇单位工资发布；该页按地区、行业、登记类型和人员大类统计，未提供内镜技术员这一O*NET详细职业的全国同口径工资。",
+                "id": "endoscopy-technicians.faq.7",
+                "question_key": "career.faq.endoscopy-technicians.china-pay",
+                "source_refs": [
+                  "nbs"
+                ]
+              },
+              {
+                "answer": "其他医疗保健支持工作者父类的年工资中位数为48,430美元/年。",
+                "id": "endoscopy-technicians.faq.8",
+                "question_key": "career.faq.endoscopy-technicians.us-pay",
+                "source_refs": [
+                  "us-wage"
+                ]
+              },
+              {
+                "answer": "美国O*NET的从业者教育调查显示，该职业存在高中毕业、专上证书和副学士等多种入行背景，并列为Job Zone 1–2；这不是全球统一门槛，医疗机构仍会按岗位配置培训、能力确认和监督。",
+                "id": "endoscopy-technicians.faq.9",
+                "question_key": "career.faq.endoscopy-technicians.education-path",
+                "source_refs": [
+                  "onet-detail"
+                ]
+              },
+              {
+                "answer": "本页练习只核对虚构追溯记录，不据纸面判断清洗消毒是否完成、器械是否可用于患者，也不替代机构培训和能力确认。",
+                "id": "endoscopy-technicians.faq.10",
+                "question_key": "career.faq.endoscopy-technicians.risk-boundary",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "转向选择：临床职业需要独立教育和执照；器械追溯经验更接近无菌处理/质量支持，但具体资格由机构与法域决定。",
+                "id": "endoscopy-technicians.faq.11",
+                "question_key": "career.faq.endoscopy-technicians.outlook-transition",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "适合先体验：愿意依据明确规则核对器械标识、程序清单、再处理批次记录、设备状态和异常标签，并把未知项留给复核人。",
+                "id": "endoscopy-technicians.faq.12",
+                "question_key": "career.faq.endoscopy-technicians.career-worth",
+                "source_refs": [
+                  "editor"
+                ]
+              }
+            ]
+          },
+          "id": "endoscopy-technicians.sources.faq.1",
+          "source_refs": [
+            "adj-1",
+            "editor",
+            "nbs",
+            "onet-detail",
+            "onet-main",
+            "us-wage"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "美国职业身份为O*NET 31-9099.02；中国职位名称、资格和授权按具体雇主与法域核验。",
+              "中国工资为本次指定官方来源中的有界缺口；美国统计按其他医疗保健支持工作者父类及各自数据期解释。",
+              "练习材料和数值均为编辑设计：全为虚构追溯记录；不接触患者、器械或化学品，不教授消毒参数，不作临床放行。"
+            ]
+          },
+          "id": "endoscopy-technicians.sources.boundary.1",
+          "source_refs": [
+            "adj-1",
+            "adj-2",
+            "adj-3",
+            "adj-4",
+            "cdc-endoscope",
+            "editor",
+            "nbs",
+            "nist",
+            "onet-detail",
+            "onet-main",
+            "us-employment",
+            "us-projections",
+            "us-wage"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "内镜技术员",
+                "id": "endoscopy-technicians.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "内镜技术员",
+                "id": "endoscopy-technicians.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "内镜技术员",
+                "id": "endoscopy-technicians.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "内镜技术员",
+                "id": "endoscopy-technicians.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "内镜技术员",
+                "id": "endoscopy-technicians.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "内镜技术员",
+                "id": "endoscopy-technicians.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "内镜技术员",
+                "id": "endoscopy-technicians.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "内镜技术员",
+                "id": "endoscopy-technicians.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "内镜技术员",
+                "id": "endoscopy-technicians.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "内镜技术员",
+                "id": "endoscopy-technicians.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "内镜技术员",
+                "id": "endoscopy-technicians.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "endoscopy-technicians.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业麻醉医师助理（29-1071.01）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-1",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "麻醉医师助理 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-1071.01"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业放射治疗师（29-1124.00）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-2",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "放射治疗师 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-1124.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业呼吸治疗师（29-1126.00）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-3",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "呼吸治疗师 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-1126.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业急症护理护士（29-1141.01）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-4",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "急症护理护士 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-1141.01"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "CDC建议为内镜再处理人员提供设备特定说明、培训、定期能力测试和监督。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cdc-endoscope",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "内镜再处理能力与设备特定说明",
+                "period": "2023更新的医疗机构建议",
+                "publisher": "美国疾病控制与预防中心",
+                "scope": "exact",
+                "url": "https://www.cdc.gov/infection-control/hcp/disinfection-sterilization/summary-recommendations.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "基于已列职业事实设计判断提示、风险控制和完整虚构练习；模拟数字不是现实统计。",
+                  "不代表雇主政策、执业授权、真实事故、招聘频率或统计调查。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "editor",
+                "limitation": "不代表雇主政策、执业授权、真实事故、招聘频率或统计调查。",
+                "market": "全球",
+                "name": "内镜技术员内容与模拟练习编辑设计",
+                "period": "2026-09-06",
+                "publisher": "本任务编辑",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "按地区、行业、登记类型和五类人员发布平均工资，未提供本O*NET详细职业同口径工资。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nbs",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025年",
+                "publisher": "国家统计局",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "通用生成式AI风险类别与治理框架，不报告本职业部署或就业影响。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nist",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "全球",
+                "name": "生成式人工智能风险管理画像",
+                "period": "2024 NIST AI 600-1",
+                "publisher": "美国国家标准与技术研究院",
+                "scope": "exact",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "任务、活动、工作环境与准备信息。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet-detail",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "内镜技术员 O*NET详细档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/31-9099.02"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "职业代码31-9099.02、定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet-main",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "内镜技术员 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/31-9099.02"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "就业存量覆盖：其他医疗保健支持工作者父类。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-employment",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "内镜技术员美国就业规模",
+                "period": "2024 BLS就业规模",
+                "publisher": "O*NET OnLine（展示BLS）",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.onetonline.org/link/localtrends/31-9099.02"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "年均空缺覆盖：其他医疗保健支持工作者父类，包含增长与替补。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-projections",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "内镜技术员美国就业预测",
+                "period": "2024—2034 BLS就业预测",
+                "publisher": "O*NET OnLine（展示BLS）",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.onetonline.org/link/localtrends/31-9099.02"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "工资数据覆盖：其他医疗保健支持工作者父类；不是新人薪酬。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-wage",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "内镜技术员美国工资",
+                "period": "2025 BLS OEWS",
+                "publisher": "O*NET OnLine（展示BLS OEWS）",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.onetonline.org/link/localwages/31-9099.02"
+              }
+            ]
+          },
+          "id": "endoscopy-technicians.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "31-9099.02",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业代码",
+        "occupation_scope": "精确职业数据：Endoscopy Technicians；O*NET 31-9099.02",
+        "period": "2026 O*NET职业档案",
+        "source_refs": [
+          "onet-main"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "48,430美元/年",
+        "fact_id": "median",
+        "market": "美国",
+        "measure": "年工资中位数",
+        "occupation_scope": "父类职业数据；BLS/O*NET统计覆盖：其他医疗保健支持工作者父类；页面主题：内镜技术员（31-9099.02）",
+        "period": "2025 BLS OEWS",
+        "source_refs": [
+          "us-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "23.28美元/小时",
+        "fact_id": "low",
+        "market": "美国",
+        "measure": "小时工资中位数",
+        "occupation_scope": "父类职业数据；BLS/O*NET统计覆盖：其他医疗保健支持工作者父类；页面主题：内镜技术员（31-9099.02）",
+        "period": "2025 BLS OEWS",
+        "source_refs": [
+          "us-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "109,700名受雇者",
+        "fact_id": "high",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "父类职业数据；BLS/O*NET统计覆盖：其他医疗保健支持工作者父类；页面主题：内镜技术员（31-9099.02）",
+        "period": "2024 BLS就业规模",
+        "source_refs": [
+          "us-employment"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "14,400个/年",
+        "fact_id": "trend",
+        "market": "美国",
+        "measure": "年均职位空缺",
+        "occupation_scope": "父类职业数据；BLS/O*NET统计覆盖：其他医疗保健支持工作者父类；页面主题：内镜技术员（31-9099.02）",
+        "period": "2024—2034 BLS就业预测",
+        "source_refs": [
+          "us-projections"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "6efc0c7de198c15b3c568d94619926d3f42a9dde80f54d54e1970993cefe4f8e",
+  "source_content_sha256": "d7f0bc5e2aa2304352c58dd43a24529d6b14beacb5c37b691d98153d2fd85ada",
   "subject": {
     "canonical_slug": "endoscopy-technicians",
     "name": "内镜技术员",
-    "summary": null
+    "summary": "内镜技术员处理器械标识、程序清单、再处理批次记录、设备状态和异常标签，核心是识别身份、批次、时间或签名缺口并立即隔离升级，而不是推断缺失步骤已完成。页面提供可完成的虚构纸面材料、明确答案、美国统计范围与安全复核边界。"
   }
 }

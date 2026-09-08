@@ -1,12 +1,1602 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：美国O*NET 29-2036.00（2026职业页）显示，核心是把患者影像与轮廓、处方、计划参数、剂量分布、版本记录和团队复核形成可追踪闭环。"
+            ]
+          },
+          "fact_refs": [
+            "occupation-code"
+          ],
+          "id": "medical-dosimetrists.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "可观察信号：能在时间压力下保持标识与版本准确，区分缺项、矛盾和已复核状态，并清楚说明结论边界。"
+            ]
+          },
+          "id": "medical-dosimetrists.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "虚构纸面练习：D-21包含四类记录。患者记录P-07的处方引用为RX-3、影像引用为IMG-B；处方记录RX-3的计划引用为PL-3、影像引用为IMG-B；计划记录PL-3的患者引用为P-07、处方引用为RX-3、影像引用为IMG-B；轮廓说明的影像引用却为IMG-A。规则是引用字段必须指向题面列明的对应记录；不同类型记录ID无需字面相等。不得使用真实患者资料或计算剂量。"
+            ]
+          },
+          "id": "medical-dosimetrists.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "fermatmind-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考答案：状态未闭环。P-07、RX-3和PL-3之间的显式引用关系与题面相符；唯一明确冲突是轮廓说明引用IMG-A，而其余三类记录均指向IMG-B。只能记录这一冲突并请求授权团队核验，不能猜测正确影像，也不能生成或批准治疗计划。"
+            ]
+          },
+          "id": "medical-dosimetrists.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "fermatmind-rubric"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：美国O*NET 29-2036.00（2026职业页）定义该职业生成放射治疗计划、开展剂量计算、沟通并监督计划实施，并与放射肿瘤团队协作。"
+            ]
+          },
+          "fact_refs": [
+            "occupation-code"
+          ],
+          "id": "medical-dosimetrists.profile.definition-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "工作对象：患者影像与轮廓、医师处方、照射野与束流修饰条件、剂量分布、参考影像和计划记录。"
+            ]
+          },
+          "id": "medical-dosimetrists.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "核心任务：设计照射野、识别和勾画结构、计算或核验处方剂量、与团队制定治疗计划。"
+            ]
+          },
+          "id": "medical-dosimetrists.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "质量任务：执行治疗计划计算机的质量保证检查，维护患者剂量等记录，并把参考影像和定位标记转交实施环节。"
+            ]
+          },
+          "id": "medical-dosimetrists.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作闭环：读取受控输入—形成计划候选—计算与核验—团队复核—授权后转移—保留版本与实施状态。后半段是编辑综合，具体流程以机构SOP为准。"
+            ]
+          },
+          "id": "medical-dosimetrists.profile.work-context-block.1",
+          "source_refs": [
+            "aapm-mppg11",
+            "aapm-tg275",
+            "fermatmind-rubric",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作情境：O*NET报告时间压力每天出现，准确性通常极重要，常坐着工作且频繁与团队面对面沟通。"
+            ]
+          },
+          "id": "medical-dosimetrists.profile.work-context-block.2",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "准备程度：O*NET列Job Zone Four；其教育调查不等于每个岗位统一资格。"
+            ]
+          },
+          "id": "medical-dosimetrists.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "可检查产出：受控输入清单、计划版本、剂量计算记录、异常清单、复核状态和转移记录。"
+            ]
+          },
+          "id": "medical-dosimetrists.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "fermatmind-rubric",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量边界：AAPM公开摘要把治疗计划与病历复核列为医学物理支持环节；具体复核时点、责任人与检查项以机构标准和授权为准。"
+            ]
+          },
+          "id": "medical-dosimetrists.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "aapm-mppg11",
+            "aapm-tg275"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "角色边界：医学剂量师聚焦计划和剂量计算，不应与主要实施治疗或采集诊断影像的相邻职业混同。"
+            ]
+          },
+          "id": "medical-dosimetrists.profile.definition-block.2",
+          "source_refs": [
+            "onet-adj-diagnostic-medical-sonographers",
+            "onet-adj-nuclear-medicine-technologists",
+            "onet-adj-radiation-therapists",
+            "onet-adj-radiologic-technologists",
+            "onet-details"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "radiation-therapists",
+                "id": "medical-dosimetrists.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/radiation-therapists"
+              },
+              {
+                "entity": "radiologic-technologists",
+                "id": "medical-dosimetrists.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/radiologic-technologists"
+              },
+              {
+                "entity": "nuclear-medicine-technologists",
+                "id": "medical-dosimetrists.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/nuclear-medicine-technologists"
+              },
+              {
+                "entity": "diagnostic-medical-sonographers",
+                "id": "medical-dosimetrists.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/diagnostic-medical-sonographers"
+              }
+            ]
+          },
+          "id": "medical-dosimetrists.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-adj-diagnostic-medical-sonographers",
+            "onet-adj-nuclear-medicine-technologists",
+            "onet-adj-radiation-therapists",
+            "onet-adj-radiologic-technologists",
+            "onet-details"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "放射治疗师按放射肿瘤医师处方为患者实施放射治疗并操作治疗设备；医学剂量师以治疗计划和剂量计算为核心。"
+            ]
+          },
+          "id": "medical-dosimetrists.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-adj-diagnostic-medical-sonographers",
+            "onet-adj-nuclear-medicine-technologists",
+            "onet-adj-radiation-therapists",
+            "onet-adj-radiologic-technologists",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "放射技术人员采集X射线、CT等诊断影像；医学剂量师使用影像信息支持放疗计划。"
+            ]
+          },
+          "id": "medical-dosimetrists.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-adj-diagnostic-medical-sonographers",
+            "onet-adj-nuclear-medicine-technologists",
+            "onet-adj-radiation-therapists",
+            "onet-adj-radiologic-technologists",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "核医学技术人员承担核医学成像与相关技术任务；医学剂量师的核心产出是放射治疗计划。"
+            ]
+          },
+          "id": "medical-dosimetrists.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-adj-diagnostic-medical-sonographers",
+            "onet-adj-nuclear-medicine-technologists",
+            "onet-adj-radiation-therapists",
+            "onet-adj-radiologic-technologists",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "诊断医学超声师采集超声影像；医学剂量师不以超声检查为核心产出。"
+            ]
+          },
+          "id": "medical-dosimetrists.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-adj-diagnostic-medical-sonographers",
+            "onet-adj-nuclear-medicine-technologists",
+            "onet-adj-radiation-therapists",
+            "onet-adj-radiologic-technologists",
+            "onet-details"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "辅助边界：可设想工具用于整理虚构记录、比较版本和生成核对候选；这不是采用率或临床有效性事实。"
+            ]
+          },
+          "id": "medical-dosimetrists.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "fermatmind-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助：格式检查、版本差异提示、记录草稿和待复核项汇总。"
+            ]
+          },
+          "id": "medical-dosimetrists.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "fermatmind-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "输入门槛：患者、影像、轮廓、处方、计划和版本标识必须来自受控系统且权限明确。"
+            ]
+          },
+          "id": "medical-dosimetrists.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "fermatmind-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工复核：回看原始影像、处方、计算结果和计划版本，不以生成文本替代。"
+            ]
+          },
+          "id": "medical-dosimetrists.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "fermatmind-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "不得自动放行：患者匹配、剂量判断、计划批准、计划转移和治疗实施。"
+            ]
+          },
+          "id": "medical-dosimetrists.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "fermatmind-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "失败风险：错误匹配、版本漂移、单位或参数误读可能形成流畅但不安全的输出。"
+            ]
+          },
+          "id": "medical-dosimetrists.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "fermatmind-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业边界：任务可辅助不等于职业替代概率，也不证明机构已采用。"
+            ]
+          },
+          "id": "medical-dosimetrists.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "fermatmind-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实践响应：只在机构批准、可审计、可回滚的低风险环节评估工具，异常时停止受影响步骤并升级。"
+            ]
+          },
+          "id": "medical-dosimetrists.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "fermatmind-rubric"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国大陆精确职业工资暂无可安全使用的数据：目前没有可安全使用且能精确对应O*NET 29-2036.00的全国职业工资分布；不得以卫生行业平均数或美国工资换算代替。"
+            ]
+          },
+          "id": "medical-dosimetrists.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "bounded-research-log",
+            "nbs-2024-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国大陆精确职业工资暂无可安全使用的数据：目前没有可安全使用且能精确对应O*NET 29-2036.00的全国职业工资分布；不得以卫生行业平均数或美国工资换算代替。"
+            ]
+          },
+          "id": "medical-dosimetrists.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "bounded-research-log",
+            "nbs-2024-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国大陆精确职业工资暂无可安全使用的数据：目前没有可安全使用且能精确对应O*NET 29-2036.00的全国职业工资分布；不得以卫生行业平均数或美国工资换算代替。"
+            ]
+          },
+          "id": "medical-dosimetrists.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "bounded-research-log",
+            "nbs-2024-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国大陆精确职业工资暂无可安全使用的数据：目前没有可安全使用且能精确对应O*NET 29-2036.00的全国职业工资分布；不得以卫生行业平均数或美国工资换算代替。"
+            ]
+          },
+          "id": "medical-dosimetrists.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "bounded-research-log",
+            "nbs-2024-wages"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：美国O*NET 29-2036.00在2025年的全国中位时薪为70.90美元、年薪为147,470美元；中位数不是起薪或个人报价。"
+            ]
+          },
+          "fact_refs": [
+            "us-median"
+          ],
+          "id": "medical-dosimetrists.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：美国O*NET 29-2036.00在2025年的全国中位时薪为70.90美元、年薪为147,470美元；中位数不是起薪或个人报价。"
+            ]
+          },
+          "fact_refs": [
+            "us-median"
+          ],
+          "id": "medical-dosimetrists.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：美国O*NET 29-2036.00在2025年的全国中位时薪为70.90美元、年薪为147,470美元；中位数不是起薪或个人报价。"
+            ]
+          },
+          "fact_refs": [
+            "us-median"
+          ],
+          "id": "medical-dosimetrists.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：美国O*NET 29-2036.00在2025年的全国中位时薪为70.90美元、年薪为147,470美元；中位数不是起薪或个人报价。"
+            ]
+          },
+          "fact_refs": [
+            "us-median"
+          ],
+          "id": "medical-dosimetrists.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：美国O*NET 29-2036.00在2025年的全国中位时薪为70.90美元、年薪为147,470美元；中位数不是起薪或个人报价。"
+            ]
+          },
+          "fact_refs": [
+            "us-median"
+          ],
+          "id": "medical-dosimetrists.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：美国O*NET 29-2036.00在2025年的全国中位时薪为70.90美元、年薪为147,470美元；中位数不是起薪或个人报价。"
+            ]
+          },
+          "fact_refs": [
+            "us-median"
+          ],
+          "id": "medical-dosimetrists.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "任务信号：能否准确核对影像、轮廓、处方、计划和版本，并把异常写清楚。"
+            ]
+          },
+          "id": "medical-dosimetrists.fit.riasec-fit-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "节奏信号：能否在每日时间压力下维持准确性，而不是靠省略复核换速度。"
+            ]
+          },
+          "id": "medical-dosimetrists.fit.riasec-fit-block.2",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "协作信号：能否与放射肿瘤团队解释计划信息、限制和未闭环状态。"
+            ]
+          },
+          "id": "medical-dosimetrists.fit.riasec-fit-block.3",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "记录信号：能否保留原始输入、版本差异、复核状态和升级结果。"
+            ]
+          },
+          "id": "medical-dosimetrists.fit.riasec-fit-block.4",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：若不愿持续处理高精度计算与记录，可比较更偏直接患者照护或影像采集的相邻职业。"
+            ]
+          },
+          "id": "medical-dosimetrists.fit.riasec-fit-block.5",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "兴趣边界：O*NET兴趣与工作风格只用于提出探索问题，不能决定胜任。"
+            ]
+          },
+          "id": "medical-dosimetrists.fit.riasec-fit-block.6",
+          "source_refs": [
+            "fermatmind-rubric",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "观察方法：用本页虚构记录题检查自己是否会主动识别标识冲突。"
+            ]
+          },
+          "id": "medical-dosimetrists.fit.riasec-fit-block.7",
+          "source_refs": [
+            "fermatmind-rubric",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "决策方法：再核对真实课程、岗位资格、机构流程和监督责任。"
+            ]
+          },
+          "id": "medical-dosimetrists.fit.riasec-fit-block.8",
+          "source_refs": [
+            "fermatmind-rubric",
+            "onet-details"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "患者、影像、轮廓、处方与计划是不同类型记录，ID无需字面相等；应核对每条记录的引用字段是否指向题面指定对象。引用冲突或缺失时，状态只能记为未闭环并交由机构授权链复核。"
+            ]
+          },
+          "id": "medical-dosimetrists.risk.career-risk-cards.1",
+          "source_refs": [
+            "aapm-mppg11",
+            "aapm-tg275",
+            "fermatmind-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "计算结果、单位、限制条件或版本来源不明时，不得把候选结果写成已批准计划。"
+            ]
+          },
+          "id": "medical-dosimetrists.risk.career-risk-cards.2",
+          "source_refs": [
+            "aapm-mppg11",
+            "aapm-tg275",
+            "fermatmind-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "计划与病历复核属于机构安全流程；本页不规定谁有签字权，也不替代医学物理支持。"
+            ]
+          },
+          "id": "medical-dosimetrists.risk.career-risk-cards.3",
+          "source_refs": [
+            "aapm-mppg11",
+            "aapm-tg275",
+            "fermatmind-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "工具提示、单人检查或流畅报告不能证明真实计划正确或可以实施。"
+            ]
+          },
+          "id": "medical-dosimetrists.risk.career-risk-cards.4",
+          "source_refs": [
+            "aapm-mppg11",
+            "aapm-tg275",
+            "fermatmind-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同规则：任一受控输入、版本、复核或授权状态不明，停止受影响的内容判断，保留现状并升级；不提供临床操作步骤。"
+            ]
+          },
+          "id": "medical-dosimetrists.risk.career-risk-cards.5",
+          "source_refs": [
+            "aapm-mppg11",
+            "aapm-tg275",
+            "fermatmind-rubric"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "现实入口：先查O*NET所示准备程度，再分别核对课程、真实岗位、机构培训和所在地要求；后四项是求职证据收集建议，不是O*NET给出的资格结论。"
+            ]
+          },
+          "id": "medical-dosimetrists.path.career-path-block.1",
+          "source_refs": [
+            "fermatmind-rubric",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "教育信号：O*NET报告新聘人员背景包括学士、学士后证书和硕士，但不是统一执业门槛。"
+            ]
+          },
+          "id": "medical-dosimetrists.path.career-path-block.2",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品：只用虚构、去识别材料制作标识核对、版本差异和异常升级记录。"
+            ]
+          },
+          "id": "medical-dosimetrists.path.career-path-block.3",
+          "source_refs": [
+            "fermatmind-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "面试说明：能解释不同类型记录ID无需字面相等，应按引用字段核对；遇到引用冲突只能记为未闭环，不能猜测或批准。"
+            ]
+          },
+          "id": "medical-dosimetrists.path.career-path-block.4",
+          "source_refs": [
+            "fermatmind-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七天练习：依次练虚构输入清单、版本表、缺项表、复核状态、异常说明、相邻职业比较和边界复盘。"
+            ]
+          },
+          "id": "medical-dosimetrists.path.career-path-block.5",
+          "source_refs": [
+            "fermatmind-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "资格决策：课程结业、专业认证、岗位录用、机构资质核验、所在地要求和临床授权是不同状态，应向相应机构分别核验。"
+            ]
+          },
+          "id": "medical-dosimetrists.path.career-path-block.6",
+          "source_refs": [
+            "fermatmind-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "能力阶梯：先稳标识与版本，再理解计划对象和团队接口，真实临床工作只在受监督与授权范围内进行。"
+            ]
+          },
+          "id": "medical-dosimetrists.path.career-path-block.7",
+          "source_refs": [
+            "fermatmind-rubric",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转型比较建议：分别查验放射治疗、放射技术、核医学和超声岗位的患者照护、设备、资格与责任证据；相邻职业事实来自各自O*NET职业页，如何比较属于编辑建议。"
+            ]
+          },
+          "id": "medical-dosimetrists.path.career-path-block.8",
+          "source_refs": [
+            "fermatmind-rubric",
+            "onet-adj-diagnostic-medical-sonographers",
+            "onet-adj-nuclear-medicine-technologists",
+            "onet-adj-radiation-therapists",
+            "onet-adj-radiologic-technologists",
+            "onet-details"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：美国O*NET/BLS显示2024年就业4,800人，数据属于2024—2034预测期。"
+            ]
+          },
+          "fact_refs": [
+            "employment"
+          ],
+          "id": "medical-dosimetrists.market-signals.market-signal-card.1",
+          "source_refs": [
+            "onet-trends"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：美国O*NET/BLS显示2024—2034预测增长为平均（3%至4%）。"
+            ]
+          },
+          "fact_refs": [
+            "growth"
+          ],
+          "id": "medical-dosimetrists.market-signals.market-signal-card.2",
+          "source_refs": [
+            "onet-trends"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：美国O*NET/BLS显示2024—2034年均空缺约200个，空缺包括增长和替补。"
+            ]
+          },
+          "fact_refs": [
+            "openings"
+          ],
+          "id": "medical-dosimetrists.market-signals.market-signal-card.3",
+          "source_refs": [
+            "onet-trends"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "就业基数、增长率和年均空缺是不同指标，不能相互替代。"
+            ]
+          },
+          "id": "medical-dosimetrists.market-signals.market-signal-card.4",
+          "source_refs": [
+            "fermatmind-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "全国预测不能推成某个地区、机构或个人的岗位保证。"
+            ]
+          },
+          "id": "medical-dosimetrists.market-signals.market-signal-card.5",
+          "source_refs": [
+            "fermatmind-rubric"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "工作对象包括影像与轮廓、医师处方、计划参数、剂量分布、参考影像和计划记录；典型任务包括设计照射野、计算或核验剂量、形成治疗计划并支持实施。",
+                "id": "medical-dosimetrists.faq.1",
+                "question_key": "career.faq.medical-dosimetrists.daily-work",
+                "source_refs": [
+                  "onet-details"
+                ]
+              },
+              {
+                "answer": "医学剂量师以治疗计划和剂量计算为核心；放射治疗师按处方实施治疗，放射技术人员采集X射线或CT等诊断影像，核医学技术人员承担核医学技术任务，超声师采集超声影像。",
+                "id": "medical-dosimetrists.faq.2",
+                "question_key": "career.faq.medical-dosimetrists.role-comparison",
+                "source_refs": [
+                  "onet-adj-diagnostic-medical-sonographers",
+                  "onet-adj-nuclear-medicine-technologists",
+                  "onet-adj-radiation-therapists",
+                  "onet-adj-radiologic-technologists",
+                  "onet-details"
+                ]
+              },
+              {
+                "answer": "可观察适配信号包括能否在时间压力下保持精确、核对复杂信息、记录版本差异并与放射肿瘤团队沟通。",
+                "id": "medical-dosimetrists.faq.3",
+                "question_key": "career.faq.medical-dosimetrists.fit",
+                "source_refs": [
+                  "onet-details"
+                ]
+              },
+              {
+                "answer": "可设想的低风险数字辅助包括整理虚构记录、比较版本和生成核对候选；这不是组织采用事实，也不能替代真实影像、处方、计算结果、计划版本和团队复核。",
+                "id": "medical-dosimetrists.faq.4",
+                "question_key": "career.faq.medical-dosimetrists.ai-impact",
+                "source_refs": [
+                  "fermatmind-rubric"
+                ]
+              },
+              {
+                "answer": "真实患者身份、影像、轮廓、处方、剂量计算、计划版本和实施状态必须由机构授权流程中的人员核验；工具输出本身不构成临床批准。",
+                "id": "medical-dosimetrists.faq.5",
+                "question_key": "career.faq.medical-dosimetrists.human-control",
+                "source_refs": [
+                  "fermatmind-rubric"
+                ]
+              },
+              {
+                "answer": "目前没有可安全使用且能精确对应O*NET 29-2036.00的中国大陆全国职业工资分布；不得以卫生行业平均数代替。",
+                "id": "medical-dosimetrists.faq.6",
+                "question_key": "career.faq.medical-dosimetrists.china-pay",
+                "source_refs": [
+                  "bounded-research-log",
+                  "nbs-2024-wages"
+                ]
+              },
+              {
+                "answer": "O*NET显示美国医学剂量师2025年全国中位时薪70.90美元、年薪147,470美元。",
+                "fact_refs": [
+                  "us-median"
+                ],
+                "id": "medical-dosimetrists.faq.7",
+                "question_key": "career.faq.medical-dosimetrists.us-pay",
+                "source_refs": [
+                  "onet-wages"
+                ]
+              },
+              {
+                "answer": "O*NET把该职业列为Job Zone Four，并报告新聘人员教育背景分布；这些调查结果不是对每个岗位统一生效的执业资格；入门作品只使用虚构、去识别材料展示记录核对、版本控制、缺项识别和升级说明；不得处理真实患者或声称临床批准。",
+                "id": "medical-dosimetrists.faq.8",
+                "question_key": "career.faq.medical-dosimetrists.education-path",
+                "source_refs": [
+                  "fermatmind-rubric",
+                  "onet-details"
+                ]
+              },
+              {
+                "answer": "患者、影像、轮廓、处方、计划或版本信息不一致时，只能把状态记为未闭环并交由机构授权链复核；本页不提供剂量计算、计划批准或治疗操作指令。",
+                "id": "medical-dosimetrists.faq.9",
+                "question_key": "career.faq.medical-dosimetrists.risk-boundary",
+                "source_refs": [
+                  "fermatmind-rubric"
+                ]
+              },
+              {
+                "answer": "O*NET/BLS显示美国医学剂量师2024年就业4,800人；O*NET/BLS显示该职业2024—2034预测增长为平均（3%至4%）；O*NET/BLS显示2024—2034年均空缺200个，空缺包括增长和替补。",
+                "fact_refs": [
+                  "employment",
+                  "growth",
+                  "openings"
+                ],
+                "id": "medical-dosimetrists.faq.10",
+                "question_key": "career.faq.medical-dosimetrists.outlook-transition",
+                "source_refs": [
+                  "onet-trends"
+                ]
+              },
+              {
+                "answer": "就业、预测增长和年均空缺是不同指标，不能推成某地区或个人的岗位保证；可观察适配信号包括能否在时间压力下保持精确、核对复杂信息、记录版本差异并与放射肿瘤团队沟通。",
+                "id": "medical-dosimetrists.faq.11",
+                "question_key": "career.faq.medical-dosimetrists.career-worth",
+                "source_refs": [
+                  "fermatmind-rubric",
+                  "onet-details"
+                ]
+              }
+            ]
+          },
+          "id": "medical-dosimetrists.sources.faq.1",
+          "source_refs": [
+            "bounded-research-log",
+            "fermatmind-rubric",
+            "nbs-2024-wages",
+            "onet-adj-diagnostic-medical-sonographers",
+            "onet-adj-nuclear-medicine-technologists",
+            "onet-adj-radiation-therapists",
+            "onet-adj-radiologic-technologists",
+            "onet-details",
+            "onet-trends",
+            "onet-wages"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "中国、美国、全球与具体法域证据分别陈述；工资、就业、资格、安全和AI结论不得跨范围拼接。",
+              "医学剂量师页面提供职业决策与安全试验信息，不替代所在地法律、医疗、金融、安全、执业或其他专业意见。",
+              "任何documented_unavailable都只表示有界检索后未建立安全数据，不允许用代理或模型记忆伪造数字。"
+            ]
+          },
+          "id": "medical-dosimetrists.sources.boundary.1",
+          "source_refs": [
+            "aapm-mppg11",
+            "aapm-tg275",
+            "bounded-research-log",
+            "fermatmind-rubric",
+            "nbs-2024-wages",
+            "onet-adj-diagnostic-medical-sonographers",
+            "onet-adj-nuclear-medicine-technologists",
+            "onet-adj-radiation-therapists",
+            "onet-adj-radiologic-technologists",
+            "onet-details",
+            "onet-trends",
+            "onet-wages"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "医学剂量师",
+                "id": "medical-dosimetrists.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "医学剂量师",
+                "id": "medical-dosimetrists.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "医学剂量师",
+                "id": "medical-dosimetrists.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "医学剂量师",
+                "id": "medical-dosimetrists.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "医学剂量师",
+                "id": "medical-dosimetrists.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "医学剂量师",
+                "id": "medical-dosimetrists.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "医学剂量师",
+                "id": "medical-dosimetrists.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "医学剂量师",
+                "id": "medical-dosimetrists.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "医学剂量师",
+                "id": "medical-dosimetrists.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "医学剂量师",
+                "id": "medical-dosimetrists.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "医学剂量师",
+                "id": "medical-dosimetrists.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "medical-dosimetrists.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2021年发布；支持治疗计划和患者病历复核的最低物理支持、时间点与责任分工。",
+                  "面向美国医学物理实践；不能替代机构SOP、处方或签署。"
+                ],
+                "evidence_type": "official guidance",
+                "id": "aapm-mppg11",
+                "limitation": "面向美国医学物理实践；不能替代机构SOP、处方或签署。",
+                "market": "美国",
+                "name": "MPPG 11.a: Plan and chart review in external beam radiotherapy and brachytherapy",
+                "period": "accessed 2026-09-06",
+                "publisher": "American Association of Physicists in Medicine",
+                "scope": "exact",
+                "url": "https://www.aapm.org/pubs/mppg/detail.asp?docid=263"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2020年发布；支持风险导向的放疗计划与病历复核建议。",
+                  "主要面向医学物理师，剂量师可用于理解复核接口；不转移最终责任。"
+                ],
+                "evidence_type": "official guidance",
+                "id": "aapm-tg275",
+                "limitation": "主要面向医学物理师，剂量师可用于理解复核接口；不转移最终责任。",
+                "market": "美国",
+                "name": "AAPM TG-275: Strategies for Effective Physics Plan and Chart Review",
+                "period": "accessed 2026-09-06",
+                "publisher": "American Association of Physicists in Medicine",
+                "scope": "exact",
+                "url": "https://www.aapm.org/pubs/reports/detail.asp?docid=198"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "未取得可读的29-2036.00中国大陆精确职业工资分布。",
+                  "只支持documented_unavailable，不支持任何工资数值。"
+                ],
+                "evidence_type": "bounded research log",
+                "id": "bounded-research-log",
+                "limitation": "只支持documented_unavailable，不支持任何工资数值。",
+                "market": "中国大陆",
+                "name": "2026-09-06 医学剂量师中国大陆工资有界检索记录",
+                "period": "reviewed 2026-09-06",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "安全工作样本、AI任务边界与条件性建议。",
+                  "不支持医疗处方、临床签署、工资、资格或替代概率。"
+                ],
+                "evidence_type": "internal editorial rubric",
+                "id": "fermatmind-rubric",
+                "limitation": "不支持医疗处方、临床签署、工资、资格或替代概率。",
+                "market": "跨市场编辑评估",
+                "name": "FermatMind career decision rubric",
+                "period": "reviewed 2026-09-06",
+                "publisher": "FermatMind",
+                "scope": "internal_rubric",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2024年城镇单位工资按单位类型、行业、地区和岗位大类汇总，不能支持医学剂量师精确职业工资。",
+                  "行业与岗位大类汇总，不是医学剂量师精确职业工资；不得用作该职业薪酬数值。"
+                ],
+                "evidence_type": "official statistics",
+                "id": "nbs-2024-wages",
+                "limitation": "行业与岗位大类汇总，不是医学剂量师精确职业工资；不得用作该职业薪酬数值。",
+                "market": "中国大陆",
+                "name": "2024年城镇单位就业人员年平均工资情况",
+                "period": "2024 annual wage data",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202505/t20250516_1959826.html"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "诊断医学超声师采集超声影像",
+                  "美国相邻职业定义，仅用于职责边界比较。"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "onet-adj-diagnostic-medical-sonographers",
+                "limitation": "美国相邻职业定义，仅用于职责边界比较。",
+                "market": "美国",
+                "name": "O*NET 29-2032.00 Diagnostic Medical Sonographers",
+                "period": "2026 occupational profile",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-2032.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "核医学技术人员执行核医学成像与相关技术任务",
+                  "美国相邻职业定义，仅用于职责边界比较。"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "onet-adj-nuclear-medicine-technologists",
+                "limitation": "美国相邻职业定义，仅用于职责边界比较。",
+                "market": "美国",
+                "name": "O*NET 29-2033.00 Nuclear Medicine Technologists",
+                "period": "2026 occupational profile",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-2033.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "放射治疗师按处方实施治疗并操作治疗设备",
+                  "美国相邻职业定义，仅用于职责边界比较。"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "onet-adj-radiation-therapists",
+                "limitation": "美国相邻职业定义，仅用于职责边界比较。",
+                "market": "美国",
+                "name": "O*NET 29-1124.00 Radiation Therapists",
+                "period": "2026 occupational profile",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-1124.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "放射技术人员采集诊断影像",
+                  "美国相邻职业定义，仅用于职责边界比较。"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "onet-adj-radiologic-technologists",
+                "limitation": "美国相邻职业定义，仅用于职责边界比较。",
+                "market": "美国",
+                "name": "O*NET 29-2034.00 Radiologic Technologists and Technicians",
+                "period": "2026 occupational profile",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-2034.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "职业身份、任务、对象、工作活动和工作情境。",
+                  "美国职业定义；不等于中国职称、执业许可或雇主任用。"
+                ],
+                "evidence_type": "official occupational profile",
+                "id": "onet-details",
+                "limitation": "美国职业定义；不等于中国职称、执业许可或雇主任用。",
+                "market": "美国",
+                "name": "O*NET 29-2036.00 Medical Dosimetrists",
+                "period": "2026 occupational profile",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-2036.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "就业、预测增长、2034就业和年均空缺标签值。",
+                  "美国预测不保证地区、机构或个人结果。"
+                ],
+                "evidence_type": "official workforce data",
+                "id": "onet-trends",
+                "limitation": "美国预测不保证地区、机构或个人结果。",
+                "market": "美国",
+                "name": "O*NET National Employment Trends 29-2036.00",
+                "period": "2024-2034 employment projections",
+                "publisher": "O*NET OnLine / Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-2036.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "年度工资中位数与第10、第90百分位。",
+                  "美国全国年度工资不是新人起薪，也不能换算成中国职业工资。"
+                ],
+                "evidence_type": "official workforce data",
+                "id": "onet-wages",
+                "limitation": "美国全国年度工资不是新人起薪，也不能换算成中国职业工资。",
+                "market": "美国",
+                "name": "O*NET National Wages 29-2036.00",
+                "period": "2025 wage data",
+                "publisher": "O*NET OnLine / Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-2036.00"
+              }
+            ]
+          },
+          "id": "medical-dosimetrists.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "4,800人",
+        "fact_id": "employment",
+        "market": "美国",
+        "measure": "employment",
+        "occupation_scope": "精确职业数据：O*NET 29-2036.00",
+        "period": "2024-2034 employment projections",
+        "source_refs": [
+          "onet-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "4%（官方类别：平均）",
+        "fact_id": "growth",
+        "market": "美国",
+        "measure": "projected employment growth",
+        "occupation_scope": "精确职业数据：O*NET 29-2036.00",
+        "period": "2024-2034 employment projections",
+        "source_refs": [
+          "onet-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "29-2036.00",
+        "fact_id": "occupation-code",
+        "market": "美国",
+        "measure": "O*NET-SOC code",
+        "occupation_scope": "精确职业数据：O*NET 29-2036.00",
+        "period": "2026 occupational profile",
+        "source_refs": [
+          "onet-details"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "200个/年",
+        "fact_id": "openings",
+        "market": "美国",
+        "measure": "projected annual openings",
+        "occupation_scope": "精确职业数据：O*NET 29-2036.00",
+        "period": "2024-2034 employment projections",
+        "source_refs": [
+          "onet-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "70.90美元/小时；147,470美元/年（2025）",
+        "fact_id": "us-median",
+        "market": "美国",
+        "measure": "annual median wage",
+        "occupation_scope": "精确职业数据：O*NET 29-2036.00",
+        "period": "2025 wage data",
+        "source_refs": [
+          "onet-wages"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "4765f6e019d73f91ee255e898ccb714266baf6b3045ce7e0cec2cb975fb4b565",
+  "source_content_sha256": "1981ddaa3956cd11ae02a066019bb18af7895cf68af849e596c9cbb56c652187",
   "subject": {
     "canonical_slug": "medical-dosimetrists",
     "name": "医学剂量师",
-    "summary": null
+    "summary": "依据医师处方和患者影像生成放射治疗计划并进行剂量计算，与放射肿瘤团队沟通、复核和支持计划实施。"
   }
 }

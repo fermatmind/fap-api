@@ -1,12 +1,1500 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "先判断你是否愿意长期面对户外条件、设备状态、班组协同和严格安全边界，而不只享受驾驶大型设备的想象。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "正向信号：能按清单核字段、听从具名责任人安排、发现异常即记录并升级；谨慎信号：把经验感当授权、忽略盲区或跳过交接。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "练习只审三张完全虚构的开工协调卡，七字段为设备别名、任务区域、操作人员授权状态、开工前检查状态、隔离/观察安排、通信方式状态、复核/升级安排；“待核”是字段已填写但未确认，不算缺失也不算安全确认，“未记录”才算缺失。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "卡A：设备甲、区域甲、授权待核、检查待核、隔离/观察已记录、通信已记录、发现待核即暂停并交现场负责人复核，缺0。卡B：设备乙、区域未记录、授权已确认、检查已记录、隔离/观察未记录、通信已记录、缺项即暂停并交现场负责人补核，缺2。卡C：设备丙、区域丙、授权已确认、检查已确认、隔离/观察已确认、通信已确认、开工前由指定负责人复核，缺0。答案0/2/0；待核不代表风险已经消除，不涉及真实机器、信号或运行参数。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业定义：操作一种或多种动力施工设备，完成挖掘、移动、整平、结构建造或硬质路面施工，并可能维修维护设备。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.profile.definition-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "遵守安全规则并识别地下设施、人员、设备或落物等障碍。",
+              "按班组通信协调设备动作和材料移动。",
+              "维护设备、报告异常并记录使用或问题。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "输入：任务要求、区域、设备状态、班组安排和机构规则。",
+              "处理：确认授权与条件、协调动作、监控异常、维护记录。",
+              "输出：在授权范围内完成的施工任务、设备/材料记录和异常交接。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.profile.responsibilities-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "开工前核任务区、地下设施信息、人员授权与检查状态。",
+              "作业中按现场规则和指定通信链协同。",
+              "异常、缺项或条件变化时暂停并交具名责任人。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.profile.responsibilities-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "O*NET明确列出遵守安全规则、避开障碍、响应信号、维护设备和记录问题等任务。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.profile.work-context-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "BLS说明工作可处于多种天气、尘土泥泞或偏远地点，并可能有夜班、不规律工时或季节性。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.profile.work-context-block.2",
+          "source_refs": [
+            "bls-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "常见对象包括推土、挖掘、装载、平地以及压缩机、泵等动力设备；具体范围由岗位决定。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "可靠交付让任务区、授权、检查、通信、异常和交接可追溯。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "具体停复工、设备配置、现场信号和最终授权必须遵循机构规则并由具名责任人决定。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "47-2073.00不是专门铺设/夯实设备操作员，也不是专门打桩机操作员。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.profile.definition-block.2",
+          "source_refs": [
+            "onet-details",
+            "onet-paving",
+            "onet-pile"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "construction-laborers",
+                "id": "operating-engineers-and-other-construction-equipment-operators.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/construction-laborers"
+              },
+              {
+                "entity": "paving-surfacing-and-tamping-equipment-operators",
+                "id": "operating-engineers-and-other-construction-equipment-operators.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/paving-surfacing-and-tamping-equipment-operators"
+              },
+              {
+                "entity": "pile-driver-operators",
+                "id": "operating-engineers-and-other-construction-equipment-operators.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/pile-driver-operators"
+              },
+              {
+                "entity": "highway-maintenance-workers",
+                "id": "operating-engineers-and-other-construction-equipment-operators.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/highway-maintenance-workers"
+              },
+              {
+                "entity": "rail-track-laying-and-maintenance-equipment-operators",
+                "id": "operating-engineers-and-other-construction-equipment-operators.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/rail-track-laying-and-maintenance-equipment-operators"
+              }
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "47-2073.00覆盖多种动力施工设备，用于挖掘、移动、整平、建造或铺设硬质路面。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-details",
+            "onet-paving",
+            "onet-pile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "47-2071.00聚焦把混凝土、沥青等施加到路床或进行材料夯实。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-details",
+            "onet-paving",
+            "onet-pile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "47-2072.00聚焦操作打桩设备，为挡墙、桥梁、码头或地基打入桩体。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-details",
+            "onet-paving",
+            "onet-pile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "页面还提供其他相邻职业入口；比较时逐项核主要设备、主要交付、现场权限和训练要求。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助整理检查清单和待核字段。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助汇总设备/材料记录、排程和交接草稿。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "不能感知现场盲区、地面、地下设施或设备真实状态。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "不能解释或发出真实作业信号，也不能操作设备。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "不能自动确认人员授权、检查合格或复工条件。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人员须回到现场、机构规则和原始记录逐项复核。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "工具输出若缺来源、时间、责任人或版本，应视为草稿并升级。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "效率提升不转移现场安全、授权和最终交付责任。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "本页所核国家统计局资料未提供47-2073.00中国精确职业工资分位。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "行业或人员大类均值不能冒充具体施工设备操作岗位的个人报价。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较岗位时拆设备种类、地区、项目、班次、证照、合同、津贴与加班口径。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "以真实招聘合同和工资结构为准，并核是否含食宿、驻场、加班或项目补贴。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "2025年美国年薪10分位42,190美元。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "25分位48,680美元，中位59,850美元。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "75分位77,170美元，90分位101,090美元。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "时薪中位28.78美元。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "全国工资分布不是个人起薪承诺。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "地区、行业、班次、设备范围、资历、证照与雇佣结构会影响报价。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "适配度看能否稳定核设备、区域、授权、检查、通信和异常，而不是只看驾驶兴趣。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "正向信号：愿意按具名责任人的规则工作。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "正向信号：遇到缺项或条件变化会暂停和升级。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "正向信号：能维护清楚的设备使用与问题记录。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎信号：把待核状态当成已经安全。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎信号：抗拒户外、泥尘、夜班或项目节奏。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "BLS强调协调、机械技能、体力和耐力，并描述户外与设备维护要求。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.fit.riasec-fit-block.7",
+          "source_refs": [
+            "bls-path",
+            "bls-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "先做虚构字段审阅和受监督观察，不用性格标签替代试做。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "人员、设备或地下设施进入任务区；每次开工和条件变化时由现场负责人核区域信息、隔离/观察与通信，缺项即暂停并升级。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "设备异常或检查状态不明；每班开工前由授权人员按机构清单核状态并留记录，异常交维修/现场负责人，未放行不得继续。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "天气、地面或能见度变化；作业前和变化后由现场负责人复核适用条件，达到机构停工条件即暂停并通知班组。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.risk.career-risk-cards.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "班组通信或观察安排失配；开工前和人员变更后由现场负责人确认责任人和方式，无法确认即暂停并重新交底。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "工具生成虚假检查、授权或交接记录；每次采用前由具名责任人回到原始记录和现场核验，无法追溯即拒用并升级。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "BLS称典型入门教育为高中或同等学历，路径可包括在岗学习、职业学校或学徒制。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.path.career-path-block.1",
+          "source_refs": [
+            "bls-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "部分运输设备可能涉及CDL，少数地区对部分设备有专门许可；必须按设备、地区和雇主逐项核实。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.path.career-path-block.2",
+          "source_refs": [
+            "bls-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "先学习机构安全规则、任务字段、沟通、检查记录与异常升级。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.path.career-path-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "再在具名有经验人员指导下接触由雇主授权的设备和任务。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.path.career-path-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七日作品只做完全虚构的协调卡、缺项表和升级记录，不模拟真实操作。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.path.career-path-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品展示七字段定义、三卡材料、0/2/0复核过程、未决项和责任链。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.path.career-path-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "学历、课程、模拟器或作品不自动赋予设备操作、运输、停复工或签字权。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.path.career-path-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "求职时核设备范围、地区许可、班次、训练、监督、维护责任、通信与停复工链。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.path.career-path-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国47-2073.00在2024年就业489,300人，2034年预计507,100人。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.market-signals.market-signal-card.1",
+          "source_refs": [
+            "onet-trends"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "2024—2034预计增长4%。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.market-signals.market-signal-card.2",
+          "source_refs": [
+            "onet-trends"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "预计年均41,900个空缺，包含增长和替补。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.market-signals.market-signal-card.3",
+          "source_refs": [
+            "onet-trends"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "BLS另一更新基期为2025—2035：预计增长5%、增加22,300人，并提到基础设施需求；两组基期不可混算。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.market-signals.market-signal-card.4",
+          "source_refs": [
+            "bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "全国预测不等于个人录用概率；地区、项目、设备、资格和雇主需求仍需逐岗核实。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "O*NET任务包括遵守安全规则、避开地下管线及人员设备等障碍、响应班组信号协调设备动作、维护设备并记录使用或问题。",
+                "id": "operating-engineers-and-other-construction-equipment-operators.faq.1",
+                "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.daily-work",
+                "source_refs": [
+                  "onet-details"
+                ]
+              },
+              {
+                "answer": "47-2073.00覆盖多类动力施工设备；47-2071.00聚焦铺设、摊铺或夯实；47-2072.00聚焦用打桩设备为墙体、桥梁、码头或地基打桩。",
+                "id": "operating-engineers-and-other-construction-equipment-operators.faq.2",
+                "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.role-comparison",
+                "source_refs": [
+                  "onet-details",
+                  "onet-paving",
+                  "onet-pile"
+                ]
+              },
+              {
+                "answer": "适配度应通过安全桌面审阅和受监督观察来判断能否核字段、沟通、记录异常和守权限，不用性格标签替代试做。",
+                "id": "operating-engineers-and-other-construction-equipment-operators.faq.3",
+                "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.fit",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "数字工具可辅助整理检查清单、材料或设备使用记录、排程与交接草稿，但这些输出不等于现场状态、授权或安全确认。",
+                "id": "operating-engineers-and-other-construction-equipment-operators.faq.4",
+                "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.ai-impact",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "人员须回到现场、设备状态、机构规则与具名授权链复核；工具不能操作设备、确认地下设施、解释信号或决定停复工。",
+                "id": "operating-engineers-and-other-construction-equipment-operators.faq.5",
+                "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.human-control",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "本页所核国家统计局资料按行业和人员大类聚合，未提供与47-2073.00一一对应的中国精确职业工资分位。",
+                "id": "operating-engineers-and-other-construction-equipment-operators.faq.6",
+                "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.china-pay",
+                "source_refs": [
+                  "nbs"
+                ]
+              },
+              {
+                "answer": "2025年美国47-2073.00年薪10/25/50/75/90分位为42,190、48,680、59,850、77,170、101,090美元，时薪中位28.78美元。",
+                "id": "operating-engineers-and-other-construction-equipment-operators.faq.7",
+                "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.us-pay",
+                "source_refs": [
+                  "onet-wages"
+                ]
+              },
+              {
+                "answer": "BLS称典型入门教育为高中或同等学历，可经在岗学习、职业学校或学徒制训练；部分运输设备涉及CDL，少数地区对部分设备另有许可，要求随地区和设备而异。",
+                "id": "operating-engineers-and-other-construction-equipment-operators.faq.8",
+                "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.education-path",
+                "source_refs": [
+                  "bls-path"
+                ]
+              },
+              {
+                "answer": "桌面样本把设备别名、区域、人员授权、检查、隔离/观察、通信与升级安排分开；缺项或待核即暂停并交具名现场责任人。",
+                "id": "operating-engineers-and-other-construction-equipment-operators.faq.9",
+                "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.risk-boundary",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "美国47-2073.00在2024—2034预计增长4%，年均41,900个空缺；空缺包含增长和替补。",
+                "id": "operating-engineers-and-other-construction-equipment-operators.faq.10",
+                "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.outlook-transition",
+                "source_refs": [
+                  "onet-trends"
+                ]
+              },
+              {
+                "answer": "不同预测基期不可混算；全国预测不等于个人录用概率，实际机会仍要逐岗核地区、项目、设备与资格。",
+                "id": "operating-engineers-and-other-construction-equipment-operators.faq.11",
+                "question_key": "career.faq.operating-engineers-and-other-construction-equipment-operators.career-worth",
+                "source_refs": [
+                  "editorial"
+                ]
+              }
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.sources.faq.1",
+          "source_refs": [
+            "bls-path",
+            "editorial",
+            "nbs",
+            "onet-details",
+            "onet-paving",
+            "onet-pile",
+            "onet-trends",
+            "onet-wages"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "练习只做抽象虚构字段审阅，不涉及真实机器、信号、控制或运行参数。",
+              "现场状态、人员授权、检查合格、停复工和最终交付由机构具名责任人决定。",
+              "工资与预测按来源市场和基期使用，不跨法域或混算。"
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.sources.boundary.1",
+          "source_refs": [
+            "bls-outlook",
+            "bls-path",
+            "bls-work",
+            "editorial",
+            "nbs",
+            "onet-details",
+            "onet-paving",
+            "onet-pile",
+            "onet-trends",
+            "onet-wages"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "建筑施工工程师操作员",
+                "id": "operating-engineers-and-other-construction-equipment-operators.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "建筑施工工程师操作员",
+                "id": "operating-engineers-and-other-construction-equipment-operators.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "建筑施工工程师操作员",
+                "id": "operating-engineers-and-other-construction-equipment-operators.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "建筑施工工程师操作员",
+                "id": "operating-engineers-and-other-construction-equipment-operators.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "建筑施工工程师操作员",
+                "id": "operating-engineers-and-other-construction-equipment-operators.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "建筑施工工程师操作员",
+                "id": "operating-engineers-and-other-construction-equipment-operators.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "建筑施工工程师操作员",
+                "id": "operating-engineers-and-other-construction-equipment-operators.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "建筑施工工程师操作员",
+                "id": "operating-engineers-and-other-construction-equipment-operators.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "建筑施工工程师操作员",
+                "id": "operating-engineers-and-other-construction-equipment-operators.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "建筑施工工程师操作员",
+                "id": "operating-engineers-and-other-construction-equipment-operators.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "建筑施工工程师操作员",
+                "id": "operating-engineers-and-other-construction-equipment-operators.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn82view6 lines 346-394。",
+                  "仅支持所列职业、市场、时期与口径。"
+                ],
+                "evidence_type": "official employment outlook",
+                "id": "bls-outlook",
+                "limitation": "仅支持所列职业、市场、时期与口径。",
+                "market": "美国",
+                "name": "BLS OOH — Construction Equipment Operators outlook",
+                "period": "2025-2035 projections",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/construction-and-extraction/construction-equipment-operators.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn82view5 lines 267-302。",
+                  "仅支持所列职业、市场、时期与口径。"
+                ],
+                "evidence_type": "official entry path",
+                "id": "bls-path",
+                "limitation": "仅支持所列职业、市场、时期与口径。",
+                "market": "美国",
+                "name": "BLS OOH — Construction Equipment Operators education, training and licensing",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/ooh/construction-and-extraction/construction-equipment-operators.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn81view5 lines 218-239; turn82view3 lines 242-260。",
+                  "仅支持所列职业、市场、时期与口径。"
+                ],
+                "evidence_type": "official duties and work context",
+                "id": "bls-work",
+                "limitation": "仅支持所列职业、市场、时期与口径。",
+                "market": "美国",
+                "name": "BLS OOH — Construction Equipment Operators duties and work environment",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/ooh/construction-and-extraction/construction-equipment-operators.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "用于不含真实机器参数的桌面练习。",
+                  "仅支持虚构职业探索练习、判断框架与权限边界，不替代现场规则或授权。"
+                ],
+                "evidence_type": "editorial desktop exercise",
+                "id": "editorial",
+                "limitation": "仅支持虚构职业探索练习、判断框架与权限边界，不替代现场规则或授权。",
+                "market": "编辑设计",
+                "name": "建筑施工工程师操作员安全职业探索框架",
+                "period": "2026-09-06",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn48view0 lines 39-51, 229-274, 338-360。",
+                  "按行业和人员大类聚合，不是47-2073.00精确职业工资。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "nbs",
+                "limitation": "按行业和人员大类聚合，不是47-2073.00精确职业工资。",
+                "market": "中国大陆",
+                "name": "国家统计局 — 2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 wage aggregates published 2026",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn81view0 lines 50-57; turn82view0 lines 121-148。",
+                  "仅支持所列职业、市场、时期与口径。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-details",
+                "limitation": "仅支持所列职业、市场、时期与口径。",
+                "market": "美国",
+                "name": "O*NET — Operating Engineers and Other Construction Equipment Operators 47-2073.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-2073.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn81view8 lines 50-57。",
+                  "仅支持所列职业、市场、时期与口径。"
+                ],
+                "evidence_type": "official adjacent occupation",
+                "id": "onet-paving",
+                "limitation": "仅支持所列职业、市场、时期与口径。",
+                "market": "美国",
+                "name": "O*NET — Paving, Surfacing, and Tamping Equipment Operators 47-2071.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-2071.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn81view9 lines 50-58。",
+                  "仅支持所列职业、市场、时期与口径。"
+                ],
+                "evidence_type": "official adjacent occupation",
+                "id": "onet-pile",
+                "limitation": "仅支持所列职业、市场、时期与口径。",
+                "market": "美国",
+                "name": "O*NET — Pile Driver Operators 47-2072.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-2072.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn81view3 lines 50-64。",
+                  "仅支持所列职业、市场、时期与口径。"
+                ],
+                "evidence_type": "official employment projections",
+                "id": "onet-trends",
+                "limitation": "仅支持所列职业、市场、时期与口径。",
+                "market": "美国",
+                "name": "O*NET — National trends 47-2073.00",
+                "period": "2024-2034 projections",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/47-2073.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn81view2 lines 50-80。",
+                  "仅支持所列职业、市场、时期与口径。"
+                ],
+                "evidence_type": "official wage distribution",
+                "id": "onet-wages",
+                "limitation": "仅支持所列职业、市场、时期与口径。",
+                "market": "美国",
+                "name": "O*NET — National wages 47-2073.00",
+                "period": "2025 BLS wage data",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/47-2073.00"
+              }
+            ]
+          },
+          "id": "operating-engineers-and-other-construction-equipment-operators.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "所核中国资料无47-2073.00精确职业分位",
+        "fact_id": "cn-wage-nonprivate",
+        "market": "中国大陆",
+        "measure": "occupation wage availability",
+        "occupation_scope": "行业代理数据；未与47-2073.00精确映射",
+        "period": "2025 wage aggregates published 2026",
+        "source_refs": [
+          "nbs"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "行业均值不可替代个人报价",
+        "fact_id": "cn-wage-private",
+        "market": "中国大陆",
+        "measure": "cross-jurisdiction wage boundary",
+        "occupation_scope": "行业代理数据；未与47-2073.00精确映射",
+        "period": "2025 wage aggregates published 2026",
+        "source_refs": [
+          "nbs"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "许可随设备、地区和雇主要求变化",
+        "fact_id": "credential-boundary",
+        "market": "美国",
+        "measure": "qualification boundary",
+        "occupation_scope": "父类职业口径：Construction Equipment Operators",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "bls-path"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2024年489,300人；2034年507,100人",
+        "fact_id": "employment-projection",
+        "market": "美国",
+        "measure": "employment projection measure",
+        "occupation_scope": "精确职业数据：47-2073.00",
+        "period": "2024-2034 projections",
+        "source_refs": [
+          "onet-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET 47-2073.00",
+        "fact_id": "occupation-identity",
+        "market": "美国",
+        "measure": "official occupation code",
+        "occupation_scope": "精确职业数据：47-2073.00",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-details"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025年薪中位59,850美元",
+        "fact_id": "us-wage",
+        "market": "美国",
+        "measure": "annual wage measure",
+        "occupation_scope": "精确职业数据：47-2073.00",
+        "period": "2025 BLS wage data",
+        "source_refs": [
+          "onet-wages"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "54a545cdfa3f1bc9c72e4405a653ed33ec2d2687b150e89891f17a0d8ff02328",
+  "source_content_sha256": "87a1f369d8632f30af2dfa83ba6b926947398e9687609ed6b8a31865964913ea",
   "subject": {
     "canonical_slug": "operating-engineers-and-other-construction-equipment-operators",
     "name": "建筑施工工程师操作员",
-    "summary": null
+    "summary": "操作动力施工设备完成挖掘、移动、整平或建造任务，协调班组信号，维护设备并守住现场安全与授权边界。"
   }
 }

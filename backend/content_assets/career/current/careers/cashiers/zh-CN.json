@@ -1,12 +1,2064 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "这个工作适合愿意在重复操作中坚持核对的人：顾客催促时仍能确认商品与价格、清楚解释差异，再完成付款。满意的结果是一笔可追溯且双方理解一致的交易，而不是最快按下结算键。"
+            ]
+          },
+          "id": "cashiers.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "bls",
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "先了解门店：固定收银还是兼顾退货、自助设备和补货，班次是否稳定，谁能批准改价和退款。若没有明确求助人，却要求新人独自处理全部异常，应先谈清支持。"
+            ]
+          },
+          "id": "cashiers.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "谨慎判断站立和情绪负担。不要用一次模拟速度推断能否长期胜任；问清休息与换岗安排，比较高峰排队时的解释成本与自己可承受程度。"
+            ]
+          },
+          "id": "cashiers.quick-decision.fit-decision-checklist.3",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "安全体验：直接使用入行模块C1商品表、C2–C4交易记录和C5交班底稿，写出核价、付款状态与交班记录。先独立填写再对照示范；所有金额为虚构商品交易练习，不是工资，不接触真钱、银行卡、真实订单或支付系统。"
+            ]
+          },
+          "id": "cashiers.quick-decision.fit-decision-checklist.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "美国官方收银员为41-2011.00，覆盖非金融机构收付款。银行柜员、药房专业岗位和博彩资金柜台有各自范围；本页不因“都收钱”把它们合成一种职业。"
+            ]
+          },
+          "id": "cashiers.profile.work-context-block.1",
+          "source_refs": [
+            "cage",
+            "editor",
+            "onet",
+            "pharmacy"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "中国目录列收银员4-01-02-04；这是名称与技能分类线索。具体门店还要确认销售品类、培训、年龄核验规则和主管授权，不提供跨市场通用操作许可。"
+            ]
+          },
+          "id": "cashiers.profile.work-context-block.2",
+          "source_refs": [
+            "cnclass",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "输入是商品标识、数量、现行价格规则与支付状态；屏幕显示与价签不一致时，先暂停争议项目并请求核价，而不是凭印象改价。"
+            ]
+          },
+          "id": "cashiers.profile.work-context-block.3",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "判断不是心算本身：要分清重复扫码、折扣不适用、交易失败和顾客要求变化。异常类型不同，处理权限和需要保留的记录也不同。"
+            ]
+          },
+          "id": "cashiers.profile.work-context-block.4",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "输出包括商品清单、收款或退款凭据、找零以及异常备注。顾客能理解收费，交班人员能复查未完成事项，才算可交付。"
+            ]
+          },
+          "id": "cashiers.profile.work-context-block.5",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "复核以授权系统和门店程序为依据。遇到顾客展示付款截图，不应把截图直接当作商户到账状态；交由指定系统或主管确认，避免重复收费。此处为保守情境指导。"
+            ]
+          },
+          "id": "cashiers.profile.work-context-block.6",
+          "source_refs": [
+            "editor",
+            "pci"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "扫码器、收银系统和支付终端负责不同环节；设备显示成功与商品退货审批并非同一权限。收银员记录事实，主管处理越权例外，支付故障交授权技术或支付支持。"
+            ]
+          },
+          "id": "cashiers.profile.work-context-block.7",
+          "source_refs": [
+            "editor",
+            "onet",
+            "pci"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作质量同时包括准确、清楚和可持续：不要为队伍速度忽略争议，也不要以“服务态度”要求员工独自承担威胁情境。高峰、夜班、兼职与兼岗会改变实际负担。"
+            ]
+          },
+          "id": "cashiers.profile.work-context-block.8",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "药房助理：药品入库与药房文书支持，可涉及收银；药学判断不能从收银经验推导。 可迁移的是记录与沟通；转向前应通过目标岗位原文确认新增责任。"
+            ]
+          },
+          "id": "cashiers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "editor",
+            "pharmacy"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "零售销售人员一线主管：监督零售员工、排班和服务；带班需要辅导与例外处置能力。 可迁移的是记录与沟通；转向前应通过目标岗位原文确认新增责任。"
+            ]
+          },
+          "id": "cashiers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "editor",
+            "supervisor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "柜台与租赁职员：处理服务或租赁请求、说明条件并接单；商品结算之外需要合同与归还条件理解。 可迁移的是记录与沟通；转向前应通过目标岗位原文确认新增责任。"
+            ]
+          },
+          "id": "cashiers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "editor",
+            "rental"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "博彩兑换与柜台收银方向：博彩场景资金兑换与记录；属于不同监管场景，不据此建议中国读者进入或视为一般零售收银。 可迁移的是记录与沟通；转向前应通过目标岗位原文确认新增责任。"
+            ]
+          },
+          "id": "cashiers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "cage",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "药房助理",
+                "id": "link-pharmacy",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/pharmacy-aides"
+              },
+              {
+                "entity": "零售销售人员一线主管",
+                "id": "link-supervisor",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/first-line-supervisors-of-retail-sales-workers"
+              },
+              {
+                "entity": "柜台与租赁职员",
+                "id": "link-rental",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/counter-and-rental-clerks"
+              },
+              {
+                "entity": "博彩兑换与柜台收银方向",
+                "id": "link-cage",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/gambling-change-persons-and-booth-cashiers"
+              }
+            ]
+          },
+          "id": "cashiers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "cage",
+            "pharmacy",
+            "rental",
+            "supervisor"
+          ],
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "先分清自动化：条码扫描、规则定价与自助结账并不都属于生成式AI。观察岗位变化时，应问究竟是哪项技术、哪段流程改变，不把所有设备更新统称AI。"
+            ]
+          },
+          "id": "cashiers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editor",
+            "r2-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "语言工具可帮主管整理常见问题或练习解释店规，但输出必须回到已批准制度核对；未经核实的优惠条件不能直接说给顾客。"
+            ]
+          },
+          "id": "cashiers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "copilot",
+            "editor",
+            "nist"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "在真实收款环节，语言模型不应替代授权支付系统判断成功、失败或退款。可把它作为离线训练伙伴，使用虚构状态卡练习追问。"
+            ]
+          },
+          "id": "cashiers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editor",
+            "nist",
+            "pci"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用的前提是价格、促销、权限与异常流程已经清楚；系统规则不一致时，加一个聊天界面不会自动消除价格争议。"
+            ]
+          },
+          "id": "cashiers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工控制在关键分叉：识别顾客实际请求、确认价格争议、核实付款状态、决定是否请主管。机器提示可能是线索，不能据此直接指控顾客。"
+            ]
+          },
+          "id": "cashiers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余责任包括把故障顾客引导到可用通道、保留未完成交易的交接信息，以及按门店授权升级；自助设备存在并不等于无需现场支持。"
+            ]
+          },
+          "id": "cashiers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "美国BTOS提供企业层面AI采用观察；下文另有新加坡收银员支付自动化现场实验。两者技术、地区和统计对象不同；本页仍没有收银员生成式AI采用率或职业净就业因果估计。"
+            ]
+          },
+          "id": "cashiers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "census",
+            "r2-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业证据应单独看BLS预测：自助结账和网络销售是其解释因素；预测不是把AI单独随机分配后的因果结果，不能把整个就业下降归因于生成式AI。"
+            ]
+          },
+          "id": "cashiers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "全球精确职业任务证据（新加坡超市收银员，2023-04-19发表）：研究在4家门店让收银员轮换传统柜台与仅扫描柜台；后者由顾客另到机器付款。控制人员和时间差异后，扫描速度提高超过10%。这是支付自动化和工作分工实验，不是生成式AI实验，也不是裁员率或全流程质量提升；它说明撤去一段任务可能改变保留下来的人工任务。"
+            ]
+          },
+          "id": "cashiers.ai-impact.ai-impact-table.9",
+          "source_refs": [
+            "r2-ai"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国已补入赤峰收银员地方实际工资调查和弥勒门店招聘报价，分别见下文。全国与美国同口径的职业工资仍未核实；不能因国家统计局宽分类公报未单列，就把地方已有资料一并写成没有数据。 全国同口径部分，本页暂无可安全使用的数据。"
+            ]
+          },
+          "id": "cashiers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs",
+            "r2-local-wage",
+            "r2-pay-1",
+            "r2-pay-2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "服务人员或零售行业年平均工资混合其他岗位和工时，不能变成收银员月薪范围；月薪和时薪也不能脱离实际排班比较。"
+            ]
+          },
+          "id": "cashiers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "editor",
+            "nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "看offer时要求分别列明固定税前金额、计薪工时、加班或夜班规则、奖金条件、休息及社保安排。本页不推测扣款规则是否合法，争议应查当地规定与劳动合同。"
+            ]
+          },
+          "id": "cashiers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较岗位时把通勤、班次变动和保证工时与工资一起记录。中国数据缺口不以美国时薪换算补齐，门店公告价格也不能称为全国中位数。"
+            ]
+          },
+          "id": "cashiers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国招聘代理数据：弥勒市2026年第十一期公告中，醉弥勒·老家柳树湾餐厅收银员报价3000–3800元/月，提供员工餐，列明月休3天。职责还包括顾客服务与环境卫生；应结合实际排班和兼岗判断报价，公告未说明税前税后。"
+            ]
+          },
+          "id": "cashiers.china-salary.career-snapshot-primary-locale.5",
+          "source_refs": [
+            "r2-pay-1"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国招聘代理数据：同一2026年公告中，老弥勒传统小吃丽景店收银员报价3200–3800元/月，要求会用电脑，列明员工餐及月休3天。公告没有保证计薪工时和薪资构成，不能据此算出可靠时薪；这是另一雇主门店的独立岗位案例。"
+            ]
+          },
+          "id": "cashiers.china-salary.career-snapshot-primary-locale.6",
+          "source_refs": [
+            "r2-pay-2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国精确职业数据（仅赤峰企业调查收银员，2025年度）：官方表列年工资中位数50000元、下四分位数42250元、上四分位数79088.16元。调查样本企业覆盖该市各旗县区；该行未披露样本人数与细分工时，也不能当作全国、新人或当前门店报价。年工资不直接除以月份充当固定月薪，公开页未给出的税口径不推测。"
+            ]
+          },
+          "id": "cashiers.china-salary.career-snapshot-primary-locale.7",
+          "source_refs": [
+            "r2-local-wage"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2025年5月收银员时薪中位数15.81美元，为精确职业数据。它描述工资分布中点，未说明个人能排到多少小时。"
+            ]
+          },
+          "fact_refs": [
+            "median"
+          ],
+          "id": "cashiers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "bls",
+            "oews"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2025年5月最低10%时薪低于11.79美元，为精确职业数据。低分位不是新手工资，地区和雇主差异也会影响位置。"
+            ]
+          },
+          "fact_refs": [
+            "low"
+          ],
+          "id": "cashiers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2025年5月最高10%时薪高于19.43美元，为精确职业数据。不能把高分位作为工作满若干年的自动收入。"
+            ]
+          },
+          "fact_refs": [
+            "high"
+          ],
+          "id": "cashiers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2025–2035就业预测下降6%，年均521,300个空缺来自替补，为精确职业数据。空缺多与职业总人数减少可以同时成立。"
+            ]
+          },
+          "fact_refs": [
+            "trend"
+          ],
+          "id": "cashiers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "bls"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "本页不将时薪机械年化；工资统计不含自雇，也不是税后收入。个人预算应使用书面确认的计薪工时。"
+            ]
+          },
+          "id": "cashiers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "editor",
+            "oews"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "本轮未取得全美独立新人起薪资料。不要把混合不同经验人群的时薪分位作为本职业经验分级表。"
+            ]
+          },
+          "id": "cashiers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "用行为看兴趣：是否愿意与短暂相遇的顾客解释清楚，而非只喜欢摆放商品。收银有重复，也有需要临场澄清的差异。"
+            ]
+          },
+          "id": "cashiers.fit.personality-fit-block.1",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "准确性练习：用C1的S/L规格及C3记录核对优惠范围，记录自己是否漏看抽数或混用条件，再复核。"
+            ]
+          },
+          "id": "cashiers.fit.personality-fit-block.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "沟通练习：按C3原话写出商品事实、待问选择和下一步；隔一段时间重读，检查是否清楚，不需要另一人扮演顾客。"
+            ]
+          },
+          "id": "cashiers.fit.personality-fit-block.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "注意力练习：模拟中断后先确认交易停在哪一步，再继续；漏看付款状态比算慢更值得优先改进。"
+            ]
+          },
+          "id": "cashiers.fit.personality-fit-block.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "数字能力可练：按C1与C2分列数量、单价和优惠条件，再独立复算；不以心算竞赛判断岗位价值。"
+            ]
+          },
+          "id": "cashiers.fit.personality-fit-block.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "工作消耗要问实：长时间站立、反复伸手与高峰排队，实际安排应看门店工作站和休息制度；本页不提供身体耐受测试。"
+            ]
+          },
+          "id": "cashiers.fit.personality-fit-block.6",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "面对不满顾客时，保持解释与权限边界；能求助是能力，不要求忍受威胁来证明服务意识。"
+            ]
+          },
+          "id": "cashiers.fit.personality-fit-block.7",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "人格测评不作录用或胜任依据。比较两次模拟的漏项、恢复步骤和疲劳感，若持续不愿面对高频顾客，可考虑后台支持方向并另查岗位要求。"
+            ]
+          },
+          "id": "cashiers.fit.personality-fit-block.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "价格争议：促销牌与系统不一致，顾客和后续排队者都受影响。保留争议商品，向主管或核价人员确认适用条件；不要凭猜测改价或承诺补偿。"
+            ]
+          },
+          "id": "cashiers.risk.career-risk-cards.1",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "支付未决：网络中断后顾客要求再刷一次，可能发生重复付款。先依门店流程核验原交易状态，记录未决事项并联系授权支持，不能把个人截图或AI答复当作结算凭证。"
+            ]
+          },
+          "id": "cashiers.risk.career-risk-cards.2",
+          "source_refs": [
+            "editor",
+            "pci"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "退款越权：顾客要求把原付款退到另一方式，钱款与交易归属可能无法对应。核对原交易并交有权限人员决定，不用个人账户代收代付。"
+            ]
+          },
+          "id": "cashiers.risk.career-risk-cards.3",
+          "source_refs": [
+            "bls",
+            "editor",
+            "pci"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "个人信息外泄：将小票或会员资料拍照发到私聊可能扩大访问范围。中国场景应限目的、限权限；训练用虚构小票，异常报告不散发完整客户信息。"
+            ]
+          },
+          "id": "cashiers.risk.career-risk-cards.4",
+          "source_refs": [
+            "editor",
+            "privacy"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "顾客冲突与体力负担：催促、辱骂或长时间重复动作影响员工与周围顾客。遇到威胁按门店安全程序求助，避免对抗；一般不适应向主管提出工作站或休息安排问题，而非靠硬撑证明合格。"
+            ]
+          },
+          "id": "cashiers.risk.career-risk-cards.5",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "采集日2026-09-05，美国Walmart条目为Future opening，仅计职责说明；中国另记录醉弥勒餐厅、老弥勒丽景店、铜川老四粥饼店三个不同门店岗位。按雇主、门店与岗位去重，不将同一公告转载或历月重复发布计为新增。中国条目属于历史招聘观察，当前空缺未确认；“雇主真正会看什么”保留美国单条职责观察，地方报价见中国薪资模块。不据这些案例报告市场招聘比例。"
+            ]
+          },
+          "id": "cashiers.path.recruitment-sample.1",
+          "source_refs": [
+            "job",
+            "r2-pay-1",
+            "r2-pay-2",
+            "r2-pay-3"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-role-comparison",
+          "data": {
+            "column_keys": [
+              "role",
+              "initial_tasks"
+            ],
+            "rows": [
+              [
+                "固定收银",
+                "学习本店系统和促销规则；产出：准确交易及清楚交班"
+              ],
+              [
+                "自助结账协助",
+                "学习同时观察多台设备与升级；产出：记录设备异常并引导求助"
+              ],
+              [
+                "服务台支持",
+                "学习更复杂的退款授权与顾客沟通；产出：退换请求与原交易对应"
+              ]
+            ]
+          },
+          "id": "cashiers.path.entry-role-comparison.1",
+          "source_refs": [
+            "editor",
+            "onet"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.employer-evidence",
+          "data": {
+            "entries": [
+              {
+                "id": "employer-context",
+                "values": [
+                  "雇主真正会看什么",
+                  "美国 Walmart 的这一条 Future opening 职责说明提及价格解释、顾客服务，以及混合前端岗位的退款和金融交易。它不是当前空缺数量或普遍频率；具体岗位权限须另核。"
+                ]
+              },
+              {
+                "id": "price-proof",
+                "values": [
+                  "价格解释",
+                  "编辑建议：用C3说明S/L优惠范围，记录顾客选择与主管答复仍未知。"
+                ]
+              },
+              {
+                "id": "handover-proof",
+                "values": [
+                  "准确与可交接",
+                  "编辑建议：用C2–C5展示算式、已确认与未决状态及下一接手角色；不把练习结果当真实工作经历。"
+                ]
+              }
+            ]
+          },
+          "id": "cashiers.path.employer-evidence.1",
+          "source_refs": [
+            "editor",
+            "job"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-portfolio",
+          "data": {
+            "entries": [
+              {
+                "id": "receipt",
+                "values": [
+                  "交易核对包",
+                  "用C1–C4记录商品、优惠、金额和状态",
+                  "普通交易与未决款分开，不把截图变到账"
+                ]
+              },
+              {
+                "id": "handover",
+                "values": [
+                  "交班包",
+                  "用C5底稿补齐T2/T3",
+                  "保留未知与处理角色，不另造退款案例"
+                ]
+              }
+            ]
+          },
+          "id": "cashiers.path.entry-portfolio.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.interview-probation",
+          "data": {
+            "column_keys": [
+              "description",
+              "observed_evidence",
+              "possible_check"
+            ],
+            "rows": [
+              [
+                "试岗价格冲突",
+                "先问适用条件再求助",
+                "没有越权承诺"
+              ],
+              [
+                "交班未决交易",
+                "说明停在哪一步",
+                "接手人不会重复收费"
+              ],
+              [
+                "设备异常",
+                "停止错误路径并报主管",
+                "保留必要记录"
+              ]
+            ]
+          },
+          "id": "cashiers.path.interview-probation.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-decision",
+          "data": {
+            "column_keys": [
+              "description",
+              "limitation",
+              "proof_method"
+            ],
+            "rows": [
+              [
+                "美国教育",
+                "通常无正式教育资格，雇主可有偏好",
+                "查具体职位的教育要求，不承诺无条件录用"
+              ],
+              [
+                "中国技能标准",
+                "存在收银员标准目录",
+                "核具体岗位准入要求，不由技能目录推定"
+              ],
+              [
+                "特殊商品与退款",
+                "岗位权限依规则和培训",
+                "查岗位规则及培训记录，确认受限商品和主管审批流程"
+              ]
+            ]
+          },
+          "id": "cashiers.path.credential-decision.1",
+          "source_refs": [
+            "bls",
+            "cnclass",
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-boundary",
+          "data": {
+            "paragraphs": [
+              "本页不授予金融服务、药学服务或特殊商品销售许可。技能训练、门店录用与退款授权分别确认；体验不操作真实账户，不进行真实销售。"
+            ]
+          },
+          "id": "cashiers.path.credential-boundary.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "成长先从稳定完成普通交易开始，再能识别异常、清楚交班，随后才考虑指导新人或带班。转主管应补排班、辅导与服务冲突处理，不能把收款金额大当成管理能力。"
+            ]
+          },
+          "id": "cashiers.path.career-path-block.1",
+          "source_refs": [
+            "editor",
+            "onet",
+            "supervisor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "中国招聘代理观察：铜川2026-06-29用工汇总中的老四粥饼店单列收银员，并注明有工作经验者优先。正文薪资栏未明确该行的计薪单位，本页因此只保留岗位与经验观察，不把裸金额解释成月薪；目前空缺未确认。"
+            ]
+          },
+          "id": "cashiers.path.career-path-block.2",
+          "source_refs": [
+            "r2-pay-3"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "练习简报：你是虚构纸面门店的收银协调人，目标是留下可核对的商品、优惠、付款和交班记录。只算模拟金额、写核价请求及解释；不收真钱、不接支付系统、不代主管改价退款。本节C1–C5、金额、时间和店规全部为编辑设计，不是工资或真实交易。请先用原始材料填写，再看对照区。"
+            ]
+          },
+          "id": "cashiers.path.entry-work-sample-data.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "material-c1-0",
+                "values": [
+                  "C1 商品与优惠规则（全部虚构）｜纸巾S",
+                  "100抽/包，单价6元；只限同笔交易S规格每满2包合价10元，单包仍6元，不能与L混搭。"
+                ]
+              },
+              {
+                "id": "material-c1-1",
+                "values": [
+                  "纸巾L",
+                  "200抽/包，单价10元；无优惠。"
+                ]
+              },
+              {
+                "id": "material-c1-2",
+                "values": [
+                  "铅笔P",
+                  "HB单支，单价3元；无优惠。"
+                ]
+              },
+              {
+                "id": "material-c1-3",
+                "values": [
+                  "练习规则",
+                  "金额均以虚构人民币元计，仅做算术。优惠按商品规格和数量判断；核价争议由值班主管处理，练习者不改规则。未决支付交主管及授权支付支持核实；没有确认不再次收费。"
+                ]
+              }
+            ]
+          },
+          "id": "cashiers.path.entry-work-sample-data.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "material-c2",
+                "values": [
+                  "C2 T1普通交易｜虚构09:05",
+                  "纸巾S 2包、铅笔P 1支；纸面状态卡写“模拟现金收到20元”；无取消或退款。请列明细、优惠后应收与找零。"
+                ]
+              },
+              {
+                "id": "material-c3",
+                "values": [
+                  "C3 T2规格争议｜09:12",
+                  "顾客拿纸巾S 1包和L 1包，说“两包不是10元吗”；练习扫描记录为S 6元、L 10元，应收16元，尚未付款。顾客是否换成两包S尚未答复；主管尚未回复。"
+                ]
+              },
+              {
+                "id": "material-c4",
+                "values": [
+                  "C4 T3付款未决｜09:18",
+                  "商品P 2支，应收6元；练习商户状态卡写“处理中”，顾客展示模拟图片写“已付款6元”。后续状态没有提供，不能判断到账或失败；顾客问是否需要再付。"
+                ]
+              },
+              {
+                "id": "material-c5",
+                "values": [
+                  "C5 09:25交班底稿",
+                  "上一班写：“T1已完成；T2可能打折；T3顾客说付了，后面看一下。”没有列商品、具体停点或下一处理人。请改为可接手记录；无真实姓名、卡号或账号。"
+                ]
+              }
+            ]
+          },
+          "id": "cashiers.path.entry-work-sample-data.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "任务与产出：按C1–C5为T1、T2、T3各写一行：商品与数量｜优惠及算式｜应收｜确认支付状态｜未知事项｜下一动作与接手角色。再为T2、T3各写一句顾客解释，并将C5改成可接手的交班记录。未决款单列。详细核价、解释、交班和复盘字段见随附扩展练习；用本页字段即可完成。"
+            ]
+          },
+          "id": "cashiers.path.entry-work-sample-data.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "对照区：先独立完成C1–C5再看示范。以下是合理解释，不是唯一服务话术。",
+              "T1：S两包优惠10元，加P一支3元，应收13元；纸面收到20元，找零7元，模拟净收13元。T2：S与L不能混搭优惠，已知应收6+10=16元，但交易停在规格澄清、未付款；可问是否要改成两包S，未获答复不替换商品。",
+              "T3：应收3×2=6元，商户状态处理中，截图不代替最终状态；请主管或授权支持核实，不要求顾客再付，也不宣布成功或失败。可说“目前这笔在练习商户记录中仍处理中，我先请负责人员核对，避免重复处理”。",
+              "交班示范：T1完成，应收13、模拟净收13、找零7，无未决；T2待核规格，应收按现有商品16、尚未收款，转值班主管，顾客是否更换未知；T3支付待核，应收6、确认收款未知，转值班主管及授权支持，禁止重复收费。未决16与6不能并入已确认13；T2未付款与T3未知不是同一状态。",
+              "复核依据：有没有把两种纸巾当同规格、漏铅笔、重复扣优惠、把20元全当收入或把截图当到账？有依据的不同话术均可；缺少状态的交易必须保留待核。"
+            ]
+          },
+          "id": "cashiers.path.entry-work-sample-data.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "day-1",
+                "values": [
+                  "第一日",
+                  "读C1及简报",
+                  "产出：商品/规格/价格/优惠核对卡；检查小大规格分开"
+                ]
+              },
+              {
+                "id": "day-2",
+                "values": [
+                  "第二日",
+                  "按C2计算T1",
+                  "产出：明细、优惠、实收模拟额与找零；复算总额"
+                ]
+              },
+              {
+                "id": "day-3",
+                "values": [
+                  "第三日",
+                  "读C3并列待核事项",
+                  "产出：已知价差、需问主管与顾客的问题；不擅自改价"
+                ]
+              },
+              {
+                "id": "day-4",
+                "values": [
+                  "第四日",
+                  "读C4",
+                  "产出：T3支付状态及停点；不以截图判成功或要求重付"
+                ]
+              },
+              {
+                "id": "day-5",
+                "values": [
+                  "第五日",
+                  "按正文产出字段写T2和T3的话术",
+                  "产出：每笔一句事实、一句待核事项与下一步；不用指控语言"
+                ]
+              },
+              {
+                "id": "day-6",
+                "values": [
+                  "第六日",
+                  "修订C5交班底稿",
+                  "产出：已完成与未决分表；查找零与流水是否混算"
+                ]
+              },
+              {
+                "id": "day-7",
+                "values": [
+                  "第七日",
+                  "独立复算后打开示范",
+                  "产出：遗漏、解释及修订依据记录；描述注意力消耗，不打适合分"
+                ]
+              }
+            ]
+          },
+          "id": "cashiers.path.seven-day-trial.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "逐笔比较初稿与复核稿：漏规格、优惠范围、付款状态还是下一处理人；记录为什么修改。",
+              "把“未知”保留到获得材料支持；不为使交班总额完整而把未决支付计已收。",
+              "记录哪一步需要反复回看以及当日精力感受，不计速度排名、疲劳数值或职业适合分。",
+              "七日步骤可按自己的节奏完成；复核只需本页规则和对照区，无需朋友、顾客或门店系统。"
+            ]
+          },
+          "id": "cashiers.path.seven-day-decision.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国官方预计该职业2025–2035就业下降6%；这意味着职业总量方向，不意味着门店不再招替补人员。求职时分清新店扩编和离职补缺。"
+            ]
+          },
+          "id": "cashiers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "自助结账和网络销售在BLS解释中影响需求，不能进一步推算生成式AI单独造成多少裁员。"
+            ]
+          },
+          "id": "cashiers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "bls"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "企业AI采用调查没有给出本页所需的收银岗位净就业因果估计。研究不足时，保留问题比编一个替代率更有用。"
+            ]
+          },
+          "id": "cashiers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "census",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "雇主页面处于未来开放状态，职责可用于准备，不能证明当前岗位数量。先确认实际营业地点、班次和申请状态再投入面试成本。"
+            ]
+          },
+          "id": "cashiers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editor",
+            "job"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "转零售主管要拿出辅导和交接证据，转柜台租赁要补条件解释；药房方向涉及不同专业边界。不要仅以“同样接待顾客”假定可以无缝转岗。"
+            ]
+          },
+          "id": "cashiers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editor",
+            "pharmacy",
+            "rental",
+            "supervisor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "核对商品、价格和付款，处理授权内退换并完成交班记录。",
+                "id": "cashiers.faq.1",
+                "question_key": "career.faq.cashiers.daily-work",
+                "source_refs": [
+                  "onet"
+                ]
+              },
+              {
+                "answer": "零售一线主管还要监督员工和排班，收银准确性只是其中一部分。",
+                "id": "cashiers.faq.2",
+                "question_key": "career.faq.cashiers.role-comparison",
+                "source_refs": [
+                  "supervisor"
+                ]
+              },
+              {
+                "answer": "看能否在重复操作和顾客询问中保持准确，并接受实际站立与班次安排。",
+                "id": "cashiers.faq.3",
+                "question_key": "career.faq.cashiers.fit",
+                "source_refs": [
+                  "bls",
+                  "editor"
+                ]
+              },
+              {
+                "answer": "支付自动化已有收银员现场实验，提示分工能改变扫描效率；它不是生成式AI实验，也不证明裁员。交易仍需按授权系统核实。",
+                "id": "cashiers.faq.4",
+                "question_key": "career.faq.cashiers.ai-impact",
+                "source_refs": [
+                  "editor",
+                  "r2-ai"
+                ]
+              },
+              {
+                "answer": "已有赤峰地方实际工资调查及弥勒门店报价，正文分别说明年份、单位和人群；这些数据不能冒充全国工资或保证个人收入。",
+                "id": "cashiers.faq.5",
+                "question_key": "career.faq.cashiers.china-pay",
+                "source_refs": [
+                  "r2-local-wage",
+                  "r2-pay-1",
+                  "r2-pay-2"
+                ]
+              },
+              {
+                "answer": "美国2025年5月时薪中位数15.81美元；它不保证个人排班工时。",
+                "id": "cashiers.faq.6",
+                "question_key": "career.faq.cashiers.us-pay",
+                "source_refs": [
+                  "bls",
+                  "oews"
+                ]
+              },
+              {
+                "answer": "美国通常无正式教育资格要求，接受在岗培训；雇主可能偏好高中学历。",
+                "id": "cashiers.faq.7",
+                "question_key": "career.faq.cashiers.education-path",
+                "source_refs": [
+                  "bls"
+                ]
+              },
+              {
+                "answer": "关注退款、钱款与交易记录，对越权或未决事项及时求助，并保护个人信息。",
+                "id": "cashiers.faq.8",
+                "question_key": "career.faq.cashiers.risk-boundary",
+                "source_refs": [
+                  "bls",
+                  "editor",
+                  "privacy"
+                ]
+              },
+              {
+                "answer": "美国2025–2035预计就业下降6%；技术和网络销售影响需求，不能据此判断每家门店的招聘。",
+                "id": "cashiers.faq.9",
+                "question_key": "career.faq.cashiers.outlook-transition",
+                "source_refs": [
+                  "bls"
+                ]
+              }
+            ]
+          },
+          "id": "cashiers.sources.faq.1",
+          "source_refs": [
+            "bls",
+            "editor",
+            "oews",
+            "onet",
+            "privacy",
+            "r2-ai",
+            "r2-local-wage",
+            "r2-pay-1",
+            "r2-pay-2",
+            "supervisor"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "中国职业名称与美国分类分别核对；门店权限、销售品类和受监管服务不可由名称推导。",
+              "招聘观察包括美国未来开放职责说明和中国历史门店公告，均不证明当前空缺；中国地方工资调查、门店报价与美国职业统计分开理解。",
+              "全部模拟为编辑设计，不使用真实支付或顾客数据；已有收银员支付自动化任务研究，但本轮未取得该职业生成式AI效率或净就业因果估计。"
+            ]
+          },
+          "id": "cashiers.sources.boundary.1",
+          "source_refs": [
+            "bls",
+            "cage",
+            "census",
+            "cnclass",
+            "copilot",
+            "editor",
+            "job",
+            "nbs",
+            "nist",
+            "oews",
+            "onet",
+            "pci",
+            "pharmacy",
+            "privacy",
+            "r2-ai",
+            "r2-local-wage",
+            "r2-pay-1",
+            "r2-pay-2",
+            "r2-pay-3",
+            "rental",
+            "supervisor"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "收银员",
+                "id": "cashiers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "收银员",
+                "id": "cashiers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "收银员",
+                "id": "cashiers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "收银员",
+                "id": "cashiers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "收银员",
+                "id": "cashiers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "收银员",
+                "id": "cashiers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "收银员",
+                "id": "cashiers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "收银员",
+                "id": "cashiers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "收银员",
+                "id": "cashiers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "收银员",
+                "id": "cashiers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "收银员",
+                "id": "cashiers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "cashiers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "时薪15.81；低高十分位11.79/19.43；预测-6%，年均替补空缺521300。",
+                  "时薪不保证每周工时；空缺不是净新增。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "bls",
+                "limitation": "时薪不保证每周工时；空缺不是净新增。",
+                "market": "美国",
+                "name": "收银员职业展望",
+                "period": "2025工资；2025–2035预测",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/sales/cashiers.htm"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "博彩场景资金兑换与记录；属于不同监管场景，不据此建议中国读者进入或视为一般零售收银。",
+                  "相邻职业不是执业授权，库存历史标题与当前官方标题可有差异。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cage",
+                "limitation": "相邻职业不是执业授权，库存历史标题与当前官方标题可有差异。",
+                "market": "美国",
+                "name": "博彩兑换与柜台收银方向职业档案",
+                "period": "2026访问",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/43-3041.00"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "BTOS调查企业任何业务职能的AI使用；按企业规模与行业存在差异，问题措辞于2025年11月改变。",
+                  "单位是企业，不是收银员岗位；不能推算岗位采用率、裁员率，不能无校正比较旧问法。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "census",
+                "limitation": "单位是企业，不是收银员岗位；不能推算岗位采用率、裁员率，不能无校正比较旧问法。",
+                "market": "美国",
+                "name": "企业AI使用情况调查分析",
+                "period": "2025-12-14至2026-05-03",
+                "publisher": "美国人口普查局",
+                "scope": "industry_proxy",
+                "url": "https://www.census.gov/library/stories/2026/05/ai-use-businesses.html"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "核对目录中实际列出的中文职业名称与代码。",
+                  "目录发布于2022年；不据此声称其覆盖全部现行资格要求，技能分类不自动等于执业许可。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cnclass",
+                "limitation": "目录发布于2022年；不据此声称其覆盖全部现行资格要求，技能分类不自动等于执业许可。",
+                "market": "中国",
+                "name": "国家职业标准目录",
+                "period": "2022发布的职业标准目录",
+                "publisher": "江苏省人力资源和社会保障厅",
+                "scope": "exact",
+                "url": "https://jshrss.jiangsu.gov.cn/art/2022/5/19/art_85534_10454317.html"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "工具可创建、总结、问答和改写文档；用户需复核生成内容。",
+                  "厂商能力说明，不是本职业效率实验或采用率；许可和组织设置影响可用性。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "copilot",
+                "limitation": "厂商能力说明，不是本职业效率实验或采用率；许可和组织设置影响可用性。",
+                "market": "全球",
+                "name": "Word中Copilot常见问题",
+                "period": "2026访问的产品说明",
+                "publisher": "Microsoft",
+                "scope": "exact",
+                "url": "https://support.microsoft.com/en-us/word/frequently-asked-questions-about-copilot-in-word"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "情境、作品、评价步骤与职业选择指导为本任务原创编辑设计；外部事实另建claim。",
+                  "不代表雇主规定、实证研究、资格课程或真实事故。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "editor",
+                "limitation": "不代表雇主规定、实证研究、资格课程或真实事故。",
+                "market": "全球",
+                "name": "收银员编辑设计",
+                "period": "2026-09-05",
+                "publisher": "本任务编辑",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "Alexandria VA，CP-2194-9025，Future opening；解释价格、退款、现金与顾客服务。",
+                  "不是当前开放职位，不能计在招数量；混合前端服务范围。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "job",
+                "limitation": "不是当前开放职位，不能计在招数量；混合前端服务范围。",
+                "market": "美国",
+                "name": "Walmart前端服务岗位说明",
+                "period": "2026-09-05访问",
+                "publisher": "Walmart",
+                "scope": "recruitment_proxy",
+                "url": "https://careers.walmart.com/us/en/jobs/CP-2194-9025"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "全国公报按单位类型、行业和宽岗位类别公布年平均工资，附方法与范围；未单列本页目标职业。",
+                  "宽岗位和行业数据不能直接替代本职业工资；不证明所有地方或雇主均无数据。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nbs",
+                "limitation": "宽岗位和行业数据不能直接替代本职业工资；不证明所有地方或雇主均无数据。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025",
+                "publisher": "国家统计局",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "描述虚构、数据隐私、人机配置风险与测试、监控等风险管理措施。",
+                  "跨场景自愿风险框架，不是职业准入法规或收银员事故率。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nist",
+                "limitation": "跨场景自愿风险框架，不是职业准入法规或收银员事故率。",
+                "market": "美国",
+                "name": "生成式人工智能风险管理画像",
+                "period": "2024",
+                "publisher": "NIST",
+                "scope": "exact",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "工资统计覆盖受薪雇员，不包括自雇；工资与预测就业范围不同。",
+                  "方法来源不提供本职业当前工资数值。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "oews",
+                "limitation": "方法来源不提供本职业当前工资数值。",
+                "market": "美国",
+                "name": "职业就业工资统计常见问题",
+                "period": "当前方法，2026访问",
+                "publisher": "美国劳工统计局",
+                "scope": "exact",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "非金融机构收付款、收银设备及交易记录。",
+                  "不覆盖银行柜员或所有受监管销售权限。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet",
+                "limitation": "不覆盖银行柜员或所有受监管销售权限。",
+                "market": "美国",
+                "name": "收银员职业档案",
+                "period": "2026职业档案",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/41-2011.00"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "支付数据保密性和完整性是商户及支付链各方的工作。",
+                  "行业标准组织说明，不是中国法律或个人收银执业证。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "pci",
+                "limitation": "行业标准组织说明，不是中国法律或个人收银执业证。",
+                "market": "全球",
+                "name": "商户支付安全说明",
+                "period": "2026访问",
+                "publisher": "PCI SSC",
+                "scope": "exact",
+                "url": "https://www.pcisecuritystandards.org/merchants/process/"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "药品入库与药房文书支持，可涉及收银；药学判断不能从收银经验推导。",
+                  "相邻职业不是执业授权，库存历史标题与当前官方标题可有差异。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "pharmacy",
+                "limitation": "相邻职业不是执业授权，库存历史标题与当前官方标题可有差异。",
+                "market": "美国",
+                "name": "药房助理职业档案",
+                "period": "2026访问",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/31-9095.00"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "第六条目的明确、最小范围；第五十一条分类、权限、培训与应急措施。",
+                  "法律义务面向个人信息处理者；具体员工依组织授权执行，不能把本页当独立法律意见。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "privacy",
+                "limitation": "法律义务面向个人信息处理者；具体员工依组织授权执行，不能把本页当独立法律意见。",
+                "market": "中国",
+                "name": "中华人民共和国个人信息保护法",
+                "period": "2021法律文本，2026核读",
+                "publisher": "工业和信息化部公布法律原文",
+                "scope": "exact",
+                "url": "https://www.miit.gov.cn/jgsj/zfs/fl/art/2022/art_515a4b20c12f430eab54bb4f56d89f56.html"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "全球精确职业任务证据（新加坡超市收银员，2023-04-19发表）：研究在4家门店让收银员轮换传统柜台与仅扫描柜台；后者由顾客另到机器付款。控制人员和时间差异后，扫描速度提高超过10%。这是支付自动化和工作分工实验，不是生成式AI实验，也不是裁员率或全流程质量提升；它说明撤去一段任务可能改变保留下来的人工任务。",
+                  "样本为特定连锁门店；作者不能完全排除顾客选择；不外推中国或生成式AI。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "r2-ai",
+                "limitation": "样本为特定连锁门店；作者不能完全排除顾客选择；不外推中国或生成式AI。",
+                "market": "全球",
+                "name": "Automation Enables Specialization: Field Evidence",
+                "period": "2023-04-19发表",
+                "publisher": "Management Science / Gong与Png",
+                "scope": "exact",
+                "url": "https://pubsonline.informs.org/doi/10.1287/mnsc.2023.4760"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "中国精确职业数据（仅赤峰企业调查收银员，2025年度）：官方表列年工资中位数50000元、下四分位数42250元、上四分位数79088.16元。调查样本企业覆盖该市各旗县区；该行未披露样本人数与细分工时，也不能当作全国、新人或当前门店报价。年工资不直接除以月份充当固定月薪，公开页未给出的税口径不推测。",
+                  "城市企业抽样调查；不是全国总体或招聘报价；未提供本职业样本量和工时分组。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "r2-local-wage",
+                "limitation": "城市企业抽样调查；不是全国总体或招聘报价；未提供本职业样本量和工时分组。",
+                "market": "中国",
+                "name": "赤峰市2025年企业薪酬调查信息",
+                "period": "2025年度；2026-06-15发布",
+                "publisher": "赤峰市人社局",
+                "scope": "exact",
+                "url": "https://rsj.chifeng.gov.cn/cfsrsjgggs/202606/t20260615_2780504.html"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "中国招聘代理数据：弥勒市2026年第十一期公告中，醉弥勒·老家柳树湾餐厅收银员报价3000–3800元/月，提供员工餐，列明月休3天。职责还包括顾客服务与环境卫生；应结合实际排班和兼岗判断报价，公告未说明税前税后。",
+                  "历史招聘公告；当前空缺未确认；不代表实际收入或全国分布。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "r2-pay-1",
+                "limitation": "历史招聘公告；当前空缺未确认；不代表实际收入或全国分布。",
+                "market": "中国",
+                "name": "弥勒2026年第十一期：醉弥勒老家柳树湾餐厅",
+                "period": "2026年第十一期公告",
+                "publisher": "弥勒市人社局",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hhml.gov.cn/info/35871/911952.htm"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "中国招聘代理数据：同一2026年公告中，老弥勒传统小吃丽景店收银员报价3200–3800元/月，要求会用电脑，列明员工餐及月休3天。公告没有保证计薪工时和薪资构成，不能据此算出可靠时薪；这是另一雇主门店的独立岗位案例。",
+                  "同城同渠道有选择偏差；不声称现仍在招；不合成市场平均值。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "r2-pay-2",
+                "limitation": "同城同渠道有选择偏差；不声称现仍在招；不合成市场平均值。",
+                "market": "中国",
+                "name": "弥勒2026年第十一期：老弥勒传统小吃丽景店",
+                "period": "2026年第十一期公告",
+                "publisher": "弥勒市人社局",
+                "scope": "recruitment_proxy",
+                "url": "https://www.hhml.gov.cn/info/35871/911952.htm"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "中国招聘代理观察：铜川2026-06-29用工汇总中的老四粥饼店单列收银员，并注明有工作经验者优先。正文薪资栏未明确该行的计薪单位，本页因此只保留岗位与经验观察，不把裸金额解释成月薪；目前空缺未确认。",
+                  "历史职责案例；薪资单位不完整，金额未纳入工资比较。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "r2-pay-3",
+                "limitation": "历史职责案例；薪资单位不完整，金额未纳入工资比较。",
+                "market": "中国",
+                "name": "铜川2026年6月用工信息：老四粥饼店",
+                "period": "2026-06-29",
+                "publisher": "铜川市人社局",
+                "scope": "recruitment_proxy",
+                "url": "https://rs.tongchuan.gov.cn/10/17801.jhtml?role=s"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "处理服务或租赁请求、说明条件并接单；商品结算之外需要合同与归还条件理解。",
+                  "相邻职业不是执业授权，库存历史标题与当前官方标题可有差异。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "rental",
+                "limitation": "相邻职业不是执业授权，库存历史标题与当前官方标题可有差异。",
+                "market": "美国",
+                "name": "柜台与租赁职员职业档案",
+                "period": "2026访问",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/41-2021.00"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "监督零售员工、排班和服务；带班需要辅导与例外处置能力。",
+                  "相邻职业不是执业授权，库存历史标题与当前官方标题可有差异。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "supervisor",
+                "limitation": "相邻职业不是执业授权，库存历史标题与当前官方标题可有差异。",
+                "market": "美国",
+                "name": "零售销售人员一线主管职业档案",
+                "period": "2026访问",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/41-1011.00"
+              }
+            ]
+          },
+          "id": "cashiers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "41-2011.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业代码",
+        "occupation_scope": "精确职业数据；收银员；41-2011.00",
+        "period": "2026职业档案",
+        "source_refs": [
+          "onet"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "15.81美元/小时",
+        "fact_id": "median",
+        "market": "美国",
+        "measure": "时薪中位数",
+        "occupation_scope": "精确职业数据；收银员；41-2011.00",
+        "period": "2025工资；2025–2035预测",
+        "source_refs": [
+          "bls"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "11.79美元/小时",
+        "fact_id": "low",
+        "market": "美国",
+        "measure": "低十分位",
+        "occupation_scope": "精确职业数据；收银员；41-2011.00",
+        "period": "2025工资；2025–2035预测",
+        "source_refs": [
+          "bls"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "19.43美元/小时",
+        "fact_id": "high",
+        "market": "美国",
+        "measure": "高十分位",
+        "occupation_scope": "精确职业数据；收银员；41-2011.00",
+        "period": "2025工资；2025–2035预测",
+        "source_refs": [
+          "bls"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "-6%；521,300个/年",
+        "fact_id": "trend",
+        "market": "美国",
+        "measure": "就业变化与替补空缺",
+        "occupation_scope": "精确职业数据；收银员；41-2011.00",
+        "period": "2025工资；2025–2035预测",
+        "source_refs": [
+          "bls"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "bb908d3e07330ed694a6b7223d092ef678208102bb99f9afa4e99a6583e2cb04",
+  "source_content_sha256": "9b6f7420be0e7c441282a1186b3f87a7db8512ce3ed31f64053bb4d9ed10c1e3",
   "subject": {
     "canonical_slug": "cashiers",
     "name": "收银员",
-    "summary": null
+    "summary": "收银员把商品、价格规则和付款状态核成一笔准确交易，同时向顾客解释差异、处理授权内异常并完成交班。入行重点是可靠核对和及时求助，不能只比扫码速度；兼职工时、站立负担和退款权限会显著改变工作体验。"
   }
 }

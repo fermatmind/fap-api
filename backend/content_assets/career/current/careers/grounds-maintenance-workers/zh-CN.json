@@ -1,12 +1,1690 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：这不是单纯修剪草坪，而是根据任务单、场地和天气组织户外养护，操作手工具或动力设备，并对作业区、结果和异常负责。若不愿长期户外体力劳动或严格遵守停工边界，应先谨慎试做。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "可观察信号：能先巡查地面、障碍、人员和设备状态，再安排修剪、浇灌、清理或种植顺序；遇到未知管线、异常噪声、天气突变或授权外任务会停下并报告。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全小体验：只用本页给出的虚构尺寸、任务、开放时段、天气、设备状态和未知事项，画一张不按比例的示意草图并编制半天养护计划；没有给出的区域位置和授权保持未知，不接触真实设备、化学品或高处作业。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "复核输出：检查作业区是否避开公众通道，任务是否按天气和人员风险排序，设备异常与未知事项是否转成停止点，交接是否区分已完成、未完成、现场变化和待授权事项。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "本页是透明父级代理：覆盖园林绿化与场地维护、植被农药施用、树木修剪和其他场地养护四个美国职业分支。四者不能被当作同一份岗位说明；下文日常流程以 37-3011.00 园林绿化分支为主，专项分支另标边界。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.profile.definition-block.1",
+          "source_refs": [
+            "editorial-work",
+            "identity-onet-landscape-current",
+            "identity-onet-other-current",
+            "identity-onet-pesticide-current",
+            "identity-onet-tree-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "工作输入包括任务单、场地图与边界、植物和地面状态、天气、工具设备、材料、现场人员活动以及雇主的安全程序。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.profile.responsibilities-block.1",
+          "source_refs": [
+            "editorial-work",
+            "identity-onet-landscape-current",
+            "identity-onet-other-current",
+            "identity-onet-pesticide-current",
+            "identity-onet-tree-current"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "常见产出是达到要求的草坪、植物、步道或灌溉状态，以及设备、异常、未完成工作和后续需求的交接记录。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.profile.responsibilities-block.2",
+          "source_refs": [
+            "editorial-work",
+            "identity-onet-landscape-current",
+            "identity-onet-other-current",
+            "identity-onet-pesticide-current",
+            "identity-onet-tree-current"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "基本流程是接单与巡查—划定作业区—检查工具设备—按顺序修剪、种植、浇灌或清理—检查结果—清点和交接。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.profile.responsibilities-block.3",
+          "source_refs": [
+            "editorial-work",
+            "identity-onet-landscape-current",
+            "identity-onet-other-current",
+            "identity-onet-pesticide-current",
+            "identity-onet-tree-current"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断包括土壤或植物是否需要处理、天气是否适合作业、设备状态是否正常、飞散物和旁人风险是否受控，以及任务是否超出授权。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.profile.work-context-block.1",
+          "source_refs": [
+            "editorial-work",
+            "identity-onet-landscape-current",
+            "identity-onet-other-current",
+            "identity-onet-pesticide-current",
+            "identity-onet-tree-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "多数工作在户外，涉及步行、站立、弯腰、重复动作、冷热天气和噪声；季节、场地开放时间和天气会改变节奏。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.profile.work-context-block.2",
+          "source_refs": [
+            "editorial-work",
+            "identity-onet-landscape-current",
+            "identity-onet-other-current",
+            "identity-onet-pesticide-current",
+            "identity-onet-tree-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "常用对象包括割草机、修剪工具、吹风或清理设备、软管与灌溉部件、手工具、植物材料和个人防护装备；具体使用以前必须按设备与雇主要求受训。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "editorial-work",
+            "identity-onet-landscape-current",
+            "identity-onet-other-current",
+            "identity-onet-pesticide-current",
+            "identity-onet-tree-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "协作对象可能包括班组负责人、物业或场地管理者、客户、其他施工队和公众；开始前需确认作业区、优先级、通行安排与异常联系人。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "editorial-work",
+            "identity-onet-landscape-current",
+            "identity-onet-other-current",
+            "identity-onet-pesticide-current",
+            "identity-onet-tree-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量不只看外观，还看是否符合任务范围、未损坏植物和设施、作业区已恢复安全、设备和材料已清点、异常有记录。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial-work",
+            "identity-onet-landscape-current",
+            "identity-onet-other-current",
+            "identity-onet-pesticide-current",
+            "identity-onet-tree-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "农药施用通常涉及专项训练或认证；树木修剪可能涉及攀爬、索具和升降设备；普通地面养护经验不能自动转成这些资格，也不能代替主管的排班与验收责任。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.profile.definition-block.2",
+          "source_refs": [
+            "editorial-work",
+            "identity-onet-landscape-current",
+            "identity-onet-other-current",
+            "identity-onet-pesticide-current",
+            "identity-onet-tree-current"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers",
+                "id": "grounds-maintenance-workers.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/first-line-supervisors-of-landscaping-lawn-service-and-groundskeeping-workers"
+              },
+              {
+                "entity": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners",
+                "id": "grounds-maintenance-workers.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/janitors-and-cleaners-except-maids-and-housekeeping-cleaners"
+              },
+              {
+                "entity": "pesticide-handlers-sprayers-and-applicators-vegetation",
+                "id": "grounds-maintenance-workers.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/pesticide-handlers-sprayers-and-applicators-vegetation"
+              },
+              {
+                "entity": "tree-trimmers-and-pruners",
+                "id": "grounds-maintenance-workers.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/tree-trimmers-and-pruners"
+              },
+              {
+                "entity": "agricultural-equipment-operators",
+                "id": "grounds-maintenance-workers.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/agricultural-equipment-operators"
+              }
+            ]
+          },
+          "id": "grounds-maintenance-workers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-ag-equipment-current",
+            "onet-janitor-current",
+            "onet-pesticide-current",
+            "onet-supervisor-current",
+            "onet-tree-current"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "一线园林养护主管直接安排人员、设备和工期，并检查合同或工作标准；普通养护员主要执行具体现场任务，不因经验增加就自动取得人员管理和报价责任。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-ag-equipment-current",
+            "onet-janitor-current",
+            "onet-pesticide-current",
+            "onet-supervisor-current",
+            "onet-tree-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "建筑清洁工主要保持室内建筑清洁与秩序，可能清理步道；场地养护更集中于草坪、植物、土壤、灌溉和户外场地状态。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-ag-equipment-current",
+            "onet-janitor-current",
+            "onet-pesticide-current",
+            "onet-supervisor-current",
+            "onet-tree-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "植被农药施用和树木修剪虽在本页父级范围内，但前者涉及配药、喷施与专项认证，后者涉及高处、攀爬和索具；二者都不能由普通地面养护任务直接推定。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-ag-equipment-current",
+            "onet-janitor-current",
+            "onet-pesticide-current",
+            "onet-supervisor-current",
+            "onet-tree-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "农业设备操作员驾驶设备服务耕作、种植、收获或畜牧生产；比较岗位时应核对服务对象、设备、场地、产出和资格，而不是只看都在户外使用机器。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-ag-equipment-current",
+            "onet-janitor-current",
+            "onet-pesticide-current",
+            "onet-supervisor-current",
+            "onet-tree-current"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "工具可以把巡检笔记整理成任务清单、路线或交接草稿，也可帮助比较公开的植物养护资料；这是信息辅助，不是现场检查或设备操作。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial-ai",
+            "ilo-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "是否采用取决于雇主允许的系统、输入质量、网络条件、数据权限，以及现场人员能否检查每项输出。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial-ai",
+            "ilo-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "场地图、灌溉位置、设备编号、客户信息和作业照片可能包含敏感信息；未获批准时不得上传外部工具。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial-ai",
+            "ilo-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "天气、坡度、障碍、旁人活动和植物实际状态必须由现场人员确认，模型不能从缺失输入中补全。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial-ai",
+            "ilo-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "涉及化学品时只能依标签、批准方案和受训人员指令；生成的配比或施用建议不得直接执行。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial-ai",
+            "ilo-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "涉及高处、索具、动力设备或异常噪声时，由受训且获授权的人决定停机、隔离、复检或升级。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial-ai",
+            "ilo-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "自动排程可能忽略场地开放时间、噪声限制或设备故障；最终任务顺序和完成状态由当班人员复核并负责。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial-ai",
+            "ilo-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "生成式 AI 的任务暴露研究不能推出本职业的采用率、生产率、替代概率或消失时间；市场判断仍需看具体分支、地区与雇主。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial-ai",
+            "ilo-ai"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：中国大陆 2025 年行业代理数据未建立与美国四分支父级场地养护职业一一对应的全国工资分布。结论是本轮无可安全展示的精确职业工资。"
+            ]
+          },
+          "fact_refs": [
+            "cn-wage-nonprivate"
+          ],
+          "id": "grounds-maintenance-workers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国大陆 2025 年行业代理数据不能提供精确全国中位数、分位数或月薪，也不能把绿化、物业或其他行业均值当作本职业工资。不得以行业均值或美国数据填补。"
+            ]
+          },
+          "fact_refs": [
+            "cn-wage-private"
+          ],
+          "id": "grounds-maintenance-workers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较中国大陆 2025 年具体机会时，应把行业代理数据与真实职位分开，并另核城市、雇佣关系、工时、季节性、设备、防护、食宿及税前税后口径。"
+            ]
+          },
+          "fact_refs": [
+            "cn-wage-nonprivate"
+          ],
+          "id": "grounds-maintenance-workers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国大陆 2025 年行业代理数据缺口只表示本轮材料没有安全的精确对应值，不表示市场没有报价；真实决策应保存岗位说明、工时和总报酬口径。"
+            ]
+          },
+          "fact_refs": [
+            "cn-wage-private"
+          ],
+          "id": "grounds-maintenance-workers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国 37-3011.00 精确职业数据：2025 年工资中位数为每小时 18.82 美元、每年 39,150 美元。该数值只对应这一精确分支。"
+            ]
+          },
+          "fact_refs": [
+            "us-wage"
+          ],
+          "id": "grounds-maintenance-workers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "editorial-work",
+            "onet-landscape-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国 37-3011.00 的 2025 年精确职业数据来自全国工资口径，不代表父级中的农药施用、树木修剪或其他分支。"
+            ]
+          },
+          "fact_refs": [
+            "us-wage"
+          ],
+          "id": "grounds-maintenance-workers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "editorial-work",
+            "onet-landscape-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国 37-3011.00 的 2025 年精确职业数据同时给出小时与年薪；未知工时、加班、季节性或福利时，不能直接互换为个人总收入。"
+            ]
+          },
+          "fact_refs": [
+            "us-wage"
+          ],
+          "id": "grounds-maintenance-workers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "editorial-work",
+            "onet-landscape-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国 37-3011.00 的 2025 年精确职业数据中，全国中位数描述覆盖人群的中间位置，不是新手起薪或特定城市保证报价。"
+            ]
+          },
+          "fact_refs": [
+            "us-wage"
+          ],
+          "id": "grounds-maintenance-workers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "editorial-work",
+            "onet-landscape-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国 37-3011.00 的 2025 年精确职业数据只属于园林绿化分支；跨分支混用会掩盖任务、风险和资格差异。"
+            ]
+          },
+          "fact_refs": [
+            "us-wage"
+          ],
+          "id": "grounds-maintenance-workers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "editorial-work",
+            "onet-landscape-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "使用美国 37-3011.00 的 2025 年精确职业数据比较机会时，应保持地区、时期、单位、分支和工时一致，并另核加班、交通、设备、季节停工和福利。"
+            ]
+          },
+          "fact_refs": [
+            "us-wage"
+          ],
+          "id": "grounds-maintenance-workers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editorial-work",
+            "onet-landscape-current"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "正向信号：你愿意先巡查场地和障碍，再动手，而不是看到任务就立即开机。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "正向信号：你能在户外、噪声、冷热和重复动作中保持注意，并持续观察旁人、地面和设备变化。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "正向信号：你愿意按边界使用工具，发现异常噪声、振动、泄漏或防护缺失时主动停机。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "正向信号：你能把已完成区域、未完成原因、设备状态和后续需求清楚交接。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "可训练能力包括植物与地面巡查、任务排序、手工具使用、基础设备点检、作业区管理和记录。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "真实消耗包括体力负荷、季节和天气变化、重复动作、噪声、脏污以及公众经过时的持续警戒。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "若你倾向于赶进度而跳过点检、不愿佩戴防护或难以接受因天气和授权停工，应先做纸面情境和受监督观察。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "兴趣或人格测评只能提出问题；是否适合要看你在具体任务中的安全行为、结果质量、学习速度和精力反应。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "割草或清理前发现石块、金属或旁人进入飞散范围：可能造成击伤或财产损坏。停止开机、清障并隔离作业区，确认无人进入后再按程序恢复。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "设备防护件缺失、漏油、异常振动或异响：继续运行可能造成失控或伤害。停机、隔离能源并挂牌报告；未经授权不拆修或带病运行。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "雷雨、强风、高温、结冰、陡坡或积水使现场条件恶化：可能滑倒、倾覆或失去控制。暂停相关任务，复核天气和场地条件，由负责人决定调整或取消。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.risk.career-risk-cards.3",
+          "source_refs": [
+            "editorial-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "农药名称、标签、配比、风向、防护或施用资格不清：可能伤害人员、植物和环境。不得配药或喷施，封存材料并交由受训且获授权人员处理。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "要求攀爬、使用索具或升降设备处理高枝，但训练、设备检查或作业区隔离不足：不得尝试；保持区域安全并升级给合格树木作业人员。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial-risk"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "现实入口：优先寻找地面、受监督的场地巡查、清理、浇灌、基础修剪和设备清点任务，先核清班次、天气暴露、体力要求和监督方式。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.path.career-path-block.1",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "雇主证据：用一份养护任务计划证明你能读任务单、规划路线、检查设备、划定作业区、设置停止点并完成交接，而不是只写“喜欢户外”。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.path.career-path-block.2",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "完整虚构材料：一处 40×25 米园区，纸面上将北边画为公众步道，其余区域只画成待确认的草坪、灌木和落枝作业区，不自行补位置；北侧步道 09:30—11:00 对公众开放，是否允许封闭未知。任务为巡查 20 分钟、修剪草坪 60 分钟、给新栽灌木浇水 30 分钟、清理地面落枝 40 分钟、收尾交接 20 分钟；设备只有手工具、软管和一台标注“启动后异响”的割草机；10:30 可能雷雨；地下喷头位置与落枝是否需高处处理均未确认。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.path.career-path-block.3",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品任务：排出 08:00—12:00 条件化计划，在不按比例的示意草图标出北侧公众步道和待确认作业区，列出至少五个风险和停止点，并写一段班末交接；不得封闭公众通道、启用异响设备，也不得猜测未知位置、授权、喷头或高处任务。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.path.career-path-block.4",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "参考思路：先巡查并向负责人确认各作业区位置和步道分隔权限；09:30—11:00 避开公众步道附近作业，割草机异响转为停机报修；浇水前核对喷头位置；落枝只处理确认属于地面且可安全搬运的部分；雷雨到来前停止户外设备作业。未知条件仍写进交接，不擅自补全。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.path.career-path-block.5",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "面试或试用期说明你如何在进度、天气、公众通行和设备异常之间排序；真实动力设备、化学品、高处或驾驶任务只在完成培训和授权后演示。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.path.career-path-block.6",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七日体验复用同一材料：第1日提取约束，第2日画路线，第3日做点检表，第4日写风险控制，第5日加入天气变化，第6日写交接，第7日复做并比较遗漏与精力。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.path.career-path-block.7",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "成长可表现为能独立管理更复杂场地、灌溉、设备或班组协作；转向农药施用、树木高处作业或一线主管前，必须补齐对应训练、证照、估算和人员责任。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.path.career-path-block.8",
+          "source_refs": [
+            "editorial-work"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国 37-3011.00 园林绿化与场地维护分支在 2024 年约有 1,192,500 名从业者。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "editorial-work",
+            "onet-landscape-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "该分支 2024—2034 年预测增长区间为 3%—4%，年均岗位空缺 158,200；来源未给出精确增长率或 2034 年就业人数。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "editorial-work",
+            "onet-landscape-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "这些数字只对应 37-3011.00，不代表父级中的农药施用、树木修剪或其他场地养护分支，也不代表个人录用概率。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "editorial-work",
+            "onet-landscape-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "招聘样本还会受地区、季节、物业类型、设备、驾驶、化学品或高处资格影响；观察职位时应记录样本范围和去重方式。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editorial-work",
+            "onet-landscape-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "技术可能改变排程、灌溉监测和记录任务，但现场天气、地形、设备、植物和公众风险仍需人工判断；转向专项分支必须补足对应资格。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editorial-work",
+            "onet-landscape-current"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "日常先核对任务单、场地边界、天气和设备，划定作业区后完成巡查、修剪、种植、浇灌或清理，再检查结果、清点设备并交接异常。",
+                "id": "grounds-maintenance-workers.faq.1",
+                "question_key": "career.faq.grounds-maintenance-workers.daily-work",
+                "source_refs": [
+                  "editorial-work"
+                ]
+              },
+              {
+                "answer": "本页是四分支父级代理：普通园林养护不同于负责排班和估算的一线主管；建筑清洁以室内清洁为核心；农药施用、树木高处修剪和农业设备操作各有独立任务与授权边界。",
+                "id": "grounds-maintenance-workers.faq.2",
+                "question_key": "career.faq.grounds-maintenance-workers.role-comparison",
+                "source_refs": [
+                  "onet-ag-equipment-current",
+                  "onet-janitor-current",
+                  "onet-pesticide-current",
+                  "onet-supervisor-current",
+                  "onet-tree-current"
+                ]
+              },
+              {
+                "answer": "可观察的适配信号是先巡查再作业、能承受户外体力与重复动作、按边界使用设备、发现异常主动停机并清楚交接；人格测评不能代替实际表现。",
+                "id": "grounds-maintenance-workers.faq.3",
+                "question_key": "career.faq.grounds-maintenance-workers.fit",
+                "source_refs": [
+                  "editorial-work"
+                ]
+              },
+              {
+                "answer": "AI 更适合辅助整理巡检、排程和交接草稿；它不能查看真实天气、地形、设备、化学标签或高处条件，也不能给出岗位替代率。",
+                "id": "grounds-maintenance-workers.faq.4",
+                "question_key": "career.faq.grounds-maintenance-workers.ai-impact",
+                "source_refs": [
+                  "editorial-ai"
+                ]
+              },
+              {
+                "answer": "现场人员必须核对作业区、旁人、天气、障碍和设备状态；化学品、高处、动力设备异常与最终放行由受训且获授权的人控制。",
+                "id": "grounds-maintenance-workers.faq.5",
+                "question_key": "career.faq.grounds-maintenance-workers.human-control",
+                "source_refs": [
+                  "editorial-ai",
+                  "editorial-risk"
+                ]
+              },
+              {
+                "answer": "本轮中国大陆资料没有与美国四分支父级职业一一对应的全国工资分布，因此不能给出精确中位数、分位数或稳定月薪，也不能用行业均值代替。",
+                "id": "grounds-maintenance-workers.faq.6",
+                "question_key": "career.faq.grounds-maintenance-workers.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "美国 37-3011.00 园林绿化与场地维护分支 2025 年工资中位数为每小时 18.82 美元、每年 39,150 美元；它不代表其他三个分支或个人起薪。",
+                "fact_refs": [
+                  "us-wage"
+                ],
+                "id": "grounds-maintenance-workers.faq.7",
+                "question_key": "career.faq.grounds-maintenance-workers.us-pay",
+                "source_refs": [
+                  "onet-landscape-current"
+                ]
+              },
+              {
+                "answer": "可从受监督的地面巡查、清理、浇灌和基础维护开始，用虚构任务包证明排程、点检、风险识别和交接；化学施用、高处、驾驶和专项设备另核培训、证照与授权。",
+                "id": "grounds-maintenance-workers.faq.8",
+                "question_key": "career.faq.grounds-maintenance-workers.education-path",
+                "source_refs": [
+                  "editorial-work"
+                ]
+              },
+              {
+                "answer": "飞散物、设备异常、恶劣天气、化学品信息不清和未经训练的高处任务都是明确停止点；先停机或隔离，再核对程序并升级。",
+                "id": "grounds-maintenance-workers.faq.9",
+                "question_key": "career.faq.grounds-maintenance-workers.risk-boundary",
+                "source_refs": [
+                  "editorial-risk"
+                ]
+              },
+              {
+                "answer": "美国 37-3011.00 分支 2024 年就业约 1,192,500 人，2024—2034 年预测增长区间为 3%—4%，年均空缺 158,200；来源未给出精确增长率或 2034 年人数，这些指标也不代表个人录用概率。",
+                "id": "grounds-maintenance-workers.faq.10",
+                "question_key": "career.faq.grounds-maintenance-workers.outlook-transition",
+                "source_refs": [
+                  "onet-landscape-current"
+                ]
+              },
+              {
+                "answer": "若你能接受户外体力、天气和重复动作，并愿意以点检、停工边界和可复核交接换取稳定结果，这条路径值得继续验证；转专项分支前补齐对应条件。",
+                "id": "grounds-maintenance-workers.faq.11",
+                "question_key": "career.faq.grounds-maintenance-workers.career-worth",
+                "source_refs": [
+                  "editorial-work"
+                ]
+              }
+            ]
+          },
+          "id": "grounds-maintenance-workers.sources.faq.1",
+          "source_refs": [
+            "editorial-ai",
+            "editorial-risk",
+            "editorial-work",
+            "nbs-wages",
+            "onet-ag-equipment-current",
+            "onet-janitor-current",
+            "onet-landscape-current",
+            "onet-pesticide-current",
+            "onet-supervisor-current",
+            "onet-tree-current"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "本页是四个美国职业分支的透明父级代理；日常流程和数字主要对应 37-3011.00，不能自动外推到农药施用、树木修剪或其他分支。",
+              "练习只使用虚构材料，不接触动力设备、化学品、高处、驾驶或真实场地；真实作业遵守设备手册、标签、雇主程序、培训和当地规则。",
+              "中国工资暂无可安全使用的数据只表示本轮材料没有精确对应口径；美国工资和预测均不构成个人报价或录用保证。"
+            ]
+          },
+          "id": "grounds-maintenance-workers.sources.boundary.1",
+          "source_refs": [
+            "editorial-ai",
+            "editorial-risk",
+            "editorial-work",
+            "identity-onet-landscape-current",
+            "identity-onet-other-current",
+            "identity-onet-pesticide-current",
+            "identity-onet-tree-current",
+            "ilo-ai",
+            "nbs-wages",
+            "onet-ag-equipment-current",
+            "onet-janitor-current",
+            "onet-landscape-current",
+            "onet-pesticide-current",
+            "onet-supervisor-current",
+            "onet-tree-current"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "场地养护人员",
+                "id": "grounds-maintenance-workers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "场地养护人员",
+                "id": "grounds-maintenance-workers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "场地养护人员",
+                "id": "grounds-maintenance-workers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "场地养护人员",
+                "id": "grounds-maintenance-workers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "场地养护人员",
+                "id": "grounds-maintenance-workers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "场地养护人员",
+                "id": "grounds-maintenance-workers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "场地养护人员",
+                "id": "grounds-maintenance-workers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "场地养护人员",
+                "id": "grounds-maintenance-workers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "场地养护人员",
+                "id": "grounds-maintenance-workers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "场地养护人员",
+                "id": "grounds-maintenance-workers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "场地养护人员",
+                "id": "grounds-maintenance-workers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "grounds-maintenance-workers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "依据任务暴露研究与现场作业边界形成低风险工具使用建议。",
+                  "编辑综合不代表实际采用率或自动化率。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-ai",
+                "limitation": "编辑综合不代表实际采用率或自动化率。",
+                "market": "编辑综合",
+                "name": "场地养护人员 AI 控制点编辑综合",
+                "period": "2026-09-06",
+                "publisher": "FermatMind editorial synthesis",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "依据户外、动力设备、化学施用和高处作业边界形成停止与升级建议。",
+                  "通用安全建议不替代设备手册、标签、雇主程序、培训或当地法规。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-risk",
+                "limitation": "通用安全建议不替代设备手册、标签、雇主程序、培训或当地法规。",
+                "market": "编辑综合",
+                "name": "场地养护人员风险控制编辑综合",
+                "period": "2026-09-06",
+                "publisher": "FermatMind editorial synthesis",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "依据四分支职业范围形成工作流程、适配信号和虚构任务包。",
+                  "编辑综合不是法规、资格、工资或采用率事实。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-work",
+                "limitation": "编辑综合不是法规、资格、工资或采用率事实。",
+                "market": "编辑综合",
+                "name": "场地养护人员任务与工作样本编辑综合",
+                "period": "2026-09-06",
+                "publisher": "FermatMind editorial synthesis",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核验草坪、植物、灌溉、设备、户外环境、2025 工资与 2024—2034 就业预测。",
+                  "只对应父级页面中的 37-3011.00 园林绿化与场地维护分支，不代表农药施用、树木修剪或其他未分类分支。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "identity-onet-landscape-current",
+                "limitation": "只对应父级页面中的 37-3011.00 园林绿化与场地维护分支，不代表农药施用、树木修剪或其他未分类分支。",
+                "market": "美国",
+                "name": "37-3011.00 Landscaping and Groundskeeping Workers",
+                "period": "O*NET updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "combined_official",
+                "url": "https://www.onetonline.org/link/details/37-3011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核验该代码仅覆盖未另行列出的其他场地养护人员，且 O*NET 无详细任务数据。",
+                  "All Other 范围宽，不能从标题推断具体任务、工资或资格。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "identity-onet-other-current",
+                "limitation": "All Other 范围宽，不能从标题推断具体任务、工资或资格。",
+                "market": "美国",
+                "name": "37-3019.00 Grounds Maintenance Workers, All Other",
+                "period": "O*NET updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "combined_official",
+                "url": "https://www.onetonline.org/link/summary/37-3019.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核验配药、喷施、设备操作以及专项培训和州或联邦认证提示。",
+                  "美国职业定义与培训提示不能替代具体州许可、标签要求或中国规则。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "identity-onet-pesticide-current",
+                "limitation": "美国职业定义与培训提示不能替代具体州许可、标签要求或中国规则。",
+                "market": "美国",
+                "name": "37-3012.00 Pesticide Handlers, Sprayers, and Applicators, Vegetation",
+                "period": "O*NET updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "combined_official",
+                "url": "https://www.onetonline.org/link/details/37-3012.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核验树冠高处、攀爬、索具、修枝和升降设备等专门任务。",
+                  "只对应树木修剪分支；不代表普通地面养护员具备高处或索具资格。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "identity-onet-tree-current",
+                "limitation": "只对应树木修剪分支；不代表普通地面养护员具备高处或索具资格。",
+                "market": "美国",
+                "name": "37-3013.00 Tree Trimmers and Pruners",
+                "period": "O*NET updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "combined_official",
+                "url": "https://www.onetonline.org/link/summary/37-3013.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持把生成式 AI 影响表述为任务暴露和任务重排。",
+                  "不提供本职业采用率、替代概率或失业时间。"
+                ],
+                "evidence_type": "institutional task research",
+                "id": "ilo-ai",
+                "limitation": "不提供本职业采用率、替代概率或失业时间。",
+                "market": "全球",
+                "name": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "period": "ILO 2025; accessed 2026-09-06",
+                "publisher": "International Labour Organization",
+                "scope": "market_signal",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核验中国公开资料为行业或人员大类口径，未建立与美国四分支父级职业一一对应的全国工资分布。",
+                  "不能用于生成场地养护人员精确工资。"
+                ],
+                "evidence_type": "official industry wage statistics",
+                "id": "nbs-wages",
+                "limitation": "不能用于生成场地养护人员精确工资。",
+                "market": "中国大陆",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 wage data; accessed 2026-09-06",
+                "publisher": "中华人民共和国国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核验该相邻岗位驾驶设备支持耕作、种植、收获或畜牧活动。",
+                  "相邻职业定义仅用于边界比较。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-ag-equipment-current",
+                "limitation": "相邻职业定义仅用于边界比较。",
+                "market": "美国",
+                "name": "45-2091.00 Agricultural Equipment Operators",
+                "period": "O*NET updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/45-2091.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核验该相邻岗位以建筑清洁和秩序维护为核心。",
+                  "相邻职业定义仅用于边界比较。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-janitor-current",
+                "limitation": "相邻职业定义仅用于边界比较。",
+                "market": "美国",
+                "name": "37-2011.00 Janitors and Cleaners, Except Maids and Housekeeping Cleaners",
+                "period": "O*NET updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/37-2011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核验草坪、植物、灌溉、设备、户外环境、2025 工资与 2024—2034 就业预测。",
+                  "只对应父级页面中的 37-3011.00 园林绿化与场地维护分支，不代表农药施用、树木修剪或其他未分类分支。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-landscape-current",
+                "limitation": "只对应父级页面中的 37-3011.00 园林绿化与场地维护分支，不代表农药施用、树木修剪或其他未分类分支。",
+                "market": "美国",
+                "name": "37-3011.00 Landscaping and Groundskeeping Workers",
+                "period": "O*NET updated 2026; 2025 wages; 2024-2034 projections; accessed 2026-09-06",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/37-3011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核验配药、喷施、设备操作以及专项培训和州或联邦认证提示。",
+                  "美国职业定义与培训提示不能替代具体州许可、标签要求或中国规则。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-pesticide-current",
+                "limitation": "美国职业定义与培训提示不能替代具体州许可、标签要求或中国规则。",
+                "market": "美国",
+                "name": "37-3012.00 Pesticide Handlers, Sprayers, and Applicators, Vegetation",
+                "period": "O*NET updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/37-3012.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核验该相邻岗位直接监督、排班、估算和协调作业。",
+                  "相邻职业定义仅用于边界比较。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-supervisor-current",
+                "limitation": "相邻职业定义仅用于边界比较。",
+                "market": "美国",
+                "name": "37-1012.00 First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers",
+                "period": "O*NET updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/37-1012.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核验树冠高处、攀爬、索具、修枝和升降设备等专门任务。",
+                  "只对应树木修剪分支；不代表普通地面养护员具备高处或索具资格。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-tree-current",
+                "limitation": "只对应树木修剪分支；不代表普通地面养护员具备高处或索具资格。",
+                "market": "美国",
+                "name": "37-3013.00 Tree Trimmers and Pruners",
+                "period": "O*NET updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/37-3013.00"
+              }
+            ]
+          },
+          "id": "grounds-maintenance-workers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "暂无可安全使用的数据（2025 官方公开口径）",
+        "fact_id": "cn-wage-nonprivate",
+        "market": "中国大陆",
+        "measure": "occupation wage availability",
+        "occupation_scope": "行业代理数据：未建立与美国四分支父级职业一一对应的中国职业工资",
+        "period": "2025 wage data; accessed 2026-09-06",
+        "source_refs": [
+          "nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "不可用行业均值或美国数据填补",
+        "fact_id": "cn-wage-private",
+        "market": "中国大陆",
+        "measure": "cross-jurisdiction wage boundary",
+        "occupation_scope": "行业代理数据：未建立与美国四分支父级职业一一对应的中国职业工资",
+        "period": "2025 wage data; accessed 2026-09-06",
+        "source_refs": [
+          "nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "37-3012.00 通常需专项训练及州或联邦认证",
+        "fact_id": "credential-boundary",
+        "market": "美国",
+        "measure": "qualification boundary",
+        "occupation_scope": "精确职业数据：37-3012.00 Pesticide Handlers only",
+        "period": "O*NET updated 2026; accessed 2026-09-06",
+        "source_refs": [
+          "onet-pesticide-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "37-3011.00：2024—2034 增长区间 3%—4%，年均空缺 158,200",
+        "fact_id": "employment-projection",
+        "market": "美国",
+        "measure": "employment projection measure",
+        "occupation_scope": "精确职业数据：37-3011.00 Landscaping and Groundskeeping Workers only",
+        "period": "O*NET updated 2026; 2025 wages; 2024-2034 projections; accessed 2026-09-06",
+        "source_refs": [
+          "onet-landscape-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "父级代理：37-3011.00、37-3012.00、37-3013.00、37-3019.00",
+        "fact_id": "occupation-identity",
+        "market": "美国",
+        "measure": "official occupation code",
+        "occupation_scope": "合并职业口径：four official U.S. branches kept distinct",
+        "period": "O*NET updated 2026; accessed 2026-09-06",
+        "source_refs": [
+          "identity-onet-landscape-current",
+          "identity-onet-other-current",
+          "identity-onet-pesticide-current",
+          "identity-onet-tree-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$18.82/小时；$39,150/年（37-3011.00，2025）",
+        "fact_id": "us-wage",
+        "market": "美国",
+        "measure": "annual wage measure",
+        "occupation_scope": "精确职业数据：37-3011.00 Landscaping and Groundskeeping Workers only",
+        "period": "O*NET updated 2026; 2025 wages; 2024-2034 projections; accessed 2026-09-06",
+        "source_refs": [
+          "onet-landscape-current"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "f1949e58d327a66e5ba2a057eac653a158ba58553913bcb6f8097619dc74245e",
+  "source_content_sha256": "cef1ce26874bfb1fcf03baea33f05e9ed3b504eb411d7452d1fabdc190280863",
   "subject": {
     "canonical_slug": "grounds-maintenance-workers",
     "name": "场地养护人员",
-    "summary": null
+    "summary": "场地养护人员根据任务单、场地状态和天气完成巡查、修剪、种植、浇灌、清理与设备点检；本页以透明父级代理覆盖四个美国分支，并明确化学施用、高处树木作业和其他专项边界。"
   }
 }

@@ -1,12 +1,1586 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "适合继续了解：你愿意核对版本、依赖和责任，能在技术、预算与多方沟通之间保持记录；若只想做单项技术工作而不愿承担协调和追问，这条路径可能不合适。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "核心价值是把建筑或工程技术活动与人员、进度、预算、质量和客户规格整合为可执行、可追溯的工作。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全试做材料（完全虚构）：A-01为WP-A/B2/依赖已确认/已复核；A-02为工作包ID空白/B1/已确认/已复核；A-03为WP-C/基线版本空白/已确认/已复核；A-04为WP-D/B3/依赖状态空白/已复核。任务：按四字段共16格计算完整率，列缺失项和每条纸面状态。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考复核：16格中13格有值，完整率81.25%；缺失为A-02工作包ID、A-03基线版本、A-04依赖状态。A-01仅标‘题面字段齐全’，不代表设计批准、可以开工或已获签署；A-02—04各暂停本条纸面审查，待对应字段确认。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：O*NET 11-9041.00规划、指导或协调建筑、工程及相关研发活动。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.profile.definition-block.1",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "投入可包括客户规格、设计基线、变更请求、资源需求、人员状态、进度、预算和质量记录。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "产出可包括协调决定、变更审查记录、预算建议、资源安排、进度更新和异常升级。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "常见流程是确认目标和基线→核依赖与资源→协调技术审查→记录决定→跟踪进度质量→升级偏差。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.profile.responsibilities-block.3",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断围绕可行性、规格与变更、资源取舍、人员责任、时间成本和质量证据。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.profile.work-context-block.1",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "O*NET调查显示团队沟通频繁，84%的受访者每周工作超过40小时，84%的受访者每天在环境受控的室内工作。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.profile.work-context-block.2",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "工具可包括CAD、项目管理、电子表格、文档管理和分析软件；具体组合由工程领域和机构决定。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "协作对象可包括建筑师、工程师、项目管理、施工、制造、质量、采购、财务、客户与管理层。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量看基线、依赖、决定、责任、版本、预算和进度是否一致且可追溯。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "本职业统筹建筑或工程技术活动，不与施工实施管理、自然科学管理、物流方案设计或通用项目协调合并。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.profile.definition-block.2",
+          "source_refs": [
+            "adj-construction",
+            "adj-logistics",
+            "adj-pm",
+            "adj-science",
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "construction-managers",
+                "id": "aem.adj.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/construction-managers"
+              },
+              {
+                "entity": "biofuels-biodiesel-technology-and-product-development-managers",
+                "id": "aem.adj.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/biofuels-biodiesel-technology-and-product-development-managers"
+              },
+              {
+                "entity": "natural-sciences-managers",
+                "id": "aem.adj.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/natural-sciences-managers"
+              },
+              {
+                "entity": "logistics-engineers",
+                "id": "aem.adj.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/logistics-engineers"
+              },
+              {
+                "entity": "project-management-specialists",
+                "id": "aem.adj.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/project-management-specialists"
+              }
+            ]
+          },
+          "id": "architectural-and-engineering-managers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "adj-biofuels",
+            "adj-construction",
+            "adj-logistics",
+            "adj-pm",
+            "adj-science",
+            "onet-summary"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "施工经理聚焦施工与维护的组织、排期、预算和实施；目标职业聚焦建筑或工程技术活动的统筹。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "adj-construction",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "生物燃料技术与产品开发经理聚焦特定生物燃料研发项目；目标职业覆盖更广的建筑或工程管理范围。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "adj-biofuels",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "自然科学经理协调生命、物理、数学或统计研究；目标职业的技术范围是建筑和工程。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "adj-science",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "物流工程师设计分析物流运营方案；项目管理专员协调单项目进度、采购、人员和预算；二者都不等同目标职业的技术管理责任。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "adj-logistics",
+            "adj-pm",
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可核技术事实：O*NET列出CAD、项目管理、电子表格、文档管理和分析软件，但没有给出生成式AI采用率。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "较低风险的工具用途只限完全虚构状态记录的查空值、格式检查和查询草稿。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人的控制点包括真实基线、依赖、技术判断、变更、预算、人员责任、专业签署和放行。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "工具输出不能自动批准设计变更、工程判断、预算承诺、人员指派、专业签署、施工或项目放行。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "若工具补造版本、依赖、审查或批准状态，应停止使用并保留原始记录与错误。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "职业软件清单、生成式AI采用、判断准确率、生产率和就业影响是不同测量对象，不能互推。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "真实项目资料能否进入外部工具取决于机构的数据、保密、知识产权、权限和审计要求。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：所核页面没有采用率、设计判断准确率、生产率因果或净就业影响，不量化替代概率。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：所核中国官方工资发布没有与O*NET 11-9041.00精确对应的中国大陆全国中位数或分位数。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "行业代理数据或宽岗位大类不能当作建筑与工程经理的精确职业工资。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "zh-CN只是内容语言；美国职业身份、进入要求与工资不能代表中国资格、就业或收入。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editorial",
+            "nbs-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较具体岗位时记录地区、工程领域、机构、职责、项目阶段、合同、计薪口径和福利；招聘报价不能冒充全国统计。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial",
+            "nbs-wage"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：2025年美国年薪中位数为{{fact:wage-annual}}。"
+            ]
+          },
+          "fact_refs": [
+            "wage-annual"
+          ],
+          "id": "architectural-and-engineering-managers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：2025年美国小时工资中位数为{{fact:wage-hourly}}。"
+            ]
+          },
+          "fact_refs": [
+            "wage-hourly"
+          ],
+          "id": "architectural-and-engineering-managers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：2025年美国年薪第10至第90百分位为{{fact:wage-range}}。"
+            ]
+          },
+          "fact_refs": [
+            "wage-range"
+          ],
+          "id": "architectural-and-engineering-managers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "全国中位数和分位数不是起薪、地区报价或个人保证。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业工资与中国行业代理数据不可换算或拼接。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "nbs-wage",
+            "onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "比较岗位须另核地区、工程领域、管理层级、项目阶段、合同、工时和薪酬组成。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editorial",
+            "onet-wage"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "版本信号：愿意核对基线、变更和审查状态。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "依赖信号：会追问资源、接口、责任和前置条件，不补猜。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "沟通信号：能把技术、客户、预算与进度信息翻译成清楚的交接。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "边界信号：责任、专业签署或放行状态不清时会暂停并升级。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "压力信号：能接受频繁沟通、多人协作和部分岗位较长工时。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "细节信号：能维护工作包、版本、依赖和复核状态的一致性。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：若只喜欢技术方案而排斥人员、预算、客户或冲突协调，先比较专业技术路径。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "本页练习只观察字段核对与追问行为，不是人格、录用、专业资格或管理授权测试。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "错误后果：O*NET调查显示多数受访者认为难以纠正的错误后果相当严重或极其严重。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.risk.career-risk-cards.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "场所：具体风险随项目与工作场所变化，必须另做项目和场所评估。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "版本与依赖：基线、依赖或复核状态冲突时，暂停相关纸面推进，保留原记录并升级。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.risk.career-risk-cards.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "权限：真实设计审查、工程计算、预算承诺、人员指派、采购、施工指令、专业签署或项目放行只由明确授权者开展。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同边界：项目对象、版本、责任、程序或批准不清时，不开始或继续相关活动，记录事实并升级。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "BLS称通常至少需要学士学位，并有建筑师或工程师的丰富工作经验；快速事实表列相关经验为5年或以上。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.path.career-path-block.1",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "先核岗位的工程领域、项目阶段、人员范围、预算责任、客户接口与第一阶段允许观察、协助或独立承担的工作。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.path.career-path-block.2",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品只用本页四条合成记录，算完整率、列缺失项、写查询并标记每条纸面状态。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.path.career-path-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品必须注明81.25%只表示题面字段完整率，A-01字段齐全也不代表设计批准、可以开工或已获签署。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.path.career-path-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七日试做：第1天读范围；第2天抄16格；第3天找3个空值；第4天算13/16；第5天写查询；第6天对答案；第7天记录继续、暂停或比较相邻方向。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.path.career-path-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "学历、专业资格、雇主任命、项目角色、设计审查权、专业签署权和现场放行权须分别核验。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.path.career-path-block.6",
+          "source_refs": [
+            "bls-ooh",
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "成长看能否处理更复杂的跨专业依赖、版本、资源和异常交接，不承诺统一年限或自动获得签署与放行权。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.path.career-path-block.7",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转向施工管理、生物燃料研发管理、自然科学管理、物流工程或项目管理前，重新核工作对象、训练、资格与最终责任。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.path.career-path-block.8",
+          "source_refs": [
+            "adj-biofuels",
+            "adj-construction",
+            "adj-logistics",
+            "adj-pm",
+            "adj-science",
+            "editorial",
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：2025年美国就业人数约{{fact:employment}}。"
+            ]
+          },
+          "fact_refs": [
+            "employment"
+          ],
+          "id": "architectural-and-engineering-managers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：2025—2035年美国就业预计{{fact:growth}}。"
+            ]
+          },
+          "fact_refs": [
+            "growth"
+          ],
+          "id": "architectural-and-engineering-managers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：2025—2035年美国预计年均{{fact:openings}}空缺。"
+            ]
+          },
+          "fact_refs": [
+            "openings"
+          ],
+          "id": "architectural-and-engineering-managers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "年均空缺有许多来自转职或退出劳动力市场的替补需要，不是净增岗位或个人录用概率。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "全国预测不能直接代表州、工程领域、管理层级、项目类型或个人机会。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "日常可包括整合技术活动、审查设计变更、形成规格、准备预算或合同、评估可行性并协调人员与进度；具体岗位只覆盖其中一部分。",
+                "id": "architectural-and-engineering-managers.faq.1",
+                "question_key": "career.faq.architectural-and-engineering-managers.daily-work",
+                "source_refs": [
+                  "onet-details",
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "目标职业统筹建筑或工程技术活动，不等同施工实施管理、自然科学管理、物流方案设计或通用项目协调。",
+                "id": "architectural-and-engineering-managers.faq.2",
+                "question_key": "career.faq.architectural-and-engineering-managers.role-comparison",
+                "source_refs": [
+                  "adj-construction",
+                  "adj-logistics",
+                  "adj-pm",
+                  "adj-science",
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "观察自己能否持续核对版本依赖、协调多方并在责任或批准不清时暂停升级；这不是适任诊断。",
+                "id": "architectural-and-engineering-managers.faq.3",
+                "question_key": "career.faq.architectural-and-engineering-managers.fit",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "所核职业页没有生成式AI采用率、设计判断准确率、生产率因果或净就业影响，不能量化替代概率。",
+                "id": "architectural-and-engineering-managers.faq.4",
+                "question_key": "career.faq.architectural-and-engineering-managers.ai-impact",
+                "source_refs": [
+                  "onet-details",
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "真实基线、依赖、技术判断、变更、预算、人员责任、专业签署和放行必须回到受控记录与授权者。",
+                "id": "architectural-and-engineering-managers.faq.5",
+                "question_key": "career.faq.architectural-and-engineering-managers.human-control",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "暂无可安全使用的数据：所核中国官方工资发布没有与O*NET 11-9041.00精确对应的全国中位数或分位数。",
+                "id": "architectural-and-engineering-managers.faq.6",
+                "question_key": "career.faq.architectural-and-engineering-managers.china-pay",
+                "source_refs": [
+                  "nbs-wage"
+                ]
+              },
+              {
+                "answer": "精确职业数据：2025年美国年薪中位数171,270美元、时薪82.34美元，年薪第10至第90百分位为120,810—262,760美元。",
+                "fact_refs": [
+                  "wage-annual",
+                  "wage-hourly",
+                  "wage-range"
+                ],
+                "id": "architectural-and-engineering-managers.faq.7",
+                "question_key": "career.faq.architectural-and-engineering-managers.us-pay",
+                "source_refs": [
+                  "onet-wage"
+                ]
+              },
+              {
+                "answer": "BLS称通常至少需要学士学位和丰富相关经验；学历不自动等于专业资格、任命、签署或放行权。",
+                "id": "architectural-and-engineering-managers.faq.8",
+                "question_key": "career.faq.architectural-and-engineering-managers.education-path",
+                "source_refs": [
+                  "bls-ooh",
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "错误后果和工作场所随项目变化；本页不提供设计审查、工程计算、施工指令、专业签署或放行步骤。",
+                "id": "architectural-and-engineering-managers.faq.9",
+                "question_key": "career.faq.architectural-and-engineering-managers.risk-boundary",
+                "source_refs": [
+                  "editorial",
+                  "onet-details"
+                ]
+              },
+              {
+                "answer": "精确职业数据：2025—2035年美国预计增长6%、年均14,900个空缺；许多空缺来自替补需要。",
+                "fact_refs": [
+                  "growth",
+                  "openings"
+                ],
+                "id": "architectural-and-engineering-managers.faq.10",
+                "question_key": "career.faq.architectural-and-engineering-managers.outlook-transition",
+                "source_refs": [
+                  "bls-ooh"
+                ]
+              },
+              {
+                "answer": "若你愿意核对版本依赖、协调技术与资源并守住责任边界，可继续用低风险字段练习观察；这不是录用或晋升保证。",
+                "id": "architectural-and-engineering-managers.faq.11",
+                "question_key": "career.faq.architectural-and-engineering-managers.career-worth",
+                "source_refs": [
+                  "editorial"
+                ]
+              }
+            ]
+          },
+          "id": "architectural-and-engineering-managers.sources.faq.1",
+          "source_refs": [
+            "adj-construction",
+            "adj-logistics",
+            "adj-pm",
+            "adj-science",
+            "bls-ooh",
+            "editorial",
+            "nbs-wage",
+            "onet-details",
+            "onet-summary",
+            "onet-wage"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "精确身份为O*NET 11-9041.00 Architectural and Engineering Managers；不把施工、自然科学、物流工程或通用项目管理并入。",
+              "五个冻结相邻职业分别依据正确O*NET职业页比较；物流工程师代码为13-1081.01。",
+              "中国工资只展示精确职业数据缺口，不用行业代理数据或美国工资替代。",
+              "练习共16格、13格有值、3格缺失；81.25%只表示题面字段完整率。",
+              "本页不提供设计审查、工程计算、预算承诺、人员指派、采购、施工指令、专业签署或项目放行。"
+            ]
+          },
+          "id": "architectural-and-engineering-managers.sources.boundary.1",
+          "source_refs": [
+            "adj-biofuels",
+            "adj-construction",
+            "adj-logistics",
+            "adj-pm",
+            "adj-science",
+            "bls-ooh",
+            "editorial",
+            "nbs-wage",
+            "onet-details",
+            "onet-summary",
+            "onet-wage"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "建筑与工程经理",
+                "id": "architectural-and-engineering-managers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "建筑与工程经理",
+                "id": "architectural-and-engineering-managers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "建筑与工程经理",
+                "id": "architectural-and-engineering-managers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "建筑与工程经理",
+                "id": "architectural-and-engineering-managers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "建筑与工程经理",
+                "id": "architectural-and-engineering-managers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "建筑与工程经理",
+                "id": "architectural-and-engineering-managers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "建筑与工程经理",
+                "id": "architectural-and-engineering-managers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "建筑与工程经理",
+                "id": "architectural-and-engineering-managers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "建筑与工程经理",
+                "id": "architectural-and-engineering-managers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "建筑与工程经理",
+                "id": "architectural-and-engineering-managers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "建筑与工程经理",
+                "id": "architectural-and-engineering-managers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "architectural-and-engineering-managers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "生物燃料研发项目职业边界。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-biofuels",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET 11-9041.01生物燃料技术与产品开发经理",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-9041.01"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "施工组织、进度、预算与实施职业边界。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-construction",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET 11-9021.00施工经理",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-9021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "物流运营方案设计与分析职业边界。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-logistics",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET 13-1081.01物流工程师",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-1081.01"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "单项目进度、采购、人员与预算协调职业边界。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-pm",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET 13-1082.00项目管理专员",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-1082.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "自然科学研究管理职业边界。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-science",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET 11-9121.00自然科学经理",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-9121.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "目标职业职责、工作环境、典型进入要求与2025—2035展望。",
+                  "美国全国职业统计不代表地区岗位或个人结果。"
+                ],
+                "evidence_type": "official source",
+                "id": "bls-ooh",
+                "limitation": "美国全国职业统计不代表地区岗位或个人结果。",
+                "market": "美国",
+                "name": "BLS建筑与工程经理职业展望",
+                "period": "BLS OOH 2025 employment and 2025-2035 projections; accessed 2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/management/architectural-and-engineering-managers.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "合成记录练习、适配、AI与授权边界。",
+                  "不是设计审查、工程分析、施工指令、专业签署或项目放行。"
+                ],
+                "evidence_type": "editorial exercise and guidance",
+                "id": "editorial",
+                "limitation": "不是设计审查、工程分析、施工指令、专业签署或项目放行。",
+                "market": "编辑设计",
+                "name": "建筑与工程经理职业探索编辑说明",
+                "period": "editorial review 2026-09-06",
+                "publisher": "FermatMind editorial",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "中国大陆行业和宽岗位工资口径。",
+                  "行业代理数据没有与O*NET 11-9041.00精确对应的全国职业工资。"
+                ],
+                "evidence_type": "official source",
+                "id": "nbs-wage",
+                "limitation": "行业代理数据没有与O*NET 11-9041.00精确对应的全国职业工资。",
+                "market": "中国大陆",
+                "name": "国家统计局：2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wage release; published 2026-05-15; reused 2026-09-06",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "精确职业任务、工作活动与工作情境。",
+                  "不提供具体机构的设计签署、施工放行或安全程序。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-details",
+                "limitation": "不提供具体机构的设计签署、施工放行或安全程序。",
+                "market": "美国",
+                "name": "O*NET 11-9041.00详细页",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/11-9041.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "精确职业身份、任务、情境、软件与教育调查。",
+                  "任务全集不表示每个岗位承担全部活动；不建立中国职业映射。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-summary",
+                "limitation": "任务全集不表示每个岗位承担全部活动；不建立中国职业映射。",
+                "market": "美国",
+                "name": "O*NET 11-9041.00摘要",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-9041.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2025美国全国工资中位数与第10、第90百分位。",
+                  "全国分布不是地区报价、起薪或个人收入保证。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-wage",
+                "limitation": "全国分布不是地区报价、起薪或个人收入保证。",
+                "market": "美国",
+                "name": "O*NET 11-9041.00美国工资",
+                "period": "2025 BLS OEWS data displayed by O*NET; accessed 2026-09-06",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/11-9041.00"
+              }
+            ]
+          },
+          "id": "architectural-and-engineering-managers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "171,270美元/年",
+        "fact_id": "wage-annual",
+        "market": "美国",
+        "measure": "年薪中位数",
+        "occupation_scope": "精确职业数据：Architectural and Engineering Managers（O*NET 11-9041.00）",
+        "period": "2025 BLS OEWS data displayed by O*NET; accessed 2026-09-06",
+        "source_refs": [
+          "onet-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "82.34美元/小时",
+        "fact_id": "wage-hourly",
+        "market": "美国",
+        "measure": "小时工资中位数",
+        "occupation_scope": "精确职业数据：Architectural and Engineering Managers（O*NET 11-9041.00）",
+        "period": "2025 BLS OEWS data displayed by O*NET; accessed 2026-09-06",
+        "source_refs": [
+          "onet-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "120,810—262,760美元/年",
+        "fact_id": "wage-range",
+        "market": "美国",
+        "measure": "年薪第10至第90百分位",
+        "occupation_scope": "精确职业数据：Architectural and Engineering Managers（O*NET 11-9041.00）",
+        "period": "2025 BLS OEWS data displayed by O*NET; accessed 2026-09-06",
+        "source_refs": [
+          "onet-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "220,900人",
+        "fact_id": "employment",
+        "market": "美国",
+        "measure": "就业人数",
+        "occupation_scope": "精确职业数据：Architectural and Engineering Managers（O*NET 11-9041.00）",
+        "period": "BLS OOH 2025 employment and 2025-2035 projections; accessed 2026-09-06",
+        "source_refs": [
+          "bls-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "增长6%（2025—2035）",
+        "fact_id": "growth",
+        "market": "美国",
+        "measure": "预计就业变化",
+        "occupation_scope": "精确职业数据：Architectural and Engineering Managers（O*NET 11-9041.00）",
+        "period": "BLS OOH 2025 employment and 2025-2035 projections; accessed 2026-09-06",
+        "source_refs": [
+          "bls-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "14,900个/年",
+        "fact_id": "openings",
+        "market": "美国",
+        "measure": "预计年均空缺",
+        "occupation_scope": "精确职业数据：Architectural and Engineering Managers（O*NET 11-9041.00）",
+        "period": "BLS OOH 2025 employment and 2025-2035 projections; accessed 2026-09-06",
+        "source_refs": [
+          "bls-ooh"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "bf081af84ee57b8755f6510f826e148fe14d3190c266747b2f6a51d5a3f2ff5d",
+  "source_content_sha256": "0c4f4908e6c784c0580c200e07f8876019cfa889ec3ad24c914f8b59ffb996b8",
   "subject": {
     "canonical_slug": "architectural-and-engineering-managers",
     "name": "建筑与工程经理",
-    "summary": null
+    "summary": "建筑与工程经理对应O*NET 11-9041.00：统筹建筑或工程技术活动，把规格、设计变更、资源、人员、进度、预算和质量纳入可追溯的决策与交接。"
   }
 }

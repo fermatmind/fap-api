@@ -1,12 +1,1798 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：卷扬机操作员的价值不是“会按按钮”，而是能在动力缆索设备提升或牵引负载时持续确认任务、设备、额定能力、吊挂路径、信号和人员隔离。任何关键条件不明时保持停止，比追求速度更重要。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial-hoist-decision",
+            "editorial-hoist-path",
+            "editorial-hoist-risk",
+            "editorial-hoist-simulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "可观察信号：你愿意重复检查，能在噪声、时间压力和多人协作下保持注意，遇到记录冲突、异常声音、负载摆动或信号不清会立即停止并清楚交接。谨慎信号是依赖经验猜测、怕耽误进度而跳过核对。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial-hoist-decision",
+            "editorial-hoist-path",
+            "editorial-hoist-risk",
+            "editorial-hoist-simulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全工作样本（60分钟，仅纸面模拟）：虚构设备额定载荷2,000千克；负载1,650千克、吊索120千克、吊钩与附件80千克。手册在场，负载是否固定平衡“未确认”，上限位装置测试“未记录”，计划路径下有两名人员，信号员先给“慢速提升”后给“紧急停止”。不得接触或操作真实设备。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial-hoist-decision",
+            "editorial-hoist-path",
+            "editorial-hoist-risk",
+            "editorial-hoist-simulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "样本输出：提交一张任务卡，计算总载荷和余量，列出可确认项与阻断项，写明紧急停止响应、人员清场和缺失检查的升级对象。参考推演：总载荷1,850千克、额定余量150千克；收到紧急停止信号后必须立即保持停止。停止后仍有负载平衡未确认、上限位测试未记录、路径下有人三项阻断条件，须清场、补记录并由现场授权链复核，不能因载荷未超额定值而启动。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial-hoist-decision",
+            "editorial-hoist-path",
+            "editorial-hoist-risk",
+            "editorial-hoist-simulation"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业边界：本页对应O*NET 53-7041.00 Hoist and Winch Operators，核心是操作或看护动力缆索卷扬/提升设备以提升或牵引负载，不扩张为打桩、挖掘或通用施工岗位。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.profile.definition-block.1",
+          "source_refs": [
+            "editorial-hoist-path",
+            "onet-hoist-summary-current",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "投入对象：任务单、负载重量和重心、设备额定能力、卷筒与缆索、吊钩和吊具、控制器、路径、环境、信号及检查记录。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.profile.responsibilities-block.1",
+          "source_refs": [
+            "editorial-hoist-path",
+            "onet-hoist-summary-current",
+            "source-pack-onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "可检查产出：按授权完成的提升或牵引、停止与异常记录、设备状态和任务交接，以及可回读的检查清单。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.profile.responsibilities-block.2",
+          "source_refs": [
+            "editorial-hoist-path",
+            "onet-hoist-summary-current",
+            "source-pack-onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "完整工作流程：接收任务；核对设备和负载；确认吊挂、路径、隔离与通信；试动并平稳操作；持续观察信号和异常；停机卸载；记录并交接。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.profile.responsibilities-block.3",
+          "source_refs": [
+            "editorial-hoist-path",
+            "onet-hoist-summary-current",
+            "source-pack-onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断：总负载是否在额定范围内，绳索与吊具是否可用，负载是否固定平衡，路径是否清空，信号是否唯一明确，异常是否要求立即停止。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.profile.work-context-block.1",
+          "source_refs": [
+            "editorial-hoist-path",
+            "onet-hoist-summary-current",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "环境与节奏：工作可能在制造、施工、船厂或物料搬运现场，伴随噪声、班次、天气或视线限制；行业不同会改变设备、规则、资格和协作链。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.profile.work-context-block.2",
+          "source_refs": [
+            "editorial-hoist-path",
+            "onet-hoist-summary-current",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "工具与材料：卷扬机或葫芦控制装置、缆索与卷筒、吊钩吊索、制动和限位装置、手册与载荷表、检查表、通信设备及交接记录。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "editorial-hoist-path",
+            "onet-hoist-summary-current",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "协作链：任务负责人提供负载与路径要求，吊装/挂钩人员处理吊具，信号员传递约定信号，合资格或胜任人员检查设备，现场主管决定授权与异常处置。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "editorial-hoist-path",
+            "onet-hoist-summary-current",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：不超额定能力，检查与授权有效，负载和路径受控，信号清楚，运动平稳，人员不在危险路径，异常停止和交接可追溯。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial-hoist-path",
+            "onet-hoist-summary-current",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "相邻职责边界：施工劳工执行通用现场任务；打桩机操作员控制打桩设备；其他工程设备操作员控制挖掘、平整或装载设备；本职业直接控制卷扬与动力缆索的提升或牵引。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.profile.definition-block.2",
+          "source_refs": [
+            "editorial-hoist-path",
+            "onet-hoist-summary-current",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "construction-laborers",
+                "id": "hoist-and-winch-operators.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/construction-laborers"
+              },
+              {
+                "entity": "pile-driver-operators",
+                "id": "hoist-and-winch-operators.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/pile-driver-operators"
+              },
+              {
+                "entity": "operating-engineers-and-other-construction-equipment-operators",
+                "id": "hoist-and-winch-operators.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/operating-engineers-and-other-construction-equipment-operators"
+              },
+              {
+                "entity": "excavating-and-loading-machine-and-dragline-operators-surface-mining",
+                "id": "hoist-and-winch-operators.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/excavating-and-loading-machine-and-dragline-operators-surface-mining"
+              },
+              {
+                "entity": "loading-and-moving-machine-operators-underground-mining",
+                "id": "hoist-and-winch-operators.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/loading-and-moving-machine-operators-underground-mining"
+              }
+            ]
+          },
+          "id": "hoist-and-winch-operators.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-construction-laborers",
+            "onet-hoist-summary-current",
+            "onet-operating-engineers",
+            "onet-pile-driver-operators",
+            "onet-surface-mining-loading",
+            "onet-underground-mining-loading"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "与施工劳工相比：两者共享现场安全要求；施工劳工承担搬运、清理和辅助等广泛任务，卷扬机操作员对动力缆索设备的控制、负载运动和停止负责。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-construction-laborers",
+            "onet-hoist-summary-current",
+            "onet-operating-engineers",
+            "onet-pile-driver-operators",
+            "onet-surface-mining-loading",
+            "onet-underground-mining-loading"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "与打桩机操作员相比：后者控制打桩设备把桩体打入地基；卷扬机操作员的核心产出是用卷扬或提升设备移动负载，设备、训练与风险模型不同。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-construction-laborers",
+            "onet-hoist-summary-current",
+            "onet-operating-engineers",
+            "onet-pile-driver-operators",
+            "onet-surface-mining-loading",
+            "onet-underground-mining-loading"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "与其他工程设备操作员相比：挖掘、平整和装载设备改变地面或搬运散料；卷扬机操作员围绕缆索、卷筒、吊挂和负载路径作业。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-construction-laborers",
+            "onet-hoist-summary-current",
+            "onet-operating-engineers",
+            "onet-pile-driver-operators",
+            "onet-surface-mining-loading",
+            "onet-underground-mining-loading"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "与采矿装载设备操作员相比：后者在露天或地下采矿中装载、移动物料；卷扬机操作员可跨行业出现，但必须按具体场景重新核验设备、资格和授权。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-construction-laborers",
+            "onet-hoist-summary-current",
+            "onet-operating-engineers",
+            "onet-pile-driver-operators",
+            "onet-surface-mining-loading",
+            "onet-underground-mining-loading"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助任务：传感器和数字记录可显示载荷、位置或设备状态，电子清单可提示缺项，系统可保存检查与交接记录。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial-hoist-ai",
+            "source-pack-onet-hot_tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用条件：设备接口、传感器校准、告警阈值、断电/通信失败模式、用户权限和纸面备用程序均已验证。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial-hoist-ai",
+            "source-pack-onet-hot_tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数据门槛：载荷读数必须包含吊具附件，设备标识和额定值需对应，时间戳与检查记录要能追溯；错误单位或陈旧状态会产生虚假安全感。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial-hoist-ai",
+            "source-pack-onet-hot_tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人类控制：人员仍要观察吊挂、路径、人员位置、信号和异常，核对系统显示与现场，服从停止信号，并按授权决定是否恢复。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial-hoist-ai",
+            "source-pack-onet-hot_tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余责任：工具不能判断所有障碍、摆动、绳索缺陷或通信误解；操作员和现场责任人必须保持注意并承担停止、隔离和升级。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial-hoist-ai",
+            "source-pack-onet-hot_tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "失败风险：传感器漂移、网络中断、错误设备绑定或告警疲劳可能隐藏危险。控制是交叉核对原始状态、定期测试、保留安全停机和人工复核。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial-hoist-ai",
+            "source-pack-onet-hot_tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业证据边界：O*NET技术清单只能说明可能使用的软件或数字工具，不能推出现场采用率、自动化比例或岗位净变化。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial-hoist-ai",
+            "source-pack-onet-hot_tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实践响应：先在非生产模拟中验证清单、告警和记录流程；任何工具上线都必须服从制造商程序、适用规则和雇主变更控制。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial-hoist-ai",
+            "source-pack-onet-hot_tech"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：中国大陆暂无可安全使用的数据来表示与O*NET 53-7041.00精确对应的全国职业工资分布；人社部职业分类入口不能提供该细分岗位中位数。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "worker-cn-authority-boundary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：已访问的中国主管机关入口用于职业分类发现，不是带统计时期、覆盖人群和抽样方法的职业工资表。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "worker-cn-authority-boundary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "计量单位：月薪、计件/班次补贴、加班、年平均工资和到手收入不可混用；本页不以行业均值或相邻工种报价填补。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "worker-cn-authority-boundary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "求职用法：比较报价时询问地区、行业、设备类型、班次、加班、补贴、训练期、资格要求和雇主提供的保险防护，并坚持同口径比较。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "worker-cn-authority-boundary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：O*NET 53-7041.00页面展示美国全国工资，适用于该职业统计范围，不是中国薪资或个人录用报价。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "source-pack-onet-localwages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：页面标注为2025年BLS OEWS工资数据；不得与其他年份、地区或招聘样本直接拼接。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "source-pack-onet-localwages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数：2025年美国中位时薪27.14美元，对应年薪56,450美元；中位数不是起薪、最低工资或经验年限阶梯。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "source-pack-onet-localwages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "计量单位：时薪与年薪来自同一统计口径，但个人总收入还受工时、加班、班次和补贴影响。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "source-pack-onet-localwages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "覆盖人群：全国受雇者统计不能反映每个行业、地区、工会或项目现场；具体报价需回到雇主条件。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "source-pack-onet-localwages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "决策限制：工资高低不能替代设备安全、训练、资格、授权和工作环境判断，也不构成个人收入保证。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "source-pack-onet-localwages"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "任务信号：能按固定顺序核对任务、设备、负载、路径和信号，即使内容重复也不跳步。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial-hoist-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "注意信号：能持续观察运动、声音、显示和人员位置，在异常出现时立即把手上动作停下来。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial-hoist-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "计算信号：会把负载、吊具和附件纳入总重量，理解额定值是上限而不是建议目标。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial-hoist-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "协作信号：能使用约定通信并要求回读，不因职位压力忽略停止或紧急停止信号。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial-hoist-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：如果你容易被多任务分心、依赖记忆、不愿记录或担心拖慢进度而回避停机，这类工作风险很高。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial-hoist-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：若噪声、户外天气、轮班、狭窄视线或对事故后果的持续警觉难以承受，应先比较室内设备看护或其他岗位。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial-hoist-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "验证方法：只做本页纸面任务卡，再依次使用三张固定变体卡——负载增加200千克、限位测试记录恢复有效、紧急停止信号出现——观察自己是否能重新计算、更新阻断项并保持停止。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial-hoist-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "人格边界：兴趣量表不能证明胜任；真实判断应来自训练表现、程序执行、异常反应、沟通和受监督的工作记录。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial-hoist-decision"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "超载或输入错误：负载、吊具和附件合计超过额定能力，或重量无法确认时，设备可能失稳或部件受损。保持停止并由有资格人员核实，不用估算替代数据。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial-hoist-risk",
+            "osha-construction-operation",
+            "osha-overhead-cranes"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "设备或绳索缺陷：检查缺失、绳索扭结磨损、制动或限位异常时继续运行会失去控制。隔离设备、标记状态并按适用程序交检修或检查责任人。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial-hoist-risk",
+            "osha-construction-operation",
+            "osha-overhead-cranes"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "路径与人员风险：负载未固定平衡、路径有障碍或人员进入下方/摆动区时，可能碰撞或坠落。清空并隔离路径，未确认前不得移动。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.risk.career-risk-cards.3",
+          "source_refs": [
+            "editorial-hoist-risk",
+            "osha-construction-operation",
+            "osha-overhead-cranes"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "信号与注意风险：信号冲突、通信中断或分心会导致错误动作。保持停止，只按约定通信；在OSHA施工规则适用时必须服从任何人的停止或紧急停止信号。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial-hoist-risk",
+            "osha-construction-operation",
+            "osha-overhead-cranes"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同升级规则：额定能力、设备检查、吊挂、路径、人员隔离、通信或授权任一无法确认，都保持停止，记录事实和未决项并交给现场授权人。OSHA条款按一般工业、施工或船厂适用范围分别使用，不把纸面练习当操作许可。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial-hoist-risk",
+            "osha-construction-operation",
+            "osha-overhead-cranes"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "现实入口：从雇主提供的安全入职、设备识别、信号、检查记录和受监督训练开始；先证明能按程序停止与交接，再逐步接触特定设备。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.path.career-path-block.1",
+          "source_refs": [
+            "editorial-hoist-path",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "雇主证据：询问具体设备和行业、谁负责检查、谁发信号、谁批准恢复、训练与评估如何记录，以及第一阶段是否始终受监督。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.path.career-path-block.2",
+          "source_refs": [
+            "editorial-hoist-path",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品：完成本页纸面任务卡，展示总载荷计算、阻断项识别、停止响应、升级对象和交接记录，不接触真实设备。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.path.career-path-block.3",
+          "source_refs": [
+            "editorial-hoist-path",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "面试与试用：用“额定能力足够但限位测试缺失且路径有人”的案例解释为什么仍不启动，并说明如何记录和请求复核。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.path.career-path-block.4",
+          "source_refs": [
+            "editorial-hoist-path",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七天试验：第1天读职业边界；第2天识别设备与记录；第3天练重量核算；第4天练信号冲突；第5天练路径风险；第6天按固定错误卡复核单位、附件重量和检查日期；第7天用同一清单复盘准确率与停止判断。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.path.career-path-block.5",
+          "source_refs": [
+            "editorial-hoist-path",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "资格决策：O*NET课程和认证只是发现入口。具体训练、设备评估、指定操作员或监督要求依行业、设备、所在地和雇主制度核验；纸面练习不能产生现场操作授权。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.path.career-path-block.6",
+          "source_refs": [
+            "editorial-hoist-path",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "能力阶梯：先做到清单和计算准确，再做到异常识别、通信与交接可靠，最后才在完成规定训练、评估和授权后承担更复杂负载或环境。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.path.career-path-block.7",
+          "source_refs": [
+            "editorial-hoist-path",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转型路径：可比较起重机/吊车操作、打桩、其他工程设备、装卸或设备检查岗位；程序执行和现场沟通可迁移，但新设备、资格和责任必须重新验证。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.path.career-path-block.8",
+          "source_refs": [
+            "editorial-hoist-path",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "官方信号：O*NET提供美国职业身份、行业、工资和预测资料；它说明统计口径，不证明某地区正在招聘。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.market-signals.market-signal-card.1",
+          "source_refs": [
+            "editorial-hoist-market",
+            "source-pack-onet-industry",
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "就业预测：O*NET/BLS把2024—2034年增长列为下降（-1%或更低），并显示约300个年度空缺；空缺含增长与替换，不等于净新增。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.market-signals.market-signal-card.2",
+          "source_refs": [
+            "editorial-hoist-market",
+            "source-pack-onet-industry",
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "招聘信号：职位样本可观察设备类型、行业、班次、资格和训练，但只代表采样时间与地区，不能外推全国需求率。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.market-signals.market-signal-card.3",
+          "source_refs": [
+            "editorial-hoist-market",
+            "source-pack-onet-industry",
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "技术信号：数字控制、监测和记录可能改变任务，但技术出现不等于雇主已采用，也不等于净岗位变化。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editorial-hoist-market",
+            "source-pack-onet-industry",
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "相邻转型：施工、打桩、其他工程设备、采矿装载和物料搬运岗位共享部分现场能力；每条转型仍需补具体设备、行业规则、资格和授权。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editorial-hoist-market",
+            "source-pack-onet-industry",
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "典型闭环是接收任务与负载信息，核对设备额定能力和检查状态，确认吊挂、路径、人员隔离与通信，试动并平稳操作，持续观察信号和异常，停机后卸载、记录和交接。",
+                "id": "hoist-and-winch-operators.faq.1",
+                "question_key": "career.faq.hoist-and-winch-operators.daily-work",
+                "source_refs": [
+                  "editorial-hoist-path"
+                ]
+              },
+              {
+                "answer": "相邻岗位都可能出现在施工或物料搬运现场，但卷扬机操作员直接控制动力缆索设备提升或牵引负载；施工劳工负责通用现场任务，打桩机操作员控制打桩设备，其他工程设备操作员控制挖掘、平整或装载设备。",
+                "id": "hoist-and-winch-operators.faq.2",
+                "question_key": "career.faq.hoist-and-winch-operators.role-comparison",
+                "source_refs": [
+                  "onet-construction-laborers",
+                  "onet-hoist-summary-current",
+                  "onet-operating-engineers",
+                  "onet-pile-driver-operators",
+                  "onet-surface-mining-loading",
+                  "onet-underground-mining-loading"
+                ]
+              },
+              {
+                "answer": "可观察适配信号是愿意在重复核查中保持专注，能稳定识别状态或信号冲突，并在时间压力下仍先停止、记录和升级。",
+                "id": "hoist-and-winch-operators.faq.3",
+                "question_key": "career.faq.hoist-and-winch-operators.fit",
+                "source_refs": [
+                  "editorial-hoist-decision"
+                ]
+              },
+              {
+                "answer": "数字工具可辅助读取设备状态、记录检查、核对任务单和标记异常；它不能确认现场障碍、负载是否稳定或信号含义，也不承担启动、停止与升级责任；O*NET热门技术页列出该职业招聘资料中出现的软件或技术词项；它不证明具体现场已采用，也不能推出自动化比例、系统可靠性或岗位替代。",
+                "id": "hoist-and-winch-operators.faq.4",
+                "question_key": "career.faq.hoist-and-winch-operators.ai-impact",
+                "source_refs": [
+                  "editorial-hoist-ai",
+                  "source-pack-onet-hot_tech"
+                ]
+              },
+              {
+                "answer": "人工控制点包括核实设备与额定载荷、观察绳索和吊具状态、确认负载与路径、识别信号、遵守停止指令，并由现场授权链决定恢复；在OSHA 1926.1417适用范围内，制造商操作程序和额定能力资料应可用；资料不可访问时须停止或安全停机，且操作员必须服从任何人发出的停止或紧急停止信号。",
+                "id": "hoist-and-winch-operators.faq.5",
+                "question_key": "career.faq.hoist-and-winch-operators.human-control",
+                "source_refs": [
+                  "editorial-hoist-ai",
+                  "osha-construction-operation"
+                ]
+              },
+              {
+                "answer": "本轮打开的中国主管机关发现入口未提供与 O*NET 53-7041.00 一一对应的卷扬机操作员全国职业工资分布；中国模块因此不写中位数、起薪或到手收入。",
+                "id": "hoist-and-winch-operators.faq.6",
+                "question_key": "career.faq.hoist-and-winch-operators.china-pay",
+                "source_refs": [
+                  "worker-cn-authority-boundary"
+                ]
+              },
+              {
+                "answer": "O*NET 显示 卷扬机操作员（53-7041.00）2025 年美国工资为 $27.14 hourly, $56,450 annual；该全国口径不是起薪或个人报价；卷扬机操作员的实际收入会随地区、雇主、班次、经验和任职形态变化；全国中位数不证明个人可获得同样工资。",
+                "id": "hoist-and-winch-operators.faq.7",
+                "question_key": "career.faq.hoist-and-winch-operators.us-pay",
+                "source_refs": [
+                  "source-pack-onet-localwages"
+                ]
+              },
+              {
+                "answer": "入门先学习读懂任务单、额定载荷、设备手册、检查记录和信号规则，再用纸面任务卡展示核对、停止、记录与交接方法；真实设备训练必须在雇主安排与监督下进行；O*NET训练与认证页只提供美国项目发现线索；具体培训、资格、年龄、体检、指定操作员或监督要求依行业、设备、雇主和所在地规则确定；O*NET培训页只是美国项目发现入口；课程出现不等于完成适用训练、通过雇主评估或获得具体设备操作授权。",
+                "id": "hoist-and-winch-operators.faq.8",
+                "question_key": "career.faq.hoist-and-winch-operators.education-path",
+                "source_refs": [
+                  "editorial-hoist-path",
+                  "source-pack-onet-localcert",
+                  "source-pack-onet-localtraining"
+                ]
+              },
+              {
+                "answer": "关键风险包括超载、绳索或吊具缺陷、负载摆动或碰撞、人员进入负载路径、信号冲突和越权恢复；控制原则是条件不明即停、隔离危险区域、按适用程序复核并升级；在OSHA 1910.179适用范围内，额定载荷须标示且不得超载；设备、绳索和安全装置按规定检查，搬运前应确认负载固定和平衡，并避免载荷越过人员；在OSHA 1926.1417适用范围内，制造商操作程序和额定能力资料应可用；资料不可访问时须停止或安全停机，且操作员必须服从任何人发出的停止或紧急停止信号。",
+                "id": "hoist-and-winch-operators.faq.9",
+                "question_key": "career.faq.hoist-and-winch-operators.risk-boundary",
+                "source_refs": [
+                  "editorial-hoist-risk",
+                  "osha-construction-operation",
+                  "osha-overhead-cranes"
+                ]
+              },
+              {
+                "answer": "O*NET/BLS 显示 卷扬机操作员（53-7041.00）在 2024—2034 年的预测增长口径为“Decline (-1% or lower)”；这是美国职业预测，不是个人录用概率；O*NET/BLS 显示 卷扬机操作员（53-7041.00）2024—2034 年预计职位空缺指标为 300；空缺包括增长与替换，不等于净新增岗位。",
+                "id": "hoist-and-winch-operators.faq.10",
+                "question_key": "career.faq.hoist-and-winch-operators.outlook-transition",
+                "source_refs": [
+                  "source-pack-onet-summary"
+                ]
+              },
+              {
+                "answer": "卷扬机操作员的职业存在、工资、空缺和技术提及是不同指标，不能合并为稳定招聘、替代率或个人成功保证。",
+                "id": "hoist-and-winch-operators.faq.11",
+                "question_key": "career.faq.hoist-and-winch-operators.career-worth",
+                "source_refs": [
+                  "editorial-hoist-market"
+                ]
+              }
+            ]
+          },
+          "id": "hoist-and-winch-operators.sources.faq.1",
+          "source_refs": [
+            "editorial-hoist-ai",
+            "editorial-hoist-decision",
+            "editorial-hoist-market",
+            "editorial-hoist-path",
+            "editorial-hoist-risk",
+            "onet-construction-laborers",
+            "onet-hoist-summary-current",
+            "onet-operating-engineers",
+            "onet-pile-driver-operators",
+            "onet-surface-mining-loading",
+            "onet-underground-mining-loading",
+            "osha-construction-operation",
+            "osha-overhead-cranes",
+            "source-pack-onet-hot_tech",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining",
+            "source-pack-onet-localwages",
+            "source-pack-onet-summary",
+            "worker-cn-authority-boundary"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "美国职业身份、OSHA一般工业/施工/船厂规则和具体雇主授权分别陈述，不跨场景拼接。",
+              "本页仅供职业决策与纸面模拟，不构成真实设备操作、检验、指挥或恢复运行许可。",
+              "中国精确职业工资为暂无可安全使用的数据，不用行业或相邻岗位数字填补。"
+            ]
+          },
+          "id": "hoist-and-winch-operators.sources.boundary.1",
+          "source_refs": [
+            "editorial-hoist-ai",
+            "editorial-hoist-decision",
+            "editorial-hoist-market",
+            "editorial-hoist-path",
+            "editorial-hoist-risk",
+            "editorial-hoist-simulation",
+            "onet-construction-laborers",
+            "onet-hoist-summary-current",
+            "onet-operating-engineers",
+            "onet-pile-driver-operators",
+            "onet-surface-mining-loading",
+            "onet-underground-mining-loading",
+            "osha-construction-operation",
+            "osha-overhead-cranes",
+            "source-pack-onet-details",
+            "source-pack-onet-hot_tech",
+            "source-pack-onet-industry",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining",
+            "source-pack-onet-localwages",
+            "source-pack-onet-summary",
+            "worker-cn-authority-boundary"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "卷扬机操作员",
+                "id": "hoist-and-winch-operators.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "卷扬机操作员",
+                "id": "hoist-and-winch-operators.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "卷扬机操作员",
+                "id": "hoist-and-winch-operators.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "卷扬机操作员",
+                "id": "hoist-and-winch-operators.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "卷扬机操作员",
+                "id": "hoist-and-winch-operators.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "卷扬机操作员",
+                "id": "hoist-and-winch-operators.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "卷扬机操作员",
+                "id": "hoist-and-winch-operators.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "卷扬机操作员",
+                "id": "hoist-and-winch-operators.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "卷扬机操作员",
+                "id": "hoist-and-winch-operators.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "卷扬机操作员",
+                "id": "hoist-and-winch-operators.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "卷扬机操作员",
+                "id": "hoist-and-winch-operators.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "hoist-and-winch-operators.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "区分可辅助步骤、数据门槛、人工控制和失败模式",
+                  "不是采用率、产品性能或自动化替代比例。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-hoist-ai",
+                "limitation": "不是采用率、产品性能或自动化替代比例。",
+                "market": "全球",
+                "name": "卷扬机数字工具控制建议",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "把已证实任务转成可观察的职业决策信号",
+                  "不是人格结论、录用标准或现场胜任证明。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-hoist-decision",
+                "limitation": "不是人格结论、录用标准或现场胜任证明。",
+                "market": "全球",
+                "name": "卷扬机操作员职业决策与适配观察",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "区分工资、预测、空缺、招聘与技术信号",
+                  "不是招聘规模、个人就业概率或安全授权保证。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-hoist-market",
+                "limitation": "不是招聘规模、个人就业概率或安全授权保证。",
+                "market": "全球",
+                "name": "卷扬机市场信号阅读边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "把职业任务转成纸面作品、七日试验与雇主核验问题",
+                  "不声称是普遍培训、录用或授权路径。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-hoist-path",
+                "limitation": "不声称是普遍培训、录用或授权路径。",
+                "market": "全球",
+                "name": "卷扬机职业试做与入门路径",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载跨场景的停止、记录和升级建议",
+                  "不替代制造商程序、适用法规、雇主制度或合资格人员判断。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-hoist-risk",
+                "limitation": "不替代制造商程序、适用法规、雇主制度或合资格人员判断。",
+                "market": "全球",
+                "name": "卷扬机非监管风险控制建议",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载完全虚构的载荷、检查、路径、信号和参考推演",
+                  "仅供职业体验；不得用于真实设备操作、指挥或授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-hoist-simulation",
+                "limitation": "仅供职业体验；不得用于真实设备操作、指挥或授权。",
+                "market": "全球",
+                "name": "卷扬机操作员纸面安全模拟",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "已实际访问并核对相邻职业身份和职责边界。",
+                  "仅用于该相邻O*NET职业；不建立中国映射、薪资或现场授权。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-construction-laborers",
+                "limitation": "仅用于该相邻O*NET职业；不建立中国映射、薪资或现场授权。",
+                "market": "美国",
+                "name": "47-2061.00 - Construction Laborers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-2061.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "已实际访问并核对本职业身份、定义和任务边界。",
+                  "仅用于O*NET 53-7041.00和美国市场；不建立中国映射、薪资或现场授权。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-hoist-summary-current",
+                "limitation": "仅用于O*NET 53-7041.00和美国市场；不建立中国映射、薪资或现场授权。",
+                "market": "美国",
+                "name": "53-7041.00 - Hoist and Winch Operators",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/53-7041.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "已实际访问并核对相邻职业身份和职责边界。",
+                  "仅用于该相邻O*NET职业；不建立中国映射、薪资或现场授权。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-operating-engineers",
+                "limitation": "仅用于该相邻O*NET职业；不建立中国映射、薪资或现场授权。",
+                "market": "美国",
+                "name": "47-2073.00 - Operating Engineers and Other Construction Equipment Operators",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-2073.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "已实际访问并核对相邻职业身份和职责边界。",
+                  "仅用于该相邻O*NET职业；不建立中国映射、薪资或现场授权。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-pile-driver-operators",
+                "limitation": "仅用于该相邻O*NET职业；不建立中国映射、薪资或现场授权。",
+                "market": "美国",
+                "name": "47-2072.00 - Pile Driver Operators",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-2072.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "已实际访问并核对相邻职业身份和职责边界。",
+                  "仅用于该相邻O*NET职业；不建立中国映射、薪资或现场授权。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-surface-mining-loading",
+                "limitation": "仅用于该相邻O*NET职业；不建立中国映射、薪资或现场授权。",
+                "market": "美国",
+                "name": "47-5022.00 - Excavating and Loading Machine and Dragline Operators, Surface Mining",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-5022.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "已实际访问并核对相邻职业身份和职责边界。",
+                  "仅用于该相邻O*NET职业；不建立中国映射、薪资或现场授权。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-underground-mining-loading",
+                "limitation": "仅用于该相邻O*NET职业；不建立中国映射、薪资或现场授权。",
+                "market": "美国",
+                "name": "47-5044.00 - Loading and Moving Machine Operators, Underground Mining",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-5044.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "已通过eCFR全文读取并核对条款范围与正文定位。",
+                  "该规则适用于其规定的施工起重机与桅杆起重机；是否覆盖具体设备与作业需由雇主和合规责任人确认。"
+                ],
+                "evidence_type": "current eCFR regulation text",
+                "id": "osha-construction-operation",
+                "limitation": "该规则适用于其规定的施工起重机与桅杆起重机；是否覆盖具体设备与作业需由雇主和合规责任人确认。",
+                "market": "美国",
+                "name": "29 CFR 1926.1417 - Operation",
+                "period": "current regulation; accessed 2026-09-06",
+                "publisher": "eCFR / Office of the Federal Register",
+                "scope": "exact",
+                "url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1926/subpart-CC/section-1926.1417"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "已通过eCFR全文读取并核对条款范围与正文定位。",
+                  "该规则适用于其规定的一般工业起重机范围；不能自动外推到所有卷扬设备、行业或法域。"
+                ],
+                "evidence_type": "current eCFR regulation text",
+                "id": "osha-overhead-cranes",
+                "limitation": "该规则适用于其规定的一般工业起重机范围；不能自动外推到所有卷扬设备、行业或法域。",
+                "market": "美国",
+                "name": "29 CFR 1910.179 - Overhead and gantry cranes",
+                "period": "current regulation; accessed 2026-09-06",
+                "publisher": "eCFR / Office of the Federal Register",
+                "scope": "exact",
+                "url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1910/subpart-N/section-1910.179"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "已访问并核对该来源，仅用于其声明的美国市场、时期与职业范围。",
+                  "仅用于该O*NET职业和美国市场；不能建立中国职业映射、中国薪资或具体现场授权。"
+                ],
+                "evidence_type": "official occupation details",
+                "id": "source-pack-onet-details",
+                "limitation": "仅用于该O*NET职业和美国市场；不能建立中国职业映射、中国薪资或具体现场授权。",
+                "market": "美国",
+                "name": "53-7041.00 - Hoist and Winch Operators",
+                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-7041.00"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "已访问并核对该来源，仅用于其声明的美国市场、时期与职业范围。",
+                  "仅用于该O*NET职业和美国市场；不能建立中国职业映射、中国薪资或具体现场授权。"
+                ],
+                "evidence_type": "official technology profile",
+                "id": "source-pack-onet-hot_tech",
+                "limitation": "仅用于该O*NET职业和美国市场；不能建立中国职业映射、中国薪资或具体现场授权。",
+                "market": "美国",
+                "name": "Hot Technologies: 53-7041.00 - Hoist and Winch Operators",
+                "period": "current page; accessed 2026-08-31",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/53-7041.00"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "已访问并核对该来源，仅用于其声明的美国市场、时期与职业范围。",
+                  "仅用于该O*NET职业和美国市场；不能建立中国职业映射、中国薪资或具体现场授权。"
+                ],
+                "evidence_type": "official industry distribution",
+                "id": "source-pack-onet-industry",
+                "limitation": "仅用于该O*NET职业和美国市场；不能建立中国职业映射、中国薪资或具体现场授权。",
+                "market": "美国",
+                "name": "Industries: 53-7041.00 - Hoist and Winch Operators",
+                "period": "current page; accessed 2026-08-31",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/53-7041.00"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "已访问并核对该来源，仅用于其声明的美国市场、时期与职业范围。",
+                  "仅用于该O*NET职业和美国市场；不能建立中国职业映射、中国薪资或具体现场授权。"
+                ],
+                "evidence_type": "official certification discovery",
+                "id": "source-pack-onet-localcert",
+                "limitation": "仅用于该O*NET职业和美国市场；不能建立中国职业映射、中国薪资或具体现场授权。",
+                "market": "美国",
+                "name": "National Certifications: 53-7041.00 - Hoist and Winch Operators",
+                "period": "current page; accessed 2026-08-31",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localcert/53-7041.00"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "已访问并核对该来源，仅用于其声明的美国市场、时期与职业范围。",
+                  "仅用于该O*NET职业和美国市场；不能建立中国职业映射、中国薪资或具体现场授权。"
+                ],
+                "evidence_type": "official local training discovery",
+                "id": "source-pack-onet-localtraining",
+                "limitation": "仅用于该O*NET职业和美国市场；不能建立中国职业映射、中国薪资或具体现场授权。",
+                "market": "美国",
+                "name": "National Training: 53-7041.00 - Hoist and Winch Operators",
+                "period": "current page; accessed 2026-08-31",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtraining/53-7041.00"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "已访问并核对该来源，仅用于其声明的美国市场、时期与职业范围。",
+                  "仅用于该O*NET职业和美国市场；不能建立中国职业映射、中国薪资或具体现场授权。"
+                ],
+                "evidence_type": "O*NET display of BLS OEWS wage data",
+                "id": "source-pack-onet-localwages",
+                "limitation": "仅用于该O*NET职业和美国市场；不能建立中国职业映射、中国薪资或具体现场授权。",
+                "market": "美国",
+                "name": "National Wages: 53-7041.00 - Hoist and Winch Operators",
+                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/53-7041.00"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "已访问并核对该来源，仅用于其声明的美国市场、时期与职业范围。",
+                  "仅用于该O*NET职业和美国市场；不能建立中国职业映射、中国薪资或具体现场授权。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "source-pack-onet-summary",
+                "limitation": "仅用于该O*NET职业和美国市场；不能建立中国职业映射、中国薪资或具体现场授权。",
+                "market": "美国",
+                "name": "53-7041.00 - Hoist and Winch Operators",
+                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/53-7041.00"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "已重开该主管机关入口；本轮未在其中建立与 O*NET 53-7041.00 一一对应的全国职业工资系列。",
+                  "共享职业分类入口仅用于发现；职业精确映射必须逐项核实。"
+                ],
+                "evidence_type": "中国主管机关发现入口",
+                "id": "worker-cn-authority-boundary",
+                "limitation": "共享职业分类入口仅用于发现；职业精确映射必须逐项核实。",
+                "market": "中国大陆",
+                "name": "卷扬机操作员中国职业映射与工资发现入口",
+                "period": "current authority discovery page; accessed 2026-08-31",
+                "publisher": "中华人民共和国人力资源和社会保障部",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.mohrss.gov.cn/wap/xw/rsxw/202210/t20221028_489104.html"
+              }
+            ]
+          },
+          "id": "hoist-and-winch-operators.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "重复核查、异常停止、沟通升级",
+        "fact_id": "fit",
+        "market": "全球",
+        "measure": "可观察适配信号",
+        "occupation_scope": "精确职业数据：卷扬机操作员 / O*NET 53-7041.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "editorial-hoist-decision"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET 53-7041.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业代码与身份",
+        "occupation_scope": "精确职业数据：卷扬机操作员 / O*NET 53-7041.00",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-hoist-summary-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "额定能力、设备绳索、路径人员、信号与授权控制",
+        "fact_id": "risk",
+        "market": "全球",
+        "measure": "风险控制边界",
+        "occupation_scope": "精确职业数据：卷扬机操作员 / O*NET 53-7041.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "editorial-hoist-risk"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "卷扬设备、缆索吊具、负载、路径、信号与记录",
+        "fact_id": "task-object",
+        "market": "美国",
+        "measure": "任务与对象",
+        "occupation_scope": "精确职业数据：卷扬机操作员 / O*NET 53-7041.00",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-hoist-summary-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "任务—设备与负载核对—路径通信—平稳操作—停止交接",
+        "fact_id": "workflow",
+        "market": "全球",
+        "measure": "核心职责",
+        "occupation_scope": "精确职业数据：卷扬机操作员 / O*NET 53-7041.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "editorial-hoist-path"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "353d0136b04e9f213981c4d30950795c9f112d65795f5f9c4ec4e84f0df717dd",
+  "source_content_sha256": "5181e68089ffd24a453aa81e88ea97ab40b0f1c8ce4f4339365e3d4aa42ad886",
   "subject": {
     "canonical_slug": "hoist-and-winch-operators",
     "name": "卷扬机操作员",
-    "summary": null
+    "summary": "卷扬机操作员用动力缆索设备提升或牵引负载，核心不是按动控制器，而是核对额定能力、设备状态、吊挂路径、信号和人员隔离，并在任何条件不清时立即停止、记录和升级。"
   }
 }

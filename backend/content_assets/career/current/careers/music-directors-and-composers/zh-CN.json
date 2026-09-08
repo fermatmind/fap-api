@@ -1,12 +1,1651 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "适合继续了解：你愿意反复细听、把音乐判断写成可执行记录，并接受独立创作或多人排练中的持续修订；若只喜欢“灵感”或舞台标签，却排斥读谱、版本、反馈和交付边界，这条路径可能不合适。"
+            ]
+          },
+          "id": "music-directors-and-composers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "合并职业有两条核心闭环：指挥把乐谱解释转成整体演出声音；作曲家把音乐意图转成可演奏、录制和修订的原创作品。"
+            ]
+          },
+          "id": "music-directors-and-composers.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全试做材料（完全虚构）：M-01为材料S-A/版本V2/来源说明“合成”/状态已复核；M-02为材料代码空白/V1/“合成”/已复核；M-03为S-C/版本空白/“合成”/已复核；M-04为S-D/V3/来源说明空白/已复核。任务：按四字段共16格计算完整率，列缺失项和每条纸面状态。"
+            ]
+          },
+          "id": "music-directors-and-composers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考复核：16格中13格有值，完整率81.25%；缺失为M-02材料代码、M-03版本、M-04来源说明。M-01仅标“题面字段齐全”，不代表允许演奏、录音、排练或发布；M-02—04各标“暂停纸面审查，待本条缺失字段确认”。不补猜，也不接触真实音乐。"
+            ]
+          },
+          "id": "music-directors-and-composers.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "合并官方职业数据：O*NET 27-2041.00覆盖指挥、计划和带领器乐或声乐演出，或创作原创音乐作品。"
+            ]
+          },
+          "id": "music-directors-and-composers.profile.definition-block.1",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "投入可包括乐谱、委约或创意目标、合奏能力、排练安排、声音/乐器选择、版本与反馈。"
+            ]
+          },
+          "id": "music-directors-and-composers.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "产出可包括演出解释与排练决策，或原创乐谱、编配、音频草稿和修订记录。"
+            ]
+          },
+          "id": "music-directors-and-composers.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "指挥闭环是读谱与解释→选曲和计划→排练→手势/反馈→合奏调整→演出或录音复盘。"
+            ]
+          },
+          "id": "music-directors-and-composers.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "作曲闭环是明确音乐功能→发展素材→决定旋律和声/声音→记谱或试听→反馈→修订→交付。"
+            ]
+          },
+          "id": "music-directors-and-composers.profile.work-context-block.1",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "BLS说明可在教堂、音乐厅、录音室或办公室工作，兼职常见，时间表可能含晚间、周末和演出前长工时。"
+            ]
+          },
+          "id": "music-directors-and-composers.profile.work-context-block.2",
+          "source_refs": [
+            "bls-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "工具可包括乐器、谱面、音乐或声音编辑、办公和演示软件；具体工具由分支与场景决定。"
+            ]
+          },
+          "id": "music-directors-and-composers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "协作对象可包括演奏者、歌手、独奏者、声部长、录音、舞台、导演、制片和委约方。"
+            ]
+          },
+          "id": "music-directors-and-composers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量看音乐意图可执行、速度节奏与平衡明确、谱面/版本可追溯、反馈闭环和交付范围清楚。"
+            ]
+          },
+          "id": "music-directors-and-composers.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "本页不把合并职业数据拆成指挥或作曲分支的独立工资、就业或资格结论，也不与五个相邻职业合并。"
+            ]
+          },
+          "id": "music-directors-and-composers.profile.definition-block.2",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "agents-and-business-managers-of-artists-performers-and-athletes",
+                "id": "music.adj.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/agents-and-business-managers-of-artists-performers-and-athletes"
+              },
+              {
+                "entity": "directors-religious-activities-and-education",
+                "id": "music.adj.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/directors-religious-activities-and-education"
+              },
+              {
+                "entity": "art-drama-and-music-teachers-postsecondary",
+                "id": "music.adj.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/art-drama-and-music-teachers-postsecondary"
+              },
+              {
+                "entity": "art-directors",
+                "id": "music.adj.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/art-directors"
+              },
+              {
+                "entity": "fine-artists-including-painters-sculptors-and-illustrators",
+                "id": "music.adj.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/fine-artists-including-painters-sculptors-and-illustrators"
+              }
+            ]
+          },
+          "id": "music-directors-and-composers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "adj-agent",
+            "adj-art-director",
+            "adj-fine-artist",
+            "adj-religious",
+            "adj-teacher",
+            "onet-summary"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "经纪与商务经理代表艺术家处理合同、谈判和业务；本职业创作音乐或领导音乐演出。"
+            ]
+          },
+          "id": "music-directors-and-composers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "adj-agent",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "宗教活动与教育主管负责宗教项目；宗教机构中的音乐职务也不自动等同该管理职业。"
+            ]
+          },
+          "id": "music-directors-and-composers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "adj-religious",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "高校艺术戏剧音乐教师以高等教育教学和研究为核心；音乐可为教学内容，但主要产出不同。"
+            ]
+          },
+          "id": "music-directors-and-composers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "adj-teacher",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "艺术指导负责视觉呈现与艺术部门；美术家创作视觉艺术，二者都不以音乐作品或合奏声音为核心。"
+            ]
+          },
+          "id": "music-directors-and-composers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "adj-art-director",
+            "adj-fine-artist",
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可核技术事实：O*NET列出音乐或声音编辑等软件类别，但未提供生成式AI采用率。"
+            ]
+          },
+          "id": "music-directors-and-composers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "美国版权边界：仅提供提示词不足以构成人类作者贡献；人类创作的安排或修改可能被考虑，且须个案判断。"
+            ]
+          },
+          "id": "music-directors-and-composers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "usco-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "低风险辅助只限完全虚构的记录查空值、版本差异摘要或查询草稿。"
+            ]
+          },
+          "id": "music-directors-and-composers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人的控制点包括音乐目标、谱面/音频来源、版本、修改意图、演奏可行性、排练反馈和权利状态。"
+            ]
+          },
+          "id": "music-directors-and-composers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "工具输出不能自动批准作品来源、署名、演奏可行性、排练决定、最终交付或发布。"
+            ]
+          },
+          "id": "music-directors-and-composers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial",
+            "usco-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "若工具补造来源、版本或反馈，停止使用并保留原始记录与错误。"
+            ]
+          },
+          "id": "music-directors-and-composers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "美国AI输出可版权性、具体音乐许可、中国权利和合同责任是不同问题，不能互推。"
+            ]
+          },
+          "id": "music-directors-and-composers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial",
+            "usco-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：本次没有采用率、音乐质量准确率、生产率因果或净就业影响，不量化替代概率。"
+            ]
+          },
+          "id": "music-directors-and-composers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "行业代理数据：中国大陆2025年城镇非私营单位文化、体育和娱乐业就业人员年平均工资为{{fact:cn-industry-nonprivate}}。"
+            ]
+          },
+          "fact_refs": [
+            "cn-industry-nonprivate"
+          ],
+          "id": "music-directors-and-composers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "行业代理数据：中国大陆2025年城镇私营单位同一行业年平均工资为{{fact:cn-industry-private}}。"
+            ]
+          },
+          "fact_refs": [
+            "cn-industry-private"
+          ],
+          "id": "music-directors-and-composers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "行业代理数据不是音乐总监与作曲家职业工资中位数，也不覆盖个体经营或自由职业收入。"
+            ]
+          },
+          "id": "music-directors-and-composers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "nbs-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：所核官方发布没有该合并职业在中国大陆的全国中位数、分位数或项目报价。"
+            ]
+          },
+          "id": "music-directors-and-composers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "nbs-wage"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "合并职业数据：2025年美国年薪中位数为{{fact:us-annual-2025}}。"
+            ]
+          },
+          "fact_refs": [
+            "us-annual-2025"
+          ],
+          "id": "music-directors-and-composers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "合并职业数据：同年美国小时工资中位数为{{fact:us-hourly-2025}}。"
+            ]
+          },
+          "fact_refs": [
+            "us-hourly-2025"
+          ],
+          "id": "music-directors-and-composers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "合并职业数据：2025年美国年薪第10百分位39,880美元、第90百分位165,760美元。"
+            ]
+          },
+          "id": "music-directors-and-composers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "OEWS工资不含自雇者，不能代表项目报价、版税、委约或任一分支个人收入。"
+            ]
+          },
+          "id": "music-directors-and-composers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国合并职业工资与中国行业代理不可换算或拼接。"
+            ]
+          },
+          "id": "music-directors-and-composers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "nbs-wage",
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "比较岗位须另核分支、地区、雇佣方式、项目周期、合同、工时和薪酬组成。"
+            ]
+          },
+          "id": "music-directors-and-composers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editorial",
+            "onet-wages"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "听辨信号：能指出音高、节奏、音色或平衡的具体差异。"
+            ]
+          },
+          "id": "music-directors-and-composers.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "表达信号：能把抽象音乐意图写成谱面、说明或可执行反馈。"
+            ]
+          },
+          "id": "music-directors-and-composers.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "修订信号：愿意反复试听、排练、记录版本并保留修改理由。"
+            ]
+          },
+          "id": "music-directors-and-composers.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "协作信号：能在独立创作与多人协调之间切换。"
+            ]
+          },
+          "id": "music-directors-and-composers.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "边界信号：来源、用途或批准不清时会暂停并查询。"
+            ]
+          },
+          "id": "music-directors-and-composers.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "节奏信号：能接受兼职、晚间周末或演出前密集工作的可能性。"
+            ]
+          },
+          "id": "music-directors-and-composers.fit.riasec-fit-block.6",
+          "source_refs": [
+            "bls-profile",
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：若排斥细听、反馈、版本和交付边界，先不要只凭“喜欢音乐”判断。"
+            ]
+          },
+          "id": "music-directors-and-composers.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "本页合成练习只观察字段核对行为，不是天赋、录用、资格或表演授权测试。"
+            ]
+          },
+          "id": "music-directors-and-composers.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "版本与交付：材料代码、版本或反馈混乱会让修订无法复核；先回到受控记录。"
+            ]
+          },
+          "id": "music-directors-and-composers.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "权利边界：委约目标、来源、修改、署名、用途或批准不清时，停止使用或交付相关材料并升级。"
+            ]
+          },
+          "id": "music-directors-and-composers.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "工作情境：兼职、晚间周末和演出前长工时可能影响安排；不能从全国职业页推断具体项目条件。"
+            ]
+          },
+          "id": "music-directors-and-composers.risk.career-risk-cards.3",
+          "source_refs": [
+            "bls-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "听力边界：BLS提示大型合奏时可能需耳塞或入耳式监听以降低损伤风险；具体防护由场地与合格安全方案确定。"
+            ]
+          },
+          "id": "music-directors-and-composers.risk.career-risk-cards.4",
+          "source_refs": [
+            "bls-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同边界：材料、人员责任、现场条件或批准不清时，只记录事实和查询项，不自行演奏、录音、排练、交付或发布。"
+            ]
+          },
+          "id": "music-directors-and-composers.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "BLS说明该合并职业通常至少需学士学位且多数岗位要求相关经验，但教育要求会变化；部分岗位无需正规教育，部分可能受益于研究生学位。"
+            ]
+          },
+          "id": "music-directors-and-composers.path.career-path-block.1",
+          "source_refs": [
+            "bls-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "先核岗位是指挥/音乐总监还是作曲，服务何种合奏、作品和场景，再问第一阶段允许观察、协助和独立承担什么。"
+            ]
+          },
+          "id": "music-directors-and-composers.path.career-path-block.2",
+          "source_refs": [
+            "editorial",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品只用本页四条合成记录，算完整率、列缺失项、写查询并标记每条纸面状态。"
+            ]
+          },
+          "id": "music-directors-and-composers.path.career-path-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品必须注明81.25%只是题面字段完整率，M-01字段齐全也不代表音乐可用、可演奏或允许发布。"
+            ]
+          },
+          "id": "music-directors-and-composers.path.career-path-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七日试做：第1天读范围；第2天抄16格；第3天找3个空值；第4天算13/16；第5天写查询；第6天对答案；第7天记录继续、暂停或比较相邻方向。"
+            ]
+          },
+          "id": "music-directors-and-composers.path.career-path-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "学历、课程、试演、作品集、经验、教师资格、雇主任命、排练领导、演出批准和权利责任须分别核验。"
+            ]
+          },
+          "id": "music-directors-and-composers.path.career-path-block.6",
+          "source_refs": [
+            "bls-profile",
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "成长看能否处理更复杂音乐材料、演奏限制、反馈和交付，不承诺统一年限或自动取得指挥/发布权。"
+            ]
+          },
+          "id": "music-directors-and-composers.path.career-path-block.7",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转向经纪、宗教项目管理、高校教学、艺术指导或美术创作前，重新核工作对象、训练、资格和最终责任。"
+            ]
+          },
+          "id": "music-directors-and-composers.path.career-path-block.8",
+          "source_refs": [
+            "adj-agent",
+            "adj-art-director",
+            "adj-fine-artist",
+            "adj-religious",
+            "adj-teacher",
+            "editorial",
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "合并职业数据：2025年美国就业人数约{{fact:employment-2025}}。"
+            ]
+          },
+          "fact_refs": [
+            "employment-2025"
+          ],
+          "id": "music-directors-and-composers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "bls-projection"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "合并职业数据：2025—2035年美国预计{{fact:growth-2025-2035}}。"
+            ]
+          },
+          "fact_refs": [
+            "growth-2025-2035"
+          ],
+          "id": "music-directors-and-composers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "bls-projection"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "合并职业数据：同期间美国预计净增加{{fact:change-2025-2035}}岗位。"
+            ]
+          },
+          "fact_refs": [
+            "change-2025-2035"
+          ],
+          "id": "music-directors-and-composers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "bls-projection"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "合并职业数据：同期间美国预计年均约{{fact:openings-2025-2035}}空缺，多数是转岗或退出后的替补，不是年净增。"
+            ]
+          },
+          "fact_refs": [
+            "openings-2025-2035"
+          ],
+          "id": "music-directors-and-composers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "bls-projection"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "上述全国合并职业预测不能拆成指挥或作曲分支、城市或个人录用概率。"
+            ]
+          },
+          "id": "music-directors-and-composers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "bls-projection"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "日常分两支：指挥读谱、计划、排练并协调整体声音；作曲家发展音乐材料、记谱/试听、反馈、修订和交付。",
+                "id": "music-directors-and-composers.faq.1",
+                "question_key": "career.faq.music-directors-and-composers.daily-work",
+                "source_refs": [
+                  "onet-details",
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "目标合并职业聚焦音乐演出领导或原创音乐作品，不等同经纪业务、宗教项目管理、高校教学、视觉指导或美术创作。",
+                "id": "music-directors-and-composers.faq.2",
+                "question_key": "career.faq.music-directors-and-composers.role-comparison",
+                "source_refs": [
+                  "adj-agent",
+                  "adj-art-director",
+                  "adj-fine-artist",
+                  "adj-religious",
+                  "adj-teacher",
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "观察自己能否细听差异、把意图写成可执行记录、接受反复反馈并守住来源和版本边界；这不是天赋诊断。",
+                "id": "music-directors-and-composers.faq.3",
+                "question_key": "career.faq.music-directors-and-composers.fit",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "所核职业页没有生成式AI采用率、生产率因果或净就业影响，不能量化替代概率。",
+                "id": "music-directors-and-composers.faq.4",
+                "question_key": "career.faq.music-directors-and-composers.ai-impact",
+                "source_refs": [
+                  "onet-details",
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "音乐目标、来源、版本、演奏可行性、排练反馈、权利状态和最终交付必须回到受控记录与责任链。",
+                "id": "music-directors-and-composers.faq.5",
+                "question_key": "career.faq.music-directors-and-composers.human-control",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "行业代理数据显示2025年文化、体育和娱乐业城镇非私营/私营单位年平均工资129,447元/64,015元；不是目标职业工资。",
+                "fact_refs": [
+                  "cn-industry-nonprivate",
+                  "cn-industry-private"
+                ],
+                "id": "music-directors-and-composers.faq.6",
+                "question_key": "career.faq.music-directors-and-composers.china-pay",
+                "source_refs": [
+                  "nbs-wage"
+                ]
+              },
+              {
+                "answer": "合并职业数据：2025年美国年薪中位数73,710美元、时薪35.44美元；OEWS不含自雇者。",
+                "fact_refs": [
+                  "us-annual-2025",
+                  "us-hourly-2025"
+                ],
+                "id": "music-directors-and-composers.faq.7",
+                "question_key": "career.faq.music-directors-and-composers.us-pay",
+                "source_refs": [
+                  "onet-wages"
+                ]
+              },
+              {
+                "answer": "BLS说明通常至少需学士学位且多数岗位需相关经验，但要求会变化；学历不自动等于任命、排练领导或发布权。",
+                "id": "music-directors-and-composers.faq.8",
+                "question_key": "career.faq.music-directors-and-composers.education-path",
+                "source_refs": [
+                  "bls-profile",
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "版本、权利、工时和听力是主要边界；具体材料、现场或批准不清时只记录并查询。",
+                "id": "music-directors-and-composers.faq.9",
+                "question_key": "career.faq.music-directors-and-composers.risk-boundary",
+                "source_refs": [
+                  "bls-profile",
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "合并职业数据：2025—2035年美国预计增长1%、净增加600、年均约4,200空缺，多数空缺为替补。",
+                "fact_refs": [
+                  "growth-2025-2035",
+                  "change-2025-2035",
+                  "openings-2025-2035"
+                ],
+                "id": "music-directors-and-composers.faq.10",
+                "question_key": "career.faq.music-directors-and-composers.outlook-transition",
+                "source_refs": [
+                  "bls-projection"
+                ]
+              },
+              {
+                "answer": "若你愿意细听、记录版本、接受修订并在独立创作与多人协调之间切换，可继续了解；这不是录用保证。",
+                "id": "music-directors-and-composers.faq.11",
+                "question_key": "career.faq.music-directors-and-composers.career-worth",
+                "source_refs": [
+                  "editorial"
+                ]
+              }
+            ]
+          },
+          "id": "music-directors-and-composers.sources.faq.1",
+          "source_refs": [
+            "adj-agent",
+            "adj-art-director",
+            "adj-fine-artist",
+            "adj-religious",
+            "adj-teacher",
+            "bls-profile",
+            "bls-projection",
+            "editorial",
+            "nbs-wage",
+            "onet-details",
+            "onet-summary",
+            "onet-wages"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "精确身份为O*NET 27-2041.00合并官方职业；不把合并数据拆成指挥或作曲分支结论。",
+              "五个冻结相邻职业各以成功打开的O*NET页比较，不与目标职业合并。",
+              "美国合并职业事实、中国行业代理、美国AI版权事实和editorial建议分别陈述。",
+              "练习共16格、13格有值、3格缺失；81.25%只表示题面字段完整率。",
+              "本页不提供真实音乐、听力医学建议、素材许可、版权法律意见、演奏、录音、排练、交付或发布批准。"
+            ]
+          },
+          "id": "music-directors-and-composers.sources.boundary.1",
+          "source_refs": [
+            "adj-agent",
+            "adj-art-director",
+            "adj-fine-artist",
+            "adj-religious",
+            "adj-teacher",
+            "bls-profile",
+            "bls-projection",
+            "editorial",
+            "nbs-wage",
+            "onet-details",
+            "onet-summary",
+            "onet-wages",
+            "usco-ai"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "音乐总监与作曲家",
+                "id": "music-directors-and-composers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "音乐总监与作曲家",
+                "id": "music-directors-and-composers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "音乐总监与作曲家",
+                "id": "music-directors-and-composers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "音乐总监与作曲家",
+                "id": "music-directors-and-composers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "音乐总监与作曲家",
+                "id": "music-directors-and-composers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "音乐总监与作曲家",
+                "id": "music-directors-and-composers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "音乐总监与作曲家",
+                "id": "music-directors-and-composers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "音乐总监与作曲家",
+                "id": "music-directors-and-composers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "音乐总监与作曲家",
+                "id": "music-directors-and-composers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "音乐总监与作曲家",
+                "id": "music-directors-and-composers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "音乐总监与作曲家",
+                "id": "music-directors-and-composers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "music-directors-and-composers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "代表艺术家处理合同、谈判和业务的边界。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-agent",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET 13-1011.00艺术家经纪与商务经理",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-1011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "视觉呈现与艺术部门管理边界。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-art-director",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET 27-1011.00艺术指导",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/27-1011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "以多种媒介创作视觉艺术的边界。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-fine-artist",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET 27-1013.00美术家",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/27-1013.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "宗教活动与教育管理边界。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-religious",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET 21-2021.00宗教活动与教育主管",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/21-2021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "高等教育教学和研究边界。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-teacher",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET 25-1121.00高校艺术戏剧音乐教师",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/25-1121.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "合并职业职责、环境、教育与工时。",
+                  "教育要求会变化；不是个人资格或录用保证。"
+                ],
+                "evidence_type": "official source",
+                "id": "bls-profile",
+                "limitation": "教育要求会变化；不是个人资格或录用保证。",
+                "market": "美国",
+                "name": "BLS OOH：Music Directors and Composers",
+                "period": "BLS OOH; modified 2026-08-27; accessed 2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "combined_official",
+                "url": "https://www.bls.gov/ooh/entertainment-and-sports/music-directors-and-composers.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "合并职业2025—2035就业、增长、净变化和年均空缺。",
+                  "多数空缺来自转岗或退出替补；不是个人机会保证。"
+                ],
+                "evidence_type": "official source",
+                "id": "bls-projection",
+                "limitation": "多数空缺来自转岗或退出替补；不是个人机会保证。",
+                "market": "美国",
+                "name": "BLS OOH：Music Directors and Composers预测",
+                "period": "BLS employment projections 2025-2035; accessed 2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "combined_official",
+                "url": "https://www.bls.gov/ooh/entertainment-and-sports/music-directors-and-composers.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "合成记录练习、适配、AI控制、权利与排练边界。",
+                  "不是乐谱、表演、听力医学建议、素材许可、版权法律意见、任命或演出批准。"
+                ],
+                "evidence_type": "editorial exercise and guidance",
+                "id": "editorial",
+                "limitation": "不是乐谱、表演、听力医学建议、素材许可、版权法律意见、任命或演出批准。",
+                "market": "编辑设计",
+                "name": "音乐总监与作曲家职业探索编辑说明",
+                "period": "editorial review 2026-09-06",
+                "publisher": "FermatMind editorial",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "文化、体育和娱乐业城镇单位年平均工资。",
+                  "同任务同日成功open复用；行业平均不等于音乐总监/作曲家职业工资，且不覆盖个体经营和自由职业者。"
+                ],
+                "evidence_type": "official source",
+                "id": "nbs-wage",
+                "limitation": "同任务同日成功open复用；行业平均不等于音乐总监/作曲家职业工资，且不覆盖个体经营和自由职业者。",
+                "market": "中国大陆",
+                "name": "国家统计局：2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wage release; published 2026-05-15; reused 2026-09-06",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "合并职业任务、活动、情境和软件。",
+                  "任务全集不表示每个岗位承担全部活动。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-details",
+                "limitation": "任务全集不表示每个岗位承担全部活动。",
+                "market": "美国",
+                "name": "O*NET 27-2041.00详细页",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "combined_official",
+                "url": "https://www.onetonline.org/link/details/27-2041.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "合并官方职业身份、任务、情境和教育调查。",
+                  "该官方职业合并音乐总监/指挥与作曲家；不能把合并数据拆为任一分支。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-summary",
+                "limitation": "该官方职业合并音乐总监/指挥与作曲家；不能把合并数据拆为任一分支。",
+                "market": "美国",
+                "name": "O*NET 27-2041.00摘要",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "combined_official",
+                "url": "https://www.onetonline.org/link/summary/27-2041.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "合并职业2025美国全国工资分布。",
+                  "OEWS不含自雇者；不是任一分支、地区或个人报价。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-wages",
+                "limitation": "OEWS不含自雇者；不是任一分支、地区或个人报价。",
+                "market": "美国",
+                "name": "O*NET：Music Directors and Composers全国工资",
+                "period": "BLS OEWS May 2025; accessed 2026-09-06",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "scope": "combined_official",
+                "url": "https://www.onetonline.org/link/localwages/27-2041.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "美国生成式AI输出可版权性的人类创作边界。",
+                  "同任务同日成功open复用；不判断中国权利、训练数据、合同或具体音乐许可。"
+                ],
+                "evidence_type": "official source",
+                "id": "usco-ai",
+                "limitation": "同任务同日成功open复用；不判断中国权利、训练数据、合同或具体音乐许可。",
+                "market": "美国",
+                "name": "美国版权局：AI报告第二部分发布说明",
+                "period": "published 2025-01-29; reused 2026-09-06",
+                "publisher": "U.S. Copyright Office",
+                "scope": "exact",
+                "url": "https://www.copyright.gov/newsnet/2025/1060.html"
+              }
+            ]
+          },
+          "id": "music-directors-and-composers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "129,447元/年",
+        "fact_id": "cn-industry-nonprivate",
+        "market": "中国大陆",
+        "measure": "城镇非私营单位就业人员年平均工资",
+        "occupation_scope": "行业代理数据：文化、体育和娱乐业",
+        "period": "2025 annual wage release; published 2026-05-15; reused 2026-09-06",
+        "source_refs": [
+          "nbs-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "64,015元/年",
+        "fact_id": "cn-industry-private",
+        "market": "中国大陆",
+        "measure": "城镇私营单位就业人员年平均工资",
+        "occupation_scope": "行业代理数据：文化、体育和娱乐业",
+        "period": "2025 annual wage release; published 2026-05-15; reused 2026-09-06",
+        "source_refs": [
+          "nbs-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "73,710美元/年",
+        "fact_id": "us-annual-2025",
+        "market": "美国",
+        "measure": "年薪中位数",
+        "occupation_scope": "合并职业数据：Music Directors and Composers（O*NET 27-2041.00）",
+        "period": "BLS OEWS May 2025; accessed 2026-09-06",
+        "source_refs": [
+          "onet-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "35.44美元/小时",
+        "fact_id": "us-hourly-2025",
+        "market": "美国",
+        "measure": "小时工资中位数",
+        "occupation_scope": "合并职业数据：Music Directors and Composers（O*NET 27-2041.00）",
+        "period": "BLS OEWS May 2025; accessed 2026-09-06",
+        "source_refs": [
+          "onet-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "51,100人",
+        "fact_id": "employment-2025",
+        "market": "美国",
+        "measure": "就业人数",
+        "occupation_scope": "合并职业数据：Music Directors and Composers（SOC 27-2041）",
+        "period": "BLS employment projections 2025-2035; accessed 2026-09-06",
+        "source_refs": [
+          "bls-projection"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "增长1%（2025—2035）",
+        "fact_id": "growth-2025-2035",
+        "market": "美国",
+        "measure": "预计就业变化",
+        "occupation_scope": "合并职业数据：Music Directors and Composers（SOC 27-2041）",
+        "period": "BLS employment projections 2025-2035; accessed 2026-09-06",
+        "source_refs": [
+          "bls-projection"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "600个",
+        "fact_id": "change-2025-2035",
+        "market": "美国",
+        "measure": "预计就业净变化",
+        "occupation_scope": "合并职业数据：Music Directors and Composers（SOC 27-2041）",
+        "period": "BLS employment projections 2025-2035; accessed 2026-09-06",
+        "source_refs": [
+          "bls-projection"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "4,200个/年",
+        "fact_id": "openings-2025-2035",
+        "market": "美国",
+        "measure": "预计年均空缺",
+        "occupation_scope": "合并职业数据：Music Directors and Composers（SOC 27-2041）",
+        "period": "BLS employment projections 2025-2035; accessed 2026-09-06",
+        "source_refs": [
+          "bls-projection"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "c0ff4d8387d88a383e70efd4fe734f44d4a6e6bc8133781e9e5a0bc62b4501bf",
+  "source_content_sha256": "43874fd953722c74af947705c7f61cfa20bb51742cd9a07a2f0007e682644ebe",
   "subject": {
     "canonical_slug": "music-directors-and-composers",
     "name": "音乐总监与作曲家",
-    "summary": null
+    "summary": "音乐总监与作曲家是O*NET 27-2041.00合并官方职业：一支把乐谱解释和排练反馈组织成整体演出声音，另一支把音乐意图发展为可演奏、录制和修订的原创作品。"
   }
 }

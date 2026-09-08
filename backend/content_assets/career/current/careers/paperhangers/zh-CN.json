@@ -1,12 +1,1478 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "如果你愿意精确测量裁切、耐心对花压平，并持续检查接缝与气泡，这个职业值得做桌面试验。"
+            ]
+          },
+          "id": "paperhangers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "真正难点是把基层、尺寸、材料批次、图案方向、环境条件和成品标准同时对齐。"
+            ]
+          },
+          "id": "paperhangers.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全练习只审三张虚构工单的7字段：表面类型、尺寸/数量、基层状态、材料图案/批次、粘贴/对花要求、作业环境/保护、升级安排（触发+对象）。"
+            ]
+          },
+          "id": "paperhangers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "A：室内石膏板墙；3.2×2.6米；基层状态未知；W-24同批竖纹；直对花且接缝检查；空房并标明地面保护；“基层不明则升级项目负责人”，缺1。B：室内顶面；尺寸/数量未知；基层干燥平整；F-8同批无图案；满贴且无对花；环境/保护未知；“任一尺寸或保护不明则升级现场主管”，缺2。C：室内混凝土墙；4.0×2.8米；基层平整且已记录；V-11同批半步对花；边缘对齐并查接缝；空房且地面/邻面已保护；“批次或基层记录不一致时升级项目负责人”，缺0。结论仅作工单缺项复推，不授权现场作业。"
+            ]
+          },
+          "id": "paperhangers.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业定义：为室内墙面或顶面铺贴装饰墙纸/织物，也可在墙面或广告牌张贴海报；可能移除旧材料或处理基层。"
+            ]
+          },
+          "id": "paperhangers.profile.definition-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "核对工单并测量表面、估算材料。"
+            ]
+          },
+          "id": "paperhangers.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "清理、打磨、填补或封闭基层，为覆盖做准备。"
+            ]
+          },
+          "id": "paperhangers.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "测量裁切材料、施胶、对齐边缘和图案。"
+            ]
+          },
+          "id": "paperhangers.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "用刷子或滚筒压平褶皱和气泡，检查对花、接缝与整洁度。"
+            ]
+          },
+          "id": "paperhangers.profile.work-context-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "O*NET还列出设置糊台和脚手架、移除旧纸、裁边等补充任务。"
+            ]
+          },
+          "id": "paperhangers.profile.work-context-block.2",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "输入是工单、表面、尺寸、材料与图案；输出是对齐、平整、接缝整洁的覆盖面。"
+            ]
+          },
+          "id": "paperhangers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "工作闭环可理解为：核表面→测量估料→处理基层→裁切施胶→铺贴对花→压平检查。"
+            ]
+          },
+          "id": "paperhangers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量依据必须落到实际规格、材料说明、合同和现场验收要求。"
+            ]
+          },
+          "id": "paperhangers.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "一句话：这是精确饰面安装，不是泛化的“装修全能工”。"
+            ]
+          },
+          "id": "paperhangers.profile.definition-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "carpenters",
+                "id": "paperhangers.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/carpenters"
+              },
+              {
+                "entity": "carpet-installers",
+                "id": "paperhangers.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/carpet-installers"
+              },
+              {
+                "entity": "floor-layers-except-carpet-wood-and-hard-tiles",
+                "id": "paperhangers.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/floor-layers-except-carpet-wood-and-hard-tiles"
+              },
+              {
+                "entity": "floor-sanders-and-finishers",
+                "id": "paperhangers.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/floor-sanders-and-finishers"
+              },
+              {
+                "entity": "tile-and-stone-setters",
+                "id": "paperhangers.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/tile-and-stone-setters"
+              }
+            ]
+          },
+          "id": "paperhangers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "裱糊工主要覆盖墙面、顶面或广告表面，处理墙纸、织物、胶黏与对花接缝。"
+            ]
+          },
+          "id": "paperhangers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-carpet",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "地毯安装工主要覆盖地面，处理地毯、衬垫、接缝、拉伸、固定条和边缘。"
+            ]
+          },
+          "id": "paperhangers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-carpet",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "两者都可能测量、裁切、施胶和检查基层，但安装表面、材料系统与成品标准不同。"
+            ]
+          },
+          "id": "paperhangers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-carpet",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "比较真实岗位时看主要表面、材料、交付和培训责任，不按“安装工”头衔互换。"
+            ]
+          },
+          "id": "paperhangers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "editorial",
+            "onet-carpet",
+            "onet-details"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助整理工单字段、估料清单与材料编号。"
+            ]
+          },
+          "id": "paperhangers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助生成客户沟通、缺项清单和检查记录草稿。"
+            ]
+          },
+          "id": "paperhangers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "不能替代现场尺寸、基层含水/缺陷、材料批次和图案方向核验。"
+            ]
+          },
+          "id": "paperhangers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "不能替代成品对花、接缝、气泡、边缘与污染检查。"
+            ]
+          },
+          "id": "paperhangers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "O*NET招聘数据只列Google Docs、Excel、Word三项软件。"
+            ]
+          },
+          "id": "paperhangers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "onet-tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "三项百分比均不可用，不能写成采用率。"
+            ]
+          },
+          "id": "paperhangers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "onet-tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "软件招聘提及不等于生成式AI已普遍采用，更不是替代率。"
+            ]
+          },
+          "id": "paperhangers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "onet-tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人的控制点是实物输入、规格、材料、成品质量和现场安全。"
+            ]
+          },
+          "id": "paperhangers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "本轮未找到中国大陆裱糊工全国精确工资分布。"
+            ]
+          },
+          "id": "paperhangers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "国家统计局2025资料按行业和人员大类聚合，不是47-2142.00职业中位数。"
+            ]
+          },
+          "id": "paperhangers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "该统计范围还不含个体工商户与自由职业者，不能覆盖所有承包/零工情境。"
+            ]
+          },
+          "id": "paperhangers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "核对真实报价时分开地区、雇佣或承包形态、计时/计件、基层处理、材料责任和项目难度。"
+            ]
+          },
+          "id": "paperhangers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "2025年美国年工资中位数为52,140美元，小时中位数25.07美元。"
+            ]
+          },
+          "id": "paperhangers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "年工资10/25/75/90分位为36,020/44,890/60,180/69,050美元。"
+            ]
+          },
+          "id": "paperhangers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "小时工资10/25/75/90分位为17.32/21.58/28.93/33.20美元。"
+            ]
+          },
+          "id": "paperhangers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "这些是美国47-2142.00总体统计，不是个人报价或项目单价。"
+            ]
+          },
+          "id": "paperhangers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "地区、雇佣形态、项目来源、工时和任务组合可影响个人收入。"
+            ]
+          },
+          "id": "paperhangers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "不把美国分位数换算成中国报价，也不把中位数当起薪。"
+            ]
+          },
+          "id": "paperhangers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "能持续做精确测量、裁切和边缘/图案对齐。"
+            ]
+          },
+          "id": "paperhangers.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "愿意处理基层、胶黏、接缝、气泡和返工线索。"
+            ]
+          },
+          "id": "paperhangers.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "能在站立、手部操作与梯架相关的工作情境中保持注意。"
+            ]
+          },
+          "id": "paperhangers.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "愿意把材料批次、表面条件和成品检查留成可复核记录。"
+            ]
+          },
+          "id": "paperhangers.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎信号：只喜欢最终图案，不愿处理基层和测量。"
+            ]
+          },
+          "id": "paperhangers.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎信号：对重复精细操作、对花或接缝检查缺乏耐心。"
+            ]
+          },
+          "id": "paperhangers.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎信号：在材料、表面或权限不明时仍凭经验继续。"
+            ]
+          },
+          "id": "paperhangers.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "用虚构工单审阅验证任务耐受度，不用性格标签替代试做。"
+            ]
+          },
+          "id": "paperhangers.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "梯架与高处：O*NET显示攀爬梯架和高处暴露；具体控制与停复工按现场程序。"
+            ]
+          },
+          "id": "paperhangers.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "污染物与胶黏/清理环境：O*NET记录污染物暴露；不从职业页推导化学品处置步骤。"
+            ]
+          },
+          "id": "paperhangers.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "裁切与小伤：O*NET记录割伤等暴露；工具、PPE与授权由现场规则确定。"
+            ]
+          },
+          "id": "paperhangers.risk.career-risk-cards.3",
+          "source_refs": [
+            "editorial",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "基层、材料或图案不一致：任务支持检查和对齐；返工、批准与客户沟通为项目责任。"
+            ]
+          },
+          "id": "paperhangers.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "编辑记录卡只写复核对象、责任人、复核时间、升级触发与对象，不规定现场停复工权限。"
+            ]
+          },
+          "id": "paperhangers.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "O*NET Job Zone 1-2：通常高中或GED，但部分岗位可能不要求。"
+            ]
+          },
+          "id": "paperhangers.path.career-path-block.1",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "相关经验从很少/无需到数月至一年不等；在职训练从数天到一年。"
+            ]
+          },
+          "id": "paperhangers.path.career-path-block.2",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "O*NET列出Paperhanger注册学徒职业名称示例。"
+            ]
+          },
+          "id": "paperhangers.path.career-path-block.3",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "全国认证发现页显示未找到认证；这不证明州或地方要求不存在。"
+            ]
+          },
+          "id": "paperhangers.path.career-path-block.4",
+          "source_refs": [
+            "onet-cert"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七日试做：识表面、量尺寸、审基层、排图案、核材料、写检查卡、复盘缺项，全程只用虚构资料。"
+            ]
+          },
+          "id": "paperhangers.path.career-path-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品1：一页虚构工单七字段审阅表，标已知、未知和升级安排。"
+            ]
+          },
+          "id": "paperhangers.path.career-path-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品2：一页虚构对花/接缝质量检查表，不提供施工参数。"
+            ]
+          },
+          "id": "paperhangers.path.career-path-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "试做和作品不等于学徒录取、雇主训练、认证、执照或现场授权。"
+            ]
+          },
+          "id": "paperhangers.path.career-path-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "2024年美国就业约2,300人。"
+            ]
+          },
+          "id": "paperhangers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "2024—2034预计增长5%—6%，快于平均。"
+            ]
+          },
+          "id": "paperhangers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "期间预计空缺200；空缺包含增长与替代，不是净增人数。"
+            ]
+          },
+          "id": "paperhangers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "行业分布：专业科学技术服务39%、建筑20%、其他41%。"
+            ]
+          },
+          "id": "paperhangers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "onet-industry"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "职业选择还要核对地区、项目来源、雇佣/承包形态和现场要求。"
+            ]
+          },
+          "id": "paperhangers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "O*NET 47-2142.00的主干是准备墙面或顶面、测量裁切墙纸/织物、施胶对花、压平接缝并检查成品，也可移除旧材料或张贴广告海报。",
+                "id": "paperhangers.faq.1",
+                "question_key": "career.faq.paperhangers.daily-work",
+                "source_refs": [
+                  "onet-details"
+                ]
+              },
+              {
+                "answer": "47-2142.00覆盖墙面或顶面装饰材料；47-2041.00的核心对象是地面地毯、衬垫、接缝、拉伸与固定，两者按安装表面和最终交付区分。",
+                "id": "paperhangers.faq.2",
+                "question_key": "career.faq.paperhangers.role-comparison",
+                "source_refs": [
+                  "onet-carpet",
+                  "onet-details"
+                ]
+              },
+              {
+                "answer": "适配与谨慎信号是任务导向的自我观察，不是性格诊断或录用结论。",
+                "id": "paperhangers.faq.3",
+                "question_key": "career.faq.paperhangers.fit",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "O*NET 2025美国招聘数据只列Google Docs、Excel、Word三项软件且百分比均不可用，不能据此声称生成式AI普及率或岗位替代率。",
+                "id": "paperhangers.faq.4",
+                "question_key": "career.faq.paperhangers.ai-impact",
+                "source_refs": [
+                  "onet-tech"
+                ]
+              },
+              {
+                "answer": "AI可帮助整理估料清单、图案编号、缺项记录和沟通草稿；人必须复核实物尺寸、基层、批次、对花、成品质量与现场安全。",
+                "id": "paperhangers.faq.5",
+                "question_key": "career.faq.paperhangers.human-control",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "国家统计局2025工资资料按行业和人员大类聚合，且不含个体工商户与自由职业者，不能当作裱糊工全国精确工资。",
+                "id": "paperhangers.faq.6",
+                "question_key": "career.faq.paperhangers.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "O*NET展示的2025 BLS数据：美国年工资中位数52,140美元，10/25/75/90分位为36,020/44,890/60,180/69,050美元；小时中位数25.07美元。",
+                "id": "paperhangers.faq.7",
+                "question_key": "career.faq.paperhangers.us-pay",
+                "source_refs": [
+                  "onet-wages"
+                ]
+              },
+              {
+                "answer": "O*NET将该职业列为Job Zone 1-2，通常高中或GED、数天至一年在职训练，并列有Paperhanger注册学徒职业名称示例。",
+                "id": "paperhangers.faq.8",
+                "question_key": "career.faq.paperhangers.education-path",
+                "source_refs": [
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "发现表面、材料、图案、环境或权限条件不明时，编辑建议仅记录复核对象、责任人、复核时间和升级触发/对象；实际停复工按现场现行程序。",
+                "id": "paperhangers.faq.9",
+                "question_key": "career.faq.paperhangers.risk-boundary",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "O*NET/BLS列出2024年就业2,300，2024—2034增长5%—6%，期间预计空缺200；空缺包含增长与替代。",
+                "id": "paperhangers.faq.10",
+                "question_key": "career.faq.paperhangers.outlook-transition",
+                "source_refs": [
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "职业判断还要核对地区、雇佣/承包形态、项目来源、表面材料和现场要求；总体预测不等于个人录用概率。",
+                "id": "paperhangers.faq.11",
+                "question_key": "career.faq.paperhangers.career-worth",
+                "source_refs": [
+                  "editorial"
+                ]
+              }
+            ]
+          },
+          "id": "paperhangers.sources.faq.1",
+          "source_refs": [
+            "editorial",
+            "nbs-wages",
+            "onet-carpet",
+            "onet-details",
+            "onet-summary",
+            "onet-tech",
+            "onet-wages"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "美国47-2142.00事实不外推为中国职业映射、工资、合同或现场授权。",
+              "候选页只提供职业理解和虚构桌面练习；施工方法、材料参数、PPE和停复工服从现场现行规则。"
+            ]
+          },
+          "id": "paperhangers.sources.boundary.1",
+          "source_refs": [
+            "editorial",
+            "nbs-wages",
+            "onet-carpet",
+            "onet-cert",
+            "onet-details",
+            "onet-industry",
+            "onet-summary",
+            "onet-tech",
+            "onet-wages"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "裱糊工",
+                "id": "paperhangers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "裱糊工",
+                "id": "paperhangers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "裱糊工",
+                "id": "paperhangers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "裱糊工",
+                "id": "paperhangers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "裱糊工",
+                "id": "paperhangers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "裱糊工",
+                "id": "paperhangers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "裱糊工",
+                "id": "paperhangers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "裱糊工",
+                "id": "paperhangers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "裱糊工",
+                "id": "paperhangers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "裱糊工",
+                "id": "paperhangers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "裱糊工",
+                "id": "paperhangers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "paperhangers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "候选页编辑设计。",
+                  "仅支持候选页编辑判断和虚构桌面练习，不支持现场施工、停复工权限或法定授权。"
+                ],
+                "evidence_type": "editorial exercise and decision framework",
+                "id": "editorial",
+                "limitation": "仅支持候选页编辑判断和虚构桌面练习，不支持现场施工、停复工权限或法定授权。",
+                "market": "编辑设计",
+                "name": "FermatMind — 裱糊工候选页编辑设计",
+                "period": "2026-09-06",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn48view0 lines 39-51, 229-274, 338-360。",
+                  "行业与人员大类聚合，不是裱糊工精确工资；且统计范围不含个体工商户和自由职业者。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "nbs-wages",
+                "limitation": "行业与人员大类聚合，不是裱糊工精确工资；且统计范围不含个体工商户和自由职业者。",
+                "market": "中国大陆",
+                "name": "国家统计局 — 2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 wage aggregates published 2026",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn46view0 lines 50-58, 123-145, 193-226。",
+                  "仅用于所列职业、市场、时期与统计口径，不跨职业或跨法域外推。"
+                ],
+                "evidence_type": "official adjacent occupation details",
+                "id": "onet-carpet",
+                "limitation": "仅用于所列职业、市场、时期与统计口径，不跨职业或跨法域外推。",
+                "market": "美国",
+                "name": "O*NET OnLine — Carpet Installers 47-2041.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-2041.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn44view5 lines 50-56。",
+                  "仅用于所列职业、市场、时期与统计口径，不跨职业或跨法域外推。"
+                ],
+                "evidence_type": "official certification discovery",
+                "id": "onet-cert",
+                "limitation": "仅用于所列职业、市场、时期与统计口径，不跨职业或跨法域外推。",
+                "market": "美国",
+                "name": "O*NET OnLine — National Certifications 47-2142.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localcert/47-2142.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn43view0 lines 50-58, 122-148, 150-236; turn44view6 lines 237-314; turn45view3 lines 1146-1172; turn45view4 lines 997-1042。",
+                  "仅用于所列职业、市场、时期与统计口径，不跨职业或跨法域外推。"
+                ],
+                "evidence_type": "official occupation details",
+                "id": "onet-details",
+                "limitation": "仅用于所列职业、市场、时期与统计口径，不跨职业或跨法域外推。",
+                "market": "美国",
+                "name": "O*NET OnLine — Paperhangers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-2142.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn44view0 lines 50-62。",
+                  "仅用于所列职业、市场、时期与统计口径，不跨职业或跨法域外推。"
+                ],
+                "evidence_type": "official industry distribution",
+                "id": "onet-industry",
+                "limitation": "仅用于所列职业、市场、时期与统计口径，不跨职业或跨法域外推。",
+                "market": "美国",
+                "name": "O*NET OnLine — Industries 47-2142.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/47-2142.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn44view3 lines 276-319; turn45view0 lines 428-459。",
+                  "仅用于所列职业、市场、时期与统计口径，不跨职业或跨法域外推。"
+                ],
+                "evidence_type": "official occupation summary and workforce data",
+                "id": "onet-summary",
+                "limitation": "仅用于所列职业、市场、时期与统计口径，不跨职业或跨法域外推。",
+                "market": "美国",
+                "name": "O*NET OnLine — Paperhangers Summary",
+                "period": "2024-2034 projections; 2025 wages",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-2142.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn44view1 lines 50-61。",
+                  "仅用于所列职业、市场、时期与统计口径，不跨职业或跨法域外推。"
+                ],
+                "evidence_type": "official technology profile",
+                "id": "onet-tech",
+                "limitation": "仅用于所列职业、市场、时期与统计口径，不跨职业或跨法域外推。",
+                "market": "美国",
+                "name": "O*NET OnLine — Hot Technologies 47-2142.00",
+                "period": "2025 US job postings",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/47-2142.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn44view2 lines 50-80。",
+                  "仅用于所列职业、市场、时期与统计口径，不跨职业或跨法域外推。"
+                ],
+                "evidence_type": "O*NET display of BLS wage data",
+                "id": "onet-wages",
+                "limitation": "仅用于所列职业、市场、时期与统计口径，不跨职业或跨法域外推。",
+                "market": "美国",
+                "name": "O*NET OnLine — National Wages 47-2142.00",
+                "period": "2025 BLS wage data",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/47-2142.00"
+              }
+            ]
+          },
+          "id": "paperhangers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "不可跨法域外推（2025行业/人员大类）",
+        "fact_id": "cn-cross-market-boundary",
+        "market": "中国大陆",
+        "measure": "cross-jurisdiction wage boundary",
+        "occupation_scope": "行业代理数据；no exact CN mapping for Paperhangers",
+        "period": "2025 wage aggregates published 2026",
+        "source_refs": [
+          "nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "documented_unavailable（无本职业精确统计）",
+        "fact_id": "cn-wage-unavailable",
+        "market": "中国大陆",
+        "measure": "occupation wage availability",
+        "occupation_scope": "行业代理数据；no exact CN mapping for Paperhangers",
+        "period": "2025 wage aggregates published 2026",
+        "source_refs": [
+          "nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "全国认证页未找到认证；不外推州/地方要求",
+        "fact_id": "credential-boundary",
+        "market": "美国",
+        "measure": "qualification boundary",
+        "occupation_scope": "精确职业数据：47-2142.00",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-cert"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2024就业2,300；2024—2034增长5%—6%；预计空缺200",
+        "fact_id": "employment-projection",
+        "market": "美国",
+        "measure": "employment projection measure",
+        "occupation_scope": "精确职业数据：47-2142.00",
+        "period": "2024-2034 projections; 2025 wages",
+        "source_refs": [
+          "onet-summary"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET 47-2142.00",
+        "fact_id": "occupation-identity",
+        "market": "美国",
+        "measure": "official occupation identity",
+        "occupation_scope": "精确职业数据：47-2142.00",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-details"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025年中位数$52,140/年，$25.07/小时",
+        "fact_id": "us-wage",
+        "market": "美国",
+        "measure": "wage measure",
+        "occupation_scope": "精确职业数据：47-2142.00",
+        "period": "2025 BLS wage data",
+        "source_refs": [
+          "onet-wages"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "ac0505e81b4ac6f8f6350b10cef96a0edf98d556b31a43754eac1b4c1185ae94",
+  "source_content_sha256": "32386627a347a83d74aa7b3e16bfde7ac59ed45110cb19962ab564b4b5f20474",
   "subject": {
     "canonical_slug": "paperhangers",
     "name": "裱糊工",
-    "summary": null
+    "summary": "裱糊工把基层核对、测量裁切、施胶对花、压平接缝与成品检查组成可复核的饰面安装闭环。"
   }
 }

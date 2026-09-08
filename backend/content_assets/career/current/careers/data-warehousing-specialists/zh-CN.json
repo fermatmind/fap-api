@@ -1,12 +1,1583 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：数据仓库专家把多个源系统的业务数据转成口径一致、可追溯、可重复装载且便于分析的数据层；价值在模型、转换、质量、性能和用户可信度同时成立。"
+            ]
+          },
+          "id": "data-warehousing-specialists.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "onet-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "适合信号：你愿意追问字段语义，能复算行数与金额，喜欢把失败模式变成自动测试，并能和业务及平台团队维护数据契约。"
+            ]
+          },
+          "id": "data-warehousing-specialists.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial-dws",
+            "onet-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：如果你只想写一次查询，不愿处理迟到数据、重跑、权限、血缘和口径争议，应先做小型装载练习再判断。"
+            ]
+          },
+          "id": "data-warehousing-specialists.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial-dws",
+            "onet-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全试做：使用本页完全虚构的客户表和订单表，设计星型模型并按规则计算目标行数、金额与隔离记录；不用真实客户或生产凭据。"
+            ]
+          },
+          "id": "data-warehousing-specialists.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "身份：本页对应美国O*NET 15-1243.01数据仓库专家精确职业；工资和预测因统计映射限制，使用父类SOC 15-1243数据库架构师代理并显式标注。"
+            ]
+          },
+          "id": "data-warehousing-specialists.profile.definition-block.1",
+          "source_refs": [
+            "bls-dbarch-outlook",
+            "bls-dbarch-wage",
+            "onet-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "输入：源表模式、字段样本、业务定义、更新频率、主键、权限、服务等级、下游查询和历史故障。"
+            ]
+          },
+          "id": "data-warehousing-specialists.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-dws"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "任务：映射源字段，设计维度/事实模型，开发抽取转换装载，处理增量与迟到数据，建立质量和回归测试。"
+            ]
+          },
+          "id": "data-warehousing-specialists.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-dws"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "产出：模型图、映射表、数据契约、装载任务、测试报告、元数据/血缘、性能基线、故障手册和用户文档。"
+            ]
+          },
+          "id": "data-warehousing-specialists.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-dws"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断：目标粒度是什么，业务键是否稳定，重复与更正如何处理，事实何时可用，历史变化保留到哪一层。"
+            ]
+          },
+          "id": "data-warehousing-specialists.profile.work-context-block.1",
+          "source_refs": [
+            "editorial-dws",
+            "onet-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "流程：确认业务问题与粒度 → 盘点来源与权限 → 建模和映射 → 增量装载 → 质量/性能测试 → 发布与监控 → 支持用户。"
+            ]
+          },
+          "id": "data-warehousing-specialists.profile.work-context-block.2",
+          "source_refs": [
+            "onet-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "工具：SQL、编程语言、数据库/云仓库、集成与编排、版本控制、元数据、BI和监控工具；工具选择从数据量、延迟、成本与运维条件出发。"
+            ]
+          },
+          "id": "data-warehousing-specialists.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-dws",
+            "onet-hot"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "协作：与业务所有者、源系统、分析、平台、安全、隐私和财务团队确认定义、权限、变更窗口与验收。"
+            ]
+          },
+          "id": "data-warehousing-specialists.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "onet-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量：每个发布要核对行数、主键、空值、引用完整性、金额或数量汇总、迟到比例、重跑幂等和查询性能。"
+            ]
+          },
+          "id": "data-warehousing-specialists.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial-dws",
+            "onet-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "责任边界：仓库实现者不能单方面改变业务定义、开放敏感数据或覆盖生产历史；争议升级给数据所有者和相应治理角色。"
+            ]
+          },
+          "id": "data-warehousing-specialists.profile.definition-block.2",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "database-administrators",
+                "id": "dws.related.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/database-administrators"
+              },
+              {
+                "entity": "computer-systems-analysts",
+                "id": "dws.related.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/computer-systems-analysts"
+              },
+              {
+                "entity": "computer-network-architects",
+                "id": "dws.related.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/computer-network-architects"
+              },
+              {
+                "entity": "computer-and-information-systems-managers",
+                "id": "dws.related.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/computer-and-information-systems-managers"
+              }
+            ]
+          },
+          "id": "data-warehousing-specialists.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-dba",
+            "onet-dws",
+            "onet-itm",
+            "onet-net",
+            "onet-sys"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "数据库管理员更偏运行可用性、容量、备份、安全和故障恢复；数据仓库专家更偏分析模型、跨源装载和业务口径。"
+            ]
+          },
+          "id": "data-warehousing-specialists.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-dba",
+            "onet-dws",
+            "onet-itm",
+            "onet-net",
+            "onet-sys"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "系统分析师更偏组织流程与应用系统改进；数据仓库专家聚焦数据如何汇聚、转换、追溯并服务分析。"
+            ]
+          },
+          "id": "data-warehousing-specialists.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-dba",
+            "onet-dws",
+            "onet-itm",
+            "onet-net",
+            "onet-sys"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "网络架构师设计LAN、WAN和通信容量；数据仓库专家设计数据层结构、流水线和查询性能。"
+            ]
+          },
+          "id": "data-warehousing-specialists.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-dba",
+            "onet-dws",
+            "onet-itm",
+            "onet-net",
+            "onet-sys"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "IT经理规划和领导组织级技术活动与资源；数据仓库专家主要交付仓库技术方案和数据质量。"
+            ]
+          },
+          "id": "data-warehousing-specialists.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-dba",
+            "onet-dws",
+            "onet-itm",
+            "onet-net",
+            "onet-sys"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助：草拟SQL、字段映射、测试断言、文档和故障摘要；输出必须在隔离环境回归。"
+            ]
+          },
+          "id": "data-warehousing-specialists.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial-dws",
+            "onet-hot"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "能力边界：模型能生成候选转换，不能凭草稿证明业务语义、主键稳定性、历史正确性或权限合法。"
+            ]
+          },
+          "id": "data-warehousing-specialists.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用条件：先定义数据契约、测试集、敏感字段、错误阈值、审批人、回滚和成本上限。"
+            ]
+          },
+          "id": "data-warehousing-specialists.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数据控制：生产样本、客户标识和凭据不得进入未获批工具；尽量用合成模式与去标识样本。"
+            ]
+          },
+          "id": "data-warehousing-specialists.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工控制：复核来源字段、连接基数、过滤、时区、币种、舍入、增量水位和目标粒度。"
+            ]
+          },
+          "id": "data-warehousing-specialists.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "发布责任：数据所有者确认口径，平台或仓库负责人批准生产变更，安全/隐私角色处理敏感范围。"
+            ]
+          },
+          "id": "data-warehousing-specialists.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业解释：招聘技术提及率不是AI采用或岗位替代概率；父类就业预测也不能证明生成式AI因果。"
+            ]
+          },
+          "id": "data-warehousing-specialists.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial-dws",
+            "onet-hot"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "验证：比较人工与工具版本的行数、哈希、金额、错误分区、运行时间和查询计划，失败即回滚。"
+            ]
+          },
+          "id": "data-warehousing-specialists.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：官方行业工资来源未提供与O*NET 15-1243.01一一对应的中国全国职业工资分布。"
+            ]
+          },
+          "id": "data-warehousing-specialists.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "行业代理不能外推：信息传输、软件和信息技术服务业平均工资不是数据仓库专家职业中位数或个人报价。"
+            ]
+          },
+          "id": "data-warehousing-specialists.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较岗位时记录城市、行业、公司规模、云/本地栈、职责层级、固定与奖金/股票和统计时间。"
+            ]
+          },
+          "id": "data-warehousing-specialists.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "缺口只表示列明来源不能安全回答精确分布，不表示没有岗位或任何薪酬信息。"
+            ]
+          },
+          "id": "data-warehousing-specialists.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial-dws",
+            "nbs-wages"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国父类职业口径：O*NET 15-1243.01的工资映射到SOC 15-1243数据库架构师，不是数据仓库专家精确统计。"
+            ]
+          },
+          "id": "data-warehousing-specialists.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "bls-dbarch-wage",
+            "editorial-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国父类职业数据：SOC 15-1243数据库架构师2025年5月年薪中位数139,500美元。"
+            ]
+          },
+          "fact_refs": [
+            "wage-median"
+          ],
+          "id": "data-warehousing-specialists.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "bls-dbarch-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国父类职业数据：2025年5月最低10%低于86,240美元，最高10%高于204,000美元。"
+            ]
+          },
+          "fact_refs": [
+            "wage-range"
+          ],
+          "id": "data-warehousing-specialists.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "bls-dbarch-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "不能把父类分布写成15-1243.01精确工资，也不能当作入门、地区、税后或个人保证。"
+            ]
+          },
+          "id": "data-warehousing-specialists.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "bls-dbarch-wage",
+            "editorial-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "报价还取决于行业、地点、职责、平台规模、值班、奖金/股票和合同性质。"
+            ]
+          },
+          "id": "data-warehousing-specialists.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "期间边界：2025年5月工资与2025—2035预测不同，增长率不能直接乘到个人工资。"
+            ]
+          },
+          "id": "data-warehousing-specialists.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "bls-dbarch-outlook",
+            "bls-dbarch-wage",
+            "editorial-dws"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "语义追问：能把“收入”“活跃客户”等词拆成粒度、过滤、时区、币种和更正规则。"
+            ]
+          },
+          "id": "data-warehousing-specialists.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial-dws",
+            "onet-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "映射耐心：愿意逐字段核对类型、空值、代码表和来源所有者。"
+            ]
+          },
+          "id": "data-warehousing-specialists.fit.riasec-fit-block.2",
+          "source_refs": [
+            "onet-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "失败重跑：喜欢设计幂等键、水位和隔离区，而不是手工改结果。"
+            ]
+          },
+          "id": "data-warehousing-specialists.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial-dws",
+            "onet-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "复算习惯：用行数、主键、金额和抽样记录证明装载正确。"
+            ]
+          },
+          "id": "data-warehousing-specialists.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial-dws",
+            "onet-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "性能权衡：能在新鲜度、成本、资源和查询速度之间说明选择。"
+            ]
+          },
+          "id": "data-warehousing-specialists.fit.riasec-fit-block.5",
+          "source_refs": [
+            "onet-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "沟通适配：能让业务确认定义，也能让平台团队复现故障。"
+            ]
+          },
+          "id": "data-warehousing-specialists.fit.riasec-fit-block.6",
+          "source_refs": [
+            "onet-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "变更克制：Schema漂移时先评估消费者和回填，再发布兼容变更。"
+            ]
+          },
+          "id": "data-warehousing-specialists.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "测评边界：工具熟悉度和兴趣只能帮助提问，不能替代作品、代码审阅和上线反馈。"
+            ]
+          },
+          "id": "data-warehousing-specialists.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "Schema漂移：字段改名或类型变化会让装载失败或静默截断；契约检测失败即停批次并通知源系统所有者。"
+            ]
+          },
+          "id": "data-warehousing-specialists.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "重复与重跑：非幂等装载会重复计算收入；以业务键和批次键去重，重跑前核对目标分区。"
+            ]
+          },
+          "id": "data-warehousing-specialists.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "迟到或孤儿数据：事实早于维度会破坏连接；进入隔离区，记录原因并按规则补维或重放。"
+            ]
+          },
+          "id": "data-warehousing-specialists.risk.career-risk-cards.3",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "敏感字段越权：错误暴露会伤害用户和组织；执行最小权限、列级控制、审计和数据所有者审批。"
+            ]
+          },
+          "id": "data-warehousing-specialists.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "指标口径错配：同名指标不同过滤或时区会误导决策；维护语义定义、血缘和验收样例，争议不私改。"
+            ]
+          },
+          "id": "data-warehousing-specialists.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "美国BLS父类职业路径（职业页2026-08-27更新，访问2026-09-06）：数据库管理员和架构师通常需要计算机或信息技术相关学士学位并理解SQL；这是父类职业口径。"
+            ]
+          },
+          "fact_refs": [
+            "path-parent"
+          ],
+          "id": "data-warehousing-specialists.path.career-path-block.1",
+          "source_refs": [
+            "bls-dbarch-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "美国O*NET 15-1243.01精确职业数据（页面2026更新，访问2026-09-06）：Job Zone Four，多数相关职业需要四年制学士学位，且通常需要数年相关经验或训练。"
+            ]
+          },
+          "fact_refs": [
+            "path-exact"
+          ],
+          "id": "data-warehousing-specialists.path.career-path-block.2",
+          "source_refs": [
+            "onet-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "虚构材料：客户表为C1/东区、C2/西区。订单为O1-C1-2026-09-01-100-完成；O2-C1-同日-50-完成；一行完全重复O2；O3-C2-2026-09-02-80-取消；O4-C3-同日-40-完成；O5-C2-日期缺失-20-完成。"
+            ]
+          },
+          "id": "data-warehousing-specialists.path.career-path-block.3",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "规则与任务：目标事实表每个订单一行，只接收完成、客户存在、日期有效的订单；完全重复保留一行，多余重复行进入隔离记录；孤儿客户和缺日期进入隔离；取消订单排除。画客户/日期维度与订单事实，计算接收、隔离、排除的行数和原始记录金额，并核对三类金额之和。"
+            ]
+          },
+          "id": "data-warehousing-specialists.path.career-path-block.4",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "参考：接收O1和一行O2，共2行、原始记录金额150；隔离多余重复O2、孤儿O4、缺日期O5，共3行、原始记录金额110；排除取消O3，共1行、原始记录金额80。输入6行原始记录金额合计340，满足150+110+80=340；这些金额只用于分流核对，不代表有效业务收入。事实粒度为每个订单ID，接收事实只关联客户C1与日期2026-09-01。"
+            ]
+          },
+          "id": "data-warehousing-specialists.path.career-path-block.5",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七日体验：第1天抄表；第2天定粒度；第3天画模型；第4天写映射；第5天写断言；第6天对照接收2行/150、隔离3行/110、排除1行/80，并核对总额340；第7天记录错误。金额仅作原始记录分流核对，全程复用同一材料。"
+            ]
+          },
+          "id": "data-warehousing-specialists.path.career-path-block.6",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品交付：模型图、字段映射、伪SQL或SQL、质量断言、隔离表和README；禁止真实客户数据、密钥或生产连接。"
+            ]
+          },
+          "id": "data-warehousing-specialists.path.career-path-block.7",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "成长证据：从可复算装载推进到数据契约、增量编排、血缘、性能和语义治理；不以年限保证晋升。"
+            ]
+          },
+          "id": "data-warehousing-specialists.path.career-path-block.8",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国父类职业数据：SOC 15-1243数据库架构师就业从2025年69,500人预计增至2035年76,000人。"
+            ]
+          },
+          "fact_refs": [
+            "market"
+          ],
+          "id": "data-warehousing-specialists.market-signals.market-signal-card.1",
+          "source_refs": [
+            "bls-dbarch-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国父类职业数据：2025—2035年增长9%、净增6,500人；不能写成15-1243.01精确预测。"
+            ]
+          },
+          "fact_refs": [
+            "market"
+          ],
+          "id": "data-warehousing-specialists.market-signals.market-signal-card.2",
+          "source_refs": [
+            "bls-dbarch-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "BLS认为组织改进系统和采用AI时，需要高质量数据基础设施支撑设计、迁移、备份与安全；这是父类需求背景。"
+            ]
+          },
+          "id": "data-warehousing-specialists.market-signals.market-signal-card.3",
+          "source_refs": [
+            "bls-dbarch-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "年均7,300个空缺是数据库管理员与架构师合并口径，不是数据仓库专家或数据库架构师单独数值。"
+            ]
+          },
+          "id": "data-warehousing-specialists.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editorial-dws"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "判断边界：全国父类预测不保证地区或个人机会，应结合岗位粒度、平台规模、数据治理责任和当地招聘样本。"
+            ]
+          },
+          "id": "data-warehousing-specialists.market-signals.market-signal-card.5",
+          "source_refs": [
+            "bls-dbarch-outlook",
+            "editorial-dws"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "核心任务包括来源系统映射、抽取和装载、转换规则、仓库结构、元数据、质量验证、测试脚本、性能权衡、故障排查和用户支持。",
+                "id": "data-warehousing-specialists.faq.1",
+                "question_key": "career.faq.data-warehousing-specialists.daily-work",
+                "source_refs": [
+                  "onet-dws"
+                ]
+              },
+              {
+                "answer": "数据库管理员偏运行性能与容量，系统分析师偏业务系统和流程，网络架构师偏数据通信网络，IT经理偏组织级计划与人员资源；数据仓库专家偏分析数据层的模型、装载、质量和可用性。",
+                "id": "data-warehousing-specialists.faq.2",
+                "question_key": "career.faq.data-warehousing-specialists.role-comparison",
+                "source_refs": [
+                  "onet-dba",
+                  "onet-dws",
+                  "onet-itm",
+                  "onet-net",
+                  "onet-sys"
+                ]
+              },
+              {
+                "answer": "工作要求把业务定义翻译为来源映射、转换、模型和测试，持续检查准确性，并向技术与业务用户解释数据。 适配度要通过可复算的小型数据仓库作品、代码审阅和需求反馈验证；工具清单或人格测评不能替代交付质量。",
+                "id": "data-warehousing-specialists.faq.3",
+                "question_key": "career.faq.data-warehousing-specialists.fit",
+                "source_refs": [
+                  "editorial-dws",
+                  "onet-dws"
+                ]
+              },
+              {
+                "answer": "O*NET 2025美国招聘信息提及Excel 25%、SQL 16%、Power BI 9%、Python 7%和Tableau 5%；这是职位广告提及率，不是AI采用率。 AI可草拟SQL、映射和测试，但必须在隔离数据上对照数据契约、行数、主键、金额、迟到数据、权限和性能基线回归；未经数据所有者批准不得发布。",
+                "id": "data-warehousing-specialists.faq.4",
+                "question_key": "career.faq.data-warehousing-specialists.ai-impact",
+                "source_refs": [
+                  "editorial-dws",
+                  "onet-hot"
+                ]
+              },
+              {
+                "answer": "AI可草拟SQL、映射和测试，但必须在隔离数据上对照数据契约、行数、主键、金额、迟到数据、权限和性能基线回归；未经数据所有者批准不得发布。 Schema漂移、重复装载、迟到数据、孤儿键、敏感字段越权和指标口径错配都会污染下游；控制应包括契约、幂等键、隔离区、血缘、权限和数据所有者升级。",
+                "id": "data-warehousing-specialists.faq.5",
+                "question_key": "career.faq.data-warehousing-specialists.human-control",
+                "source_refs": [
+                  "editorial-dws"
+                ]
+              },
+              {
+                "answer": "中国官方行业工资来源没有建立与O*NET 15-1243.01一一对应的全国职业工资分布，因此暂无可安全使用的数据来展示精确职业中位数或分位数。",
+                "id": "data-warehousing-specialists.faq.6",
+                "question_key": "career.faq.data-warehousing-specialists.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "美国BLS父类SOC 15-1243数据库架构师2025年5月年薪中位数为139,500美元；它是数据仓库专家的父类职业代理。 美国BLS父类SOC 15-1243数据库架构师2025年5月最低10%低于86,240美元，最高10%高于204,000美元。 父类职业分布不能写成数据仓库专家精确工资，也不代表入门、地区、税后或个人报价。",
+                "id": "data-warehousing-specialists.faq.7",
+                "question_key": "career.faq.data-warehousing-specialists.us-pay",
+                "source_refs": [
+                  "bls-dbarch-wage",
+                  "editorial-dws"
+                ]
+              },
+              {
+                "answer": "美国BLS父类数据库管理员和架构师通常需要计算机或信息技术相关学士学位，并需要理解SQL。 O*NET把15-1243.01列为Job Zone Four：多数职业需要四年制学士学位，并通常需要数年相关经验或训练。",
+                "id": "data-warehousing-specialists.faq.8",
+                "question_key": "career.faq.data-warehousing-specialists.education-path",
+                "source_refs": [
+                  "bls-dbarch-path",
+                  "onet-dws"
+                ]
+              },
+              {
+                "answer": "O*NET把15-1243.01列为Job Zone Four：多数职业需要四年制学士学位，并通常需要数年相关经验或训练。",
+                "id": "data-warehousing-specialists.faq.9",
+                "question_key": "career.faq.data-warehousing-specialists.credentials",
+                "source_refs": [
+                  "onet-dws"
+                ]
+              },
+              {
+                "answer": "Schema漂移、重复装载、迟到数据、孤儿键、敏感字段越权和指标口径错配都会污染下游；控制应包括契约、幂等键、隔离区、血缘、权限和数据所有者升级。",
+                "id": "data-warehousing-specialists.faq.10",
+                "question_key": "career.faq.data-warehousing-specialists.risk-boundary",
+                "source_refs": [
+                  "editorial-dws"
+                ]
+              },
+              {
+                "answer": "美国BLS父类SOC 15-1243数据库架构师就业从2025年69,500人预计增至2035年76,000人，增长9%，净增6,500人。 父类预测不能变成15-1243.01精确就业概率；BLS年均7,300个空缺是数据库管理员与架构师合并口径，也不能错配。",
+                "id": "data-warehousing-specialists.faq.11",
+                "question_key": "career.faq.data-warehousing-specialists.outlook-transition",
+                "source_refs": [
+                  "bls-dbarch-outlook",
+                  "editorial-dws"
+                ]
+              },
+              {
+                "answer": "工作要求把业务定义翻译为来源映射、转换、模型和测试，持续检查准确性，并向技术与业务用户解释数据。 父类预测不能变成15-1243.01精确就业概率；BLS年均7,300个空缺是数据库管理员与架构师合并口径，也不能错配。",
+                "id": "data-warehousing-specialists.faq.12",
+                "question_key": "career.faq.data-warehousing-specialists.career-worth",
+                "source_refs": [
+                  "editorial-dws",
+                  "onet-dws"
+                ]
+              }
+            ]
+          },
+          "id": "data-warehousing-specialists.sources.faq.1",
+          "source_refs": [
+            "bls-dbarch-outlook",
+            "bls-dbarch-path",
+            "bls-dbarch-wage",
+            "editorial-dws",
+            "nbs-wages",
+            "onet-dba",
+            "onet-dws",
+            "onet-hot",
+            "onet-itm",
+            "onet-net",
+            "onet-sys"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "本页对应美国O*NET 15-1243.01精确职业；美国工资和预测使用父类SOC 15-1243数据库架构师代理并显式披露。",
+              "中国行业代理、美国父类统计、招聘技术提及和编辑练习分别陈述。",
+              "订单练习完全虚构，不使用真实客户、生产凭据或线上系统。"
+            ]
+          },
+          "id": "data-warehousing-specialists.sources.boundary.1",
+          "source_refs": [
+            "bls-dbarch-outlook",
+            "bls-dbarch-path",
+            "bls-dbarch-wage",
+            "editorial-dws",
+            "nbs-wages",
+            "onet-dba",
+            "onet-dws",
+            "onet-hot",
+            "onet-itm",
+            "onet-net",
+            "onet-sys"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "数据仓库专家",
+                "id": "data-warehousing-specialists.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "数据仓库专家",
+                "id": "data-warehousing-specialists.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "数据仓库专家",
+                "id": "data-warehousing-specialists.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "数据仓库专家",
+                "id": "data-warehousing-specialists.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "数据仓库专家",
+                "id": "data-warehousing-specialists.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "数据仓库专家",
+                "id": "data-warehousing-specialists.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "数据仓库专家",
+                "id": "data-warehousing-specialists.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "数据仓库专家",
+                "id": "data-warehousing-specialists.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "数据仓库专家",
+                "id": "data-warehousing-specialists.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "数据仓库专家",
+                "id": "data-warehousing-specialists.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "数据仓库专家",
+                "id": "data-warehousing-specialists.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "data-warehousing-specialists.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持父类SOC 15-1243数据库架构师2025年69,500人、2035年76,000人、增长9%、净增6,500人。",
+                  "这是父类数据库架构师预测；页面年均7,300空缺是数据库管理员与架构师合并口径。"
+                ],
+                "evidence_type": "官方职业或劳动力资料",
+                "id": "bls-dbarch-outlook",
+                "limitation": "这是父类数据库架构师预测；页面年均7,300空缺是数据库管理员与架构师合并口径。",
+                "market": "美国",
+                "name": "Database Administrators and Architects, OOH",
+                "period": "2025—2035年预测；访问2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/ooh/computer-and-information-technology/database-administrators.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持数据库管理员与架构师通常需要计算机或信息技术相关学士学位，并理解SQL。",
+                  "父类职业典型路径，不是单个岗位硬性门槛。"
+                ],
+                "evidence_type": "官方职业或劳动力资料",
+                "id": "bls-dbarch-path",
+                "limitation": "父类职业典型路径，不是单个岗位硬性门槛。",
+                "market": "美国",
+                "name": "Database Administrators and Architects, OOH",
+                "period": "职业页2026-08-27更新；访问2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/ooh/computer-and-information-technology/database-administrators.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持父类SOC 15-1243数据库架构师2025年中位数139,500美元、最低10%低于86,240美元、最高10%高于204,000美元。",
+                  "这是父类数据库架构师数据，不是15-1243.01数据仓库专家精确工资。"
+                ],
+                "evidence_type": "官方职业或劳动力资料",
+                "id": "bls-dbarch-wage",
+                "limitation": "这是父类数据库架构师数据，不是15-1243.01数据仓库专家精确工资。",
+                "market": "美国",
+                "name": "Database Administrators and Architects, OOH",
+                "period": "2025年5月工资；访问2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/ooh/computer-and-information-technology/database-administrators.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持虚构订单仓库练习、风险控制、适配和职业体验方法。",
+                  "不支持外部工资、就业、教育、AI采用率或技术性能。"
+                ],
+                "evidence_type": "编辑设计",
+                "id": "editorial-dws",
+                "limitation": "不支持外部工资、就业、教育、AI采用率或技术性能。",
+                "market": "编辑设计",
+                "name": "数据仓库专家候选页编辑设计",
+                "period": "2026-09-06",
+                "publisher": "FermatMind candidate editorial",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "用于核对中国信息传输、软件和信息技术服务业工资代理与精确数据仓库专家职业之间的映射缺口。",
+                  "行业平均工资不是数据仓库专家职业中位数、分位数或个人报价。"
+                ],
+                "evidence_type": "official wage statistics",
+                "id": "nbs-wages",
+                "limitation": "行业平均工资不是数据仓库专家职业中位数、分位数或个人报价。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wages; published 2026-05-15; retrieved 2026-08-31",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持数据库管理员以运行、性能、容量、扩展和数据库安全为中心。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "官方职业或劳动力资料",
+                "id": "onet-dba",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "15-1242.00 - Database Administrators",
+                "period": "O*NET页面2026更新；访问2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-1242.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持精确职业身份、仓库建模、来源映射、装载转换、质量、元数据、测试、支持和教育情境。",
+                  "仅适用于O*NET 15-1243.01；页面工资和就业另映射父类Database Architects。"
+                ],
+                "evidence_type": "官方职业或劳动力资料",
+                "id": "onet-dws",
+                "limitation": "仅适用于O*NET 15-1243.01；页面工资和就业另映射父类Database Architects。",
+                "market": "美国",
+                "name": "15-1243.01 - Data Warehousing Specialists",
+                "period": "O*NET页面2026更新；访问2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-1243.01"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持招聘信息中Excel、SQL、Power BI、Python、Tableau等技术提及比例。",
+                  "招聘提及率不是技能重要性、采用率、熟练度或岗位需求因果。"
+                ],
+                "evidence_type": "官方职业或劳动力资料",
+                "id": "onet-hot",
+                "limitation": "招聘提及率不是技能重要性、采用率、熟练度或岗位需求因果。",
+                "market": "美国",
+                "name": "Hot Technologies: 15-1243.01",
+                "period": "美国招聘信息2025年；访问2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "recruitment_proxy",
+                "url": "https://www.onetonline.org/link/hot_tech/15-1243.01"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持IT经理以规划、协调和领导组织计算机活动为中心。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "官方职业或劳动力资料",
+                "id": "onet-itm",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "11-3021.00 - Computer and Information Systems Managers",
+                "period": "O*NET页面2026更新；访问2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-3021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持网络架构师以LAN、WAN和数据通信网络设计、容量与安全为中心。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "官方职业或劳动力资料",
+                "id": "onet-net",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "15-1241.00 - Computer Network Architects",
+                "period": "O*NET页面2026更新；访问2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-1241.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持系统分析师以组织系统、流程和应用问题分析及改进为中心。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "官方职业或劳动力资料",
+                "id": "onet-sys",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "15-1211.00 - Computer Systems Analysts",
+                "period": "O*NET页面2026更新；访问2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-1211.00"
+              }
+            ]
+          },
+          "id": "data-warehousing-specialists.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "O*NET 15-1243.01数据仓库专家",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业身份",
+        "occupation_scope": "精确职业数据：美国O*NET 15-1243.01",
+        "period": "O*NET页面2026更新；访问2026-09-06",
+        "source_refs": [
+          "onet-dws"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025年5月年薪中位数139,500美元",
+        "fact_id": "wage-median",
+        "market": "美国",
+        "measure": "年薪中位数",
+        "occupation_scope": "父类职业数据：美国SOC 15-1243数据库架构师",
+        "period": "2025年5月工资；访问2026-09-06",
+        "source_refs": [
+          "bls-dbarch-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "最低10%低于86,240美元；最高10%高于204,000美元",
+        "fact_id": "wage-range",
+        "market": "美国",
+        "measure": "工资分位",
+        "occupation_scope": "父类职业数据：美国SOC 15-1243数据库架构师",
+        "period": "2025年5月工资；访问2026-09-06",
+        "source_refs": [
+          "bls-dbarch-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "来源映射、转换、建模、测试与用户沟通",
+        "fact_id": "fit",
+        "market": "美国",
+        "measure": "工作活动",
+        "occupation_scope": "精确职业数据：美国O*NET 15-1243.01",
+        "period": "O*NET页面2026更新；访问2026-09-06",
+        "source_refs": [
+          "onet-dws"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "通常需要相关学士学位并理解SQL",
+        "fact_id": "path-parent",
+        "market": "美国",
+        "measure": "典型教育",
+        "occupation_scope": "父类职业数据：美国数据库管理员与架构师",
+        "period": "职业页2026-08-27更新；访问2026-09-06",
+        "source_refs": [
+          "bls-dbarch-path"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "Job Zone Four；通常需要四年制学士和数年相关经验或训练",
+        "fact_id": "path-exact",
+        "market": "美国",
+        "measure": "准备要求",
+        "occupation_scope": "精确职业数据：美国O*NET 15-1243.01",
+        "period": "O*NET页面2026更新；访问2026-09-06",
+        "source_refs": [
+          "onet-dws"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025年69,500人；2035年76,000人；增长9%",
+        "fact_id": "market",
+        "market": "美国",
+        "measure": "就业预测",
+        "occupation_scope": "父类职业数据：美国SOC 15-1243数据库架构师",
+        "period": "2025—2035年预测；访问2026-09-06",
+        "source_refs": [
+          "bls-dbarch-outlook"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "883d217d58a584421294334f00d0b84d3457fc32f1baabd92ed7c823bc980a28",
+  "source_content_sha256": "ad86529799433fa4629ed5b1593ae9241ab6a3e97f3458470d2830bf7e890582",
   "subject": {
     "canonical_slug": "data-warehousing-specialists",
     "name": "数据仓库专家",
-    "summary": null
+    "summary": "数据仓库专家把分散源系统转成可分析的数据层：定义粒度和模型，开发可重跑的抽取转换装载，验证质量与性能，维护元数据和血缘，并支持可信使用。"
   }
 }

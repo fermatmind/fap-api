@@ -1,12 +1,1580 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：这份工作不是“看到报码就换件”，而是把症状、测试、故障隔离、维修、复测和验收记录闭环。喜欢机械推理、精确测量并能对不安全条件说停的人值得纸面试做。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial-bus-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "可观察信号：拆件前保留症状和原始读数；新证据出现时会改诊断；维修后用同一标准复测；安全、设备或权限不明时不路试、不放行。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial-bus-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全工作样本（60分钟，仅纸面）：公交车报制动距离变长和动力不足；本题规定制动衬片门槛6毫米，右前记录4毫米；本题简化假设单个千斤顶承受全部8.6吨前轴载荷，拟用额定8吨千斤顶；报码提示增压不足但压力测试未做；工单预填“更换增压器并路试”。不得接触真实车辆或工具。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "ecfr-jacks",
+            "editorial-bus-simulation",
+            "fmcsa-brakes"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考推演：不得举升、路试、换件或放行。按题设，衬片低于门槛2毫米，千斤顶额定能力低于载荷0.6吨；制动安全未闭环；报码不能独立证明增压器故障，须补测试。输出事实、计算、冲突、未知、停止理由和所需授权角色。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "ecfr-jacks",
+            "editorial-bus-simulation",
+            "fmcsa-brakes"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业边界：O*NET 49-3031.00，诊断、调整、修理或大修公交车和卡车，或维护修理各类柴油发动机；不扩张为所有车辆或工程设备维修。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.definition-block.1",
+          "source_refs": [
+            "onet-bus-truck"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "投入对象：车辆与工单、症状和故障码、制动转向轮承、发动机传动排放系统、测量值、维修资料、工具和零件。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-bus-truck"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "可检查产出：有证据的故障隔离、获批维修、复测结果、未决异常、车辆状态和可追溯工单。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.responsibilities-block.2",
+          "source_refs": [
+            "editorial-bus-decision",
+            "onet-bus-truck"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "完整流程：确认症状—检查安全—测试隔离—获批维修—实施—复测—按授权路试或验收—记录交接。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.responsibilities-block.3",
+          "source_refs": [
+            "editorial-bus-decision"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断：症状与报码是否一致、测试是否足以定位、工具量程与支撑是否合适、关键系统是否达到标准、谁有路试与放行权限。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.work-context-block.1",
+          "source_refs": [
+            "editorial-bus-decision",
+            "onet-bus-truck"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "环境与节奏：车间、场站和道路测试之间切换，常见噪声、污染物、高低温、重部件、狭窄姿势和时间压力。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.work-context-block.2",
+          "source_refs": [
+            "onet-bus-truck"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "工具与材料：手动/动力工具、量具、压力表与诊断设备、千斤顶或举升设备、维修资料、零件和工单；名称不代表已受训。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "editorial-bus-decision",
+            "onet-bus-truck"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "协作链：司机或调度描述症状，服务顾问/车队授权工单，技师测试维修，零件与质量支持复核，合资格或授权角色处理制动检查、路试和放行。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "editorial-bus-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：故障原因与测试证据一致，维修范围获批，关键紧固/调整/保护状态有记录，同条件复测通过，未决风险明确交接。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial-bus-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "相邻边界：轻型汽车、农机、非发动机移动重型设备和机动艇维修共享部分机械技能，但车辆、工况、工具、系统和验收责任不同。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.profile.definition-block.2",
+          "source_refs": [
+            "onet-auto-tech",
+            "onet-farm-mech",
+            "onet-heavy-mech",
+            "onet-motorboat"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "automotive-service-technicians-and-mechanics",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/automotive-service-technicians-and-mechanics"
+              },
+              {
+                "entity": "farm-equipment-mechanics-and-service-technicians",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/farm-equipment-mechanics-and-service-technicians"
+              },
+              {
+                "entity": "mobile-heavy-equipment-mechanics-except-engines",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/mobile-heavy-equipment-mechanics-except-engines"
+              },
+              {
+                "entity": "motorboat-mechanics-and-service-technicians",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/motorboat-mechanics-and-service-technicians"
+              }
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-auto-tech",
+            "onet-bus-truck",
+            "onet-farm-mech",
+            "onet-heavy-mech",
+            "onet-motorboat"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "汽车维修技师主要面向轻型道路车辆；本职业更强调公交、卡车、车队停运和柴油发动机系统。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-auto-tech",
+            "onet-bus-truck",
+            "onet-farm-mech",
+            "onet-heavy-mech",
+            "onet-motorboat"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "农机维修围绕田间设备和季节工况；本职业围绕公交卡车与柴油动力的道路或车队服务。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-auto-tech",
+            "onet-bus-truck",
+            "onet-farm-mech",
+            "onet-heavy-mech",
+            "onet-motorboat"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "移动重型设备机械师（不含发动机）侧重工程/采矿等移动设备的非发动机系统；本职业明确包含柴油发动机维护修理。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-auto-tech",
+            "onet-bus-truck",
+            "onet-farm-mech",
+            "onet-heavy-mech",
+            "onet-motorboat"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "机动艇机械师面对船用动力、艇体接口和水上环境；柴油原理可能共享，但测试与验收场景不同。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-auto-tech",
+            "onet-bus-truck",
+            "onet-farm-mech",
+            "onet-heavy-mech",
+            "onet-motorboat"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助：故障码归类、维修资料检索、测试顺序提示、历史工单对照和记录草稿。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial-bus-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用条件：车辆型号、软件版本、传感器、维修资料、工具接口和权限可靠。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial-bus-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数据门槛：车辆ID、里程、症状、工况、单位、报码、测试读数和维修版本一致可追溯。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial-bus-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工控制：确认真实症状、安全连接测试设备、解释冲突读数、检查维修质量并决定是否停止。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial-bus-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余责任：工具不能确认举升支撑、部件损伤、制动安全、道路环境或放行权限。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial-bus-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "失败风险：旧资料、错误单位、报码过度解释和漏掉复测会制造虚假确定性。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial-bus-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业边界：软件清单和任务可辅助性不等于采用率、生产率或净岗位变化。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial-bus-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实践响应：先在虚构工单与非生产训练中验证建议，真实使用服从雇主变更和质量控制。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial-bus-ai"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：中国大陆暂无可安全使用的数据来表示与O*NET 49-3031.00精确对应的全国职业工资分布。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：国家统计局2025资料按行业和宽泛岗位大类发布，不能替代同期职业中位数。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "计量单位：行业年平均、月薪、时薪、计件、夜班、加班和绩效不可混用。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "求职用法：统一地区、车队/维修厂、班次、工时、技能范围、试用期、福利和税前口径。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：O*NET展示美国49-3031.00全国工资。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-bus-truck"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：2025年BLS工资数据。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-bus-truck"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数：时薪29.70美元、年薪61,770美元，不是起薪。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-bus-truck"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "计量单位：时薪与年薪同源，个人总收入仍受工时、班次和加班影响。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-bus-truck"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "覆盖人群：全国统计不能代表每个地区、车队、维修组织和技能范围。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "onet-bus-truck"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "决策限制：统计值不是个人报价、录用或收入保证。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "onet-bus-truck"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "任务信号：愿意先确认症状和工单，再按测试证据缩小故障范围。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial-bus-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "测量信号：会记录单位、工况、原始值、标准和复测值。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial-bus-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "推理信号：报码只是线索，能区分已知、推断和待验证。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial-bus-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "质量信号：维修后按同一验收标准复测，不用“感觉好了”代替。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial-bus-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：为赶工跳过支撑、隔离、复测或记录会放大风险。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial-bus-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：若难以承受噪声、污染物、重体力、狭窄姿势或轮班，应比较实际场景。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial-bus-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "验证方法：独立完成本页固定故障卡和两张固定变体卡，不依赖他人临时出题。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial-bus-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "人格边界：喜欢机械或人格测评不证明胜任，诊断证据、安全判断和受监督绩效更重要。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial-bus-decision"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "举升载荷：工具额定能力不足、基础或支撑不明时不得举升或进入载荷下方；适用1910.244时遵守额定与固定要求。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.1",
+          "source_refs": [
+            "ecfr-jacks",
+            "editorial-bus-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "危险能量：电气、液压、气压、热能或机械储能未按现场程序控制时不得拆卸。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial-bus-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "制动与转向：关键缺陷未关闭不得路试或放行；适用Part 396的制动责任须由合资格人员承担。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.3",
+          "source_refs": [
+            "editorial-bus-risk",
+            "fmcsa-brakes"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "误诊换件：报码与症状冲突、测试未完成或资料版本不明时保留未知，不用换件制造闭环。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial-bus-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同规则：安全条件、测试证据、工具、资格或授权任一不明即停止、记录并升级；纸面练习不授予现场权限。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.risk.career-risk-cards.5",
+          "source_refs": [
+            "ecfr-jacks",
+            "editorial-bus-risk",
+            "fmcsa-brakes"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "现实入口：从受监督的保养、检查、工单和测量基础开始，再逐步进入制动、发动机、传动、排放或车队诊断。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.1",
+          "source_refs": [
+            "editorial-bus-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "雇主证据：核实车辆类型、第一阶段任务、工具训练、举升/能量控制、制动资格、路试与放行责任。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.2",
+          "source_refs": [
+            "editorial-bus-path",
+            "fmcsa-brakes"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品：完成本页虚构故障卡，展示原始读数、诊断树、停止判断、待验证项和复测模板。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.3",
+          "source_refs": [
+            "editorial-bus-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "面试与试用：解释为何按题设4毫米衬片、额定8吨千斤顶和未完成压力测试分别阻断路试、举升与换件。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.4",
+          "source_refs": [
+            "editorial-bus-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七天纸面体验只用本页故障卡：第1天抄录事实与未知；第2天复算4毫米与题设6毫米、额定8吨与题设8.6吨载荷的差；第3天画制动、举升、增压三条停止线；第4天做变体A（仅把千斤顶改为10吨），说明只消除了哪一项冲突；第5天做变体B（仅把衬片改为7毫米），说明其余未知为何仍在；第6天比较两版诊断树与复测栏；第7天复盘是否能坚持不靠报码换件、不越权路试。每天保留一页输出，不接触真实车辆或工具。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.5",
+          "source_refs": [
+            "editorial-bus-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "资格决策：课程、证书与学徒机会是线索；具体制动检查、设备、路试和放行权限按规则与雇主核验。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.6",
+          "source_refs": [
+            "editorial-bus-path",
+            "fmcsa-brakes"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "能力阶梯：先稳定保养与记录，再做系统测试和有限维修，最后承担复杂诊断、复测与协作。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.7",
+          "source_refs": [
+            "editorial-bus-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转型路径：可比较轻型汽车、农机、移动重型设备或机动艇维修，需补对应设备、环境与验收证据。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.path.career-path-block.8",
+          "source_refs": [
+            "editorial-bus-path"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "官方信号：O*NET提供美国职业、工资、行业和预测资料，不证明本地正在招聘。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.1",
+          "source_refs": [
+            "editorial-bus-market",
+            "onet-bus-truck"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "就业预测：2024—2034为慢于平均（1%至2%），年度空缺约26,500；空缺含替换。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.2",
+          "source_refs": [
+            "onet-bus-truck"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "招聘信号：样本只代表采样时间、地区、车辆类型、班次和技能组合。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.3",
+          "source_refs": [
+            "editorial-bus-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "技术信号：远程诊断和电动化可能改变任务，不等于所有车队已采用或净岗位变化。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editorial-bus-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "相邻转型：共享机械与诊断能力不等于新车辆、设备或责任已获授权。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editorial-bus-market"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "工作闭环是确认症状与工单、检查安全条件、测试并隔离故障、提出并获批维修、实施维修、重新测试、按授权条件路试或验收、记录交接。",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.faq.1",
+                "question_key": "career.faq.bus-and-truck-mechanics-and-diesel-engine-specialists.daily-work",
+                "source_refs": [
+                  "editorial-bus-decision"
+                ]
+              },
+              {
+                "answer": "本职业以公交卡车和柴油发动机为核心；轻型汽车、农机、非发动机移动重型设备和机动艇维修分别围绕不同车辆、使用环境、系统与验收责任。",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.faq.2",
+                "question_key": "career.faq.bus-and-truck-mechanics-and-diesel-engine-specialists.role-comparison",
+                "source_refs": [
+                  "onet-auto-tech",
+                  "onet-bus-truck",
+                  "onet-farm-mech",
+                  "onet-heavy-mech",
+                  "onet-motorboat"
+                ]
+              },
+              {
+                "answer": "适配度通过能否先测量再判断、按证据隔离故障、保留原始读数、复测维修结果并在安全或权限不明时停止升级来观察，不是人格结论。",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.faq.3",
+                "question_key": "career.faq.bus-and-truck-mechanics-and-diesel-engine-specialists.fit",
+                "source_refs": [
+                  "editorial-bus-decision"
+                ]
+              },
+              {
+                "answer": "数字工具可辅助故障码归类、维修资料检索、测试顺序提示、历史工单对照和记录草稿；不能确认真实部件状态、支撑稳定、制动安全或放行权限。",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.faq.4",
+                "question_key": "career.faq.bus-and-truck-mechanics-and-diesel-engine-specialists.ai-impact",
+                "source_refs": [
+                  "editorial-bus-ai"
+                ]
+              },
+              {
+                "answer": "人工控制点包括确认车辆和症状、选择并安全连接测试设备、解释相互矛盾的读数、检查维修质量，并由授权角色决定路试、复工或放行。",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.faq.5",
+                "question_key": "career.faq.bus-and-truck-mechanics-and-diesel-engine-specialists.human-control",
+                "source_refs": [
+                  "editorial-bus-ai"
+                ]
+              },
+              {
+                "answer": "国家统计局2025年资料提供行业和宽泛岗位大类，不能给出与O*NET 49-3031.00精确对应的中国大陆全国职业中位数、统一起薪或个人到手收入。",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.faq.6",
+                "question_key": "career.faq.bus-and-truck-mechanics-and-diesel-engine-specialists.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "O*NET展示2025年美国全国中位时薪29.70美元、年薪61,770美元；该全国中位数不是起薪或个人报价，不能替代地区、车队、班次、工时、技能范围和雇主条件。",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.faq.7",
+                "question_key": "career.faq.bus-and-truck-mechanics-and-diesel-engine-specialists.us-pay",
+                "source_refs": [
+                  "onet-bus-truck"
+                ]
+              },
+              {
+                "answer": "入门先学习工单、车辆识别、工具和测量基础、举升与危险能量边界，在完全虚构的纸面故障卡上展示诊断顺序、停止判断和复测记录；真实训练由雇主安排；课程、证书和学徒机会是能力线索；具体设备、车辆系统、制动检查、道路测试和最终放行权限由适用规则与雇主核验。",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.faq.8",
+                "question_key": "career.faq.bus-and-truck-mechanics-and-diesel-engine-specialists.education-path",
+                "source_refs": [
+                  "editorial-bus-path"
+                ]
+              },
+              {
+                "answer": "关键风险包括未固定举升载荷、危险能量、误诊换件、制动或转向缺陷、污染物高温表面、未经条件确认的路试和越权放行；条件不明即停止记录并升级；在29 CFR 1910.244适用范围内，千斤顶须有足够额定能力；载荷升起后须立即用垫架、垫块或其他方式固定，失效千斤顶须标记并停用。",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.faq.9",
+                "question_key": "career.faq.bus-and-truck-mechanics-and-diesel-engine-specialists.risk-boundary",
+                "source_refs": [
+                  "ecfr-jacks",
+                  "editorial-bus-risk"
+                ]
+              },
+              {
+                "answer": "O*NET/BLS将49-3031.00的2024—2034增长列为慢于平均（1%至2%）；这不是个人就业概率；O*NET/BLS显示49-3031.00在2024—2034年的年度空缺约26,500个；空缺含增长与替换，不等于净新增。",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.faq.10",
+                "question_key": "career.faq.bus-and-truck-mechanics-and-diesel-engine-specialists.outlook-transition",
+                "source_refs": [
+                  "onet-bus-truck"
+                ]
+              },
+              {
+                "answer": "职业工资、就业预测、年度空缺、车队结构、招聘样本和诊断技术采用是不同信号，不能合并为个人录用或收入保证；适配度通过能否先测量再判断、按证据隔离故障、保留原始读数、复测维修结果并在安全或权限不明时停止升级来观察，不是人格结论。",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.faq.11",
+                "question_key": "career.faq.bus-and-truck-mechanics-and-diesel-engine-specialists.career-worth",
+                "source_refs": [
+                  "editorial-bus-decision",
+                  "editorial-bus-market"
+                ]
+              }
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.sources.faq.1",
+          "source_refs": [
+            "ecfr-jacks",
+            "editorial-bus-ai",
+            "editorial-bus-decision",
+            "editorial-bus-market",
+            "editorial-bus-path",
+            "editorial-bus-risk",
+            "nbs-wages",
+            "onet-auto-tech",
+            "onet-bus-truck",
+            "onet-farm-mech",
+            "onet-heavy-mech",
+            "onet-motorboat"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "O*NET事实、美国统计、eCFR千斤顶条文、FMCSA制动指导和编辑建议分别陈述。",
+              "本页只供职业决策和纸面模拟，不构成真实车辆维修、举升、能量控制、制动检查、道路测试或放行指导。",
+              "中国精确职业工资暂无可安全使用的数据，不用行业或宽泛岗位均值填补。"
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.sources.boundary.1",
+          "source_refs": [
+            "ecfr-jacks",
+            "editorial-bus-ai",
+            "editorial-bus-decision",
+            "editorial-bus-market",
+            "editorial-bus-path",
+            "editorial-bus-risk",
+            "editorial-bus-simulation",
+            "fmcsa-brakes",
+            "nbs-wages",
+            "onet-auto-tech",
+            "onet-bus-truck",
+            "onet-farm-mech",
+            "onet-heavy-mech",
+            "onet-motorboat"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "公交卡车机械师发动机专员",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "公交卡车机械师发动机专员",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "公交卡车机械师发动机专员",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "公交卡车机械师发动机专员",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "公交卡车机械师发动机专员",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "公交卡车机械师发动机专员",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "公交卡车机械师发动机专员",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "公交卡车机械师发动机专员",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "公交卡车机械师发动机专员",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "公交卡车机械师发动机专员",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "公交卡车机械师发动机专员",
+                "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对千斤顶额定能力、支撑、检查和停用要求。",
+                  "仅限该条适用范围；不替代举升机或雇主程序。"
+                ],
+                "evidence_type": "current eCFR regulation text",
+                "id": "ecfr-jacks",
+                "limitation": "仅限该条适用范围；不替代举升机或雇主程序。",
+                "market": "美国",
+                "name": "29 CFR 1910.244 - Other portable tools and equipment",
+                "period": "current regulation; accessed 2026-09-06",
+                "publisher": "eCFR / Office of the Federal Register",
+                "scope": "exact",
+                "url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1910/subpart-P/section-1910.244"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成现场维修、道路测试、检查资格或车辆放行授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-bus-ai",
+                "limitation": "不构成现场维修、道路测试、检查资格或车辆放行授权。",
+                "market": "全球",
+                "name": "柴油车辆数字工具控制建议",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成现场维修、道路测试、检查资格或车辆放行授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-bus-decision",
+                "limitation": "不构成现场维修、道路测试、检查资格或车辆放行授权。",
+                "market": "全球",
+                "name": "柴油车辆维修职业决策",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成现场维修、道路测试、检查资格或车辆放行授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-bus-market",
+                "limitation": "不构成现场维修、道路测试、检查资格或车辆放行授权。",
+                "market": "全球",
+                "name": "柴油车辆市场信号边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成现场维修、道路测试、检查资格或车辆放行授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-bus-path",
+                "limitation": "不构成现场维修、道路测试、检查资格或车辆放行授权。",
+                "market": "全球",
+                "name": "柴油车辆入门试做路径",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成现场维修、道路测试、检查资格或车辆放行授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-bus-risk",
+                "limitation": "不构成现场维修、道路测试、检查资格或车辆放行授权。",
+                "market": "全球",
+                "name": "柴油车辆非监管风险建议",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成现场维修、道路测试、检查资格或车辆放行授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-bus-simulation",
+                "limitation": "不构成现场维修、道路测试、检查资格或车辆放行授权。",
+                "market": "全球",
+                "name": "柴油车辆纸面诊断模拟",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对商用机动车制动检查人员资格与记录边界。",
+                  "指导页声明不能替代法规；仅在Part 396适用的承运人和责任范围内使用。"
+                ],
+                "evidence_type": "official compliance guidance",
+                "id": "fmcsa-brakes",
+                "limitation": "指导页声明不能替代法规；仅在Part 396适用的承运人和责任范围内使用。",
+                "market": "美国",
+                "name": "FMCSA Motor Carrier Safety Planner - Brake Inspector Qualifications (396.25)",
+                "period": "current guidance; accessed 2026-09-06",
+                "publisher": "Federal Motor Carrier Safety Administration",
+                "scope": "exact",
+                "url": "https://csa.fmcsa.dot.gov/SafetyPlanner/MyFiles/SubSections.aspx?ch=22&eta=40693&sec=65&sub=149"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对中国行业和宽泛岗位工资口径。",
+                  "不能替代本职业精确工资。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "nbs-wages",
+                "limitation": "不能替代本职业精确工资。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wages; published 2026-05-15; accessed 2026-09-06",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-auto-tech",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "49-3023.00 - Automotive Service Technicians and Mechanics",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/49-3023.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对身份、任务、环境、准备、工资与预测。",
+                  "仅限该O*NET职业和美国统计。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-bus-truck",
+                "limitation": "仅限该O*NET职业和美国统计。",
+                "market": "美国",
+                "name": "49-3031.00 - Bus and Truck Mechanics and Diesel Engine Specialists",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/49-3031.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-farm-mech",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "49-3041.00 - Farm Equipment Mechanics and Service Technicians",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/49-3041.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-heavy-mech",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "49-3042.00 - Mobile Heavy Equipment Mechanics, Except Engines",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/49-3042.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-motorboat",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "49-3051.00 - Motorboat Mechanics and Service Technicians",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/49-3051.00"
+              }
+            ]
+          },
+          "id": "bus-and-truck-mechanics-and-diesel-engine-specialists.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "精确职业数据：O*NET 49-3031.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业代码与身份",
+        "occupation_scope": "公交卡车机械师发动机专员 / 49-3031.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-bus-truck"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "精确职业数据：车辆、系统、症状、测试、工具零件和工单",
+        "fact_id": "task-object",
+        "market": "美国",
+        "measure": "任务与对象",
+        "occupation_scope": "公交卡车机械师发动机专员 / 49-3031.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-bus-truck"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "纸面工作流：症状—测试隔离—获批维修—复测—交接",
+        "fact_id": "workflow",
+        "market": "全球",
+        "measure": "核心职责",
+        "occupation_scope": "公交卡车机械师发动机专员候选纸面工作流（编辑综合）",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "editorial-bus-decision"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "先测量、证据诊断、复测与停止升级",
+        "fact_id": "fit",
+        "market": "全球",
+        "measure": "可观察适配信号",
+        "occupation_scope": "公交卡车机械师发动机专员 / 49-3031.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "editorial-bus-decision"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "举升、能量、制动转向、误诊与放行",
+        "fact_id": "risk",
+        "market": "全球",
+        "measure": "风险控制边界",
+        "occupation_scope": "公交卡车机械师发动机专员 / 49-3031.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "editorial-bus-risk"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "dc638dbe9741eddb93d9106c86a27918d625c6ae13d37a1bd5e5ffac543000bc",
+  "source_content_sha256": "43aba8baffa3c64b2e03babf57e2e77a7f3f521650db40ea1983a49f85cd81ee",
   "subject": {
     "canonical_slug": "bus-and-truck-mechanics-and-diesel-engine-specialists",
     "name": "公交卡车机械师发动机专员",
-    "summary": null
+    "summary": "根据车辆症状、测试读数和维修资料隔离公交卡车或柴油发动机故障，完成获批维修、复测与记录，并在举升、制动或道路测试条件不明时停止升级。"
   }
 }

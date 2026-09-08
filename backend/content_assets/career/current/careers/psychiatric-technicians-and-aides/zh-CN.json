@@ -1,12 +1,2176 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "适合先体验的是愿意持续观察、准确交接并尊重服务对象的人。工作不是凭个人热心“治好别人”，而是在明确团队分工里完成有限、可靠的照护。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "bls-combined",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "先区分技术员与助手：前者的教育及可能持照范围不同，后者不能从同一页面的技术员任务获得授权。应先找清自己申请的真实岗位和法域。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "bls-combined",
+            "editor",
+            "license"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "选择时核排班、现场体力要求、培训和遇到变化时谁来接手。如果岗位把不具资格的新手当独立治疗人员，不能以“边干边学”掩盖权限缺口。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.quick-decision.fit-decision-checklist.3",
+          "source_refs": [
+            "bls-combined",
+            "cn-care",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "安全体验只使用入行模块P1时间线、P2交班片段和P3模拟报告规则，分清事实、推测与待澄清项，再填写交班及隐私检查。所有人物记录完全虚构；不接触患者、不收病历、不练诊断、给药、约束或危机处置。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.quick-decision.fit-decision-checklist.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "本页是有界合并：美国技术员29-2053.00与助手31-1133.00共同呈现，职责与工资分别说明。中国没有在本次来源中建立一对一资格等价，不能将译名当本地执照名称。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.profile.work-context-block.1",
+          "source_refs": [
+            "aide",
+            "cn-care",
+            "editor",
+            "tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "美国技术员接收专业人员指示、照护或治疗计划、既有记录和当班观察作为输入；日常工作包括观察身心状况、记录并报告变化，参与规定的康复或治疗活动，以及在本人资格和机构授权内完成照护任务。产出不是独立诊断，而是可追溯的观察、按计划完成的获授权工作及其反应记录，让医疗团队能据此接续判断。",
+              "加州是范围更明确的例子：持照技术员可做基础评估资料收集、参与计划、按照护或治疗计划执行干预并参与评价，也可在许可范围内提供基础护理、给药和自我照护教育；但始终在规定专业人员指导下工作，不是独立执业者，不能自行改计划、作诊断或开处方。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.profile.work-context-block.2",
+          "source_refs": [
+            "editor",
+            "license",
+            "tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "美国助手主要在护理或医疗人员指导下完成生活支持、饮食与清洁协助、院内陪同、活动参与和环境整理，同时留意行为与所在位置并报告异常。其交付是该班次已完成的支持事项、未完成或拒绝事项，以及可追溯的观察和转报状态；O*NET列出的某些可能临床任务不意味着每名助手都有资格，仍以当地规则、训练和机构授权为准。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.profile.work-context-block.3",
+          "source_refs": [
+            "aide",
+            "bls-combined",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "无论技术员还是助手，记录都应让接班人分清看见了什么、完成了什么、对方如何反应、已报告给谁和哪些事项仍未确认。这里把“记录可追溯、计划内工作有完成状态、反馈能被团队接续”作为编辑性的质量检查方法，不是全美统一法定绩效指标；不得把“故意找麻烦”等评价冒充客观观察。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.profile.work-context-block.4",
+          "source_refs": [
+            "aide",
+            "editor",
+            "tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断是识别自己无法确认或超出范围的变化，并交给负责专业人员。报告不等于诊断；中国精神障碍诊断应由精神科执业医师作出。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.profile.work-context-block.5",
+          "source_refs": [
+            "cn-law",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "活动支持可包括按团队安排协助参与，尊重对方选择与需要。是否调整治疗目标由相应专业人员判断，不能把让人服从活动当个人业绩。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.profile.work-context-block.6",
+          "source_refs": [
+            "bls-combined",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "交接时接收人需能追溯观察和已采取的获授权行动。涉及患者资料按机构规则保护，个人作品集不能使用真实病历或可识别人像。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.profile.work-context-block.7",
+          "source_refs": [
+            "bls-combined",
+            "cn-law",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "中国医疗护理员是不同的本地身份边界：经培训在医务人员指导下提供生活照护等，禁止医疗护理专业技术性工作。美国技术员可能给药的描述不能搬到中国护工招聘中。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.profile.work-context-block.8",
+          "source_refs": [
+            "cn-care",
+            "license"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "临床与咨询心理学家：工作涉及专业心理评估与干预；观察记录经验不能代替其教育和执业要求。 本页角色提供协助和观察；转向该方向需另核专业教育、资格与具体工作范围。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "bls-combined",
+            "editor",
+            "psych"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "心理健康咨询师：围绕心理健康问题开展咨询服务，专业咨询关系不同于生活照护协助。 本页角色提供协助和观察；转向该方向需另核专业教育、资格与具体工作范围。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "bls-combined",
+            "counselor",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "心理健康与物质滥用社会工作者：从社会心理需要、支持资源和服务衔接开展工作，须补社会工作评估与服务能力。 本页角色提供协助和观察；转向该方向需另核专业教育、资格与具体工作范围。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "bls-combined",
+            "editor",
+            "social"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "作业治疗师：以日常活动能力的评估和治疗为专业对象，陪同活动不等于独立作业治疗。 本页角色提供协助和观察；转向该方向需另核专业教育、资格与具体工作范围。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "bls-combined",
+            "editor",
+            "ot"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "临床与咨询心理学家",
+                "id": "psych",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/clinical-and-counseling-psychologists"
+              },
+              {
+                "entity": "心理健康咨询师",
+                "id": "counselor",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/mental-health-counselors"
+              },
+              {
+                "entity": "心理健康与物质滥用社会工作者",
+                "id": "social",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/mental-health-and-substance-abuse-social-workers"
+              },
+              {
+                "entity": "作业治疗师",
+                "id": "ot",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/occupational-therapists"
+              }
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "counselor",
+            "ot",
+            "psych",
+            "social"
+          ],
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "普通文本工具可以草拟材料或整理内容，但产品能力不等于临床可用。学习时可整理虚构交接笔记，不能将其说成已获准自动生成患者记录。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "copilot",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "把原始观察交给AI改写，可能让推测变成确定语句，或遗漏时间和报告对象。复核者需逐项比原记录，不能只看语言顺畅。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editor",
+            "nist"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用证据：本页没有分别针对技术员与助手的可靠全国AI使用率，也没有患者安全或净效率提升的职业级试验证据。医院采购工具不能直接当本岗位已采用。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "copilot",
+            "editor",
+            "r2-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数据控制：真实病历和可识别患者资料不能因为方便就进入个人外部工具。中国精神卫生法对可识别患者信息有保密要求，真实使用由机构按适用规则安排。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "cn-law",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "输出控制：未经确认的观察保留不确定性，工具建议不能修改照护计划、生成处方或决定限制性措施。问题交获授权专业人员，而不是由助手按模型回答执行。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "cn-care",
+            "cn-law",
+            "editor",
+            "license"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "记录责任：作者核实来源、事实和用语，团队复核具体照护含义。即使自动整理，也需要可追溯的人工确认，不能让工具署名替代责任人。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editor",
+            "nist"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余现场工作包括观察、沟通、生活支持和及时报告；这些任务受情境与监督影响。不能从可生成一段记录推导照护岗位整体可替代。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "bls-combined",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业证据另看BLS：两类子角色的预测不同，需求与照护组织安排有关。本页没有证据把这些差异归为AI造成，也不把整体增长理解成无风险。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "bls-aide",
+            "bls-tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "中国行业代理研究：2025年发表的单院回顾性研究使用346名住院精神分裂症患者资料，整合临床史与护理观察的模型报告AUC为0.8741。AUC衡量区分能力，不是个人暴力发生概率或87.41%的诊断准确率。研究按70/30划分内部训练与测试，没有外院验证；还排除了第一周发生相关事件者，不能概括全部患者。它未检验真实部署后的安全、工作用时或就业变化，也不支持把患者普遍视为危险。模型提示不能代替专业判断，更不赋予助手诊断或约束权限。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.ai-impact.ai-impact-table.9",
+          "source_refs": [
+            "r2-ai"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国本页精确对应工资：本页暂无可安全使用的数据。国家统计局2025公报未提供美国两子角色在中国的同口径工资，不能强行填合并数。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "精神科护士、医疗护理员和美国持照技术员不是同一身份，医院或卫生行业年平均工资也不能代替各自岗位的收入。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "cn-care",
+            "license",
+            "nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "看本地offer先核劳动关系、岗位职责、固定工资、夜班或加班安排及支付条件，再问培训和资格。待遇较高不能成为超范围工作的理由。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "cn-care",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国新增的是精神卫生机构护理员采购意向的月薪报价上限，尚未得到可核验的该岗录用工资或实发分布。美国两子角色与中国护理员分别保留，不以护士工资、采购总价或美元换算补空。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editor",
+            "r2-pay-1"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国行业代理资料：武汉市精神卫生中心2025-08-07的临床护理员外包服务推介公告，要求分项列护理工月薪且不得高于5000元/人/月；这是采购意向中的报价上限，不是录用报价、实际工资或全国工资。总服务报价还含社保、管理费等，不能全部算成员工收入；公告也说明推介不作为最终采购依据。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.china-salary.career-snapshot-primary-locale.5",
+          "source_refs": [
+            "r2-pay-1"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2025年5月精神科技术员年工资中位数45,130美元，是技术员子角色的精确职业数据，不能套给助手或中国护理员。"
+            ]
+          },
+          "fact_refs": [
+            "tech-pay"
+          ],
+          "id": "psychiatric-technicians-and-aides.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "bls-tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2025年5月精神科助手年工资中位数44,910美元，是助手子角色的精确职业数据，不是税后或保证起薪。"
+            ]
+          },
+          "fact_refs": [
+            "aide-pay"
+          ],
+          "id": "psychiatric-technicians-and-aides.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "bls-aide"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2025年5月技术员最低10%年工资低于35,090美元、最高10%高于60,750美元；这是技术员精确职业数据，不是初高级分级。"
+            ]
+          },
+          "fact_refs": [
+            "tech-range"
+          ],
+          "id": "psychiatric-technicians-and-aides.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "bls-tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2025年5月助手最低10%年工资低于32,090美元、最高10%高于60,440美元；这是助手精确职业数据，不能与技术员两端拼接成区间。"
+            ]
+          },
+          "fact_refs": [
+            "aide-range"
+          ],
+          "id": "psychiatric-technicians-and-aides.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "bls-aide"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2025–2035技术员与助手合并就业预计增长18%，年均约21,900空缺，为合并职业数据；包含替补，不是任一子角色每年净新增。"
+            ]
+          },
+          "fact_refs": [
+            "growth"
+          ],
+          "id": "psychiatric-technicians-and-aides.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "bls-combined"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "工资统计不含自雇，也不等于个人税后所得。技术员与助手中位数接近不证明职责、训练或权限相同；不得据此建议跳过资格路径。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "bls-combined",
+            "editor",
+            "oews"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "观察能力体现在描述变化而非迅速下结论。练习把评价性词语改成能复核的事实，并注明不知道的部分。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.fit.personality-fit-block.1",
+          "source_refs": [
+            "bls-combined",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "沟通首先是听见对方表达并尊重人格；不能用羞辱、威胁或把人当病名来推动配合。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.fit.personality-fit-block.2",
+          "source_refs": [
+            "cn-law",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "耐心不是独自承担所有困难。遇到超出能力范围的情况及时报告，是团队工作能力的一部分。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.fit.personality-fit-block.3",
+          "source_refs": [
+            "bls-combined",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "生活照护涉及持续、细致的辅助活动。若只对心理理论有兴趣而不愿处理日常支持，应先比较咨询、研究或其他方向的真实训练要求。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.fit.personality-fit-block.4",
+          "source_refs": [
+            "bls-combined",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "排班可能包含夜间、周末和节假日；求职时问具体安排与恢复时间，不从一条招聘推定全部机构相同。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.fit.personality-fit-block.5",
+          "source_refs": [
+            "bls-combined",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "体力要求与职业防护应由雇主说明、培训和评估。不要用搬动同伴或模拟约束来证明自己身体适合。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.fit.personality-fit-block.6",
+          "source_refs": [
+            "bls-combined",
+            "editor",
+            "infection"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "服务关系需要边界，不能以私人承诺、公开病历或越权建议来表达关心；用团队内可追溯的支持方式。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.fit.personality-fit-block.7",
+          "source_refs": [
+            "cn-law",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "体验后看是否能接受复核、如实承认遗漏并继续学习。人格测验和个人曾有何种经历都不能直接判定适合或不适合。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.fit.personality-fit-block.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "越权治疗：把观察解释成诊断、自行更改药物或照护计划，会把风险传给患者。先核执业身份与授权，临床决定交负责专业人员；加州技术员可在范围内给药并非自行处方，助手不能据标题继承。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.risk.career-risk-cards.1",
+          "source_refs": [
+            "cn-care",
+            "cn-law",
+            "editor",
+            "license"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "限制性措施误用：把不配合当理由自行约束或惩罚，会侵害患者权益。中国法律对保护性措施有严格条件并禁止惩罚用途；按机构专业团队制度报告和转交，本页不提供实施步骤。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.risk.career-risk-cards.2",
+          "source_refs": [
+            "cn-law",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "交接失真：把猜测写成事实或漏报变化，会误导后续判断。记录原观察、报告对象与未确认部分，由接班人员复核；AI改写后也要回查，不能补造“已评估正常”。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.risk.career-risk-cards.3",
+          "source_refs": [
+            "bls-combined",
+            "editor",
+            "nist"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "感染与体力风险：照护接触和搬动等工作需培训及防护。CDC标准预防适用于全部患者，不能污名化精神障碍群体；具体操作只在合格培训和机构安排下进行，体验不接触患者。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.risk.career-risk-cards.4",
+          "source_refs": [
+            "bls-combined",
+            "editor",
+            "infection"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "隐私与尊严：将真实案例发到社交平台或外部AI可能暴露身份。中国精神卫生法保护可识别患者信息；作品完全虚构，发现泄露按机构程序报告，不用删除聊天替代事件处理。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.risk.career-risk-cards.5",
+          "source_refs": [
+            "cn-law",
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "2026-09-05按雇主与职位编号去重，已核读加州JC-505721助手案例及JC-529771技术员案例，两个子角色分别记录。后者截止2026-09-16，前者保留原公告工作安排。中国武汉资料是临床护理员服务采购意向，单列机构职责案例，不计招聘样本；不计算全国需求比例。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.path.recruitment-sample.1",
+          "source_refs": [
+            "job",
+            "r2-care-boundary",
+            "r2-tech-job"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-role-comparison",
+          "data": {
+            "column_keys": [
+              "role",
+              "initial_tasks"
+            ],
+            "rows": [
+              [
+                "美国技术员",
+                "初期任务：按专业指示核对照护计划，完成获授权的观察、记录、活动或照护任务并报告反应；交付重点：计划项、完成状态、观察与转报可追溯；监督条件：按目标州许可、机构授权及专业人员指导工作"
+              ],
+              [
+                "美国助手",
+                "初期任务：协助饮食、清洁、穿着、陪同和活动，留意行为与位置变化；交付重点：支持事项是否完成、异常观察及报告对象清楚；监督条件：在护理或医疗人员指导下，不从任务清单推定临床权限"
+              ],
+              [
+                "中国本地照护岗位",
+                "初期任务：按本地岗位安排提供生活照护和辅助活动，发现情况向护士等负责人员报告；交付重点：生活支持与报告记录；监督条件：经培训考核并在医务人员指导下工作，禁止医疗护理专业技术性工作"
+              ]
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.path.entry-role-comparison.1",
+          "source_refs": [
+            "aide",
+            "bls-combined",
+            "cn-care",
+            "editor",
+            "license",
+            "license-status",
+            "r2-care-boundary",
+            "tech"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.employer-evidence",
+          "data": {
+            "entries": [
+              {
+                "id": "employer-0",
+                "values": [
+                  "雇主真正会看什么",
+                  "加州JC-505721助手案例要求CNA材料，涉及现场多班次、间歇性工作和监督下协作；不能推广为全美统一助手门槛，也不保证连续全时工作。"
+                ]
+              },
+              {
+                "id": "employer-1",
+                "values": [
+                  "编辑建议：展示记录与报告",
+                  "用P1/P2把事实、推测和未提供项分开；以P3记录报告接收状态，不增加任何临床措施。"
+                ]
+              },
+              {
+                "id": "employer-2",
+                "values": [
+                  "编辑建议：展示真实资格边界",
+                  "求职时仅列本人可核实的培训与资格，不伪造临床经历。本页纸面练习只产出记录，不代替资格。"
+                ]
+              }
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.path.employer-evidence.1",
+          "source_refs": [
+            "editor",
+            "job"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-portfolio",
+          "data": {
+            "entries": [
+              {
+                "id": "handover",
+                "values": [
+                  "记录整理包",
+                  "P1/P2原记录、事实/推测/未知表及改写",
+                  "原文保留，修订单另写，不造新观察"
+                ]
+              },
+              {
+                "id": "boundaries",
+                "values": [
+                  "转交问题包",
+                  "按P3填报告对象、问题和接收状态",
+                  "不由收到推断已评估，不提出临床措施"
+                ]
+              },
+              {
+                "id": "privacy",
+                "values": [
+                  "隐私检查包",
+                  "记录用途、必要字段、接收者与分享范围",
+                  "本题仅本页虚构文本，不找真实案例"
+                ]
+              }
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.path.entry-portfolio.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.interview-probation",
+          "data": {
+            "column_keys": [
+              "description",
+              "observed_evidence",
+              "boundary"
+            ],
+            "rows": [
+              [
+                "面试情境",
+                "解释何时报告而不是下结论",
+                "不声称自己能独立诊断"
+              ],
+              [
+                "入职交接",
+                "确认负责人、训练和可做任务",
+                "未获授权不补位医疗操作"
+              ],
+              [
+                "反馈复盘",
+                "展示遗漏如何改进",
+                "不改写原始记录掩盖错误"
+              ]
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.path.interview-probation.1",
+          "source_refs": [
+            "cn-care",
+            "editor",
+            "license"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-decision",
+          "data": {
+            "column_keys": [
+              "description",
+              "boundary"
+            ],
+            "rows": [
+              [
+                "美国技术员教育",
+                "通常高中后证书，部分州持照；核目标州和学校认可"
+              ],
+              [
+                "加州技术员执照",
+                "当前有效active方可执业；核真实执照状态与范围"
+              ],
+              [
+                "美国助手",
+                "高中常见；样本另要求CNA；以具体州和雇主要求核对"
+              ],
+              [
+                "中国医疗护理员",
+                "合格培训、指导下生活照护；不能替代卫生专业人员"
+              ]
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.path.credential-decision.1",
+          "source_refs": [
+            "bls-combined",
+            "cn-care",
+            "job",
+            "license-status"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-boundary",
+          "data": {
+            "paragraphs": [
+              "技术员学校训练、助手岗位CNA材料、执照当前有效状态和机构任务授权分别核实。中美资格不自动互认；中国医疗护理员培训不授予诊断、处方或医疗护理专业技术权限。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.path.credential-boundary.1",
+          "source_refs": [
+            "bls-combined",
+            "cn-care",
+            "cn-law",
+            "job",
+            "license-status"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "助手的能力发展可按“入职训练→稳定完成本岗生活支持与客观报告→在既有授权内承担更可靠的活动协助、交接或新人支持”理解；技术员则从按计划准确完成观察和获授权照护，逐步提高对反应记录、团队反馈和计划执行的可靠性。这个编辑框架描述任务与产出的变化，不是全美统一晋升阶梯，也不硬造高级职级。",
+              "助手不会因工作年限自动成为持照技术员；转技术员、护士或其他专业岗位，要按目的岗位重新核对教育、考试和资格。技术员经验增加也不会自动获得独立诊断、处方或治疗决策权限。加州只是持照技术员范围示例，不代表全美统一制度；中美资格不自动互认。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.path.career-path-block.1",
+          "source_refs": [
+            "bls-combined",
+            "cn-care",
+            "editor",
+            "job",
+            "license",
+            "r2-tech-job"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "中国机构职责案例：同一武汉公告要求护理员在护士长领导、护士指导下工作，经培训考核上岗，生活照护中发现情况向护士报告，禁止临床护理技术操作。供应商负责招聘和薪酬，医院并非在此直接招人。这支持核对监督、雇佣关系和任务边界，不能把采购人数算成当前职位，也不把机构条款推广为全国执业授权。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.path.career-path-block.2",
+          "source_refs": [
+            "r2-care-boundary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "美国招聘代理观察：加州DDS的JC-529771是Solano县现场、长期全职技术员岗位，报名截止2026-09-16，要求持有效Psychiatric Technician执照；职责含行为训练和精神科护理相关工作。它补足技术员的独立岗位案例，与前述间歇性助手分开。岗位位于发育障碍服务与危机支持场景，不能代表所有精神科病区，更不能由中国护理员培训直接取得其权限。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.path.career-path-block.3",
+          "source_refs": [
+            "r2-tech-job"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "练习简报：你是纯纸面记录整理者，目标是把P1原始观察和P2模糊交班整理成可追溯记录，并按P3将问题转给模拟负责人员。你不扮演临床决策者。只允许分类、保留原话、拟问题和报告；不作诊断、不建议药物或限制性措施、不修改照护计划。人物Q、时刻、场所、对话和报告流程完全虚构，未暗含诊断；无真实患者、病历、账号或联系方式。先填写，再看示范。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.path.entry-work-sample-data.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "material-14-0",
+                "values": [
+                  "P1 完全虚构时间线｜08:45｜记录者甲",
+                  "Q坐在阅读区椅子上，说“今天想在这儿坐一会儿”。没有提供其他表达或身体测量。"
+                ]
+              },
+              {
+                "id": "material-14-1",
+                "values": [
+                  "09:00｜记录者甲",
+                  "小组活动开始。甲未见Q进入活动室；未记录Q为何未进入，也未记录此前是否邀请或解释安排。"
+                ]
+              },
+              {
+                "id": "material-14-2",
+                "values": [
+                  "09:05｜记录者乙",
+                  "乙见Q在阅读区翻书。乙不知道08:45至09:05间全部活动；不得把这条写成一直在阅读区。"
+                ]
+              },
+              {
+                "id": "material-14-3",
+                "values": [
+                  "09:07｜记录者乙",
+                  "Q说“音乐有点响，我想安静一会儿”。没有提供睡眠、诊断、药物或其他临床信息。"
+                ]
+              },
+              {
+                "id": "material-14-4",
+                "values": [
+                  "09:08｜记录者乙",
+                  "乙把09:07原话转报给模拟当班负责护士；09:10收到“已收到”的回复。没有提供后续评估、计划变更或处理结果。"
+                ]
+              }
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.path.entry-work-sample-data.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "material-15-0",
+                "values": [
+                  "P2 09:12交班片段｜虚构",
+                  "“Q不配合活动，情绪有问题，可能昨晚没睡；已经跟护士说了，应该好了。”此片段是要审校的原文，不是可靠结论；请依据P1逐句指出支持与不支持。"
+                ]
+              },
+              {
+                "id": "material-15-1",
+                "values": [
+                  "P3 本题转交与隐私规则｜编辑设定",
+                  "记录整理者只向模拟当班负责护士拟报告；需要专业判断的问题由其接收后按机构职责转交。若未见回复，写未确认接收并拟再次联系负责人员；收到不等于已评估。仅在纸面写，不实际发送。隐私检查对象是来源、用途、必要字段和接收者；不去搜真实案例、不把实际病历放入个人社交群或外部工具。本题无任何危机判断任务。"
+                ]
+              }
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.path.entry-work-sample-data.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "任务与产出：对P1时刻和P2原句逐行写来源｜事实｜推测｜待澄清｜依据；再写交班问题单，列原话、报告对象、接收状态、未知及下一接收角色。隐私检查写是否全虚构、用途、必要字段、接收者、是否发送和个人稿保存/删除选择。本题不实际发送，不补诊断、药物或限制措施建议。保留原记录，整理稿另写；详细模板在扩展练习，本页字段即可完成。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.path.entry-work-sample-data.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "对照区：先按P1–P3独立填写，再看示范。示范只整理记录和转交问题，不是对Q的临床判断。",
+              "事实示范：08:45原话想坐一会儿；09:00甲未见进入活动室；09:05乙见翻书；09:07Q表达音乐响、想安静；09:08乙报告，09:10护士回复收到。不能写Q一直没离开，也不能把未见参加写成拒绝全部活动。",
+              "推测与未知示范：“不配合”“情绪有问题”“昨晚没睡”“应该好了”均没有P1支持。睡眠、未参加原因、是否获解释或邀请、后续专业评估都未提供。Q对声音的表达按原话保留，不据此推诊断。",
+              "交班示范：记录来自甲/乙和Q原话，09:07表达已报模拟负责护士且09:10收到；未见后续评估。拟交问题：是否需要补充活动邀请与安排记录？后续由谁更新接收/评估状态？这些是记录缺口，转负责人员判断，不指定治疗、药物或限制性措施。",
+              "隐私与复核示范：本题全虚构、仅代号Q，无真实病历或联系资料，纸面自查不发送。必要内容为时刻、来源、原话和接收状态；不加无关身份信息。保存个人练习稿供本次复盘，何时删除由本人选择，不冒充病历保存规则。不同记录顺序可接受，但原话、未知、权限与隐私不能丢。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.path.entry-work-sample-data.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "day-1",
+                "values": [
+                  "第一日",
+                  "读简报与P3",
+                  "产出：可做/不可做/转交角色卡；不继承临床权限"
+                ]
+              },
+              {
+                "id": "day-2",
+                "values": [
+                  "第二日",
+                  "读P1逐条分类",
+                  "产出：时间、观察者、原话与未知表；不把表达当诊断"
+                ]
+              },
+              {
+                "id": "day-3",
+                "values": [
+                  "第三日",
+                  "审P2模糊交班",
+                  "产出：逐词指出推测和无依据结论，列P1缺少什么"
+                ]
+              },
+              {
+                "id": "day-4",
+                "values": [
+                  "第四日",
+                  "按正文产出字段写交班与问题单",
+                  "产出：引用时刻、已报告状态、待澄清及接收对象；不作临床建议"
+                ]
+              },
+              {
+                "id": "day-5",
+                "values": [
+                  "第五日",
+                  "执行P3隐私检查",
+                  "产出：用途、接收者、字段和分享判断；不上传真实材料"
+                ]
+              },
+              {
+                "id": "day-6",
+                "values": [
+                  "第六日",
+                  "独立回查P1后看示范",
+                  "产出：遗漏与修改依据；收到不等于已评估"
+                ]
+              },
+              {
+                "id": "day-7",
+                "values": [
+                  "第七日",
+                  "整理两版及复盘",
+                  "产出：记录准确性、解释变化和精力描述；不生成职业适合分"
+                ]
+              }
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.path.seven-day-trial.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "对照原始时刻逐条检查有没有把“未见参加”改成拒绝所有活动，把原话变成推断。",
+              "对比初稿与修订稿：哪处漏来源、时间、接收状态或未知，为什么改；不覆盖原记录。",
+              "记录反复回查的地方和专注负担；不模拟患者，不做心理测评或职业适合评分。",
+              "保留待澄清不是试做失败；自行填诊断、药物或限制性措施才违反任务。继续学习时另核真实训练与资格。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.path.seven-day-decision.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国2025–2035技术员预计增长22%，助手预计增长2%；先看子角色，不能用合并18%给每个岗位承诺相同机会。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.market-signals.market-signal-card.1",
+          "source_refs": [
+            "bls-aide",
+            "bls-combined",
+            "bls-tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "BLS把技术员需求与精神健康及物质使用障碍照护联系起来，同时指出机构更多依赖技术员限制助手需求。这是官方预测解释，不是个体必然升职路径。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.market-signals.market-signal-card.2",
+          "source_refs": [
+            "bls-aide",
+            "bls-tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "本次加州助手样本显示现场、班次与资格材料的重要性；限期、间歇性职位不能作为稳定全时岗位增多的证据。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.market-signals.market-signal-card.3",
+          "source_refs": [
+            "job"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "文本AI工具资料没有证明两类岗位可减少多少人员或提高多少患者安全；本页不把医疗行业技术宣传转成就业替代率。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.market-signals.market-signal-card.4",
+          "source_refs": [
+            "copilot"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "转咨询、社会工作、心理学或作业治疗需分别完成专业训练与资格核查。照护接触能帮助理解服务环境，但不能自动变成治疗能力；中国转岗按当地身份重新核对。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.market-signals.market-signal-card.5",
+          "source_refs": [
+            "counselor",
+            "editor",
+            "ot",
+            "psych",
+            "social"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "美国技术员按专业指示和照护计划观察、记录、报告并完成获授权照护；助手主要做生活支持、陪同、活动和环境协助并报告变化。前者的专业范围不自动转给后者。",
+                "id": "psychiatric-technicians-and-aides.faq.1",
+                "question_key": "career.faq.psychiatric-technicians-and-aides.daily-work",
+                "source_refs": [
+                  "aide",
+                  "tech"
+                ]
+              },
+              {
+                "answer": "作业治疗师负责日常活动能力评估和治疗，陪同活动不等于独立治疗。",
+                "id": "psychiatric-technicians-and-aides.faq.2",
+                "question_key": "career.faq.psychiatric-technicians-and-aides.role-comparison",
+                "source_refs": [
+                  "ot"
+                ]
+              },
+              {
+                "answer": "需观察、耐心、沟通与团队合作，并考虑夜间周末班次和体力要求。",
+                "id": "psychiatric-technicians-and-aides.faq.3",
+                "question_key": "career.faq.psychiatric-technicians-and-aides.fit",
+                "source_refs": [
+                  "bls-combined"
+                ]
+              },
+              {
+                "answer": "已有整合护理观察的回顾性预测研究，但内部测试分数不等于临床有效、安全部署或岗位减少；工具不能扩大诊断和约束权限。",
+                "id": "psychiatric-technicians-and-aides.faq.4",
+                "question_key": "career.faq.psychiatric-technicians-and-aides.ai-impact",
+                "source_refs": [
+                  "editor",
+                  "r2-ai"
+                ]
+              },
+              {
+                "answer": "正文补充了武汉护理员采购意向的月薪报价上限；它不是录用工资或实发收入，也不能对应美国持照技术员。全国同口径工资仍缺。",
+                "id": "psychiatric-technicians-and-aides.faq.5",
+                "question_key": "career.faq.psychiatric-technicians-and-aides.china-pay",
+                "source_refs": [
+                  "nbs",
+                  "r2-pay-1"
+                ]
+              },
+              {
+                "answer": "美国2025年5月技术员年工资中位数45,130美元，助手44,910美元，两类应分别看。",
+                "id": "psychiatric-technicians-and-aides.faq.6",
+                "question_key": "career.faq.psychiatric-technicians-and-aides.us-pay",
+                "source_refs": [
+                  "bls-aide",
+                  "bls-tech"
+                ]
+              },
+              {
+                "answer": "美国技术员通常需要高中后证书教育，助手通常需要高中或同等学历；两者有在岗训练，部分州要求技术员持照。助手年限不会自动换成技术员资格，转换须重新核目的岗位要求。",
+                "id": "psychiatric-technicians-and-aides.faq.7",
+                "question_key": "career.faq.psychiatric-technicians-and-aides.education-path",
+                "source_refs": [
+                  "bls-combined"
+                ]
+              },
+              {
+                "answer": "加州技术员须持当前有效执照并在规定专业人员指导下工作，经验不会自动增加独立诊断、处方或治疗决策权限；中国医疗护理员是另一身份，须合格培训且禁止医疗护理专业技术性工作。",
+                "id": "psychiatric-technicians-and-aides.faq.8",
+                "question_key": "career.faq.psychiatric-technicians-and-aides.credentials",
+                "source_refs": [
+                  "cn-care",
+                  "license",
+                  "license-status"
+                ]
+              },
+              {
+                "answer": "中国精神障碍诊断由精神科执业医师作出，保护性措施不得用于惩罚；本页角色不能据译名独立诊疗。",
+                "id": "psychiatric-technicians-and-aides.faq.9",
+                "question_key": "career.faq.psychiatric-technicians-and-aides.risk-boundary",
+                "source_refs": [
+                  "cn-law",
+                  "editor"
+                ]
+              },
+              {
+                "answer": "美国2025–2035技术员预计增长22%，助手2%，不能混用子角色趋势。",
+                "id": "psychiatric-technicians-and-aides.faq.10",
+                "question_key": "career.faq.psychiatric-technicians-and-aides.outlook-transition",
+                "source_refs": [
+                  "bls-aide",
+                  "bls-tech"
+                ]
+              }
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.sources.faq.1",
+          "source_refs": [
+            "aide",
+            "bls-aide",
+            "bls-combined",
+            "bls-tech",
+            "cn-care",
+            "cn-law",
+            "editor",
+            "license",
+            "license-status",
+            "nbs",
+            "ot",
+            "r2-ai",
+            "r2-pay-1",
+            "tech"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "美国29-2053.00与31-1133.00为有界合并；子角色数据不合并成虚构单职业。",
+              "中国医疗护理员仅用于本地邻近职责界限，不声称中美资格等价；身份范围与执业监管不能用工资缺口代替。",
+              "全文为职业内容，体验仅用虚构资料，无患者接触、诊断、给药、约束或其他医疗操作教学。"
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.sources.boundary.1",
+          "source_refs": [
+            "aide",
+            "bls-aide",
+            "bls-combined",
+            "bls-tech",
+            "cn-care",
+            "cn-law",
+            "copilot",
+            "counselor",
+            "editor",
+            "infection",
+            "job",
+            "license",
+            "license-status",
+            "nbs",
+            "nist",
+            "oews",
+            "ot",
+            "psych",
+            "r2-ai",
+            "r2-care-boundary",
+            "r2-pay-1",
+            "r2-tech-job",
+            "social",
+            "tech"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "精神科技术员与助手",
+                "id": "psychiatric-technicians-and-aides.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "精神科技术员与助手",
+                "id": "psychiatric-technicians-and-aides.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "精神科技术员与助手",
+                "id": "psychiatric-technicians-and-aides.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "精神科技术员与助手",
+                "id": "psychiatric-technicians-and-aides.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "精神科技术员与助手",
+                "id": "psychiatric-technicians-and-aides.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "精神科技术员与助手",
+                "id": "psychiatric-technicians-and-aides.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "精神科技术员与助手",
+                "id": "psychiatric-technicians-and-aides.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "精神科技术员与助手",
+                "id": "psychiatric-technicians-and-aides.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "精神科技术员与助手",
+                "id": "psychiatric-technicians-and-aides.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "精神科技术员与助手",
+                "id": "psychiatric-technicians-and-aides.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "精神科技术员与助手",
+                "id": "psychiatric-technicians-and-aides.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "在护理和医疗人员指导下提供日常生活、陪同、活动和环境支持；监测行为与位置，记录并向专业人员报告观察。",
+                  "列出的可能任务不代表每个助手都可实施给药或限制性措施。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "aide",
+                "limitation": "列出的可能任务不代表每个助手都可实施给药或限制性措施。",
+                "market": "美国",
+                "name": "精神科助手职业档案",
+                "period": "2026访问",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/31-1133.00"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "助手年工资中位44910美元，低高十分位32090/60440，增长2%。",
+                  "仅助手，不套技术员；分位不是经验等级。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "bls-aide",
+                "limitation": "仅助手，不套技术员；分位不是经验等级。",
+                "market": "美国",
+                "name": "BLS助手子角色工资与预测",
+                "period": "2025工资；2025–2035预测",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/healthcare/psychiatric-technicians-and-aides.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "合并增长18%，年均21900空缺；BLS分别列出技术员的监测、报告及依指示照护，与助手的日常生活、陪同、活动和环境支持；两类均在医疗团队指导下工作。",
+                  "合并指标不能分配给任一子角色；空缺包含替补。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "bls-combined",
+                "limitation": "合并指标不能分配给任一子角色；空缺包含替补。",
+                "market": "美国",
+                "name": "BLS合并职业工作与预测",
+                "period": "2025–2035预测；2026职业说明",
+                "publisher": "BLS",
+                "scope": "combined_official",
+                "url": "https://www.bls.gov/ooh/healthcare/psychiatric-technicians-and-aides.htm"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "技术员年工资中位45130美元，低高十分位35090/60750，增长22%。",
+                  "仅技术员，不套助手；职业统计不证明个人已获许可。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "bls-tech",
+                "limitation": "仅技术员，不套助手；职业统计不证明个人已获许可。",
+                "market": "美国",
+                "name": "BLS技术员子角色工资与预测",
+                "period": "2025工资；2025–2035预测",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/healthcare/psychiatric-technicians-and-aides.htm"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "培训合格护理员在医务人员指导下提供生活照护、辅助活动；严禁医疗护理专业技术性工作。",
+                  "用于中国邻近岗位边界，不声称它等同美国任一子角色；OCR有乱码，核原件图像。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-care",
+                "limitation": "用于中国邻近岗位边界，不声称它等同美国任一子角色；OCR有乱码，核原件图像。",
+                "market": "中国",
+                "name": "加强医疗护理员培训和规范管理通知原件",
+                "period": "2019通知，2026核读原件第3页",
+                "publisher": "国家卫健委等部门；许昌卫健委原件",
+                "scope": "exact",
+                "url": "https://xcswjw.xuchang.gov.cn/BigFileUpLoadStorage/temp/2020-05-14/cdeb3ca9-e030-4dc3-a1f1-14dae06f78de/%E5%9B%BD%E5%8D%AB%E5%8C%BB%E5%8F%91%E3%80%942019%E3%80%9549%E5%8F%B7%E5%9B%BD%E5%AE%B6%E5%8D%AB%E7%94%9F%E5%81%A5%E5%BA%B7%E5%A7%94%E5%91%98%E4%BC%9A%E7%AD%895%E9%83%A8%E9%97%A8%E8%81%94%E5%90%88%E5%85%B3%E4%BA%8E%E5%8A%A0%E5%BC%BA%E5%8C%BB%E7%96%97%E6%8A%A4%E7%90%86%E5%91%98%E5%9F%B9%E8%AE%AD%E5%92%8C%E8%A7%84%E8%8C%83%E7%AE%A1%E7%90%86%E5%B7%A5%E4%BD%9C%E7%9A%84%E9%80%9A%E7%9F%A5.pdf"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "精神障碍诊断由精神科执业医师作出；患者尊严及信息保密；保护性措施有限定且不得用于惩罚。",
+                  "不是培训指南；不向助手授权独立诊断、限制自由或用药。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-law",
+                "limitation": "不是培训指南；不向助手授权独立诊断、限制自由或用药。",
+                "market": "中国",
+                "name": "精神卫生法2018修正文本",
+                "period": "2018修正，2026核读",
+                "publisher": "全国人大常委会；北京市卫健委转载",
+                "scope": "exact",
+                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992810.html"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "工具可创建、总结、问答和改写文档；用户需复核生成内容。",
+                  "厂商能力说明，不是本职业效率实验或采用率；许可和组织设置影响可用性。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "copilot",
+                "limitation": "厂商能力说明，不是本职业效率实验或采用率；许可和组织设置影响可用性。",
+                "market": "全球",
+                "name": "Word中Copilot常见问题",
+                "period": "2026访问的产品说明",
+                "publisher": "Microsoft",
+                "scope": "exact",
+                "url": "https://support.microsoft.com/en-us/word/frequently-asked-questions-about-copilot-in-word"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "围绕心理健康问题开展咨询服务，专业咨询关系不同于生活照护协助。",
+                  "美国相邻职业，不能推出中国同名资格或自动转岗。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "counselor",
+                "limitation": "美国相邻职业，不能推出中国同名资格或自动转岗。",
+                "market": "美国",
+                "name": "心理健康咨询师档案",
+                "period": "2026访问",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/21-1014.00"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "情境、作品、评价步骤与职业选择指导为本任务原创编辑设计；外部事实另建claim。",
+                  "不代表雇主规定、实证研究、资格课程或真实事故。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "editor",
+                "limitation": "不代表雇主规定、实证研究、资格课程或真实事故。",
+                "market": "全球",
+                "name": "精神科技术员与助手编辑设计",
+                "period": "2026-09-05",
+                "publisher": "本任务编辑",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "标准预防适用全部患者照护；依暴露评估、培训和防护用品防止感染传播。",
+                  "不是精神障碍患者特有风险标签，也不替代机构具体培训。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "infection",
+                "limitation": "不是精神障碍患者特有风险标签，也不替代机构具体培训。",
+                "market": "美国",
+                "name": "全部患者照护的标准预防",
+                "period": "2024页面，2026访问",
+                "publisher": "CDC",
+                "scope": "exact",
+                "url": "https://www.cdc.gov/infection-control/hcp/basics/standard-precautions.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "JC-505721助手，限期非连续全时安排，现场多班次，指导下辅助持照照护人员，要求CNA材料。",
+                  "单一加州发育中心助手岗位；不代表技术员或中国，不使用受临时薪酬调整影响的报价作统计。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "job",
+                "limitation": "单一加州发育中心助手岗位；不代表技术员或中国，不使用受临时薪酬调整影响的报价作统计。",
+                "market": "美国",
+                "name": "Porterville精神科技术员助手岗位",
+                "period": "2026-09-05访问",
+                "publisher": "California DDS",
+                "scope": "recruitment_proxy",
+                "url": "https://calcareers.ca.gov/CalHrPublic/Jobs/JobPostingPrint.aspx?jcid=505721"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "加州持照技术员不是独立执业者；在规定专业人员指导下进行基础评估资料收集、参与计划、按照护或治疗计划执行干预并参与评价，也可在范围内提供基础护理、给药和自我照护教育。",
+                  "仅加州技术员；不延伸到助手、中国护理员或独立处方。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "license",
+                "limitation": "仅加州技术员；不延伸到助手、中国护理员或独立处方。",
+                "market": "美国",
+                "name": "加州精神科技术员执业范围",
+                "period": "2026访问",
+                "publisher": "BVNPT",
+                "scope": "exact",
+                "url": "https://www.bvnpt.ca.gov/licensees/psychiatric_technician.shtml"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "合法执业要求当前有效active执照，过期或inactive不能执业。",
+                  "仅加州技术员与该委员会执照范围。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "license-status",
+                "limitation": "仅加州技术员与该委员会执照范围。",
+                "market": "美国",
+                "name": "加州执照状态核实",
+                "period": "2026访问",
+                "publisher": "BVNPT",
+                "scope": "exact",
+                "url": "https://bvnpt.ca.gov/consumers/license_verification.shtml"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "全国公报按单位类型、行业和宽岗位类别公布年平均工资，附方法与范围；未单列本页目标职业。",
+                  "宽岗位和行业数据不能直接替代本职业工资；不证明所有地方或雇主均无数据。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nbs",
+                "limitation": "宽岗位和行业数据不能直接替代本职业工资；不证明所有地方或雇主均无数据。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025",
+                "publisher": "国家统计局",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "描述虚构、数据隐私、人机配置风险与测试、监控等风险管理措施。",
+                  "跨场景自愿风险框架，不是职业准入法规或本职业事故率。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nist",
+                "limitation": "跨场景自愿风险框架，不是职业准入法规或本职业事故率。",
+                "market": "美国",
+                "name": "生成式人工智能风险管理画像",
+                "period": "2024",
+                "publisher": "NIST",
+                "scope": "exact",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "工资统计覆盖受薪雇员，不包括自雇；工资与预测就业范围不同。",
+                  "方法来源不提供本职业当前工资数值。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "oews",
+                "limitation": "方法来源不提供本职业当前工资数值。",
+                "market": "美国",
+                "name": "职业就业工资统计常见问题",
+                "period": "当前方法，2026访问",
+                "publisher": "美国劳工统计局",
+                "scope": "exact",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "以日常活动能力的评估和治疗为专业对象，陪同活动不等于独立作业治疗。",
+                  "美国相邻职业，不能推出中国同名资格或自动转岗。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "ot",
+                "limitation": "美国相邻职业，不能推出中国同名资格或自动转岗。",
+                "market": "美国",
+                "name": "作业治疗师档案",
+                "period": "2026访问",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-1122.00"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "工作涉及专业心理评估与干预；观察记录经验不能代替其教育和执业要求。",
+                  "美国相邻职业，不能推出中国同名资格或自动转岗。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "psych",
+                "limitation": "美国相邻职业，不能推出中国同名资格或自动转岗。",
+                "market": "美国",
+                "name": "临床与咨询心理学家档案",
+                "period": "2026访问",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/19-3033.00"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "中国行业代理研究：2025年发表的单院回顾性研究使用346名住院精神分裂症患者资料，整合临床史与护理观察的模型报告AUC为0.8741。AUC衡量区分能力，不是个人暴力发生概率或87.41%的诊断准确率。研究按70/30划分内部训练与测试，没有外院验证；还排除了第一周发生相关事件者，不能概括全部患者。它未检验真实部署后的安全、工作用时或就业变化，也不支持把患者普遍视为危险。模型提示不能代替专业判断，更不赋予助手诊断或约束权限。",
+                  "回顾性预测研究，非生成式AI、临床实施试验或职业替代证据；护理观察仍是输入。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "r2-ai",
+                "limitation": "回顾性预测研究，非生成式AI、临床实施试验或职业替代证据；护理观察仍是输入。",
+                "market": "中国",
+                "name": "Hierarchical machine learning model integrating clinical history and nursing observations",
+                "period": "2025-09-22发表；2021-07至2024-07病例",
+                "publisher": "研究作者 / Frontiers in Psychiatry",
+                "scope": "industry_proxy",
+                "url": "https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2025.1644341/full"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "中国机构职责案例：同一武汉公告要求护理员在护士长领导、护士指导下工作，经培训考核上岗，生活照护中发现情况向护士报告，禁止临床护理技术操作。供应商负责招聘和薪酬，医院并非在此直接招人。这支持核对监督、雇佣关系和任务边界，不能把采购人数算成当前职位，也不把机构条款推广为全国执业授权。",
+                  "单机构采购需求；上岗具体授权须另核，不能据此学习临床操作。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "r2-care-boundary",
+                "limitation": "单机构采购需求；上岗具体授权须另核，不能据此学习临床操作。",
+                "market": "中国",
+                "name": "武汉临床护理员服务职责与监督要求",
+                "period": "2025-08-07",
+                "publisher": "武汉市精神卫生中心",
+                "scope": "industry_proxy",
+                "url": "https://www.chinapsy.com/view_1901.html"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "中国行业代理资料：武汉市精神卫生中心2025-08-07的临床护理员外包服务推介公告，要求分项列护理工月薪且不得高于5000元/人/月；这是采购意向中的报价上限，不是录用报价、实际工资或全国工资。总服务报价还含社保、管理费等，不能全部算成员工收入；公告也说明推介不作为最终采购依据。",
+                  "尚非最终采购或招聘；不能形成实际收入区间；护理员不等同美国持照技术员。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "r2-pay-1",
+                "limitation": "尚非最终采购或招聘；不能形成实际收入区间；护理员不等同美国持照技术员。",
+                "market": "中国",
+                "name": "武汉市精神卫生中心临床护理员外包服务采购项目推介会公告",
+                "period": "2025-08-07",
+                "publisher": "武汉市精神卫生中心",
+                "scope": "industry_proxy",
+                "url": "https://www.chinapsy.com/view_1901.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "美国招聘代理观察：加州DDS的JC-529771是Solano县现场、长期全职技术员岗位，报名截止2026-09-16，要求持有效Psychiatric Technician执照；职责含行为训练和精神科护理相关工作。它补足技术员的独立岗位案例，与前述间歇性助手分开。岗位位于发育障碍服务与危机支持场景，不能代表所有精神科病区，更不能由中国护理员培训直接取得其权限。",
+                  "单一加州雇主案例；按执照及岗位监督执行；不是全国统一职位条件。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "r2-tech-job",
+                "limitation": "单一加州雇主案例；按执照及岗位监督执行；不是全国统一职位条件。",
+                "market": "美国",
+                "name": "California DDS Psychiatric Technician JC-529771",
+                "period": "2026-09；截止2026-09-16",
+                "publisher": "California Department of Developmental Services",
+                "scope": "recruitment_proxy",
+                "url": "https://calcareers.ca.gov/CalHrPublic/Jobs/JobPosting.aspx?JobControlId=529771"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "从社会心理需要、支持资源和服务衔接开展工作，须补社会工作评估与服务能力。",
+                  "美国相邻职业，不能推出中国同名资格或自动转岗。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "social",
+                "limitation": "美国相邻职业，不能推出中国同名资格或自动转岗。",
+                "market": "美国",
+                "name": "心理健康与物质滥用社会工作者档案",
+                "period": "2026访问",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/21-1023.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "依医师等专业人员指示照护；观察身心状况并向医护人员报告，可参与规定的康复或治疗活动、生活技能支持及获授权的给药。",
+                  "任务列表不是个人医疗授权；只对应技术员子角色。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "tech",
+                "limitation": "任务列表不是个人医疗授权；只对应技术员子角色。",
+                "market": "美国",
+                "name": "精神科技术员职业档案",
+                "period": "2026访问",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-2053.00"
+              }
+            ]
+          },
+          "id": "psychiatric-technicians-and-aides.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "29-2053.00",
+        "fact_id": "identity-tech",
+        "market": "美国",
+        "measure": "技术员代码",
+        "occupation_scope": "精确职业数据；精神科技术员子角色；29-2053.00",
+        "period": "2026访问",
+        "source_refs": [
+          "tech"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "31-1133.00",
+        "fact_id": "identity-aide",
+        "market": "美国",
+        "measure": "助手代码",
+        "occupation_scope": "精确职业数据；精神科助手子角色；31-1133.00",
+        "period": "2026访问",
+        "source_refs": [
+          "aide"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "45,130美元/年",
+        "fact_id": "tech-pay",
+        "market": "美国",
+        "measure": "技术员年工资中位数",
+        "occupation_scope": "精确职业数据；精神科技术员子角色；29-2053.00",
+        "period": "2025工资；2025–2035预测",
+        "source_refs": [
+          "bls-tech"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "44,910美元/年",
+        "fact_id": "aide-pay",
+        "market": "美国",
+        "measure": "助手年工资中位数",
+        "occupation_scope": "精确职业数据；精神科助手子角色；31-1133.00",
+        "period": "2025工资；2025–2035预测",
+        "source_refs": [
+          "bls-aide"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "35,090；60,750美元/年",
+        "fact_id": "tech-range",
+        "market": "美国",
+        "measure": "技术员低高十分位",
+        "occupation_scope": "精确职业数据；精神科技术员子角色；29-2053.00",
+        "period": "2025工资；2025–2035预测",
+        "source_refs": [
+          "bls-tech"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "32,090；60,440美元/年",
+        "fact_id": "aide-range",
+        "market": "美国",
+        "measure": "助手低高十分位",
+        "occupation_scope": "精确职业数据；精神科助手子角色；31-1133.00",
+        "period": "2025工资；2025–2035预测",
+        "source_refs": [
+          "bls-aide"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "18%；21,900个/年",
+        "fact_id": "growth",
+        "market": "美国",
+        "measure": "合并增长与空缺",
+        "occupation_scope": "合并职业数据；精神科技术员与助手；29-2053.00, 31-1133.00",
+        "period": "2025–2035预测；2026职业说明",
+        "source_refs": [
+          "bls-combined"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "3caeb2751e353c8d61f43f762c46f94f2be15c07fad472a0d2d2fa195294452a",
+  "source_content_sha256": "2f88dde8ce8474af00959a21f4d93ff5c0a890aad40405fa583d191c1ad8ede2",
   "subject": {
     "canonical_slug": "psychiatric-technicians-and-aides",
     "name": "精神科技术员与助手",
-    "summary": null
+    "summary": "本页合并介绍精神科技术员与助手，但两者的教育、授权和工资分别列示。工作核心是在专业人员指导下观察、记录、协助生活与照护，并及时报告变化；这不是独立诊断或治疗岗位。入门先核当地资格和监督安排，职业体验仅用虚构记录，不接触患者或练习医疗操作。"
   }
 }

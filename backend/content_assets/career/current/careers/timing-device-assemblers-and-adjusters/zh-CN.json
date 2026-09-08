@@ -1,12 +1,1635 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：这份工作不是“手巧就行”，而是把器件身份、图纸版本、装配顺序、原始测量、公差判定、调整授权与复测交接闭环。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "ed-fit",
+            "ed-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "可观察信号：开始前核工单与标签；记录单位和条件；逐次判断而非只看平均；越界或身份不一致时隔离并升级。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "ed-fit",
+            "ed-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "60分钟纸面样本：工单T-204、标签T-240；允许日差-0.20至+0.20秒/日；三次+0.12、+0.18、+0.27；须身份一致且每次合格；练习者无调整权限。不得接触真实器件。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考答案：均值+0.19，但第三次超上限0.07，且身份不一致；隔离并记录身份待核和单次越界，不得调整或放行。输出原始读数表、逐次判定、均值、冲突、未知和升级单。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "ed-sim"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业边界：O*NET 51-2061.00，在窄公差内精密装配或调校带电气/电子部件的计时装置。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.profile.definition-block.1",
+          "source_refs": [
+            "onet-timing"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "装配对象：数字钟或其他计时装置、微小机械/电气部件、夹具、镊子、放大镜和工单图纸。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-timing"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "检验任务：观察部件与子组件运行，用测试设备检查配合和精度并诊断缺陷。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-timing"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "调整任务：按规格调整尺寸或位置、替换指定部件；任务列示不等于个人已获设备或通电授权。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-timing"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "完整流程：核身份版本—确认工具条件—装配—记原始值—比公差—授权调校—复测—隔离/交接。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.profile.work-context-block.1",
+          "source_refs": [
+            "ed-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作情境：室内受控环境、精确性、坐姿、近距离视力、手指灵巧和稳定性重要。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.profile.work-context-block.2",
+          "source_refs": [
+            "onet-timing"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "准备程度：O*NET列Job Zone 1-2，培训数天至一年；不保证任何个人录用。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-timing"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "可检查产出：身份匹配、步骤、原始读数、公差判定、调整、复测和隔离/放行记录。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "ed-output"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：身份/版本/单位正确，逐次读数可追溯，不以平均掩盖越界，调整和放行有授权。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "ed-output"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "相邻边界：校准计量、电机工具维修、控制阀维修、工业机械维修和钟表维修与本职业的对象及责任不同。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.profile.definition-block.2",
+          "source_refs": [
+            "onet-calibration",
+            "onet-control",
+            "onet-industrial",
+            "onet-motor",
+            "onet-timing",
+            "onet-watch-repair"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "calibration-technologists-and-technicians",
+                "id": "timing-device-assemblers-and-adjusters.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/calibration-technologists-and-technicians"
+              },
+              {
+                "entity": "electric-motor-power-tool-and-related-repairers",
+                "id": "timing-device-assemblers-and-adjusters.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/electric-motor-power-tool-and-related-repairers"
+              },
+              {
+                "entity": "control-and-valve-installers-and-repairers-except-mechanical-door",
+                "id": "timing-device-assemblers-and-adjusters.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/control-and-valve-installers-and-repairers-except-mechanical-door"
+              },
+              {
+                "entity": "industrial-machinery-mechanics",
+                "id": "timing-device-assemblers-and-adjusters.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/industrial-machinery-mechanics"
+              },
+              {
+                "entity": "watch-and-clock-repairers",
+                "id": "timing-device-assemblers-and-adjusters.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/watch-and-clock-repairers"
+              }
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-calibration",
+            "onet-control",
+            "onet-industrial",
+            "onet-motor",
+            "onet-timing",
+            "onet-watch-repair"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "校准技术人员用测量科学评定标准适用性并校准测量设备；本职业装配或调校计时装置本体。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-calibration",
+            "onet-control",
+            "onet-industrial",
+            "onet-motor",
+            "onet-timing",
+            "onet-watch-repair"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "电机与电动工具维修处理电机、布线和开关；控制阀维修处理机械调节控制装置。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-calibration",
+            "onet-control",
+            "onet-industrial",
+            "onet-motor",
+            "onet-timing",
+            "onet-watch-repair"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "工业机械师维修生产加工机械；其设备规模、能量和停机责任通常不同于微型计时装置装调。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-calibration",
+            "onet-control",
+            "onet-industrial",
+            "onet-motor",
+            "onet-timing",
+            "onet-watch-repair"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "钟表维修师修理、清洁和调整既有钟表机构；本职业包含窄公差生产装配与调校，不只售后维修。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-calibration",
+            "onet-control",
+            "onet-industrial",
+            "onet-motor",
+            "onet-timing",
+            "onet-watch-repair"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助：读数录入、公差标记、图纸版本比对、缺陷分类和工单草稿。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用条件：器件ID、图纸、规格、单位、量具状态和测试条件可靠。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数据门槛：原始值、复测值、操作人、时间、条件和版本可追溯。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工控制：核器件工单、确认测试条件、观察配合、判断异常并隔离。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余责任：工具不能确认真实配合、测量系统有效性、残余能量或调整后的状态。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "失败风险：小数点/单位错、平均掩盖越界、旧图纸、标签错配或自动放行。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业边界：自动判差不等于全流程采用率、质量提升或岗位净变化。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实践响应：先在固定纸面记录验证规则，真实系统服从量具、版本、安全与权限控制。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：中国大陆暂无可安全使用的数据表示与O*NET 51-2061.00精确对应的全国工资。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：国家统计局2025资料按行业和宽泛岗位大类发布，不能替代精确职业中位数。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "计量单位：年薪、月薪、时薪、计时和计件不可混用。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "求职用法：统一地区、产品、班次、工时、计件规则、精度责任、洁净要求和福利。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：O*NET展示美国51-2061.00全国工资。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-timing"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：2025年BLS工资数据。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-timing"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数：时薪30.11美元、年薪62,620美元，不是起薪。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-timing"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "计量单位：时薪与年薪同源，不能与计件价混用。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-timing"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "覆盖人群：2024就业约200的小基数职业，全国统计不代表每个细分岗位。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "onet-timing"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "决策限制：统计值不是个人报价、录用或收入保证。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "onet-timing"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "核对信号：先比器件标签、工单和图纸版本。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.fit.riasec-fit-block.1",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "测量信号：保留原始值、单位、条件和逐次判定。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.fit.riasec-fit-block.2",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "手工信号：能稳定处理微小部件，且不靠强行修整掩盖错配。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.fit.riasec-fit-block.3",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "质量信号：越界即隔离，调整后复测，不把平均合格当全项合格。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.fit.riasec-fit-block.4",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：不耐受近距离、坐姿、精细重复和低容错会增加消耗。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.fit.riasec-fit-block.5",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：为赶产量跳过身份、版本、测量或隔离会放大质量风险。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.fit.riasec-fit-block.6",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "验证方法：独立完成固定读数题及“标签改T-204”“第三次改+0.17”两张变体。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.fit.riasec-fit-block.7",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "人格边界：细心自评不证明胜任；稳定读数、规则判断、记录和受监督表现更重要。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.fit.riasec-fit-block.8",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "错件错版：标签、工单或图纸不一致即隔离，不继续装配或放行。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.risk.career-risk-cards.1",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "测量误判：单位、条件、工具状态或单次读数异常时保留原始值并复核。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.risk.career-risk-cards.2",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "能源边界：美国1910.147适用且机器设备可能意外启动或释放储能时，遵守雇主能源控制程序，只由授权人员执行。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.risk.career-risk-cards.3",
+          "source_refs": [
+            "ecfr-loto"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "材料边界：溶剂、润滑剂或未知材料不得凭经验使用，须依现场标签、程序、通风与防护要求。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.risk.career-risk-cards.4",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同规则：身份、版本、工具、能源、材料、公差或授权任一不明，即停止受影响步骤、记录并升级。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.risk.career-risk-cards.5",
+          "source_refs": [
+            "ecfr-loto",
+            "ed-risk"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "现实入口：从部件识别、工单/图纸核对、放大观察、读数记录和不合格隔离开始。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.path.career-path-block.1",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "雇主证据：核实产品、精度、量具培训、通电/能源、化学品、返工、复测和放行权限。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.path.career-path-block.2",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品：完成本页纸面题，展示逐次判定、均值、冲突、未知和升级单。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.path.career-path-block.3",
+          "source_refs": [
+            "ed-path",
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "面试与试用：解释为何均值合格仍不能覆盖单次+0.27与标签错配。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.path.career-path-block.4",
+          "source_refs": [
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七天试验：抄规则、做逐次判断、算均值、画流程、做标签T-204变体（身份冲突消失但+0.27仍失败）、做第三次+0.17变体（读数全合格但身份仍失败）、复盘停止条件各一天。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.path.career-path-block.5",
+          "source_refs": [
+            "ed-path",
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "资格决策：量具、装配、通电、化学品、能源隔离、维修调校和放行权限逐项核验。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.path.career-path-block.6",
+          "source_refs": [
+            "ecfr-loto",
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "能力阶梯：先稳部件与记录，再做受监督装配和测量，最后承担调校、复测和异常闭环。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.path.career-path-block.7",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转型路径：可比较计量校准、电机工具、控制阀、工业机械或钟表维修，需补对应设备与安全证据。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.path.career-path-block.8",
+          "source_refs": [
+            "ed-path",
+            "onet-calibration",
+            "onet-control",
+            "onet-industrial",
+            "onet-motor",
+            "onet-timing",
+            "onet-watch-repair"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "官方信号：O*NET提供美国职业、工资、就业和预测资料，不证明本地正在招聘。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.market-signals.market-signal-card.1",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "就业预测：2024—2034下降（-1%或更低）；2024就业约200，年度空缺显示0。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.market-signals.market-signal-card.2",
+          "source_refs": [
+            "onet-timing"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "小数边界：页面显示0可能受极小基数与取整影响，不能解释为现实中绝无机会。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.market-signals.market-signal-card.3",
+          "source_refs": [
+            "ed-market",
+            "onet-timing"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "技术信号：自动测试可能改变读数和判差任务，不等于装配、异常诊断与放行责任消失。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.market-signals.market-signal-card.4",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "相邻转型：共享精密工具或维修技能不等于新设备和安全权限已获得。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.market-signals.market-signal-card.5",
+          "source_refs": [
+            "ed-market",
+            "onet-calibration",
+            "onet-control",
+            "onet-industrial",
+            "onet-motor",
+            "onet-timing",
+            "onet-watch-repair"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "可复核闭环是核工单与器件身份、确认图纸版本和工具状态、按顺序装配、记录原始测量、与公差比较、仅按授权调校、复测并隔离不合格品、交接记录。",
+                "id": "timing-device-assemblers-and-adjusters.faq.1",
+                "question_key": "career.faq.timing-device-assemblers-and-adjusters.daily-work",
+                "source_refs": [
+                  "ed-work"
+                ]
+              },
+              {
+                "answer": "本职业围绕计时装置窄公差装配/调校；校准技术人员评定测量标准和仪器校准，电机工具维修处理电机/布线/开关，控制阀维修处理调节控制装置，工业机械师维修生产机械，钟表维修师以修理清洁既有钟表机构为核心。",
+                "id": "timing-device-assemblers-and-adjusters.faq.2",
+                "question_key": "career.faq.timing-device-assemblers-and-adjusters.role-comparison",
+                "source_refs": [
+                  "onet-calibration",
+                  "onet-control",
+                  "onet-industrial",
+                  "onet-motor",
+                  "onet-timing",
+                  "onet-watch-repair"
+                ]
+              },
+              {
+                "answer": "适配度通过能否核对身份与版本、稳定记录微小读数、按每次结果判定、耐受精细重复工作，并在工具/能量/公差或授权不明时停工升级来观察。",
+                "id": "timing-device-assemblers-and-adjusters.faq.3",
+                "question_key": "career.faq.timing-device-assemblers-and-adjusters.fit",
+                "source_refs": [
+                  "ed-fit"
+                ]
+              },
+              {
+                "answer": "数字工具可辅助读数录入、公差标记、版本比对、缺陷分类和工单草稿；不能确认真实部件配合、测量系统有效性、残余能量或调整后的机械状态。",
+                "id": "timing-device-assemblers-and-adjusters.faq.4",
+                "question_key": "career.faq.timing-device-assemblers-and-adjusters.ai-impact",
+                "source_refs": [
+                  "ed-ai"
+                ]
+              },
+              {
+                "answer": "人工控制点包括核对器件和工单、确认量具/测试条件、观察机械配合、判断异常读数、隔离不合格品，并由授权角色决定调整、通电测试和放行。",
+                "id": "timing-device-assemblers-and-adjusters.faq.5",
+                "question_key": "career.faq.timing-device-assemblers-and-adjusters.human-control",
+                "source_refs": [
+                  "ed-ai"
+                ]
+              },
+              {
+                "answer": "国家统计局2025资料只有行业和宽泛岗位大类，不能给出与O*NET 51-2061.00精确对应的中国大陆全国中位数、统一起薪或计件单价。",
+                "id": "timing-device-assemblers-and-adjusters.faq.6",
+                "question_key": "career.faq.timing-device-assemblers-and-adjusters.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "O*NET展示2025年美国全国中位时薪30.11美元、年薪62,620美元；该职业2024就业仅约200人，全国中位数不等于起薪、个人报价或每个细分计时装置岗位。",
+                "id": "timing-device-assemblers-and-adjusters.faq.7",
+                "question_key": "career.faq.timing-device-assemblers-and-adjusters.us-pay",
+                "source_refs": [
+                  "onet-timing"
+                ]
+              },
+              {
+                "answer": "入门先练工单核对、部件/步骤清单、读数表、公差判定和不合格隔离，只用虚构纸面数据，不接触真实计时装置、测试仪或化学品；量具使用、微型部件装配、通电测试、化学品、能源隔离、维修调校和最终放行是不同训练与权限，须由雇主逐项核验。",
+                "id": "timing-device-assemblers-and-adjusters.faq.8",
+                "question_key": "career.faq.timing-device-assemblers-and-adjusters.education-path",
+                "source_refs": [
+                  "ed-path"
+                ]
+              },
+              {
+                "answer": "关键风险包括器件错配、旧图纸、微小零件遗失、单位/测量条件错误、以均值掩盖单次越界、未经授权通电或调校、溶剂/润滑剂信息不明和误放行；在29 CFR 1910.147适用的美国机器设备维修维护场景，如意外启动或储能释放可能伤人，雇主须建立能源控制程序并由相应授权人员执行；条文另有范围和例外。",
+                "id": "timing-device-assemblers-and-adjusters.faq.9",
+                "question_key": "career.faq.timing-device-assemblers-and-adjusters.risk-boundary",
+                "source_refs": [
+                  "ecfr-loto",
+                  "ed-risk"
+                ]
+              },
+              {
+                "answer": "O*NET/BLS显示2024—2034为下降（-1%或更低）；这不是个人失业概率；O*NET/BLS页面显示2024就业约200，年度空缺显示0；小基数与显示精度限制意味着不能把0解释为绝无任何机会。",
+                "id": "timing-device-assemblers-and-adjusters.faq.10",
+                "question_key": "career.faq.timing-device-assemblers-and-adjusters.outlook-transition",
+                "source_refs": [
+                  "onet-timing"
+                ]
+              },
+              {
+                "answer": "工资、极小就业基数、下降预测、显示为0的年度空缺、招聘样本和自动化采用是不同信号，不能合并为个人录用概率；适配度通过能否核对身份与版本、稳定记录微小读数、按每次结果判定、耐受精细重复工作，并在工具/能量/公差或授权不明时停工升级来观察。",
+                "id": "timing-device-assemblers-and-adjusters.faq.11",
+                "question_key": "career.faq.timing-device-assemblers-and-adjusters.career-worth",
+                "source_refs": [
+                  "ed-fit",
+                  "ed-market"
+                ]
+              }
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.sources.faq.1",
+          "source_refs": [
+            "ecfr-loto",
+            "ed-ai",
+            "ed-fit",
+            "ed-market",
+            "ed-path",
+            "ed-risk",
+            "ed-work",
+            "nbs-wages",
+            "onet-calibration",
+            "onet-control",
+            "onet-industrial",
+            "onet-motor",
+            "onet-timing",
+            "onet-watch-repair"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "O*NET事实、美国统计、eCFR适用边界和编辑建议分别陈述。",
+              "本页只供职业决策和纸面检验，不构成真实拆装、调校、通电、化学品或放行指导。",
+              "中国精确职业工资暂无可安全使用的数据。"
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.sources.boundary.1",
+          "source_refs": [
+            "ecfr-loto",
+            "ed-ai",
+            "ed-fit",
+            "ed-market",
+            "ed-output",
+            "ed-path",
+            "ed-risk",
+            "ed-sim",
+            "ed-work",
+            "nbs-wages",
+            "onet-calibration",
+            "onet-control",
+            "onet-industrial",
+            "onet-motor",
+            "onet-timing",
+            "onet-watch-repair"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "计时装置装配与调校工",
+                "id": "timing-device-assemblers-and-adjusters.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "计时装置装配与调校工",
+                "id": "timing-device-assemblers-and-adjusters.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "计时装置装配与调校工",
+                "id": "timing-device-assemblers-and-adjusters.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "计时装置装配与调校工",
+                "id": "timing-device-assemblers-and-adjusters.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "计时装置装配与调校工",
+                "id": "timing-device-assemblers-and-adjusters.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "计时装置装配与调校工",
+                "id": "timing-device-assemblers-and-adjusters.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "计时装置装配与调校工",
+                "id": "timing-device-assemblers-and-adjusters.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "计时装置装配与调校工",
+                "id": "timing-device-assemblers-and-adjusters.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "计时装置装配与调校工",
+                "id": "timing-device-assemblers-and-adjusters.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "计时装置装配与调校工",
+                "id": "timing-device-assemblers-and-adjusters.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "计时装置装配与调校工",
+                "id": "timing-device-assemblers-and-adjusters.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对机器设备维修维护中意外启动或储能释放的适用边界、雇主程序和授权角色。",
+                  "只在该条适用的美国工作场景使用；不把纸面练习变成操作指导。"
+                ],
+                "evidence_type": "current eCFR regulation text",
+                "id": "ecfr-loto",
+                "limitation": "只在该条适用的美国工作场景使用；不把纸面练习变成操作指导。",
+                "market": "美国",
+                "name": "29 CFR 1910.147 - Control of hazardous energy",
+                "period": "current regulation; accessed 2026-09-06",
+                "publisher": "eCFR / Office of the Federal Register",
+                "scope": "exact",
+                "url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1910/subpart-J/section-1910.147"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实设备拆装、调校、通电、化学品或放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-ai",
+                "limitation": "不构成真实设备拆装、调校、通电、化学品或放行指导。",
+                "market": "全球",
+                "name": "精密装调数字工具边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实设备拆装、调校、通电、化学品或放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-fit",
+                "limitation": "不构成真实设备拆装、调校、通电、化学品或放行指导。",
+                "market": "全球",
+                "name": "精密装调适配观察",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实设备拆装、调校、通电、化学品或放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-market",
+                "limitation": "不构成真实设备拆装、调校、通电、化学品或放行指导。",
+                "market": "全球",
+                "name": "精密装调市场边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实设备拆装、调校、通电、化学品或放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-output",
+                "limitation": "不构成真实设备拆装、调校、通电、化学品或放行指导。",
+                "market": "全球",
+                "name": "精密装调产出质量",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实设备拆装、调校、通电、化学品或放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-path",
+                "limitation": "不构成真实设备拆装、调校、通电、化学品或放行指导。",
+                "market": "全球",
+                "name": "精密装调入门路径",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实设备拆装、调校、通电、化学品或放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-risk",
+                "limitation": "不构成真实设备拆装、调校、通电、化学品或放行指导。",
+                "market": "全球",
+                "name": "精密装调风险边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实设备拆装、调校、通电、化学品或放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-sim",
+                "limitation": "不构成真实设备拆装、调校、通电、化学品或放行指导。",
+                "market": "全球",
+                "name": "精密装调纸面检验模拟",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实设备拆装、调校、通电、化学品或放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-work",
+                "limitation": "不构成真实设备拆装、调校、通电、化学品或放行指导。",
+                "market": "全球",
+                "name": "精密装调闭环",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对中国行业和宽泛岗位工资口径。",
+                  "不能替代本职业精确工资。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "nbs-wages",
+                "limitation": "不能替代本职业精确工资。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wages; published 2026-05-15; accessed 2026-09-06",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-calibration",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "17-3028.00 - Calibration Technologists and Technicians",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-3028.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-control",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "49-9012.00 - Control and Valve Installers and Repairers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/49-9012.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-industrial",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "49-9041.00 - Industrial Machinery Mechanics",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/49-9041.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-motor",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "49-2092.00 - Electric Motor, Power Tool, and Related Repairers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/49-2092.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对身份、任务、环境、准备、工资和预测。",
+                  "仅限该职业和美国统计。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-timing",
+                "limitation": "仅限该职业和美国统计。",
+                "market": "美国",
+                "name": "51-2061.00 - Timing Device Assemblers and Adjusters",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-2061.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-watch-repair",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "49-9064.00 - Watch and Clock Repairers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/49-9064.00"
+              }
+            ]
+          },
+          "id": "timing-device-assemblers-and-adjusters.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "精确职业数据：O*NET 51-2061.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业身份",
+        "occupation_scope": "计时装置装配与调校工 / 51-2061.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-timing"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "计时装置、微型部件、图纸工单与测试读数",
+        "fact_id": "tasks",
+        "market": "美国",
+        "measure": "任务对象",
+        "occupation_scope": "计时装置装配与调校工 / 51-2061.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-timing"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "核身份版本—装配—测量判定—授权调校—复测隔离",
+        "fact_id": "workflow",
+        "market": "全球",
+        "measure": "工作闭环",
+        "occupation_scope": "计时装置装配与调校工 / 51-2061.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "ed-work"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "核对、精细操作、读数与停止判断",
+        "fact_id": "fit",
+        "market": "全球",
+        "measure": "适配信号",
+        "occupation_scope": "计时装置装配与调校工 / 51-2061.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "ed-fit"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "错件、测量、能源、材料与放行",
+        "fact_id": "risk",
+        "market": "全球",
+        "measure": "风险边界",
+        "occupation_scope": "计时装置装配与调校工 / 51-2061.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "ed-risk"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "d18ab5067fe9e880d4a159e16d6004d3c71d7b83d211f1aeb020b5fdbd147902",
+  "source_content_sha256": "5e3143ed6ebca454b85f49fbc40f0801ebfa93b868c243985dc74c459c7c09ef",
   "subject": {
     "canonical_slug": "timing-device-assemblers-and-adjusters",
     "name": "计时装置装配与调校工",
-    "summary": null
+    "summary": "按工单和图纸在窄公差内装配、检查与调校计时装置，保留原始读数和复测记录，并在错件、越界、能源或授权条件不明时隔离升级。"
   }
 }

@@ -1,12 +1,1539 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：商业与工业设计师把用户、商业和工程约束转成可评审的制造产品概念、模型与原型；核心不是只画外观，而是让方案在功能、安全、成本和制造条件下可验证。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "cid-onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "适合信号：你能把模糊需求拆成约束，提出多个方向，主动核材料与制造限制，并根据证据迭代。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "cid-editorial",
+            "cid-onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：如果你容易漏掉强制约束、把估算当测试或越权确认安全与量产，应先练习需求矩阵、版本记录和升级边界。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全试做：用本页四张虚构概念卡，按题内规则分为纸面入围、约束不符、资料不全或安全停止升级；不接触真实产品。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业范围：本页对应O*NET 27-1021.00 Commercial and Industrial Designers，面向汽车、家电、玩具等制造产品；中文也常称“工业设计师”，这里指同一官方职业，不是另一个相邻方向。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.profile.definition-block.1",
+          "source_refs": [
+            "cid-onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "与客户或团队澄清产品用途、目标用户和设计要求。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.profile.responsibilities-block.1",
+          "source_refs": [
+            "cid-onet"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "研究材料、制造方法、成本和市场特征，形成草图、效果图或计算机模型。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.profile.responsibilities-block.2",
+          "source_refs": [
+            "cid-onet"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "制作或协调原型，评估外观、安全、功能、可维护性和可制造性，再提交评审。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.profile.responsibilities-block.3",
+          "source_refs": [
+            "cid-onet"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作常在办公室、设计中心、测试场所、客户现场或制造地点之间衔接；设计师与工程、市场、生产和客户协作，但各自批准权限不能混同。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.profile.work-context-block.1",
+          "source_refs": [
+            "cid-editorial",
+            "cid-onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "一个可复核闭环是：需求与约束→概念方向→材料/成本/制造核对→模型或原型→测试与评审→版本化修改→有权限人员批准。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.profile.work-context-block.2",
+          "source_refs": [
+            "cid-onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "可使用CAD、建模、渲染和文档工具；尺寸、公差、材料、测试结果和批准状态必须回到受控原始记录核对。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "cid-editorial",
+            "cid-onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "核心产出包括需求矩阵、概念草图、数字模型、原型、规格说明、成本与制造约束记录以及评审修改单。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "cid-onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量不是图面漂亮，而是需求可追踪、关键约束已验证、版本一致，且未解决冲突被明确停止和升级。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "cid-editorial",
+            "cid-onet"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "fashion-designers",
+                "id": "fashion-designers",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/fashion-designers"
+              }
+            ]
+          },
+          "id": "commercial-and-industrial-designers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "cid-fashion",
+            "cid-onet"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "时装设计师27-1022.00面向服装与配饰；本职业27-1021.00面向更广的制造产品概念。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "cid-fashion",
+            "cid-onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "interior-designers",
+                "id": "interior-designers",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/interior-designers"
+              }
+            ]
+          },
+          "id": "commercial-and-industrial-designers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "cid-interior",
+            "cid-onet"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "室内设计师27-1025.00规划、设计并陈设房间或建筑内部空间；本职业聚焦可制造产品。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "cid-interior",
+            "cid-onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "craft-artists",
+                "id": "craft-artists",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/craft-artists"
+              }
+            ]
+          },
+          "id": "commercial-and-industrial-designers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "cid-craft",
+            "cid-onet"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "工艺美术家27-1012.00以多种技法制作或复制手工物件用于销售或展览；本职业把用户、商业和工程约束转成可制造产品概念。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.direction-comparison.adjacent-career-comparison-table.6",
+          "source_refs": [
+            "cid-craft",
+            "cid-onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "industrial-engineering-technicians",
+                "id": "industrial-engineering-technicians",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/industrial-engineering-technicians"
+              }
+            ]
+          },
+          "id": "commercial-and-industrial-designers.direction-comparison.adjacent-career-comparison-table.7",
+          "source_refs": [
+            "cid-iet",
+            "cid-onet"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "工业工程技师17-3026.00通常在工程人员指导下处理工业布局或制造生产问题；本职业的主要产出是产品设计概念、模型与原型评审。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.direction-comparison.adjacent-career-comparison-table.8",
+          "source_refs": [
+            "cid-iet",
+            "cid-onet"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "工具可协助整理去标识化访谈摘录、列概念方向或生成评审表草稿。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "工具生成的概念必须逐项回到原始需求、尺寸、材料和测试记录核对。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "安全、公差、材料、成本和可制造性结论不能由生成内容自行确认。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "知识产权、工程签字、客户批准和量产变更必须由有权限人员负责。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "输入前移除未公开设计、客户机密和不必要的个人信息。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "输出保留来源、版本和未解决假设，冲突时停止受影响结论并升级。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "本页不提供AI采用率、替代率或岗位损失概率。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "最小留痕包括输入范围、生成版本、人工核对项、冲突和批准人。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国精确职业工资：暂无可安全使用的数据。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "cid-nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "国家统计局发布的是城镇单位、行业或岗位大类平均工资，不能改写为商业与工业设计师职业中位数。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "cid-nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "求职记录应分别注明城市、产品行业、雇佣方式、经验、薪酬周期、固定/浮动构成和样本量。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "没有同口径样本时保留缺口，不用招聘标题或单个报价外推全国范围。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国BLS：2025年5月该职业中位年薪83,910美元。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "cid-bls-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数表示一半从业者高于、一半低于，不是起薪。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "cid-bls-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国BLS：2025年5月最低10%低于53,460美元，最高10%高于139,770美元。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "cid-bls-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "分位边界描述美国全国分布，不是任何个人的保证。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "cid-bls-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "比较个人报价时，建议分别记录产品行业、雇主类型、地区、经验、雇佣方式、项目责任和计薪口径；这些只是比较维度，不表示本页已证明各维度与报酬的因果关系。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "比较报价时把2025工资与2025—2035就业预测分开记录。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "把模糊需求拆成用户、功能、尺寸、成本、材料和制造约束。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.fit.riasec-fit-block.1",
+          "source_refs": [
+            "cid-onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "在过早定稿前画出多个概念方向并说明取舍。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.fit.riasec-fit-block.2",
+          "source_refs": [
+            "cid-onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "主动查证材料、制造方法、成本和产品使用情境。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.fit.riasec-fit-block.3",
+          "source_refs": [
+            "cid-onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "能把模型或原型反馈转成版本化修改。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.fit.riasec-fit-block.4",
+          "source_refs": [
+            "cid-onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "与工程、市场、生产和客户沟通时区分事实、假设与批准。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.fit.riasec-fit-block.5",
+          "source_refs": [
+            "cid-onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "发现约束冲突时愿意停止受影响结论并升级。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.fit.riasec-fit-block.6",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "用需求矩阵、模型和评审记录判断过程能力，不靠“有创意”标签。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.fit.riasec-fit-block.7",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "一次纸面练习只能提供过程样本，不能决定职业适配。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.fit.riasec-fit-block.8",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "漏掉强制约束会让概念在后期返工；使用逐项需求矩阵并标注验证状态。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.risk.career-risk-cards.1",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "把估算当作测试会造成错误安全结论；回到原始测试记录并由责任人确认。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.risk.career-risk-cards.2",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "未公开设计或客户资料外泄会带来知识产权与保密风险；按最小必要范围使用受控系统。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.risk.career-risk-cards.3",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "未经授权确认工程、安全或量产会越过职责；停止受影响步骤并升级给有权限人员。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.risk.career-risk-cards.4",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "版本不一致会让图纸、模型和评审结论错配；记录版本、时间、变更原因和批准状态。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.risk.career-risk-cards.5",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "美国BLS称通常需要学士学位，并需要包含设计项目示例的电子作品集。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.path.career-path-block.1",
+          "source_refs": [
+            "cid-bls-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "逐项核验目标岗位的软件、行业标准、保密、测试、监督和签字权限；不把美国概况当跨法域执照。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.path.career-path-block.2",
+          "source_refs": [
+            "cid-bls-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "题内规则：每张概念卡必须给出目标用户、使用情境、质量、估算单位成本和边缘测试结果；任一缺失即分类为“资料不全”。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.path.career-path-block.3",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "题内约束：质量不得超过1.2千克，估算单位成本不得超过160元；超出任一项即“约束不符”。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.path.career-path-block.4",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "题内安全优先：边缘测试结果为FAIL时，无论成本或质量如何都“安全停止并升级”；该优先级高于其他分类。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.path.career-path-block.5",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "四张卡结论：A纸面入围；B约束不符；C资料不全；D安全停止并升级。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.path.career-path-block.6",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "交付一张表：卡号、已知事实、触发规则、分类、缺失信息和下一步；不得补造测试结果。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.path.career-path-block.7",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品集先证明需求、概念、模型、原型评审和边界处理，再按目标产品领域补齐真实资格与授权。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.path.career-path-block.8",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "BLS预计美国就业从2025年35,400人增至2035年36,300人，增长2%、净增900人。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "cid-bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "2%是十年就业增长率，900是净增就业人数，两者不可与年均空缺互换。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "cid-bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "BLS预计十年间平均每年约2,800个空缺，多数来自转职或退出劳动力市场后的替补。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "cid-bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "年均空缺包含替补需求，不代表每年净增2,800人。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "cid-bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "这些是美国全国预测，不是中国需求、某一产品行业机会或个人录用保证。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "cid-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "核心闭环是：理解用户与客户要求，研究产品用途、材料、制造方法和成本，形成草图或计算机模型，制作或协调原型，评估外观、安全、功能、可维护性与可制造性，再提交评审和迭代。",
+                "id": "commercial-and-industrial-designers.faq.1",
+                "question_key": "career.faq.commercial-and-industrial-designers.daily-work",
+                "source_refs": [
+                  "cid-onet"
+                ]
+              },
+              {
+                "answer": "时装设计师27-1022.00面向服装与配饰；本职业27-1021.00面向更广的制造产品概念。 室内设计师27-1025.00规划、设计并陈设房间或建筑内部空间；本职业聚焦可制造产品。 工艺美术家27-1012.00以多种技法制作或复制手工物件用于销售或展览；本职业把用户、商业和工程约束转成可制造产品概念。 工业工程技师17-3026.00通常在工程人员指导下处理工业布局或制造生产问题；本职业的主要产出是产品设计概念、模型与原型评审。",
+                "id": "commercial-and-industrial-designers.faq.2",
+                "question_key": "career.faq.commercial-and-industrial-designers.role-comparison",
+                "source_refs": [
+                  "cid-craft",
+                  "cid-fashion",
+                  "cid-iet",
+                  "cid-interior",
+                  "cid-onet"
+                ]
+              },
+              {
+                "answer": "在本页编辑情境中，生成式工具可协助整理访谈摘录、生成概念方向清单、改写展示文案或建立评审表草稿；输入要去除保密与个人信息，输出必须回到原始需求、尺寸、材料和测试记录核对。 产品安全、尺寸公差、材料选择、成本约束、可制造性、知识产权、工程签字和量产变更不能由生成结果自行决定；信息缺失或冲突时应停止受影响结论并交给有权限责任人。",
+                "id": "commercial-and-industrial-designers.faq.3",
+                "question_key": "career.faq.commercial-and-industrial-designers.ai-impact",
+                "source_refs": [
+                  "cid-editorial"
+                ]
+              },
+              {
+                "answer": "在本页编辑情境中，生成式工具可协助整理访谈摘录、生成概念方向清单、改写展示文案或建立评审表草稿；输入要去除保密与个人信息，输出必须回到原始需求、尺寸、材料和测试记录核对。",
+                "id": "commercial-and-industrial-designers.faq.4",
+                "question_key": "career.faq.commercial-and-industrial-designers.automatable-tasks",
+                "source_refs": [
+                  "cid-editorial"
+                ]
+              },
+              {
+                "answer": "产品安全、尺寸公差、材料选择、成本约束、可制造性、知识产权、工程签字和量产变更不能由生成结果自行决定；信息缺失或冲突时应停止受影响结论并交给有权限责任人。",
+                "id": "commercial-and-industrial-designers.faq.5",
+                "question_key": "career.faq.commercial-and-industrial-designers.human-control",
+                "source_refs": [
+                  "cid-editorial"
+                ]
+              },
+              {
+                "answer": "本轮没有建立中国大陆商业与工业设计师精确职业的全国工资分布；国家统计局城镇单位、行业或岗位大类平均工资不能替代该职业中位数、分位数、统一起薪或个人报价。",
+                "id": "commercial-and-industrial-designers.faq.6",
+                "question_key": "career.faq.commercial-and-industrial-designers.china-pay",
+                "source_refs": [
+                  "cid-nbs"
+                ]
+              },
+              {
+                "answer": "BLS报告：美国商业与工业设计师2025年5月中位年薪为83,910美元。 BLS报告：美国该职业2025年5月最低10%年薪低于53,460美元，最高10%高于139,770美元。",
+                "id": "commercial-and-industrial-designers.faq.7",
+                "question_key": "career.faq.commercial-and-industrial-designers.us-pay",
+                "source_refs": [
+                  "cid-bls-wage"
+                ]
+              },
+              {
+                "answer": "工作对象是产品需求、材料、模型和原型；可观察的适配信号包括能分析模糊需求、制作多个概念方向、评估材料与制造限制，并根据原型或评审记录迭代。 适配判断应看需求说明、草图、模型、原型评审和边界处理等行为证据，不用“有创意”或审美标签替代过程能力。",
+                "id": "commercial-and-industrial-designers.faq.8",
+                "question_key": "career.faq.commercial-and-industrial-designers.fit",
+                "source_refs": [
+                  "cid-editorial",
+                  "cid-onet"
+                ]
+              },
+              {
+                "answer": "工作对象是产品需求、材料、模型和原型；可观察的适配信号包括能分析模糊需求、制作多个概念方向、评估材料与制造限制，并根据原型或评审记录迭代。 适配判断应看需求说明、草图、模型、原型评审和边界处理等行为证据，不用“有创意”或审美标签替代过程能力。 就业增长、净增人数和年均空缺是不同指标；美国全国预测不能外推为中国需求、某一产品行业机会或个人录用保证。",
+                "id": "commercial-and-industrial-designers.faq.9",
+                "question_key": "career.faq.commercial-and-industrial-designers.career-worth",
+                "source_refs": [
+                  "cid-editorial",
+                  "cid-onet"
+                ]
+              },
+              {
+                "answer": "主要失误模式是漏掉强制约束、把估算当测试、泄露未公开设计、越权确认安全或量产；控制是需求矩阵、版本记录、原始测试复核、权限分离和冲突升级。",
+                "id": "commercial-and-industrial-designers.faq.10",
+                "question_key": "career.faq.commercial-and-industrial-designers.risk-boundary",
+                "source_refs": [
+                  "cid-editorial"
+                ]
+              },
+              {
+                "answer": "BLS称工业设计师通常需要学士学位进入该职业，并需要包含设计项目示例的电子作品集。",
+                "id": "commercial-and-industrial-designers.faq.11",
+                "question_key": "career.faq.commercial-and-industrial-designers.education-path",
+                "source_refs": [
+                  "cid-bls-path"
+                ]
+              },
+              {
+                "answer": "BLS称工业设计师通常需要学士学位进入该职业，并需要包含设计项目示例的电子作品集。 BLS描述的是美国典型入门路径，不是跨法域执照清单；具体学历、软件、行业标准、保密、测试和签字权限应按目标岗位与产品领域核验。",
+                "id": "commercial-and-industrial-designers.faq.12",
+                "question_key": "career.faq.commercial-and-industrial-designers.credentials",
+                "source_refs": [
+                  "cid-bls-path"
+                ]
+              },
+              {
+                "answer": "BLS预计美国商业与工业设计师就业人数从2025年的35,400人增至2035年的36,300人，增长2%，净增900人。 BLS预计2025—2035十年间，美国该职业平均每年约有2,800个岗位空缺，多数来自转职或退出劳动力市场后的替补需求。 就业增长、净增人数和年均空缺是不同指标；美国全国预测不能外推为中国需求、某一产品行业机会或个人录用保证。",
+                "id": "commercial-and-industrial-designers.faq.13",
+                "question_key": "career.faq.commercial-and-industrial-designers.outlook-transition",
+                "source_refs": [
+                  "cid-bls-outlook",
+                  "cid-editorial"
+                ]
+              }
+            ]
+          },
+          "id": "commercial-and-industrial-designers.sources.faq.1",
+          "source_refs": [
+            "cid-bls-outlook",
+            "cid-bls-path",
+            "cid-bls-wage",
+            "cid-craft",
+            "cid-editorial",
+            "cid-fashion",
+            "cid-iet",
+            "cid-interior",
+            "cid-nbs",
+            "cid-onet"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "本页对应O*NET 27-1021.00；“商业与工业设计师”和常用名称“工业设计师”在这里指同一官方职业，不作为新增职业或相邻方向。",
+              "美国工资与就业预测、中国工资缺口、编辑性工具边界和虚构练习分别陈述。",
+              "纸面练习不构成真实产品安全认证、工程批准、签字或量产授权。"
+            ]
+          },
+          "id": "commercial-and-industrial-designers.sources.boundary.1",
+          "source_refs": [
+            "cid-bls-outlook",
+            "cid-bls-path",
+            "cid-bls-wage",
+            "cid-craft",
+            "cid-editorial",
+            "cid-fashion",
+            "cid-iet",
+            "cid-interior",
+            "cid-nbs",
+            "cid-onet"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "商业与工业设计师",
+                "id": "commercial-and-industrial-designers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "商业与工业设计师",
+                "id": "commercial-and-industrial-designers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "商业与工业设计师",
+                "id": "commercial-and-industrial-designers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "商业与工业设计师",
+                "id": "commercial-and-industrial-designers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "商业与工业设计师",
+                "id": "commercial-and-industrial-designers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "商业与工业设计师",
+                "id": "commercial-and-industrial-designers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "商业与工业设计师",
+                "id": "commercial-and-industrial-designers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "商业与工业设计师",
+                "id": "commercial-and-industrial-designers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "商业与工业设计师",
+                "id": "commercial-and-industrial-designers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "商业与工业设计师",
+                "id": "commercial-and-industrial-designers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "商业与工业设计师",
+                "id": "commercial-and-industrial-designers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "commercial-and-industrial-designers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "支持2025年35,400人、2035年36,300人、增长2%、净增900人和年均2,800个空缺。",
+                  "美国全国预测；增长、净增和年均空缺不可互换。"
+                ],
+                "evidence_type": "官方职业或统计资料",
+                "id": "cid-bls-outlook",
+                "limitation": "美国全国预测；增长、净增和年均空缺不可互换。",
+                "market": "美国",
+                "name": "BLS Occupational Outlook Handbook: Industrial Designers — Job Outlook",
+                "period": "2025—2035预测；访问2026-09-07",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/arts-and-design/industrial-designers.htm"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "支持典型入门需要学士学位和电子作品集。",
+                  "美国全国职业概况，不是跨法域法定准入或个人录用保证。"
+                ],
+                "evidence_type": "官方职业或统计资料",
+                "id": "cid-bls-path",
+                "limitation": "美国全国职业概况，不是跨法域法定准入或个人录用保证。",
+                "market": "美国",
+                "name": "BLS Occupational Outlook Handbook: Industrial Designers — How to Become One",
+                "period": "页面更新2026-09-02；访问2026-09-07",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/arts-and-design/industrial-designers.htm"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "支持2025年5月中位年薪83,910美元、最低10%低于53,460美元、最高10%高于139,770美元。",
+                  "美国全国职业统计，不是起薪、到手收入或中国工资。"
+                ],
+                "evidence_type": "官方职业或统计资料",
+                "id": "cid-bls-wage",
+                "limitation": "美国全国职业统计，不是起薪、到手收入或中国工资。",
+                "market": "美国",
+                "name": "BLS Occupational Outlook Handbook: Industrial Designers — Pay",
+                "period": "2025年5月工资；访问2026-09-07",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/arts-and-design/industrial-designers.htm"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "支持以多种技法制作或复制手工物件用于销售或展览的职业身份。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "官方职业或统计资料",
+                "id": "cid-craft",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "O*NET 27-1012.00 Craft Artists",
+                "period": "页面更新2026；访问2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/27-1012.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "支持虚构概念卡练习、工具使用边界、适配观察与风险控制；所有练习规则均在题面给出。",
+                  "不支持外部工资、就业、法规、AI采用率、真实产品安全认证或工程签字。"
+                ],
+                "evidence_type": "编辑性分析",
+                "id": "cid-editorial",
+                "limitation": "不支持外部工资、就业、法规、AI采用率、真实产品安全认证或工程签字。",
+                "market": "编辑设计",
+                "name": "商业与工业设计师候选页编辑设计",
+                "period": "2026-09-07",
+                "publisher": "FermatMind candidate editorial",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "支持服装与配饰设计职业身份。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "官方职业或统计资料",
+                "id": "cid-fashion",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "O*NET 27-1022.00 Fashion Designers",
+                "period": "页面更新2026；访问2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/27-1022.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "支持在工程人员指导下把工程原理用于工业布局或制造生产问题的职业身份。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "官方职业或统计资料",
+                "id": "cid-iet",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "O*NET 17-3026.00 Industrial Engineering Technologists and Technicians",
+                "period": "页面更新2026；访问2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-3026.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "支持室内空间规划、设计与陈设职业身份。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "官方职业或统计资料",
+                "id": "cid-interior",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "O*NET 27-1025.00 Interior Designers",
+                "period": "页面更新2026；访问2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/27-1025.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "支持中国2025年城镇单位、行业和岗位大类平均工资的统计范围，用于说明与精确职业工资的映射缺口。",
+                  "行业/岗位大类平均工资不能替代商业与工业设计师精确职业中位数、分位数、统一起薪或个人报价。"
+                ],
+                "evidence_type": "官方职业或统计资料",
+                "id": "cid-nbs",
+                "limitation": "行业/岗位大类平均工资不能替代商业与工业设计师精确职业中位数、分位数、统一起薪或个人报价。",
+                "market": "中国",
+                "name": "Average Annual Wages of Employees in Urban Units in 2025",
+                "period": "2025年工资；2026-05-16发布；访问2026-09-07",
+                "publisher": "National Bureau of Statistics of China",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "支持精确职业身份、制造产品概念、草图/CAD、材料与成本研究、原型、可行性、安全/功能评估和跨职能协作。",
+                  "仅限美国O*NET 27-1021.00；不建立中国工资或法定资格。"
+                ],
+                "evidence_type": "官方职业或统计资料",
+                "id": "cid-onet",
+                "limitation": "仅限美国O*NET 27-1021.00；不建立中国工资或法定资格。",
+                "market": "美国",
+                "name": "O*NET 27-1021.00 Commercial and Industrial Designers",
+                "period": "页面更新2026；访问2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/27-1021.00"
+              }
+            ]
+          },
+          "id": "commercial-and-industrial-designers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "O*NET 27-1021.00 Commercial and Industrial Designers",
+        "fact_id": "cid-identity",
+        "market": "美国",
+        "measure": "职业身份",
+        "occupation_scope": "精确职业数据：美国O*NET 27-1021.00",
+        "period": "页面更新2026；访问2026-09-07",
+        "source_refs": [
+          "cid-onet"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "83,910美元/年",
+        "fact_id": "cid-wage-median",
+        "market": "美国",
+        "measure": "中位年薪",
+        "occupation_scope": "精确职业数据：美国商业与工业设计师",
+        "period": "2025年5月工资；访问2026-09-07",
+        "source_refs": [
+          "cid-bls-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "最低10%<53,460美元；最高10%>139,770美元",
+        "fact_id": "cid-wage-range",
+        "market": "美国",
+        "measure": "工资分位",
+        "occupation_scope": "精确职业数据：美国商业与工业设计师",
+        "period": "2025年5月工资；访问2026-09-07",
+        "source_refs": [
+          "cid-bls-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "通常学士学位+电子作品集",
+        "fact_id": "cid-path-bls",
+        "market": "美国",
+        "measure": "典型教育与入门材料",
+        "occupation_scope": "精确职业数据：美国商业与工业设计师",
+        "period": "页面更新2026-09-02；访问2026-09-07",
+        "source_refs": [
+          "cid-bls-path"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "35,400→36,300；+2%；净增900",
+        "fact_id": "cid-market",
+        "market": "美国",
+        "measure": "就业预测",
+        "occupation_scope": "精确职业数据：美国商业与工业设计师",
+        "period": "2025—2035预测；访问2026-09-07",
+        "source_refs": [
+          "cid-bls-outlook"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "平均每年约2,800个空缺",
+        "fact_id": "cid-openings",
+        "market": "美国",
+        "measure": "年均岗位空缺",
+        "occupation_scope": "精确职业数据：美国商业与工业设计师",
+        "period": "2025—2035预测；访问2026-09-07",
+        "source_refs": [
+          "cid-bls-outlook"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "94e4788c0abc7a0f4ffbde31f4d62a3b13f1672f0fc255500050df2b86e04517",
+  "source_content_sha256": "520eab4b82480c2aa70362ff03955b34dd77bafa0efa80a3eb801121388c064b",
   "subject": {
     "canonical_slug": "commercial-and-industrial-designers",
     "name": "商业与工业设计师",
-    "summary": null
+    "summary": "商业与工业设计师把用户、商业和工程约束转成制造产品概念、模型与原型，并通过材料、成本、功能、安全和可制造性评审持续迭代。"
   }
 }

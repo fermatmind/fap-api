@@ -21,7 +21,7 @@ final class CareerContentV3AuthorityPackage
     public function __construct(
         private readonly int $expectedCareers = CareerCurrentAuthorityPackage::EXPECTED_CAREERS,
         private readonly int $expectedLocalePages = CareerCurrentAuthorityPackage::EXPECTED_LOCALE_PAGES,
-        private readonly int $expectedEnhancedLocalePages = 2,
+        private readonly ?int $expectedEnhancedLocalePages = null,
         private readonly string $expectedSlugSetSha256 = self::CANONICAL_SLUG_SET_SHA256,
     ) {}
 
@@ -246,7 +246,9 @@ final class CareerContentV3AuthorityPackage
         }
         $localePageSet = array_keys($localePages);
         sort($localePageSet, SORT_STRING);
-        if (count($sortedSlugs) !== $this->expectedCareers
+        if ($enhanced !== $manifest['coverage']['enhanced_locale_pages']
+            || $legacy !== $manifest['coverage']['legacy_locale_pages']
+            || count($sortedSlugs) !== $this->expectedCareers
             || count($localePageSet) !== $this->expectedLocalePages
             || ! hash_equals($manifest['set_hashes']['slug_set_sha256'], CareerCurrentAuthorityPackage::hashValue($sortedSlugs))
             || ! hash_equals($this->expectedSlugSetSha256, $manifest['set_hashes']['slug_set_sha256'])
@@ -290,6 +292,13 @@ final class CareerContentV3AuthorityPackage
     /** @param array<string,mixed> $manifest */
     private function assertManifest(array $manifest): void
     {
+        $enhanced = $manifest['coverage']['enhanced_locale_pages'] ?? null;
+        $legacy = $manifest['coverage']['legacy_locale_pages'] ?? null;
+        if (! is_int($legacy) || $legacy < 0
+            || ! is_int($enhanced) || $enhanced < 0 || $enhanced > $this->expectedLocalePages
+            || ($this->expectedEnhancedLocalePages !== null && $enhanced !== $this->expectedEnhancedLocalePages)) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_MANIFEST_INVALID');
+        }
         $keys = array_keys($manifest);
         sort($keys, SORT_STRING);
         if ($keys !== [
@@ -306,8 +315,8 @@ final class CareerContentV3AuthorityPackage
                 'locales' => count(CareerCurrentAuthorityPackage::LOCALES),
                 'locale_pages' => $this->expectedLocalePages,
                 'files' => $this->expectedLocalePages,
-                'enhanced_locale_pages' => $this->expectedEnhancedLocalePages,
-                'legacy_locale_pages' => $this->expectedLocalePages - $this->expectedEnhancedLocalePages,
+                'enhanced_locale_pages' => $enhanced,
+                'legacy_locale_pages' => $this->expectedLocalePages - $enhanced,
             ]
             || ! is_array($manifest['files'] ?? null)
             || count($manifest['files']) !== $this->expectedLocalePages

@@ -1,12 +1,1621 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：这份工作的核心是把正确物料按正确配方、顺序和时间交给正确设备，并在批次、设备或安全条件冲突时停止。喜欢有形产出、重复核对和可追溯记录的人值得纸面试做。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial-mix-decision",
+            "editorial-mix-workflow"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "可观察信号：能按工单一一核对物料标签与重量，持续观察反馈，发现多料、错版、告警或检查缺失会暂停，不用经验猜测补齐。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial-mix-decision",
+            "editorial-mix-workflow"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全工作样本（60分钟，仅纸面）：目标为100千克蓝色惰性颗粒60、黄色30、白色10，混合12分钟；备料卡为60/30/12，计时卡为10分钟，防护检查未记录，并出现“堵料告警”。不得接触真实设备或物料。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial-mix-simulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考推演：备料合计102千克，白色多2千克；混合时间、检查状态与告警也冲突。结论是不得启动或放行，标出已知、计算、冲突和未知，并把任务卡交生产、质量和维护授权角色核实。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial-mix-simulation"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业边界：O*NET 51-9023.00，设置、操作或看护用于混合化学品、烟草、液体、颜料等材料的机器，不扩张为所有制造设备岗位。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.profile.definition-block.1",
+          "source_refs": [
+            "onet-mixing-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "投入对象：工单、配方、物料标签与重量、混合机、阀门泵送附件、时间与过程反馈、样品和批次记录。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-mixing-current"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "可检查产出：按授权规格完成且可追溯的混合批次、样品、偏差记录、设备状态和交接。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.profile.responsibilities-block.2",
+          "source_refs": [
+            "editorial-mix-workflow"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "完整流程：读工单—称量核对—检查设备—按序投料设定—监看—目标质量停机转移—取样记录—清洁交接。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.profile.responsibilities-block.3",
+          "source_refs": [
+            "editorial-mix-workflow",
+            "onet-mixing-current"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断：配方版本、物料身份和总量是否一致，顺序时间是否正确，设备反馈是否正常，偏差能否继续或必须停止升级。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.profile.work-context-block.1",
+          "source_refs": [
+            "editorial-mix-workflow"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "环境与节奏：常见于制造现场，站立、时间压力、污染物、噪声和危险设备暴露可能较高；实际条件随物料与行业变化。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.profile.work-context-block.2",
+          "source_refs": [
+            "onet-mixing-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "工具与材料：混合设备和控制器、秤量装置、泵阀输送附件、工单配方、取样或测试工具和生产记录。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-mixing-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "协作链：物料准备提供经核标签，生产负责人授权任务，质量角色取样或判定，维护处理设备异常，安全角色管理适用控制。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "editorial-mix-workflow"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：物料、重量、顺序、时间、过程状态和记录与受控要求一致；异常、停机与交接可追溯。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial-mix-workflow"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "相邻边界：烘烤干燥、食品配料、轧制、磨削抛光和热处理各自围绕不同工艺或设备，本职业以混合/掺混机器为核心。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.profile.definition-block.2",
+          "source_refs": [
+            "onet-food-batchmakers",
+            "onet-grinding",
+            "onet-heat-treating",
+            "onet-mixing-current",
+            "onet-roasting",
+            "onet-rolling"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders"
+              },
+              {
+                "entity": "food-batchmakers",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/food-batchmakers"
+              },
+              {
+                "entity": "rolling-machine-setters-operators-and-tenders-metal-and-plastic",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/rolling-machine-setters-operators-and-tenders-metal-and-plastic"
+              },
+              {
+                "entity": "grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic"
+              },
+              {
+                "entity": "heat-treating-equipment-setters-operators-and-tenders-metal-and-plastic",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/heat-treating-equipment-setters-operators-and-tenders-metal-and-plastic"
+              }
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-food-batchmakers",
+            "onet-grinding",
+            "onet-heat-treating",
+            "onet-mixing-current",
+            "onet-roasting",
+            "onet-rolling"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "食品烟草烘烤干燥岗位控制热处理工序；本职业控制材料混合或掺混，工艺目标不同。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-food-batchmakers",
+            "onet-grinding",
+            "onet-heat-treating",
+            "onet-mixing-current",
+            "onet-roasting",
+            "onet-rolling"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "食品批次配料员组织食品原料批次；本职业边界是混合机器的设置、操作或看护，具体岗位可能重叠但不能默认等同。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-food-batchmakers",
+            "onet-grinding",
+            "onet-heat-treating",
+            "onet-mixing-current",
+            "onet-roasting",
+            "onet-rolling"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "金属塑料轧制与磨削抛光岗位改变工件形状或表面；本职业把多种材料混成规定批次。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-food-batchmakers",
+            "onet-grinding",
+            "onet-heat-treating",
+            "onet-mixing-current",
+            "onet-roasting",
+            "onet-rolling"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "热处理设备岗位用温度改变金属材料性质；本职业围绕配方、投料、混合时间与批次状态。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-food-batchmakers",
+            "onet-grinding",
+            "onet-heat-treating",
+            "onet-mixing-current",
+            "onet-roasting",
+            "onet-rolling"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助：工单核对、称量偏差提示、趋势监测、样品与批次记录。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial-mix-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用条件：设备接口、传感器校准、配方版本、权限和故障回退已验证。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial-mix-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数据门槛：物料ID、单位、批次、时间戳和设备号一致且可追溯。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial-mix-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人类控制：核实物料和配方、观察现场、响应告警并决定是否停止升级。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial-mix-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余责任：工具不负责真实物料身份、机器防护、维护隔离或质量放行。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial-mix-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "失败风险：错误单位、旧配方、传感器漂移和错误设备绑定会制造虚假一致。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial-mix-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业边界：技术清单不等于采用率、自动化比例或净岗位变化。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial-mix-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实践响应：先在纸面或非生产模拟验证提示与记录，真实上线服从变更控制。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial-mix-ai"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：中国大陆暂无可安全使用的数据来表示与O*NET 51-9023.00精确对应的全国职业工资分布。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：行业平均工资不能替代该细分职业的同期中位数或起薪。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "计量单位：月薪、时薪、计件、班次加班和年平均工资不可混用。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editorial-mix-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "求职用法：比较报价时统一地区、行业、班次、加班、补贴、试用期和税前口径。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial-mix-market"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：O*NET展示美国51-9023.00全国工资。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-mixing-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：2025年BLS工资数据。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-mixing-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数：时薪23.55美元、年薪48,990美元，不是起薪。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-mixing-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "计量单位：时薪与年薪同源，个人总收入仍受工时、班次和加班影响。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-mixing-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "覆盖人群：全国受雇者统计不能代表每个行业和地区。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "onet-mixing-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "决策限制：统计值不是个人报价或收入保证。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "onet-mixing-current"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "任务信号：愿意按固定顺序核对工单、标签、重量和设备。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial-mix-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "注意信号：能在重复运行中持续看反馈并发现小偏差。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial-mix-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "计算信号：能检查各物料和总量、单位与容差。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial-mix-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "协作信号：能准确交接批次、设备和未决偏差。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial-mix-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：依赖记忆、厌恶记录或为了产量跳过核对会放大风险。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial-mix-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：若难以承受站立、噪声、污染物或轮班，应比较不同制造场景。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial-mix-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "验证方法：用本页固定纸面任务卡复算，不依赖他人或真实设备。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial-mix-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "人格边界：兴趣或自评不证明胜任，训练表现和受监督记录更重要。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial-mix-decision"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "错料错量：标签、单位或总量冲突时不得投料，保留批次并升级。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial-mix-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "过程偏差：顺序、时间或反馈异常时暂停流转，由授权角色决定返工或放行。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial-mix-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "机器防护：适用1910.212时须防护旋转部件、夹点等危险；防护状态不明不运行。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.risk.career-risk-cards.3",
+          "source_refs": [
+            "ecfr-machine-guarding"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "危险能量：适用1910.147的维护检修须按能量控制程序，由获授权人员执行。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.risk.career-risk-cards.4",
+          "source_refs": [
+            "ecfr-loto"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同规则：物料、设备、防护、能源、程序或授权任一不明即停止、记录并升级；纸面练习不授予现场权限。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.risk.career-risk-cards.5",
+          "source_refs": [
+            "ecfr-loto",
+            "ecfr-machine-guarding",
+            "editorial-mix-risk"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "现实入口：从雇主安全入职、工单配方、物料识别、设备状态和受监督训练开始。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.career-path-block.1",
+          "source_refs": [
+            "editorial-mix-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "雇主证据：核实设备、物料、第一阶段任务、质量放行、维护隔离和监督方式。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.career-path-block.2",
+          "source_refs": [
+            "editorial-mix-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品：完成本页虚构批次卡，展示复算、冲突识别、停止与交接。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.career-path-block.3",
+          "source_refs": [
+            "editorial-mix-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "面试与试用：解释为何总量、时间、检查和告警任一冲突都不能用经验跳过。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.career-path-block.4",
+          "source_refs": [
+            "editorial-mix-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七天试验：边界、工单、称量、过程、异常、固定错误卡、复盘各一天。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.career-path-block.5",
+          "source_refs": [
+            "editorial-mix-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "资格决策：课程和证书是线索，真实训练、设备评估和授权由适用规则与雇主确认。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.career-path-block.6",
+          "source_refs": [
+            "editorial-mix-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "能力阶梯：先核对准确，再稳定监看和记录，最后才承担更复杂配方或设备。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.career-path-block.7",
+          "source_refs": [
+            "editorial-mix-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转型路径：可比较食品批次、烘烤干燥、轧制、磨削或热处理，需补新工艺、设备与责任证据。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.path.career-path-block.8",
+          "source_refs": [
+            "editorial-mix-path"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "官方信号：O*NET提供美国职业、工资、行业和预测资料，不证明本地正在招聘。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.market-signals.market-signal-card.1",
+          "source_refs": [
+            "editorial-mix-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "就业预测：2024—2034为下降（-1%或更低），年度空缺约8,800；空缺含替换。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.market-signals.market-signal-card.2",
+          "source_refs": [
+            "onet-mixing-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "招聘信号：样本只代表采样时间、地区、行业和设备。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.market-signals.market-signal-card.3",
+          "source_refs": [
+            "editorial-mix-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "技术信号：数字监测可能改变任务，不等于组织已采用或净岗位变化。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editorial-mix-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "相邻转型：制造岗位共享程序与设备观察，但新工艺、资格和授权必须重核。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editorial-mix-market"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "工作闭环是读工单和规格、称量核对物料、检查设备与作业条件、按顺序投料和设定、监看混合、在目标质量时停机转移、取样记录、清洁交接。",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.faq.1",
+                "question_key": "career.faq.mixing-and-blending-machine-setters-operators-and-tenders.daily-work",
+                "source_refs": [
+                  "onet-mixing-current"
+                ]
+              },
+              {
+                "answer": "本职业以混合或掺混机器为核心；食品烟草烘烤干燥、食品批次配料、金属塑料轧制、磨削抛光和热处理分别以不同工艺或设备为核心，职责不能仅凭“机器操作”互换。",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.faq.2",
+                "question_key": "career.faq.mixing-and-blending-machine-setters-operators-and-tenders.role-comparison",
+                "source_refs": [
+                  "onet-food-batchmakers",
+                  "onet-grinding",
+                  "onet-heat-treating",
+                  "onet-mixing-current",
+                  "onet-roasting",
+                  "onet-rolling"
+                ]
+              },
+              {
+                "answer": "适配度通过能否准确核对配方和批次、持续监看、发现偏差、保留记录并在条件不明时停止升级来观察，不是人格或录用结论。",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.faq.3",
+                "question_key": "career.faq.mixing-and-blending-machine-setters-operators-and-tenders.fit",
+                "source_refs": [
+                  "editorial-mix-decision"
+                ]
+              },
+              {
+                "answer": "数字工具可辅助工单核对、称量偏差提示、过程趋势和批次记录；它不能确认物料身份、设备现场状态或放行权限。",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.faq.4",
+                "question_key": "career.faq.mixing-and-blending-machine-setters-operators-and-tenders.ai-impact",
+                "source_refs": [
+                  "editorial-mix-ai"
+                ]
+              },
+              {
+                "answer": "人工控制点包括核实配方版本和物料标签、复核称量与设备状态、观察异常、执行停止隔离并由授权角色决定维护、返工或放行。",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.faq.5",
+                "question_key": "career.faq.mixing-and-blending-machine-setters-operators-and-tenders.human-control",
+                "source_refs": [
+                  "editorial-mix-ai"
+                ]
+              },
+              {
+                "answer": "中国大陆行业工资统计不能提供混合与搅拌机操作及看护员的全国职业中位数、统一起薪或个人到手收入。",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.faq.6",
+                "question_key": "career.faq.mixing-and-blending-machine-setters-operators-and-tenders.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "O*NET展示2025年美国全国中位时薪23.55美元、年薪48,990美元；该美国全国中位数不是起薪或个人报价，不能替代地区、行业、班次、加班和雇主条件。",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.faq.7",
+                "question_key": "career.faq.mixing-and-blending-machine-setters-operators-and-tenders.us-pay",
+                "source_refs": [
+                  "onet-mixing-current"
+                ]
+              },
+              {
+                "answer": "入门先学习读取工单、批次和设备记录，用完全虚构的纸面批次卡展示核对、偏差识别、停止与交接；真实设备训练须由雇主安排和监督；课程或证书只能作为发现线索；具体物料、设备、危险能量控制、质量职责和操作授权由适用规则与雇主核验。",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.faq.8",
+                "question_key": "career.faq.mixing-and-blending-machine-setters-operators-and-tenders.education-path",
+                "source_refs": [
+                  "editorial-mix-path"
+                ]
+              },
+              {
+                "answer": "关键风险包括错料错量、顺序或时间偏差、旋转部件与夹点、维护时危险能量、污染交叉和越权放行；条件不明时保持停止并升级；在29 CFR 1910.212适用范围内，机器防护应保护操作人员及区域内其他人员免受旋转部件、夹点和飞屑等危害；在29 CFR 1910.147适用范围内，维护检修若可能发生意外启动或储能释放，须按能量控制程序处理；纸面练习不授予执行锁定挂牌的权限。",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.faq.9",
+                "question_key": "career.faq.mixing-and-blending-machine-setters-operators-and-tenders.risk-boundary",
+                "source_refs": [
+                  "ecfr-loto",
+                  "ecfr-machine-guarding",
+                  "editorial-mix-risk"
+                ]
+              },
+              {
+                "answer": "O*NET/BLS将51-9023.00的2024—2034增长列为下降（-1%或更低）；这不是个人就业概率；O*NET/BLS显示51-9023.00在2024—2034年的年度空缺约8,800个；空缺含增长与替换，不等于净新增。",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.faq.10",
+                "question_key": "career.faq.mixing-and-blending-machine-setters-operators-and-tenders.outlook-transition",
+                "source_refs": [
+                  "onet-mixing-current"
+                ]
+              },
+              {
+                "answer": "职业工资、就业预测、年度空缺、行业分布、招聘样本和技术采用是不同信号，不能合并为个人录用或收入保证。",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.faq.11",
+                "question_key": "career.faq.mixing-and-blending-machine-setters-operators-and-tenders.career-worth",
+                "source_refs": [
+                  "editorial-mix-market"
+                ]
+              }
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.sources.faq.1",
+          "source_refs": [
+            "ecfr-loto",
+            "ecfr-machine-guarding",
+            "editorial-mix-ai",
+            "editorial-mix-decision",
+            "editorial-mix-market",
+            "editorial-mix-path",
+            "editorial-mix-risk",
+            "nbs-wages",
+            "onet-food-batchmakers",
+            "onet-grinding",
+            "onet-heat-treating",
+            "onet-mixing-current",
+            "onet-roasting",
+            "onet-rolling"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "O*NET职业事实、美国统计、eCFR安全条文和编辑建议分别陈述，不跨范围拼接。",
+              "本页仅供职业决策和纸面模拟，不构成真实设备操作、锁定挂牌、维护或质量放行授权。",
+              "中国精确职业工资暂无可安全使用的数据，不用行业均值填补。"
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.sources.boundary.1",
+          "source_refs": [
+            "ecfr-loto",
+            "ecfr-machine-guarding",
+            "editorial-mix-ai",
+            "editorial-mix-decision",
+            "editorial-mix-market",
+            "editorial-mix-path",
+            "editorial-mix-risk",
+            "editorial-mix-simulation",
+            "editorial-mix-workflow",
+            "nbs-wages",
+            "onet-food-batchmakers",
+            "onet-grinding",
+            "onet-heat-treating",
+            "onet-mixing-current",
+            "onet-roasting",
+            "onet-rolling"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "混合与搅拌机操作及看护员",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "混合与搅拌机操作及看护员",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "混合与搅拌机操作及看护员",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "混合与搅拌机操作及看护员",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "混合与搅拌机操作及看护员",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "混合与搅拌机操作及看护员",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "混合与搅拌机操作及看护员",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "混合与搅拌机操作及看护员",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "混合与搅拌机操作及看护员",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "混合与搅拌机操作及看护员",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "混合与搅拌机操作及看护员",
+                "id": "mixing-and-blending-machine-setters-operators-and-tenders.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对维护检修期间危险能量控制范围。",
+                  "只在该条适用范围内使用。"
+                ],
+                "evidence_type": "current eCFR regulation text",
+                "id": "ecfr-loto",
+                "limitation": "只在该条适用范围内使用。",
+                "market": "美国",
+                "name": "29 CFR 1910.147 - The control of hazardous energy (lockout/tagout)",
+                "period": "current regulation; accessed 2026-09-06",
+                "publisher": "eCFR / Office of the Federal Register",
+                "scope": "exact",
+                "url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1910/subpart-J/section-1910.147"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对机器防护一般要求。",
+                  "只在该条适用范围内使用。"
+                ],
+                "evidence_type": "current eCFR regulation text",
+                "id": "ecfr-machine-guarding",
+                "limitation": "只在该条适用范围内使用。",
+                "market": "美国",
+                "name": "29 CFR 1910.212 - General requirements for all machines",
+                "period": "current regulation; accessed 2026-09-06",
+                "publisher": "eCFR / Office of the Federal Register",
+                "scope": "exact",
+                "url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1910/subpart-O/section-1910.212"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成现场程序、授权、产品质量放行或法规结论。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-mix-ai",
+                "limitation": "不构成现场程序、授权、产品质量放行或法规结论。",
+                "market": "全球",
+                "name": "混合机数字工具控制建议",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成现场程序、授权、产品质量放行或法规结论。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-mix-decision",
+                "limitation": "不构成现场程序、授权、产品质量放行或法规结论。",
+                "market": "全球",
+                "name": "混合机操作职业决策",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成现场程序、授权、产品质量放行或法规结论。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-mix-market",
+                "limitation": "不构成现场程序、授权、产品质量放行或法规结论。",
+                "market": "全球",
+                "name": "混合机市场信号边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成现场程序、授权、产品质量放行或法规结论。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-mix-path",
+                "limitation": "不构成现场程序、授权、产品质量放行或法规结论。",
+                "market": "全球",
+                "name": "混合机入门试做路径",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成现场程序、授权、产品质量放行或法规结论。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-mix-risk",
+                "limitation": "不构成现场程序、授权、产品质量放行或法规结论。",
+                "market": "全球",
+                "name": "混合机非监管风险建议",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成现场程序、授权、产品质量放行或法规结论。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-mix-simulation",
+                "limitation": "不构成现场程序、授权、产品质量放行或法规结论。",
+                "market": "全球",
+                "name": "混合机纸面批次模拟",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "承载由已核对职业任务组合出的流程、产出、判断、协作和质量建议。",
+                  "不构成现场程序、设备授权、维护隔离或质量放行结论。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-mix-workflow",
+                "limitation": "不构成现场程序、设备授权、维护隔离或质量放行结论。",
+                "market": "全球",
+                "name": "混合机岗位流程与判断编辑综合",
+                "period": "current task analysis; reviewed 2026-09-07",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "中国行业工资统计及税前口径。",
+                  "行业平均不能替代本职业精确工资。"
+                ],
+                "evidence_type": "official wage statistics",
+                "id": "nbs-wages",
+                "limitation": "行业平均不能替代本职业精确工资。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wages; published 2026-05-15; accessed 2026-09-06",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业身份和职责。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-food-batchmakers",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "51-3092.00 - Food Batchmakers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-3092.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业身份和职责。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-grinding",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "51-4033.00 - Grinding, Lapping, Polishing, and Buffing Machine Tool Setters, Operators, and Tenders, Metal and Plastic",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-4033.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业身份和职责。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-heat-treating",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "51-4191.00 - Heat Treating Equipment Setters, Operators, and Tenders, Metal and Plastic",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-4191.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对职业身份、任务、环境、工资与预测。",
+                  "仅限该O*NET职业和美国统计。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-mixing-current",
+                "limitation": "仅限该O*NET职业和美国统计。",
+                "market": "美国",
+                "name": "51-9023.00 - Mixing and Blending Machine Setters, Operators, and Tenders",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-9023.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业身份和职责。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-roasting",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "51-3091.00 - Food and Tobacco Roasting, Baking, and Drying Machine Operators and Tenders",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-3091.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业身份和职责。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-rolling",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "51-4023.00 - Rolling Machine Setters, Operators, and Tenders, Metal and Plastic",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-4023.00"
+              }
+            ]
+          },
+          "id": "mixing-and-blending-machine-setters-operators-and-tenders.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "配方核对、持续监看、偏差停止与交接",
+        "fact_id": "fit",
+        "market": "全球",
+        "measure": "可观察适配信号",
+        "occupation_scope": "混合与搅拌机操作及看护员 / 51-9023.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "editorial-mix-decision"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "精确职业数据：O*NET 51-9023.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业代码与身份",
+        "occupation_scope": "混合与搅拌机操作及看护员 / 51-9023.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-mixing-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "错料、过程、机器防护、危险能量与授权",
+        "fact_id": "risk",
+        "market": "全球",
+        "measure": "风险控制边界",
+        "occupation_scope": "混合与搅拌机操作及看护员 / 51-9023.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "editorial-mix-risk"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "精确职业数据：工单、物料、混合设备、样品与批次记录",
+        "fact_id": "task-object",
+        "market": "美国",
+        "measure": "任务与对象",
+        "occupation_scope": "混合与搅拌机操作及看护员 / 51-9023.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-mixing-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "精确职业数据：工单—称量—设备—投料混合—取样记录—清洁交接",
+        "fact_id": "workflow",
+        "market": "美国",
+        "measure": "核心职责",
+        "occupation_scope": "混合与搅拌机操作及看护员 / 51-9023.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-mixing-current"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "53fa9940c56ecaaaf32d40c88a738ed5eaccd2db92b10cfb015d0a8d31846b72",
+  "source_content_sha256": "595879504c0c9e0895b81a0d63c9af89807cf06966bbc2e95be43d7495fe060c",
   "subject": {
     "canonical_slug": "mixing-and-blending-machine-setters-operators-and-tenders",
-    "name": "机器铺设工、操作员、看护员",
-    "summary": null
+    "name": "混合与搅拌机操作及看护员",
+    "summary": "按工单核对物料与设备，设置并监看混合批次，在错料、过程、设备或安全条件异常时停止、记录并升级。"
   }
 }

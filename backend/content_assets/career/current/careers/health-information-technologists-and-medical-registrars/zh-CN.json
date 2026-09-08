@@ -1,12 +1,1634 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "适合继续了解：你愿意长期处理字段定义、编码规则、缺失与冲突，能解释数据口径并谨慎保护敏感信息。若只喜欢“医疗”或“技术”标签，却不愿反复核对记录，这条路径可能消耗很大。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "核心价值是让医疗信息可检索、可分析、可审计：从抽取、编码、登记和统计，到数据库或系统改进，具体岗位往往只覆盖其中一部分。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全试做材料（完全虚构）：R-01为C50/随访2026-06-01/状态有效；R-02为诊断代码空白/随访2026-06-03/状态有效；R-03为C18/随访2026-06-02/状态空白；R-04为C34/随访日期空白/状态停用。任务：按“诊断代码、随访日期、状态”12个单元格计算完整率，列缺失项、查询问题和发布状态。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考复核：12个单元格中9个有值，字段完整率为75%；缺失项正好是R-02诊断代码、R-03状态、R-04随访日期。对每项发起“请依据哪份有效原记录补全”的查询；发布状态为“暂停，待三项确认”。字段完整不等于临床内容正确，不补猜诊断或状态。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "精确职业为O*NET 29-9021.00：应用医疗与信息系统知识，参与系统设计改进，并抽取、收集和分析治疗与随访信息。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.profile.definition-block.1",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "投入：病历与随访信息、分类编码标准、字段定义、系统需求和访问权限。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "产出：经核对的编码或登记数据、统计报告、查询单、数据库/系统测试结果和培训材料。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "流程：明确用途与字段→抽取/编码/登记→检查缺失冲突→查询澄清→汇总分析或系统测试→记录变更与交付。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断包括患者与记录是否匹配、代码依据是否清楚、字段定义和统计口径是否一致，以及异常能否发布。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.profile.work-context-block.1",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作可偏病历分析、疾病/肿瘤登记、数据统计、数据库或医疗信息系统；具体岗位不必承担全部任务。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.profile.work-context-block.2",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "常见工具类别包括EHR、编码与分类、数据库、统计、报表、信息检索和安全软件；招聘样本中的Office、Excel和Epic等不是全职业普及率。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-hot",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "协作对象可能包括临床人员、编码/登记同事、信息技术、隐私安全、质量人员和管理者。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量要同时看定义一致、来源可追溯、缺失冲突已处理、变更可审计，以及适用的保密性、完整性和可用性。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial",
+            "hhs-security",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "O*NET明确该职业画像仍有部分数据在收集；相邻管理、研究、法规与通用分析岗位不能因共享数据工作而合并。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.profile.definition-block.2",
+          "source_refs": [
+            "adj-admin",
+            "adj-clinical-research",
+            "adj-health-manager",
+            "adj-management-analyst",
+            "adj-regulatory",
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "administrative-services-managers",
+                "id": "him.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/administrative-services-managers"
+              },
+              {
+                "entity": "medical-and-health-services-managers",
+                "id": "him.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/medical-and-health-services-managers"
+              },
+              {
+                "entity": "clinical-research-coordinators",
+                "id": "him.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/clinical-research-coordinators"
+              },
+              {
+                "entity": "regulatory-affairs-specialists",
+                "id": "him.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/regulatory-affairs-specialists"
+              },
+              {
+                "entity": "management-analysts",
+                "id": "him.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/management-analysts"
+              }
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "adj-admin",
+            "adj-clinical-research",
+            "adj-health-manager",
+            "adj-management-analyst",
+            "adj-regulatory",
+            "onet-summary"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "行政服务经理统筹记录管理等组织行政服务；医疗卫生服务经理统筹医院、诊所等医疗服务。目标职业更贴近医疗数据、登记与信息系统本身。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "adj-admin",
+            "adj-clinical-research",
+            "adj-health-manager",
+            "adj-management-analyst",
+            "adj-regulatory",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "临床研究协调员围绕研究项目、方案合规和研究数据；目标职业面向常规医疗信息系统、病历与登记数据，项目目的不同。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "adj-admin",
+            "adj-clinical-research",
+            "adj-health-manager",
+            "adj-management-analyst",
+            "adj-regulatory",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "法规事务专员协调审计、检查、许可续期、注册与监管申报；管理分析师研究组织效率。两者可能使用相似分析技能，但交付对象不同。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "adj-admin",
+            "adj-clinical-research",
+            "adj-health-manager",
+            "adj-management-analyst",
+            "adj-regulatory",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "比较时先问最终交付是医疗信息数据/系统、组织运营、临床研究、监管申报还是通用管理改进，再核具体资格与权限。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "adj-admin",
+            "adj-clinical-research",
+            "adj-health-manager",
+            "adj-management-analyst",
+            "adj-regulatory",
+            "editorial",
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "当前可核实的是EHR、编码、数据库、统计与报表工具；招聘样本中Office、Excel和Epic等出现，不等于全职业普及。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "onet-hot",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：所核职业资料未给出生成式AI采用率、准确率、生产率因果或净就业影响。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "onet-hot",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "低风险辅助可限于查询草稿、字段缺口清单或汇总初稿，并先用合成数据测试。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人的控制点是回看原始记录、定义、编码依据、权限和变更历史。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "患者匹配、数据发布、访问授权和面向医疗决定的最终解释不能从模型输出自动放行。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "输出出现患者错配、字段幻觉、口径混用或来源缺失时，停止使用并保留审计线索。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数字工具或招聘关键词不等于AI采用，更不等于岗位替代；就业数据必须另按同一职业与期间解释。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "onet-hot",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实践顺序：合成数据→人工对照→记录错误→机构评估；不得把真实患者数据放入未获批准的工具。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：本次所核国家统计局2025年工资发布未提供与O*NET 29-9021.00精确对应的中国大陆全国工资中位数或分位数。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "该发布按行业和宽岗位大类汇总，不能把“卫生和社会工作”或信息技术行业均值当作本职业工资。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "zh-CN是内容语言，不证明中国存在一一对应的职业、资格或统一计薪口径。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editorial",
+            "nbs-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较具体岗位时记录城市、机构、岗位名称、职责组合、经验要求、计薪单位和福利；招聘样本不能冒充全国统计。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial",
+            "nbs-wage"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据：2025年年薪中位数为{{fact:us-annual-2025}}。"
+            ]
+          },
+          "fact_refs": [
+            "us-annual-2025"
+          ],
+          "id": "health-information-technologists-and-medical-registrars.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据：2025年小时工资中位数为{{fact:us-hourly-2025}}；不等于加班率。"
+            ]
+          },
+          "fact_refs": [
+            "us-hourly-2025"
+          ],
+          "id": "health-information-technologists-and-medical-registrars.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "同页年薪第10百分位为39,830美元、第90百分位为117,420美元；分位点不是入门或资深标签。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "全国职业统计覆盖多种岗位组合，不代表某一病历、登记、数据库或管理岗位的单独报价。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-details",
+            "onet-summary",
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "具体地区、机构、职责、经验与班次会影响报价；页面数字不是个人收入保证。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国数据不能换算为中国工资；中国精确职业分布在本次核查中仍不可用。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "nbs-wage",
+            "onet-wages"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "细节信号：你能在多条记录和字段定义中稳定发现空值、冲突与异常。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "追溯信号：不凭印象补代码或诊断，愿意回到有效原记录和定义。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "口径信号：能解释分母、期间、筛选规则和“完整”不等于“正确”。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "系统信号：愿意测试数据库、报表或流程改动，并记录失败条件。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "保密信号：对真实患者信息保持克制，只在授权范围处理。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial",
+            "hhs-security"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "协作信号：能把查询写清，让临床、编码、IT或质量角色知道需确认什么。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：若你容易跳过重复核对、讨厌定义与记录，或想用工具自动填补未知，先不要把兴趣当作适配。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "本页合成练习只观察行为，不是人格测评、录用判断或系统访问授权。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "患者错配：标识或记录链接错误会把信息归到错误对象。控制是暂停处理、回到原记录核验并沿机构流程升级，不自行改诊断。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "编码或字段冲突：缺失、冲突或定义版本不一致会扭曲登记与统计。控制是保留冲突、发起查询并记录最终依据。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "访问与披露：HIPAA Security Rule只适用于覆盖实体及业务伙伴，要求保护ePHI的保密性、完整性和可用性；具体措施由受规制实体按风险确定。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.risk.career-risk-cards.3",
+          "source_refs": [
+            "hhs-security"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "系统或工具异常：报表、数据库或模型输出无法追溯时，停止发布/更改，回到原记录、定义和审计日志。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同边界：使用合成数据练习；真实患者数据、系统访问、编码更改、发布和医疗决定须服从适用机构程序与授权，本页不提供个案医疗或法律意见。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial",
+            "hhs-security"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "美国O*NET将该职业置于准备区三，多数职业需要职业学校训练、相关经验或副学士学位，并通常需要一至两年结合在职经验和资深人员指导的训练。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.path.career-path-block.1",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "先选一个入口：病历/编码分析、疾病登记、数据报表、数据库或医疗信息系统支持，再核目标岗位的第一阶段任务。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.path.career-path-block.2",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品只用本页四条合成记录，计算字段完整率、列缺失项、写查询单和暂停状态。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.path.career-path-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品必须说明“字段完整率75%不等于临床正确”，不得补猜诊断、状态或日期。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.path.career-path-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七日试做：第1天读职业范围；第2天抄录12格；第3天找3个空值；第4天算9/12；第5天写查询；第6天对答案；第7天记录继续、暂停或比较相邻方向。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.path.career-path-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "教育、培训、认证、录用、系统访问、数据更改和签字/发布责任是不同状态，分别向雇主与适用法域核验。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.path.career-path-block.6",
+          "source_refs": [
+            "editorial",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "成长看能否处理更复杂定义、数据质量、系统测试、隐私安全与跨团队交付，不承诺统一年限或自动晋级。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.path.career-path-block.7",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转向管理、临床研究、法规或通用管理分析前，重新核对交付对象、岗位资格和最终责任。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.path.career-path-block.8",
+          "source_refs": [
+            "adj-admin",
+            "adj-clinical-research",
+            "adj-health-manager",
+            "adj-management-analyst",
+            "adj-regulatory",
+            "editorial",
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据：2024年就业人数为{{fact:us-employment-2024}}。"
+            ]
+          },
+          "fact_refs": [
+            "us-employment-2024"
+          ],
+          "id": "health-information-technologists-and-medical-registrars.market-signals.market-signal-card.1",
+          "source_refs": [
+            "onet-trends"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据：2024—2034年就业预计从41,900增至48,100，增长{{fact:us-growth-2024-2034}}。"
+            ]
+          },
+          "fact_refs": [
+            "us-growth-2024-2034"
+          ],
+          "id": "health-information-technologists-and-medical-registrars.market-signals.market-signal-card.2",
+          "source_refs": [
+            "onet-trends"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据：同期间预计年均{{fact:us-openings-2024-2034}}空缺，包含增长与替代需求。"
+            ]
+          },
+          "fact_refs": [
+            "us-openings-2024-2034"
+          ],
+          "id": "health-information-technologists-and-medical-registrars.market-signals.market-signal-card.3",
+          "source_refs": [
+            "onet-trends"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "15%增长率、净增6,200人与年均3,200个空缺是不同指标，不能相加或解释成个人录用概率。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.market-signals.market-signal-card.4",
+          "source_refs": [
+            "onet-trends"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "O*NET明确职业画像仍有部分数据在收集；全国预测也不能推出某机构、地区、中国市场或个人机会。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.market-signals.market-signal-card.5",
+          "source_refs": [
+            "onet-summary",
+            "onet-trends"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "日常可包括病历和随访信息抽取、编码与登记、统计报告、缺失冲突查询、数据库或系统测试、隐私安全和员工培训；具体岗位通常只覆盖其中一部分。",
+                "id": "health-information-technologists-and-medical-registrars.faq.1",
+                "question_key": "career.faq.health-information-technologists-and-medical-registrars.daily-work",
+                "source_refs": [
+                  "onet-details",
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "目标职业聚焦医疗数据、登记和信息系统；行政或医疗服务经理统筹运营，临床研究协调员管理研究项目，法规事务专员做监管流程，管理分析师做通用组织改进。",
+                "id": "health-information-technologists-and-medical-registrars.faq.2",
+                "question_key": "career.faq.health-information-technologists-and-medical-registrars.role-comparison",
+                "source_refs": [
+                  "adj-admin",
+                  "adj-clinical-research",
+                  "adj-health-manager",
+                  "adj-management-analyst",
+                  "adj-regulatory",
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "观察自己能否发现字段缺失与冲突、回查原记录、解释指标口径、保留变更痕迹并谨慎处理敏感信息；这不是人格或适任诊断。",
+                "id": "health-information-technologists-and-medical-registrars.faq.3",
+                "question_key": "career.faq.health-information-technologists-and-medical-registrars.fit",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "当前资料只确认EHR、编码、数据库、统计和报表等数字工具以及招聘软件样本，没有生成式AI采用率或净就业影响，不能量化替代概率。",
+                "id": "health-information-technologists-and-medical-registrars.faq.4",
+                "question_key": "career.faq.health-information-technologists-and-medical-registrars.ai-impact",
+                "source_refs": [
+                  "onet-hot",
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "患者匹配、编码依据、访问权限、数据更改和面向医疗决定的最终解释必须回到原记录与机构程序，由具备职责的人复核。",
+                "id": "health-information-technologists-and-medical-registrars.faq.5",
+                "question_key": "career.faq.health-information-technologists-and-medical-registrars.human-control",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "暂无可安全使用的数据：本次所核中国官方发布没有与O*NET 29-9021.00精确对应的全国工资中位数或分位数，不能用行业均值替代。",
+                "id": "health-information-technologists-and-medical-registrars.faq.6",
+                "question_key": "career.faq.health-information-technologists-and-medical-registrars.china-pay",
+                "source_refs": [
+                  "nbs-wage"
+                ]
+              },
+              {
+                "answer": "美国精确职业数据：2025年年薪中位数68,020美元、小时中位数32.70美元；不是起薪、地区报价或个人保证。",
+                "fact_refs": [
+                  "us-annual-2025",
+                  "us-hourly-2025"
+                ],
+                "id": "health-information-technologists-and-medical-registrars.faq.7",
+                "question_key": "career.faq.health-information-technologists-and-medical-registrars.us-pay",
+                "source_refs": [
+                  "onet-wages"
+                ]
+              },
+              {
+                "answer": "美国O*NET把该职业置于准备区三；教育、培训、认证、录用、系统访问、数据更改与发布责任仍需分别核验。",
+                "id": "health-information-technologists-and-medical-registrars.faq.8",
+                "question_key": "career.faq.health-information-technologists-and-medical-registrars.education-path",
+                "source_refs": [
+                  "editorial",
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "患者错配、代码/字段冲突、越权访问和不可追溯的系统输出都应触发暂停与升级；真实数据和系统操作服从机构程序，本页不提供个案医疗或法律意见。",
+                "id": "health-information-technologists-and-medical-registrars.faq.9",
+                "question_key": "career.faq.health-information-technologists-and-medical-registrars.risk-boundary",
+                "source_refs": [
+                  "editorial",
+                  "hhs-security",
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "美国精确职业2024—2034年预计增长15%、年均3,200个空缺；空缺含增长与替代需求，全国预测不是个人录用概率。",
+                "fact_refs": [
+                  "us-growth-2024-2034",
+                  "us-openings-2024-2034"
+                ],
+                "id": "health-information-technologists-and-medical-registrars.faq.10",
+                "question_key": "career.faq.health-information-technologists-and-medical-registrars.outlook-transition",
+                "source_refs": [
+                  "onet-trends"
+                ]
+              },
+              {
+                "answer": "如果你愿意长期核对定义、记录和权限，可用合成记录检验缺失识别、口径解释与查询交接，再比较病历分析、登记、系统或相邻管理方向。",
+                "id": "health-information-technologists-and-medical-registrars.faq.11",
+                "question_key": "career.faq.health-information-technologists-and-medical-registrars.career-worth",
+                "source_refs": [
+                  "editorial"
+                ]
+              }
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.sources.faq.1",
+          "source_refs": [
+            "adj-admin",
+            "adj-clinical-research",
+            "adj-health-manager",
+            "adj-management-analyst",
+            "adj-regulatory",
+            "editorial",
+            "hhs-security",
+            "nbs-wage",
+            "onet-details",
+            "onet-hot",
+            "onet-summary",
+            "onet-trends",
+            "onet-wages"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "精确身份为O*NET 29-9021.00；O*NET明确部分画像仍在收集，页面未列内容不等于职业没有。",
+              "美国职业数据、中国工资缺口、美国HIPAA适用规则和编辑建议分别陈述，不跨法域外推。",
+              "HIPAA Security Rule摘要只适用于覆盖实体及其业务伙伴，不自动适用于所有国家、机构或个人。",
+              "合成练习共12格、9格有值、3格缺失，75%只表示题面字段完整率，不表示临床正确。",
+              "本页不使用真实患者数据，也不授予系统访问、数据更改、诊断、签字或发布权限。"
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.sources.boundary.1",
+          "source_refs": [
+            "adj-admin",
+            "adj-clinical-research",
+            "adj-health-manager",
+            "adj-management-analyst",
+            "adj-regulatory",
+            "editorial",
+            "hhs-security",
+            "nbs-wage",
+            "onet-details",
+            "onet-hot",
+            "onet-summary",
+            "onet-trends",
+            "onet-wages"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "健康信息技师与医疗登记专员",
+                "id": "health-information-technologists-and-medical-registrars.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "健康信息技师与医疗登记专员",
+                "id": "health-information-technologists-and-medical-registrars.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "健康信息技师与医疗登记专员",
+                "id": "health-information-technologists-and-medical-registrars.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "健康信息技师与医疗登记专员",
+                "id": "health-information-technologists-and-medical-registrars.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "健康信息技师与医疗登记专员",
+                "id": "health-information-technologists-and-medical-registrars.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "健康信息技师与医疗登记专员",
+                "id": "health-information-technologists-and-medical-registrars.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "健康信息技师与医疗登记专员",
+                "id": "health-information-technologists-and-medical-registrars.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "健康信息技师与医疗登记专员",
+                "id": "health-information-technologists-and-medical-registrars.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "健康信息技师与医疗登记专员",
+                "id": "health-information-technologists-and-medical-registrars.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "健康信息技师与医疗登记专员",
+                "id": "health-information-technologists-and-medical-registrars.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "健康信息技师与医疗登记专员",
+                "id": "health-information-technologists-and-medical-registrars.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "行政服务经理职业范围。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-admin",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET：Administrative Services Managers",
+                "period": "O*NET 31.0 profile; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-3012.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "临床研究协调员职业范围。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-clinical-research",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET：Clinical Research Coordinators",
+                "period": "O*NET 31.0 profile; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-9121.01"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "医疗卫生服务经理职业范围。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-health-manager",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET：Medical and Health Services Managers",
+                "period": "O*NET 31.0 profile; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-9111.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "管理分析师职业范围。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-management-analyst",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET：Management Analysts",
+                "period": "O*NET 31.0 profile; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-1111.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "法规事务专员职业范围。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-regulatory",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET：Regulatory Affairs Specialists",
+                "period": "O*NET 31.0 profile; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-1041.07"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "合成练习、适配观察、AI控制、风险响应和七日试做。",
+                  "不是患者记录、诊断建议、医疗决定、法律意见或系统访问授权。"
+                ],
+                "evidence_type": "editorial exercise and guidance",
+                "id": "editorial",
+                "limitation": "不是患者记录、诊断建议、医疗决定、法律意见或系统访问授权。",
+                "market": "编辑设计",
+                "name": "健康信息职业探索编辑说明",
+                "period": "editorial review 2026-09-06",
+                "publisher": "FermatMind editorial",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "ePHI保密性、完整性、可用性与行政/物理/技术保障。",
+                  "仅适用于HIPAA覆盖实体和业务伙伴；摘要不是完整法律意见。"
+                ],
+                "evidence_type": "official source",
+                "id": "hhs-security",
+                "limitation": "仅适用于HIPAA覆盖实体和业务伙伴；摘要不是完整法律意见。",
+                "market": "美国受规制实体",
+                "name": "HHS：HIPAA Security Rule摘要",
+                "period": "current rule summary reviewed 2026-08-07; accessed 2026-09-06",
+                "publisher": "U.S. Department of Health and Human Services",
+                "scope": "exact",
+                "url": "https://www.hhs.gov/hipaa/for-professionals/security/laws-regulations/index.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "中国工资表的行业聚合口径。",
+                  "未提供与O*NET 29-9021.00精确对应的全国工资分布；本职业复用同任务同日已打开记录。"
+                ],
+                "evidence_type": "official source",
+                "id": "nbs-wage",
+                "limitation": "未提供与O*NET 29-9021.00精确对应的全国工资分布；本职业复用同任务同日已打开记录。",
+                "market": "中国大陆",
+                "name": "国家统计局：2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wage release; published 2026-05-15; accessed 2026-09-06",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "身份、任务和详细活动。",
+                  "任务列表不代表每个岗位全部承担。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-details",
+                "limitation": "任务列表不代表每个岗位全部承担。",
+                "market": "美国",
+                "name": "O*NET：29-9021.00 详细页",
+                "period": "O*NET 31.0 profile; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-9021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "招聘启事中软件技能及出现百分比。",
+                  "招聘样本不是职业普及率、AI采用率或能力要求全集。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-hot",
+                "limitation": "招聘样本不是职业普及率、AI采用率或能力要求全集。",
+                "market": "美国招聘样本",
+                "name": "O*NET：29-9021.00 招聘软件技能",
+                "period": "2025 job postings; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "recruitment_proxy",
+                "url": "https://www.onetonline.org/link/hot_tech/29-9021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "身份、任务、准备区、工具与职业特征。",
+                  "该页说明部分画像仍在收集；美国资料不建立中国映射。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-summary",
+                "limitation": "该页说明部分画像仍在收集；美国资料不建立中国映射。",
+                "market": "美国",
+                "name": "O*NET：29-9021.00 摘要",
+                "period": "O*NET 31.0 profile; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-9021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2024—2034就业、增长和年均空缺。",
+                  "全国预测不是个人录用概率。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-trends",
+                "limitation": "全国预测不是个人录用概率。",
+                "market": "美国",
+                "name": "O*NET：29-9021.00 全国趋势",
+                "period": "2024-2034 projections; accessed 2026-09-06",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/29-9021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2025年美国工资中位数与分位数。",
+                  "全国统计不是起薪、地区报价或个人保证。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-wages",
+                "limitation": "全国统计不是起薪、地区报价或个人保证。",
+                "market": "美国",
+                "name": "O*NET：29-9021.00 全国工资",
+                "period": "2025 BLS OEWS wage data; accessed 2026-09-06",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/29-9021.00"
+              }
+            ]
+          },
+          "id": "health-information-technologists-and-medical-registrars.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "68,020美元/年",
+        "fact_id": "us-annual-2025",
+        "market": "美国",
+        "measure": "年薪中位数",
+        "occupation_scope": "精确职业数据：O*NET 29-9021.00",
+        "period": "2025 BLS OEWS wage data; accessed 2026-09-06",
+        "source_refs": [
+          "onet-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "32.70美元/小时",
+        "fact_id": "us-hourly-2025",
+        "market": "美国",
+        "measure": "小时工资中位数",
+        "occupation_scope": "精确职业数据：O*NET 29-9021.00",
+        "period": "2025 BLS OEWS wage data; accessed 2026-09-06",
+        "source_refs": [
+          "onet-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "41,900人",
+        "fact_id": "us-employment-2024",
+        "market": "美国",
+        "measure": "就业人数",
+        "occupation_scope": "精确职业数据：O*NET 29-9021.00",
+        "period": "2024-2034 projections; accessed 2026-09-06",
+        "source_refs": [
+          "onet-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "15%（2024—2034）",
+        "fact_id": "us-growth-2024-2034",
+        "market": "美国",
+        "measure": "预计就业增长",
+        "occupation_scope": "精确职业数据：O*NET 29-9021.00",
+        "period": "2024-2034 projections; accessed 2026-09-06",
+        "source_refs": [
+          "onet-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "3,200个/年",
+        "fact_id": "us-openings-2024-2034",
+        "market": "美国",
+        "measure": "预计年均职位空缺",
+        "occupation_scope": "精确职业数据：O*NET 29-9021.00",
+        "period": "2024-2034 projections; accessed 2026-09-06",
+        "source_refs": [
+          "onet-trends"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "3159a3ee1c587d3a8ad1cf2f987b9481d070c601f1fd7f6f17e849c3f6df2c16",
+  "source_content_sha256": "a5bdf3b4edda5b3ceda47cf9f759ef585d0aee68c3276855f086147005e909d1",
   "subject": {
     "canonical_slug": "health-information-technologists-and-medical-registrars",
     "name": "健康信息技师与医疗登记专员",
-    "summary": null
+    "summary": "健康信息技师与医疗登记专员把病历、治疗与随访信息转成可检索、可分析、可审计的数据与系统：既处理编码、登记和统计，也可能参与数据库、医疗信息系统、隐私安全和员工培训。具体岗位通常只覆盖其中一部分。"
   }
 }

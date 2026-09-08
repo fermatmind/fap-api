@@ -1,12 +1,1644 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "适合继续了解：你愿意把尺寸、材料、图纸版本和检查记录做得可追溯，也能接受车间或现场的体力与安全约束。只喜欢“动手”而不愿反复测量和复核，可能不适合。"
+            ]
+          },
+          "id": "sheet-metal-workers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "职业主线是把图纸和规格转成薄板金属部件或风管系统，并通过测量、连接、安装和检查交付；工作可分为制造、安装、维护或测试平衡。"
+            ]
+          },
+          "id": "sheet-metal-workers.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "bls-ooh",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全试做材料（完全虚构）：盖板工单写明成品外形600×400毫米、镀锌钢板、数量2、安装位置“机房A”；材料厚度空白，图纸修订号空白，铆钉只写“规格待定”，接缝余量空白。任务只是在纸面列出已知项、四个缺口、应向谁追问和当前工单状态。"
+            ]
+          },
+          "id": "sheet-metal-workers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考复核：已知项为外形、材料类别、数量和位置；缺口正好是厚度、图纸修订号、铆钉规格、接缝余量。把四项逐一列给图纸/设计责任人与工单责任人，由双方按实际职责确认并回填同一份有效工单；题面没有给出四项的具体负责分工，不替他们分配。状态写“暂停放行，待四项确认”。不得补猜尺寸、设置机器或开始加工。"
+            ]
+          },
+          "id": "sheet-metal-workers.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "O*NET 47-2211.00覆盖制造、装配、安装和维修薄板金属产品与设备，也包括预制金属风管安装工。"
+            ]
+          },
+          "id": "sheet-metal-workers.profile.definition-block.1",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "投入：施工图或车间图、尺寸、材料规格、连接要求和适用工序。"
+            ]
+          },
+          "id": "sheet-metal-workers.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "产出：尺寸与接缝经检查的部件、风管或外壳，以及安装或维修结果。"
+            ]
+          },
+          "id": "sheet-metal-workers.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "流程：读图与选材→测量划线→切割成形→连接装配→安装或维修→检查尺寸和接缝。"
+            ]
+          },
+          "id": "sheet-metal-workers.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断是材料与图纸是否匹配、修订是否有效、尺寸和连接方式是否明确，以及异常是否需要停止和升级。"
+            ]
+          },
+          "id": "sheet-metal-workers.profile.work-context-block.1",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作类型包括车间制造、施工安装、维护修理和系统测试平衡；具体岗位通常只覆盖其中一部分。"
+            ]
+          },
+          "id": "sheet-metal-workers.profile.work-context-block.2",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "常见工具环境可能包含剪切、压力、成形和计算机控制设备，也可能使用CADD；具体设备操作必须按岗位训练与授权。"
+            ]
+          },
+          "id": "sheet-metal-workers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "bls-ooh",
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "协作对象可包括制图/设计、工单或项目负责人、质量与安全人员，以及下游安装或维护人员。"
+            ]
+          },
+          "id": "sheet-metal-workers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量要看尺寸、接缝、材料与图纸要求是否一致，并让检查结果可复核。"
+            ]
+          },
+          "id": "sheet-metal-workers.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "本页不把锅炉、木作、石膏板吊顶或绝缘材料安装合并进钣金工；相邻岗位须按核心对象和产出分别判断。"
+            ]
+          },
+          "id": "sheet-metal-workers.profile.definition-block.2",
+          "source_refs": [
+            "adj-boilermakers",
+            "adj-carpenters",
+            "adj-drywall",
+            "adj-insulation-building",
+            "adj-insulation-mechanical",
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "boilermakers",
+                "id": "sheet-metal.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/boilermakers"
+              },
+              {
+                "entity": "carpenters",
+                "id": "sheet-metal.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/carpenters"
+              },
+              {
+                "entity": "drywall-and-ceiling-tile-installers",
+                "id": "sheet-metal.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/drywall-and-ceiling-tile-installers"
+              },
+              {
+                "entity": "insulation-workers-floor-ceiling-and-wall",
+                "id": "sheet-metal.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/insulation-workers-floor-ceiling-and-wall"
+              },
+              {
+                "entity": "insulation-workers-mechanical",
+                "id": "sheet-metal.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/insulation-workers-mechanical"
+              }
+            ]
+          },
+          "id": "sheet-metal-workers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "adj-boilermakers",
+            "adj-carpenters",
+            "adj-drywall",
+            "adj-insulation-building",
+            "adj-insulation-mechanical",
+            "onet-summary"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "锅炉制造与安装工面向锅炉、罐体等大型容器；钣金工面向薄板部件、外壳与风管，材料厚度和装配对象不同。"
+            ]
+          },
+          "id": "sheet-metal-workers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "adj-boilermakers",
+            "adj-carpenters",
+            "adj-drywall",
+            "adj-insulation-building",
+            "adj-insulation-mechanical",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "木工与石膏板/吊顶安装工分别以木质结构或墙板吊顶系统为核心；共享读图、测量和现场协作，不代表能互换岗位。"
+            ]
+          },
+          "id": "sheet-metal-workers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "adj-boilermakers",
+            "adj-carpenters",
+            "adj-drywall",
+            "adj-insulation-building",
+            "adj-insulation-mechanical",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "楼地面/吊顶/墙体绝缘工处理建筑围护面的保温材料；机械绝缘工处理管道、风管和机械系统的保温层。它们可能与风管安装衔接，但交付物不是金属风管本体。"
+            ]
+          },
+          "id": "sheet-metal-workers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "adj-boilermakers",
+            "adj-carpenters",
+            "adj-drywall",
+            "adj-insulation-building",
+            "adj-insulation-mechanical",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "比较方向时先问：主要材料是什么、最终交付什么、要操作哪些设备、需要哪种训练与授权，而不是只看是否在同一工地。"
+            ]
+          },
+          "id": "sheet-metal-workers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "adj-boilermakers",
+            "adj-carpenters",
+            "adj-drywall",
+            "adj-insulation-building",
+            "adj-insulation-mechanical",
+            "editorial",
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "当前可核实的是自动化与数字化：部分车间使用计算机控制的锯、激光、剪切机、压力机和CADD，不等同于生成式AI。"
+            ]
+          },
+          "id": "sheet-metal-workers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：本次已打开资料未提供钣金工生成式AI采用率、生产率因果估计或净就业影响，因此不量化“替代概率”。"
+            ]
+          },
+          "id": "sheet-metal-workers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "低风险辅助可以是整理图纸修订清单、材料缺口或检查记录草案；先由组织确认数据与工具可用。"
+            ]
+          },
+          "id": "sheet-metal-workers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人的控制点：回看原图、材料规格、修订号和工单，不从工具摘要直接下达加工。"
+            ]
+          },
+          "id": "sheet-metal-workers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "机器状态、防护装置、切割折弯参数与现场放行仍由具备相应职责的人按程序确认。"
+            ]
+          },
+          "id": "sheet-metal-workers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "输出缺来源、尺寸单位不一致、版本冲突或材料未知时，停止使用该输出并保留原始记录。"
+            ]
+          },
+          "id": "sheet-metal-workers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "自动化设备的存在不等于所有岗位都采用，更不等于岗位净减少；市场判断应看同一期间的就业统计。"
+            ]
+          },
+          "id": "sheet-metal-workers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实践顺序：先用虚构数据测试版本与缺口识别，记录错误，再由雇主决定是否进入受控流程。"
+            ]
+          },
+          "id": "sheet-metal-workers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国大陆行业代理数据：2025年规模以上企业“生产制造及有关人员”年平均工资为{{fact:cn-production-wage-2025}}；这不是钣金工精确工资。"
+            ]
+          },
+          "fact_refs": [
+            "cn-production-wage-2025"
+          ],
+          "id": "sheet-metal-workers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "该数据覆盖多种生产制造岗位，且限于规模以上企业；不能推算钣金工起薪、地区报价或到手收入。"
+            ]
+          },
+          "id": "sheet-metal-workers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：本次所核国家统计局表没有钣金工全国精确中位数或分位数，因此保留职业映射缺口。"
+            ]
+          },
+          "id": "sheet-metal-workers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "nbs-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "求职时另核对城市、行业、制造或安装岗位、班次、计薪单位、加班与福利，并要求招聘方说明统计口径。"
+            ]
+          },
+          "id": "sheet-metal-workers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial",
+            "nbs-wage"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国BLS精确职业数据：2025年5月年薪中位数为{{fact:us-annual-2025}}。"
+            ]
+          },
+          "fact_refs": [
+            "us-annual-2025"
+          ],
+          "id": "sheet-metal-workers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据：2025年5月小时工资中位数为{{fact:us-hourly-2025}}；不等于加班率或到手收入。"
+            ]
+          },
+          "fact_refs": [
+            "us-hourly-2025"
+          ],
+          "id": "sheet-metal-workers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "两项都是全美该职业的中位数，不是入门价、个人保证或某个城市报价。"
+            ]
+          },
+          "id": "sheet-metal-workers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "制造、安装、维护和测试平衡岗位的工作环境不同；具体报价仍需看地区、行业和雇主。"
+            ]
+          },
+          "id": "sheet-metal-workers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "比较岗位时保持年份、单位、职业范围和地区一致，不把年薪与小时工资重复相加。"
+            ]
+          },
+          "id": "sheet-metal-workers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国统计不能换算成中国钣金工工资；中国部分只展示明确标为代理的宽岗位大类。"
+            ]
+          },
+          "id": "sheet-metal-workers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "bls-ooh",
+            "nbs-wage"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "任务信号：你愿意从图纸和工单中逐一确认尺寸、材料和修订，而不是凭印象补齐缺口。"
+            ]
+          },
+          "id": "sheet-metal-workers.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "精度信号：发现单位、尺寸或连接要求冲突时，能停下来追问并保存原始版本。"
+            ]
+          },
+          "id": "sheet-metal-workers.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "动手信号：你对制造、装配、安装或维修的完整闭环有兴趣，而不只喜欢某一种工具。"
+            ]
+          },
+          "id": "sheet-metal-workers.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "环境信号：能理性评估站立、搬运、弯腰、攀爬、噪声、粉尘和高处等工作条件。"
+            ]
+          },
+          "id": "sheet-metal-workers.fit.riasec-fit-block.4",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "协作信号：能把未知项、复核依据和暂停原因清楚交给设计、项目、质量或安全角色。"
+            ]
+          },
+          "id": "sheet-metal-workers.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "反证信号：别人指出图纸版本或材料错误时，愿意重做核对而不是为原判断辩护。"
+            ]
+          },
+          "id": "sheet-metal-workers.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：若你经常跳过测量、讨厌记录或在安全条件未知时仍想继续，先不要把兴趣当作适配。"
+            ]
+          },
+          "id": "sheet-metal-workers.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "用本页虚构工单观察这些行为即可；结果不是人格测试、录用判断或设备操作资格。"
+            ]
+          },
+          "id": "sheet-metal-workers.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "锐边、热作与跌落：BLS列出割伤、灼伤和梯子/脚手架跌落。真实控制须按岗位、现场和雇主程序确定；本页不教焊接或高处操作。"
+            ]
+          },
+          "id": "sheet-metal-workers.risk.career-risk-cards.1",
+          "source_refs": [
+            "bls-ooh",
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "机器防护：在1910.212适用的美国一般工业范围，剪切机、压力机、动力锯和成形辊等操作点须按条文防护；缺失或异常时停止并升级。"
+            ]
+          },
+          "id": "sheet-metal-workers.risk.career-risk-cards.2",
+          "source_refs": [
+            "ecfr-guarding",
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "危险能源：1910.147只用于其适用的一般工业检修维护，能源隔离由获授权员工执行；该条明确排除建筑业，不能外推为所有工地规则。"
+            ]
+          },
+          "id": "sheet-metal-workers.risk.career-risk-cards.3",
+          "source_refs": [
+            "ecfr-loto",
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "信息风险：图纸修订、材料厚度、连接规格或单位缺失会让后续加工和安装失去依据；标记未知、保留版本并暂停放行。"
+            ]
+          },
+          "id": "sheet-metal-workers.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同边界：真实机器、焊接、高处、搬运和能源隔离均需适用训练、程序与授权；纸面练习只训练缺口识别和交接。"
+            ]
+          },
+          "id": "sheet-metal-workers.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "美国BLS显示：建筑业钣金工通常走学徒制，制造业通常通过在职训练或技术学校学习；常见入门学历是高中或同等学历。"
+            ]
+          },
+          "id": "sheet-metal-workers.path.career-path-block.1",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "先选目标场景：车间制造、施工安装、维护修理或测试平衡，再核对该雇主的第一阶段任务和监督方式。"
+            ]
+          },
+          "id": "sheet-metal-workers.path.career-path-block.2",
+          "source_refs": [
+            "bls-ooh",
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品只做虚构工单核对，不接触真实材料、机器、焊接或施工现场。"
+            ]
+          },
+          "id": "sheet-metal-workers.path.career-path-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品输出为已知项表、四项缺口、追问对象和“暂停放行”交接记录；不自行补材料厚度或机器参数。"
+            ]
+          },
+          "id": "sheet-metal-workers.path.career-path-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七日试做：第1天读职业范围；第2天抄录已知项；第3天找四个缺口；第4天写追问；第5天做版本核对；第6天对照答案；第7天记录继续、暂停或比较相邻方向。"
+            ]
+          },
+          "id": "sheet-metal-workers.path.career-path-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "学历、学徒或培训、录用、具体设备授权和现场职责是不同状态，必须分别核验。"
+            ]
+          },
+          "id": "sheet-metal-workers.path.career-path-block.6",
+          "source_refs": [
+            "bls-ooh",
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "成长用更复杂图纸、材料、质量复核和协作责任来衡量，不承诺统一年限或自动晋级。"
+            ]
+          },
+          "id": "sheet-metal-workers.path.career-path-block.7",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转向锅炉、木作、墙板吊顶或绝缘工作前，重新核对主要材料、工具、训练和责任边界。"
+            ]
+          },
+          "id": "sheet-metal-workers.path.career-path-block.8",
+          "source_refs": [
+            "adj-boilermakers",
+            "adj-carpenters",
+            "adj-drywall",
+            "adj-insulation-building",
+            "adj-insulation-mechanical",
+            "editorial",
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据：2025年就业约{{fact:us-employment-2025}}。"
+            ]
+          },
+          "fact_refs": [
+            "us-employment-2025"
+          ],
+          "id": "sheet-metal-workers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据：2025—2035年就业增长{{fact:us-growth-2025-2035}}，约净增3,300人。"
+            ]
+          },
+          "fact_refs": [
+            "us-growth-2025-2035"
+          ],
+          "id": "sheet-metal-workers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据：2025—2035年预计年均{{fact:us-openings-2025-2035}}空缺，很多来自转职或退出劳动力市场；不能当作净新增。"
+            ]
+          },
+          "fact_refs": [
+            "us-openings-2025-2035"
+          ],
+          "id": "sheet-metal-workers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "O*NET趋势页仍显示2024—2034旧版的2%和10,600个年均空缺；本页只展示BLS 2025—2035版，不混用期间。"
+            ]
+          },
+          "id": "sheet-metal-workers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editorial",
+            "onet-trends"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "全国预测不能推出某城市招聘、个人录用或中国市场结果；判断机会还需核地区、行业和制造/安装岗位。"
+            ]
+          },
+          "id": "sheet-metal-workers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "日常工作从读图选材、测量划线，到切割成形、连接装配、安装或维修，再检查尺寸与接缝；岗位可能偏制造、安装、维护或测试平衡。",
+                "id": "sheet-metal-workers.faq.1",
+                "question_key": "career.faq.sheet-metal-workers.daily-work",
+                "source_refs": [
+                  "bls-ooh",
+                  "onet-details",
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "钣金工以薄板金属部件和风管为核心；锅炉工处理大型容器，木工与墙板吊顶工处理不同材料和系统，两类绝缘工交付保温层。共享工地或读图技能不代表岗位互换。",
+                "id": "sheet-metal-workers.faq.2",
+                "question_key": "career.faq.sheet-metal-workers.role-comparison",
+                "source_refs": [
+                  "adj-boilermakers",
+                  "adj-carpenters",
+                  "adj-drywall",
+                  "adj-insulation-building",
+                  "adj-insulation-mechanical",
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "可用虚构工单观察自己是否愿意反复核对尺寸、材料、版本和未知项，能否接受复核并清楚交接；这不是人格或适任诊断。",
+                "id": "sheet-metal-workers.faq.3",
+                "question_key": "career.faq.sheet-metal-workers.fit",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "当前职业资料能确认计算机控制设备与CADD等自动化，但没有给出生成式AI采用率或净就业影响，不能据此量化替代概率。",
+                "id": "sheet-metal-workers.faq.4",
+                "question_key": "career.faq.sheet-metal-workers.ai-impact",
+                "source_refs": [
+                  "bls-ooh"
+                ]
+              },
+              {
+                "answer": "人必须回看原图、材料规格、修订号和工单；尺寸冲突或信息缺失时停止并升级，工具输出不构成机器操作许可。",
+                "id": "sheet-metal-workers.faq.5",
+                "question_key": "career.faq.sheet-metal-workers.human-control",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "中国大陆行业代理数据：2025年规模以上企业“生产制造及有关人员”80,739元/年的宽岗位大类平均，不是钣金工工资；暂无全国精确中位数或分位数。",
+                "fact_refs": [
+                  "cn-production-wage-2025"
+                ],
+                "id": "sheet-metal-workers.faq.6",
+                "question_key": "career.faq.sheet-metal-workers.china-pay",
+                "source_refs": [
+                  "nbs-wage"
+                ]
+              },
+              {
+                "answer": "美国精确职业数据：钣金工2025年5月年薪中位数61,800美元、小时中位数29.71美元；均不是起薪、加班率、地区报价或个人保证。",
+                "fact_refs": [
+                  "us-annual-2025",
+                  "us-hourly-2025"
+                ],
+                "id": "sheet-metal-workers.faq.7",
+                "question_key": "career.faq.sheet-metal-workers.us-pay",
+                "source_refs": [
+                  "bls-ooh"
+                ]
+              },
+              {
+                "answer": "美国建筑业钣金工通常走学徒制，制造业通常通过在职训练或技术学校学习；学历、训练、录用和具体设备授权仍要分别核验。",
+                "id": "sheet-metal-workers.faq.8",
+                "question_key": "career.faq.sheet-metal-workers.education-path",
+                "source_refs": [
+                  "bls-ooh",
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "真实工作可能涉及锐边、热作、跌落、机器、噪声和粉尘。防护和危险能源规则有法域与场景边界；本页不提供机器、焊接、高处或能源隔离操作指导。",
+                "id": "sheet-metal-workers.faq.9",
+                "question_key": "career.faq.sheet-metal-workers.risk-boundary",
+                "source_refs": [
+                  "bls-ooh",
+                  "ecfr-guarding",
+                  "ecfr-loto",
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "美国精确职业数据：BLS预计2025—2035年增长3%、年均约9,800个空缺；空缺包含大量替代需求，不能当作净新增或个人就业保证。",
+                "fact_refs": [
+                  "us-growth-2025-2035",
+                  "us-openings-2025-2035"
+                ],
+                "id": "sheet-metal-workers.faq.10",
+                "question_key": "career.faq.sheet-metal-workers.outlook-transition",
+                "source_refs": [
+                  "bls-ooh"
+                ]
+              },
+              {
+                "answer": "如果你愿意长期做测量、版本核对、质量复查和安全交接，可先完成虚构纸面核对，再比较制造、安装、维护或相邻方向；一次练习不能证明录用适配。",
+                "id": "sheet-metal-workers.faq.11",
+                "question_key": "career.faq.sheet-metal-workers.career-worth",
+                "source_refs": [
+                  "editorial"
+                ]
+              }
+            ]
+          },
+          "id": "sheet-metal-workers.sources.faq.1",
+          "source_refs": [
+            "adj-boilermakers",
+            "adj-carpenters",
+            "adj-drywall",
+            "adj-insulation-building",
+            "adj-insulation-mechanical",
+            "bls-ooh",
+            "ecfr-guarding",
+            "ecfr-loto",
+            "editorial",
+            "nbs-wage",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "本页精确身份是O*NET 47-2211.00 Sheet Metal Workers；相邻职业按各自对象和产出比较。",
+              "美国职业统计、中国宽岗位大类代理和编辑建议分别陈述，不跨市场换算。",
+              "29 CFR 1910.147危险能源控制条款明确排除建筑业；1910.212和1910.147都不外推为中国或全球规则。",
+              "纸面练习只有四个明确缺口，答案不补猜材料厚度、修订号、铆钉规格或接缝余量。",
+              "内容用于职业探索，不替代雇主程序、训练、资格或机器与现场授权。"
+            ]
+          },
+          "id": "sheet-metal-workers.sources.boundary.1",
+          "source_refs": [
+            "adj-boilermakers",
+            "adj-carpenters",
+            "adj-drywall",
+            "adj-insulation-building",
+            "adj-insulation-mechanical",
+            "bls-ooh",
+            "ecfr-guarding",
+            "ecfr-loto",
+            "editorial",
+            "nbs-wage",
+            "onet-details",
+            "onet-summary",
+            "onet-trends"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "钣金工",
+                "id": "sheet-metal-workers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "钣金工",
+                "id": "sheet-metal-workers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "钣金工",
+                "id": "sheet-metal-workers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "钣金工",
+                "id": "sheet-metal-workers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "钣金工",
+                "id": "sheet-metal-workers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "钣金工",
+                "id": "sheet-metal-workers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "钣金工",
+                "id": "sheet-metal-workers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "钣金工",
+                "id": "sheet-metal-workers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "钣金工",
+                "id": "sheet-metal-workers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "钣金工",
+                "id": "sheet-metal-workers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "钣金工",
+                "id": "sheet-metal-workers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "sheet-metal-workers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "锅炉制造与安装工职业范围。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-boilermakers",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "O*NET：Boilermakers",
+                "period": "O*NET 31.0 profile; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-2011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "木工职业范围。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-carpenters",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "O*NET：Carpenters",
+                "period": "O*NET 31.0 profile; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-2031.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "石膏板与吊顶安装工职业范围。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-drywall",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "O*NET：Drywall and Ceiling Tile Installers",
+                "period": "O*NET 31.0 profile; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-2081.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "楼地面、吊顶与墙体绝缘工职业范围。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-insulation-building",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "O*NET：Insulation Workers, Floor, Ceiling, and Wall",
+                "period": "O*NET 31.0 profile; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-2131.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "机械绝缘工职业范围。",
+                  "仅用于相邻职业比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-insulation-mechanical",
+                "limitation": "仅用于相邻职业比较。",
+                "market": "美国",
+                "name": "O*NET：Insulation Workers, Mechanical",
+                "period": "O*NET 31.0 profile; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-2132.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "工作类型、环境、入门方式、2025工资和2025—2035预测。",
+                  "全国统计不是起薪、地区报价或个人就业保证。"
+                ],
+                "evidence_type": "official source",
+                "id": "bls-ooh",
+                "limitation": "全国统计不是起薪、地区报价或个人就业保证。",
+                "market": "美国",
+                "name": "BLS Occupational Outlook Handbook：Sheet Metal Workers",
+                "period": "May 2025 wage and 2025-2035 projections; accessed 2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/construction-and-extraction/sheet-metal-workers.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "机器防护、操作点防护及列举的剪切机、压力机和成形辊。",
+                  "仅在该规定适用范围内使用；不是全球或中国安全规则。"
+                ],
+                "evidence_type": "official source",
+                "id": "ecfr-guarding",
+                "limitation": "仅在该规定适用范围内使用；不是全球或中国安全规则。",
+                "market": "美国一般工业",
+                "name": "eCFR 29 CFR 1910.212 机器防护",
+                "period": "eCFR current through 2026-09-03; accessed 2026-09-06",
+                "publisher": "Electronic Code of Federal Regulations",
+                "scope": "exact",
+                "url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1910/subpart-O/section-1910.212"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "适用的一般工业设备检修维护中的危险能源控制、程序与培训。",
+                  "该条明确不覆盖建筑业；不能据此规定所有钣金施工。"
+                ],
+                "evidence_type": "official source",
+                "id": "ecfr-loto",
+                "limitation": "该条明确不覆盖建筑业；不能据此规定所有钣金施工。",
+                "market": "美国一般工业",
+                "name": "eCFR 29 CFR 1910.147 危险能源控制",
+                "period": "eCFR current through 2026-09-03; accessed 2026-09-06",
+                "publisher": "Electronic Code of Federal Regulations",
+                "scope": "exact",
+                "url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1910/subpart-J/section-1910.147"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "纸面练习、适配观察、工具控制、风险响应和七日试做。",
+                  "不是资格、雇主程序、机器操作指导或现场授权。"
+                ],
+                "evidence_type": "editorial exercise and guidance",
+                "id": "editorial",
+                "limitation": "不是资格、雇主程序、机器操作指导或现场授权。",
+                "market": "编辑设计",
+                "name": "钣金工职业探索编辑说明",
+                "period": "editorial review 2026-09-06",
+                "publisher": "FermatMind editorial",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "规模以上企业生产制造及有关人员年平均工资及统计口径。",
+                  "宽岗位大类平均不是钣金工精确工资；本职业复用同日已打开页面记录。"
+                ],
+                "evidence_type": "official source",
+                "id": "nbs-wage",
+                "limitation": "宽岗位大类平均不是钣金工精确工资；本职业复用同日已打开页面记录。",
+                "market": "中国大陆",
+                "name": "国家统计局：2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 data; published 2026-05-15; accessed 2026-09-06",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "详细任务、工具、工作情境和准备信息。",
+                  "调查项目不表示每个岗位承担全部任务。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-details",
+                "limitation": "调查项目不表示每个岗位承担全部任务。",
+                "market": "美国",
+                "name": "O*NET：Sheet Metal Workers 详细页",
+                "period": "O*NET 31.0 profile; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-2211.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "职业身份、任务、工作情境和准备区。",
+                  "美国职业资料不建立中国工资、资格或雇主授权。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-summary",
+                "limitation": "美国职业资料不建立中国工资、资格或雇主授权。",
+                "market": "美国",
+                "name": "O*NET：Sheet Metal Workers 摘要",
+                "period": "O*NET 31.0 profile; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-2211.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "显示较早一版2024—2034预测，用于识别与BLS当前版期间差异。",
+                  "不得与2025—2035统计拼成同一期间。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-trends",
+                "limitation": "不得与2025—2035统计拼成同一期间。",
+                "market": "美国",
+                "name": "O*NET：Sheet Metal Workers 全国趋势",
+                "period": "2024-2034 projections; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/47-2211.00"
+              }
+            ]
+          },
+          "id": "sheet-metal-workers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "80,739元/年",
+        "fact_id": "cn-production-wage-2025",
+        "market": "中国大陆",
+        "measure": "规模以上企业岗位大类年平均工资",
+        "occupation_scope": "行业代理数据：规模以上企业生产制造及有关人员",
+        "period": "2025 data; published 2026-05-15; accessed 2026-09-06",
+        "source_refs": [
+          "nbs-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "61,800美元/年",
+        "fact_id": "us-annual-2025",
+        "market": "美国",
+        "measure": "年薪中位数",
+        "occupation_scope": "精确职业数据：O*NET 47-2211.00",
+        "period": "May 2025 wage and 2025-2035 projections; accessed 2026-09-06",
+        "source_refs": [
+          "bls-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "29.71美元/小时",
+        "fact_id": "us-hourly-2025",
+        "market": "美国",
+        "measure": "小时工资中位数",
+        "occupation_scope": "精确职业数据：O*NET 47-2211.00",
+        "period": "May 2025 wage and 2025-2035 projections; accessed 2026-09-06",
+        "source_refs": [
+          "bls-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "131,100人",
+        "fact_id": "us-employment-2025",
+        "market": "美国",
+        "measure": "就业人数",
+        "occupation_scope": "精确职业数据：O*NET 47-2211.00",
+        "period": "May 2025 wage and 2025-2035 projections; accessed 2026-09-06",
+        "source_refs": [
+          "bls-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "3%（2025—2035）",
+        "fact_id": "us-growth-2025-2035",
+        "market": "美国",
+        "measure": "预计就业增长",
+        "occupation_scope": "精确职业数据：O*NET 47-2211.00",
+        "period": "May 2025 wage and 2025-2035 projections; accessed 2026-09-06",
+        "source_refs": [
+          "bls-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "9,800个/年",
+        "fact_id": "us-openings-2025-2035",
+        "market": "美国",
+        "measure": "预计年均职位空缺",
+        "occupation_scope": "精确职业数据：O*NET 47-2211.00",
+        "period": "May 2025 wage and 2025-2035 projections; accessed 2026-09-06",
+        "source_refs": [
+          "bls-ooh"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "0a983c1e358b3ba3f4fd359d9507813d5b4b259158b9e84b83b8da45ba5dc244",
+  "source_content_sha256": "8c365fd233f9cb1f6acb312aa48416e7408789e5bb49cf0c760cc841a821824f",
   "subject": {
     "canonical_slug": "sheet-metal-workers",
     "name": "钣金工",
-    "summary": null
+    "summary": "钣金工把图纸和规格转成可安装、可检查的薄板金属部件：选材、测量划线、切割成形、连接、安装与维修都要求尺寸准确、版本清楚并遵守适用安全程序。工作可发生在车间、工厂或施工现场。"
   }
 }

@@ -1,12 +1,1591 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "航空航天工程师把需求转成可分析、可制造、可测试的航空器、航天器、卫星或导弹设计，并用计算、图纸、试验和记录证明方案满足约束；核心不是“喜欢飞机”，而是持续处理需求冲突和验证证据。"
+            ]
+          },
+          "id": "aerospace-engineers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "这个职业是否值得选择取决于你的目标与可验证适配：若你愿意把模糊需求拆成可测指标，能解释假设与误差，面对失败数据会追根因，并接受同行复核、配置控制和长周期协作，这是正向信号。"
+            ]
+          },
+          "id": "aerospace-engineers.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "谨慎信号是：只想做概念创意、不愿记录推导，容易把仿真结果当现实结论，或不愿在证据不足时停止推进。"
+            ]
+          },
+          "id": "aerospace-engineers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全试做只做纸面权衡，不设计、制造或试飞真实飞行器：某虚构无人滑翔器要求载荷2千克、续航至少60分钟、总质量不超过10千克、能量预算不超过300瓦时。下列三组参数均是在承载2千克载荷的同一虚构计算条件下得到：A方案为9.2千克、65分钟、280瓦时，且有热与振动验证记录；B方案为8.6千克、58分钟、250瓦时，只有热验证；C方案为10.4千克、72分钟、310瓦时，且有热与振动验证记录。"
+            ]
+          },
+          "id": "aerospace-engineers.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考答案：在题面给定的四项数值约束和两类验证记录内，只有A全部满足；B少2分钟续航且缺振动验证，C超质量0.4千克并超能量预算10瓦时。仍未知结构裕度、气动、控制软件、实际环境、适航或项目批准、可制造性和成本，因此结论只能是“纸面筛选A进入后续核验”，不得建造或飞行。"
+            ]
+          },
+          "id": "aerospace-engineers.quick-decision.fermat-decision-card.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据（O*NET当前页，访问日期2026年9月7日）：{{fact:occupation-identity}}。航空航天工程师的官方职责覆盖航空器、导弹与航天器的设计、建造和测试。"
+            ]
+          },
+          "fact_refs": [
+            "occupation-identity"
+          ],
+          "id": "aerospace-engineers.profile.definition-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "典型闭环是澄清客户与法规要求，形成概念和详细设计，计算或建模，评估规格与可制造性，规划并审查测试，分析结果与失效，再更新图纸、程序和记录。"
+            ]
+          },
+          "id": "aerospace-engineers.profile.definition-block.2",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "常见交付物包括需求与接口说明、计算和模型、技术图纸与规格、试验计划和结果、失效分析、操作程序及设计评审材料；岗位组合随项目阶段变化。"
+            ]
+          },
+          "id": "aerospace-engineers.profile.definition-block.3",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "关键判断不是单一性能最大化，而是在质量、可靠性、成本、进度、法规、环境和制造约束之间说明取舍，并让每项结论可追溯到需求与证据。"
+            ]
+          },
+          "id": "aerospace-engineers.profile.definition-block.4",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "NASA系统工程指南区分验证与确认：验证建立对要求符合性的证据，确认检查系统是否满足客户或用户预期；验证矩阵应把每条要求与来源及验证方法对应起来。"
+            ]
+          },
+          "id": "aerospace-engineers.profile.definition-block.5",
+          "source_refs": [
+            "nasa-seh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "BLS描述该职业通常在办公室使用计算机工作，多数全职，部分每周超过40小时；具体岗位也可能进入实验室、制造或测试协作环境。"
+            ]
+          },
+          "id": "aerospace-engineers.profile.definition-block.6",
+          "source_refs": [
+            "bls-entry"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "O*NET的2025年美国招聘信息显示MATLAB、Python、C++、Simulink、SolidWorks、AutoCAD和CATIA等软件被提及；这是职位发布样本信号，不代表每个岗位都要求。"
+            ]
+          },
+          "id": "aerospace-engineers.profile.definition-block.7",
+          "source_refs": [
+            "onet-hot-tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "工作会连接系统、结构、推进、航电、制造、质量、测试、项目管理、供应商和客户；工程师需要把接口、变更、假设和未决风险交给下一责任人。"
+            ]
+          },
+          "id": "aerospace-engineers.profile.definition-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "质量证据至少要说明需求版本、分析或试验方法、输入数据、结果、偏差、复核人和未关闭问题；单张图表或模型分数不能替代完整证据链。"
+            ]
+          },
+          "id": "aerospace-engineers.profile.definition-block.9",
+          "source_refs": [
+            "nasa-seh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "O*NET职业描述说明工作内容，但不授予真实项目访问、国防信息接触、设计签署、适航批准或试飞权限；这些边界必须按雇主、合同和所在地规则另行核对。"
+            ]
+          },
+          "id": "aerospace-engineers.profile.definition-block.10",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "偏系统与总体的岗位强调需求、接口、权衡和验证闭环；偏学科设计的岗位更集中于结构、气动、推进、热或控制等单一技术域。"
+            ]
+          },
+          "id": "aerospace-engineers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "偏试验与验证的岗位主要产出试验方案、仪器与数据、偏差处置和符合性证据；它与只做概念或详细设计的日常节奏不同。"
+            ]
+          },
+          "id": "aerospace-engineers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "nasa-seh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "制造工程师更关注生产流程、工装、产能和现场改进；航空航天工程师的身份核心仍是航空航天产品的设计、开发和测试。"
+            ]
+          },
+          "id": "aerospace-engineers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "电气或电子工程师可能负责电源、通信、传感器或电路，但不能仅因在航空项目工作就等同于O*NET 17-2011.00；应按主要职责和交付物判断。"
+            ]
+          },
+          "id": "aerospace-engineers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "研究型岗位更可能探索材料、方法或机理，产品型岗位更强调在既定要求、预算和进度内交付可验证设计；两者都可能出现在本职业范围。"
+            ]
+          },
+          "id": "aerospace-engineers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "选方向时先比较三件事：你想长期负责的对象、你能独立交付的证据、以及出错后由谁承担决策责任；不要只比较职位名称。"
+            ]
+          },
+          "id": "aerospace-engineers.direction-comparison.adjacent-career-comparison-table.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "ILO的2025年生成式AI指数衡量任务层面的潜在暴露，不能解释为航空航天工程师的实际采用率、自动化率或失业概率。"
+            ]
+          },
+          "id": "aerospace-engineers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "ilo-genai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "在获准环境内，AI可辅助检索公开资料、整理需求候选、生成代码或测试草稿、比较文档版本和总结非敏感会议记录，但输出只是待核候选。"
+            ]
+          },
+          "id": "aerospace-engineers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "仿真脚本、计算结果和模型生成内容必须复核单位、边界条件、材料与环境假设、数值收敛、版本及适用范围，并与独立方法或试验证据交叉检查。"
+            ]
+          },
+          "id": "aerospace-engineers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "不得把受限设计、国防信息、出口受控资料、未公开故障数据或客户机密输入未经批准的AI服务；实际数据规则以雇主、合同和法律为准。"
+            ]
+          },
+          "id": "aerospace-engineers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "需求批准、设计基线、风险接受、偏差处置、验证关闭和放行决定应由指定责任人按项目流程完成，AI不能成为签署者或责任主体。"
+            ]
+          },
+          "id": "aerospace-engineers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "保留工具与模型版本、输入来源、提示或参数、输出、人工修改、复核结论和最终批准，才能在错误出现时重放推理路径。"
+            ]
+          },
+          "id": "aerospace-engineers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "遇到缺失来源、不可重复结果、异常单位、越界预测或与试验矛盾时，应停止依赖该输出、保全记录并升级，而不是让AI补齐未知数据。"
+            ]
+          },
+          "id": "aerospace-engineers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "更有韧性的能力是需求分解、物理与数学判断、验证设计、失效分析、跨学科沟通和责任边界管理；这些能力也决定AI输出能否被正确使用。"
+            ]
+          },
+          "id": "aerospace-engineers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "本页所核国家统计局2024年工资资料按城镇单位、行业门类和人员大类汇总，未提供与O*NET 17-2011.00一一对应的中国大陆航空航天工程师工资分位；该精确职业工资暂无可安全使用的数据。因此这里不提供起薪、中位数或百分位，也不以行业均值代替。"
+            ]
+          },
+          "id": "aerospace-engineers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "国家统计局2024年工资资料提供城镇单位、行业和人员大类聚合值，其中科学研究和技术服务业是行业口径，不能当作航空航天工程师单职业工资。"
+            ]
+          },
+          "id": "aerospace-engineers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较中国岗位时，应分别记录城市、单位性质、具体技术方向、经验、学历、项目属性、工时、现金薪酬、补贴和福利；招聘区间也不是实际入职分布。"
+            ]
+          },
+          "id": "aerospace-engineers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "美国工资不能按汇率直接换算为中国报价，因为覆盖人群、税费福利、工时、产业结构和生活成本均不同。"
+            ]
+          },
+          "id": "aerospace-engineers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "个人决策应以同城市、同方向、同经验层级的真实职位和书面报价为主，并询问试用期、奖金、加班、保密及项目地点。"
+            ]
+          },
+          "id": "aerospace-engineers.china-salary.career-snapshot-primary-locale.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "页面语言为中文不证明存在一一对应的中国职业分类；国内资格、保密、项目准入和签署责任必须向目标单位与适用主管规则核对。"
+            ]
+          },
+          "id": "aerospace-engineers.china-salary.career-snapshot-primary-locale.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据（2025年5月）：年薪中位数为{{fact:us-wage-2025}}，时薪中位数为64.89美元；这不是起薪或个人报价。"
+            ]
+          },
+          "fact_refs": [
+            "us-wage-2025"
+          ],
+          "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "bls-pay"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数表示一半从业者高于该值、一半低于该值；它不是起薪、平均值、雇主报价或个人可得工资。"
+            ]
+          },
+          "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "bls-pay"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "具体报酬会受地区、行业、职责、经验、教育、安保要求、合同工时和福利影响，应回到目标职位与当地数据核对。"
+            ]
+          },
+          "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "BLS把学士学位列为美国典型入门教育，并指出国防相关项目可能要求安全许可；这不代表每个岗位条件相同。"
+            ]
+          },
+          "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "bls-entry"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "年薪与时薪是同一BLS中位数的不同表达，不能再相加，也不能据此推导加班、奖金或税后收入。"
+            ]
+          },
+          "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "bls-pay"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "评估报价时应同时核对基本薪资、奖金、股权、退休与医疗福利、工时、搬迁、出差、现场要求和许可条件。"
+            ]
+          },
+          "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "这组数字仅描述美国BLS覆盖的航空航天工程师，不应外推到中国、相邻工程职业或个人未来收入。"
+            ]
+          },
+          "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.7",
+          "source_refs": [
+            "bls-pay"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "适合信号：你愿意把问题量化，能在数据不完整时写清假设和未知项，并乐于用计算、模型、试验和同行评审反复纠错。"
+            ]
+          },
+          "id": "aerospace-engineers.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "适合信号：你能长时间维护单位、版本、接口和需求编号等细节，同时不丢失系统目标。"
+            ]
+          },
+          "id": "aerospace-engineers.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "适合信号：你能向不同专业解释取舍，主动暴露风险，并在评审中区分事实、推断和建议。"
+            ]
+          },
+          "id": "aerospace-engineers.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "需要谨慎：部分项目周期长、审查多、责任重，临近试验或里程碑可能加班；BLS也指出部分人员每周超过40小时。"
+            ]
+          },
+          "id": "aerospace-engineers.fit.riasec-fit-block.4",
+          "source_refs": [
+            "bls-entry"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "需要谨慎：如果你强烈排斥失败试验、文档维护、受约束设计或长期协作，这份工作的真实节奏可能与想象不符。"
+            ]
+          },
+          "id": "aerospace-engineers.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "入门学习通常包括数学、物理、工程基础、计算与设计工具，但真正匹配还要通过可复核样本、课程项目或受监督实践验证。"
+            ]
+          },
+          "id": "aerospace-engineers.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "访谈从业者时询问最近一周交付了什么、哪类评审最耗时、失败如何关闭、工具和文档各占多少，而不是只问职业是否有前景。"
+            ]
+          },
+          "id": "aerospace-engineers.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "最有用的自测证据是一份需求—方案—验证矩阵，能让他人复算约束、发现遗漏并追踪你的修改。"
+            ]
+          },
+          "id": "aerospace-engineers.fit.riasec-fit-block.8",
+          "source_refs": [
+            "nasa-seh"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "需求或接口误读会让后续分析建立在错误基线上；控制是使用唯一标识、来源、版本、验收标准和变更记录，并在矛盾未解时停止关闭。"
+            ]
+          },
+          "id": "aerospace-engineers.risk.career-risk-cards.1",
+          "source_refs": [
+            "nasa-seh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "模型或计算可能因单位、边界条件、材料参数、网格、数值方法或代码版本错误而失真；控制是独立复算、敏感性检查、同行评审和适用范围声明。"
+            ]
+          },
+          "id": "aerospace-engineers.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "试验可能出现配置不一致、仪器问题、环境偏差或数据丢失；控制是试验前审查配置与停止条件，记录偏差并保留原始数据。"
+            ]
+          },
+          "id": "aerospace-engineers.risk.career-risk-cards.3",
+          "source_refs": [
+            "nasa-seh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "未受控设计变更可能破坏已验证接口；控制是影响分析、版本基线、批准记录，并明确哪些证据必须重做。"
+            ]
+          },
+          "id": "aerospace-engineers.risk.career-risk-cards.4",
+          "source_refs": [
+            "nasa-seh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "项目资料可能受合同、保密、国防或其他访问限制；控制是只在获准系统按最小权限处理，并向指定安全或法务人员核对，页面不代替具体规则。"
+            ]
+          },
+          "id": "aerospace-engineers.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "任何计算、课程样本或AI输出都不授予设计签署、风险接受、适航批准、试验指挥或飞行放行权限；超出角色时必须交给指定责任人。"
+            ]
+          },
+          "id": "aerospace-engineers.risk.career-risk-cards.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "O*NET把航空航天工程师列为Job Zone Four，通常需要较充分准备；美国典型入门教育是学士学位，具体课程、实习、许可或安保条件仍要按目标雇主和项目核对。"
+            ]
+          },
+          "id": "aerospace-engineers.path.career-path-block.1",
+          "source_refs": [
+            "onet-training"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "基础准备可围绕微积分、微分方程、线性代数、概率、力学、热流体、材料、控制、编程和技术写作展开，再按结构、气动、推进、航电或系统方向加深。"
+            ]
+          },
+          "id": "aerospace-engineers.path.career-path-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品集应使用公开或完全虚构材料，展示需求分解、方案权衡、可复算计算、验证矩阵、版本记录和复盘；不得放入雇主、客户、国防或其他受限资料。"
+            ]
+          },
+          "id": "aerospace-engineers.path.career-path-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "把纸面滑翔器题做成一页符合性矩阵：四项数值约束逐项标注A/B/C是否满足，并另列热、振动两类验证记录是否存在；未知项保持未知。"
+            ]
+          },
+          "id": "aerospace-engineers.path.career-path-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "独立复核应重新计算差额：A满足题面全部条件；B续航差2分钟且缺振动验证；C质量超0.4千克且能量超10瓦时。若复核者无法从题面复算，样本尚未完成。"
+            ]
+          },
+          "id": "aerospace-engineers.path.career-path-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七天试做：第1天抄录需求与单位，第2天建矩阵，第3天独立复算，第4天写假设和未知项，第5天隔开原答案后从空白表盲法重算并比较差异，第6天修订并留痕，第7天写停止条件和学习复盘；如有同伴复核可作为附加证据，但不是完成练习的前提。"
+            ]
+          },
+          "id": "aerospace-engineers.path.career-path-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "面试或实习准备应能解释一次需求冲突、一次计算复核、一次失败或偏差处置，以及你如何限制结论；不会的部分明确说未知并提出验证计划。"
+            ]
+          },
+          "id": "aerospace-engineers.path.career-path-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "能力阶梯可从受监督的数据整理和简单分析，发展到独立负责子系统交付，再到跨学科权衡与评审；每一级都应绑定可复核证据和明确授权。"
+            ]
+          },
+          "id": "aerospace-engineers.path.career-path-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "纸面练习不得转成真实飞行器设计、制造或试飞指令；进入真实项目后必须使用其批准的需求、工具、评审、验证、安全与放行流程。"
+            ]
+          },
+          "id": "aerospace-engineers.path.career-path-block.9",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据（2025年）：就业人数为{{fact:us-employment-2025}}。"
+            ]
+          },
+          "fact_refs": [
+            "us-employment-2025"
+          ],
+          "id": "aerospace-engineers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据（2025至2035年）：预计就业增长{{fact:us-growth-2025-2035}}，从68,700人增至74,400人。"
+            ]
+          },
+          "fact_refs": [
+            "us-growth-2025-2035"
+          ],
+          "id": "aerospace-engineers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "2025至2035年就业基数的净变化约为增加5,700人；这是十年净增，不是每年空缺。"
+            ]
+          },
+          "id": "aerospace-engineers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据（2025至2035年）：平均每年约{{fact:us-openings-2025-2035}}个职位空缺；这不是十年净增。"
+            ]
+          },
+          "fact_refs": [
+            "us-openings-2025-2035"
+          ],
+          "id": "aerospace-engineers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "O*NET当前行业分布显示该职业集中于制造业、专业科学技术服务和政府；行业占比是就业结构，不等于增长贡献或个人机会。"
+            ]
+          },
+          "id": "aerospace-engineers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "onet-industry"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "BLS把更低噪声与更高燃油效率的飞机重设计、卫星发射成本下降、小卫星和无人机用途列为需求背景；具体招聘仍受预算、合同、地区和资格影响。"
+            ]
+          },
+          "id": "aerospace-engineers.market-signals.market-signal-card.6",
+          "source_refs": [
+            "bls-outlook"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "典型闭环是澄清客户与法规要求，形成概念和详细设计，计算或建模，评估规格与可制造性，规划并审查测试，分析结果与失效，再更新图纸、程序和记录。",
+                "id": "aerospace-engineers.faq.1",
+                "question_key": "career.faq.aerospace-engineers.daily-work",
+                "source_refs": [
+                  "onet-details"
+                ]
+              },
+              {
+                "answer": "偏系统与总体的岗位强调需求、接口、权衡和验证闭环；偏学科设计的岗位更集中于结构、气动、推进、热或控制等单一技术域。",
+                "id": "aerospace-engineers.faq.2",
+                "question_key": "career.faq.aerospace-engineers.role-comparison",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "适合信号：你愿意把问题量化，能在数据不完整时写清假设和未知项，并乐于用计算、模型、试验和同行评审反复纠错。",
+                "id": "aerospace-engineers.faq.3",
+                "question_key": "career.faq.aerospace-engineers.fit",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "ILO的2025年生成式AI指数衡量任务层面的潜在暴露，不能解释为航空航天工程师的实际采用率、自动化率或失业概率。",
+                "id": "aerospace-engineers.faq.4",
+                "question_key": "career.faq.aerospace-engineers.ai-impact",
+                "source_refs": [
+                  "ilo-genai"
+                ]
+              },
+              {
+                "answer": "需求批准、设计基线、风险接受、偏差处置、验证关闭和放行决定应由指定责任人按项目流程完成，AI不能成为签署者或责任主体。",
+                "id": "aerospace-engineers.faq.5",
+                "question_key": "career.faq.aerospace-engineers.human-control",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "本页所核国家统计局2024年工资资料按城镇单位、行业门类和人员大类汇总，未提供与O*NET 17-2011.00一一对应的中国大陆航空航天工程师工资分位；该精确职业工资暂无可安全使用的数据。因此本页不提供起薪、中位数或百分位，也不以行业均值代替。",
+                "id": "aerospace-engineers.faq.6",
+                "question_key": "career.faq.aerospace-engineers.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "美国精确职业数据：BLS报告航空航天工程师2025年5月工资中位数为每年134,960美元、每小时64.89美元。",
+                "fact_refs": [
+                  "us-wage-2025"
+                ],
+                "id": "aerospace-engineers.faq.7",
+                "question_key": "career.faq.aerospace-engineers.us-pay",
+                "source_refs": [
+                  "bls-pay"
+                ]
+              },
+              {
+                "answer": "O*NET把航空航天工程师列为Job Zone Four，通常需要较充分准备；美国典型入门教育是学士学位，具体课程、实习、许可或安保条件仍要按目标雇主和项目核对。",
+                "id": "aerospace-engineers.faq.8",
+                "question_key": "career.faq.aerospace-engineers.credentials",
+                "source_refs": [
+                  "onet-training"
+                ]
+              },
+              {
+                "answer": "美国精确职业数据：BLS预计航空航天工程师就业在2025至2035年增长8%，从68,700人增至74,400人。",
+                "fact_refs": [
+                  "us-growth-2025-2035"
+                ],
+                "id": "aerospace-engineers.faq.9",
+                "question_key": "career.faq.aerospace-engineers.outlook-transition",
+                "source_refs": [
+                  "bls-outlook"
+                ]
+              },
+              {
+                "answer": "任何计算、课程样本或AI输出都不授予设计签署、风险接受、适航批准、试验指挥或飞行放行权限；超出角色时必须交给指定责任人。",
+                "id": "aerospace-engineers.faq.10",
+                "question_key": "career.faq.aerospace-engineers.risk-boundary",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "这个职业是否值得选择取决于你的目标与可验证适配：若你愿意把模糊需求拆成可测指标，能解释假设与误差，面对失败数据会追根因，并接受同行复核、配置控制和长周期协作，这是正向信号。",
+                "id": "aerospace-engineers.faq.11",
+                "question_key": "career.faq.aerospace-engineers.career-worth",
+                "source_refs": [
+                  "editorial"
+                ]
+              }
+            ]
+          },
+          "id": "aerospace-engineers.sources.faq.1",
+          "source_refs": [
+            "bls-outlook",
+            "bls-pay",
+            "editorial",
+            "ilo-genai",
+            "nbs-wages",
+            "onet-details",
+            "onet-training"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "中国大陆航空航天工程师精确工资暂无可安全使用的数据；行业聚合工资不能冒充单职业工资。",
+              "美国工资、就业、增长和空缺仅按BLS航空航天工程师精确职业口径解释，且中位数不是起薪。",
+              "本页练习仅用于纸面职业体验，不授予真实设计、签署、适航、试验、放行、保密或项目访问权限。"
+            ]
+          },
+          "id": "aerospace-engineers.sources.boundary.1",
+          "source_refs": [
+            "bls-entry",
+            "bls-outlook",
+            "bls-pay",
+            "editorial",
+            "ilo-genai",
+            "nasa-seh",
+            "nbs-wages",
+            "onet-details",
+            "onet-hot-tech",
+            "onet-industry",
+            "onet-training"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "航空航天工程师",
+                "id": "aerospace-engineers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "航空航天工程师",
+                "id": "aerospace-engineers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "航空航天工程师",
+                "id": "aerospace-engineers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "航空航天工程师",
+                "id": "aerospace-engineers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "航空航天工程师",
+                "id": "aerospace-engineers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "航空航天工程师",
+                "id": "aerospace-engineers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "航空航天工程师",
+                "id": "aerospace-engineers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "航空航天工程师",
+                "id": "aerospace-engineers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "航空航天工程师",
+                "id": "aerospace-engineers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "航空航天工程师",
+                "id": "aerospace-engineers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "航空航天工程师",
+                "id": "aerospace-engineers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "aerospace-engineers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "BLS全文支持职业职责、办公室工作环境、部分人员超过40小时、学士学位典型入口及国防项目可能要求安全许可。",
+                  "工作环境和学士学位描述是美国职业总体指引；具体雇主、国防项目和职位可能另有要求。"
+                ],
+                "evidence_type": "official occupational outlook and entry guidance",
+                "id": "bls-entry",
+                "limitation": "工作环境和学士学位描述是美国职业总体指引；具体雇主、国防项目和职位可能另有要求。",
+                "market": "美国",
+                "name": "Aerospace Engineers: Work Environment and Entry Requirements",
+                "period": "current page; updated 2026-08-27",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "BLS全文支持2025—2035增长8%、年均3,800个空缺、68,700至74,400及净增5,700，并列出需求背景。",
+                  "预测不是个人录用概率；净增岗位与年均空缺是不同指标。"
+                ],
+                "evidence_type": "official employment projection",
+                "id": "bls-outlook",
+                "limitation": "预测不是个人录用概率；净增岗位与年均空缺是不同指标。",
+                "market": "美国",
+                "name": "Aerospace Engineers: Job Outlook",
+                "period": "2025-2035 projection; updated 2026-08-27",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm#tab-6"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "BLS全文支持2025年5月工资中位数134,960美元/年、64.89美元/小时及中位数定义。",
+                  "中位数描述美国职业总体分布，不是起薪、报价或个人收入保证。"
+                ],
+                "evidence_type": "official occupational wage",
+                "id": "bls-pay",
+                "limitation": "中位数描述美国职业总体分布，不是起薪、报价或个人收入保证。",
+                "market": "美国",
+                "name": "Aerospace Engineers: Pay",
+                "period": "May 2025",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/aerospace-engineers.htm#tab-5"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "支持本候选的页面组织、完全虚构纸面练习、适配建议和审慎控制；外部事实由相应权威来源承担。",
+                  "仅支持页面组织、虚构练习和审慎控制建议；不作为外部事实来源。"
+                ],
+                "evidence_type": "editorial synthesis and fictional exercise",
+                "id": "editorial",
+                "limitation": "仅支持页面组织、虚构练习和审慎控制建议；不作为外部事实来源。",
+                "market": "编辑设计",
+                "name": "Aerospace Engineers candidate editorial protocol",
+                "period": "2026-09-07",
+                "publisher": "FermatMind 编辑设计",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "ILO全文说明2025指数结合任务数据、专家输入和AI预测衡量职业暴露，并把工作转型而非整体替代列为更可能结果。",
+                  "任务暴露是研究指标，不是本职业采用率、自动化率或失业概率。"
+                ],
+                "evidence_type": "official task-exposure research",
+                "id": "ilo-genai",
+                "limitation": "任务暴露是研究指标，不是本职业采用率、自动化率或失业概率。",
+                "market": "全球",
+                "name": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "period": "2025-05-20",
+                "publisher": "International Labour Organization",
+                "scope": "combined_official",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "NASA全文支持验证/确认计划、责任、方法、测试对象及证据矩阵；要求矩阵页面说明每个shall应有唯一标识和明确来源。",
+                  "NASA指南说明需求、验证、确认和责任管理方法，不自动成为任何雇主项目的适用标准。"
+                ],
+                "evidence_type": "official systems engineering guidance",
+                "id": "nasa-seh",
+                "limitation": "NASA指南说明需求、验证、确认和责任管理方法，不自动成为任何雇主项目的适用标准。",
+                "market": "美国",
+                "name": "NASA Systems Engineering Handbook",
+                "period": "current reference; accessed 2026-09-07",
+                "publisher": "NASA",
+                "scope": "combined_official",
+                "url": "https://www.nasa.gov/reference/system-engineering-handbook-appendix/"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "国家统计局全文按城镇单位、区域、行业门类、登记注册类型及人员大类汇总；没有与O*NET 17-2011.00一一对应的精确职业工资分位。",
+                  "只提供行业或人员大类聚合工资，不能当作航空航天工程师单职业工资。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "nbs-wages",
+                "limitation": "只提供行业或人员大类聚合工资，不能当作航空航天工程师单职业工资。",
+                "market": "中国大陆",
+                "name": "2024年城镇单位就业人员年平均工资情况",
+                "period": "2024 wages; published 2025-05-17",
+                "publisher": "National Bureau of Statistics of China",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202505/t20250516_1959826.html"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "O*NET全文支持17-2011.00身份、15项任务、工作活动、工作情境及职业准备信息。",
+                  "只支持美国O*NET 17-2011.00的职业范围、任务和工作活动；不建立中国映射或法律授权。"
+                ],
+                "evidence_type": "official occupation details",
+                "id": "onet-details",
+                "limitation": "只支持美国O*NET 17-2011.00的职业范围、任务和工作活动；不建立中国映射或法律授权。",
+                "market": "美国",
+                "name": "17-2011.00 - Aerospace Engineers",
+                "period": "current page; accessed 2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-2011.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "O*NET全文支持2025年美国职位发布样本中的软件提及率及其统计口径。",
+                  "招聘信息提及率是美国职位发布样本信号，不等于技能必要性、实际采用率或自动化率。"
+                ],
+                "evidence_type": "official job-posting technology data",
+                "id": "onet-hot-tech",
+                "limitation": "招聘信息提及率是美国职位发布样本信号，不等于技能必要性、实际采用率或自动化率。",
+                "market": "美国",
+                "name": "Hot Technologies: Aerospace Engineers",
+                "period": "2025 US job postings; accessed 2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/17-2011.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "O*NET全文支持制造业44%、专业科学技术服务32%、政府15%及其他9%的行业分布。",
+                  "行业分布描述美国就业结构，不等于个人机会或未来招聘量。"
+                ],
+                "evidence_type": "official industry distribution",
+                "id": "onet-industry",
+                "limitation": "行业分布描述美国就业结构，不等于个人机会或未来招聘量。",
+                "market": "美国",
+                "name": "Industry: Aerospace Engineers",
+                "period": "current page; accessed 2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/17-2011.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "O*NET详情页全文支持Job Zone Four及教育调查口径。",
+                  "Job Zone与教育调查描述美国职业准备，不替代具体学校、雇主或所在地资格要求。"
+                ],
+                "evidence_type": "official preparation guidance",
+                "id": "onet-training",
+                "limitation": "Job Zone与教育调查描述美国职业准备，不替代具体学校、雇主或所在地资格要求。",
+                "market": "美国",
+                "name": "Aerospace Engineers: Job Zone and Education",
+                "period": "current page; accessed 2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-2011.00#JobZone"
+              }
+            ]
+          },
+          "id": "aerospace-engineers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "O*NET 17-2011.00",
+        "fact_id": "occupation-identity",
+        "market": "美国",
+        "measure": "官方职业代码",
+        "occupation_scope": "美国精确职业数据：O*NET 17-2011.00 Aerospace Engineers",
+        "period": "current page; accessed 2026-09-07",
+        "source_refs": [
+          "onet-details"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "134,960美元/年",
+        "fact_id": "us-wage-2025",
+        "market": "美国",
+        "measure": "工资中位数",
+        "occupation_scope": "美国精确职业数据：Aerospace Engineers",
+        "period": "May 2025",
+        "source_refs": [
+          "bls-pay"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "68,700人",
+        "fact_id": "us-employment-2025",
+        "market": "美国",
+        "measure": "就业人数",
+        "occupation_scope": "美国精确职业数据：Aerospace Engineers",
+        "period": "2025-2035 projection; updated 2026-08-27",
+        "source_refs": [
+          "bls-outlook"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "8%",
+        "fact_id": "us-growth-2025-2035",
+        "market": "美国",
+        "measure": "就业增长率",
+        "occupation_scope": "美国精确职业数据：Aerospace Engineers",
+        "period": "2025-2035 projection; updated 2026-08-27",
+        "source_refs": [
+          "bls-outlook"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "3,800个/年",
+        "fact_id": "us-openings-2025-2035",
+        "market": "美国",
+        "measure": "平均年度职位空缺",
+        "occupation_scope": "美国精确职业数据：Aerospace Engineers",
+        "period": "2025-2035 projection; updated 2026-08-27",
+        "source_refs": [
+          "bls-outlook"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "7c2ca116f71d6863f088317c135d3b75f6a0112afb5f3e0b091bace1f8dcf375",
+  "source_content_sha256": "73bfb63de46ae134f841670a4ed1ac472b8d47af0e0cd47e2b54befafd5fccc8",
   "subject": {
     "canonical_slug": "aerospace-engineers",
     "name": "航空航天工程师",
-    "summary": null
+    "summary": "把航空航天系统需求转成可分析、可制造、可验证的设计，并对假设、接口、风险和证据负责。"
   }
 }

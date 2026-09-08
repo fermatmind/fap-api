@@ -10,8 +10,8 @@
     "coverage": {
       "additionalProperties": false,
       "properties": {
-        "enhanced_locale_pages": { "const": 2 }, "files": { "const": 2092 },
-        "legacy_locale_pages": { "const": 2090 }, "locale_pages": { "const": 2092 },
+        "enhanced_locale_pages": { "type": "integer", "minimum": 0, "maximum": 2092 }, "files": { "const": 2092 },
+        "legacy_locale_pages": { "type": "integer", "minimum": 0, "maximum": 2092 }, "locale_pages": { "const": 2092 },
         "locales": { "const": 2 }, "slugs": { "const": 1046 }
       },
       "required": ["slugs", "locales", "locale_pages", "files", "enhanced_locale_pages", "legacy_locale_pages"],

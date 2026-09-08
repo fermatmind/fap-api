@@ -1,12 +1,1635 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：导览不是背稿，而是把准确讲解、时间路线、人员状态、场所规则与异常升级连成闭环。愿意核来源、点人数、留缓冲并对未知说停的人值得纸面试做。"
+            ]
+          },
+          "id": "tour-and-travel-guides.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial-tour-fit",
+            "editorial-tour-workflow"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "可观察信号：能把事实与故事分开；路线会复算；持续确认人数与状态；遇到开放、无障碍、安全或权限不明时不擅自承诺。"
+            ]
+          },
+          "id": "tour-and-travel-guides.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial-tour-fit",
+            "editorial-tour-workflow"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全工作样本（60分钟，仅纸面）：18人；安全说明5分钟；A厅10分钟、移动4分钟、B厅18分钟、移动6分钟、庭院12分钟、答疑10分钟；A/B必去、庭院可选；B厅容量20；一人需无障碍路线但路线未知。"
+            ]
+          },
+          "id": "tour-and-travel-guides.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial-tour-simulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考推演：全走65分钟，超时5分钟；删除庭院及其6分钟移动后47分钟，余13分钟。B厅容量可容纳18人，但无障碍路线未闭环，只能写“待场馆确认”。输出时间表、人数节点、已知/未知、三条确认问题和升级记录。"
+            ]
+          },
+          "id": "tour-and-travel-guides.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial-tour-simulation"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业边界：O*NET 39-7011.00，陪同个人或团体观光或参观工业设施、公共建筑、艺术馆等兴趣地点。"
+            ]
+          },
+          "id": "tour-and-travel-guides.profile.definition-block.1",
+          "source_refs": [
+            "onet-tour"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "讲解任务：描述兴趣点并答疑，研究场地历史、环境及游客能力来规划解说。"
+            ]
+          },
+          "id": "tour-and-travel-guides.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-tour"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "带领任务：选择路线、陪同移动、提供方向，并监控游客遵守场所或行程规则与安全惯例。"
+            ]
+          },
+          "id": "tour-and-travel-guides.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-tour"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "扩展任务：部分岗位可做学校教育、清点用品、登记、收费、驾驶或急救；任务列示不代表个人已获训练或授权。"
+            ]
+          },
+          "id": "tour-and-travel-guides.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-tour"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "完整流程：核对委派/规则与需求—复核事实和路线—行前说明—清点带领—观察异常—按权限调整或升级—结束交接。"
+            ]
+          },
+          "id": "tour-and-travel-guides.profile.work-context-block.1",
+          "source_refs": [
+            "editorial-tour-workflow"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作情境：面对面讨论、公众讲解和外部公众接触频繁，站立与步行可较多；具体频率随岗位变化。"
+            ]
+          },
+          "id": "tour-and-travel-guides.profile.work-context-block.2",
+          "source_refs": [
+            "onet-tour"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "准备程度：O*NET列为Job Zone Three；这是美国职业准备描述，不是中国导游执业条件。"
+            ]
+          },
+          "id": "tour-and-travel-guides.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-tour"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "可检查产出：讲解提纲、时间路线表、人数节点、无障碍/限制清单、安全说明和异常记录。"
+            ]
+          },
+          "id": "tour-and-travel-guides.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "editorial-tour-output"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：事实有出处、路线可执行、人数可核对、未知不冒充确认、警示清楚、异常及时升级。"
+            ]
+          },
+          "id": "tour-and-travel-guides.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial-tour-output"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "相邻边界：设施运营、活动策划、公园教育、历史研究和高校历史教学都可能共享讲解或组织技能，但核心产出不同。"
+            ]
+          },
+          "id": "tour-and-travel-guides.profile.definition-block.2",
+          "source_refs": [
+            "onet-event-planners",
+            "onet-historians",
+            "onet-history-teachers",
+            "onet-park-naturalists",
+            "onet-recreation-managers",
+            "onet-tour"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "entertainment-and-recreation-managers-except-gambling",
+                "id": "tour-and-travel-guides.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/entertainment-and-recreation-managers-except-gambling"
+              },
+              {
+                "entity": "meeting-convention-and-event-planners",
+                "id": "tour-and-travel-guides.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/meeting-convention-and-event-planners"
+              },
+              {
+                "entity": "park-naturalists",
+                "id": "tour-and-travel-guides.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/park-naturalists"
+              },
+              {
+                "entity": "historians",
+                "id": "tour-and-travel-guides.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/historians"
+              },
+              {
+                "entity": "history-teachers-postsecondary",
+                "id": "tour-and-travel-guides.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/history-teachers-postsecondary"
+              }
+            ]
+          },
+          "id": "tour-and-travel-guides.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-event-planners",
+            "onet-historians",
+            "onet-history-teachers",
+            "onet-park-naturalists",
+            "onet-recreation-managers",
+            "onet-tour"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "娱乐休闲经理规划、指挥或协调设施与活动运营；导游与陪同人员执行具体游览和现场讲解。"
+            ]
+          },
+          "id": "tour-and-travel-guides.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-event-planners",
+            "onet-historians",
+            "onet-history-teachers",
+            "onet-park-naturalists",
+            "onet-recreation-managers",
+            "onet-tour"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "会议活动策划师协调人员与资源来安排会议、活动或会展；导览的核心是带领访客完成路线。"
+            ]
+          },
+          "id": "tour-and-travel-guides.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-event-planners",
+            "onet-historians",
+            "onet-history-teachers",
+            "onet-park-naturalists",
+            "onet-recreation-managers",
+            "onet-tour"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "公园自然解说员设计并实施国家、州或地方公园的历史、自然和科学教育项目；导游范围更广且不等同于自然资源教育。"
+            ]
+          },
+          "id": "tour-and-travel-guides.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-event-planners",
+            "onet-historians",
+            "onet-history-teachers",
+            "onet-park-naturalists",
+            "onet-recreation-managers",
+            "onet-tour"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "历史学家研究、分析和解释史料，高校历史教师教授历史与史学课程；导游可使用历史知识，但不以原创研究或高等教育课程为核心。"
+            ]
+          },
+          "id": "tour-and-travel-guides.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-event-planners",
+            "onet-historians",
+            "onet-history-teachers",
+            "onet-park-naturalists",
+            "onet-recreation-managers",
+            "onet-tour"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助：史料整理、讲解草稿、常见问答翻译、路线时间计算和异常记录草稿。"
+            ]
+          },
+          "id": "tour-and-travel-guides.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial-tour-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用条件：来源版本、场馆通知、地图、语言、无障碍信息、设备和网络可靠。"
+            ]
+          },
+          "id": "tour-and-travel-guides.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial-tour-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数据门槛：团型、人数、时间、容量、路线状态、开放限制和更新时间一致可追溯。"
+            ]
+          },
+          "id": "tour-and-travel-guides.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial-tour-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工控制：核对来源与现场通知，确认路线和人数，观察游客反应并处理冲突信息。"
+            ]
+          },
+          "id": "tour-and-travel-guides.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial-tour-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余责任：工具不能确认实时开放、拥挤、游客理解或身体状态，也不能取得改线和应急授权。"
+            ]
+          },
+          "id": "tour-and-travel-guides.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial-tour-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "失败风险：虚构史实、旧地图、错误翻译、低估移动时间或遗漏无障碍条件。"
+            ]
+          },
+          "id": "tour-and-travel-guides.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial-tour-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业边界：任务可辅助性不等于场馆采用率、游客满意度或岗位净变化。"
+            ]
+          },
+          "id": "tour-and-travel-guides.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial-tour-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实践响应：先在固定虚构场地图上与人工计算对照，真实使用服从场馆、旅行社、隐私和安全程序。"
+            ]
+          },
+          "id": "tour-and-travel-guides.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial-tour-ai"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：中国大陆暂无可安全使用的数据表示与O*NET 39-7011.00精确对应的全国职业工资分布。"
+            ]
+          },
+          "id": "tour-and-travel-guides.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：国家统计局2025资料按行业和宽泛岗位大类发布，不能替代同期精确职业中位数。"
+            ]
+          },
+          "id": "tour-and-travel-guides.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "计量单位：年薪、月薪、时薪、带团费、讲解场次费、小费和旺季奖金不可混用。"
+            ]
+          },
+          "id": "tour-and-travel-guides.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editorial-tour-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "求职用法：统一城市、景区/场馆、语种、旺淡季、雇佣模式、团型、工时、保险和执业条件。"
+            ]
+          },
+          "id": "tour-and-travel-guides.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial-tour-market"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：O*NET展示美国“导游和旅游陪同人员”统计口径工资，该口径不等于所有39-7011.00子场景。"
+            ]
+          },
+          "id": "tour-and-travel-guides.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-tour"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：2025年BLS工资数据。"
+            ]
+          },
+          "id": "tour-and-travel-guides.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-tour"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数：时薪18.33美元、年薪38,120美元，不是起薪。"
+            ]
+          },
+          "id": "tour-and-travel-guides.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-tour"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "计量单位：时薪与年薪同源，不能与单次导览报价、小费或旺季收入直接混用。"
+            ]
+          },
+          "id": "tour-and-travel-guides.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-tour"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "覆盖人群：全国统计不能代表每个城市、场馆、语种和雇佣模式。"
+            ]
+          },
+          "id": "tour-and-travel-guides.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "onet-tour"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "决策限制：统计值不是个人报价、录用或收入保证。"
+            ]
+          },
+          "id": "tour-and-travel-guides.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "onet-tour"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "事实信号：讲解前能追到可靠出处，不会用顺口故事替代未知。"
+            ]
+          },
+          "id": "tour-and-travel-guides.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial-tour-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "路线信号：会写每段时长、容量、清点点与缓冲，并重算变更。"
+            ]
+          },
+          "id": "tour-and-travel-guides.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial-tour-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "观察信号：持续确认人数、疲劳、理解、无障碍需求和场所限制。"
+            ]
+          },
+          "id": "tour-and-travel-guides.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial-tour-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "表达信号：能按受众调整语言，同时明确哪些信息待确认。"
+            ]
+          },
+          "id": "tour-and-travel-guides.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial-tour-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：只顾讲稿而漏人数、时间或安全条件会放大风险。"
+            ]
+          },
+          "id": "tour-and-travel-guides.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial-tour-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：若难以承受站立步行、公开讲解、临场问答、拥挤和旺季节奏，应比较真实场景。"
+            ]
+          },
+          "id": "tour-and-travel-guides.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial-tour-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "验证方法：独立完成固定路线题，以及“25人”和“答疑15分钟”两张固定变体。"
+            ]
+          },
+          "id": "tour-and-travel-guides.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial-tour-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "人格边界：外向或爱旅游不证明胜任；准确性、路线控制、观察与升级更重要。"
+            ]
+          },
+          "id": "tour-and-travel-guides.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial-tour-fit"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "事实失真：来源或版本未核对时标注未知，不把推测讲成事实。"
+            ]
+          },
+          "id": "tour-and-travel-guides.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial-tour-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "人员与路线：人数对不上、开放/无障碍/容量不明或路线超时即暂停推进并联系责任方。"
+            ]
+          },
+          "id": "tour-and-travel-guides.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial-tour-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "中国执业安全：条例适用时须按接待计划，并对可能危及人身财物安全的情况真实说明、明确警示；紧急改线还涉及立即报告。"
+            ]
+          },
+          "id": "tour-and-travel-guides.risk.career-risk-cards.3",
+          "source_refs": [
+            "mct-guide-regulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "消费边界：条例适用时不得兜售物品、索要小费或欺骗胁迫消费。"
+            ]
+          },
+          "id": "tour-and-travel-guides.risk.career-risk-cards.4",
+          "source_refs": [
+            "mct-guide-regulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同规则：事实、人数、路线、安全、场所规则或权限任一不明，即记录、停止受影响步骤并升级；纸面题不授予带团或应急权限。"
+            ]
+          },
+          "id": "tour-and-travel-guides.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial-tour-risk",
+            "mct-guide-regulation"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "现实入口：先练来源核对、讲解结构、时间估算、清点节点、问答记录和异常升级。"
+            ]
+          },
+          "id": "tour-and-travel-guides.path.career-path-block.1",
+          "source_refs": [
+            "editorial-tour-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "中国资格边界：条例所称导游须取得导游证并接受旅行社委派；O*NET中的场馆讲解等岗位不能自动套用同一条件。"
+            ]
+          },
+          "id": "tour-and-travel-guides.path.career-path-block.2",
+          "source_refs": [
+            "editorial-tour-path",
+            "mct-guide-regulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品：完成本页虚构路线题，展示时间表、人数节点、已知/未知和升级单。"
+            ]
+          },
+          "id": "tour-and-travel-guides.path.career-path-block.3",
+          "source_refs": [
+            "editorial-tour-path",
+            "editorial-tour-simulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "面试与试用：解释为何删除庭院可解决超时，却不能解决无障碍路线未知。"
+            ]
+          },
+          "id": "tour-and-travel-guides.path.career-path-block.4",
+          "source_refs": [
+            "editorial-tour-simulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七天试验：第1天抄题；第2天算65/47分钟；第3天画人数节点；第4天写确认问题；第5天把人数改25人，B厅容量20导致路线不成立；第6天只把答疑改15分钟，删庭院后总时长52分钟、余8分钟但无障碍仍未知；第7天复盘停止条件。"
+            ]
+          },
+          "id": "tour-and-travel-guides.path.career-path-block.5",
+          "source_refs": [
+            "editorial-tour-path",
+            "editorial-tour-simulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "资格决策：分别核验导游证/委派、场馆讲解、驾驶、急救和特殊活动带领，不用通用课程替代授权。"
+            ]
+          },
+          "id": "tour-and-travel-guides.path.career-path-block.6",
+          "source_refs": [
+            "editorial-tour-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "能力阶梯：先做固定路线讲解，再处理受监督变更，最后承担复杂团型、跨语种或多点协调。"
+            ]
+          },
+          "id": "tour-and-travel-guides.path.career-path-block.7",
+          "source_refs": [
+            "editorial-tour-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转型路径：可比较娱乐设施管理、活动策划、公园教育、历史研究或高校教学；需补对应运营、策划、自然科学、研究或教学证据。"
+            ]
+          },
+          "id": "tour-and-travel-guides.path.career-path-block.8",
+          "source_refs": [
+            "editorial-tour-path",
+            "onet-event-planners",
+            "onet-historians",
+            "onet-history-teachers",
+            "onet-park-naturalists",
+            "onet-recreation-managers",
+            "onet-tour"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "官方信号：O*NET提供美国职业、工资、就业和预测资料，不证明本地正在招聘。"
+            ]
+          },
+          "id": "tour-and-travel-guides.market-signals.market-signal-card.1",
+          "source_refs": [
+            "editorial-tour-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "就业预测：2024—2034增长为远快于平均（7%或更高）；2024就业55,800，年度空缺约13,000，空缺含替换。"
+            ]
+          },
+          "id": "tour-and-travel-guides.market-signals.market-signal-card.2",
+          "source_refs": [
+            "onet-tour"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "招聘信号：样本只代表采样时间、城市、场馆/景区、语种、旺淡季和用工模式。"
+            ]
+          },
+          "id": "tour-and-travel-guides.market-signals.market-signal-card.3",
+          "source_refs": [
+            "editorial-tour-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "技术信号：数字导览、翻译和路线工具可能改变准备任务，不等于现场观察与安全责任消失。"
+            ]
+          },
+          "id": "tour-and-travel-guides.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editorial-tour-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "相邻转型：共享讲解、组织或历史知识不等于设施运营、活动策划、研究或教学责任已经获得。"
+            ]
+          },
+          "id": "tour-and-travel-guides.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editorial-tour-market",
+            "onet-event-planners",
+            "onet-historians",
+            "onet-history-teachers",
+            "onet-park-naturalists",
+            "onet-recreation-managers",
+            "onet-tour"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "可复核闭环是核对委派/场所规则与游客需求、复核事实和路线、做出行前说明、清点人数并带领移动、持续观察异常、按权限调整或升级、结束后交接记录。",
+                "id": "tour-and-travel-guides.faq.1",
+                "question_key": "career.faq.tour-and-travel-guides.daily-work",
+                "source_refs": [
+                  "editorial-tour-workflow"
+                ]
+              },
+              {
+                "answer": "本职业带领访客完成具体游览；娱乐休闲经理管理设施或活动运营，活动策划协调会议和活动安排，公园自然解说员设计并实施公园教育项目，历史学家研究解释史料，高校历史教师教授历史与史学课程。",
+                "id": "tour-and-travel-guides.faq.2",
+                "question_key": "career.faq.tour-and-travel-guides.role-comparison",
+                "source_refs": [
+                  "onet-event-planners",
+                  "onet-historians",
+                  "onet-history-teachers",
+                  "onet-park-naturalists",
+                  "onet-recreation-managers",
+                  "onet-tour"
+                ]
+              },
+              {
+                "answer": "适配度通过能否核实讲解事实、把路线时间算清、持续点人数、察觉游客状态、清楚表达并在安全或权限不明时停下来升级来观察，不是外向人格结论。",
+                "id": "tour-and-travel-guides.faq.3",
+                "question_key": "career.faq.tour-and-travel-guides.fit",
+                "source_refs": [
+                  "editorial-tour-fit"
+                ]
+              },
+              {
+                "answer": "数字工具可辅助整理史料、生成讲解草稿、翻译常见问题、计算路线时间和记录异常；不能确认场地实时开放、事实准确、游客理解、身体状况或安全条件。",
+                "id": "tour-and-travel-guides.faq.4",
+                "question_key": "career.faq.tour-and-travel-guides.ai-impact",
+                "source_refs": [
+                  "editorial-tour-ai"
+                ]
+              },
+              {
+                "answer": "人工控制点包括核对来源和现场通知、确认路线与人数、观察游客反应、处理冲突信息，并由具备职责和授权的人员决定改线、急救、疏散或终止。",
+                "id": "tour-and-travel-guides.faq.5",
+                "question_key": "career.faq.tour-and-travel-guides.human-control",
+                "source_refs": [
+                  "editorial-tour-ai"
+                ]
+              },
+              {
+                "answer": "国家统计局2025资料提供行业和宽泛岗位大类，不能给出与O*NET 39-7011.00精确对应的中国大陆全国职业中位数、统一起薪或带团服务费。",
+                "id": "tour-and-travel-guides.faq.6",
+                "question_key": "career.faq.tour-and-travel-guides.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "O*NET展示“导游和旅游陪同人员”统计口径在2025年的美国全国中位时薪18.33美元、年薪38,120美元；该美国统计合并“导游和旅游陪同人员”口径，且全国中位数不是起薪、单次导览报价或个人收入保证。",
+                "id": "tour-and-travel-guides.faq.7",
+                "question_key": "career.faq.tour-and-travel-guides.us-pay",
+                "source_refs": [
+                  "onet-tour"
+                ]
+              },
+              {
+                "answer": "入门先练来源核对、讲解结构、时间估算、清点节点、游客提问记录和异常升级；只用虚构场地图，不带真实团、不教授急救或户外技能；《导游人员管理条例》所称导游人员须取得导游证并接受旅行社委派；在中国境内从事该条例定义的导游活动必须取得导游证。该条件不能外推至O*NET范围内所有博物馆讲解或教育岗位；导游证、旅行社委派、场所讲解资格、驾驶、急救和特殊活动带领是不同权限；应按市场、岗位和活动逐项核验。",
+                "id": "tour-and-travel-guides.faq.8",
+                "question_key": "career.faq.tour-and-travel-guides.education-path",
+                "source_refs": [
+                  "editorial-tour-path",
+                  "mct-guide-regulation"
+                ]
+              },
+              {
+                "answer": "关键风险包括讲解失实、人员走失、路线超时、无障碍信息遗漏、越过场所限制、未经授权改线、个人信息暴露和把未知开放状态写成已确认；在该条例适用的导游活动中，应严格按旅行社接待计划安排；遇危及人身安全的紧急情形，符合条件时可调整计划但应立即报告旅行社，并须就可能危及人身财物安全的情况真实说明、明确警示；该条例禁止导游向旅游者兜售物品、索要小费以及欺骗、胁迫消费。",
+                "id": "tour-and-travel-guides.faq.9",
+                "question_key": "career.faq.tour-and-travel-guides.risk-boundary",
+                "source_refs": [
+                  "editorial-tour-risk",
+                  "mct-guide-regulation"
+                ]
+              },
+              {
+                "answer": "O*NET/BLS显示2024—2034增长为远快于平均（7%或更高）；这不是个人就业概率；O*NET/BLS显示2024就业55,800，2024—2034年度空缺约13,000；空缺包含增长与替换。",
+                "id": "tour-and-travel-guides.faq.10",
+                "question_key": "career.faq.tour-and-travel-guides.outlook-transition",
+                "source_refs": [
+                  "onet-tour"
+                ]
+              },
+              {
+                "answer": "工资、预测、年度空缺、季节性、单次服务费和技术采用是不同信号，不能合并为个人录用或收入保证；适配度通过能否核实讲解事实、把路线时间算清、持续点人数、察觉游客状态、清楚表达并在安全或权限不明时停下来升级来观察，不是外向人格结论。",
+                "id": "tour-and-travel-guides.faq.11",
+                "question_key": "career.faq.tour-and-travel-guides.career-worth",
+                "source_refs": [
+                  "editorial-tour-fit",
+                  "editorial-tour-market"
+                ]
+              }
+            ]
+          },
+          "id": "tour-and-travel-guides.sources.faq.1",
+          "source_refs": [
+            "editorial-tour-ai",
+            "editorial-tour-fit",
+            "editorial-tour-market",
+            "editorial-tour-path",
+            "editorial-tour-risk",
+            "editorial-tour-workflow",
+            "mct-guide-regulation",
+            "nbs-wages",
+            "onet-event-planners",
+            "onet-historians",
+            "onet-history-teachers",
+            "onet-park-naturalists",
+            "onet-recreation-managers",
+            "onet-tour"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "O*NET职业事实、美国统计、中国导游条例和编辑建议分别陈述。",
+              "本页只供职业决策和纸面模拟，不构成真实带团、场所安全、驾驶、急救或执业指导。",
+              "中国精确职业工资暂无可安全使用的数据，不用行业或宽泛岗位均值填补。"
+            ]
+          },
+          "id": "tour-and-travel-guides.sources.boundary.1",
+          "source_refs": [
+            "editorial-tour-ai",
+            "editorial-tour-fit",
+            "editorial-tour-market",
+            "editorial-tour-output",
+            "editorial-tour-path",
+            "editorial-tour-risk",
+            "editorial-tour-simulation",
+            "editorial-tour-workflow",
+            "mct-guide-regulation",
+            "nbs-wages",
+            "onet-event-planners",
+            "onet-historians",
+            "onet-history-teachers",
+            "onet-park-naturalists",
+            "onet-recreation-managers",
+            "onet-tour"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "导游与陪同人员",
+                "id": "tour-and-travel-guides.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "导游与陪同人员",
+                "id": "tour-and-travel-guides.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "导游与陪同人员",
+                "id": "tour-and-travel-guides.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "导游与陪同人员",
+                "id": "tour-and-travel-guides.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "导游与陪同人员",
+                "id": "tour-and-travel-guides.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "导游与陪同人员",
+                "id": "tour-and-travel-guides.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "导游与陪同人员",
+                "id": "tour-and-travel-guides.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "导游与陪同人员",
+                "id": "tour-and-travel-guides.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "导游与陪同人员",
+                "id": "tour-and-travel-guides.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "导游与陪同人员",
+                "id": "tour-and-travel-guides.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "导游与陪同人员",
+                "id": "tour-and-travel-guides.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "tour-and-travel-guides.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实带团、场所安全、急救、驾驶、收费或执业授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-tour-ai",
+                "limitation": "不构成真实带团、场所安全、急救、驾驶、收费或执业授权。",
+                "market": "全球",
+                "name": "导览数字工具控制建议",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实带团、场所安全、急救、驾驶、收费或执业授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-tour-fit",
+                "limitation": "不构成真实带团、场所安全、急救、驾驶、收费或执业授权。",
+                "market": "全球",
+                "name": "导览适配观察",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实带团、场所安全、急救、驾驶、收费或执业授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-tour-market",
+                "limitation": "不构成真实带团、场所安全、急救、驾驶、收费或执业授权。",
+                "market": "全球",
+                "name": "导览市场信号边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实带团、场所安全、急救、驾驶、收费或执业授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-tour-output",
+                "limitation": "不构成真实带团、场所安全、急救、驾驶、收费或执业授权。",
+                "market": "全球",
+                "name": "导览产出与质量",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实带团、场所安全、急救、驾驶、收费或执业授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-tour-path",
+                "limitation": "不构成真实带团、场所安全、急救、驾驶、收费或执业授权。",
+                "market": "全球",
+                "name": "导览入门试做路径",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实带团、场所安全、急救、驾驶、收费或执业授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-tour-risk",
+                "limitation": "不构成真实带团、场所安全、急救、驾驶、收费或执业授权。",
+                "market": "全球",
+                "name": "导览非监管风险建议",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实带团、场所安全、急救、驾驶、收费或执业授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-tour-simulation",
+                "limitation": "不构成真实带团、场所安全、急救、驾驶、收费或执业授权。",
+                "market": "全球",
+                "name": "导览路线纸面模拟",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实带团、场所安全、急救、驾驶、收费或执业授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-tour-workflow",
+                "limitation": "不构成真实带团、场所安全、急救、驾驶、收费或执业授权。",
+                "market": "全球",
+                "name": "导览工作闭环",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对中国导游证、旅行社委派、接待计划、安全警示和消费边界。",
+                  "只适用于条例所称在中国境内从事导游活动的导游人员；不能覆盖O*NET中所有博物馆讲解等岗位。"
+                ],
+                "evidence_type": "official regulation text",
+                "id": "mct-guide-regulation",
+                "limitation": "只适用于条例所称在中国境内从事导游活动的导游人员；不能覆盖O*NET中所有博物馆讲解等岗位。",
+                "market": "中国",
+                "name": "导游人员管理条例",
+                "period": "2017 revision; accessed 2026-09-06",
+                "publisher": "文化和旅游部",
+                "scope": "exact",
+                "url": "https://zwgk.mct.gov.cn/zfxxgkml/zcfg/xzfg/202012/t20201204_905495.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对中国行业和宽泛岗位工资口径。",
+                  "不能替代本职业精确工资。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "nbs-wages",
+                "limitation": "不能替代本职业精确工资。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wages; published 2026-05-15; accessed 2026-09-06",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-event-planners",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "13-1121.00 - Meeting, Convention, and Event Planners",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-1121.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-historians",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "19-3093.00 - Historians",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/19-3093.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-history-teachers",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "25-1125.00 - History Teachers, Postsecondary",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/25-1125.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-park-naturalists",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "19-1031.03 - Park Naturalists",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/19-1031.03"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-recreation-managers",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "11-9072.00 - Entertainment and Recreation Managers, Except Gambling",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-9072.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对身份、任务、环境、准备、工资和预测。",
+                  "仅限该O*NET职业和美国统计。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-tour",
+                "limitation": "仅限该O*NET职业和美国统计。",
+                "market": "美国",
+                "name": "39-7011.00 - Tour Guides and Escorts",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/39-7011.00"
+              }
+            ]
+          },
+          "id": "tour-and-travel-guides.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "精确职业数据：O*NET 39-7011.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业代码与身份",
+        "occupation_scope": "导游与陪同人员 / 39-7011.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-tour"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "精确职业数据：讲解、陪同、路线、规则与访客",
+        "fact_id": "tasks",
+        "market": "美国",
+        "measure": "任务与对象",
+        "occupation_scope": "导游与陪同人员 / 39-7011.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-tour"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "核规则—复核事实路线—说明—清点带领—异常升级—交接",
+        "fact_id": "workflow",
+        "market": "全球",
+        "measure": "工作闭环",
+        "occupation_scope": "导游与陪同人员 / 39-7011.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "editorial-tour-workflow"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "事实核对、时间路线、人数观察、清楚表达",
+        "fact_id": "fit",
+        "market": "全球",
+        "measure": "可观察适配信号",
+        "occupation_scope": "导游与陪同人员 / 39-7011.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "editorial-tour-fit"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "事实、人员、路线、安全、消费与权限",
+        "fact_id": "risk",
+        "market": "全球",
+        "measure": "风险控制边界",
+        "occupation_scope": "导游与陪同人员 / 39-7011.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "editorial-tour-risk"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "b0ac84a7abe8fe77ad3fdb5c129a9bad1ce80ba2a507481bb59c282e25d0b6b5",
+  "source_content_sha256": "723a1d454dfc2bd80b7d9e2cafa536b9017621c2919aa476851ede3077686e7a",
   "subject": {
     "canonical_slug": "tour-and-travel-guides",
     "name": "导游与陪同人员",
-    "summary": null
+    "summary": "核对讲解事实、路线时间、人数和场所限制，带领访客完成游览，并在开放、无障碍、安全或权限条件不明时停止受影响步骤并升级。"
   }
 }

@@ -1,12 +1,1846 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "适合先体验：愿意依据明确规则核对旅客日期、预算、班次、住宿、退改条件和目的地限制，并把未知项留给复核人。"
+            ]
+          },
+          "id": "travel-agents.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "慎重观察：如果在期限压力下容易跳过版本、单位或例外条件，先用下方旅行顾问纸面材料测试自己的错误模式。"
+            ]
+          },
+          "id": "travel-agents.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "体验方法：只用下方给出的记录和规则完成“给出首选与备选组合，计算总价并解释未选择项。”，再按参考答案逐条检查。"
+            ]
+          },
+          "id": "travel-agents.quick-decision.fit-decision-checklist.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "安全边界：所有班次、价格和条款均为虚构报价；不进入预订、支付、签证或真实安全建议。"
+            ]
+          },
+          "id": "travel-agents.quick-decision.fit-decision-checklist.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "职业身份：旅行顾问对应美国O*NET代码41-3041.00。本页用它限定职业任务，不把美国代码当作中国职称或执业许可。"
+            ]
+          },
+          "id": "travel-agents.profile.work-context-block.1",
+          "source_refs": [
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "主要材料：旅客日期、预算、班次、住宿、退改条件和目的地限制。接手任务先确认来源、期间、版本与缺项。"
+            ]
+          },
+          "id": "travel-agents.profile.work-context-block.2",
+          "source_refs": [
+            "onet-detail",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作链：先冻结硬约束，再比较交通和住宿组合的总价、到达时间与退改风险，形成两套带假设的报价；旅客确认后才进入真实预订。"
+            ]
+          },
+          "id": "travel-agents.profile.work-context-block.3",
+          "source_refs": [
+            "onet-detail",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断：区分硬约束、偏好和仍待旅客确认的条件，并识别低价是否以不可退改或过晚到达为代价。"
+            ]
+          },
+          "id": "travel-agents.profile.work-context-block.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "常见环境：门店、呼叫中心或线上服务团队，需在供应商库存变化下保持版本和沟通记录。"
+            ]
+          },
+          "id": "travel-agents.profile.work-context-block.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "常用工具：预订分销系统、供应商门户、行程与费用比较表、客户关系记录；工具输出必须回到原材料验证。"
+            ]
+          },
+          "id": "travel-agents.profile.work-context-block.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "协作与复核：旅行顾问解释供应商条件并协助预订，不签发签证意见、不保证入境或安全，也不擅自承诺供应商外补偿。"
+            ]
+          },
+          "id": "travel-agents.profile.work-context-block.7",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：价格时间戳、航班/车次、住宿夜数、税费范围和退改条款与旅客确认一致。"
+            ]
+          },
+          "id": "travel-agents.profile.work-context-block.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "报关经纪处理进出口申报与海关合规，旅行证件整理经验不能替代货物分类和法定代理权限。"
+            ]
+          },
+          "id": "travel-agents.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "adj-1",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "会议与活动策划交付场地、供应商和现场执行方案；行程协调可迁移，但预算统筹和活动交付责任更广。"
+            ]
+          },
+          "id": "travel-agents.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "adj-2",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "礼宾人员解决住客即时需求并协调本地服务；目的地知识可迁移，但其产出偏现场服务而非完整预订组合。"
+            ]
+          },
+          "id": "travel-agents.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "adj-3",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "导游与陪同人员负责现场讲解、带队和行程执行；旅行顾问交付预订方案，转向导游需补现场组织与讲解能力。"
+            ]
+          },
+          "id": "travel-agents.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "adj-4",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "海关经纪人",
+                "id": "adj-link-1",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/customs-brokers"
+              },
+              {
+                "entity": "会议、会展与活动策划师",
+                "id": "adj-link-2",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/meeting-convention-and-event-planners"
+              },
+              {
+                "entity": "礼宾员",
+                "id": "adj-link-3",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/concierges"
+              },
+              {
+                "entity": "导游和陪同人员",
+                "id": "adj-link-4",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/tour-guides-and-escorts"
+              }
+            ]
+          },
+          "id": "travel-agents.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "adj-1",
+            "onet-main"
+          ],
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可按日期、预算和退改条件整理候选组合"
+            ]
+          },
+          "id": "travel-agents.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实时库存与最终价格会变化，生成答案不能替代供应商确认"
+            ]
+          },
+          "id": "travel-agents.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "接入可靠库存、价格时间戳和授权支付流程前只能做草案"
+            ]
+          },
+          "id": "travel-agents.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "输入端确认姓名拼写不进入练习，并区分硬约束与偏好"
+            ]
+          },
+          "id": "travel-agents.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "输出端复核总价、到达时间、夜数、行李和取消条件"
+            ]
+          },
+          "id": "travel-agents.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工解释取舍、取得旅客确认并处理异常升级"
+            ]
+          },
+          "id": "travel-agents.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "没有统一采用率或旅行顾问净就业因果证据"
+            ]
+          },
+          "id": "travel-agents.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "应练习条件比较、版本记录和清楚说明未包含费用"
+            ]
+          },
+          "id": "travel-agents.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "NIST的生成式AI风险画像可用于检查虚构、隐私、信息完整性和过度依赖等通用风险；它不是本职业采用率或事故率。"
+            ]
+          },
+          "id": "travel-agents.ai-impact.ai-impact-table.9",
+          "source_refs": [
+            "nist"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据。本次核对国家统计局2025年城镇单位工资发布；该页按地区、行业、登记类型和人员大类统计，未提供旅行顾问这一O*NET详细职业的全国同口径工资。"
+            ]
+          },
+          "id": "travel-agents.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "因此本页不提供中国全国点估计，也不拿宽行业均值替代个人工资；这只是本次来源范围内未取得，不宣称全国不存在其他资料。"
+            ]
+          },
+          "id": "travel-agents.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较具体岗位时应记录城市、税前/税后、月薪/年薪、固定/浮动、工时、经验和实际职责。"
+            ]
+          },
+          "id": "travel-agents.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "若使用招聘报价，应保留职位原文、日期和样本范围；本页未做招聘计数，不声称市场频率。"
+            ]
+          },
+          "id": "travel-agents.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2026年O*NET精确职业数据代码：41-3041.00。O*NET/BLS数据与旅行顾问的SOC职业口径一致。"
+            ]
+          },
+          "fact_refs": [
+            "identity"
+          ],
+          "id": "travel-agents.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据的2025年工资中位数为50,160美元/年；覆盖受雇者，不是税后收入或新人起薪。"
+            ]
+          },
+          "fact_refs": [
+            "median"
+          ],
+          "id": "travel-agents.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "us-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据的2025年小时工资中位数为24.11美元/小时；不在未知工时下自行换算个人年收入。"
+            ]
+          },
+          "fact_refs": [
+            "low"
+          ],
+          "id": "travel-agents.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "us-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据的2024年就业规模为65,700名受雇者；这是存量，不是当年招聘数。"
+            ]
+          },
+          "fact_refs": [
+            "high"
+          ],
+          "id": "travel-agents.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "us-employment"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据的2024—2034年预计年均职位空缺为7,100个/年；包含增长与替补，不等于净新增。"
+            ]
+          },
+          "fact_refs": [
+            "trend"
+          ],
+          "id": "travel-agents.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "us-projections"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "当前来源没有单独的新毕业生工资；经验、地区、行业和职责仍需在具体职位中核对。"
+            ]
+          },
+          "id": "travel-agents.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "愿意先问清最晚到达时间而不是马上推荐最低价"
+            ]
+          },
+          "id": "travel-agents.fit.personality-fit-block.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "能同时跟踪交通、住宿和取消条件"
+            ]
+          },
+          "id": "travel-agents.fit.personality-fit-block.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "价格变化时愿意重新说明假设而非坚持旧报价"
+            ]
+          },
+          "id": "travel-agents.fit.personality-fit-block.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "面对多种偏好能给出取舍理由"
+            ]
+          },
+          "id": "travel-agents.fit.personality-fit-block.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "能把旅客尚未确认的事项显式列出"
+            ]
+          },
+          "id": "travel-agents.fit.personality-fit-block.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "愿意核对姓名日期等高代价字段但练习不使用真实证件"
+            ]
+          },
+          "id": "travel-agents.fit.personality-fit-block.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "能在供应商中断时控制承诺边界"
+            ]
+          },
+          "id": "travel-agents.fit.personality-fit-block.7",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "可用本页两套方案体验频繁比较是否耗竭"
+            ]
+          },
+          "id": "travel-agents.fit.personality-fit-block.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：选择22:40到达的班次但旅客要求21:00前入住。影响：旅客无法按计划入住。控制：将到达硬约束设为筛选条件并剔除该组合。复核/责任：旅客确认可接受的最晚到达时间。"
+            ]
+          },
+          "id": "travel-agents.risk.career-risk-cards.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：把不可退房价写成可免费取消。影响：改期时产生损失。控制：逐条抄录取消截止时间和罚则。复核/责任：预订前由旅客确认条款。"
+            ]
+          },
+          "id": "travel-agents.risk.career-risk-cards.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：报价遗漏城市税和行李费。影响：预算被低估。控制：把未含费用单列并重新汇总。复核/责任：供应商页面确认后由旅客接受。"
+            ]
+          },
+          "id": "travel-agents.risk.career-risk-cards.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：行程中断时先承诺全额赔付。影响：超出顾问与供应商授权。控制：只说明已知政策、记录请求并升级。复核/责任：主管或供应商决定补偿。"
+            ]
+          },
+          "id": "travel-agents.risk.career-risk-cards.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同边界：旅行顾问解释供应商条件并协助预订，不签发签证意见、不保证入境或安全，也不擅自承诺供应商外补偿；不同雇主和法域的具体流程需另核。"
+            ]
+          },
+          "id": "travel-agents.risk.career-risk-cards.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "本页没有招聘样本或频率统计；下面是依据职业任务整理的能力展示建议，不代表普遍录用门槛。"
+            ]
+          },
+          "id": "travel-agents.path.recruitment-sample.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-role-comparison",
+          "data": {
+            "column_keys": [
+              "stage",
+              "possible_check",
+              "observed_evidence"
+            ],
+            "rows": [
+              [
+                "基础准备",
+                "目的地、费用、退改与客户需求比较练习",
+                "高中毕业是美国典型值"
+              ],
+              [
+                "在岗培训",
+                "学习预订系统并在复核下形成报价",
+                "通常还要掌握雇主和供应商流程"
+              ],
+              [
+                "独立顾问",
+                "处理复杂行程、变化与客户沟通",
+                "证书不替代实时库存、签证和安全信息核验"
+              ]
+            ]
+          },
+          "id": "travel-agents.path.entry-role-comparison.1",
+          "source_refs": [
+            "bls-travel",
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.employer-evidence",
+          "data": {
+            "entries": [
+              {
+                "id": "card-1",
+                "values": [
+                  "任务依据",
+                  "来自O*NET职业任务，不是雇主频率"
+                ]
+              },
+              {
+                "id": "card-2",
+                "values": [
+                  "展示方式",
+                  "保存输入、规则、判断与复核轨迹"
+                ]
+              }
+            ]
+          },
+          "id": "travel-agents.path.employer-evidence.1",
+          "source_refs": [
+            "editor",
+            "onet-detail",
+            "onet-main"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-portfolio",
+          "data": {
+            "entries": [
+              {
+                "id": "card-1",
+                "values": [
+                  "原始材料",
+                  "保留页面给出的虚构记录"
+                ]
+              },
+              {
+                "id": "card-2",
+                "values": [
+                  "判断记录",
+                  "逐项写规则、结果与未知"
+                ]
+              },
+              {
+                "id": "card-3",
+                "values": [
+                  "交接摘要",
+                  "写结论、限制与复核人"
+                ]
+              }
+            ]
+          },
+          "id": "travel-agents.path.entry-portfolio.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.interview-probation",
+          "data": {
+            "column_keys": [
+              "stage",
+              "possible_check",
+              "observed_evidence"
+            ],
+            "rows": [
+              [
+                "面试",
+                "讲清一处错误如何发现",
+                "材料行与规则"
+              ],
+              [
+                "试用",
+                "先核版本和权限",
+                "未决项清单"
+              ],
+              [
+                "交付",
+                "说明限制和下一步",
+                "复核记录"
+              ]
+            ]
+          },
+          "id": "travel-agents.path.interview-probation.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-decision",
+          "data": {
+            "column_keys": [
+              "stage",
+              "possible_check",
+              "observed_evidence"
+            ],
+            "rows": [
+              [
+                "学历/课程",
+                "可展示相关知识与学习经历",
+                "不能单独证明岗位胜任或法定授权"
+              ],
+              [
+                "软件证书",
+                "可展示特定工具训练",
+                "不等于职业许可或项目授权"
+              ],
+              [
+                "单位培训",
+                "可展示本机构流程训练",
+                "不自动形成跨机构授权"
+              ],
+              [
+                "职业许可/注册",
+                "仅在签发法域与范围内有效",
+                "仍须核对雇主及具体项目要求"
+              ]
+            ]
+          },
+          "id": "travel-agents.path.credential-decision.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-boundary",
+          "data": {
+            "paragraphs": [
+              "学历、课程、软件证书、单位培训、职业许可和项目授权是不同概念；具体要求按职位和法域核对。"
+            ]
+          },
+          "id": "travel-agents.path.credential-boundary.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "美国BLS称旅行代理通常需要高中毕业；雇主可能偏好销售经验、相关证书或教育，新员工通常接受至少一个月在岗培训。证书可展示学习经历，但不能替代实时供应商核验或客户授权。"
+            ]
+          },
+          "id": "travel-agents.path.career-path-block.1",
+          "source_refs": [
+            "bls-travel"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转向活动策划要补现场交付与供应商管理；转向礼宾重即时服务；转向导游重现场讲解；转向报关不属于自然横移。"
+            ]
+          },
+          "id": "travel-agents.path.career-path-block.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "以下旅行顾问纸面材料全部虚构并完整显示。任务：给出首选与备选组合，计算总价并解释未选择项。 安全边界：所有班次、价格和条款均为虚构报价；不进入预订、支付、签证或真实安全建议。"
+            ]
+          },
+          "id": "travel-agents.path.entry-work-sample-data.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "travel-a",
+                "values": [
+                  "交通方案：交通A",
+                  "班次：08:00–11:00",
+                  "基础价：¥680",
+                  "行李：含1件行李",
+                  "退改条件：出发前24小时可退，收¥80"
+                ]
+              },
+              {
+                "id": "travel-b",
+                "values": [
+                  "交通方案：交通B",
+                  "班次：17:30–22:40",
+                  "基础价：¥520",
+                  "行李：不含行李（另¥100）",
+                  "退改条件：不可退"
+                ]
+              },
+              {
+                "id": "hotel-x",
+                "values": [
+                  "住宿方案：酒店X",
+                  "晚数与房价：2晚×¥460",
+                  "包含项目：含税/早餐",
+                  "取消条件：入住日前48小时可取消"
+                ]
+              },
+              {
+                "id": "hotel-y",
+                "values": [
+                  "住宿方案：酒店Y",
+                  "晚数与房价：2晚×¥350",
+                  "额外费用：另收城市税¥50/晚",
+                  "取消条件：不可取消"
+                ]
+              }
+            ]
+          },
+          "id": "travel-agents.path.entry-work-sample-data.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "material-2-1",
+                "values": [
+                  "约束类别：旅客硬约束",
+                  "具体条件：总预算≤¥1,800；到达≤21:00；需要1件行李"
+                ]
+              },
+              {
+                "id": "material-2-2",
+                "values": [
+                  "约束类别：偏好",
+                  "具体条件：优先可退改；早餐非必须"
+                ]
+              },
+              {
+                "id": "material-2-3",
+                "values": [
+                  "约束类别：报价口径",
+                  "具体条件：列出总价、未含费用、时间戳和取消条件"
+                ]
+              }
+            ]
+          },
+          "id": "travel-agents.path.entry-work-sample-data.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "任务：给出首选与备选组合，计算总价并解释未选择项。",
+              "参考答案：首选交通A+酒店X=¥1,600，满足到达、行李和预算且可有限退改；备选交通A+酒店Y=¥1,480，但酒店不可取消。交通B到达过晚，即使加行李也不能满足硬约束。",
+              "边界：所有班次、价格和条款均为虚构报价；不进入预订、支付、签证或真实安全建议。"
+            ]
+          },
+          "id": "travel-agents.path.entry-work-sample-data.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "day-1",
+                "values": [
+                  "第1日",
+                  "理解材料",
+                  "标出字段、单位与版本"
+                ]
+              },
+              {
+                "id": "day-2",
+                "values": [
+                  "第2日",
+                  "按规则初判",
+                  "完成第一版记录"
+                ]
+              },
+              {
+                "id": "day-3",
+                "values": [
+                  "第3日",
+                  "复算/复读",
+                  "找出算术、时间或逻辑错误"
+                ]
+              },
+              {
+                "id": "day-4",
+                "values": [
+                  "第4日",
+                  "写异常清单",
+                  "区分可确认与待确认"
+                ]
+              },
+              {
+                "id": "day-5",
+                "values": [
+                  "第5日",
+                  "写交接",
+                  "指定复核人与限制"
+                ]
+              },
+              {
+                "id": "day-6",
+                "values": [
+                  "第6日",
+                  "对照答案修订",
+                  "保留初稿与改动原因"
+                ]
+              },
+              {
+                "id": "day-7",
+                "values": [
+                  "第7日",
+                  "复盘负担",
+                  "记录最耗注意力的步骤"
+                ]
+              }
+            ]
+          },
+          "id": "travel-agents.path.seven-day-trial.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "能否仅依材料复现答案",
+              "是否会漏单位、版本或例外",
+              "能否解释为何暂停并升级",
+              "是否愿意继续练习同类任务"
+            ]
+          },
+          "id": "travel-agents.path.seven-day-decision.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国官方预测：Travel Agents在2024—2034年预计年均空缺为7,100个/年，该指标含增长与替补。"
+            ]
+          },
+          "id": "travel-agents.market-signals.market-signal-card.1",
+          "source_refs": [
+            "us-projections"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "本页没有雇主样本或招聘频率统计，不把O*NET任务或软件页面写成当前招聘热度。"
+            ]
+          },
+          "id": "travel-agents.market-signals.market-signal-card.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "本页没有该职业AI实际采用率或净就业因果证据；任务可辅助不等于职位减少。"
+            ]
+          },
+          "id": "travel-agents.market-signals.market-signal-card.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "转向选择：转向活动策划要补现场交付与供应商管理；转向礼宾重即时服务；转向导游重现场讲解；转向报关不属于自然横移。"
+            ]
+          },
+          "id": "travel-agents.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "决策时应分别看官方预测、具体职位原文、个人作品和资格/授权差距，不能把不同市场和时期合成一个增长结论。"
+            ]
+          },
+          "id": "travel-agents.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "该职业处理旅客日期、预算、班次、住宿、退改条件和目的地限制；工作链为：先冻结硬约束，再比较交通和住宿组合的总价、到达时间与退改风险，形成两套带假设的报价；旅客确认后才进入真实预订。",
+                "id": "travel-agents.faq.1",
+                "question_key": "career.faq.travel-agents.daily-work",
+                "source_refs": [
+                  "onet-detail",
+                  "onet-main"
+                ]
+              },
+              {
+                "answer": "报关经纪处理进出口申报与海关合规，旅行证件整理经验不能替代货物分类和法定代理权限。",
+                "id": "travel-agents.faq.2",
+                "question_key": "career.faq.travel-agents.role-comparison",
+                "source_refs": [
+                  "adj-1",
+                  "onet-main"
+                ]
+              },
+              {
+                "answer": "愿意先问清最晚到达时间而不是马上推荐最低价",
+                "id": "travel-agents.faq.3",
+                "question_key": "career.faq.travel-agents.fit",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "可按日期、预算和退改条件整理候选组合",
+                "id": "travel-agents.faq.4",
+                "question_key": "career.faq.travel-agents.ai-impact",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "可按日期、预算和退改条件整理候选组合",
+                "id": "travel-agents.faq.5",
+                "question_key": "career.faq.travel-agents.automatable-tasks",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "人工解释取舍、取得旅客确认并处理异常升级",
+                "id": "travel-agents.faq.6",
+                "question_key": "career.faq.travel-agents.human-control",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "暂无可安全使用的数据。本次核对国家统计局2025年城镇单位工资发布；该页按地区、行业、登记类型和人员大类统计，未提供旅行顾问这一O*NET详细职业的全国同口径工资。",
+                "id": "travel-agents.faq.7",
+                "question_key": "career.faq.travel-agents.china-pay",
+                "source_refs": [
+                  "nbs"
+                ]
+              },
+              {
+                "answer": "Travel Agents的年工资中位数为50,160美元/年。",
+                "id": "travel-agents.faq.8",
+                "question_key": "career.faq.travel-agents.us-pay",
+                "source_refs": [
+                  "us-wage"
+                ]
+              },
+              {
+                "answer": "美国BLS称旅行代理通常需要高中毕业；雇主可能偏好销售经验、相关证书或教育，新员工通常接受至少一个月在岗培训。证书可展示学习经历，但不能替代实时供应商核验或客户授权。",
+                "id": "travel-agents.faq.9",
+                "question_key": "career.faq.travel-agents.education-path",
+                "source_refs": [
+                  "bls-travel"
+                ]
+              },
+              {
+                "answer": "共同边界：旅行顾问解释供应商条件并协助预订，不签发签证意见、不保证入境或安全，也不擅自承诺供应商外补偿；不同雇主和法域的具体流程需另核。",
+                "id": "travel-agents.faq.10",
+                "question_key": "career.faq.travel-agents.risk-boundary",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "转向选择：转向活动策划要补现场交付与供应商管理；转向礼宾重即时服务；转向导游重现场讲解；转向报关不属于自然横移。",
+                "id": "travel-agents.faq.11",
+                "question_key": "career.faq.travel-agents.outlook-transition",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "适合先体验：愿意依据明确规则核对旅客日期、预算、班次、住宿、退改条件和目的地限制，并把未知项留给复核人。",
+                "id": "travel-agents.faq.12",
+                "question_key": "career.faq.travel-agents.career-worth",
+                "source_refs": [
+                  "editor"
+                ]
+              }
+            ]
+          },
+          "id": "travel-agents.sources.faq.1",
+          "source_refs": [
+            "adj-1",
+            "bls-travel",
+            "editor",
+            "nbs",
+            "onet-detail",
+            "onet-main",
+            "us-wage"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "美国职业身份为O*NET 41-3041.00；中国职位名称、资格和授权按具体雇主与法域核验。",
+              "中国工资为本次指定官方来源中的有界缺口；美国统计按Travel Agents及各自数据期解释。",
+              "练习材料和数值均为编辑设计：所有班次、价格和条款均为虚构报价；不进入预订、支付、签证或真实安全建议。"
+            ]
+          },
+          "id": "travel-agents.sources.boundary.1",
+          "source_refs": [
+            "adj-1",
+            "adj-2",
+            "adj-3",
+            "adj-4",
+            "bls-travel",
+            "editor",
+            "nbs",
+            "nist",
+            "onet-detail",
+            "onet-main",
+            "us-employment",
+            "us-projections",
+            "us-wage"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "旅行顾问",
+                "id": "travel-agents.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "旅行顾问",
+                "id": "travel-agents.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "旅行顾问",
+                "id": "travel-agents.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "旅行顾问",
+                "id": "travel-agents.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "旅行顾问",
+                "id": "travel-agents.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "旅行顾问",
+                "id": "travel-agents.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "旅行顾问",
+                "id": "travel-agents.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "旅行顾问",
+                "id": "travel-agents.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "旅行顾问",
+                "id": "travel-agents.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "旅行顾问",
+                "id": "travel-agents.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "旅行顾问",
+                "id": "travel-agents.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "travel-agents.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业海关经纪人（13-1041.08）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-1",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "海关经纪人 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-1041.08"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业会议、会展与活动策划师（13-1121.00）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-2",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "会议、会展与活动策划师 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-1121.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业礼宾员（39-6012.00）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-3",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "礼宾员 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/39-6012.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业导游和陪同人员（39-7011.00）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-4",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "导游和陪同人员 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/39-7011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "美国BLS称旅行代理通常需要高中毕业；雇主可能偏好销售经验、相关证书或教育，新员工通常接受至少一个月在岗培训。",
+                  "美国官方职业资料不能直接外推为中国或其他法域的统一学历、许可或录用要求。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "bls-travel",
+                "limitation": "美国官方职业资料不能直接外推为中国或其他法域的统一学历、许可或录用要求。",
+                "market": "美国",
+                "name": "美国BLS职业展望：旅行代理",
+                "period": "2026访问的职业展望",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/sales/travel-agents.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "基于已列职业事实设计判断提示、风险控制和完整虚构练习；模拟数字不是现实统计。",
+                  "不代表雇主政策、执业授权、真实事故、招聘频率或统计调查。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "editor",
+                "limitation": "不代表雇主政策、执业授权、真实事故、招聘频率或统计调查。",
+                "market": "全球",
+                "name": "旅行顾问内容与模拟练习编辑设计",
+                "period": "2026-09-06",
+                "publisher": "本任务编辑",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "按地区、行业、登记类型和五类人员发布平均工资，未提供本O*NET详细职业同口径工资。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nbs",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025年",
+                "publisher": "国家统计局",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "通用生成式AI风险类别与治理框架，不报告本职业部署或就业影响。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nist",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "全球",
+                "name": "生成式人工智能风险管理画像",
+                "period": "2024 NIST AI 600-1",
+                "publisher": "美国国家标准与技术研究院",
+                "scope": "exact",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "任务、活动、工作环境与准备信息。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet-detail",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "旅行顾问 O*NET详细档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/41-3041.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "职业代码41-3041.00、定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet-main",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "旅行顾问 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/41-3041.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "就业存量覆盖：Travel Agents。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-employment",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "旅行顾问美国就业规模",
+                "period": "2024 BLS就业规模",
+                "publisher": "O*NET OnLine（展示BLS）",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/41-3041.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "年均空缺覆盖：Travel Agents，包含增长与替补。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-projections",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "旅行顾问美国就业预测",
+                "period": "2024—2034 BLS就业预测",
+                "publisher": "O*NET OnLine（展示BLS）",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/41-3041.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "工资数据覆盖：Travel Agents；不是新人薪酬。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-wage",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "旅行顾问美国工资",
+                "period": "2025 BLS OEWS",
+                "publisher": "O*NET OnLine（展示BLS OEWS）",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/41-3041.00"
+              }
+            ]
+          },
+          "id": "travel-agents.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "41-3041.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业代码",
+        "occupation_scope": "精确职业数据：Travel Agents；O*NET 41-3041.00",
+        "period": "2026 O*NET职业档案",
+        "source_refs": [
+          "onet-main"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "50,160美元/年",
+        "fact_id": "median",
+        "market": "美国",
+        "measure": "年工资中位数",
+        "occupation_scope": "精确职业数据；BLS/O*NET统计覆盖：Travel Agents；页面主题：旅行顾问（41-3041.00）",
+        "period": "2025 BLS OEWS",
+        "source_refs": [
+          "us-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "24.11美元/小时",
+        "fact_id": "low",
+        "market": "美国",
+        "measure": "小时工资中位数",
+        "occupation_scope": "精确职业数据；BLS/O*NET统计覆盖：Travel Agents；页面主题：旅行顾问（41-3041.00）",
+        "period": "2025 BLS OEWS",
+        "source_refs": [
+          "us-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "65,700名受雇者",
+        "fact_id": "high",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "精确职业数据；BLS/O*NET统计覆盖：Travel Agents；页面主题：旅行顾问（41-3041.00）",
+        "period": "2024 BLS就业规模",
+        "source_refs": [
+          "us-employment"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "7,100个/年",
+        "fact_id": "trend",
+        "market": "美国",
+        "measure": "年均职位空缺",
+        "occupation_scope": "精确职业数据；BLS/O*NET统计覆盖：Travel Agents；页面主题：旅行顾问（41-3041.00）",
+        "period": "2024—2034 BLS就业预测",
+        "source_refs": [
+          "us-projections"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "4586752853d7aa8a4a389311ed84857a1376a3aa42a6b6639c7497bdde2487f4",
+  "source_content_sha256": "6d223a74f78f268ff136acd8fea8ef56f3af0592a6c1d34653c309456bb3bd6e",
   "subject": {
     "canonical_slug": "travel-agents",
     "name": "旅行顾问",
-    "summary": null
+    "summary": "旅行顾问处理旅客日期、预算、班次、住宿、退改条件和目的地限制，核心是区分硬约束、偏好和仍待旅客确认的条件，并识别低价是否以不可退改或过晚到达为代价。页面提供可完成的虚构纸面材料、明确答案、美国统计范围与安全复核边界。"
   }
 }

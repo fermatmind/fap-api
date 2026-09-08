@@ -1,12 +1,1600 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "适合继续了解：你愿意反复读图、量测、对齐、检查缺陷并在高风险边界前停下确认；如果只喜欢焊接或“大型设备”标签，却不愿承受体力、狭窄空间、高处、出差和严格程序，这条路径可能消耗很大。"
+            ]
+          },
+          "id": "boilermakers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "bls-ooh",
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "核心价值是让锅炉、封闭大罐和相关压力容器按图纸形成可检查的结构，并在维护修理中发现泄漏、弱点或部件缺陷；具体岗位不必承担全部任务。"
+            ]
+          },
+          "id": "boilermakers.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全试做材料（完全虚构）：W-01为图纸R2/部件P-10/批准状态有效；W-02为图纸修订空白/部件P-20/批准有效；W-03为图纸R1/部件编号空白/批准有效；W-04为图纸R3/部件P-40/批准状态空白。任务：按“图纸修订、部件编号、批准状态”12格计算完整率，列缺失项、查询问题与工作包状态。"
+            ]
+          },
+          "id": "boilermakers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考复核：12格中9格有值，完整率75%；缺失为W-02图纸修订、W-03部件编号、W-04批准状态。三项都问“请由受控文件责任人确认有效值与依据”；工作包状态为“暂停，待三项确认”。不补猜参数，也不据此开始制造、焊接、吊装、进入或测试。"
+            ]
+          },
+          "id": "boilermakers.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "精确职业为O*NET 47-2011.00：制造、组装、维护和修理固定式蒸汽锅炉及辅助设备，也处理锅炉框架、罐体或大桶板件和附件。"
+            ]
+          },
+          "id": "boilermakers.profile.definition-block.1",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "投入：受控图纸和规格、厚金属板件、锅炉或容器部件、阀门仪表、连接要求与检查对象。"
+            ]
+          },
+          "id": "boilermakers.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "产出：已定位对齐并连接的结构或部件、安装的附件、缺陷检查结果，以及经修理或清洁的设备。"
+            ]
+          },
+          "id": "boilermakers.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "流程：读图与放样→加工和定位→配合吊装→连接组装→安装附件→检查/测试→清洁维护或修理；岗位可能只覆盖其中一段。"
+            ]
+          },
+          "id": "boilermakers.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断围绕图纸位置尺寸、部件配合、连接完整性、泄漏或缺陷，以及条件不足时是否暂停并升级。"
+            ]
+          },
+          "id": "boilermakers.profile.work-context-block.1",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "场景可在建筑、制造、能源或维护现场；可能进锅炉/罐体内部、在高处或户外工作，也可能出差和加班。"
+            ]
+          },
+          "id": "boilermakers.profile.work-context-block.2",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "常见工具包括量具、手动/动力工具、金属加工设备、焊接设备、起重索具，以及部分机器人或自动焊机；具体设备须由岗位确认。"
+            ]
+          },
+          "id": "boilermakers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "bls-ooh",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "协作对象可能包括图纸/工程、焊接与装配、起重操作、质量/检验、安全、现场主管和设备使用方。"
+            ]
+          },
+          "id": "boilermakers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量要看图纸和规格一致、位置尺寸与配合可核、缺陷已记录处理，以及测试、检验和放行由相应责任链完成。"
+            ]
+          },
+          "id": "boilermakers.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary",
+            "samr-law"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "相邻岗位可能共享焊接、金属、管道或吊装，但目标职业的核心对象是锅炉、封闭大罐和压力容器，不等同薄板、管道、结构钢或助手岗位。"
+            ]
+          },
+          "id": "boilermakers.profile.definition-block.2",
+          "source_refs": [
+            "adj-electric-helper",
+            "adj-iron",
+            "adj-pipe",
+            "adj-pipe-helper",
+            "adj-sheet",
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "plumbers-pipefitters-and-steamfitters",
+                "id": "boiler.adj.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/plumbers-pipefitters-and-steamfitters"
+              },
+              {
+                "entity": "sheet-metal-workers",
+                "id": "boiler.adj.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/sheet-metal-workers"
+              },
+              {
+                "entity": "structural-iron-and-steel-workers",
+                "id": "boiler.adj.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/structural-iron-and-steel-workers"
+              },
+              {
+                "entity": "helpers-electricians",
+                "id": "boiler.adj.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/helpers-electricians"
+              },
+              {
+                "entity": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters",
+                "id": "boiler.adj.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/helpers-pipelayers-plumbers-pipefitters-and-steamfitters"
+              }
+            ]
+          },
+          "id": "boilermakers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "adj-electric-helper",
+            "adj-iron",
+            "adj-pipe",
+            "adj-pipe-helper",
+            "adj-sheet",
+            "onet-summary"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "管道工聚焦输送水、蒸汽、空气或其他流体/气体的管道系统；锅炉工聚焦锅炉、大罐与压力容器结构及附件。"
+            ]
+          },
+          "id": "boilermakers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "adj-electric-helper",
+            "adj-iron",
+            "adj-pipe",
+            "adj-pipe-helper",
+            "adj-sheet",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "钣金工多制作安装风管、箱体、落水管等薄金属制品；锅炉工处理厚板、大型容器和相关维护修理。"
+            ]
+          },
+          "id": "boilermakers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "adj-electric-helper",
+            "adj-iron",
+            "adj-pipe",
+            "adj-pipe-helper",
+            "adj-sheet",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "结构钢铁工竖立连接梁柱等结构构件，可能搭建金属储罐；锅炉工还承担锅炉/压力容器的部件安装、缺陷检查和维护修理。"
+            ]
+          },
+          "id": "boilermakers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "adj-electric-helper",
+            "adj-iron",
+            "adj-pipe",
+            "adj-pipe-helper",
+            "adj-sheet",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "两类助手按定义帮助电工或管道工完成较低技能任务，不能因都在现场或拿工具就与锅炉工的完整职责、资格和授权互换。"
+            ]
+          },
+          "id": "boilermakers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "adj-electric-helper",
+            "adj-iron",
+            "adj-pipe",
+            "adj-pipe-helper",
+            "adj-sheet",
+            "editorial",
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可核自动化事实：BLS记录制造环节已有自动化，锅炉工仍手工组装维护，并可能使用机器人或自动焊机组装罐体。"
+            ]
+          },
+          "id": "boilermakers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：所核BLS职业页未给出生成式AI采用率、准确率、生产率因果或净就业影响。"
+            ]
+          },
+          "id": "boilermakers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "低风险辅助可限于对完全虚构的文件清单找空值、生成查询草稿或汇总初稿。"
+            ]
+          },
+          "id": "boilermakers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人的控制点是回看受控图纸、修订、尺寸、材料、连接要求、人员职责与授权和现场条件。"
+            ]
+          },
+          "id": "boilermakers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "制造、焊接、吊装、进入受限空间、压力测试、监督检验与放行不能由工具输出自动授权。"
+            ]
+          },
+          "id": "boilermakers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "工具混淆图纸版本、部件编号或批准状态时，停止使用并保留原文件与错误记录。"
+            ]
+          },
+          "id": "boilermakers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "自动焊机或机器人不等于生成式AI采用，也不能推出就业变化；就业预测须另看相同职业与期间。"
+            ]
+          },
+          "id": "boilermakers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实践顺序：合成记录→人工对照→记录错误→由机构评估；本页不提供任何现场参数或程序。"
+            ]
+          },
+          "id": "boilermakers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：本次所核国家统计局2025年工资发布没有与O*NET 47-2011.00精确对应的中国大陆全国中位数或分位数。"
+            ]
+          },
+          "id": "boilermakers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "行业或“生产制造及有关人员”宽口径不能当作锅炉制造与安装工工资。"
+            ]
+          },
+          "id": "boilermakers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "zh-CN是内容语言；中国锅炉相关生产许可、个人资格与具体岗位薪酬是不同问题。"
+            ]
+          },
+          "id": "boilermakers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editorial",
+            "nbs-wage",
+            "samr-law"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较具体岗位时记录城市、单位许可范围、设备/活动、职责、资格、经验、计薪单位、出差加班和福利，招聘样本不能冒充全国统计。"
+            ]
+          },
+          "id": "boilermakers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial",
+            "nbs-wage"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据：2025年年薪中位数为{{fact:us-annual-2025}}。"
+            ]
+          },
+          "fact_refs": [
+            "us-annual-2025"
+          ],
+          "id": "boilermakers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据：2025年小时工资中位数为{{fact:us-hourly-2025}}；不等于加班率。"
+            ]
+          },
+          "fact_refs": [
+            "us-hourly-2025"
+          ],
+          "id": "boilermakers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "同页年薪第10百分位低于50,490美元，第90百分位高于110,370美元；不是起薪或资深标签。"
+            ]
+          },
+          "id": "boilermakers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "BLS还说明行业、经验、职责、任期和地区会影响收入；全国数据不是单一合同或工地报价。"
+            ]
+          },
+          "id": "boilermakers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "学徒收入低于完全训练的锅炉工并随技能增长，但页面没有给统一学徒金额或个人进度保证。"
+            ]
+          },
+          "id": "boilermakers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国数据不能换算成中国工资；中国精确职业分布本次仍不可用。"
+            ]
+          },
+          "id": "boilermakers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "bls-ooh",
+            "nbs-wage"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "读图信号：能按图纸修订、位置、尺寸和部件编号进行核验。"
+            ]
+          },
+          "id": "boilermakers.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "缺陷信号：愿意记录泄漏、弱点或配合异常，不凭经验掩盖未知。"
+            ]
+          },
+          "id": "boilermakers.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "体力信号：先核真实搬运、站立、狭窄空间和高处要求，不把“能吃苦”当安全能力。"
+            ]
+          },
+          "id": "boilermakers.fit.riasec-fit-block.3",
+          "source_refs": [
+            "bls-ooh",
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "协作信号：能与起重、焊接、质量、安全和主管清楚确认交接。"
+            ]
+          },
+          "id": "boilermakers.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "程序信号：资格、许可、隔离或批准不清时愿意暂停，不用工具替代授权。"
+            ]
+          },
+          "id": "boilermakers.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "节奏信号：能评估出差、加班、检修停机期和合同空档对生活的影响。"
+            ]
+          },
+          "id": "boilermakers.fit.riasec-fit-block.6",
+          "source_refs": [
+            "bls-ooh",
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：若你容易跳过版本核对、厌恶重复检查或想先做后补手续，先不要把兴趣当适配。"
+            ]
+          },
+          "id": "boilermakers.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "本页合成练习只观察文件核对行为，不是人格、录用、资格或现场授权测试。"
+            ]
+          },
+          "id": "boilermakers.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "狭窄空间与通风：BLS描述锅炉/罐体内部可能黑暗、潮湿、嘈杂且通风不佳。控制是只在机构完成适用评估、许可和防护后由获授权人员作业；本页不给进入程序。"
+            ]
+          },
+          "id": "boilermakers.risk.career-risk-cards.1",
+          "source_refs": [
+            "bls-ooh",
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "高处与重型部件：BLS说明锅炉工常在大型锅炉、罐体、压力容器或水坝高处工作，工作本身可能危险；O*NET任务还包括配合起重吊装。条件或职责不明时停止相关步骤并按现场程序升级。"
+            ]
+          },
+          "id": "boilermakers.risk.career-risk-cards.2",
+          "source_refs": [
+            "bls-ooh",
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "热作、机械与噪声：O*NET任务包含焊接、割炬、金属加工和动力工具，BLS说明该工作可能危险并要求遵循具体安全程序、使用防护装备。本页不规定PPE或操作参数。"
+            ]
+          },
+          "id": "boilermakers.risk.career-risk-cards.3",
+          "source_refs": [
+            "bls-ooh",
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "中国法域边界：锅炉等特种设备的生产单位许可、相关人员资格和监督检验是不同责任；不能凭职业名称推定个人已获资格或设备可交付。"
+            ]
+          },
+          "id": "boilermakers.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial",
+            "samr-law"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同边界：图纸、材料、资格、许可、隔离、通风、防坠落、吊装、焊接、测试或检验条件不明时不开始/继续，记录事实并交给机构授权链。"
+            ]
+          },
+          "id": "boilermakers.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "美国BLS通常要求高中学历或同等学历，多数通过通常四年的学徒制学习工具设备、金属、安装、读图制图与安全。"
+            ]
+          },
+          "id": "boilermakers.path.career-path-block.1",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "先核目标场景是制造、现场组装安装还是维护修理，再问第一阶段允许观察、协助和独立承担什么。"
+            ]
+          },
+          "id": "boilermakers.path.career-path-block.2",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品只用本页四条合成工作包记录，算完整率、列缺失项、写查询并保持暂停状态。"
+            ]
+          },
+          "id": "boilermakers.path.career-path-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品必须说明75%只是题面文件完整率，不代表图纸正确、部件可制造、设备可测试或现场可开工。"
+            ]
+          },
+          "id": "boilermakers.path.career-path-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七日试做：第1天读范围；第2天抄12格；第3天找3个空值；第4天算9/12；第5天写查询；第6天对答案；第7天记录继续、暂停或比较相邻方向。"
+            ]
+          },
+          "id": "boilermakers.path.career-path-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "高中学历、学徒录取、培训完成、焊接等作业资格、州执照、单位许可、个人授权、检验和交付责任必须分别核验。"
+            ]
+          },
+          "id": "boilermakers.path.career-path-block.6",
+          "source_refs": [
+            "bls-ooh",
+            "editorial",
+            "samr-law"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "成长看能否处理更复杂图纸、放样、加工、连接、缺陷判断与安全交接，不承诺统一年限或自动取得授权。"
+            ]
+          },
+          "id": "boilermakers.path.career-path-block.7",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转向管道、钣金、结构钢或助手路径前，重新核对核心对象、训练、资格与最终责任。"
+            ]
+          },
+          "id": "boilermakers.path.career-path-block.8",
+          "source_refs": [
+            "adj-electric-helper",
+            "adj-iron",
+            "adj-pipe",
+            "adj-pipe-helper",
+            "adj-sheet",
+            "editorial",
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据：2025年就业人数约{{fact:us-employment-2025}}。"
+            ]
+          },
+          "fact_refs": [
+            "us-employment-2025"
+          ],
+          "id": "boilermakers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据：2025—2035年就业预计{{fact:us-decline-2025-2035}}，约从10,200降至10,100。"
+            ]
+          },
+          "fact_refs": [
+            "us-decline-2025-2035"
+          ],
+          "id": "boilermakers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据：同期间预计年均约{{fact:us-openings-2025-2035}}空缺，来自转岗或退出劳动力市场的替代需求。"
+            ]
+          },
+          "fact_refs": [
+            "us-openings-2025-2035"
+          ],
+          "id": "boilermakers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "下降2%、净减少约200与年均700空缺是不同指标，不能相加或解释成个人录用概率。"
+            ]
+          },
+          "id": "boilermakers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "BLS认为维护更换与新设备安装仍有需求，同时远离燃煤发电会压低需求；这是美国全国预测，不外推某工地、中国市场或个人。"
+            ]
+          },
+          "id": "boilermakers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "bls-ooh"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "日常可包括读图放样、厚板加工、定位对齐、连接组装、附件安装、缺陷检查、清洁与修理；具体岗位通常只覆盖其中一段。",
+                "id": "boilermakers.faq.1",
+                "question_key": "career.faq.boilermakers.daily-work",
+                "source_refs": [
+                  "onet-details",
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "锅炉工聚焦锅炉、封闭大罐和压力容器；管道、薄板、结构钢和助手岗位的核心对象、完整职责与授权不同。",
+                "id": "boilermakers.faq.2",
+                "question_key": "career.faq.boilermakers.role-comparison",
+                "source_refs": [
+                  "adj-electric-helper",
+                  "adj-iron",
+                  "adj-pipe",
+                  "adj-pipe-helper",
+                  "adj-sheet",
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "观察自己能否稳定核对图纸与部件、记录缺陷、清楚升级未知，并先核体力、狭窄空间、高处、出差与加班条件；这不是适任诊断。",
+                "id": "boilermakers.faq.3",
+                "question_key": "career.faq.boilermakers.fit",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "BLS只确认制造自动化及机器人/自动焊机使用，没有生成式AI采用率或净就业影响，不能量化替代概率。",
+                "id": "boilermakers.faq.4",
+                "question_key": "career.faq.boilermakers.ai-impact",
+                "source_refs": [
+                  "bls-ooh"
+                ]
+              },
+              {
+                "answer": "图纸、尺寸、材料、人员状态、许可、吊装、焊接、进入、测试、检验和放行必须回到受控文件与现场程序，由有职责者复核。",
+                "id": "boilermakers.faq.5",
+                "question_key": "career.faq.boilermakers.human-control",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "暂无可安全使用的数据：所核中国官方工资发布没有与O*NET 47-2011.00精确对应的全国中位数或分位数。",
+                "id": "boilermakers.faq.6",
+                "question_key": "career.faq.boilermakers.china-pay",
+                "source_refs": [
+                  "nbs-wage"
+                ]
+              },
+              {
+                "answer": "美国精确职业2025年年薪中位数76,410美元、小时中位数36.74美元；不是起薪、加班率、地区报价或个人保证。",
+                "fact_refs": [
+                  "us-annual-2025",
+                  "us-hourly-2025"
+                ],
+                "id": "boilermakers.faq.7",
+                "question_key": "career.faq.boilermakers.us-pay",
+                "source_refs": [
+                  "bls-ooh"
+                ]
+              },
+              {
+                "answer": "美国多数锅炉工经通常四年学徒制学习；学历、培训、州执照、作业资格、单位许可与个人授权仍须分别核验。",
+                "id": "boilermakers.faq.8",
+                "question_key": "career.faq.boilermakers.education-path",
+                "source_refs": [
+                  "bls-ooh",
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "狭窄空间、高处、重型部件、热作与机械风险都要求具体现场程序；中国锅炉相关单位许可、人员资格和监督检验也不能互代。",
+                "id": "boilermakers.faq.9",
+                "question_key": "career.faq.boilermakers.risk-boundary",
+                "source_refs": [
+                  "bls-ooh",
+                  "editorial",
+                  "samr-law"
+                ]
+              },
+              {
+                "answer": "美国精确职业2025—2035年预计下降2%、年均约700空缺；空缺来自替代需求，全国预测不是个人录用概率。",
+                "fact_refs": [
+                  "us-decline-2025-2035",
+                  "us-openings-2025-2035"
+                ],
+                "id": "boilermakers.faq.10",
+                "question_key": "career.faq.boilermakers.outlook-transition",
+                "source_refs": [
+                  "bls-ooh"
+                ]
+              },
+              {
+                "answer": "如果你能按图纸和修订核对对象、发现尺寸材料状态缺口并清楚升级不确定项，可继续用低风险文件核对观察这条路径；这不是适任诊断。",
+                "id": "boilermakers.faq.11",
+                "question_key": "career.faq.boilermakers.career-worth",
+                "source_refs": [
+                  "editorial"
+                ]
+              }
+            ]
+          },
+          "id": "boilermakers.sources.faq.1",
+          "source_refs": [
+            "adj-electric-helper",
+            "adj-iron",
+            "adj-pipe",
+            "adj-pipe-helper",
+            "adj-sheet",
+            "bls-ooh",
+            "editorial",
+            "nbs-wage",
+            "onet-details",
+            "onet-summary",
+            "samr-law"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "精确身份为O*NET 47-2011.00，不与管道工、钣金工、结构钢铁工或助手岗位合并。",
+              "美国职业事实、中国工资缺口、中国特种设备法律和editorial建议分别陈述，不跨法域外推。",
+              "中国单位许可、个人资格、现场授权、监督检验和交付责任是不同状态。",
+              "练习共12格、9格有值、3格缺失；75%只表示题面文件完整率。",
+              "本页不提供制造、焊接、吊装、进入受限空间、压力测试、检验或放行操作。"
+            ]
+          },
+          "id": "boilermakers.sources.boundary.1",
+          "source_refs": [
+            "adj-electric-helper",
+            "adj-iron",
+            "adj-pipe",
+            "adj-pipe-helper",
+            "adj-sheet",
+            "bls-ooh",
+            "editorial",
+            "nbs-wage",
+            "onet-details",
+            "onet-summary",
+            "samr-law"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "锅炉制造与安装工",
+                "id": "boilermakers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "锅炉制造与安装工",
+                "id": "boilermakers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "锅炉制造与安装工",
+                "id": "boilermakers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "锅炉制造与安装工",
+                "id": "boilermakers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "锅炉制造与安装工",
+                "id": "boilermakers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "锅炉制造与安装工",
+                "id": "boilermakers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "锅炉制造与安装工",
+                "id": "boilermakers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "锅炉制造与安装工",
+                "id": "boilermakers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "锅炉制造与安装工",
+                "id": "boilermakers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "锅炉制造与安装工",
+                "id": "boilermakers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "锅炉制造与安装工",
+                "id": "boilermakers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "boilermakers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "电工助手职业边界。",
+                  "只用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-electric-helper",
+                "limitation": "只用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET 47-3013.00电工助手",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-3013.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "结构钢构件职业边界。",
+                  "只用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-iron",
+                "limitation": "只用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET 47-2221.00结构钢铁工",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-2221.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "管道系统职业边界。",
+                  "只用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-pipe",
+                "limitation": "只用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET 47-2152.00管道工等",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-2152.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "管道工助手职业边界。",
+                  "只用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-pipe-helper",
+                "limitation": "只用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET 47-3015.00管道工助手",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-3015.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "薄金属制品职业边界。",
+                  "只用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-sheet",
+                "limitation": "只用于相邻比较。",
+                "market": "美国",
+                "name": "O*NET 47-2211.00钣金工",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-2211.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "职责、工作环境、入门、2025工资与2025—2035预测。",
+                  "美国全国统计不是地区报价或个人保证；安全描述不是现场程序。"
+                ],
+                "evidence_type": "official source",
+                "id": "bls-ooh",
+                "limitation": "美国全国统计不是地区报价或个人保证；安全描述不是现场程序。",
+                "market": "美国",
+                "name": "BLS职业展望手册：Boilermakers",
+                "period": "BLS OOH: May 2025 wages and 2025-2035 projections; updated 2026-08-27; accessed 2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/construction-and-extraction/boilermakers.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "合成文件核对练习、适配观察、AI控制与风险响应。",
+                  "不是施工、焊接、起重、压力测试、设备进入或安全授权。"
+                ],
+                "evidence_type": "editorial exercise and guidance",
+                "id": "editorial",
+                "limitation": "不是施工、焊接、起重、压力测试、设备进入或安全授权。",
+                "market": "编辑设计",
+                "name": "锅炉制造与安装职业探索编辑说明",
+                "period": "editorial review 2026-09-06",
+                "publisher": "FermatMind editorial",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "中国工资表的行业和宽岗位聚合口径。",
+                  "没有与O*NET 47-2011.00精确对应的全国工资分布；复用同任务同日已打开记录。"
+                ],
+                "evidence_type": "official source",
+                "id": "nbs-wage",
+                "limitation": "没有与O*NET 47-2011.00精确对应的全国工资分布；复用同任务同日已打开记录。",
+                "market": "中国大陆",
+                "name": "国家统计局：2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wage release; published 2026-05-15; accessed 2026-09-06",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "职业身份、任务与详细活动。",
+                  "任务全集不代表每个岗位都承担全部工作。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-details",
+                "limitation": "任务全集不代表每个岗位都承担全部工作。",
+                "market": "美国",
+                "name": "O*NET 47-2011.00详细页",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-2011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "职业身份、任务、情境、工具与准备信息。",
+                  "美国职业调查不建立中国资格或授权。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet-summary",
+                "limitation": "美国职业调查不建立中国资格或授权。",
+                "market": "美国",
+                "name": "O*NET 47-2011.00摘要",
+                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/47-2011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "锅炉等特种设备的生产许可、人员资格、施工告知、监督检验与责任主体。",
+                  "法律覆盖设备和活动；不能仅凭职业名称推定个人具体证书、许可项目或停工权。"
+                ],
+                "evidence_type": "official source",
+                "id": "samr-law",
+                "limitation": "法律覆盖设备和活动；不能仅凭职业名称推定个人具体证书、许可项目或停工权。",
+                "market": "中国大陆",
+                "name": "中华人民共和国特种设备安全法",
+                "period": "PRC Special Equipment Safety Law; accessed 2026-09-06",
+                "publisher": "国家市场监督管理总局",
+                "scope": "exact",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2023/art_ad5e293574484b48b45047ee0ede6099.html"
+              }
+            ]
+          },
+          "id": "boilermakers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "76,410美元/年",
+        "fact_id": "us-annual-2025",
+        "market": "美国",
+        "measure": "年薪中位数",
+        "occupation_scope": "精确职业数据：Boilermakers (47-2011)",
+        "period": "BLS OOH: May 2025 wages and 2025-2035 projections; updated 2026-08-27; accessed 2026-09-06",
+        "source_refs": [
+          "bls-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "36.74美元/小时",
+        "fact_id": "us-hourly-2025",
+        "market": "美国",
+        "measure": "小时工资中位数",
+        "occupation_scope": "精确职业数据：Boilermakers (47-2011)",
+        "period": "BLS OOH: May 2025 wages and 2025-2035 projections; updated 2026-08-27; accessed 2026-09-06",
+        "source_refs": [
+          "bls-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "10,200人",
+        "fact_id": "us-employment-2025",
+        "market": "美国",
+        "measure": "就业人数",
+        "occupation_scope": "精确职业数据：Boilermakers (47-2011)",
+        "period": "BLS OOH: May 2025 wages and 2025-2035 projections; updated 2026-08-27; accessed 2026-09-06",
+        "source_refs": [
+          "bls-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "下降2%（2025—2035）",
+        "fact_id": "us-decline-2025-2035",
+        "market": "美国",
+        "measure": "预计就业变化",
+        "occupation_scope": "精确职业数据：Boilermakers (47-2011)",
+        "period": "BLS OOH: May 2025 wages and 2025-2035 projections; updated 2026-08-27; accessed 2026-09-06",
+        "source_refs": [
+          "bls-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "700个/年",
+        "fact_id": "us-openings-2025-2035",
+        "market": "美国",
+        "measure": "预计年均职位空缺",
+        "occupation_scope": "精确职业数据：Boilermakers (47-2011)",
+        "period": "BLS OOH: May 2025 wages and 2025-2035 projections; updated 2026-08-27; accessed 2026-09-06",
+        "source_refs": [
+          "bls-ooh"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "d2618239722974e89b8af1de991bcc06c516f5e9d20a1f536ad5693fd2e30e8a",
+  "source_content_sha256": "f1b3f40be0e95ba6bb1ae226c3d6db15d0b72008c06d61ffe004eda17e4a5e88",
   "subject": {
     "canonical_slug": "boilermakers",
     "name": "锅炉制造与安装工",
-    "summary": null
+    "summary": "锅炉制造与安装工按图纸制造、组装、安装、维护和修理锅炉、封闭大罐及相关压力容器，处理厚金属板件、连接、附件、缺陷检查和设备维护。工作体力要求高，常涉及狭窄空间、高处、重型部件与严格安全边界。"
   }
 }

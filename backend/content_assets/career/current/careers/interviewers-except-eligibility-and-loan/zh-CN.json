@@ -1,12 +1,1647 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：访谈员把既定表格或问卷转成准确、完整、可追溯的回答记录；核心不是自由聊天，而是按脚本提问、澄清矛盾并如实保留拒答和未知。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "适合信号：你能耐心听完、逐字记录关键回答、在不诱导的前提下追问，并愿意重复核对编号、跳题与编码。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "iv-editorial",
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：如果你常替对方补答案、为了完成率隐藏拒答，或不愿处理重复流程和隐私边界，应先做本页虚构问卷分流练习。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "iv-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全试做：只用五条虚构记录，判断接收、待澄清或排除，并写一段不超过150字的质量交接；不联系真人。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "iv-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "身份：本页对应O*NET 43-4111.00，通过电话、邮件、面谈等方式完成表格、申请或问卷；不含资格审核和信贷访谈。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.profile.definition-block.1",
+          "source_refs": [
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "输入：经批准的问卷版本、联系清单、同意脚本、跳题规则、编码表、渠道状态和质量标准。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.1",
+          "source_refs": [
+            "iv-onet-profile"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "任务：说明目的与程序，按指定问题提问，准确记录回答，协助理解表格，并报告无法取得有效数据的问题。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.2",
+          "source_refs": [
+            "iv-onet-profile"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "产出：带问卷版本和记录ID的回答、拒答/回访状态、异常说明、编码结果与交接清单。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.profile.responsibilities-block.3",
+          "source_refs": [
+            "iv-onet-profile"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断：何时只解释题意而不诱导，何时追问不一致，何时保留缺失，何时停止并升级隐私或同意问题。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.profile.work-context-block.1",
+          "source_refs": [
+            "iv-editorial",
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "流程：核对任务与版本 → 执行告知/同意步骤 → 按脚本提问 → 原样记录 → 检查跳题与范围 → 标注异常 → 交接。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.profile.work-context-block.2",
+          "source_refs": [
+            "iv-onet-profile",
+            "iv-pipl"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "工具：电话或视频系统、问卷平台、表格、CRM/登记系统和质量检查表；工具不能替受访者回答。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "协作：受访者、项目主管、抽检员、研究或业务负责人，以及处理隐私与系统权限的人员。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量：题号、版本、原答、状态、时间和编码可追溯；拒答与未知不被改写为否定或零。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "iv-editorial",
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "边界：访谈员记录和澄清既定问题，不设计抽样或问卷、不决定资格或贷款，也不解释医疗结论。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.profile.definition-block.2",
+          "source_refs": [
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "human-resources-specialists",
+                "id": "iv.related.human-resources-specialists",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/human-resources-specialists"
+              }
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "adj-hr"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "management-analysts",
+                "id": "iv.related.management-analysts",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/management-analysts"
+              }
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "adj-ma"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "survey-researchers",
+                "id": "iv.related.survey-researchers",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/survey-researchers"
+              }
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "adj-survey"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "social-science-research-assistants",
+                "id": "iv.related.social-science-research-assistants",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/social-science-research-assistants"
+              }
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "adj-ra"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "medical-records-and-health-information-technicians",
+                "id": "iv.related.medical-records-and-health-information-technicians",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/medical-records-and-health-information-technicians"
+              }
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "adj-medrec"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "人力资源专员为组织招募、筛选和安置人员；访谈员执行既定表格或问卷并记录回答，不作录用建议。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.direction-comparison.adjacent-career-comparison-table.6",
+          "source_refs": [
+            "adj-hr",
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "管理分析师研究组织程序与系统并提出改进成果；访谈员主要交付逐份回答记录与数据质量状态。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.direction-comparison.adjacent-career-comparison-table.7",
+          "source_refs": [
+            "adj-ma",
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "调查研究员可设计调查、确定目标并分析解释结果；访谈员主要执行既定工具、记录回答并报告现场问题。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.direction-comparison.adjacent-career-comparison-table.8",
+          "source_refs": [
+            "adj-survey",
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "社会科学研究助理协助研究、质量控制和数据管理；访谈员更聚焦受访者接触与单份表格或问卷完成。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.direction-comparison.adjacent-career-comparison-table.9",
+          "source_refs": [
+            "adj-ra",
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "医疗记录专员维护病历并执行医疗编码；访谈员可采集或登记回答，但不把回答解释成诊断，也不承担医疗编码职责。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.direction-comparison.adjacent-career-comparison-table.10",
+          "source_refs": [
+            "adj-medrec",
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助：实时转写、格式校验、跳题提示和缺项提醒可减少机械整理。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "iv-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "不能替代：工具不能证明回答真实、同意有效，也不能替受访者补答。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "iv-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用前提：先固定问卷版本、允许字段、保留期限、抽检样本和异常停用规则。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "iv-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数据控制：未获批准的真实姓名、宗教、健康、金融或未成年人信息不得输入外部工具。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "iv-editorial",
+            "iv-pipl"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工复核：逐项比对录音/原答、题号、跳题、状态和编码；不一致保留双版本与说明。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "iv-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "责任：是否继续访谈、是否接受记录、如何处理敏感信息由项目及有权人员决定。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "iv-editorial",
+            "iv-pipl"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业边界：任务可辅助不等于组织已采用或岗位必然消失；当前来源不支持替代概率。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "iv-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "验证：用同一虚构记录比较人工版与工具版的字面回答、缺项、状态和异常数，漏一项即停止扩大使用。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "iv-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：已查国家统计局材料没有与O*NET 43-4111.00一一对应的中国全国访谈员单职业工资分布，因此不展示伪精确工资。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "iv-nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "行业平均工资不能写成访谈员中位数、起薪或个人报价。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "iv-nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较岗位时应记录城市、行业、渠道、全职/项目制、绩效口径、固定工资和补贴。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "iv-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "该缺口只限已列材料和口径，不表示市场没有工资信息。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "iv-nbs"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业口径为SOC/O*NET 43-4111.00，不含资格审核与信贷访谈。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "iv-onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "2025年工资中位数为22.08美元/小时、45,920美元/年。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "iv-onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "年薪第10、25、50、75、90分位为33,900、38,330、45,920、53,090、62,810美元。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "iv-onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "分位数是全国职业分布，不是入门上下限或个人保证。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "iv-onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "个人报价仍取决于地区、行业、渠道、班次、经验和雇佣模式。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "iv-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "工资为2025年口径，就业预测为2024—2034年，二者不能直接互推。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "iv-onet-outlook",
+            "iv-onet-wage"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "倾听：能完整听取回答，不抢答或把停顿解释成否定。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.fit.riasec-fit-block.1",
+          "source_refs": [
+            "iv-editorial",
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "中立：用同样措辞执行脚本，不因个人判断改变问题。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.fit.riasec-fit-block.2",
+          "source_refs": [
+            "iv-editorial",
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "细节：核对题号、记录ID、版本、跳题与编码。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.fit.riasec-fit-block.3",
+          "source_refs": [
+            "iv-editorial",
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "澄清：能指出矛盾并用非诱导问题请求确认。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.fit.riasec-fit-block.4",
+          "source_refs": [
+            "iv-editorial",
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "重复耐受：在相似访谈中仍保持同样质量。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.fit.riasec-fit-block.5",
+          "source_refs": [
+            "iv-editorial",
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "边界：遇到同意、隐私或超出脚本的问题能暂停升级。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.fit.riasec-fit-block.6",
+          "source_refs": [
+            "iv-editorial",
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "沟通：能解释程序，但不把解释变成建议答案。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.fit.riasec-fit-block.7",
+          "source_refs": [
+            "iv-editorial",
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "验证：以准确率、返工原因和抽检反馈判断适配，不靠兴趣标签。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.fit.riasec-fit-block.8",
+          "source_refs": [
+            "iv-editorial",
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "诱导回答：解释问题时暗示答案会污染记录；回到批准脚本，无法澄清时记为未知。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.risk.career-risk-cards.1",
+          "source_refs": [
+            "iv-editorial",
+            "iv-pipl"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "同意无效：未完成告知或撤回后仍采集会扩大风险；立即停止并交隐私负责人。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.risk.career-risk-cards.2",
+          "source_refs": [
+            "iv-editorial",
+            "iv-pipl"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "跳题错误：错误跳过或多问会造成缺项或过度收集；按版本化规则复核。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.risk.career-risk-cards.3",
+          "source_refs": [
+            "iv-editorial",
+            "iv-pipl"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "编码失真：把拒答、未知和零混为一类会误导后续分析；保留原答与状态码。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.risk.career-risk-cards.4",
+          "source_refs": [
+            "iv-editorial",
+            "iv-pipl"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "敏感信息泄露：最小化访问、传输和导出，异常时隔离记录并按组织流程升级。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.risk.career-risk-cards.5",
+          "source_refs": [
+            "iv-editorial",
+            "iv-pipl"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "美国O*NET将该职业列为Job Zone Three；通常需要职业学校、相关经验或副学士层级准备，并常有一至两年在岗训练，但雇主要求不同。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.path.career-path-block.1",
+          "source_refs": [
+            "iv-onet-jobzone"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "O*NET的Job Zone与培训/认证入口只用于了解美国职业准备和候选项目；具体证书、系统权限或法域资格须按目标招聘方和适用规则核验。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.path.career-path-block.2",
+          "source_refs": [
+            "iv-onet-jobzone"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "虚构材料：规则要求同意为“是”，评分题须为0—10整数，状态为“完成”的记录须有年龄段；状态为“回访”的记录允许评分暂缺；同意为“否”必须排除。五条记录为R01（是/25–34/8/完成）、R02（是/年龄缺失/11/完成）、R03（否/35–44/6/完成）、R04（是/45–54/评分缺失/回访）、R05（是/25–34/7/完成）。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.path.career-path-block.3",
+          "source_refs": [
+            "iv-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "任务：将每条记录分为接收、待澄清或排除；写明触发规则、不可推断项和一段质量交接。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.path.career-path-block.4",
+          "source_refs": [
+            "iv-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "参考：接收R01、R05共2条；R02因年龄缺失且评分越界、R04因状态为回访且评分尚未填写，列待澄清共2条；R03因同意为否而排除1条。5=2+2+1守恒。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.path.career-path-block.5",
+          "source_refs": [
+            "iv-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "不得把R02的11改成10、把R04的缺失写成0，或改写R03的同意状态；只记录并按规则分流。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.path.career-path-block.6",
+          "source_refs": [
+            "iv-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品交付：一页分流表、一份异常问题清单和不超过150字的交接摘要；全部使用虚构ID。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.path.career-path-block.7",
+          "source_refs": [
+            "iv-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "成长证据从准确记录推进到异常复核、质量抽检、培训新人和复杂项目协调，不以固定年限保证晋升。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.path.career-path-block.8",
+          "source_refs": [
+            "iv-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国该职业2024年约有164,300名从业者。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.market-signals.market-signal-card.1",
+          "source_refs": [
+            "iv-onet-employment"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "2024—2034年就业预测为下降1%或更多；这是全国职业预测，不是个人结论。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.market-signals.market-signal-card.2",
+          "source_refs": [
+            "iv-onet-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "同期平均每年预计约15,800个空缺，包含增长和替补需求。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.market-signals.market-signal-card.3",
+          "source_refs": [
+            "iv-onet-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "岗位可分布在医疗、教育、市场调查和公共项目等场景，具体脚本、数据与权限差异很大。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.market-signals.market-signal-card.4",
+          "source_refs": [
+            "iv-editorial",
+            "iv-onet-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "判断机会时分开核对地区、行业、渠道、项目周期、质量要求和隐私责任。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.market-signals.market-signal-card.5",
+          "source_refs": [
+            "iv-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "核心流程是说明目的和程序、按指令提问、准确记录与编码、识别回答不一致、检查完整性，并报告无法取得有效数据的问题。",
+                "id": "interviewers-except-eligibility-and-loan.faq.1",
+                "question_key": "career.faq.interviewers-except-eligibility-and-loan.daily-work",
+                "source_refs": [
+                  "iv-onet-profile"
+                ]
+              },
+              {
+                "answer": "访谈员43-4111.00按指定问题完成表格、申请或问卷，记录回答并协助填写；本职业不负责资格审核或信贷访谈。 人力资源专员13-1071.00为组织招募、筛选、面试或安置人员，并可能执行多个人力资源领域活动。 管理分析师13-1111.00开展组织研究与评估、设计系统和程序，并提出提高运行效率的成果。 调查研究员19-3022.00规划、开发或实施调查，并可能分析解释数据、确定调查目标或测试问题措辞。 社会科学研究助理19-4061.00协助实验、调查、质量控制、数据管理或研究成果准备。 医疗记录专员29-2072.00按医疗、行政、伦理、法律和监管要求编制、处理和维护病历，并对医疗概念进行编码。",
+                "id": "interviewers-except-eligibility-and-loan.faq.2",
+                "question_key": "career.faq.interviewers-except-eligibility-and-loan.role-comparison",
+                "source_refs": [
+                  "adj-hr",
+                  "adj-ma",
+                  "adj-medrec",
+                  "adj-ra",
+                  "adj-survey",
+                  "iv-onet-profile"
+                ]
+              },
+              {
+                "answer": "该职业需要主动倾听、清楚表达、阅读理解、细节关注、可靠性和按同一规则重复执行。 适配度应通过按脚本访谈、原样记录、追问不一致和复核编码的作品验证，而非只看社交偏好。",
+                "id": "interviewers-except-eligibility-and-loan.faq.3",
+                "question_key": "career.faq.interviewers-except-eligibility-and-loan.fit",
+                "source_refs": [
+                  "iv-editorial",
+                  "iv-onet-profile"
+                ]
+              },
+              {
+                "answer": "语音转写、格式检查和缺项提示可辅助整理访谈记录，但不能证明回答真实、同意有效或编码正确。 人员必须核对原始回答、问卷版本、跳题规则、同意状态和异常说明；工具不得替受访者补答或推断敏感信息。",
+                "id": "interviewers-except-eligibility-and-loan.faq.4",
+                "question_key": "career.faq.interviewers-except-eligibility-and-loan.ai-impact",
+                "source_refs": [
+                  "iv-editorial"
+                ]
+              },
+              {
+                "answer": "人员必须核对原始回答、问卷版本、跳题规则、同意状态和异常说明；工具不得替受访者补答或推断敏感信息。",
+                "id": "interviewers-except-eligibility-and-loan.faq.5",
+                "question_key": "career.faq.interviewers-except-eligibility-and-loan.human-control",
+                "source_refs": [
+                  "iv-editorial"
+                ]
+              },
+              {
+                "answer": "本次国家统计局工资材料没有与O*NET 43-4111.00一一对应的中国全国访谈员单职业工资分布。",
+                "id": "interviewers-except-eligibility-and-loan.faq.6",
+                "question_key": "career.faq.interviewers-except-eligibility-and-loan.china-pay",
+                "source_refs": [
+                  "iv-nbs"
+                ]
+              },
+              {
+                "answer": "美国O*NET/BLS显示该职业2025年工资中位数为每小时22.08美元、每年45,920美元。 2025年美国年薪第10、25、50、75、90分位分别为33,900、38,330、45,920、53,090、62,810美元。",
+                "id": "interviewers-except-eligibility-and-loan.faq.7",
+                "question_key": "career.faq.interviewers-except-eligibility-and-loan.us-pay",
+                "source_refs": [
+                  "iv-onet-wage"
+                ]
+              },
+              {
+                "answer": "O*NET将该职业列为Job Zone Three，通常需要职业学校、相关在岗经验或副学士层级准备，并常需一至两年在岗训练；这不是所有雇主统一门槛。 成长证据从准确记录和脚本执行，推进到异常复核、质量抽检、培训新人和复杂项目协调；不以固定年限保证晋升。",
+                "id": "interviewers-except-eligibility-and-loan.faq.8",
+                "question_key": "career.faq.interviewers-except-eligibility-and-loan.education-path",
+                "source_refs": [
+                  "iv-editorial",
+                  "iv-onet-jobzone"
+                ]
+              },
+              {
+                "answer": "O*NET将该职业列为Job Zone Three，通常需要职业学校、相关在岗经验或副学士层级准备，并常需一至两年在岗训练；这不是所有雇主统一门槛。 O*NET的Job Zone与培训/认证入口只描述美国职业准备和候选项目；是否需要具体证书、系统权限或法域资格，应按目标招聘方和适用规则逐项核验。",
+                "id": "interviewers-except-eligibility-and-loan.faq.9",
+                "question_key": "career.faq.interviewers-except-eligibility-and-loan.credentials",
+                "source_refs": [
+                  "iv-onet-jobzone"
+                ]
+              },
+              {
+                "answer": "高风险点包括诱导性改写、漏记拒答、错误跳题、错误编码和把未取得同意的敏感信息继续处理；应保留原答、版本、状态和升级记录。 中国个人信息保护法第13条列出可处理个人信息的情形，第17条规定处理前的一般告知事项；第28条将宗教信仰、医疗健康、金融账户等信息及不满十四周岁未成年人信息列为敏感个人信息，并要求特定目的、充分必要性和严格保护措施。",
+                "id": "interviewers-except-eligibility-and-loan.faq.10",
+                "question_key": "career.faq.interviewers-except-eligibility-and-loan.risk-boundary",
+                "source_refs": [
+                  "iv-editorial",
+                  "iv-pipl"
+                ]
+              },
+              {
+                "answer": "美国2024—2034年就业预测为下降1%或更多。 美国2024—2034年平均每年预计约15,800个职位空缺，包含增长与替补需求。 全国就业预测与年均空缺不能推导个人录用概率；具体机会还取决于行业、渠道、地区、项目周期与数据质量要求。",
+                "id": "interviewers-except-eligibility-and-loan.faq.11",
+                "question_key": "career.faq.interviewers-except-eligibility-and-loan.outlook-transition",
+                "source_refs": [
+                  "iv-editorial",
+                  "iv-onet-outlook"
+                ]
+              },
+              {
+                "answer": "适配度应通过按脚本访谈、原样记录、追问不一致和复核编码的作品验证，而非只看社交偏好。 全国就业预测与年均空缺不能推导个人录用概率；具体机会还取决于行业、渠道、地区、项目周期与数据质量要求。",
+                "id": "interviewers-except-eligibility-and-loan.faq.12",
+                "question_key": "career.faq.interviewers-except-eligibility-and-loan.career-worth",
+                "source_refs": [
+                  "iv-editorial"
+                ]
+              }
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.sources.faq.1",
+          "source_refs": [
+            "adj-hr",
+            "adj-ma",
+            "adj-medrec",
+            "adj-ra",
+            "adj-survey",
+            "iv-editorial",
+            "iv-nbs",
+            "iv-onet-jobzone",
+            "iv-onet-outlook",
+            "iv-onet-profile",
+            "iv-onet-wage",
+            "iv-pipl"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "本页对应美国O*NET 43-4111.00，不含资格审核与信贷访谈。",
+              "美国工资与预测、中国工资缺口和中国个人信息法律边界分别陈述。",
+              "练习材料完全虚构，不联系真人、不采集真实个人信息。"
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.sources.boundary.1",
+          "source_refs": [
+            "adj-hr",
+            "adj-ma",
+            "adj-medrec",
+            "adj-ra",
+            "adj-survey",
+            "iv-editorial",
+            "iv-nbs",
+            "iv-onet-employment",
+            "iv-onet-jobzone",
+            "iv-onet-outlook",
+            "iv-onet-profile",
+            "iv-onet-wage",
+            "iv-pipl"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "访谈员（资格审核与信贷除外）",
+                "id": "interviewers-except-eligibility-and-loan.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "访谈员（资格审核与信贷除外）",
+                "id": "interviewers-except-eligibility-and-loan.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "访谈员（资格审核与信贷除外）",
+                "id": "interviewers-except-eligibility-and-loan.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "访谈员（资格审核与信贷除外）",
+                "id": "interviewers-except-eligibility-and-loan.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "访谈员（资格审核与信贷除外）",
+                "id": "interviewers-except-eligibility-and-loan.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "访谈员（资格审核与信贷除外）",
+                "id": "interviewers-except-eligibility-and-loan.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "访谈员（资格审核与信贷除外）",
+                "id": "interviewers-except-eligibility-and-loan.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "访谈员（资格审核与信贷除外）",
+                "id": "interviewers-except-eligibility-and-loan.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "访谈员（资格审核与信贷除外）",
+                "id": "interviewers-except-eligibility-and-loan.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "访谈员（资格审核与信贷除外）",
+                "id": "interviewers-except-eligibility-and-loan.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "访谈员（资格审核与信贷除外）",
+                "id": "interviewers-except-eligibility-and-loan.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "人力资源专员招募、筛选、面试或安置组织内人员。",
+                  "仅支持该相邻职业的身份与职责摘要，不支持主职业工资、资格或中国事实。"
+                ],
+                "evidence_type": "官方职业、统计或法规资料",
+                "id": "adj-hr",
+                "limitation": "仅支持该相邻职业的身份与职责摘要，不支持主职业工资、资格或中国事实。",
+                "market": "美国",
+                "name": "O*NET 13-1071.00 Human Resources Specialists",
+                "period": "页面更新2026；访问2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/13-1071.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "管理分析师开展组织研究和评估、设计系统与程序以提高运行效率。",
+                  "仅支持该相邻职业的身份与职责摘要，不支持主职业工资、资格或中国事实。"
+                ],
+                "evidence_type": "官方职业、统计或法规资料",
+                "id": "adj-ma",
+                "limitation": "仅支持该相邻职业的身份与职责摘要，不支持主职业工资、资格或中国事实。",
+                "market": "美国",
+                "name": "O*NET 13-1111.00 Management Analysts",
+                "period": "页面更新2026；访问2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/13-1111.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "医疗记录专员按医疗、行政、伦理、法律和监管要求编制维护病历并执行医疗编码。",
+                  "仅支持该相邻职业的身份与职责摘要，不支持主职业工资、资格或中国事实。"
+                ],
+                "evidence_type": "官方职业、统计或法规资料",
+                "id": "adj-medrec",
+                "limitation": "仅支持该相邻职业的身份与职责摘要，不支持主职业工资、资格或中国事实。",
+                "market": "美国",
+                "name": "O*NET 29-2072.00 Medical Records Specialists",
+                "period": "页面更新2026；访问2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/29-2072.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "社会科学研究助理协助实验、调查、质量控制、数据管理和研究成果准备。",
+                  "仅支持该相邻职业的身份与职责摘要，不支持主职业工资、资格或中国事实。"
+                ],
+                "evidence_type": "官方职业、统计或法规资料",
+                "id": "adj-ra",
+                "limitation": "仅支持该相邻职业的身份与职责摘要，不支持主职业工资、资格或中国事实。",
+                "market": "美国",
+                "name": "O*NET 19-4061.00 Social Science Research Assistants",
+                "period": "页面更新2026；访问2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/19-4061.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "调查研究员规划、开发或实施调查，并可能分析数据、确定目标或测试问题措辞。",
+                  "仅支持该相邻职业的身份与职责摘要，不支持主职业工资、资格或中国事实。"
+                ],
+                "evidence_type": "官方职业、统计或法规资料",
+                "id": "adj-survey",
+                "limitation": "仅支持该相邻职业的身份与职责摘要，不支持主职业工资、资格或中国事实。",
+                "market": "美国",
+                "name": "O*NET 19-3022.00 Survey Researchers",
+                "period": "页面更新2026；访问2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/19-3022.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "支持虚构问卷分流练习、AI辅助边界、适配验证、风险控制和成长建议。",
+                  "不是外部事实、资格要求或法律意见。"
+                ],
+                "evidence_type": "editorial exercise",
+                "id": "iv-editorial",
+                "limitation": "不是外部事实、资格要求或法律意见。",
+                "market": "编辑设计",
+                "name": "访谈记录纸面体验设计",
+                "period": "2026-09-07",
+                "publisher": "FermatMind 编辑设计",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "支持2025年中国城镇单位、行业与五类岗位平均工资统计范围，用于确认没有与O*NET 43-4111.00一一对应的全国单职业分布。",
+                  "单位、行业或五类岗位平均工资不是访谈员精确职业中位数、起薪或个人报价。"
+                ],
+                "evidence_type": "official source",
+                "id": "iv-nbs",
+                "limitation": "单位、行业或五类岗位平均工资不是访谈员精确职业中位数、起薪或个人报价。",
+                "market": "中国大陆",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025年；访问2026-09-07",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "支持美国该职业2024年约有164,300名从业者。",
+                  "2024就业基数不是2024—2034增长率、年均空缺或个人录用概率。"
+                ],
+                "evidence_type": "官方职业、统计或法规资料",
+                "id": "iv-onet-employment",
+                "limitation": "2024就业基数不是2024—2034增长率、年均空缺或个人录用概率。",
+                "market": "美国",
+                "name": "O*NET 43-4111.00 2024就业基数",
+                "period": "2024年就业；访问2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/43-4111.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "支持Job Zone Three、典型职业学校/相关经验/副学士层级准备和一至两年训练。",
+                  "Job Zone是职业层级概况，不是所有雇主的统一录用或证书要求。"
+                ],
+                "evidence_type": "官方职业、统计或法规资料",
+                "id": "iv-onet-jobzone",
+                "limitation": "Job Zone是职业层级概况，不是所有雇主的统一录用或证书要求。",
+                "market": "美国",
+                "name": "O*NET 43-4111.00 Job Zone",
+                "period": "页面更新2026；访问2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/43-4111.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "支持2024就业164,300人、2024—2034下降1%或更多、年均15,800个空缺及空缺含增长和替补。",
+                  "美国全国预测，不是个人录用概率；下降与年均空缺不是同一指标。"
+                ],
+                "evidence_type": "官方职业、统计或法规资料",
+                "id": "iv-onet-outlook",
+                "limitation": "美国全国预测，不是个人录用概率；下降与年均空缺不是同一指标。",
+                "market": "美国",
+                "name": "O*NET 43-4111.00就业趋势",
+                "period": "2024—2034年预测；访问2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/43-4111.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "支持职业身份、提问记录、完整性检查、不一致澄清、工作情境与可观察技能。",
+                  "仅限美国43-4111.00，不含资格审核和信贷访谈；不支持中国工资。"
+                ],
+                "evidence_type": "官方职业、统计或法规资料",
+                "id": "iv-onet-profile",
+                "limitation": "仅限美国43-4111.00，不含资格审核和信贷访谈；不支持中国工资。",
+                "market": "美国",
+                "name": "O*NET 43-4111.00职业详情",
+                "period": "页面更新2026；访问2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/43-4111.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "支持2025年中位时薪22.08美元、中位年薪45,920美元及全国年薪分位。",
+                  "美国全国职业工资，不是个人报价或中国工资。"
+                ],
+                "evidence_type": "官方职业、统计或法规资料",
+                "id": "iv-onet-wage",
+                "limitation": "美国全国职业工资，不是个人报价或中国工资。",
+                "market": "美国",
+                "name": "O*NET 43-4111.00工资",
+                "period": "2025年工资；访问2026-09-07",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/43-4111.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持个人信息处理合法性、告知、敏感个人信息与未成年人信息边界。 2026-09-07再次请求官方全文时超时，沿用2026-09-06已成功打开的全文记录，不伪称本次打开成功。",
+                  "仅说明中国个人信息处理的一般法律边界，不决定具体项目处理基础、岗位授权或其他法域要求。"
+                ],
+                "evidence_type": "official source",
+                "id": "iv-pipl",
+                "limitation": "仅说明中国个人信息处理的一般法律边界，不决定具体项目处理基础、岗位授权或其他法域要求。",
+                "market": "中国大陆",
+                "name": "中华人民共和国个人信息保护法",
+                "period": "2021年通过并施行；访问2026-09-06",
+                "publisher": "全国人民代表大会",
+                "scope": "exact",
+                "url": "https://www.npc.gov.cn/npc/c2/c30834/202108/t20210820_313088.html"
+              }
+            ]
+          },
+          "id": "interviewers-except-eligibility-and-loan.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "O*NET 43-4111.00",
+        "fact_id": "iv-identity",
+        "market": "美国",
+        "measure": "职业身份",
+        "occupation_scope": "精确职业数据：美国O*NET 43-4111.00访谈员（资格审核与信贷除外）",
+        "period": "页面更新2026；访问2026-09-07",
+        "source_refs": [
+          "iv-onet-profile"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "22.08美元/小时；45,920美元/年",
+        "fact_id": "iv-wage",
+        "market": "美国",
+        "measure": "工资中位数",
+        "occupation_scope": "精确职业数据：美国O*NET 43-4111.00访谈员（资格审核与信贷除外）",
+        "period": "2025年工资；访问2026-09-07",
+        "source_refs": [
+          "iv-onet-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "33,900/38,330/45,920/53,090/62,810美元/年",
+        "fact_id": "iv-wage-range",
+        "market": "美国",
+        "measure": "年薪分位",
+        "occupation_scope": "精确职业数据：美国O*NET 43-4111.00访谈员（资格审核与信贷除外）",
+        "period": "2025年工资；访问2026-09-07",
+        "source_refs": [
+          "iv-onet-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "164,300人",
+        "fact_id": "iv-employment",
+        "market": "美国",
+        "measure": "就业人数",
+        "occupation_scope": "精确职业数据：美国O*NET 43-4111.00访谈员（资格审核与信贷除外）",
+        "period": "2024年就业；访问2026-09-07",
+        "source_refs": [
+          "iv-onet-employment"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "15,800个/年",
+        "fact_id": "iv-openings",
+        "market": "美国",
+        "measure": "年均空缺",
+        "occupation_scope": "精确职业数据：美国O*NET 43-4111.00访谈员（资格审核与信贷除外）",
+        "period": "2024—2034年预测；访问2026-09-07",
+        "source_refs": [
+          "iv-onet-outlook"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "下降1%或更多",
+        "fact_id": "iv-growth-outlook",
+        "market": "美国",
+        "measure": "就业增长预测",
+        "occupation_scope": "精确职业数据：美国O*NET 43-4111.00访谈员（资格审核与信贷除外）",
+        "period": "2024—2034年预测；访问2026-09-07",
+        "source_refs": [
+          "iv-onet-outlook"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "759a5dfb60746750b4e86aa765e5442582ddf2826f1ce6649e9aea4d449ce6cb",
+  "source_content_sha256": "6d5b04dfb31df66bea25db8b35c75b3e0acdecb482d3b606816bdaf24e149b1b",
   "subject": {
     "canonical_slug": "interviewers-except-eligibility-and-loan",
     "name": "访谈员（资格审核与信贷除外）",
-    "summary": null
+    "summary": "访谈员按既定问卷或表格提问、记录并澄清不一致，交付可追溯的回答、编码与异常状态；关键质量在中立、准确、完整和隐私边界。"
   }
 }

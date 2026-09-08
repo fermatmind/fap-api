@@ -1,12 +1,1985 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "如果你愿意追问“需求怎样测得出来”，并能在方案被试验否定后修改判断，机械工程值得深入体验。喜欢机械外观或画图只是起点，交付还要让别人理解设计假设和验证办法。"
+            ]
+          },
+          "id": "mechanical-engineers.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "先比较岗位实际对象：零件设计、热管理、试验、设备维护支持还是制造协作。岗位标题一样，日常可能分别围绕图样、数据、现场故障或供应商，不能只凭“工程师”三个字选工作。"
+            ]
+          },
+          "id": "mechanical-engineers.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "bls",
+            "editor",
+            "job",
+            "r2-pay-3"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "谨慎条件包括只愿做方案不愿解释失败、回避数学基础，或雇主让新人独立批准自己没能力判断的高风险设计。前两项可以逐步训练，后者应明确审查人和权限。"
+            ]
+          },
+          "id": "mechanical-engineers.quick-decision.fit-decision-checklist.3",
+          "source_refs": [
+            "bls",
+            "editor",
+            "license"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "安全体验直接用入行模块M1接口示意、M2用途与未知条件、M3两候选方案，填写澄清、比较和验证计划。仅纸面概念练习，不需CAD软件，不制造、不加载、不销售，也不给实物安全结论；先独立完成再对照示范。"
+            ]
+          },
+          "id": "mechanical-engineers.quick-decision.fit-decision-checklist.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "本页以美国17-2141.00机械工程师范围为身份基准，包括机械与热系统相关设计、开发和试验；中国阅读时按具体任务理解，不把美国代码当中国职称代码。"
+            ]
+          },
+          "id": "mechanical-engineers.profile.work-context-block.1",
+          "source_refs": [
+            "bls",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作输入应是可核实需求：使用环境、接口、载荷或热条件、制造限制及验收目标。没有这些输入，精细CAD模型仍可能回答错问题。此处为设计审查的编辑归纳。"
+            ]
+          },
+          "id": "mechanical-engineers.profile.work-context-block.2",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断是选用何种方案和哪些假设。把已知条件、暂定值和必须确认的事项分开记录，让审查者知道哪些结论会随条件变化。"
+            ]
+          },
+          "id": "mechanical-engineers.profile.work-context-block.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "典型输出可包括图样、部件清单、计算说明、测试计划和变更记录；具体文档由行业和雇主决定，不能把示例当所有项目固定清单。"
+            ]
+          },
+          "id": "mechanical-engineers.profile.work-context-block.4",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "试验并非给成功模型配一张照片。说明测试对象和条件、记录观察与差异，判断是否需要修改；没有覆盖的工况不能写成已经验证。"
+            ]
+          },
+          "id": "mechanical-engineers.profile.work-context-block.5",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "复核链需要设计、制造、试验和使用方共同理解接口。机械人员解释结构选择，制造人员反馈可生产性，专业审查人决定职责范围内的批准。"
+            ]
+          },
+          "id": "mechanical-engineers.profile.work-context-block.6",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工具包括CAD与分析软件，但结果可信度取决于输入和模型边界。漂亮云图不能自动证明材料、接触或载荷设定正确，异常须回到物理假设检查。"
+            ]
+          },
+          "id": "mechanical-engineers.profile.work-context-block.7",
+          "source_refs": [
+            "editor",
+            "job"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "办公室建模、试验数据分析与现场问题可能交替出现。交付质量看能否复现结果、解释取舍和控制版本；未经训练和授权不自行操作危险设备来“补作品”。"
+            ]
+          },
+          "id": "mechanical-engineers.profile.work-context-block.8",
+          "source_refs": [
+            "bls",
+            "editor",
+            "job"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "电气工程师：电气系统和设备设计开发，关注电能与电气功能；机械接口经验不能代替电气分析。 选择依据是更愿意承担哪类结果，转岗前用目标任务作品证明缺口已补。"
+            ]
+          },
+          "id": "mechanical-engineers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "editor",
+            "electrical"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "电子工程师：电子元件和系统设计，关注电子功能与实现；结构配合之外要补电子专业知识。 选择依据是更愿意承担哪类结果，转岗前用目标任务作品证明缺口已补。"
+            ]
+          },
+          "id": "mechanical-engineers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "editor",
+            "electronics"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "工业工程师：设计与改善人员、设备、物料等综合生产系统；机械部件经验之外需补流程和系统效率分析。 选择依据是更愿意承担哪类结果，转岗前用目标任务作品证明缺口已补。"
+            ]
+          },
+          "id": "mechanical-engineers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "editor",
+            "industrial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "制造工程师：设计和改进制造系统及过程；产品设计转向量产需补工艺、装备与过程验证。 选择依据是更愿意承担哪类结果，转岗前用目标任务作品证明缺口已补。"
+            ]
+          },
+          "id": "mechanical-engineers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "editor",
+            "manufacturing"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "电气工程师",
+                "id": "link-electrical",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/electrical-engineers"
+              },
+              {
+                "entity": "电子工程师",
+                "id": "link-electronics",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/electronics-engineers-except-computer"
+              },
+              {
+                "entity": "工业工程师",
+                "id": "link-industrial",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/industrial-engineers"
+              },
+              {
+                "entity": "制造工程师",
+                "id": "link-manufacturing",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/manufacturing-engineers"
+              }
+            ]
+          },
+          "id": "mechanical-engineers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "electrical",
+            "electronics",
+            "industrial",
+            "manufacturing"
+          ],
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "生成式设计可以按使用者设置的制造方法和限制探索候选形状；它并不会替你发现尚未输入的实际使用条件。先明确问题，再评价输出。"
+            ]
+          },
+          "id": "mechanical-engineers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "cad",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "把AI文本建议用于整理待查假设或准备评审问题时，每个公式、材料属性和标准引用仍需回到可信原始资料。流畅的设计说明不能成为计算依据。"
+            ]
+          },
+          "id": "mechanical-engineers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editor",
+            "nist"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用条件包括可用的工程数据、软件与计算资源、版本管理以及有人能检查结果。没有独立复核能力时，不应让自动生成扩大可签字范围。"
+            ]
+          },
+          "id": "mechanical-engineers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editor",
+            "license",
+            "nist"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "控制点放在输入：审查载荷、边界条件、制造过程与排除区域是否符合任务。无法解释设置来源时，应标未确认而不是继续生成更多方案。"
+            ]
+          },
+          "id": "mechanical-engineers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "cad",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "控制点也放在验证：比较候选的可制造性、装配和测试计划；批准人应能否决不满足需求的结果，不能以工具完成状态代替试验。"
+            ]
+          },
+          "id": "mechanical-engineers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "bls",
+            "cad",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余责任仍是需求取舍、失效解释和发布判断。是否节省整理工时须另行验证；工程师与组织仍要对被采用的设计承担其岗位和法域内责任。"
+            ]
+          },
+          "id": "mechanical-engineers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "bls",
+            "editor",
+            "license"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "美国BTOS是企业采用调查，不能据此报机械工程师使用AI的比例。当前资料也没有本职业统一净节省时间或岗位替代概率。"
+            ]
+          },
+          "id": "mechanical-engineers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "census"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业证据独立呈现：BLS将自动化设备集成视为需求来源之一。自动化既改变工具也创造工程任务，不能从一个产品演示直接推断工程师整体减少。"
+            ]
+          },
+          "id": "mechanical-engineers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "全球行业代理数据（工程任务基准）：2026-09-04发表的研究用2025年初模型测试86道题，其中20道设计题、16道优化题；工程部分比较的3个模型各题重复10次，在D08、D10两道设计题上均未答对。研究涉及几何、受力和约束取舍，却不是在岗机械工程师的效率实验；其旧模型与纯文本设置也不能代表当前所有工具。可据此要求独立复核，不可据题目错误率推算事故或岗位替代率。"
+            ]
+          },
+          "id": "mechanical-engineers.ai-impact.ai-impact-table.9",
+          "source_refs": [
+            "r2-ai"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国机械工程师全国可比工资：本页暂无可安全使用的数据。国家统计局2025公报未给出该单职业分布，不能把“专业技术人员”年平均工资贴到本页。"
+            ]
+          },
+          "id": "mechanical-engineers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "机械岗位跨产品、工艺与应用场景；行业工资不等于机械工程师工资，更不能等同新人、试验岗或研发岗各自收入。"
+            ]
+          },
+          "id": "mechanical-engineers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "bls",
+            "editor",
+            "nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "索取offer时分别问固定税前年薪或月薪、奖金条件、加班安排、出差及驻场、研发或生产责任。仅给总包上限时，不能视为固定可获得金额。"
+            ]
+          },
+          "id": "mechanical-engineers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "现已补充中国三个雇主的地方报价。做同城比较仍需匹配层级与技术范围，不能用美国机器人岗位或汇率折算替代；公告里的区间上限也不是每名录用者的保证收入。"
+            ]
+          },
+          "id": "mechanical-engineers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editor",
+            "r2-pay-1",
+            "r2-pay-2",
+            "r2-pay-3"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国招聘代理数据：烟台浩阳机械在招远2026-01-08公告中的机械工程师报价4000–6000元/月；机械或热处理相关专业、专科以上，应届生亦可，列出CAD、SOLIDWORKS、ANSYS及机械基础要求。这是具体入门机会线索，不是全国新人收入分布。"
+            ]
+          },
+          "id": "mechanical-engineers.china-salary.career-snapshot-primary-locale.5",
+          "source_refs": [
+            "r2-pay-1"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国招聘代理数据：山东康泰智能同日发布的招远机械结构工程师报价6000–10000元/月；要求技术或机电产品设计制造经验，并用三维工具进行设计与样机跟踪。这个产品结构方向和上一个接受应届生的岗位要求不同，不合成为经验溢价或全国工资区间。"
+            ]
+          },
+          "id": "mechanical-engineers.china-salary.career-snapshot-primary-locale.6",
+          "source_refs": [
+            "r2-pay-2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国招聘代理数据：银邦（安徽）新能源材料在淮北2026-01-19公告中的机械工程师报价5000–10000元/月，优秀者面议；工作重心是产线机械设备维保、改善及安装调试验收。这是设备工程方向的雇主要求，不能把同页机修工报价或电工作业证要求移植给机械工程师。"
+            ]
+          },
+          "id": "mechanical-engineers.china-salary.career-snapshot-primary-locale.7",
+          "source_refs": [
+            "r2-pay-3"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2025年5月机械工程师年工资中位数104,110美元，为精确职业数据，不是税后或新人起薪。"
+            ]
+          },
+          "fact_refs": [
+            "median"
+          ],
+          "id": "mechanical-engineers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "bls"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2025年5月最低10%工资低于73,990美元/年，为精确职业数据；低分位不等于初级工程师。"
+            ]
+          },
+          "fact_refs": [
+            "low"
+          ],
+          "id": "mechanical-engineers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "bls"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2025年5月最高10%工资高于164,340美元/年，为精确职业数据；高分位不等于自动晋升收入。"
+            ]
+          },
+          "fact_refs": [
+            "high"
+          ],
+          "id": "mechanical-engineers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2025–2035就业预计增长11%，年均17,800个空缺，为精确职业数据。空缺包含替补，不能当作每年净新增。"
+            ]
+          },
+          "fact_refs": [
+            "trend"
+          ],
+          "id": "mechanical-engineers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "bls"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "工资采用美国受薪职业统计；自雇咨询服务收入不在OEWS工资中，不能用此数估算独立顾问利润。"
+            ]
+          },
+          "id": "mechanical-engineers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "oews"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "本页未取得单独的新毕业生全国工资资料。选择具体职位时需核实际经验与技术范围，不从工资分位自动推导职级。"
+            ]
+          },
+          "id": "mechanical-engineers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "观察自己是否愿意把模糊功能写成可检验问题；只追求新奇结构而不确认用途，容易在后期返工。"
+            ]
+          },
+          "id": "mechanical-engineers.fit.personality-fit-block.1",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "数学基础以解释假设来练：能否说清采用何种简化、变量代表什么、单位是否一致；不要求凭记忆迅速报答案。"
+            ]
+          },
+          "id": "mechanical-engineers.fit.personality-fit-block.2",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "图样表达以接口可理解为目标：按M1转写前后上下和尺寸，再独立对照文字检查遗漏；无需同伴或真实产品保密图。"
+            ]
+          },
+          "id": "mechanical-engineers.fit.personality-fit-block.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "失败分析看能否区分观察、猜测与已排除原因；保留没支持自己方案的数据，才能让下一次修改有意义。"
+            ]
+          },
+          "id": "mechanical-engineers.fit.personality-fit-block.4",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "协作包括接纳制造与试验反馈。对方说“做不出来”时，先问工艺条件和限制，不立即把问题归给执行者。"
+            ]
+          },
+          "id": "mechanical-engineers.fit.personality-fit-block.5",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "细节投入可能与截止时间冲突；学习说明哪些检查已完成、哪些尚未验证，让负责人作知情选择。"
+            ]
+          },
+          "id": "mechanical-engineers.fit.personality-fit-block.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "现场或试验岗位的噪声、出差和工作条件须问雇主；本页体验仅做纸面审查，不用危险操作试探自己是否适合。"
+            ]
+          },
+          "id": "mechanical-engineers.fit.personality-fit-block.7",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "兴趣或人格量表不决定胜任。比较自己是否愿意持续补基础、修改错误并解释结果，必要时从范围较窄的设计支持或测试数据任务开始。"
+            ]
+          },
+          "id": "mechanical-engineers.fit.personality-fit-block.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "需求遗漏：支架只考虑正常方向而遗漏使用方实际工况，可能把风险转给使用者。评审时列出未知载荷与适用范围，未确认前不发布实用设计；负责人安排补证。"
+            ]
+          },
+          "id": "mechanical-engineers.risk.career-risk-cards.1",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "仿真误判：错误约束可能使图像看似理想，制造或测试人员据此误信安全。保留输入和简化说明，安排独立检查及适用试验；不能以AI结论或云图颜色批准。"
+            ]
+          },
+          "id": "mechanical-engineers.risk.career-risk-cards.2",
+          "source_refs": [
+            "bls",
+            "editor",
+            "nist"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "版本混用：供应商按旧图制造，新图却用于验收，导致返工或接口不合。建立有效版本与变更影响清单，设计、采购和制造明确接收；不只靠口头通知。"
+            ]
+          },
+          "id": "mechanical-engineers.risk.career-risk-cards.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "试验越界：为了赶进度在不具备场地、培训或批准时自行试机，可能伤及操作者和附近人员。本页不提供试机步骤；由获授权团队在批准条件下安排，体验只做纸面计划。"
+            ]
+          },
+          "id": "mechanical-engineers.risk.career-risk-cards.4",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "专业签字：软件证书或通过考试不代表具备州级PE许可，也不代表中国某项目授权。超出能力或权限的设计交合格负责人审查，不以岗位称谓代替资格确认。"
+            ]
+          },
+          "id": "mechanical-engineers.risk.career-risk-cards.5",
+          "source_refs": [
+            "cn-title",
+            "editor",
+            "license"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "2026-09-05采集：保留美国FieldAI机器人硬件职位，另核中国烟台浩阳机械、山东康泰智能和银邦安徽新能源材料三个岗位，按雇主与岗位去重。它们分别涉及入门机械、产品结构和产线设备，报价见中国薪资模块；当前空缺未确认。美国职责观察合入雇主卡，保持单一岗位范围，不跨市场计算要求比例。"
+            ]
+          },
+          "id": "mechanical-engineers.path.recruitment-sample.1",
+          "source_refs": [
+            "job",
+            "r2-pay-1",
+            "r2-pay-2",
+            "r2-pay-3"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-role-comparison",
+          "data": {
+            "column_keys": [
+              "role",
+              "initial_tasks"
+            ],
+            "rows": [
+              [
+                "设计支持",
+                "产出：标注清楚的概念与接口；补课：工程基础与图样要求"
+              ],
+              [
+                "试验数据支持",
+                "产出：条件、观察与问题记录；补课：测试方法和统计判断"
+              ],
+              [
+                "制造协作支持",
+                "产出：变更和工艺问题清单；补课：制造过程与质量控制"
+              ]
+            ]
+          },
+          "id": "mechanical-engineers.path.entry-role-comparison.1",
+          "source_refs": [
+            "bls",
+            "editor",
+            "job"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.employer-evidence",
+          "data": {
+            "entries": [
+              {
+                "id": "employer-0",
+                "values": [
+                  "雇主真正会看什么",
+                  "美国FieldAI单一机器人硬件岗位提及机械建模、热与振动实验能力。该场景不代表所有机械岗位，不跨中美案例计算要求比例。"
+                ]
+              },
+              {
+                "id": "employer-1",
+                "values": [
+                  "编辑建议：展示接口理解",
+                  "以M1/M2记录朝向、包络和未知；不要求购买CAD或制作实物。"
+                ]
+              },
+              {
+                "id": "employer-2",
+                "values": [
+                  "编辑建议：展示判断过程",
+                  "用M3比較两方案，写需要什么证据和由谁确定验证条件；没有数据就保留未知，不把计划写成测试结果。"
+                ]
+              }
+            ]
+          },
+          "id": "mechanical-engineers.path.employer-evidence.1",
+          "source_refs": [
+            "editor",
+            "job"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-portfolio",
+          "data": {
+            "entries": [
+              {
+                "id": "requirements",
+                "values": [
+                  "需求澄清包",
+                  "据M1/M2填已知、未知、须问角色",
+                  "不擅填质量、摩擦或材料性能"
+                ]
+              },
+              {
+                "id": "design-review",
+                "values": [
+                  "方案比较包",
+                  "据M3与接口文字做A/B对照",
+                  "区分空间表面符合和未经验证的稳定性"
+                ]
+              },
+              {
+                "id": "test-plan",
+                "values": [
+                  "纸面验证计划",
+                  "写需获得的数据、未来负责角色和判定前提",
+                  "只规划，不试制、不加载、不宣称验证通过"
+                ]
+              }
+            ]
+          },
+          "id": "mechanical-engineers.path.entry-portfolio.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.interview-probation",
+          "data": {
+            "column_keys": [
+              "description",
+              "observed_evidence",
+              "possible_check"
+            ],
+            "rows": [
+              [
+                "面试讲作品",
+                "解释一次推翻原方案的原因",
+                "证据和结论有对应"
+              ],
+              [
+                "试用接任务",
+                "先确认输入与负责人",
+                "不确定条件明确列出"
+              ],
+              [
+                "发布前交接",
+                "说明版本与未验证项",
+                "接收人能追溯变化"
+              ]
+            ]
+          },
+          "id": "mechanical-engineers.path.interview-probation.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-decision",
+          "data": {
+            "column_keys": [
+              "description",
+              "boundary"
+            ],
+            "rows": [
+              [
+                "美国学位",
+                "常见本科路径；核课程与雇主要求"
+              ],
+              [
+                "FE/PE",
+                "考试、经验与州许可分开；向目标州委员会核个人路径"
+              ],
+              [
+                "中国职称",
+                "工程师是评价层级；查适用地区与单位评审规则"
+              ],
+              [
+                "软件证书",
+                "工具能力证明；不能替代专业执照和项目批准"
+              ]
+            ]
+          },
+          "id": "mechanical-engineers.path.credential-decision.1",
+          "source_refs": [
+            "bls",
+            "cn-title",
+            "editor",
+            "license"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-boundary",
+          "data": {
+            "paragraphs": [
+              "中国职称、美国PE许可、软件认证和企业项目授权互不等同。入门职位不要求PE不代表可独立向公众提供需许可的工程服务；具体执业范围以所在地委员会与任务要求核定。"
+            ]
+          },
+          "id": "mechanical-engineers.path.credential-boundary.1",
+          "source_refs": [
+            "bls",
+            "cn-title",
+            "license"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "先能交付可复核输入和图样，再承担有限范围计算与验证，之后才能逐步负责子系统取舍和跨团队变更。每个阶段用已审查成果与反馈证明，不以证书数量或工龄替代实际能力。"
+            ]
+          },
+          "id": "mechanical-engineers.path.career-path-block.1",
+          "source_refs": [
+            "bls",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "练习简报：你是虚构桌面展示支架的概念评审记录人，目标是解释已知接口、未知条件和下一步需要验证什么。M1–M3均为编辑设计，尺寸不是实测或行业标准。允许纸面标注、逻辑比较、列问题和写验证计划；不建实物、不加载、不制造、不在真实物品上试用，不给承重或安全合格结论。无需软件或额外资料；未知就是应提交的内容。"
+            ]
+          },
+          "id": "mechanical-engineers.path.entry-work-sample-data.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "material-12-0",
+                "values": [
+                  "M1 文字接口示意 v1",
+                  "用途朝向示意：从使用者看，正前方是阅读面，后方为背部支撑，左到右为宽W，前到后为深D，桌面向上为高H。桌面接触面在最下方；展示纸卡在前方，背撑在卡后。允许外包络W≤120mm、D≤100mm、H≤150mm；不得打孔、粘贴或夹持桌面。此为题面尺寸，不是实物设计图。"
+                ]
+              },
+              {
+                "id": "material-12-1",
+                "values": [
+                  "M2 用途与故意未知项",
+                  "仅讨论室内桌面展示一张纸卡的概念；卡片外形80mm宽×120mm高，厚度、质量、重心、接触摩擦、外力及桌面材质全部未给出。是否需要调整角度、如何防滑及使用期限也未知。材料候选X或Y只是代号，无牌号与性能；不得自行查一个数填进来宣称安全。提问角色为虚构需求人和工程审查人。"
+                ]
+              },
+              {
+                "id": "material-12-2",
+                "values": [
+                  "M3 两候选方案",
+                  "方案A：固定倾角背撑，一体概念；外包络110×90×130mm（W×D×H），不能调角，具体倾角未给出。方案B：底座加可调背撑，连接方式未定；外包络115×95×140mm，可调范围未给出。两者只称概念，都无材料牌号、厚度、接触与强度计算；不得从一体或可调推断稳定性。"
+                ]
+              }
+            ]
+          },
+          "id": "mechanical-engineers.path.entry-work-sample-data.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "任务与产出：读M1–M3，写需求清单（已知｜未知｜影响哪项判断｜拟问角色）；再写A/B比较（包络｜调角｜连接｜缺证据｜能作与不能作的结论）；最后写验证计划（问题｜所需数据｜负责角色｜如何确定判定条件）。全部只在纸面完成，不制造或加载。详细填写模板在扩展练习；本页字段即可完成。"
+            ]
+          },
+          "id": "mechanical-engineers.path.entry-work-sample-data.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "对照区：先完成M1–M3的三份产出，再看示范。开放题允许不同有依据的提问顺序；没有唯一推荐方案。",
+              "接口与比较示范：A的110≤120、90≤100、130≤150；B的115≤120、95≤100、140≤150。两者仅在题面名义包络上符合；尺寸未经制造或测量，不等于公差、装配或稳定性合格。A不能调角，B可调范围与连接未定；是否需要调角先问需求人，不能先宣布B更好。",
+              "澄清示范：纸卡质量、重心与外力关系到稳定性判断，桌面与接触条件关系到滑移，材料牌号和厚度关系到结构解释；题目未提供，所以写未知。先问需求人实际用途与调角必要性，再请审查人定义需要验证的使用条件；不以纸卡看起来轻为理由略过。",
+              "验证计划示范：问题“能否满足展示角度”先需角度要求和接口图，由设计及使用方确认判定条件；问题“稳定性是否满足”先需质量、重心、载荷与接触信息，由合格工程团队制定计算与后续试验方案。当前仅记录所缺资料和责任角色，无任何试验结果、通过判定或加载步骤。",
+              "复核依据：能指出前后上下、尺寸单位、调角差异及未知项即有可评审产出。把概念包络符合写成“可以承重/可以制造/安全”必须返工；把未知留在计划中是正确边界，不是未完成练习。"
+            ]
+          },
+          "id": "mechanical-engineers.path.entry-work-sample-data.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "day-1",
+                "values": [
+                  "第一日",
+                  "读M1/M2并填写需求表",
+                  "产出：用途、禁止项和未知清单；检查质量载荷未补数"
+                ]
+              },
+              {
+                "id": "day-2",
+                "values": [
+                  "第二日",
+                  "照M1转写文字接口图",
+                  "产出：前后左右上下与包络注记；无需绘图软件"
+                ]
+              },
+              {
+                "id": "day-3",
+                "values": [
+                  "第三日",
+                  "读M3填写A/B比较表",
+                  "产出：空间、角度、连接与未知项比较；不选安全赢家"
+                ]
+              },
+              {
+                "id": "day-4",
+                "values": [
+                  "第四日",
+                  "核对单位和条件",
+                  "产出：尺寸一致性与假设清单；把mm和未提供值分开"
+                ]
+              },
+              {
+                "id": "day-5",
+                "values": [
+                  "第五日",
+                  "填写验证计划",
+                  "产出：问题、所需证据、负责角色与判定前提；不实施"
+                ]
+              },
+              {
+                "id": "day-6",
+                "values": [
+                  "第六日",
+                  "完成自查后对照示范",
+                  "产出：曾遗漏条件、修订解释及依据；未得到新材料不删未知"
+                ]
+              },
+              {
+                "id": "day-7",
+                "values": [
+                  "第七日",
+                  "整理三份作品并复盘",
+                  "产出：理解变化、未解决问题、学习方向与精力描述；不算适合分"
+                ]
+              }
+            ]
+          },
+          "id": "mechanical-engineers.path.seven-day-trial.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "比较初稿和修订稿是否把“包络内”误写“安全”，把未提供的质量或连接强度猜成已知。",
+              "记录每个解释如何依据M1/M2/M3，不能用自己想象的客户答复闭合问题。",
+              "复盘哪项需要反复读、修改是否更容易解释、是否愿意继续补基础；不编测评分数。",
+              "保留未解决的技术问题作为练习成果；它不妨碍完成概念审查，但妨碍作实物安全结论。"
+            ]
+          },
+          "id": "mechanical-engineers.path.seven-day-decision.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国2025–2035增长11%是职业总体预测，自动化设备集成是需求解释之一；不是每个细分产品都扩张。"
+            ]
+          },
+          "id": "mechanical-engineers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "bls"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "企业AI调查与机械职位需求之间没有可直接换算关系，本页不合成一个全球工程师增长率。"
+            ]
+          },
+          "id": "mechanical-engineers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "census"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "FieldAI岗位体现机器人硬件对建模和试验的同时要求；它不代表所有机械岗位都需要同一实验平台。"
+            ]
+          },
+          "id": "mechanical-engineers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "job"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "工具资料说明生成式设计可设置制造约束，未给出本职业净效率或工资溢价；学习工具仍需配合工程基础与验证。"
+            ]
+          },
+          "id": "mechanical-engineers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "cad",
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "转向制造工程要补过程与量产验证，转工业工程要补系统流程评价，转电气电子要补专业基础与适用权限；用目标任务作品验证差距。"
+            ]
+          },
+          "id": "mechanical-engineers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editor",
+            "electrical",
+            "electronics",
+            "industrial",
+            "manufacturing"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "分析需求、设计机械热设备、测试样机并按试验结果修正设计。",
+                "id": "mechanical-engineers.faq.1",
+                "question_key": "career.faq.mechanical-engineers.daily-work",
+                "source_refs": [
+                  "bls"
+                ]
+              },
+              {
+                "answer": "制造工程更关注制造过程与系统；产品设计经验还需补工艺与过程验证。",
+                "id": "mechanical-engineers.faq.2",
+                "question_key": "career.faq.mechanical-engineers.role-comparison",
+                "source_refs": [
+                  "manufacturing"
+                ]
+              },
+              {
+                "answer": "需要分析、数学、问题解决和沟通，并与工程团队协作。",
+                "id": "mechanical-engineers.faq.3",
+                "question_key": "career.faq.mechanical-engineers.fit",
+                "source_refs": [
+                  "bls"
+                ]
+              },
+              {
+                "answer": "已有工程任务基准揭示几何、受力和约束推理错误；它不等于在岗效率实验。设计仍需独立计算、测试与授权复核。",
+                "id": "mechanical-engineers.faq.4",
+                "question_key": "career.faq.mechanical-engineers.ai-impact",
+                "source_refs": [
+                  "editor",
+                  "r2-ai"
+                ]
+              },
+              {
+                "answer": "正文有中国地方雇主报价，并区分入门、产品结构和产线设备方向；全国同口径工资仍未核实，不能把这些报价合成全国平均值。",
+                "id": "mechanical-engineers.faq.5",
+                "question_key": "career.faq.mechanical-engineers.china-pay",
+                "source_refs": [
+                  "nbs",
+                  "r2-pay-1",
+                  "r2-pay-2",
+                  "r2-pay-3"
+                ]
+              },
+              {
+                "answer": "美国2025年5月年工资中位数104,110美元，不能视作个人起薪。",
+                "id": "mechanical-engineers.faq.6",
+                "question_key": "career.faq.mechanical-engineers.us-pay",
+                "source_refs": [
+                  "bls"
+                ]
+              },
+              {
+                "answer": "美国通常需要机械工程或机械工程技术本科学位，入门职位通常不要求PE执照。",
+                "id": "mechanical-engineers.faq.7",
+                "question_key": "career.faq.mechanical-engineers.education-path",
+                "source_refs": [
+                  "bls"
+                ]
+              },
+              {
+                "answer": "美国许可由州级委员会管理，教育、考试与经验不等于已取得有效许可；中国职称也不能与项目授权混同。",
+                "id": "mechanical-engineers.faq.8",
+                "question_key": "career.faq.mechanical-engineers.credentials",
+                "source_refs": [
+                  "cn-title",
+                  "license"
+                ]
+              },
+              {
+                "answer": "设备失效、原型测试与设计修正都需要明确责任；超出专业许可范围的工作不能仅凭岗位名称批准。",
+                "id": "mechanical-engineers.faq.9",
+                "question_key": "career.faq.mechanical-engineers.risk-boundary",
+                "source_refs": [
+                  "bls",
+                  "editor",
+                  "license"
+                ]
+              },
+              {
+                "answer": "美国BLS预测2025–2035就业增长11%，自动化设备集成是其需求解释的一部分。",
+                "id": "mechanical-engineers.faq.10",
+                "question_key": "career.faq.mechanical-engineers.outlook-transition",
+                "source_refs": [
+                  "bls"
+                ]
+              }
+            ]
+          },
+          "id": "mechanical-engineers.sources.faq.1",
+          "source_refs": [
+            "bls",
+            "cn-title",
+            "editor",
+            "license",
+            "manufacturing",
+            "nbs",
+            "r2-ai",
+            "r2-pay-1",
+            "r2-pay-2",
+            "r2-pay-3"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "以美国官方机械工程职业范围定义对象，中国职称单独说明；未建立中美资格互认。",
+              "模拟作品只做纸面概念比较和评审，不制作、不加载或试验实物，不对实物安全作声明。",
+              "全国中国单职业工资缺口保留；美国单一机器人雇主与企业AI调查分别标明限制。"
+            ]
+          },
+          "id": "mechanical-engineers.sources.boundary.1",
+          "source_refs": [
+            "bls",
+            "cad",
+            "census",
+            "cn-title",
+            "editor",
+            "electrical",
+            "electronics",
+            "industrial",
+            "job",
+            "license",
+            "manufacturing",
+            "nbs",
+            "nist",
+            "oews",
+            "onet",
+            "r2-ai",
+            "r2-pay-1",
+            "r2-pay-2",
+            "r2-pay-3"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "机械工程师",
+                "id": "mechanical-engineers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "机械工程师",
+                "id": "mechanical-engineers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "机械工程师",
+                "id": "mechanical-engineers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "机械工程师",
+                "id": "mechanical-engineers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "机械工程师",
+                "id": "mechanical-engineers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "机械工程师",
+                "id": "mechanical-engineers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "机械工程师",
+                "id": "mechanical-engineers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "机械工程师",
+                "id": "mechanical-engineers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "机械工程师",
+                "id": "mechanical-engineers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "机械工程师",
+                "id": "mechanical-engineers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "机械工程师",
+                "id": "mechanical-engineers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "mechanical-engineers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "年工资104110；低高十分位73990/164340；增长11%，年均17800空缺。",
+                  "按美国SOC17-2141统计；不把低分位当新人。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "bls",
+                "limitation": "按美国SOC17-2141统计；不把低分位当新人。",
+                "market": "美国",
+                "name": "机械工程师职业展望",
+                "period": "2025工资；2025–2035预测",
+                "publisher": "BLS",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/mechanical-engineers.htm"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "用户设置制造方法及对应限制影响生成式设计结果。",
+                  "工具功能不等于实物符合全部安全标准；未提供本职业效率实验。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cad",
+                "limitation": "工具功能不等于实物符合全部安全标准；未提供本职业效率实验。",
+                "market": "全球",
+                "name": "生成式设计制造方法设置",
+                "period": "2026访问的工具说明",
+                "publisher": "Autodesk",
+                "scope": "exact",
+                "url": "https://help.autodesk.com/cloudhelp/ENU/Fusion-GenerativeDesign/files/GD-SPECIFY-MFG-METHOD.htm"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "BTOS调查企业任何业务职能的AI使用；按企业规模与行业存在差异，问题措辞于2025年11月改变。",
+                  "单位是企业，不是本职业个体；不能推算岗位采用率、裁员率，不能无校正比较旧问法。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "census",
+                "limitation": "单位是企业，不是本职业个体；不能推算岗位采用率、裁员率，不能无校正比较旧问法。",
+                "market": "美国",
+                "name": "企业AI使用情况调查分析",
+                "period": "2025-12-14至2026-05-03",
+                "publisher": "美国人口普查局",
+                "scope": "industry_proxy",
+                "url": "https://www.census.gov/library/stories/2026/05/ai-use-businesses.html"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "工程技术职称分层，强调技术能力和业绩，工程师为职称层级。",
+                  "职称评价不是对所有产品或工程项目的统一签字许可；地方具体条件另核。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "cn-title",
+                "limitation": "职称评价不是对所有产品或工程项目的统一签字许可；地方具体条件另核。",
+                "market": "中国",
+                "name": "深化工程技术人才职称制度改革指导意见",
+                "period": "2019文件，2026核读",
+                "publisher": "人社部、工信部",
+                "scope": "exact",
+                "url": "https://www.miit.gov.cn/jgsj/rjj/wjfb/art/2020/art_09bb59c2df974722a8ee3441976f37d2.html"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "情境、作品、评价步骤与职业选择指导为本任务原创编辑设计；外部事实另建claim。",
+                  "不代表雇主规定、实证研究、资格课程或真实事故。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "editor",
+                "limitation": "不代表雇主规定、实证研究、资格课程或真实事故。",
+                "market": "全球",
+                "name": "机械工程师编辑设计",
+                "period": "2026-09-05",
+                "publisher": "本任务编辑",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "电气系统和设备设计开发，关注电能与电气功能；机械接口经验不能代替电气分析。",
+                  "相邻方向，不能以能力相邻推导资质互认。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "electrical",
+                "limitation": "相邻方向，不能以能力相邻推导资质互认。",
+                "market": "美国",
+                "name": "电气工程师档案",
+                "period": "2026访问",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2071.00"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "电子元件和系统设计，关注电子功能与实现；结构配合之外要补电子专业知识。",
+                  "相邻方向，不能以能力相邻推导资质互认。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "electronics",
+                "limitation": "相邻方向，不能以能力相邻推导资质互认。",
+                "market": "美国",
+                "name": "电子工程师档案",
+                "period": "2026访问",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2072.00"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "设计与改善人员、设备、物料等综合生产系统；机械部件经验之外需补流程和系统效率分析。",
+                  "相邻方向，不能以能力相邻推导资质互认。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "industrial",
+                "limitation": "相邻方向，不能以能力相邻推导资质互认。",
+                "market": "美国",
+                "name": "工业工程师档案",
+                "period": "2026访问",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2112.00"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "机器人传感与计算平台机械系统、CAD、热及振动等实验技能。",
+                  "单一机器人雇主岗位，不代表全部机械工程行业或中国市场。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "job",
+                "limitation": "单一机器人雇主岗位，不代表全部机械工程行业或中国市场。",
+                "market": "美国",
+                "name": "FieldAI机器人硬件机械工程师",
+                "period": "2026-09-05访问",
+                "publisher": "FieldAI",
+                "scope": "recruitment_proxy",
+                "url": "https://jobs.lever.co/field-ai/c6d6d504-d01a-4ba5-9b33-f3e857f630d4"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "教育、考试与经验构成常见执照路径，许可由各州委员会管理。",
+                  "考试机构不代替州委员会，不能给个人作已获许可判断。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "license",
+                "limitation": "考试机构不代替州委员会，不能给个人作已获许可判断。",
+                "market": "美国",
+                "name": "工程执照路径",
+                "period": "2026访问",
+                "publisher": "NCEES",
+                "scope": "exact",
+                "url": "https://ncees.org/licensure/"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "设计和改进制造系统及过程；产品设计转向量产需补工艺、装备与过程验证。",
+                  "相邻方向，不能以能力相邻推导资质互认。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "manufacturing",
+                "limitation": "相邻方向，不能以能力相邻推导资质互认。",
+                "market": "美国",
+                "name": "制造工程师档案",
+                "period": "2026访问",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2112.03"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "全国公报按单位类型、行业和宽岗位类别公布年平均工资，附方法与范围；未单列本页目标职业。",
+                  "宽岗位和行业数据不能直接替代本职业工资；不证明所有地方或雇主均无数据。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nbs",
+                "limitation": "宽岗位和行业数据不能直接替代本职业工资；不证明所有地方或雇主均无数据。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025",
+                "publisher": "国家统计局",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "描述虚构、数据隐私、人机配置风险与测试、监控等风险管理措施。",
+                  "跨场景自愿风险框架，不是职业准入法规或本职业事故率。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nist",
+                "limitation": "跨场景自愿风险框架，不是职业准入法规或本职业事故率。",
+                "market": "美国",
+                "name": "生成式人工智能风险管理画像",
+                "period": "2024",
+                "publisher": "NIST",
+                "scope": "exact",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "工资统计覆盖受薪雇员，不包括自雇；工资与预测就业范围不同。",
+                  "方法来源不提供本职业当前工资数值。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "oews",
+                "limitation": "方法来源不提供本职业当前工资数值。",
+                "market": "美国",
+                "name": "职业就业工资统计常见问题",
+                "period": "当前方法，2026访问",
+                "publisher": "美国劳工统计局",
+                "scope": "exact",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "机械设备设计、研发、测试、安装与维护监督。",
+                  "任务覆盖不意味着每位工程师可承担所有行业专业责任。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet",
+                "limitation": "任务覆盖不意味着每位工程师可承担所有行业专业责任。",
+                "market": "美国",
+                "name": "机械工程师职业档案",
+                "period": "2026职业档案",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2141.00"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "全球行业代理数据（工程任务基准）：2026-09-04发表的研究用2025年初模型测试86道题，其中20道设计题、16道优化题；工程部分比较的3个模型各题重复10次，在D08、D10两道设计题上均未答对。研究涉及几何、受力和约束取舍，却不是在岗机械工程师的效率实验；其旧模型与纯文本设置也不能代表当前所有工具。可据此要求独立复核，不可据题目错误率推算事故或岗位替代率。",
+                  "限定测试版本与无工具文本条件；没有测职业工资、就业或实际部署收益。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "r2-ai",
+                "limitation": "限定测试版本与无工具文本条件；没有测职业工资、就业或实际部署收益。",
+                "market": "全球",
+                "name": "Evaluating large language models on text-based engineering design tasks",
+                "period": "2025-01至03测试；2026-09-04发表",
+                "publisher": "Research in Engineering Design / 原研究作者",
+                "scope": "industry_proxy",
+                "url": "https://link.springer.com/article/10.1007/s00163-026-00504-1"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "中国招聘代理数据：烟台浩阳机械在招远2026-01-08公告中的机械工程师报价4000–6000元/月；机械或热处理相关专业、专科以上，应届生亦可，列出CAD、SOLIDWORKS、ANSYS及机械基础要求。这是具体入门机会线索，不是全国新人收入分布。",
+                  "未注明税口径、固定与奖金构成；当前空缺未确认。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "r2-pay-1",
+                "limitation": "未注明税口径、固定与奖金构成；当前空缺未确认。",
+                "market": "中国",
+                "name": "招远2026网络招聘：烟台浩阳机械",
+                "period": "2026-01-08",
+                "publisher": "招远市人社局",
+                "scope": "recruitment_proxy",
+                "url": "https://www.zhaoyuan.gov.cn/col/col102041/art/2026/art_3e544ff1e3dd48389b2db3d2b7d58a68.html"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "中国招聘代理数据：山东康泰智能同日发布的招远机械结构工程师报价6000–10000元/月；要求技术或机电产品设计制造经验，并用三维工具进行设计与样机跟踪。这个产品结构方向和上一个接受应届生的岗位要求不同，不合成为经验溢价或全国工资区间。",
+                  "历史报价；税口径未说明；岗位经验和产品不同，非因果薪资比较。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "r2-pay-2",
+                "limitation": "历史报价；税口径未说明；岗位经验和产品不同，非因果薪资比较。",
+                "market": "中国",
+                "name": "招远2026网络招聘：山东康泰智能",
+                "period": "2026-01-08",
+                "publisher": "招远市人社局",
+                "scope": "recruitment_proxy",
+                "url": "https://www.zhaoyuan.gov.cn/col/col102041/art/2026/art_3e544ff1e3dd48389b2db3d2b7d58a68.html"
+              },
+              {
+                "accessed_at": "2026-09-05",
+                "details": [
+                  "中国招聘代理数据：银邦（安徽）新能源材料在淮北2026-01-19公告中的机械工程师报价5000–10000元/月，优秀者面议；工作重心是产线机械设备维保、改善及安装调试验收。这是设备工程方向的雇主要求，不能把同页机修工报价或电工作业证要求移植给机械工程师。",
+                  "历史报价；是否仍招、税口径和奖金未明确；岗位标题相同不等于技术范围相同。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "r2-pay-3",
+                "limitation": "历史报价；是否仍招、税口径和奖金未明确；岗位标题相同不等于技术范围相同。",
+                "market": "中国",
+                "name": "淮北2026年1月招聘：银邦安徽新能源材料",
+                "period": "2026-01-19",
+                "publisher": "淮北高新区社会工作局",
+                "scope": "recruitment_proxy",
+                "url": "https://gxq.huaibei.gov.cn/qyfw/qyzp/58015492.html"
+              }
+            ]
+          },
+          "id": "mechanical-engineers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "17-2141.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业代码",
+        "occupation_scope": "精确职业数据；机械工程师；17-2141.00",
+        "period": "2026职业档案",
+        "source_refs": [
+          "onet"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "104,110美元/年",
+        "fact_id": "median",
+        "market": "美国",
+        "measure": "年薪中位数",
+        "occupation_scope": "精确职业数据；机械工程师；17-2141.00",
+        "period": "2025工资；2025–2035预测",
+        "source_refs": [
+          "bls"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "73,990美元/年",
+        "fact_id": "low",
+        "market": "美国",
+        "measure": "低十分位",
+        "occupation_scope": "精确职业数据；机械工程师；17-2141.00",
+        "period": "2025工资；2025–2035预测",
+        "source_refs": [
+          "bls"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "164,340美元/年",
+        "fact_id": "high",
+        "market": "美国",
+        "measure": "高十分位",
+        "occupation_scope": "精确职业数据；机械工程师；17-2141.00",
+        "period": "2025工资；2025–2035预测",
+        "source_refs": [
+          "bls"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "11%；17,800个/年",
+        "fact_id": "trend",
+        "market": "美国",
+        "measure": "增长与年均空缺",
+        "occupation_scope": "精确职业数据；机械工程师；17-2141.00",
+        "period": "2025工资；2025–2035预测",
+        "source_refs": [
+          "bls"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "758ab8f568f6c04ef4705bb551805c1042d35cdf3f73f9feb582d650bf1decfc",
+  "source_content_sha256": "2a803946b55c38c33bceefe126394643dd0672c6a46d3057b3537bc26ab59d1d",
   "subject": {
     "canonical_slug": "mechanical-engineers",
     "name": "机械工程师",
-    "summary": null
+    "summary": "机械工程师把功能需求转成机械或热系统方案，通过计算、图样、样机和试验验证设计是否满足条件。核心能力是解释假设、处理失效并控制变更，而不只是建模；入门作品可以从纯数字的接口与设计审查开始，真实制造和专业签字须另有授权。"
   }
 }

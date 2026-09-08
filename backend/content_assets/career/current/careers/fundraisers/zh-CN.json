@@ -1,12 +1,1510 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：募资专员把组织目标和资金需求转成可核实的支持请求，并维护从首次接触、承诺到致谢的记录。"
+            ]
+          },
+          "id": "fundraisers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "适合信号：能准确说明用途、接受拒绝，并对承诺、限制和下一步留下清楚记录。"
+            ]
+          },
+          "id": "fundraisers.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：若容易为达目标夸大效果、替组织承诺税务或回报，应先练习边界和升级。"
+            ]
+          },
+          "id": "fundraisers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全试做只使用四条虚构记录，不联系真人、不收款、不使用真实个人信息。"
+            ]
+          },
+          "id": "fundraisers.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "身份：本页对应O*NET 13-1131.00，覆盖为组织策划募资活动、征集金钱或其他捐赠，并可制作宣传材料和说明组织需求。"
+            ]
+          },
+          "id": "fundraisers.profile.definition-block.1",
+          "source_refs": [
+            "editorial",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "输入：经批准的组织使命、项目说明、资金用途、潜在支持者清单、渠道规则、历史联系和数据字段。"
+            ]
+          },
+          "id": "fundraisers.profile.responsibilities-block.1",
+          "source_refs": [
+            "editorial",
+            "onet"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "任务：研究潜在支持者、建立关系、准备请求、执行活动、记录回应和承诺，并向支持者致谢。"
+            ]
+          },
+          "id": "fundraisers.profile.responsibilities-block.2",
+          "source_refs": [
+            "editorial",
+            "onet"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "产出：活动简报、分群依据、沟通版本、承诺与限制记录、致谢、进度与成本复盘。"
+            ]
+          },
+          "id": "fundraisers.profile.responsibilities-block.3",
+          "source_refs": [
+            "editorial",
+            "onet"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断：请求是否适配对方、用途与限制是否说清、何时停止联系、何时将资格、税务、隐私或利益冲突问题升级。"
+            ]
+          },
+          "id": "fundraisers.profile.work-context-block.1",
+          "source_refs": [
+            "editorial",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "流程：核批准版本与资格边界，研究支持者，形成请求，复核并发送，记录回应与限制，完成致谢和复盘。"
+            ]
+          },
+          "id": "fundraisers.profile.work-context-block.2",
+          "source_refs": [
+            "editorial",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "工具：捐赠人数据库、邮件与活动平台、项目说明、预算表、审批记录和版本受控模板。"
+            ]
+          },
+          "id": "fundraisers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "editorial",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "协作：与项目负责人、财务、法务或合规、传播、活动执行和数据权限负责人协作。"
+            ]
+          },
+          "id": "fundraisers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量：对象、渠道、版本、承诺、限制、金额状态、同意与下一步可追溯；拒绝和未知不被改写。"
+            ]
+          },
+          "id": "fundraisers.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "边界：本岗位执行关系与活动，不自动拥有组织公开募捐资格，不替财务确认到账，也不即兴提供税务保证。"
+            ]
+          },
+          "id": "fundraisers.profile.definition-block.2",
+          "source_refs": [
+            "editorial",
+            "onet"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "management-analysts",
+                "id": "fundraisers.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/management-analysts"
+              },
+              {
+                "entity": "market-research-analysts",
+                "id": "fundraisers.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/market-research-analysts"
+              },
+              {
+                "entity": "market-research-analysts-and-marketing-specialists",
+                "id": "fundraisers.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/market-research-analysts-and-marketing-specialists"
+              },
+              {
+                "entity": "meeting-convention-and-event-planners",
+                "id": "fundraisers.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/meeting-convention-and-event-planners"
+              }
+            ]
+          },
+          "id": "fundraisers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "adj-event",
+            "adj-ma",
+            "adj-mr",
+            "onet"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "管理分析师13-1111.00研究组织问题与流程；募资专员13-1131.00围绕支持者形成请求、承诺和捐赠记录。"
+            ]
+          },
+          "id": "fundraisers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "adj-event",
+            "adj-ma",
+            "adj-mr",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "市场研究分析师与营销专员按O*NET 13-1161.00研究市场、需求和营销效果；募资专员把使命与资金用途转成支持请求。"
+            ]
+          },
+          "id": "fundraisers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "adj-event",
+            "adj-ma",
+            "adj-mr",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "两个市场研究相邻页的现有官方依据均为13-1161.00；本页不因名称不同虚构职责差异。"
+            ]
+          },
+          "id": "fundraisers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "adj-event",
+            "adj-ma",
+            "adj-mr",
+            "onet"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "会议活动策划师13-1121.00协调场地、供应商和现场执行；募资专员即使参与活动，核心仍是支持请求和捐赠记录。"
+            ]
+          },
+          "id": "fundraisers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "adj-event",
+            "adj-ma",
+            "adj-mr",
+            "onet"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "AI可辅助整理公开资料、形成沟通草稿和检查字段缺失，但不能证明捐赠意愿或组织资格。"
+            ]
+          },
+          "id": "fundraisers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用前要限定批准语料、数据权限、发送权限、人工复核和撤回流程。"
+            ]
+          },
+          "id": "fundraisers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "潜在支持者资料可能含个人信息，输入范围、访问权限、保存期限与删除规则必须明确。"
+            ]
+          },
+          "id": "fundraisers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人类复核组织名称、项目用途、请求金额、回报、限制、称谓、渠道和历史联系。"
+            ]
+          },
+          "id": "fundraisers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "最终发送、资格判断、税务陈述、利益冲突处理和捐赠限制解释由有权人员决定。"
+            ]
+          },
+          "id": "fundraisers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "错误画像、虚构个性化、遗漏拒绝或重复联系会损害信任并制造合规风险。"
+            ]
+          },
+          "id": "fundraisers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "任务暴露、工具采用、生产率和净就业变化是不同问题，不能从生成草稿推导岗位消失。"
+            ]
+          },
+          "id": "fundraisers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "先在虚构数据和不发送的草稿环节试用，记录错误后再决定是否扩大。"
+            ]
+          },
+          "id": "fundraisers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国全国募资专员精确职业工资暂无可安全使用的数据；本次核查未建立与O*NET 13-1131.00一一对应的单职业分布。"
+            ]
+          },
+          "id": "fundraisers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "国家统计局行业层级工资不能写成募资专员个人或单职业中位数。"
+            ]
+          },
+          "id": "fundraisers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "因此本页不展示中国起薪、到手收入或分位数，也不以招聘样本冒充全国统计。"
+            ]
+          },
+          "id": "fundraisers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "求职记录应分别写城市、组织类型、资金来源、合同类型、固定与浮动构成、统计期间和样本量。"
+            ]
+          },
+          "id": "fundraisers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国BLS口径下，募资专员2025年年工资中位数为72,550美元。"
+            ]
+          },
+          "id": "fundraisers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "bls-pay"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "该数字是美国全国职业统计，不是中国市场工资，也不是个人起薪或录用报价。"
+            ]
+          },
+          "id": "fundraisers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "bls-pay",
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数表示一半从业者高于、一半低于该值，不代表所有地区和组织相同。"
+            ]
+          },
+          "id": "fundraisers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "bls-pay"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "比较岗位时，建议分别记录组织类型、地区、资历、职责范围、计薪口径和总报酬构成。"
+            ]
+          },
+          "id": "fundraisers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "年度工资口径不等同于到手收入、小时报价或包含奖金的总报酬。"
+            ]
+          },
+          "id": "fundraisers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "使用该数值时同时保留2025年、美国、募资专员职业口径与BLS来源。"
+            ]
+          },
+          "id": "fundraisers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "bls-pay"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "能把组织使命改写成具体、可核实且不夸大的请求。"
+            ]
+          },
+          "id": "fundraisers.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "能在沟通前研究对方需求，又不把推测写成事实。"
+            ]
+          },
+          "id": "fundraisers.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "能接受拒绝并按偏好停止或调整联系。"
+            ]
+          },
+          "id": "fundraisers.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "能精确记录承诺、限制、版本、金额状态和下一步。"
+            ]
+          },
+          "id": "fundraisers.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "若喜欢关系建立但讨厌记录，应通过样本验证而不是凭兴趣判断。"
+            ]
+          },
+          "id": "fundraisers.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "若资格、税务或隐私边界难以稳定遵守，应先比较责任边界更合适的相邻方向。"
+            ]
+          },
+          "id": "fundraisers.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "高频外联、截止日和活动节奏需要情绪稳定与优先级管理。"
+            ]
+          },
+          "id": "fundraisers.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "人格或兴趣量表只用于提问，最终看工作样本、学习速度与真实绩效。"
+            ]
+          },
+          "id": "fundraisers.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "资格或备案不清时不得以个人名义继续公开募捐；先核组织、活动、渠道和批准范围。"
+            ]
+          },
+          "id": "fundraisers.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial",
+            "mca"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "不要即兴保证税前扣除、固定回报或资金用途；将此类问题交给有权人员提供批准说明。"
+            ]
+          },
+          "id": "fundraisers.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial",
+            "mca"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "发现捐赠限制、利益冲突、拒绝联系或个人数据权限异常时，停止发送并保留原始记录。"
+            ]
+          },
+          "id": "fundraisers.risk.career-risk-cards.3",
+          "source_refs": [
+            "editorial",
+            "mca"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "到账、承诺和认捐是不同状态；未由财务确认的金额不能记为已收款。"
+            ]
+          },
+          "id": "fundraisers.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial",
+            "mca"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同升级规则：记录已知事实、受影响对象、当前状态和待决问题，再交给组织指定的财务、法务、合规或项目责任人。"
+            ]
+          },
+          "id": "fundraisers.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial",
+            "mca"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "美国BLS称募资专员通常需要学士学位；雇主可能偏好非营利组织实习、志愿服务或其他相关经验。"
+            ]
+          },
+          "id": "fundraisers.path.career-path-block.1",
+          "source_refs": [
+            "bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品可展示研究依据、活动简报、沟通草稿、承诺与限制字段、致谢和复盘。"
+            ]
+          },
+          "id": "fundraisers.path.career-path-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "虚构活动：纸桥学习馆已批准通过邮件为“教室设备”募资；不得承诺税务优惠或未批准回报。"
+            ]
+          },
+          "id": "fundraisers.path.career-path-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "分流规则：渠道同意、用途匹配且无未决回报或限制才进入草稿；明确拒绝即排除；回报或限制未决即澄清。"
+            ]
+          },
+          "id": "fundraisers.path.career-path-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "四条记录结论：A进入草稿，B排除，C和D进入澄清；交接只写事实与待决问题。"
+            ]
+          },
+          "id": "fundraisers.path.career-path-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "可用同一套虚构材料分步练习研究、分流、草稿、字段复核、致谢、边界检查和错误复盘；七日只是本页建议节奏，不是资格或效果保证。"
+            ]
+          },
+          "id": "fundraisers.path.career-path-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "公开募捐资格属于组织与活动边界，课程、录用和岗位名称都不自动授予该资格。"
+            ]
+          },
+          "id": "fundraisers.path.career-path-block.7",
+          "source_refs": [
+            "mca"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "成长从准确记录和受控草稿走向活动计划、复杂关系与跨团队质量复核，不承诺固定晋升年限。"
+            ]
+          },
+          "id": "fundraisers.path.career-path-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国BLS显示募资专员2025年就业140,900人，2035年预计148,700人。"
+            ]
+          },
+          "id": "fundraisers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "2025至2035年预计增长6%，平均每年约有10,000个职位空缺。"
+            ]
+          },
+          "id": "fundraisers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "十年净增7,800人与年均空缺不是同一指标；空缺包含增长与替补。"
+            ]
+          },
+          "id": "fundraisers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "bls-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "这些是美国全国预测，不能推导个人录用概率或外推为中国需求。"
+            ]
+          },
+          "id": "fundraisers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "转向管理分析、市场研究或活动策划时，应分别补齐新岗位的分析对象、工具、作品与责任证据。"
+            ]
+          },
+          "id": "fundraisers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "adj-event",
+            "adj-ma",
+            "adj-mr",
+            "onet"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "核心工作包括识别潜在捐赠人、建立关系、争取捐赠承诺、维护捐赠人数据库、执行活动、准备申请材料、致谢并监测募资进度。",
+                "id": "fundraisers.faq.1",
+                "question_key": "career.faq.fundraisers.daily-work",
+                "source_refs": [
+                  "onet"
+                ]
+              },
+              {
+                "answer": "管理分析师13-1111.00研究组织问题与流程；两个市场研究相邻页的现有官方依据均为13-1161.00，研究市场、需求和营销效果，不据名称虚构职责差异；会议活动策划师13-1121.00协调场地、供应商与活动执行；募资专员13-1131.00以捐赠人关系、支持请求、承诺与捐赠记录为核心。",
+                "id": "fundraisers.faq.2",
+                "question_key": "career.faq.fundraisers.role-comparison",
+                "source_refs": [
+                  "adj-event",
+                  "adj-ma",
+                  "adj-mr",
+                  "onet"
+                ]
+              },
+              {
+                "answer": "适配证据包括能否准确说明使命与用途、研究对方但不把推测当事实、接受拒绝、记录承诺与限制，并在外联和截止日压力下守住资格、税务、隐私和数据边界。",
+                "id": "fundraisers.faq.3",
+                "question_key": "career.faq.fundraisers.fit",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "工具可辅助整理公开资料、沟通草稿、字段缺失与活动记录；应先限定批准语料、数据和发送权限，并从虚构数据与不发送草稿开始。 人员须核原始沟通、批准版本、用途、金额、回报、限制、同意与财务记录；工具不得虚构画像或承诺、忽略拒绝、擅自发送，或替组织作资格与税务保证。",
+                "id": "fundraisers.faq.4",
+                "question_key": "career.faq.fundraisers.ai-impact",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "人员须核原始沟通、批准版本、用途、金额、回报、限制、同意与财务记录；工具不得虚构画像或承诺、忽略拒绝、擅自发送，或替组织作资格与税务保证。",
+                "id": "fundraisers.faq.5",
+                "question_key": "career.faq.fundraisers.human-control",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "国家统计局2025年行业工资材料没有与O*NET 13-1131.00一一对应的中国全国募资专员单职业工资分布；不得把行业平均数写成个人或职业中位数。 中国求职记录应分别写城市、组织类型、资金来源、合同类型、固定与浮动构成、统计期间和样本量；样本口径不一致时保留缺口。",
+                "id": "fundraisers.faq.6",
+                "question_key": "career.faq.fundraisers.china-pay",
+                "source_refs": [
+                  "editorial",
+                  "nbs"
+                ]
+              },
+              {
+                "answer": "美国BLS口径下，募资专员2025年年工资中位数为72,550美元；中位数表示一半从业者高于、一半低于。它不是中国市场工资、个人起薪或录用报价；比较岗位时建议分别记录组织类型、地区、资历、职责范围、计薪口径和总报酬构成。",
+                "id": "fundraisers.faq.7",
+                "question_key": "career.faq.fundraisers.us-pay",
+                "source_refs": [
+                  "bls-pay",
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "BLS称募资专员通常需要学士学位，雇主可能偏好有非营利组织实习、志愿服务或其他相关经验的候选人。 作品可展示捐赠人研究、活动简报、沟通草稿、承诺与限制字段、致谢和复盘；成长从准确记录和受控草稿走向活动计划与跨团队质量复核，不承诺固定年限。",
+                "id": "fundraisers.faq.8",
+                "question_key": "career.faq.fundraisers.education-path",
+                "source_refs": [
+                  "bls-outlook",
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "公开募捐资格属于组织及活动边界，不是募资专员个人头衔自动授予的权限；岗位仍须核组织、渠道、审批与记录流程。",
+                "id": "fundraisers.faq.9",
+                "question_key": "career.faq.fundraisers.credentials",
+                "source_refs": [
+                  "mca"
+                ]
+              },
+              {
+                "answer": "中国公开募捐须在组织公开募捐资格、募捐方案备案和信息公开边界内开展；个人岗位或课程不能替组织取得资格。 夸大用途、越权承诺税务或回报、遗漏限制或拒绝、错误记录金额状态和不当处理个人数据时，应停止发送，保留已知事实与待决问题并交财务、法务、合规或项目责任人。",
+                "id": "fundraisers.faq.10",
+                "question_key": "career.faq.fundraisers.risk-boundary",
+                "source_refs": [
+                  "editorial",
+                  "mca"
+                ]
+              },
+              {
+                "answer": "美国BLS显示募资专员2025年就业140,900人，2035年预计148,700人，增长6%，平均每年约有10,000个职位空缺；十年净增7,800人与年均空缺不同，后者包含增长与替补。美国全国预测不能推导个人录用概率，也不能外推为中国需求。",
+                "id": "fundraisers.faq.11",
+                "question_key": "career.faq.fundraisers.outlook-transition",
+                "source_refs": [
+                  "bls-outlook",
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "是否值得进入应同时看你能否把组织目标转为可核实请求、接受拒绝、准确记录承诺与限制并守住资格和税务边界；先用四条虚构记录做不联系真人、不收款的安全试做。",
+                "id": "fundraisers.faq.12",
+                "question_key": "career.faq.fundraisers.career-worth",
+                "source_refs": [
+                  "editorial"
+                ]
+              }
+            ]
+          },
+          "id": "fundraisers.sources.faq.1",
+          "source_refs": [
+            "adj-event",
+            "adj-ma",
+            "adj-mr",
+            "bls-outlook",
+            "bls-pay",
+            "editorial",
+            "mca",
+            "nbs",
+            "onet"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "本页对应O*NET 13-1131.00，不把三个不同官方职业或重复身份相邻页并入募资专员。",
+              "中国工资缺口、美国工资与就业、公开募捐资格和编辑性方法分别陈述。",
+              "虚构练习不联系真人、不收款，也不构成募捐资格、税务意见或发送授权。"
+            ]
+          },
+          "id": "fundraisers.sources.boundary.1",
+          "source_refs": [
+            "adj-event",
+            "adj-ma",
+            "adj-mr",
+            "bls-outlook",
+            "bls-pay",
+            "editorial",
+            "mca",
+            "nbs",
+            "onet"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "募资专员",
+                "id": "fundraisers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "募资专员",
+                "id": "fundraisers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "募资专员",
+                "id": "fundraisers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "募资专员",
+                "id": "fundraisers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "募资专员",
+                "id": "fundraisers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "募资专员",
+                "id": "fundraisers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "募资专员",
+                "id": "fundraisers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "募资专员",
+                "id": "fundraisers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "募资专员",
+                "id": "fundraisers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "募资专员",
+                "id": "fundraisers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "募资专员",
+                "id": "fundraisers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "fundraisers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2026-09-07实际打开完整O*NET详情页，共1112行；定位13-1121.00定义和任务。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-event",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "13-1121.00 - Meeting, Convention, and Event Planners",
+                "period": "O*NET updated 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/13-1121.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2026-09-07实际打开完整O*NET详情页，共1369行；定位13-1111.00定义和任务。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-ma",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "13-1111.00 - Management Analysts",
+                "period": "O*NET updated 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/13-1111.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2026-09-07实际打开完整O*NET详情页，共1235行；定位13-1161.00定义和任务。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-mr",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "13-1161.00 - Market Research Analysts and Marketing Specialists",
+                "period": "O*NET updated 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/13-1161.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2026-09-07实际打开BLS OOH完整页；定位2025就业、2035预测、6%增长和年均10,000空缺。",
+                  "预测不是个人录用概率。"
+                ],
+                "evidence_type": "official source",
+                "id": "bls-outlook",
+                "limitation": "预测不是个人录用概率。",
+                "market": "美国",
+                "name": "Fundraisers Occupational Outlook Handbook",
+                "period": "2025-2035 projections",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/business-and-financial/fundraisers.htm"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2026-09-07实际打开BLS OOH完整页，共524行；定位2025工资中位、10%边界与行业差异。",
+                  "美国全国统计，不是个人报价。"
+                ],
+                "evidence_type": "official source",
+                "id": "bls-pay",
+                "limitation": "美国全国统计，不是个人报价。",
+                "market": "美国",
+                "name": "Fundraisers Occupational Outlook Handbook",
+                "period": "May 2025",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/business-and-financial/fundraisers.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持虚构材料、AI边界、适配建议与练习答案。",
+                  "不是外部事实、资格结论或法律意见。"
+                ],
+                "evidence_type": "editorial exercise",
+                "id": "editorial",
+                "limitation": "不是外部事实、资格结论或法律意见。",
+                "market": "编辑设计",
+                "name": "募资专员虚构活动简报练习",
+                "period": "2026-09-06",
+                "publisher": "FermatMind 编辑设计",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持公开募捐资格、方案备案与信息公开边界。",
+                  "不覆盖所有募资场景；具体活动仍需核对组织资格。"
+                ],
+                "evidence_type": "official source",
+                "id": "mca",
+                "limitation": "不覆盖所有募资场景；具体活动仍需核对组织资格。",
+                "market": "中国大陆",
+                "name": "慈善组织公开募捐管理办法",
+                "period": "2024",
+                "publisher": "民政部",
+                "scope": "exact",
+                "url": "https://www.gov.cn/gongbao/2024/issue_11646/material/gwygb202429.pdf"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持行业工资材料范围。",
+                  "没有募资专员全国单职业工资分布。"
+                ],
+                "evidence_type": "official source",
+                "id": "nbs",
+                "limitation": "没有募资专员全国单职业工资分布。",
+                "market": "中国大陆",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "2026-09-07实际打开完整O*NET详情页，共1235行；定位职业定义、任务和工作情境。",
+                  "美国职业口径。"
+                ],
+                "evidence_type": "official source",
+                "id": "onet",
+                "limitation": "美国职业口径。",
+                "market": "美国",
+                "name": "13-1131.00 - Fundraisers",
+                "period": "O*NET updated 2026",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/13-1131.00"
+              }
+            ]
+          },
+          "id": "fundraisers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "O*NET 13-1131.00募资专员",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业身份",
+        "occupation_scope": "精确职业数据：美国O*NET/SOC 13-1131.00募资专员",
+        "period": "O*NET updated 2026",
+        "source_refs": [
+          "onet"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "潜在捐赠人关系、请求、承诺、记录与致谢",
+        "fact_id": "work",
+        "market": "美国",
+        "measure": "核心任务",
+        "occupation_scope": "精确职业数据：美国O*NET/SOC 13-1131.00募资专员",
+        "period": "O*NET updated 2026",
+        "source_refs": [
+          "onet"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "邮件、电话、面对面沟通与团队协作",
+        "fact_id": "context",
+        "market": "美国",
+        "measure": "工作情境",
+        "occupation_scope": "精确职业数据：美国O*NET/SOC 13-1131.00募资专员",
+        "period": "O*NET updated 2026",
+        "source_refs": [
+          "onet"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "通常需要学士学位；雇主可能偏好相关经验",
+        "fact_id": "education",
+        "market": "美国",
+        "measure": "入门准备",
+        "occupation_scope": "精确职业数据：美国O*NET/SOC 13-1131.00募资专员",
+        "period": "2025-2035 projections",
+        "source_refs": [
+          "bls-outlook"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025年年工资中位数72,550美元",
+        "fact_id": "wage",
+        "market": "美国",
+        "measure": "年工资中位数",
+        "occupation_scope": "精确职业数据：美国O*NET/SOC 13-1131.00募资专员",
+        "period": "May 2025",
+        "source_refs": [
+          "bls-pay"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025年140,900人；2035年148,700人；增长6%；年均约10,000个空缺",
+        "fact_id": "employment",
+        "market": "美国",
+        "measure": "就业预测与年均空缺",
+        "occupation_scope": "精确职业数据：美国O*NET/SOC 13-1131.00募资专员",
+        "period": "2025-2035 projections",
+        "source_refs": [
+          "bls-outlook"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "1eb9473ca7a7f28c68eb8d3a678f62b125d545aa382b485041870eec8451a131",
+  "source_content_sha256": "60d4a5bbc48df2684a5d774446c2058adc0a1a1e401776d4eccb18c99cd5c030",
   "subject": {
     "canonical_slug": "fundraisers",
     "name": "募资专员",
-    "summary": null
+    "summary": "募资专员研究潜在支持者、形成准确的资金或实物捐赠请求、维护承诺与限制记录，并在资格、税务、隐私或回报问题不清时停止并升级。"
   }
 }

@@ -1,12 +1,1457 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "先确认你看的是否真是21-1029.00汇总类别，而不是某个已单列的社会工作专业方向。"
+            ]
+          },
+          "id": "social-workers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "不要用“社会工作者”头衔猜日常任务；先要到对象、问题、服务、记录、监督和资格。"
+            ]
+          },
+          "id": "social-workers.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全练习只审三张虚构岗位卡的7字段：服务对象、主要问题、服务/产出、机构场景、记录/协作、资格/授权、升级安排（触发+对象）。"
+            ]
+          },
+          "id": "social-workers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "A：成年社区居民；住房资源衔接；服务/产出未知；市政项目；只记虚构转介编号并与项目组协作；要求岗位培训且不含临床授权；“服务范围不明则升级项目主管”，缺1。B：退役人员；就业适应；资源导航清单；非营利机构；记录/协作未知；资格/授权未知；“任一记录或资格不明则升级合规负责人”，缺2。C：灾后家庭；临时安置信息；资源清单与转介状态；政府项目；虚构编号且与安置组协作；岗位培训、无临床权限；“出现服务范围争议时升级项目主管”，缺0。只做范围审阅，不接触真实个案。"
+            ]
+          },
+          "id": "social-workers.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业定义：21-1029.00只收纳未被单独列出的社会工作者。"
+            ]
+          },
+          "id": "social-workers.profile.definition-block.1",
+          "source_refs": [
+            "onet-umbrella"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "O*NET明确“All Other”类别特征范围很宽。"
+            ]
+          },
+          "id": "social-workers.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-umbrella"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "O*NET明确该标题没有统一职业任务数据。"
+            ]
+          },
+          "id": "social-workers.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-umbrella"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "因此不能给整个类别编造统一的咨询、评估、转介或临床职责。"
+            ]
+          },
+          "id": "social-workers.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-umbrella"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "具体岗位首先核服务对象和主要问题。"
+            ]
+          },
+          "id": "social-workers.profile.work-context-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "再核服务/产出、机构场景和记录协作。"
+            ]
+          },
+          "id": "social-workers.profile.work-context-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "再核监督关系、资格与授权边界。"
+            ]
+          },
+          "id": "social-workers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "同一头衔在政府、卫生社会援助或其他行业可对应不同工作。"
+            ]
+          },
+          "id": "social-workers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量判断只能落到具体岗位说明、机构规则和监督链。"
+            ]
+          },
+          "id": "social-workers.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "一句话：这是一类待拆分的职业桶，不是一套固定日常。"
+            ]
+          },
+          "id": "social-workers.profile.definition-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "substance-abuse-and-behavioral-disorder-counselors",
+                "id": "social-workers.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/substance-abuse-and-behavioral-disorder-counselors"
+              },
+              {
+                "entity": "educational-guidance-and-career-counselors-and-advisors",
+                "id": "social-workers.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/educational-guidance-and-career-counselors-and-advisors"
+              },
+              {
+                "entity": "marriage-and-family-therapists",
+                "id": "social-workers.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/marriage-and-family-therapists"
+              },
+              {
+                "entity": "mental-health-counselors",
+                "id": "social-workers.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/mental-health-counselors"
+              },
+              {
+                "entity": "rehabilitation-counselors",
+                "id": "social-workers.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/rehabilitation-counselors"
+              }
+            ]
+          },
+          "id": "social-workers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "21-1029.00是未单列社会工作者的剩余汇总。"
+            ]
+          },
+          "id": "social-workers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-child",
+            "onet-mental",
+            "onet-umbrella"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "21-1023.00明确评估和治疗精神、情绪或物质滥用问题。"
+            ]
+          },
+          "id": "social-workers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-child",
+            "onet-mental",
+            "onet-umbrella"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "21-1021.00聚焦儿童、家庭和学校社会服务；两条相邻职业任务都不能倒灌为21-1029统一职责。"
+            ]
+          },
+          "id": "social-workers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-child",
+            "onet-mental",
+            "onet-umbrella"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "判断具体岗位时按对象、问题、服务、监督和资格归类，不只看头衔。"
+            ]
+          },
+          "id": "social-workers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "editorial",
+            "onet-child",
+            "onet-mental",
+            "onet-umbrella"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助把岗位说明拆成字段和缺项。"
+            ]
+          },
+          "id": "social-workers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助整理公开资源目录与问题清单草稿。"
+            ]
+          },
+          "id": "social-workers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "不能从21-1029汇总类别推断AI任务暴露。"
+            ]
+          },
+          "id": "social-workers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "不能把相邻21-1023任务当成本类别AI可替代任务。"
+            ]
+          },
+          "id": "social-workers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "O*NET当前无该类别任务数据。"
+            ]
+          },
+          "id": "social-workers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "本轮技术页无法打开，不写软件采用率。"
+            ]
+          },
+          "id": "social-workers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "任何真实个案、记录或高影响判断都超出桌面练习。"
+            ]
+          },
+          "id": "social-workers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人的控制点是岗位归类、原始依据、监督、资格和授权。"
+            ]
+          },
+          "id": "social-workers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "本轮无中国大陆21-1029.00精确对应工资。"
+            ]
+          },
+          "id": "social-workers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "国家统计局2025资料按行业和人员大类聚合。"
+            ]
+          },
+          "id": "social-workers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "行业均值不能当作“其他社会工作者”职业中位数。"
+            ]
+          },
+          "id": "social-workers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "真实岗位要按地区、机构、合同、岗位定义、资格和工作量核价。"
+            ]
+          },
+          "id": "social-workers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "2025年美国工资中位数为71,900美元/年。"
+            ]
+          },
+          "id": "social-workers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-stats"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "对应小时中位数34.57美元。"
+            ]
+          },
+          "id": "social-workers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-stats"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "这是21-1029.00汇总类别总体统计。"
+            ]
+          },
+          "id": "social-workers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "除中位数外，10/25/75/90工资分位在本页引用的数据中未提供。"
+            ]
+          },
+          "id": "social-workers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "类别内部岗位、行业、地区和资格差异可能很大。"
+            ]
+          },
+          "id": "social-workers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "不用美国中位数换算中国报价，也不把中位数当起薪。"
+            ]
+          },
+          "id": "social-workers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "能接受先澄清岗位范围再判断职业。"
+            ]
+          },
+          "id": "social-workers.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "面对岗位说明，能追问服务对象、主要问题、实际产出、记录方式、监督人和资格门槛。"
+            ]
+          },
+          "id": "social-workers.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "能区分资源协调、项目工作与临床服务。"
+            ]
+          },
+          "id": "social-workers.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "愿意在资料不足时保留未知并升级。"
+            ]
+          },
+          "id": "social-workers.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎信号：仅凭“社会工作”头衔假定职责。"
+            ]
+          },
+          "id": "social-workers.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎信号：把相邻专业方向任务倒灌到All Other。"
+            ]
+          },
+          "id": "social-workers.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎信号：资格或授权不明仍做高影响判断。"
+            ]
+          },
+          "id": "social-workers.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "用虚构岗位卡验证范围审阅耐受度，不用性格标签。"
+            ]
+          },
+          "id": "social-workers.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "职业错分：21-1029无统一任务数据，先保留未知。"
+            ]
+          },
+          "id": "social-workers.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "职责错借：不把21-1023评估治疗任务写成21-1029统一职责。"
+            ]
+          },
+          "id": "social-workers.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "资格错推：认证发现目录不等于许可或授权。"
+            ]
+          },
+          "id": "social-workers.risk.career-risk-cards.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "数据越界：练习不使用真实服务对象、个案或记录。"
+            ]
+          },
+          "id": "social-workers.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "编辑控制只记录复核对象、责任人、时间、升级触发与对象，不规定机构处置。"
+            ]
+          },
+          "id": "social-workers.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "O*NET该汇总页未提供统一教育或训练数据。"
+            ]
+          },
+          "id": "social-workers.path.career-path-block.1",
+          "source_refs": [
+            "onet-umbrella"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "先锁定具体岗位，再核学历、训练、经验和监督。"
+            ]
+          },
+          "id": "social-workers.path.career-path-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "认证页列出9项发现条目，只用于发现。"
+            ]
+          },
+          "id": "social-workers.path.career-path-block.3",
+          "source_refs": [
+            "onet-cert"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "证书/考试、许可证、雇主任命和服务授权必须分开。"
+            ]
+          },
+          "id": "social-workers.path.career-path-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七日试做：拆岗位、核类别、列字段、找缺项、查监督、写边界、复盘。"
+            ]
+          },
+          "id": "social-workers.path.career-path-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品1：一页虚构岗位七字段审阅表。"
+            ]
+          },
+          "id": "social-workers.path.career-path-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品2：一页21-1029与21-1023分类边界表。"
+            ]
+          },
+          "id": "social-workers.path.career-path-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品不等于教育、证书、执照、录用或服务授权。"
+            ]
+          },
+          "id": "social-workers.path.career-path-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "2024年美国就业约81,000人。"
+            ]
+          },
+          "id": "social-workers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "onet-stats"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "2024—2034预计增长3%—4%。"
+            ]
+          },
+          "id": "social-workers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "onet-stats"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "期间预计空缺7,000；空缺含增长和替代。"
+            ]
+          },
+          "id": "social-workers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "onet-stats"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "行业为政府57%、卫生和社会援助19%、其他24%。"
+            ]
+          },
+          "id": "social-workers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "onet-industry"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "汇总数据不能替代具体岗位、地区、机构和资格核验。"
+            ]
+          },
+          "id": "social-workers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "O*NET 21-1029.00是“All Other”汇总类别，指未被单独列出的社会工作者；O*NET明确该标题无统一职业任务数据。",
+                "id": "social-workers.faq.1",
+                "question_key": "career.faq.social-workers.daily-work",
+                "source_refs": [
+                  "onet-umbrella"
+                ]
+              },
+              {
+                "answer": "21-1029.00是无统一任务数据的剩余汇总；21-1023.00聚焦精神健康/物质滥用评估治疗，21-1021.00聚焦儿童、家庭和学校社会服务。",
+                "id": "social-workers.faq.2",
+                "question_key": "career.faq.social-workers.role-comparison",
+                "source_refs": [
+                  "onet-child",
+                  "onet-mental",
+                  "onet-umbrella"
+                ]
+              },
+              {
+                "answer": "“All Other”类别内部差异很大，适配只能在具体岗位的对象、问题、服务、记录、监督和资格明确后再判断。",
+                "id": "social-workers.faq.3",
+                "question_key": "career.faq.social-workers.fit",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "由于21-1029.00没有O*NET任务或技术数据，本页不声称特定AI采用率、任务暴露或替代率。",
+                "id": "social-workers.faq.4",
+                "question_key": "career.faq.social-workers.ai-impact",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "由于21-1029.00没有O*NET任务或技术数据，本页不声称特定AI采用率、任务暴露或替代率。",
+                "id": "social-workers.faq.5",
+                "question_key": "career.faq.social-workers.human-control",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "国家统计局2025工资资料按行业和人员大类聚合，不能作为21-1029.00在中国的精确工资。",
+                "id": "social-workers.faq.6",
+                "question_key": "career.faq.social-workers.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "O*NET/BLS为美国21-1029.00给出的2025工资中位数是71,900美元/年、34.57美元/小时；其他工资分位在本页引用的数据中未提供。",
+                "id": "social-workers.faq.7",
+                "question_key": "career.faq.social-workers.us-pay",
+                "source_refs": [
+                  "onet-stats"
+                ]
+              },
+              {
+                "answer": "O*NET 21-1029.00汇总页没有提供统一教育或训练数据；必须回到具体岗位核对。",
+                "id": "social-workers.faq.8",
+                "question_key": "career.faq.social-workers.education-path",
+                "source_refs": [
+                  "onet-umbrella"
+                ]
+              },
+              {
+                "answer": "本页不从汇总类别推导个案评估、干预、危机、隐私或授权流程；虚构练习只审岗位说明字段。",
+                "id": "social-workers.faq.9",
+                "question_key": "career.faq.social-workers.risk-boundary",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "O*NET/BLS列出2024年就业81,000、2024—2034增长3%—4%、期间预计空缺7,000。",
+                "id": "social-workers.faq.10",
+                "question_key": "career.faq.social-workers.outlook-transition",
+                "source_refs": [
+                  "onet-stats"
+                ]
+              },
+              {
+                "answer": "汇总数据不能替代具体岗位、地区、机构、合同和资格核验。",
+                "id": "social-workers.faq.11",
+                "question_key": "career.faq.social-workers.career-worth",
+                "source_refs": [
+                  "editorial"
+                ]
+              }
+            ]
+          },
+          "id": "social-workers.sources.faq.1",
+          "source_refs": [
+            "editorial",
+            "nbs-wages",
+            "onet-child",
+            "onet-mental",
+            "onet-stats",
+            "onet-umbrella"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "21-1029是All Other汇总类别，无统一任务数据；不从相邻职业倒灌职责。",
+              "候选页不接触真实个案，不提供临床、危机、隐私、许可或机构处置建议。"
+            ]
+          },
+          "id": "social-workers.sources.boundary.1",
+          "source_refs": [
+            "editorial",
+            "nbs-wages",
+            "onet-cert",
+            "onet-child",
+            "onet-industry",
+            "onet-mental",
+            "onet-stats",
+            "onet-umbrella"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "其他社会工作者",
+                "id": "social-workers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "其他社会工作者",
+                "id": "social-workers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "其他社会工作者",
+                "id": "social-workers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "其他社会工作者",
+                "id": "social-workers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "其他社会工作者",
+                "id": "social-workers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "其他社会工作者",
+                "id": "social-workers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "其他社会工作者",
+                "id": "social-workers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "其他社会工作者",
+                "id": "social-workers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "其他社会工作者",
+                "id": "social-workers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "其他社会工作者",
+                "id": "social-workers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "其他社会工作者",
+                "id": "social-workers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "social-workers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "候选页编辑设计。",
+                  "仅支持分类审阅和虚构桌面练习，不支持真实个案、服务、临床判断或法定授权。"
+                ],
+                "evidence_type": "editorial scope-classification exercise",
+                "id": "editorial",
+                "limitation": "仅支持分类审阅和虚构桌面练习，不支持真实个案、服务、临床判断或法定授权。",
+                "market": "编辑设计",
+                "name": "FermatMind — 其他社会工作者候选页编辑设计",
+                "period": "2026-09-06",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn48view0 lines 39-51, 229-274, 338-360。",
+                  "行业与人员大类聚合，不是21-1029.00精确工资。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "nbs-wages",
+                "limitation": "行业与人员大类聚合，不是21-1029.00精确工资。",
+                "market": "中国大陆",
+                "name": "国家统计局 — 2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 wage aggregates published 2026",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn49view5 lines 50-66。",
+                  "仅用于所列职业、市场、时期与口径，不跨职业或跨法域外推。"
+                ],
+                "evidence_type": "official certification discovery",
+                "id": "onet-cert",
+                "limitation": "仅用于所列职业、市场、时期与口径，不跨职业或跨法域外推。",
+                "market": "美国",
+                "name": "O*NET OnLine — National Certifications 21-1029.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localcert/21-1029.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn51view0 lines 50-57, 124-148。",
+                  "仅用于所列职业、市场、时期与口径，不跨职业或跨法域外推。"
+                ],
+                "evidence_type": "official adjacent occupation details",
+                "id": "onet-child",
+                "limitation": "仅用于所列职业、市场、时期与口径，不跨职业或跨法域外推。",
+                "market": "美国",
+                "name": "O*NET OnLine — Child, Family, and School Social Workers 21-1021.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/21-1021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn49view1 lines 46-58。",
+                  "仅用于所列职业、市场、时期与口径，不跨职业或跨法域外推。"
+                ],
+                "evidence_type": "official industry distribution",
+                "id": "onet-industry",
+                "limitation": "仅用于所列职业、市场、时期与口径，不跨职业或跨法域外推。",
+                "market": "美国",
+                "name": "O*NET OnLine — Industries 21-1029.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/21-1029.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn50view0 lines 50-57; turn50view1 lines 124-140, 190-224。",
+                  "仅用于所列职业、市场、时期与口径，不跨职业或跨法域外推。"
+                ],
+                "evidence_type": "official adjacent occupation details",
+                "id": "onet-mental",
+                "limitation": "仅用于所列职业、市场、时期与口径，不跨职业或跨法域外推。",
+                "market": "美国",
+                "name": "O*NET OnLine — Mental Health and Substance Abuse Social Workers 21-1023.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/21-1023.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn49view4 lines 98-129。",
+                  "仅用于所列职业、市场、时期与口径，不跨职业或跨法域外推。"
+                ],
+                "evidence_type": "official workforce data",
+                "id": "onet-stats",
+                "limitation": "仅用于所列职业、市场、时期与口径，不跨职业或跨法域外推。",
+                "market": "美国",
+                "name": "O*NET OnLine — Social Workers, All Other workforce data",
+                "period": "2024-2034 projections; 2025 wages",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/21-1029.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn49view0 lines 50-54。",
+                  "“All Other”汇总类别；O*NET明确无该类任务数据，不能据此写统一日常职责。"
+                ],
+                "evidence_type": "official umbrella occupation identity",
+                "id": "onet-umbrella",
+                "limitation": "“All Other”汇总类别；O*NET明确无该类任务数据，不能据此写统一日常职责。",
+                "market": "美国",
+                "name": "O*NET OnLine — Social Workers, All Other 21-1029.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/21-1029.00"
+              }
+            ]
+          },
+          "id": "social-workers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "行业聚合，不作职业工资",
+        "fact_id": "cn-wage-nonprivate",
+        "market": "中国大陆",
+        "measure": "occupation wage availability",
+        "occupation_scope": "行业代理数据；no exact CN mapping",
+        "period": "2025 wage aggregates published 2026",
+        "source_refs": [
+          "nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "行业聚合，不作职业工资",
+        "fact_id": "cn-wage-private",
+        "market": "中国大陆",
+        "measure": "cross-jurisdiction wage boundary",
+        "occupation_scope": "行业代理数据；no exact CN mapping",
+        "period": "2025 wage aggregates published 2026",
+        "source_refs": [
+          "nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "9项认证/考试发现，不等于统一要求",
+        "fact_id": "credential-boundary",
+        "market": "美国",
+        "measure": "qualification boundary",
+        "occupation_scope": "精确职业数据：21-1029.00",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-cert"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2024就业81,000；增长3%—4%；空缺7,000",
+        "fact_id": "employment-projection",
+        "market": "美国",
+        "measure": "employment projection measure",
+        "occupation_scope": "精确职业数据：21-1029.00",
+        "period": "2024-2034 projections; 2025 wages",
+        "source_refs": [
+          "onet-stats"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET 21-1029.00 All Other",
+        "fact_id": "occupation-identity",
+        "market": "美国",
+        "measure": "official occupation code",
+        "occupation_scope": "精确职业数据：21-1029.00",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-umbrella"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025年中位数$71,900/年、$34.57/小时",
+        "fact_id": "us-wage",
+        "market": "美国",
+        "measure": "annual wage measure",
+        "occupation_scope": "精确职业数据：21-1029.00",
+        "period": "2024-2034 projections; 2025 wages",
+        "source_refs": [
+          "onet-stats"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "3c552d97dd03348dc2241270c4467ed971b2b99268662db37ba548984a116f98",
+  "source_content_sha256": "fbb409487d9f32ceb4ac29ac7034aba96216599f8d580d76250ee59f42e1c2a4",
   "subject": {
     "canonical_slug": "social-workers",
     "name": "其他社会工作者",
-    "summary": null
+    "summary": "“其他社会工作者”是无统一任务数据的剩余汇总类别；判断岗位必须回到具体服务对象、问题、职责、监督和授权。"
   }
 }

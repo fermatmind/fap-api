@@ -1,12 +1,1870 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "适合先体验：愿意依据明确规则核对控制点坐标、坐标参考系统、影像期次、比例尺、属性与精度元数据，并把未知项留给复核人。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "慎重观察：如果在期限压力下容易跳过版本、单位或例外条件，先用下方制图师与摄影测量师纸面材料测试自己的错误模式。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "体验方法：只用下方给出的记录和规则完成“识别不能直接叠加的图层与异常控制点，并写质量交接。”，再按参考答案逐条检查。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.quick-decision.fit-decision-checklist.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "安全边界：坐标均为虚构；不采集真实敏感位置，不用于导航、产权、工程放样或应急。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.quick-decision.fit-decision-checklist.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "职业身份：制图师与摄影测量师对应美国O*NET代码17-1021.00。本页用它限定职业任务，不把美国代码当作中国职称或执业许可。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.profile.work-context-block.1",
+          "source_refs": [
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "主要材料：控制点坐标、坐标参考系统、影像期次、比例尺、属性与精度元数据。接手任务先确认来源、期间、版本与缺项。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.profile.work-context-block.2",
+          "source_refs": [
+            "onet-detail",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作链：确认坐标系和单位，比较控制点与影像来源，识别坐标/属性异常，制作带精度和用途限制的地图数据；质量负责人复核后再交付。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.profile.work-context-block.3",
+          "source_refs": [
+            "onet-detail",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断：判断数据能否叠加、偏差是单位/坐标系还是采集误差，以及产品可支持何种用途。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.profile.work-context-block.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "常见环境：办公室为主，部分岗位需要到测区；政府、测绘、工程与数据企业的用途要求不同。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.profile.work-context-block.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "常用工具：GIS、摄影测量软件、遥感影像、空间数据库和元数据工具；工具输出必须回到原材料验证。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.profile.work-context-block.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "美国BLS称部分制图师与摄影测量师可能需要许可，具体要求随州和职责变化；是否涉及产权界线、测量签署或其他受监管产出必须按实际岗位另核。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.profile.work-context-block.7",
+          "source_refs": [
+            "bls-cartography"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：CRS、单位、采集日期、来源、误差和版本完整，地图用途不超过数据精度。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.profile.work-context-block.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "测量师负责测量并确定地表点、边界和位置，常涉及更明确的法定测量责任；制图的数据处理能力可迁移，但外业测量、边界判断与许可要求是主要差异。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "bls-cartography"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "测量与制图技术员在测量师、制图师或摄影测量师指导下采集、处理和维护地理数据；这是更接近的数据采集与技术支持方向，职责范围和监督层级不同。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "bls-cartography"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "数据库架构师设计数据模型与治理，空间数据库经验可迁移，但系统架构与可靠性责任更广。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "adj-1",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "数据仓库专家交付集成与分析数据平台，ETL能力可迁移，但地图表达和空间精度不再是核心。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "adj-2",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "GIS技术专家直接维护空间数据、分析和应用，最接近横移方向；仍需比较制图成品责任与系统支持职责。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "adj-3",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "数据科学家构建统计/机器学习模型，空间分析可迁移，但模型验证、编程和统计推断是主要缺口。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.direction-comparison.adjacent-career-comparison-table.6",
+          "source_refs": [
+            "adj-4",
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "数据库架构师",
+                "id": "adj-link-1",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/database-architects"
+              },
+              {
+                "entity": "数据仓库专家",
+                "id": "adj-link-2",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/data-warehousing-specialists"
+              },
+              {
+                "entity": "地理信息系统技术专家与技术员",
+                "id": "adj-link-3",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/geographic-information-systems-technologists-and-technicians"
+              },
+              {
+                "entity": "数据科学家",
+                "id": "adj-link-4",
+                "relation": "career.related",
+                "url": "/zh/career/jobs/data-scientists"
+              }
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.direction-comparison.adjacent-career-comparison-table.7",
+          "source_refs": [
+            "adj-1",
+            "onet-main"
+          ],
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助属性清洗、影像初筛和元数据草稿"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "若CRS或单位错误，自动叠加会稳定地产生整体偏移"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "真实采用依赖已知坐标系、精度标准和人工抽检"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "输入端核对EPSG、单位、采集期次和控制点来源"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "输出端检查残差与边界点，标注无法验证区域"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工负责用途选择、精度声明和敏感位置处理"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "没有该职业AI采用率或净就业因果证据"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "应强化空间数据质量、误差解释和可复现流程"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "NIST的生成式AI风险画像可用于检查虚构、隐私、信息完整性和过度依赖等通用风险；它不是本职业采用率或事故率。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.ai-impact.ai-impact-table.9",
+          "source_refs": [
+            "nist"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据。本次核对国家统计局2025年城镇单位工资发布；该页按地区、行业、登记类型和人员大类统计，未提供制图师与摄影测量师这一O*NET详细职业的全国同口径工资。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "因此本页不提供中国全国点估计，也不拿宽行业均值替代个人工资；这只是本次来源范围内未取得，不宣称全国不存在其他资料。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较具体岗位时应记录城市、税前/税后、月薪/年薪、固定/浮动、工时、经验和实际职责。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "若使用招聘报价，应保留职位原文、日期和样本范围；本页未做招聘计数，不声称市场频率。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2026年O*NET精确职业数据代码：17-1021.00。O*NET/BLS数据与制图师与摄影测量师的SOC职业口径一致。"
+            ]
+          },
+          "fact_refs": [
+            "identity"
+          ],
+          "id": "cartographers-and-photogrammetrists.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-main"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据的2025年工资中位数为81,390美元/年；覆盖受雇者，不是税后收入或新人起薪。"
+            ]
+          },
+          "fact_refs": [
+            "median"
+          ],
+          "id": "cartographers-and-photogrammetrists.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "us-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据的2025年小时工资中位数为39.13美元/小时；不在未知工时下自行换算个人年收入。"
+            ]
+          },
+          "fact_refs": [
+            "low"
+          ],
+          "id": "cartographers-and-photogrammetrists.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "us-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据的2024年就业规模为13,400名受雇者；这是存量，不是当年招聘数。"
+            ]
+          },
+          "fact_refs": [
+            "high"
+          ],
+          "id": "cartographers-and-photogrammetrists.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "us-employment"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据的2024—2034年预计年均职位空缺为1,000个/年；包含增长与替补，不等于净新增。"
+            ]
+          },
+          "fact_refs": [
+            "trend"
+          ],
+          "id": "cartographers-and-photogrammetrists.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "us-projections"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "当前来源没有单独的新毕业生工资；经验、地区、行业和职责仍需在具体职位中核对。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "能耐心核对坐标位数与单位"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.fit.personality-fit-block.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "愿意追查图层为何整体偏移"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.fit.personality-fit-block.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "能接受地图视觉漂亮但精度不合格"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.fit.personality-fit-block.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "会把未知遮挡区域标出来"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.fit.personality-fit-block.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "愿意维护元数据和版本"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.fit.personality-fit-block.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "能向非技术接收者解释适用比例尺与用途"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.fit.personality-fit-block.6",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "关注敏感位置与授权范围"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.fit.personality-fit-block.7",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "纸面点位练习可测试空间细节，不代表现场测量资格"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.fit.personality-fit-block.8",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：P3东坐标少一位数字。影响：点位偏离约千米级，图层解释失真。控制：与原控制点表核对并标异常。复核/责任：数据负责人确认原值。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.risk.career-risk-cards.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：一层用EPSG:4326度，一层标米却直接叠加。影响：整体错位。控制：停止叠加并统一CRS/单位。复核/责任：GIS质量人员复核转换。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.risk.career-risk-cards.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：2024影像被标成2026现状。影响：更新判断错误。控制：保留采集日期并限制现势性结论。复核/责任：项目负责人确认可用期。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.risk.career-risk-cards.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "触发：练习地图被用于产权或工程放样。影响：用途超过精度与授权。控制：明确‘教学检查、非产权/放样’并阻止外用。复核/责任：适用法域的授权专业人员决定。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.risk.career-risk-cards.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "本页练习成果不用于导航、产权、工程放样或应急；真实用途须核对数据精度、岗位职责以及适用的许可与审查要求。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.risk.career-risk-cards.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "本页没有招聘样本或频率统计；下面是依据职业任务整理的能力展示建议，不代表普遍录用门槛。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.path.recruitment-sample.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-role-comparison",
+          "data": {
+            "column_keys": [
+              "stage",
+              "possible_check",
+              "observed_evidence"
+            ],
+            "rows": [
+              [
+                "相关本科学习",
+                "制图、地理/GIS、测量或摄影测量项目",
+                "美国典型路径，不等于各地统一门槛"
+              ],
+              [
+                "实习/入门岗位",
+                "数据来源、CRS、精度与地图成品",
+                "作品必须说明用途和限制"
+              ],
+              [
+                "专业岗位",
+                "整合多源数据、质量控制与客户交付",
+                "许可是否需要按州和实际职责核对"
+              ]
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.path.entry-role-comparison.1",
+          "source_refs": [
+            "bls-cartography",
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.employer-evidence",
+          "data": {
+            "entries": [
+              {
+                "id": "card-1",
+                "values": [
+                  "任务依据",
+                  "来自O*NET职业任务，不是雇主频率"
+                ]
+              },
+              {
+                "id": "card-2",
+                "values": [
+                  "展示方式",
+                  "保存输入、规则、判断与复核轨迹"
+                ]
+              }
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.path.employer-evidence.1",
+          "source_refs": [
+            "editor",
+            "onet-detail",
+            "onet-main"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-portfolio",
+          "data": {
+            "entries": [
+              {
+                "id": "card-1",
+                "values": [
+                  "原始材料",
+                  "保留页面给出的虚构记录"
+                ]
+              },
+              {
+                "id": "card-2",
+                "values": [
+                  "判断记录",
+                  "逐项写规则、结果与未知"
+                ]
+              },
+              {
+                "id": "card-3",
+                "values": [
+                  "交接摘要",
+                  "写结论、限制与复核人"
+                ]
+              }
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.path.entry-portfolio.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.interview-probation",
+          "data": {
+            "column_keys": [
+              "stage",
+              "possible_check",
+              "observed_evidence"
+            ],
+            "rows": [
+              [
+                "面试",
+                "讲清一处错误如何发现",
+                "材料行与规则"
+              ],
+              [
+                "试用",
+                "先核版本和权限",
+                "未决项清单"
+              ],
+              [
+                "交付",
+                "说明限制和下一步",
+                "复核记录"
+              ]
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.path.interview-probation.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-decision",
+          "data": {
+            "column_keys": [
+              "stage",
+              "possible_check",
+              "observed_evidence"
+            ],
+            "rows": [
+              [
+                "学历/课程",
+                "可展示相关知识与学习经历",
+                "不能单独证明岗位胜任或法定授权"
+              ],
+              [
+                "软件证书",
+                "可展示特定工具训练",
+                "不等于职业许可或项目授权"
+              ],
+              [
+                "单位培训",
+                "可展示本机构流程训练",
+                "不自动形成跨机构授权"
+              ],
+              [
+                "职业许可/注册",
+                "仅在签发法域与范围内有效",
+                "仍须核对雇主及具体项目要求"
+              ]
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.path.credential-decision.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-boundary",
+          "data": {
+            "paragraphs": [
+              "学历、课程、软件证书、单位培训、职业许可和项目授权是不同概念；具体要求按职位和法域核对。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.path.credential-boundary.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "美国BLS称制图师与摄影测量师通常需要制图学、地理学、地理信息学、测量学或相关领域学士学位；GIS实习有助于取得实践经验，部分岗位是否需许可取决于州和具体职责。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.path.career-path-block.1",
+          "source_refs": [
+            "bls-cartography"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "GIS技术岗位最接近；转数据库/数仓重系统工程；转数据科学重统计建模。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.path.career-path-block.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "以下制图师与摄影测量师纸面材料全部虚构并完整显示。任务：识别不能直接叠加的图层与异常控制点，并写质量交接。 安全边界：坐标均为虚构；不采集真实敏感位置，不用于导航、产权、工程放样或应急。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.path.entry-work-sample-data.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "material-1-1",
+                "values": [
+                  "点位或图层：P1",
+                  "坐标值与单位：E=500000m,N=3450000m",
+                  "坐标参考系统：EPSG:32650",
+                  "数据状态：控制点"
+                ]
+              },
+              {
+                "id": "material-1-2",
+                "values": [
+                  "点位或图层：P2",
+                  "坐标值与单位：E=500080m,N=3450060m",
+                  "坐标参考系统：EPSG:32650",
+                  "数据状态：控制点"
+                ]
+              },
+              {
+                "id": "material-1-3",
+                "values": [
+                  "点位或图层：P3",
+                  "坐标值与单位：E=50016m,N=3450120m",
+                  "坐标参考系统：EPSG:32650",
+                  "数据状态：疑似少一位"
+                ]
+              },
+              {
+                "id": "material-1-4",
+                "values": [
+                  "点位或图层：影像L1",
+                  "坐标值与单位：经纬度(度)",
+                  "坐标参考系统：EPSG:4326",
+                  "数据状态：采集2024-06"
+                ]
+              }
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.path.entry-work-sample-data.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "entries": [
+              {
+                "id": "material-2-1",
+                "values": [
+                  "检查项：坐标",
+                  "质量规则：比较前CRS和单位必须一致"
+                ]
+              },
+              {
+                "id": "material-2-2",
+                "values": [
+                  "检查项：合理性",
+                  "质量规则：相邻控制点间距预期50–200m"
+                ]
+              },
+              {
+                "id": "material-2-3",
+                "values": [
+                  "检查项：用途",
+                  "质量规则：只定位数据问题，不做真实转换、导航、产权或放样"
+                ]
+              }
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.path.entry-work-sample-data.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-work-sample-data",
+          "data": {
+            "paragraphs": [
+              "任务：识别不能直接叠加的图层与异常控制点，并写质量交接。",
+              "参考答案：L1与控制点CRS/单位不同，不能直接叠加；P3东坐标与P1/P2相差约45万米且位数异常，应回查原值；不得自行补成500160m。",
+              "边界：坐标均为虚构；不采集真实敏感位置，不用于导航、产权、工程放样或应急。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.path.entry-work-sample-data.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "day-1",
+                "values": [
+                  "第1日",
+                  "理解材料",
+                  "标出字段、单位与版本"
+                ]
+              },
+              {
+                "id": "day-2",
+                "values": [
+                  "第2日",
+                  "按规则初判",
+                  "完成第一版记录"
+                ]
+              },
+              {
+                "id": "day-3",
+                "values": [
+                  "第3日",
+                  "复算/复读",
+                  "找出算术、时间或逻辑错误"
+                ]
+              },
+              {
+                "id": "day-4",
+                "values": [
+                  "第4日",
+                  "写异常清单",
+                  "区分可确认与待确认"
+                ]
+              },
+              {
+                "id": "day-5",
+                "values": [
+                  "第5日",
+                  "写交接",
+                  "指定复核人与限制"
+                ]
+              },
+              {
+                "id": "day-6",
+                "values": [
+                  "第6日",
+                  "对照答案修订",
+                  "保留初稿与改动原因"
+                ]
+              },
+              {
+                "id": "day-7",
+                "values": [
+                  "第7日",
+                  "复盘负担",
+                  "记录最耗注意力的步骤"
+                ]
+              }
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.path.seven-day-trial.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-decision",
+          "data": {
+            "entries": [
+              "能否仅依材料复现答案",
+              "是否会漏单位、版本或例外",
+              "能否解释为何暂停并升级",
+              "是否愿意继续练习同类任务"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.path.seven-day-decision.1",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国官方预测：Cartographers and Photogrammetrists在2024—2034年预计年均空缺为1,000个/年，该指标含增长与替补。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.market-signals.market-signal-card.1",
+          "source_refs": [
+            "us-projections"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "本页没有雇主样本或招聘频率统计，不把O*NET任务或软件页面写成当前招聘热度。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.market-signals.market-signal-card.2",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "本页没有该职业AI实际采用率或净就业因果证据；任务可辅助不等于职位减少。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.market-signals.market-signal-card.3",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "转向选择：GIS技术岗位最接近；转数据库/数仓重系统工程；转数据科学重统计建模。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "决策时应分别看官方预测、具体职位原文、个人作品和资格/授权差距，不能把不同市场和时期合成一个增长结论。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editor"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "该职业处理控制点坐标、坐标参考系统、影像期次、比例尺、属性与精度元数据；工作链为：确认坐标系和单位，比较控制点与影像来源，识别坐标/属性异常，制作带精度和用途限制的地图数据；质量负责人复核后再交付。",
+                "id": "cartographers-and-photogrammetrists.faq.1",
+                "question_key": "career.faq.cartographers-and-photogrammetrists.daily-work",
+                "source_refs": [
+                  "onet-detail",
+                  "onet-main"
+                ]
+              },
+              {
+                "answer": "测量师负责测量并确定地表点、边界和位置，常涉及更明确的法定测量责任；制图的数据处理能力可迁移，但外业测量、边界判断与许可要求是主要差异。",
+                "id": "cartographers-and-photogrammetrists.faq.2",
+                "question_key": "career.faq.cartographers-and-photogrammetrists.role-comparison",
+                "source_refs": [
+                  "bls-cartography"
+                ]
+              },
+              {
+                "answer": "能耐心核对坐标位数与单位",
+                "id": "cartographers-and-photogrammetrists.faq.3",
+                "question_key": "career.faq.cartographers-and-photogrammetrists.fit",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "可辅助属性清洗、影像初筛和元数据草稿",
+                "id": "cartographers-and-photogrammetrists.faq.4",
+                "question_key": "career.faq.cartographers-and-photogrammetrists.ai-impact",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "可辅助属性清洗、影像初筛和元数据草稿",
+                "id": "cartographers-and-photogrammetrists.faq.5",
+                "question_key": "career.faq.cartographers-and-photogrammetrists.automatable-tasks",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "人工负责用途选择、精度声明和敏感位置处理",
+                "id": "cartographers-and-photogrammetrists.faq.6",
+                "question_key": "career.faq.cartographers-and-photogrammetrists.human-control",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "暂无可安全使用的数据。本次核对国家统计局2025年城镇单位工资发布；该页按地区、行业、登记类型和人员大类统计，未提供制图师与摄影测量师这一O*NET详细职业的全国同口径工资。",
+                "id": "cartographers-and-photogrammetrists.faq.7",
+                "question_key": "career.faq.cartographers-and-photogrammetrists.china-pay",
+                "source_refs": [
+                  "nbs"
+                ]
+              },
+              {
+                "answer": "Cartographers and Photogrammetrists的年工资中位数为81,390美元/年。",
+                "id": "cartographers-and-photogrammetrists.faq.8",
+                "question_key": "career.faq.cartographers-and-photogrammetrists.us-pay",
+                "source_refs": [
+                  "us-wage"
+                ]
+              },
+              {
+                "answer": "美国BLS称制图师与摄影测量师通常需要制图学、地理学、地理信息学、测量学或相关领域学士学位；GIS实习有助于取得实践经验，部分岗位是否需许可取决于州和具体职责。",
+                "id": "cartographers-and-photogrammetrists.faq.9",
+                "question_key": "career.faq.cartographers-and-photogrammetrists.education-path",
+                "source_refs": [
+                  "bls-cartography"
+                ]
+              },
+              {
+                "answer": "本页练习成果不用于导航、产权、工程放样或应急；真实用途须核对数据精度、岗位职责以及适用的许可与审查要求。",
+                "id": "cartographers-and-photogrammetrists.faq.10",
+                "question_key": "career.faq.cartographers-and-photogrammetrists.risk-boundary",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "转向选择：GIS技术岗位最接近；转数据库/数仓重系统工程；转数据科学重统计建模。",
+                "id": "cartographers-and-photogrammetrists.faq.11",
+                "question_key": "career.faq.cartographers-and-photogrammetrists.outlook-transition",
+                "source_refs": [
+                  "editor"
+                ]
+              },
+              {
+                "answer": "适合先体验：愿意依据明确规则核对控制点坐标、坐标参考系统、影像期次、比例尺、属性与精度元数据，并把未知项留给复核人。",
+                "id": "cartographers-and-photogrammetrists.faq.12",
+                "question_key": "career.faq.cartographers-and-photogrammetrists.career-worth",
+                "source_refs": [
+                  "editor"
+                ]
+              }
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.sources.faq.1",
+          "source_refs": [
+            "bls-cartography",
+            "editor",
+            "nbs",
+            "onet-detail",
+            "onet-main",
+            "us-wage"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "美国职业身份为O*NET 17-1021.00；中国职位名称、资格和授权按具体雇主与法域核验。",
+              "中国工资为本次指定官方来源中的有界缺口；美国统计按Cartographers and Photogrammetrists及各自数据期解释。",
+              "练习材料和数值均为编辑设计：坐标均为虚构；不采集真实敏感位置，不用于导航、产权、工程放样或应急。"
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.sources.boundary.1",
+          "source_refs": [
+            "adj-1",
+            "adj-2",
+            "adj-3",
+            "adj-4",
+            "bls-cartography",
+            "editor",
+            "nbs",
+            "nist",
+            "onet-detail",
+            "onet-main",
+            "us-employment",
+            "us-projections",
+            "us-wage"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "制图师与摄影测量师",
+                "id": "cartographers-and-photogrammetrists.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "制图师与摄影测量师",
+                "id": "cartographers-and-photogrammetrists.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "制图师与摄影测量师",
+                "id": "cartographers-and-photogrammetrists.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "制图师与摄影测量师",
+                "id": "cartographers-and-photogrammetrists.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "制图师与摄影测量师",
+                "id": "cartographers-and-photogrammetrists.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "制图师与摄影测量师",
+                "id": "cartographers-and-photogrammetrists.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "制图师与摄影测量师",
+                "id": "cartographers-and-photogrammetrists.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "制图师与摄影测量师",
+                "id": "cartographers-and-photogrammetrists.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "制图师与摄影测量师",
+                "id": "cartographers-and-photogrammetrists.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "制图师与摄影测量师",
+                "id": "cartographers-and-photogrammetrists.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "制图师与摄影测量师",
+                "id": "cartographers-and-photogrammetrists.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业数据库架构师（15-1243.00）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-1",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "数据库架构师 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-1243.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业数据仓库专家（15-1243.01）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-2",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "数据仓库专家 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-1243.01"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业地理信息系统技术专家与技术员（15-1299.02）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-3",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "地理信息系统技术专家与技术员 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-1299.02"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "相邻职业数据科学家（15-2051.00）的定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "adj-4",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "数据科学家 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-2051.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "BLS将制图/摄影测量描述为制作地图与相关产品，并与测量师等相邻职业分列。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "bls-cartography",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "制图与摄影测量职业边界",
+                "period": "2026访问的职业展望",
+                "publisher": "美国劳工统计局",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/cartographers-and-photogrammetrists.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "基于已列职业事实设计判断提示、风险控制和完整虚构练习；模拟数字不是现实统计。",
+                  "不代表雇主政策、执业授权、真实事故、招聘频率或统计调查。"
+                ],
+                "evidence_type": "editorial_design",
+                "id": "editor",
+                "limitation": "不代表雇主政策、执业授权、真实事故、招聘频率或统计调查。",
+                "market": "全球",
+                "name": "制图师与摄影测量师内容与模拟练习编辑设计",
+                "period": "2026-09-06",
+                "publisher": "本任务编辑",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "按地区、行业、登记类型和五类人员发布平均工资，未提供本O*NET详细职业同口径工资。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nbs",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025年",
+                "publisher": "国家统计局",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "通用生成式AI风险类别与治理框架，不报告本职业部署或就业影响。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "nist",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "全球",
+                "name": "生成式人工智能风险管理画像",
+                "period": "2024 NIST AI 600-1",
+                "publisher": "美国国家标准与技术研究院",
+                "scope": "exact",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "任务、活动、工作环境与准备信息。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet-detail",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "制图师与摄影测量师 O*NET详细档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/17-1021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "职业代码17-1021.00、定义与任务。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "onet-main",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "制图师与摄影测量师 O*NET职业档案",
+                "period": "2026 O*NET职业档案",
+                "publisher": "O*NET OnLine / 美国劳工部",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-1021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "就业存量覆盖：Cartographers and Photogrammetrists。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-employment",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "制图师与摄影测量师美国就业规模",
+                "period": "2024 BLS就业规模",
+                "publisher": "O*NET OnLine（展示BLS）",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/17-1021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "年均空缺覆盖：Cartographers and Photogrammetrists，包含增长与替补。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-projections",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "制图师与摄影测量师美国就业预测",
+                "period": "2024—2034 BLS就业预测",
+                "publisher": "O*NET OnLine（展示BLS）",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/17-1021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "工资数据覆盖：Cartographers and Photogrammetrists；不是新人薪酬。",
+                  "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。"
+                ],
+                "evidence_type": "primary_document",
+                "id": "us-wage",
+                "limitation": "仅用于所述职业、市场、期间和范围；不自动建立其他市场映射、其他法域授权或个体结果。",
+                "market": "美国",
+                "name": "制图师与摄影测量师美国工资",
+                "period": "2025 BLS OEWS",
+                "publisher": "O*NET OnLine（展示BLS OEWS）",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/17-1021.00"
+              }
+            ]
+          },
+          "id": "cartographers-and-photogrammetrists.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "17-1021.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业代码",
+        "occupation_scope": "精确职业数据：Cartographers and Photogrammetrists；O*NET 17-1021.00",
+        "period": "2026 O*NET职业档案",
+        "source_refs": [
+          "onet-main"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "81,390美元/年",
+        "fact_id": "median",
+        "market": "美国",
+        "measure": "年工资中位数",
+        "occupation_scope": "精确职业数据；BLS/O*NET统计覆盖：Cartographers and Photogrammetrists；页面主题：制图师与摄影测量师（17-1021.00）",
+        "period": "2025 BLS OEWS",
+        "source_refs": [
+          "us-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "39.13美元/小时",
+        "fact_id": "low",
+        "market": "美国",
+        "measure": "小时工资中位数",
+        "occupation_scope": "精确职业数据；BLS/O*NET统计覆盖：Cartographers and Photogrammetrists；页面主题：制图师与摄影测量师（17-1021.00）",
+        "period": "2025 BLS OEWS",
+        "source_refs": [
+          "us-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "13,400名受雇者",
+        "fact_id": "high",
+        "market": "美国",
+        "measure": "就业规模",
+        "occupation_scope": "精确职业数据；BLS/O*NET统计覆盖：Cartographers and Photogrammetrists；页面主题：制图师与摄影测量师（17-1021.00）",
+        "period": "2024 BLS就业规模",
+        "source_refs": [
+          "us-employment"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "1,000个/年",
+        "fact_id": "trend",
+        "market": "美国",
+        "measure": "年均职位空缺",
+        "occupation_scope": "精确职业数据；BLS/O*NET统计覆盖：Cartographers and Photogrammetrists；页面主题：制图师与摄影测量师（17-1021.00）",
+        "period": "2024—2034 BLS就业预测",
+        "source_refs": [
+          "us-projections"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "adf3c2c3a1e8639abec35f3b3adf37d452c2bd79c571f727eb91d454bf9de967",
+  "source_content_sha256": "ebf4efc8868e3294396f8ed9fb771dba02fb6e04d0efde162191445bb51212a7",
   "subject": {
     "canonical_slug": "cartographers-and-photogrammetrists",
     "name": "制图师与摄影测量师",
-    "summary": null
+    "summary": "制图师与摄影测量师处理控制点坐标、坐标参考系统、影像期次、比例尺、属性与精度元数据，核心是判断数据能否叠加、偏差是单位/坐标系还是采集误差，以及产品可支持何种用途。页面提供可完成的虚构纸面材料、明确答案、美国统计范围与安全复核边界。"
   }
 }

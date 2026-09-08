@@ -1,12 +1,1554 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：核心是按规格检查材料或产品，保留原始读数，并给出可追溯的接收、拒收或暂缓状态。"
+            ]
+          },
+          "id": "quality-control-inspectors.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "onet-519061"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "可观察信号：复测稳定、单位清楚、缺失不猜补，发现越界时能保留证据并升级。"
+            ]
+          },
+          "id": "quality-control-inspectors.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全体验只用QC-8虚构纸面记录，不接触真实产品、量具、设备或控制系统。"
+            ]
+          },
+          "id": "quality-control-inspectors.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "输出每件样品的完整性、范围判断、状态和依据。"
+            ]
+          },
+          "id": "quality-control-inspectors.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "本页的美国统计采用51-9061.00“检查员、测试员、分拣员、取样员和称重员”父类职业口径，不把组合数据写成质量控制检查员独有统计。"
+            ]
+          },
+          "id": "quality-control-inspectors.profile.definition-block.1",
+          "source_refs": [
+            "onet-519061"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "投入包括图纸、规格、抽样要求、材料或产品、量具状态和批次信息。"
+            ]
+          },
+          "id": "quality-control-inspectors.profile.definition-block.2",
+          "source_refs": [
+            "onet-519061"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "产出包括读数、检验记录、接收或拒收标记、不合格品隔离和异常通知。"
+            ]
+          },
+          "id": "quality-control-inspectors.profile.definition-block.3",
+          "source_refs": [
+            "onet-519061"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "流程从核规格版本和样本身份开始，经检查测量、复核、判定、记录和交接。"
+            ]
+          },
+          "id": "quality-control-inspectors.profile.definition-block.4",
+          "source_refs": [
+            "onet-519061"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "关键判断是结果是否在公差内、字段是否完整、量具与样本是否可追溯。"
+            ]
+          },
+          "id": "quality-control-inspectors.profile.definition-block.5",
+          "source_refs": [
+            "onet-519061"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "BLS显示许多岗位在制造业，可能站立、搬动物品并接触噪声、移动部件或刺激性颗粒。"
+            ]
+          },
+          "id": "quality-control-inspectors.profile.definition-block.6",
+          "source_refs": [
+            "bls-qc-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "常见对象包括卡尺、量规、千分尺、电子检测设备、原料、在制品和成品。"
+            ]
+          },
+          "id": "quality-control-inspectors.profile.definition-block.7",
+          "source_refs": [
+            "onet-519061"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "需要把生产问题通知主管或其他负责人员。"
+            ]
+          },
+          "id": "quality-control-inspectors.profile.definition-block.8",
+          "source_refs": [
+            "onet-519061"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "质量看原始值未被改写、单位明确、规格版本正确、复测一致和处置可追溯。"
+            ]
+          },
+          "id": "quality-control-inspectors.profile.definition-block.9",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "真实放行、隔离、返工和设备操作必须服从雇主程序与授权。"
+            ]
+          },
+          "id": "quality-control-inspectors.profile.definition-block.10",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "mechanical-engineers",
+                "id": "quality-control-inspectors.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/mechanical-engineers"
+              },
+              {
+                "entity": "mechanical-engineering-technicians",
+                "id": "quality-control-inspectors.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/mechanical-engineering-technicians"
+              },
+              {
+                "entity": "calibration-technologists-and-technicians",
+                "id": "quality-control-inspectors.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/calibration-technologists-and-technicians"
+              },
+              {
+                "entity": "weighers-measurers-checkers-and-samplers-recordkeeping",
+                "id": "quality-control-inspectors.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/weighers-measurers-checkers-and-samplers-recordkeeping"
+              },
+              {
+                "entity": "electric-motor-power-tool-and-related-repairers",
+                "id": "quality-control-inspectors.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/electric-motor-power-tool-and-related-repairers"
+              }
+            ]
+          },
+          "id": "quality-control-inspectors.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "editorial-quality-guidance",
+            "onet-519061"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "先核对相邻方向主要检查或处理的对象，不按标题猜职责。"
+            ]
+          },
+          "id": "quality-control-inspectors.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "再核对交付是产品判定、测量设备状态、工程设计、维修结果还是数量记录。"
+            ]
+          },
+          "id": "quality-control-inspectors.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "测量责任、设备责任、资格和最终授权必须逐岗位查证。"
+            ]
+          },
+          "id": "quality-control-inspectors.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "相邻链接只提供探索入口，不表示工资、职责或资格相同。"
+            ]
+          },
+          "id": "quality-control-inspectors.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "BLS指出三维扫描与自动视觉可自动化部分检查任务并提高生产率。"
+            ]
+          },
+          "id": "quality-control-inspectors.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "bls-qc-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "自动系统可协助测量、筛选和排列候选异常。"
+            ]
+          },
+          "id": "quality-control-inspectors.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "bls-qc-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "候选异常必须追回规格版本、原始读数、样本和设备状态。"
+            ]
+          },
+          "id": "quality-control-inspectors.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "缺失读数、单位或样本身份不能由工具猜补。"
+            ]
+          },
+          "id": "quality-control-inspectors.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "接收、拒收、隔离和恢复由有权限人员按现场程序决定。"
+            ]
+          },
+          "id": "quality-control-inspectors.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "试用工具先用虚构数据记录版本、阈值、误报和漏报。"
+            ]
+          },
+          "id": "quality-control-inspectors.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "效果评价同时看复测一致性、漏检、误拒和追溯完整性。"
+            ]
+          },
+          "id": "quality-control-inspectors.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "任务自动化不能直接换算为统一的岗位替代比例。"
+            ]
+          },
+          "id": "quality-control-inspectors.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "bls-qc-outlook"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "本次核查材料没有中国大陆该精确职业的全国工资分布，暂无可安全使用的数据，保持documented_unavailable。"
+            ]
+          },
+          "id": "quality-control-inspectors.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国大陆制造业行业代理：2024年城镇非私营单位年平均工资107,987元，不是质量控制检查员中位数。"
+            ]
+          },
+          "fact_refs": [
+            "cn-manufacturing-nonprivate-wage"
+          ],
+          "id": "quality-control-inspectors.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages-2024"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国大陆制造业行业代理：2024年城镇私营单位年平均工资71,467元，不是该职业起薪。"
+            ]
+          },
+          "fact_refs": [
+            "cn-manufacturing-private-wage"
+          ],
+          "id": "quality-control-inspectors.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "nbs-wages-2024"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较真实岗位时另核地区、行业、班次、工时、津贴、合同和统计期。"
+            ]
+          },
+          "id": "quality-control-inspectors.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国51-9061父类职业数据：2025年年薪中位数为48,570美元。"
+            ]
+          },
+          "fact_refs": [
+            "us-median-wage-2025"
+          ],
+          "id": "quality-control-inspectors.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "bls-qc-pay"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国51-9061父类职业数据：2025年第10分位年薪为35,510美元。"
+            ]
+          },
+          "fact_refs": [
+            "us-wage-percentiles-2025"
+          ],
+          "id": "quality-control-inspectors.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "bls-qc-pay"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国51-9061父类职业数据：2025年第90分位年薪为77,860美元。"
+            ]
+          },
+          "fact_refs": [
+            "us-wage-percentiles-2025"
+          ],
+          "id": "quality-control-inspectors.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "bls-qc-pay"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "这些父类职业分位数不是质量控制检查员个人起薪或晋升承诺。"
+            ]
+          },
+          "id": "quality-control-inspectors.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "地区、行业、班次、资历和职责会影响实际报价。"
+            ]
+          },
+          "id": "quality-control-inspectors.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国父类职业数据不能直接换算为中国岗位工资。"
+            ]
+          },
+          "id": "quality-control-inspectors.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "先看是否愿意反复核对规格、单位、样本和读数。"
+            ]
+          },
+          "id": "quality-control-inspectors.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "任务适配表现为能把公差转成清楚的检查顺序。"
+            ]
+          },
+          "id": "quality-control-inspectors.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "判断适配表现为能区分范围内、越界与信息缺失。"
+            ]
+          },
+          "id": "quality-control-inspectors.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "交付适配表现为记录可追到批次、样本、时间、量具和规格版本。"
+            ]
+          },
+          "id": "quality-control-inspectors.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "协作适配表现为能把异常清楚交给生产、工程或主管。"
+            ]
+          },
+          "id": "quality-control-inspectors.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "学习适配表现为能掌握图纸、量具、抽样和报告要求。"
+            ]
+          },
+          "id": "quality-control-inspectors.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "消耗点可能来自站立、噪声、轮班、重复检查和赶工压力。"
+            ]
+          },
+          "id": "quality-control-inspectors.fit.riasec-fit-block.7",
+          "source_refs": [
+            "bls-qc-ooh"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "兴趣或人格标签不能替代纸面样本、训练、授权和实际绩效。"
+            ]
+          },
+          "id": "quality-control-inspectors.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "规格版本不明：停止判定，保留材料并升级。"
+            ]
+          },
+          "id": "quality-control-inspectors.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "读数、单位或样本身份缺失：状态为暂缓，不自行补值。"
+            ]
+          },
+          "id": "quality-control-inspectors.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "量具或设备状态不明：不据其结果放行产品。"
+            ]
+          },
+          "id": "quality-control-inspectors.risk.career-risk-cards.3",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "靠近移动部件、噪声或污染物时按现场防护和授权边界处理。"
+            ]
+          },
+          "id": "quality-control-inspectors.risk.career-risk-cards.4",
+          "source_refs": [
+            "bls-qc-ooh",
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "恢复检查或生产前由有权限人员按真实程序确认。"
+            ]
+          },
+          "id": "quality-control-inspectors.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "BLS显示该职业通常以高中学历或同等学历入门，并在就业后接受中期在岗训练；岗位要求仍以实际招聘为准。"
+            ]
+          },
+          "id": "quality-control-inspectors.path.career-path-block.1",
+          "source_refs": [
+            "bls-qc-ooh",
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品只使用QC-8虚构纸面记录，不接触真实产品或量具。"
+            ]
+          },
+          "id": "quality-control-inspectors.path.career-path-block.2",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "QC-8规格：虚构轴径允许9.95—10.05毫米，边界包含在内。A=10.02毫米；B=10.08毫米；C缺少读数。"
+            ]
+          },
+          "id": "quality-control-inspectors.path.career-path-block.3",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "规则：字段完整且在闭区间内标接收候选；任一越界标拒收候选；缺失标暂缓。"
+            ]
+          },
+          "id": "quality-control-inspectors.path.career-path-block.4",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "参考答案：A在范围内，接收候选；B高于10.05，拒收候选；C无读数，暂缓。"
+            ]
+          },
+          "id": "quality-control-inspectors.path.career-path-block.5",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "交付表包含样品、原始值、单位、上下限、完整性、状态和依据。"
+            ]
+          },
+          "id": "quality-control-inspectors.path.career-path-block.6",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七日体验可交换记录顺序重复核对并统计判断差异。"
+            ]
+          },
+          "id": "quality-control-inspectors.path.career-path-block.7",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "成长看更可靠的测量、追溯、异常说明和交接证据，不承诺授权或固定年限。"
+            ]
+          },
+          "id": "quality-control-inspectors.path.career-path-block.8",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国51-9061父类职业数据：2025年就业602,000人，2035年预计617,200人，官方净增15,200。"
+            ]
+          },
+          "fact_refs": [
+            "us-employment-2025"
+          ],
+          "id": "quality-control-inspectors.market-signals.market-signal-card.1",
+          "source_refs": [
+            "bls-qc-outlook",
+            "bls-qc-pay"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国51-9061父类职业数据：2025—2035增长3%。"
+            ]
+          },
+          "fact_refs": [
+            "us-outlook-2025-2035"
+          ],
+          "id": "quality-control-inspectors.market-signals.market-signal-card.2",
+          "source_refs": [
+            "bls-qc-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国51-9061父类职业数据：2025—2035年均职位空缺约66,700个，包含增长与替换。"
+            ]
+          },
+          "fact_refs": [
+            "us-outlook-2025-2035"
+          ],
+          "id": "quality-control-inspectors.market-signals.market-signal-card.3",
+          "source_refs": [
+            "bls-qc-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "自动化部分检查任务与仍需检验验证可以同时存在。"
+            ]
+          },
+          "id": "quality-control-inspectors.market-signals.market-signal-card.4",
+          "source_refs": [
+            "bls-qc-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "父类职业预测不能替代地区、行业和真实招聘核验。"
+            ]
+          },
+          "id": "quality-control-inspectors.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editorial-quality-guidance"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "O*NET 51-9061.00检查、测试、分拣、取样或称量非农原料及加工、机加工、制造或装配产品，查找缺陷、磨损与规格偏差，并记录结果。",
+                "id": "quality-control-inspectors.faq.1",
+                "question_key": "career.faq.quality-control-inspectors.daily-work",
+                "source_refs": [
+                  "onet-519061"
+                ]
+              },
+              {
+                "answer": "判断相邻方向的差异，需要查明各自处理对象、交付物、测量责任、设备责任和资格；页面导航名称不能证明职责相同。",
+                "id": "quality-control-inspectors.faq.2",
+                "question_key": "career.faq.quality-control-inspectors.role-comparison",
+                "source_refs": [
+                  "editorial-quality-guidance"
+                ]
+              },
+              {
+                "answer": "适配证据来自稳定复测、保留原始值、区分越界与缺失、写清判断依据和及时升级，而不是人格标签。",
+                "id": "quality-control-inspectors.faq.3",
+                "question_key": "career.faq.quality-control-inspectors.fit",
+                "source_refs": [
+                  "editorial-quality-guidance"
+                ]
+              },
+              {
+                "answer": "视觉检测、三维扫描和算法可加快尺寸测量、缺陷筛选与异常排序，但公开资料没有统一采用率，也不能把任务自动化直接换算为岗位替代概率。",
+                "id": "quality-control-inspectors.faq.4",
+                "question_key": "career.faq.quality-control-inspectors.ai-impact",
+                "source_refs": [
+                  "bls-qc-outlook"
+                ]
+              },
+              {
+                "answer": "自动系统的候选结果须追回规格版本、原始读数、样本与设备状态；接收、拒收、隔离和恢复由有权限人员按现场程序决定。",
+                "id": "quality-control-inspectors.faq.5",
+                "question_key": "career.faq.quality-control-inspectors.human-control",
+                "source_refs": [
+                  "editorial-quality-guidance"
+                ]
+              },
+              {
+                "answer": "本次核查材料没有中国大陆质量控制检查员全国精确职业工资分布；制造业平均工资仅作行业代理。",
+                "id": "quality-control-inspectors.faq.6",
+                "question_key": "career.faq.quality-control-inspectors.china-pay",
+                "source_refs": [
+                  "editorial-quality-guidance"
+                ]
+              },
+              {
+                "answer": "美国检查员、测试员、分拣员、取样员和称重员组合职业2025年5月年薪中位数为48570美元。",
+                "id": "quality-control-inspectors.faq.7",
+                "question_key": "career.faq.quality-control-inspectors.us-pay",
+                "source_refs": [
+                  "bls-qc-pay"
+                ]
+              },
+              {
+                "answer": "BLS质量控制检查员通常以高中学历或同等学历入门，并在受雇后接受中期在岗训练。",
+                "id": "quality-control-inspectors.faq.8",
+                "question_key": "career.faq.quality-control-inspectors.education-path",
+                "source_refs": [
+                  "bls-qc-ooh"
+                ]
+              },
+              {
+                "answer": "编辑性停止边界：规格版本、读数、单位、样本身份或设备状态不明时，纸面判断标记暂缓并升级；不据此操作真实设备或放行产品。",
+                "id": "quality-control-inspectors.faq.9",
+                "question_key": "career.faq.quality-control-inspectors.risk-boundary",
+                "source_refs": [
+                  "editorial-quality-guidance"
+                ]
+              },
+              {
+                "answer": "BLS 51-9061组合职业2025年就业602,000人，2035年预计617,200人，官方净增15,200，增长3%，2025—2035年均职位空缺约66,700个。",
+                "id": "quality-control-inspectors.faq.10",
+                "question_key": "career.faq.quality-control-inspectors.outlook-transition",
+                "source_refs": [
+                  "bls-qc-outlook"
+                ]
+              },
+              {
+                "answer": "BLS 51-9061组合职业2025年就业602,000人，2035年预计617,200人，官方净增15,200，增长3%，2025—2035年均职位空缺约66,700个。",
+                "id": "quality-control-inspectors.faq.11",
+                "question_key": "career.faq.quality-control-inspectors.career-worth",
+                "source_refs": [
+                  "bls-qc-outlook"
+                ]
+              }
+            ]
+          },
+          "id": "quality-control-inspectors.sources.faq.1",
+          "source_refs": [
+            "bls-qc-ooh",
+            "bls-qc-outlook",
+            "bls-qc-pay",
+            "editorial-quality-guidance",
+            "onet-519061"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "中国、美国与其他法域的证据分别陈述，工资、就业、资格、安全和技术结论不跨范围拼接。",
+              "本页只用于职业了解和虚构纸面练习，不替代现场程序、所在地规则、产品处置或专业意见。",
+              "工资数据缺口保持可见，不用行业代理、其他国家数据或估算值冒充精确职业工资。"
+            ]
+          },
+          "id": "quality-control-inspectors.sources.boundary.1",
+          "source_refs": [
+            "asq-cqi",
+            "bls-qc-ooh",
+            "bls-qc-outlook",
+            "bls-qc-pay",
+            "editorial-quality-guidance",
+            "nbs-wages-2024",
+            "nist-ai-rmf",
+            "onet-519061",
+            "onet-wages-519061",
+            "osha-loto",
+            "osha-machine-guarding",
+            "samr-cma"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "质量控制检查员",
+                "id": "quality-control-inspectors.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "质量控制检查员",
+                "id": "quality-control-inspectors.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "质量控制检查员",
+                "id": "quality-control-inspectors.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "质量控制检查员",
+                "id": "quality-control-inspectors.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "质量控制检查员",
+                "id": "quality-control-inspectors.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "质量控制检查员",
+                "id": "quality-control-inspectors.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "质量控制检查员",
+                "id": "quality-control-inspectors.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "质量控制检查员",
+                "id": "quality-control-inspectors.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "质量控制检查员",
+                "id": "quality-control-inspectors.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "质量控制检查员",
+                "id": "quality-control-inspectors.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "质量控制检查员",
+                "id": "quality-control-inspectors.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "quality-control-inspectors.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-08-30",
+                "details": [
+                  "支持CQI工作范围、经验与考试要求及自愿认证边界。",
+                  "专业协会自愿认证，不是通用执照、岗位分配或雇主授权。"
+                ],
+                "evidence_type": "professional certification profile",
+                "id": "asq-cqi",
+                "limitation": "专业协会自愿认证，不是通用执照、岗位分配或雇主授权。",
+                "market": "美国",
+                "name": "Certified Quality Inspector",
+                "period": "资料截至2026-08-30；数值按声明日期",
+                "publisher": "American Society for Quality",
+                "scope": "exact",
+                "url": "https://www.asq.org/cert/quality-inspector"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持职责、环境、入口、工资、就业预测和自动化影响。",
+                  "51-9061组合职业口径，不支持中国工资或每个行业资格。"
+                ],
+                "evidence_type": "official occupational outlook and wage statistics",
+                "id": "bls-qc-ooh",
+                "limitation": "51-9061组合职业口径，不支持中国工资或每个行业资格。",
+                "market": "美国",
+                "name": "Quality Control Inspectors: Occupational Outlook Handbook",
+                "period": "2026",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/ooh/production/quality-control-inspectors.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持职责、环境、入口、工资、就业预测和自动化影响。",
+                  "51-9061组合职业口径，不支持中国工资或每个行业资格。"
+                ],
+                "evidence_type": "official occupational outlook and wage statistics",
+                "id": "bls-qc-outlook",
+                "limitation": "51-9061组合职业口径，不支持中国工资或每个行业资格。",
+                "market": "美国",
+                "name": "Quality Control Inspectors: 就业预测",
+                "period": "2025-2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/ooh/production/quality-control-inspectors.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持职责、环境、入口、工资、就业预测和自动化影响。",
+                  "51-9061组合职业口径，不支持中国工资或每个行业资格。"
+                ],
+                "evidence_type": "official occupational outlook and wage statistics",
+                "id": "bls-qc-pay",
+                "limitation": "51-9061组合职业口径，不支持中国工资或每个行业资格。",
+                "market": "美国",
+                "name": "Quality Control Inspectors: 工资与就业",
+                "period": "2025",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/ooh/production/quality-control-inspectors.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "用于相邻比较方法、人工控制、停止升级和QC-8虚构练习。",
+                  "不构成产品放行、量具校准、危险能源控制、法规解释或雇主授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-quality-guidance",
+                "limitation": "不构成产品放行、量具校准、危险能源控制、法规解释或雇主授权。",
+                "market": "全球",
+                "name": "质量控制检查员阅读与纸面练习编辑综合",
+                "period": "2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "提供2024年制造业非私营与私营单位就业人员年平均工资。",
+                  "行业平均工资代理，税前；不是质量控制检查员职业中位数或到手收入。"
+                ],
+                "evidence_type": "official industry wage statistics",
+                "id": "nbs-wages-2024",
+                "limitation": "行业平均工资代理，税前；不是质量控制检查员职业中位数或到手收入。",
+                "market": "中国大陆",
+                "name": "2024年城镇单位就业人员年平均工资情况",
+                "period": "2024",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202505/t20250516_1959826.html"
+              },
+              {
+                "accessed_at": "2026-08-30",
+                "details": [
+                  "支持AI系统持续治理、测量、人工监督与风险记录。",
+                  "跨行业自愿框架，不测量质量检查员采用率或就业影响。"
+                ],
+                "evidence_type": "official AI risk management framework",
+                "id": "nist-ai-rmf",
+                "limitation": "跨行业自愿框架，不测量质量检查员采用率或就业影响。",
+                "market": "美国",
+                "name": "Artificial Intelligence Risk Management Framework 1.0",
+                "period": "资料截至2026-08-30；数值按声明日期",
+                "publisher": "National Institute of Standards and Technology",
+                "scope": "combined_official",
+                "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持组合职业身份、任务、工具、环境与自动检测边界。",
+                  "组合职业代理，涵盖测试、分拣、取样和称重，不等于每个行业岗位。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-519061",
+                "limitation": "组合职业代理，涵盖测试、分拣、取样和称重，不等于每个行业岗位。",
+                "market": "美国",
+                "name": "Inspectors, Testers, Sorters, Samplers, and Weighers 51-9061.00",
+                "period": "2026",
+                "publisher": "O*NET OnLine",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.onetonline.org/link/summary/51-9061.00"
+              },
+              {
+                "accessed_at": "2026-08-30",
+                "details": [
+                  "交叉核对2025美国工资中位数和分位数。",
+                  "转引BLS组合职业数据，不是单一质量检查岗位起薪。"
+                ],
+                "evidence_type": "official national wage projection",
+                "id": "onet-wages-519061",
+                "limitation": "转引BLS组合职业数据，不是单一质量检查岗位起薪。",
+                "market": "美国",
+                "name": "National Wages 51-9061.00",
+                "period": "资料截至2026-08-30；数值按声明日期",
+                "publisher": "O*NET OnLine",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.onetonline.org/link/localwages/51-9061.00"
+              },
+              {
+                "accessed_at": "2026-08-30",
+                "details": [
+                  "支持美国一般工业危险能源隔离、验证、培训和授权边界。",
+                  "美国一般工业规则，具体岗位须服从雇主程序和适用辖区。"
+                ],
+                "evidence_type": "official workplace safety standard",
+                "id": "osha-loto",
+                "limitation": "美国一般工业规则，具体岗位须服从雇主程序和适用辖区。",
+                "market": "美国",
+                "name": "29 CFR 1910.147 Control of Hazardous Energy",
+                "period": "资料截至2026-08-30；数值按声明日期",
+                "publisher": "Occupational Safety and Health Administration",
+                "scope": "combined_official",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147"
+              },
+              {
+                "accessed_at": "2026-08-30",
+                "details": [
+                  "支持防护装置、飞出物、培训和停机升级场景。",
+                  "通用机器防护指导，不替代设备特定风险评估。"
+                ],
+                "evidence_type": "official machine guarding guidance",
+                "id": "osha-machine-guarding",
+                "limitation": "通用机器防护指导，不替代设备特定风险评估。",
+                "market": "美国",
+                "name": "Machine Guarding Additional Safety Considerations",
+                "period": "资料截至2026-08-30；数值按声明日期",
+                "publisher": "Occupational Safety and Health Administration",
+                "scope": "combined_official",
+                "url": "https://www.osha.gov/etools/machine-guarding/introduction/safety-considerations"
+              },
+              {
+                "accessed_at": "2026-08-30",
+                "details": [
+                  "支持中国向社会出具证明性数据的检验检测机构资质边界。",
+                  "机构资质边界，不等于所有企业内部检查员个人执照。"
+                ],
+                "evidence_type": "official inspection institution qualification service",
+                "id": "samr-cma",
+                "limitation": "机构资质边界，不等于所有企业内部检查员个人执照。",
+                "market": "中国大陆",
+                "name": "检验检测机构资质认定",
+                "period": "资料截至2026-08-30；数值按声明日期",
+                "publisher": "国家市场监督管理总局",
+                "scope": "combined_official",
+                "url": "https://zwfw.samr.gov.cn/eportal/ui?articleKey=f4c3613b3f374795832eb2c19ae39259&columnId=9d6bd9df36f04d339493018644b0631a&pageId=f11b5cdee1bf4930a99a5a43133c4e31"
+              }
+            ]
+          },
+          "id": "quality-control-inspectors.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "107,987元/年",
+        "fact_id": "cn-manufacturing-nonprivate-wage",
+        "market": "中国大陆",
+        "measure": "城镇非私营单位制造业税前年平均工资",
+        "occupation_scope": "中国制造业行业数据（行业代理），不是质量控制检查员精确职业工资",
+        "period": "2024",
+        "source_refs": [
+          "nbs-wages-2024"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "71,467元/年",
+        "fact_id": "cn-manufacturing-private-wage",
+        "market": "中国大陆",
+        "measure": "城镇私营单位制造业税前年平均工资",
+        "occupation_scope": "中国制造业行业数据（行业代理），不是质量控制检查员精确职业工资",
+        "period": "2024",
+        "source_refs": [
+          "nbs-wages-2024"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "51-9061.00",
+        "fact_id": "soc-code-51-9061",
+        "market": "美国",
+        "measure": "O*NET组合代理职业代码",
+        "occupation_scope": "美国51-9061父类职业数据，不是质量控制检查员独有统计",
+        "period": "2026",
+        "source_refs": [
+          "onet-519061"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "约602,000人",
+        "fact_id": "us-employment-2025",
+        "market": "美国",
+        "measure": "就业存量",
+        "occupation_scope": "美国51-9061父类职业数据，不是质量控制检查员独有统计",
+        "period": "2025",
+        "source_refs": [
+          "bls-qc-pay"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "48,570美元/年",
+        "fact_id": "us-median-wage-2025",
+        "market": "美国",
+        "measure": "全国年薪中位数",
+        "occupation_scope": "美国51-9061父类职业数据，不是质量控制检查员独有统计",
+        "period": "2025",
+        "source_refs": [
+          "bls-qc-pay"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "3%；约66,700个空缺/年",
+        "fact_id": "us-outlook-2025-2035",
+        "market": "美国",
+        "measure": "2025—2035年就业增长率与预测年均岗位空缺",
+        "occupation_scope": "美国51-9061父类职业数据，不是质量控制检查员独有统计",
+        "period": "2025-2035",
+        "source_refs": [
+          "bls-qc-outlook"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "35,510—77,860美元/年（第10—90百分位）",
+        "fact_id": "us-wage-percentiles-2025",
+        "market": "美国",
+        "measure": "全国第10至第90百分位年薪范围",
+        "occupation_scope": "美国51-9061父类职业数据，不是质量控制检查员独有统计",
+        "period": "2025",
+        "source_refs": [
+          "bls-qc-pay"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "13ae3744433ac075a1f959c7dc2bc00a199c394766af0980465c377e1793308d",
+  "source_content_sha256": "f1c0b89c207a24cffdb8c064a5e65a7296bd6dee4b593e6a33d15b0c2cb2439b",
   "subject": {
     "canonical_slug": "quality-control-inspectors",
     "name": "质量控制检查员",
-    "summary": null
+    "summary": "质量控制检查员依据图纸与规格检查材料或产品，保留读数和样本追溯，标记接收、拒收或暂缓，并把异常交给有权限人员处理。"
   }
 }

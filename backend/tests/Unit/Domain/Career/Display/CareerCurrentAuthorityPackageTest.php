@@ -73,11 +73,18 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
                 continue;
             }
             foreach ($localized as $page) {
-                self::assertSame('legacy', $page['content_state']);
-                self::assertSame([], $page['blocks']);
-                self::assertNull($page['subject']['summary']);
+                if ($page['content_state'] === 'legacy') {
+                    self::assertSame([], $page['blocks']);
+                    self::assertNull($page['subject']['summary']);
+                } else {
+                    self::assertSame('zh-CN', $page['locale']);
+                    self::assertCount(13, $page['blocks']);
+                    self::assertNotEmpty($page['subject']['summary']);
+                }
             }
         }
+        self::assertSame($package['summary']['enhanced_locale_page_count'], $package['manifest']['coverage']['enhanced_locale_pages']);
+        self::assertSame($package['summary']['legacy_locale_page_count'], $package['manifest']['coverage']['legacy_locale_pages']);
         self::assertArrayNotHasKey('software-developers', $package['pages']);
     }
 

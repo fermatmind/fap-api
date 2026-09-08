@@ -1,12 +1,1631 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：这份工作不是“会切就行”，而是把批次、规格、加工、称重标识、缺陷隔离、物料差异、清洁交接和放行状态闭环。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "ed-fit",
+            "ed-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "可观察信号：核批次容器；保留原始重量；不猜差异去向；待定不放行；设备、防护或授权不明时停止升级。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "ed-fit",
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "60分钟虚构纸面样本：B-17投入120kg，合格72、修整30、副产品12、待定4kg；允许差异≤0.5kg；每容器须完整标识，副产品标签缺失。不得接触真实刀具、设备或食品。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考答案：去向合计118kg，差异2kg超限，且副产品标签未知；批次未闭环，待定不得放行，不能猜测2kg去向。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "ed-sim"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业边界：O*NET 51-3022.00，用手或手工具对肉类、禽类和海产品做常规切割与修整。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.definition-block.1",
+          "source_refs": [
+            "onet-meat"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "加工对象：肉、禽、鱼类原料、批次规格、容器、重量标签和缺陷/修整类别。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-meat"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "切修任务：使用刀、切肉刀、肉锯、带锯或其他设备切割修整；任务存在不代表个人已获设备授权。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-meat"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "记录任务：称重标识、按指定容器分装密封、检查缺陷并为包装准备。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-meat"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "完整流程：核批次规格—确认状态—授权加工—称重标识—隔离待定—核物料—清洁交接—授权放行。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.work-context-block.1",
+          "source_refs": [
+            "ed-work"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作情境：站立、重复动作、防护、低温、设备节奏、时间压力和危险设备暴露较突出。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.work-context-block.2",
+          "source_refs": [
+            "onet-meat"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "准备程度：O*NET列Job Zone 1-2，通常高中或同等学历，培训数天到一年；不保证录用。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-meat"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "可检查产出：批次、容器、重量、内容、缺陷、待定、物料差异、清洁与放行记录。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "ed-output"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：批次一致、单位明确、去向可追溯、差异不掩盖、待定不冒充放行。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "ed-output"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "相邻边界：餐厅烹饪、快餐烹饪、广义食品准备、农产品分级和种植收获与本职业不同。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.profile.definition-block.2",
+          "source_refs": [
+            "onet-farmworkers",
+            "onet-food-prep",
+            "onet-graders",
+            "onet-meat",
+            "onet-restaurant-cook",
+            "onet-short-cook"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "cooks-restaurant",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/cooks-restaurant"
+              },
+              {
+                "entity": "cooks-short-order",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/cooks-short-order"
+              },
+              {
+                "entity": "food-preparation-workers",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/food-preparation-workers"
+              },
+              {
+                "entity": "graders-and-sorters-agricultural-products",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/graders-and-sorters-agricultural-products"
+              },
+              {
+                "entity": "farmworkers-and-laborers-crop-nursery-and-greenhouse",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/farmworkers-and-laborers-crop-nursery-and-greenhouse"
+              }
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-farmworkers",
+            "onet-food-prep",
+            "onet-graders",
+            "onet-meat",
+            "onet-restaurant-cook",
+            "onet-short-cook"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "餐厅厨师准备、调味和烹制餐厅菜品；本职业聚焦肉禽海产原料的常规切割修整。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-farmworkers",
+            "onet-food-prep",
+            "onet-graders",
+            "onet-meat",
+            "onet-restaurant-cook",
+            "onet-short-cook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "快餐厨师按单制作短时食品；本职业不以点单烹调和餐桌服务为核心。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-farmworkers",
+            "onet-food-prep",
+            "onet-graders",
+            "onet-meat",
+            "onet-restaurant-cook",
+            "onet-short-cook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "食品准备工做更广的非烹调准备，可能切肉，但不等同于生产性肉禽鱼切割修整。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-farmworkers",
+            "onet-food-prep",
+            "onet-graders",
+            "onet-meat",
+            "onet-restaurant-cook",
+            "onet-short-cook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "农产品分级员按大小重量颜色或状况分类未加工农产品；种植业工人种植、养护和收获作物。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-farmworkers",
+            "onet-food-prep",
+            "onet-graders",
+            "onet-meat",
+            "onet-restaurant-cook",
+            "onet-short-cook"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助：标签生成、称重录入、物料差异、缺陷分类和交接草稿。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用条件：秤、容器ID、批次、规格和设备接口可靠。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数据门槛：原始重量、去向、缺陷、待定、操作与时间可追溯。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工控制：核批次、观察原料缺陷、确认容器与重量并隔离异常。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余责任：工具不能确认真实刀具设备状态、清洁效果或人员安全。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "失败风险：错批次、错单位、标签串批、缺陷误分、四舍五入掩盖差异或自动放行。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业边界：自动称重分拣不等于全流程采用率或岗位净变化。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实践响应：先用固定纸面批次验证规则，真实设备服从雇主培训、程序和权限。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：中国大陆暂无可安全使用的数据表示与O*NET 51-3022.00精确对应的全国工资。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：国家统计局2025资料按行业和宽泛岗位大类发布，不能替代精确职业中位数。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "计量口径：年薪、月薪、时薪、计时、计件和加班不可混用。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "求职用法：统一地区、产品、班次、工时、计件规则、低温防护、福利与食宿。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：O*NET展示美国51-3022.00全国工资。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-meat"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：2025年BLS工资数据。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-meat"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数：时薪18.41美元、年薪38,300美元，不是起薪。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-meat"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "计量单位：时薪与年薪同源，不能与计件价混用。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-meat"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "覆盖人群：精确职业全国统计，不代表每个产品、工厂、零售或班次。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "onet-meat"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "决策限制：统计值不是个人报价、录用或收入保证。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "onet-meat"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "批次信号：先比原料、工单、规格和容器标识。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.fit.riasec-fit-block.1",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "数量信号：保留原始重量和单位，核每个去向。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.fit.riasec-fit-block.2",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "质量信号：缺陷和待定分开，不凭外观猜放行。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.fit.riasec-fit-block.3",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "节奏信号：重复、低温和设备节奏下仍保持准确记录。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.fit.riasec-fit-block.4",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：不适应持续站立、重复动作或低温可能增加消耗。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.fit.riasec-fit-block.5",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：为赶产量绕过防护、隔离、标签或清洁交接会放大风险。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.fit.riasec-fit-block.6",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "验证方法：做本页题及“待定改6kg”“补副产品标签”两张变体。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.fit.riasec-fit-block.7",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "人格边界：手快自评不证明胜任；准确记录、安全边界和受监督表现更重要。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.fit.riasec-fit-block.8",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "锋利/运动设备：真实操作只按雇主训练、防护、设备和岗位授权执行。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.risk.career-risk-cards.1",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "低温滑倒重复动作：按现场程序和异常报告路径处理，不以本页替代培训。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.risk.career-risk-cards.2",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "批次质量：错标签、缺陷混入、差异或清洁状态未知时隔离受影响物料。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.risk.career-risk-cards.3",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "能源边界：美国1910.147适用且维护可能发生意外启动或储能释放时，遵守雇主能源控制程序，只由授权人员执行。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.risk.career-risk-cards.4",
+          "source_refs": [
+            "ecfr-loto"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同规则：批次、设备、防护、清洁、能源、质量或放行授权任一不明，停止受影响步骤、记录并升级。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.risk.career-risk-cards.5",
+          "source_refs": [
+            "ecfr-loto",
+            "ed-risk"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "现实入口：从批次识别、容器清单、称重标签、缺陷代码、物料平衡和待定隔离开始。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.path.career-path-block.1",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "雇主证据：核实产品、班次、刀具/设备培训、防护、低温、清洁、能源、返工和放行权限。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.path.career-path-block.2",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品：完成本页纸面题，展示去向合计、差异、标签未知和状态。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.path.career-path-block.3",
+          "source_refs": [
+            "ed-path",
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "面试与试用：解释为何2kg差异和缺标签都未闭环，不能猜或放行。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.path.career-path-block.4",
+          "source_refs": [
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七天试验：抄规则、做容器表、算差异、画流程、待定改6kg变体、补标签变体、复盘停止条件各一天。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.path.career-path-block.5",
+          "source_refs": [
+            "ed-path",
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "资格决策：刀具、锯切、防护、清洁化学品、维护、能源隔离、质检和放行逐项核验。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.path.career-path-block.6",
+          "source_refs": [
+            "ecfr-loto",
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "能力阶梯：先稳批次标签与记录，再做受监督加工，最后承担多品类、异常和授权范围内交接。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.path.career-path-block.7",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转型路径：餐饮烹饪、食品准备、农产品分级或种植业需补对应对象、工艺和安全证据。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.path.career-path-block.8",
+          "source_refs": [
+            "ed-path",
+            "onet-farmworkers",
+            "onet-food-prep",
+            "onet-graders",
+            "onet-meat",
+            "onet-restaurant-cook",
+            "onet-short-cook"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "官方信号：O*NET提供美国职业、工资、就业和预测资料，不证明本地正在招聘。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "就业预测：2024—2034增长5%至6%；2024就业约146,800，年度空缺约18,400。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "onet-meat"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "空缺边界：年度空缺含增长和替补，不等于新增岗位或个人录用概率。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "ed-market",
+            "onet-meat"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "技术信号：自动称重、视觉分拣或标签系统可能改变任务，不证明全行业采用。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "剩余责任：批次核验、真实缺陷、设备安全、异常隔离和放行责任不会因辅助工具自动转移。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "ed-ai",
+            "ed-market"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "可复核闭环是核对批次与规格、确认岗位和设备状态、按授权加工、逐容器称重标识、隔离缺陷/待定品、核对物料平衡，并由有权角色确认清洁、复工和食品放行；任务包括用刀具或锯等设备切割修整、称重并标记容器、检查缺陷、为包装切修、按指定容器分装密封，以及清洁切割设备。",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.faq.1",
+                "question_key": "career.faq.meat-poultry-and-fish-cutters-and-trimmers.daily-work",
+                "source_refs": [
+                  "ed-work",
+                  "onet-meat"
+                ]
+              },
+              {
+                "answer": "本职业以肉禽水产的常规切割修整和分装记录为核心；餐厅厨师与快餐厨师烹制菜品，食品准备工执行更广的非烹调准备，农产品分级员按特征分类未加工农产品，种植业工人种植养护和收获作物。",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.faq.2",
+                "question_key": "career.faq.meat-poultry-and-fish-cutters-and-trimmers.role-comparison",
+                "source_refs": [
+                  "onet-farmworkers",
+                  "onet-food-prep",
+                  "onet-graders",
+                  "onet-meat",
+                  "onet-restaurant-cook",
+                  "onet-short-cook"
+                ]
+              },
+              {
+                "answer": "适配度可通过能否稳定核批次、称重标识、发现缺陷、保持重复动作下的准确记录，并在设备、防护、清洁或授权不明时停止升级来观察。",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.faq.3",
+                "question_key": "career.faq.meat-poultry-and-fish-cutters-and-trimmers.fit",
+                "source_refs": [
+                  "ed-fit"
+                ]
+              },
+              {
+                "answer": "数字工具可辅助标签、称重录入、物料差异、缺陷分类和交接草稿；不能确认真实刀具/设备状态、肉品缺陷、清洁效果或人员操作安全。",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.faq.4",
+                "question_key": "career.faq.meat-poultry-and-fish-cutters-and-trimmers.ai-impact",
+                "source_refs": [
+                  "ed-ai"
+                ]
+              },
+              {
+                "answer": "人工控制点包括核批次规格、观察原料和缺陷、确认重量与容器、隔离待定品，并由授权角色决定设备、清洁、复工和放行。",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.faq.5",
+                "question_key": "career.faq.meat-poultry-and-fish-cutters-and-trimmers.human-control",
+                "source_refs": [
+                  "ed-ai"
+                ]
+              },
+              {
+                "answer": "国家统计局2025资料只有行业和宽泛岗位大类，不能给出与O*NET 51-3022.00精确对应的中国大陆全国中位数、统一起薪或计件价。",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.faq.6",
+                "question_key": "career.faq.meat-poultry-and-fish-cutters-and-trimmers.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "O*NET显示2025年美国全国中位时薪18.41美元、年薪38,300美元；该全国中位数不是起薪、计件价、个人报价或中国工资。",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.faq.7",
+                "question_key": "career.faq.meat-poultry-and-fish-cutters-and-trimmers.us-pay",
+                "source_refs": [
+                  "onet-meat"
+                ]
+              },
+              {
+                "answer": "入门先练批次核对、容器清单、称重表、缺陷代码、物料平衡和待定隔离，只用虚构纸面数据，不接触真实刀具、设备或食品；刀具、锯切设备、防护、清洁化学品、卡堵/维护、能源隔离、质量判定和食品放行是不同训练与权限，须由雇主逐项核验。",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.faq.8",
+                "question_key": "career.faq.meat-poultry-and-fish-cutters-and-trimmers.education-path",
+                "source_refs": [
+                  "ed-path"
+                ]
+              },
+              {
+                "answer": "关键风险包括锋利工具和运动设备、滑倒与低温、重复动作、错批次/错标签、缺陷混入、清洁状态不明、未经授权处理卡堵或维护以及误放行；在29 CFR 1910.147适用的美国机器设备维护场景，如意外启动或储能释放可能伤人，雇主须建立能源控制程序并由相应授权人员执行；条文另有正常生产操作范围与例外。",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.faq.9",
+                "question_key": "career.faq.meat-poultry-and-fish-cutters-and-trimmers.risk-boundary",
+                "source_refs": [
+                  "ecfr-loto",
+                  "ed-risk"
+                ]
+              },
+              {
+                "answer": "O*NET/BLS显示2024—2034增长5%至6%，快于平均；O*NET/BLS显示2024就业约146,800，2024—2034年度空缺约18,400；空缺包括增长和替补。",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.faq.10",
+                "question_key": "career.faq.meat-poultry-and-fish-cutters-and-trimmers.outlook-transition",
+                "source_refs": [
+                  "onet-meat"
+                ]
+              },
+              {
+                "answer": "工资、就业、预测、空缺、计时/计件和自动化采用是不同信号，不能合并为个人录用或收入概率；适配度可通过能否稳定核批次、称重标识、发现缺陷、保持重复动作下的准确记录，并在设备、防护、清洁或授权不明时停止升级来观察。",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.faq.11",
+                "question_key": "career.faq.meat-poultry-and-fish-cutters-and-trimmers.career-worth",
+                "source_refs": [
+                  "ed-fit",
+                  "ed-market"
+                ]
+              }
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.sources.faq.1",
+          "source_refs": [
+            "ecfr-loto",
+            "ed-ai",
+            "ed-fit",
+            "ed-market",
+            "ed-path",
+            "ed-risk",
+            "ed-work",
+            "nbs-wages",
+            "onet-farmworkers",
+            "onet-food-prep",
+            "onet-graders",
+            "onet-meat",
+            "onet-restaurant-cook",
+            "onet-short-cook"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "O*NET职业事实、美国统计、eCFR条件式安全边界、中国行业代理和编辑建议分别陈述。",
+              "本页只供职业决策和虚构纸面核算，不构成刀具、设备、清洁、能源隔离或食品放行指导。",
+              "中国精确职业工资暂无可安全使用的数据。"
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.sources.boundary.1",
+          "source_refs": [
+            "ecfr-loto",
+            "ed-ai",
+            "ed-fit",
+            "ed-market",
+            "ed-output",
+            "ed-path",
+            "ed-risk",
+            "ed-sim",
+            "ed-work",
+            "nbs-wages",
+            "onet-farmworkers",
+            "onet-food-prep",
+            "onet-graders",
+            "onet-meat",
+            "onet-restaurant-cook",
+            "onet-short-cook"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "肉类、鱼类切割工布置员",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "肉类、鱼类切割工布置员",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "肉类、鱼类切割工布置员",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "肉类、鱼类切割工布置员",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "肉类、鱼类切割工布置员",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "肉类、鱼类切割工布置员",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "肉类、鱼类切割工布置员",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "肉类、鱼类切割工布置员",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "肉类、鱼类切割工布置员",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "肉类、鱼类切割工布置员",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "肉类、鱼类切割工布置员",
+                "id": "meat-poultry-and-fish-cutters-and-trimmers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对机器设备维护中意外启动或储能释放的适用边界和授权角色。",
+                  "只在该条适用的美国维护场景使用；本轮较早已读正文，后续重开被访问页拦截，不推断新状态。"
+                ],
+                "evidence_type": "current eCFR regulation text",
+                "id": "ecfr-loto",
+                "limitation": "只在该条适用的美国维护场景使用；本轮较早已读正文，后续重开被访问页拦截，不推断新状态。",
+                "market": "美国",
+                "name": "29 CFR 1910.147 - Control of hazardous energy",
+                "period": "current regulation; accessed 2026-09-06",
+                "publisher": "eCFR / Office of the Federal Register",
+                "scope": "exact",
+                "url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1910/subpart-J/section-1910.147"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实刀具、锯切、设备清洁、能源隔离或食品放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-ai",
+                "limitation": "不构成真实刀具、锯切、设备清洁、能源隔离或食品放行指导。",
+                "market": "全球",
+                "name": "切割修整数字工具边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实刀具、锯切、设备清洁、能源隔离或食品放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-fit",
+                "limitation": "不构成真实刀具、锯切、设备清洁、能源隔离或食品放行指导。",
+                "market": "全球",
+                "name": "切割修整适配观察",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实刀具、锯切、设备清洁、能源隔离或食品放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-market",
+                "limitation": "不构成真实刀具、锯切、设备清洁、能源隔离或食品放行指导。",
+                "market": "全球",
+                "name": "切割修整市场边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实刀具、锯切、设备清洁、能源隔离或食品放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-output",
+                "limitation": "不构成真实刀具、锯切、设备清洁、能源隔离或食品放行指导。",
+                "market": "全球",
+                "name": "切割修整产出质量",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实刀具、锯切、设备清洁、能源隔离或食品放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-path",
+                "limitation": "不构成真实刀具、锯切、设备清洁、能源隔离或食品放行指导。",
+                "market": "全球",
+                "name": "切割修整入门路径",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实刀具、锯切、设备清洁、能源隔离或食品放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-risk",
+                "limitation": "不构成真实刀具、锯切、设备清洁、能源隔离或食品放行指导。",
+                "market": "全球",
+                "name": "切割修整风险边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实刀具、锯切、设备清洁、能源隔离或食品放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-sim",
+                "limitation": "不构成真实刀具、锯切、设备清洁、能源隔离或食品放行指导。",
+                "market": "全球",
+                "name": "虚构批次质量练习",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实刀具、锯切、设备清洁、能源隔离或食品放行指导。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-work",
+                "limitation": "不构成真实刀具、锯切、设备清洁、能源隔离或食品放行指导。",
+                "market": "全球",
+                "name": "切割修整记录闭环",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对中国行业和宽泛岗位工资口径。",
+                  "不能替代本职业精确工资。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "nbs-wages",
+                "limitation": "不能替代本职业精确工资。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wages; published 2026-05-15; accessed 2026-09-06",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-farmworkers",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "45-2092.00 - Farmworkers and Laborers, Crop, Nursery, and Greenhouse",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/45-2092.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-food-prep",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "35-2021.00 - Food Preparation Workers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/35-2021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-graders",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "45-2041.00 - Graders and Sorters, Agricultural Products",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/45-2041.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对身份、任务、环境、准备、工资和预测。",
+                  "仅限该职业和美国统计。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-meat",
+                "limitation": "仅限该职业和美国统计。",
+                "market": "美国",
+                "name": "51-3022.00 - Meat, Poultry, and Fish Cutters and Trimmers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-3022.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-restaurant-cook",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "35-2014.00 - Cooks, Restaurant",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/35-2014.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-short-cook",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "35-2015.00 - Cooks, Short Order",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/35-2015.00"
+              }
+            ]
+          },
+          "id": "meat-poultry-and-fish-cutters-and-trimmers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "精确职业数据：O*NET 51-3022.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业身份",
+        "occupation_scope": "肉类、鱼类切割工布置员 / 51-3022.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-meat"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "切割修整、称重标识、缺陷检查与分装",
+        "fact_id": "tasks",
+        "market": "美国",
+        "measure": "核心任务",
+        "occupation_scope": "肉类、鱼类切割工布置员 / 51-3022.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-meat"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "批次—加工—称重—隔离—差异—清洁—放行",
+        "fact_id": "workflow",
+        "market": "全球",
+        "measure": "工作闭环",
+        "occupation_scope": "肉类、鱼类切割工布置员 / 51-3022.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "ed-work"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "批次、数量、缺陷、节奏与停止判断",
+        "fact_id": "fit",
+        "market": "全球",
+        "measure": "适配信号",
+        "occupation_scope": "肉类、鱼类切割工布置员 / 51-3022.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "ed-fit"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "刀具设备、低温、重复、标签、清洁与放行",
+        "fact_id": "risk",
+        "market": "全球",
+        "measure": "风险边界",
+        "occupation_scope": "肉类、鱼类切割工布置员 / 51-3022.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "ed-risk"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "e49829dc15542d7e665dc99b4c16787884a66d7ccba4a54026f5df4f6e52eac2",
+  "source_content_sha256": "d8cf29cb66547224b8bf3c7aaa88fbb630ef355fe9ea11039e696b96d55504a7",
   "subject": {
     "canonical_slug": "meat-poultry-and-fish-cutters-and-trimmers",
     "name": "肉类、鱼类切割工布置员",
-    "summary": null
+    "summary": "按批次和规格对肉禽水产做常规切割修整，逐容器称重标识并隔离缺陷或待定品，在设备、清洁、能源或放行权限不明时停止升级。"
   }
 }

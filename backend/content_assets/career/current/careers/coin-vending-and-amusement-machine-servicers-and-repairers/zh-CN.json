@@ -1,12 +1,1497 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：如果你愿意同时处理设备故障、补货收款记录和服务现场沟通，这个职业值得小成本试做；如果只喜欢单一环节，先核对招聘职位的真实重心。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "观察三件事：能否把现象、故障代码和图示对齐；能否把零件、货款与服务记录对齐；能否在能源、资格或设备状态不明时停止推测并升级。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全桌面练习：只审三张虚构服务卡的7字段——资产/地点、现象、故障代码或测试证据、能源/隔离状态、零件可用性、负责技师、升级安排（触发条件+对象）；不操作真实机器。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "卡A：VM-17/南堂，已扣款但未出货，E12连续3次，能源/隔离未知，A17推进器可用，负责技师陈工，“隔离未知时升级值班主管”；缺1项。卡B：AG-04/游戏区，黑屏，P03+照片，T-02于09:10记录已隔离，零件可用性未知，技师未分配，“任一未知时升级服务协调员”；缺2项。卡C：VM-22/东厅，温度警报，T09+复测记录，T-05于10:20记录已隔离，F22风扇可用，负责技师李工，“获授权复测后再报警则升级值班主管”；缺0项。三卡都不构成维修许可。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业定义：O*NET 49-9091.00覆盖硬币式、自动售货与娱乐机的安装、保养、调整和修理，也包含补货、清点钱款与服务记录。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.profile.definition-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "接收服务请求，核对机器、地点、故障现象与历史记录。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "检查与测试机器，参照图示和测试结果识别故障。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "更换或调整部件，完成后记录工作、零件和服务结果。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "实际日程可同时包含路线服务、客户场地沟通、补货收款和机电故障处理。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.profile.work-context-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "职位重心会因设备类型与雇主而异：自动售货路线可更看重库存和钱款，娱乐设备服务可更看重电子与机械诊断。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.profile.work-context-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "结构化核对：对象是指定机器；输入是现象、代码、图示和历史；产出是恢复结果、零件/款货记录与升级记录。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "一句话回答：这是把设备诊断修理与现场服务记录连起来的职业。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量不只是“机器能转”：还要能追溯故障证据、零件处理、款货差异和服务记录。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "边界：这一O*NET条目不等于所有雇主都要求同一种设备、同一路线或同一授权。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.profile.definition-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "office-machine-operators-except-computer",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/office-machine-operators-except-computer"
+              },
+              {
+                "entity": "computer-automated-teller-and-office-machine-repairers",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/computer-automated-teller-and-office-machine-repairers"
+              },
+              {
+                "entity": "electric-motor-power-tool-and-related-repairers",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/electric-motor-power-tool-and-related-repairers"
+              },
+              {
+                "entity": "mobile-heavy-equipment-mechanics-except-engines",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/mobile-heavy-equipment-mechanics-except-engines"
+              },
+              {
+                "entity": "home-appliance-repairers",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/home-appliance-repairers"
+              }
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "49-2011的对象是计算机、文字处理系统、ATM和复印/传真等办公机器。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-industrial-repair",
+            "onet-office-repair"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "49-9091的对象是硬币式、自动售货和娱乐机，并包含补货、钱款与服务记录。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "49-2094的对象是工业控制、发射机、天线等商业和工业电子设备。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-industrial-repair",
+            "onet-office-repair"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "三者都可包含测试、更换零件和服务记录，但设备范围、软件/工业系统复杂度与款货责任不同，不能按“维修员”头衔互换。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-industrial-repair",
+            "onet-office-repair"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助：整理服务单、故障代码、零件清单和路线摘要。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助：对历史工单分类，帮助技师定位需先核对的记录。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "不能代替：确认真实设备状态、现场能源条件和人员资格。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "不能代替：对款货差异、零件实物和恢复结果的人工复核。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "O*NET热门技术页仅显示Office、Excel、Outlook和PowerPoint线索，百分比不可用。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "onet-tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "该页不是生成式AI采用调查，也不支持计算岗位被替代概率。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "onet-tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人类控制点：原始故障证据、设备身份、零件实物、款货记录和恢复结果。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "推荐使用原则：工具输出只是待核线索；不清楚时保留未知并交由获授权人员判断。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "截至2026年9月6日本次复核，与美国49-9091.00精确对应的中国大陆全国职业工资暂无可安全使用的数据，本模块记为documented_unavailable。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "国家统计局2024年资料提供城镇单位、行业与人员大类聚合数，不是49-9091.00的中国等价统计。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "因此不把任何行业均值当成本职业中位数、起薪或个人到手收入。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "求职时应核对城市、设备类型、路线/现金责任、班次、薪酬口径和数据时间。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "2025年美国49-9091.00工资中位数：47,450美元/年。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "对应小时中位数：22.81美元/小时。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "年工资第10百分位：34,320美元；第25百分位：39,760美元。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "年工资第75百分位：58,110美元；第90百分位：66,370美元。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "百分位是职业统计分布，不是从入门到高级的固定晋升阶梯。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "该数据是美国BLS OEWS工资数据的O*NET展示，不能转换为中国报价或个人承诺。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "onet-wage"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "适合信号1：愿意从现象、代码、图示和测试结果逐项缩小故障范围。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "适合信号2：能同时管理机器、零件、库存、款货和服务记录。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "适合信号3：能在客户场地清楚说明已知、未知和下一个复核点。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "适合信号4：愿意在信息不全时停止猜测，按雇主程序升级。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎信号1：对路线、补货、款货记录或外出服务强烈排斥。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎信号2：只愿意更换部件，不愿留存故障证据和服务结果。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎信号3：会把相似机型经验直接套到未核对的设备。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "最好的验证不是性格测验，而是完成本页虚构服务卡审查并解释每一个未知项。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "故障证据不完整：O*NET支持检查、测试与图示诊断；编辑控制是保留未知，不用相似故障代替当前证据。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "设备与零件错配：O*NET支持更换零件与记录服务；编辑控制是同时核对资产身份、零件可用性与记录。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "款货差异：O*NET包含收取金钱、补货和存档；差异处理必须遵循雇主的记录、复核和升级程序。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.risk.career-risk-cards.3",
+          "source_refs": [
+            "editorial",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "能源、资格或当前状态不明：本页不从O*NET任务推导停机权、复机权或具体操作步骤；只记录并交由现行程序指定的人员判断。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "班前/出发卡的编辑控制：每次记录复核时间、责任人、升级触发条件和升级对象；具体停复工权限由雇主程序确定。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "BLS典型入门教育：高中学历或同等水平。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.path.career-path-block.1",
+          "source_refs": [
+            "bls-training"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "BLS列出：无典型相关工作经验，短期在职培训。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.path.career-path-block.2",
+          "source_refs": [
+            "bls-training"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "路径建议：先练习读取故障现象、资产身份、图示和服务记录，再进入雇主训练。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.path.career-path-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "路径建议：将补货/款货记录与故障诊断分开练习，避免一个“维修员”标签遮蔽真实职位重心。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.path.career-path-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七日虚构试做：第1日读服务卡，第2日核对资产/现象，第3日整理故障证据，第4日核对零件，第5日写升级记录，第6日复算A/B/C缺项，第7日回顾。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.path.career-path-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品1：一页虚构服务卡审查表，包含7字段、已知/未知和升级理由。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.path.career-path-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品2：一页故障证据到待核项的对照表，不写真实拆机、通电或旁路步骤。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.path.career-path-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "边界：这些是职业探索作品，不是雇主培训、设备授权、资质或现场工作许可。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.path.career-path-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "BLS预计就业从2025年34,700降至2035年33,500。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "bls-proj"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "同期净减少1,200，变化-3.4%。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "bls-proj"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "期间年均空缺约3,800；这可能主要来自人员流动与退出，不等于就业净增长。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "bls-proj"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "O*NET行业分布显示：艺术/娱乐/休闲21%、零售15%、政府13%、批发12%、住宿餐饮11%、其他28%。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "onet-industry"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "判断：这是一个总体预测下降但仍有替换性空缺的美国职业；先核对本地设备类型与雇主需求，不把年均空缺写成增长。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "O*NET 49-9091.00的任务包括安装、保养、调整或修理硬币式、自动售货和娱乐机，以及补货、清点、测试、更换零件和记录服务。",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.faq.1",
+                "question_key": "career.faq.coin-vending-and-amusement-machine-servicers-and-repairers.daily-work",
+                "source_refs": [
+                  "onet-details"
+                ]
+              },
+              {
+                "answer": "O*NET 49-9091.00的对象是硬币式、自动售货和娱乐机，任务包括补货、收取钱款和维护服务记录。 49-2011修理计算机、ATM和办公机器；49-2094修理、测试、调整或安装工业控制、发射机和天线等商业/工业电子设备。 冻结route的五个链接仅是导航候选；正文另用49-2094作设备范围比较，不声称49-2094属于route列表。",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.faq.2",
+                "question_key": "career.faq.coin-vending-and-amusement-machine-servicers-and-repairers.role-comparison",
+                "source_refs": [
+                  "editorial",
+                  "onet-details",
+                  "onet-industrial-repair",
+                  "onet-office-repair"
+                ]
+              },
+              {
+                "answer": "适配与谨慎信号是基于职业任务设计的自我观察框架，不是性格诊断或雇佣结论。",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.faq.3",
+                "question_key": "career.faq.coin-vending-and-amusement-machine-servicers-and-repairers.fit",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "O*NET 2025年美国招聘信息仅列出Office、Excel、Outlook和PowerPoint等软件线索；不能据此推导生成式AI普及或岗位替代率。",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.faq.4",
+                "question_key": "career.faq.coin-vending-and-amusement-machine-servicers-and-repairers.ai-impact",
+                "source_refs": [
+                  "onet-tech"
+                ]
+              },
+              {
+                "answer": "数字工具不能代替人工核对真实设备、原始故障证据、零件实物、款货记录和恢复结果；能源、资格与授权交由现行程序指定的人员判断。",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.faq.5",
+                "question_key": "career.faq.coin-vending-and-amusement-machine-servicers-and-repairers.human-control",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "国家统计局2024年工资资料按单位类型、行业和人员大类汇总，不是本职业的全国精确工资。",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.faq.6",
+                "question_key": "career.faq.coin-vending-and-amusement-machine-servicers-and-repairers.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "O*NET展示的2025年美国49-9091工资中位数为47,450美元/年或22.81美元/小时；这是统计分布，不是个人报价。",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.faq.7",
+                "question_key": "career.faq.coin-vending-and-amusement-machine-servicers-and-repairers.us-pay",
+                "source_refs": [
+                  "onet-wage"
+                ]
+              },
+              {
+                "answer": "BLS将该职业的典型入门教育列为高中学历或同等水平，无典型相关经验，并有短期在职培训；这不自动构成设备作业授权。",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.faq.8",
+                "question_key": "career.faq.coin-vending-and-amusement-machine-servicers-and-repairers.education-path",
+                "source_refs": [
+                  "bls-training"
+                ]
+              },
+              {
+                "answer": "风险卡只给出记录、复核和升级框架；不规定停机、复机、能源隔离或具体维修步骤。",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.faq.9",
+                "question_key": "career.faq.coin-vending-and-amusement-machine-servicers-and-repairers.risk-boundary",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "BLS预计49-9091就业从2025年34,700降至2035年33,500，变化-3.4%，期间年均空缺约3,800；净变化与年均空缺不是同一指标。",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.faq.10",
+                "question_key": "career.faq.coin-vending-and-amusement-machine-servicers-and-repairers.outlook-transition",
+                "source_refs": [
+                  "bls-proj"
+                ]
+              },
+              {
+                "answer": "如果你愿意做故障诊断、现场服务和可追溯记录，可先完成虚构桌面练习再核对本地职缺；总体下降预测不等于没有空缺。",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.faq.11",
+                "question_key": "career.faq.coin-vending-and-amusement-machine-servicers-and-repairers.career-worth",
+                "source_refs": [
+                  "editorial"
+                ]
+              }
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.sources.faq.1",
+          "source_refs": [
+            "bls-proj",
+            "bls-training",
+            "editorial",
+            "nbs-wages",
+            "onet-details",
+            "onet-industrial-repair",
+            "onet-office-repair",
+            "onet-tech",
+            "onet-wage"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "美国事实仅对应O*NET/BLS 49-9091.00口径；不作中国职业、工资或授权映射。",
+              "虚构服务卡仅为桌面职业探索，不含真实设备操作。"
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.sources.boundary.1",
+          "source_refs": [
+            "bls-proj",
+            "bls-training",
+            "editorial",
+            "nbs-wages",
+            "onet-details",
+            "onet-industrial-repair",
+            "onet-industry",
+            "onet-office-repair",
+            "onet-tech",
+            "onet-wage"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "自动售货、机器维修员",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "自动售货、机器维修员",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "自动售货、机器维修员",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "自动售货、机器维修员",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "自动售货、机器维修员",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "自动售货、机器维修员",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "自动售货、机器维修员",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "自动售货、机器维修员",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "自动售货、机器维修员",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "自动售货、机器维修员",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "自动售货、机器维修员",
+                "id": "coin-vending-and-amusement-machine-servicers-and-repairers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn36view3 lines 1062-1065。",
+                  "仅用于所列职业、市场、时期和口径；不外推到中国映射、个人结果或操作授权。"
+                ],
+                "evidence_type": "official statistics",
+                "id": "bls-proj",
+                "limitation": "仅用于所列职业、市场、时期和口径；不外推到中国映射、个人结果或操作授权。",
+                "market": "美国",
+                "name": "U.S. Bureau of Labor Statistics — Occupational projections",
+                "period": "2025-2035 projections; published 2026",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn36view4 lines 818-840。",
+                  "仅用于所列职业、市场、时期和口径；不外推到中国映射、个人结果或操作授权。"
+                ],
+                "evidence_type": "official statistics",
+                "id": "bls-training",
+                "limitation": "仅用于所列职业、市场、时期和口径；不外推到中国映射、个人结果或操作授权。",
+                "market": "美国",
+                "name": "U.S. Bureau of Labor Statistics — Education and training assignments",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/education-and-training-by-occupation.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "本页编辑设计，仅支持虚构桌面练习和不外推边界。",
+                  "仅支持编辑练习和决策边界，不支持外部事实、现场操作步骤或法定授权。"
+                ],
+                "evidence_type": "editorial exercise and decision framework",
+                "id": "editorial",
+                "limitation": "仅支持编辑练习和决策边界，不支持外部事实、现场操作步骤或法定授权。",
+                "market": "编辑设计",
+                "name": "FermatMind — 自动售货、机器维修员候选页编辑设计",
+                "period": "2026-09-06",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn33view3 lines 24-39, 66-75, 127-155, 175-246。",
+                  "按行业与人员大类汇总，不能代替本职业精确工资。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "nbs-wages",
+                "limitation": "按行业与人员大类汇总，不能代替本职业精确工资。",
+                "market": "中国大陆",
+                "name": "国家统计局 — 2024年城镇单位就业人员年平均工资情况",
+                "period": "2024 wage aggregates published 2025; accessed 2026-09-06",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202505/t20250516_1959826.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn35view0 lines 50-234, 235-340。",
+                  "仅用于所列职业、市场、时期和口径；不外推到中国映射、个人结果或操作授权。"
+                ],
+                "evidence_type": "official occupation details",
+                "id": "onet-details",
+                "limitation": "仅用于所列职业、市场、时期和口径；不外推到中国映射、个人结果或操作授权。",
+                "market": "美国",
+                "name": "O*NET OnLine — 49-9091.00 details",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/49-9091.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn38view0 lines 50-57, 121-147; turn38view1 lines 199-244。",
+                  "仅用于所列职业、市场、时期和口径；不外推到中国映射、个人结果或操作授权。"
+                ],
+                "evidence_type": "official adjacent occupation details",
+                "id": "onet-industrial-repair",
+                "limitation": "仅用于所列职业、市场、时期和口径；不外推到中国映射、个人结果或操作授权。",
+                "market": "美国",
+                "name": "O*NET OnLine — 49-2094.00 commercial and industrial equipment repairers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/49-2094.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn36view1 lines 50-71。",
+                  "仅用于所列职业、市场、时期和口径；不外推到中国映射、个人结果或操作授权。"
+                ],
+                "evidence_type": "official industry distribution",
+                "id": "onet-industry",
+                "limitation": "仅用于所列职业、市场、时期和口径；不外推到中国映射、个人结果或操作授权。",
+                "market": "美国",
+                "name": "O*NET OnLine — Industries 49-9091.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/49-9091.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn37view0 lines 50-57, 121-150, 200-259。",
+                  "仅用于所列职业、市场、时期和口径；不外推到中国映射、个人结果或操作授权。"
+                ],
+                "evidence_type": "official adjacent occupation details",
+                "id": "onet-office-repair",
+                "limitation": "仅用于所列职业、市场、时期和口径；不外推到中国映射、个人结果或操作授权。",
+                "market": "美国",
+                "name": "O*NET OnLine — 49-2011.00 office machine repairers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/49-2011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn36view2 lines 50-61。",
+                  "仅用于所列职业、市场、时期和口径；不外推到中国映射、个人结果或操作授权。"
+                ],
+                "evidence_type": "official technology profile",
+                "id": "onet-tech",
+                "limitation": "仅用于所列职业、市场、时期和口径；不外推到中国映射、个人结果或操作授权。",
+                "market": "美国",
+                "name": "O*NET OnLine — Hot Technologies 49-9091.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/49-9091.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn36view0 lines 50-75。",
+                  "仅用于所列职业、市场、时期和口径；不外推到中国映射、个人结果或操作授权。"
+                ],
+                "evidence_type": "O*NET display of BLS OEWS wage data",
+                "id": "onet-wage",
+                "limitation": "仅用于所列职业、市场、时期和口径；不外推到中国映射、个人结果或操作授权。",
+                "market": "美国",
+                "name": "O*NET / BLS — National Wages 49-9091.00",
+                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "publisher": "O*NET / BLS",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/49-9091.00"
+              }
+            ]
+          },
+          "id": "coin-vending-and-amusement-machine-servicers-and-repairers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "故障证据、资产/零件核对与可追溯记录",
+        "fact_id": "fit",
+        "market": "美国",
+        "measure": "可观察适配信号",
+        "occupation_scope": "精确职业数据：49-9091.00",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-details"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET 49-9091.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业代码与身份",
+        "occupation_scope": "精确职业数据：49-9091.00",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-details"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "信息不全、设备/零件错配、款货差异与授权边界",
+        "fact_id": "risk",
+        "market": "美国",
+        "measure": "风险控制边界",
+        "occupation_scope": "精确职业数据：49-9091.00",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-details"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "BLS OEWS 2025 工资分布",
+        "fact_id": "us-wage",
+        "market": "美国",
+        "measure": "美国工资口径",
+        "occupation_scope": "精确职业数据：49-9091.00",
+        "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+        "source_refs": [
+          "onet-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "机器、零件、库存、款货与外出服务",
+        "fact_id": "work-context",
+        "market": "美国",
+        "measure": "任务与对象",
+        "occupation_scope": "精确职业数据：49-9091.00",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-details"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "服务请求→检查测试→调整/更换→复核与记录",
+        "fact_id": "workflow",
+        "market": "美国",
+        "measure": "核心职责",
+        "occupation_scope": "精确职业数据：49-9091.00",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-details"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "9fa5146cf2b9bcf683541a6c1ce2ed17309c7104490ecee2f26550eab9beab42",
+  "source_content_sha256": "f97aa9a779bc5ae849f9d2f0786892917b9aa7a7d05a3c92e2c7117aecb4a7bf",
   "subject": {
     "canonical_slug": "coin-vending-and-amusement-machine-servicers-and-repairers",
     "name": "自动售货、机器维修员",
-    "summary": null
+    "summary": "自动售货、机器维修员将设备检查测试、零件调整更换、补货收款与服务记录组成可追溯的现场服务闭环。"
   }
 }

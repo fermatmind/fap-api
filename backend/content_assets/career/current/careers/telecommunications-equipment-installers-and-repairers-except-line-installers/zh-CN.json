@@ -1,12 +1,1699 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：核心是核对工单、设备与端口，保留原始读数，隔离异常，并只在授权范围内维修、复测和交接。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "ed-decision",
+            "ed-exercise",
+            "onet-target-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "可观察信号：能逐字段核对，不把DOWN改成UP；对象、现场状态或权限不明时愿意停止并升级。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "ed-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "虚构纸面练习：T-18要求三条日志的端口均为P3、设备序列号均与工单A-787完全一致、状态均为UP。三条记录依次是A-787/P3/UP、A-787/P3/UP、A-778/P3/DOWN。学习者没有设备访问或变更权限。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "ed-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考答案：T-18未闭环。第三条同时出现序列号A-778不匹配和状态DOWN；保留原记录，标明两项差异并交有权人员，不能猜测或执行任何设备变更。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "ed-exercise"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业边界：O*NET 49-2022.00负责通信设备的安装、设置、调整、拆除或维修；职业标题明确排除线路安装工。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.profile.definition-block.1",
+          "source_refs": [
+            "onet-target-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "工作对象：交换、分配、路由与拨号设备，以及客户场所的电话、有线电视、互联网等通信设备；部分任务涉及建筑内通信线缆。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-target-current"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "核心任务：依工单或图纸连接设备，测试电路和通信链路，隔离故障，维修或更换故障设备并复测。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-target-current"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "记录任务：维护设施设备记录、报告设备状态；现场程序无法解决问题时请求技术支持。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-target-current"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "资料闭环建议：核工单与对象、记初始状态、分清授权动作、保存读数和变更、复测并交接；具体流程以雇主制度为准。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.profile.work-context-block.1",
+          "source_refs": [
+            "ed-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作情境：客户沟通、车辆出行、户外、高处、危险设备和手工操作在部分岗位出现，不代表每个岗位频率相同。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.profile.work-context-block.2",
+          "source_refs": [
+            "onet-target-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "准备边界：O*NET列Job Zone 3；具体教育、训练、驾驶、高处、井室、电气和客户准入要求须向岗位逐项核验。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-cert-current",
+            "onet-target-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "可检查产出：对象清单、工单字段、初始状态、原始读数、授权动作、复测结果和交接状态。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "ed-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量检查：对象可追溯、读数保真、异常与动作分栏、复测不冒充客户验收。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "ed-profile"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "线路边界：官方任务可能包含建筑内线缆和接入外部线缆系统，但本页不把该职业改写为以铺设线路为主的线路安装工。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.profile.definition-block.2",
+          "source_refs": [
+            "onet-target-current"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "computer-network-support-specialists",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/computer-network-support-specialists"
+              },
+              {
+                "entity": "computer-network-architects",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/computer-network-architects"
+              },
+              {
+                "entity": "telecommunications-engineering-specialists",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/telecommunications-engineering-specialists"
+              },
+              {
+                "entity": "network-and-computer-systems-administrators",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/network-and-computer-systems-administrators"
+              },
+              {
+                "entity": "electronics-engineers-except-computer",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/electronics-engineers-except-computer"
+              }
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "ed-decision",
+            "onet-electronics-engineer",
+            "onet-network-architect",
+            "onet-network-support",
+            "onet-sysadmin",
+            "onet-target-current",
+            "onet-telecom-engineering"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "网络支持专员排查和维护现有数据通信网络；本职业直接安装与维修通信设备。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-network-support",
+            "onet-target-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "网络架构师设计、实施并规划数据通信网络；本职业侧重设备连接、测试、故障隔离与维修。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-network-architect",
+            "onet-target-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "电信工程专家设计或配置通信系统并监督安装维护；本职业执行设备安装维修任务。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-target-current",
+            "onet-telecom-engineering"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "系统管理员维护组织网络、服务器与访问控制；电子工程师设计开发电子组件与系统；二者都不等同于通信设备安装维修。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-electronics-engineer",
+            "onet-sysadmin",
+            "onet-target-current"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数字工具可整理工单字段、比对配置文本和形成日志摘要候选；输出仍须回到原工单、设备标识和读数核对。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用条件：先限定为可回滚的文本整理或候选检查，并记录输入版本、权限和错误。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数据门槛：设备清单、工单、配置、日志和阈值必须有明确版本与访问权限。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工复核：逐项回看设备与端口标识、原始读数、配置来源和异常上下文。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "不得自动放行：物理连接、真实供电与现场状态、故障因果、变更授权和恢复服务。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "失败风险：流畅摘要可能遗漏DOWN、串错设备或把建议写成已执行动作。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "证据边界：任务辅助不等于行业已采用，也不能推出生产率、就业或岗位替代概率。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "ed-ai",
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实践响应：先在T-18这类虚构记录上比对机器候选与人工核对结果，再按错误记录决定是否继续试验。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "ed-ai",
+            "ed-exercise"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "行业代理数据：中国大陆全国口径2025年暂无可安全使用的数据与O*NET 49-2022.00精确职业工资分布对应，状态为documented_unavailable。"
+            ]
+          },
+          "fact_refs": [
+            "cn-wage-nonprivate"
+          ],
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "行业代理数据：中国大陆全国口径2025年国家统计局资料按登记类型、地区和行业发布，不能替代本职业工资。"
+            ]
+          },
+          "fact_refs": [
+            "cn-wage-private"
+          ],
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "行业代理数据：中国大陆全国口径2025年公开平均工资不是电信设备安装与维修工的职业中位数或起薪。"
+            ]
+          },
+          "fact_refs": [
+            "cn-wage-nonprivate"
+          ],
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "nbs-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "行业代理数据：中国大陆全国口径2025年求职比较应看地区、设备类型、经验、班次、合同与福利，不用行业均值或美国工资填补缺口。"
+            ]
+          },
+          "fact_refs": [
+            "cn-wage-private"
+          ],
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "nbs-current"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "精确职业数据：美国O*NET 49-2022.00统计时期为2025年；全国中位时薪30.72美元、中位年薪63,890美元。"
+            ]
+          },
+          "fact_refs": [
+            "us-wage"
+          ],
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-wage-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "年薪分布下端：10%的美国从业者为44,240美元或以下；这不是统一起薪。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-wage-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "年薪分布上端：10%的美国从业者为96,730美元或以上；这不是个人收入保证。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-wage-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "时薪分布：2025年美国全国10%分位21.27美元，中位数30.72美元，90%分位46.51美元。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-wage-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "职业边界：工资比较须同时保留2025年、美国全国、49-2022.00和从业者分布口径。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "onet-wage-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "决策限制：全国工资分布不含具体地区、班次、工会、经验或福利差异，也不是个人收入保证。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "onet-wage-current"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "愿意对照工单、图纸和设备标识逐个字段检查，而不是凭印象补齐，是一个可观察的适配迹象。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.fit.riasec-fit-block.1",
+          "source_refs": [
+            "ed-decision"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "能保留原始读数，并把故障现象、推断和已授权动作分开记录，通常更接近这类任务的要求。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.fit.riasec-fit-block.2",
+          "source_refs": [
+            "ed-decision",
+            "onet-target-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "愿意向客户或同事解释设备状态、限制和下一步责任人，有助于完成沟通与交接。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.fit.riasec-fit-block.3",
+          "source_refs": [
+            "ed-decision",
+            "onet-target-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "现场状态或权限不明时，能够克制继续操作并升级，是重要的边界意识。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.fit.riasec-fit-block.4",
+          "source_refs": [
+            "ed-decision",
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "部分岗位包含车辆出行、户外、高处、危险设备和频繁沟通，应向具体雇主确认这些情境的实际频率。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.fit.riasec-fit-block.5",
+          "source_refs": [
+            "onet-target-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "如果只喜欢网络设计而不愿承担设备安装、测试、维修和记录，可优先比较网络架构或电信工程方向。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.fit.riasec-fit-block.6",
+          "source_refs": [
+            "ed-decision",
+            "onet-network-architect",
+            "onet-target-current",
+            "onet-telecom-engineering"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "低风险验证：独立完成T-18，并口述为什么第三条不能关闭。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.fit.riasec-fit-block.7",
+          "source_refs": [
+            "ed-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "兴趣或人格框架只能帮助提出问题，不能替代工作样本、训练、资格和实际绩效。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.fit.riasec-fit-block.8",
+          "source_refs": [
+            "ed-decision"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "官方任务包含供电是否充分的测试；真实供电状态、隔离措施或权限不明时，不执行接线、拆机或恢复动作。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.risk.career-risk-cards.1",
+          "source_refs": [
+            "ed-risk",
+            "onet-target-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "官方资料显示部分岗位涉及高处、井室和危险设备；准入、防护或救援条件不明时停止，本页不提供操作步骤。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.risk.career-risk-cards.2",
+          "source_refs": [
+            "ed-risk",
+            "onet-target-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "设备、端口、线缆或工单标识不一致时，保留差异并暂停受影响动作，不能擅自把记录改成一致。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.risk.career-risk-cards.3",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "仪器、单位、阈值或原始读数缺失时，只能报告证据缺口，不能宣称故障已定位或服务已恢复。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.risk.career-risk-cards.4",
+          "source_refs": [
+            "ed-profile",
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "纸面判断、现场操作、客户验收和恢复服务是不同权限；任一条件不清都交有权人员处理。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.risk.career-risk-cards.5",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "现实入口：先在无设备访问条件下练纸面工单、端口表、测试记录与异常交接。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.path.career-path-block.1",
+          "source_refs": [
+            "ed-path",
+            "onet-target-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "雇主核验：询问主要设备、站点类型、训练监督、驾驶、高处/井室、电气、客户准入与恢复服务权限。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.path.career-path-block.2",
+          "source_refs": [
+            "ed-path",
+            "onet-cert-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品：保存T-18题面、逐行核对表和两项异常说明，不把纸面题写成真实维修经历。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.path.career-path-block.3",
+          "source_refs": [
+            "ed-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "面试表达：解释第三条为何同时不满足序列号和状态规则，以及为什么不能靠猜测关闭。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.path.career-path-block.4",
+          "source_refs": [
+            "ed-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七天纸面计划：依次练工单字段、对象标识、端口表、原始读数、异常分栏、交接摘要和权限复盘；全程不接触真实设备。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.path.career-path-block.5",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "资格决策：认证目录、执照、雇主授权和现场准入分别核实，目录收录不等于普遍必需。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.path.career-path-block.6",
+          "source_refs": [
+            "onet-cert-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "能力升级建议：先稳记录与核对，再在监督下接触真实安装维修，最后只承担已获授权的排障与交接。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.path.career-path-block.7",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转型建议：网络支持、架构、电信工程、系统管理和电子工程各有不同对象与产出，需按目标职业另补训练与责任证据。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.path.career-path-block.8",
+          "source_refs": [
+            "ed-path",
+            "onet-electronics-engineer",
+            "onet-network-architect",
+            "onet-network-support",
+            "onet-sysadmin",
+            "onet-target-current",
+            "onet-telecom-engineering"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国精确职业数据：2024就业156,900，2034预测150,400，2024—2034下降4%，同期年均空缺13,200。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "onet-trends-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "下降4%是十年就业存量变化，不是每年下降4%。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "ed-market",
+            "onet-trends-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "年均空缺13,200包含增长与替补，不能推成个人录用概率。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "ed-market",
+            "onet-trends-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "工资、就业存量、十年变化和年均空缺应分别阅读，不能合成一个确定的职业好坏分数。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "若考虑相邻转型，应按目标职业的对象、产出、训练和责任重新核验，不能用本职业统计代替。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "依工单或图纸连接设备，测试电路和通信链路，隔离故障，维修或更换故障设备，复测并维护记录；具体流程随雇主而异。",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.faq.1",
+                "question_key": "career.faq.telecommunications-equipment-installers-and-repairers-except-line-installers.daily-work",
+                "source_refs": [
+                  "ed-profile",
+                  "onet-target-current"
+                ]
+              },
+              {
+                "answer": "网络支持专员维护现有数据网络；网络架构师负责设计规划；电信工程专家设计或配置系统并监督安装；系统管理员维护组织网络与服务器；电子工程师设计开发电子系统；本职业主要安装维修通信设备。",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.faq.2",
+                "question_key": "career.faq.telecommunications-equipment-installers-and-repairers-except-line-installers.role-comparison",
+                "source_refs": [
+                  "onet-electronics-engineer",
+                  "onet-network-architect",
+                  "onet-network-support",
+                  "onet-sysadmin",
+                  "onet-target-current",
+                  "onet-telecom-engineering"
+                ]
+              },
+              {
+                "answer": "可用本页纸面题观察自己能否逐字段核对、保留异常并克制越权；再向雇主确认户外、高处、客户沟通等真实情境。",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.faq.3",
+                "question_key": "career.faq.telecommunications-equipment-installers-and-repairers-except-line-installers.fit",
+                "source_refs": [
+                  "ed-decision"
+                ]
+              },
+              {
+                "answer": "数字工具可生成工单整理、配置比对或日志摘要候选，但须回到原始对象和记录核对；这不是行业采用率或岗位替代结论。",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.faq.4",
+                "question_key": "career.faq.telecommunications-equipment-installers-and-repairers-except-line-installers.ai-impact",
+                "source_refs": [
+                  "ed-ai"
+                ]
+              },
+              {
+                "answer": "人必须核对物理对象、原始读数、现场状态与权限；变更和恢复服务由有权人员决定。",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.faq.5",
+                "question_key": "career.faq.telecommunications-equipment-installers-and-repairers-except-line-installers.human-control",
+                "source_refs": [
+                  "ed-ai"
+                ]
+              },
+              {
+                "answer": "行业代理数据：中国大陆全国口径2025年暂无可安全使用的数据与O*NET 49-2022.00精确职业工资分布对应，因此记为documented_unavailable。",
+                "fact_refs": [
+                  "cn-wage-nonprivate"
+                ],
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.faq.6",
+                "question_key": "career.faq.telecommunications-equipment-installers-and-repairers-except-line-installers.china-pay",
+                "source_refs": [
+                  "nbs-current"
+                ]
+              },
+              {
+                "answer": "精确职业数据：美国O*NET/BLS显示2025年49-2022.00全国中位时薪30.72美元、中位年薪63,890美元；分位数不是起薪或个人保证。",
+                "fact_refs": [
+                  "us-wage"
+                ],
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.faq.7",
+                "question_key": "career.faq.telecommunications-equipment-installers-and-repairers-except-line-installers.us-pay",
+                "source_refs": [
+                  "onet-wage-current"
+                ]
+              },
+              {
+                "answer": "O*NET列Job Zone 3；可先做纸面工单练习，再向雇主核对训练和监督。认证目录、执照、雇主授权与现场准入要分别确认。",
+                "fact_refs": [
+                  "credential-boundary"
+                ],
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.faq.8",
+                "question_key": "career.faq.telecommunications-equipment-installers-and-repairers-except-line-installers.education-path",
+                "source_refs": [
+                  "ed-path",
+                  "onet-cert-current",
+                  "onet-target-current"
+                ]
+              },
+              {
+                "answer": "部分岗位涉及供电测试、高处、井室和危险设备；现场状态、准入、防护或权限不明时停止受影响动作并升级，本页不提供现场步骤。",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.faq.9",
+                "question_key": "career.faq.telecommunications-equipment-installers-and-repairers-except-line-installers.risk-boundary",
+                "source_refs": [
+                  "ed-risk"
+                ]
+              },
+              {
+                "answer": "美国精确职业2024就业156,900，2034预测150,400，十年下降4%，年均空缺13,200；空缺含增长与替补。",
+                "fact_refs": [
+                  "employment-projection"
+                ],
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.faq.10",
+                "question_key": "career.faq.telecommunications-equipment-installers-and-repairers-except-line-installers.outlook-transition",
+                "source_refs": [
+                  "ed-market",
+                  "onet-trends-current"
+                ]
+              },
+              {
+                "answer": "把任务适配、工作情境、工资、十年就业变化和年均空缺分开评估；任何单一指标都不能确定个人录用或长期适配。",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.faq.11",
+                "question_key": "career.faq.telecommunications-equipment-installers-and-repairers-except-line-installers.career-worth",
+                "source_refs": [
+                  "ed-decision",
+                  "ed-market"
+                ]
+              }
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.sources.faq.1",
+          "source_refs": [
+            "ed-ai",
+            "ed-decision",
+            "ed-market",
+            "ed-path",
+            "ed-profile",
+            "ed-risk",
+            "nbs-current",
+            "onet-cert-current",
+            "onet-electronics-engineer",
+            "onet-network-architect",
+            "onet-network-support",
+            "onet-sysadmin",
+            "onet-target-current",
+            "onet-telecom-engineering",
+            "onet-trends-current",
+            "onet-wage-current"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "中国、美国与全球编辑判断分开陈述；工资、就业、资格、安全和AI结论不得跨范围拼接。",
+              "页面只提供职业理解和无设备访问的纸面练习，不替代雇主训练、现场程序、执照、客户准入、专业判断或恢复服务授权。",
+              "documented_unavailable表示有界检索未建立精确职业数据，不允许用行业均值或跨国数字填补。"
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.sources.boundary.1",
+          "source_refs": [
+            "ed-ai",
+            "ed-decision",
+            "ed-exercise",
+            "ed-market",
+            "ed-path",
+            "ed-profile",
+            "ed-risk",
+            "nbs-current",
+            "onet-cert-current",
+            "onet-electronics-engineer",
+            "onet-hot",
+            "onet-network-architect",
+            "onet-network-support",
+            "onet-sysadmin",
+            "onet-target-current",
+            "onet-telecom-engineering",
+            "onet-trends-current",
+            "onet-wage-current"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "电信设备安装与维修工（线路安装工除外）",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "电信设备安装与维修工（线路安装工除外）",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "电信设备安装与维修工（线路安装工除外）",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "电信设备安装与维修工（线路安装工除外）",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "电信设备安装与维修工（线路安装工除外）",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "电信设备安装与维修工（线路安装工除外）",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "电信设备安装与维修工（线路安装工除外）",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "电信设备安装与维修工（线路安装工除外）",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "电信设备安装与维修工（线路安装工除外）",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "电信设备安装与维修工（线路安装工除外）",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "电信设备安装与维修工（线路安装工除外）",
+                "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "区分数字辅助、人工核对与现场授权。",
+                  "编辑综合用于职业理解与低风险学习，不构成现场操作、雇主授权、客户验收、执照或合规结论。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-ai",
+                "limitation": "编辑综合用于职业理解与低风险学习，不构成现场操作、雇主授权、客户验收、执照或合规结论。",
+                "market": "全球",
+                "name": "电信维修数字工具任务拆分",
+                "period": "current task analysis; reviewed 2026-09-07",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "把官方任务与工作情境转成可观察的兴趣和耐受度问题。",
+                  "编辑综合用于职业理解与低风险学习，不构成现场操作、雇主授权、客户验收、执照或合规结论。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-decision",
+                "limitation": "编辑综合用于职业理解与低风险学习，不构成现场操作、雇主授权、客户验收、执照或合规结论。",
+                "market": "全球",
+                "name": "电信维修适配观察框架",
+                "period": "current task analysis; reviewed 2026-09-07",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "虚构、无设备访问的低风险题面及独立推演答案。",
+                  "编辑综合用于职业理解与低风险学习，不构成现场操作、雇主授权、客户验收、执照或合规结论。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-exercise",
+                "limitation": "编辑综合用于职业理解与低风险学习，不构成现场操作、雇主授权、客户验收、执照或合规结论。",
+                "market": "全球",
+                "name": "T-18纸面状态核对练习",
+                "period": "current task analysis; reviewed 2026-09-07",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "分开解释就业存量、预测变化、年均空缺和个人决策。",
+                  "编辑综合用于职业理解与低风险学习，不构成现场操作、雇主授权、客户验收、执照或合规结论。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-market",
+                "limitation": "编辑综合用于职业理解与低风险学习，不构成现场操作、雇主授权、客户验收、执照或合规结论。",
+                "market": "全球",
+                "name": "电信维修市场信号解释",
+                "period": "current task analysis; reviewed 2026-09-07",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "给出纸面练习、雇主核验和能力升级建议。",
+                  "编辑综合用于职业理解与低风险学习，不构成现场操作、雇主授权、客户验收、执照或合规结论。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-path",
+                "limitation": "编辑综合用于职业理解与低风险学习，不构成现场操作、雇主授权、客户验收、执照或合规结论。",
+                "market": "全球",
+                "name": "电信维修低风险入门路径",
+                "period": "current task analysis; reviewed 2026-09-07",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "把官方任务整理为可检查但非强制的记录闭环与质量提示。",
+                  "编辑综合用于职业理解与低风险学习，不构成现场操作、雇主授权、客户验收、执照或合规结论。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-profile",
+                "limitation": "编辑综合用于职业理解与低风险学习，不构成现场操作、雇主授权、客户验收、执照或合规结论。",
+                "market": "全球",
+                "name": "电信设备维修工作流与质量编辑综合",
+                "period": "current task analysis; reviewed 2026-09-07",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "把官方暴露事实转成不提供现场步骤的停手与升级边界。",
+                  "编辑综合用于职业理解与低风险学习，不构成现场操作、雇主授权、客户验收、执照或合规结论。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-risk",
+                "limitation": "编辑综合用于职业理解与低风险学习，不构成现场操作、雇主授权、客户验收、执照或合规结论。",
+                "market": "全球",
+                "name": "电信维修保守风险边界",
+                "period": "current task analysis; reviewed 2026-09-07",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "核实公开表格按登记类型、地区和行业汇总，未给出49-2022.00精确职业分布。",
+                  "行业平均工资不是该职业工资，不能跨分类或跨法域替代。"
+                ],
+                "evidence_type": "official industry wage statistics",
+                "id": "nbs-current",
+                "limitation": "行业平均工资不是该职业工资，不能跨分类或跨法域替代。",
+                "market": "中国大陆全国口径",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wage",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "核实该职业页面列出多种全国认证。",
+                  "认证目录不证明某证书普遍必需，也不等于执照、客户准入或雇主授权。"
+                ],
+                "evidence_type": "official credential directory",
+                "id": "onet-cert-current",
+                "limitation": "认证目录不证明某证书普遍必需，也不等于执照、客户准入或雇主授权。",
+                "market": "美国",
+                "name": "National Certifications 49-2022.00",
+                "period": "current certification directory",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localcert/49-2022.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "核实电子工程师研究、设计、开发或测试电子组件与系统的范围。",
+                  "仅支持17-2072.00相邻职业边界。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-electronics-engineer",
+                "limitation": "仅支持17-2072.00相邻职业边界。",
+                "market": "美国",
+                "name": "17-2072.00 Electronics Engineers, Except Computer",
+                "period": "current page; accessed 2026-09-07",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2072.00"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "Technology mentions linked to the occupation.",
+                  "Posting mentions do not prove proficiency, adoption or automation rate."
+                ],
+                "evidence_type": "official job-posting technology summary",
+                "id": "onet-hot",
+                "limitation": "Posting mentions do not prove proficiency, adoption or automation rate.",
+                "market": "美国",
+                "name": "Hot Technologies 49-2022.00 Telecommunications Equipment Installers And Repairers, Except Line Installers",
+                "period": "O*NET technology data current 2026; accessed 2026-08-31",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/49-2022.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "核实网络架构师设计、实施、建模和规划数据通信网络的范围。",
+                  "仅支持15-1241.00相邻职业边界。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-network-architect",
+                "limitation": "仅支持15-1241.00相邻职业边界。",
+                "market": "美国",
+                "name": "15-1241.00 Computer Network Architects",
+                "period": "current page; accessed 2026-09-07",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-1241.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "核实网络支持专员分析、测试、排障和维护现有网络的范围。",
+                  "仅支持15-1231.00相邻职业边界。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-network-support",
+                "limitation": "仅支持15-1231.00相邻职业边界。",
+                "market": "美国",
+                "name": "15-1231.00 Computer Network Support Specialists",
+                "period": "current page; accessed 2026-09-07",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-1231.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "核实系统管理员维护组织网络、操作系统、服务器、日志和访问控制的范围。",
+                  "仅支持15-1244.00相邻职业边界。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-sysadmin",
+                "limitation": "仅支持15-1244.00相邻职业边界。",
+                "market": "美国",
+                "name": "15-1244.00 Network and Computer Systems Administrators",
+                "period": "current page; accessed 2026-09-07",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-1244.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "核实职业范围、任务、工作情境、Job Zone与风险暴露。",
+                  "美国职业资料；不证明中国等价映射，也不规定具体雇主的授权或安全程序。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-target-current",
+                "limitation": "美国职业资料；不证明中国等价映射，也不规定具体雇主的授权或安全程序。",
+                "market": "美国",
+                "name": "49-2022.00 Telecommunications Equipment Installers and Repairers, Except Line Installers",
+                "period": "current page; accessed 2026-09-07",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/49-2022.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "核实电信工程专家设计或配置通信系统并监督安装维护的范围。",
+                  "仅支持15-1241.01相邻职业边界。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-telecom-engineering",
+                "limitation": "仅支持15-1241.01相邻职业边界。",
+                "market": "美国",
+                "name": "15-1241.01 Telecommunications Engineering Specialists",
+                "period": "current page; accessed 2026-09-07",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-1241.01"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "核实2024就业、2034预测、十年变化和年均空缺。",
+                  "预测不是个人录用概率；年均空缺含增长与替补。"
+                ],
+                "evidence_type": "official employment data",
+                "id": "onet-trends-current",
+                "limitation": "预测不是个人录用概率；年均空缺含增长与替补。",
+                "market": "美国",
+                "name": "National Employment Trends 49-2022.00",
+                "period": "2024-2034 employment projections",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/49-2022.00"
+              },
+              {
+                "accessed_at": "2026-09-07",
+                "details": [
+                  "核实2025美国全国工资分布。",
+                  "工资分位不是起薪或个人报价。"
+                ],
+                "evidence_type": "official wage data",
+                "id": "onet-wage-current",
+                "limitation": "工资分位不是起薪或个人报价。",
+                "market": "美国",
+                "name": "National Wages 49-2022.00",
+                "period": "2025 wage data",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/49-2022.00"
+              }
+            ]
+          },
+          "id": "telecommunications-equipment-installers-and-repairers-except-line-installers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "documented_unavailable（2025 官方公开口径）",
+        "fact_id": "cn-wage-nonprivate",
+        "market": "中国大陆全国口径",
+        "measure": "occupation wage availability",
+        "occupation_scope": "行业代理数据：中国大陆全国口径2025宽泛统计，不是49-2022.00精确职业工资",
+        "period": "2025 annual wage",
+        "source_refs": [
+          "nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "不可跨法域外推（2025 官方公开口径）",
+        "fact_id": "cn-wage-private",
+        "market": "中国大陆全国口径",
+        "measure": "cross-jurisdiction wage boundary",
+        "occupation_scope": "行业代理数据：中国大陆全国口径2025宽泛统计，不是49-2022.00精确职业工资",
+        "period": "2025 annual wage",
+        "source_refs": [
+          "nbs-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "认证不等于许可或授权（O*NET 2026）",
+        "fact_id": "credential-boundary",
+        "market": "美国",
+        "measure": "qualification boundary",
+        "occupation_scope": "精确职业数据：O*NET 49-2022.00",
+        "period": "current certification directory",
+        "source_refs": [
+          "onet-cert-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2024就业156,900；2034预测150,400；十年下降4%；年均空缺13,200",
+        "fact_id": "employment-projection",
+        "market": "美国",
+        "measure": "employment projection measure",
+        "occupation_scope": "精确职业数据：O*NET 49-2022.00",
+        "period": "2024-2034 employment projections",
+        "source_refs": [
+          "onet-trends-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET 49-2022.00",
+        "fact_id": "occupation-identity",
+        "market": "美国",
+        "measure": "official occupation code",
+        "occupation_scope": "精确职业数据：O*NET 49-2022.00",
+        "period": "current page; accessed 2026-09-07",
+        "source_refs": [
+          "onet-target-current"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "30.72美元/小时；63,890美元/年（2025）",
+        "fact_id": "us-wage",
+        "market": "美国",
+        "measure": "annual wage measure",
+        "occupation_scope": "精确职业数据：O*NET 49-2022.00",
+        "period": "2025 wage data",
+        "source_refs": [
+          "onet-wage-current"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "0d31205ba3cf02799b88f21747664e585b230da50563ab556183b212e50d6daf",
+  "source_content_sha256": "032ae55bed65cf8e90f5f9ce4b8172a684cf73fb3c212364321c43cc4fb4ec7e",
   "subject": {
     "canonical_slug": "telecommunications-equipment-installers-and-repairers-except-line-installers",
     "name": "电信设备安装与维修工（线路安装工除外）",
-    "summary": null
+    "summary": "安装、设置、调整或维修交换、分配、路由及客户侧通信设备，并以工单、标识、测试读数、故障隔离、复测和服务交接形成闭环。"
   }
 }

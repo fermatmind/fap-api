@@ -1,12 +1,1613 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：编舞不是只想动作，而是把创作意图、节拍、空间、表演者限制、反馈和版本交接连成可复现闭环。愿意记录、修订并尊重安全与授权边界的人值得纸面试做。"
+            ]
+          },
+          "id": "choreographers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "ed-fit",
+            "ed-workflow"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "可观察信号：能把抽象情绪拆成节拍和队形；用具体反馈修改；保留动作/素材限制；不把“网上能看见”当成可使用授权。"
+            ]
+          },
+          "id": "choreographers.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "ed-fit",
+            "ed-workflow"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "60分钟纸面样本：90秒；每8拍4秒；引子4个八拍、A 8个、过渡2个（其中1个标为可选）、B 6个、结尾3个；6名虚构舞者；禁托举、腾空和接触，一人不跪；音乐授权未知。不得要求任何人实际表演。"
+            ]
+          },
+          "id": "choreographers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考推演：23×4=92秒，超2秒；删1个可选过渡八拍后22×4=88秒。输出节拍表、队形框、无跪姿替代、限制/未知清单、版本号；音乐授权未知意味着不能发布。"
+            ]
+          },
+          "id": "choreographers.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "ed-sim"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业边界：O*NET 27-2032.00，创作新舞蹈套路、排练，并可能执导和舞台化呈现。"
+            ]
+          },
+          "id": "choreographers.profile.definition-block.1",
+          "source_refs": [
+            "onet-choreo"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "创作任务：研究故事和乐谱，把想法与情绪转成动作，设计不同演出场景的舞蹈。"
+            ]
+          },
+          "id": "choreographers.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-choreo"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "排练任务：指导排练、教授舞步技巧、评估反馈并记录动作和队形。"
+            ]
+          },
+          "id": "choreographers.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-choreo"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "协作对象：表演者、音乐总监、舞台与服装灯光协作者、音乐/旁白和版本记录。"
+            ]
+          },
+          "id": "choreographers.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-choreo"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "完整流程：确认目标与授权素材—拆节拍叙事—设计纸面动作空间—按能力排练—记录反馈限制—修订交接。"
+            ]
+          },
+          "id": "choreographers.profile.work-context-block.1",
+          "source_refs": [
+            "ed-workflow"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作情境：近距离协作、身体弯转、站立、重复动作和平衡要求可能突出，并可能承担他人安全责任。"
+            ]
+          },
+          "id": "choreographers.profile.work-context-block.2",
+          "source_refs": [
+            "onet-choreo"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "准备程度：O*NET列为Job Zone Three；不等于统一学历、证书或法定执业门槛。"
+            ]
+          },
+          "id": "choreographers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-choreo"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "可检查产出：节拍表、动作/队形记谱、版本说明、素材清单、限制、反馈和修改日志。"
+            ]
+          },
+          "id": "choreographers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "ed-output"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：节拍一致、可复现、尊重限制、版本清楚、授权待核项可见、反馈对应修改。"
+            ]
+          },
+          "id": "choreographers.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "ed-output"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "相邻边界：艺术教学、课程协调、视觉统筹与视觉艺术创作可能共享创意技能，但不以创作并排练舞蹈呈现为核心。"
+            ]
+          },
+          "id": "choreographers.profile.definition-block.2",
+          "source_refs": [
+            "onet-art-directors",
+            "onet-art-teachers",
+            "onet-choreo",
+            "onet-fine-artists",
+            "onet-instructional",
+            "onet-self-teachers"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "art-drama-and-music-teachers-postsecondary",
+                "id": "choreographers.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/art-drama-and-music-teachers-postsecondary"
+              },
+              {
+                "entity": "self-enrichment-teachers",
+                "id": "choreographers.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/self-enrichment-teachers"
+              },
+              {
+                "entity": "instructional-coordinators",
+                "id": "choreographers.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/instructional-coordinators"
+              },
+              {
+                "entity": "art-directors",
+                "id": "choreographers.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/art-directors"
+              },
+              {
+                "entity": "fine-artists-including-painters-sculptors-and-illustrators",
+                "id": "choreographers.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/fine-artists-including-painters-sculptors-and-illustrators"
+              }
+            ]
+          },
+          "id": "choreographers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-art-directors",
+            "onet-art-teachers",
+            "onet-choreo",
+            "onet-fine-artists",
+            "onet-instructional",
+            "onet-self-teachers"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "高校艺术教师教授艺术、戏剧和音乐课程；编舞师的核心交付是舞蹈作品与排练版本。"
+            ]
+          },
+          "id": "choreographers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-art-directors",
+            "onet-art-teachers",
+            "onet-choreo",
+            "onet-fine-artists",
+            "onet-instructional",
+            "onet-self-teachers"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "兴趣教师为自我提升或休闲目的教学；编舞师可教排练，但目标是形成具体呈现。"
+            ]
+          },
+          "id": "choreographers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-art-directors",
+            "onet-art-teachers",
+            "onet-choreo",
+            "onet-fine-artists",
+            "onet-instructional",
+            "onet-self-teachers"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "教学协调员开发课程材料和教学指南；艺术指导统筹视觉制作；两者均不等于舞蹈动作与队形设计。"
+            ]
+          },
+          "id": "choreographers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-art-directors",
+            "onet-art-teachers",
+            "onet-choreo",
+            "onet-fine-artists",
+            "onet-instructional",
+            "onet-self-teachers"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "视觉艺术家用视觉媒介创作原创作品；编舞师以身体动作、节拍、空间和表演者协作为主要媒介。"
+            ]
+          },
+          "id": "choreographers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-art-directors",
+            "onet-art-teachers",
+            "onet-choreo",
+            "onet-fine-artists",
+            "onet-instructional",
+            "onet-self-teachers"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助：节拍切分、动作记谱草稿、队形可视化、版本比较和排练记录。"
+            ]
+          },
+          "id": "choreographers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用条件：音乐版本、拍号、舞台尺寸、表演者限制、素材权限和文件版本可靠。"
+            ]
+          },
+          "id": "choreographers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数据门槛：节拍、段落、人数、空间区、动作禁限、修改人和版本号一致可追溯。"
+            ]
+          },
+          "id": "choreographers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工控制：核素材合同、理解表演者能力、观察效果、处理疼痛/冲突反馈。"
+            ]
+          },
+          "id": "choreographers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余责任：工具不能确认身体可行性、疲劳、疼痛、场地、同意或演出授权。"
+            ]
+          },
+          "id": "choreographers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "失败风险：动作不可执行、节拍错位、版本覆盖、模仿受保护作品或忽略限制。"
+            ]
+          },
+          "id": "choreographers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业边界：工具可生成分镜不等于项目采用率、创作质量或岗位净变化。"
+            ]
+          },
+          "id": "choreographers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实践响应：只在原创虚构节拍的纸面分镜中验证，真实排练服从项目安全和授权流程。"
+            ]
+          },
+          "id": "choreographers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "ed-ai"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：中国大陆暂无可安全使用的数据表示与O*NET 27-2032.00精确对应的全国工资与项目费。"
+            ]
+          },
+          "id": "choreographers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：国家统计局2025资料按行业和宽泛岗位大类发布，不能替代精确职业中位数。"
+            ]
+          },
+          "id": "choreographers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "计量单位：年薪、时薪、排练费、演出费和项目费不可混用。"
+            ]
+          },
+          "id": "choreographers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "求职用法：统一城市、场景、项目周期、排练/演出工时、署名、修改轮次、差旅保险和付款节点。"
+            ]
+          },
+          "id": "choreographers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：O*NET展示美国27-2032.00全国工资。"
+            ]
+          },
+          "id": "choreographers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-choreo"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：2025年BLS工资数据。"
+            ]
+          },
+          "id": "choreographers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-choreo"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数：时薪26.59美元、年薪55,310美元，不是起薪。"
+            ]
+          },
+          "id": "choreographers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-choreo"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "计量单位：时薪与年薪同源，不能与项目报价直接混用。"
+            ]
+          },
+          "id": "choreographers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-choreo"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "覆盖人群：全国统计不能代表每个城市、舞种、演出场景和项目模式。"
+            ]
+          },
+          "id": "choreographers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "onet-choreo"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "决策限制：统计值不是个人报价、接单或收入保证。"
+            ]
+          },
+          "id": "choreographers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "onet-choreo"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "结构信号：能把意图拆成节拍、段落、空间和可观察效果。"
+            ]
+          },
+          "id": "choreographers.fit.riasec-fit-block.1",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "记录信号：动作、队形、音乐版本和修改理由可让团队复现。"
+            ]
+          },
+          "id": "choreographers.fit.riasec-fit-block.2",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "反馈信号：能把“感觉不对”追问成节拍、方向、层次或衔接问题。"
+            ]
+          },
+          "id": "choreographers.fit.riasec-fit-block.3",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "边界信号：尊重表演者能力、疼痛反馈、同意与素材授权。"
+            ]
+          },
+          "id": "choreographers.fit.riasec-fit-block.4",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：靠重复硬练掩盖结构问题会增加消耗和风险。"
+            ]
+          },
+          "id": "choreographers.fit.riasec-fit-block.5",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：若难以承受身体示范、近距离协作、反复修改和项目不确定性，应核真实场景。"
+            ]
+          },
+          "id": "choreographers.fit.riasec-fit-block.6",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "验证方法：独立完成固定92秒纸面分镜及“每8拍3.75秒”“结尾增1个八拍”两张变体。"
+            ]
+          },
+          "id": "choreographers.fit.riasec-fit-block.7",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "人格边界：有创意或会跳舞不证明能编排、排练、记录和安全交接。"
+            ]
+          },
+          "id": "choreographers.fit.riasec-fit-block.8",
+          "source_refs": [
+            "ed-fit"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "身体限制：疼痛、疲劳、能力或场地条件未知时，不要求实际尝试；纸面练习禁高风险动作。"
+            ]
+          },
+          "id": "choreographers.risk.career-risk-cards.1",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "版权素材：音乐、影像、既有舞作或参考片段的使用范围不明时，只登记待核，不发布或对外承诺。"
+            ]
+          },
+          "id": "choreographers.risk.career-risk-cards.2",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "同意与隐私：肖像、拍摄、未成年人或健康限制信息按项目授权处理。"
+            ]
+          },
+          "id": "choreographers.risk.career-risk-cards.3",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "版本与舞台：音乐、动作、队形、服装、道具和场地版本不一致时暂停合并并升级。"
+            ]
+          },
+          "id": "choreographers.risk.career-risk-cards.4",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同规则：身体、素材、人员、场地、合同或发布授权任一不明，即标注未知、停止受影响步骤并交责任人确认。"
+            ]
+          },
+          "id": "choreographers.risk.career-risk-cards.5",
+          "source_refs": [
+            "ed-risk"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "现实入口：先用原创虚构节拍练纸面节拍表、队形图、版本日志和反馈表。"
+            ]
+          },
+          "id": "choreographers.path.career-path-block.1",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "项目证据：核实舞种、场地、人员能力、音乐/影像权利、拍摄、署名、修改轮次和付款节点。"
+            ]
+          },
+          "id": "choreographers.path.career-path-block.2",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品：完成本页88秒修订版，附原92秒版、差异、限制与未知清单。"
+            ]
+          },
+          "id": "choreographers.path.career-path-block.3",
+          "source_refs": [
+            "ed-path",
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "面试与试用：解释为何删一个八拍解决时长，却不解决音乐授权未知。"
+            ]
+          },
+          "id": "choreographers.path.career-path-block.4",
+          "source_refs": [
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七天试验：抄题、画段落、算92/88秒、做队形纸面框、写限制、做两张变体、复盘版本各一天；变体一每8拍3.75秒则原23个八拍为86.25秒；变体二在88秒版加1个结尾八拍又回92秒。"
+            ]
+          },
+          "id": "choreographers.path.career-path-block.5",
+          "source_refs": [
+            "ed-path",
+            "ed-sim"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "资格决策：分别核验舞蹈能力、教学、场地、音乐影像、拍摄肖像、未成年人和合同授权。"
+            ]
+          },
+          "id": "choreographers.path.career-path-block.6",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "能力阶梯：先做短段纸面结构，再参与受监督排练修改，最后承担完整作品与跨团队交接。"
+            ]
+          },
+          "id": "choreographers.path.career-path-block.7",
+          "source_refs": [
+            "ed-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转型路径：可比较艺术教学、兴趣教学、课程协调、艺术指导或视觉艺术创作，需补对应教学、课程或视觉作品证据。"
+            ]
+          },
+          "id": "choreographers.path.career-path-block.8",
+          "source_refs": [
+            "ed-path",
+            "onet-art-directors",
+            "onet-art-teachers",
+            "onet-choreo",
+            "onet-fine-artists",
+            "onet-instructional",
+            "onet-self-teachers"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "官方信号：O*NET提供美国职业、工资、就业和预测资料，不证明本地项目正在招募。"
+            ]
+          },
+          "id": "choreographers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "就业预测：2024—2034增长较快（5%至6%）；2024就业4,600，年度空缺约700，空缺含替换。"
+            ]
+          },
+          "id": "choreographers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "onet-choreo"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "项目信号：样本只代表采样时间、城市、舞种、演出场景、周期和署名/计费结构。"
+            ]
+          },
+          "id": "choreographers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "技术信号：分镜和动作生成工具可能改变草稿任务，不等于身体排练、团队反馈或授权责任消失。"
+            ]
+          },
+          "id": "choreographers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "ed-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "相邻转型：共享创意或教学能力不等于相邻岗位责任已经具备。"
+            ]
+          },
+          "id": "choreographers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "ed-market",
+            "onet-art-directors",
+            "onet-art-teachers",
+            "onet-choreo",
+            "onet-fine-artists",
+            "onet-instructional",
+            "onet-self-teachers"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "可复核闭环是确认作品目标与授权素材、拆解音乐/叙事结构、设计动作和空间草图、按表演者能力排练、记录反馈与安全限制、修订并形成排练/舞台交接版。",
+                "id": "choreographers.faq.1",
+                "question_key": "career.faq.choreographers.daily-work",
+                "source_refs": [
+                  "ed-workflow"
+                ]
+              },
+              {
+                "answer": "编舞师创作并排练舞蹈呈现；高校艺术教师教授高等教育课程，兴趣教师以休闲或自我提升教学为主，教学协调员开发课程材料和教学指南，艺术指导统筹视觉呈现，视觉艺术家以视觉媒介创作原创作品。",
+                "id": "choreographers.faq.2",
+                "question_key": "career.faq.choreographers.role-comparison",
+                "source_refs": [
+                  "onet-art-directors",
+                  "onet-art-teachers",
+                  "onet-choreo",
+                  "onet-fine-artists",
+                  "onet-instructional",
+                  "onet-self-teachers"
+                ]
+              },
+              {
+                "answer": "适配度通过能否把抽象意图转成节拍和空间结构、记录版本、吸收具体反馈、尊重表演者限制并在安全或授权不明时停下来核对来观察。",
+                "id": "choreographers.faq.3",
+                "question_key": "career.faq.choreographers.fit",
+                "source_refs": [
+                  "ed-fit"
+                ]
+              },
+              {
+                "answer": "数字工具可辅助节拍切分、动作记谱草稿、队形可视化、版本比较和排练记录；不能确认素材权利、身体可行性、疲劳、疼痛、场地或表演者同意。",
+                "id": "choreographers.faq.4",
+                "question_key": "career.faq.choreographers.ai-impact",
+                "source_refs": [
+                  "ed-ai"
+                ]
+              },
+              {
+                "answer": "人工控制点包括核对素材和合同范围、理解表演者能力与限制、现场观察动作效果、处理疼痛或冲突反馈，并由相应责任人批准演出版本与舞台条件。",
+                "id": "choreographers.faq.5",
+                "question_key": "career.faq.choreographers.human-control",
+                "source_refs": [
+                  "ed-ai"
+                ]
+              },
+              {
+                "answer": "国家统计局2025资料按行业和宽泛岗位大类发布，不能给出与O*NET 27-2032.00精确对应的中国大陆全国职业中位数、统一起薪或项目费。",
+                "id": "choreographers.faq.6",
+                "question_key": "career.faq.choreographers.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "O*NET展示2025年美国编舞师全国中位时薪26.59美元、年薪55,310美元；全国中位数不是起薪、项目报价或个人收入；项目制、自由职业、排练与演出计费须另核。",
+                "id": "choreographers.faq.7",
+                "question_key": "career.faq.choreographers.us-pay",
+                "source_refs": [
+                  "onet-choreo"
+                ]
+              },
+              {
+                "answer": "入门先用原创或明确可用的虚构节拍做纸面分镜、队形图、版本日志和反馈表；不要求他人实际跳舞，不教授高风险动作；作品版权、音乐和影像使用、表演者肖像与拍摄、未成年人参与、场地和合同授权是不同边界，须按项目逐项核验。",
+                "id": "choreographers.faq.8",
+                "question_key": "career.faq.choreographers.education-path",
+                "source_refs": [
+                  "ed-path"
+                ]
+              },
+              {
+                "answer": "关键风险包括未经授权使用音乐/影像、动作超出能力、重复负荷、场地或服装限制未核、未成年人/肖像/拍摄同意缺失、版本混乱和越权承诺。",
+                "id": "choreographers.faq.9",
+                "question_key": "career.faq.choreographers.risk-boundary",
+                "source_refs": [
+                  "ed-risk"
+                ]
+              },
+              {
+                "answer": "O*NET/BLS显示2024—2034增长较快（5%至6%）；这不是个人就业概率；O*NET/BLS显示2024就业4,600，2024—2034年度空缺约700；空缺包含增长与替换。",
+                "id": "choreographers.faq.10",
+                "question_key": "career.faq.choreographers.outlook-transition",
+                "source_refs": [
+                  "onet-choreo"
+                ]
+              },
+              {
+                "answer": "工资、预测、空缺、项目报价、演出季和数字工具采用是不同信号，不能合并为个人接单或收入保证；适配度通过能否把抽象意图转成节拍和空间结构、记录版本、吸收具体反馈、尊重表演者限制并在安全或授权不明时停下来核对来观察。",
+                "id": "choreographers.faq.11",
+                "question_key": "career.faq.choreographers.career-worth",
+                "source_refs": [
+                  "ed-fit",
+                  "ed-market"
+                ]
+              }
+            ]
+          },
+          "id": "choreographers.sources.faq.1",
+          "source_refs": [
+            "ed-ai",
+            "ed-fit",
+            "ed-market",
+            "ed-path",
+            "ed-risk",
+            "ed-workflow",
+            "nbs-wages",
+            "onet-art-directors",
+            "onet-art-teachers",
+            "onet-choreo",
+            "onet-fine-artists",
+            "onet-instructional",
+            "onet-self-teachers"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "O*NET职业事实、美国统计、国家统计局工资口径和编辑建议分别陈述。",
+              "本页只供职业决策和纯纸面分镜，不构成身体训练、排练、演出、版权或合同授权。",
+              "中国精确职业工资暂无可安全使用的数据。"
+            ]
+          },
+          "id": "choreographers.sources.boundary.1",
+          "source_refs": [
+            "ed-ai",
+            "ed-fit",
+            "ed-market",
+            "ed-output",
+            "ed-path",
+            "ed-risk",
+            "ed-sim",
+            "ed-workflow",
+            "nbs-wages",
+            "onet-art-directors",
+            "onet-art-teachers",
+            "onet-choreo",
+            "onet-fine-artists",
+            "onet-instructional",
+            "onet-self-teachers"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "编舞师",
+                "id": "choreographers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "编舞师",
+                "id": "choreographers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "编舞师",
+                "id": "choreographers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "编舞师",
+                "id": "choreographers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "编舞师",
+                "id": "choreographers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "编舞师",
+                "id": "choreographers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "编舞师",
+                "id": "choreographers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "编舞师",
+                "id": "choreographers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "编舞师",
+                "id": "choreographers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "编舞师",
+                "id": "choreographers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "编舞师",
+                "id": "choreographers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "choreographers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成身体训练、排练、演出、版权或合同授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-ai",
+                "limitation": "不构成身体训练、排练、演出、版权或合同授权。",
+                "market": "全球",
+                "name": "编舞数字工具边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成身体训练、排练、演出、版权或合同授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-fit",
+                "limitation": "不构成身体训练、排练、演出、版权或合同授权。",
+                "market": "全球",
+                "name": "编舞适配观察",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成身体训练、排练、演出、版权或合同授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-market",
+                "limitation": "不构成身体训练、排练、演出、版权或合同授权。",
+                "market": "全球",
+                "name": "编舞市场边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成身体训练、排练、演出、版权或合同授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-output",
+                "limitation": "不构成身体训练、排练、演出、版权或合同授权。",
+                "market": "全球",
+                "name": "编舞产出质量",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成身体训练、排练、演出、版权或合同授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-path",
+                "limitation": "不构成身体训练、排练、演出、版权或合同授权。",
+                "market": "全球",
+                "name": "编舞入门路径",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成身体训练、排练、演出、版权或合同授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-risk",
+                "limitation": "不构成身体训练、排练、演出、版权或合同授权。",
+                "market": "全球",
+                "name": "编舞风险边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成身体训练、排练、演出、版权或合同授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-sim",
+                "limitation": "不构成身体训练、排练、演出、版权或合同授权。",
+                "market": "全球",
+                "name": "编舞纸面分镜模拟",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成身体训练、排练、演出、版权或合同授权。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "ed-workflow",
+                "limitation": "不构成身体训练、排练、演出、版权或合同授权。",
+                "market": "全球",
+                "name": "编舞工作闭环",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对中国行业和宽泛岗位工资口径。",
+                  "不能替代本职业精确工资。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "nbs-wages",
+                "limitation": "不能替代本职业精确工资。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wages; published 2026-05-15; accessed 2026-09-06",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-art-directors",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "27-1011.00 - Art Directors",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/27-1011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-art-teachers",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "25-1121.00 - Art, Drama, and Music Teachers, Postsecondary",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/25-1121.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对身份、任务、情境、准备、工资与预测。",
+                  "仅限该职业及美国统计。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-choreo",
+                "limitation": "仅限该职业及美国统计。",
+                "market": "美国",
+                "name": "27-2032.00 - Choreographers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/27-2032.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-fine-artists",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "27-1013.00 - Fine Artists, Including Painters, Sculptors, and Illustrators",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/27-1013.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-instructional",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "25-9031.00 - Instructional Coordinators",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/25-9031.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-self-teachers",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "25-3021.00 - Self-Enrichment Teachers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/25-3021.00"
+              }
+            ]
+          },
+          "id": "choreographers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "精确职业数据：O*NET 27-2032.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业身份",
+        "occupation_scope": "编舞师 / 27-2032.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-choreo"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "动作、节拍、队形、表演者与排练",
+        "fact_id": "tasks",
+        "market": "美国",
+        "measure": "任务对象",
+        "occupation_scope": "编舞师 / 27-2032.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-choreo"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "目标素材—结构—排练—反馈—修订交接",
+        "fact_id": "workflow",
+        "market": "全球",
+        "measure": "工作闭环",
+        "occupation_scope": "编舞师 / 27-2032.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "ed-workflow"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "结构、记录、反馈与边界",
+        "fact_id": "fit",
+        "market": "全球",
+        "measure": "适配信号",
+        "occupation_scope": "编舞师 / 27-2032.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "ed-fit"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "身体、素材、同意、场地与版本",
+        "fact_id": "risk",
+        "market": "全球",
+        "measure": "风险边界",
+        "occupation_scope": "编舞师 / 27-2032.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "ed-risk"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "47a0fdba55775033015292ee3e7d6dc941fd3bb28095477b68463292b6480eb2",
+  "source_content_sha256": "d61b14cfe3e968f5f611e2af9f664f38fcbe74721718f2355140a8b23be909e0",
   "subject": {
     "canonical_slug": "choreographers",
     "name": "编舞师",
-    "summary": null
+    "summary": "把创作意图转成可复现的节拍、动作与空间结构，通过排练反馈修订版本，并在身体限制、素材权利、场地或发布授权不明时停止受影响步骤。"
   }
 }

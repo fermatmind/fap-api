@@ -1,12 +1,1678 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "先判断你是否能在高风险、快节奏、强协作环境中持续执行设备检查、通信确认、记录和升级。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "正向信号：愿意逐项复核设备状态、甲板信号、人员区域和任务阶段，不以速度代替确认。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.quick-decision.fit-decision-checklist.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "谨慎信号：厌恶程序、记录和重复确认，或把熟悉设备误当作已获授权。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.quick-decision.fit-decision-checklist.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "练习材料只使用抽象占位符，不代表真实甲板信号或操作参数。逐卡核七字段：设备对象、状态信号、任务阶段、通信确认、人员/区域状态、资格授权、升级安排（触发条件+升级对象）。",
+              "卡A：设备对象=设备A；状态信号=已给；任务阶段=阶段甲；通信确认=未知；人员/区域状态=已给；资格授权=已给；升级安排=任一字段未知时交指定监督者。缺项数=1。",
+              "卡B：设备对象=设备B；状态信号=未知；任务阶段=阶段乙；通信确认=已给；人员/区域状态=未知；资格授权=已给；升级安排=任一字段未知时交指定监督者。缺项数=2。",
+              "卡C：设备对象=设备C；状态信号=已给；任务阶段=阶段丙；通信确认=已给；人员/区域状态=已给；资格授权=已给；升级安排=任一字段未知时交指定监督者。缺项数=0。答案只由上述材料推出；任何未知都记录并升级。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业定义：操作维护弹射器、拦阻装置及相关机械、液压和控制系统。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.profile.definition-block.1",
+          "source_refs": [
+            "onet-specialist"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "工作对象包括弹射、拦阻和视觉着舰辅助设备。",
+              "产出包括设备测试维护、放飞回收指挥和运行维护日志。",
+              "紧急着陆时可能涉及启动拦阻系统。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-specialist"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "O*NET明确这是军事职业且不采集其职业数据。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.profile.work-context-block.1",
+          "source_refs": [
+            "onet-specialist"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "美国海军ABE是该职业的一个军种示例，不代表所有军种岗位。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "navy-abe"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "ABE示例设备包括液压/蒸汽弹射器、拦阻装置、水制动器、发动机、喷流挡板与控制站。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "navy-abe"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "工作多在航母飞行甲板户外进行，节奏快并与其他航空专业协作。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.profile.definition-block.2",
+          "source_refs": [
+            "navy-abe"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "检查清单和日志应回到单位批准的程序与格式。",
+              "不确定时停止自行推断并升级。",
+              "训练与任命不因工具辅助而转移。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.profile.responsibilities-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "维护日志可记录放飞、回收和设备维护事件。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.profile.work-context-block.2",
+          "source_refs": [
+            "onet-specialist"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "核心对象：航空器放飞回收设备与相关控制系统。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.profile.onet-structured-fields-block.2",
+          "source_refs": [
+            "onet-specialist"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业身份只确认55-3012.00军事职业，不建立中国等价岗位。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.profile.definition-block.3",
+          "source_refs": [
+            "onet-specialist"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "O*NET无该军事职业技术统计，不写采用率。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.profile.onet-structured-fields-block.3",
+          "source_refs": [
+            "onet-specialist"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "专员：操作维护设备并执行放飞回收支持。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-aircrew",
+            "onet-officer",
+            "onet-specialist"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "军官：计划指挥作业并监督系统战备与安全。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-aircrew",
+            "onet-officer",
+            "onet-specialist"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "机组成员：在飞行中执行通信、侦察、运输等任务。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-aircrew",
+            "onet-officer",
+            "onet-specialist"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "比较时核对象、所在阶段、军衔职责、最终决定和授权。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-aircrew",
+            "onet-officer",
+            "onet-specialist"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "机组成员",
+                "id": "aircraft-launch-and-recovery-specialists.direction.1",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/air-crew-members"
+              },
+              {
+                "entity": "装甲突击车辆成员",
+                "id": "aircraft-launch-and-recovery-specialists.direction.2",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/armored-assault-vehicle-crew-members"
+              },
+              {
+                "entity": "火炮导弹成员",
+                "id": "aircraft-launch-and-recovery-specialists.direction.3",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/artillery-and-missile-crew-members"
+              },
+              {
+                "entity": "指挥与控制中心专员",
+                "id": "aircraft-launch-and-recovery-specialists.direction.4",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/command-and-control-center-specialists"
+              },
+              {
+                "entity": "步兵",
+                "id": "aircraft-launch-and-recovery-specialists.direction.5",
+                "relation": "career.adjacent",
+                "url": "/zh/career/jobs/infantry"
+              }
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "相邻入口可继续了解其他军事职业，但不能据标题相似认定可互换。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.direction-comparison.adjacent-career-comparison-table.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "O*NET不采集该军事职业任务数据，因此不提供AI采用率、暴露率或替代率。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "onet-specialist"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "entries": [
+              "可辅助：虚构清单格式、日志字段和缺项检查。",
+              "不可替代：真实设备状态、甲板信号、人员区域判断。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "所有输出须回到批准程序、真实设备与授权人员。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "entries": [
+              "核原始状态。",
+              "核通信确认。",
+              "核人员与区域。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "低风险草稿与高风险放飞回收决定必须分开。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "entries": [
+              "低风险：格式与提醒。",
+              "高风险：设备放行、信号和任务决定。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "质量看漏项、误报、返工和升级，不只看速度。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "训练、任命、安全许可和甲板授权不会因AI自动转移。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "这里不提供中国大陆55-3012.00精确职业工资。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "国家统计局工资资料不建立该美军职业代码的中国映射。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "行业或人员大类均值不能冒充军事职业待遇。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中文页面语言不代表存在中国等价岗位。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "具体军队待遇应查对应国家和军种的正式制度。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.china-salary.career-snapshot-primary-locale.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "美国军种待遇不能直接换算为中国个人收入。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.china-salary.career-snapshot-primary-locale.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "O*NET明确不采集军事职业数据。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-data-boundary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "因此没有可核实的55-3012.00美国职业工资分位。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-data-boundary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "不得用民用航空岗位工资代理。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "核对待遇时要分军种、军衔、服役状态和地点。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "津贴、福利与基本工资也需按正式口径拆开。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "任何数字都应回到对应军种官方制度。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "缺少精确分位不影响职业任务与训练边界判断。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.us-salary.career-snapshot-secondary-locale.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "匹配度看能否稳定执行设备、信号、记录和协作程序。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "entries": [
+              "愿意重复确认。",
+              "能在快节奏中保持程序。",
+              "遇到未知会升级。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.fit.personality-fit-block.1",
+          "source_refs": [
+            "navy-abe"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "美国海军ABE示例强调团队、工具设备与安全程序意识。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.fit.personality-fit-block.2",
+          "source_refs": [
+            "navy-abe"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "兴趣只用于探索，不能替代招募资格。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "entries": [
+              "访谈在役或退役人员。",
+              "阅读军种正式招募材料。",
+              "完成虚构状态卡审阅。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.fit.personality-fit-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "体能、听力、色觉和深度知觉要求以军种正式评估为准。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.fit.personality-fit-block.4",
+          "source_refs": [
+            "navy-abe"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎信号：把熟悉机械等同于甲板授权。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "一周内能否清楚写出状态、确认、边界与升级，是更安全的探索证据。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.fit.personality-fit-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "entries": [
+              "设备状态不明；控制：只记录未知并升级。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "entries": [
+              "通信未确认；控制：不推断已收到或已放行。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "entries": [
+              "人员/区域状态不明；控制：交指定监督者确认。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.risk.career-risk-cards.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "entries": [
+              "越过资格授权；控制：核军种训练、任命和单位权限。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "entries": [
+              "把草稿当真实指令；控制：桌面练习不模拟甲板信号。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "entries": [
+              "升级记录须含触发条件、对象、时间和责任人。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.risk.career-risk-cards.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.recruitment-sample",
+          "data": {
+            "paragraphs": [
+              "只用公开资料和虚构状态卡探索，不使用真实任务、设备状态、信号或敏感信息。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.path.recruitment-sample.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-role-comparison",
+          "data": {
+            "column_keys": [
+              "role",
+              "employer_evidence",
+              "boundary"
+            ],
+            "rows": [
+              [
+                "入门训练",
+                "基础理论与程序",
+                "不等于甲板授权"
+              ],
+              [
+                "岗位训练",
+                "受监督设备与记录任务",
+                "按任命范围"
+              ],
+              [
+                "进阶角色",
+                "监督或专业设备职责",
+                "需另行训练与任命"
+              ]
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.path.entry-role-comparison.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.employer-evidence",
+          "data": {
+            "column_keys": [
+              "work_evidence",
+              "signal"
+            ],
+            "rows": [
+              [
+                "七字段状态卡",
+                "未知项不猜测"
+              ],
+              [
+                "相邻职业表",
+                "能区分专员、军官与机组"
+              ],
+              [
+                "来源说明",
+                "知道O*NET数据空白"
+              ]
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.path.employer-evidence.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "matrix"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-portfolio",
+          "data": {
+            "entries": [
+              {
+                "id": "aircraft-launch-and-recovery-specialists.portfolio.one",
+                "values": [
+                  "虚构状态卡",
+                  "七字段",
+                  "缺项与升级"
+                ]
+              },
+              {
+                "id": "aircraft-launch-and-recovery-specialists.portfolio.two",
+                "values": [
+                  "相邻职业表",
+                  "对象与责任",
+                  "不作互换结论"
+                ]
+              }
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.path.entry-portfolio.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "cards"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.interview-probation",
+          "data": {
+            "column_keys": [
+              "work",
+              "possible_check"
+            ],
+            "rows": [
+              [
+                "状态字段未知",
+                "练习判断：记录未知并升级"
+              ],
+              [
+                "通信字段未知",
+                "练习判断：不假定已经确认"
+              ],
+              [
+                "练习动作超出授权边界",
+                "练习判断：停止自行判断并交指定监督者"
+              ]
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.path.interview-probation.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.seven-day-trial",
+          "data": {
+            "entries": [
+              {
+                "id": "aircraft-launch-and-recovery-specialists.trial.day1",
+                "values": [
+                  "第1天",
+                  "读职业与军种边界"
+                ]
+              },
+              {
+                "id": "aircraft-launch-and-recovery-specialists.trial.day3",
+                "values": [
+                  "第3天",
+                  "完成虚构状态卡"
+                ]
+              },
+              {
+                "id": "aircraft-launch-and-recovery-specialists.trial.day7",
+                "values": [
+                  "第7天",
+                  "复盘缺项与升级"
+                ]
+              }
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.path.seven-day-trial.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "timeline"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-decision",
+          "data": {
+            "column_keys": [
+              "credential",
+              "job_value",
+              "boundary"
+            ],
+            "rows": [
+              [
+                "高中或同等学历",
+                "美国海军ABE示例资格",
+                "不代表其他军种资格"
+              ],
+              [
+                "A级技术学校",
+                "美国海军ABE示例为5周",
+                "完成训练不自动取得其他岗位权限"
+              ],
+              [
+                "岗位或单位授权",
+                "决定可承担的具体职责",
+                "须按对应正式规则另行核验"
+              ]
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.path.credential-decision.1",
+          "source_refs": [
+            "editorial",
+            "navy-training"
+          ],
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-boundary",
+          "data": {
+            "paragraphs": [
+              "美国海军ABE示例要求高中或同等学历、美国公民和安全许可资格；具体资格以当前正式招募规则为准。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.path.credential-boundary.1",
+          "source_refs": [
+            "navy-training"
+          ],
+          "type": "notice"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-boundary",
+          "data": {
+            "paragraphs": [
+              "七日练习和作品不等于新兵训练、技术学校、任命、安全许可或甲板授权。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.path.credential-boundary.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "notice"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "O*NET不采集军事职业就业数据。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.market-signals.market-signal-card.1",
+          "source_refs": [
+            "onet-data-boundary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "因此没有55-3012.00精确就业规模。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.market-signals.market-signal-card.2",
+          "source_refs": [
+            "onet-data-boundary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "没有精确增长率或空缺预测。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.market-signals.market-signal-card.3",
+          "source_refs": [
+            "onet-data-boundary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "民用航空趋势不能替代军事岗位需求。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "实际机会应查对应军种当前招募和资格。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "招募状态也不等于个人录用概率。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.market-signals.market-signal-card.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "55-3012.00操作维护弹射器、拦阻装置及相关机械、液压和控制系统，也涉及视觉着舰辅助、测试维护、手势/灯光指挥和日志。",
+                "id": "aircraft-launch-and-recovery-specialists.faq.1",
+                "question_key": "career.faq.aircraft-launch-and-recovery-specialists.daily-work",
+                "source_refs": [
+                  "onet-specialist"
+                ]
+              },
+              {
+                "answer": "专员操作维护并执行放飞回收；军官规划指挥并监督系统战备安全；机组成员执行飞行中的任务。",
+                "id": "aircraft-launch-and-recovery-specialists.faq.2",
+                "question_key": "career.faq.aircraft-launch-and-recovery-specialists.role-comparison",
+                "source_refs": [
+                  "onet-aircrew",
+                  "onet-officer",
+                  "onet-specialist"
+                ]
+              },
+              {
+                "answer": "美国海军ABE示例强调团队协作、工具设备能力、安全程序意识、体能以及听力、色觉和深度知觉要求。",
+                "id": "aircraft-launch-and-recovery-specialists.faq.3",
+                "question_key": "career.faq.aircraft-launch-and-recovery-specialists.fit",
+                "source_refs": [
+                  "navy-abe"
+                ]
+              },
+              {
+                "answer": "O*NET只提供军事职业摘要且不采集任务数据，因此不能给出该职业AI采用率、暴露率或替代率。",
+                "id": "aircraft-launch-and-recovery-specialists.faq.4",
+                "question_key": "career.faq.aircraft-launch-and-recovery-specialists.ai-impact",
+                "source_refs": [
+                  "onet-specialist"
+                ]
+              },
+              {
+                "answer": "数字工具只可辅助虚构清单、日志格式和缺项检查；设备状态、甲板信号、人员区域、放飞回收决定必须由已训练获授权人员控制。",
+                "id": "aircraft-launch-and-recovery-specialists.faq.5",
+                "question_key": "career.faq.aircraft-launch-and-recovery-specialists.human-control",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "这里不提供中国大陆55-3012.00精确工资；具体军队待遇也不应从民用行业均值推算。",
+                "id": "aircraft-launch-and-recovery-specialists.faq.6",
+                "question_key": "career.faq.aircraft-launch-and-recovery-specialists.china-pay",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "O*NET明确不采集军事职业数据，因此本职业页不提供可核实的美国职业工资分位。",
+                "id": "aircraft-launch-and-recovery-specialists.faq.7",
+                "question_key": "career.faq.aircraft-launch-and-recovery-specialists.us-pay",
+                "source_refs": [
+                  "onet-data-boundary"
+                ]
+              },
+              {
+                "answer": "美国海军ABE示例要求高中学历或同等学历、美国公民及安全许可资格，并在新兵训练后接受5周A级技术学校训练。",
+                "id": "aircraft-launch-and-recovery-specialists.faq.8",
+                "question_key": "career.faq.aircraft-launch-and-recovery-specialists.credentials",
+                "source_refs": [
+                  "navy-training"
+                ]
+              },
+              {
+                "answer": "O*NET不采集军事职业就业数据，因此本职业无可核实的O*NET就业规模、增长率或空缺预测。",
+                "id": "aircraft-launch-and-recovery-specialists.faq.9",
+                "question_key": "career.faq.aircraft-launch-and-recovery-specialists.outlook-transition",
+                "source_refs": [
+                  "onet-data-boundary"
+                ]
+              }
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.sources.faq.1",
+          "source_refs": [
+            "editorial",
+            "navy-abe",
+            "navy-training",
+            "onet-aircrew",
+            "onet-data-boundary",
+            "onet-officer",
+            "onet-specialist"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "55-3012.00是军事职业，O*NET明确不采集其工资、就业或任务数据。",
+              "海军ABE只是军种示例；训练、任命、安全许可和甲板授权须查对应正式规则。",
+              "桌面练习不模拟真实信号、不操作设备、不使用敏感信息。"
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.sources.boundary.1",
+          "source_refs": [
+            "editorial",
+            "navy-abe",
+            "navy-environment",
+            "navy-training",
+            "nbs-wages",
+            "onet-aircrew",
+            "onet-data-boundary",
+            "onet-officer",
+            "onet-specialist"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "飞机弹射与回收专员",
+                "id": "aircraft-launch-and-recovery-specialists.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "飞机弹射与回收专员",
+                "id": "aircraft-launch-and-recovery-specialists.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "飞机弹射与回收专员",
+                "id": "aircraft-launch-and-recovery-specialists.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "飞机弹射与回收专员",
+                "id": "aircraft-launch-and-recovery-specialists.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "飞机弹射与回收专员",
+                "id": "aircraft-launch-and-recovery-specialists.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "飞机弹射与回收专员",
+                "id": "aircraft-launch-and-recovery-specialists.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "飞机弹射与回收专员",
+                "id": "aircraft-launch-and-recovery-specialists.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "飞机弹射与回收专员",
+                "id": "aircraft-launch-and-recovery-specialists.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "飞机弹射与回收专员",
+                "id": "aircraft-launch-and-recovery-specialists.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "飞机弹射与回收专员",
+                "id": "aircraft-launch-and-recovery-specialists.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "飞机弹射与回收专员",
+                "id": "aircraft-launch-and-recovery-specialists.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "用于读者职业探索与虚构桌面练习。",
+                  "只支持职业探索和虚构桌面练习，不替代军种招募、训练、任命或甲板授权。"
+                ],
+                "evidence_type": "editorial desktop exercise",
+                "id": "editorial",
+                "limitation": "只支持职业探索和虚构桌面练习，不替代军种招募、训练、任命或甲板授权。",
+                "market": "编辑设计",
+                "name": "FermatMind — 飞机弹射与回收专员职业探索框架",
+                "period": "2026-09-06",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn59view1 lines 1090-1172。",
+                  "美国海军ABE示例，不代表其他军种或所有岗位。"
+                ],
+                "evidence_type": "official service career profile",
+                "id": "navy-abe",
+                "limitation": "美国海军ABE示例，不代表其他军种或所有岗位。",
+                "market": "美国",
+                "name": "U.S. Navy — Aviation Boatswain’s Mate Launch & Recovery",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "U.S. Navy Recruiting Command",
+                "scope": "exact",
+                "url": "https://static.navy.com/careers-benefits/careers/aviation/aviation-boatswains-mate-launch-and-recovery/"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn59view1 lines 1123-1125。",
+                  "美国海军ABE工作环境示例，不跨军种外推。"
+                ],
+                "evidence_type": "official service work environment",
+                "id": "navy-environment",
+                "limitation": "美国海军ABE工作环境示例，不跨军种外推。",
+                "market": "美国",
+                "name": "U.S. Navy — ABE work environment",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "U.S. Navy Recruiting Command",
+                "scope": "exact",
+                "url": "https://static.navy.com/careers-benefits/careers/aviation/aviation-boatswains-mate-launch-and-recovery/"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn59view1 lines 1128-1158。",
+                  "当前美国海军招募说明；资格可能更新，应回到正式招募规则。"
+                ],
+                "evidence_type": "official service training and qualification profile",
+                "id": "navy-training",
+                "limitation": "当前美国海军招募说明；资格可能更新，应回到正式招募规则。",
+                "market": "美国",
+                "name": "U.S. Navy — ABE training and qualifications",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "U.S. Navy Recruiting Command",
+                "scope": "exact",
+                "url": "https://static.navy.com/careers-benefits/careers/aviation/aviation-boatswains-mate-launch-and-recovery/"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn48view0 lines 39-51, 229-274, 338-360。",
+                  "行业与人员大类聚合，不是55-3012.00军事职业工资。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "nbs-wages",
+                "limitation": "行业与人员大类聚合，不是55-3012.00军事职业工资。",
+                "market": "中国大陆",
+                "name": "国家统计局 — 2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 wage aggregates published 2026",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn59view3 lines 50-78。",
+                  "仅用于所列职业、军种、市场、时期和口径。"
+                ],
+                "evidence_type": "official adjacent military occupation profile",
+                "id": "onet-aircrew",
+                "limitation": "仅用于所列职业、军种、市场、时期和口径。",
+                "market": "美国",
+                "name": "O*NET OnLine — Air Crew Members 55-3011.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/55-3011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn59view0 lines 50-54。",
+                  "O*NET明确不采集军事职业数据。"
+                ],
+                "evidence_type": "official military data boundary",
+                "id": "onet-data-boundary",
+                "limitation": "O*NET明确不采集军事职业数据。",
+                "market": "美国",
+                "name": "O*NET OnLine — military occupation data boundary for 55-3012.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/55-3012.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn59view2 lines 50-72。",
+                  "仅用于所列职业、军种、市场、时期和口径。"
+                ],
+                "evidence_type": "official adjacent military occupation profile",
+                "id": "onet-officer",
+                "limitation": "仅用于所列职业、军种、市场、时期和口径。",
+                "market": "美国",
+                "name": "O*NET OnLine — Aircraft Launch and Recovery Officers 55-1012.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/55-1012.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn59view0 lines 50-71。",
+                  "O*NET明确不采集军事职业数据；仅提供职业摘要。"
+                ],
+                "evidence_type": "official military occupation profile",
+                "id": "onet-specialist",
+                "limitation": "O*NET明确不采集军事职业数据；仅提供职业摘要。",
+                "market": "美国",
+                "name": "O*NET OnLine — Aircraft Launch and Recovery Specialists 55-3012.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/55-3012.00"
+              }
+            ]
+          },
+          "id": "aircraft-launch-and-recovery-specialists.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "O*NET 55-3012.00军事职业",
+        "fact_id": "occupation-identity",
+        "market": "美国",
+        "measure": "官方职业代码",
+        "occupation_scope": "精确职业数据：55-3012.00军事职业；O*NET不采集工资、就业或技术统计",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-specialist"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "无O*NET军事职业工资数据",
+        "fact_id": "us-wage",
+        "market": "美国",
+        "measure": "职业页工资或可用性边界",
+        "occupation_scope": "精确职业数据：55-3012.00军事职业；O*NET不采集工资、就业或技术统计",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-data-boundary"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "无O*NET军事职业技术统计",
+        "fact_id": "technology-context",
+        "market": "美国",
+        "measure": "技术页面可用性",
+        "occupation_scope": "精确职业数据：55-3012.00军事职业；O*NET不采集工资、就业或技术统计",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-specialist"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "海军ABE示例：高中/同等学历、公民及安全许可资格、5周A级技术学校",
+        "fact_id": "credential-boundary",
+        "market": "美国",
+        "measure": "认证目录可用性",
+        "occupation_scope": "精确职业数据：55-3012.00军事职业；O*NET不采集工资、就业或技术统计",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "navy-training"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "无O*NET军事职业就业预测",
+        "fact_id": "employment-projection",
+        "market": "美国",
+        "measure": "就业趋势或可用性边界",
+        "occupation_scope": "精确职业数据：55-3012.00军事职业；O*NET不采集工资、就业或技术统计",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-data-boundary"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "8ee2b73978438ae103aa41a47157727bf6004b441554108861893ebd6514671b",
+  "source_content_sha256": "f451d22fe39897286812ec636978313718ba7c5dc15bc23b0f175a3c897f3390",
   "subject": {
     "canonical_slug": "aircraft-launch-and-recovery-specialists",
     "name": "飞机弹射与回收专员",
-    "summary": null
+    "summary": "军事职业：操作维护弹射和拦阻系统，执行航母航空器放飞回收支持；军种训练、资格和单位授权是硬边界。"
   }
 }

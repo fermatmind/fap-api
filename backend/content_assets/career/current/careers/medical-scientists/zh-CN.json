@@ -1,12 +1,1753 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：本页是包含流行病学家与非流行病学医学科学家的父职业。共同核心是把疾病或健康问题转成可检验研究，再用数据、样本或群体证据形成有范围限制的结论；不是直接提供诊疗建议。"
+            ]
+          },
+          "id": "medical-scientists.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "onet-epi-current",
+            "onet-med-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "适合信号：你愿意让数据反驳假设，能长期维护变量、排除标准、版本和负结果，并能向不同专业人员解释不确定性。"
+            ]
+          },
+          "id": "medical-scientists.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "bls-epi-duties",
+            "bls-med-duties",
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：如果你只喜欢医学主题，却不愿反复核对研究设计、数据质量、伦理边界和复现失败，应先做安全数据练习再决定方向。"
+            ]
+          },
+          "id": "medical-scientists.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "bls-epi-duties",
+            "bls-med-duties",
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全试做：只用本页完全虚构的两组汇总数据，计算事件比例、绝对差和比例比，列出不能作因果结论的理由；不得使用真实患者、样本或个人健康信息。"
+            ]
+          },
+          "id": "medical-scientists.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "身份：本页采用透明父职业范围，包含美国O*NET 19-1041.00流行病学家与19-1042.00非流行病学医学科学家；所有工资和预测都按子职业分开。"
+            ]
+          },
+          "id": "medical-scientists.profile.definition-block.1",
+          "source_refs": [
+            "onet-epi-current",
+            "onet-med-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "输入：研究问题、文献、方案、变量定义、医学样本或去标识健康数据、质量记录、伦理与数据使用条件。"
+            ]
+          },
+          "id": "medical-scientists.profile.responsibilities-block.1",
+          "source_refs": [
+            "hhs-ohrp-45cfr46",
+            "nih-dms-policy",
+            "onet-epi-current",
+            "onet-med-current"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "任务：选择研究设计，定义样本与比较，执行或监督数据/样本获取，检查偏差与质量，分析结果并做独立验证。"
+            ]
+          },
+          "id": "medical-scientists.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-epi-current",
+            "onet-med-current"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "产出：研究方案、数据字典、分析记录、实验结果、技术报告、论文、公共卫生建议或明确标注限制的结论。"
+            ]
+          },
+          "id": "medical-scientists.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-epi-current",
+            "onet-med-current"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断：研究设计能否回答问题，测量与比较是否一致，缺失和偏差会怎样改变结果，异常是信号、操作问题还是分析错误。"
+            ]
+          },
+          "id": "medical-scientists.profile.work-context-block.1",
+          "source_refs": [
+            "onet-epi-current",
+            "onet-med-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作流程：问题与范围确认 → 伦理和数据边界 → 方案与变量定义 → 数据或样本质量控制 → 分析和敏感性检查 → 独立复核 → 有界沟通。"
+            ]
+          },
+          "id": "medical-scientists.profile.work-context-block.2",
+          "source_refs": [
+            "hhs-ohrp-45cfr46",
+            "nih-dms-policy",
+            "onet-epi-current",
+            "onet-med-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "环境与工具：非流行病学医学科学家多在办公室和实验室，流行病学家还可能进入社区、临床或应急现场；常用统计、数据库、实验与文档工具。"
+            ]
+          },
+          "id": "medical-scientists.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "bls-epi-duties",
+            "bls-med-duties"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "协作：与研究助理、实验室人员、统计人员、临床人员、公共卫生团队、数据管理者、伦理审查与资助方沟通；不同角色的批准权不能互相替代。"
+            ]
+          },
+          "id": "medical-scientists.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "hhs-ohrp-45cfr46",
+            "onet-epi-current",
+            "onet-med-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量：每个结果要能回到方案版本、变量定义、数据或样本来源、代码和排除记录；负结果、缺失和偏差不能被隐藏。"
+            ]
+          },
+          "id": "medical-scientists.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial-exercise",
+            "nih-dms-policy"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "责任边界：研究结论不等于个体诊断；人体研究、数据使用、实验室操作和临床执业分别受适用授权控制。"
+            ]
+          },
+          "id": "medical-scientists.profile.definition-block.2",
+          "source_refs": [
+            "bls-med-duties",
+            "cdc-bmbl6",
+            "hhs-ohrp-45cfr46",
+            "nih-dms-policy"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "clinical-research-coordinators",
+                "id": "medical-scientists.related.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/clinical-research-coordinators"
+              },
+              {
+                "entity": "health-informatics-specialists",
+                "id": "medical-scientists.related.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/health-informatics-specialists"
+              },
+              {
+                "entity": "microbiologists",
+                "id": "medical-scientists.related.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/microbiologists"
+              },
+              {
+                "entity": "geneticists",
+                "id": "medical-scientists.related.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/geneticists"
+              }
+            ]
+          },
+          "id": "medical-scientists.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-crc-current",
+            "onet-epi-current",
+            "onet-gen-current",
+            "onet-hi-current",
+            "onet-med-current",
+            "onet-micro-current"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "临床研究协调员更偏向研究现场排期、受试者流程、方案合规和研究文件；医学科学家更偏向研究问题、方法、分析和结论责任。"
+            ]
+          },
+          "id": "medical-scientists.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-crc-current",
+            "onet-epi-current",
+            "onet-gen-current",
+            "onet-hi-current",
+            "onet-med-current",
+            "onet-micro-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "健康信息学专家更偏向设计、实施和改进医疗信息系统；医学科学家使用数据系统，但目标是回答疾病或健康研究问题。"
+            ]
+          },
+          "id": "medical-scientists.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-crc-current",
+            "onet-epi-current",
+            "onet-gen-current",
+            "onet-hi-current",
+            "onet-med-current",
+            "onet-micro-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "微生物学家以细菌、真菌等微生物的生长、结构和作用为主要对象；医学科学家可能研究感染，但父职业对象更宽。"
+            ]
+          },
+          "id": "medical-scientists.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-crc-current",
+            "onet-epi-current",
+            "onet-gen-current",
+            "onet-hi-current",
+            "onet-med-current",
+            "onet-micro-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "遗传学家研究性状在分子、个体或群体层面的遗传；医学科学家可能使用遗传证据，但不因此等同于遗传学家。"
+            ]
+          },
+          "id": "medical-scientists.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-crc-current",
+            "onet-epi-current",
+            "onet-gen-current",
+            "onet-hi-current",
+            "onet-med-current",
+            "onet-micro-current"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助任务：筛选文献、起草分析代码、检查表格结构、提取候选特征或整理报告目录；输出必须回到原始依据复核。"
+            ]
+          },
+          "id": "medical-scientists.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial-exercise",
+            "onet-epi-current",
+            "onet-med-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "能力边界：模型可以发现模式或生成草稿，不能凭输出本身证明机制、因果、临床有效性或公共卫生影响。"
+            ]
+          },
+          "id": "medical-scientists.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial-exercise",
+            "onet-epi-current",
+            "onet-med-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用条件：先定义获准数据、预期任务、错误指标、人工复核点、审批人和回滚方案，再从虚构或低风险步骤试用。"
+            ]
+          },
+          "id": "medical-scientists.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数据控制：人体、样本、基因和未公开项目数据先核对同意、用途、去标识、权限与工具环境。"
+            ]
+          },
+          "id": "medical-scientists.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial-exercise",
+            "hhs-ohrp-45cfr46",
+            "nih-dms-policy"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工控制点：复查方案、变量定义、数据来源、代码版本、缺失处理、偏差和外部验证。"
+            ]
+          },
+          "id": "medical-scientists.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余责任：伦理批准、实验室安全、研究结论范围、临床实践和对外承诺仍由有权限人员承担。"
+            ]
+          },
+          "id": "medical-scientists.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "bls-med-duties",
+            "cdc-bmbl6",
+            "hhs-ohrp-45cfr46"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业解释：职业任务资料不测量生成式AI采用率或替代概率，不能从任务可辅助直接推出岗位增减。"
+            ]
+          },
+          "id": "medical-scientists.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "onet-epi-current",
+            "onet-med-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "安全验证：在虚构数据上比较人工与工具结果，记录漏检、误报、复算时间和失败模式，再决定是否进入获批试点。"
+            ]
+          },
+          "id": "medical-scientists.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：本次核查的中国官方行业工资来源没有建立与美国19-1041.00和19-1042.00一一对应的全国职业工资分布，因此不展示父职业精确中位数或分位数。"
+            ]
+          },
+          "id": "medical-scientists.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages-2024"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "不能外推：科学研究和技术服务业平均工资、美国子职业工资或单个招聘报价都不能替代中国医学科学家精确职业统计。"
+            ]
+          },
+          "id": "medical-scientists.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages-2024"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "核对岗位时分别记录研究方向、机构类型、城市、学历阶段、合同性质、固定与浮动薪酬以及统计时间。"
+            ]
+          },
+          "id": "medical-scientists.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editorial-exercise",
+            "nbs-wages-2024"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "缺口只表示本次列明来源没有安全可比的精确分布，不表示中国没有相关岗位或任何工资信息。"
+            ]
+          },
+          "id": "medical-scientists.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial-exercise",
+            "nbs-wages-2024"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "父职业口径：本页包含两个美国精确子职业，工资不能合并成一个数字。以下均为美国BLS 2025年5月职业人群统计。"
+            ]
+          },
+          "id": "medical-scientists.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "bls-epi-wages",
+            "bls-med-wages",
+            "onet-epi-current",
+            "onet-med-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国BLS的19-1042精确职业数据：2025年5月非流行病学医学科学家年薪中位数103,410美元，最低10%低于64,800美元，最高10%高于177,780美元。"
+            ]
+          },
+          "fact_refs": [
+            "med-wage"
+          ],
+          "id": "medical-scientists.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "bls-med-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国BLS的19-1041精确职业数据：2025年5月流行病学家年薪中位数87,220美元，最低10%低于61,270美元，最高10%高于138,800美元。"
+            ]
+          },
+          "fact_refs": [
+            "epi-wage"
+          ],
+          "id": "medical-scientists.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "bls-epi-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "不要把中位数当作入门工资：两组数字覆盖各自职业人群，不代表具体学历阶段、机构、城市、税后收入或个人报价。"
+            ]
+          },
+          "id": "medical-scientists.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "bls-epi-wages",
+            "bls-med-wages",
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "行业和地区会改变报价；比较岗位时要同时核对研究方向、机构类型、职责、合同性质和总薪酬结构。"
+            ]
+          },
+          "id": "medical-scientists.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "期间边界：2025年5月工资与2025—2035年就业预测是不同数据面，不能把增长率直接乘到个人工资上。"
+            ]
+          },
+          "id": "medical-scientists.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "bls-epi-outlook",
+            "bls-epi-wages",
+            "bls-med-outlook",
+            "bls-med-wages",
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "问题意识：你愿意把模糊医学问题收窄成可检验问题，并清楚区分描述、关联、机制假设和因果结论。"
+            ]
+          },
+          "id": "medical-scientists.fit.riasec-fit-block.1",
+          "source_refs": [
+            "bls-epi-duties",
+            "bls-med-duties",
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "数据耐心：你能维护变量字典、缺失值、排除标准、代码版本和审计记录。"
+            ]
+          },
+          "id": "medical-scientists.fit.riasec-fit-block.2",
+          "source_refs": [
+            "bls-epi-duties",
+            "bls-med-duties",
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "反证倾向：结果不支持假设时，你先检查设计、测量和分析，而不是只寻找支持原判断的解释。"
+            ]
+          },
+          "id": "medical-scientists.fit.riasec-fit-block.3",
+          "source_refs": [
+            "bls-epi-duties",
+            "bls-med-duties",
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "安全边界：你能在同意、数据用途、样本身份或实验条件不清时暂停并升级。"
+            ]
+          },
+          "id": "medical-scientists.fit.riasec-fit-block.4",
+          "source_refs": [
+            "cdc-bmbl6",
+            "editorial-exercise",
+            "hhs-ohrp-45cfr46",
+            "nih-dms-policy"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "表达适配：你能向同领域研究者和非专业受众分别说明结果、限制和下一步验证。"
+            ]
+          },
+          "id": "medical-scientists.fit.riasec-fit-block.5",
+          "source_refs": [
+            "bls-epi-duties",
+            "bls-med-duties",
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "长期节奏：你接受研究周期长、重复验证、负结果和资助不确定性。"
+            ]
+          },
+          "id": "medical-scientists.fit.riasec-fit-block.6",
+          "source_refs": [
+            "bls-epi-duties",
+            "bls-med-duties",
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "方向差异：你要进一步判断自己更愿意研究群体分布与公共卫生，还是疾病机制、实验或临床研发。"
+            ]
+          },
+          "id": "medical-scientists.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial-exercise",
+            "onet-epi-current",
+            "onet-med-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "测评边界：兴趣和人格工具只能提出体验问题，不能替代课程表现、研究样本、监督反馈和资格核对。"
+            ]
+          },
+          "id": "medical-scientists.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "场景一｜人体研究授权不清：方案变更、同意范围或IRB状态无法确认时，暂停受影响步骤，保存记录并升级给研究负责人和伦理/合规角色。"
+            ]
+          },
+          "id": "medical-scientists.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial-exercise",
+            "hhs-ohrp-45cfr46"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "场景二｜数据用途越界：共享范围超过同意或协议可能伤害参与者并使研究失信；停止导出，核对去标识、权限、用途和数据管理计划。"
+            ]
+          },
+          "id": "medical-scientists.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial-exercise",
+            "nih-dms-policy"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "场景三｜样本或实验条件异常：标签、污染、批次或遏制条件不清会让结果无效并带来暴露风险；停止操作并交由获授权实验室人员处置。"
+            ]
+          },
+          "id": "medical-scientists.risk.career-risk-cards.3",
+          "source_refs": [
+            "cdc-bmbl6",
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "场景四｜分析漂移：排除标准、变量或代码改变却未记录，会制造不可复现结论；冻结版本、重跑检查并让独立人员复核。"
+            ]
+          },
+          "id": "medical-scientists.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial-exercise",
+            "nih-dms-policy"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同边界：研究结果不等于个体诊断或治疗建议；对外结论、临床实践和应急处置由适用授权链决定。"
+            ]
+          },
+          "id": "medical-scientists.risk.career-risk-cards.5",
+          "source_refs": [
+            "bls-med-duties",
+            "editorial-exercise",
+            "hhs-ohrp-45cfr46"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "入门教育：美国BLS于2026-08-27更新的19-1042精确职业数据显示，非流行病学医学科学家通常需要博士或医学学位，部分岗位接受硕士加经验；同日更新的19-1041精确职业数据显示，流行病学家通常至少需要硕士学位。"
+            ]
+          },
+          "fact_refs": [
+            "med-education",
+            "epi-education"
+          ],
+          "id": "medical-scientists.path.career-path-block.1",
+          "source_refs": [
+            "bls-epi-duties",
+            "bls-med-duties"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "方向选择：先区分群体健康/公共卫生研究与疾病机制/实验/临床研发，再核对课程、方法、导师、机构和第一年任务。"
+            ]
+          },
+          "id": "medical-scientists.path.career-path-block.2",
+          "source_refs": [
+            "bls-epi-duties",
+            "bls-med-duties",
+            "editorial-exercise",
+            "onet-epi-current",
+            "onet-med-current"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "虚构材料｜研究A：干预组100名可分析对象中22人发生事件；对照组100名可分析对象中30人发生事件。只提供汇总数，不说明随机化、失访、随访期或不良事件。任务是计算两组事件比例、绝对差和比例比，并列出不能作因果结论的未知项。"
+            ]
+          },
+          "id": "medical-scientists.path.career-path-block.3",
+          "source_refs": [
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "参考推演：干预组22÷100=22%，对照组30÷100=30%；绝对差为22%-30%=-8个百分点，比例比为22%÷30%≈0.73。只能描述给定汇总数据，不能证明疗效；仍缺随机化、基线平衡、失访、随访时间、不良事件和统计不确定性。"
+            ]
+          },
+          "id": "medical-scientists.path.career-path-block.4",
+          "source_refs": [
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品交付：一页变量与口径表、一张复算表、一页限制和下一步验证清单；页首标注‘完全虚构汇总数据，不用于临床或公共卫生决策’。"
+            ]
+          },
+          "id": "medical-scientists.path.career-path-block.5",
+          "source_refs": [
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七日体验：第1天读研究A并列未知项；第2天独立复算；第3天改变一个分子做敏感性检查；第4天写变量字典；第5天写限制；第6天按参考推演复核；第7天记录错误和方向偏好。全程使用研究A。"
+            ]
+          },
+          "id": "medical-scientists.path.career-path-block.6",
+          "source_refs": [
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "资格边界：研究岗位与临床执业不同；主要做研究的医学科学家通常不需医疗执照，但实际诊疗或治疗患者必须取得相应许可。"
+            ]
+          },
+          "id": "medical-scientists.path.career-path-block.7",
+          "source_refs": [
+            "bls-med-duties"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "成长证据：从可复算的数据检查和准确记录，推进到有界方案、独立验证、跨专业沟通和获授权责任；不以固定年限保证晋升。"
+            ]
+          },
+          "id": "medical-scientists.path.career-path-block.8",
+          "source_refs": [
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国BLS的19-1042精确职业数据：2025年就业约181,000人，2035年约203,700人，增长13%，净增约22,700人。"
+            ]
+          },
+          "fact_refs": [
+            "med-market"
+          ],
+          "id": "medical-scientists.market-signals.market-signal-card.1",
+          "source_refs": [
+            "bls-med-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国BLS的19-1042精确子职业数据：2025—2035年平均每年约10,500个职位空缺，包含转岗和退出劳动力市场形成的替补需求。"
+            ]
+          },
+          "id": "medical-scientists.market-signals.market-signal-card.2",
+          "source_refs": [
+            "bls-med-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国BLS的19-1041精确职业数据：2025年就业约12,800人，2035年约15,200人，增长19%，净增约2,400人，平均每年约800个职位空缺。"
+            ]
+          },
+          "fact_refs": [
+            "epi-market"
+          ],
+          "id": "medical-scientists.market-signals.market-signal-card.3",
+          "source_refs": [
+            "bls-epi-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "需求因素不同：非流行病学研究受老龄化、慢性病、癌症、阿尔茨海默病和抗生素耐药等影响；流行病学受新发疾病和公共卫生服务需求影响，同时可能受政府预算约束。"
+            ]
+          },
+          "id": "medical-scientists.market-signals.market-signal-card.4",
+          "source_refs": [
+            "bls-epi-outlook",
+            "bls-med-outlook"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "判断边界：两个子职业的增长、净增和空缺不能合并成父职业单一概率，更不保证地区、机构或个人机会。"
+            ]
+          },
+          "id": "medical-scientists.market-signals.market-signal-card.5",
+          "source_refs": [
+            "bls-epi-outlook",
+            "bls-med-outlook",
+            "editorial-exercise"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "非流行病学医学科学家提出疾病研究问题，设计实验或临床研究，分析医学样本与数据，遵循实验室安全程序，并发表或解释研究结果。 流行病学家调查疾病和健康结局的分布与决定因素，设计公共卫生研究，分析观察、访谈、调查或样本数据，并向卫生人员、政策制定者和公众沟通结果。",
+                "id": "medical-scientists.faq.1",
+                "question_key": "career.faq.medical-scientists.daily-work",
+                "source_refs": [
+                  "onet-epi-current",
+                  "onet-med-current"
+                ]
+              },
+              {
+                "answer": "临床研究协调员偏向方案执行与合规文件，健康信息学专家偏向医疗信息系统，微生物学家以微生物为对象，遗传学家以性状遗传与基因机制为对象；医学科学家父职业以人类疾病、健康结局或群体分布研究为主。",
+                "id": "medical-scientists.faq.2",
+                "question_key": "career.faq.medical-scientists.role-comparison",
+                "source_refs": [
+                  "onet-crc-current",
+                  "onet-epi-current",
+                  "onet-gen-current",
+                  "onet-hi-current",
+                  "onet-med-current",
+                  "onet-micro-current"
+                ]
+              },
+              {
+                "answer": "医学科学家需要提出可检验问题、分析数据、准确记录、监测样本或健康数据，并向不同专业或公众解释证据和限制。",
+                "id": "medical-scientists.faq.3",
+                "question_key": "career.faq.medical-scientists.fit",
+                "source_refs": [
+                  "bls-epi-duties",
+                  "bls-med-duties"
+                ]
+              },
+              {
+                "answer": "医学科学家的文献筛选、代码草拟、表格检查、图像或组学特征提取可以由数字工具辅助，但所列职业资料不提供生成式AI采用率、自动化比例或替代概率。 工具输出必须回到研究方案、原始或获准数据、变量定义、代码版本和独立验证结果复核；无法确认的异常不应被包装成医学结论。",
+                "id": "medical-scientists.faq.4",
+                "question_key": "career.faq.medical-scientists.ai-impact",
+                "source_refs": [
+                  "editorial-exercise",
+                  "onet-epi-current",
+                  "onet-med-current"
+                ]
+              },
+              {
+                "answer": "工具输出必须回到研究方案、原始或获准数据、变量定义、代码版本和独立验证结果复核；无法确认的异常不应被包装成医学结论。",
+                "id": "medical-scientists.faq.5",
+                "question_key": "career.faq.medical-scientists.human-control",
+                "source_refs": [
+                  "editorial-exercise"
+                ]
+              },
+              {
+                "answer": "本次核查的中国官方行业工资来源未建立与美国19-1041.00和19-1042.00一一对应的全国职业工资分布，因此暂无可安全使用的数据来展示父职业精确中位数或分位数。",
+                "id": "medical-scientists.faq.6",
+                "question_key": "career.faq.medical-scientists.china-pay",
+                "source_refs": [
+                  "nbs-wages-2024"
+                ]
+              },
+              {
+                "answer": "美国BLS的19-1042非流行病学医学科学家数据显示，2025年5月年薪中位数为103,410美元；最低10%低于64,800美元，最高10%高于177,780美元。 美国BLS的19-1041流行病学家数据显示，2025年5月年薪中位数为87,220美元；最低10%低于61,270美元，最高10%高于138,800美元。",
+                "fact_refs": [
+                  "med-wage",
+                  "epi-wage"
+                ],
+                "id": "medical-scientists.faq.7",
+                "question_key": "career.faq.medical-scientists.us-pay",
+                "source_refs": [
+                  "bls-epi-wages",
+                  "bls-med-wages"
+                ]
+              },
+              {
+                "answer": "美国BLS表示19-1042非流行病学医学科学家通常需要博士或医学学位，部分岗位可凭硕士加经验进入。 美国BLS表示19-1041流行病学家通常至少需要硕士学位。",
+                "fact_refs": [
+                  "med-education",
+                  "epi-education"
+                ],
+                "id": "medical-scientists.faq.8",
+                "question_key": "career.faq.medical-scientists.education-path",
+                "source_refs": [
+                  "bls-epi-duties",
+                  "bls-med-duties"
+                ]
+              },
+              {
+                "answer": "BLS表示以研究为主的医学科学家通常不需要执照或认证，但实际行医或治疗患者者必须取得相应医疗执照；研究岗位与临床执业资格必须分开。",
+                "id": "medical-scientists.faq.9",
+                "question_key": "career.faq.medical-scientists.credentials",
+                "source_refs": [
+                  "bls-med-duties"
+                ]
+              },
+              {
+                "answer": "在HHS规则适用的人体受试者研究中，需要按适用要求处理IRB审查、风险最小化、隐私和知情同意，不能以研究便利替代授权。 NIH政策覆盖的研究需要计划科学数据管理与共享，同时保护参与者隐私并支持验证和可重复性；共享不等于无条件公开。 生物医学实验室应按病原体、程序和设施开展风险评估，选择合适的操作规范、安全设备和遏制措施。",
+                "id": "medical-scientists.faq.10",
+                "question_key": "career.faq.medical-scientists.risk-boundary",
+                "source_refs": [
+                  "cdc-bmbl6",
+                  "hhs-ohrp-45cfr46",
+                  "nih-dms-policy"
+                ]
+              },
+              {
+                "answer": "美国BLS的19-1042数据显示，2025年就业约181,000人，2035年约203,700人，增长13%，净增约22,700人，十年内平均每年约10,500个职位空缺。 美国BLS的19-1041数据显示，2025年就业约12,800人，2035年约15,200人，增长19%，净增约2,400人，十年内平均每年约800个职位空缺。",
+                "fact_refs": [
+                  "med-market",
+                  "epi-market"
+                ],
+                "id": "medical-scientists.faq.11",
+                "question_key": "career.faq.medical-scientists.outlook-transition",
+                "source_refs": [
+                  "bls-epi-outlook",
+                  "bls-med-outlook"
+                ]
+              },
+              {
+                "answer": "医学科学家需要提出可检验问题、分析数据、准确记录、监测样本或健康数据，并向不同专业或公众解释证据和限制。 增长率、净增岗位和年均空缺是不同指标；父职业的两个子职业也不能合并成个人就业概率。",
+                "id": "medical-scientists.faq.12",
+                "question_key": "career.faq.medical-scientists.career-worth",
+                "source_refs": [
+                  "bls-epi-duties",
+                  "bls-med-duties",
+                  "editorial-exercise"
+                ]
+              }
+            ]
+          },
+          "id": "medical-scientists.sources.faq.1",
+          "source_refs": [
+            "bls-epi-duties",
+            "bls-epi-outlook",
+            "bls-epi-wages",
+            "bls-med-duties",
+            "bls-med-outlook",
+            "bls-med-wages",
+            "cdc-bmbl6",
+            "editorial-exercise",
+            "hhs-ohrp-45cfr46",
+            "nbs-wages-2024",
+            "nih-dms-policy",
+            "onet-crc-current",
+            "onet-epi-current",
+            "onet-gen-current",
+            "onet-hi-current",
+            "onet-med-current",
+            "onet-micro-current"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "本页是包含美国O*NET 19-1041.00和19-1042.00的透明父职业；工资与预测按子职业分开。",
+              "中国、美国、具体法域和编辑练习分别陈述；统计不等于个人报价或保证。",
+              "研究A为完全虚构汇总数据，不用于真实研究、临床、公共卫生、伦理审查或实验室操作。"
+            ]
+          },
+          "id": "medical-scientists.sources.boundary.1",
+          "source_refs": [
+            "bls-epi-duties",
+            "bls-epi-outlook",
+            "bls-epi-wages",
+            "bls-med-duties",
+            "bls-med-outlook",
+            "bls-med-wages",
+            "cdc-bmbl6",
+            "editorial-exercise",
+            "hhs-ohrp-45cfr46",
+            "nbs-wages-2024",
+            "nih-dms-policy",
+            "onet-crc-current",
+            "onet-epi-current",
+            "onet-gen-current",
+            "onet-hi-current",
+            "onet-med-current",
+            "onet-micro-current"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "医学科学家",
+                "id": "medical-scientists.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "医学科学家",
+                "id": "medical-scientists.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "医学科学家",
+                "id": "medical-scientists.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "医学科学家",
+                "id": "medical-scientists.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "医学科学家",
+                "id": "medical-scientists.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "医学科学家",
+                "id": "medical-scientists.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "医学科学家",
+                "id": "medical-scientists.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "医学科学家",
+                "id": "medical-scientists.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "医学科学家",
+                "id": "medical-scientists.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "医学科学家",
+                "id": "medical-scientists.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "医学科学家",
+                "id": "medical-scientists.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "medical-scientists.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持美国19-1041流行病学家职责、环境与入门教育。",
+                  "职业说明不代表单个岗位或法域授权。"
+                ],
+                "evidence_type": "官方职业资料",
+                "id": "bls-epi-duties",
+                "limitation": "职业说明不代表单个岗位或法域授权。",
+                "market": "美国",
+                "name": "Epidemiologists, Occupational Outlook Handbook",
+                "period": "职业页2026-08-27更新；访问2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/epidemiologists.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持美国19-1041流行病学家就业规模、增长和年均空缺预测。",
+                  "全国预测含替补需求，不保证个人求职结果。"
+                ],
+                "evidence_type": "官方职业资料",
+                "id": "bls-epi-outlook",
+                "limitation": "全国预测含替补需求，不保证个人求职结果。",
+                "market": "美国",
+                "name": "Epidemiologists, Occupational Outlook Handbook",
+                "period": "2025—2035年预测；访问2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/epidemiologists.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持美国19-1041流行病学家工资中位数和上下10%分位。",
+                  "职业人群统计，不是入门工资、地区报价或个人报价。"
+                ],
+                "evidence_type": "官方职业资料",
+                "id": "bls-epi-wages",
+                "limitation": "职业人群统计，不是入门工资、地区报价或个人报价。",
+                "market": "美国",
+                "name": "Epidemiologists, Occupational Outlook Handbook",
+                "period": "2025年5月工资；访问2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/epidemiologists.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持美国19-1042非流行病学医学科学家职责、环境与入门教育。",
+                  "职业说明不代表单个岗位或法域授权。"
+                ],
+                "evidence_type": "官方职业资料",
+                "id": "bls-med-duties",
+                "limitation": "职业说明不代表单个岗位或法域授权。",
+                "market": "美国",
+                "name": "Medical Scientists, Occupational Outlook Handbook",
+                "period": "职业页2026-08-27更新；访问2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/medical-scientists.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持美国19-1042非流行病学医学科学家就业规模、增长和年均空缺预测。",
+                  "全国预测含替补需求，不保证个人求职结果。"
+                ],
+                "evidence_type": "官方职业资料",
+                "id": "bls-med-outlook",
+                "limitation": "全国预测含替补需求，不保证个人求职结果。",
+                "market": "美国",
+                "name": "Medical Scientists, Occupational Outlook Handbook",
+                "period": "2025—2035年预测；访问2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/medical-scientists.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持美国19-1042非流行病学医学科学家工资中位数和上下10%分位。",
+                  "职业人群统计，不是入门工资、地区报价或个人报价。"
+                ],
+                "evidence_type": "官方职业资料",
+                "id": "bls-med-wages",
+                "limitation": "职业人群统计，不是入门工资、地区报价或个人报价。",
+                "market": "美国",
+                "name": "Medical Scientists, Occupational Outlook Handbook",
+                "period": "2025年5月工资；访问2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/life-physical-and-social-science/medical-scientists.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "页面明确第6版是咨询性最佳实践，并以按具体操作方案开展风险评估作为核心原则，用于评估和提出缓解措施。",
+                  "咨询性最佳实践，不替代具体法域和设施规则。"
+                ],
+                "evidence_type": "official biosafety guidance",
+                "id": "cdc-bmbl6",
+                "limitation": "咨询性最佳实践，不替代具体法域和设施规则。",
+                "market": "美国",
+                "name": "Biosafety in Microbiological and Biomedical Laboratories, 6th Edition",
+                "period": "第6版；网页2026-03-18更新；访问2026-09-06",
+                "publisher": "U.S. CDC and NIH",
+                "scope": "combined_official",
+                "url": "https://www.cdc.gov/labs/bmbl/index.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持虚构汇总数据练习、职业试做方法和安全边界。",
+                  "不支持外部工资、资格、法规、AI采用率或临床结论。"
+                ],
+                "evidence_type": "编辑设计",
+                "id": "editorial-exercise",
+                "limitation": "不支持外部工资、资格、法规、AI采用率或临床结论。",
+                "market": "编辑设计",
+                "name": "医学科学家纸面体验编辑设计",
+                "period": "2026-09-06",
+                "publisher": "FermatMind candidate editorial",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "§46.101(a)界定适用范围；§46.111(a)(1)、(4)—(7)支持风险最小化、知情同意、数据安全监测、隐私与保密；§46.116(a)(1)支持知情同意一般要求。",
+                  "eCFR为持续更新的权威但非官方法律版本；是否适用取决于研究、资助和监管管辖，豁免或变更须按具体条款判断。"
+                ],
+                "evidence_type": "official human subjects research regulation",
+                "id": "hhs-ohrp-45cfr46",
+                "limitation": "eCFR为持续更新的权威但非官方法律版本；是否适用取决于研究、资助和监管管辖，豁免或变更须按具体条款判断。",
+                "market": "美国",
+                "name": "45 CFR Part 46—Protection of Human Subjects",
+                "period": "现行45 CFR Part 46；eCFR截至2026-09-03更新；访问2026-09-06",
+                "publisher": "Electronic Code of Federal Regulations / U.S. HHS",
+                "scope": "exact",
+                "url": "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-A/part-46"
+              },
+              {
+                "accessed_at": "2026-08-30",
+                "details": [
+                  "用于核对中国科学研究和技术服务业工资代理与精确医学科学家职业之间的映射缺口。",
+                  "行业平均工资不是医学科学家职业中位数或个人报价。"
+                ],
+                "evidence_type": "official industry wage statistics",
+                "id": "nbs-wages-2024",
+                "limitation": "行业平均工资不是医学科学家职业中位数或个人报价。",
+                "market": "中国大陆",
+                "name": "2024年城镇单位就业人员年平均工资情况",
+                "period": "2024年",
+                "publisher": "中华人民共和国国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202505/t20250516_1959826.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "页面说明2023 NIH DMS政策预期、数据管理对严谨性与研究诚信的重要性，以及负责任共享需保护人体研究参与者隐私。",
+                  "不是所有机构或数据的全球通则。"
+                ],
+                "evidence_type": "official research data policy",
+                "id": "nih-dms-policy",
+                "limitation": "不是所有机构或数据的全球通则。",
+                "market": "美国",
+                "name": "Data Management and Sharing Policy",
+                "period": "2023年政策；页面更新2025年8月",
+                "publisher": "U.S. National Institutes of Health",
+                "scope": "combined_official",
+                "url": "https://grants.nih.gov/policy-and-compliance/policy-topics/sharing-policies/dms"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持临床研究协调员以项目执行、方案合规和研究文件为中心的职责。",
+                  "不代表医学科学家的研究问题与结论责任。"
+                ],
+                "evidence_type": "官方职业资料",
+                "id": "onet-crc-current",
+                "limitation": "不代表医学科学家的研究问题与结论责任。",
+                "market": "美国",
+                "name": "11-9121.01 - Clinical Research Coordinators",
+                "period": "O*NET页面2026更新；访问2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-9121.01"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持流行病学子职业身份、任务、活动与工作情境。",
+                  "仅适用于美国O*NET 19-1041.00，不代表非流行病学医学科学家。"
+                ],
+                "evidence_type": "官方职业资料",
+                "id": "onet-epi-current",
+                "limitation": "仅适用于美国O*NET 19-1041.00，不代表非流行病学医学科学家。",
+                "market": "美国",
+                "name": "19-1041.00 - Epidemiologists",
+                "period": "O*NET页面2026更新；访问2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/19-1041.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持遗传学家以性状遗传和基因机制为中心的职责。",
+                  "临床遗传实践仍需另核资格。"
+                ],
+                "evidence_type": "官方职业资料",
+                "id": "onet-gen-current",
+                "limitation": "临床遗传实践仍需另核资格。",
+                "market": "美国",
+                "name": "19-1029.03 - Geneticists",
+                "period": "O*NET页面2026更新；访问2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/19-1029.03"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持健康信息学专家设计和改进医疗信息系统的职责。",
+                  "不代表医学科学家的疾病研究职责。"
+                ],
+                "evidence_type": "官方职业资料",
+                "id": "onet-hi-current",
+                "limitation": "不代表医学科学家的疾病研究职责。",
+                "market": "美国",
+                "name": "15-1211.01 - Health Informatics Specialists",
+                "period": "O*NET页面2026更新；访问2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-1211.01"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持非流行病学医学科学家身份、研究任务与实验室安全任务。",
+                  "仅适用于美国O*NET 19-1042.00，不包含流行病学家。"
+                ],
+                "evidence_type": "官方职业资料",
+                "id": "onet-med-current",
+                "limitation": "仅适用于美国O*NET 19-1042.00，不包含流行病学家。",
+                "market": "美国",
+                "name": "19-1042.00 - Medical Scientists, Except Epidemiologists",
+                "period": "O*NET页面2026更新；访问2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/19-1042.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持微生物学家以微生物为主要研究对象的职责。",
+                  "仅支持相邻方向比较。"
+                ],
+                "evidence_type": "官方职业资料",
+                "id": "onet-micro-current",
+                "limitation": "仅支持相邻方向比较。",
+                "market": "美国",
+                "name": "19-1022.00 - Microbiologists",
+                "period": "O*NET页面2026更新；访问2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/19-1022.00"
+              }
+            ]
+          },
+          "id": "medical-scientists.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "2025年5月年薪中位数103,410美元",
+        "fact_id": "med-wage",
+        "market": "美国",
+        "measure": "年薪中位数",
+        "occupation_scope": "精确职业数据：美国O*NET 19-1042.00",
+        "period": "2025年5月工资；访问2026-09-06",
+        "source_refs": [
+          "bls-med-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025年5月年薪中位数87,220美元",
+        "fact_id": "epi-wage",
+        "market": "美国",
+        "measure": "年薪中位数",
+        "occupation_scope": "精确职业数据：美国O*NET 19-1041.00",
+        "period": "2025年5月工资；访问2026-09-06",
+        "source_refs": [
+          "bls-epi-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025年181,000人；2035年203,700人",
+        "fact_id": "med-market",
+        "market": "美国",
+        "measure": "就业规模与预测",
+        "occupation_scope": "精确职业数据：美国O*NET 19-1042.00",
+        "period": "2025—2035年预测；访问2026-09-06",
+        "source_refs": [
+          "bls-med-outlook"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025年12,800人；2035年15,200人",
+        "fact_id": "epi-market",
+        "market": "美国",
+        "measure": "就业规模与预测",
+        "occupation_scope": "精确职业数据：美国O*NET 19-1041.00",
+        "period": "2025—2035年预测；访问2026-09-06",
+        "source_refs": [
+          "bls-epi-outlook"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "通常需要博士或医学学位；部分岗位接受硕士加经验",
+        "fact_id": "med-education",
+        "market": "美国",
+        "measure": "典型入门教育",
+        "occupation_scope": "精确职业数据：美国O*NET 19-1042.00",
+        "period": "职业页2026-08-27更新；访问2026-09-06",
+        "source_refs": [
+          "bls-med-duties"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "通常至少需要硕士学位",
+        "fact_id": "epi-education",
+        "market": "美国",
+        "measure": "典型入门教育",
+        "occupation_scope": "精确职业数据：美国O*NET 19-1041.00",
+        "period": "职业页2026-08-27更新；访问2026-09-06",
+        "source_refs": [
+          "bls-epi-duties"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "0dec17dc434f9ae44c860e8890ab76684971c0344c23832e76a21ad3b2865403",
+  "source_content_sha256": "036fd40dde726f7d12343e17f2ded2fbfa1026eb9eced31fbc6f9b8709c40335",
   "subject": {
     "canonical_slug": "medical-scientists",
     "name": "医学科学家",
-    "summary": null
+    "summary": "医学科学家把疾病或健康问题转成可检验研究：设计方案，管理数据或样本质量，分析并验证结果，再以清楚的限制向同行、机构或公众沟通。本页分别呈现流行病学与非流行病学两个子职业。"
   }
 }

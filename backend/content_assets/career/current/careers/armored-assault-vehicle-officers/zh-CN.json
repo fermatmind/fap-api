@@ -1,12 +1,1566 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "O*NET 55-1013.00 仅给出装甲突击车辆军官概述，并明确 O*NET 不收集军事职业数据，具体职责、教育和发展应回到相应军种官方资料。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "适合继续探索的信号：能整合多来源状态报告；愿意承担团队管理责任；对资格与维护期限敏感；能写简洁行政交接。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "虚构行政表：成员甲年度安全培训有效至 09-30；成员乙有效至 08-31；车辆 V1 维护状态‘已完成’，V2 状态空白；物资箱 K 账面 12、交接 11。纸面规则：截至 09-06，过期资格、空白维护状态和数量差异都只能标‘待确认’，不得推断战备或安排作战任务。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "输出：乙培训过期、V2 状态缺失、K 差 1 件；分别交训练、维护、补给责任人复核。参考结果：甲记录可用；其余三项保持待确认。练习不含地图、部署、目标、武器操作或性能参数。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "如果你愿意承担人员领导、训练评估、装备准备和正式指挥责任，这个职业可继续探索；军种选拔、军事环境与高风险责任是不可回避的成本。只能通过官方招募与任职渠道核对资格，本页行政练习不代表作战适配。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.quick-decision.fermat-decision-card.5",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "O*NET 55-1013.00 只给出装甲突击车辆军官概述且不收集军事职业详细数据；Army Armor 资料显示该职业核心是领导装甲分队、训练人员、维持装备准备并在正式指挥链承担责任。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.profile.definition-block.1",
+          "source_refs": [
+            "army-armor-da-pam"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "公开输入包括上级任务要求、人员能力与资格、训练目标、装备维护状态、补给约束和安全风险。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.profile.responsibilities-block.1",
+          "source_refs": [
+            "army-armor-da-pam"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "公开交付包括训练计划与评估、人员和装备准备判断、保障优先级、风险升级及向上级的状态建议。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.profile.responsibilities-block.2",
+          "source_refs": [
+            "army-armor-da-pam"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "理解上级要求→评估人员与装备准备→确定训练和保障优先级→领导执行与复盘→协调维护补给→向指挥链报告。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.profile.responsibilities-block.3",
+          "source_refs": [
+            "army-armor-da-pam"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断不是单纯核表，而是在人力、训练目标、装备状态和风险之间设定优先级，并明确哪些决定须由更高指挥或专业保障链批准。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.profile.work-context-block.1",
+          "source_refs": [
+            "army-armor-da-pam"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作同时包含训练场、分队管理和参谋协作；本页只说明公开职责，不描述战术部署、目标选择或武器使用。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.profile.work-context-block.2",
+          "source_refs": [
+            "army-armor-da-pam"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "计划、通信、训练评估、维护与物资系统支持准备管理；系统提示不能替代军官对人员领导和风险的判断。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "army-armor-da-pam"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "军官直接领导下属并与上级、车组、训练、维护、补给和安全人员协调，责任来自任命、军种制度和明确指挥链。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "army-armor-da-pam"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量不仅看记录一致，还看训练目标是否达成、分队是否理解要求、准备问题是否闭环、风险是否及时升级。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "army-armor-da-pam"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "美国与中国军官体系不可直接互换；任命、晋衔、岗位资格和军饷均由各自制度决定。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.profile.definition-block.2",
+          "source_refs": [
+            "army-armor-da-pam"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "空勤军官",
+                "id": "adjacent-1",
+                "relation": "adjacent-role",
+                "url": "/zh/career/jobs/air-crew-officers"
+              },
+              {
+                "entity": "航空器起降保障军官",
+                "id": "adjacent-2",
+                "relation": "adjacent-role",
+                "url": "/zh/career/jobs/aircraft-launch-and-recovery-officers"
+              },
+              {
+                "entity": "炮兵与导弹军官",
+                "id": "adjacent-3",
+                "relation": "adjacent-role",
+                "url": "/zh/career/jobs/artillery-and-missile-officers"
+              },
+              {
+                "entity": "指挥控制中心军官",
+                "id": "adjacent-4",
+                "relation": "adjacent-role",
+                "url": "/zh/career/jobs/command-and-control-center-officers"
+              },
+              {
+                "entity": "步兵军官",
+                "id": "adjacent-5",
+                "relation": "adjacent-role",
+                "url": "/zh/career/jobs/infantry-officers"
+              }
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "adjacent-onet-55-1011-00",
+            "adjacent-onet-55-1012-00",
+            "adjacent-onet-55-1014-00",
+            "adjacent-onet-55-1015-00",
+            "adjacent-onet-55-1016-00",
+            "editorial-safe-exercise-v2",
+            "source-pack-onet-details"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "空勤军官组织并指挥飞行任务中的机组工作；装甲车辆军官领导地面分队、训练与装备准备，转向需完成航空岗位选拔、飞行训练和军种任职资格。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "adjacent-onet-55-1011-00",
+            "editorial-safe-exercise-v2",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "舰载机起降军官负责弹射、拦阻及相关系统的运行维护与人员训练；装甲车辆军官负责地面分队领导，转向需补舰载航空系统、安全和岗位资格。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "adjacent-onet-55-1012-00",
+            "editorial-safe-exercise-v2",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "炮兵与导弹军官管理火力系统单位及其人员训练；装甲车辆军官管理装甲分队与车辆准备，两者武器系统、专业教育和指挥授权不同。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "adjacent-onet-55-1014-00",
+            "editorial-safe-exercise-v2",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "指挥控制中心军官整合通信、监视和态势信息并协调跨单位响应；装甲车辆军官直接领导分队，转向需补指挥控制系统、信息综合和参谋流程。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "adjacent-onet-55-1015-00",
+            "editorial-safe-exercise-v2",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "步兵军官领导步兵分队并组织其训练与行动准备；装甲车辆军官以装甲车辆分队为组织和装备基础，转向需接受不同兵种教育与岗位认证。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.6",
+          "source_refs": [
+            "adjacent-onet-55-1016-00",
+            "editorial-safe-exercise-v2",
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "以下为基于职业任务的有限编辑推演，并非该职业的实际部署证据：行政系统可辅助检查训练到期、维护字段缺失和物资记录差异。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "是否采用取决于军种批准、系统分类、数据权限和任务适用范围。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "自动提示必须回到原始记录和责任人确认。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "DoDD 3000.09 只适用于自主/半自主武器系统的规定范围。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "dod-autonomy-directive"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "本页不讨论目标选择、武器操作或作战优化。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "敏感、受控或分类信息不得输入未批准系统。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人员资格、装备状态和指挥决定仍由正式授权链承担。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "公开资料不足以量化该职业 AI 采用或就业变化；目前没有本页细分职业的采用率、裁员率或因果就业证据，必须以具体机构与岗位验证。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：中国军官收入与岗位信息不与美国 O*NET 55-1013 建立精确可比职业工资；不使用公开基本工资之外的推算。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "cn-officer-rank"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "阅读工资时须保留地区、期间、币种、税前/税后、统计量和职业范围。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "cn-officer-rank"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "行业平均只描述行业就业人员，不能等同目标职业中位数或个人报价。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "cn-officer-rank"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "没有同口径职业数据时保留缺口，比跨法域或用招聘片段推算更可靠。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "cn-officer-rank"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "暂无可安全使用的数据：DoD 基本工资按军衔、服役年限等制度计算，不是装甲车辆相关军官的职业工资分布；本页不编造中位数或起薪。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "dod-military-pay"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数是分布中点，不是新手工资、到手收入或个人报价。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "employment 是就业存量，change 是净变化，岗位空缺 同时包含增长与替补。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "典型入门教育和训练是全国职业表口径，具体岗位仍以雇主与法域要求为准。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "不同地区、行业、工时和经验会改变工资，不能从全国数直接推算本地收入。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "本页只使用明确标注的 exact、combined 或 parent 范围，不把代理写成精确子职业数据。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "可观察信号 1：能整合多来源状态报告。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "可观察信号 2：愿意承担团队管理责任。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "可观察信号 3：对资格与维护期限敏感。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "可观察信号 4：能写简洁行政交接。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "可观察信号 5：遵守正式授权链。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "可观察信号 6：在信息不完整时主动升级。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "可观察信号 7：可接受高纪律和高责任环境。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "可观察信号 8：不把模拟练习当军事训练。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "人员资格记录过期：训练安排可能越权；暂停安排并交主管确认。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.risk.career-risk-cards.1",
+          "source_refs": [
+            "army-armor-da-pam"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "装备维护状态缺失：不得据此判定可用；转维护链补证。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.risk.career-risk-cards.2",
+          "source_refs": [
+            "army-armor-da-pam"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "物资数量与交接表不一致：可能造成保障缺口；盘点记录并升级。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.risk.career-risk-cards.3",
+          "source_refs": [
+            "army-armor-da-pam"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "把通用自主系统规范外推到全部车辆：形成错误规则；只在指令适用系统和范围内引用。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.risk.career-risk-cards.4",
+          "source_refs": [
+            "dod-autonomy-directive"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同边界：不确定时停止、保留原记录并交有权角色；本页不替代单位程序、执业规范或安全培训。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "美国陆军公开 Armor Branch 资料可说明军官任命后的专业教育与岗位发展；资格、选拔和任职以当前军种制度为准。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.path.career-path-block.1",
+          "source_refs": [
+            "army-g1-career-management"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "入门证据应展示能按规则处理真实岗位材料的能力，而不是只列软件名称。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.path.career-path-block.2",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "虚构行政表：成员甲年度安全培训有效至 09-30；成员乙有效至 08-31；车辆 V1 维护状态‘已完成’，V2 状态空白；物资箱 K 账面 12、交接 11。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.path.career-path-block.3",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "纸面规则：截至 09-06，过期资格、空白维护状态和数量差异都只能标‘待确认’，不得推断战备或安排作战任务。输出：乙培训过期、V2 状态缺失、K 差 1 件；分别交训练、维护、补给责任人复核。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.path.career-path-block.4",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "参考结果：甲记录可用；其余三项保持待确认。练习不含地图、部署、目标、武器操作或性能参数。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.path.career-path-block.5",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七日体验：第1天：阅读同一套虚构材料和边界，圈出未知项；输出问题清单。 第2天：按纸面规则完成第一版；输出逐项判断与依据。 第3天：对照参考思路找出遗漏；输出更正记录。 第4天：把结论改写成可交接格式；输出一页交接稿。 第5天：请他人仅凭材料复核；输出歧义和反馈。 第6天：修订并记录精力、耐心和错误类型；输出第二版。 第7天：比较两版，判断自己是否愿意继续训练；输出继续/谨慎/停止及理由。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.path.career-path-block.6",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "资格与证书只在具体法域、雇主和授权范围内成立，先查当前原文。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.path.career-path-block.7",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "进阶体现为更大单位与任务范围的领导、训练、维护协调和参谋责任；军种任职资格、晋衔制度与安全授权决定实际路径，不能用民用职业年限推算。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.path.career-path-block.8",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "O*NET 明示不收集军事职业数据，因此不发布该职业就业基数、增长率或 岗位空缺；军种人力需求也不由本页推断。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "source-pack-onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "公开资料不足以形成该细分军事职业的就业预测或招聘频率；军种编制、选拔与任命决定实际机会。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "Army Armor 路径显示责任会从排级领导扩展到连队指挥和参谋工作，但不保证按年限自动获得任职。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "转向空勤军官需要航空选拔、飞行训练和机组任务资格，地面分队领导经验不能替代这些门槛。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "adjacent-onet-55-1011-00",
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "转向指挥控制中心军官需要信息融合、通信系统与跨单位协调训练，并接受对应岗位授权。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "adjacent-onet-55-1012-00",
+            "editorial-safe-exercise-v2"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "O*NET 55-1013.00 只给出装甲突击车辆军官概述且不收集军事职业详细数据；Army Armor 资料显示该职业核心是领导装甲分队、训练人员、维持装备准备并在正式指挥链承担责任。 公开输入包括上级任务要求、人员能力与资格、训练目标、装备维护状态、补给约束和安全风险。 公开交付包括训练计划与评估、人员和装备准备判断、保障优先级、风险升级及向上级的状态建议。 理解上级要求→评估人员与装备准备→确定训练和保障优先级→领导执行与复盘→协调维护补给→向指挥链报告。",
+                "id": "armored-assault-vehicle-officers.faq.1",
+                "question_key": "career.faq.armored-assault-vehicle-officers.daily-work",
+                "source_refs": [
+                  "army-armor-da-pam"
+                ]
+              },
+              {
+                "answer": "空勤军官组织并指挥飞行任务中的机组工作。 装甲车辆军官领导地面分队、训练与装备准备。 转向需完成航空岗位选拔、飞行训练和军种任职资格。 舰载机起降军官负责弹射、拦阻及相关系统的运行维护与人员训练。 装甲车辆军官负责地面分队领导。 转向需补舰载航空系统、安全和岗位资格。 炮兵与导弹军官管理火力系统单位及其人员训练。 装甲车辆军官管理装甲分队与车辆准备。 两者武器系统、专业教育和指挥授权不同。 指挥控制中心军官整合通信、监视和态势信息并协调跨单位响应。 装甲车辆军官直接领导分队。 转向需补指挥控制系统、信息综合和参谋流程。 步兵军官领导步兵分队并组织其训练与行动准备。 装甲车辆军官以装甲车辆分队为组织和装备基础。 转向需接受不同兵种教育与岗位认证。",
+                "id": "armored-assault-vehicle-officers.faq.2",
+                "question_key": "career.faq.armored-assault-vehicle-officers.role-comparison",
+                "source_refs": [
+                  "adjacent-onet-55-1011-00",
+                  "adjacent-onet-55-1012-00",
+                  "adjacent-onet-55-1014-00",
+                  "adjacent-onet-55-1015-00",
+                  "adjacent-onet-55-1016-00",
+                  "editorial-safe-exercise-v2",
+                  "source-pack-onet-details"
+                ]
+              },
+              {
+                "answer": "可观察信号 1：能整合多来源状态报告。用一次小任务或岗位访谈验证，不用人格标签下结论。 可观察信号 2：愿意承担团队管理责任。用一次小任务或岗位访谈验证，不用人格标签下结论。 可观察信号 3：对资格与维护期限敏感。用一次小任务或岗位访谈验证，不用人格标签下结论。 可观察信号 4：能写简洁行政交接。用一次小任务或岗位访谈验证，不用人格标签下结论。",
+                "id": "armored-assault-vehicle-officers.faq.3",
+                "question_key": "career.faq.armored-assault-vehicle-officers.fit",
+                "source_refs": [
+                  "editorial-safe-exercise-v2"
+                ]
+              },
+              {
+                "answer": "以下为基于职业任务的有限编辑推演，并非该职业的实际部署证据：行政系统可辅助检查训练到期、维护字段缺失和物资记录差异。 是否采用取决于军种批准、系统分类、数据权限和任务适用范围。 自动提示必须回到原始记录和责任人确认。 公开资料不足以量化该职业 AI 采用或就业变化；目前没有本页细分职业的采用率、裁员率或因果就业证据，必须以具体机构与岗位验证。",
+                "id": "armored-assault-vehicle-officers.faq.4",
+                "question_key": "career.faq.armored-assault-vehicle-officers.ai-impact",
+                "source_refs": [
+                  "editorial-safe-exercise-v2"
+                ]
+              },
+              {
+                "answer": "人员资格记录过期：训练安排可能越权；暂停安排并交主管确认。 装备维护状态缺失：不得据此判定可用；转维护链补证。 物资数量与交接表不一致：可能造成保障缺口；盘点记录并升级。 把通用自主系统规范外推到全部车辆：形成错误规则；只在指令适用系统和范围内引用。",
+                "id": "armored-assault-vehicle-officers.faq.5",
+                "question_key": "career.faq.armored-assault-vehicle-officers.human-control",
+                "source_refs": [
+                  "army-armor-da-pam",
+                  "dod-autonomy-directive"
+                ]
+              },
+              {
+                "answer": "暂无可安全使用的数据：中国军官收入与岗位信息不与美国 O*NET 55-1013 建立精确可比职业工资；不使用公开基本工资之外的推算。 阅读工资时须保留地区、期间、币种、税前/税后、统计量和职业范围。",
+                "id": "armored-assault-vehicle-officers.faq.6",
+                "question_key": "career.faq.armored-assault-vehicle-officers.china-pay",
+                "source_refs": [
+                  "cn-officer-rank"
+                ]
+              },
+              {
+                "answer": "暂无可安全使用的数据：DoD 基本工资按军衔、服役年限等制度计算，不是装甲车辆相关军官的职业工资分布；本页不编造中位数或起薪。 中位数是分布中点，不是新手工资、到手收入或个人报价。",
+                "id": "armored-assault-vehicle-officers.faq.7",
+                "question_key": "career.faq.armored-assault-vehicle-officers.us-pay",
+                "source_refs": [
+                  "dod-military-pay",
+                  "editorial-safe-exercise-v2"
+                ]
+              },
+              {
+                "answer": "美国陆军公开 Armor Branch 资料可说明军官任命后的专业教育与岗位发展；资格、选拔和任职以当前军种制度为准。 虚构行政表：成员甲年度安全培训有效至 09-30；成员乙有效至 08-31；车辆 V1 维护状态‘已完成’，V2 状态空白；物资箱 K 账面 12、交接 11。 纸面规则：截至 09-06，过期资格、空白维护状态和数量差异都只能标‘待确认’，不得推断战备或安排作战任务。输出：乙培训过期、V2 状态缺失、K 差 1 件；分别交训练、维护、补给责任人复核。 参考结果：甲记录可用；其余三项保持待确认。练习不含地图、部署、目标、武器操作或性能参数。 七日体验：第1天：阅读同一套虚构材料和边界，圈出未知项；输出问题清单。 第2天：按纸面规则完成第一版；输出逐项判断与依据。 第3天：对照参考思路找出遗漏；输出更正记录。 第4天：把结论改写成可交接格式；输出一页交接稿。 第5天：请他人仅凭材料复核；输出歧义和反馈。 第6天：修订并记录精力、耐心和错误类型；输出第二版。 第7天：比较两版，判断自己是否愿意继续训练；输出继续/谨慎/停止及理由。",
+                "id": "armored-assault-vehicle-officers.faq.8",
+                "question_key": "career.faq.armored-assault-vehicle-officers.education-path",
+                "source_refs": [
+                  "army-g1-career-management",
+                  "editorial-safe-exercise-v2"
+                ]
+              },
+              {
+                "answer": "人员资格记录过期：训练安排可能越权；暂停安排并交主管确认。 装备维护状态缺失：不得据此判定可用；转维护链补证。 物资数量与交接表不一致：可能造成保障缺口；盘点记录并升级。 把通用自主系统规范外推到全部车辆：形成错误规则；只在指令适用系统和范围内引用。 共同边界：不确定时停止、保留原记录并交有权角色；本页不替代单位程序、执业规范或安全培训。",
+                "id": "armored-assault-vehicle-officers.faq.9",
+                "question_key": "career.faq.armored-assault-vehicle-officers.risk-boundary",
+                "source_refs": [
+                  "army-armor-da-pam",
+                  "dod-autonomy-directive",
+                  "editorial-safe-exercise-v2"
+                ]
+              },
+              {
+                "answer": "O*NET 明示不收集军事职业数据，因此不发布该职业就业基数、增长率或 岗位空缺；军种人力需求也不由本页推断。 公开资料不足以形成该细分军事职业的就业预测或招聘频率；军种编制、选拔与任命决定实际机会。 Army Armor 路径显示责任会从排级领导扩展到连队指挥和参谋工作，但不保证按年限自动获得任职。 转向空勤军官需要航空选拔、飞行训练和机组任务资格，地面分队领导经验不能替代这些门槛。 转向指挥控制中心军官需要信息融合、通信系统与跨单位协调训练，并接受对应岗位授权。",
+                "id": "armored-assault-vehicle-officers.faq.10",
+                "question_key": "career.faq.armored-assault-vehicle-officers.outlook-transition",
+                "source_refs": [
+                  "editorial-safe-exercise-v2",
+                  "source-pack-onet-details"
+                ]
+              },
+              {
+                "answer": "如果你愿意承担人员领导、训练评估、装备准备和正式指挥责任，这个职业可继续探索；军种选拔、军事环境与高风险责任是不可回避的成本。只能通过官方招募与任职渠道核对资格，本页行政练习不代表作战适配。",
+                "id": "armored-assault-vehicle-officers.faq.11",
+                "question_key": "career.faq.armored-assault-vehicle-officers.career-worth",
+                "source_refs": [
+                  "editorial-safe-exercise-v2"
+                ]
+              }
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.sources.faq.1",
+          "source_refs": [
+            "adjacent-onet-55-1011-00",
+            "adjacent-onet-55-1012-00",
+            "adjacent-onet-55-1014-00",
+            "adjacent-onet-55-1015-00",
+            "adjacent-onet-55-1016-00",
+            "army-armor-da-pam",
+            "army-g1-career-management",
+            "cn-officer-rank",
+            "dod-autonomy-directive",
+            "dod-military-pay",
+            "editorial-safe-exercise-v2",
+            "source-pack-onet-details"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "本页只讨论公开、非战术的领导、训练和准备职责，不提供目标、武器或作战优化指导。",
+              "军种选拔、任命、晋衔和信息处理以正式制度与授权链为准。"
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.sources.boundary.1",
+          "source_refs": [
+            "adjacent-onet-55-1011-00",
+            "adjacent-onet-55-1012-00",
+            "adjacent-onet-55-1014-00",
+            "adjacent-onet-55-1015-00",
+            "adjacent-onet-55-1016-00",
+            "army-armor-da-pam",
+            "army-g1-career-management",
+            "cn-officer-rank",
+            "dod-autonomy-directive",
+            "dod-military-pay",
+            "editorial-safe-exercise-v2",
+            "source-pack-onet-details"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "装甲突击车辆官",
+                "id": "armored-assault-vehicle-officers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "装甲突击车辆官",
+                "id": "armored-assault-vehicle-officers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "装甲突击车辆官",
+                "id": "armored-assault-vehicle-officers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "装甲突击车辆官",
+                "id": "armored-assault-vehicle-officers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "装甲突击车辆官",
+                "id": "armored-assault-vehicle-officers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "装甲突击车辆官",
+                "id": "armored-assault-vehicle-officers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "装甲突击车辆官",
+                "id": "armored-assault-vehicle-officers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "装甲突击车辆官",
+                "id": "armored-assault-vehicle-officers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "装甲突击车辆官",
+                "id": "armored-assault-vehicle-officers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "装甲突击车辆官",
+                "id": "armored-assault-vehicle-officers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "装甲突击车辆官",
+                "id": "armored-assault-vehicle-officers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "O*NET 将 Air Crew Officers 定义为：Perform and direct in-flight duties to ensure the successful completion of combat, reconnaissance, transport, and search and rescue missions. Duties include operating aircraft communications and radar equipment, such as establishing satellite linkages and jamming enemy communications capabilities; operating aircraft weapons and defensive systems; conducting preflight, in-flight, and postflight inspections of onboard equipment; and directing cargo and personnel drops.",
+                  "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。"
+                ],
+                "evidence_type": "official_guidance",
+                "id": "adjacent-onet-55-1011-00",
+                "limitation": "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。",
+                "market": "美国",
+                "name": "55-1011.00 - Air Crew Officers",
+                "period": "O*NET current occupation summary; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/55-1011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "O*NET 将 Aircraft Launch And Recovery Officers 定义为：Plan and direct the operation and maintenance of catapults, arresting gear, and associated mechanical, hydraulic, and control systems involved primarily in aircraft carrier takeoff and landing operations. Duties include supervision of readiness and safety of arresting gear, launching equipment, barricades, and visual landing aid systems; planning and coordinating the design, development, and testing of launch and recovery systems; preparing specifications for catapult and arresting gear installations; evaluating design proposals; determining handling equipment needed for new aircraft; preparing technical data and instructions for operation of landing aids; and training personnel in carrier takeoff and landing procedures.",
+                  "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。"
+                ],
+                "evidence_type": "official_guidance",
+                "id": "adjacent-onet-55-1012-00",
+                "limitation": "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。",
+                "market": "美国",
+                "name": "55-1012.00 - Aircraft Launch And Recovery Officers",
+                "period": "O*NET current occupation summary; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/55-1012.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "O*NET 将 Artillery And Missile Officers 定义为：Manage personnel and weapons operations to destroy enemy positions, aircraft, and vessels. Duties include planning, targeting, and coordinating the tactical deployment of field artillery and air defense artillery missile systems units; directing the establishment and operation of fire control communications systems; targeting and launching intercontinental ballistic missiles; directing the storage and handling of nuclear munitions and components; overseeing security of weapons storage and launch facilities; and managing maintenance of weapons systems.",
+                  "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。"
+                ],
+                "evidence_type": "official_guidance",
+                "id": "adjacent-onet-55-1014-00",
+                "limitation": "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。",
+                "market": "美国",
+                "name": "55-1014.00 - Artillery And Missile Officers",
+                "period": "O*NET current occupation summary; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/55-1014.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "O*NET 将 Command And Control Center Officers 定义为：Manage the operation of communications, detection, and weapons systems essential for controlling air, ground, and naval operations. Duties include managing critical communication links between air, naval, and ground forces; formulating and implementing emergency plans for natural and wartime disasters; coordinating emergency response teams and agencies; evaluating command center information and need for high-level military and government reporting; managing the operation of surveillance and detection systems; providing technical information and advice on capabilities and operational readiness; and directing operation of weapons targeting, firing, and launch computer systems.",
+                  "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。"
+                ],
+                "evidence_type": "official_guidance",
+                "id": "adjacent-onet-55-1015-00",
+                "limitation": "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。",
+                "market": "美国",
+                "name": "55-1015.00 - Command And Control Center Officers",
+                "period": "O*NET current occupation summary; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/55-1015.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "O*NET 将 Infantry Officers 定义为：Direct, train, and lead infantry units in ground combat operations. Duties include directing deployment of infantry weapons, vehicles, and equipment; directing location, construction, and camouflage of infantry positions and equipment; managing field communications operations; coordinating with armor, artillery, and air support units; performing strategic and tactical planning, including battle plan development; and leading basic reconnaissance operations.",
+                  "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。"
+                ],
+                "evidence_type": "official_guidance",
+                "id": "adjacent-onet-55-1016-00",
+                "limitation": "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。",
+                "market": "美国",
+                "name": "55-1016.00 - Infantry Officers",
+                "period": "O*NET current occupation summary; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/55-1016.00"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "The guide describes Armor officer development through BOLC, tank or scout platoon leadership, company or troop command, and combined-arms staff work.",
+                  "Service-specific Army Armor pathway; assignment, promotion, and command authority remain Army decisions and are not guaranteed by education alone."
+                ],
+                "evidence_type": "official service career and training guide",
+                "id": "army-armor-da-pam",
+                "limitation": "Service-specific Army Armor pathway; assignment, promotion, and command authority remain Army decisions and are not guaranteed by education alone.",
+                "market": "美国",
+                "name": "Armor Branch officer career management — DA PAM 600-3",
+                "period": "Armor Branch guide dated 2021; accessed 2026-08-31",
+                "publisher": "U.S. Army Armor Branch",
+                "scope": "exact",
+                "url": "https://www.moore.army.mil/Armor/OCoA/content/References%20and%20Guides/DA%20Pam%20600-3%20Officer%20Career%20Management-AR.pdf"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "The Army G-1 page identifies DA PAM 600-3 and the Armor Branch career-management material as the Army's officer-development route.",
+                  "Army-specific career management; it does not establish a civilian license or a China-equivalent occupation."
+                ],
+                "evidence_type": "official military career-management page",
+                "id": "army-g1-career-management",
+                "limitation": "Army-specific career management; it does not establish a civilian license or a China-equivalent occupation.",
+                "market": "美国",
+                "name": "U.S. Army G-1 — DA PAM 600-3 career management",
+                "period": "current Army G-1 page; accessed 2026-08-31",
+                "publisher": "U.S. Army",
+                "scope": "exact",
+                "url": "https://www.army.mil/G-1"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "The regulation distinguishes officer identity and ranks and ties rank approval to authorized military authorities.",
+                  "General officer-rank framework; it neither creates a public practice license nor proves an exact armored-officer title or salary mapping."
+                ],
+                "evidence_type": "official officer rank and command hierarchy regulation",
+                "id": "cn-officer-rank",
+                "limitation": "General officer-rank framework; it neither creates a public practice license nor proves an exact armored-officer title or salary mapping.",
+                "market": "中国大陆",
+                "name": "中国人民解放军军官军衔条例",
+                "period": "officer rank regulation published 2021; accessed 2026-08-31",
+                "publisher": "中华人民共和国司法部",
+                "scope": "combined_official",
+                "url": "https://xzfy.moj.gov.cn/c/2021-01-06/487602.shtml"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "The directive requires appropriate human judgment over the use of force, trained operators, testing, clear activation/deactivation procedures, and compliance with law, safety rules, and ROE.",
+                  "Applies to autonomous and semi-autonomous weapon systems; it is not evidence that every armored vehicle uses AI or autonomy."
+                ],
+                "evidence_type": "official defense safety and authorization directive",
+                "id": "dod-autonomy-directive",
+                "limitation": "Applies to autonomous and semi-autonomous weapon systems; it is not evidence that every armored vehicle uses AI or autonomy.",
+                "market": "美国",
+                "name": "DoDD 3000.09 — Autonomy in Weapon Systems",
+                "period": "directive dated 2023-01-25; accessed 2026-08-31",
+                "publisher": "U.S. Department of Defense",
+                "scope": "exact",
+                "url": "https://www.esd.whs.mil/portals/54/documents/dd/issuances/dodd/300009p.pdf"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "DoD states that military basic pay is determined by grade and years of service and that DFAS maintains tables for commissioned officers.",
+                  "Combined commissioned-officer compensation framework, not an occupation-specific wage distribution for O*NET 55-1013.00."
+                ],
+                "evidence_type": "official military compensation framework",
+                "id": "dod-military-pay",
+                "limitation": "Combined commissioned-officer compensation framework, not an occupation-specific wage distribution for O*NET 55-1013.00.",
+                "market": "美国",
+                "name": "DoD Basic Pay",
+                "period": "current basic-pay page; accessed 2026-08-31",
+                "publisher": "U.S. Department of Defense",
+                "scope": "combined_official",
+                "url": "https://militarypay.defense.gov/Pay/Basic-Pay/Charts/"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "为本职业提供虚构、可复核且不触发真实危险或专业授权行为的纸面练习。",
+                  "编辑设计不是外部职业事实、资格、法规、工资、采用率或就业证据。"
+                ],
+                "evidence_type": "editorial exercise design",
+                "id": "editorial-safe-exercise-v2",
+                "limitation": "编辑设计不是外部职业事实、资格、法规、工资、采用率或就业证据。",
+                "market": "全球编辑设计",
+                "name": "FermatMind 安全纸面体验与边界设计",
+                "period": "2026-09-06 content repair",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "O*NET 将 Armored Assault Vehicle Officers 的核心职责定义为：Direct the operation of tanks, light armor, and amphibious assault vehicle units during combat situations on land or in aquatic environments. Duties include directing crew members in the operation of targeting and firing systems; coordinating the operation of advanced onboard communications and navigation equipment; directing the transport of personnel and equipment during combat; formulating and implementing battle plans, including the tactical employment of armored vehicle units; and coordinating with infantry, artillery, and air support units.",
+                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                ],
+                "evidence_type": "official occupation details",
+                "id": "source-pack-onet-details",
+                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "market": "美国",
+                "name": "55-1013.00 - Armored Assault Vehicle Officers",
+                "period": "current page; accessed 2026-08-31",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/55-1013.00"
+              }
+            ]
+          },
+          "id": "armored-assault-vehicle-officers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": "正文可见条目直接引用，未进行跨口径计算。",
+        "display_value": "O*NET 55-1013.00 只给出装甲突击车辆军官概述且不收集军事职业详细数据；Army Armor 资料显示该职业核心是领导装甲分队、训练人员、维持装备准备并在正式指挥链承担责任。",
+        "fact_id": "content-profile-1",
+        "market": "美国",
+        "measure": "职业身份与职责",
+        "occupation_scope": "精确职业数据（Armor Branch officer career management — DA PAM 600-3）：Service-specific Army Armor pathway; assignment, promotion, and command authority remain Army decisions and are not guaranteed by education alone.",
+        "period": "Armor Branch guide dated 2021; accessed 2026-08-31",
+        "source_refs": [
+          "army-armor-da-pam"
+        ]
+      },
+      {
+        "derivation": "正文可见条目直接引用，未进行跨口径计算。",
+        "display_value": "暂无可安全使用的数据：中国军官收入与岗位信息不与美国 O*NET 55-1013 建立精确可比职业工资；不使用公开基本工资之外的推算。",
+        "fact_id": "content-china-salary-1",
+        "market": "中国大陆",
+        "measure": "中国数据边界",
+        "occupation_scope": "合并职业数据（中国人民解放军军官军衔条例）：General officer-rank framework; it neither creates a public practice license nor proves an exact armored-officer title or salary mapping.",
+        "period": "officer rank regulation published 2021; accessed 2026-08-31",
+        "source_refs": [
+          "cn-officer-rank"
+        ]
+      },
+      {
+        "derivation": "正文可见条目直接引用，未进行跨口径计算。",
+        "display_value": "暂无可安全使用的数据：DoD 基本工资按军衔、服役年限等制度计算，不是装甲车辆相关军官的职业工资分布；本页不编造中位数或起薪。",
+        "fact_id": "content-us-salary-1",
+        "market": "美国",
+        "measure": "美国工资与预测口径",
+        "occupation_scope": "合并职业数据（DoD Basic Pay）：Combined commissioned-officer compensation framework, not an occupation-specific wage distribution for O*NET 55-1013.00.",
+        "period": "current basic-pay page; accessed 2026-08-31",
+        "source_refs": [
+          "dod-military-pay"
+        ]
+      },
+      {
+        "derivation": "正文可见条目直接引用，未进行跨口径计算。",
+        "display_value": "美国陆军公开 Armor Branch 资料可说明军官任命后的专业教育与岗位发展；资格、选拔和任职以当前军种制度为准。",
+        "fact_id": "content-path-1",
+        "market": "美国",
+        "measure": "典型入口或路径边界",
+        "occupation_scope": "精确职业数据（U.S. Army G-1 — DA PAM 600-3 career management）：Army-specific career management; it does not establish a civilian license or a China-equivalent occupation.",
+        "period": "current Army G-1 page; accessed 2026-08-31",
+        "source_refs": [
+          "army-g1-career-management"
+        ]
+      },
+      {
+        "derivation": "正文可见条目直接引用，未进行跨口径计算。",
+        "display_value": "人员资格记录过期：训练安排可能越权；暂停安排并交主管确认。",
+        "fact_id": "content-risk-1",
+        "market": "美国",
+        "measure": "核心风险与控制边界",
+        "occupation_scope": "精确职业数据（Armor Branch officer career management — DA PAM 600-3）：Service-specific Army Armor pathway; assignment, promotion, and command authority remain Army decisions and are not guaranteed by education alone.",
+        "period": "Armor Branch guide dated 2021; accessed 2026-08-31",
+        "source_refs": [
+          "army-armor-da-pam"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "d54db41bb0cae948ac04db945eeb125473ef96f34af3ba24d2e82d05d0db8259",
+  "source_content_sha256": "97aab475ae6567ae7ac4530445bb9d8c2a96fd067bcdb13d4254d047221e63bb",
   "subject": {
     "canonical_slug": "armored-assault-vehicle-officers",
     "name": "装甲突击车辆官",
-    "summary": null
+    "summary": "本页只作公开、非战术职业概述：装甲车辆相关军官组织人员、装备、训练、维护和行政战备，并在正式指挥链内承担领导责任；不提供部署、目标、武器或作战优化指导。"
   }
 }

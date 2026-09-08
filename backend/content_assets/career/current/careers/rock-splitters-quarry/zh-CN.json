@@ -1,12 +1,1492 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "先问自己：是否愿意在户外、噪声与粉尘环境中，反复观察纹理、标线、分石并接受严格现场控制？"
+            ]
+          },
+          "id": "rock-splitters-quarry.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "不要只看“体力活”；真正需要观察的是准确标线、工具状态确认、人员隔离和不确定时升级。"
+            ]
+          },
+          "id": "rock-splitters-quarry.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全练习只审三张虚构任务卡的七字段：纹理判断、尺寸标线、方法工具、人员隔离、粉尘控制、爆破/授权边界、升级安排（触发条件+对象）。不进入现场、不操作设备或爆炸物。"
+            ]
+          },
+          "id": "rock-splitters-quarry.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "A：纹理清楚；尺寸线齐；楔子+锤；隔离区已确认；粉尘控制未知；不含爆破；“粉尘控制不明即交采石场主管复核”，缺1。B：纹理未知；尺寸线齐；风镐；人员隔离未知；水+局排；不含爆破；“纹理或隔离不明即交班组长”，缺2。C：纹理清楚；尺寸线齐；楔子+锤；隔离区确认；水+局排；不含爆破；“任一条件变化即交班组长复核”，缺0。"
+            ]
+          },
+          "id": "rock-splitters-quarry.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业定义：从采石场岩体中分离粗尺寸石块。"
+            ]
+          },
+          "id": "rock-splitters-quarry.profile.definition-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "核心任务包括判断岩石纹理线。"
+            ]
+          },
+          "id": "rock-splitters-quarry.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "按尺寸或轮廓在石材上标线。"
+            ]
+          },
+          "id": "rock-splitters-quarry.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "用风镐、楔子、羽形楔和锤等工具分石。"
+            ]
+          },
+          "id": "rock-splitters-quarry.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "补充任务可包括沿轮廓钻孔或切槽。"
+            ]
+          },
+          "id": "rock-splitters-quarry.profile.work-context-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "补充任务也列出设置炸药，但职业任务不等于个人自动取得爆破资格。"
+            ]
+          },
+          "id": "rock-splitters-quarry.profile.work-context-block.2",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "工作活动包括材料搬运、体力活动、机器过程控制与设备材料检查。"
+            ]
+          },
+          "id": "rock-splitters-quarry.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "准确性对该职业很重要。"
+            ]
+          },
+          "id": "rock-splitters-quarry.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "练习交接表可记录尺寸、批次、缺陷、复核人与处置。"
+            ]
+          },
+          "id": "rock-splitters-quarry.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "任何现场程序、停复工或爆破权限都必须向具体雇主核验。"
+            ]
+          },
+          "id": "rock-splitters-quarry.profile.definition-block.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "brickmasons-and-blockmasons",
+                "id": "rock-splitters-quarry.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/brickmasons-and-blockmasons"
+              },
+              {
+                "entity": "stonemasons",
+                "id": "rock-splitters-quarry.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/stonemasons"
+              },
+              {
+                "entity": "tile-and-stone-setters",
+                "id": "rock-splitters-quarry.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/tile-and-stone-setters"
+              },
+              {
+                "entity": "cement-masons-and-concrete-finishers",
+                "id": "rock-splitters-quarry.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/cement-masons-and-concrete-finishers"
+              },
+              {
+                "entity": "terrazzo-workers-and-finishers",
+                "id": "rock-splitters-quarry.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/terrazzo-workers-and-finishers"
+              }
+            ]
+          },
+          "id": "rock-splitters-quarry.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "采石工：从采石场岩体分离粗尺寸石块。"
+            ]
+          },
+          "id": "rock-splitters-quarry.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-details",
+            "onet-stonecutters",
+            "onet-stonemasons"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "制造业石材切割雕刻工：按图样切割、雕刻、修整和抛光石材制品。"
+            ]
+          },
+          "id": "rock-splitters-quarry.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-details",
+            "onet-stonecutters",
+            "onet-stonemasons"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "石匠：把石材砌筑或安装成墙、桥台、路缘等结构。"
+            ]
+          },
+          "id": "rock-splitters-quarry.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-details",
+            "onet-stonecutters",
+            "onet-stonemasons"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "三者都接触石材，但投入位置、产出形态和工作场景不同；上方入口可用于继续比较相邻职业。"
+            ]
+          },
+          "id": "rock-splitters-quarry.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "editorial",
+            "onet-details",
+            "onet-stonecutters",
+            "onet-stonemasons"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助把虚构尺寸、批次与缺陷信息整理成表格草稿。"
+            ]
+          },
+          "id": "rock-splitters-quarry.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助检查记录是否缺字段。"
+            ]
+          },
+          "id": "rock-splitters-quarry.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "不能替代现场纹理判断和材料检查。"
+            ]
+          },
+          "id": "rock-splitters-quarry.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "不能感知隔离区内人员变化或工具真实状态。"
+            ]
+          },
+          "id": "rock-splitters-quarry.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "不能把O*NET补充任务解释为个人爆破授权。"
+            ]
+          },
+          "id": "rock-splitters-quarry.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "O*NET工作情境显示该职业多数为轻度自动化或完全不自动化。"
+            ]
+          },
+          "id": "rock-splitters-quarry.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "任何AI输出都要回到现场原始标线、材料、设备和雇主程序复核。"
+            ]
+          },
+          "id": "rock-splitters-quarry.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人的控制点是现场确认、异常升级、资格和停复工权限。"
+            ]
+          },
+          "id": "rock-splitters-quarry.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "这里不提供中国大陆47-5051.00精确职业工资。"
+            ]
+          },
+          "id": "rock-splitters-quarry.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "国家统计局资料按行业和人员大类聚合。"
+            ]
+          },
+          "id": "rock-splitters-quarry.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "行业平均工资不能当采石工职业中位数。"
+            ]
+          },
+          "id": "rock-splitters-quarry.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "具体岗位应按地区、企业、班次、合同、风险暴露、资格和计件口径核价。"
+            ]
+          },
+          "id": "rock-splitters-quarry.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2025年年薪10分位为37,340美元。"
+            ]
+          },
+          "id": "rock-splitters-quarry.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "25分位为42,670美元。"
+            ]
+          },
+          "id": "rock-splitters-quarry.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数为48,740美元。"
+            ]
+          },
+          "id": "rock-splitters-quarry.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "75分位为60,030美元。"
+            ]
+          },
+          "id": "rock-splitters-quarry.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "90分位为67,710美元。"
+            ]
+          },
+          "id": "rock-splitters-quarry.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "这些是美国全国职业分位，不是起薪、具体州报价或中国岗位换算。"
+            ]
+          },
+          "id": "rock-splitters-quarry.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "愿意观察纹理并在切割前复核标线。"
+            ]
+          },
+          "id": "rock-splitters-quarry.fit.riasec-fit-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "能长期维持准确性而不是只追求速度。"
+            ]
+          },
+          "id": "rock-splitters-quarry.fit.riasec-fit-block.2",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "愿意检查设备、材料和周边环境。"
+            ]
+          },
+          "id": "rock-splitters-quarry.fit.riasec-fit-block.3",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "能接受户外、体力、噪声与粉尘控制要求。"
+            ]
+          },
+          "id": "rock-splitters-quarry.fit.riasec-fit-block.4",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎信号：未确认隔离区就准备启动工具。"
+            ]
+          },
+          "id": "rock-splitters-quarry.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎信号：把补充爆破任务当作自动授权。"
+            ]
+          },
+          "id": "rock-splitters-quarry.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎信号：粉尘控制不明仍继续。"
+            ]
+          },
+          "id": "rock-splitters-quarry.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "用虚构卡、访谈和受控观察验证，不用兴趣标签代替资格。"
+            ]
+          },
+          "id": "rock-splitters-quarry.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "硅尘：岩石切割、钻孔、破碎和运输可能产生可吸入结晶硅尘。"
+            ]
+          },
+          "id": "rock-splitters-quarry.risk.career-risk-cards.1",
+          "source_refs": [
+            "niosh-mining-dust",
+            "niosh-silica"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "控制：优先用水、局部排风、隔离等工程控制，避免干扫或压缩空气清扫。"
+            ]
+          },
+          "id": "rock-splitters-quarry.risk.career-risk-cards.2",
+          "source_refs": [
+            "niosh-mining-dust",
+            "niosh-silica"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "工具与飞散物：风镐、锤、楔和石块移动都需按雇主程序确认设备、隔离和防护。"
+            ]
+          },
+          "id": "rock-splitters-quarry.risk.career-risk-cards.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "爆破：O*NET列为补充任务，但法定资格、现场许可和授权必须单独核验。"
+            ]
+          },
+          "id": "rock-splitters-quarry.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "编辑控制：虚构练习只记录复核时间、责任人、升级条件和对象，不规定现场停复工口令。"
+            ]
+          },
+          "id": "rock-splitters-quarry.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "O*NET将该职业列为Job Zone 1-2。"
+            ]
+          },
+          "id": "rock-splitters-quarry.path.career-path-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "通常需要高中学历或GED，但部分岗位可能不要求。"
+            ]
+          },
+          "id": "rock-splitters-quarry.path.career-path-block.2",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "相关经验可能从很少到数月或一年。"
+            ]
+          },
+          "id": "rock-splitters-quarry.path.career-path-block.3",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "岗位培训范围从数天到一年。"
+            ]
+          },
+          "id": "rock-splitters-quarry.path.career-path-block.4",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "先访谈具体雇主，核对设备、粉尘、隔离与资格要求。"
+            ]
+          },
+          "id": "rock-splitters-quarry.path.career-path-block.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七日桌面练习：职业定义、任务拆分、七字段卡、风险来源、相邻比较、缺项复核、复盘。"
+            ]
+          },
+          "id": "rock-splitters-quarry.path.career-path-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品1：一页虚构分石任务七字段审阅表。"
+            ]
+          },
+          "id": "rock-splitters-quarry.path.career-path-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品2：采石工、制造业石材切割工、石匠边界表；作品不等于培训、证书、录用或授权。"
+            ]
+          },
+          "id": "rock-splitters-quarry.path.career-path-block.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国2024年就业约3,200人。"
+            ]
+          },
+          "id": "rock-splitters-quarry.market-signals.market-signal-card.1",
+          "source_refs": [
+            "onet-stats"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "2024—2034预计增长3%—4%。"
+            ]
+          },
+          "id": "rock-splitters-quarry.market-signals.market-signal-card.2",
+          "source_refs": [
+            "onet-stats"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "期间预计空缺400，包含增长和替代。"
+            ]
+          },
+          "id": "rock-splitters-quarry.market-signals.market-signal-card.3",
+          "source_refs": [
+            "onet-stats"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "采矿采石油气行业占78%，制造业占15%。"
+            ]
+          },
+          "id": "rock-splitters-quarry.market-signals.market-signal-card.4",
+          "source_refs": [
+            "onet-stats"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "这是美国小规模职业统计，不能替代具体地区岗位核验。"
+            ]
+          },
+          "id": "rock-splitters-quarry.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "47-5051.00的核心是识别岩石纹理、标记尺寸或轮廓，并用风镐、楔子和锤等工具从采石场岩体分离粗尺寸石块。",
+                "id": "rock-splitters-quarry.faq.1",
+                "question_key": "career.faq.rock-splitters-quarry.daily-work",
+                "source_refs": [
+                  "onet-details"
+                ]
+              },
+              {
+                "answer": "采石工从采石场岩体分离粗石块；制造业石材切割雕刻工按图样切割雕刻石材；石匠把石材安装成墙、桥台、路缘等结构。",
+                "id": "rock-splitters-quarry.faq.2",
+                "question_key": "career.faq.rock-splitters-quarry.role-comparison",
+                "source_refs": [
+                  "onet-details",
+                  "onet-stonecutters",
+                  "onet-stonemasons"
+                ]
+              },
+              {
+                "answer": "O*NET显示该职业重视准确性、材料与设备检查、现场体力活动和机器过程控制。",
+                "id": "rock-splitters-quarry.faq.3",
+                "question_key": "career.faq.rock-splitters-quarry.fit",
+                "source_refs": [
+                  "onet-details"
+                ]
+              },
+              {
+                "answer": "O*NET任务显示核心工作包含现场纹理判断、标线和使用工具进行物理分石。",
+                "id": "rock-splitters-quarry.faq.4",
+                "question_key": "career.faq.rock-splitters-quarry.ai-impact",
+                "source_refs": [
+                  "onet-details"
+                ]
+              },
+              {
+                "answer": "数字表单只做草稿辅助；现场纹理、人员隔离、工具状态、爆破资格和停复工由人按雇主程序判断。",
+                "id": "rock-splitters-quarry.faq.5",
+                "question_key": "career.faq.rock-splitters-quarry.human-control",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "国家统计局2025工资资料按行业和人员大类聚合，不能作为采石工在中国的精确职业工资。",
+                "id": "rock-splitters-quarry.faq.6",
+                "question_key": "career.faq.rock-splitters-quarry.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "美国2025年工资分位为年薪37,340/42,670/48,740/60,030/67,710美元，对应10/25/50/75/90分位。",
+                "id": "rock-splitters-quarry.faq.7",
+                "question_key": "career.faq.rock-splitters-quarry.us-pay",
+                "source_refs": [
+                  "onet-wages"
+                ]
+              },
+              {
+                "answer": "O*NET将该职业列为Job Zone 1-2：通常高中学历或GED，相关经验从很少到数月或一年，岗位培训从数天到一年。",
+                "id": "rock-splitters-quarry.faq.8",
+                "question_key": "career.faq.rock-splitters-quarry.education-path",
+                "source_refs": [
+                  "onet-details"
+                ]
+              },
+              {
+                "answer": "岩石切割、钻孔、破碎和运输可能产生可吸入结晶硅尘；NIOSH建议优先使用水、局部排风、隔离等工程控制，避免干扫或压缩空气清扫。",
+                "id": "rock-splitters-quarry.faq.9",
+                "question_key": "career.faq.rock-splitters-quarry.risk-boundary",
+                "source_refs": [
+                  "niosh-mining-dust",
+                  "niosh-silica"
+                ]
+              },
+              {
+                "answer": "美国2024年就业约3,200人，2024—2034预计增长3%—4%、期间空缺400；采矿采石油气占78%，制造业占15%。",
+                "id": "rock-splitters-quarry.faq.10",
+                "question_key": "career.faq.rock-splitters-quarry.outlook-transition",
+                "source_refs": [
+                  "onet-stats"
+                ]
+              },
+              {
+                "answer": "小规模美国统计不应被外推为具体地区招聘承诺或中国市场需求。",
+                "id": "rock-splitters-quarry.faq.11",
+                "question_key": "career.faq.rock-splitters-quarry.career-worth",
+                "source_refs": [
+                  "editorial"
+                ]
+              }
+            ]
+          },
+          "id": "rock-splitters-quarry.sources.faq.1",
+          "source_refs": [
+            "editorial",
+            "nbs-wages",
+            "niosh-mining-dust",
+            "niosh-silica",
+            "onet-details",
+            "onet-stats",
+            "onet-stonecutters",
+            "onet-stonemasons",
+            "onet-wages"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "爆破为O*NET补充任务，不代表个人自动取得法定资格或雇主授权。",
+              "候选练习只用虚构任务卡，不进入现场、不操作设备或爆炸物。"
+            ]
+          },
+          "id": "rock-splitters-quarry.sources.boundary.1",
+          "source_refs": [
+            "editorial",
+            "nbs-wages",
+            "niosh-mining-dust",
+            "niosh-silica",
+            "onet-details",
+            "onet-stats",
+            "onet-stonecutters",
+            "onet-stonemasons",
+            "onet-wages"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "采石工",
+                "id": "rock-splitters-quarry.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "采石工",
+                "id": "rock-splitters-quarry.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "采石工",
+                "id": "rock-splitters-quarry.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "采石工",
+                "id": "rock-splitters-quarry.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "采石工",
+                "id": "rock-splitters-quarry.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "采石工",
+                "id": "rock-splitters-quarry.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "采石工",
+                "id": "rock-splitters-quarry.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "采石工",
+                "id": "rock-splitters-quarry.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "采石工",
+                "id": "rock-splitters-quarry.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "采石工",
+                "id": "rock-splitters-quarry.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "采石工",
+                "id": "rock-splitters-quarry.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "rock-splitters-quarry.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "用于读者范围审阅与虚构桌面练习。",
+                  "只支持虚构桌面审阅，不替代雇主程序、现场培训、爆破授权或安全许可。"
+                ],
+                "evidence_type": "editorial desktop exercise",
+                "id": "editorial",
+                "limitation": "只支持虚构桌面审阅，不替代雇主程序、现场培训、爆破授权或安全许可。",
+                "market": "编辑设计",
+                "name": "FermatMind — 采石工范围审阅框架",
+                "period": "2026-09-06",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn48view0 lines 39-51, 229-274, 338-360。",
+                  "行业与人员大类聚合，不是47-5051.00精确工资。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "nbs-wages",
+                "limitation": "行业与人员大类聚合，不是47-5051.00精确工资。",
+                "market": "中国大陆",
+                "name": "国家统计局 — 2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 wage aggregates published 2026",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn53view3 lines 23-45。",
+                  "只支持所列职业、市场、时期和口径。"
+                ],
+                "evidence_type": "official mining engineering controls",
+                "id": "niosh-mining-dust",
+                "limitation": "只支持所列职业、市场、时期和口径。",
+                "market": "美国",
+                "name": "NIOSH — Dust Control in Metal/Nonmetal Mining",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "CDC/NIOSH",
+                "scope": "exact",
+                "url": "https://www.cdc.gov/niosh/engcontrols/ecd/detail81.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn53view2 lines 49-80。",
+                  "只支持所列职业、市场、时期和口径。"
+                ],
+                "evidence_type": "official occupational safety guidance",
+                "id": "niosh-silica",
+                "limitation": "只支持所列职业、市场、时期和口径。",
+                "market": "美国",
+                "name": "NIOSH — Safe Work Practices for Respirable Crystalline Silica",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "CDC/NIOSH",
+                "scope": "exact",
+                "url": "https://www.cdc.gov/niosh/silica/work/index.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn53view0 lines 50-58; turn54view0 lines 123-147; turn54view3 lines 308-436; turn54view5 lines 792-799; turn55view0 lines 900-910。",
+                  "只支持所列职业、市场、时期和口径。"
+                ],
+                "evidence_type": "official occupation details",
+                "id": "onet-details",
+                "limitation": "只支持所列职业、市场、时期和口径。",
+                "market": "美国",
+                "name": "O*NET OnLine — Rock Splitters, Quarry 47-5051.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-5051.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn53view0 lines 1197-1228。",
+                  "只支持所列职业、市场、时期和口径。"
+                ],
+                "evidence_type": "official wage and projection data",
+                "id": "onet-stats",
+                "limitation": "只支持所列职业、市场、时期和口径。",
+                "market": "美国",
+                "name": "O*NET OnLine — Rock Splitters, Quarry workforce data",
+                "period": "2025 wages; 2024-2034 projections",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-5051.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn57view0 lines 50-58, 122-148。",
+                  "只支持所列职业、市场、时期和口径。"
+                ],
+                "evidence_type": "official adjacent occupation details",
+                "id": "onet-stonecutters",
+                "limitation": "只支持所列职业、市场、时期和口径。",
+                "market": "美国",
+                "name": "O*NET OnLine — Stone Cutters and Carvers, Manufacturing 51-9195.03",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-9195.03"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn57view1 lines 50-58, 123-143。",
+                  "只支持所列职业、市场、时期和口径。"
+                ],
+                "evidence_type": "official adjacent occupation details",
+                "id": "onet-stonemasons",
+                "limitation": "只支持所列职业、市场、时期和口径。",
+                "market": "美国",
+                "name": "O*NET OnLine — Stonemasons 47-2022.00",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-2022.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "全文定位：turn53view1 lines 68-98。",
+                  "只支持所列职业、市场、时期和口径。"
+                ],
+                "evidence_type": "official national wage distribution",
+                "id": "onet-wages",
+                "limitation": "只支持所列职业、市场、时期和口径。",
+                "market": "美国",
+                "name": "O*NET OnLine — National wage distribution for Rock Splitters, Quarry",
+                "period": "2025 BLS wage data",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/47-5051.00?st=OK"
+              }
+            ]
+          },
+          "id": "rock-splitters-quarry.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "行业聚合，不作职业工资",
+        "fact_id": "cn-nonprivate",
+        "market": "中国大陆",
+        "measure": "采矿业非私营单位年平均工资",
+        "occupation_scope": "行业代理数据；no exact CN mapping",
+        "period": "2025 wage aggregates published 2026",
+        "source_refs": [
+          "nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "行业聚合，不作职业工资",
+        "fact_id": "cn-private",
+        "market": "中国大陆",
+        "measure": "采矿业私营单位年平均工资",
+        "occupation_scope": "行业代理数据；no exact CN mapping",
+        "period": "2025 wage aggregates published 2026",
+        "source_refs": [
+          "nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2024—2034增长3%—4%",
+        "fact_id": "us-growth",
+        "market": "美国",
+        "measure": "就业增长预测",
+        "occupation_scope": "精确职业数据：47-5051.00",
+        "period": "2025 wages; 2024-2034 projections",
+        "source_refs": [
+          "onet-stats"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "期间空缺400",
+        "fact_id": "us-openings",
+        "market": "美国",
+        "measure": "年均职位空缺",
+        "occupation_scope": "精确职业数据：47-5051.00",
+        "period": "2025 wages; 2024-2034 projections",
+        "source_refs": [
+          "onet-stats"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$48,740/年",
+        "fact_id": "us-wage-median",
+        "market": "美国",
+        "measure": "年薪中位数",
+        "occupation_scope": "精确职业数据：47-5051.00",
+        "period": "2025 BLS wage data",
+        "source_refs": [
+          "onet-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$37,340/年",
+        "fact_id": "us-wage-p10",
+        "market": "美国",
+        "measure": "第10分位年薪",
+        "occupation_scope": "精确职业数据：47-5051.00",
+        "period": "2025 BLS wage data",
+        "source_refs": [
+          "onet-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$67,710/年",
+        "fact_id": "us-wage-p90",
+        "market": "美国",
+        "measure": "第90分位年薪",
+        "occupation_scope": "精确职业数据：47-5051.00",
+        "period": "2025 BLS wage data",
+        "source_refs": [
+          "onet-wages"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "ae9d05374ff04d48ddbc6149721128b04e16239deb75ca4d75ca152da4f2f8df",
+  "source_content_sha256": "aff32e985239770ff401a33258dab8c6498c3a16d1ca6c1badb863a684c3d7be",
   "subject": {
     "canonical_slug": "rock-splitters-quarry",
     "name": "采石工",
-    "summary": null
+    "summary": "在采石场识别岩石纹理、标线，并用风镐、楔子等工具分离粗尺寸石块；爆破与现场许可必须另行核验。"
   }
 }

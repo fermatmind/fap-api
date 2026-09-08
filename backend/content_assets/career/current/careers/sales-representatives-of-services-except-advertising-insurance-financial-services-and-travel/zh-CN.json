@@ -1,12 +1,1636 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "直接判断：这份工作不是“会说话就行”，而是把需求、可验证的服务规格、价格与条件、批准、成交记录和履约移交闭环。愿意复算、保留未知并对越权承诺说停的人值得纸面试做。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial-sales-fit",
+            "editorial-sales-workflow"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "可观察信号：先问清客户约束；数字会复算；能区分已确认、待确认和不可承诺；成交后把范围、例外、负责人和下一步完整移交。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial-sales-fit",
+            "editorial-sales-workflow"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "安全工作样本（60分钟，仅纸面）：虚构客户120名员工使用3个月，税前预算180,000元，支持响应须不超过2小时。A为12,000元加420元/人/月，响应4小时、含迁移；B为58,000元/月，响应2小时，迁移与取消条款未知。不得联系真实客户或制作真实合同。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial-sales-simulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考推演：A=163,200元，预算余量16,800元但响应不合格；B=174,000元，余量6,000元且响应合格，但迁移与取消未知。输出需求表、逐项计算、符合/不符合/未知矩阵、三条澄清问题和授权升级单；不得写“B可立即签约”。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial-sales-simulation"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业边界：O*NET 41-3091.00，向个人或企业销售服务，也可能说明选项或解决客户问题；明确排除广告、保险、金融服务和旅游销售。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.profile.definition-block.1",
+          "source_refs": [
+            "onet-service-sales"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "主要任务：回答服务、价格、可用性或信用条款问题，联系潜在或现有客户讨论需求。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-service-sales"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "提案与成交：准备销售展示或提案、协商条件，并创建销售表格或协议。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-service-sales"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "售后任务：在合同签订后咨询并解决问题、提供持续支持。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-service-sales"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "完整流程：核对需求—确认规格与交付条件—计算并说明方案—标出未知—取得批准与客户确认—移交履约—跟踪问题。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.profile.work-context-block.1",
+          "source_refs": [
+            "editorial-sales-workflow"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "工作环境：高频电话和电子沟通、面对面讨论、关系维护、时间压力及结果责任并存；具体强度随服务行业和客群变化。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.profile.work-context-block.2",
+          "source_refs": [
+            "onet-service-sales"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "准备程度：O*NET将其列为Job Zone Three，通常需要中等准备；这不是中国统一学历、证书或执业门槛。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-service-sales"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "可检查产出：需求记录、方案对照、经复算报价、承诺与例外清单、批准记录、客户确认和售后移交。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "editorial-sales-workflow"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量标准：事实可追溯、数字复算正确、未知不伪装成确定、承诺在权限内、客户同意有记录、履约交接不丢条件。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "editorial-sales-workflow"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "相邻边界：营销与销售经理偏策略或团队管理；买手和采购代理代表购买方；市场研究分析师研究需求与市场，本职业直接完成非排除类服务销售。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.profile.definition-block.2",
+          "source_refs": [
+            "onet-buyers",
+            "onet-market-research",
+            "onet-marketing-managers",
+            "onet-purchasing-agents",
+            "onet-sales-managers",
+            "onet-service-sales"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "marketing-managers",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/marketing-managers"
+              },
+              {
+                "entity": "sales-managers",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/sales-managers"
+              },
+              {
+                "entity": "wholesale-and-retail-buyers-except-farm-products",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/wholesale-and-retail-buyers-except-farm-products"
+              },
+              {
+                "entity": "purchasing-agents-except-wholesale-retail-and-farm-products",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/purchasing-agents-except-wholesale-retail-and-farm-products"
+              },
+              {
+                "entity": "market-research-analysts-and-marketing-specialists",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/market-research-analysts-and-marketing-specialists"
+              }
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-buyers",
+            "onet-market-research",
+            "onet-marketing-managers",
+            "onet-purchasing-agents",
+            "onet-sales-managers",
+            "onet-service-sales"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "营销经理规划需求、定价或推广策略并协调营销政策；本职业面向具体客户说明并销售服务。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-buyers",
+            "onet-market-research",
+            "onet-marketing-managers",
+            "onet-purchasing-agents",
+            "onet-sales-managers",
+            "onet-service-sales"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "销售经理设定目标、分析数据并指挥销售团队；本职业不因承担个人销售任务而自动拥有团队管理权限。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-buyers",
+            "onet-market-research",
+            "onet-marketing-managers",
+            "onet-purchasing-agents",
+            "onet-sales-managers",
+            "onet-service-sales"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "批发零售买手与采购代理站在购买方或组织采购侧选择和购买商品/服务；本职业代表服务提供方推进销售。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-buyers",
+            "onet-market-research",
+            "onet-marketing-managers",
+            "onet-purchasing-agents",
+            "onet-sales-managers",
+            "onet-service-sales"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "市场研究分析师研究市场条件、潜在销量和营销效果；本职业使用相关信息但核心交付是客户级服务销售与跟进。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-buyers",
+            "onet-market-research",
+            "onet-marketing-managers",
+            "onet-purchasing-agents",
+            "onet-sales-managers",
+            "onet-service-sales"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "可辅助：询盘整理、需求字段提取、提案草稿、方案比较、跟进提醒和通话记录摘要。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial-sales-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用条件：产品目录、价格版本、服务区域、权限表、客户同意和数据访问边界可靠。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "editorial-sales-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "数据门槛：客户需求、人数、期限、单位、折扣、税费口径、响应承诺和版本日期一致可追溯。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial-sales-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工控制：核实客户和需求、复算价格、确认条款版本与批准、记录客户同意。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial-sales-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "剩余责任：工具不能确认真实服务能力、交付资源、合同效力、客户理解或后续履约。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial-sales-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "失败风险：错误摘要、旧价目、虚构功能、遗漏费用或把未知条款写成承诺。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial-sales-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "就业边界：任务可辅助性不等于工具采用率、绩效提升或岗位净变化。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial-sales-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "实践响应：先在固定虚构简报中对照人工计算和条款清单，真实使用服从雇主审批、隐私和质量控制。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial-sales-ai"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：中国大陆暂无可安全使用的数据来表示与O*NET 41-3091.00精确对应的全国职业工资与佣金分布。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：国家统计局2025资料按行业和宽泛岗位大类发布，不能替代同期精确职业中位数。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "计量单位：固定年薪、月薪、时薪、佣金、奖金和税前税后不可混用。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "editorial-sales-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "求职用法：统一地区、服务行业、客群、底薪、佣金基数、退单规则、回款条件、试用期和福利口径。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "editorial-sales-market"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "市场口径：O*NET展示美国41-3091.00全国工资。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-service-sales"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "统计时期：2025年BLS工资数据。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-service-sales"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数：时薪33.65美元、年薪69,990美元，不是起薪。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-service-sales"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "计量单位：时薪与年薪同源，但个人总收入还可能含佣金、奖金和不同工时。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-service-sales"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "覆盖人群：全国统计不能代表每个地区、服务行业、客群和薪酬方案。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "onet-service-sales"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "决策限制：统计值不是个人报价、录用或收入保证。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "onet-service-sales"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "需求信号：能把“便宜、快、好”拆成预算、人数、期限、响应和必须/可选条件。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.fit.riasec-fit-block.1",
+          "source_refs": [
+            "editorial-sales-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "计算信号：逐项写公式、单位和取值来源，能发现一次性费用与周期费用。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.fit.riasec-fit-block.2",
+          "source_refs": [
+            "editorial-sales-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "沟通信号：用事实回答，不知道时明确待确认并给出负责人和期限。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.fit.riasec-fit-block.3",
+          "source_refs": [
+            "editorial-sales-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "质量信号：在发出提案前核对版本、范围、价格、例外和批准。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.fit.riasec-fit-block.4",
+          "source_refs": [
+            "editorial-sales-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：为成交隐瞒限制、弱化费用或先承诺后找资源会放大履约与信任风险。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.fit.riasec-fit-block.5",
+          "source_refs": [
+            "editorial-sales-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "谨慎条件：若难以承受高频沟通、拒绝、跟进节奏和结果压力，应比较实际岗位。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.fit.riasec-fit-block.6",
+          "source_refs": [
+            "editorial-sales-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "验证方法：独立完成本页固定简报，以及“150人”和“预算170,000元”两张固定变体，不依赖他人临时出题。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.fit.riasec-fit-block.7",
+          "source_refs": [
+            "editorial-sales-fit"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "人格边界：外向或测评标签不证明胜任；需求质量、数字准确、边界判断和持续跟进更重要。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.fit.riasec-fit-block.8",
+          "source_refs": [
+            "editorial-sales-fit"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "信息与价格：服务范围、总价、计价方法、限制或售后未经核实，不得写成确定承诺。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial-sales-risk"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "宣传陈述：美国业务适用FTC基本原则时须真实、不欺骗、不不公平并有证据；特殊服务另核额外规则。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.risk.career-risk-cards.2",
+          "source_refs": [
+            "ftc-ad-basics"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "中国消费者交易：经营者须真实全面说明服务，显著标明项目、内容、价格和计价方法，并履行相关承诺。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.risk.career-risk-cards.3",
+          "source_refs": [
+            "samr-consumer-regulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "联系与数据：在中国适用范围内，商业信息或电话须有消费者同意并提供便捷取消；真实客户资料只按授权处理。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.risk.career-risk-cards.4",
+          "source_refs": [
+            "samr-consumer-regulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "共同规则：服务能力、价格、条款、客户同意、个人信息或批准任一不明，即标注未知、停止对外承诺并升级。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial-sales-risk",
+            "ftc-ad-basics",
+            "samr-consumer-regulation"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "现实入口：从标准服务目录、需求记录、方案讲解、报价复算、CRM记录和售后移交开始。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.path.career-path-block.1",
+          "source_refs": [
+            "editorial-sales-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "雇主证据：核实服务边界、价格版本、折扣权限、线索来源、数据处理、签署权限、佣金与退单规则。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.path.career-path-block.2",
+          "source_refs": [
+            "editorial-sales-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品：完成本页虚构简报，展示需求矩阵、计算、未知条款、澄清问题和升级单。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.path.career-path-block.3",
+          "source_refs": [
+            "editorial-sales-path",
+            "editorial-sales-simulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "面试与试用：解释为何A价格合格但响应不合格、B暂时可行却不能立即签约。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.path.career-path-block.4",
+          "source_refs": [
+            "editorial-sales-simulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七天试验：第1天抄写固定简报；第2天算A/B；第3天做符合/未知矩阵；第4天写三条澄清问题；第5天只把人数改为150人，A=201,000元超预算、B仍为174,000元但保留迁移与取消未知；第6天只把预算改为170,000元，A虽为163,200元却响应不合格、B为174,000元超预算，因此无可确认方案；第7天复盘错误与停止条件。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.path.career-path-block.5",
+          "source_refs": [
+            "editorial-sales-path",
+            "editorial-sales-simulation"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "资格决策：通用课程或证书只是线索；行业许可、信用、折扣、合同、隐私和对外承诺权限按岗位逐项核验。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.path.career-path-block.6",
+          "source_refs": [
+            "editorial-sales-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "能力阶梯：先稳定记录与复算，再独立处理标准方案，最后承担复杂方案、例外协调和售后闭环。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.path.career-path-block.7",
+          "source_refs": [
+            "editorial-sales-path"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "转型路径：可比较营销、销售管理、采购或市场研究；共享沟通和分析能力不等于已具备新岗位的管理、采购或研究责任。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.path.career-path-block.8",
+          "source_refs": [
+            "editorial-sales-path",
+            "onet-buyers",
+            "onet-market-research",
+            "onet-marketing-managers",
+            "onet-purchasing-agents",
+            "onet-sales-managers",
+            "onet-service-sales"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "官方信号：O*NET提供美国职业、工资、就业和预测资料，不证明本地正在招聘。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.market-signals.market-signal-card.1",
+          "source_refs": [
+            "editorial-sales-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "就业预测：2024—2034增长为平均（3%至4%）；2024就业1,226,700，年度空缺约123,000，空缺含替换。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.market-signals.market-signal-card.2",
+          "source_refs": [
+            "onet-service-sales"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "招聘信号：样本只代表采样时间、地区、服务行业、客群、薪酬和经验组合。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.market-signals.market-signal-card.3",
+          "source_refs": [
+            "editorial-sales-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "技术信号：CRM、提案和生成式工具可能改变记录与准备任务，不等于所有组织已采用或净岗位变化。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.market-signals.market-signal-card.4",
+          "source_refs": [
+            "editorial-sales-market"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "相邻转型：共享销售、沟通或数据能力不等于管理、采购或研究责任已经获得。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.market-signals.market-signal-card.5",
+          "source_refs": [
+            "editorial-sales-market",
+            "onet-buyers",
+            "onet-market-research",
+            "onet-marketing-managers",
+            "onet-purchasing-agents",
+            "onet-sales-managers",
+            "onet-service-sales"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "可复核工作闭环是核对客户需求与适用范围、确认服务规格和交付条件、计算并说明方案、记录尚未确认的条款、取得内部批准与客户确认、移交履约并跟踪问题。",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.faq.1",
+                "question_key": "career.faq.sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.daily-work",
+                "source_refs": [
+                  "editorial-sales-workflow"
+                ]
+              },
+              {
+                "answer": "本职业直接销售非排除类服务；营销经理统筹需求与推广策略，销售经理指挥销售团队，批发零售买手和采购代理代表组织采购商品或服务，市场研究分析师研究市场条件而非完成一线服务销售。",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.faq.2",
+                "question_key": "career.faq.sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.role-comparison",
+                "source_refs": [
+                  "onet-buyers",
+                  "onet-market-research",
+                  "onet-marketing-managers",
+                  "onet-purchasing-agents",
+                  "onet-sales-managers",
+                  "onet-service-sales"
+                ]
+              },
+              {
+                "answer": "适配度通过能否准确倾听需求、区分事实与假设、清楚计算方案、保留未决条件、兑现交接并对越权承诺说停来观察，不是人格结论。",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.faq.3",
+                "question_key": "career.faq.sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.fit",
+                "source_refs": [
+                  "editorial-sales-fit"
+                ]
+              },
+              {
+                "answer": "数字工具可辅助整理询盘、生成提案草稿、比较方案、提醒跟进和汇总记录；不能确认服务真实可用性、价格批准、客户同意、合同效力或履约结果。",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.faq.4",
+                "question_key": "career.faq.sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.ai-impact",
+                "source_refs": [
+                  "editorial-sales-ai"
+                ]
+              },
+              {
+                "answer": "人工控制点包括核对客户身份和需求、验证数据来源、复算价格、确认最新条款和授权、记录客户同意，并由相应责任角色批准例外、合同和履约承诺。",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.faq.5",
+                "question_key": "career.faq.sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.human-control",
+                "source_refs": [
+                  "editorial-sales-ai"
+                ]
+              },
+              {
+                "answer": "国家统计局2025年资料提供行业和宽泛岗位大类，不能给出与O*NET 41-3091.00精确对应的中国大陆全国职业中位数、统一起薪或佣金结构。",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.faq.6",
+                "question_key": "career.faq.sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "O*NET展示2025年美国全国中位时薪33.65美元、年薪69,990美元；全国中位数不是起薪或个人报价；固定工资、佣金、奖金、工时、地区与服务行业差异须另行核对。",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.faq.7",
+                "question_key": "career.faq.sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.us-pay",
+                "source_refs": [
+                  "onet-service-sales"
+                ]
+              },
+              {
+                "answer": "入门可先练需求记录、方案对照、报价复算、异议记录、权限升级和售后移交；使用完全虚构的服务简报，不接触真实客户、合同、付款或个人信息；通用销售课程或证书只是能力线索；行业许可、折扣权限、信用条款、合同签署、个人信息处理与对外承诺须由具体行业规则和雇主核验。",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.faq.8",
+                "question_key": "career.faq.sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.education-path",
+                "source_refs": [
+                  "editorial-sales-path"
+                ]
+              },
+              {
+                "answer": "关键风险包括误述能力或价格、遗漏收费或取消条件、使用未经核准的承诺、未经同意联系、泄露客户信息、把未确认条款写成既定事实，以及签约后移交断裂；在中国消费者交易适用范围内，经营者须真实、全面提供服务信息，显著标明服务项目、内容、价格和计价方法，并履行对价格、售后和责任承担等作出的承诺；预付款服务还涉及书面约定；FTC面向美国企业的基本指导指出，广告陈述必须真实，不得具有欺骗性或不公平，并须有证据支持；特殊服务可能适用额外规则。",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.faq.9",
+                "question_key": "career.faq.sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.risk-boundary",
+                "source_refs": [
+                  "editorial-sales-risk",
+                  "ftc-ad-basics",
+                  "samr-consumer-regulation"
+                ]
+              },
+              {
+                "answer": "O*NET/BLS将41-3091.00的2024—2034增长列为平均（3%至4%）；这不是个人就业概率；O*NET/BLS显示2024就业1,226,700，2024—2034年度空缺约123,000；空缺包含增长与替换。",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.faq.10",
+                "question_key": "career.faq.sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.outlook-transition",
+                "source_refs": [
+                  "onet-service-sales"
+                ]
+              },
+              {
+                "answer": "职业工资、就业预测、年度空缺、招聘样本和技术采用是不同信号，不能合并为个人录用、佣金或收入保证；适配度通过能否准确倾听需求、区分事实与假设、清楚计算方案、保留未决条件、兑现交接并对越权承诺说停来观察，不是人格结论。",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.faq.11",
+                "question_key": "career.faq.sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.career-worth",
+                "source_refs": [
+                  "editorial-sales-fit",
+                  "editorial-sales-market"
+                ]
+              }
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.sources.faq.1",
+          "source_refs": [
+            "editorial-sales-ai",
+            "editorial-sales-fit",
+            "editorial-sales-market",
+            "editorial-sales-path",
+            "editorial-sales-risk",
+            "editorial-sales-workflow",
+            "ftc-ad-basics",
+            "nbs-wages",
+            "onet-buyers",
+            "onet-market-research",
+            "onet-marketing-managers",
+            "onet-purchasing-agents",
+            "onet-sales-managers",
+            "onet-service-sales",
+            "samr-consumer-regulation"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "O*NET职业事实、美国统计、中国消费者法规、FTC美国业务指导和编辑建议分别陈述。",
+              "本页只供职业决策和纸面模拟，不构成真实客户接触、广告、报价、合同、隐私处理或合规意见。",
+              "中国精确职业工资暂无可安全使用的数据，不用行业或宽泛岗位均值填补。"
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.sources.boundary.1",
+          "source_refs": [
+            "editorial-sales-ai",
+            "editorial-sales-fit",
+            "editorial-sales-market",
+            "editorial-sales-path",
+            "editorial-sales-risk",
+            "editorial-sales-simulation",
+            "editorial-sales-workflow",
+            "ftc-ad-basics",
+            "nbs-wages",
+            "onet-buyers",
+            "onet-market-research",
+            "onet-marketing-managers",
+            "onet-purchasing-agents",
+            "onet-sales-managers",
+            "onet-service-sales",
+            "samr-consumer-regulation"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "服务销售代表（广告、保险、金融、旅游除外）",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "服务销售代表（广告、保险、金融、旅游除外）",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "服务销售代表（广告、保险、金融、旅游除外）",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "服务销售代表（广告、保险、金融、旅游除外）",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "服务销售代表（广告、保险、金融、旅游除外）",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "服务销售代表（广告、保险、金融、旅游除外）",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "服务销售代表（广告、保险、金融、旅游除外）",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "服务销售代表（广告、保险、金融、旅游除外）",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "服务销售代表（广告、保险、金融、旅游除外）",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "服务销售代表（广告、保险、金融、旅游除外）",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "服务销售代表（广告、保险、金融、旅游除外）",
+                "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实客户接触、报价、合同、合规或收入保证。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-sales-ai",
+                "limitation": "不构成真实客户接触、报价、合同、合规或收入保证。",
+                "market": "全球",
+                "name": "服务销售数字工具控制建议",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实客户接触、报价、合同、合规或收入保证。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-sales-fit",
+                "limitation": "不构成真实客户接触、报价、合同、合规或收入保证。",
+                "market": "全球",
+                "name": "服务销售适配观察",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实客户接触、报价、合同、合规或收入保证。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-sales-market",
+                "limitation": "不构成真实客户接触、报价、合同、合规或收入保证。",
+                "market": "全球",
+                "name": "服务销售市场信号边界",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实客户接触、报价、合同、合规或收入保证。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-sales-path",
+                "limitation": "不构成真实客户接触、报价、合同、合规或收入保证。",
+                "market": "全球",
+                "name": "服务销售入门试做路径",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实客户接触、报价、合同、合规或收入保证。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-sales-risk",
+                "limitation": "不构成真实客户接触、报价、合同、合规或收入保证。",
+                "market": "全球",
+                "name": "服务销售非监管风险建议",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实客户接触、报价、合同、合规或收入保证。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-sales-simulation",
+                "limitation": "不构成真实客户接触、报价、合同、合规或收入保证。",
+                "market": "全球",
+                "name": "服务方案纸面模拟",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "承载基于已证实任务的编辑建议。",
+                  "不构成真实客户接触、报价、合同、合规或收入保证。"
+                ],
+                "evidence_type": "editorial synthesis",
+                "id": "editorial-sales-workflow",
+                "limitation": "不构成真实客户接触、报价、合同、合规或收入保证。",
+                "market": "全球",
+                "name": "服务销售工作闭环",
+                "period": "current task analysis; reviewed 2026-09-06",
+                "publisher": "FermatMind editorial review",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对美国广告陈述应真实、不欺骗、不不公平且有证据支持。",
+                  "只限美国联邦广告基本原则；特殊服务可能另有规则。"
+                ],
+                "evidence_type": "official business guidance",
+                "id": "ftc-ad-basics",
+                "limitation": "只限美国联邦广告基本原则；特殊服务可能另有规则。",
+                "market": "美国",
+                "name": "Advertising and Marketing Basics",
+                "period": "current guidance; accessed 2026-09-06",
+                "publisher": "Federal Trade Commission",
+                "scope": "exact",
+                "url": "https://www.ftc.gov/business-guidance/advertising-marketing/advertising-marketing-basics"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对中国行业和宽泛岗位工资口径。",
+                  "不能替代本职业精确工资。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "nbs-wages",
+                "limitation": "不能替代本职业精确工资。",
+                "market": "中国",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wages; published 2026-05-15; accessed 2026-09-06",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-buyers",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "13-1022.00 - Wholesale and Retail Buyers, Except Farm Products",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-1022.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-market-research",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "13-1161.00 - Market Research Analysts and Marketing Specialists",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-1161.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-marketing-managers",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "11-2021.00 - Marketing Managers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-2021.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-purchasing-agents",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "13-1023.00 - Purchasing Agents, Except Wholesale, Retail, and Farm Products",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-1023.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对相邻职业。",
+                  "仅用于相邻比较。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-sales-managers",
+                "limitation": "仅用于相邻比较。",
+                "market": "美国",
+                "name": "11-2022.00 - Sales Managers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-2022.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对身份、任务、工作环境、准备程度、工资和就业预测。",
+                  "仅限该O*NET职业和美国统计。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "onet-service-sales",
+                "limitation": "仅限该O*NET职业和美国统计。",
+                "market": "美国",
+                "name": "41-3091.00 - Sales Representatives of Services, Except Advertising, Insurance, Financial Services, and Travel",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/41-3091.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "核对中国消费者服务信息、价格、承诺、预付款和商业联系边界。",
+                  "义务主体是经营者；销售代表须依组织授权和适用制度执行，不能据此推定个人资质。"
+                ],
+                "evidence_type": "official regulation text",
+                "id": "samr-consumer-regulation",
+                "limitation": "义务主体是经营者；销售代表须依组织授权和适用制度执行，不能据此推定个人资质。",
+                "market": "中国",
+                "name": "中华人民共和国消费者权益保护法实施条例",
+                "period": "effective 2024-07-01; accessed 2026-09-06",
+                "publisher": "国家市场监督管理总局",
+                "scope": "exact",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2024/art_0aea188276a44f0baf940ab95ee00e0a.html"
+              }
+            ]
+          },
+          "id": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "精确职业数据：O*NET 41-3091.00",
+        "fact_id": "identity",
+        "market": "美国",
+        "measure": "职业代码与身份",
+        "occupation_scope": "服务销售代表（广告、保险、金融、旅游除外） / 41-3091.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-service-sales"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "精确职业数据：需求、服务、价格、提案、协议与售后支持",
+        "fact_id": "task-object",
+        "market": "美国",
+        "measure": "任务与对象",
+        "occupation_scope": "服务销售代表（广告、保险、金融、旅游除外） / 41-3091.00（精确职业数据）",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-service-sales"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "核对需求—说明方案—标记未知—批准确认—履约移交",
+        "fact_id": "workflow",
+        "market": "全球",
+        "measure": "工作闭环",
+        "occupation_scope": "服务销售代表（广告、保险、金融、旅游除外） / 41-3091.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "editorial-sales-workflow"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "倾听、复算、边界判断、承诺交接",
+        "fact_id": "fit",
+        "market": "全球",
+        "measure": "可观察适配信号",
+        "occupation_scope": "服务销售代表（广告、保险、金融、旅游除外） / 41-3091.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "editorial-sales-fit"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "信息、价格、条款、联系、数据与授权",
+        "fact_id": "risk",
+        "market": "全球",
+        "measure": "风险控制边界",
+        "occupation_scope": "服务销售代表（广告、保险、金融、旅游除外） / 41-3091.00",
+        "period": "current task analysis; reviewed 2026-09-06",
+        "source_refs": [
+          "editorial-sales-risk"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "9d8065b78e1cc4cbe7819cbfad84a20f882967b7982ccb909c8f752c27cf2d21",
+  "source_content_sha256": "aa5d1bc0a0ce3d87fc78d6e6633044171fc72403b7eacdc3e1cab3f212a144d6",
   "subject": {
     "canonical_slug": "sales-representatives-of-services-except-advertising-insurance-financial-services-and-travel",
     "name": "服务销售代表（广告、保险、金融、旅游除外）",
-    "summary": null
+    "summary": "核对客户需求与服务能力，形成可复算方案，在价格、条款和授权边界内推进确认，并把承诺、例外与售后事项完整移交。"
   }
 }

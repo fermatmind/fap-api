@@ -1,12 +1,1484 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "如果你愿意每天在图纸、人员、材料、工序冲突和现场风险之间做取舍，并对班组结果负责，这个方向值得继续了解；若你只想做纯办公室排期、回避现场沟通或不愿叫停不清楚的任务，匹配度会较低。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "正向信号是能把模糊要求拆成班组可执行的顺序，愿意当面确认并留下记录；谨慎信号是依赖口头记忆、为了赶进度跳过复核，或把不同工种的资格默认互通。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "桌面试做只审七项，其中第七项“升级安排”必须同时写明触发条件与升级对象。A卡：图纸版本未记录，木工4人，材料已到，交叉作业未记录，已知危险为脚手架占道，负责人赵组长；升级触发未记录，对象为项目经理。B卡：图纸V8，电工3人，材料到场未记录，交叉作业为吊装，已知危险为临电，负责人未记录；升级触发与对象都未记录。C卡：图纸V9，钢筋工5人，材料已到，无交叉作业，危险为临边，负责人钱组长；条件变化时升级安全负责人。只列资料缺口，不安排真实作业。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "独立答案：A缺图纸版本、交叉作业和完整升级安排三项；B缺材料到场、负责人和完整升级安排三项；C在指定七项内无缺项。三张卡都不能据此获准开工，仍须项目授权人员现场复核。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "职业边界：O*NET 47-1011.00指直接监督和协调施工或采掘工人；BLS所述建筑经理则从项目开始到结束统筹计划、预算与整体监督，两者不是同义职位。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.profile.definition-block.1",
+          "source_refs": [
+            "bls-cm",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "主要投入包括当前图纸与规格、工作面状态、人员与技能、材料设备、前后工序约束和安全要求。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "可检查产出包括班组分工、当日顺序、材料请求、进度与质量检查记录、问题清单和交接信息。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "典型闭环是读规格、查看现场、估算人员材料、排班与协调、检查进度和安全、处理偏差、记录并交接。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "关键判断不是单纯追进度，而是判断工作是否满足规格、人员是否适配任务、工序是否冲突以及何时停止升级。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.profile.work-context-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "O*NET调查显示面对面讨论和持续接触他人是高频工作情境，现场主管需要把指令讲清、复述确认并处理冲突。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.profile.work-context-block.2",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "常见材料与工具包括图纸、规格、测量标记工具、检查表、日报、材料清单，以及用于排程和沟通的软件。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "协作对象通常包括班组成员、其他工种主管、承包商、项目管理或技术人员，以及质量和安全角色。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "质量标准是完成内容与规格一致、工序接口清楚、异常可追溯；记录不能替代现场检查。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "权限随项目、工种、设备和法域变化。职业名称、工作经验或普通证书都不自动授予具体设备操作、许可作业或签字权限。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.profile.definition-block.2",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "general-and-operations-managers",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/general-and-operations-managers"
+              },
+              {
+                "entity": "construction-managers",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/construction-managers"
+              },
+              {
+                "entity": "industrial-engineers",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/industrial-engineers"
+              },
+              {
+                "entity": "civil-engineering-technicians",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/civil-engineering-technicians"
+              },
+              {
+                "entity": "first-line-supervisors-of-security-workers",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/first-line-supervisors-of-security-workers"
+              }
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "bls-cm"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "建筑经理的范围通常覆盖项目从开始到结束的计划、预算、合同、进度和多方协调，责任层级与统计口径都不同。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "bls-cm"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "若更喜欢直接带班、快速处理工作面冲突并持续在场，先看一线主管；若更偏项目级成本、合同和跨阶段统筹，再比较建筑经理。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "bls-cm"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "从具体工种转向主管，新增的是人员安排、接口协调、质量与安全检查和记录责任，而不是放弃工艺判断。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "bls-cm"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "47-1011.00同时覆盖施工与采掘一线主管；不同场景的危险、设备、许可和生产系统须分别核对。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "较适合数字辅助的是把日报、材料需求、人员安排和偏差记录结构化，或从受控资料中生成待核对清单。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "editorial",
+            "onet-tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "O*NET的2025美国招聘信息中出现Office、Excel、Outlook和Procore等软件线索；这说明软件需求，不等于生成式AI已普遍采用。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "onet-tech"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "工具可以提示图纸版本冲突或进度差异，但不能从远端文本确认现场隔离、设备状态、人员能力或天气变化。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "涉及安全、规格符合性、人员分派和对外承诺时，必须回看受控图纸、现场事实与授权程序。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "输入工具前先排除个人信息、客户机密、未公开图纸和安全敏感数据，并遵循雇主的数据规则。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "工具输出应标注来源、版本、时间和未核实项；无法追溯的结论只能作为待查线索。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "自动生成的班前计划不能直接下发，必须由了解现场、工序和权限的人逐项复核。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "本页不提供该职业的AI暴露分数；工具能力、企业采用、现场可靠性、自动化率和就业结果不能互相替代。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "截至2026年9月6日本次复核，与美国47-1011.00精确对应的中国大陆全国职业工资暂无可安全使用的数据，本模块记为documented_unavailable。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "国家统计局公布的是城镇单位、行业与人员大类平均工资。例如建筑业数据是行业聚合，不能冒充本职业中位数或个人月薪。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "比较中国岗位时应分别确认基本工资、工时与加班、项目补贴、食宿交通、保险、奖金条件、淡旺季以及事故责任安排。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "美国数据不能按汇率换算为中国报价；岗位名称也不能建立中美职业资格或授权的一一对应。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "2025年美国47-1011.00工资中位数为79,920美元/年，不能解释为入门工资或个人报价。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "同页小时中位数为38.42美元，年薪与时薪是同一统计分布的不同单位，不应相加。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "第10百分位为53,280美元/年，第25百分位63,400美元，第75百分位101,460美元，第90百分位128,260美元。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "这些数据覆盖美国该职业统计人群；地区、行业、经验、工时和雇佣形式会改变具体报价。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "工资页同时展示第10、25、50、75和90百分位，比较报价时应先确认使用的是哪个位置和单位。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "onet-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "求职比较应把工资单位、是否加班、补贴、福利、项目期限、通勤和现场责任放在同一张表中。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "onet-wage"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "你能否从图纸与规格中找出当天工作要求，并把不确定项列成问题，而不是凭经验补空白？"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.fit.riasec-fit-block.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "你能否按技能、人数、材料与工序接口分派任务，并解释为什么这样安排？"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.fit.riasec-fit-block.2",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "你是否愿意持续到现场核对进度、设备和成品，而不是只在群聊中追问？"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.fit.riasec-fit-block.3",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "面对赶工压力，你能否把安全、质量和权限问题说清，并承受叫停后的协调成本？"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.fit.riasec-fit-block.4",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "你能否向班组、其他工种和管理技术人员分别使用对方听得懂的语言沟通？"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.fit.riasec-fit-block.5",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "你是否能保持日报、材料请求、偏差、返工和交接记录的一致性？"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.fit.riasec-fit-block.6",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "这个岗位常需户外工作、接触危险设备并承担他人安全责任；应结合个人健康和生活安排评估。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.fit.riasec-fit-block.7",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "用一周桌面模拟观察自己是否稳定完成复核与记录，比一次性人格测试更有意义。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.fit.riasec-fit-block.8",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "O*NET列出阅读规格与检查进度；若图纸版本或要求不一致，只记录差异并按项目现行程序升级。本页不定义停工权。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.risk.career-risk-cards.1",
+          "source_refs": [
+            "editorial",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "O*NET列出按人员与材料要求分派工作；能力、工种资格或任务授权不清时，不用相似经验代替核验，交由项目授权链处理。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.risk.career-risk-cards.2",
+          "source_refs": [
+            "editorial",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "O*NET列出检查现场与设备；状态不清时只记录可观察事实并依现行程序处理，本页不提供隔离、启动、停机或复工步骤。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.risk.career-risk-cards.3",
+          "source_refs": [
+            "editorial",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "O*NET列出协调其他施工活动；交叉作业或材料变化使计划失效时，重新核对接口并依项目程序升级。班前卡字段只是编辑检查框架。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.risk.career-risk-cards.4",
+          "source_refs": [
+            "editorial",
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "O*NET列出安全程序培训，但具体停工权、复工条件、签字和事故处置不能由职业任务自动推出，须按项目、雇主和所在地规则确认。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.risk.career-risk-cards.5",
+          "source_refs": [
+            "editorial",
+            "onet-details"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "BLS把该职业的典型入门教育列为高中学历或同等水平，并列出五年或以上相关工作经验、无典型在职培训。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.path.career-path-block.1",
+          "source_refs": [
+            "bls-training",
+            "onet-cert"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "BLS的“典型”统计不是最低门槛；O*NET认证清单也不等于法定资格、雇主录用、现场授权或签字责任。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.path.career-path-block.2",
+          "source_refs": [
+            "bls-training",
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "成长建议：先在一个具体施工或采掘工种积累可核查经验，再逐步承担小范围协调、记录和带教；这是编辑建议，须向目标雇主验证。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.path.career-path-block.3",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "非操作性练习可聚焦图纸版本核对、人员材料估算、工作面接口表、进度与偏差记录；它不替代真实工地培训。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.path.career-path-block.4",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "O*NET认证页只用于发现名称；向目标雇主询问工种经验、培训、证书、设备资格、班组规模和值班要求。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.path.career-path-block.5",
+          "source_refs": [
+            "editorial",
+            "onet-cert"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七日试做每天审一张虚构班前卡，第七字段始终同时核对升级触发条件与对象；记录缺口、追问和优先级，不接触真实工地。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.path.career-path-block.6",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "作品可包含班前卡、工序接口表、人员材料估算和偏差复盘，并清楚注明假设、未核实项及“非现场作业文件”。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.path.career-path-block.7",
+          "source_refs": [
+            "editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "申请前分开核对学历、相关工种经验、认证发现、通用安全培训、特定设备资格、雇主授权和法定签字责任。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.path.career-path-block.8",
+          "source_refs": [
+            "editorial",
+            "onet-cert"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "BLS预计该职业就业从2025年的913,300增至2035年的959,400，净增46,100；O*NET行业页另显示69%位于建筑业，两个来源回答不同问题。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "bls-proj",
+            "onet-industry"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "同期增长率为5.0%；这是十年就业变化，不是个人录用概率、工资涨幅或年度招聘增长。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "bls-proj"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "预计年均空缺67,000，包含职业转换与退出造成的替补需求，不能与净增46,100相加。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "bls-proj"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "2025年美国工资中位数79,920美元可帮助判断统计位置，但不能替代具体地区和雇主报价。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "bls-proj"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "评估机会时同时看项目类型、班组规模、具体工种经验、安全责任、工时、出差与晋升边界。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "bls-proj"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "日常工作是读规格和查看现场，估算人员材料，安排班组与工序，检查进度、安全和质量，处理偏差并记录交接。",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.faq.1",
+                "question_key": "career.faq.first-line-supervisors-of-construction-trades-and-extraction-workers.daily-work",
+                "source_refs": [
+                  "onet-details"
+                ]
+              },
+              {
+                "answer": "一线主管直接组织施工或采掘班组；建筑经理通常统筹项目级预算、合同、进度和多方协作，不能按头衔互换。",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.faq.2",
+                "question_key": "career.faq.first-line-supervisors-of-construction-trades-and-extraction-workers.role-comparison",
+                "source_refs": [
+                  "bls-cm"
+                ]
+              },
+              {
+                "answer": "适合能持续现场核对、清楚沟通、留下记录，并在进度压力下仍愿意停止和升级不确定事项的人。",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.faq.3",
+                "question_key": "career.faq.first-line-supervisors-of-construction-trades-and-extraction-workers.fit",
+                "source_refs": [
+                  "onet-details"
+                ]
+              },
+              {
+                "answer": "数字工具可辅助整理日报、清单和差异，但不能确认现场状态、人员资格或安全条件；关键决定必须由获授权人员复核。",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.faq.4",
+                "question_key": "career.faq.first-line-supervisors-of-construction-trades-and-extraction-workers.ai-impact",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "图纸版本、现场条件、人员能力、安全状态、任务分派和复工决定必须由了解现场且具相应权限的人核验。",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.faq.5",
+                "question_key": "career.faq.first-line-supervisors-of-construction-trades-and-extraction-workers.human-control",
+                "source_refs": [
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "暂无可安全使用的中国大陆全国精确职业工资；建筑业或管理人员大类平均不能当成本职业中位数。",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.faq.6",
+                "question_key": "career.faq.first-line-supervisors-of-construction-trades-and-extraction-workers.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "2025年美国中位数为79,920美元/年或38.42美元/小时，属于职业统计分布，不是入门工资或个人报价。",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.faq.7",
+                "question_key": "career.faq.first-line-supervisors-of-construction-trades-and-extraction-workers.us-pay",
+                "source_refs": [
+                  "onet-wage"
+                ]
+              },
+              {
+                "answer": "BLS把47-1011的典型入门教育列为高中学历或同等水平，并列出五年或以上相关工作经验、无典型在职培训。成长建议、桌面试做与作品设计仅是职业探索方法，不构成真实工地培训、资格或授权。",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.faq.8",
+                "question_key": "career.faq.first-line-supervisors-of-construction-trades-and-extraction-workers.education-path",
+                "source_refs": [
+                  "bls-training",
+                  "editorial"
+                ]
+              },
+              {
+                "answer": "O*NET列出读规格、分派人员、协调工序、检查现场与设备、培训安全程序和记录信息等任务。发现版本、资格、设备、交叉作业或安全责任不清时，只记录事实并依项目现行程序升级；本页不规定停工权、复工条件或操作步骤。",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.faq.9",
+                "question_key": "career.faq.first-line-supervisors-of-construction-trades-and-extraction-workers.risk-boundary",
+                "source_refs": [
+                  "editorial",
+                  "onet-details"
+                ]
+              },
+              {
+                "answer": "BLS预计2025—2035就业增长5.0%、净增46,100，年均空缺67,000；三项指标含义不同。",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.faq.10",
+                "question_key": "career.faq.first-line-supervisors-of-construction-trades-and-extraction-workers.outlook-transition",
+                "source_refs": [
+                  "bls-proj"
+                ]
+              },
+              {
+                "answer": "如果你愿意承担现场协调、复核与安全责任，并能先在具体工种积累经验，这条路径值得试做；否则先比较项目协调或技术岗位。",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.faq.11",
+                "question_key": "career.faq.first-line-supervisors-of-construction-trades-and-extraction-workers.career-worth",
+                "source_refs": [
+                  "bls-proj"
+                ]
+              }
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.sources.faq.1",
+          "source_refs": [
+            "bls-cm",
+            "bls-proj",
+            "bls-training",
+            "editorial",
+            "nbs-wages",
+            "onet-details",
+            "onet-wage"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "中国与美国证据分别陈述；工资、就业、资格、安全和技术结论不得跨市场、时期或职业范围拼接。",
+              "本页提供职业决策与非操作性桌面试做，不替代所在地法律、安全程序、工种培训、设备要求或项目授权。",
+              "documented_unavailable只表示本次有界检索未建立安全的精确数据，不使用行业或人员大类代理伪造职业数字。"
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.sources.boundary.1",
+          "source_refs": [
+            "bls-cm",
+            "bls-proj",
+            "bls-training",
+            "editorial",
+            "nbs-wages",
+            "onet-cert",
+            "onet-details",
+            "onet-industry",
+            "onet-tech",
+            "onet-wage"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "建筑施工主管采掘工人",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "建筑施工主管采掘工人",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "建筑施工主管采掘工人",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "建筑施工主管采掘工人",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "建筑施工主管采掘工人",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "建筑施工主管采掘工人",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "建筑施工主管采掘工人",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "建筑施工主管采掘工人",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "建筑施工主管采掘工人",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "建筑施工主管采掘工人",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "建筑施工主管采掘工人",
+                "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn31view3 lines 176-204, 216-280。",
+                  "只用于区分11-9021建筑经理，不替代47-1011一线主管数据。"
+                ],
+                "evidence_type": "official adjacent occupation profile",
+                "id": "bls-cm",
+                "limitation": "只用于区分11-9021建筑经理，不替代47-1011一线主管数据。",
+                "market": "美国",
+                "name": "Construction Managers — Occupational Outlook Handbook",
+                "period": "2025 pay and 2025-2035 outlook; accessed 2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/management/construction-managers.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn32view1 lines 927-932。",
+                  "仅用于所列职业、时期和市场，不外推到个人结果或其他法域。"
+                ],
+                "evidence_type": "official statistics",
+                "id": "bls-proj",
+                "limitation": "仅用于所列职业、时期和市场，不外推到个人结果或其他法域。",
+                "market": "美国",
+                "name": "Occupational projections and worker characteristics",
+                "period": "2025-2035 projections; published 2026",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn32view2 lines 717-743。",
+                  "仅用于所列职业、时期和市场，不外推到个人结果或其他法域。"
+                ],
+                "evidence_type": "official statistics",
+                "id": "bls-training",
+                "limitation": "仅用于所列职业、时期和市场，不外推到个人结果或其他法域。",
+                "market": "美国",
+                "name": "Education and training assignments by detailed occupation",
+                "period": "2025-2035 assignments; published 2026",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/education-and-training-by-occupation.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "仅支持虚构桌面练习、决策框架和不外推边界。",
+                  "不支持外部事实、现场作业方法或法定授权。"
+                ],
+                "evidence_type": "editorial exercise and decision framework",
+                "id": "editorial",
+                "limitation": "不支持外部事实、现场作业方法或法定授权。",
+                "market": "编辑设计",
+                "name": "建筑施工主管采掘工人候选页编辑设计",
+                "period": "2026-09-06",
+                "publisher": "FermatMind 编辑设计",
+                "scope": "editorial_synthesis",
+                "url": null
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn33view3 lines 24-39, 66-75, 127-155, 175-246。",
+                  "仅为行业与岗位大类聚合，不能替代本职业精确工资。"
+                ],
+                "evidence_type": "official aggregate wage statistics",
+                "id": "nbs-wages",
+                "limitation": "仅为行业与岗位大类聚合，不能替代本职业精确工资。",
+                "market": "中国大陆",
+                "name": "2024年城镇单位就业人员年平均工资情况",
+                "period": "2024 wage aggregates published 2025; accessed 2026-09-06",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202505/t20250516_1959826.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn34view1 lines 50-108。",
+                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                ],
+                "evidence_type": "official certification discovery",
+                "id": "onet-cert",
+                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "market": "美国",
+                "name": "National Certifications: 47-1011.00 - First-Line Supervisors of Construction Trades and Extraction Workers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localcert/47-1011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn30view0 lines 50-224, 225-340, 548-637。",
+                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                ],
+                "evidence_type": "official occupation details",
+                "id": "onet-details",
+                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "market": "美国",
+                "name": "47-1011.00 - First-Line Supervisors of Construction Trades and Extraction Workers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/47-1011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn33view0 lines 50-59。",
+                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                ],
+                "evidence_type": "official industry distribution",
+                "id": "onet-industry",
+                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "market": "美国",
+                "name": "Industries: 47-1011.00 - First-Line Supervisors of Construction Trades and Extraction Workers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/47-1011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn33view1 lines 50-67。",
+                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                ],
+                "evidence_type": "official technology profile",
+                "id": "onet-tech",
+                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "market": "美国",
+                "name": "Hot Technologies: 47-1011.00 - First-Line Supervisors of Construction Trades and Extraction Workers",
+                "period": "current page; accessed 2026-09-06",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/47-1011.00"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "2026-09-06本任务真实打开全文并复核：turn32view0 lines 50-80。",
+                  "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page."
+                ],
+                "evidence_type": "O*NET display of BLS OEWS wage data",
+                "id": "onet-wage",
+                "limitation": "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.",
+                "market": "美国",
+                "name": "National Wages: 47-1011.00 - First-Line Supervisors of Construction Trades and Extraction Workers",
+                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/47-1011.00"
+              }
+            ]
+          },
+          "id": "first-line-supervisors-of-construction-trades-and-extraction-workers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "一线施工或采掘主管直接组织班组现场活动；建筑经理则从项目开始到结束统筹计划、预算、合同、进度与多方协作，两者不能按头衔互换。",
+        "fact_id": "adjacent-boundary",
+        "market": "美国",
+        "measure": "来源支持的职业事实",
+        "occupation_scope": "精确职业数据：47-1011.00",
+        "period": "2025 pay and 2025-2035 outlook; accessed 2026-09-06",
+        "source_refs": [
+          "bls-cm"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "O*NET列出多种相关认证用于路径发现；认证清单不等于法定要求、雇主录用或具体作业授权。",
+        "fact_id": "entry-boundary",
+        "market": "美国",
+        "measure": "来源支持的职业事实",
+        "occupation_scope": "精确职业数据：47-1011.00",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-cert"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "适配信号包括能读懂规格要求、安排人员材料、协调交叉作业、记录偏差，并在安全或授权边界出现时及时升级。",
+        "fact_id": "fit-signals",
+        "market": "美国",
+        "measure": "来源支持的职业事实",
+        "occupation_scope": "精确职业数据：47-1011.00",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-details"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "该职业直接监督和协调施工或采掘工人，检查进度、设备或现场是否符合安全与技术要求，并安排人员、材料、工序和记录。",
+        "fact_id": "occupation-identity",
+        "market": "美国",
+        "measure": "来源支持的职业事实",
+        "occupation_scope": "精确职业数据：47-1011.00",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-details"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "该职业直接监督和协调施工或采掘工人，检查进度、设备或现场是否符合安全与技术要求，并安排人员、材料、工序和记录。",
+        "fact_id": "occupation-workflow",
+        "market": "美国",
+        "measure": "来源支持的职业事实",
+        "occupation_scope": "精确职业数据：47-1011.00",
+        "period": "current page; accessed 2026-09-06",
+        "source_refs": [
+          "onet-details"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "9308819a82109dac98f51e6ed500b73e152a3d6f905f54c2cdd93f8cb34f6bad",
+  "source_content_sha256": "da37c4b64ad74b22ac6a1bd08bc5945a9fbe0056d84ad61e449add75a7d369f6",
   "subject": {
     "canonical_slug": "first-line-supervisors-of-construction-trades-and-extraction-workers",
     "name": "建筑施工主管采掘工人",
-    "summary": null
+    "summary": "建筑施工主管采掘工人直接监督施工或采掘班组，把图纸要求、人员材料、工序衔接、安全检查与现场记录组织成可执行、可复核的班组计划。"
   }
 }

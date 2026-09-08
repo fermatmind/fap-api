@@ -1,12 +1,1598 @@
 {
-  "blocks": [],
-  "content_state": "legacy",
+  "blocks": [
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.quick-decision",
+      "id": "quick-decision",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "这份工作的核心不是侦破案件，而是按程序把现场观察、照片、指纹和物证变成可追溯记录：编号、描述、拍摄、采集、包装、转移和报告都要一致。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "正向信号是能在时间压力下保持字段准确、尊重现场边界、接受复核，并在信息冲突时停下而不是补猜。谨慎条件是容易改写原记录、跳过签收或把初步相似当最终鉴定。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "60分钟安全试做只用虚构资料：两份表都记录同一张虚构现场照片E-01。采集记录把“照片拍摄时间”写为09:12，并记录09:18封存、10:05由A转给B、10:30最终存入L-3；元数据表把同一字段“照片拍摄时间”写为09:21，并把同一阶段的“10:30最终存储位置”写为L-8。没有真实人员、案件、指纹图像或系统账号，不得作身份或证据有效性判断。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.quick-decision.fermat-decision-card.3",
+          "source_refs": [
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "参考答案：建立两条未解决差异——照片时间09:12与09:21冲突，存储位置L-3与L-8冲突。保留两份原记录，标记来源和时间，不覆盖任何值；暂停后续依赖步骤并交由机构有权人员核对。输出差异表、保管链时间线和升级说明。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.quick-decision.fermat-decision-card.4",
+          "source_refs": [
+            "nij-chain-custody",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.profile",
+      "id": "profile",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "本页对应美国O*NET 33-3021.02。官方范围是采集犯罪现场证据、分类和识别指纹，并为刑事或民事案件拍摄影像。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.profile.definition-block.1",
+          "source_refs": [
+            "onet-context",
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "拍摄犯罪或事故现场并记录位置与状态。",
+              "分类、比较和识别指纹或其他规定材料。",
+              "采集、包装、标记、清点和提交证据。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.profile.responsibilities-block.1",
+          "source_refs": [
+            "onet-context",
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "维护证据记录并撰写、复核报告。",
+              "使用数据库检索调查信息并控制访问。",
+              "与调查、实验室、证物管理和法律人员交接。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.profile.responsibilities-block.2",
+          "source_refs": [
+            "onet-context",
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "现场安全与边界优先。",
+              "原始记录、时间和编号可追溯。",
+              "任何鉴定、披露或处置均按权限批准。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.profile.responsibilities-block.3",
+          "source_refs": [
+            "onet-context",
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "典型流程从接收指挥、确认现场边界和安全条件开始，随后摄影测量、识别与采集、包装标记、清点移交、记录报告，最后由有权人员复核。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.profile.work-context-block.1",
+          "source_refs": [
+            "onet-context",
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.work-context-block",
+          "data": {
+            "paragraphs": [
+              "主要对象包括场景照片、指纹、物证包装与标签、现场草图、保管链记录、数据库条目和操作报告；不同机构的任务组合不同。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.profile.work-context-block.2",
+          "source_refs": [
+            "onet-context",
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.onet-structured-fields-block",
+          "data": {
+            "paragraphs": [
+              "质量看编号、位置、时间、描述、封存和每次转移是否一致，也看原始记录是否保留、修改是否留痕、结论是否在授权范围内。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.profile.onet-structured-fields-block.1",
+          "source_refs": [
+            "onet-context",
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "工作可能在现场、证物室、实验室或办公室之间切换，并与调查人员、实验室人员、证物管理员和法律人员协作。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.profile.career-quick-answers-block.1",
+          "source_refs": [
+            "onet-context",
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "常见工具包括相机、测量与照明设备、指纹处理工具、证物包装材料、条码或证物管理系统、数据库和办公软件；使用权限依机构规定。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.profile.career-quick-answers-block.2",
+          "source_refs": [
+            "onet-context",
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.definition-block",
+          "data": {
+            "paragraphs": [
+              "该职业不等同于普通档案文员、侦探、法医科学技术员、验尸官或一般合规人员；判断岗位时看是否以现场证据与保管记录为主要交付。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.profile.definition-block.2",
+          "source_refs": [
+            "onet-context",
+            "onet-details",
+            "onet-tasks"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.direction-comparison",
+      "id": "direction-comparison",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "entries": [
+              {
+                "entity": "clinical-research-coordinators",
+                "id": "police-identification-and-records-officers.parity.adjacent.1",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/clinical-research-coordinators"
+              },
+              {
+                "entity": "compliance-officers",
+                "id": "police-identification-and-records-officers.parity.adjacent.2",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/compliance-officers"
+              },
+              {
+                "entity": "environmental-compliance-inspectors",
+                "id": "police-identification-and-records-officers.parity.adjacent.3",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/environmental-compliance-inspectors"
+              },
+              {
+                "entity": "government-property-inspectors-and-investigators",
+                "id": "police-identification-and-records-officers.parity.adjacent.4",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/government-property-inspectors-and-investigators"
+              },
+              {
+                "entity": "coroners",
+                "id": "police-identification-and-records-officers.parity.adjacent.5",
+                "relation": "adjacent-career",
+                "url": "/zh/career/jobs/coroners"
+              }
+            ]
+          },
+          "id": "police-identification-and-records-officers.direction-comparison.adjacent-career-comparison-table.1",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "links"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "临床研究协调员管理研究参与者、方案、数据与伦理流程；本职业处理犯罪或事故现场证据与保管记录，不能共享权限。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.direction-comparison.adjacent-career-comparison-table.2",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "合规官和环境合规检查员主要解释或检查组织与环境法规执行；本职业的核心是现场证据、指纹、摄影和证据记录。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.direction-comparison.adjacent-career-comparison-table.3",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "政府财产检查与调查人员关注公共财产、合同或损失调查；即使也写报告，其证据对象和调查权限不同。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.direction-comparison.adjacent-career-comparison-table.4",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "data": {
+            "paragraphs": [
+              "验尸官处理死亡调查和法定认定；现场证据人员不得因接触同一事件就承担验尸、医疗或死因判断。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.direction-comparison.adjacent-career-comparison-table.5",
+          "source_refs": [
+            "onet-summary"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.ai-impact",
+      "id": "ai-impact",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "AI可辅助把语音转成草稿、检查字段缺失、比较日志版本、生成报告框架和整理公开资料，但只能处理获准数据。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.ai-impact.ai-impact-table.1",
+          "source_refs": [
+            "ilo-genai-police-records",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "采用前要核对数据分类、访问权限、系统日志、模型输出保存方式、错误回滚和谁有权批准；能演示不等于机构已部署。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.ai-impact.ai-impact-table.2",
+          "source_refs": [
+            "ilo-genai-police-records",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "不得把模型用于未经授权的人脸或身份识别、指纹最终鉴定、证据真实性判断、删除或改写原记录、决定披露或处置。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.ai-impact.ai-impact-table.3",
+          "source_refs": [
+            "ilo-genai-police-records",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "人工控制点包括原始证据与记录核验、编号与保管链冲突处理、受限数据库查询、最终鉴定、报告签署和法律披露。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.ai-impact.ai-impact-table.4",
+          "source_refs": [
+            "ilo-genai-police-records",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "测试应覆盖错号、错时、重复记录、缺失签收、旧版本覆盖、无权访问和模型编造；任何一项失败都应阻止自动提交。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.ai-impact.ai-impact-table.5",
+          "source_refs": [
+            "ilo-genai-police-records",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "所有AI输出要标明来源记录、生成时间、模型版本、人工修改和最终责任人；无法追溯的文本不能进入正式记录。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.ai-impact.ai-impact-table.6",
+          "source_refs": [
+            "ilo-genai-police-records",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "ILO任务暴露指数不等于该职业替代概率；实际影响还取决于机构政策、基础设施、技能和采用实践。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.ai-impact.ai-impact-table.7",
+          "source_refs": [
+            "ilo-genai-police-records",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "个人应把能力重点放在现场观察、程序执行、证据保全、差异判断、清晰报告和审阅自动化结果，而不是只追求录入速度。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.ai-impact.ai-impact-table.8",
+          "source_refs": [
+            "ilo-genai-police-records",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.china-salary",
+      "id": "china-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "中国大陆与本页细分职业完全对应的全国精确工资暂无可安全使用的数据。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.china-salary.career-snapshot-primary-locale.1",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "国家统计局2025工资资料按行业和单位类型汇总，属于行业代理资料，不能当作警察鉴定与记录官员单职业工资。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.china-salary.career-snapshot-primary-locale.2",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "不展示数值不是零工资或没有岗位，只表示在当前有界检索中没有建立安全对应的全国中位数、分位数或统一起薪。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.china-salary.career-snapshot-primary-locale.3",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-primary-locale",
+          "data": {
+            "paragraphs": [
+              "求职时应按所在地机构、编制或劳动关系、职级、资格、班次和津补贴分别确认；美国父类数据不能换算为中国个人收入。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.china-salary.career-snapshot-primary-locale.4",
+          "source_refs": [
+            "nbs-wages"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.us-salary",
+      "id": "us-salary",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "美国2025年父类职业数据：Detectives and Criminal Investigators工资中位数为{{fact:us-parent-wage-2025}}；不是33-3021.02细分职业精确值。"
+            ]
+          },
+          "fact_refs": [
+            "us-parent-wage-2025"
+          ],
+          "id": "police-identification-and-records-officers.us-salary.career-snapshot-secondary-locale.1",
+          "source_refs": [
+            "bls-detectives-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "O*NET在本细分职业页面明确标注工资采自父类Detectives and Criminal Investigators，因此只能作为父类职业代理数据。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.us-salary.career-snapshot-secondary-locale.2",
+          "source_refs": [
+            "bls-detectives-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "中位数表示一半高于、一半低于，不是入门工资、税后收入或个人保证。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.us-salary.career-snapshot-secondary-locale.3",
+          "source_refs": [
+            "bls-detectives-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "比较岗位时应核对州与地方机构、职级、工龄、班次、加班、津贴、退休和其他福利。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.us-salary.career-snapshot-secondary-locale.4",
+          "source_refs": [
+            "bls-detectives-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "不同岗位标题可能对应现场技术员、指纹检验、证物管理或具执法身份职位，薪酬不可只按页面标题套用。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "bls-detectives-wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "跨市场比较必须保留法域、职责、币种、税制、工时与福利差异，不能用汇率直接排序。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.us-salary.career-snapshot-secondary-locale.6",
+          "source_refs": [
+            "bls-detectives-wage"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.fit",
+      "id": "fit",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "适配信号：你能连续核对编号、位置、时间、封存和转移记录，并在冲突时保留原件而非自行改写。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.fit.riasec-fit-block.1",
+          "source_refs": [
+            "onet-context",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "观察信号：你能区分‘看到什么’、‘记录什么’与‘有权得出什么结论’，不会把初步线索写成确定事实。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.fit.riasec-fit-block.2",
+          "source_refs": [
+            "onet-context",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "协作信号：你能按统一字段与摄影、采集、实验室、证物管理和法律人员交接，并接受别人复核。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.fit.riasec-fit-block.3",
+          "source_refs": [
+            "onet-context",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "压力信号：在紧急、令人不适或信息不完整的现场仍能执行安全和程序要求，必要时请求支援。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.fit.riasec-fit-block.4",
+          "source_refs": [
+            "onet-context",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "消耗来源可能包括轮班、受限环境、精细重复核对、接触事故或犯罪场景，以及报告可能被法律程序审查。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.fit.riasec-fit-block.5",
+          "source_refs": [
+            "onet-context",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "不适合信号包括厌恶留痕、容易跳过交接签收、喜欢凭直觉补空、无法接受权限限制或不愿纠正记录。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.fit.riasec-fit-block.6",
+          "source_refs": [
+            "onet-context",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "兴趣或人格量表只能辅助探索；更有效的是完成虚构日志差异表并让他人或隔日检查表复核。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.fit.riasec-fit-block.7",
+          "source_refs": [
+            "onet-context",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.riasec-fit-block",
+          "data": {
+            "paragraphs": [
+              "若更偏好政策解释、科研协调、环境检查、一般档案或医学死亡调查，应分别比较对应相邻职业。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.fit.riasec-fit-block.8",
+          "source_refs": [
+            "onet-context",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.risk",
+      "id": "risk",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "现场污染或丢失：未控制边界、多人无记录接触或包装不当会损害材料完整性。按机构程序保护现场、限制接触、分别包装标记并记录操作。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.risk.career-risk-cards.1",
+          "source_refs": [
+            "nij-chain-custody",
+            "nij-crime-scene-guide",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "保管链断点：缺少回收位置、时间、描述、封存或签收会使后续无法复原。每次转移都记录交出人、接收人、时间、状态和存储位置。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.risk.career-risk-cards.2",
+          "source_refs": [
+            "nij-chain-custody",
+            "nij-crime-scene-guide",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "记录冲突：编号、照片元数据或库位不一致时，不覆盖原值；保留两个来源、标记差异、暂停依赖动作并升级。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.risk.career-risk-cards.3",
+          "source_refs": [
+            "nij-chain-custody",
+            "nij-crime-scene-guide",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "权限和隐私：不得查询无关人员、导出受限数据、向无权者披露或越权作鉴定和法律结论；按机构政策与适用法律处理。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.risk.career-risk-cards.4",
+          "source_refs": [
+            "nij-chain-custody",
+            "nij-crime-scene-guide",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "人身与特殊危险：遇到生物、化学、放射、爆炸或其他危险条件，先撤离或隔离并联系相应专业机构；纸面指南不能代替现场指挥。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.risk.career-risk-cards.5",
+          "source_refs": [
+            "nij-chain-custody",
+            "nij-crime-scene-guide",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.path",
+      "id": "path",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "O*NET把该职业列为Job Zone Three，常见准备包括职业学校、相关经验或副学士层级，并需一至两年在岗和经验人员指导；真实门槛由机构与法域决定。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.path.career-path-block.1",
+          "source_refs": [
+            "onet-job-zone"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "无经验作品集只用虚构材料：证据编号表、现场照片清单、保管链时间线、差异记录和一页报告。不得使用真实案件、人物、指纹图像、内部表单或受限系统。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.path.career-path-block.2",
+          "source_refs": [
+            "nij-crime-scene-guide",
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "沿用E-01练习：先逐字段抄录两份来源，任何未提供的案件号、地点、物品内容、签名和封条状态都写‘未提供’，不能补猜。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.path.career-path-block.3",
+          "source_refs": [
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "答案必须指出两条冲突：09:12与09:21的时间差异、L-3与L-8的存储位置差异。它们都是未解决差异，不足以判断哪条记录正确或证据是否有效。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.path.career-path-block.4",
+          "source_refs": [
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "交付物包含差异表、09:12照片拍摄—09:18封存—10:05转移—10:30最终存储的时间线，以及‘保留原记录、暂停依赖步骤、交有权人员核对’的升级说明。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.path.career-path-block.5",
+          "source_refs": [
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "七天试做：第1天识别字段，第2天排时间线，第3天核编号，第4天做差异表，第5天写升级说明，第6天按检查表复核，第7天请从业者审阅；无人可审时隔日隐藏答案独立重做。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.path.career-path-block.6",
+          "source_refs": [
+            "police-records-editorial"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "教育背景、课程、认证、录用、机构授权、数据库权限、鉴定签字和出庭资格是不同状态；任何纸面练习都不授予真实操作权限。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.path.career-path-block.7",
+          "source_refs": [
+            "nij-crime-scene-guide",
+            "onet-education"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-path-block",
+          "data": {
+            "paragraphs": [
+              "能力进阶以准确、可追溯和受监督的工作为准：先稳定记录和交接，再承担更复杂采集或比较任务；最终鉴定、带教或管理责任须另核资格和授权。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.path.career-path-block.8",
+          "source_refs": [
+            "onet-job-zone"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.market-signals",
+      "id": "market-signals",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国2025—2035年父类职业数据：Detectives and Criminal Investigators就业为{{fact:us-parent-employment-2025}}；不是33-3021.02细分职业精确值。"
+            ]
+          },
+          "fact_refs": [
+            "us-parent-employment-2025"
+          ],
+          "id": "police-identification-and-records-officers.market-signals.market-signal-card.1",
+          "source_refs": [
+            "bls-detectives-projection"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国2025—2035年父类职业数据：侦探与刑事调查人员预计年均职位空缺{{fact:us-parent-openings-2025-2035}}，包含增长与替补需求，不是年均净新增。"
+            ]
+          },
+          "fact_refs": [
+            "us-parent-openings-2025-2035"
+          ],
+          "id": "police-identification-and-records-officers.market-signals.market-signal-card.2",
+          "source_refs": [
+            "bls-detectives-projection"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "美国2025—2035年父类职业数据：{{fact:us-parent-growth-2025-2035}}。这与年均7,800个空缺是不同指标，不能合并成个人录用概率。"
+            ]
+          },
+          "fact_refs": [
+            "us-parent-growth-2025-2035"
+          ],
+          "id": "police-identification-and-records-officers.market-signals.market-signal-card.3",
+          "source_refs": [
+            "bls-detectives-projection"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "该细分职业的需求还取决于地方预算、机构设置、案件结构、实验室与证物流程，父类全国数据不能替代目标岗位核验。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.market-signals.market-signal-card.4",
+          "source_refs": [
+            "bls-detectives-projection"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.market-signal-card",
+          "data": {
+            "paragraphs": [
+              "可迁移方向包括法医科学技术、证物管理、数字取证、调查支持或质量管理；转向前要补对应方法、系统、资格和责任经验。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.market-signals.market-signal-card.5",
+          "source_refs": [
+            "bls-detectives-projection"
+          ],
+          "type": "prose"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.sources",
+      "id": "sources",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.faq-block",
+          "data": {
+            "entries": [
+              {
+                "answer": "典型工作包括保护和记录现场，拍摄与测量，识别、采集、包装和标记物证，维护证据记录与报告，并按程序提交或转移。",
+                "id": "police-identification-and-records-officers.faq.1",
+                "question_key": "career.faq.police-identification-and-records-officers.daily-work",
+                "source_refs": [
+                  "onet-tasks"
+                ]
+              },
+              {
+                "answer": "该职业以犯罪或事故现场证据、指纹和保管记录为核心；临床研究协调、一般合规、环境检查、政府财产调查和验尸工作具有不同对象、法律权限与最终交付。",
+                "id": "police-identification-and-records-officers.faq.2",
+                "question_key": "career.faq.police-identification-and-records-officers.role-comparison",
+                "source_refs": [
+                  "onet-summary"
+                ]
+              },
+              {
+                "answer": "适配证据是能否持续准确记录、识别差异、按程序保全和转移材料、接受复核并在权限边界处升级，而不是人格测评结果。",
+                "id": "police-identification-and-records-officers.faq.3",
+                "question_key": "career.faq.police-identification-and-records-officers.fit",
+                "source_refs": [
+                  "onet-context"
+                ]
+              },
+              {
+                "answer": "生成式AI任务暴露只表示技术潜力；实际影响取决于技术、基础设施、技能和工作场所实践，不能直接解释为岗位替代。",
+                "id": "police-identification-and-records-officers.faq.4",
+                "question_key": "career.faq.police-identification-and-records-officers.ai-impact",
+                "source_refs": [
+                  "ilo-genai-police-records"
+                ]
+              },
+              {
+                "answer": "AI可辅助转录、字段比对和报告初稿，但不得修改原始证据记录、识别个人、作鉴定结论或代替授权审批；输出必须追回原始记录并保留人工修改。",
+                "id": "police-identification-and-records-officers.faq.5",
+                "question_key": "career.faq.police-identification-and-records-officers.human-control",
+                "source_refs": [
+                  "police-records-editorial"
+                ]
+              },
+              {
+                "answer": "国家统计局2025工资资料按行业和单位类型汇总，不能建立警察鉴定与记录官员单一职业的全国工资分布；中国精确职业工资暂无可安全使用的数据。",
+                "id": "police-identification-and-records-officers.faq.6",
+                "question_key": "career.faq.police-identification-and-records-officers.china-pay",
+                "source_refs": [
+                  "nbs-wages"
+                ]
+              },
+              {
+                "answer": "O*NET明确说明33-3021.02页面的2025工资采自父类Detectives and Criminal Investigators；中位数为每小时45.09美元、每年93,790美元。",
+                "fact_refs": [
+                  "us-parent-wage-2025"
+                ],
+                "id": "police-identification-and-records-officers.faq.7",
+                "question_key": "career.faq.police-identification-and-records-officers.us-pay",
+                "source_refs": [
+                  "bls-detectives-wage"
+                ]
+              },
+              {
+                "answer": "O*NET将该职业列为Job Zone Three，通常需要职业学校、相关在岗经验或副学士层级准备，并常需一至两年在岗及经验人员指导；这不是统一学历或执照。",
+                "id": "police-identification-and-records-officers.faq.8",
+                "question_key": "career.faq.police-identification-and-records-officers.education-path",
+                "source_refs": [
+                  "onet-job-zone"
+                ]
+              },
+              {
+                "answer": "保管链记录应覆盖回收位置、日期时间、物品描述与状态、包装、运输、储存以及每次接收保管的人；转移应签名或用安全电子方式记录。",
+                "id": "police-identification-and-records-officers.faq.9",
+                "question_key": "career.faq.police-identification-and-records-officers.risk-boundary",
+                "source_refs": [
+                  "nij-chain-custody"
+                ]
+              },
+              {
+                "answer": "父类33-3021的就业与空缺不能当作33-3021.02细分职业精确市场，也不能推导个人录用概率。",
+                "id": "police-identification-and-records-officers.faq.10",
+                "question_key": "career.faq.police-identification-and-records-officers.outlook-transition",
+                "source_refs": [
+                  "bls-detectives-projection"
+                ]
+              },
+              {
+                "answer": "该职业围绕现场证据记录、摄影、指纹分类识别、物证记录与报告展开；适合度应看程序执行、准确记录和边界控制。",
+                "id": "police-identification-and-records-officers.faq.11",
+                "question_key": "career.faq.police-identification-and-records-officers.career-worth",
+                "source_refs": [
+                  "onet-details",
+                  "onet-tasks"
+                ]
+              }
+            ]
+          },
+          "id": "police-identification-and-records-officers.sources.faq.1",
+          "source_refs": [
+            "bls-detectives-projection",
+            "bls-detectives-wage",
+            "ilo-genai-police-records",
+            "nbs-wages",
+            "nij-chain-custody",
+            "onet-context",
+            "onet-details",
+            "onet-job-zone",
+            "onet-summary",
+            "onet-tasks",
+            "police-records-editorial"
+          ],
+          "type": "faq"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "entries": [
+              "中国、美国与全球证据分别陈述；美国工资和就业明确是父类职业代理，不得冒充33-3021.02细分职业精确值。",
+              "本页用于职业决策和安全纸面试做，不授予进入现场、接触物证、查询受限系统、作鉴定或法律结论的权限。",
+              "真实案件、个人信息、指纹图像和机构内部资料不得进入练习；未知字段保持未知。"
+            ]
+          },
+          "id": "police-identification-and-records-officers.sources.boundary.1",
+          "source_refs": [
+            "bls-detectives-projection",
+            "bls-detectives-wage",
+            "ilo-genai-police-records",
+            "nbs-wages",
+            "nij-chain-custody",
+            "nij-crime-scene-guide",
+            "onet-context",
+            "onet-details",
+            "onet-education",
+            "onet-job-zone",
+            "onet-summary",
+            "onet-tasks",
+            "police-records-editorial"
+          ],
+          "type": "list"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.navigation",
+      "id": "navigation",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.navigation-links",
+          "data": {
+            "entries": [
+              {
+                "entity": "警察鉴定与记录官员",
+                "id": "police-identification-and-records-officers.navigation.1",
+                "relation": "career.section",
+                "url": "#career-content-quick-decision"
+              },
+              {
+                "entity": "警察鉴定与记录官员",
+                "id": "police-identification-and-records-officers.navigation.2",
+                "relation": "career.section",
+                "url": "#career-content-profile"
+              },
+              {
+                "entity": "警察鉴定与记录官员",
+                "id": "police-identification-and-records-officers.navigation.3",
+                "relation": "career.section",
+                "url": "#career-content-direction-comparison"
+              },
+              {
+                "entity": "警察鉴定与记录官员",
+                "id": "police-identification-and-records-officers.navigation.4",
+                "relation": "career.section",
+                "url": "#career-content-ai-impact"
+              },
+              {
+                "entity": "警察鉴定与记录官员",
+                "id": "police-identification-and-records-officers.navigation.5",
+                "relation": "career.section",
+                "url": "#career-content-china-salary"
+              },
+              {
+                "entity": "警察鉴定与记录官员",
+                "id": "police-identification-and-records-officers.navigation.6",
+                "relation": "career.section",
+                "url": "#career-content-us-salary"
+              },
+              {
+                "entity": "警察鉴定与记录官员",
+                "id": "police-identification-and-records-officers.navigation.7",
+                "relation": "career.section",
+                "url": "#career-content-fit"
+              },
+              {
+                "entity": "警察鉴定与记录官员",
+                "id": "police-identification-and-records-officers.navigation.8",
+                "relation": "career.section",
+                "url": "#career-content-risk"
+              },
+              {
+                "entity": "警察鉴定与记录官员",
+                "id": "police-identification-and-records-officers.navigation.9",
+                "relation": "career.section",
+                "url": "#career-content-path"
+              },
+              {
+                "entity": "警察鉴定与记录官员",
+                "id": "police-identification-and-records-officers.navigation.10",
+                "relation": "career.section",
+                "url": "#career-content-market-signals"
+              },
+              {
+                "entity": "警察鉴定与记录官员",
+                "id": "police-identification-and-records-officers.navigation.11",
+                "relation": "career.section",
+                "url": "#career-content-sources"
+              }
+            ]
+          },
+          "id": "police-identification-and-records-officers.navigation.links.1",
+          "type": "links"
+        }
+      ]
+    },
+    {
+      "availability": "available",
+      "content_state": "enhanced",
+      "copy_key": "career.block.source-register",
+      "id": "source-register",
+      "items": [
+        {
+          "availability": "available",
+          "copy_key": "career.item.published-sources",
+          "data": {
+            "entries": [
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持父类33-3021就业基数、增长、净增、年均空缺和典型入口。",
+                  "父类数据包含其他侦探与刑事调查人员，不能当作33-3021.02细分职业精确统计。"
+                ],
+                "evidence_type": "official employment projections",
+                "id": "bls-detectives-projection",
+                "limitation": "父类数据包含其他侦探与刑事调查人员，不能当作33-3021.02细分职业精确统计。",
+                "market": "美国",
+                "name": "Occupational projections and worker characteristics: Detectives and criminal investigators",
+                "period": "2025 base; 2025-2035 projections; accessed 2026-09-06",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持父类Detectives and Criminal Investigators的2025工资中位数。",
+                  "O*NET明确说明数据采自父类33-3021，不是33-3021.02细分职业精确工资。"
+                ],
+                "evidence_type": "official wage statistics",
+                "id": "bls-detectives-wage",
+                "limitation": "O*NET明确说明数据采自父类33-3021，不是33-3021.02细分职业精确工资。",
+                "market": "美国",
+                "name": "National Wages: Police Identification and Records Officers",
+                "period": "May 2025; accessed 2026-09-06",
+                "publisher": "U.S. Department of Labor, O*NET / Bureau of Labor Statistics",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.onetonline.org/link/localwages/33-3021.02"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持任务暴露不等于实际采用或岗位净变化。",
+                  "不提供该细分职业的替代概率、准确率或机构采用率。"
+                ],
+                "evidence_type": "official research working paper",
+                "id": "ilo-genai-police-records",
+                "limitation": "不提供该细分职业的替代概率、准确率或机构采用率。",
+                "market": "全球",
+                "name": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "period": "2025; accessed 2026-09-06",
+                "publisher": "International Labour Organization",
+                "scope": "combined_official",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "行业和岗位大类平均工资口径核查。",
+                  "未发布警察鉴定与记录官员单一职业的全国工资分布。"
+                ],
+                "evidence_type": "official wage statistics",
+                "id": "nbs-wages",
+                "limitation": "未发布警察鉴定与记录官员单一职业的全国工资分布。",
+                "market": "中国大陆",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual average wages; published 2026-05-15; accessed 2026-08-31",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持回收位置、时间、描述、状态、包装、运输、储存和每次保管转移记录。",
+                  "培训材料是通用指导，具体机构表单、证据规则和法域要求优先。"
+                ],
+                "evidence_type": "official evidence-handling guidance",
+                "id": "nij-chain-custody",
+                "limitation": "培训材料是通用指导，具体机构表单、证据规则和法域要求优先。",
+                "market": "美国",
+                "name": "Crime Scene Investigation: Chain of Custody",
+                "period": "training page current; accessed 2026-09-06",
+                "publisher": "National Institute of Justice",
+                "scope": "combined_official",
+                "url": "https://nij.ojp.gov/nij-hosted-online-training-courses/collecting-dna-evidence-at-property-crime-scenes/evidence-collection/chain-custody"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持现场保护、物证保全、采集提交、方法化处理与按机构政策和法律执行。",
+                  "指南不替代机构政策、联邦州法律或具体案件指挥。"
+                ],
+                "evidence_type": "official law-enforcement guidance",
+                "id": "nij-crime-scene-guide",
+                "limitation": "指南不替代机构政策、联邦州法律或具体案件指挥。",
+                "market": "美国",
+                "name": "Crime Scene Investigation: Guides for Law Enforcement",
+                "period": "guidance published 2017; accessed 2026-09-06",
+                "publisher": "National Institute of Justice",
+                "scope": "combined_official",
+                "url": "https://nij.ojp.gov/topics/articles/crime-scene-investigation-guides-law-enforcement"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "准确性、协作、设备和风险情境。",
+                  "美国工作情境不替代中国安全法规。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-context",
+                "limitation": "美国工作情境不替代中国安全法规。",
+                "market": "美国",
+                "name": "Police Identification And Records Officers work context",
+                "period": "O*NET 2026 occupational profile; accessed 2026-08-31",
+                "publisher": "U.S. Department of Labor, O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/33-3021.02#WorkContext"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "职业身份、官方代码和职责范围。",
+                  "美国职业定义不建立中国准入或工资口径。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-details",
+                "limitation": "美国职业定义不建立中国准入或工资口径。",
+                "market": "美国",
+                "name": "Police Identification And Records Officers 33-3021.02",
+                "period": "O*NET 2026 occupational profile; accessed 2026-08-31",
+                "publisher": "U.S. Department of Labor, O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/33-3021.02"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "受访者教育背景信息。",
+                  "教育分布不等于每个雇主的硬性要求。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-education",
+                "limitation": "教育分布不等于每个雇主的硬性要求。",
+                "market": "美国",
+                "name": "Police Identification And Records Officers education",
+                "period": "O*NET 2026 occupational profile; accessed 2026-08-31",
+                "publisher": "U.S. Department of Labor, O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/33-3021.02#Education"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "职业准备、经验和培训层级。",
+                  "常见准备路径不是统一学历或执照门槛。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-job-zone",
+                "limitation": "常见准备路径不是统一学历或执照门槛。",
+                "market": "美国",
+                "name": "Police Identification And Records Officers job zone",
+                "period": "O*NET 2026 occupational profile; accessed 2026-08-31",
+                "publisher": "U.S. Department of Labor, O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/33-3021.02#JobZone"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "职业摘要与相关职业。",
+                  "相邻职业仍需按各自责任和资格核对。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-summary",
+                "limitation": "相邻职业仍需按各自责任和资格核对。",
+                "market": "美国",
+                "name": "Police Identification And Records Officers summary",
+                "period": "O*NET 2026 occupational profile; accessed 2026-08-31",
+                "publisher": "U.S. Department of Labor, O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/33-3021.02"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "任务、对象、交付物和工作闭环。",
+                  "任务样本不代表每个岗位执行全部任务。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-tasks",
+                "limitation": "任务样本不代表每个岗位执行全部任务。",
+                "market": "美国",
+                "name": "Police Identification And Records Officers tasks",
+                "period": "O*NET 2026 occupational profile; accessed 2026-08-31",
+                "publisher": "U.S. Department of Labor, O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/33-3021.02#Tasks"
+              },
+              {
+                "accessed_at": "2026-09-06",
+                "details": [
+                  "支持完全虚构的证据日志核对、差异表、七日试做和AI控制建议。",
+                  "不是案件事实、执法授权、鉴定结论、证据可采性或机构程序。"
+                ],
+                "evidence_type": "editorial exercise and decision framework",
+                "id": "police-records-editorial",
+                "limitation": "不是案件事实、执法授权、鉴定结论、证据可采性或机构程序。",
+                "market": "编辑设计",
+                "name": "警察鉴定与记录官员纸面体验设计",
+                "period": "2026-09-06",
+                "publisher": "FermatMind 编辑设计",
+                "scope": "editorial_synthesis",
+                "url": null
+              }
+            ]
+          },
+          "id": "police-identification-and-records-officers.source-register.published.1",
+          "type": "sources"
+        }
+      ]
+    }
+  ],
+  "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "fact_register": {
+    "facts": [
+      {
+        "derivation": null,
+        "display_value": "33-3021.02",
+        "fact_id": "occupation-identity",
+        "market": "美国",
+        "measure": "O*NET-SOC职业代码",
+        "occupation_scope": "美国精确职业数据：Police Identification and Records Officers（O*NET 33-3021.02）",
+        "period": "O*NET 2026 occupational profile; accessed 2026-08-31",
+        "source_refs": [
+          "onet-details"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "$45.09/小时；$93,790/年",
+        "fact_id": "us-parent-wage-2025",
+        "market": "美国",
+        "measure": "父类职业工资中位数",
+        "occupation_scope": "美国父类职业数据：Detectives and Criminal Investigators（SOC 33-3021），非33-3021.02细分职业精确值",
+        "period": "May 2025; accessed 2026-09-06",
+        "source_refs": [
+          "bls-detectives-wage"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2025年120,500人；2035年120,700人；净增约200人；增长0.2%",
+        "fact_id": "us-parent-employment-2025",
+        "market": "美国",
+        "measure": "父类就业基数与预测",
+        "occupation_scope": "美国父类职业数据：Detectives and Criminal Investigators（SOC 33-3021），非33-3021.02细分职业精确值",
+        "period": "2025 base; 2025-2035 projections; accessed 2026-09-06",
+        "source_refs": [
+          "bls-detectives-projection"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "约7,800个/年",
+        "fact_id": "us-parent-openings-2025-2035",
+        "market": "美国",
+        "measure": "父类年均职位空缺",
+        "occupation_scope": "美国父类职业数据：Detectives and Criminal Investigators（SOC 33-3021），非33-3021.02细分职业精确值",
+        "period": "2025 base; 2025-2035 projections; accessed 2026-09-06",
+        "source_refs": [
+          "bls-detectives-projection"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "增长0.2%；净增约200人",
+        "fact_id": "us-parent-growth-2025-2035",
+        "market": "美国",
+        "measure": "父类就业增长率与净变化",
+        "occupation_scope": "美国父类职业数据：Detectives and Criminal Investigators（SOC 33-3021），非33-3021.02细分职业精确值",
+        "period": "2025 base; 2025-2035 projections; accessed 2026-09-06",
+        "source_refs": [
+          "bls-detectives-projection"
+        ]
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "68cabf5c79c683307ab3557e5e08aa05d370cf4e881e5a5257993a4a97e6a977",
+  "source_content_sha256": "48517e69bea5ac44899ab017edf96a6f1311a7fe3429d7d8e758de6b0781a696",
   "subject": {
     "canonical_slug": "police-identification-and-records-officers",
     "name": "警察鉴定与记录官员",
-    "summary": null
+    "summary": "警察鉴定与记录官员记录、拍摄、采集和保全犯罪或事故现场证据，维护指纹与物证记录；核心要求是程序一致、保管链可追溯、权限清楚并避免污染或擅自结论。"
   }
 }
