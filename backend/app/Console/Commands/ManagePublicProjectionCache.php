@@ -66,8 +66,8 @@ final class ManagePublicProjectionCache extends Command
     private function configuration(): array
     {
         PublicProjectionMigration::headroom();
-        $password = config('database.redis.public_projection.password');
-        if (! is_string($password) || strlen($password) < 16 || preg_match('/[\r\n\x00]/', $password)) {
+        $password = config('database.redis.public_projection.password') ?? '';
+        if (! is_string($password) || ($password === '' && ! app()->environment(['staging', 'testing'])) || preg_match('/[\r\n\x00]/', $password)) {
             throw new \RuntimeException('Existing Redis credential unavailable.');
         }
         $text = "bind 127.0.0.1\nprotected-mode yes\nport 6380\ndaemonize no\nsupervised no\n"

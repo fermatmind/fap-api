@@ -223,5 +223,11 @@ final class PublicProjectionMigrationTest extends TestCase
         $invalid = new Process($command);
         $invalid->run();
         $this->assertFalse($invalid->isSuccessful());
+        config(['database.redis.public_projection.password' => null]);
+        $this->artisan('cache:public-projection config')->assertSuccessful();
+        $production = new Process($command);
+        $production->run();
+        $this->assertFalse($production->isSuccessful());
+        (new Process([...$command, '--staging']))->mustRun();
     }
 }

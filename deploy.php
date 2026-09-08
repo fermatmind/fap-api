@@ -3129,7 +3129,7 @@ task('cache:prepare-public-projection', function () {
     });
     $script = deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/install_public_projection_redis.py');
     $candidate = deployPlaceholderPathArg('{{deploy_path}}', 'shared/backend/storage/app/private/public-projection-redis.conf');
-    run('sudo -n python3 '.$script.' --candidate '.$candidate, ['timeout' => 120]);
+    run('sudo -n python3 '.$script.' --candidate '.$candidate.(currentHost()->getAlias() === 'staging' ? ' --staging' : ''), ['timeout' => 120]);
     within('{{release_path}}/backend', function (): void {
         run('{{bin/php}} artisan cache:public-projection activate --no-interaction --no-ansi', ['timeout' => 240]);
     });

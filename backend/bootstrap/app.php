@@ -107,7 +107,7 @@ $app = Application::configure(basePath: dirname(__DIR__))
         $schedule->command('norms:big5:monthly-drift-check')->monthlyOn(1, '04:50')->withoutOverlapping();
         $schedule->command('norms:eq60:drift-check --from=active --to=candidate')->monthlyOn(1, '05:00')->withoutOverlapping();
         $schedule->command('career:prune-public-cache-versions --apply --pressure')->everyFiveMinutes()->withoutOverlapping(5);
-        $schedule->command('seo:refresh-llms-full-cache')->everyThirtyMinutes()->withoutOverlapping(10);
+        $schedule->command('seo:refresh-llms-full-cache')->everyThirtyMinutes()->withoutOverlapping(10)->environments('production');
         $schedule->command('cache:public-projection retire')->everyFiveMinutes()->withoutOverlapping(5);
         $schedule->command('seo:warm-sitemap-source-cache --json')->everyFiveMinutes()->withoutOverlapping(5);
         if ((bool) config('seo_intel.crawler_log_aggregate_storage.scheduler_enabled', false)) {
