@@ -41,7 +41,9 @@ final class WarmSitemapSourceCacheCommand extends Command
 
             $lock = Cache::lock(SitemapSourceController::CACHE_KEY_LOCK, SitemapSourceController::LOCK_TTL_SECONDS);
             if (! $lock->get()) {
-                return $this->emitResult('locked', 0, round(microtime(true) - $start, 3));
+                $this->emitResult('locked', 0, round(microtime(true) - $start, 3));
+
+                return self::FAILURE;
             }
 
             try {
@@ -63,11 +65,10 @@ final class WarmSitemapSourceCacheCommand extends Command
             }
         } catch (\Throwable $throwable) {
             $elapsed = round(microtime(true) - $start, 3);
-            $controller = app(SitemapSourceController::class);
-            $payload = $controller->fallbackPayload();
-            $controller->storeCache($payload);
+            // A failed rebuild must never replace authority with a static fallback.
+            $this->emitResult('failed', 0, $elapsed, (str_contains($throwable->getMessage(), 'OOM') ? 'REDIS_OOM' : get_class($throwable)));
 
-            return $this->emitResult('fallback_warmed', (int) ($payload['count'] ?? 0), $elapsed, $throwable->getMessage());
+            return self::FAILURE;
         }
     }
 
@@ -89,6 +90,9 @@ final class WarmSitemapSourceCacheCommand extends Command
             $this->fingerprintReceiptMatches($cachedFingerprint, $fingerprint)
             && $this->cachePayloadIsReadable($cachedPayload)
         ) {
+            // Renew freshness only after the authority fingerprint, including removals, matches.
+            $controller->storeCache($cachedPayload);
+
             return $this->emitResult(
                 'verified_unchanged',
                 (int) ($cachedPayload['count'] ?? 0),

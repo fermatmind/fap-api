@@ -21,7 +21,7 @@ final class SitemapWarmSchedulerBootstrapTest extends TestCase
 
         $this->assertStringContainsString('seo:warm-sitemap-source-cache', $command);
         $this->assertStringContainsString('--json', $command);
-        $this->assertSame('*/10 * * * *', $event['expression']);
+        $this->assertSame('*/5 * * * *', $event['expression']);
     }
 
     /**

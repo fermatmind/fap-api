@@ -132,7 +132,31 @@ class SitemapSourceController extends Controller
      */
     public function storeCache(array $payload): void
     {
-        Cache::put(self::CACHE_KEY_FRESH, $payload, self::FRESH_TTL_SECONDS);
+        if (($payload['ok'] ?? null) !== true || ($payload['source'] ?? null) !== 'backend_sitemap_generator'
+            || ! is_array($payload['items'] ?? null) || count($payload['items']) < 1
+            || ($payload['count'] ?? null) !== count($payload['items'])) {
+            throw new \RuntimeException('Sitemap candidate authority or completeness is invalid.');
+        }
+        $seen = [];
+        foreach ($payload['items'] as $item) {
+            $loc = $item['loc'] ?? '';
+            $parts = is_string($loc) ? parse_url($loc) : false;
+            if (! is_array($parts) || ($parts['scheme'] ?? '') !== 'https'
+                || ($parts['host'] ?? '') !== parse_url($this->fallbackBaseUrl(), PHP_URL_HOST)
+                || isset($parts['query']) || isset($parts['fragment']) || isset($parts['user'])
+                || $this->isPrivateFallbackPath($parts['path'] ?? '/')
+                || ! is_string($item['lastmod'] ?? null) || strtotime($item['lastmod']) === false
+                || isset($seen[$loc])) {
+                throw new \RuntimeException('Sitemap candidate contains an invalid or duplicate public URL.');
+            }
+            $seen[$loc] = true;
+        }
+        if (! Cache::put(self::CACHE_KEY_FRESH, $payload, self::FRESH_TTL_SECONDS)) {
+            throw new \RuntimeException('Sitemap authority cache write failed.');
+        }
+        if (Cache::get(self::CACHE_KEY_FRESH) !== $payload) {
+            throw new \RuntimeException('Sitemap authority cache readback failed.');
+        }
         Cache::forget(self::CACHE_KEY_STALE);
     }
 

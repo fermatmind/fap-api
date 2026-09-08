@@ -5,7 +5,7 @@ php_bin="${SITEMAP_SOURCE_WARM_PHP_BIN:-}"
 artisan="${SITEMAP_SOURCE_WARM_ARTISAN:-}"
 timeout_seconds="${SITEMAP_SOURCE_WARM_TIMEOUT_SECONDS:-180}"
 kill_after_seconds="${SITEMAP_SOURCE_WARM_KILL_AFTER_SECONDS:-30}"
-strict="${SITEMAP_SOURCE_WARM_STRICT:-false}"
+strict="${SITEMAP_SOURCE_WARM_STRICT:-true}"
 
 fail_config() {
   printf '%s\n' "sitemap_source_cache_warm_status=configuration_error" >&2
@@ -41,7 +41,7 @@ command_output="$(
     --refresh-if-changed \
     --json \
     --no-interaction \
-    --no-ansi 2>/dev/null
+    --no-ansi
 )"
 command_status=$?
 set -e
@@ -62,8 +62,7 @@ if [ "$command_status" -eq 0 ]; then
       && [ "$result_count" -ge 1 ] \
       && {
         [ "$result_status" = "verified_unchanged" ] \
-          || [ "$result_status" = "rebuilt" ] \
-          || [ "$result_status" = "fallback_warmed" ];
+          || [ "$result_status" = "rebuilt" ];
       }
     then
       printf 'sitemap_source_cache_warm_status=%s\n' "$result_status"
@@ -84,14 +83,11 @@ elif [ "$command_status" -eq 124 ] || [ "$command_status" -eq 137 ]; then
   reason="timeout"
 else
   reason="command_failed"
+  printf '%s\n' "$command_output" >&2
 fi
 
 printf '%s\n' "sitemap_source_cache_warm_status=degraded"
 printf 'sitemap_source_cache_warm_reason=%s\n' "$reason"
 printf 'sitemap_source_cache_warm_strict=%s\n' "$strict"
 
-if [ "$strict" = "true" ]; then
-  exit 1
-fi
-
-exit 0
+exit 1

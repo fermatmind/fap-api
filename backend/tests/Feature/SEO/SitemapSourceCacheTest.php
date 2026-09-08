@@ -238,45 +238,20 @@ class SitemapSourceCacheTest extends TestCase
         $this->runRefreshIfChanged('rebuilt');
     }
 
-    public function test_warm_command_replaces_stale_dynamic_cache_with_safe_fallback_when_generator_fails(): void
+    public function test_failed_warm_does_not_publish_fallback_or_overwrite_authority(): void
     {
-        config(['app.frontend_url' => 'https://fermatmind.com']);
-        config(['app.url' => 'https://fermatmind.com']);
-        Cache::put('seo:sitemap-source:v1:stale', [
-            'ok' => true,
-            'source' => 'backend_sitemap_generator',
-            'count' => 1,
-            'items' => [[
-                'loc' => 'https://fermatmind.com/en/career/jobs/depublished-role',
-                'lastmod' => '2026-01-01T00:00:00+00:00',
-            ]],
-        ], 86400);
-
+        $original = ['ok' => true, 'source' => 'backend_sitemap_generator', 'count' => 1,
+            'items' => [['loc' => 'https://fermatmind.com/zh/tests', 'lastmod' => '2026-01-01T00:00:00Z']]];
+        Cache::put('seo:sitemap-source:v1:fresh', $original, 600);
         $this->mock(SitemapGenerator::class, function ($mock): void {
-            $mock->shouldReceive('generateSitemapUrls')
-                ->once()
-                ->andThrow(new \RuntimeException('simulated sitemap generator failure'));
+            $mock->shouldReceive('generateSitemapUrls')->twice()->andThrow(new \RuntimeException('OOM simulated'));
         });
-
-        $this->artisan('seo:warm-sitemap-source-cache --json')
-            ->assertSuccessful();
-
-        $fresh = Cache::get('seo:sitemap-source:v1:fresh');
-        $stale = Cache::get('seo:sitemap-source:v1:stale');
-
-        $this->assertIsArray($fresh);
-        $this->assertSame('backend_sitemap_generator_fallback', $fresh['source']);
-        $this->assertGreaterThan(10, $fresh['count']);
-        $this->assertNull($stale);
-        $this->assertNotContains(
-            'https://fermatmind.com/en/career/jobs/depublished-role',
-            collect($fresh['items'])->pluck('loc')->all(),
-        );
-
-        $response = $this->getJson('/api/v0.5/seo/sitemap-source');
-        $response->assertOk()
-            ->assertHeader('X-Fermat-Cache', 'hit')
-            ->assertJsonPath('source', 'backend_sitemap_generator_fallback');
+        $this->artisan('seo:warm-sitemap-source-cache --json')->assertFailed();
+        $this->assertSame($original, Cache::get('seo:sitemap-source:v1:fresh'));
+        Cache::forget('seo:sitemap-source:v1:fresh');
+        $this->artisan('seo:warm-sitemap-source-cache --json')->assertFailed();
+        $this->assertNull(Cache::get('seo:sitemap-source:v1:fresh'));
+        $this->getJson('/api/v0.5/seo/sitemap-source')->assertHeader('X-Fermat-Cache', 'fallback');
     }
 
     public function test_response_shape_remains_compatible(): void

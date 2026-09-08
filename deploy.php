@@ -3104,6 +3104,12 @@ task('career:public-authority-cache-rebuilt', function () {
     writeln('<info>Career public authority cache rebuilt for a changed fingerprint.</info>');
 });
 
+task('career:prune-public-cache-versions', function () {
+    within('{{release_path}}/backend', function (): void {
+        run('timeout --kill-after=30s 900 {{bin/php}} artisan career:prune-public-cache-versions --apply --no-interaction --no-ansi', ['timeout' => 960]);
+    });
+});
+
 task('career:warm-public-authority-cache', function () {
     if (deployBooleanOption('a08_gate_only', false)) {
         writeln('<info>A08 gate-only delivery: no cache warm.</info>');
@@ -3275,7 +3281,7 @@ task('seo:warm-sitemap-source-cache', function () {
     }
     $timeoutSeconds = (string) (getenv('DEPLOY_SEO_SITEMAP_SOURCE_WARM_TIMEOUT') ?: '180');
     $killAfterSeconds = (string) (getenv('DEPLOY_SEO_SITEMAP_SOURCE_WARM_KILL_AFTER') ?: '30');
-    $strict = (string) (getenv('DEPLOY_SEO_SITEMAP_SOURCE_WARM_STRICT') ?: 'false');
+    $strict = (string) (getenv('DEPLOY_SEO_SITEMAP_SOURCE_WARM_STRICT') ?: 'true');
 
     $canSudoWwwData = deployCanSudoWwwData();
     $sudoPrefix = $canSudoWwwData
@@ -4955,7 +4961,8 @@ after('big5:publish-private-result-authority', 'riasec:publish-private-result-au
 after('riasec:publish-private-result-authority', 'enneagram:publish-private-result-authority');
 after('enneagram:publish-private-result-authority', 'eq60:publish-private-result-authority');
 after('eq60:publish-private-result-authority', 'guard:career-runtime-projection-authority');
-after('guard:career-runtime-projection-authority', 'career:repair-published-detail-cache-coverage');
+after('guard:career-runtime-projection-authority', 'career:prune-public-cache-versions');
+after('career:prune-public-cache-versions', 'career:repair-published-detail-cache-coverage');
 after('career:repair-published-detail-cache-coverage', 'guard:career-detail-cache-coverage');
 after('guard:career-detail-cache-coverage', 'career:warm-public-authority-cache');
 after('career:warm-public-authority-cache', 'career:rebuild-directory-after-detail-repair');

@@ -2048,9 +2048,19 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     /** @return array{exists: bool, value: mixed} */
     private function cacheValueSnapshot(string $key): array
     {
+        $value = Cache::get($key);
+        // Rollback snapshots can outlive the active pointer. Keep their immutable
+        // projections pinned for the entire retention window before switching.
+        if (is_string($value) && preg_match('/:(?:active|lkg)$/D', $key)) {
+            $base = preg_replace('/:(?:active|lkg)$/D', '', $key);
+            if (! Cache::put($base.':pins:'.$value, true, CareerCacheVersionRetention::RETENTION_SECONDS)) {
+                throw new \RuntimeException('Career rollback retention pin could not be stored.');
+            }
+        }
+
         return [
-            'exists' => Cache::has($key),
-            'value' => Cache::get($key),
+            'exists' => $value !== null,
+            'value' => $value,
         ];
     }
 
