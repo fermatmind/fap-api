@@ -32,6 +32,34 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
         Cache::flush();
     }
 
+    public function test_current_aliases_resolve_detail_and_search_but_are_not_directory_members(): void
+    {
+        $target = 'librarians';
+        $alias = 'librarians-and-media-collections-specialists';
+        $this->createDirectoryOccupation($target, 'Librarians', '图书馆员', 'education', 'Education');
+        $this->createDirectoryOccupation($alias, 'Librarians and Media Collections Specialists', '图书管理员及媒体资料专员', 'education', 'Education');
+        $this->publishRuntimeProjection([$target, $alias]);
+        $this->warmDirectoryAuthority();
+        foreach (['en', 'zh-CN'] as $locale) {
+            $this->getJson('/api/v0.5/career/jobs/'.$alias.'?locale='.$locale)
+                ->assertOk()->assertJsonPath('identity.canonical_slug', $target);
+            $this->getJson('/api/v0.5/career/directory?locale='.$locale)
+                ->assertOk()->assertJsonPath('pagination.total', 1)
+                ->assertJsonPath('items.0.slug', $target);
+        }
+        $this->getJson('/api/v0.5/career/directory?locale=en&q='.urlencode('图书管理员及媒体资料专员'))
+            ->assertOk()->assertJsonPath('pagination.total', 1)
+            ->assertJsonPath('items.0.slug', $target);
+    }
+
+    public function test_alias_never_serves_its_placeholder_when_target_is_not_published(): void
+    {
+        $alias = 'librarians-and-media-collections-specialists';
+        $this->createDirectoryOccupation($alias, 'Old librarian', '旧图书馆员', 'education', 'Education');
+        $this->publishRuntimeProjection([$alias]);
+        $this->getJson('/api/v0.5/career/jobs/'.$alias.'?locale=zh-CN')->assertNotFound();
+    }
+
     public function test_it_returns_paginated_lightweight_directory_authority(): void
     {
         $this->createDirectoryOccupation('accountants-and-auditors', 'Accountants and Auditors', '会计师与审计师', 'business-finance', 'Business and Finance');

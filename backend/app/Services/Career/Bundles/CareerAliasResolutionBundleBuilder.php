@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\Display\CareerCurrentIdentity;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\IndexStateValue;
 use App\Domain\Career\Publish\FirstWavePublishGate;
@@ -59,6 +60,8 @@ final class CareerAliasResolutionBundleBuilder
 
     public function build(string $query, ?string $locale = null): CareerAliasResolutionBundle
     {
+        $originalQuery = trim($query);
+        $query = app(CareerCurrentIdentity::class)->canonicalQuery($query);
         $rawQuery = trim($query);
         $normalizedQuery = $this->normalizeText($rawQuery) ?? '';
         $normalizedLocale = $this->normalizeLocale($locale);
@@ -77,7 +80,7 @@ final class CareerAliasResolutionBundleBuilder
 
         return new CareerAliasResolutionBundle(
             query: [
-                'raw' => $rawQuery,
+                'raw' => $originalQuery,
                 'normalized' => $normalizedQuery,
                 'locale' => $normalizedLocale,
             ],
@@ -250,7 +253,7 @@ final class CareerAliasResolutionBundleBuilder
             }
 
             $occupation = $snapshot->occupation;
-            if (! $occupation instanceof Occupation) {
+            if (! $occupation instanceof Occupation || app(CareerCurrentIdentity::class)->isAlias((string) $occupation->canonical_slug)) {
                 continue;
             }
 
@@ -330,7 +333,7 @@ final class CareerAliasResolutionBundleBuilder
             }
 
             $occupation = $alias->occupation;
-            if (! $occupation instanceof Occupation) {
+            if (! $occupation instanceof Occupation || app(CareerCurrentIdentity::class)->isAlias((string) $occupation->canonical_slug)) {
                 continue;
             }
 

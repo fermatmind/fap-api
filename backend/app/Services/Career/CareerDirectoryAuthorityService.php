@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Career;
 
+use App\Domain\Career\Display\CareerCurrentIdentity;
+
 final class CareerDirectoryAuthorityService
 {
     public const AUTHORITY_VERSION = 'career.directory_authority.v1';
@@ -112,7 +114,7 @@ final class CareerDirectoryAuthorityService
      */
     public static function excludedSlugs(): array
     {
-        return self::EXCLUDED_SLUGS;
+        return array_values(array_unique([...self::EXCLUDED_SLUGS, ...array_keys(app(CareerCurrentIdentity::class)->aliases())]));
     }
 
     /**
@@ -158,7 +160,9 @@ final class CareerDirectoryAuthorityService
                 $item['title_zh'] ?? '',
             ]));
 
-        return str_contains($haystack, strtolower($query));
+        $haystack .= ' '.implode(' ', app(CareerCurrentIdentity::class)->searchTerms((string) ($item['slug'] ?? '')));
+
+        return str_contains(mb_strtolower($haystack), mb_strtolower($query));
     }
 
     /**
@@ -183,6 +187,7 @@ final class CareerDirectoryAuthorityService
         return array_values(array_filter(
             $items,
             static fn (mixed $item): bool => is_array($item)
+                && ! app(CareerCurrentIdentity::class)->isAlias((string) ($item['slug'] ?? ''))
                 && ($item['indexable'] ?? false) === true
                 && ($item['detail_ready'] ?? false) === true,
         ));

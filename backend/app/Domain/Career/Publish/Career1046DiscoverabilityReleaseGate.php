@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Career\Publish;
 
+use App\Domain\Career\Display\CareerCurrentIdentity;
 use RuntimeException;
 use Throwable;
 
@@ -38,6 +39,9 @@ final class Career1046DiscoverabilityReleaseGate
     /** @return bool Whether this exact locale row is allowed into sitemap and llms. */
     public function allows(string $slug, string $locale): bool
     {
+        if (app(CareerCurrentIdentity::class)->isAlias($slug)) {
+            return false;
+        }
         $snapshot = $this->snapshot();
         $normalizedSlug = strtolower(trim($slug));
         if (isset($snapshot['target']['*'])) {
@@ -52,7 +56,7 @@ final class Career1046DiscoverabilityReleaseGate
 
     public function cacheIdentity(): string
     {
-        return $this->snapshot()['identity'];
+        return hash('sha256', $this->snapshot()['identity'].'|'.json_encode(app(CareerCurrentIdentity::class)->aliases(), JSON_THROW_ON_ERROR));
     }
 
     public function validationCount(): int

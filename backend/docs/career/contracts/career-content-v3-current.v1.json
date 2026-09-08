@@ -13,6 +13,12 @@
     "manifest": "manifest.json",
     "path_template": "careers/{canonical_slug}/{locale}.json"
   },
+  "identity_aliases": {
+    "authority": "manifest.json#identity_aliases",
+    "storage_identity": "Retain original slug, directory and two empty legacy files",
+    "public_identity": "Resolve to one existing non-alias target; exclude aliases from public inventories",
+    "compatibility": "Missing mapping means no aliases; physical counts remain 1046 and 2092"
+  },
   "fail_closed": [
     "invalid_root_manifest", "missing_or_undeclared_file", "duplicate_slug_locale",
     "unknown_or_noncanonical_slug", "path_traversal_or_symlink", "invalid_json_or_contract",

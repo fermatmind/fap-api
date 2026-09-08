@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SEO;
 
+use App\Domain\Career\Display\CareerCurrentIdentity;
 use App\Domain\Career\Publish\Career1046DiscoverabilityReleaseGate;
 use App\Domain\Career\Publish\CareerGenerationCanonicalJson;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
@@ -72,11 +73,19 @@ final class Career1046DiscoverabilityReleaseCacheTransitionTest extends TestCase
             self::assertStringContainsString($targetZh, $body, $surface);
             self::assertNotSame($held[$surface], $body, $surface);
         }
-        self::assertSame(2092, $this->targetCareerUrlCount($released['sitemap'], $fixture['slugs']));
-        self::assertSame(2092, $this->targetCareerUrlCount($released['llms'], $fixture['slugs']));
-        self::assertSame(2092, $this->targetCareerUrlCount($released['llms-full'], $fixture['slugs']));
-        self::assertSame(1046, count($this->targetSlugsInBody($released['llms'], $fixture['slugs'])));
-        self::assertSame(1046, count($this->targetSlugsInBody($released['llms-full'], $fixture['slugs'])));
+        $publicCount = 1046 - count(app(CareerCurrentIdentity::class)->aliases());
+        foreach (app(CareerCurrentIdentity::class)->aliases() as $alias => $formal) {
+            foreach ($released as $surface => $body) {
+                $found = $this->targetSlugsInBody($body, $fixture['slugs']);
+                self::assertFalse(in_array($alias, $found, true), $surface.': alias excluded');
+                self::assertTrue(in_array($formal, $found, true), $surface.': target retained');
+            }
+        }
+        self::assertSame($publicCount * 2, $this->targetCareerUrlCount($released['sitemap'], $fixture['slugs']));
+        self::assertSame($publicCount * 2, $this->targetCareerUrlCount($released['llms'], $fixture['slugs']));
+        self::assertSame($publicCount * 2, $this->targetCareerUrlCount($released['llms-full'], $fixture['slugs']));
+        self::assertSame($publicCount, count($this->targetSlugsInBody($released['llms'], $fixture['slugs'])));
+        self::assertSame($publicCount, count($this->targetSlugsInBody($released['llms-full'], $fixture['slugs'])));
 
         app()->forgetInstance(Career1046DiscoverabilityReleaseGate::class);
         unlink($fixture['root'].'/active-generation.json');

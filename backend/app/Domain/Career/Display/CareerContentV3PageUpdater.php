@@ -16,7 +16,7 @@ final class CareerContentV3PageUpdater
     ) {}
 
     /** @return array<string,mixed> */
-    public function update(string $backendRoot, string $slug, string $locale, bool $write): array
+    public function update(string $backendRoot, string $slug, string $locale, bool $write, ?array $identityAliases = null): array
     {
         $slug = strtolower(trim($slug));
         $locale = $this->locale($locale);
@@ -28,6 +28,14 @@ final class CareerContentV3PageUpdater
         $intentPath = rtrim($backendRoot, '/').'/'.CareerCurrentAuthorityReleaseIntent::RELATIVE_PATH;
         $manifest = $this->read($manifestPath, 'CURRENT_CONTENT_V3_MANIFEST_INVALID');
         $intent = $this->read($intentPath, 'CURRENT_RELEASE_INTENT_INVALID');
+        if ($identityAliases !== null) {
+            ksort($identityAliases, SORT_STRING);
+            if ($identityAliases === []) {
+                unset($manifest['identity_aliases']);
+            } else {
+                $manifest['identity_aliases'] = $identityAliases;
+            }
+        }
         $targetIndex = null;
         foreach ($manifest['files'] ?? [] as $index => $entry) {
             if (is_array($entry) && ($entry['canonical_slug'] ?? null) === $slug && ($entry['locale'] ?? null) === $locale) {
@@ -65,7 +73,7 @@ final class CareerContentV3PageUpdater
         $manifest['coverage']['legacy_locale_pages'] = $sourceSummary['legacy'];
         $projection = array_intersect_key($manifest, array_flip([
             'authority_path', 'compiler_version', 'contract_version', 'coverage', 'files', 'locales',
-            'schema_version', 'set_hashes', 'source_registry_sha256',
+            'schema_version', 'set_hashes', 'source_registry_sha256', 'identity_aliases',
         ]));
         $manifest['aggregate_sha256'] = CareerCurrentAuthorityPackage::hashValue($projection);
         $manifestBytes = CareerCurrentAuthorityPackage::encodePrettyCanonical($manifest);
@@ -78,6 +86,8 @@ final class CareerContentV3PageUpdater
         $intent['locale_page_count'] = $manifest['coverage']['locale_pages'];
         $intent['file_count'] = $manifest['coverage']['files'];
         $intentBytes = CareerCurrentAuthorityPackage::encodePrettyCanonical($intent);
+
+        $this->package->validateIdentityAliases($manifest, $currentRoot);
 
         $changed = ! hash_equals(hash('sha256', (string) file_get_contents($pagePath)), hash('sha256', $pageBytes))
             || ! hash_equals(hash('sha256', (string) file_get_contents($manifestPath)), hash('sha256', $manifestBytes))

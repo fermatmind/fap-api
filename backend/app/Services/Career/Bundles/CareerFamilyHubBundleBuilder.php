@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\Display\CareerCurrentIdentity;
 use App\Domain\Career\IndexStateValue;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Domain\Career\Publish\FirstWaveReadinessSummaryService;
@@ -198,7 +199,7 @@ final class CareerFamilyHubBundleBuilder
             ->filter(static fn (mixed $snapshot): bool => $snapshot instanceof RecommendationSnapshot)
             ->map(function (RecommendationSnapshot $snapshot) use ($readinessBySlug): ?array {
                 $occupation = $snapshot->occupation;
-                if (! $occupation instanceof Occupation) {
+                if (! $occupation instanceof Occupation || app(CareerCurrentIdentity::class)->isAlias((string) $occupation->canonical_slug)) {
                     return null;
                 }
 

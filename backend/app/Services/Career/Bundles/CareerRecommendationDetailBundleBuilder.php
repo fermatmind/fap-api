@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\Display\CareerCurrentIdentity;
 use App\Domain\Career\Feedback\CareerFeedbackTimelineAuthorityService;
 use App\Domain\Career\IndexStateValue;
 use App\Domain\Career\Publish\CareerLifecycleOperationalSummaryService;
@@ -246,7 +247,8 @@ final class CareerRecommendationDetailBundleBuilder
                     return null;
                 }
 
-                if (! $this->isPublicMatchedJobSnapshot($snapshot)) {
+                if (app(CareerCurrentIdentity::class)->isAlias((string) $occupation->canonical_slug)
+                    || ! $this->isPublicMatchedJobSnapshot($snapshot)) {
                     return null;
                 }
 

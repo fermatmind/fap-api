@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\API\V0_5\SEO;
 
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
+use App\Domain\Career\Display\CareerCurrentIdentity;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionLookup;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Http\Controllers\Controller;
@@ -206,7 +207,7 @@ class SitemapSourceController extends Controller
     private function isRuntimePublishedCareerJobDetailUrl(string $loc, CareerRuntimePublishProjectionLookup $projection): bool
     {
         $route = $this->careerJobDetailRouteParts($loc);
-        if ($route === null) {
+        if ($route === null || app(CareerCurrentIdentity::class)->isAlias($route['slug'])) {
             return false;
         }
 

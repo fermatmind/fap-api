@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\Display\CareerCurrentIdentity;
 use App\Domain\Career\IndexStateValue;
 use App\Domain\Career\Transition\TransitionPathType;
 use App\DTO\Career\CareerTransitionPreviewBundle;
@@ -86,7 +87,8 @@ final class CareerTransitionPreviewBundleBuilder
         $snapshot = $path->recommendationSnapshot;
         $targetOccupation = $path->toOccupation;
 
-        if (! $snapshot instanceof RecommendationSnapshot || $targetOccupation === null) {
+        if (! $snapshot instanceof RecommendationSnapshot || $targetOccupation === null
+            || app(CareerCurrentIdentity::class)->isAlias((string) $targetOccupation->canonical_slug)) {
             return null;
         }
 

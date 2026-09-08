@@ -3,6 +3,11 @@
   "$id": "career-content-v3-current-manifest.v1.schema.json",
   "additionalProperties": false,
   "properties": {
+    "identity_aliases": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+      "additionalProperties": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+    },
     "aggregate_sha256": { "$ref": "#/$defs/hash" },
     "authority_path": { "const": "backend/content_assets/career/current" },
     "compiler_version": { "const": "career.content_v3.per_page.compiler.v1" },

@@ -1,0 +1,73 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Unit\Domain\Career\Display;
+
+use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
+use App\Domain\Career\Display\CareerContentV3PageUpdater;
+use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
+use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
+use App\Domain\Career\Display\CareerCurrentAuthorityReleaseIntent;
+use App\Domain\Career\Display\CareerCurrentIdentity;
+use Illuminate\Filesystem\Filesystem;
+use Tests\TestCase;
+
+final class CareerCurrentIdentityTest extends TestCase
+{
+    public function test_retained_aliases_resolve_names_without_changing_physical_identity(): void
+    {
+        $identity = app(CareerCurrentIdentity::class);
+        $package = app(CareerContentV3AuthorityPackage::class)->load(base_path());
+        self::assertSame(1046, $package['manifest']['coverage']['slugs']);
+        self::assertSame(2092, $package['manifest']['coverage']['files']);
+        foreach ($identity->aliases() as $alias => $target) {
+            self::assertSame($target, $identity->canonicalSlug($alias));
+            self::assertFalse($identity->isAlias($target));
+            foreach ($identity->searchTerms($target) as $name) {
+                self::assertSame($target, $identity->canonicalQuery($name));
+            }
+            foreach (['en', 'zh-CN'] as $locale) {
+                $page = json_decode(file_get_contents(base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH.'/careers/'.$alias.'/'.$locale.'.json')), true);
+                self::assertSame($alias, $page['subject']['canonical_slug']);
+                self::assertSame('legacy', $page['content_state']);
+                self::assertSame([], $page['blocks']);
+            }
+        }
+        self::assertSame('unmatched query', $identity->canonicalQuery('unmatched query'));
+    }
+
+    public function test_invalid_alias_updates_restore_page_manifest_and_intent_exactly(): void
+    {
+        $root = sys_get_temp_dir().'/career-alias-rollback-'.bin2hex(random_bytes(8));
+        $files = new Filesystem;
+        $current = $root.'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH;
+        $files->makeDirectory(dirname($current), 0700, true);
+        $files->copyDirectory(base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH), $current);
+        $files->copy(base_path(CareerCurrentAuthorityReleaseIntent::RELATIVE_PATH), $root.'/'.CareerCurrentAuthorityReleaseIntent::RELATIVE_PATH);
+        $paths = [$current.'/careers/librarians-and-media-collections-specialists/zh-CN.json', $current.'/manifest.json', $root.'/'.CareerCurrentAuthorityReleaseIntent::RELATIVE_PATH];
+        try {
+            $before = array_map('file_get_contents', $paths);
+            $updater = app(CareerContentV3PageUpdater::class);
+            foreach ([
+                ['librarians-and-media-collections-specialists' => 'missing-target'],
+                ['librarians-and-media-collections-specialists' => 'librarians-and-media-collections-specialists'],
+                ['librarians-and-media-collections-specialists' => 'preschool-teachers', 'preschool-teachers' => 'librarians'],
+                ['librarians-and-media-collections-specialists' => 'preschool-teachers', 'preschool-teachers' => 'librarians-and-media-collections-specialists'],
+                ['actors' => 'librarians'],
+            ] as $aliases) {
+                try {
+                    $updater->update($root, 'librarians-and-media-collections-specialists', 'zh-CN', true, $aliases);
+                    self::fail('Invalid identity must fail closed');
+                } catch (CareerCurrentAuthorityPackageFailure $failure) {
+                    self::assertContains($failure->getMessage(), ['CURRENT_IDENTITY_ALIASES_INVALID', 'CURRENT_IDENTITY_ALIAS_BODY_NOT_EMPTY']);
+                }
+                self::assertSame($before, array_map('file_get_contents', $paths));
+            }
+            self::assertFalse($updater->update($root, 'librarians-and-media-collections-specialists', 'zh-CN', true, app(CareerCurrentIdentity::class)->aliases())['changed']);
+            self::assertSame($before, array_map('file_get_contents', $paths));
+        } finally {
+            $files->deleteDirectory($root);
+        }
+    }
+}

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API\V0_5\Career;
 
+use App\Domain\Career\Display\CareerCurrentIdentity;
 use App\Http\Controllers\Concerns\RespondsWithNotFound;
 use App\Http\Controllers\Controller;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
@@ -55,6 +56,7 @@ final class CareerJobDetailController extends Controller
 
     public function show(Request $request, string $slug): JsonResponse
     {
+        $slug = app(CareerCurrentIdentity::class)->canonicalSlug($slug);
         $publicLocale = is_string($request->query('locale')) ? (string) $request->query('locale') : 'zh-CN';
         $verifyOnly = $this->careerVerifyOnly->isAuthorized($request);
         try {

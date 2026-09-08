@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Career\Publish;
 
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
+use App\Domain\Career\Display\CareerCurrentIdentity;
 
 final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublishProjectionCoverageSnapshot, CareerRuntimePublishProjectionVisibility
 {
@@ -68,12 +69,12 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
 
     public function datasetVisible(string $slug): bool
     {
-        return (bool) ($this->itemForSlug($slug)['dataset_visible'] ?? false);
+        return ! app(CareerCurrentIdentity::class)->isAlias($slug) && (bool) ($this->itemForSlug($slug)['dataset_visible'] ?? false);
     }
 
     public function searchVisible(string $slug): bool
     {
-        return (bool) ($this->itemForSlug($slug)['search_visible'] ?? false);
+        return ! app(CareerCurrentIdentity::class)->isAlias($slug) && (bool) ($this->itemForSlug($slug)['search_visible'] ?? false);
     }
 
     public function detailRouteEnabled(string $slug): bool
@@ -83,7 +84,7 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
 
     public function robotsIndexable(string $slug): bool
     {
-        return ($this->itemForSlug($slug)['robots_indexable'] ?? false) === true;
+        return ! app(CareerCurrentIdentity::class)->isAlias($slug) && ($this->itemForSlug($slug)['robots_indexable'] ?? false) === true;
     }
 
     public function releaseGatePass(string $slug): bool
@@ -119,7 +120,8 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
     /** @return list<array<string, mixed>> */
     private function visibleItems(callable $filter): array
     {
-        $items = array_values(array_filter($this->itemsBySlug(), $filter));
+        $items = array_values(array_filter($this->itemsBySlug(), static fn (array $item): bool => $filter($item)
+            && ! app(CareerCurrentIdentity::class)->isAlias((string) ($item['slug'] ?? ''))));
         usort($items, static fn (array $left, array $right): int => strcmp(
             strtolower((string) ($left['slug'] ?? '')),
             strtolower((string) ($right['slug'] ?? '')),

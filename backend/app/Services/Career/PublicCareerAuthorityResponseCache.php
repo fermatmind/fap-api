@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career;
 
+use App\Domain\Career\Display\CareerCurrentIdentity;
 use App\Domain\Career\Display\CareerJobDetailCanonicalCacheReader;
 use App\Domain\Career\Publish\CareerJobDetailExposureReadiness;
 use App\Domain\Career\Publish\CareerLaunchGovernanceClosureService;
@@ -178,6 +179,8 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                 if ($recordCacheState) {
                     $this->logJobIndexCacheState($normalizedLocale, $state, $version);
                 }
+
+                $payload['items'] = array_values(array_filter($payload['items'] ?? [], static fn (array $item): bool => ! app(CareerCurrentIdentity::class)->isAlias((string) data_get($item, 'identity.canonical_slug', ''))));
 
                 return $payload;
             }
@@ -2274,7 +2277,8 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             $slug = strtolower(trim((string) data_get($item, 'identity.canonical_slug', '')));
             $projectionItem = $this->effectiveJobDetailProjectionItem($slug, $publicLocale);
 
-            return $slug !== '' && $this->detailReadIsPublishedForLocale($slug, $publicLocale)
+            return $slug !== '' && ! app(CareerCurrentIdentity::class)->isAlias($slug)
+                && $this->detailReadIsPublishedForLocale($slug, $publicLocale)
                 && ($projectionItem['dataset_visible'] ?? false) === true
                 && (! $requireDetailReady || $this->jobDetailCacheIsReady($slug, $publicLocale));
         }));

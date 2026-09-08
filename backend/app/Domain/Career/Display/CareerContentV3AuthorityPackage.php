@@ -103,11 +103,13 @@ final class CareerContentV3AuthorityPackage
         }
         $aggregateProjection = array_intersect_key($manifest, array_flip([
             'authority_path', 'compiler_version', 'contract_version', 'coverage', 'files', 'locales',
-            'schema_version', 'set_hashes', 'source_registry_sha256',
+            'schema_version', 'set_hashes', 'source_registry_sha256', 'identity_aliases',
         ]));
         if (! hash_equals($manifest['aggregate_sha256'], CareerCurrentAuthorityPackage::hashValue($aggregateProjection))) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_AGGREGATE_MISMATCH');
         }
+
+        $this->assertIdentityAliases($manifest, $entries, $resolvedRoot);
 
         return ['root' => $resolvedRoot, 'manifest' => $manifest, 'entries' => $entries, 'slugs' => $slugs];
     }
@@ -260,11 +262,13 @@ final class CareerContentV3AuthorityPackage
 
         $aggregateProjection = array_intersect_key($manifest, array_flip([
             'authority_path', 'compiler_version', 'contract_version', 'coverage', 'files', 'locales',
-            'schema_version', 'set_hashes', 'source_registry_sha256',
+            'schema_version', 'set_hashes', 'source_registry_sha256', 'identity_aliases',
         ]));
         if (! hash_equals($manifest['aggregate_sha256'], CareerCurrentAuthorityPackage::hashValue($aggregateProjection))) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_AGGREGATE_MISMATCH');
         }
+
+        $this->assertIdentityAliases($manifest, $this->aliasEntries($manifest), $root);
 
         return [
             'manifest' => $manifest,
@@ -274,6 +278,9 @@ final class CareerContentV3AuthorityPackage
                 'aggregate_sha256' => $manifest['aggregate_sha256'],
                 'assets_sha256' => $manifest['aggregate_sha256'],
                 'career_count' => count($sortedSlugs),
+                'stored_identity_count' => count($sortedSlugs),
+                'alias_count' => count($manifest['identity_aliases'] ?? []),
+                'independent_identity_count' => count($sortedSlugs) - count($manifest['identity_aliases'] ?? []),
                 'file_count' => count($localePageSet),
                 'locale_page_count' => count($localePageSet),
                 'enhanced_locale_page_count' => $enhanced,
@@ -299,7 +306,7 @@ final class CareerContentV3AuthorityPackage
             || ($this->expectedEnhancedLocalePages !== null && $enhanced !== $this->expectedEnhancedLocalePages)) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_MANIFEST_INVALID');
         }
-        $keys = array_keys($manifest);
+        $keys = array_keys(array_diff_key($manifest, ['identity_aliases' => true]));
         sort($keys, SORT_STRING);
         if ($keys !== [
             'aggregate_sha256', 'authority_path', 'compiler_version', 'contract_version', 'coverage',
@@ -336,6 +343,43 @@ final class CareerContentV3AuthorityPackage
         foreach ($manifest['set_hashes'] as $hash) {
             if (! is_string($hash) || ! $this->hash($hash)) {
                 throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_MANIFEST_INVALID');
+            }
+        }
+    }
+
+    /** @return array<string,array<string,array<string,mixed>>> */
+    private function aliasEntries(array $manifest): array
+    {
+        $entries = [];
+        foreach ($manifest['files'] as $entry) {
+            $entries[$entry['canonical_slug']][$entry['locale']] = $entry;
+        }
+
+        return $entries;
+    }
+
+    /** Validate a candidate mapping before even a dry-run reports success. */
+    public function validateIdentityAliases(array $manifest, string $root): void
+    {
+        $this->assertIdentityAliases($manifest, $this->aliasEntries($manifest), $root);
+    }
+
+    private function assertIdentityAliases(array $manifest, array $entries, string $root): void
+    {
+        $aliases = array_key_exists('identity_aliases', $manifest) ? $manifest['identity_aliases'] : [];
+        if (! is_array($aliases) || ($aliases !== [] && array_is_list($aliases))) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_IDENTITY_ALIASES_INVALID');
+        }
+        foreach ($aliases as $alias => $target) {
+            if (! is_string($alias) || ! is_string($target) || $alias === $target
+                || ! isset($entries[$alias], $entries[$target]) || isset($aliases[$target])) {
+                throw new CareerCurrentAuthorityPackageFailure('CURRENT_IDENTITY_ALIASES_INVALID');
+            }
+            foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
+                $page = $this->readObject($root.'/'.$entries[$alias][$locale]['path'], 'CURRENT_CONTENT_V3_JSON_INVALID');
+                if (($page['content_state'] ?? null) !== 'legacy' || ($page['blocks'] ?? null) !== []) {
+                    throw new CareerCurrentAuthorityPackageFailure('CURRENT_IDENTITY_ALIAS_BODY_NOT_EMPTY');
+                }
             }
         }
     }

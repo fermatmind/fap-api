@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\Display\CareerCurrentIdentity;
 use App\Domain\Career\IndexStateValue;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\DTO\Career\CareerSearchResultBundle;
@@ -51,6 +52,7 @@ final class CareerSearchBundleBuilder
      */
     public function build(string $query, int $limit = 10, ?string $locale = null, string $mode = 'auto'): array
     {
+        $query = app(CareerCurrentIdentity::class)->canonicalQuery($query);
         $normalizedQuery = $this->normalizeText($query);
         if ($normalizedQuery === null) {
             return [];
