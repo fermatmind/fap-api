@@ -1,12 +1,12 @@
 {
-  "aggregate_sha256": "946577fa2b82de53aa6c565c5a1fbe09cfd9146603cda580effcfc561bf7e611",
+  "aggregate_sha256": "32ffeaa6bbf41fdedf474647f57a1d515a1ff0e18c85b0780329e5cc6acadfab",
   "authority_path": "backend/content_assets/career/current",
   "compiler_version": "career.content_v3.per_page.compiler.v1",
   "contract_version": "career.content_v3_current.manifest.v1",
   "coverage": {
-    "enhanced_locale_pages": 144,
+    "enhanced_locale_pages": 145,
     "files": 2092,
-    "legacy_locale_pages": 1948,
+    "legacy_locale_pages": 1947,
     "locale_pages": 2092,
     "locales": 2,
     "slugs": 1046
@@ -12193,24 +12193,24 @@
       "source_content_sha256": "4f96cb4b5bc84512538005d19012da0f7e8ce853762fb33bdb48ae2cb7be7b9b"
     },
     {
-      "bytes": 348,
+      "bytes": 343,
       "canonical_slug": "material-recording-clerks",
       "legacy_projection_sha256": "ec26d5227c006c05abba495d490f8f16c1906800aaabdeafd51bea5edfb474f6",
       "legacy_row_sha256": "0c68ea05b61987cc04cc594f1ecc4a91a5ff7b5d62a633f66bac68bccbc79437",
       "locale": "en",
       "path": "careers/material-recording-clerks/en.json",
-      "sha256": "c28fe271382f7f1c4b6776de83f2cff7d2478a8cc03fbf7633a6a88729aa4af6",
-      "source_content_sha256": "eb77546ca1e1feb509dcdccded1ac6d75eb4d2fd00258acf5ebe4e2b24ec5355"
+      "sha256": "97b2eb3f7eb91550a2d784cbbbaa65089a668265b786c3fe50dd80d0ebf4247d",
+      "source_content_sha256": "d4678b8029293f1a51d2015c4f73b06adbe51f8ab42d836b75caea022f042dd0"
     },
     {
-      "bytes": 351,
+      "bytes": 59882,
       "canonical_slug": "material-recording-clerks",
       "legacy_projection_sha256": "d9b1abc139086ea0ec6fb24320dec015cad0fc2c5c3235bce24eca79ec1eb309",
       "legacy_row_sha256": "0c68ea05b61987cc04cc594f1ecc4a91a5ff7b5d62a633f66bac68bccbc79437",
       "locale": "zh-CN",
       "path": "careers/material-recording-clerks/zh-CN.json",
-      "sha256": "250b2f2e248c5aa7382023221f01dbd9ac119031bf4a6bfa2fbe53ae43bb50d1",
-      "source_content_sha256": "4b2a83fc467e97e197a2000962b77db9c5f895788ebbc0c624b6536ebed5f9b0"
+      "sha256": "7e3e8af69131c1a39546f7e32eb77ac3febadc68e800dce9d3d4148b59e70f42",
+      "source_content_sha256": "1e4c098c5966f56a7908bac83e2c371d0ff5aa366d3072e25ff37dab273efb59"
     },
     {
       "bytes": 331,
@@ -20980,6 +20980,24 @@
       ],
       "scope_type": "exact_official_occupation",
       "source_route_sha256": "c1c77a49d3d3ff728139fb0f110da85c64225c7f416b758394e1601fca3ced77"
+    },
+    "material-recording-clerks": {
+      "occupations": [
+        {
+          "code": "43-5061.00",
+          "title": "Production, Planning, and Expediting Clerks"
+        },
+        {
+          "code": "43-5071.00",
+          "title": "Shipping, Receiving, and Inventory Clerks"
+        },
+        {
+          "code": "43-5111.00",
+          "title": "Weighers, Measurers, Checkers, and Samplers, Recordkeeping"
+        }
+      ],
+      "scope_type": "bounded_official_combination",
+      "source_route_sha256": "e58626ad1cef66af92ac937d9d5f7d7bef8ae68b48979e28376a215b65377676"
     }
   },
   "locales": [
@@ -20992,7 +21010,7 @@
     "legacy_versionless_projection_sha256": "b7fed8007d505b45e2707ef11e3b1b4196d13985e0e8e1b146c4710fcbcdc616",
     "locale_page_set_sha256": "2ff43a2a6d0b8e7dd868b82214a7150b0d58e2bc192ec564ed6c2eccf9824176",
     "slug_set_sha256": "19a7e22cd0c854276efb3f9d15927bd034e7b2ecd6917fbe841e9dd0632fc988",
-    "source_semantic_aggregate_sha256": "357b65d404e384d96724f5c3ee54b9a7f7c0ac559736fd5d16b2073e28def3cb"
+    "source_semantic_aggregate_sha256": "a6fe29ce9831d88717a3915529362aea5ce3549fd5f277a42bc94d95c74ac75e"
   },
-  "source_registry_sha256": "f3c62c1394faa723eb661713e0e1873e22c1ae04046bc719fb87496e728940dd"
+  "source_registry_sha256": "830b277453bf56f3e3db0e086fa9afed37d28d69939f4de42f7c2341fb8b9a39"
 }
