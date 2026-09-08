@@ -6,7 +6,7 @@ namespace App\Services\SEO;
 
 use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
 use App\Services\Cms\ArticlePublicListReadCache;
-use Illuminate\Support\Facades\Cache;
+use App\Support\PublicProjectionCache as Cache;
 
 final class SeoDiscoverabilityCacheInvalidator
 {

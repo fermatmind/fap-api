@@ -10,8 +10,8 @@ use App\Domain\Career\Publish\CareerRuntimePublishProjectionLookup;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Http\Controllers\Controller;
 use App\Services\SEO\SitemapGenerator;
+use App\Support\PublicProjectionCache as Cache;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Cache;
 
 class SitemapSourceController extends Controller
 {

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace FermatMind\Operations;
 
+use App\Support\PublicProjectionCache as Cache;
 use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Schema;

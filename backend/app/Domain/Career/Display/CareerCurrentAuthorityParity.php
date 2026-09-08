@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\Domain\Career\Display;
 
+use App\Support\PublicProjectionCache as Cache;
 use Illuminate\Cache\Events\CacheFlushed;
 use Illuminate\Cache\Events\KeyForgotten;
 use Illuminate\Cache\Events\KeyWritten;
 use Illuminate\Database\Events\QueryExecuted;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Redis;
 use RuntimeException;
 
 final class CareerCurrentAuthorityParity
@@ -513,9 +512,9 @@ final class CareerCurrentAuthorityParity
         if ($mode === 'none') {
             return ['mode' => 'none'];
         }
-        $config = Redis::connection('cache')->command('config', ['get', 'maxmemory']);
+        $config = Cache::store()->getStore()->connection()->command('config', ['get', 'maxmemory']);
         $maxmemory = (int) (($config['maxmemory'] ?? null) ?? (is_array($config) ? end($config) : 0));
-        $policy = Redis::connection('cache')->command('config', ['get', 'maxmemory-policy']);
+        $policy = Cache::store()->getStore()->connection()->command('config', ['get', 'maxmemory-policy']);
         $policyValue = (string) (($policy['maxmemory-policy'] ?? null) ?? (is_array($policy) ? end($policy) : ''));
         if ($maxmemory !== (int) config('career_current_authority_parity.redis_maxmemory_baseline_bytes', self::LOCKED_REDIS_MAXMEMORY_BYTES)
             || $policyValue !== (string) config('career_current_authority_parity.redis_policy', 'noeviction')) {
@@ -534,7 +533,7 @@ final class CareerCurrentAuthorityParity
     private function memoryUsage(string $cacheKey): int
     {
         $key = (string) config('database.redis.options.prefix').(string) config('cache.prefix').$cacheKey;
-        $client = Redis::connection('cache')->client();
+        $client = Cache::store()->getStore()->connection()->client();
         $usage = $client->rawCommand('MEMORY', 'USAGE', $key);
 
         return is_numeric($usage) ? (int) $usage : 0;

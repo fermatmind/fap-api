@@ -45,6 +45,12 @@ return [
 
     'stores' => [
 
+        'public_projection' => [
+            'driver' => 'redis',
+            'connection' => 'public_projection',
+            'lock_connection' => env('REDIS_CACHE_LOCK_CONNECTION', 'default'),
+        ],
+
         'array' => [
             'driver' => 'array',
             'serialize' => false,

@@ -10,7 +10,7 @@ use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
 use App\Services\SEO\SitemapCache;
 use App\Services\SEO\SitemapGenerator;
 use App\Services\SeoIntel\UrlTruth\PublicCanonicalConsumerSnapshot;
-use Illuminate\Support\Facades\Cache;
+use App\Support\PublicProjectionCache as Cache;
 use Illuminate\Support\Facades\Http;
 use RuntimeException;
 

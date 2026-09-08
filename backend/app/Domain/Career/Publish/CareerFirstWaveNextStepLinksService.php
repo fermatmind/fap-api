@@ -7,7 +7,7 @@ namespace App\Domain\Career\Publish;
 use App\DTO\Career\CareerFirstWaveNextStepLinksSummary;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
-use Illuminate\Support\Facades\Cache;
+use App\Support\PublicProjectionCache as Cache;
 use Illuminate\Support\Facades\Log;
 
 final class CareerFirstWaveNextStepLinksService

@@ -33,12 +33,28 @@ final class CacheLifecycleAlerts
             $state['observed_at'] = time();
             $state['healthy'] = $healthy;
             $wasNotified = (bool) ($state['fault_notified'] ?? false);
+            if (! $healthy && ($urgent || $state['failures'] >= 3)) {
+                $state['pending_fault'] = true;
+            }
+            if ($healthy && ! $wasNotified && ($state['pending_fault'] ?? false)) {
+                try {
+                    $this->deliver($component, false);
+                    $state['fault_notified'] = $wasNotified = true;
+                    $state['pending_fault'] = false;
+                    $state['sent_at'] = time();
+                    $state['delivery_failed'] = false;
+                } catch (\Throwable) {
+                    $state['delivery_failed'] = true;
+                    Log::warning('cache_lifecycle_email_failed', ['component' => $component]);
+                }
+            }
             $due = $healthy ? $wasNotified : ($urgent || $state['failures'] >= 3)
                 && (! $wasNotified || time() - (int) ($state['sent_at'] ?? 0) >= 86400);
             if ($due) {
                 try {
                     $this->deliver($component, $healthy);
                     $state['fault_notified'] = ! $healthy;
+                    $state['pending_fault'] = false;
                     $state['sent_at'] = time();
                     $state['delivery_failed'] = false;
                 } catch (\Throwable) {
@@ -79,7 +95,43 @@ final class CacheLifecycleAlerts
         return ['ok' => ! in_array(false, $checks, true), 'checks' => $checks];
     }
 
-    public function deliver(string $component, bool $recovered): void
+    public function verifyDelivery(): void
+    {
+        $root = storage_path('app/ops/cache-lifecycle');
+        File::ensureDirectoryExists($root, 0770);
+        $lock = fopen($root.'/mail_verification.lock', 'c');
+        if ($lock === false || ! flock($lock, LOCK_EX | LOCK_NB)) {
+            throw new \RuntimeException('Mail verification lock unavailable.');
+        }
+        chmod($root.'/mail_verification.lock', 0660);
+        try {
+            $path = $root.'/mail_verification.json';
+            $identity = hash('sha256', json_encode([config('ops.cache_lifecycle.mail_recipient'), config('mail.from.address'),
+                config('mail.mailers.smtp.host')], JSON_THROW_ON_ERROR));
+            $state = is_file($path) ? json_decode((string) file_get_contents($path), true, 32, JSON_THROW_ON_ERROR) : [];
+            if (($state['identity'] ?? null) !== $identity) {
+                $state = ['identity' => $identity];
+            }
+            foreach (['fault' => false, 'recovery' => true] as $phase => $recovered) {
+                if ($state[$phase] ?? false) {
+                    continue;
+                }
+                $this->deliver('mail_delivery_verification', $recovered, true);
+                $state[$phase] = true;
+                $state['verified_at'] = time();
+                if (file_put_contents($path.'.tmp', json_encode($state, JSON_THROW_ON_ERROR), LOCK_EX) === false
+                    || ! rename($path.'.tmp', $path)) {
+                    throw new \RuntimeException('Mail verification state write failed.');
+                }
+                chmod($path, 0660);
+            }
+        } finally {
+            flock($lock, LOCK_UN);
+            fclose($lock);
+        }
+    }
+
+    public function deliver(string $component, bool $recovered, bool $verification = false): void
     {
         $recipient = trim((string) config('ops.cache_lifecycle.mail_recipient'));
         $from = trim((string) config('mail.from.address'));
@@ -90,7 +142,10 @@ final class CacheLifecycleAlerts
         $smtp['timeout'] = 10;
         $mailer = app(MailManager::class)->build($smtp);
         $subject = '[FermatMind '.app()->environment().'] 缓存与 SEO '.($recovered ? '已恢复' : '异常');
-        $body = '组件：'.$component."\n".($recovered ? '连续检查中的此前故障已恢复。' : '自动维护未完成，请查看现有 Ops 和部署日志。')
+        if ($verification) {
+            $subject = '[FermatMind] 告警通道验证：'.($recovered ? '恢复通知' : '异常通知');
+        }
+        $body = ($verification ? "这是一封上线验收测试邮件，不代表生产故障。\n" : '').'组件：'.$component."\n".($recovered ? '连续检查中的此前故障已恢复。' : '自动维护未完成，请查看现有 Ops 和部署日志。')
             ."\n时间（UTC）：".gmdate('c');
         if ($mailer->raw($body, static function (Message $message) use ($recipient, $from, $subject): void {
             $message->from($from, 'FermatMind Ops')->to($recipient)->subject($subject);

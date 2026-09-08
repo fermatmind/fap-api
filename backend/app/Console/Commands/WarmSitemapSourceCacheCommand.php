@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
+use App\Support\PublicProjectionCache as Cache;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Cache;
 
 final class WarmSitemapSourceCacheCommand extends Command
 {

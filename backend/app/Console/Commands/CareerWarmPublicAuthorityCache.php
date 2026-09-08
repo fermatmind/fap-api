@@ -9,8 +9,8 @@ use App\Services\Career\Bundles\CareerJobListBundleBuilder;
 use App\Services\Career\CareerDirectoryReadModelBuilder;
 use App\Services\Career\Dataset\CareerFullDatasetAuthorityBuilder;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
+use App\Support\PublicProjectionCache as Cache;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Cache;
 
 final class CareerWarmPublicAuthorityCache extends Command
 {

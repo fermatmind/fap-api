@@ -14,8 +14,8 @@ use App\Services\SeoCouncil\Governance\RuntimeCapabilitySnapshotBuilder;
 use App\Services\SeoCouncil\TechnicalDiagnosis\TechnicalPrivateNegativeSetEvaluator;
 use App\Services\SeoIntel\Runtime\ScheduledRuntimeProbeReceiptService;
 use App\Services\SeoIntel\UrlTruth\UrlTruthReconciliationRuntimeService;
+use App\Support\PublicProjectionCache as Cache;
 use Carbon\CarbonImmutable;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 

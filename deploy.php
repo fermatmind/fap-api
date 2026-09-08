@@ -634,6 +634,19 @@ if ($stagingIdentityFile !== null) {
  * exact revision authorized by the production workflow_run event.
  */
 task('guard:expected-release-revision', function () {
+    $state = deployPlaceholderPathArg('{{deploy_path}}', 'shared/backend/storage/app/ops/cache-lifecycle/public_projection.json');
+    $compatible = deployPlaceholderPathArg('{{release_path}}', 'backend/app/Support/PublicProjectionCache.php');
+    run('python3 - '.$state.' '.$compatible." <<'PY'\n".<<<'PYTHON'
+import json, pathlib, sys
+state, compatible = map(pathlib.Path, sys.argv[1:])
+if state.exists():
+    value = json.loads(state.read_text())
+    if value.get('version') != 1 or value.get('mode') not in ['legacy', 'mirror', 'primary', 'isolated']:
+        raise SystemExit('cache_rollback_compatibility=invalid_state')
+    if value['mode'] != 'legacy' and not compatible.is_file():
+        raise SystemExit('cache_rollback_compatibility=unverified_legacy_reader')
+PY
+PYTHON);
     if (currentHost()->getAlias() !== 'production') {
         return;
     }
@@ -3110,6 +3123,33 @@ task('prepare:cache-lifecycle-storage', function () {
     run('sudo -n python3 '.$script.' --storage-root '.$storage, ['timeout' => 60]);
 });
 
+task('cache:prepare-public-projection', function () {
+    within('{{release_path}}/backend', function (): void {
+        run('{{bin/php}} artisan cache:public-projection config --no-interaction --no-ansi', ['timeout' => 30]);
+    });
+    $script = deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/install_public_projection_redis.py');
+    $candidate = deployPlaceholderPathArg('{{deploy_path}}', 'shared/backend/storage/app/private/public-projection-redis.conf');
+    run('sudo -n python3 '.$script.' --candidate '.$candidate, ['timeout' => 120]);
+    within('{{release_path}}/backend', function (): void {
+        run('{{bin/php}} artisan cache:public-projection activate --no-interaction --no-ansi', ['timeout' => 240]);
+    });
+});
+
+task('cache:accept-public-projection', function () {
+    if (! test('test -f '.deployPlaceholderPathArg('{{release_path}}', 'backend/app/Support/PublicProjectionCache.php'))) {
+        return;
+    }
+
+    $sha = trim(run('cat '.deployPlaceholderPathArg('{{release_path}}', 'REVISION')));
+    if (! preg_match('/^[a-f0-9]{40}$/D', $sha)) {
+        throw new \RuntimeException('Public projection accepted revision unavailable.');
+    }
+    within('{{release_path}}/backend', function () use ($sha): void {
+        run('{{bin/php}} artisan cache:public-projection accept --sha='.deployShellArg($sha).' --no-interaction --no-ansi', ['timeout' => 30]);
+        run('{{bin/php}} artisan cache:public-projection verify-mail --no-interaction --no-ansi', ['timeout' => 30]);
+    });
+});
+
 task('career:prune-public-cache-versions', function () {
     within('{{release_path}}/backend', function (): void {
         run('timeout --kill-after=30s 900 {{bin/php}} artisan career:prune-public-cache-versions --apply --no-interaction --no-ansi', ['timeout' => 960]);
@@ -4968,7 +5008,9 @@ after('riasec:publish-private-result-authority', 'enneagram:publish-private-resu
 after('enneagram:publish-private-result-authority', 'eq60:publish-private-result-authority');
 after('eq60:publish-private-result-authority', 'guard:career-runtime-projection-authority');
 after('guard:career-runtime-projection-authority', 'prepare:cache-lifecycle-storage');
-after('prepare:cache-lifecycle-storage', 'career:prune-public-cache-versions');
+after('prepare:cache-lifecycle-storage', 'cache:prepare-public-projection');
+after('cache:prepare-public-projection', 'career:prune-public-cache-versions');
+after('deploy:success', 'cache:accept-public-projection');
 after('career:prune-public-cache-versions', 'career:repair-published-detail-cache-coverage');
 after('career:repair-published-detail-cache-coverage', 'guard:career-detail-cache-coverage');
 after('guard:career-detail-cache-coverage', 'career:warm-public-authority-cache');

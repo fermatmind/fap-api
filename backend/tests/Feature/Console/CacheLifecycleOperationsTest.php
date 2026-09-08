@@ -124,4 +124,41 @@ final class CacheLifecycleOperationsTest extends TestCase
         $state = json_decode(file_get_contents(storage_path('app/ops/cache-lifecycle/llms_refresh.json')), true);
         $this->assertFalse($state['healthy']);
     }
+
+    public function test_failed_fault_delivery_is_retried_even_after_service_recovers(): void
+    {
+        config(['ops.cache_lifecycle.mail_recipient' => 'ops@example.test', 'mail.from.address' => 'sender@example.test']);
+        $mailer = app(MailManager::class)->build(['transport' => 'array']);
+        $manager = Mockery::mock(MailManager::class);
+        $calls = 0;
+        $manager->shouldReceive('build')->andReturnUsing(function () use ($mailer, &$calls) {
+            if (++$calls === 1) {
+                throw new \RuntimeException('SMTP unavailable');
+            }
+
+            return $mailer;
+        });
+        $this->app->instance(MailManager::class, $manager);
+        $alerts = new CacheLifecycleAlerts;
+        $alerts->observe('redis_capacity', false, true);
+        $alerts->observe('redis_capacity', true);
+        $alerts->observe('redis_capacity', true);
+        $this->assertSame(3, $calls);
+        $this->assertCount(2, $mailer->getSymfonyTransport()->messages());
+    }
+
+    public function test_real_transport_verification_is_deduplicated_after_both_acknowledgements(): void
+    {
+        config(['ops.cache_lifecycle.mail_recipient' => 'ops@example.test', 'mail.from.address' => 'sender@example.test']);
+        $mailer = app(MailManager::class)->build(['transport' => 'array']);
+        $manager = Mockery::mock(MailManager::class);
+        $manager->shouldReceive('build')->twice()->andReturn($mailer);
+        $this->app->instance(MailManager::class, $manager);
+        $alerts = new CacheLifecycleAlerts;
+        $alerts->verifyDelivery();
+        $alerts->verifyDelivery();
+        $messages = $mailer->getSymfonyTransport()->messages();
+        $this->assertCount(2, $messages);
+        $this->assertStringContainsString('告警通道验证', $messages[0]->getOriginalMessage()->getSubject());
+    }
 }

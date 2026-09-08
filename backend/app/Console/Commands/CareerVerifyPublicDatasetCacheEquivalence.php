@@ -7,9 +7,9 @@ namespace App\Console\Commands;
 use App\Http\Resources\Career\CareerDatasetHubResource;
 use App\Services\Career\Dataset\CareerPublicDatasetContractBuilder;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
+use App\Support\PublicProjectionCache as Cache;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use RuntimeException;
 

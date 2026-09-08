@@ -6,8 +6,8 @@ namespace App\Console\Commands;
 
 use App\Services\Career\CareerCacheBackupRetention;
 use App\Services\Career\CareerCacheVersionRetention;
+use App\Support\PublicProjectionCache as Cache;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 
 final class CareerPrunePublicCacheVersions extends Command
@@ -37,9 +37,17 @@ final class CareerPrunePublicCacheVersions extends Command
         try {
             $result = $this->prune($policy, $root, $deadline);
             if ($this->option('pressure') && $result === self::SUCCESS) {
-                $memory = Cache::store()->getStore()->connection()->client()->info('memory');
-                app(\App\Services\Ops\CacheLifecycleAlerts::class)->observe('redis_capacity',
-                    (int) ($memory['maxmemory'] ?? 0) > 0 && (int) ($memory['used_memory'] ?? PHP_INT_MAX) < (int) $memory['maxmemory'] * 0.85, true);
+                $memories = [Cache::store()->getStore()->connection()->client()->info('memory')];
+                if (in_array(Cache::state()['mode'], ['mirror', 'primary'], true)) {
+                    [$other] = \App\Services\Career\PublicProjectionMigration::connection(Cache::state()['mode'] === 'mirror');
+                    $memories[] = $other->info('memory');
+                }
+                $healthy = true;
+                foreach ($memories as $memory) {
+                    $healthy = $healthy && (int) ($memory['maxmemory'] ?? 0) > 0
+                        && (int) ($memory['used_memory'] ?? PHP_INT_MAX) < (int) $memory['maxmemory'] * 0.85;
+                }
+                app(\App\Services\Ops\CacheLifecycleAlerts::class)->observe('redis_capacity', $healthy, true);
             }
             app(\App\Services\Ops\CacheLifecycleAlerts::class)->observe('career_retention', $result === self::SUCCESS);
 
@@ -188,56 +196,79 @@ final class CareerPrunePublicCacheVersions extends Command
                 if ($freed + $entry['bytes'] > $limit) {
                     continue;
                 }
-                $key = $prefix.$entry['key'];
-                $base = $prefix.$entry['base'];
-                $active = $redis->rawCommand('GET', $base.':active');
-                $lkg = $redis->rawCommand('GET', $base.':lkg');
-                // Bind Lua's raw compare to the exact planned pointers, not two racy reads.
-                if ($active !== serialize($entry['active']) || $lkg !== serialize($entry['lkg'])) {
-                    continue;
-                }
-                // Re-read application values; decoding remains owned by the configured Redis store.
-                if (Cache::get($entry['base'].':active') !== $entry['active'] || Cache::get($entry['base'].':lkg') !== $entry['lkg']
-                    || Cache::has($entry['base'].':pins:'.$entry['version'])) {
-                    continue;
-                }
-                foreach (['active', 'lkg'] as $pointer) {
-                    $protectedKey = $entry['base'].':versions:'.$entry[$pointer];
-                    if (! isset($protected[$protectedKey])) {
-                        $protectedDump = $redis->rawCommand('DUMP', $prefix.$protectedKey);
-                        if (! is_string($protectedDump)) {
-                            throw new \RuntimeException('Career protected payload is missing; retention stopped.');
-                        }
-                        $protected[$protectedKey] = sha1($protectedDump);
+                Cache::mutation(function () use ($entry, $prefix, $redis, $backup, $backups, &$backupBytes, &$protected, &$removed, &$freed): void {
+                    $key = $prefix.$entry['key'];
+                    $base = $prefix.$entry['base'];
+                    $active = $redis->rawCommand('GET', $base.':active');
+                    $lkg = $redis->rawCommand('GET', $base.':lkg');
+                    // Bind Lua's raw compare to the exact planned pointers, not two racy reads.
+                    if ($active !== serialize($entry['active']) || $lkg !== serialize($entry['lkg'])) {
+                        return;
                     }
-                }
-                $idle = $redis->rawCommand('OBJECT', 'IDLETIME', $key);
-                if ($idle === false || (int) $idle < CareerCacheVersionRetention::RETENTION_SECONDS) {
-                    continue;
-                }
-                $dump = $redis->rawCommand('DUMP', $key);
-                if (! is_string($dump)) {
-                    continue;
-                }
-                $record = json_encode(['key' => $entry['key'], 'dump' => base64_encode($dump), 'ttl_ms' => $redis->rawCommand('PTTL', $key)], JSON_THROW_ON_ERROR)."\n";
-                $backups->assertHeadroom($backupBytes, strlen($record) + 64);
-                if (fwrite($backup, $record) !== strlen($record) || ! fflush($backup) || ! fsync($backup)) {
-                    throw new \RuntimeException('Career retention backup write failed.');
-                }
-                $backupBytes += strlen($record);
-                // Compare-and-delete is one Redis operation, so a concurrent pointer switch or pin wins.
-                $deleted = $redis->rawCommand('EVAL', <<<'LUA'
+                    // Re-read application values; decoding remains owned by the configured Redis store.
+                    if (Cache::get($entry['base'].':active') !== $entry['active'] || Cache::get($entry['base'].':lkg') !== $entry['lkg']
+                        || Cache::has($entry['base'].':pins:'.$entry['version'])) {
+                        return;
+                    }
+                    foreach (['active', 'lkg'] as $pointer) {
+                        $protectedKey = $entry['base'].':versions:'.$entry[$pointer];
+                        if (! isset($protected[$protectedKey])) {
+                            $protectedDump = $redis->rawCommand('DUMP', $prefix.$protectedKey);
+                            if (! is_string($protectedDump)) {
+                                throw new \RuntimeException('Career protected payload is missing; retention stopped.');
+                            }
+                            $protected[$protectedKey] = sha1($protectedDump);
+                        }
+                    }
+                    $idle = $redis->rawCommand('OBJECT', 'IDLETIME', $key);
+                    if ($idle === false || (int) $idle < CareerCacheVersionRetention::RETENTION_SECONDS) {
+                        return;
+                    }
+                    $dump = $redis->rawCommand('DUMP', $key);
+                    if (! is_string($dump)) {
+                        return;
+                    }
+                    $mirror = null;
+                    $mode = Cache::state()['mode'];
+                    if (in_array($mode, ['mirror', 'primary'], true)) {
+                        [$mirror, $mirrorPrefix] = \App\Services\Career\PublicProjectionMigration::connection($mode === 'mirror');
+                        $mirrorBase = $mirrorPrefix.$entry['base'];
+                        if ($mirror->rawCommand('GET', $mirrorBase.':active') !== $active
+                            || $mirror->rawCommand('GET', $mirrorBase.':lkg') !== $lkg
+                            || $mirror->rawCommand('EXISTS', $mirrorBase.':pins:'.$entry['version']) !== 0
+                            || $mirror->rawCommand('DUMP', $mirrorPrefix.$entry['key']) !== $dump) {
+                            return;
+                        }
+                    }
+                    $record = json_encode(['key' => $entry['key'], 'dump' => base64_encode($dump), 'ttl_ms' => $redis->rawCommand('PTTL', $key)], JSON_THROW_ON_ERROR)."\n";
+                    $backups->assertHeadroom($backupBytes, strlen($record) + 64);
+                    if (fwrite($backup, $record) !== strlen($record) || ! fflush($backup) || ! fsync($backup)) {
+                        throw new \RuntimeException('Career retention backup write failed.');
+                    }
+                    $backupBytes += strlen($record);
+                    // Compare-and-delete is one Redis operation, so a concurrent pointer switch or pin wins.
+                    $deleted = $redis->rawCommand('EVAL', <<<'LUA'
 #!lua flags=allow-oom
 if redis.call('GET', KEYS[2]) ~= ARGV[1] or redis.call('GET', KEYS[3]) ~= ARGV[2] or redis.call('EXISTS', KEYS[4]) ~= 0 then return 0 end
 local payload = redis.call('DUMP', KEYS[1])
 if not payload or redis.sha1hex(payload) ~= ARGV[3] then return 0 end
 return redis.call('UNLINK', KEYS[1])
 LUA, 4, $key, $base.':active', $base.':lkg', $base.':pins:'.$entry['version'], $active, $lkg, sha1($dump));
-                if (! is_int($deleted) || ($deleted !== 0 && $deleted !== 1)) {
-                    throw new \RuntimeException('Career retention atomic deletion failed.');
-                }
-                $removed += $deleted;
-                $freed += $deleted ? $entry['bytes'] : 0;
+                    if (! is_int($deleted) || ($deleted !== 0 && $deleted !== 1)) {
+                        throw new \RuntimeException('Career retention atomic deletion failed.');
+                    }
+                    if ($deleted === 1 && $mirror !== null) {
+                        try {
+                            $mirror->rawCommand('UNLINK', $mirrorPrefix.$entry['key']);
+                            Cache::changed();
+                        } catch (\Throwable $error) {
+                            Cache::changed(true);
+                            throw $error;
+                        }
+                    }
+                    $removed += $deleted;
+                    $freed += $deleted ? $entry['bytes'] : 0;
+                });
             }
         } finally {
             fclose($backup);
