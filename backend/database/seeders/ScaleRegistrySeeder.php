@@ -801,6 +801,23 @@ final class ScaleRegistrySeeder extends Seeder
         $base = json_decode(file_get_contents(database_path('data/mbti_landing_zh_20260905.json')), true, 512, JSON_THROW_ON_ERROR);
         $attributes['content_i18n_json']['zh'] = array_replace($attributes['content_i18n_json']['zh'] ?? [], $base['content'], $methods['scales']['MBTI']);
 
+        $copyPackage = json_decode(file_get_contents(database_path('data/assessment_mbti_copy_zh_20260908.json')), true, 512, JSON_THROW_ON_ERROR);
+        foreach ($copyPackage['updates'] as $update) {
+            if (isset($update['path'])) {
+                data_set($attributes['content_i18n_json']['zh'], $update['path'], $update['value']);
+
+                continue;
+            }
+
+            $collection = data_get($attributes['content_i18n_json']['zh'], $update['collection']);
+            $index = is_array($collection) ? array_search($update['id'], array_column($collection, 'id'), true) : false;
+            if ($index === false) {
+                throw new \RuntimeException($update['collection'].'.'.$update['id'].' is missing from the MBTI seed baseline.');
+            }
+            $collection[$index][$update['field']] = $update['value'];
+            data_set($attributes['content_i18n_json']['zh'], $update['collection'], $collection);
+        }
+
         $entryPackage = json_decode(file_get_contents(database_path('data/assessment_entry_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
         $attributes['content_i18n_json']['zh']['landing_entry'] = $entryPackage['scales'][$attributes['code']]['landing_entry'];
 
