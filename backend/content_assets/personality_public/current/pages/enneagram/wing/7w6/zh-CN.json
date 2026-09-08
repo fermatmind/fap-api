@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/wings/7w6",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-7",
-          "label": "core_type:type-7",
+          "label": "九型人格 7 号核心型",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-7"
         },
         {
           "href": "/zh/personality/enneagram/type-6",
-          "label": "core_type:type-6",
+          "label": "九型人格 6 号核心型",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-6"
         },
         {
           "href": "/zh/personality/enneagram/wings/7w8",
-          "label": "wing:7w8",
+          "label": "7w8 翼型",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:7w8"
         }
@@ -214,14 +214,14 @@
       ],
       "seo": {
         "description": "7w6 是证据有限的翼型假设：第七型选项与群体协商仍以可能性为核心，第六型可能增加后备方案、安心感与共同计划。善于交际或准备预案不能证明 7w6；协调职责、事故响应、团队规范、资金不稳与共同问责都可能要求相同行为。",
-        "title": "7w6：以第七型为主、关注协商、后备方案与共同计划的翼型假设"
+        "title": "7w6：七号核心、六号翼影响与常见误判"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/7w6",
       "source_hash": "d9b767a224b46c00810df3265b5d5f7d3ed2991eb1aa1fc2bd663584bae1d042",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
       "summary": "7w6 是证据有限的翼型假设：第七型选项与群体协商仍以可能性为核心，第六型可能增加后备方案、安心感与共同计划。善于交际或准备预案不能证明 7w6；协调职责、事故响应、团队规范、资金不稳与共同问责都可能要求相同行为。",
-      "title": "7w6：以第七型为主、关注协商、后备方案与共同计划的翼型假设"
+      "title": "7w6：七号核心、六号翼影响与常见误判"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "cad3e052f5b2e1e808ac2da396320739f3816237caa0ea4343e9fd07ed293713"
+  "source_content_sha256": "faf707d713f77ce9589415ef08d741efe926eab42f5ad6f76fb95986bf4f197e"
 }

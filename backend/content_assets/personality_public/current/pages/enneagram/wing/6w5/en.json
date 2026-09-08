@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/wings/6w5",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-6",
-          "label": "core_type:type-6",
+          "label": "Enneagram Type 6",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-6"
         },
         {
           "href": "/en/personality/enneagram/type-5",
-          "label": "core_type:type-5",
+          "label": "Enneagram Type 5",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-5"
         },
         {
           "href": "/en/personality/enneagram/wings/6w7",
-          "label": "wing:6w7",
+          "label": "6w7 wing",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:6w7"
         }
@@ -214,14 +214,14 @@
       ],
       "seo": {
         "description": "6w5 is an evidence-limited wing hypothesis: Type Six uncertainty, support, trust, and contingency concerns remain primary, while the adjacent type may modify attention toward evidence, analysis, and private preparation. The pattern does not establish 6w5 because research training, technical review, confidentiality, regulated analysis, and specialist roles can require the same behavior.",
-        "title": "6w5: a core-first hypothesis about evidence, analysis, and private preparation"
+        "title": "6w5: Type 6 Core, 5 Wing, and Common Misreads"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/6w5",
       "source_hash": "aac57f4dfd998d03778142ed06d093cb1dec9d438b27714d2447529d11b7a537",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
       "summary": "6w5 is an evidence-limited wing hypothesis: Type Six uncertainty, support, trust, and contingency concerns remain primary, while the adjacent type may modify attention toward evidence, analysis, and private preparation. The pattern does not establish 6w5 because research training, technical review, confidentiality, regulated analysis, and specialist roles can require the same behavior.",
-      "title": "6w5: a core-first hypothesis about evidence, analysis, and private preparation"
+      "title": "6w5: Type 6 Core, 5 Wing, and Common Misreads"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "1fc17c07d4a64825577a3c62020ba43384bd1ea59e09d47221d5043f98bca1ea"
+  "source_content_sha256": "8b1b58d6251eb838a7d8969739cfe05a5ba7a0dcec798b7b8c427cf0da4535f6"
 }

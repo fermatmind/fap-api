@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/wings/4w5",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-4",
-          "label": "core_type:type-4",
+          "label": "Enneagram Type 4",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-4"
         },
         {
           "href": "/en/personality/enneagram/type-5",
-          "label": "core_type:type-5",
+          "label": "Enneagram Type 5",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-5"
         },
         {
           "href": "/en/personality/enneagram/wings/4w3",
-          "label": "wing:4w3",
+          "label": "4w3 wing",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:4w3"
         }
@@ -214,14 +214,14 @@
       ],
       "seo": {
         "description": "The 4w5 wing is a core-first, evidence-limited hypothesis: Type Four attention to identity and meaning may be modified by Five-adjacent privacy, conceptual depth, and selective disclosure. Solitary research or restrained expression cannot establish a wing because expertise, confidentiality, access needs, and work design can look the same.",
-        "title": "4w5: private depth as a core-first wing hypothesis"
+        "title": "4w5: Type 4 Core, 5 Wing, and Common Misreads"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/4w5",
       "source_hash": "edf265da57d2176108b09360d31882d9786ea3a4c321498d81e39724b2211d83",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
       "summary": "The 4w5 wing is a core-first, evidence-limited hypothesis: Type Four attention to identity and meaning may be modified by Five-adjacent privacy, conceptual depth, and selective disclosure. Solitary research or restrained expression cannot establish a wing because expertise, confidentiality, access needs, and work design can look the same.",
-      "title": "4w5: private depth as a core-first wing hypothesis"
+      "title": "4w5: Type 4 Core, 5 Wing, and Common Misreads"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "1d9af3ef5f4acc6b62ad5c4513b58c4757eaaf9cb6bcdf201d12f62f3b6ba46b"
+  "source_content_sha256": "ff6a530cb89ab99f9debe50c23934efd67dc83b6c63fc396ff80621da7c8b083"
 }

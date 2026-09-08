@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/wings/1w2",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-1",
-          "label": "core_type:type-1",
+          "label": "Enneagram Type 1",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-1"
         },
         {
           "href": "/en/personality/enneagram/type-2",
-          "label": "core_type:type-2",
+          "label": "Enneagram Type 2",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-2"
         },
         {
           "href": "/en/personality/enneagram/wings/1w9",
-          "label": "wing:1w9",
+          "label": "1w9 wing",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:1w9"
         }
@@ -214,14 +214,14 @@
       ],
       "seo": {
         "description": "The 1w2 wing is a core-first, evidence-limited hypothesis in which Type One attention to standards may be modified by a Two-adjacent pull toward direct involvement, practical help, and relational repair. It is not an independent category, and helpful correction may arise from role duty or learned service rather than a wing.",
-        "title": "1w2: a core-first hypothesis about involved improvement"
+        "title": "1w2: Type 1 Core, 2 Wing, and Common Misreads"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/1w2",
       "source_hash": "dfb97d837b6ce187a8a1d2f5b42c3ff6ed856afcfd3b6e2cd1a10098abd92a1c",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
       "summary": "The 1w2 wing is a core-first, evidence-limited hypothesis in which Type One attention to standards may be modified by a Two-adjacent pull toward direct involvement, practical help, and relational repair. It is not an independent category, and helpful correction may arise from role duty or learned service rather than a wing.",
-      "title": "1w2: a core-first hypothesis about involved improvement"
+      "title": "1w2: Type 1 Core, 2 Wing, and Common Misreads"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "0d4c0098225bb38e6ce0ad3cf25c1a96360b91bb6965269647651e0b37cf067a"
+  "source_content_sha256": "3edba0fb8e02d7d49d3d475cbc680c101cb1afbdc7105beac87747749ec9005d"
 }

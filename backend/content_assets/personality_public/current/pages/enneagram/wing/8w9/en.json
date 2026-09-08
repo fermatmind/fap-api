@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/wings/8w9",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-8",
-          "label": "core_type:type-8",
+          "label": "Enneagram Type 8",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-8"
         },
         {
           "href": "/en/personality/enneagram/type-9",
-          "label": "core_type:type-9",
+          "label": "Enneagram Type 9",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-9"
         },
         {
           "href": "/en/personality/enneagram/wings/8w7",
-          "label": "wing:8w7",
+          "label": "8w7 wing",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:8w7"
         }
@@ -214,14 +214,14 @@
       ],
       "seo": {
         "description": "8w9 is an evidence-limited wing hypothesis in which Type Eight autonomy stays primary while Nine may add steady force, territory, endurance, and delayed response. Calm authority or physical presence does not establish 8w9 because property duty, cultural restraint, recovery needs, seniority, security work, and slow institutional processes can look similar.",
-        "title": "8w9: a core-first hypothesis about steady force, territory, and delayed response"
+        "title": "8w9: Type 8 Core, 9 Wing, and Common Misreads"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/8w9",
       "source_hash": "bebdffc44395193eb1bf73c5553d883b193b30c84bfd1c5c51f6515bd4c24ddd",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
       "summary": "8w9 is an evidence-limited wing hypothesis in which Type Eight autonomy stays primary while Nine may add steady force, territory, endurance, and delayed response. Calm authority or physical presence does not establish 8w9 because property duty, cultural restraint, recovery needs, seniority, security work, and slow institutional processes can look similar.",
-      "title": "8w9: a core-first hypothesis about steady force, territory, and delayed response"
+      "title": "8w9: Type 8 Core, 9 Wing, and Common Misreads"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "219360a1091bd722cc7d042f4b203ac955326f03c76a7443db60b44bc80f9f8a"
+  "source_content_sha256": "0b8507e8137d7c36fcab8c29e27ce11b0a667395204f5801328d375b6c2addbe"
 }

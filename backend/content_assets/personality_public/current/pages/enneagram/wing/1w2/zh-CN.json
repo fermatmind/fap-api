@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/wings/1w2",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-1",
-          "label": "core_type:type-1",
+          "label": "九型人格 1 号核心型",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-1"
         },
         {
           "href": "/zh/personality/enneagram/type-2",
-          "label": "core_type:type-2",
+          "label": "九型人格 2 号核心型",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-2"
         },
         {
           "href": "/zh/personality/enneagram/wings/1w9",
-          "label": "wing:1w9",
+          "label": "1w9 翼型",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:1w9"
         }
@@ -214,14 +214,14 @@
       ],
       "seo": {
         "description": "1w2 是以一号标准与修订关注为核心、用二号相邻特征解释直接参与和关系修复的传统次级假设。观察1w2参与改善，不能只看是否热心，还要记录帮助是否受邀、标准是否清楚，以及被拒绝后能否把决定权交还对方。",
-        "title": "1w2 观察页：直接帮助如何改变修订方式"
+        "title": "1w2：一号核心、二号翼影响与常见误判"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/1w2",
       "source_hash": "bb5bc4a731abc5e0c11218b32209d622160a637d491334b501a630216d89f5e6",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
       "summary": "1w2 是以一号标准与修订关注为核心、用二号相邻特征解释直接参与和关系修复的传统次级假设。观察1w2参与改善，不能只看是否热心，还要记录帮助是否受邀、标准是否清楚，以及被拒绝后能否把决定权交还对方。",
-      "title": "1w2 观察页：直接帮助如何改变修订方式"
+      "title": "1w2：一号核心、二号翼影响与常见误判"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "ca2e9285dad5a91d71b37e89b875c2716403ec1ae1f1e5485148f0f31f3234c5"
+  "source_content_sha256": "c7c191fba806ee3b203e95d8313d58c1506534a307ad0fbbe610a8178ad6a195"
 }

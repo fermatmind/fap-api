@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/wings/3w4",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-3",
-          "label": "core_type:type-3",
+          "label": "九型人格 3 号核心型",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-3"
         },
         {
           "href": "/zh/personality/enneagram/type-4",
-          "label": "core_type:type-4",
+          "label": "九型人格 4 号核心型",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-4"
         },
         {
           "href": "/zh/personality/enneagram/wings/3w2",
-          "label": "wing:3w2",
+          "label": "3w2 翼型",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:3w2"
         }
@@ -214,14 +214,14 @@
       ],
       "seo": {
         "description": "3w4 是证据有限、以第三型为核心的传统翼型假设：对可见成果的关注，可能受到第四型相邻主题中的独特性、个人表达和理想比较所修饰。作品有辨识度不能证明翼型，专业分工、作品集要求和审美训练也会产生相似结果。",
-        "title": "3w4：以成果为核心、以独特作品为修饰的翼型假设"
+        "title": "3w4：三号核心、四号翼影响与常见误判"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/3w4",
       "source_hash": "83781bd1ba64990979cce890d9739a1d102a5f3eff13927f98c043b0d18b6c3f",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
       "summary": "3w4 是证据有限、以第三型为核心的传统翼型假设：对可见成果的关注，可能受到第四型相邻主题中的独特性、个人表达和理想比较所修饰。作品有辨识度不能证明翼型，专业分工、作品集要求和审美训练也会产生相似结果。",
-      "title": "3w4：以成果为核心、以独特作品为修饰的翼型假设"
+      "title": "3w4：三号核心、四号翼影响与常见误判"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "045bd32f412f563cf0df90c5d6a9bd0ced1cd61c0563513fac7bfc04642897ab"
+  "source_content_sha256": "5f1908c4787e48224b583b19830ce82669b82ff837aece2ad6661748551c5b15"
 }

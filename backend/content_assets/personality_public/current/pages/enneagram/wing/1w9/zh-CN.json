@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/wings/1w9",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-1",
-          "label": "core_type:type-1",
+          "label": "九型人格 1 号核心型",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-1"
         },
         {
           "href": "/zh/personality/enneagram/type-9",
-          "label": "core_type:type-9",
+          "label": "九型人格 9 号核心型",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-9"
         },
         {
           "href": "/zh/personality/enneagram/wings/1w2",
-          "label": "wing:1w2",
+          "label": "1w2 翼型",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:1w2"
         }
@@ -214,14 +214,14 @@
       ],
       "seo": {
         "description": "1w9 是以一号为核心、以九号相邻特征为修饰的传统假设。观察1w9克制修正，要看平缓语气、延后表达或降低冲突是否最终带来具体改动，而不是把安静、随和或慢节奏直接当成独立翼型证据。",
-        "title": "1w9 观察页：克制表达是否服务于实际修正"
+        "title": "1w9：一号核心、九号翼影响与常见误判"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/1w9",
       "source_hash": "5585064c6c3c1c85e5db83cd7adfa277c7c7788a1f7349ff3f52b14496f015f9",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
       "summary": "1w9 是以一号为核心、以九号相邻特征为修饰的传统假设。观察1w9克制修正，要看平缓语气、延后表达或降低冲突是否最终带来具体改动，而不是把安静、随和或慢节奏直接当成独立翼型证据。",
-      "title": "1w9 观察页：克制表达是否服务于实际修正"
+      "title": "1w9：一号核心、九号翼影响与常见误判"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "c51faf286db7552d71758fd36df2f8ca79a913e9a36e677102a4ba79607365f5"
+  "source_content_sha256": "91778186124f834bbdd949aaee255d8014606dbc8244b69d5f8d1da555e5531f"
 }

@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/wings/2w1",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-2",
-          "label": "core_type:type-2",
+          "label": "九型人格 2 号核心型",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-2"
         },
         {
           "href": "/zh/personality/enneagram/type-1",
-          "label": "core_type:type-1",
+          "label": "九型人格 1 号核心型",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-1"
         },
         {
           "href": "/zh/personality/enneagram/wings/2w3",
-          "label": "wing:2w3",
+          "label": "2w3 翼型",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:2w3"
         }
@@ -214,14 +214,14 @@
       ],
       "seo": {
         "description": "2w1 是以二号的需要与连接关注为核心、用一号相邻特征解释标准、克制和负责服务的传统次级假设。观察2w1原则服务，应记录标准是否保护同意和质量，而不是把有纪律的照护直接写成翼型证据。",
-        "title": "2w1 观察页：原则性服务与同意边界"
+        "title": "2w1：二号核心、一号翼影响与常见误判"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/2w1",
       "source_hash": "35984c88041309b2851f433173601e2d8f73d448014dcafa4b3d51151e9dd4ba",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
       "summary": "2w1 是以二号的需要与连接关注为核心、用一号相邻特征解释标准、克制和负责服务的传统次级假设。观察2w1原则服务，应记录标准是否保护同意和质量，而不是把有纪律的照护直接写成翼型证据。",
-      "title": "2w1 观察页：原则性服务与同意边界"
+      "title": "2w1：二号核心、一号翼影响与常见误判"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "a77f59dcba18dddd9f310a3028aa5466b93fd23a62d78340a2defb3c1b50cf58"
+  "source_content_sha256": "a996881f30528c23b688cc090e5bb8812c79dc45ac055f165e118923f185d1d8"
 }

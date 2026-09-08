@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/wings/6w7",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-6",
-          "label": "core_type:type-6",
+          "label": "Enneagram Type 6",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-6"
         },
         {
           "href": "/en/personality/enneagram/type-7",
-          "label": "core_type:type-7",
+          "label": "Enneagram Type 7",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-7"
         },
         {
           "href": "/en/personality/enneagram/wings/6w5",
-          "label": "wing:6w5",
+          "label": "6w5 wing",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:6w5"
         }
@@ -214,14 +214,14 @@
       ],
       "seo": {
         "description": "6w7 is an evidence-limited wing hypothesis: Type Six uncertainty, support, trust, and contingency concerns remain primary, while the adjacent type may modify attention toward options, social coordination, and active experiments. The pattern does not establish 6w7 because facilitation duties, incident response, sales work, community organizing, and time pressure can require the same behavior.",
-        "title": "6w7: a core-first hypothesis about options, social coordination, and active experiments"
+        "title": "6w7: Type 6 Core, 7 Wing, and Common Misreads"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/6w7",
       "source_hash": "64813b5d219ac8e5124b6e7f8d5c1314eb23b789fd056217ef1fdb9ba20df568",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
       "summary": "6w7 is an evidence-limited wing hypothesis: Type Six uncertainty, support, trust, and contingency concerns remain primary, while the adjacent type may modify attention toward options, social coordination, and active experiments. The pattern does not establish 6w7 because facilitation duties, incident response, sales work, community organizing, and time pressure can require the same behavior.",
-      "title": "6w7: a core-first hypothesis about options, social coordination, and active experiments"
+      "title": "6w7: Type 6 Core, 7 Wing, and Common Misreads"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "e4f42743da9446ad9066aa9d7ff17e0905d08458556a3897955469cf8167d92c"
+  "source_content_sha256": "c70f7a31b36e24164d8a9e05ed8f06e0cfdbabf57be81dcc993550bd8cc94e07"
 }

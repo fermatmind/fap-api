@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/wings/7w6",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-7",
-          "label": "core_type:type-7",
+          "label": "Enneagram Type 7",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-7"
         },
         {
           "href": "/en/personality/enneagram/type-6",
-          "label": "core_type:type-6",
+          "label": "Enneagram Type 6",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-6"
         },
         {
           "href": "/en/personality/enneagram/wings/7w8",
-          "label": "wing:7w8",
+          "label": "7w8 wing",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:7w8"
         }
@@ -214,14 +214,14 @@
       ],
       "seo": {
         "description": "7w6 is an evidence-limited wing hypothesis in which Type Seven options and possibility remain primary while Six may add consultation, contingency, reassurance, and shared planning. Sociability or backup plans do not establish 7w6 because facilitation, incident response, team norms, precarious resources, and accountable coordination can require the same behavior.",
-        "title": "7w6: a core-first hypothesis about options, consultation, and contingency"
+        "title": "7w6: Type 7 Core, 6 Wing, and Common Misreads"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/7w6",
       "source_hash": "e27768d0da2cc06db8c92ef94eaf93620dd462b51c1283e2686f6655bb0ea912",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
       "summary": "7w6 is an evidence-limited wing hypothesis in which Type Seven options and possibility remain primary while Six may add consultation, contingency, reassurance, and shared planning. Sociability or backup plans do not establish 7w6 because facilitation, incident response, team norms, precarious resources, and accountable coordination can require the same behavior.",
-      "title": "7w6: a core-first hypothesis about options, consultation, and contingency"
+      "title": "7w6: Type 7 Core, 6 Wing, and Common Misreads"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "f46f0bdd0164a73fc9d2d4953eaa31243f5e1b8601b7291797f9896730d07098"
+  "source_content_sha256": "c0d39d4dedaf97579bb4da34152f6225ab6e91e096a64b6048c8b478a3cb3955"
 }

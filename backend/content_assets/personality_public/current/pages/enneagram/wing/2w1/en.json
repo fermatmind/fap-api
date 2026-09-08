@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/wings/2w1",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-2",
-          "label": "core_type:type-2",
+          "label": "Enneagram Type 2",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-2"
         },
         {
           "href": "/en/personality/enneagram/type-1",
-          "label": "core_type:type-1",
+          "label": "Enneagram Type 1",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-1"
         },
         {
           "href": "/en/personality/enneagram/wings/2w3",
-          "label": "wing:2w3",
+          "label": "2w3 wing",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:2w3"
         }
@@ -214,14 +214,14 @@
       ],
       "seo": {
         "description": "The 2w1 wing is a core-first, evidence-limited hypothesis: Type Two attention to needs and connection may be modified by One-adjacent standards, restraint, and responsible service. Responsible service is observable, but duty, ethics training, or formal care roles can produce the same pattern.",
-        "title": "2w1: responsible service as a core-first wing hypothesis"
+        "title": "2w1: Type 2 Core, 1 Wing, and Common Misreads"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/2w1",
       "source_hash": "cc068d74da322b0f4f853081f8a8abd2a9dc0f90ba171804c727ef651e8a9eca",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
       "summary": "The 2w1 wing is a core-first, evidence-limited hypothesis: Type Two attention to needs and connection may be modified by One-adjacent standards, restraint, and responsible service. Responsible service is observable, but duty, ethics training, or formal care roles can produce the same pattern.",
-      "title": "2w1: responsible service as a core-first wing hypothesis"
+      "title": "2w1: Type 2 Core, 1 Wing, and Common Misreads"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "4fb88f1ee1c2e33f59045bbe16878e75ba202c1d909fce0e8e507ae1107de4d8"
+  "source_content_sha256": "c6cde6c2eb1584aa3c902d22399560a9a439389f2982bc511524a3b627bf96d0"
 }

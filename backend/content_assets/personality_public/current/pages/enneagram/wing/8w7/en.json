@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/wings/8w7",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-8",
-          "label": "core_type:type-8",
+          "label": "Enneagram Type 8",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-8"
         },
         {
           "href": "/en/personality/enneagram/type-7",
-          "label": "core_type:type-7",
+          "label": "Enneagram Type 7",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-7"
         },
         {
           "href": "/en/personality/enneagram/wings/8w9",
-          "label": "wing:8w9",
+          "label": "8w9 wing",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:8w9"
         }
@@ -214,14 +214,14 @@
       ],
       "seo": {
         "description": "8w7 is an evidence-limited wing hypothesis in which Type Eight autonomy remains primary while Seven may add momentum, options, appetite, and expansive action. Fast growth or high energy does not establish 8w7 because founder incentives, crisis tempo, sales targets, abundant resources, unstable markets, and job authority can produce the same pattern.",
-        "title": "8w7: a core-first hypothesis about momentum, options, and expansive action"
+        "title": "8w7: Type 8 Core, 7 Wing, and Common Misreads"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/8w7",
       "source_hash": "cd6b5c85e664d76051489c773c4d4392a32a516f7b77c4952fcacf3c1be2ba9c",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
       "summary": "8w7 is an evidence-limited wing hypothesis in which Type Eight autonomy remains primary while Seven may add momentum, options, appetite, and expansive action. Fast growth or high energy does not establish 8w7 because founder incentives, crisis tempo, sales targets, abundant resources, unstable markets, and job authority can produce the same pattern.",
-      "title": "8w7: a core-first hypothesis about momentum, options, and expansive action"
+      "title": "8w7: Type 8 Core, 7 Wing, and Common Misreads"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "9e30386570da63511b4c8999db638d88ccf268a46bc2b3142fd641a48f9d27ce"
+  "source_content_sha256": "3ef4a18ea3b5f48a8dea8eca6bc2e8b7fb7697453560c2077b3be89639dc1869"
 }

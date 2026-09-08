@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/wings/4w3",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-4",
-          "label": "core_type:type-4",
+          "label": "九型人格 4 号核心型",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-4"
         },
         {
           "href": "/zh/personality/enneagram/type-3",
-          "label": "core_type:type-3",
+          "label": "九型人格 3 号核心型",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-3"
         },
         {
           "href": "/zh/personality/enneagram/wings/4w5",
-          "label": "wing:4w5",
+          "label": "4w5 翼型",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:4w5"
         }
@@ -214,14 +214,14 @@
       ],
       "seo": {
         "description": "4w3 是证据有限、以第四型为核心的传统翼型假设：对身份和意义的关注，可能受到第三型相邻主题中的可见交付、受众认可与适配所修饰。个人品牌不能证明翼型，作品集规则、晋升激励和表达训练都可能形成相似表现。",
-        "title": "4w3：以意义为核心、以可见表达为修饰的翼型假设"
+        "title": "4w3：四号核心、三号翼影响与常见误判"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/4w3",
       "source_hash": "4b3934152240ec86a832f9299802dfe1c4dbbce241e8330b4adc526fd8e24bce",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
       "summary": "4w3 是证据有限、以第四型为核心的传统翼型假设：对身份和意义的关注，可能受到第三型相邻主题中的可见交付、受众认可与适配所修饰。个人品牌不能证明翼型，作品集规则、晋升激励和表达训练都可能形成相似表现。",
-      "title": "4w3：以意义为核心、以可见表达为修饰的翼型假设"
+      "title": "4w3：四号核心、三号翼影响与常见误判"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "abceee6605dc0091284a5f7b632118839bb36ac7bc5a238b30f23a8b6846f35f"
+  "source_content_sha256": "13013a114f71931a9c33726d0ddc2d1e014d2702736269db95e6f29764822f22"
 }

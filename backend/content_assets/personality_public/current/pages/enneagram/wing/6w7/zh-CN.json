@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/wings/6w7",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-6",
-          "label": "core_type:type-6",
+          "label": "九型人格 6 号核心型",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-6"
         },
         {
           "href": "/zh/personality/enneagram/type-7",
-          "label": "core_type:type-7",
+          "label": "九型人格 7 号核心型",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-7"
         },
         {
           "href": "/zh/personality/enneagram/wings/6w5",
-          "label": "wing:6w5",
+          "label": "6w5 翼型",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:6w5"
         }
@@ -214,14 +214,14 @@
       ],
       "seo": {
         "description": "6w7 是证据有限的翼型假设：第六型的不确定性、支持、信任与预案仍是核心，相邻类型只可能修饰为选项、社交协调与主动试验。这种表现不能证明 6w7，因为协调职责、事故响应、销售工作、社群组织与时间压力都会要求相似行为。本页直接说明第六型不确定支持如何保持核心、选项、社交协调与主动试验如何作为修饰，以及协调职责、事故响应、销售工作、社群组织与时间压力如何形成替代解释。",
-        "title": "6w7：以第六型为主、关注选项、社交协调与主动试验的翼型假设"
+        "title": "6w7：六号核心、七号翼影响与常见误判"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/6w7",
       "source_hash": "9698864bb8a0a603ab21f01544219bc4609af0d80fa6e2131f9ab95ddabdcee1",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
       "summary": "6w7 是证据有限的翼型假设：第六型的不确定性、支持、信任与预案仍是核心，相邻类型只可能修饰为选项、社交协调与主动试验。这种表现不能证明 6w7，因为协调职责、事故响应、销售工作、社群组织与时间压力都会要求相似行为。本页直接说明第六型不确定支持如何保持核心、选项、社交协调与主动试验如何作为修饰，以及协调职责、事故响应、销售工作、社群组织与时间压力如何形成替代解释。",
-      "title": "6w7：以第六型为主、关注选项、社交协调与主动试验的翼型假设"
+      "title": "6w7：六号核心、七号翼影响与常见误判"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "ffc0f953f13c0a6fcdaea82606ba7f3a23283171115ae14cc27bd7f1a4f72000"
+  "source_content_sha256": "f6c7b5e1ecedd192df6ac776cf096629c70348c7ef1b1057e9a461639b1290b1"
 }
