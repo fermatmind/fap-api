@@ -513,3 +513,16 @@ test("natural Council identity fix retains the A08 gate-only deployment", () => 
   assert.equal(result.operations.a08_readonly_wiring, true);
   assert.equal(result.deploy, true);
 });
+
+ test("file-only page reader and manifest checks remain on the existing Career release lane", () => {
+  for (const path of [
+    "backend/app/Domain/Career/Display/CareerPageProjector.php",
+    "backend/app/Services/Career/CareerFilePageReader.php",
+    "backend/app/Console/Commands/CareerCurrentManifest.php",
+    "backend/app/Http/Controllers/API/V0_5/Cms/CareerJobController.php",
+  ]) {
+    const result = classifyPaths([path]);
+    assert.equal(result.operations.publisher_required, true);
+    assert.equal(result.operations.career_current_authority_release, true);
+  }
+});

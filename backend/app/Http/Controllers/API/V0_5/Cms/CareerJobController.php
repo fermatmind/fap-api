@@ -123,7 +123,11 @@ final class CareerJobController extends Controller
 
         $slug = app(CareerCurrentIdentity::class)->canonicalSlug($slug);
         $reader = app(\App\Services\Career\CareerFilePageReader::class);
-        $bundle = $reader->read($slug, $validated['locale']);
+        try {
+            $bundle = $reader->read($slug, $validated['locale']);
+        } catch (\App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure $error) {
+            return response()->json(['error' => 'CAREER_PAGE_UNAVAILABLE', 'code' => $error->safeCode], 503);
+        }
 
         return $bundle === null ? response()->json(['error' => 'not found'], 404) : response()->json($reader->seo($bundle));
     }

@@ -70,10 +70,15 @@ final class CareerFilePageReader
         $meta = ['title' => $title, 'description' => $description, 'canonical' => $path,
             'robots' => 'index,follow', 'hreflang' => ['en' => '/en/career/jobs/'.$page['subject']['canonical_slug'], 'zh-CN' => '/zh/career/jobs/'.$page['subject']['canonical_slug']]];
 
+        $meta['alternates'] = $meta['hreflang'];
+        $meta['og'] = ['title' => $title, 'description' => $description, 'url' => $path, 'image' => null];
+        $meta['twitter'] = ['title' => $title, 'description' => $description, 'image' => null];
+
         return ['meta' => $meta, 'jsonld' => null, 'seo_surface_v1' => [
             'metadata_contract_version' => 'seo.surface.v1', 'surface_type' => 'career_job_detail',
             'canonical_url' => $path, 'robots_policy' => 'index,follow', 'title' => $title,
             'description' => $description ?? '', 'index_eligible' => true, 'index_state' => 'indexable',
+            'indexability_state' => 'indexable', 'sitemap_state' => 'included', 'llms_exposure_state' => 'allow',
             'structured_data_keys' => [], 'metadata_fingerprint' => $page['source_content_sha256'],
         ]];
     }

@@ -28,31 +28,31 @@ final class GlobalCareerRuntimeCohortPublishAuthorityAlignment01Test extends Tes
 
     public function test_runtime_detail_and_seo_authority_are_aligned_for_public_en_and_zh_routes(): void
     {
-        $this->configureRuntimeProjection(['runtime-aligned-job' => true]);
-        $this->createRuntimeOccupation('runtime-aligned-job');
+        $this->configureRuntimeProjection(['actors' => true]);
+        $this->createRuntimeOccupation('actors');
         $cache = app(PublicCareerAuthorityResponseCache::class);
-        $this->assertSame('cached', $cache->warmJobDetailPayload('runtime-aligned-job', 'en', true)['status']);
-        $this->assertSame('cached', $cache->warmJobDetailPayload('runtime-aligned-job', 'zh-CN', true)['status']);
+        $this->assertSame('cached', $cache->warmJobDetailPayload('actors', 'en', true)['status']);
+        $this->assertSame('cached', $cache->warmJobDetailPayload('actors', 'zh-CN', true)['status']);
 
-        $this->getJson('/api/v0.5/career/jobs/runtime-aligned-job?locale=en')
+        $this->getJson('/api/v0.5/career/jobs/actors?locale=en')
             ->assertOk()
-            ->assertJsonPath('identity.canonical_slug', 'runtime-aligned-job')
-            ->assertJsonPath('seo_contract.canonical_path', '/en/career/jobs/runtime-aligned-job')
+            ->assertJsonPath('identity.canonical_slug', 'actors')
+            ->assertJsonPath('seo_contract.canonical_path', '/en/career/jobs/actors')
             ->assertJsonPath('seo_contract.index_eligible', true)
             ->assertJsonPath('seo_contract.robots_policy', 'index,follow');
 
-        $this->getJson('/api/v0.5/career/jobs/runtime-aligned-job?locale=zh-CN')
+        $this->getJson('/api/v0.5/career/jobs/actors?locale=zh-CN')
             ->assertOk()
-            ->assertJsonPath('identity.canonical_slug', 'runtime-aligned-job')
-            ->assertJsonPath('seo_contract.canonical_path', '/zh/career/jobs/runtime-aligned-job')
+            ->assertJsonPath('identity.canonical_slug', 'actors')
+            ->assertJsonPath('seo_contract.canonical_path', '/zh/career/jobs/actors')
             ->assertJsonPath('seo_contract.index_eligible', true)
             ->assertJsonPath('seo_contract.robots_policy', 'index,follow');
 
         foreach ([
-            'en' => '/en/career/jobs/runtime-aligned-job',
-            'zh-CN' => '/zh/career/jobs/runtime-aligned-job',
+            'en' => '/en/career/jobs/actors',
+            'zh-CN' => '/zh/career/jobs/actors',
         ] as $locale => $canonicalPath) {
-            $response = $this->getJson('/api/v0.5/career-jobs/runtime-aligned-job/seo?locale='.$locale.'&org_id=0')
+            $response = $this->getJson('/api/v0.5/career-jobs/actors/seo?locale='.$locale.'&org_id=0')
                 ->assertOk()
                 ->assertJsonPath('meta.robots', 'index,follow')
                 ->assertJsonPath('meta.canonical', $canonicalPath)
@@ -62,7 +62,10 @@ final class GlobalCareerRuntimeCohortPublishAuthorityAlignment01Test extends Tes
                 ->assertJsonPath('seo_surface_v1.sitemap_state', 'included')
                 ->assertJsonPath('seo_surface_v1.llms_exposure_state', 'allow');
 
-            $this->assertContains('Occupation', $response->json('seo_surface_v1.structured_data_keys'));
+            $this->assertSame([], $response->json('seo_surface_v1.structured_data_keys'));
+            $this->assertNull($response->json('jsonld'));
+            $file = app(\App\Domain\Career\Display\CareerPageProjector::class)->read('actors', $locale);
+            $this->assertSame($file['seo']['description']['text'], $response->json('meta.description'));
         }
     }
 

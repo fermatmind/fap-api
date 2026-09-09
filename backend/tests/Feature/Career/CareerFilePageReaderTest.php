@@ -90,5 +90,7 @@ final class CareerFilePageReaderTest extends TestCase
         $this->publication(true);
         $this->getJson('/api/v0.5/career/jobs/missing-file-role?locale=en')->assertStatus(503)
             ->assertJsonPath('error', 'CAREER_PAGE_UNAVAILABLE');
+        $this->getJson('/api/v0.5/career-jobs/missing-file-role/seo?locale=en')->assertStatus(503)
+            ->assertJsonPath('error', 'CAREER_PAGE_UNAVAILABLE');
     }
 }
