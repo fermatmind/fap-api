@@ -67,8 +67,9 @@ final class CareerCurrentIdentity
             }
         }
         $slug = (string) (data_get($payload, 'identity.canonical_slug') ?? $payload['canonical_slug'] ?? $payload['slug'] ?? '');
-        if ($slug === '' && is_string($payload['url'] ?? null)
-            && preg_match('#^/(?:en|zh)/career/jobs/([a-z0-9-]+)/?$#D', (string) parse_url($payload['url'], PHP_URL_PATH), $match) === 1) {
+        $url = $payload['url'] ?? $payload['item'] ?? null;
+        if ($slug === '' && is_string($url)
+            && preg_match('#^/(?:en|zh)/career/jobs/([a-z0-9-]+)/?$#D', (string) parse_url($url, PHP_URL_PATH), $match) === 1) {
             $slug = $match[1];
         }
         $definition = $this->definition($slug);
@@ -97,6 +98,18 @@ final class CareerCurrentIdentity
         foreach (['display_surface_v1.presentation_v2.hero.title', 'display_surface_v1.page.content.hero.title'] as $path) {
             if (is_string(data_get($payload, $path))) {
                 data_set($payload, $path, $title);
+            }
+        }
+        // A combination has no single SOC/O*NET code; all members live in crosswalks.
+        $singleCode = count($definition['occupations']) === 1 ? $definition['occupations'][0]['code'] : null;
+        foreach (['onet_code' => $singleCode, 'soc_code' => $singleCode === null ? null : substr($singleCode, 0, 7)] as $key => $code) {
+            if (array_key_exists($key, $payload)) {
+                $payload[$key] = $code;
+            }
+            foreach (['display_surface_v1.presentation_v1.hero', 'display_surface_v1.presentation_v2.hero'] as $container) {
+                if (is_array(data_get($payload, $container)) && array_key_exists($key, data_get($payload, $container))) {
+                    data_set($payload, $container.'.'.$key, $code);
+                }
             }
         }
         if (is_array($payload['ontology'] ?? null)) {

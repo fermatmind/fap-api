@@ -88,15 +88,41 @@ final class CareerCurrentIdentityTest extends TestCase
                         'content_v3' => ['subject' => ['name' => 'Retained body']],
                     ],
                 ];
+                $payload['display_surface_v1']['subject'] = ['canonical_slug' => $slug, 'onet_code' => 'old', 'soc_code' => 'old'];
+                $payload['display_surface_v1']['presentation_v1']['hero'] = ['onet_code' => 'old', 'soc_code' => 'old'];
                 $projected = $identity->projectPayload($payload, $locale);
                 self::assertSame($identity->name($slug, $locale), data_get($projected, 'display_surface_v1.presentation_v2.hero.title'));
                 self::assertSame($identity->name($slug, $locale), data_get($projected, 'display_surface_v1.page.content.hero.title'));
+                $members = $identity->definition($slug)['occupations'];
+                $code = count($members) === 1 ? $members[0]['code'] : null;
+                foreach (['subject', 'presentation_v1.hero'] as $container) {
+                    self::assertSame($code, data_get($projected, 'display_surface_v1.'.$container.'.onet_code'));
+                    self::assertSame($code === null ? null : substr($code, 0, 7), data_get($projected, 'display_surface_v1.'.$container.'.soc_code'));
+                }
                 self::assertSame($payload['display_surface_v1']['content_v3'], $projected['display_surface_v1']['content_v3']);
                 self::assertSame($projected, $identity->projectPayload($projected, $locale));
             }
         }
         $unscoped = ['identity' => ['canonical_slug' => 'actors'], 'display_surface_v1' => ['presentation_v2' => ['hero' => ['title' => 'Actors']]]];
         self::assertSame($unscoped, $identity->projectPayload($unscoped, 'en'));
+    }
+
+    public function test_breadcrumb_identity_uses_the_full_current_combination(): void
+    {
+        $identity = app(CareerCurrentIdentity::class);
+        $slug = 'drywall-and-ceiling-tile-installers-and-tapers';
+        foreach (['en' => 'en', 'zh-CN' => 'zh'] as $locale => $segment) {
+            $items = [
+                ['position' => 1, 'name' => 'Career', 'item' => '/career'],
+                ['position' => 2, 'name' => 'Drywall And Ceiling Tile Installers', 'item' => '/'.$segment.'/career/jobs/'.$slug],
+            ];
+            $public = $identity->projectPayload(['structured_data' => ['breadcrumb_list' => ['itemListElement' => $items]]], $locale);
+            $actual = $public['structured_data']['breadcrumb_list']['itemListElement'];
+            self::assertSame($items[0], $actual[0]);
+            self::assertSame($identity->name($slug, $locale), $actual[1]['name']);
+            self::assertSame($items[1]['item'], $actual[1]['item']);
+            self::assertSame($public, $identity->projectPayload($public, $locale));
+        }
     }
 
     public function test_invalid_scope_definitions_are_rejected(): void
