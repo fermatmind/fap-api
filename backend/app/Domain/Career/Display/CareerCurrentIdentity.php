@@ -92,6 +92,13 @@ final class CareerCurrentIdentity
                 }
             }
         }
+        // These presentation containers inherit the enclosing career identity.
+        // They do not carry their own slug, so recursive projection cannot name them.
+        foreach (['display_surface_v1.presentation_v2.hero.title', 'display_surface_v1.page.content.hero.title'] as $path) {
+            if (is_string(data_get($payload, $path))) {
+                data_set($payload, $path, $title);
+            }
+        }
         if (is_array($payload['ontology'] ?? null)) {
             $payload['ontology']['crosswalks'] = [];
             foreach ($definition['occupations'] as $occupation) {

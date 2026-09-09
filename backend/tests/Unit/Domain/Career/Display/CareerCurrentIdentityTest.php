@@ -75,6 +75,30 @@ final class CareerCurrentIdentityTest extends TestCase
         self::assertSame($slug, $identity->canonicalQuery($public['titles']['canonical_zh']));
     }
 
+    public function test_nested_detail_headings_inherit_current_identity_in_both_languages(): void
+    {
+        $identity = app(CareerCurrentIdentity::class);
+        foreach (array_keys($identity->scopes()) as $slug) {
+            foreach (['en', 'zh-CN'] as $locale) {
+                $payload = [
+                    'identity' => ['canonical_slug' => $slug],
+                    'display_surface_v1' => [
+                        'presentation_v2' => ['hero' => ['title' => 'Old name']],
+                        'page' => ['content' => ['hero' => ['title' => 'Old name']]],
+                        'content_v3' => ['subject' => ['name' => 'Retained body']],
+                    ],
+                ];
+                $projected = $identity->projectPayload($payload, $locale);
+                self::assertSame($identity->name($slug, $locale), data_get($projected, 'display_surface_v1.presentation_v2.hero.title'));
+                self::assertSame($identity->name($slug, $locale), data_get($projected, 'display_surface_v1.page.content.hero.title'));
+                self::assertSame($payload['display_surface_v1']['content_v3'], $projected['display_surface_v1']['content_v3']);
+                self::assertSame($projected, $identity->projectPayload($projected, $locale));
+            }
+        }
+        $unscoped = ['identity' => ['canonical_slug' => 'actors'], 'display_surface_v1' => ['presentation_v2' => ['hero' => ['title' => 'Actors']]]];
+        self::assertSame($unscoped, $identity->projectPayload($unscoped, 'en'));
+    }
+
     public function test_invalid_scope_definitions_are_rejected(): void
     {
         $package = app(CareerContentV3AuthorityPackage::class);
