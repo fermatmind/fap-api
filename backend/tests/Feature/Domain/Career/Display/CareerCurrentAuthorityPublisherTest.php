@@ -17,6 +17,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         );
         $publisher = app(CareerCurrentAuthorityPublisher::class);
         $first = $publisher->execute(base_path());
+        self::assertSame('career.detail.page.v1', $first['public_readback']['render_contract_version']);
         self::assertSame(2092, $first['public_readback']['cache_content_match_count']);
         self::assertSame(2092, $first['write_counts']['cache_candidate_write_count']);
         self::assertSame(0, $first['write_counts']['database_update_count']);

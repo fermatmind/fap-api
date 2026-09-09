@@ -348,12 +348,8 @@ jobs:
             if .classification.operations.seo_council_orchestration == true
             then false else true end
           ' "$receipt")"
-          if [ "$private_result_authority_publish_required" = false ]; then
-            # Keep the CI parity proof, but do not turn a Council control-plane
-            # closeout into Career publication authority.
-            career_current=false
-            career_current_full_scan=false
-          fi
+          # Career now warms fingerprint-bound file projections without changing
+          # business publication authority. Private result publication stays separate.
           {
             echo "deploy=$(jq -r .classification.deploy "$receipt")"
             echo "infrastructure=$(jq -r .classification.flags.infrastructure_deployment "$receipt")"

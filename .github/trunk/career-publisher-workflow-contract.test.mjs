@@ -110,3 +110,11 @@ test("the actual production receipt predicate rejects sampled and incomplete inv
     r => { r.write_counts.cache_write_count = 1; },
   ]) { const invalid = structuredClone(receipt); mutate(invalid); assert.equal(accepted(invalid), false); }
 });
+
+test("file cache publication stays classifier-bound and separate from private result authority", () => {
+  assert.ok(deploy.includes('career_current="$(jq -r \'.publisher.required == true\' "$receipt")"'));
+  assert.doesNotMatch(deploy, /career_current=false|career_current_full_scan=false/);
+  assert.match(deploy, /if \.classification\.operations\.seo_council_orchestration == true\s+then false else true end/);
+  assert.match(deploy, /needs\.policy\.outputs\.career_current_release == 'true'/);
+  assert.match(deploy, /needs\.policy\.outputs\.career_current == 'true'/);
+});

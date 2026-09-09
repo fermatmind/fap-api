@@ -80,7 +80,7 @@ test("11D through 11L extend only the permanent CI and deploy control plane", ()
   assert.match(deploy, /production_runtime/);
   assert.match(deploy, /private_result_authority_publish_required/);
   assert.match(deploy, /if \.classification\.operations\.seo_council_orchestration == true/);
-  assert.match(deploy, /if \[ "\$private_result_authority_publish_required" = false \]; then\s+#[^\n]*\n\s+#[^\n]*\n\s+career_current=false\s+career_current_full_scan=false/);
+  assert.doesNotMatch(deploy, /career_current=false|career_current_full_scan=false/);
 });
 
 test("11D through 11L deployment stays disabled and writes immutable exact-SHA closeout receipts only", () => {

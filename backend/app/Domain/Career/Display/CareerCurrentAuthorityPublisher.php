@@ -69,6 +69,7 @@ final class CareerCurrentAuthorityPublisher
                 'after_state_sha256' => $after['summary']['aggregate_sha256'],
             ],
             'public_readback' => [
+                'render_contract_version' => CareerPageProjector::VERSION,
                 'verified_slug_count' => $count, 'verified_locale_page_count' => count($hashes),
                 'cache_content_match_count' => count($hashes),
                 'api_content_match_count' => 0, 'aggregate_sha256' => $digest,
