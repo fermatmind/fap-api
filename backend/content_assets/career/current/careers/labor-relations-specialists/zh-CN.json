@@ -1613,8 +1613,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "available",
+        "fact_ref": "wage-median",
+        "key": "us_pay",
+        "label": "美国年薪中位数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "0443c6d10290371c08213f43ffe9a5fedfac5285088c32aa19647b6432f5d5d2",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "劳动关系专员调查员工与管理层争议，解释集体协议，准备谈判方案并协调申诉程序；核心交付是可追溯的事实时间线、条款对照、选项与授权记录。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "劳动关系专员"
+    }
+  },
+  "source_content_sha256": "970ff8bf3aed8b161e167d41d05408b68ebc4072dcde75df31868df8e0664389",
   "subject": {
     "canonical_slug": "labor-relations-specialists",
     "name": "劳动关系专员",

@@ -32,7 +32,8 @@ final class CareerContentV3Contract
     {
         self::exactKeysWithOptional($content, [
             'contract_version', 'locale', 'subject', 'content_state', 'source_content_sha256', 'blocks',
-        ], ['fact_register']);
+        ], ['fact_register', 'hero', 'seo']);
+        CareerPageProjector::assertFields($content);
         if (($content['contract_version'] ?? null) !== self::CONTRACT_VERSION
             || ! in_array($content['locale'] ?? null, CareerCurrentAuthorityPackage::LOCALES, true)
             || ! in_array($content['content_state'] ?? null, ['enhanced', 'legacy'], true)

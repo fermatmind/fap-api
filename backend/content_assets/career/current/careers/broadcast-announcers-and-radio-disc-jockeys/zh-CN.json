@@ -1903,8 +1903,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "available",
+        "fact_ref": "low",
+        "key": "us_pay",
+        "label": "美国时薪中位数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "1e6e1d0959e3562d7dbadbc2532fadc29a0f45d70de29e16cc70f17200f1a252",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "广播主持人与电台音乐节目主持人处理节目单、口播稿、音频素材、时长、嘉宾资料、广告/公益标识和播出日志，核心是判断信息是否可播、素材使用状态是否明确、总时长和节目或机构规定的插播窗口是否满足。页面提供可完成的虚构纸面材料、明确答案、美国统计范围与安全复核边界。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "广播主持人与电台音乐节目主持人"
+    }
+  },
+  "source_content_sha256": "b247cf2f68aac5b220a6e3af92ddaf7c7ce0217aec5cacc283010e5a33470a89",
   "subject": {
     "canonical_slug": "broadcast-announcers-and-radio-disc-jockeys",
     "name": "广播主持人与电台音乐节目主持人",

@@ -1592,8 +1592,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_pay",
+        "label": "美国薪资参考"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "1981ddaa3956cd11ae02a066019bb18af7895cf68af849e596c9cbb56c652187",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "依据医师处方和患者影像生成放射治疗计划并进行剂量计算，与放射肿瘤团队沟通、复核和支持计划实施。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "医学剂量师"
+    }
+  },
+  "source_content_sha256": "467d21ebfd379acf7eee5e7b5569d0ef3018340ea8db88cba76c499e3e9480a4",
   "subject": {
     "canonical_slug": "medical-dosimetrists",
     "name": "医学剂量师",

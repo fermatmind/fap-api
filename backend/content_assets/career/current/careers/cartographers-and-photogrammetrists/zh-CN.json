@@ -1860,8 +1860,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "available",
+        "fact_ref": "low",
+        "key": "us_pay",
+        "label": "美国时薪中位数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "ebf4efc8868e3294396f8ed9fb771dba02fb6e04d0efde162191445bb51212a7",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "制图师与摄影测量师处理控制点坐标、坐标参考系统、影像期次、比例尺、属性与精度元数据，核心是判断数据能否叠加、偏差是单位/坐标系还是采集误差，以及产品可支持何种用途。页面提供可完成的虚构纸面材料、明确答案、美国统计范围与安全复核边界。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "制图师与摄影测量师"
+    }
+  },
+  "source_content_sha256": "a24d232289080c200a79a2d02cce1d509017a809047a3bf162b745b5f24af536",
   "subject": {
     "canonical_slug": "cartographers-and-photogrammetrists",
     "name": "制图师与摄影测量师",

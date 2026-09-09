@@ -1810,8 +1810,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "available",
+        "fact_ref": "low",
+        "key": "us_pay",
+        "label": "美国时薪中位数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "b6e7352b2c6bdbe875b4b325e9a3c78c7b0e6e1bdcd5bad4d3d4d9c2c4f38096",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "回收协调员监督回收项目与人员，安排收集路线和出货，管理预算与承运合同，培训员工，检查设施合规并制定减废目标。页面另以虚构称重与去向凭证提供低风险体验，明确危险或未知物料只记录并升级。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "回收协调员"
+    }
+  },
+  "source_content_sha256": "ee7054ab10971b3df4f41e8637666cfb1bebf27eacf65f4bc769b51d880eaa8a",
   "subject": {
     "canonical_slug": "recycling-coordinators",
     "name": "回收协调员",

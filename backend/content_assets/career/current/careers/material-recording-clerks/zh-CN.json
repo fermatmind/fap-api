@@ -1546,8 +1546,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "available",
+        "fact_ref": "us-combined-median-wage",
+        "key": "us_pay",
+        "label": "美国年薪中位数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "1e4c098c5966f56a7908bac83e2c371d0ff5aa366d3072e25ff37dab273efb59",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "透明组合职业：在生产流、收发货记录和称量计量检查记录三类范围内，保持数量、位置、状态、时间与差异可追溯。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "物料记录文员"
+    }
+  },
+  "source_content_sha256": "07b9e3d0274c7b95fda3d421e274b592b35322e6231f9abcec5ba84a1e0a9e40",
   "subject": {
     "canonical_slug": "material-recording-clerks",
     "name": "物料记录文员",

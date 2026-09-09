@@ -1562,8 +1562,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_pay",
+        "label": "美国薪资参考"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "available",
+        "fact_ref": "us-employment-2025",
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "334d319f62f9ae3b2a2c69864ed89cd5fc456df41e705315c447a61f7be644ce",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "非儿科骨科外科医师以受许可、受监督的临床判断和手术能力处理成人肌肉骨骼疾病与损伤，并对患者安全、团队协作和结果负责。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "外科医师"
+    }
+  },
+  "source_content_sha256": "2683cb9eb57b9af3891259a7084ab217b46b4679beff5206aa6e1ab1809b1826",
   "subject": {
     "canonical_slug": "orthopedic-surgeons-except-pediatric",
     "name": "外科医师",

@@ -1638,8 +1638,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_pay",
+        "label": "美国薪资参考"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "available",
+        "fact_ref": "employment-2025",
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "9fcd635b3dd9453726e3b75685bb4628e3ddfb38fa4f1ccbca13277e9ff26025",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "电影视频编辑把分散的运动影像、声音和制作意图组织成可复核的成片：核对素材与时间码，选择镜头、安排顺序、同步声音、记录修改并与制作团队反复审看。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "电影视频编辑"
+    }
+  },
+  "source_content_sha256": "1fe5d18a08a799c462c2b5e9153b1b4f476ca2984adb48cd21c0641bafc33176",
   "subject": {
     "canonical_slug": "film-and-video-editors",
     "name": "电影视频编辑",

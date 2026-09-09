@@ -1612,8 +1612,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_pay",
+        "label": "美国薪资参考"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "available",
+        "fact_ref": "employment",
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "cdb0a07b5d62ec6094f01cb0413235d0e6a9a6948fac71844742e684cf8e1c2e",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "本页精确讨论O*NET 51-9011.00化工设备操作与看护员：在既定流程与授权下操作或看护设备，监看状态、记录数据、识别异常并完成交接；不把化学工程设计、实验分析或金属加工设备岗位合并进来。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "设备操作员看护员"
+    }
+  },
+  "source_content_sha256": "f0b26c18113e925e89d543a4c9576b4813f3dfca9f8bc36b61c44398cd437cb5",
   "subject": {
     "canonical_slug": "chemical-equipment-operators-and-tenders",
     "name": "设备操作员看护员",

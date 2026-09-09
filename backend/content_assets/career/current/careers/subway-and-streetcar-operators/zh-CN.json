@@ -2,8 +2,59 @@
   "blocks": [],
   "content_state": "legacy",
   "contract_version": "career.detail.content.v3",
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_pay",
+        "label": "美国薪资参考"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "f0ea64b9016a2689ea0577ad30b16ce0f62d1fb47a3105d5a486e78d4e42e868",
+  "seo": {
+    "description": {
+      "availability": "missing",
+      "text": null
+    },
+    "title": {
+      "availability": "available",
+      "text": "地铁与有轨电车司机"
+    }
+  },
+  "source_content_sha256": "4d78746d067f4a7584adb559d5a4d2d991d290228d348f94e2a53f9ed1d95ca0",
   "subject": {
     "canonical_slug": "subway-and-streetcar-operators",
     "name": "地铁与有轨电车司机",

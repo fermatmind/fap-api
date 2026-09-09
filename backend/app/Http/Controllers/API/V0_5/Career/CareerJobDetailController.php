@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\API\V0_5\Career;
 
 use App\Domain\Career\Display\CareerCurrentIdentity;
+use App\Domain\Career\Display\CareerPageProjector;
 use App\Http\Controllers\Concerns\RespondsWithNotFound;
 use App\Http\Controllers\Controller;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
@@ -71,6 +72,10 @@ final class CareerJobDetailController extends Controller
 
             $payload = $this->reviewEvidenceBridge->projectDetailPayload($slug, $payload, ! $verifyOnly);
             $payload = app(CareerCurrentIdentity::class)->projectPayload($payload, $publicLocale);
+            $pages = app(CareerPageProjector::class);
+            $payload['career_page'] = $pages->contains($slug) ? $pages->read($slug, $publicLocale) : null;
+            // Preserve the exact old wire shape until the frontend has switched.
+            unset($payload['display_surface_v1']['content_v3']['hero'], $payload['display_surface_v1']['content_v3']['seo']);
 
             return response()->json($this->projectReaderSafePayload($payload))
                 ->header(self::PUBLIC_READ_CACHE_HEADER, $read['state']);
@@ -103,6 +108,9 @@ final class CareerJobDetailController extends Controller
         }
 
         foreach ($payload as $key => $value) {
+            if ($key === 'career_page' && is_array($value)) {
+                continue;
+            }
             // Current has already been hydrated by the canonical reader. Legacy
             // cleanup must preserve its source enums and structured references.
             if ($key === 'content_v3' && is_array($value)

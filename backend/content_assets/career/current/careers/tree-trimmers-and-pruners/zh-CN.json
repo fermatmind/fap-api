@@ -1545,8 +1545,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_pay",
+        "label": "美国薪资参考"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "available",
+        "fact_ref": "us-employment-2025",
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "026867dffecd4cbeb1bec81714961900cd9b1162e04f40b866f39ae15df0755e",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "在户外、高处、落物与潜在带电风险下评估和修剪树木，并通过隔离、设备检查、团队通信和停止规则保护人员、设施与树木。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "树木修剪工"
+    }
+  },
+  "source_content_sha256": "21b8dae80322535003679a6b3b3da2e66b07a36f44923ab9bd473b2677236461",
   "subject": {
     "canonical_slug": "tree-trimmers-and-pruners",
     "name": "树木修剪工",

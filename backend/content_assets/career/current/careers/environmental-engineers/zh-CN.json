@@ -1619,8 +1619,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "available",
+        "fact_ref": "us-median-wage",
+        "key": "us_pay",
+        "label": "美国年薪中位数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "787e81bc58d4c60d39efc42df2e10095b109b2fb7194c466390d553d06d268a7",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "环境工程师用工程方法处理水、空气、土壤污染控制与场地修复：从数据、标准和现场约束出发，形成方案、许可材料、质量检查与可追溯报告，并在安全、法规或授权不清时停止并升级。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "环境工程师"
+    }
+  },
+  "source_content_sha256": "0fde8a2b658ac760d9e846c262374060a687d1a7af0a929e169b3d4adc571c5a",
   "subject": {
     "canonical_slug": "environmental-engineers",
     "name": "环境工程师",

@@ -1836,8 +1836,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "available",
+        "fact_ref": "low",
+        "key": "us_pay",
+        "label": "美国时薪中位数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "6d223a74f78f268ff136acd8fea8ef56f3af0592a6c1d34653c309456bb3bd6e",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "旅行顾问处理旅客日期、预算、班次、住宿、退改条件和目的地限制，核心是区分硬约束、偏好和仍待旅客确认的条件，并识别低价是否以不可退改或过晚到达为代价。页面提供可完成的虚构纸面材料、明确答案、美国统计范围与安全复核边界。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "旅行顾问"
+    }
+  },
+  "source_content_sha256": "bf03cb1af2a92ccd00ba799edb630c9ec00bdd88a11009b74002304831e9c26f",
   "subject": {
     "canonical_slug": "travel-agents",
     "name": "旅行顾问",

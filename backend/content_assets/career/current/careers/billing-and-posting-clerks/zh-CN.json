@@ -1849,8 +1849,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "available",
+        "fact_ref": "low",
+        "key": "us_pay",
+        "label": "美国时薪中位数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "b14a4cde5c654ed2b45e56f6e6506f81d03ec9cdb689fe38868648a8697b309e",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "账单过账文员处理订单、发运单、费率表、客户账户和贷项记录，核心是判断一项收费是否具备完整依据，以及差异应更正、暂挂还是交主管处理。页面提供可完成的虚构纸面材料、明确答案、美国统计范围与安全复核边界。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "账单过账文员"
+    }
+  },
+  "source_content_sha256": "b37d8ec3b298a4b9fc01f5346a4cf9061d9c9642df3c2e9f0aeca1a1b2876ac8",
   "subject": {
     "canonical_slug": "billing-and-posting-clerks",
     "name": "账单过账文员",

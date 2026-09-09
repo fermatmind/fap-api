@@ -1975,8 +1975,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "available",
+        "fact_ref": "median",
+        "key": "us_pay",
+        "label": "美国年薪中位数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "2a803946b55c38c33bceefe126394643dd0672c6a46d3057b3537bc26ab59d1d",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "机械工程师把功能需求转成机械或热系统方案，通过计算、图样、样机和试验验证设计是否满足条件。核心能力是解释假设、处理失效并控制变更，而不只是建模；入门作品可以从纯数字的接口与设计审查开始，真实制造和专业签字须另有授权。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "机械工程师"
+    }
+  },
+  "source_content_sha256": "4c401c6c03decda41ffa69878a0c6b0f1d206c46a6c7ff13e584a3efe5dfa614",
   "subject": {
     "canonical_slug": "mechanical-engineers",
     "name": "机械工程师",

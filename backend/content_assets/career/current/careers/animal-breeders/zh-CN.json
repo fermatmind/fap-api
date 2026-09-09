@@ -1581,8 +1581,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_pay",
+        "label": "美国薪资参考"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "available",
+        "fact_ref": "employment-2024",
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "d6483f42022f00a5d02a9289962fd4d90163d0eb63f9cc6414f7fea241cf9a73",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "动物饲养员对应O*NET 45-2021.00 Animal Breeders：按谱系、特征和后代选择并繁育动物，持续观察状态、维护身份与繁育记录，并在异常或权限不清时停止并升级。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "动物饲养员"
+    }
+  },
+  "source_content_sha256": "368336f8ba6e607288823efdea7401e2237d675037fe1b96eaf52e54aa48175d",
   "subject": {
     "canonical_slug": "animal-breeders",
     "name": "动物饲养员",

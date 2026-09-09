@@ -8532,8 +8532,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "available",
+        "fact_ref": "bls-us-accountants-wage-median-2025",
+        "key": "us_pay",
+        "label": "美国年薪中位数"
+      },
+      {
+        "availability": "available",
+        "fact_ref": "bls-us-accountants-employment-growth-2025-2035",
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "available",
+        "fact_ref": "bls-us-accountants-employment-2025",
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "available",
+        "fact_ref": "bls-us-accountants-openings-2025-2035",
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "available",
+        "fact_ref": "mohrss-cn-economic-financial-wage-median-2024",
+        "key": "china_pay",
+        "label": "中国经济和金融专业人员年工资中位数"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "54f96d4ad1b3f3428b43dd5f2730d0742c3ebcdf55909d8e835e17a05cb5009c",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "把交易、凭证、报表和内控证据，转化为可核验的财务信息。它更适合重视准确性、规则、截止日期和跨部门沟通的人——而不是只会\"算数\"的人。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "会计师和审计师"
+    }
+  },
+  "source_content_sha256": "8db66e10a2b0437b6016f8c85c659d9e0f35f1b994a5c1cd0fedb48a2c1d787d",
   "subject": {
     "canonical_slug": "accountants-and-auditors",
     "name": "会计师和审计师",

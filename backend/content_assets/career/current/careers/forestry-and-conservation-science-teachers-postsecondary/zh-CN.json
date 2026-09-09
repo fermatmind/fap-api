@@ -1571,8 +1571,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "available",
+        "fact_ref": "wage-annual",
+        "key": "us_pay",
+        "label": "美国年薪中位数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "available",
+        "fact_ref": "employment",
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "552118e5e61cef1d836d55b040e92489c1390e0c2a233873634ecdf7845ee1b9",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "本页精确讨论O*NET 25-1043.00：教授林业与保护科学课程，包括以教学为主和教学研究并重的高等教育教师；不把自然科学管理、一般生物研究、资源管理或其他学科教师合并进来。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "林业与保护科学教师（高等教育）"
+    }
+  },
+  "source_content_sha256": "7bb54376026cdbff2ffd5cce2ac5382ff654e0b8ec7491c95ce79dd3631ab8dc",
   "subject": {
     "canonical_slug": "forestry-and-conservation-science-teachers-postsecondary",
     "name": "林业与保护科学教师（高等教育）",

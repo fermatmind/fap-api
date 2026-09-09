@@ -1661,8 +1661,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "available",
+        "fact_ref": "us-wage",
+        "key": "us_pay",
+        "label": "美国年薪中位数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "2240146aedbb97758ad9a4351e6ac338e2fd9ff181363d2f686882fa27c0c407",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "神经科医师以非手术方式评估和管理脑、脊髓与周围神经疾病：整合病史、神经检查和检查时序，形成有证据边界的临床判断，协调治疗、监测与交接。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "神经科医师"
+    }
+  },
+  "source_content_sha256": "2b5cbcc7f42403f769cbd8ab68dc05555159e1d02920a7679118a782dd5d5123",
   "subject": {
     "canonical_slug": "neurologists",
     "name": "神经科医师",

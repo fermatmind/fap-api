@@ -1624,8 +1624,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_pay",
+        "label": "美国薪资参考"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "available",
+        "fact_ref": "us-employment-2024",
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "a5bdf3b4edda5b3ceda47cf9f759ef585d0aee68c3276855f086147005e909d1",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "健康信息技师与医疗登记专员把病历、治疗与随访信息转成可检索、可分析、可审计的数据与系统：既处理编码、登记和统计，也可能参与数据库、医疗信息系统、隐私安全和员工培训。具体岗位通常只覆盖其中一部分。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "健康信息技师与医疗登记专员"
+    }
+  },
+  "source_content_sha256": "9760b00b67b599e37240714061dd0acff3c59bef4d6b724e08ccd381be422434",
   "subject": {
     "canonical_slug": "health-information-technologists-and-medical-registrars",
     "name": "健康信息技师与医疗登记专员",

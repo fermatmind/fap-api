@@ -1981,8 +1981,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "available",
+        "fact_ref": "median",
+        "key": "us_pay",
+        "label": "美国时薪中位数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "d28b0fb02b7485cebabbf975f89255e322e25126c3cfb2d964d4d29611abb6fc",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "演员通过台词、行动和与搭档的互动塑造角色，按导演反馈反复排练与调整。职业判断既要看表演能力，也要看试镜、短期项目和工作间歇能否承受；小时工资不代表全年收入。入门可用自创短场景练习，真实演出、影像使用和数字替身须另行明确合同与授权。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "演员"
+    }
+  },
+  "source_content_sha256": "a58a7c6cdcbbadf7879b5d3e7603ef47ede365f64b63357490676366d663ef75",
   "subject": {
     "canonical_slug": "actors",
     "name": "演员",

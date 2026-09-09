@@ -1686,8 +1686,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "available",
+        "fact_ref": "pd-us-wage",
+        "key": "us_pay",
+        "label": "美国年薪中位数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "available",
+        "fact_ref": "pd-us-employment",
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "d9ce1254ef9acb9eaf11f9868158c92c1b1b6c6c2d8851d61d51e368d7bde3f1",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "制片人与导演把剧本或节目构想转成可执行的舞台、影视、广播或视频作品：制片侧控制资金、人员、预算与交付，导演侧负责剧本解释、表演、镜头与整体创意。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "制片人与导演"
+    }
+  },
+  "source_content_sha256": "bbb7b83bb7dcbc5474f792a53517050460a7b206d136715f242edb453abe739c",
   "subject": {
     "canonical_slug": "producers-and-directors",
     "name": "制片人与导演",

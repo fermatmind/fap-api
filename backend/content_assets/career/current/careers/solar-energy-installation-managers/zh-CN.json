@@ -1643,8 +1643,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_pay",
+        "label": "美国薪资参考"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "available",
+        "fact_ref": "parent-employment",
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "af610680dde63299e5d3bf95b21a9d196c6332c8d1dc0ef7c3db2810491e1721",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "太阳能安装经理直接管理住宅或商业光伏及太阳能热系统安装班组，统筹图纸与规范、人员材料、进度预算、现场检查和质量安全。核心不是泛项目管理，而是把太阳能安装项目的受控信息、班组执行和检查交付连成可追溯闭环。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "太阳能安装经理"
+    }
+  },
+  "source_content_sha256": "ee4e2331180acdcaca4524735fb3447de75550de5093b4f65ec5dcefd57f1ed7",
   "subject": {
     "canonical_slug": "solar-energy-installation-managers",
     "name": "太阳能安装经理",

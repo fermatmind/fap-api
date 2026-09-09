@@ -1582,8 +1582,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_pay",
+        "label": "美国薪资参考"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "available",
+        "fact_ref": "employment",
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "30c009c8ea5419773f7ade2f4691f8d5a157f13a1ae242d7336d018b913057ed",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "口译与笔译人员对应O*NET 27-3091.00：把口语、手语或书面文本从一种语言转换为另一种语言，并围绕受众、术语、含义、数字、专名、版本与机密要求完成复核和交付。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "口译与笔译人员"
+    }
+  },
+  "source_content_sha256": "f1aa5ec7921fb6c24088179b788dfe18986e151267f322033853c83de4582f4e",
   "subject": {
     "canonical_slug": "interpreters-and-translators",
     "name": "口译与笔译人员",

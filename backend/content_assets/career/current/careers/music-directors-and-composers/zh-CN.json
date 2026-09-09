@@ -1641,8 +1641,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_pay",
+        "label": "美国薪资参考"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "available",
+        "fact_ref": "employment-2025",
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "43874fd953722c74af947705c7f61cfa20bb51742cd9a07a2f0007e682644ebe",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "音乐总监与作曲家是O*NET 27-2041.00合并官方职业：一支把乐谱解释和排练反馈组织成整体演出声音，另一支把音乐意图发展为可演奏、录制和修订的原创作品。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "音乐总监与作曲家"
+    }
+  },
+  "source_content_sha256": "80776739dfb651046c3274dbfb640d5b7e3e4c5e3133ab58a33e35ced5eaae25",
   "subject": {
     "canonical_slug": "music-directors-and-composers",
     "name": "音乐总监与作曲家",

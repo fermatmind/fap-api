@@ -1590,8 +1590,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_pay",
+        "label": "美国薪资参考"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "available",
+        "fact_ref": "us-employment-2025",
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "f1b3f40be0e95ba6bb1ae226c3d6db15d0b72008c06d61ffe004eda17e4a5e88",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "锅炉制造与安装工按图纸制造、组装、安装、维护和修理锅炉、封闭大罐及相关压力容器，处理厚金属板件、连接、附件、缺陷检查和设备维护。工作体力要求高，常涉及狭窄空间、高处、重型部件与严格安全边界。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "锅炉制造与安装工"
+    }
+  },
+  "source_content_sha256": "1893fd3b33e661049db26229515b6788f9f7a3e3d6b4f62d314343748565a1e1",
   "subject": {
     "canonical_slug": "boilermakers",
     "name": "锅炉制造与安装工",

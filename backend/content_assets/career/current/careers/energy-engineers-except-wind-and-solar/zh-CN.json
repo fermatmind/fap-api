@@ -1811,8 +1811,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "available",
+        "fact_ref": "low",
+        "key": "us_pay",
+        "label": "美国时薪中位数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "b95bcf4936b7b2bc242e5329cf87d66e9b72635014c98c35ac4dca6eb73550de",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "能源工程师（风电与太阳能除外）设计、开发和评价建筑或工业能源项目：调查设施与用能条件，建立基线，比较技术经济方案，解决设计或施工问题，并规划实施与节能验证。页面另以虚构账单题提供低风险体验，明确美国统计范围及签署、项目授权边界。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "能源工程师（风电与太阳能除外）"
+    }
+  },
+  "source_content_sha256": "4408dcd43ab7196e182d887dca283ef3782ce8a28215cd8918c5b39918de9355",
   "subject": {
     "canonical_slug": "energy-engineers-except-wind-and-solar",
     "name": "能源工程师（风电与太阳能除外）",

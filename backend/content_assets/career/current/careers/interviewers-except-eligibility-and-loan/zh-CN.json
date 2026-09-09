@@ -1637,8 +1637,59 @@
       }
     ]
   },
+  "hero": {
+    "ai": {
+      "availability": "missing",
+      "fact_ref": null,
+      "key": "ai",
+      "label": "AI 任务暴露"
+    },
+    "badges": [],
+    "metrics": [
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_pay",
+        "label": "美国薪资参考"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_growth",
+        "label": "美国就业增长"
+      },
+      {
+        "availability": "available",
+        "fact_ref": "iv-employment",
+        "key": "us_employment",
+        "label": "美国在岗人数"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "us_openings",
+        "label": "美国年均职位空缺"
+      },
+      {
+        "availability": "missing",
+        "fact_ref": null,
+        "key": "china_pay",
+        "label": "中国大陆薪资参考"
+      }
+    ]
+  },
   "locale": "zh-CN",
-  "source_content_sha256": "6d5b04dfb31df66bea25db8b35c75b3e0acdecb482d3b606816bdaf24e149b1b",
+  "seo": {
+    "description": {
+      "availability": "available",
+      "text": "访谈员按既定问卷或表格提问、记录并澄清不一致，交付可追溯的回答、编码与异常状态；关键质量在中立、准确、完整和隐私边界。"
+    },
+    "title": {
+      "availability": "available",
+      "text": "访谈员（资格审核与信贷除外）"
+    }
+  },
+  "source_content_sha256": "141bfcd7942b7e5582ccd168d421103e2b0b6f06dd633e6b140025480844bb3d",
   "subject": {
     "canonical_slug": "interviewers-except-eligibility-and-loan",
     "name": "访谈员（资格审核与信贷除外）",
