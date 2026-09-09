@@ -75,6 +75,23 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
             ->assertJsonPath('items.0.title', $title);
     }
 
+    public function test_current_source_scope_survives_legacy_transport_cleanup(): void
+    {
+        $slug = 'insulation-workers-mechanical';
+        $expected = app(\App\Domain\Career\Display\CareerContentV3CanonicalReader::class)->page($slug, 'zh-CN');
+        self::assertStringContainsString('industry_proxy', json_encode($expected));
+        $controller = app(\App\Http\Controllers\API\V0_5\Career\CareerJobDetailController::class);
+        $project = new \ReflectionMethod($controller, 'projectReaderSafePayload');
+        $public = $project->invoke($controller, [
+            'display_surface_v1' => ['content_v3' => $expected],
+            'legacy_label' => 'industry_proxy',
+            'audit_fields' => ['trace' => 'private'],
+        ]);
+        self::assertSame($expected, $public['display_surface_v1']['content_v3']);
+        self::assertArrayNotHasKey('audit_fields', $public);
+        self::assertSame('recruitment-market reference', $public['legacy_label']);
+    }
+
     public function test_it_returns_paginated_lightweight_directory_authority(): void
     {
         $this->createDirectoryOccupation('accountants-and-auditors', 'Accountants and Auditors', '会计师与审计师', 'business-finance', 'Business and Finance');

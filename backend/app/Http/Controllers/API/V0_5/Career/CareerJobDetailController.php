@@ -103,6 +103,12 @@ final class CareerJobDetailController extends Controller
         }
 
         foreach ($payload as $key => $value) {
+            // Current has already been hydrated by the canonical reader. Legacy
+            // cleanup must preserve its source enums and structured references.
+            if ($key === 'content_v3' && is_array($value)
+                && ($value['contract_version'] ?? null) === 'career.detail.content.v3') {
+                continue;
+            }
             if (is_array($value)) {
                 $payload[$key] = $this->stripInternalReaderPayloadKeys($value);
             } elseif (is_string($value)) {

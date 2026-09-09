@@ -1,3 +1,4 @@
+import { spawnSync } from "node:child_process";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
@@ -53,8 +54,8 @@ test("production publisher is bound to the preactivation receipt digest", () => 
   assert.match(deploy, /trunk-production-\$\{\{ github\.event\.workflow_run\.head_sha \}\}/);
   assert.match(deploy, /production_parity_receipt="artifacts\/career-current-production-parity\/career-current-authority-production-preactivation-parity\.json"/);
   assert.match(deploy, /PRODUCTION_PARITY_RECEIPT_DIGEST="\$\(jq -r \.receipt_digest "\$production_parity_receipt"\)"/);
-  assert.match(deploy, /\.validation_scope\.canonical_slugs == \["accountants-and-auditors"\]/);
-  assert.match(deploy, /\.validation_scope\.locale_page_count == 2/);
+  assert.ok(deploy.includes("(.validation_scope.canonical_slugs | unique | length) == 1046"));
+  assert.match(deploy, /\.validation_scope\.locale_page_count == 2092/);
   assert.match(deploy, /\.parity\.production_preactivation_receipt_digest == env\.PRODUCTION_PARITY_RECEIPT_DIGEST/);
   assert.match(publisher, /CAREER_CURRENT_PUBLISH_PRODUCTION_PARITY_RECEIPT_DIGEST/);
   assert.match(publisher, /validation_scope\.canonical_slugs/);
@@ -80,4 +81,33 @@ test("Career publisher respects the resolved publication decision for mixed cach
       .replaceAll("needs.policy.outputs.career_current", JSON.stringify(authorized));
     assert.equal(Function(`return (${resolved})`)(), expected);
   }
+});
+
+test("the actual production receipt predicate rejects sampled and incomplete inventories", () => {
+  const block = deploy.split("- id: career-parity")[1].split("- name: Check fixed production")[0];
+  const start = block.indexOf(".contract_version ==");
+  const end = block.indexOf("' \"$receipt\"", start);
+  assert.ok(start >= 0 && end > start);
+  const predicate = block.slice(start, end).trim();
+  const args = ["-e"];
+  const values = { sha: "a".repeat(40), active: "b".repeat(40), package: "c".repeat(64), projection: "d".repeat(64), compiler: "e".repeat(64), codec: "f".repeat(64) };
+  for (const [key, value] of Object.entries(values)) args.push("--arg", key, value);
+  const receipt = {
+    contract_version: "career.current_authority_parity.v2", status: "pass", mode: "production-preactivation",
+    release_sha: values.sha, active_sha: values.active,
+    package: { digest: values.package, projection_digest: values.projection, compiler_digest: values.compiler, codec_digest: values.codec },
+    database: { compatibility_row_count: 1046, validated_compatibility_row_count: 1046 },
+    validation_scope: { canonical_slugs: Array.from({ length: 1046 }, (_, i) => `role-${i}`), slug_count: 1046, locales: ["en", "zh-CN"], locale_page_count: 2092 },
+    full_scan: { counts: Object.fromEntries(["locale_pages", "candidate", "active", "lkg", "api", "snapshot"].map(key => [key, 2092])) },
+    redis: { mode: "readonly" }, write_counts: { database_write_count: 0, cache_write_count: 0 }, receipt_digest: "a".repeat(64),
+  };
+  const accepted = value => spawnSync("jq", [...args, predicate], { input: JSON.stringify(value), encoding: "utf8" }).status === 0;
+  assert.equal(accepted(receipt), true);
+  for (const mutate of [
+    r => { r.validation_scope.canonical_slugs = ["accountants-and-auditors"]; r.validation_scope.locale_page_count = 2; },
+    r => { r.validation_scope.canonical_slugs[1045] = r.validation_scope.canonical_slugs[0]; },
+    r => { r.database.validated_compatibility_row_count = 1045; },
+    r => { r.full_scan.counts.api = 2091; },
+    r => { r.write_counts.cache_write_count = 1; },
+  ]) { const invalid = structuredClone(receipt); mutate(invalid); assert.equal(accepted(invalid), false); }
 });

@@ -60,7 +60,7 @@ final class CareerCurrentAuthorityParityTest extends TestCase
         self::assertSame($first['full_scan']['bytes'], $second['full_scan']['bytes']);
     }
 
-    public function test_deploy_runs_accountant_bilingual_production_parity_before_mutations_and_symlink(): void
+    public function test_deploy_requires_all_2092_production_pages_before_mutations_and_symlink(): void
     {
         $root = dirname(__DIR__, 6);
         $deploy = (string) file_get_contents($root.'/deploy.php');
@@ -77,8 +77,8 @@ final class CareerCurrentAuthorityParityTest extends TestCase
         self::assertStringContainsString("-o career_current_parity_required='", $workflow);
         self::assertStringNotContainsString('Run staging zero-write 2092-page Career parity', $workflow);
         self::assertStringContainsString('career.current_authority_parity.v2', $workflow);
-        self::assertStringContainsString('.validation_scope.canonical_slugs == ["accountants-and-auditors"]', $workflow);
-        self::assertStringContainsString('.validation_scope.locale_page_count == 2', $workflow);
+        self::assertStringContainsString('(.validation_scope.canonical_slugs | unique | length) == 1046', $workflow);
+        self::assertStringContainsString('.validation_scope.locale_page_count == 2092', $workflow);
         self::assertStringContainsString('CAREER_CURRENT_PUBLISH_PRODUCTION_PARITY_RECEIPT_DIGEST', $workflow);
         self::assertStringNotContainsString('CAREER_CURRENT_PUBLISH_STAGING_PARITY_RECEIPT_DIGEST', $workflow);
     }

@@ -85,10 +85,10 @@ final class CareerCurrentAuthorityParity
 
         $redis = $this->redisContract($redisMode);
         $full = $mode === self::MODE_PRODUCTION_PREACTIVATION
-            ? $this->scan($authority, self::PRODUCTION_VALIDATION_SLUGS, true, $redisMode)
+            ? $this->scan($authority, $slugs, true, $redisMode)
             : $this->scanPages($authority, $slugs, true, $redisMode);
         $slice = $mode === self::MODE_PRODUCTION_PREACTIVATION
-            ? $full
+            ? $this->scan($authority, self::PRODUCTION_VALIDATION_SLUGS, true, $redisMode)
             : $this->scanPages($authority, self::PACKAGE_SLICE_SLUGS, false, 'none');
         unset($slice['database_row_set_sha256']);
         // Accountant remains bilingual enhanced; the reviewed Chinese actor page
@@ -141,14 +141,14 @@ final class CareerCurrentAuthorityParity
             unset($full['database_row_set_sha256'], $receipt['full_scan']['database_row_set_sha256']);
             $receipt['active_sha'] = $activeSha;
             $receipt['validation_scope'] = [
-                'canonical_slugs' => self::PRODUCTION_VALIDATION_SLUGS,
-                'slug_count' => 1,
+                'canonical_slugs' => $slugs,
+                'slug_count' => count($slugs),
                 'locales' => CareerCurrentAuthorityPackage::LOCALES,
-                'locale_page_count' => 2,
+                'locale_page_count' => count($slugs) * count(CareerCurrentAuthorityPackage::LOCALES),
             ];
             $receipt['database'] = [
                 'compatibility_row_count' => count($slugs),
-                'validated_compatibility_row_count' => 1,
+                'validated_compatibility_row_count' => count($slugs),
                 'slug_set_sha256' => CareerCurrentAuthorityPackage::hashValue($slugs),
                 'row_set_sha256' => $rowSetSha256,
             ];
