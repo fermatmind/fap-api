@@ -40,6 +40,7 @@ export const CAREER_PUBLISHER_BOUNDARY_MATRIX = [
   "backend/app/Providers/AppServiceProvider.php",
   "backend/app/Services/Career/CareerJobDisplaySurfaceBuilder.php",
   "backend/app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php",
+  "backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php",
   "backend/app/Services/Career/PublicCareerAuthorityResponseCache.php",
   "backend/config/career_current_authority_parity.php",
   "backend/scripts/ci/career_current_authority_parity.php",

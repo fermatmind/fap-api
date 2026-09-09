@@ -463,6 +463,31 @@ final class CareerJobPublicApiTest extends TestCase
         $this->assertStringNotContainsString('www.fermatmind.com', (string) $response->getContent());
     }
 
+    public function test_current_scope_reaches_the_real_seo_endpoint_before_metadata_fingerprinting(): void
+    {
+        $slug = 'drywall-and-ceiling-tile-installers-and-tapers';
+        $job = $this->createJob([
+            'job_code' => $slug, 'slug' => $slug, 'locale' => 'zh-CN',
+            'title' => 'Old installer', 'subtitle' => 'Old installer',
+            'excerpt' => 'Old single occupation summary', 'body_md' => '# Old installer',
+            'market_demand_json' => ['source_refs' => [['url' => 'https://www.bls.gov/ooh/construction-and-extraction/drywall-and-ceiling-tile-installers-and-tapers.htm']]],
+            'status' => CareerJob::STATUS_PUBLISHED, 'is_public' => true,
+            'is_indexable' => true, 'published_at' => now()->subMinute(),
+        ]);
+        $this->createSeoMeta($job, ['jsonld_overrides_json' => ['source_docx' => $slug.'.docx']]);
+        foreach (['zh-CN', 'en'] as $locale) {
+            $page = app(\App\Domain\Career\Display\CareerContentV3CanonicalReader::class)->page($slug, $locale);
+            $this->getJson('/api/v0.5/career-jobs/'.$slug.'/seo?locale='.$locale)
+                ->assertOk()
+                ->assertJsonPath('meta.title', $page['subject']['name'])
+                ->assertJsonPath('meta.description', $page['subject']['summary'] ?? 'Career overview and next steps for '.$page['subject']['name'].'.')
+                ->assertJsonPath('meta.og.title', $page['subject']['name'])
+                ->assertJsonPath('meta.twitter.title', $page['subject']['name'])
+                ->assertJsonPath('seo_surface_v1.title', $page['subject']['name'])
+                ->assertJsonPath('jsonld.canonical_title', 'Drywall and Ceiling Tile Installers and Tapers');
+        }
+    }
+
     public function test_zh_seo_endpoint_uses_authoritative_docx_indexability_contract(): void
     {
         $job = $this->createJob([

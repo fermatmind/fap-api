@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\Display\CareerCurrentIdentity;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Feedback\CareerFeedbackTimelineAuthorityService;
 use App\Domain\Career\IndexStateValue;
@@ -69,6 +70,26 @@ final class CareerJobDetailBundleBuilder
         ?string $publicLocale = null,
         ?array $exposureProjectionItem = null,
         ?array $conversionClosureOverride = null,
+    ): ?CareerJobDetailBundle {
+        $identity = app(CareerCurrentIdentity::class);
+        $bundle = $this->buildCompatibilityBundle($identity->canonicalSlug($slug), $publicLocale, $exposureProjectionItem, $conversionClosureOverride);
+        if ($bundle === null || $identity->definition((string) ($bundle->identity['canonical_slug'] ?? '')) === null) {
+            return $bundle;
+        }
+        $public = $identity->projectPayload($bundle->toArray(), $publicLocale ?? 'zh-CN');
+        $arguments = get_object_vars($bundle);
+        $arguments['titles'] = $public['titles'];
+        $arguments['ontology'] = $public['ontology'];
+        $arguments['truthLayer'] = $public['truth_layer'];
+
+        return new CareerJobDetailBundle(...$arguments);
+    }
+
+    private function buildCompatibilityBundle(
+        string $slug,
+        ?string $publicLocale,
+        ?array $exposureProjectionItem,
+        ?array $conversionClosureOverride,
     ): ?CareerJobDetailBundle {
         $normalizedSlug = strtolower(trim($slug));
         if ($normalizedSlug === '') {

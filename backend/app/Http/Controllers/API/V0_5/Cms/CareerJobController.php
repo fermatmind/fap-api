@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\API\V0_5\Cms;
 
 use App\Domain\Career\Display\CareerContentV3CanonicalReader;
+use App\Domain\Career\Display\CareerCurrentIdentity;
 use App\DTO\Career\CareerJobDetailBundle;
 use App\Http\Controllers\Concerns\RespondsWithNotFound;
 use App\Http\Controllers\Controller;
@@ -210,10 +211,16 @@ final class CareerJobController extends Controller
     private function bundleDescription(CareerJobDetailBundle $bundle, string $title, string $locale): string
     {
         $slug = strtolower(trim((string) ($bundle->identity['canonical_slug'] ?? '')));
-        if ($locale === 'zh-CN' && $slug === 'accountants-and-auditors') {
+        if (($locale === 'zh-CN' && $slug === 'accountants-and-auditors')
+            || app(CareerCurrentIdentity::class)->definition($slug) !== null) {
             $summary = data_get($this->careerContentV3CanonicalReader->page($slug, $locale), 'subject.summary');
             if (is_string($summary) && trim($summary) !== '') {
                 return trim($summary);
+            }
+            if (app(CareerCurrentIdentity::class)->definition($slug) !== null) {
+                return $locale === 'zh-CN'
+                    ? $title.'的职业概览与下一步路径。'
+                    : 'Career overview and next steps for '.$title.'.';
             }
         }
 
