@@ -240,7 +240,7 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
     public function authentication_and_rate_limit_failures_are_explicit(): void
     {
         $this->seedPreviousSuccess();
-        Http::fakeSequence()->push([], 401)->push([], 429);
+        Http::fakeSequence()->push([], 401)->push([], 429)->push([], 429)->push([], 429);
 
         $auth = app(GscReadModelSyncService::class)->sync(7, ['web']);
         $rateLimit = app(GscReadModelSyncService::class)->sync(7, ['web']);

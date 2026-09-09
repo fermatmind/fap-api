@@ -9,6 +9,7 @@ use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\TestWith;
 use Tests\TestCase;
 
 final class SeoIntelGscLiveReadonlyAdapterTest extends TestCase
@@ -247,6 +248,102 @@ final class SeoIntelGscLiveReadonlyAdapterTest extends TestCase
         $this->assertFalse((bool) data_get($artifact, 'negative_guarantees.generic_proxy', true));
         $this->assertTrue((bool) ($artifact['requires_operator_approval_before_secret_install'] ?? false));
         $this->assertTrue((bool) ($artifact['requires_operator_approval_before_live_read'] ?? false));
+    }
+
+    #[Test]
+    public function oauth_transient_failures_retry_but_never_leak_credentials(): void
+    {
+        $this->enableServiceAccountConfig();
+        Http::fake([
+            'oauth2.googleapis.com/*' => Http::sequence()->pushStatus(503)->push(['access_token' => 'private-token'], 200),
+            'searchconsole.googleapis.com/*' => Http::response(['rows' => []], 200),
+        ]);
+        $result = $this->liveFetch();
+        $this->assertSame('success', $result['status']);
+        Http::assertSentCount(3);
+        $this->assertStringNotContainsString('private-token', json_encode($result));
+    }
+
+    #[Test]
+    #[TestWith(['invalid_grant'])]
+    #[TestWith(['invalid_client'])]
+    #[TestWith(['invalid_scope'])]
+    public function oauth_rejections_are_distinct_and_never_retried(string $error): void
+    {
+        $this->enableServiceAccountConfig();
+        Http::fake(['*' => Http::response(['error' => $error, 'error_description' => 'private-provider-detail'], 400)]);
+        $result = $this->liveFetch();
+        $this->assertSame(['gsc_oauth_'.$error], $result['issues']);
+        Http::assertSentCount(1);
+        $this->assertStringNotContainsString('private-provider-detail', json_encode($result));
+    }
+
+    #[Test]
+    public function oauth_transport_failure_is_bounded_and_distinct_from_rejected_credentials(): void
+    {
+        $this->enableServiceAccountConfig();
+        $attempts = 0;
+        Http::fake(function () use (&$attempts) {
+            $attempts++;
+            throw new \Illuminate\Http\Client\ConnectionException('private-network-detail');
+        });
+        $result = $this->liveFetch();
+        $this->assertSame(3, $attempts);
+        $this->assertSame(['gsc_oauth_transport_failed'], $result['issues']);
+        $this->assertStringNotContainsString('private-network-detail', json_encode($result));
+    }
+
+    #[Test]
+    public function oauth_server_failure_stays_blocked_after_three_attempts(): void
+    {
+        $this->enableServiceAccountConfig();
+        Http::fake(['*' => Http::response([], 503)]);
+        $this->assertSame(['gsc_oauth_service_unavailable'], $this->liveFetch()['issues']);
+        Http::assertSentCount(3);
+    }
+
+    #[Test]
+    #[TestWith([401])]
+    #[TestWith([403])]
+    public function analytics_access_denied_is_not_retried(int $status): void
+    {
+        $this->enableAccessTokenConfig();
+        Http::fake(['*' => Http::response([], $status)]);
+        $this->assertSame(['gsc_authentication_failed'], $this->liveFetch()['issues']);
+        Http::assertSentCount(1);
+    }
+
+    #[Test]
+    public function analytics_retries_transient_responses(): void
+    {
+        $this->enableAccessTokenConfig();
+        Http::fakeSequence()->pushStatus(429)->pushStatus(503)->push(['rows' => []], 200);
+        $this->assertSame('success', $this->liveFetch()['status']);
+        Http::assertSentCount(3);
+    }
+
+    private function liveFetch(): array
+    {
+        return (new GscReadonlyLiveAdapter)->fetchSearchAnalyticsRows([], [
+            'allow_external_api_calls' => true,
+            'execute_live_read' => true,
+        ]);
+    }
+
+    private function enableServiceAccountConfig(): void
+    {
+        $this->enableAccessTokenConfig();
+        $key = openssl_pkey_new(['private_key_bits' => 2048, 'private_key_type' => OPENSSL_KEYTYPE_RSA]);
+        openssl_pkey_export($key, $privateKey);
+        config([
+            'seo_intel.gsc_readonly_adapter.auth_mode' => 'service_account',
+            'seo_intel.gsc_readonly_adapter.service_account_json' => json_encode([
+                'type' => 'service_account',
+                'client_email' => 'test@example.invalid',
+                'private_key' => $privateKey,
+                'token_uri' => 'https://oauth2.googleapis.com/token',
+            ]),
+        ]);
     }
 
     private function enableAccessTokenConfig(): void

@@ -99,7 +99,12 @@ test("staging refreshes real measurement and production validates before conditi
   assert.match(staging, /GSC_SYNC_QUALITY_HOLD/);
   assert.match(staging, /GSC_RESTRICTED_EGRESS_TRANSPORT_FAILED/);
   assert.match(staging, /GSC_PREFLIGHT_TRANSPORT_FAILED/);
-  assert.match(staging, /GSC_AUTHENTICATION_FAILED/);
+  for (const reason of ["GSC_SEARCH_ANALYTICS_ACCESS_DENIED", "GSC_OAUTH_TRANSPORT_FAILED",
+    "GSC_OAUTH_TEMPORARILY_UNAVAILABLE", "GSC_OAUTH_INVALID_GRANT", "GSC_OAUTH_INVALID_CLIENT",
+    "GSC_OAUTH_INVALID_SCOPE", "GSC_OAUTH_RESPONSE_INVALID", "GSC_AUTHENTICATION_LOCAL_FAILURE"]) {
+    assert.match(staging, new RegExp(`fail ${reason}`));
+  }
+  assert.doesNotMatch(staging, /fail GSC_AUTHENTICATION_FAILED/);
   assert.match(staging, /GSC_EMPTY_RESPONSE/);
   assert.match(staging, /GSC_SYNC_INTERNAL_FAILURE/);
   assert.match(staging, /GSC_SYNC_OUTPUT_INVALID/);

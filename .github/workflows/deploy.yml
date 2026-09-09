@@ -728,8 +728,29 @@ jobs:
           if [ "$sync_exit" -ne 0 ]; then
             sync_issue="$(jq -r '.issue // ""' "$sync_json")"
             case "$sync_issue" in
-              gsc_authentication_failed|gsc_authentication_request_failed|gsc_access_token_resolution_failed)
-                fail GSC_AUTHENTICATION_FAILED
+              gsc_authentication_failed)
+                fail GSC_SEARCH_ANALYTICS_ACCESS_DENIED
+                ;;
+              gsc_oauth_transport_failed)
+                fail GSC_OAUTH_TRANSPORT_FAILED
+                ;;
+              gsc_oauth_rate_limited|gsc_oauth_service_unavailable)
+                fail GSC_OAUTH_TEMPORARILY_UNAVAILABLE
+                ;;
+              gsc_oauth_invalid_grant)
+                fail GSC_OAUTH_INVALID_GRANT
+                ;;
+              gsc_oauth_invalid_client)
+                fail GSC_OAUTH_INVALID_CLIENT
+                ;;
+              gsc_oauth_invalid_scope)
+                fail GSC_OAUTH_INVALID_SCOPE
+                ;;
+              gsc_oauth_rejected|gsc_oauth_token_missing)
+                fail GSC_OAUTH_RESPONSE_INVALID
+                ;;
+              gsc_authentication_request_failed|gsc_access_token_resolution_failed)
+                fail GSC_AUTHENTICATION_LOCAL_FAILURE
                 ;;
               gsc_disconnected)
                 fail GSC_SYNC_PREFLIGHT_CHANGED

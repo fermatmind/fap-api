@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel;
 
+use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Throwable;
 
@@ -127,20 +130,16 @@ final class GscReadonlyLiveAdapter
         }
 
         try {
-            $token = $this->accessToken();
+            $authentication = $this->accessToken();
+        } catch (ConnectionException) {
+            return $this->blockedFetch($preflight, 'gsc_oauth_transport_failed', true);
         } catch (Throwable) {
             return $this->blockedFetch($preflight, 'gsc_authentication_request_failed', true);
         }
-        if ($token === '') {
-            return [
-                'status' => 'blocked',
-                'rows' => [],
-                'external_calls_attempted' => $this->authMode() === 'service_account',
-                'writes_attempted' => false,
-                'issues' => ['gsc_access_token_resolution_failed'],
-                'preflight' => $preflight,
-            ];
+        if (isset($authentication['issue'])) {
+            return $this->blockedFetch($preflight, $authentication['issue'], $this->authMode() === 'service_account');
         }
+        $token = $authentication['token'];
 
         $endpoint = sprintf(
             (string) config('seo_intel.gsc_readonly_adapter.search_analytics_endpoint'),
@@ -149,9 +148,8 @@ final class GscReadonlyLiveAdapter
 
         $payload = $this->safeSearchAnalyticsPayload($request);
         try {
-            $response = Http::acceptJson()
+            $response = $this->googleRequest()->acceptJson()
                 ->withToken($token)
-                ->timeout(max(1, (int) config('seo_intel.gsc_readonly_adapter.timeout_seconds', 10)))
                 ->post($endpoint, $payload);
         } catch (Throwable) {
             return $this->blockedFetch($preflight, 'gsc_searchanalytics_timeout_or_transport_failure', true);
@@ -273,31 +271,52 @@ final class GscReadonlyLiveAdapter
         ];
     }
 
-    private function accessToken(): string
+    /** @return array{token: string}|array{issue: string} */
+    private function accessToken(): array
     {
         if ($this->authMode() === 'access_token') {
-            return trim((string) config('seo_intel.gsc_readonly_adapter.access_token', ''));
+            return ['token' => trim((string) config('seo_intel.gsc_readonly_adapter.access_token', ''))];
         }
 
         $serviceAccount = $this->serviceAccountJson();
         if ($serviceAccount === null) {
-            return '';
+            return ['issue' => 'gsc_access_token_resolution_failed'];
         }
 
         $tokenUri = (string) ($serviceAccount['token_uri'] ?? config('seo_intel.gsc_readonly_adapter.token_uri'));
         $jwt = $this->serviceAccountJwt($serviceAccount, $tokenUri);
-        $response = Http::asForm()
-            ->timeout(max(1, (int) config('seo_intel.gsc_readonly_adapter.timeout_seconds', 10)))
+        $response = $this->googleRequest()->asForm()
             ->post($tokenUri, [
                 'grant_type' => 'urn:ietf:params:oauth:grant-type:jwt-bearer',
                 'assertion' => $jwt,
             ]);
 
         if (! $response->successful()) {
-            return '';
+            // Only fixed error codes leave this boundary; Google bodies may contain credentials.
+            $issue = match (true) {
+                $response->status() === 429 => 'gsc_oauth_rate_limited',
+                $response->serverError() => 'gsc_oauth_service_unavailable',
+                $response->json('error') === 'invalid_grant' => 'gsc_oauth_invalid_grant',
+                $response->json('error') === 'invalid_client' => 'gsc_oauth_invalid_client',
+                $response->json('error') === 'invalid_scope' => 'gsc_oauth_invalid_scope',
+                default => 'gsc_oauth_rejected',
+            };
+
+            return ['issue' => $issue];
         }
 
-        return trim((string) ($response->json('access_token') ?? ''));
+        $token = trim((string) ($response->json('access_token') ?? ''));
+
+        return $token === '' ? ['issue' => 'gsc_oauth_token_missing'] : ['token' => $token];
+    }
+
+    private function googleRequest(): PendingRequest
+    {
+        // At most three attempts for transient failures; auth/permission errors never retry.
+        return Http::timeout(max(1, (int) config('seo_intel.gsc_readonly_adapter.timeout_seconds', 10)))
+            ->retry([250, 500], when: static fn (\Exception $error): bool => $error instanceof ConnectionException
+                || ($error instanceof RequestException
+                    && in_array($error->response->status(), [429, 500, 502, 503, 504], true)), throw: false);
     }
 
     /**
