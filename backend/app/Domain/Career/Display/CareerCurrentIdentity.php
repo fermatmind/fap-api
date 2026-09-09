@@ -15,6 +15,22 @@ final class CareerCurrentIdentity
         return $this->reader->authority()['manifest']['identity_aliases'] ?? [];
     }
 
+    /** Public identity inventory is derived only from the validated Current manifest. */
+    public function inventory(): array
+    {
+        $authority = $this->reader->authority();
+        $slugs = $authority['slugs'];
+        sort($slugs, SORT_STRING);
+
+        return [
+            'manifest_sha256' => hash_file('sha256', $authority['root'].'/manifest.json'),
+            'storage_count' => count($slugs),
+            'file_count' => $authority['manifest']['coverage']['files'],
+            'slugs' => $slugs,
+            'aliases' => (object) $this->aliases(),
+        ];
+    }
+
     public function canonicalSlug(string $slug): string
     {
         $slug = strtolower(trim($slug));

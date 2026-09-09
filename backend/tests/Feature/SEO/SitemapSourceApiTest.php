@@ -82,7 +82,10 @@ class SitemapSourceApiTest extends TestCase
             ->assertOk()
             ->assertHeader('X-Fermat-Cache', 'hit')
             ->assertJsonPath('ok', true)
-            ->assertJsonPath('source', 'backend_sitemap_generator');
+            ->assertJsonPath('source', 'backend_sitemap_generator')
+            ->assertJsonPath('career_current_identity.storage_count', 1046)
+            ->assertJsonPath('career_current_identity.file_count', 2092)
+            ->assertJsonPath('career_current_identity.aliases.preschool-teachers', 'preschool-teachers-except-special-education');
 
         $locs = collect($response->json('items'))->pluck('loc')->all();
 

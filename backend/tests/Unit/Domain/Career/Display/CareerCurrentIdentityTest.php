@@ -15,6 +15,21 @@ use Tests\TestCase;
 
 final class CareerCurrentIdentityTest extends TestCase
 {
+    public function test_public_inventory_binds_storage_and_aliases_to_current_manifest(): void
+    {
+        $identity = app(CareerCurrentIdentity::class);
+        $inventory = $identity->inventory();
+        self::assertSame(1046, $inventory['storage_count']);
+        self::assertSame(2092, $inventory['file_count']);
+        self::assertCount(1046, array_unique($inventory['slugs']));
+        self::assertSame(hash_file('sha256', base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH.'/manifest.json')), $inventory['manifest_sha256']);
+        self::assertSame($identity->aliases(), (array) $inventory['aliases']);
+        foreach ((array) $inventory['aliases'] as $alias => $target) {
+            self::assertContains($alias, $inventory['slugs']);
+            self::assertContains($target, $inventory['slugs']);
+        }
+    }
+
     public function test_retained_aliases_resolve_names_without_changing_physical_identity(): void
     {
         $identity = app(CareerCurrentIdentity::class);

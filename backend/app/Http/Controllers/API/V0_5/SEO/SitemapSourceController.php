@@ -171,7 +171,7 @@ class SitemapSourceController extends Controller
             default => 'public, max-age=300, s-maxage=600',
         };
 
-        return response()->json($payload)
+        return response()->json([...$payload, 'career_current_identity' => app(CareerCurrentIdentity::class)->inventory()])
             ->header('X-Fermat-Cache', $cacheState)
             ->header('Cache-Control', $cacheControl);
     }
