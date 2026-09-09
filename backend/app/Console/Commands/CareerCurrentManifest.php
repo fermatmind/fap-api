@@ -39,7 +39,7 @@ final class CareerCurrentManifest extends Command
                 'assets_sha256' => $manifest['aggregate_sha256'],
                 'manifest_sha256' => hash_file('sha256', $manifestPath),
                 'aggregate_sha256' => $manifest['aggregate_sha256'],
-                'versionless_projection_sha256' => $manifest['set_hashes']['legacy_versionless_projection_sha256'],
+                'versionless_projection_sha256' => $manifest['set_hashes']['source_semantic_aggregate_sha256'],
                 'career_count' => count($index['slugs']),
                 'locale_page_count' => count($manifest['files']),
                 'source_format' => 'content_v3_per_page',

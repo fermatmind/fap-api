@@ -20,6 +20,9 @@ final class CareerCurrentManifestCommandTest extends TestCase
         $check = json_decode(trim(Artisan::output()), true, 512, JSON_THROW_ON_ERROR);
         self::assertSame('PASS_CAREER_CURRENT_MANIFEST', $check['status'] ?? null);
         self::assertFalse($check['stale'] ?? true);
+        $manifest = json_decode(file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
+        self::assertSame($manifest['set_hashes']['source_semantic_aggregate_sha256'], $check['versionless_projection_sha256']);
+        self::assertArrayNotHasKey('legacy_versionless_projection_sha256', $manifest['set_hashes']);
         self::assertSame(0, array_sum(array_intersect_key($check, array_flip([
             'database_writes',
             'cache_writes',
