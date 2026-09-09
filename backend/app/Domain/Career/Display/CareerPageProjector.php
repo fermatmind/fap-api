@@ -34,6 +34,17 @@ final class CareerPageProjector
         if (! isset($content['hero'], $content['seo'])) {
             throw new CareerCurrentAuthorityPackageFailure('CAREER_PAGE_FIELDS_MISSING');
         }
+        foreach ($content['blocks'] as &$block) {
+            $block['items'] = array_values(array_filter($block['items'], static fn (array $item): bool => ($item['visibility'] ?? 'public') !== 'internal'));
+            foreach ($block['items'] as &$item) {
+                unset($item['visibility']);
+            }
+            unset($item);
+            if ($block['items'] === []) {
+                $block['availability'] = 'missing';
+            }
+        }
+        unset($block);
         $factMap = [];
         foreach ($content['fact_register']['facts'] ?? [] as $fact) {
             $factMap[$fact['fact_id']] = $fact;

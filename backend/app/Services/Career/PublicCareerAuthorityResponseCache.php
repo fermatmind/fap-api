@@ -211,6 +211,27 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     /**
      * @return array{payload: array<string, mixed>|null, state: 'degraded'|'fresh'|'not_found'|'stale'}
      */
+    /** Publication metadata only. This does not hydrate cached display content. */
+    public function filePageBusiness(string $slug, string $locale): array
+    {
+        $version = Cache::get($this->jobDetailActiveVersionKey($slug, $locale));
+        if (! is_string($version)) {
+            return [];
+        }
+        $payload = $this->readStoredJobDetailPayload($this->jobDetailVersionPayloadKey($slug, $locale, $version));
+
+        return is_array($payload) ? array_intersect_key($payload, array_flip([
+            'score_bundle', 'white_box_scores', 'warnings', 'claim_permissions', 'integrity_summary',
+            'provenance_meta', 'lifecycle_companion', 'lifecycle_operational', 'shortlist_contract',
+            'conversion_closure', 'search_entry_tier', 'search_entry_authority',
+        ])) : [];
+    }
+
+    public function filePagePublication(string $slug, string $locale): ?array
+    {
+        return $this->effectiveJobDetailProjectionItem($slug, $locale);
+    }
+
     public function jobDetailRead(string $slug, string $publicLocale = 'zh-CN'): array
     {
         $normalizedSlug = strtolower(trim($slug));

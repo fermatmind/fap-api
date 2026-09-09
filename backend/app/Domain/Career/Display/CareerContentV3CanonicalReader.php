@@ -18,7 +18,6 @@ class CareerContentV3CanonicalReader
         private readonly CareerContentV3AuthorityPackage $package,
         private readonly ?string $backendRoot = null,
         private readonly ?CareerContentV3FactResolver $factResolver = null,
-        private readonly ?CareerContentV3CompatibilityProjector $compatibilityProjector = null,
     ) {}
 
     /** @return array<string,mixed> */
@@ -92,7 +91,7 @@ class CareerContentV3CanonicalReader
             }
             $surface['content_v3'] = $page;
 
-            return ($this->compatibilityProjector ?? new CareerContentV3CompatibilityProjector)->project($surface, $page);
+            return $surface;
         } catch (Throwable) {
             return null;
         }

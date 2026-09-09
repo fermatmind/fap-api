@@ -58,7 +58,6 @@ final class CareerContentV3AuthorityPackage
         $entries = [];
         $localePages = [];
         $semanticHashes = [];
-        $compatibilityHashes = [];
         foreach ($manifest['files'] as $entry) {
             $this->assertFileEntry($entry);
             $slug = $entry['canonical_slug'];
@@ -80,7 +79,6 @@ final class CareerContentV3AuthorityPackage
             $localePages[$identity] = true;
             $entries[$slug][$locale] = $entry;
             $semanticHashes[] = $entry['source_content_sha256'];
-            $compatibilityHashes[] = $entry['legacy_projection_sha256'];
         }
         $this->assertInventory($resolvedRoot, $declaredPaths);
         ksort($entries, SORT_STRING);
@@ -97,8 +95,7 @@ final class CareerContentV3AuthorityPackage
             || ! hash_equals($manifest['set_hashes']['slug_set_sha256'], CareerCurrentAuthorityPackage::hashValue($slugs))
             || ! hash_equals($this->expectedSlugSetSha256, $manifest['set_hashes']['slug_set_sha256'])
             || ! hash_equals($manifest['set_hashes']['locale_page_set_sha256'], CareerCurrentAuthorityPackage::hashValue($localePageSet))
-            || ! hash_equals($manifest['set_hashes']['source_semantic_aggregate_sha256'], CareerCurrentAuthorityPackage::hashValue($semanticHashes))
-            || ! hash_equals($manifest['set_hashes']['legacy_projection_aggregate_sha256'], CareerCurrentAuthorityPackage::hashValue($compatibilityHashes))) {
+            || ! hash_equals($manifest['set_hashes']['source_semantic_aggregate_sha256'], CareerCurrentAuthorityPackage::hashValue($semanticHashes))) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_COVERAGE_INVALID');
         }
         $aggregateProjection = array_intersect_key($manifest, array_flip([
@@ -181,7 +178,6 @@ final class CareerContentV3AuthorityPackage
         $localePages = [];
         $fileProjection = [];
         $semanticHashes = [];
-        $compatibilityHashes = [];
         $enhanced = 0;
         $legacy = 0;
         $blockCount = 0;
@@ -227,7 +223,6 @@ final class CareerContentV3AuthorityPackage
             $pages[$slug][$locale] = $page;
             $slugs[$slug] = true;
             $semanticHashes[] = $page['source_content_sha256'];
-            $compatibilityHashes[] = $entry['legacy_projection_sha256'];
             $page['content_state'] === 'enhanced' ? $enhanced++ : $legacy++;
             $blockCount += count($page['blocks']);
             foreach ($page['blocks'] as $block) {
@@ -256,8 +251,7 @@ final class CareerContentV3AuthorityPackage
             || ! hash_equals($manifest['set_hashes']['slug_set_sha256'], CareerCurrentAuthorityPackage::hashValue($sortedSlugs))
             || ! hash_equals($this->expectedSlugSetSha256, $manifest['set_hashes']['slug_set_sha256'])
             || ! hash_equals($manifest['set_hashes']['locale_page_set_sha256'], CareerCurrentAuthorityPackage::hashValue($localePageSet))
-            || ! hash_equals($manifest['set_hashes']['source_semantic_aggregate_sha256'], CareerCurrentAuthorityPackage::hashValue($semanticHashes))
-            || ! hash_equals($manifest['set_hashes']['legacy_projection_aggregate_sha256'], CareerCurrentAuthorityPackage::hashValue($compatibilityHashes))) {
+            || ! hash_equals($manifest['set_hashes']['source_semantic_aggregate_sha256'], CareerCurrentAuthorityPackage::hashValue($semanticHashes))) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_COVERAGE_INVALID');
         }
 
@@ -293,7 +287,7 @@ final class CareerContentV3AuthorityPackage
                 'source_format' => 'content_v3_per_page',
                 'slug_set_sha256' => $manifest['set_hashes']['slug_set_sha256'],
                 'locale_page_set_sha256' => $manifest['set_hashes']['locale_page_set_sha256'],
-                'versionless_projection_sha256' => $manifest['set_hashes']['legacy_versionless_projection_sha256'],
+                'versionless_projection_sha256' => $manifest['set_hashes']['source_semantic_aggregate_sha256'],
             ],
         ];
     }
@@ -334,15 +328,14 @@ final class CareerContentV3AuthorityPackage
             || ! is_array($manifest['set_hashes'] ?? null)) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_MANIFEST_INVALID');
         }
-        $setKeys = array_keys($manifest['set_hashes']);
+        $setKeys = array_keys(array_diff_key($manifest['set_hashes'], array_flip(['legacy_projection_aggregate_sha256', 'legacy_versionless_projection_sha256'])));
         sort($setKeys, SORT_STRING);
         if ($setKeys !== [
-            'legacy_projection_aggregate_sha256', 'legacy_versionless_projection_sha256',
             'locale_page_set_sha256', 'slug_set_sha256', 'source_semantic_aggregate_sha256',
         ]) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_MANIFEST_INVALID');
         }
-        foreach ($manifest['set_hashes'] as $hash) {
+        foreach (array_intersect_key($manifest['set_hashes'], array_flip($setKeys)) as $hash) {
             if (! is_string($hash) || ! $this->hash($hash)) {
                 throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_MANIFEST_INVALID');
             }
@@ -423,10 +416,10 @@ final class CareerContentV3AuthorityPackage
         if (! is_array($entry) || array_is_list($entry)) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_FILE_DECLARATION_INVALID');
         }
-        $keys = array_keys($entry);
+        $keys = array_keys(array_diff_key($entry, array_flip(['legacy_projection_sha256', 'legacy_row_sha256'])));
         sort($keys, SORT_STRING);
         if ($keys !== [
-            'bytes', 'canonical_slug', 'legacy_projection_sha256', 'legacy_row_sha256', 'locale',
+            'bytes', 'canonical_slug', 'locale',
             'path', 'sha256', 'source_content_sha256',
         ]) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_FILE_DECLARATION_INVALID');
@@ -440,7 +433,7 @@ final class CareerContentV3AuthorityPackage
             || ! is_int($entry['bytes'] ?? null) || $entry['bytes'] <= 0) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_FILE_DECLARATION_INVALID');
         }
-        foreach (['sha256', 'source_content_sha256', 'legacy_projection_sha256', 'legacy_row_sha256'] as $key) {
+        foreach (['sha256', 'source_content_sha256'] as $key) {
             if (! is_string($entry[$key] ?? null) || ! $this->hash($entry[$key])) {
                 throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_FILE_DECLARATION_INVALID');
             }

@@ -73,7 +73,7 @@ class CareerCurrentAuthorityPackageLoader
             'source_format' => 'content_v3_per_page',
             'slug_set_sha256' => $manifest['set_hashes']['slug_set_sha256'],
             'locale_page_set_sha256' => $manifest['set_hashes']['locale_page_set_sha256'],
-            'versionless_projection_sha256' => $manifest['set_hashes']['legacy_versionless_projection_sha256'],
+            'versionless_projection_sha256' => $manifest['set_hashes']['source_semantic_aggregate_sha256'],
         ];
 
         return $index;

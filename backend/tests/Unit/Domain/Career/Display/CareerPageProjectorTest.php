@@ -61,4 +61,24 @@ final class CareerPageProjectorTest extends TestCase
         $this->expectException(CareerCurrentAuthorityPackageFailure::class);
         $this->projector()->project($source);
     }
+
+    public function test_internal_import_markers_remain_in_the_file_but_never_become_public_body(): void
+    {
+        $source = json_decode(file_get_contents(dirname(__DIR__, 5).'/content_assets/career/current/careers/accountants-and-auditors/zh-CN.json'), true, 512, JSON_THROW_ON_ERROR);
+        $page = $this->projector()->project($source);
+        $publicIds = array_column(array_merge(...array_column($page['content']['blocks'], 'items')), 'id');
+        $internalCount = 0;
+        foreach ($source['blocks'] as $block) {
+            foreach ($block['items'] as $item) {
+                if (($item['visibility'] ?? 'public') === 'internal') {
+                    $internalCount++;
+                    self::assertNotContains($item['id'], $publicIds);
+                } else {
+                    self::assertContains($item['id'], $publicIds);
+                }
+            }
+        }
+        self::assertGreaterThan(0, $internalCount);
+        self::assertStringNotContainsString('"paragraphs":["published"]', CareerCurrentAuthorityPackage::encodeCanonical($page));
+    }
 }

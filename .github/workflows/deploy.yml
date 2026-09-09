@@ -2016,19 +2016,14 @@ jobs:
               and .package.projection_digest == $projection
               and .package.compiler_digest == $compiler
               and .package.codec_digest == $codec
-              and .database.compatibility_row_count == 1046
-              and .database.validated_compatibility_row_count == 1046
               and (.validation_scope.canonical_slugs | length) == 1046
               and (.validation_scope.canonical_slugs | unique | length) == 1046
               and .validation_scope.slug_count == 1046
               and .validation_scope.locales == ["en", "zh-CN"]
               and .validation_scope.locale_page_count == 2092
               and .full_scan.counts.locale_pages == 2092
-              and .full_scan.counts.candidate == 2092
-              and .full_scan.counts.active == 2092
-              and .full_scan.counts.lkg == 2092
-              and .full_scan.counts.api == 2092
-              and .full_scan.counts.snapshot == 2092
+              and .full_scan.counts.encoded == 2092
+              and .full_scan.counts.decoded == 2092
               and .redis.mode == "readonly"
               and ([.write_counts[]] | all(. == 0))
               and (.receipt_digest | test("^[0-9a-f]{64}$"))

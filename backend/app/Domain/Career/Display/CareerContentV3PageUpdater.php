@@ -89,7 +89,7 @@ final class CareerContentV3PageUpdater
         $intent['aggregate_sha256'] = $manifest['aggregate_sha256'];
         $intent['manifest_sha256'] = hash('sha256', $manifestBytes);
         $intent['source_registry_sha256'] = $manifest['source_registry_sha256'];
-        $intent['versionless_projection_sha256'] = $manifest['set_hashes']['legacy_versionless_projection_sha256'];
+        $intent['versionless_projection_sha256'] = $manifest['set_hashes']['source_semantic_aggregate_sha256'];
         $intent['slug_count'] = $manifest['coverage']['slugs'];
         $intent['locale_page_count'] = $manifest['coverage']['locale_pages'];
         $intent['file_count'] = $manifest['coverage']['files'];

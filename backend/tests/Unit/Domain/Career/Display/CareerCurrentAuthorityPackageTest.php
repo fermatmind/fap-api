@@ -58,7 +58,7 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
             $package['manifest']['aggregate_sha256'],
         );
         self::assertSame(
-            $package['manifest']['set_hashes']['legacy_versionless_projection_sha256'],
+            $package['manifest']['set_hashes']['source_semantic_aggregate_sha256'],
             $package['summary']['versionless_projection_sha256'],
         );
         foreach ($package['pages'] as $localized) {

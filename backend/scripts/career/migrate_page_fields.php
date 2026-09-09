@@ -75,6 +75,21 @@ foreach ($manifest['files'] as &$entry) {
             'title' => ['availability' => 'available', 'text' => $page['subject']['name']],
         ];
     }
+    // Audited imported control values are retained in the file but are not editorial paragraphs.
+    $controlComponents = ['career.item.personality-fit-block', 'career.item.career-path-block', 'career.item.career-risk-cards', 'career.item.market-signal-card', 'career.item.career-quick-answers-block', 'career.item.onet-structured-fields-block'];
+    foreach ($page['blocks'] as &$block) {
+        foreach ($block['items'] as &$item) {
+            if (! in_array($item['copy_key'], $controlComponents, true)) {
+                continue;
+            }
+            $values = $item['type'] === 'prose' ? ($item['data']['paragraphs'] ?? []) : ($item['type'] === 'list' ? ($item['data']['entries'] ?? []) : []);
+            if ($values !== [] && array_filter($values, static fn ($value): bool => ! is_string($value) || preg_match('~^(?:[a-z][a-z0-9_.-]{0,65}|/(?:zh|en)/career/jobs/[a-z-]+)$~D', $value) !== 1) === []) {
+                $item['visibility'] = 'internal';
+            }
+        }
+        unset($item);
+    }
+    unset($block);
     $semantic = $page;
     unset($semantic['source_content_sha256']);
     $page['source_content_sha256'] = Package::hashValue($semantic);
@@ -86,12 +101,14 @@ foreach ($manifest['files'] as &$entry) {
             file_put_contents($path, $bytes);
         }
     }
+    unset($entry['legacy_projection_sha256'], $entry['legacy_row_sha256']);
     $entry['bytes'] = strlen($bytes);
     $entry['sha256'] = hash('sha256', $bytes);
     $entry['source_content_sha256'] = $page['source_content_sha256'];
     $hashes[] = $page['source_content_sha256'];
 }
 unset($entry);
+unset($manifest['set_hashes']['legacy_projection_aggregate_sha256'], $manifest['set_hashes']['legacy_versionless_projection_sha256']);
 $manifest['set_hashes']['source_semantic_aggregate_sha256'] = Package::hashValue($hashes);
 $aggregate = $manifest;
 unset($aggregate['aggregate_sha256']);
@@ -99,6 +116,7 @@ $manifest['aggregate_sha256'] = Package::hashValue($aggregate);
 $bytes = Package::encodePrettyCanonical($manifest);
 $intentPath = dirname($root).'/career_current_authority_release.v1.json';
 $intent = json_decode(file_get_contents($intentPath), true, 512, JSON_THROW_ON_ERROR);
+$intent['versionless_projection_sha256'] = $manifest['set_hashes']['source_semantic_aggregate_sha256'];
 $intent['aggregate_sha256'] = $manifest['aggregate_sha256'];
 $intent['manifest_sha256'] = hash('sha256', $bytes);
 if ($write) {

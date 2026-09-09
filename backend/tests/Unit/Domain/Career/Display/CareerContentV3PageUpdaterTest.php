@@ -55,6 +55,11 @@ final class CareerContentV3PageUpdaterTest extends TestCase
             $page['blocks'] = [];
             $page['subject']['summary'] = null;
             unset($page['fact_register']);
+            foreach ($page['hero']['metrics'] as &$metric) {
+                $metric['availability'] = 'missing';
+                $metric['fact_ref'] = null;
+            }
+            unset($metric);
             file_put_contents($paths[0], CareerCurrentAuthorityPackage::encodePrettyCanonical($page));
             $updater = app(CareerContentV3PageUpdater::class);
             $updater->update($root, 'actors', 'zh-CN', true);

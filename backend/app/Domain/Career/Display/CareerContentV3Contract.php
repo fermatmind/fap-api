@@ -116,7 +116,11 @@ final class CareerContentV3Contract
             if (! is_array($item)) {
                 self::fail();
             }
-            self::exactKeysWithOptional($item, ['id', 'copy_key', 'type', 'availability', 'data'], ['fact_refs', 'source_refs']);
+            self::exactKeysWithOptional($item, ['id', 'copy_key', 'type', 'availability', 'data'], ['fact_refs', 'source_refs', 'title', 'visibility']);
+            self::optionalText($item, 'title');
+            if (isset($item['visibility']) && ! in_array($item['visibility'], ['public', 'internal'], true)) {
+                self::fail();
+            }
             $itemId = $item['id'] ?? null;
             if (! self::key($itemId) || isset($seenItems[$itemId])
                 || ! self::key($item['copy_key'] ?? null)
@@ -170,7 +174,8 @@ final class CareerContentV3Contract
                 if (! is_array($entry)) {
                     self::fail();
                 }
-                self::exactKeys($entry, ['id', 'values']);
+                self::exactKeysWithOptional($entry, ['id', 'values'], ['title']);
+                self::optionalText($entry, 'title');
                 if (! self::key($entry['id'] ?? null) || isset($seenEntries[$entry['id']])) {
                     self::fail();
                 }
@@ -185,7 +190,8 @@ final class CareerContentV3Contract
                 if (! is_array($entry)) {
                     self::fail();
                 }
-                self::exactKeysWithOptional($entry, ['id', 'question_key', 'answer'], ['fact_refs', 'source_refs']);
+                self::exactKeysWithOptional($entry, ['id', 'question_key', 'answer'], ['fact_refs', 'source_refs', 'question']);
+                self::optionalText($entry, 'question');
                 if (! self::key($entry['id'] ?? null) || isset($seenEntries[$entry['id']])
                     || ! self::key($entry['question_key'] ?? null)
                     || ! self::nonEmpty($entry['answer'] ?? null)) {
@@ -261,13 +267,20 @@ final class CareerContentV3Contract
                 if (! is_array($entry)) {
                     self::fail();
                 }
-                self::exactKeys($entry, ['key', 'value']);
+                self::exactKeysWithOptional($entry, ['key', 'value'], ['label']);
+                self::optionalText($entry, 'label');
                 if (! self::key($entry['key'] ?? null) || ! self::nonEmpty($entry['value'] ?? null)) {
                     self::fail();
                 }
             }
         } elseif ($type === 'table' || $type === 'matrix') {
-            self::exactKeys($data, ['column_keys', 'rows']);
+            self::exactKeysWithOptional($data, ['column_keys', 'rows'], ['column_labels']);
+            if (isset($data['column_labels'])) {
+                self::stringList($data['column_labels']);
+            }
+            if (isset($data['column_labels']) && count($data['column_labels']) !== count($data['column_keys'])) {
+                throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_ITEM_INVALID');
+            }
             if (! is_array($data['column_keys'] ?? null) || ! array_is_list($data['column_keys'])
                 || $data['column_keys'] === [] || ! is_array($data['rows'] ?? null)
                 || ! array_is_list($data['rows']) || $data['rows'] === []) {
@@ -295,6 +308,13 @@ final class CareerContentV3Contract
     }
 
     /** @param list<string> $expected */
+    private static function optionalText(array $value, string $key): void
+    {
+        if (isset($value[$key]) && (! is_string($value[$key]) || trim($value[$key]) === '')) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_ITEM_INVALID');
+        }
+    }
+
     private static function exactKeys(array $value, array $expected): void
     {
         $actual = array_keys($value);

@@ -11,6 +11,9 @@ final class PublicProjectionCache
 {
     public static function selected(string $key): bool
     {
+        if (preg_match('~^career:page:career\.detail\.page\.v1:[a-z0-9-]+:(?:en|zh-CN):[a-f0-9]{64}$~D', $key) === 1) {
+            return true;
+        }
         if (in_array($key, ['seo:sitemap-source:v1:fresh', 'seo:sitemap-source:v1:stale', 'seo:sitemap-source:warm-fingerprint:v1',
             'career:public-authority:dataset-hub:v3', 'career:public-authority:dataset-method:v3',
             'career:public-authority:launch-governance-closure:v1', 'career:public-authority:warm-fingerprint:v1'], true)) {
