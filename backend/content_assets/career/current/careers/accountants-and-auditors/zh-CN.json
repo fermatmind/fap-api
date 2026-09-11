@@ -5513,6 +5513,13 @@
               "no_experience_proof",
               "distinction"
             ],
+            "column_labels": [
+              "入门岗位",
+              "入职初期主要做什么",
+              "雇主通常看什么",
+              "没经验如何证明",
+              "与其他方向的区别"
+            ],
             "rows": [
               [
                 "财务／会计助理",
@@ -5556,6 +5563,7 @@
             "source-10",
             "source-8"
           ],
+          "title": "常见入门岗位",
           "type": "table"
         },
         {
@@ -5598,6 +5606,7 @@
             "source-10",
             "source-8"
           ],
+          "title": "雇主真正会看什么",
           "type": "cards"
         },
         {
@@ -5639,6 +5648,7 @@
             ]
           },
           "id": "accountant-entry-work-sample",
+          "title": "入门案例材料",
           "type": "cards"
         },
         {
@@ -5680,6 +5690,7 @@
           "source_refs": [
             "source-10"
           ],
+          "title": "没经验可以做什么作品",
           "type": "cards"
         },
         {
@@ -5691,6 +5702,12 @@
               "possible_check",
               "observed_evidence",
               "boundary"
+            ],
+            "column_labels": [
+              "阶段",
+              "可能考察",
+              "观察证据",
+              "使用边界"
             ],
             "rows": [
               [
@@ -5724,6 +5741,7 @@
             "source-16",
             "source-17"
           ],
+          "title": "面试和试用期可能考什么",
           "type": "table"
         },
         {
@@ -5783,6 +5801,7 @@
             ]
           },
           "id": "accountant-entry-seven-day-trial",
+          "title": "七天低成本体验",
           "type": "timeline"
         },
         {
@@ -5800,6 +5819,7 @@
             ]
           },
           "id": "accountant-entry-seven-day-decision",
+          "title": "第七天如何判断",
           "type": "list"
         },
         {
@@ -5814,6 +5834,15 @@
               "conditions",
               "investment",
               "limitation"
+            ],
+            "column_labels": [
+              "资格／身份",
+              "主要适合谁",
+              "求职现实作用",
+              "是否普遍入职门槛",
+              "报考／注册条件",
+              "投入等级",
+              "重要限制"
             ],
             "rows": [
               [
@@ -5880,6 +5909,7 @@
             "source-20",
             "source-21"
           ],
+          "title": "证书决策表",
           "type": "table"
         },
         {
@@ -5901,6 +5931,7 @@
             "source-20",
             "source-21"
           ],
+          "title": "证书、会员与执业边界",
           "type": "notice"
         },
         {
@@ -7849,6 +7880,7 @@
               {
                 "answer": "会计师每天把业务交易转成可追溯的财务记录：核对原始单据、编制或复核凭证、对账、处理差异，并在月结、季报或年报周期形成财务和管理报告；税务、成本、预算岗位还会申报、分析和解释经营结果。审计师则先了解业务与内控、评估风险，再抽取或分析交易、访谈人员、检查合同和凭证、记录审计证据并报告发现。具体节奏随企业会计、事务所审计、税务或内审而变，但共同底层是“取得信息—验证准确与合规—形成可复核结论—向相关人员解释”。",
                 "id": "faq-1",
+                "question": "会计师和审计师每天具体做什么？",
                 "question_key": "career.faq.accounting.daily-work",
                 "source_refs": [
                   "source-10"
@@ -7857,6 +7889,7 @@
               {
                 "answer": "核心区别在目的和责任。会计依据适用准则确认、计量、记录并报告交易，主要产出账簿、财务报表、税务或管理信息；审计从相对独立的立场评价这些信息及相关控制是否存在重大错报风险，并以充分、适当的证据支持审计结论。两者都会分析数据和理解业务，但会计更强调持续建立信息，审计更强调验证可信度、职业怀疑和证据链。想选方向，可比较你更喜欢搭建月结流程，还是追查异常并对他人资料提出质疑。",
                 "id": "faq-2",
+                "question": "会计和审计有什么区别？",
                 "question_key": "career.faq.accounting.comparison",
                 "source_refs": [
                   "source-10",
@@ -7870,6 +7903,7 @@
                   "bls-us-accountants-openings-2025-2035"
                 ],
                 "id": "faq-3",
+                "question": "AI 会取代会计师或审计师吗？",
                 "question_key": "career.faq.accounting.ai-replacement",
                 "source_refs": [
                   "source-8",
@@ -7880,6 +7914,7 @@
               {
                 "answer": "优先被自动化的是输入结构化、规则稳定、结果可批量校验的任务，例如发票与凭证识别、分类编码、银行对账、三单匹配、费用审核、标准报表生成、底稿整理和初步异常筛查。自动化并不表示结果可直接采用：数据质量、系统接口、权限控制、会计政策、异常阈值和人工复核都会改变可靠性。岗位通常会从逐笔处理转向规则配置、异常队列复核、证据追踪和输出解释。判断自己的风险时，应拆解日常任务比例，而不是只看职位名称。",
                 "id": "faq-4",
+                "question": "哪些会计与审计工作最容易被 AI 自动化？",
                 "question_key": "career.faq.accounting.automatable-tasks",
                 "source_refs": [
                   "source-9"
@@ -7888,6 +7923,7 @@
               {
                 "answer": "目前更难替代的是把专业责任、情境和证据结合起来的能力：解释准则并选择政策，判断重大性和风险，保持职业怀疑，识别管理层偏差，处理不完整或相互矛盾的证据，以及在独立性、伦理和商业压力之间作可辩护判断。专业人员还要向客户、管理层、审计委员会或监管方解释结论并承担相应责任。AI 能检索、归纳和提示异常，但其输出仍需验证；真正的优势是知道何时不能接受系统答案，以及如何留下可复核的判断记录。",
                 "id": "faq-5",
+                "question": "AI 难以替代会计师和审计师的哪些能力？",
                 "question_key": "career.faq.accounting.human-skills",
                 "source_refs": [
                   "source-25",
@@ -7900,6 +7936,7 @@
                   "bls-us-accountants-wage-median-2025"
                 ],
                 "id": "faq-6",
+                "question": "会计师和审计师工资一般多少？",
                 "question_key": "career.faq.accounting.salary",
                 "source_refs": [
                   "source-6",
@@ -7910,6 +7947,7 @@
               {
                 "answer": "要求取决于司法辖区、岗位和雇主。美国 BLS 将会计师和审计师的典型入门学历列为会计或相关专业学士学位；中国大陆的企业会计、事务所审计、税务、内审和管理会计并没有完全相同的门槛。非会计专业可以转入，但通常要系统补齐会计循环、财务报告、税法、审计与内控，并证明 Excel、ERP、数据核对和书面表达能力。涉及法定审计、执业或签字权限时，还必须另外满足当地注册、经验、继续教育和独立性规定。",
                 "id": "faq-7",
+                "question": "学会计或做审计需要什么学历和专业背景？",
                 "question_key": "career.faq.accounting.education",
                 "source_refs": [
                   "source-8",
@@ -7923,6 +7961,7 @@
               {
                 "answer": "不是所有岗位都必须。企业核算、成本会计、管理会计和 FP&A 通常没有统一的法定 CPA 门槛，证书更多是知识与竞争力信号；但法定审计、公开执业或签字权限往往受当地法律和监管要求约束，考试通过也不一定等同于取得执业资格。中国、美国及其他地区的 CPA 名称、考试、经验和权限并不完全互认。决定是否报考前，应先锁定目标国家与岗位，核对监管机构、专业协会和招聘要求，再评估时间成本与实际回报。",
                 "id": "faq-8",
+                "question": "做会计或审计必须考注册会计师（CPA）吗？",
                 "question_key": "career.faq.accounting.credentials",
                 "source_refs": [
                   "source-18",
@@ -7934,6 +7973,7 @@
               {
                 "answer": "先建立完整工作链，而不是零散背分录：理解会计恒等式、借贷记账和三张核心报表的勾稽关系，再练原始单据、凭证、总账、试算平衡、对账、月结和基础税务。随后掌握 Excel、常见 ERP、数据导入与校验，并练习把差异原因写成可复核说明。入门可先完成本页的一页报销核对说明；掌握基础后，再使用材料完整的练习验证分录、对账和报表能力，不能把这次小情境当作完整岗位能力证明。之后再按企业会计、审计、税务或 FP&A 补充专门知识与证书。",
                 "id": "faq-9",
+                "question": "零基础转行会计，应该先学什么？",
                 "question_key": "career.faq.accounting.career-change",
                 "source_refs": [
                   "source-10",
@@ -7946,6 +7986,7 @@
                   "bls-us-accountants-employment-growth-2025-2035"
                 ],
                 "id": "faq-10",
+                "question": "学会计还值得吗？未来哪些能力更重要？",
                 "question_key": "career.faq.accounting.career-worth",
                 "source_refs": [
                   "source-8",
@@ -8365,6 +8406,16 @@
                 "publisher": "中国注册会计师协会",
                 "scope": "注册会计师使用 AI 时的核验、留痕与责任",
                 "url": "https://www.cicpa.org.cn/xxfb/news/202603/t20260305_65842.html"
+              },
+              {
+                "details": [
+                  "历史已发布的会计师和审计师任务级评分：{{fact:fermatmind-accountants-task-exposure}}。"
+                ],
+                "id": "source-fermatmind-ai-rubric",
+                "limitation": "任务暴露表示 AI 可能影响的工作活动范围，不等于实际自动化率或岗位消失概率。",
+                "name": "FermatMind 任务级评分",
+                "publisher": "FermatMind 任务级 rubric",
+                "url": null
               }
             ]
           },
@@ -8376,6 +8427,4857 @@
   ],
   "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "display": {
+    "component_order": [
+      "breadcrumb",
+      "hero",
+      "primary_cta",
+      "ai_impact_table",
+      "adjacent_career_comparison_table",
+      "career_quick_answers_block",
+      "definition_block",
+      "onet_structured_fields_block",
+      "responsibilities_block",
+      "work_context_block",
+      "boundary_notice",
+      "fit_decision_checklist",
+      "personality_fit_block",
+      "market_signal_card",
+      "source_card",
+      "riasec_fit_block",
+      "fermat_decision_card",
+      "career_path_block",
+      "career_risk_cards",
+      "career_snapshot_primary_locale",
+      "career_snapshot_secondary_locale",
+      "faq_block"
+    ],
+    "components": {
+      "adjacent_career_comparison_table": {
+        "conclusion": {
+          "$item": "adjacent-career-comparison-table-1",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "type": "prose"
+        },
+        "evidence_links": [
+          {
+            "href": {
+              "$link": "adjacent-career-comparison-table-29",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "entry": "link-1",
+              "field": "url"
+            },
+            "label": {
+              "$link": "adjacent-career-comparison-table-29",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "entry": "link-1",
+              "field": "entity"
+            }
+          },
+          {
+            "href": {
+              "$link": "adjacent-career-comparison-table-29",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "entry": "link-2",
+              "field": "url"
+            },
+            "label": {
+              "$link": "adjacent-career-comparison-table-29",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "entry": "link-2",
+              "field": "entity"
+            }
+          },
+          {
+            "href": {
+              "$link": "adjacent-career-comparison-table-29",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "entry": "link-3",
+              "field": "url"
+            },
+            "label": {
+              "$link": "adjacent-career-comparison-table-29",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "entry": "link-3",
+              "field": "entity"
+            }
+          },
+          {
+            "href": {
+              "$link": "adjacent-career-comparison-table-29",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "entry": "link-4",
+              "field": "url"
+            },
+            "label": {
+              "$link": "adjacent-career-comparison-table-29",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "entry": "link-4",
+              "field": "entity"
+            }
+          },
+          {
+            "href": {
+              "$link": "adjacent-career-comparison-table-29",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "entry": "link-5",
+              "field": "url"
+            },
+            "label": {
+              "$link": "adjacent-career-comparison-table-29",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "entry": "link-5",
+              "field": "entity"
+            }
+          }
+        ],
+        "evidence_note": {
+          "$item": "adjacent-career-comparison-table-2",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "type": "prose"
+        },
+        "heading": "会计、审计、税务和财务分析怎么选？",
+        "intro": {
+          "$item": "adjacent-career-comparison-table-3",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "type": "prose"
+        },
+        "rows": [
+          {
+            "与会计师／审计师的关键区别": {
+              "$item": "adjacent-career-comparison-table-4",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "更适合什么选择": {
+              "$item": "adjacent-career-comparison-table-5",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "核心工作与产出": {
+              "$item": "adjacent-career-comparison-table-6",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": {
+              "$item": "adjacent-career-comparison-table-7",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            }
+          },
+          {
+            "与会计师／审计师的关键区别": {
+              "$item": "adjacent-career-comparison-table-8",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "更适合什么选择": {
+              "$item": "adjacent-career-comparison-table-9",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "核心工作与产出": {
+              "$item": "adjacent-career-comparison-table-10",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": {
+              "$item": "adjacent-career-comparison-table-11",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            }
+          },
+          {
+            "与会计师／审计师的关键区别": {
+              "$item": "adjacent-career-comparison-table-12",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "更适合什么选择": {
+              "$item": "adjacent-career-comparison-table-13",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "核心工作与产出": {
+              "$item": "adjacent-career-comparison-table-14",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": {
+              "$item": "adjacent-career-comparison-table-15",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            }
+          },
+          {
+            "与会计师／审计师的关键区别": {
+              "$item": "adjacent-career-comparison-table-16",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "更适合什么选择": {
+              "$item": "adjacent-career-comparison-table-17",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "核心工作与产出": {
+              "$item": "adjacent-career-comparison-table-18",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": {
+              "$item": "adjacent-career-comparison-table-19",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            }
+          },
+          {
+            "与会计师／审计师的关键区别": {
+              "$item": "adjacent-career-comparison-table-20",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "更适合什么选择": {
+              "$item": "adjacent-career-comparison-table-21",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "核心工作与产出": {
+              "$item": "adjacent-career-comparison-table-22",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": {
+              "$item": "adjacent-career-comparison-table-23",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            }
+          },
+          {
+            "与会计师／审计师的关键区别": {
+              "$item": "adjacent-career-comparison-table-24",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "更适合什么选择": {
+              "$item": "adjacent-career-comparison-table-25",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "核心工作与产出": {
+              "$item": "adjacent-career-comparison-table-26",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": {
+              "$item": "adjacent-career-comparison-table-27",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            }
+          }
+        ],
+        "transition": {
+          "$item": "adjacent-career-comparison-table-28",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "type": "prose"
+        }
+      },
+      "ai_impact_table": {
+        "action_rows": [
+          {
+            "人群": {
+              "$item": "ai-impact-table-1",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "应对重点": {
+              "$item": "ai-impact-table-2",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人群": {
+              "$item": "ai-impact-table-3",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "应对重点": {
+              "$item": "ai-impact-table-4",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人群": {
+              "$item": "ai-impact-table-5",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "应对重点": {
+              "$item": "ai-impact-table-6",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人群": {
+              "$item": "ai-impact-table-7",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "应对重点": {
+              "$item": "ai-impact-table-8",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          }
+        ],
+        "answer": {
+          "$item": "ai-impact-table-9",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "authority_links": [
+          {
+            "来源": {
+              "$item": "ai-impact-table-10",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "类型": "官方职业预测",
+            "适用范围": {
+              "$item": "ai-impact-table-11",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "链接": {
+              "$link": "ai-impact-table-114",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "entry": "link-1",
+              "field": "url"
+            }
+          },
+          {
+            "来源": {
+              "$item": "ai-impact-table-12",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "类型": "全球雇主调查",
+            "适用范围": {
+              "$item": "ai-impact-table-13",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "链接": {
+              "$link": "ai-impact-table-114",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "entry": "link-2",
+              "field": "url"
+            }
+          },
+          {
+            "来源": {
+              "$item": "ai-impact-table-14",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "类型": "任务暴露研究",
+            "适用范围": {
+              "$item": "ai-impact-table-15",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "链接": {
+              "$link": "ai-impact-table-114",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "entry": "link-3",
+              "field": "url"
+            }
+          },
+          {
+            "来源": {
+              "$item": "ai-impact-table-16",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "类型": "行业监管与执业提示",
+            "适用范围": {
+              "$item": "ai-impact-table-17",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "链接": {
+              "$link": "ai-impact-table-114",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "entry": "link-4",
+              "field": "url"
+            }
+          },
+          {
+            "来源": {
+              "$item": "ai-impact-table-18",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "类型": "审计准则更新",
+            "适用范围": {
+              "$item": "ai-impact-table-19",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "链接": {
+              "$link": "ai-impact-table-114",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "entry": "link-5",
+              "field": "url"
+            }
+          },
+          {
+            "来源": {
+              "$item": "ai-impact-table-20",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "类型": "同行评审实证研究",
+            "适用范围": {
+              "$item": "ai-impact-table-21",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "链接": {
+              "$link": "ai-impact-table-114",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "entry": "link-6",
+              "field": "url"
+            }
+          },
+          {
+            "来源": {
+              "$item": "ai-impact-table-22",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "类型": "同行评审实证研究",
+            "适用范围": {
+              "$item": "ai-impact-table-23",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "链接": {
+              "$link": "ai-impact-table-114",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "entry": "link-7",
+              "field": "url"
+            }
+          }
+        ],
+        "difference_intro": {
+          "$item": "ai-impact-table-24",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "difference_rows": [
+          {
+            "AI主要改变": {
+              "$item": "ai-impact-table-25",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "仍由人负责": {
+              "$item": "ai-impact-table-26",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "方向": "企业会计"
+          },
+          {
+            "AI主要改变": {
+              "$item": "ai-impact-table-27",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "仍由人负责": {
+              "$item": "ai-impact-table-28",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "方向": "外部／内部审计"
+          },
+          {
+            "AI主要改变": {
+              "$item": "ai-impact-table-29",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "仍由人负责": {
+              "$item": "ai-impact-table-30",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "方向": "簿记与会计文员"
+          }
+        ],
+        "evidence_intro": {
+          "$item": "ai-impact-table-31",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "evidence_rows": [
+          {
+            "使用限制": {
+              "$item": "ai-impact-table-32",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "来源": {
+              "$item": "ai-impact-table-33",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "研究对象": {
+              "$item": "ai-impact-table-34",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "结论": {
+              "$item": "ai-impact-table-35",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "链接": {
+              "$link": "ai-impact-table-114",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "entry": "link-8",
+              "field": "url"
+            }
+          },
+          {
+            "使用限制": {
+              "$item": "ai-impact-table-36",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "来源": {
+              "$item": "ai-impact-table-37",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "研究对象": {
+              "$item": "ai-impact-table-38",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "结论": {
+              "$item": "ai-impact-table-39",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "链接": {
+              "$link": "ai-impact-table-114",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "entry": "link-9",
+              "field": "url"
+            }
+          },
+          {
+            "使用限制": {
+              "$item": "ai-impact-table-40",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "来源": {
+              "$item": "ai-impact-table-41",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "研究对象": {
+              "$item": "ai-impact-table-42",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "结论": {
+              "$item": "ai-impact-table-43",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "链接": {
+              "$link": "ai-impact-table-114",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "entry": "link-10",
+              "field": "url"
+            }
+          },
+          {
+            "使用限制": {
+              "$item": "ai-impact-table-44",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "来源": {
+              "$item": "ai-impact-table-45",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "研究对象": {
+              "$item": "ai-impact-table-46",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "结论": {
+              "$item": "ai-impact-table-47",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "链接": {
+              "$link": "ai-impact-table-114",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "entry": "link-11",
+              "field": "url"
+            }
+          },
+          {
+            "使用限制": {
+              "$item": "ai-impact-table-48",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "来源": {
+              "$item": "ai-impact-table-49",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "研究对象": {
+              "$item": "ai-impact-table-50",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "结论": {
+              "$item": "ai-impact-table-51",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "链接": {
+              "$link": "ai-impact-table-114",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "entry": "link-12",
+              "field": "url"
+            }
+          }
+        ],
+        "heading": "AI 会取代会计师和审计师吗？",
+        "method_cards": [
+          {
+            "含义": {
+              "$item": "ai-impact-table-52",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "概念": "AI 能处理哪些会计与审计任务？"
+          },
+          {
+            "含义": {
+              "$item": "ai-impact-table-53",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "概念": "哪些会计与审计任务会真正自动化？"
+          },
+          {
+            "含义": {
+              "$item": "ai-impact-table-54",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "概念": "AI 会减少会计师和审计师岗位吗？"
+          }
+        ],
+        "questions": [
+          {
+            "回答": {
+              "$item": "ai-impact-table-55",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "来源": {
+              "$item": "ai-impact-table-56",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "链接": {
+              "$link": "ai-impact-table-114",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "entry": "link-13",
+              "field": "url"
+            },
+            "问题": "会计师会被 AI 取代吗？"
+          },
+          {
+            "回答": {
+              "$item": "ai-impact-table-57",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "来源": {
+              "$item": "ai-impact-table-58",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "链接": {
+              "$link": "ai-impact-table-114",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "entry": "link-14",
+              "field": "url"
+            },
+            "问题": "审计师会被 AI 取代吗？"
+          },
+          {
+            "回答": {
+              "$item": "ai-impact-table-59",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "来源": {
+              "$item": "ai-impact-table-60",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "链接": {
+              "$link": "ai-impact-table-114",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "entry": "link-15",
+              "field": "url"
+            },
+            "问题": "哪些会计岗位最容易受 AI 影响？"
+          },
+          {
+            "回答": {
+              "$item": "ai-impact-table-61",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "来源": {
+              "$item": "ai-impact-table-62",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "链接": {
+              "$link": "ai-impact-table-114",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "entry": "link-16",
+              "field": "url"
+            },
+            "问题": "现在学会计还有前途吗？"
+          },
+          {
+            "回答": {
+              "$item": "ai-impact-table-63",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "来源": {
+              "$item": "ai-impact-table-64",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "链接": {
+              "$link": "ai-impact-table-114",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "entry": "link-17",
+              "field": "url"
+            },
+            "问题": "AI 可以签署审计报告吗？"
+          },
+          {
+            "回答": {
+              "$item": "ai-impact-table-65",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "来源": {
+              "$item": "ai-impact-table-66",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "链接": {
+              "$link": "ai-impact-table-114",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "entry": "link-18",
+              "field": "url"
+            },
+            "问题": "到 2030 年会计岗位会消失吗？"
+          },
+          {
+            "回答": {
+              "$item": "ai-impact-table-67",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "来源": {
+              "$item": "ai-impact-table-68",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "链接": {
+              "$link": "ai-impact-table-114",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "entry": "link-19",
+              "field": "url"
+            },
+            "问题": "会计师和审计师应该学习哪些 AI 技能？"
+          }
+        ],
+        "responsibility_intro": {
+          "$item": "ai-impact-table-69",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "responsibility_steps": [
+          {
+            "步骤": "任务输入",
+            "说明": {
+              "$item": "ai-impact-table-70",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "步骤": "AI 处理",
+            "说明": {
+              "$item": "ai-impact-table-71",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "步骤": "人工复核",
+            "说明": {
+              "$item": "ai-impact-table-72",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "步骤": "证据留痕",
+            "说明": {
+              "$item": "ai-impact-table-73",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "步骤": "专业签字／责任",
+            "说明": {
+              "$item": "ai-impact-table-74",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          }
+        ],
+        "risk_rows": [
+          {
+            "为什么重要": {
+              "$item": "ai-impact-table-75",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "控制方式": {
+              "$item": "ai-impact-table-76",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "风险": "虚构信息或错误引用"
+          },
+          {
+            "为什么重要": {
+              "$item": "ai-impact-table-77",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "控制方式": {
+              "$item": "ai-impact-table-78",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "风险": "机密数据泄露"
+          },
+          {
+            "为什么重要": {
+              "$item": "ai-impact-table-79",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "控制方式": {
+              "$item": "ai-impact-table-80",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "风险": "数据谱系与可靠性不足"
+          },
+          {
+            "为什么重要": {
+              "$item": "ai-impact-table-81",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "控制方式": {
+              "$item": "ai-impact-table-82",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "风险": "偏差与模型漂移"
+          },
+          {
+            "为什么重要": {
+              "$item": "ai-impact-table-83",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "控制方式": {
+              "$item": "ai-impact-table-84",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "风险": "自动化偏误与底稿不足"
+          }
+        ],
+        "task_rows": [
+          {
+            "人的控制点": {
+              "$item": "ai-impact-table-85",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "任务": {
+              "$item": "ai-impact-table-86",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "工作方向": {
+              "$item": "ai-impact-table-87",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "当前变化": {
+              "$item": "ai-impact-table-88",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": {
+              "$item": "ai-impact-table-89",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "任务": {
+              "$item": "ai-impact-table-90",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "工作方向": {
+              "$item": "ai-impact-table-91",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "当前变化": {
+              "$item": "ai-impact-table-92",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": {
+              "$item": "ai-impact-table-93",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "任务": {
+              "$item": "ai-impact-table-94",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "工作方向": {
+              "$item": "ai-impact-table-95",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "当前变化": {
+              "$item": "ai-impact-table-96",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": {
+              "$item": "ai-impact-table-97",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "任务": {
+              "$item": "ai-impact-table-98",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "工作方向": {
+              "$item": "ai-impact-table-99",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "当前变化": {
+              "$item": "ai-impact-table-100",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": {
+              "$item": "ai-impact-table-101",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "任务": {
+              "$item": "ai-impact-table-102",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "工作方向": {
+              "$item": "ai-impact-table-103",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "当前变化": {
+              "$item": "ai-impact-table-104",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": {
+              "$item": "ai-impact-table-105",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "任务": {
+              "$item": "ai-impact-table-106",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "工作方向": {
+              "$item": "ai-impact-table-107",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "当前变化": {
+              "$item": "ai-impact-table-108",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": {
+              "$item": "ai-impact-table-109",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "任务": {
+              "$item": "ai-impact-table-110",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "工作方向": {
+              "$item": "ai-impact-table-111",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "当前变化": {
+              "$item": "ai-impact-table-112",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          }
+        ],
+        "transition": {
+          "$item": "ai-impact-table-113",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        }
+      },
+      "boundary_notice": {
+        "$item": "boundary-notice-1",
+        "block": "sources",
+        "copy_key": "career.item.boundary-notice",
+        "type": "list"
+      },
+      "breadcrumb": {
+        "label": {
+          "$subject": "name"
+        },
+        "slug": {
+          "$subject": "canonical_slug"
+        }
+      },
+      "career_path_block": {
+        "boundary": {
+          "$item": "career-path-block-1",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "competence_ladder": [
+          {
+            "description": {
+              "$item": "career-path-block-2",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            },
+            "stage": {
+              "$item": "career-path-block-3",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            }
+          },
+          {
+            "description": {
+              "$item": "career-path-block-4",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            },
+            "stage": {
+              "$item": "career-path-block-5",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            }
+          },
+          {
+            "description": {
+              "$item": "career-path-block-6",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            },
+            "stage": {
+              "$item": "career-path-block-7",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            }
+          },
+          {
+            "description": {
+              "$item": "career-path-block-8",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            },
+            "stage": {
+              "$item": "career-path-block-9",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            }
+          }
+        ],
+        "direct_answer": {
+          "$item": "career-path-block-10",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "entry_heading": "应届生／转行者如何验证并入门",
+        "heading": "怎样成为会计师或审计师？入行要求、证书与职业发展路径",
+        "locale_requirements": {
+          "credential_boundary": {
+            "$item": "career-path-block-11",
+            "block": "path",
+            "copy_key": "career.item.career-path-block",
+            "type": "prose"
+          },
+          "jurisdiction": {
+            "$item": "career-path-block-12",
+            "block": "path",
+            "copy_key": "career.item.career-path-block",
+            "type": "prose"
+          },
+          "summary": {
+            "$item": "career-path-block-13",
+            "block": "path",
+            "copy_key": "career.item.career-path-block",
+            "type": "prose"
+          }
+        },
+        "schema_version": "career.career_progression.v1",
+        "source_links": [
+          {
+            "href": {
+              "$link": "career-path-block-86",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "entry": "link-1",
+              "field": "url"
+            },
+            "id": "bls",
+            "label": {
+              "$link": "career-path-block-86",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "entry": "link-1",
+              "field": "entity"
+            },
+            "scope": {
+              "$item": "career-path-block-16",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$link": "career-path-block-86",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "entry": "link-2",
+              "field": "url"
+            },
+            "id": "ifac3",
+            "label": {
+              "$link": "career-path-block-86",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "entry": "link-2",
+              "field": "entity"
+            },
+            "scope": {
+              "$item": "career-path-block-18",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$link": "career-path-block-86",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "entry": "link-3",
+              "field": "url"
+            },
+            "id": "ifac7",
+            "label": {
+              "$link": "career-path-block-86",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "entry": "link-3",
+              "field": "entity"
+            },
+            "scope": {
+              "$item": "career-path-block-20",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$link": "career-path-block-86",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "entry": "link-4",
+              "field": "url"
+            },
+            "id": "cicpa",
+            "label": {
+              "$link": "career-path-block-86",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "entry": "link-4",
+              "field": "entity"
+            },
+            "scope": {
+              "$item": "career-path-block-22",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            }
+          }
+        ],
+        "tracks": [
+          {
+            "id": "corporate-accounting",
+            "stages": [
+              {
+                "credentials": {
+                  "$item": "career-path-block-24",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "next_moves": {
+                  "$item": "career-path-block-25",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "readiness_evidence": {
+                  "$item": "career-path-block-26",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "responsibility": {
+                  "$item": "career-path-block-27",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": {
+                  "$item": "career-path-block-28",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                }
+              },
+              {
+                "credentials": {
+                  "$item": "career-path-block-29",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "next_moves": {
+                  "$item": "career-path-block-30",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "readiness_evidence": {
+                  "$item": "career-path-block-31",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "responsibility": {
+                  "$item": "career-path-block-32",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": {
+                  "$item": "career-path-block-33",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                }
+              },
+              {
+                "credentials": {
+                  "$item": "career-path-block-34",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "next_moves": {
+                  "$item": "career-path-block-35",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "readiness_evidence": {
+                  "$item": "career-path-block-36",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "responsibility": {
+                  "$item": "career-path-block-37",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": {
+                  "$item": "career-path-block-38",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                }
+              },
+              {
+                "credentials": {
+                  "$item": "career-path-block-39",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "next_moves": {
+                  "$item": "career-path-block-40",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "readiness_evidence": {
+                  "$item": "career-path-block-41",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "responsibility": {
+                  "$item": "career-path-block-42",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": {
+                  "$item": "career-path-block-43",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                }
+              }
+            ],
+            "title": "企业会计与管理会计"
+          },
+          {
+            "id": "external-audit",
+            "stages": [
+              {
+                "credentials": {
+                  "$item": "career-path-block-45",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "next_moves": {
+                  "$item": "career-path-block-46",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "readiness_evidence": {
+                  "$item": "career-path-block-47",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "responsibility": {
+                  "$item": "career-path-block-48",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": {
+                  "$item": "career-path-block-49",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                }
+              },
+              {
+                "credentials": {
+                  "$item": "career-path-block-50",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "next_moves": {
+                  "$item": "career-path-block-51",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "readiness_evidence": {
+                  "$item": "career-path-block-52",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "responsibility": {
+                  "$item": "career-path-block-53",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": {
+                  "$item": "career-path-block-54",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                }
+              },
+              {
+                "credentials": {
+                  "$item": "career-path-block-55",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "next_moves": {
+                  "$item": "career-path-block-56",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "readiness_evidence": {
+                  "$item": "career-path-block-57",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "responsibility": {
+                  "$item": "career-path-block-58",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": {
+                  "$item": "career-path-block-59",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                }
+              },
+              {
+                "credentials": {
+                  "$item": "career-path-block-60",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "next_moves": {
+                  "$item": "career-path-block-61",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "readiness_evidence": {
+                  "$item": "career-path-block-62",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "responsibility": {
+                  "$item": "career-path-block-63",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": {
+                  "$item": "career-path-block-64",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                }
+              }
+            ],
+            "title": "事务所与外部审计"
+          },
+          {
+            "id": "internal-specialist",
+            "stages": [
+              {
+                "credentials": {
+                  "$item": "career-path-block-66",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "next_moves": {
+                  "$item": "career-path-block-67",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "readiness_evidence": {
+                  "$item": "career-path-block-68",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "responsibility": {
+                  "$item": "career-path-block-69",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": {
+                  "$item": "career-path-block-70",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                }
+              },
+              {
+                "credentials": {
+                  "$item": "career-path-block-71",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "next_moves": {
+                  "$item": "career-path-block-72",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "readiness_evidence": {
+                  "$item": "career-path-block-73",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "responsibility": {
+                  "$item": "career-path-block-74",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": {
+                  "$item": "career-path-block-75",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                }
+              },
+              {
+                "credentials": {
+                  "$item": "career-path-block-76",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "next_moves": {
+                  "$item": "career-path-block-77",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "readiness_evidence": {
+                  "$item": "career-path-block-78",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "responsibility": {
+                  "$item": "career-path-block-79",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": {
+                  "$item": "career-path-block-80",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                }
+              },
+              {
+                "credentials": {
+                  "$item": "career-path-block-81",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "next_moves": {
+                  "$item": "career-path-block-82",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "readiness_evidence": {
+                  "$item": "career-path-block-83",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "responsibility": {
+                  "$item": "career-path-block-84",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": {
+                  "$item": "career-path-block-85",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                }
+              }
+            ],
+            "title": "内部审计与专业方向"
+          }
+        ]
+      },
+      "career_quick_answers_block": {
+        "availability": "published",
+        "heading": "职业画像结构化说明",
+        "items": [
+          {
+            "answer": {
+              "$item": "career-quick-answers-block-2",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa3",
+            "question": "两套相连但独立的工作系统",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "会计信息生产线",
+                  "secondary_value": {
+                    "$item": "career-quick-answers-block-4",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  },
+                  "value": {
+                    "$item": "career-quick-answers-block-5",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  }
+                },
+                {
+                  "alternate_value": null,
+                  "label": "审计鉴证线",
+                  "secondary_value": {
+                    "$item": "career-quick-answers-block-6",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  },
+                  "value": {
+                    "$item": "career-quick-answers-block-7",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  }
+                },
+                {
+                  "alternate_value": null,
+                  "label": "共同专业底座",
+                  "secondary_value": null,
+                  "value": {
+                    "$item": "career-quick-answers-block-8",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "answer": {
+              "$item": "career-quick-answers-block-9",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa2",
+            "question": "会计和审计有什么区别？职责、产出与保证边界",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "核心目的",
+                  "secondary_value": {
+                    "$item": "career-quick-answers-block-11",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  },
+                  "value": {
+                    "$item": "career-quick-answers-block-12",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  }
+                },
+                {
+                  "alternate_value": null,
+                  "label": "主要对象与依据",
+                  "secondary_value": {
+                    "$item": "career-quick-answers-block-13",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  },
+                  "value": {
+                    "$item": "career-quick-answers-block-14",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  }
+                },
+                {
+                  "alternate_value": null,
+                  "label": "核心过程",
+                  "secondary_value": {
+                    "$item": "career-quick-answers-block-15",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  },
+                  "value": {
+                    "$item": "career-quick-answers-block-16",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  }
+                },
+                {
+                  "alternate_value": null,
+                  "label": "主要产出",
+                  "secondary_value": {
+                    "$item": "career-quick-answers-block-17",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  },
+                  "value": {
+                    "$item": "career-quick-answers-block-18",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  }
+                },
+                {
+                  "alternate_value": null,
+                  "label": "责任主体",
+                  "secondary_value": {
+                    "$item": "career-quick-answers-block-19",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  },
+                  "value": {
+                    "$item": "career-quick-answers-block-20",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  }
+                },
+                {
+                  "alternate_value": null,
+                  "label": "独立性要求",
+                  "secondary_value": {
+                    "$item": "career-quick-answers-block-21",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  },
+                  "value": {
+                    "$item": "career-quick-answers-block-22",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  }
+                },
+                {
+                  "alternate_value": null,
+                  "label": "保证边界",
+                  "secondary_value": {
+                    "$item": "career-quick-answers-block-23",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  },
+                  "value": {
+                    "$item": "career-quick-answers-block-24",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "answer": {
+              "$item": "career-quick-answers-block-25",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa1",
+            "question": "关键职业判断",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "01",
+                  "secondary_value": {
+                    "$item": "career-quick-answers-block-27",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  },
+                  "value": {
+                    "$item": "career-quick-answers-block-28",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  }
+                },
+                {
+                  "alternate_value": null,
+                  "label": "02",
+                  "secondary_value": {
+                    "$item": "career-quick-answers-block-29",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  },
+                  "value": {
+                    "$item": "career-quick-answers-block-30",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  }
+                },
+                {
+                  "alternate_value": null,
+                  "label": "03",
+                  "secondary_value": {
+                    "$item": "career-quick-answers-block-31",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  },
+                  "value": {
+                    "$item": "career-quick-answers-block-32",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  }
+                },
+                {
+                  "alternate_value": null,
+                  "label": "04",
+                  "secondary_value": {
+                    "$item": "career-quick-answers-block-33",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  },
+                  "value": {
+                    "$item": "career-quick-answers-block-34",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  }
+                },
+                {
+                  "alternate_value": null,
+                  "label": "05",
+                  "secondary_value": {
+                    "$item": "career-quick-answers-block-35",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  },
+                  "value": {
+                    "$item": "career-quick-answers-block-36",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  }
+                },
+                {
+                  "alternate_value": null,
+                  "label": "06",
+                  "secondary_value": {
+                    "$item": "career-quick-answers-block-37",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  },
+                  "value": {
+                    "$item": "career-quick-answers-block-38",
+                    "block": "profile",
+                    "copy_key": "career.item.career-quick-answers-block",
+                    "type": "prose"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "schema_version": "career.quick_answers.v1"
+      },
+      "career_risk_cards": {
+        "boundary": {
+          "$item": "career-risk-cards-1",
+          "block": "risk",
+          "copy_key": "career.item.career-risk-cards",
+          "type": "prose"
+        },
+        "context_links": [
+          {
+            "href": {
+              "$link": "career-risk-cards-51",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-1",
+              "field": "url"
+            },
+            "label": {
+              "$link": "career-risk-cards-51",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-1",
+              "field": "entity"
+            }
+          }
+        ],
+        "direct_answer": {
+          "$item": "career-risk-cards-2",
+          "block": "risk",
+          "copy_key": "career.item.career-risk-cards",
+          "type": "prose"
+        },
+        "evidence_scope": {
+          "$item": "career-risk-cards-3",
+          "block": "risk",
+          "copy_key": "career.item.career-risk-cards",
+          "type": "prose"
+        },
+        "heading": "会计与审计工作有哪些压力、风险与职业边界？",
+        "risks": [
+          {
+            "affected_roles": {
+              "$item": "career-risk-cards-4",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "consequence": {
+              "$item": "career-risk-cards-5",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "evidence_refs": [
+              "onet",
+              "iesba"
+            ],
+            "id": "misstatement-compliance",
+            "mitigation": {
+              "$item": "career-risk-cards-8",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "scenario": {
+              "$item": "career-risk-cards-9",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "title": "错报、漏报与合规风险"
+          },
+          {
+            "affected_roles": {
+              "$item": "career-risk-cards-10",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "consequence": {
+              "$item": "career-risk-cards-11",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "evidence_refs": [
+              "onet",
+              "bls"
+            ],
+            "id": "deadline-workload",
+            "mitigation": {
+              "$item": "career-risk-cards-14",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "scenario": {
+              "$item": "career-risk-cards-15",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "title": "结账、税期和审计忙季压力"
+          },
+          {
+            "affected_roles": {
+              "$item": "career-risk-cards-16",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "consequence": {
+              "$item": "career-risk-cards-17",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "evidence_refs": [
+              "iesba",
+              "cicpa"
+            ],
+            "id": "independence-conflict",
+            "mitigation": {
+              "$item": "career-risk-cards-20",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "scenario": {
+              "$item": "career-risk-cards-21",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "title": "独立性与利益冲突"
+          },
+          {
+            "affected_roles": {
+              "$item": "career-risk-cards-22",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "consequence": {
+              "$item": "career-risk-cards-23",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "evidence_refs": [
+              "onet",
+              "iesba"
+            ],
+            "id": "evidence-scope",
+            "mitigation": {
+              "$item": "career-risk-cards-26",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "scenario": {
+              "$item": "career-risk-cards-27",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "title": "资料、证据质量与项目范围失控"
+          },
+          {
+            "affected_roles": {
+              "$item": "career-risk-cards-28",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "consequence": {
+              "$item": "career-risk-cards-29",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "evidence_refs": [
+              "iesba",
+              "cicpa"
+            ],
+            "id": "confidentiality-access",
+            "mitigation": {
+              "$item": "career-risk-cards-32",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "scenario": {
+              "$item": "career-risk-cards-33",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "title": "保密、数据与系统权限风险"
+          },
+          {
+            "affected_roles": {
+              "$item": "career-risk-cards-34",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "consequence": {
+              "$item": "career-risk-cards-35",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "evidence_refs": [
+              "ifac7",
+              "iesba"
+            ],
+            "id": "competence-change",
+            "mitigation": {
+              "$item": "career-risk-cards-38",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "scenario": {
+              "$item": "career-risk-cards-39",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "title": "准则、技术与持续胜任能力风险"
+          }
+        ],
+        "schema_version": "career.work_risk.v1",
+        "source_links": [
+          {
+            "href": {
+              "$link": "career-risk-cards-51",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-2",
+              "field": "url"
+            },
+            "id": "onet",
+            "label": {
+              "$link": "career-risk-cards-51",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-2",
+              "field": "entity"
+            },
+            "scope": {
+              "$item": "career-risk-cards-42",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$link": "career-risk-cards-51",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-3",
+              "field": "url"
+            },
+            "id": "bls",
+            "label": {
+              "$link": "career-risk-cards-51",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-3",
+              "field": "entity"
+            },
+            "scope": {
+              "$item": "career-risk-cards-44",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$link": "career-risk-cards-51",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-4",
+              "field": "url"
+            },
+            "id": "iesba",
+            "label": {
+              "$link": "career-risk-cards-51",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-4",
+              "field": "entity"
+            },
+            "scope": {
+              "$item": "career-risk-cards-46",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$link": "career-risk-cards-51",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-5",
+              "field": "url"
+            },
+            "id": "cicpa",
+            "label": {
+              "$link": "career-risk-cards-51",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-5",
+              "field": "entity"
+            },
+            "scope": {
+              "$item": "career-risk-cards-48",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$link": "career-risk-cards-51",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-6",
+              "field": "url"
+            },
+            "id": "ifac7",
+            "label": {
+              "$link": "career-risk-cards-51",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-6",
+              "field": "entity"
+            },
+            "scope": {
+              "$item": "career-risk-cards-50",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          }
+        ]
+      },
+      "career_snapshot_primary_locale": {
+        "salary": {
+          "bls_table": [
+            {
+              "指标": "数据与口径",
+              "数值": {
+                "$item": "career-snapshot-primary-locale-1",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "说明": {
+                "$item": "career-snapshot-primary-locale-2",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
+            },
+            {
+              "指标": "数据与口径",
+              "数值": {
+                "$item": "career-snapshot-primary-locale-3",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "说明": {
+                "$item": "career-snapshot-primary-locale-4",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
+            },
+            {
+              "指标": "数据与口径",
+              "数值": {
+                "$item": "career-snapshot-primary-locale-5",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "说明": {
+                "$item": "career-snapshot-primary-locale-6",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
+            },
+            {
+              "指标": "数据与口径",
+              "数值": {
+                "$item": "career-snapshot-primary-locale-7",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "说明": {
+                "$item": "career-snapshot-primary-locale-8",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
+            },
+            {
+              "指标": "数据与口径",
+              "数值": {
+                "$item": "career-snapshot-primary-locale-9",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "说明": {
+                "$item": "career-snapshot-primary-locale-10",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
+            },
+            {
+              "指标": "数据与口径",
+              "数值": {
+                "$item": "career-snapshot-primary-locale-11",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "说明": {
+                "$item": "career-snapshot-primary-locale-12",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
+            },
+            {
+              "指标": "数据与口径",
+              "数值": {
+                "$item": "career-snapshot-primary-locale-13",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "说明": {
+                "$item": "career-snapshot-primary-locale-14",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
+            },
+            {
+              "指标": "数据与口径",
+              "数值": {
+                "$item": "career-snapshot-primary-locale-15",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "说明": {
+                "$item": "career-snapshot-primary-locale-16",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
+            }
+          ],
+          "china_ai_row": {
+            "$item": "career-snapshot-primary-locale-17",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_class_row": {
+            "$item": "career-snapshot-primary-locale-18",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_edu_table": [
+            {
+              "学历段": {
+                "$item": "career-snapshot-primary-locale-19",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "岗位方向": {
+                "$item": "career-snapshot-primary-locale-20",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "说明": {
+                "$item": "career-snapshot-primary-locale-21",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
+            },
+            {
+              "学历段": {
+                "$item": "career-snapshot-primary-locale-22",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "岗位方向": {
+                "$item": "career-snapshot-primary-locale-23",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "说明": {
+                "$item": "career-snapshot-primary-locale-24",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
+            },
+            {
+              "学历段": {
+                "$item": "career-snapshot-primary-locale-25",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "岗位方向": {
+                "$item": "career-snapshot-primary-locale-26",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "说明": {
+                "$item": "career-snapshot-primary-locale-27",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
+            },
+            {
+              "学历段": {
+                "$item": "career-snapshot-primary-locale-28",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "岗位方向": {
+                "$item": "career-snapshot-primary-locale-29",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "说明": {
+                "$item": "career-snapshot-primary-locale-30",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
+            }
+          ],
+          "china_industry_table": [
+            {
+              "行业": {
+                "$item": "career-snapshot-primary-locale-31",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "需求": {
+                "$item": "career-snapshot-primary-locale-32",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
+            },
+            {
+              "行业": {
+                "$item": "career-snapshot-primary-locale-33",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "需求": {
+                "$item": "career-snapshot-primary-locale-34",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
+            },
+            {
+              "行业": {
+                "$item": "career-snapshot-primary-locale-35",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "需求": {
+                "$item": "career-snapshot-primary-locale-36",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
+            }
+          ],
+          "china_intl": {
+            "$item": "career-snapshot-primary-locale-37",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_name_row": {
+            "$item": "career-snapshot-primary-locale-38",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_open": {
+            "$item": "career-snapshot-primary-locale-39",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_open_note": {
+            "$item": "career-snapshot-primary-locale-40",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_ref": {
+            "$item": "career-snapshot-primary-locale-41",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_salary_note": {
+            "$item": "career-snapshot-primary-locale-42",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_salary_table": [
+            {
+              "城市/区间": {
+                "$item": "career-snapshot-primary-locale-43",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "月薪参考": {
+                "$item": "career-snapshot-primary-locale-44",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
+            },
+            {
+              "城市/区间": {
+                "$item": "career-snapshot-primary-locale-45",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "月薪参考": {
+                "$item": "career-snapshot-primary-locale-46",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
+            },
+            {
+              "城市/区间": {
+                "$item": "career-snapshot-primary-locale-47",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "月薪参考": {
+                "$item": "career-snapshot-primary-locale-48",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              }
+            }
+          ],
+          "china_soc_row": {
+            "$item": "career-snapshot-primary-locale-49",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "edu": {
+            "$item": "career-snapshot-primary-locale-50",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "fact_refs": [
+            "mohrss-cn-economic-financial-wage-median-2024",
+            "editorial-cn-economic-financial-monthly-median-2024",
+            "randstad-cn-first-tier-finance-monthly-range-2026",
+            "randstad-cn-core-city-finance-monthly-range-2026"
+          ],
+          "sources_note": {
+            "$item": "career-snapshot-primary-locale-51",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "us_growth": {
+            "$item": "career-snapshot-primary-locale-52",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "us_median": {
+            "$item": "career-snapshot-primary-locale-53",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          }
+        }
+      },
+      "career_snapshot_secondary_locale": {
+        "authority_sources": {
+          "$item": "career-snapshot-secondary-locale-1",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "bls_table": [
+          {
+            "fact_ref": "bls-us-accountants-wage-p10-2025",
+            "指标": "薪资 · 10 分位",
+            "数值": {
+              "$item": "career-snapshot-secondary-locale-2",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "说明": {
+              "$item": "career-snapshot-secondary-locale-3",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            }
+          },
+          {
+            "fact_ref": "bls-us-accountants-wage-p25-2025",
+            "指标": "薪资 · 25 分位",
+            "数值": {
+              "$item": "career-snapshot-secondary-locale-4",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "说明": {
+              "$item": "career-snapshot-secondary-locale-5",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            }
+          },
+          {
+            "fact_ref": "bls-us-accountants-wage-median-2025",
+            "指标": "薪资 · 中位数",
+            "数值": {
+              "$item": "career-snapshot-secondary-locale-6",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "说明": {
+              "$item": "career-snapshot-secondary-locale-7",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            }
+          },
+          {
+            "fact_ref": "bls-us-accountants-wage-p75-2025",
+            "指标": "薪资 · 75 分位",
+            "数值": {
+              "$item": "career-snapshot-secondary-locale-8",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "说明": {
+              "$item": "career-snapshot-secondary-locale-9",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            }
+          },
+          {
+            "fact_ref": "bls-us-accountants-wage-p90-2025",
+            "指标": "薪资 · 90 分位",
+            "数值": {
+              "$item": "career-snapshot-secondary-locale-10",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "说明": {
+              "$item": "career-snapshot-secondary-locale-11",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            }
+          },
+          {
+            "指标": "就业 · 就业规模",
+            "数值": {
+              "$item": "career-snapshot-secondary-locale-12",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "说明": {
+              "$item": "career-snapshot-secondary-locale-13",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            }
+          },
+          {
+            "fact_ref": "bls-us-accountants-employment-growth-2025-2035",
+            "指标": "就业 · 增长率",
+            "数值": {
+              "$item": "career-snapshot-secondary-locale-14",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "说明": {
+              "$item": "career-snapshot-secondary-locale-15",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            }
+          },
+          {
+            "fact_ref": "bls-us-accountants-openings-2025-2035",
+            "指标": "就业 · 年均职位空缺",
+            "数值": {
+              "$item": "career-snapshot-secondary-locale-16",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "说明": {
+              "$item": "career-snapshot-secondary-locale-17",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            }
+          }
+        ],
+        "boundary": {
+          "$item": "career-snapshot-secondary-locale-18",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "direct_answer": {
+          "$item": "career-snapshot-secondary-locale-19",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "factor_rows": [
+          {
+            "answer": {
+              "$item": "career-snapshot-secondary-locale-20",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "factor": {
+              "$item": "career-snapshot-secondary-locale-21",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            }
+          },
+          {
+            "answer": {
+              "$item": "career-snapshot-secondary-locale-22",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "factor": {
+              "$item": "career-snapshot-secondary-locale-23",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            }
+          },
+          {
+            "answer": {
+              "$item": "career-snapshot-secondary-locale-24",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "factor": {
+              "$item": "career-snapshot-secondary-locale-25",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            }
+          }
+        ],
+        "factors_heading": "哪些因素真正影响美国会计和审计工资？",
+        "growth": {
+          "$item": "career-snapshot-secondary-locale-26",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "heading": "美国会计师和审计师工资多少？",
+        "industry_heading": "不同行业的美国工资差多少？",
+        "industry_period": {
+          "$fact": "bls-us-accountants-industry-finance-2025",
+          "field": "period"
+        },
+        "industry_rows": [
+          {
+            "fact_ref": "bls-us-accountants-industry-finance-2025",
+            "industry": {
+              "$item": "career-snapshot-secondary-locale-27",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "median": {
+              "$item": "career-snapshot-secondary-locale-28",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "note": {
+              "$item": "career-snapshot-secondary-locale-29",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            }
+          },
+          {
+            "fact_ref": "bls-us-accountants-industry-management-2025",
+            "industry": {
+              "$item": "career-snapshot-secondary-locale-30",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "median": {
+              "$item": "career-snapshot-secondary-locale-31",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "note": {
+              "$item": "career-snapshot-secondary-locale-32",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            }
+          },
+          {
+            "fact_ref": "bls-us-accountants-industry-government-2025",
+            "industry": {
+              "$item": "career-snapshot-secondary-locale-33",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "median": {
+              "$item": "career-snapshot-secondary-locale-34",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "note": {
+              "$item": "career-snapshot-secondary-locale-35",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            }
+          },
+          {
+            "fact_ref": "bls-us-accountants-industry-accounting-services-2025",
+            "industry": {
+              "$item": "career-snapshot-secondary-locale-36",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "median": {
+              "$item": "career-snapshot-secondary-locale-37",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "note": {
+              "$item": "career-snapshot-secondary-locale-38",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            }
+          }
+        ],
+        "interpretation_heading": "美国会计师和审计师工资怎么理解？",
+        "interpretation_rows": [
+          {
+            "answer": {
+              "$item": "career-snapshot-secondary-locale-39",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "question": "年薪中位数是入门工资吗？"
+          },
+          {
+            "answer": {
+              "$item": "career-snapshot-secondary-locale-40",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "question": "税前月均等值是到手工资吗？"
+          },
+          {
+            "answer": {
+              "$item": "career-snapshot-secondary-locale-41",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "question": "美国审计师一定比会计师工资高吗？"
+          },
+          {
+            "answer": {
+              "$item": "career-snapshot-secondary-locale-42",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "question": "CPA 会保证会计师或审计师加薪吗？"
+          }
+        ],
+        "median": {
+          "$item": "career-snapshot-secondary-locale-43",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "outlook_heading": "美国就业前景",
+        "outlook_period": {
+          "$fact": "bls-us-accountants-employment-growth-2025-2035",
+          "field": "period"
+        },
+        "wage_heading": "美国工资分布"
+      },
+      "definition_block": {
+        "$item": "definition-block-1",
+        "block": "profile",
+        "copy_key": "career.item.definition-block",
+        "type": "prose"
+      },
+      "faq_block": {
+        "items": {
+          "$item": "faq-block-1",
+          "block": "sources",
+          "copy_key": "career.item.faq-block",
+          "type": "faq"
+        }
+      },
+      "fermat_decision_card": {
+        "caveat": {
+          "$item": "fermat-decision-card-1",
+          "block": "quick-decision",
+          "copy_key": "career.item.fermat-decision-card",
+          "type": "prose"
+        },
+        "summary": {
+          "$item": "fermat-decision-card-2",
+          "block": "quick-decision",
+          "copy_key": "career.item.fermat-decision-card",
+          "type": "prose"
+        },
+        "title": "会计与审计适合什么样的人？"
+      },
+      "fit_decision_checklist": {
+        "boundary": {
+          "$item": "fit-decision-checklist-1",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "how": {
+          "$item": "fit-decision-checklist-2",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "suit": {
+          "$item": "fit-decision-checklist-3",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        }
+      },
+      "hero": {
+        "h1": {
+          "$subject": "name"
+        },
+        "quick_answer": {
+          "$subject": "summary"
+        },
+        "title": {
+          "$subject": "name"
+        }
+      },
+      "market_signal_card": {
+        "context_links": [
+          {
+            "href": {
+              "$link": "market-signal-card-75",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "entry": "link-1",
+              "field": "url"
+            },
+            "label": {
+              "$link": "market-signal-card-75",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "entry": "link-1",
+              "field": "entity"
+            }
+          },
+          {
+            "href": {
+              "$link": "market-signal-card-75",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "entry": "link-2",
+              "field": "url"
+            },
+            "label": {
+              "$link": "market-signal-card-75",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "entry": "link-2",
+              "field": "entity"
+            }
+          }
+        ],
+        "direct_answer": {
+          "$item": "market-signal-card-1",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "heading": "会计职业前景如何？可以转向哪些相关职业？",
+        "outlook_evidence": [
+          {
+            "geography": {
+              "$item": "market-signal-card-2",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "horizon": {
+              "$item": "market-signal-card-3",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "interpretation": {
+              "$item": "market-signal-card-4",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "limitation": {
+              "$item": "market-signal-card-5",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "metric": {
+              "$item": "market-signal-card-6",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "occupation_scope": {
+              "$item": "market-signal-card-7",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "source_id": "bls",
+            "value": {
+              "$item": "market-signal-card-9",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "geography": {
+              "$item": "market-signal-card-10",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "horizon": {
+              "$item": "market-signal-card-11",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "interpretation": {
+              "$item": "market-signal-card-12",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "limitation": {
+              "$item": "market-signal-card-13",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "metric": {
+              "$item": "market-signal-card-14",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "occupation_scope": {
+              "$item": "market-signal-card-15",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "source_id": "wef",
+            "value": {
+              "$item": "market-signal-card-17",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "geography": {
+              "$item": "market-signal-card-18",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "horizon": {
+              "$item": "market-signal-card-19",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "interpretation": {
+              "$item": "market-signal-card-20",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "limitation": {
+              "$item": "market-signal-card-21",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "metric": {
+              "$item": "market-signal-card-22",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "occupation_scope": {
+              "$item": "market-signal-card-23",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "source_id": "ilo",
+            "value": {
+              "$item": "market-signal-card-25",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          }
+        ],
+        "schema_version": "career.outlook_transitions.v1",
+        "source_links": [
+          {
+            "href": {
+              "$link": "market-signal-card-75",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "entry": "link-3",
+              "field": "url"
+            },
+            "id": "bls",
+            "label": {
+              "$link": "market-signal-card-75",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "entry": "link-3",
+              "field": "entity"
+            },
+            "scope": {
+              "$item": "market-signal-card-28",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$link": "market-signal-card-75",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "entry": "link-4",
+              "field": "url"
+            },
+            "id": "wef",
+            "label": {
+              "$link": "market-signal-card-75",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "entry": "link-4",
+              "field": "entity"
+            },
+            "scope": {
+              "$item": "market-signal-card-30",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$link": "market-signal-card-75",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "entry": "link-5",
+              "field": "url"
+            },
+            "id": "ilo",
+            "label": {
+              "$link": "market-signal-card-75",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "entry": "link-5",
+              "field": "entity"
+            },
+            "scope": {
+              "$item": "market-signal-card-32",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$link": "market-signal-card-75",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "entry": "link-6",
+              "field": "url"
+            },
+            "id": "onet",
+            "label": {
+              "$link": "market-signal-card-75",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "entry": "link-6",
+              "field": "entity"
+            },
+            "scope": {
+              "$item": "market-signal-card-34",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          }
+        ],
+        "transitions": [
+          {
+            "capability_gaps": {
+              "$item": "market-signal-card-35",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "market-signal-card-36",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "target_href": {
+              "$link": "market-signal-card-75",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "entry": "link-7",
+              "field": "url"
+            },
+            "target_slug": "financial-managers",
+            "target_title": "财务经理",
+            "transition_distance": {
+              "$item": "market-signal-card-39",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "capability_gaps": {
+              "$item": "market-signal-card-40",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "market-signal-card-41",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "target_href": {
+              "$link": "market-signal-card-75",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "entry": "link-8",
+              "field": "url"
+            },
+            "target_slug": "financial-analysts",
+            "target_title": "财务与投资分析师",
+            "transition_distance": {
+              "$item": "market-signal-card-44",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "capability_gaps": {
+              "$item": "market-signal-card-45",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "market-signal-card-46",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "target_href": {
+              "$link": "market-signal-card-75",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "entry": "link-9",
+              "field": "url"
+            },
+            "target_slug": "budget-analysts",
+            "target_title": "预算分析师",
+            "transition_distance": {
+              "$item": "market-signal-card-49",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "capability_gaps": {
+              "$item": "market-signal-card-50",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "market-signal-card-51",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "target_href": {
+              "$link": "market-signal-card-75",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "entry": "link-10",
+              "field": "url"
+            },
+            "target_slug": "financial-examiners",
+            "target_title": "财务审查员",
+            "transition_distance": {
+              "$item": "market-signal-card-54",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "capability_gaps": {
+              "$item": "market-signal-card-55",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "market-signal-card-56",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "target_href": {
+              "$link": "market-signal-card-75",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "entry": "link-11",
+              "field": "url"
+            },
+            "target_slug": "fraud-examiners-investigators-and-analysts",
+            "target_title": "舞弊审查、调查与分析师",
+            "transition_distance": {
+              "$item": "market-signal-card-59",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "capability_gaps": {
+              "$item": "market-signal-card-60",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "market-signal-card-61",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "target_href": {
+              "$link": "market-signal-card-75",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "entry": "link-12",
+              "field": "url"
+            },
+            "target_slug": "management-analysts",
+            "target_title": "管理分析师",
+            "transition_distance": {
+              "$item": "market-signal-card-64",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "capability_gaps": {
+              "$item": "market-signal-card-65",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "market-signal-card-66",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "target_href": {
+              "$link": "market-signal-card-75",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "entry": "link-13",
+              "field": "url"
+            },
+            "target_slug": "bookkeeping-accounting-and-auditing-clerks",
+            "target_title": "簿记、会计与审计文员",
+            "transition_distance": {
+              "$item": "market-signal-card-69",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "capability_gaps": {
+              "$item": "market-signal-card-70",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "market-signal-card-71",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "target_href": {
+              "$link": "market-signal-card-75",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "entry": "link-14",
+              "field": "url"
+            },
+            "target_slug": "tax-preparers",
+            "target_title": "税务申报员",
+            "transition_distance": {
+              "$item": "market-signal-card-74",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          }
+        ]
+      },
+      "onet_structured_fields_block": {
+        "availability": "published",
+        "heading": "专业依据与使用边界",
+        "rows": [
+          {
+            "alternate_value": null,
+            "label": "O*NET 13-2011.00",
+            "secondary_value": null,
+            "value": {
+              "$item": "onet-structured-fields-block-2",
+              "block": "profile",
+              "copy_key": "career.item.onet-structured-fields-block",
+              "type": "prose"
+            }
+          },
+          {
+            "alternate_value": null,
+            "label": "BLS Occupational Outlook Handbook",
+            "secondary_value": null,
+            "value": {
+              "$item": "onet-structured-fields-block-3",
+              "block": "profile",
+              "copy_key": "career.item.onet-structured-fields-block",
+              "type": "prose"
+            }
+          },
+          {
+            "alternate_value": null,
+            "label": "《中华人民共和国职业分类大典（2022年版）》",
+            "secondary_value": null,
+            "value": {
+              "$item": "onet-structured-fields-block-4",
+              "block": "profile",
+              "copy_key": "career.item.onet-structured-fields-block",
+              "type": "prose"
+            }
+          },
+          {
+            "alternate_value": null,
+            "label": "《企业会计准则——基本准则》",
+            "secondary_value": null,
+            "value": {
+              "$item": "onet-structured-fields-block-5",
+              "block": "profile",
+              "copy_key": "career.item.onet-structured-fields-block",
+              "type": "prose"
+            }
+          },
+          {
+            "alternate_value": null,
+            "label": "《中国注册会计师审计准则第1101号》",
+            "secondary_value": null,
+            "value": {
+              "$item": "onet-structured-fields-block-6",
+              "block": "profile",
+              "copy_key": "career.item.onet-structured-fields-block",
+              "type": "prose"
+            }
+          }
+        ],
+        "schema_version": "career.onet_structured_fields.v1"
+      },
+      "personality_fit_block": {
+        "assessments": [
+          {
+            "answer": {
+              "$item": "personality-fit-block-1",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "cta_href": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-1",
+              "field": "url"
+            },
+            "cta_label": "测我的霍兰德职业兴趣",
+            "evidence_level": {
+              "$item": "personality-fit-block-2",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "id": "riasec",
+            "label": "霍兰德职业兴趣模型（RIASEC）",
+            "question": "霍兰德职业兴趣中，什么类型更适合会计与审计？",
+            "signals": {
+              "$item": "personality-fit-block-4",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "list"
+            },
+            "watchout": {
+              "$item": "personality-fit-block-5",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          },
+          {
+            "answer": {
+              "$item": "personality-fit-block-6",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "cta_href": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-2",
+              "field": "url"
+            },
+            "cta_label": "查看我的大五人格特质",
+            "evidence_level": {
+              "$item": "personality-fit-block-7",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "id": "big-five",
+            "label": "五因素人格模型（大五人格）",
+            "question": "大五人格中，哪些特质与会计工作更相关？",
+            "signals": {
+              "$item": "personality-fit-block-9",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "list"
+            },
+            "watchout": {
+              "$item": "personality-fit-block-10",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          },
+          {
+            "answer": {
+              "$item": "personality-fit-block-11",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "cta_href": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-3",
+              "field": "url"
+            },
+            "cta_label": "了解我的 MBTI 偏好",
+            "evidence_level": {
+              "$item": "personality-fit-block-12",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "id": "mbti",
+            "label": "迈尔斯-布里格斯类型指标（MBTI）",
+            "question": "哪种 MBTI 最适合会计或审计？",
+            "signals": {
+              "$item": "personality-fit-block-14",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "list"
+            },
+            "watchout": {
+              "$item": "personality-fit-block-15",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          },
+          {
+            "answer": {
+              "$item": "personality-fit-block-16",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "cta_href": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-4",
+              "field": "url"
+            },
+            "cta_label": "探索我的九型人格模式",
+            "evidence_level": {
+              "$item": "personality-fit-block-17",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "id": "enneagram",
+            "label": "九型人格（Enneagram）",
+            "question": "九型人格几号更适合会计？",
+            "signals": {
+              "$item": "personality-fit-block-19",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "list"
+            },
+            "watchout": {
+              "$item": "personality-fit-block-20",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          },
+          {
+            "answer": {
+              "$item": "personality-fit-block-21",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "cta_href": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-5",
+              "field": "url"
+            },
+            "cta_label": "了解我的智力与推理表现",
+            "evidence_level": {
+              "$item": "personality-fit-block-22",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "id": "iq",
+            "label": "智力商数（IQ）与数理推理",
+            "question": "智商不高或数学不好能做会计吗？",
+            "signals": {
+              "$item": "personality-fit-block-24",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "list"
+            },
+            "watchout": {
+              "$item": "personality-fit-block-25",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          },
+          {
+            "answer": {
+              "$item": "personality-fit-block-26",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "cta_href": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-6",
+              "field": "url"
+            },
+            "cta_label": "了解我的情绪智力能力",
+            "evidence_level": {
+              "$item": "personality-fit-block-27",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "id": "eq",
+            "label": "情绪智力（EI，常称“情商”）",
+            "question": "会计和审计需要高情商吗？",
+            "signals": {
+              "$item": "personality-fit-block-29",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "list"
+            },
+            "watchout": {
+              "$item": "personality-fit-block-30",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          }
+        ],
+        "boundary": {
+          "$item": "personality-fit-block-31",
+          "block": "fit",
+          "copy_key": "career.item.personality-fit-block",
+          "type": "prose"
+        },
+        "direct_answer": {
+          "$item": "personality-fit-block-32",
+          "block": "fit",
+          "copy_key": "career.item.personality-fit-block",
+          "type": "prose"
+        },
+        "directions": [
+          {
+            "direction": {
+              "$item": "personality-fit-block-33",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "fit_signals": {
+              "$item": "personality-fit-block-34",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "target": {
+              "href": {
+                "$link": "personality-fit-block-85",
+                "block": "fit",
+                "copy_key": "career.item.personality-fit-block",
+                "entry": "link-7",
+                "field": "url"
+              },
+              "slug": "bookkeeping-accounting-and-auditing-clerks",
+              "title": {
+                "$link": "personality-fit-block-85",
+                "block": "fit",
+                "copy_key": "career.item.personality-fit-block",
+                "entry": "link-7",
+                "field": "entity"
+              }
+            },
+            "watchouts": {
+              "$item": "personality-fit-block-36",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          },
+          {
+            "direction": {
+              "$item": "personality-fit-block-37",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "fit_signals": {
+              "$item": "personality-fit-block-38",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "target": {
+              "href": {
+                "$link": "personality-fit-block-85",
+                "block": "fit",
+                "copy_key": "career.item.personality-fit-block",
+                "entry": "link-8",
+                "field": "url"
+              },
+              "slug": "financial-examiners",
+              "title": {
+                "$link": "personality-fit-block-85",
+                "block": "fit",
+                "copy_key": "career.item.personality-fit-block",
+                "entry": "link-8",
+                "field": "entity"
+              }
+            },
+            "watchouts": {
+              "$item": "personality-fit-block-40",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          },
+          {
+            "direction": {
+              "$item": "personality-fit-block-41",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "fit_signals": {
+              "$item": "personality-fit-block-42",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "target": {
+              "href": {
+                "$link": "personality-fit-block-85",
+                "block": "fit",
+                "copy_key": "career.item.personality-fit-block",
+                "entry": "link-9",
+                "field": "url"
+              },
+              "slug": "tax-preparers",
+              "title": {
+                "$link": "personality-fit-block-85",
+                "block": "fit",
+                "copy_key": "career.item.personality-fit-block",
+                "entry": "link-9",
+                "field": "entity"
+              }
+            },
+            "watchouts": {
+              "$item": "personality-fit-block-44",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          },
+          {
+            "direction": {
+              "$item": "personality-fit-block-45",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "fit_signals": {
+              "$item": "personality-fit-block-46",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "target": {
+              "href": {
+                "$link": "personality-fit-block-85",
+                "block": "fit",
+                "copy_key": "career.item.personality-fit-block",
+                "entry": "link-10",
+                "field": "url"
+              },
+              "slug": "financial-analysts",
+              "title": {
+                "$link": "personality-fit-block-85",
+                "block": "fit",
+                "copy_key": "career.item.personality-fit-block",
+                "entry": "link-10",
+                "field": "entity"
+              }
+            },
+            "watchouts": {
+              "$item": "personality-fit-block-48",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          },
+          {
+            "direction": {
+              "$item": "personality-fit-block-49",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "fit_signals": {
+              "$item": "personality-fit-block-50",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "target": {
+              "href": {
+                "$link": "personality-fit-block-85",
+                "block": "fit",
+                "copy_key": "career.item.personality-fit-block",
+                "entry": "link-11",
+                "field": "url"
+              },
+              "slug": "fraud-examiners-investigators-and-analysts",
+              "title": {
+                "$link": "personality-fit-block-85",
+                "block": "fit",
+                "copy_key": "career.item.personality-fit-block",
+                "entry": "link-11",
+                "field": "entity"
+              }
+            },
+            "watchouts": {
+              "$item": "personality-fit-block-52",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          },
+          {
+            "direction": {
+              "$item": "personality-fit-block-53",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "fit_signals": {
+              "$item": "personality-fit-block-54",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "target": {
+              "href": {
+                "$link": "personality-fit-block-85",
+                "block": "fit",
+                "copy_key": "career.item.personality-fit-block",
+                "entry": "link-12",
+                "field": "url"
+              },
+              "slug": "financial-managers",
+              "title": {
+                "$link": "personality-fit-block-85",
+                "block": "fit",
+                "copy_key": "career.item.personality-fit-block",
+                "entry": "link-12",
+                "field": "entity"
+              }
+            },
+            "watchouts": {
+              "$item": "personality-fit-block-56",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          }
+        ],
+        "heading": "做会计或审计，哪些兴趣、性格特质与能力更重要？",
+        "questions": [
+          {
+            "answer": {
+              "$item": "personality-fit-block-57",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "question": "什么性格的人更适合做会计师或审计师？"
+          },
+          {
+            "answer": {
+              "$item": "personality-fit-block-58",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "question": "内向的人适合做会计师或审计师吗？"
+          },
+          {
+            "answer": {
+              "$item": "personality-fit-block-59",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "question": "外向的人能做好会计师或审计师吗？"
+          },
+          {
+            "answer": {
+              "$item": "personality-fit-block-60",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "question": "哪种 MBTI 最适合会计师或审计师？"
+          },
+          {
+            "answer": {
+              "$item": "personality-fit-block-61",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "question": "霍兰德职业兴趣中，什么类型更适合会计师或审计师？"
+          },
+          {
+            "answer": {
+              "$item": "personality-fit-block-62",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "question": "大五人格中，哪些特质更有利于会计与审计工作？"
+          },
+          {
+            "answer": {
+              "$item": "personality-fit-block-63",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "question": "数学不好能学会计吗？会计需要很高的智商吗？"
+          },
+          {
+            "answer": {
+              "$item": "personality-fit-block-64",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "question": "会计师和审计师需要高情商吗？"
+          },
+          {
+            "answer": {
+              "$item": "personality-fit-block-65",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "question": "九型人格哪一型更适合会计师或审计师？"
+          },
+          {
+            "answer": {
+              "$item": "personality-fit-block-66",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "question": "我更适合企业会计、审计、税务还是 FP&A？"
+          }
+        ],
+        "schema_version": "career.fit_decision_center.v1",
+        "signals": [
+          {
+            "body": {
+              "$item": "personality-fit-block-68",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "id": "fit",
+            "label": "你可能更适合",
+            "tone": "positive"
+          },
+          {
+            "body": {
+              "$item": "personality-fit-block-71",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "id": "caution",
+            "label": "这些情况需要慎重",
+            "tone": "caution"
+          },
+          {
+            "body": {
+              "$item": "personality-fit-block-74",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "id": "experiment",
+            "label": "做一次入行练习",
+            "tone": "action"
+          }
+        ],
+        "source_links": [
+          {
+            "href": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-13",
+              "field": "url"
+            },
+            "label": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-13",
+              "field": "entity"
+            },
+            "usage": {
+              "$item": "personality-fit-block-77",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-14",
+              "field": "url"
+            },
+            "label": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-14",
+              "field": "entity"
+            },
+            "usage": {
+              "$item": "personality-fit-block-78",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-15",
+              "field": "url"
+            },
+            "label": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-15",
+              "field": "entity"
+            },
+            "usage": {
+              "$item": "personality-fit-block-79",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-16",
+              "field": "url"
+            },
+            "label": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-16",
+              "field": "entity"
+            },
+            "usage": {
+              "$item": "personality-fit-block-80",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-17",
+              "field": "url"
+            },
+            "label": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-17",
+              "field": "entity"
+            },
+            "usage": {
+              "$item": "personality-fit-block-81",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-18",
+              "field": "url"
+            },
+            "label": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-18",
+              "field": "entity"
+            },
+            "usage": {
+              "$item": "personality-fit-block-82",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-19",
+              "field": "url"
+            },
+            "label": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-19",
+              "field": "entity"
+            },
+            "usage": {
+              "$item": "personality-fit-block-83",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          },
+          {
+            "href": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-20",
+              "field": "url"
+            },
+            "label": {
+              "$link": "personality-fit-block-85",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "entry": "link-20",
+              "field": "entity"
+            },
+            "usage": {
+              "$item": "personality-fit-block-84",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          }
+        ]
+      },
+      "primary_cta": {
+        "entry_surface": "career_job_detail",
+        "href": {
+          "$link": "navigation-links",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "navigation-1",
+          "field": "url"
+        },
+        "label": "测我的职业兴趣是否适合会计与审计",
+        "source_page_type": "career_job_detail",
+        "subject_key": {
+          "$subject": "canonical_slug"
+        },
+        "subject_kind": "career_job",
+        "target_action": "start_riasec_test",
+        "test_slug": "holland-career-interest-test-riasec"
+      },
+      "responsibilities_block": {
+        "$item": "responsibilities-block-1",
+        "block": "profile",
+        "copy_key": "career.item.responsibilities-block",
+        "type": "list"
+      },
+      "riasec_fit_block": {
+        "fit_interest": {
+          "$item": "riasec-fit-block-1",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        },
+        "interest": {
+          "$item": "riasec-fit-block-2",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        },
+        "riasec": {
+          "$item": "riasec-fit-block-3",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        },
+        "riasec_short": {
+          "$item": "riasec-fit-block-4",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        }
+      },
+      "source_card": {
+        "eeat_signals": {
+          "author": {
+            "$item": "source-card-1",
+            "block": "sources",
+            "copy_key": "career.item.source-card",
+            "type": "prose"
+          },
+          "source": {
+            "$item": "source-card-2",
+            "block": "sources",
+            "copy_key": "career.item.source-card",
+            "type": "prose"
+          },
+          "updated_at": {
+            "$item": "source-card-3",
+            "block": "sources",
+            "copy_key": "career.item.source-card",
+            "type": "prose"
+          }
+        },
+        "note": {
+          "$item": "source-card-4",
+          "block": "sources",
+          "copy_key": "career.item.source-card",
+          "type": "prose"
+        },
+        "secondary_links": [
+          {
+            "href": {
+              "$link": "navigation-links",
+              "block": "navigation",
+              "copy_key": "career.item.navigation-links",
+              "entry": "navigation-2",
+              "field": "url"
+            },
+            "label": "MBTI (English)"
+          },
+          {
+            "href": {
+              "$link": "navigation-links",
+              "block": "navigation",
+              "copy_key": "career.item.navigation-links",
+              "entry": "navigation-3",
+              "field": "url"
+            },
+            "label": "Big Five (English)"
+          },
+          {
+            "href": {
+              "$link": "navigation-links",
+              "block": "navigation",
+              "copy_key": "career.item.navigation-links",
+              "entry": "navigation-4",
+              "field": "url"
+            },
+            "label": "MBTI (中文)"
+          },
+          {
+            "href": {
+              "$link": "navigation-links",
+              "block": "navigation",
+              "copy_key": "career.item.navigation-links",
+              "entry": "navigation-5",
+              "field": "url"
+            },
+            "label": "Big Five (中文)"
+          }
+        ]
+      },
+      "work_context_block": {
+        "$item": "work-context-block-1",
+        "block": "profile",
+        "copy_key": "career.item.work-context-block",
+        "type": "prose"
+      }
+    },
+    "contract_version": "career.detail.display.v1",
+    "native_items": [
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-role-comparison",
+        "id": "accountant-entry-role-comparison",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.employer-evidence",
+        "id": "accountant-entry-employer-evidence",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "accountant-entry-work-sample",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-portfolio",
+        "id": "accountant-entry-portfolio",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.interview-probation",
+        "id": "accountant-entry-interview-probation",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "accountant-entry-seven-day-trial",
+        "location": "entry_decisions",
+        "type": "timeline"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "accountant-entry-seven-day-decision",
+        "location": "entry_decisions",
+        "type": "list"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.credential-decision",
+        "id": "accountant-credential-decision",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.credential-boundary",
+        "id": "accountant-credential-boundary",
+        "location": "entry_decisions",
+        "type": "notice"
+      },
+      {
+        "block": "source-register",
+        "copy_key": "career.item.published-sources",
+        "id": "published-sources",
+        "location": "sources",
+        "type": "sources"
+      }
+    ],
+    "path": {
+      "$link": "navigation-links",
+      "block": "navigation",
+      "copy_key": "career.item.navigation-links",
+      "entry": "navigation-6",
+      "field": "url"
+    },
+    "section_titles": {
+      "ai-impact": "AI 影响",
+      "china-salary": "中国大陆薪资参考",
+      "direction-comparison": "职业方向比较",
+      "fit": "职业适配指南",
+      "market-signals": "职业前景与相关职业转向",
+      "navigation": "下一步与相关入口",
+      "path": "入行、证书与职业发展",
+      "profile": "职业画像",
+      "quick-decision": "快速判断",
+      "risk": "工作压力、风险与职业边界",
+      "source-register": "资料来源",
+      "sources": "常见问题与资料来源",
+      "us-salary": "美国薪资参考"
+    }
+  },
   "fact_register": {
     "facts": [
       {
@@ -8605,17 +13507,33 @@
         "source_refs": [
           "source-5"
         ]
+      },
+      {
+        "derivation": "任务暴露表示 AI 可能影响的工作活动范围，不等于实际自动化率或岗位消失概率。",
+        "display_value": "8/10",
+        "fact_id": "fermatmind-accountants-task-exposure",
+        "market": "职业任务",
+        "measure": "FermatMind 任务级评分（0—10）",
+        "occupation_scope": "会计师和审计师",
+        "period": "历史已发布评分，评分期未注明",
+        "source_refs": [
+          "source-fermatmind-ai-rubric"
+        ]
       }
     ]
   },
   "hero": {
     "ai": {
-      "availability": "missing",
-      "fact_ref": null,
+      "availability": "available",
+      "fact_ref": "fermatmind-accountants-task-exposure",
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI影响程度"
     },
-    "badges": [],
+    "badges": [
+      "RIASEC · CEI",
+      "企业财务 / 事务所审计",
+      "合规责任 · 忙季高压 · 自动化升级"
+    ],
     "metrics": [
       {
         "availability": "available",
@@ -8660,7 +13578,7 @@
       "text": "会计师和审计师"
     }
   },
-  "source_content_sha256": "a202575c27e08cf576bfa9a1589387b5aef27c161dc7c3ac32a4015ae2989e55",
+  "source_content_sha256": "6b322e3b2ad0d019af1913ebf8839cccc5adcdf0fe8eed5044bc9f881aca4291",
   "subject": {
     "canonical_slug": "accountants-and-auditors",
     "name": "会计师和审计师",
