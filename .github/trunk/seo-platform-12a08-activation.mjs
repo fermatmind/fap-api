@@ -36,20 +36,49 @@ export function fingerprint(root = process.cwd(), ref = 'HEAD') {
   const semantic = new Map();
   if (semanticRows.length) {
     const objects = semanticRows.map(row=>row.split(' ')[2].split('\t')[0]);
-    const bytes = execFileSync('git',['cat-file','--batch'],{cwd:root,input:objects.join('\n')+'\n',maxBuffer:128*1024*1024});
-    let offset=0;
-    for (const row of semanticRows) {
-      const end=bytes.indexOf(10,offset), size=Number(bytes.subarray(offset,end).toString().split(' ')[2]);
-      if (!Number.isSafeInteger(size)) throw new Error('CONTENT_IDENTITY_FINGERPRINT_HOLD');
-      const value=JSON.parse(bytes.subarray(end+1,end+1+size).toString()); offset=end+size+2;
-      semantic.set(row,JSON.stringify(contentIdentity(value,row.endsWith('/manifest.json'))));
+    const sizes = execFileSync('git', ['cat-file', '--batch-check'], {
+      cwd: root, input: objects.join('\n')+'\n', maxBuffer: 32*1024*1024,
+    }).toString().trimEnd().split('\n').map((line, index) => {
+      const [oid, type, length] = line.split(' ');
+      const size = Number(length);
+      if (oid !== objects[index] || type !== 'blob' || !Number.isSafeInteger(size) || size < 0
+        || size + line.length + 2 > 128*1024*1024) throw new Error('CONTENT_IDENTITY_FINGERPRINT_HOLD');
+      return size + line.length + 2;
+    });
+    if (sizes.length !== objects.length) throw new Error('CONTENT_IDENTITY_FINGERPRINT_HOLD');
+    // Bound each read, not the total package size. Keep the existing single-object ceiling.
+    for (let start = 0; start < objects.length;) {
+      let end = start + 1, batchBytes = sizes[start];
+      while (end < objects.length && batchBytes + sizes[end] <= 16*1024*1024) batchBytes += sizes[end++];
+      const bytes = execFileSync('git', ['cat-file', '--batch'], {
+        cwd: root, input: objects.slice(start, end).join('\n')+'\n', maxBuffer: 128*1024*1024,
+      });
+      let offset = 0;
+      for (let index = start; index < end; index++) {
+        const newline = bytes.indexOf(10, offset);
+        const [oid, type, length] = bytes.subarray(offset, newline).toString().split(' ');
+        const size = Number(length);
+        if (newline < offset || oid !== objects[index] || type !== 'blob' || !Number.isSafeInteger(size)
+          || size < 0 || newline + size + 1 >= bytes.length || bytes[newline + size + 1] !== 10
+          || size + newline - offset + 2 !== sizes[index]) throw new Error('CONTENT_IDENTITY_FINGERPRINT_HOLD');
+        const value = JSON.parse(bytes.subarray(newline + 1, newline + 1 + size).toString());
+        offset = newline + size + 2;
+        const row = semanticRows[index];
+        semantic.set(row, JSON.stringify(contentIdentity(value, row.endsWith('/manifest.json'))));
+      }
+      if (offset !== bytes.length) throw new Error('CONTENT_IDENTITY_FINGERPRINT_HOLD');
+      start = end;
     }
   }
   for (const row of rows) {
     const path = row.slice(row.indexOf('\t') + 1);
     for (const id of scopeFor(path)) result[id].push(semantic.has(row) ? `${path}\0${semantic.get(row)}` : row);
   }
-  return Object.fromEntries(Object.entries(result).map(([id, rows]) => [id, digest(rows.sort().join('\0'))]));
+  return Object.fromEntries(Object.entries(result).map(([id, rows]) => {
+    const hash = createHash('sha256');
+    rows.sort().forEach((row, index) => { if (index) hash.update('\0'); hash.update(row); });
+    return [id, hash.digest('hex')];
+  }));
 }
 // Only compiler-owned Current packages have a reviewed copy/identity split.
 // Unknown authority contracts remain byte-bound rather than guessed to be prose.

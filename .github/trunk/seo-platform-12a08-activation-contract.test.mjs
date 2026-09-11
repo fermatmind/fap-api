@@ -3,7 +3,7 @@ import test from 'node:test';
 import {mkdtempSync,writeFileSync,readFileSync,rmSync,mkdirSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {execFileSync} from 'node:child_process';
-import {fingerprint,scopeFor,mayCarry,MISSIONS,scopedReceipt,CHECKS} from './seo-platform-12a08-activation.mjs';
+import {fingerprint,scopeFor,mayCarry,MISSIONS,scopedReceipt,CHECKS,digest} from './seo-platform-12a08-activation.mjs';
 import {verifyState} from './seo-platform-12a08-release.mjs';
 import {classifyPaths} from './classify-paths.mjs';
 test('explicit shared versus mission dependencies exclude ordinary copy, retain identities and authority',()=>{
@@ -187,4 +187,29 @@ test('authorized M3 requires safe source and terminal artifacts plus preceding m
   assert.equal(run(unsafe),'ready=false');
   const missing=proof();missing.missions[MISSIONS[1]].end_to_end_acceptance.status='pending';assert.equal(run(missing),'ready=false');
  }finally{rmSync(dir,{recursive:true,force:true});}
+});
+
+
+test('Current fingerprints retain exact semantics above the former 128 MiB package limit',()=>{
+ const root=mkdtempSync(`${tmpdir()}/a08-large-current-`);
+ const git=(...args)=>execFileSync('git',args,{cwd:root}).toString().trim();
+ try {
+  git('init','-q');git('config','user.email','test@example.test');git('config','user.name','Test');
+  const directory='backend/content_assets/career/current/careers';
+  mkdirSync(`${root}/${directory}`,{recursive:true});
+  const rows=[], body='x'.repeat(1024*1024);
+  for(let index=0;index<130;index++) {
+   const path=`${directory}/career-${index}.json`, identity={schema_version:'v1',identity:{slug:`career-${index}`},authoring_structure:{status:'unfilled'}};
+   writeFileSync(`${root}/${path}`,JSON.stringify({...identity,blocks:[{text:body}]}));
+   rows.push(`${path}\0${JSON.stringify(identity)}`);
+  }
+  git('add','.');git('commit','-qm','synthetic large package');
+  const result=fingerprint(root);
+  assert.equal(result.public,digest(rows.sort().join('\0')));
+  for(const id of MISSIONS) assert.equal(result[id],digest(''));
+  const path=`${directory}/career-0.json`, value=JSON.parse(readFileSync(`${root}/${path}`,'utf8'));
+  value.authoring_structure.status='mapped';
+  writeFileSync(`${root}/${path}`,JSON.stringify(value));git('add','.');git('commit','-qm','change internal authority');
+  assert.notEqual(fingerprint(root).public,result.public);
+ } finally {rmSync(root,{recursive:true,force:true});}
 });
