@@ -4615,7 +4615,7 @@ foreach (['publish', 'rollback'] as $accountantOperation) {
         }
         within('{{release_path}}/backend', function () use ($accountantOperation): void {
             run(
-                'sudo -n -u www-data -- env DEPLOY_REVISION='.deployShellArg((string) (getenv('DEPLOY_REVISION') ?: ''))
+                'DEPLOY_REVISION='.deployShellArg((string) (getenv('DEPLOY_REVISION') ?: ''))
                     .' {{bin/php}} scripts/deploy/publish_staging_accountant.php '.deployShellArg($accountantOperation),
                 timeout: 90,
             );

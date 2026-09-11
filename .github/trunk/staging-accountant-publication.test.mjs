@@ -8,7 +8,7 @@ const script = readFileSync('backend/scripts/deploy/publish_staging_accountant.p
 test('staging accountant publication runs after activation and is restored on deploy failure', () => {
   const task = deploy.slice(deploy.indexOf("foreach (['publish', 'rollback'] as $accountantOperation)"), deploy.indexOf("task('healthcheck:staging-big-five-report-delivery'"));
   assert.match(task, /currentHost\(\)->getAlias\(\) !== 'staging'/);
-  assert.match(task, /sudo -n -u www-data/);
+  assert.doesNotMatch(task, /sudo|chmod|chown/);
   assert.match(task, /DEPLOY_REVISION/);
   assert.ok(deploy.includes("after('healthcheck:staging-big-five-report-delivery', 'career:staging-accountant-publish');"));
   assert.ok(deploy.includes("after('deploy:failed', 'career:staging-accountant-rollback');"));
