@@ -48,7 +48,7 @@ final class CareerStagingAccountantPublication
                 throw new RuntimeException('staging_accountant_publication_record_missing');
             }
             $item = $items[$target];
-            if ($this->published($item)) {
+            if (self::published($item)) {
                 $verifyHttp($page);
 
                 return ['status' => 'already_published', 'changed_locale_rows' => 0];
@@ -173,7 +173,15 @@ final class CareerStagingAccountantPublication
         return ['generation_id' => $id, 'bytes' => $bytes];
     }
 
-    private function published(array $item): bool
+    /** The separately checked staging file page is outside the legacy bilingual directory/cache cohort. */
+    public static function hasDedicatedStagingSmoke(array $item): bool
+    {
+        return ($item['slug'] ?? null) === self::SLUG && ($item['locale'] ?? null) === 'zh'
+            && self::published($item) && ($item['dataset_visible'] ?? null) === false
+            && ($item['search_visible'] ?? null) === false;
+    }
+
+    private static function published(array $item): bool
     {
         return $item['runtime_publish_state'] === 'published' && ($item['detail_route_enabled'] ?? false) === true
             && ($item['robots_indexable'] ?? false) === true && ($item['release_gate_pass'] ?? false) === true;

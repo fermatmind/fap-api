@@ -55,6 +55,10 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
         $items = [];
 
         foreach ($this->itemsBySlugLocale ?? [] as $item) {
+            // The Chinese file page has its own required HTTP smoke, not a legacy body cache.
+            if (app()->environment('staging') && CareerStagingAccountantPublication::hasDedicatedStagingSmoke($item)) {
+                continue;
+            }
             $slug = $this->normalizeSlug((string) ($item['slug'] ?? ''));
             $locale = $this->normalizeLocale((string) ($item['locale'] ?? 'en'));
             if ($slug === null || ! in_array($locale, $normalizedLocales, true)) {

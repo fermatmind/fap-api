@@ -82,6 +82,18 @@ final class StagingAccountantPublicationTest extends TestCase
         self::assertSame(2, $calls);
     }
 
+    public function test_file_page_remains_readable_without_entering_the_legacy_bilingual_cache_cohort(): void
+    {
+        $this->publisher()->publish(str_repeat('a', 40), static function (): void {});
+        $lookup = $this->app->make(\App\Domain\Career\Publish\CareerRuntimePublishProjectionLookup::class);
+        self::assertSame('published', $lookup->itemForSlug(CareerStagingAccountantPublication::SLUG, 'zh')['runtime_publish_state']);
+        $legacy = $lookup->jobDetailCoverageItems(['en', 'zh-CN']);
+        self::assertArrayNotHasKey(CareerStagingAccountantPublication::SLUG.'|zh-CN', $legacy);
+        self::assertArrayHasKey('actors|zh-CN', $legacy);
+        $this->app->instance('env', 'production');
+        self::assertArrayHasKey(CareerStagingAccountantPublication::SLUG.'|zh-CN', $lookup->jobDetailCoverageItems(['zh-CN']));
+    }
+
     public function test_upgrades_the_legacy_generation_format_used_by_staging(): void
     {
         $root = storage_path('app/private/career_generation_authority');

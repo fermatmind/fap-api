@@ -25,3 +25,11 @@ test('publication and generation changes select the existing controlled cache ch
     assert.equal(result.deploy, true);
   }
 });
+
+test('legacy directory verification retains its bilingual checks and scopes the separate file-page smoke to staging', () => {
+  const gate = readFileSync('backend/scripts/deploy/verify_career_cold_cache_discoverability.php', 'utf8');
+  assert.ok(gate.includes("if ($app->environment('staging'))"));
+  assert.ok(gate.includes('CareerStagingAccountantPublication::hasDedicatedStagingSmoke($item)'));
+  assert.ok(gate.includes("self::fail($safePrefix.'_BILINGUAL_SET_MISMATCH')"));
+  assert.ok(deploy.includes("after('healthcheck:staging-big-five-report-delivery', 'career:staging-accountant-publish');"));
+});

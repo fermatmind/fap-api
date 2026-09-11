@@ -429,6 +429,14 @@ final class CareerColdCacheDiscoverabilityRunner
         try {
             $app = self::bootstrapApplication();
             $artifact = self::activeProjectionArtifact($app);
+            // Keep the existing bilingual directory cohort; the explicitly published Chinese
+            // file page is checked against its full API response by the same deploy chain.
+            if ($app->environment('staging')) {
+                $artifact['payload']['items'] = array_values(array_filter(
+                    $artifact['payload']['items'],
+                    static fn (array $item): bool => ! \App\Domain\Career\Publish\CareerStagingAccountantPublication::hasDedicatedStagingSmoke($item),
+                ));
+            }
             $authority = CareerColdCacheDiscoverabilityValidator::authoritySnapshot(
                 $artifact['payload'],
                 $artifact['sha256'],
