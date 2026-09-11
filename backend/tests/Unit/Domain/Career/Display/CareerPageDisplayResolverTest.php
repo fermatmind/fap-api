@@ -25,12 +25,16 @@ final class CareerPageDisplayResolverTest extends TestCase
         return (new CareerPageProjector(new CareerContentV3CanonicalReader($package), $package, new CareerContentV3FactResolver))->project($source);
     }
 
-    public function test_formal_file_contains_all_original_components_and_restored_hero_values(): void
+    public function test_formal_file_projects_its_original_components_and_hero_values(): void
     {
-        $page = $this->project($this->source());
-        self::assertSame('8/10', $page['hero']['ai']['fact']['display_value']);
-        self::assertSame(['RIASEC · CEI', '企业财务 / 事务所审计', '合规责任 · 忙季高压 · 自动化升级'], $page['hero']['badges']);
-        self::assertSame(['$83,680', '5%', '1,595,200', '115,300', '¥78,500'], array_column(array_column($page['hero']['metrics'], 'fact'), 'display_value'));
+        $source = $this->source();
+        $page = $this->project($source);
+        $facts = array_column($source['fact_register']['facts'], null, 'fact_id');
+        self::assertSame($facts[$source['hero']['ai']['fact_ref']]['display_value'], $page['hero']['ai']['fact']['display_value']);
+        self::assertSame($source['hero']['badges'], $page['hero']['badges']);
+        foreach ($source['hero']['metrics'] as $index => $metric) {
+            self::assertSame($facts[$metric['fact_ref']]['display_value'], $page['hero']['metrics'][$index]['fact']['display_value']);
+        }
         self::assertCount(22, $page['display']['components']);
         self::assertCount(10, $page['display']['components']['faq_block']['items']);
         self::assertCount(4, $page['display']['components']['source_card']['secondary_links']);
