@@ -220,7 +220,7 @@ final class CareerContentV3AuthorityPackage
             if (isset($pages[$slug][$locale])) {
                 throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_DUPLICATE_BINDING');
             }
-            $pages[$slug][$locale] = $page;
+            $pages[$slug][$locale] = CareerAuthoringStructure::publicContent($page);
             $slugs[$slug] = true;
             $semanticHashes[] = $page['source_content_sha256'];
             $page['content_state'] === 'enhanced' ? $enhanced++ : $legacy++;

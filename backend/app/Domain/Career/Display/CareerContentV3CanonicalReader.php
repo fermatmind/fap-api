@@ -43,10 +43,10 @@ class CareerContentV3CanonicalReader
         if (! isset($this->pages[$key])) {
             $raw = $this->package->pageFromIndexForRuntime($index, $slug, $locale);
             $isolated = $this->isolateInvalidBlocks($raw)['content'];
-            $this->pages[$key] = ($this->factResolver ?? new CareerContentV3FactResolver)->resolve($isolated);
+            $this->pages[$key] = CareerAuthoringStructure::publicContent(($this->factResolver ?? new CareerContentV3FactResolver)->resolve($isolated));
         }
 
-        return $this->pages[$key];
+        return CareerAuthoringStructure::publicContent($this->pages[$key]);
     }
 
     /** @return array<string,mixed> */

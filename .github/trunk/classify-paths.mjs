@@ -18,6 +18,11 @@ const normalize = (path) => path.replace(/^\.\//, "").replaceAll("\\", "/");
 const matches = (path, expressions) => expressions.some((expression) => expression.test(path));
 
 export const CAREER_PUBLISHER_BOUNDARY_MATRIX = [
+  "backend/app/Domain/Career/Display/CareerAuthoringStructure.php",
+  "backend/app/Domain/Career/Display/CareerAuthoringLayout.php",
+  "backend/app/Domain/Career/Display/CareerAuthoringMigration.php",
+  "backend/docs/career/contracts/career-authoring-structure.v1.json",
+  "backend/scripts/career/migrate_authoring_structure.php",
   ".github/workflows/ci.yml",
   ".github/workflows/deploy.yml",
   "backend/content_assets/career/career_current_authority_release.v1.json",

@@ -25,6 +25,7 @@ final class CareerContentV3Contract
             self::assertBlock($block, $seenBlocks, $seenItems);
         }
         self::assertEvidenceBindings($content);
+        CareerAuthoringStructure::assert($content);
         (new CareerPageDisplayResolver)->resolve($content);
     }
 
@@ -33,7 +34,7 @@ final class CareerContentV3Contract
     {
         self::exactKeysWithOptional($content, [
             'contract_version', 'locale', 'subject', 'content_state', 'source_content_sha256', 'blocks',
-        ], ['fact_register', 'hero', 'seo', 'display']);
+        ], ['fact_register', 'hero', 'seo', 'display', 'authoring_structure']);
         CareerPageProjector::assertFields($content);
         if (($content['contract_version'] ?? null) !== self::CONTRACT_VERSION
             || ! in_array($content['locale'] ?? null, CareerCurrentAuthorityPackage::LOCALES, true)

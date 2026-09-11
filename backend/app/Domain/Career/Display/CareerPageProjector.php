@@ -35,7 +35,7 @@ final class CareerPageProjector
             throw new CareerCurrentAuthorityPackageFailure('CAREER_PAGE_FIELDS_MISSING');
         }
         $display = (new CareerPageDisplayResolver)->resolve($content);
-        unset($content['display']);
+        unset($content['display'], $content['authoring_structure']);
         foreach ($content['blocks'] as &$block) {
             $block['items'] = array_values(array_filter($block['items'], static fn (array $item): bool => ($item['visibility'] ?? 'public') !== 'internal'));
             foreach ($block['items'] as &$item) {

@@ -11,10 +11,14 @@
     "identity_aliases": "current_manifest",
     "identity_scopes": "current_manifest_from_approved_official_route",
     "source_content_sha256": "legacy_page_semantic_binding",
-    "subject": "per_page_current_identity"
+    "subject": "per_page_current_identity",
+    "authoring_structure": "per_page_internal_authoring_positions_not_public_or_publication_authority"
   },
   "prohibited_competing_authorities": [
-    "sharded_current", "flat_assets_jsonl", "frontend_editorial_fallback",
-    "cache_payload", "publisher_receipt"
+    "sharded_current",
+    "flat_assets_jsonl",
+    "frontend_editorial_fallback",
+    "cache_payload",
+    "publisher_receipt"
   ]
 }
