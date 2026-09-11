@@ -32,11 +32,22 @@ final class CareerAuthoringStructureTest extends TestCase
         return (new CareerAuthoringLayout)->migrate($page, $this->baseline());
     }
 
+    public function test_formal_chinese_inventory_has_completed_structural_migration(): void
+    {
+        $paths = glob(dirname(__DIR__, 5).'/content_assets/career/current/careers/*/zh-CN.json');
+        self::assertCount(1046, $paths);
+        foreach ($paths as $path) {
+            $page = json_decode(file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
+            self::assertArrayHasKey('authoring_structure', $page, basename(dirname($path)));
+            CareerAuthoringStructure::assert($page);
+        }
+    }
+
     public function test_layout_covers_actual_cells_cards_questions_and_component_string_splits(): void
     {
         $page = $this->migrate($this->page());
         $slots = $page['authoring_structure']['slots'];
-        self::assertCount(1587, $slots);
+        self::assertCount(1716, $slots);
         self::assertSame(array_keys(CareerAuthoringStructure::schema()['slots']), array_keys($slots));
         foreach ([
             'responsibilities_block.01.title', 'responsibilities_block.06.description',
@@ -59,6 +70,14 @@ final class CareerAuthoringStructureTest extends TestCase
         self::assertArrayHasKey('entry_decisions.entry-role-comparison.rows.01.initial_tasks', $slots);
         self::assertArrayHasKey('entry_decisions.employer-evidence.entries.01.title', $slots);
         self::assertArrayHasKey('entry_decisions.seven-day-trial.entries.07.title', $slots);
+        self::assertArrayHasKey('career_snapshot_secondary_locale.bls_table.01.explanation.notes.01', $slots);
+        self::assertArrayHasKey('career_snapshot_secondary_locale.bls_table.01.explanation.sources.02.href', $slots);
+        self::assertArrayHasKey('career_snapshot_primary_locale.salary.china_ref.sources.01.label', $slots);
+        foreach (['interface.profile.responsibilities_heading', 'interface.quick_decision.suit_heading', 'interface.china_salary.pay_level_heading', 'interface.us_salary.tiers.01.interpretation', 'interface.fit.directions_heading'] as $id) {
+            self::assertSame('unfilled', $slots[$id]['status']);
+            self::assertNull($slots[$id]['ref']);
+        }
+        self::assertSame(['overview', 'quick-decision', 'profile', 'direction-comparison', 'ai-impact', 'china-salary', 'us-salary', 'fit', 'risk', 'path', 'market-signals', 'sources'], $page['authoring_structure']['module_order']);
     }
 
     public function test_all_formal_chinese_pages_migrate_losslessly_and_idempotently(): void
@@ -80,7 +99,7 @@ final class CareerAuthoringStructureTest extends TestCase
             self::assertSame(CareerAuthoringStructure::publicContent($old), CareerAuthoringStructure::publicContent($new), $entry['path']);
             self::assertSame($projector->project($old), $projector->project($new), $entry['path']);
             self::assertSame($new, $layout->migrate($new, $baseline));
-            self::assertCount(1587, $new['authoring_structure']['slots']);
+            self::assertCount(1716, $new['authoring_structure']['slots']);
             self::assertSame(CareerAuthoringStructure::inventory($new, $new['authoring_structure']['slots']), $new['authoring_structure']['inventory']);
         }
         self::assertSame(['enhanced' => 144, 'legacy' => 902], $states);

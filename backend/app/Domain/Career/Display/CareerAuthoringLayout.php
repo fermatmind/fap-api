@@ -25,6 +25,115 @@ final class CareerAuthoringLayout
         '问题' => 'question', '需求' => 'demand', '风险' => 'risk',
     ];
 
+    // Existing UI-owned copy and derived salary cells also need explicit future authoring positions.
+    // No UI strings or occupation facts are copied here; these positions start unfilled.
+    private const INTERFACE_POSITIONS = [
+        'interface.quick_decision.suit_heading',
+        'interface.quick_decision.caution_heading',
+        'interface.quick_decision.experiment_heading',
+        'interface.profile.responsibilities_heading',
+        'interface.profile.comparison.dimension_header',
+        'interface.profile.comparison.primary_header',
+        'interface.profile.comparison.secondary_header',
+        'interface.direction_comparison.conclusion_heading',
+        'interface.direction_comparison.table.caption',
+        'interface.direction_comparison.table.direction_header',
+        'interface.direction_comparison.table.work_output_header',
+        'interface.direction_comparison.table.distinction_header',
+        'interface.direction_comparison.table.choice_header',
+        'interface.direction_comparison.evidence_label',
+        'interface.ai_impact.heading',
+        'interface.ai_impact.method_cards_label',
+        'interface.ai_impact.tasks.heading',
+        'interface.ai_impact.tasks.caption',
+        'interface.ai_impact.tasks.direction_header',
+        'interface.ai_impact.tasks.task_header',
+        'interface.ai_impact.tasks.change_header',
+        'interface.ai_impact.tasks.human_control_header',
+        'interface.ai_impact.evidence.heading',
+        'interface.ai_impact.evidence.source_link_label',
+        'interface.ai_impact.evidence.study_scope_label',
+        'interface.ai_impact.evidence.conclusion_label',
+        'interface.ai_impact.evidence.limitation_label',
+        'interface.ai_impact.differences.heading',
+        'interface.ai_impact.differences.change_label',
+        'interface.ai_impact.differences.human_responsibility_label',
+        'interface.ai_impact.responsibility.heading',
+        'interface.ai_impact.risks.heading',
+        'interface.ai_impact.risks.control_label',
+        'interface.ai_impact.actions.heading',
+        'interface.ai_impact.questions.heading',
+        'interface.ai_impact.questions.source_label',
+        'interface.ai_impact.questions.source_link_label',
+        'interface.ai_impact.sources.heading',
+        'interface.china_salary.section_label',
+        'interface.china_salary.official_wage_heading',
+        'interface.china_salary.pay_level_heading',
+        'interface.china_salary.scenarios.caption',
+        'interface.china_salary.scenarios.role_header',
+        'interface.china_salary.scenarios.pay_range_header',
+        'interface.china_salary.scenarios.interpretation_header',
+        'interface.china_salary.drivers_heading',
+        'interface.china_salary.ai_pay_heading',
+        'interface.china_salary.sources_label',
+        'interface.us_salary.section_label',
+        'interface.us_salary.tiers.position_header',
+        'interface.us_salary.tiers.annual_header',
+        'interface.us_salary.tiers.monthly_header',
+        'interface.us_salary.tiers.interpretation_header',
+        'interface.us_salary.industry.industry_header',
+        'interface.us_salary.industry.interpretation_header',
+        'interface.us_salary.sources_label',
+        'interface.us_salary.tiers.01.label',
+        'interface.us_salary.tiers.01.interpretation',
+        'interface.us_salary.tiers.01.annual_range',
+        'interface.us_salary.tiers.01.monthly_range',
+        'interface.us_salary.tiers.02.label',
+        'interface.us_salary.tiers.02.interpretation',
+        'interface.us_salary.tiers.02.annual_range',
+        'interface.us_salary.tiers.02.monthly_range',
+        'interface.us_salary.tiers.03.label',
+        'interface.us_salary.tiers.03.interpretation',
+        'interface.us_salary.tiers.03.annual_range',
+        'interface.us_salary.tiers.03.monthly_range',
+        'interface.fit.assessments_heading',
+        'interface.fit.interest_baseline_label',
+        'interface.fit.interest_experience_heading',
+        'interface.fit.interest_code_heading',
+        'interface.fit.assessment_misuse_label',
+        'interface.fit.directions_heading',
+        'interface.fit.direction_match_label',
+        'interface.fit.direction_caution_label',
+        'interface.fit.related_career_label',
+        'interface.fit.questions_heading',
+        'interface.risk.scenario_label',
+        'interface.risk.affected_roles_label',
+        'interface.risk.consequence_label',
+        'interface.risk.mitigation_label',
+        'interface.risk.evidence_label',
+        'interface.path.responsibilities_label',
+        'interface.path.promotion_evidence_label',
+        'interface.path.credential_boundary_label',
+        'interface.path.next_step_label',
+        'interface.path.competence_ladder_heading',
+        'interface.path.entry_decisions_heading',
+        'interface.outlook.evidence_heading',
+        'interface.outlook.evidence_limitation_label',
+        'interface.outlook.transitions_heading',
+        'interface.outlook.transitions_intro',
+        'interface.outlook.shared_capabilities_label',
+        'interface.outlook.capability_gaps_label',
+        'interface.outlook.detail_link_label',
+        'interface.sources.heading',
+        'interface.sources.original_source_link_label',
+        'interface.sources.limitation_label',
+        'interface.sources.faq_heading',
+        'interface.sources.usage_boundary_heading',
+        'interface.navigation.desktop_heading',
+        'interface.navigation.mobile_heading',
+        'interface.navigation.test_cta_label',
+    ];
+
     private const METADATA = ['availability', 'key', 'id', 'fact_ref', 'fact_refs', 'source_refs', 'claim_refs', 'question_key', 'question_intent', 'column_keys', 'entry_surface', 'source_page_type', 'subject_kind', 'subject_key', 'target_action', 'test_slug'];
 
     public function baseline(array $page): array
@@ -63,9 +172,12 @@ final class CareerAuthoringLayout
         for ($index = 0; $index < 3; $index++) {
             $this->add('hero.badges.'.self::ordinal($index), isset($page['hero']['badges'][$index]) ? ['source' => 'page', 'path' => ['hero', 'badges', $index]] : null);
         }
+        foreach (self::INTERFACE_POSITIONS as $position) {
+            $this->add($position, null);
+        }
         ksort($this->slots, SORT_STRING);
 
-        return ['contract_version' => CareerAuthoringStructure::VERSION, 'module_order' => $page['display']['component_order'], 'slots' => $this->slots];
+        return ['contract_version' => CareerAuthoringStructure::VERSION, 'module_order' => ['overview', ...array_values(array_filter(array_column($page['blocks'], 'id'), static fn (string $id): bool => ! in_array($id, ['navigation', 'source-register'], true)))], 'slots' => $this->slots];
     }
 
     public function migrate(array $page, array $baseline): array
@@ -197,6 +309,23 @@ final class CareerAuthoringLayout
             foreach ($lines as $index => $line) {
                 foreach (['label', 'description'] as $part => $field) {
                     $this->add($position.'.'.self::ordinal($index).'.'.$field, [...$ref, 'parts' => [["\n", $index, count($lines)], ['｜', $part, 2]]]);
+                }
+            }
+        } elseif (is_string($value) && (
+            preg_match('/\Acareer_snapshot_primary_locale\.salary\.(china_ref|china_intl|sources_note|edu)\z/', $position)
+            || $position === 'career_snapshot_secondary_locale.authority_sources'
+            || preg_match('/\Acareer_snapshot_secondary_locale\.bls_table\.[0-9]+\.explanation\z/', $position)
+        )) {
+            // The salary component splits these exact fields into note / source label / URL.
+            $entries = explode('；', $value);
+            foreach ($entries as $index => $entry) {
+                $parts = [['；', $index, count($entries)]];
+                if (str_contains($entry, '｜')) {
+                    foreach (['label', 'href'] as $part => $field) {
+                        $this->add($position.'.sources.'.self::ordinal($index).'.'.$field, [...$ref, 'parts' => [...$parts, ['｜', $part, 2]]]);
+                    }
+                } else {
+                    $this->add($position.'.notes.'.self::ordinal($index), [...$ref, 'parts' => $parts]);
                 }
             }
         } else {

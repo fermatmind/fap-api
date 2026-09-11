@@ -31,6 +31,7 @@ final class CareerAuthoringMigration
         $intent = json_decode(file_get_contents($intentPath), true, 512, JSON_THROW_ON_ERROR);
         $files->makeDirectory($current, 0700, true);
         $updates = [];
+        $registries = [];
         $originalHashes = [$intentRelative => hash_file('sha256', $intentPath), CareerCurrentAuthorityPackage::RELATIVE_PATH.'/manifest.json' => hash_file('sha256', $index['root'].'/manifest.json')];
         foreach ($manifest['files'] as $entry) {
             $originalHashes[CareerCurrentAuthorityPackage::RELATIVE_PATH.'/'.$entry['path']] = $entry['sha256'];
@@ -40,6 +41,15 @@ final class CareerAuthoringMigration
         try {
             foreach ($manifest['files'] as &$entry) {
                 $original = $package->pageFromIndex($index, $entry['canonical_slug'], $entry['locale']);
+                $sources = [];
+                foreach ($original['blocks'] as $block) {
+                    foreach ($block['items'] as $item) {
+                        if ($item['type'] === 'sources') {
+                            $sources = array_merge($sources, $item['data']['entries']);
+                        }
+                    }
+                }
+                $registries[] = [$entry['canonical_slug'].'|'.$entry['locale'], CareerCurrentAuthorityPackage::hashValue($sources)];
                 $relative = CareerCurrentAuthorityPackage::RELATIVE_PATH.'/'.$entry['path'];
                 $target = $candidateRoot.'/'.$relative;
                 $files->ensureDirectoryExists(dirname($target));
@@ -78,6 +88,7 @@ final class CareerAuthoringMigration
             if ($counts['zh_pages'] !== 1046 || $counts['enhanced'] !== 144 || $counts['legacy'] !== 902) {
                 throw new CareerCurrentAuthorityPackageFailure('CAREER_AUTHORING_MIGRATION_COHORT_DRIFT');
             }
+            $manifest['source_registry_sha256'] = CareerCurrentAuthorityPackage::hashValue($registries);
             $manifest['set_hashes']['source_semantic_aggregate_sha256'] = CareerCurrentAuthorityPackage::hashValue(array_column($manifest['files'], 'source_content_sha256'));
             $manifest['aggregate_sha256'] = CareerCurrentAuthorityPackage::hashValue(array_intersect_key($manifest, array_flip([
                 'authority_path', 'compiler_version', 'contract_version', 'coverage', 'files', 'locales',
@@ -85,6 +96,7 @@ final class CareerAuthoringMigration
             ])));
             $manifestBytes = CareerCurrentAuthorityPackage::encodePrettyCanonical($manifest);
             file_put_contents($current.'/manifest.json', $manifestBytes);
+            $intent['source_registry_sha256'] = $manifest['source_registry_sha256'];
             $intent['aggregate_sha256'] = $manifest['aggregate_sha256'];
             $intent['manifest_sha256'] = hash('sha256', $manifestBytes);
             $intent['versionless_projection_sha256'] = $manifest['set_hashes']['source_semantic_aggregate_sha256'];

@@ -54,7 +54,7 @@ final class CareerContentV3PageUpdaterTest extends TestCase
             $page['content_state'] = 'legacy';
             $page['blocks'] = [];
             $page['subject']['summary'] = null;
-            unset($page['fact_register']);
+            unset($page['fact_register'], $page['authoring_structure']); // This test deliberately constructs an empty pre-migration page.
             foreach ($page['hero']['metrics'] as &$metric) {
                 $metric['availability'] = 'missing';
                 $metric['fact_ref'] = null;
