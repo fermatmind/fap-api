@@ -4601,6 +4601,28 @@ task('healthcheck:queue-smoke', function () {
     });
 });
 
+// This staging-only publication is explicitly limited to the existing Chinese accountant file.
+foreach (['publish', 'rollback'] as $accountantOperation) {
+    task('career:staging-accountant-'.$accountantOperation, function () use ($accountantOperation): void {
+        if (currentHost()->getAlias() !== 'staging') {
+            return;
+        }
+        if ($accountantOperation === 'rollback' && ! get('staging_accountant_publication_started', false)) {
+            return;
+        }
+        if ($accountantOperation === 'publish') {
+            set('staging_accountant_publication_started', true);
+        }
+        within('{{release_path}}/backend', function () use ($accountantOperation): void {
+            run(
+                'sudo -n -u www-data -- env DEPLOY_REVISION='.deployShellArg((string) (getenv('DEPLOY_REVISION') ?: ''))
+                    .' {{bin/php}} scripts/deploy/publish_staging_accountant.php '.deployShellArg($accountantOperation),
+                timeout: 90,
+            );
+        });
+    });
+}
+
 task('healthcheck:staging-big-five-report-delivery', function () {
     if (currentHost()->getAlias() !== 'staging') {
         writeln('<comment>Skip staging Big Five report delivery smoke outside staging</comment>');
@@ -5044,6 +5066,7 @@ after('healthcheck:ops-entry-contract', 'seo:agent-policy-gateway-closeout');
 after('queue:reload-workers', 'scheduler:install-managed-cron');
 after('queue:reload-workers', 'healthcheck:queue-smoke');
 after('healthcheck:queue-smoke', 'healthcheck:staging-big-five-report-delivery');
+after('healthcheck:staging-big-five-report-delivery', 'career:staging-accountant-publish');
 after('scheduler:install-managed-cron', 'scheduler:wait-natural-heartbeat');
 
 /**
@@ -5114,6 +5137,7 @@ task('deploy:schema-only', [
 after('rollback', 'bootstrap-cache:rebuild-current');
 after('bootstrap-cache:rebuild-current', 'rollback:healthcheck');
 
+after('deploy:failed', 'career:staging-accountant-rollback');
 after('deploy:failed', 'fap:deploy-unlock-owned');
 after('deploy:failed', 'big5:rollback-private-result-authority-on-failure');
 after('deploy:failed', 'riasec:rollback-private-result-authority-on-failure');

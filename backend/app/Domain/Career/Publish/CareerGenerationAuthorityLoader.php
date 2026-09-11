@@ -64,6 +64,25 @@ final class CareerGenerationAuthorityLoader
         return $loaded;
     }
 
+    /** Validate an immutable candidate with the same checks used by active readers. */
+    public function loadGeneration(string $generationId): array
+    {
+        $this->requiredIdentity($generationId, 'generation_id');
+        $root = storage_path('app/private/career_generation_authority');
+        $this->assertSafeRoot($root);
+
+        $loaded = $this->loadFromPointer(
+            $root,
+            $root.'/generations/'.$generationId.'/'.self::GENERATION_POINTER_FILENAME,
+            true,
+        );
+        if ($loaded['pointer']['generation_id'] !== $generationId) {
+            throw new RuntimeException('career_generation_candidate_identity_mismatch');
+        }
+
+        return $loaded;
+    }
+
     /**
      * @return array{pointer:array<string,mixed>,projection:array<string,mixed>,ledger:array<string,mixed>}
      */

@@ -234,6 +234,7 @@ export function classifyPaths(inputPaths) {
     const seoCouncilOrchestrationBoundary = isSeoCouncilOrchestrationBoundary(path);
     const cache = !careerCurrentManagedCache && !seoAgentPolicyGatewayBoundary && !seoCouncilOrchestrationBoundary && matches(path, [
       /(^|\/)(?:Cache|Redis|Projection)(\/|\.)/,
+      /(?:CareerGenerationAuthorityLoader|CareerStagingAccountantPublication|publish_staging_accountant)\.php$/,
       /(?:cache|redis|projection|materiali[sz]ed|active_pointer|lkg)/i,
     ]);
     const retiredEqMirror = path.startsWith("backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/");
