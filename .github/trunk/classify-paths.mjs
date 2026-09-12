@@ -187,6 +187,11 @@ export function classifyPaths(inputPaths) {
     mbti_zh_result_authority_release: paths.includes(
       "backend/content_assets/personality_public/mbti_zh_result_authority_release.v1.json",
     ),
+    mbti_result_introductions_publish: paths.some((path) =>
+      /^backend\/content_assets\/personality_public\/mbti_result_introductions\.(?:zh-CN|en)\.v1\.json$/.test(path)
+      || path === "backend/app/Services/Cms/MbtiResultIntroductionPublisher.php"
+      || path === "backend/app/Console/Commands/PublishMbtiResultIntroductions.php",
+    ),
     career_data_recovery: paths.some(isCareerDataRecoveryBoundary),
     seo_platform_10_closeout: paths.includes("backend/config/seo_platform_10.php"),
     seo_platform_11a_closeout: paths.includes(

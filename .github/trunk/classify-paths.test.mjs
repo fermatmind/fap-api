@@ -526,3 +526,19 @@ test("natural Council identity fix retains the A08 gate-only deployment", () => 
     assert.equal(result.operations.career_current_authority_release, true);
   }
 });
+
+test("MBTI introduction publication is scoped to its bilingual assets and publisher", () => {
+  for (const path of [
+    "backend/content_assets/personality_public/mbti_result_introductions.zh-CN.v1.json",
+    "backend/content_assets/personality_public/mbti_result_introductions.en.v1.json",
+    "backend/app/Services/Cms/MbtiResultIntroductionPublisher.php",
+    "backend/app/Console/Commands/PublishMbtiResultIntroductions.php",
+  ]) {
+    const result = classifyPaths([path]);
+    assert.equal(result.operations.mbti_result_introductions_publish, true, path);
+    assert.equal(result.deploy, true, path);
+  }
+  for (const path of ["backend/routes/api.php", "deploy.php", "backend/content_assets/personality_public/current/manifest.json", "README.md"]) {
+    assert.equal(classifyPaths([path]).operations.mbti_result_introductions_publish, false, path);
+  }
+});

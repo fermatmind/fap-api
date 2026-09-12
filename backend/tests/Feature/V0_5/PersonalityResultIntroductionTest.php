@@ -5,12 +5,40 @@ declare(strict_types=1);
 namespace Tests\Feature\V0_5;
 
 use App\Models\PersonalityResultIntroduction;
+use App\Services\Cms\MbtiResultIntroductionPublisher;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 final class PersonalityResultIntroductionTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $publisher = app(MbtiResultIntroductionPublisher::class);
+        $publisher->publish($publisher->package()['package_hash'], true);
+    }
+
+    public function test_publisher_is_idempotent_and_rejects_package_drift(): void
+    {
+        $publisher = app(MbtiResultIntroductionPublisher::class);
+        $hash = $publisher->package()['package_hash'];
+        $this->assertSame(0, $publisher->publish($hash, true)['created']);
+        $this->artisan('personality:publish-result-introductions', ['--expected-hash' => $hash])->assertSuccessful();
+        $this->artisan('personality:publish-result-introductions', ['--expected-hash' => str_repeat('0', 64), '--write' => true])->assertFailed();
+        $this->assertSame(64, PersonalityResultIntroduction::query()->count());
+    }
+
+    public function test_conflict_rejects_the_whole_batch_without_filling_missing_rows(): void
+    {
+        $publisher = app(MbtiResultIntroductionPublisher::class);
+        PersonalityResultIntroduction::query()->where('locale', 'en')->delete();
+        PersonalityResultIntroduction::query()->where('full_code', 'INTP-A')->update(['status' => 'draft']);
+        $this->artisan('personality:publish-result-introductions', ['--expected-hash' => $publisher->package()['package_hash'], '--write' => true])->assertFailed();
+        $this->assertSame(0, PersonalityResultIntroduction::query()->where('locale', 'en')->count());
+        $this->assertSame('draft', PersonalityResultIntroduction::query()->where('full_code', 'INTP-A')->first()->status);
+    }
 
     public function test_all_64_published_assets_round_trip_with_exact_type_and_language(): void
     {

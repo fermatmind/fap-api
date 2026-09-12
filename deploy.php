@@ -28,6 +28,7 @@ set('seo_council_closeout_deferred', false);
 set('career_current_parity_required', false);
 set('career_data_recovery', false);
 set('private_result_authority_publish_required', true);
+set('mbti_result_introductions_publish', false);
 
 set('sentry_release', function () {
     return get('release_name');
@@ -3089,6 +3090,29 @@ BASH,
     });
 });
 
+task('mbti:publish-result-introductions', function () {
+    if (filter_var(get('mbti_result_introductions_publish', false), FILTER_VALIDATE_BOOLEAN) !== true) {
+        return;
+    }
+    // The local checkout is SHA-verified by deploy.yml. Bind the remote publisher
+    // to these exact editorial bytes rather than accepting an arbitrary package.
+    $fileHashes = [];
+    foreach (['zh-CN', 'en'] as $locale) {
+        $path = __DIR__.'/backend/content_assets/personality_public/mbti_result_introductions.'.$locale.'.v1.json';
+        $digest = hash_file('sha256', $path);
+        if ($digest === false) {
+            throw new \RuntimeException('Missing MBTI introduction package.');
+        }
+        $fileHashes[] = $digest;
+    }
+    $packageHash = hash('sha256', implode('', $fileHashes));
+    within('{{release_path}}/backend', function () use ($packageHash): void {
+        $command = 'timeout 60 {{bin/php}} artisan personality:publish-result-introductions --expected-hash='.deployShellArg($packageHash).' --no-interaction --no-ansi';
+        run($command);
+        run($command.' --write');
+    });
+});
+
 task('eq60:rollback-private-result-authority-on-failure', function () {
     if (! test('test -r '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan'))) {
         return;
@@ -5028,7 +5052,8 @@ after('artisan:scales:seed-default', 'big5:publish-private-result-authority');
 after('big5:publish-private-result-authority', 'riasec:publish-private-result-authority');
 after('riasec:publish-private-result-authority', 'enneagram:publish-private-result-authority');
 after('enneagram:publish-private-result-authority', 'eq60:publish-private-result-authority');
-after('eq60:publish-private-result-authority', 'guard:career-runtime-projection-authority');
+after('eq60:publish-private-result-authority', 'mbti:publish-result-introductions');
+after('mbti:publish-result-introductions', 'guard:career-runtime-projection-authority');
 after('guard:career-runtime-projection-authority', 'prepare:cache-lifecycle-storage');
 after('prepare:cache-lifecycle-storage', 'cache:prepare-public-projection');
 after('cache:prepare-public-projection', 'career:prune-public-cache-versions');
