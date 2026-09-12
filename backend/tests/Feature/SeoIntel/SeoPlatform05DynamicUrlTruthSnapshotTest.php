@@ -223,6 +223,39 @@ final class SeoPlatform05DynamicUrlTruthSnapshotTest extends TestCase
     }
 
     #[Test]
+    public function a_superseded_error_with_a_proven_retired_successor_is_not_a_current_conflict(): void
+    {
+        $truth = [];
+        $bindings = [];
+        foreach (['en', 'zh-CN'] as $locale) {
+            $prefix = $locale === 'en' ? 'en' : 'zh';
+            $old = $this->record('http://fermatmind.com/'.$prefix.'/articles/old', $locale, 'retired-report');
+            $successor = $this->record('https://fermatmind.com/'.$prefix.'/articles/retired', $locale, 'retired-report');
+            $truth[] = array_replace($this->truthRow($old), ['indexability_state' => 'superseded_canonical']);
+            $truth[] = array_replace($this->truthRow($successor), ['indexability_state' => 'retired_authority']);
+            $bindings[] = array_replace($this->bindingRow($old), ['authority_status' => 'superseded_canonical',
+                'binding_status' => 'superseded_duplicate', 'current_binding_key' => null]);
+            $bindings[] = array_replace($this->bindingRow($successor), ['authority_status' => 'retired_authority',
+                'binding_status' => 'retired_authority', 'current_binding_key' => null]);
+        }
+        $snapshot = (new UrlTruthReconciliationSnapshot)->build([], $truth, $bindings, []);
+        $this->assertSame(2, data_get($snapshot, 'difference_classification.canonical_host_or_path_error'));
+        $this->assertSame(0, data_get($snapshot, 'difference_classification.current_canonical_host_or_path_error'));
+        $this->assertSame(4, data_get($snapshot, 'counts.url_truth_total'));
+
+        // Only the erroneous row's own superseded marker permits exclusion.
+        $truth[0]['indexability_state'] = 'retired_authority';
+        $snapshot = (new UrlTruthReconciliationSnapshot)->build([], $truth, $bindings, []);
+        $this->assertSame(1, data_get($snapshot, 'difference_classification.current_canonical_host_or_path_error'));
+        $truth[0]['indexability_state'] = 'superseded_canonical';
+        foreach (['indexable', 'unknown', ''] as $state) {
+            $truth[1]['indexability_state'] = $state;
+            $snapshot = (new UrlTruthReconciliationSnapshot)->build([], $truth, $bindings, []);
+            $this->assertSame(1, data_get($snapshot, 'difference_classification.current_canonical_host_or_path_error'), $state);
+        }
+    }
+
+    #[Test]
     public function historical_marker_cannot_hide_current_conflicting_or_unknown_evidence(): void
     {
         $old = $this->record('http://fermatmind.com/en/articles/old', 'en', 'old');

@@ -352,7 +352,7 @@ final class UrlTruthReconciliationSnapshot
                 continue;
             }
             if ($this->entityIdentity($related) !== $identity
-                || ($related['indexability_state'] ?? null) !== 'superseded_canonical'
+                || ! in_array($related['indexability_state'] ?? null, ['superseded_canonical', 'retired_authority'], true)
                 || (isset($related['canonical_url_hash'])
                     && $related['canonical_url_hash'] !== $this->urlHash((string) ($related['canonical_url'] ?? '')))) {
                 return false;
