@@ -5080,6 +5080,25 @@
                 ]
             }
         },
+        "/api/v0.5/personality/mbti/trait-explanations": {
+            "get": {
+                "operationId": "get_api_v0_5_personality_mbti_trait_explanations",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\MbtiTraitExplanationsController",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders",
+                    "App\\Http\\Middleware\\RecordPublicContentRuntime"
+                ]
+            }
+        },
         "/api/v0.5/personality/{type}": {
             "get": {
                 "operationId": "get_api_v0_5_personality_type_",
