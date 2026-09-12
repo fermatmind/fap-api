@@ -187,6 +187,93 @@ final class SeoPlatform05DynamicUrlTruthSnapshotTest extends TestCase
         $this->assertStringNotContainsString('request-indexing', $deploy);
     }
 
+    #[Test]
+    public function proven_historical_canonical_errors_remain_in_audit_but_not_current_count(): void
+    {
+        $oldEn = $this->record('http://fermatmind.com/en/articles/old', 'en', 'old');
+        $oldZh = $this->record('https://fermatmind.com/zh/articles/old/', 'zh-CN', 'old');
+        $current = $this->record('https://fermatmind.com/en/articles/current', 'en', 'current');
+        $truth = [$this->truthRow($current)];
+        $bindings = [$this->bindingRow($current)];
+        foreach ([$oldEn, $oldZh] as $old) {
+            $truth[] = array_replace($this->truthRow($old), ['indexability_state' => 'superseded_canonical']);
+            $bindings[] = array_replace($this->bindingRow($old), [
+                'authority_status' => 'superseded_canonical', 'binding_status' => 'superseded_canonical', 'current_binding_key' => null,
+            ]);
+        }
+        $queries = [];
+        \Illuminate\Support\Facades\DB::listen(function ($query) use (&$queries): void {
+            $queries[] = $query->sql;
+        });
+        $before = [$truth, $bindings];
+        $snapshot = (new UrlTruthReconciliationSnapshot)->build([$current], $truth, $bindings, []);
+        $this->assertSame(2, data_get($snapshot, 'difference_classification.canonical_host_or_path_error'));
+        $this->assertSame(0, data_get($snapshot, 'difference_classification.current_canonical_host_or_path_error'));
+        $this->assertSame(1, data_get($snapshot, 'counts.effective_public'));
+        $this->assertSame(1, data_get($snapshot, 'counts.url_truth_valid'));
+        $this->assertSame(3, data_get($snapshot, 'counts.url_truth_total'));
+        $this->assertSame($before, [$truth, $bindings]);
+        $this->assertSame([], $queries);
+
+        $badCurrent = $this->record('http://fermatmind.com/en/articles/current-error', 'en', 'current-error');
+        $snapshot = (new UrlTruthReconciliationSnapshot)->build([$current, $badCurrent],
+            [...$truth, $this->truthRow($badCurrent)], [...$bindings, $this->bindingRow($badCurrent)], []);
+        $this->assertSame(3, data_get($snapshot, 'difference_classification.canonical_host_or_path_error'));
+        $this->assertSame(1, data_get($snapshot, 'difference_classification.current_canonical_host_or_path_error'));
+    }
+
+    #[Test]
+    public function historical_marker_cannot_hide_current_conflicting_or_unknown_evidence(): void
+    {
+        $old = $this->record('http://fermatmind.com/en/articles/old', 'en', 'old');
+        $row = array_replace($this->truthRow($old), ['indexability_state' => 'superseded_canonical']);
+        $replacement = $this->record('https://fermatmind.com/en/articles/new', 'en', 'old');
+        $other = $this->record($old->canonicalUrl, 'en', 'other');
+        $retired = array_replace($this->bindingRow($old), ['authority_status' => 'superseded_canonical']);
+        $cases = [
+            'current URL' => [[$old], [$row], []],
+            'current entity on another URL' => [[$replacement], [$row], []],
+            'current legacy binding' => [[], [$row], [$this->bindingRow($old)]],
+            'current new binding' => [[], [$row], [array_replace($this->bindingRow($old), [
+                'authority_status' => 'superseded_canonical', 'binding_status' => 'current', 'current_binding_key' => str_repeat('a', 64),
+            ])]],
+            'entity bound to another URL' => [[], [$row], [$this->bindingRow($replacement)]],
+            'URL bound to another entity' => [[], [$row], [$this->bindingRow($other)]],
+            'retired conflicting identity' => [[], [$row], [array_replace($retired, ['entity_id_or_slug' => 'other'])]],
+            'unknown truth state' => [[], [array_replace($row, ['indexability_state' => 'unknown'])], []],
+            'missing truth identity' => [[], [array_replace($row, ['entity_id_or_slug' => null])], []],
+            'missing truth locale' => [[], [array_replace($row, ['locale' => ''])], []],
+            'missing binding identity' => [[], [$row], [array_replace($retired, ['entity_id_or_slug' => null])]],
+            'missing binding hash' => [[], [$row], [array_replace($retired, ['canonical_url_hash' => null])]],
+            'unassociable binding locale' => [[], [$row], [array_replace($this->bindingRow($replacement), ['locale' => null])]],
+            'unknown legacy binding state' => [[], [$row], [array_replace($retired, ['authority_status' => 'unknown'])]],
+            'unknown new binding state' => [[], [$row], [array_replace($retired, ['current_binding_key' => null, 'binding_status' => null])]],
+            'inconsistent current key' => [[], [$row], [array_replace($retired, ['current_binding_key' => 'key', 'binding_status' => 'retired'])]],
+            'current status without key' => [[], [$row], [array_replace($retired, ['current_binding_key' => null, 'binding_status' => 'current'])]],
+            'hash conflict' => [[], [array_replace($row, ['canonical_url_hash' => str_repeat('b', 64)])], []],
+            'conflicting truth entity' => [[], [$row, $this->truthRow($replacement)], []],
+        ];
+        foreach ($cases as $label => [$authority, $truth, $bindings]) {
+            $snapshot = (new UrlTruthReconciliationSnapshot)->build($authority, $truth, $bindings, []);
+            $this->assertSame(1, data_get($snapshot, 'difference_classification.current_canonical_host_or_path_error'), $label);
+        }
+        // Both schemas retain their established current-binding semantics.
+        foreach ([$retired, array_replace($retired, ['authority_status' => 'published_approved',
+            'current_binding_key' => null, 'binding_status' => 'superseded_canonical'])] as $binding) {
+            $snapshot = (new UrlTruthReconciliationSnapshot)->build([], [$row], [$binding], []);
+            $this->assertSame(0, data_get($snapshot, 'difference_classification.current_canonical_host_or_path_error'));
+        }
+    }
+
+    #[Test]
+    public function current_canonical_count_requires_all_three_sources(): void
+    {
+        foreach ([[null, [], []], [[], null, []], [[], [], ['authority' => 'measurement_hold']]] as [$truth, $bindings, $state]) {
+            $snapshot = (new UrlTruthReconciliationSnapshot)->build([], $truth, $bindings, [], sourceState: $state);
+            $this->assertNull(data_get($snapshot, 'difference_classification.current_canonical_host_or_path_error'));
+        }
+    }
+
     private function record(
         string $url,
         string $locale,

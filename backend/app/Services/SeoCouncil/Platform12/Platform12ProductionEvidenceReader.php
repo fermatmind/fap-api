@@ -110,16 +110,10 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         } elseif ($missionId === Platform12DailyMissionSet::IDS[1]) {
             $truth = $read('url_truth_reconciliation', fn (): array => $this->truth->read(false));
             $authorityAvailable = data_get($truth, 'source_state.authority') === 'available';
-            $truthAvailable = data_get($truth, 'source_state.url_truth') === 'available'
-                && data_get($truth, 'source_state.entity_bindings') === 'available';
             $input['authority'] = $authorityAvailable ? ['availability' => 'AVAILABLE',
                 'revision_hash' => $this->hasher->hash($truth),
                 'current_public_count' => data_get($truth, 'counts.effective_public')] : ['availability' => 'UNAVAILABLE'];
-            $input['url_truth'] = $truthAvailable ? ['availability' => 'AVAILABLE',
-                'revision_hash' => $this->hasher->hash($truth),
-                'current_url_truth_count' => data_get($truth, 'counts.url_truth_valid'),
-                'wrong_canonical_count' => data_get($truth, 'difference_classification.canonical_host_or_path_error'),
-                'false_noindex_count' => data_get($truth, 'difference_classification.private_or_noindex_included')] : ['availability' => 'UNAVAILABLE'];
+            $input['url_truth'] = $this->urlTruthEvidence($truth);
             $input['clustering'] = $read('issue_cluster', fn (): array => $this->clusters());
             $input['d1_observation'] = $read('d1_observation', fn (): array => $this->d1($at));
             $probe = $read('scheduled_runtime_probe', fn (): array => $this->runtimeWindow($at));
@@ -176,6 +170,20 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         return ['input' => $input, 'sources' => $sources, 'source_gaps' => array_values(array_unique($gaps)),
             'captured_at' => $at->format('Y-m-d\TH:i:s\Z'),
             'expires_at' => $at->addMinutes(10)->format('Y-m-d\TH:i:s\Z')];
+    }
+
+    private function urlTruthEvidence(?array $truth): array
+    {
+        if (data_get($truth, 'source_state.url_truth') !== 'available'
+            || data_get($truth, 'source_state.entity_bindings') !== 'available') {
+            return ['availability' => 'UNAVAILABLE'];
+        }
+
+        return ['availability' => 'AVAILABLE',
+            'revision_hash' => $this->hasher->hash($truth),
+            'current_url_truth_count' => data_get($truth, 'counts.url_truth_valid'),
+            'wrong_canonical_count' => data_get($truth, 'difference_classification.current_canonical_host_or_path_error'),
+            'false_noindex_count' => data_get($truth, 'difference_classification.private_or_noindex_included')];
     }
 
     private function gsc(CarbonImmutable $now): array

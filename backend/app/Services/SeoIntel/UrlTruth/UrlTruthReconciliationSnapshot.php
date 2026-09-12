@@ -77,11 +77,7 @@ final class UrlTruthReconciliationSnapshot
 
         $bindings = [];
         foreach ($entityRows ?? [] as $row) {
-            $hasCurrentBindingSchema = array_key_exists('current_binding_key', $row);
-            $isCurrentBinding = $hasCurrentBindingSchema
-                ? ($row['current_binding_key'] ?? null) !== null && ($row['binding_status'] ?? null) === 'current'
-                : in_array(strtolower((string) ($row['authority_status'] ?? '')), ['active', 'published', 'published_approved'], true);
-            if (! $isCurrentBinding) {
+            if (! $this->isCurrentBinding($row)) {
                 continue;
             }
             $key = implode('|', [
@@ -170,6 +166,13 @@ final class UrlTruthReconciliationSnapshot
             'url_truth_duplicate' => $duplicateUrls,
             'current_binding_duplicate' => $duplicateBindings,
             'canonical_host_or_path_error' => $urlTruthRows === null ? null : $this->canonicalShapeErrors($urlTruthRows),
+            'current_canonical_host_or_path_error' => $urlTruthRows === null || $entityRows === null || ! $authorityAvailable
+                ? null
+                : $this->canonicalShapeErrors(array_values(array_filter(
+                    $urlTruthRows,
+                    fn (array $row): bool => $this->canonicalShapeErrors([$row]) === 0
+                        || ! $this->provenHistoricalCanonical($row, $authority, $urlTruthRows, $entityRows),
+                ))),
             'stale_authority_revision' => $revisionComparable && $authorityAvailable ? $staleAuthorityRevision : null,
             'locale_or_counterpart_drift' => $authorityAvailable ? $counterpartMissing + $this->localePathDrift($urlTruthRows) : null,
             'private_or_noindex_included' => $truthStateCounts['private_or_noindex'],
@@ -280,6 +283,101 @@ final class UrlTruthReconciliationSnapshot
         }
 
         return ['private_or_noindex' => $privateOrNoindex, 'redirect_only' => $redirectOnly];
+    }
+
+    /** @param array<string,mixed> $row */
+    private function isCurrentBinding(array $row): bool
+    {
+        return array_key_exists('current_binding_key', $row)
+            ? ($row['current_binding_key'] ?? null) !== null && ($row['binding_status'] ?? null) === 'current'
+            : in_array(strtolower((string) ($row['authority_status'] ?? '')), ['active', 'published', 'published_approved'], true);
+    }
+
+    /** @param array<string,mixed> $row */
+    private function entityIdentity(array $row): ?string
+    {
+        $parts = [strtolower(trim((string) ($row['page_entity_type'] ?? ''))),
+            trim((string) ($row['entity_id_or_slug'] ?? '')), trim((string) ($row['locale'] ?? ''))];
+
+        return in_array('', $parts, true) ? null : json_encode($parts, JSON_THROW_ON_ERROR);
+    }
+
+    /** Missing identity components cannot disprove an association. */
+    private function couldShareEntity(array $left, array $right): bool
+    {
+        foreach (['page_entity_type', 'entity_id_or_slug', 'locale'] as $field) {
+            $a = trim((string) ($left[$field] ?? ''));
+            $b = trim((string) ($right[$field] ?? ''));
+            if ($field === 'page_entity_type') {
+                $a = strtolower($a);
+                $b = strtolower($b);
+            }
+            if ($a !== '' && $b !== '' && $a !== $b) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Prove retirement from this read only. A marker alone is not evidence that
+     * the URL and every associated entity have left current authority/bindings.
+     *
+     * @param  array<string,mixed>  $row
+     * @param  array<string,array<string,mixed>>  $authority
+     * @param  list<array<string,mixed>>  $truthRows
+     * @param  list<array<string,mixed>>  $entityRows
+     */
+    private function provenHistoricalCanonical(array $row, array $authority, array $truthRows, array $entityRows): bool
+    {
+        $identity = $this->entityIdentity($row);
+        $url = trim((string) ($row['canonical_url'] ?? ''));
+        if (($row['indexability_state'] ?? null) !== 'superseded_canonical' || $identity === null || $url === '') {
+            return false;
+        }
+        $hash = $this->urlHash($url);
+        if (isset($row['canonical_url_hash']) && $row['canonical_url_hash'] !== $hash) {
+            return false;
+        }
+        foreach ($authority as $current) {
+            if ($current['hash'] === $hash || $this->couldShareEntity($row, $current)) {
+                return false;
+            }
+        }
+        foreach ($truthRows as $related) {
+            if ($this->urlHash((string) ($related['canonical_url'] ?? '')) !== $hash
+                && ($related['canonical_url_hash'] ?? null) !== $hash
+                && ! $this->couldShareEntity($row, $related)) {
+                continue;
+            }
+            if ($this->entityIdentity($related) !== $identity
+                || ($related['indexability_state'] ?? null) !== 'superseded_canonical'
+                || (isset($related['canonical_url_hash'])
+                    && $related['canonical_url_hash'] !== $this->urlHash((string) ($related['canonical_url'] ?? '')))) {
+                return false;
+            }
+        }
+        foreach ($entityRows as $binding) {
+            if (($binding['canonical_url_hash'] ?? null) !== $hash && ! $this->couldShareEntity($row, $binding)) {
+                continue;
+            }
+            // Conflicting/missing identities or unknown states cannot prove absence.
+            if ($this->entityIdentity($binding) !== $identity || $this->isCurrentBinding($binding)
+                || preg_match('/^[a-f0-9]{64}$/D', (string) ($binding['canonical_url_hash'] ?? '')) !== 1) {
+                return false;
+            }
+            if (array_key_exists('current_binding_key', $binding)) {
+                if ($binding['current_binding_key'] !== null
+                    || ! in_array($binding['binding_status'] ?? null, ['retired', 'retired_authority', 'superseded_canonical', 'superseded_duplicate'], true)) {
+                    return false;
+                }
+            } elseif (! in_array($binding['authority_status'] ?? null, ['retired', 'retired_authority', 'superseded_canonical', 'superseded_duplicate'], true)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /** @param list<array<string,mixed>> $rows */

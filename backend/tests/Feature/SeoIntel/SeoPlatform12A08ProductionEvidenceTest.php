@@ -117,6 +117,65 @@ final class SeoPlatform12A08ProductionEvidenceTest extends TestCase
             ['http_probe_count' => 10, 'accepted_http_probe_count' => 9, 'exposure_count' => 0, 'unobserved_count' => 0]);
     }
 
+    public function test_m2_maps_current_canonical_count_without_changing_denominators_or_audit(): void
+    {
+        $snapshot = [
+            'source_state' => ['authority' => 'available', 'url_truth' => 'available', 'entity_bindings' => 'available'],
+            'counts' => ['effective_public' => 10, 'url_truth_valid' => 8],
+            'difference_classification' => ['canonical_host_or_path_error' => 2,
+                'current_canonical_host_or_path_error' => 0, 'private_or_noindex_included' => 0],
+        ];
+        foreach ([0 => 'RECONCILIATION_INCOMPLETE_HOLD', 1 => 'WRONG_CANONICAL_HOLD'] as $count => $expected) {
+            $snapshot['difference_classification']['current_canonical_host_or_path_error'] = $count;
+            $mapped = $this->read('urlTruthEvidence', $snapshot);
+            $this->assertSame($count, $mapped['wrong_canonical_count']);
+            $this->assertSame(8, $mapped['current_url_truth_count']);
+            $this->assertSame(0, $mapped['false_noindex_count']);
+            $receipt = $this->evaluateM2($snapshot, $mapped);
+            $this->assertSame($expected, $receipt['state']);
+            $this->assertSame(10, $receipt['authority_reconciliation']['fixed_denominator']);
+            $this->assertSame(2, $snapshot['difference_classification']['canonical_host_or_path_error']);
+            $this->assertFalse($receipt['execution_allowed']);
+            $this->assertSame(['url_truth' => false, 'canonical' => false, 'robots' => false, 'authority' => false], $receipt['writes']);
+        }
+        Http::assertNothingSent();
+    }
+
+    public function test_m2_missing_or_unavailable_current_count_never_falls_back_to_history_or_zero(): void
+    {
+        $base = ['source_state' => ['authority' => 'available', 'url_truth' => 'available', 'entity_bindings' => 'available'],
+            'counts' => ['effective_public' => 10, 'url_truth_valid' => 8],
+            'difference_classification' => ['canonical_host_or_path_error' => 2, 'private_or_noindex_included' => 0]];
+        foreach (['missing', 'null', 'authority', 'entity_bindings', 'url_truth'] as $unavailable) {
+            $snapshot = $base;
+            if ($unavailable !== 'missing') {
+                $snapshot['difference_classification']['current_canonical_host_or_path_error'] = null;
+            }
+            if (array_key_exists($unavailable, $snapshot['source_state'])) {
+                $snapshot['source_state'][$unavailable] = 'measurement_hold';
+            }
+            $mapped = $this->read('urlTruthEvidence', $snapshot);
+            $this->assertNull($mapped['wrong_canonical_count'] ?? null);
+            $expected = in_array($unavailable, ['missing', 'null'], true) ? 'INPUT_HOLD' : 'URL_TRUTH_UNAVAILABLE_HOLD';
+            $this->assertSame($expected, $this->evaluateM2($snapshot, $mapped)['state'], $unavailable);
+        }
+    }
+
+    private function evaluateM2(array $snapshot, array $mapped): array
+    {
+        return app(\App\Services\SeoCouncil\Platform12\Evaluation\Platform12DailyUrlTruthEvaluator::class)->evaluate([
+            'evaluated_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
+            'authority' => ['availability' => $snapshot['source_state']['authority'] === 'available' ? 'AVAILABLE' : 'UNAVAILABLE',
+                'revision_hash' => str_repeat('a', 64), 'current_public_count' => $snapshot['counts']['effective_public']],
+            'url_truth' => $mapped,
+            'clustering' => ['availability' => 'AVAILABLE', 'issue_count' => 0, 'clustered_issue_count' => 0,
+                'dedupe_candidate_count' => 0, 'dedupe_unique_count' => 0],
+            'd1_observation' => ['availability' => 'AVAILABLE', 'candidate_count' => 0, 'observed_count' => 0],
+            'runtime_observation' => ['availability' => 'AVAILABLE', 'observation_count' => 10],
+            'sitemap_observation' => ['availability' => 'AVAILABLE', 'observation_count' => 10],
+        ]);
+    }
+
     private function read(string $method, mixed ...$arguments): array
     {
         return (new \ReflectionMethod(Platform12ProductionEvidenceReader::class, $method))
