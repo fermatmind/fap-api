@@ -765,6 +765,7 @@ Route::prefix('v0.5')->group(function () {
             ->whereIn('framework', PersonalityPublicContentAsset::FRAMEWORKS)
             ->where('slug', '[A-Za-z0-9][A-Za-z0-9/-]{0,159}');
         Route::get('/personality', [PersonalityController::class, 'index']);
+        Route::get('/personality/mbti/trait-explanations', \App\Http\Controllers\API\V0_5\Cms\MbtiTraitExplanationsController::class);
         Route::get('/personality/comparisons', [PersonalityController::class, 'comparisonIndex']);
         Route::get('/personality/comparisons/{comparison}', [PersonalityController::class, 'comparison']);
         Route::get('/personality/{type}/result-intro', [PersonalityDesktopCloneController::class, 'intro'])
