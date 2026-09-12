@@ -21,6 +21,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('mbti_trait_catalogs');
+        // Forward-only: retain published content if application code is rolled back.
     }
 };
