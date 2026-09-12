@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\PersonalityCms;
 
+use App\PersonalityCms\DesktopClone\MbtiResultChapterCopy;
 use App\PersonalityCms\DesktopClone\MbtiZhResultContentPackage;
 use Tests\TestCase;
 
@@ -45,6 +46,28 @@ final class MbtiZhResultContentPackageTest extends TestCase
             }
         }
         $this->assertSame(224, $disabledSlots);
+    }
+
+    public function test_chapter_assets_cover_all_full_types_and_preserve_the_existing_contract(): void
+    {
+        $assets = app(MbtiResultChapterCopy::class)->load();
+        $paragraphs = [];
+        foreach (app(MbtiZhResultContentPackage::class)->compile()['rows'] as $row) {
+            $code = $row['full_code'];
+            $this->assertSame($assets[$code]['faq'], $row['content_json']['faq']);
+            foreach (MbtiResultChapterCopy::CHAPTERS as $chapter) {
+                $intro = $row['content_json']['chapters'][$chapter]['intro'];
+                $this->assertSame($assets[$code]['chapters'][$chapter], $intro);
+                $this->assertCount(2, $intro);
+                $this->assertGreaterThanOrEqual(300, mb_strlen(implode('', $intro)), $code.'.'.$chapter);
+                $this->assertLessThanOrEqual(370, mb_strlen(implode('', $intro)), $code.'.'.$chapter);
+                $paragraphs[] = implode('', $intro);
+            }
+            foreach ($row['content_json']['faq'] as $faq) {
+                $this->assertGreaterThanOrEqual(100, mb_strlen($faq['answer']));
+            }
+        }
+        $this->assertCount(96, array_unique($paragraphs));
     }
 
     public function test_restored_traits_keep_distinct_meanings_and_stable_identifiers(): void

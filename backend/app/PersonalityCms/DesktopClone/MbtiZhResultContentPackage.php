@@ -29,6 +29,7 @@ final class MbtiZhResultContentPackage
         private readonly PersonalityDesktopCloneBaselineReader $reader,
         private readonly PersonalityDesktopCloneBaselineNormalizer $normalizer,
         private readonly PersonalityVariantCloneContentValidator $validator,
+        private readonly MbtiResultChapterCopy $chapterCopy,
     ) {}
 
     /** @return array<string, mixed> */
@@ -42,11 +43,13 @@ final class MbtiZhResultContentPackage
             throw new RuntimeException('The zh-CN MBTI result package must contain exactly 32 variants.');
         }
 
+        $chapterRows = $this->chapterCopy->load();
         $compiledRows = [];
         foreach ($rows as $row) {
             $fullCode = strtoupper(trim((string) ($row['full_code'] ?? '')));
             $content = MbtiZhResultContentPolicy::normalizeDesktopContent((array) ($row['content_json'] ?? []), 'zh-CN');
             $content = $this->contextualizeSharedModuleCopy($content);
+            $content = $this->chapterCopy->apply($content, $chapterRows[$fullCode]);
             $assetSlots = MbtiZhResultContentPolicy::normalizeAssetSlots(
                 PersonalityDesktopCloneAssetSlotSupport::normalizeAssetSlots((array) ($row['asset_slots_json'] ?? [])),
                 'zh-CN',
