@@ -8,8 +8,10 @@ use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantCloneContent;
 use App\Models\PersonalityProfileVariantRevision;
+use App\PersonalityCms\DesktopClone\MbtiResultChapterCopy;
 use App\PersonalityCms\DesktopClone\MbtiZhResultContentPackage;
 use App\Support\Idempotency\IdempotencyKey;
+use App\Support\Mbti\MbtiZhResultContentPolicy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
@@ -286,6 +288,18 @@ final class MbtiZhResultContentReleaseService
             }
             if ($record->status !== PersonalityProfileVariantCloneContent::STATUS_PUBLISHED) {
                 throw new RuntimeException('Current clone record must already be published for '.$row['full_code'].'.');
+            }
+            // Existing released packages may only change the four authored slots.
+            // Baseline-only initialization keeps the original first-release path.
+            if (isset($record->meta_json['package_hash']) && ! hash_equals(
+                IdempotencyKey::hashPayload(MbtiResultChapterCopy::withoutEditorialSlots(
+                    MbtiZhResultContentPolicy::normalizeDesktopContent((array) $record->content_json, 'zh-CN'),
+                )),
+                IdempotencyKey::hashPayload(MbtiResultChapterCopy::withoutEditorialSlots(
+                    MbtiZhResultContentPolicy::normalizeDesktopContent($row['content_json'], 'zh-CN'),
+                )),
+            )) {
+                throw new RuntimeException('Content outside chapter introductions and FAQ changed for '.$row['full_code']);
             }
             $targets[] = ['row' => $row, 'variant' => $variant, 'record' => $record];
         }

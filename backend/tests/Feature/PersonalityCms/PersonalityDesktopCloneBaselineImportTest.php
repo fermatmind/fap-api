@@ -8,8 +8,11 @@ use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantCloneContent;
 use App\Models\PersonalityProfileVariantRevision;
+use App\PersonalityCms\DesktopClone\MbtiResultChapterCopy;
+use App\PersonalityCms\DesktopClone\MbtiZhResultContentPackage;
 use App\PersonalityCms\DesktopClone\PersonalityDesktopCloneAssetSlotSupport;
 use App\Services\Cms\MbtiZhResultContentReleaseService;
+use App\Support\Idempotency\IdempotencyKey;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
@@ -17,6 +20,85 @@ use Tests\TestCase;
 final class PersonalityDesktopCloneBaselineImportTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function test_chapter_revision_reaches_all_public_types_and_leaves_other_content_unchanged(): void
+    {
+        $this->seedReleasedChapterPreState();
+        $before = PersonalityProfileVariantCloneContent::query()->get()->keyBy('id');
+        $service = app(MbtiZhResultContentReleaseService::class);
+        $plan = $service->dryRun();
+        $draft = $service->writeDraft($plan['package_hash'], $plan['pre_state_hash'], 1);
+        $service->promote($plan['package_hash'], $plan['pre_state_hash'], $draft['candidate_revision_set_hash']);
+        $this->assertTrue($service->readback($plan['package_hash'])['ok']);
+        $assets = app(MbtiResultChapterCopy::class)->load();
+        foreach (PersonalityProfileVariantCloneContent::query()->with('variant')->get() as $record) {
+            $this->assertSame(
+                IdempotencyKey::hashPayload(MbtiResultChapterCopy::withoutEditorialSlots($before[$record->id]->content_json)),
+                IdempotencyKey::hashPayload(MbtiResultChapterCopy::withoutEditorialSlots($record->content_json)),
+            );
+            $code = $record->variant->runtime_type_code;
+            $response = $this->getJson('/api/v0.5/personality/'.strtolower($code).'/desktop-clone?locale=zh-CN')->assertOk();
+            $response->assertJsonPath('content.faq', $assets[$code]['faq']);
+            foreach (MbtiResultChapterCopy::CHAPTERS as $chapter) {
+                $response->assertJsonPath('content.chapters.'.$chapter.'.intro', $assets[$code]['chapters'][$chapter]);
+            }
+        }
+        $this->assertTrue($service->dryRun()['already_active']);
+    }
+
+    public function test_chapter_publication_rejects_drift_in_unrelated_published_content(): void
+    {
+        $this->seedReleasedChapterPreState();
+        $record = PersonalityProfileVariantCloneContent::query()->firstOrFail();
+        $content = $record->content_json;
+        $content['hero']['profile_identity']['nickname'] = 'Independent CMS edit';
+        $record->forceFill(['content_json' => $content])->save();
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Content outside chapter introductions and FAQ changed');
+        app(MbtiZhResultContentReleaseService::class)->dryRun();
+    }
+
+    public function test_chapter_promotion_rejects_an_edit_after_draft_without_overwriting_it(): void
+    {
+        $this->seedReleasedChapterPreState();
+        $service = app(MbtiZhResultContentReleaseService::class);
+        $plan = $service->dryRun();
+        $draft = $service->writeDraft($plan['package_hash'], $plan['pre_state_hash'], 1);
+        $record = PersonalityProfileVariantCloneContent::query()->firstOrFail();
+        $content = $record->content_json;
+        $content['chapters']['career']['intro'][0] = 'Concurrent editor content';
+        $record->forceFill(['content_json' => $content])->save();
+        try {
+            $service->promote($plan['package_hash'], $plan['pre_state_hash'], $draft['candidate_revision_set_hash']);
+            $this->fail('Promotion must reject a changed pre-state.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('Package or production pre-state changed', $exception->getMessage());
+        }
+        $this->assertSame('Concurrent editor content', $record->fresh()->content_json['chapters']['career']['intro'][0]);
+    }
+
+    private function seedReleasedChapterPreState(): void
+    {
+        $this->seedZhVariantsForAllMbtiBaseTypes();
+        $this->artisan('personality:import-desktop-clone-baseline', [
+            '--locale' => ['zh-CN'], '--status' => 'published', '--upsert' => true,
+            '--source-dir' => '../content_baselines/personality_clone',
+        ])->assertExitCode(0);
+        $rows = array_column(app(MbtiZhResultContentPackage::class)->compile()['rows'], null, 'full_code');
+        foreach (PersonalityProfileVariantCloneContent::query()->with('variant')->get() as $record) {
+            $row = $rows[$record->variant->runtime_type_code];
+            $content = $row['content_json'];
+            foreach (MbtiResultChapterCopy::CHAPTERS as $chapter) {
+                $content['chapters'][$chapter]['intro'] = ['Previous first paragraph', 'Previous second paragraph'];
+            }
+            $content['faq'][0]['answer'] = 'Previous answer';
+            $record->forceFill([
+                'content_json' => $content,
+                'asset_slots_json' => $row['asset_slots_json'],
+                'meta_json' => [...$row['meta_json'], 'package_hash' => str_repeat('a', 64)],
+            ])->save();
+        }
+    }
 
     public function test_exact_zh_package_draft_promotion_readback_and_rollback_are_revision_bound(): void
     {

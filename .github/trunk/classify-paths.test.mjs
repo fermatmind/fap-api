@@ -255,6 +255,14 @@ test("binds only the exact MBTI zh authority release manifest to its operation",
   assert.equal(exact.flags.content_assets, true);
   assert.equal(exact.operations.mbti_zh_result_authority_release, true);
   assert.equal(adjacent.operations.mbti_zh_result_authority_release, false);
+  for (const path of [
+    "backend/content_assets/personality_public/mbti_result_chapters.zh-CN.v1.json",
+    "backend/app/PersonalityCms/DesktopClone/MbtiResultChapterCopy.php",
+    "backend/app/PersonalityCms/DesktopClone/MbtiZhResultContentPackage.php",
+  ]) {
+    assert.equal(classifyPaths([path]).operations.mbti_zh_result_authority_release, true, path);
+  }
+  assert.equal(classifyPaths(["backend/content_assets/personality_public/mbti_result_chapters.en.v1.json"]).operations.mbti_zh_result_authority_release, false);
 });
 test("binds SEO Platform 10 closeout only to its exact controlled operation config", () => {
   const exact = classifyPaths(["backend/config/seo_platform_10.php"]);

@@ -184,9 +184,12 @@ export function classifyPaths(inputPaths) {
     publisher_required: publisherRequired,
     career_current_authority_release: paths.some(isCareerAuthorityReleaseBoundary),
     personality_current_authority_release: paths.some(isPersonalityCurrentBoundary),
-    mbti_zh_result_authority_release: paths.includes(
+    mbti_zh_result_authority_release: paths.some((path) => [
       "backend/content_assets/personality_public/mbti_zh_result_authority_release.v1.json",
-    ),
+      "backend/content_assets/personality_public/mbti_result_chapters.zh-CN.v1.json",
+      "backend/app/PersonalityCms/DesktopClone/MbtiResultChapterCopy.php",
+      "backend/app/PersonalityCms/DesktopClone/MbtiZhResultContentPackage.php",
+    ].includes(path)),
     mbti_trait_content_publish: paths.some((path) =>
       /^backend\/content_assets\/personality_public\/mbti_trait_(?:explanations|overviews)\.zh-CN\.v1\.json$/.test(path)
       || path === "backend/app/Services/Cms/MbtiTraitExplanations.php"
