@@ -77,6 +77,7 @@ final class PublicContentDeliveryProbeService
     /** @param array<string, mixed> $target @return array<string, mixed> */
     private function probe(array $target): array
     {
+        $payloadBudgetBytes = $this->payloadBudgetBytes($target);
         $startedAt = hrtime(true);
         $observedAt = CarbonImmutable::now('UTC')->toIso8601String();
 
@@ -88,25 +89,25 @@ final class PublicContentDeliveryProbeService
                 ->withOptions(['allow_redirects' => false, 'stream' => true])
                 ->get($this->targetUrl((string) $target['path']), (array) $target['query']);
 
-            $body = $this->boundedBody($response);
+            $body = $this->boundedBody($response, $payloadBudgetBytes);
             $bytes = strlen($body);
             $cacheState = $this->cacheState($response);
             $statusCode = $response->status();
-            $readback = $bytes <= $this->payloadBudgetBytes()
+            $readback = $bytes <= $payloadBudgetBytes
                 ? $this->readback->extract((string) $target['readback_profile'], $body)
                 : $this->emptyReadback((string) $target['readback_profile']);
             $cacheReady = in_array($cacheState, (array) $target['allowed_cache_states'], true);
             if ($response->header('X-Fermat-Content-Authority') === 'personality.page.content.v1') {
                 // Current bypasses the legacy DB cache and exposes no cache header.
                 // Only an exact local package/target readback can accept that absence.
-                $readback = $bytes <= $this->payloadBudgetBytes()
+                $readback = $bytes <= $payloadBudgetBytes
                     ? $this->currentReadback($target, $body, (string) $response->header('X-Fermat-Content-Aggregate'))
                     : $this->emptyReadback((string) $target['readback_profile']);
                 $cacheReady = $cacheReady || ($response->header('X-Fermat-Public-Read-Cache', '') === '' && $readback['ok']);
             }
             $ok = $statusCode >= 200
                 && $statusCode < 300
-                && $bytes <= $this->payloadBudgetBytes()
+                && $bytes <= $payloadBudgetBytes
                 && $cacheReady
                 && $readback['ok'] === true;
 
@@ -117,7 +118,7 @@ final class PublicContentDeliveryProbeService
                 'bytes' => $bytes,
                 'cache_state' => $cacheState,
                 'readback' => $readback,
-                'error_code' => $this->failureCode($statusCode, $bytes, $cacheReady, $readback['ok']),
+                'error_code' => $this->failureCode($statusCode, $bytes, $cacheReady, $readback['ok'], $payloadBudgetBytes),
             ]);
         } catch (ConnectionException) {
             $result = $this->failureEnvelope($target, $observedAt, $startedAt, 'connection_failed');
@@ -150,14 +151,14 @@ final class PublicContentDeliveryProbeService
         );
     }
 
-    private function boundedBody(Response $response): string
+    private function boundedBody(Response $response, int $payloadBudgetBytes): string
     {
         $stream = $response->toPsrResponse()->getBody();
         if ($stream->isSeekable()) {
             $stream->rewind();
         }
 
-        $limit = $this->payloadBudgetBytes() + 1;
+        $limit = $payloadBudgetBytes + 1;
         $body = '';
         while (! $stream->eof() && strlen($body) < $limit) {
             $chunk = $stream->read(min(8192, $limit - strlen($body)));
@@ -208,12 +209,12 @@ final class PublicContentDeliveryProbeService
         ];
     }
 
-    private function failureCode(int $statusCode, int $bytes, bool $cacheReady, bool $readbackReady): ?string
+    private function failureCode(int $statusCode, int $bytes, bool $cacheReady, bool $readbackReady, int $payloadBudgetBytes): ?string
     {
         if ($statusCode < 200 || $statusCode >= 300) {
             return 'http_status';
         }
-        if ($bytes > $this->payloadBudgetBytes()) {
+        if ($bytes > $payloadBudgetBytes) {
             return 'payload_budget_exceeded';
         }
         if (! $cacheReady) {
@@ -283,6 +284,12 @@ final class PublicContentDeliveryProbeService
                     throw new RuntimeException('public content delivery probe target is incomplete.');
                 }
             }
+            if (array_key_exists('payload_budget_bytes', $target)
+                && (! is_int($target['payload_budget_bytes'])
+                    || $target['payload_budget_bytes'] < 1024
+                    || $target['payload_budget_bytes'] > 1048576)) {
+                throw new RuntimeException('public content delivery probe target payload budget is invalid.');
+            }
             $id = (string) $target['id'];
             $path = (string) $target['path'];
             if (preg_match('/^[a-z0-9_]{3,80}$/', $id) !== 1
@@ -331,8 +338,12 @@ final class PublicContentDeliveryProbeService
         return self::KEY_PREFIX.':latest:'.$targetId;
     }
 
-    private function payloadBudgetBytes(): int
+    private function payloadBudgetBytes(array $target): int
     {
+        if (array_key_exists('payload_budget_bytes', $target)) {
+            return $target['payload_budget_bytes'];
+        }
+
         return max(1024, min(1048576, (int) config(
             'public_content_observability.probe.payload_budget_bytes',
             524288,

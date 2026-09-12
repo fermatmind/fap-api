@@ -24,6 +24,7 @@ return [
         'targets' => [
             [
                 'id' => 'l1_mbti_intj_a_en',
+                'payload_budget_bytes' => 589824,
                 'family' => 'mbti',
                 'priority' => 'L1',
                 'locale' => 'en',

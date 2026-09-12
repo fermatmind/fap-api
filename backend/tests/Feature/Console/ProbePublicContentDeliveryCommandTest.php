@@ -160,6 +160,7 @@ final class ProbePublicContentDeliveryCommandTest extends TestCase
             } else {
                 unset($headers['X-Fermat-Content-Authority']);
             }
+            Http::swap(new \Illuminate\Http\Client\Factory);
             Http::fake(['*' => Http::response($body, 200, $headers)]);
             $items = app(PublicContentDeliveryProbeService::class)->probeAll();
             $this->assertFalse($items[1]['ok'], $fault);
@@ -176,6 +177,7 @@ final class ProbePublicContentDeliveryCommandTest extends TestCase
         );
         $this->assertTrue($result['ok']);
         $this->assertSame('INTJ-A', $result['fields']['display_type']);
+        $this->setMbtiBudget(null);
         config()->set('public_content_observability.probe.payload_budget_bytes', 1024);
         Http::fake(['*' => Http::response($payload, 200, [
             'X-Fermat-Content-Authority' => 'personality.page.content.v1',
@@ -189,6 +191,7 @@ final class ProbePublicContentDeliveryCommandTest extends TestCase
 
     public function test_payload_budget_and_connection_failures_are_bounded_without_exception_details(): void
     {
+        $this->setMbtiBudget(null);
         config()->set('public_content_observability.probe.payload_budget_bytes', 1024);
         Http::fakeSequence()
             ->push(str_repeat('x', 2048), 200, ['X-Fermat-Public-Read-Cache' => 'fresh'])
@@ -206,6 +209,178 @@ final class ProbePublicContentDeliveryCommandTest extends TestCase
         $network = $this->jsonOutput()['items'][0];
         $this->assertSame('connection_failed', $network['error_code']);
         $this->assertStringNotContainsString('private upstream detail', json_encode($network, JSON_THROW_ON_ERROR));
+    }
+
+    public function test_complete_current_english_mbti_payload_passes_the_fixed_target_budget(): void
+    {
+        $reader = app(PersonalityCurrentPageReader::class);
+        $payload = ['ok' => true, ...$reader->payload('mbti', 'variant', 'intj-a', 'en')];
+        $body = response()->json($payload)->getContent();
+        $this->assertStringContainsString('mbti64_promotion_metadata', $body);
+        $this->assertGreaterThan(524288, strlen($body));
+        $this->assertLessThanOrEqual(589824, strlen($body));
+        Http::fake(['*' => Http::response($body, 200, $this->currentHeaders())]);
+
+        $item = app(PublicContentDeliveryProbeService::class)->probeNext();
+        $this->assertTrue($item['ok']);
+        $this->assertSame(strlen($body), $item['bytes']);
+        $this->assertTrue($item['readback']['ok']);
+        $this->assertSame('INTJ-A', $item['readback']['fields']['display_type']);
+        $this->assertNull($item['error_code']);
+        $this->assertStringNotContainsString('mbti64_promotion_metadata', json_encode($item, JSON_THROW_ON_ERROR));
+    }
+
+    public function test_mbti_exact_budget_and_overflow_use_bounded_stream_reads_before_readback(): void
+    {
+        $payload = ['ok' => true, ...app(PersonalityCurrentPageReader::class)->payload('mbti', 'variant', 'intj-a', 'en')];
+        $body = response()->json($payload)->getContent();
+        foreach ([589824, 589825, 600000] as $length) {
+            Cache::store('array')->flush();
+            $stream = \GuzzleHttp\Psr7\Utils::streamFor(str_pad($body, $length));
+            $bytesRead = 0;
+            $bounded = \GuzzleHttp\Psr7\FnStream::decorate($stream, [
+                'read' => function (int $length) use ($stream, &$bytesRead): string {
+                    $chunk = $stream->read($length);
+                    $bytesRead += strlen($chunk);
+
+                    return $chunk;
+                },
+                'getContents' => static function (): never {
+                    throw new \RuntimeException('unbounded_read_forbidden');
+                },
+            ]);
+            Http::swap(new \Illuminate\Http\Client\Factory);
+            Http::fake(['*' => Http::response($bounded, 200, $this->currentHeaders())]);
+            $item = app(PublicContentDeliveryProbeService::class)->probeNext();
+            $this->assertSame(min($length, 589825), $item['bytes']);
+            $this->assertSame(min($length, 589825), $bytesRead);
+            $this->assertSame($length === 589824, $item['ok']);
+            $this->assertSame($length === 589824 ? null : 'payload_budget_exceeded', $item['error_code']);
+            $this->assertSame($length === 589824, $item['readback']['ok']);
+            if ($length > 589824) {
+                $this->assertSame([], $item['readback']['fields']);
+            }
+        }
+    }
+
+    public function test_other_targets_keep_the_global_512_kib_limit(): void
+    {
+        $targets = config('public_content_observability.probe.targets');
+        $this->assertSame(589824, $targets[0]['payload_budget_bytes']);
+        $this->assertArrayNotHasKey('payload_budget_bytes', $targets[1]);
+        $this->assertArrayNotHasKey('payload_budget_bytes', $targets[2]);
+        $this->assertSame(524288, config('public_content_observability.probe.payload_budget_bytes'));
+        Http::fake(['*' => Http::response(str_repeat('x', 524289))]);
+        $items = app(PublicContentDeliveryProbeService::class)->probeAll();
+        foreach ([$items[1], $items[2]] as $item) {
+            $this->assertSame(524289, $item['bytes']);
+            $this->assertSame('payload_budget_exceeded', $item['error_code']);
+            $this->assertSame([], $item['readback']['fields']);
+        }
+    }
+
+    public function test_target_budget_precedence_and_absent_override_preserve_global_compatibility(): void
+    {
+        foreach ([[2048, 1024, 1500, true], [1024, 4096, 1500, false],
+            [1048576, 1024, 1048576, true],
+            [null, '2048', 2048, true], [null, '2048', 2049, false],
+            [null, 0, 1024, true], [null, 0, 1025, false],
+            [null, 2097152, 1048577, false]] as [$override, $global, $length, $ok]) {
+            Cache::store('array')->flush();
+            $this->setMbtiBudget($override);
+            config()->set('public_content_observability.probe.payload_budget_bytes', $global);
+            Http::swap(new \Illuminate\Http\Client\Factory);
+            Http::fake(['*' => Http::response(str_pad(json_encode($this->mbtiPayload(), JSON_THROW_ON_ERROR), $length),
+                200, ['X-Fermat-Public-Read-Cache' => 'fresh'])]);
+            $item = app(PublicContentDeliveryProbeService::class)->probeNext();
+            $this->assertSame($ok, $item['ok']);
+            $this->assertSame($ok ? null : 'payload_budget_exceeded', $item['error_code']);
+        }
+    }
+
+    public function test_one_probe_freezes_its_budget_before_request_even_if_configuration_changes(): void
+    {
+        $this->setMbtiBudget(null);
+        config()->set('public_content_observability.probe.payload_budget_bytes', 1024);
+        Http::fake(function () {
+            config()->set('public_content_observability.probe.payload_budget_bytes', 1048576);
+
+            return Http::response(str_repeat('x', 2048));
+        });
+        $item = app(PublicContentDeliveryProbeService::class)->probeNext();
+        $this->assertSame(1025, $item['bytes']);
+        $this->assertSame('payload_budget_exceeded', $item['error_code']);
+        $this->assertSame([], $item['readback']['fields']);
+    }
+
+    public function test_invalid_target_budgets_fail_before_any_http_request(): void
+    {
+        $original = config('public_content_observability.probe.targets');
+        foreach ([null, '589824', 589824.0, true, false, 1023, 1048577, [], -1] as $invalid) {
+            // A malformed later target must also fail before the first request.
+            $targets = $original;
+            $targets[2]['payload_budget_bytes'] = $invalid;
+            config()->set('public_content_observability.probe.targets', $targets);
+            Http::swap(new \Illuminate\Http\Client\Factory);
+            Http::fake();
+            $this->assertSame(1, Artisan::call('public-content:probe-delivery', ['--all' => true, '--json' => true]));
+            $this->assertSame('probe_configuration_or_storage_unavailable', $this->jsonOutput()['error_code']);
+            Http::assertNothingSent();
+        }
+    }
+
+    public function test_mbti_larger_budget_preserves_current_provenance_and_cache_rejections(): void
+    {
+        $payload = ['ok' => true, ...app(PersonalityCurrentPageReader::class)->payload('mbti', 'variant', 'intj-a', 'en')];
+        foreach (['aggregate', 'locale', 'display_type', 'stale', 'missing_authority', 'missing_identity'] as $fault) {
+            Cache::store('array')->flush();
+            $body = $payload;
+            $headers = $this->currentHeaders();
+            match ($fault) {
+                'aggregate' => $headers['X-Fermat-Content-Aggregate'] = str_repeat('0', 64),
+                'locale' => $body['profile']['locale'] = 'zh-CN',
+                'display_type' => $body['mbti_public_projection_v1']['display_type'] = 'ENTJ-A',
+                'stale' => $headers['X-Fermat-Public-Read-Cache'] = 'stale',
+                'missing_authority' => $headers['X-Fermat-Content-Authority'] = '',
+                'missing_identity' => $body['profile']['type_code'] = null,
+            };
+            Http::swap(new \Illuminate\Http\Client\Factory);
+            Http::fake(['*' => Http::response($body, 200, $headers)]);
+            $item = app(PublicContentDeliveryProbeService::class)->probeNext();
+            $this->assertFalse($item['ok'], $fault);
+            $this->assertNotSame('payload_budget_exceeded', $item['error_code'], $fault);
+        }
+    }
+
+    public function test_timeout_options_and_timeout_failure_remain_bounded_and_sanitized(): void
+    {
+        Http::fake(function (Request $request, array $options): never {
+            $this->assertSame(8, $options['timeout']);
+            $this->assertSame(3, $options['connect_timeout']);
+            $this->assertFalse($options['allow_redirects']);
+            $this->assertTrue($options['stream']);
+            $this->assertSame([], $request->header('Authorization'));
+            throw new \Illuminate\Http\Client\ConnectionException('cURL error 28: private timeout detail');
+        });
+        $item = app(PublicContentDeliveryProbeService::class)->probeNext();
+        $this->assertSame('connection_failed', $item['error_code']);
+        $this->assertStringNotContainsString('private timeout detail', json_encode($item, JSON_THROW_ON_ERROR));
+    }
+
+    private function setMbtiBudget(?int $budget): void
+    {
+        $targets = config('public_content_observability.probe.targets');
+        unset($targets[0]['payload_budget_bytes']);
+        if ($budget !== null) {
+            $targets[0]['payload_budget_bytes'] = $budget;
+        }
+        config()->set('public_content_observability.probe.targets', $targets);
+    }
+
+    private function currentHeaders(): array
+    {
+        return ['X-Fermat-Content-Authority' => 'personality.page.content.v1',
+            'X-Fermat-Content-Aggregate' => app(PersonalityCurrentPageReader::class)->aggregateSha256()];
     }
 
     public function test_private_or_tenant_scoped_config_fails_before_any_request(): void
