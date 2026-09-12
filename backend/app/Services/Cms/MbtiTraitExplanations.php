@@ -72,7 +72,10 @@ final class MbtiTraitExplanations
             throw new RuntimeException('Invalid MBTI overview inventory.');
         }
         foreach ($document['overviews'] as $overview) {
-            $code = $overview['full_code'] ?? '';
+            if (! is_array($overview) || ! is_string($overview['full_code'] ?? null)) {
+                throw new RuntimeException('Invalid MBTI overview structure.');
+            }
+            $code = $overview['full_code'];
             if (! isset($expectedCodes[$code]) || count($overview) !== 2 || ! is_array($overview['paragraphs'] ?? null) || count($overview['paragraphs']) !== 2) {
                 throw new RuntimeException('Invalid MBTI overview identity.');
             }

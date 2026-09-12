@@ -93,6 +93,15 @@ final class MbtiTraitExplanationsTest extends TestCase
         $catalog->validate($document);
     }
 
+    public function test_malformed_overview_identity_is_rejected_as_content_error(): void
+    {
+        $catalog = app(MbtiTraitExplanations::class);
+        $document = $catalog->package()['document'];
+        $document['overviews'][0]['full_code'] = ['INTP-A'];
+        $this->expectException(\RuntimeException::class);
+        $catalog->validate($document);
+    }
+
     public function test_publish_rejects_a_mismatched_hash(): void
     {
         $catalog = app(MbtiTraitExplanations::class);
