@@ -5118,6 +5118,25 @@
                 ]
             }
         },
+        "/api/v0.5/personality/{type}/result-intro": {
+            "get": {
+                "operationId": "get_api_v0_5_personality_type_result_intro",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityDesktopCloneController@intro",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders",
+                    "App\\Http\\Middleware\\RecordPublicContentRuntime"
+                ]
+            }
+        },
         "/api/v0.5/personality/{type}/seo": {
             "get": {
                 "operationId": "get_api_v0_5_personality_type_seo",
