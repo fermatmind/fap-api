@@ -157,13 +157,81 @@ final class StagingAccountantPublicationTest extends TestCase
         $this->app->instance('env', 'production');
         foreach (['publish', 'rollback'] as $operation) {
             try {
-                $this->publisher()->{$operation}(str_repeat('e', 40), static function (): void {});
+                if ($operation === 'publish') {
+                    $this->publisher()->publish(str_repeat('e', 40), static function (): void {});
+                } else {
+                    $this->publisher()->rollback(str_repeat('e', 40));
+                }
                 self::fail('production must reject staging publication');
             } catch (RuntimeException $error) {
                 self::assertSame('staging_accountant_environment_or_revision_invalid', $error->getMessage());
             }
         }
         self::assertSame($before, $this->loader()->loadStrict());
+    }
+
+    public function test_actor_missing_score_can_publish_and_both_targets_rollback_in_reverse_order(): void
+    {
+        $items = $this->loader()->loadStrict()['projection']['items'];
+        foreach ($items as &$item) {
+            if ($item['slug'] === 'actors' && $item['locale'] === 'zh') {
+                $item = array_replace($item, ['runtime_publish_state' => 'blocked', 'detail_route_enabled' => false,
+                    'robots_indexable' => false, 'release_gate_pass' => false, 'blockers' => [],
+                    'dataset_visible' => false, 'search_visible' => false]);
+            }
+        }
+        unset($item);
+        CareerGenerationAuthorityFixture::write($items);
+        $before = $this->loader()->loadStrict();
+        $sha = str_repeat('c', 40);
+        $publisher = $this->publisher();
+        $publisher->publish($sha, static function (): void {});
+        $accountant = $this->loader()->loadStrict();
+        $verify = static function (array $page): void {
+            self::assertSame('missing', $page['hero']['ai']['availability']);
+            CareerStagingAccountantPublication::assertResponse(200, ['bundle_kind' => 'career_job_detail',
+                'identity' => ['canonical_slug' => 'actors'], 'locale_policy' => ['requested_locale' => 'zh-CN'],
+                'career_page' => $page], $page);
+        };
+        self::assertSame(1, $publisher->publish($sha, $verify, 'actors')['changed_locale_rows']);
+        $after = $this->loader()->loadStrict();
+        foreach ($accountant['projection']['items'] as $index => $item) {
+            if ($item['slug'] !== 'actors' || $item['locale'] !== 'zh') {
+                self::assertSame($item, $after['projection']['items'][$index]);
+            }
+        }
+        self::assertSame(0, $publisher->publish($sha, $verify, 'actors')['changed_locale_rows']);
+        $publisher->rollback($sha, 'actors');
+        self::assertSame($accountant, $this->loader()->loadStrict());
+        $publisher->rollback($sha);
+        self::assertSame($before, $this->loader()->loadStrict());
+    }
+
+    #[DataProvider('invalidWebResponses')]
+    public function test_web_smoke_rejects_404_wrong_revision_and_missing_visible_body(string $case): void
+    {
+        $page = $this->app->make(CareerPageProjector::class)->read('actors', 'zh-CN');
+        $sha = str_repeat('b', 40);
+        $html = '<main data-career-renderer-release="'.$sha.'" data-career-production-template="career-production-v1">';
+        foreach (['career-production-ai-gauge', 'career-production-hero-badges', 'career-dossier-toc', 'career-display-faq'] as $marker) {
+            $html .= '<div data-testid="'.$marker.'"></div>';
+        }
+        foreach ([$page['subject']['name'], ...$page['hero']['badges'], $page['display']['components']['hero']['quick_answer'],
+            $page['display']['components']['definition_block'], $page['display']['components']['faq_block']['items'][0]['question']] as $value) {
+            $html .= '<p>'.htmlspecialchars($value).'</p>';
+        }
+        foreach ($page['hero']['metrics'] as $metric) {
+            $html .= '<p>'.htmlspecialchars($metric['fact']['display_value'] ?? '').'</p>';
+        }
+        CareerStagingAccountantPublication::assertWebResponse(200, $html, $page, $sha);
+        $this->expectExceptionMessage('staging_accountant_web_smoke_failed');
+        CareerStagingAccountantPublication::assertWebResponse($case === '404' ? 404 : 200,
+            $case === 'body' ? '<script>'.$html.'</script>' : $html, $page, $case === 'revision' ? str_repeat('d', 40) : $sha);
+    }
+
+    public static function invalidWebResponses(): array
+    {
+        return [['404'], ['revision'], ['body']];
     }
 
     #[DataProvider('invalidResponses')]

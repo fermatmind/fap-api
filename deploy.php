@@ -4601,7 +4601,7 @@ task('healthcheck:queue-smoke', function () {
     });
 });
 
-// This staging-only publication is explicitly limited to the existing Chinese accountant file.
+// This staging-only step publishes only the existing Chinese accountant and actor files.
 foreach (['publish', 'rollback'] as $accountantOperation) {
     task('career:staging-accountant-'.$accountantOperation, function () use ($accountantOperation): void {
         if (currentHost()->getAlias() !== 'staging') {
@@ -4617,7 +4617,7 @@ foreach (['publish', 'rollback'] as $accountantOperation) {
             run(
                 'DEPLOY_REVISION='.deployShellArg((string) (getenv('DEPLOY_REVISION') ?: ''))
                     .' {{bin/php}} scripts/deploy/publish_staging_accountant.php '.deployShellArg($accountantOperation),
-                timeout: 90,
+                timeout: 180,
             );
         });
     });

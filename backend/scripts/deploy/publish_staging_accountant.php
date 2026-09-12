@@ -18,18 +18,28 @@ try {
     $publisher = $app->make(CareerStagingAccountantPublication::class);
     $mode = $argv[1] ?? '';
     if ($mode === 'rollback') {
-        $publisher->rollback($sha);
+        foreach (array_reverse(CareerStagingAccountantPublication::SLUGS) as $slug) {
+            $publisher->rollback($sha, $slug);
+        }
         echo "staging_accountant_publication_rollback_checked\n";
     } elseif ($mode === 'publish') {
-        $result = $publisher->publish($sha, static function (array $page): void {
-            $response = Http::connectTimeout(5)->timeout(45)->withoutRedirecting()
-                ->withHeaders(['Cache-Control' => 'no-cache'])
-                ->get('https://staging-api.fermatmind.com/api/v0.5/career/jobs/'.CareerStagingAccountantPublication::SLUG, [
-                    'locale' => CareerStagingAccountantPublication::LOCALE,
-                    'projection_contract' => 'career.detail.page.v1',
-                ]);
-            CareerStagingAccountantPublication::assertResponse($response->status(), $response->json(), $page);
-        });
+        $result = [];
+        foreach (CareerStagingAccountantPublication::SLUGS as $slug) {
+            $result[$slug] = $publisher->publish($sha, static function (array $page) use ($slug): void {
+                $response = Http::connectTimeout(5)->timeout(45)->withoutRedirecting()
+                    ->withHeaders(['Cache-Control' => 'no-cache'])
+                    ->get('https://staging-api.fermatmind.com/api/v0.5/career/jobs/'.$slug, [
+                        'locale' => CareerStagingAccountantPublication::LOCALE,
+                        'projection_contract' => 'career.detail.page.v1',
+                    ]);
+                CareerStagingAccountantPublication::assertResponse($response->status(), $response->json(), $page);
+                if ($slug === 'actors') {
+                    $revision = Http::connectTimeout(5)->timeout(15)->get('https://staging.fermatmind.com/revision');
+                    $web = Http::connectTimeout(5)->timeout(45)->withoutRedirecting()->get('https://staging.fermatmind.com/zh/career/jobs/actors');
+                    CareerStagingAccountantPublication::assertWebResponse($web->status(), $web->body(), $page, $revision->successful() ? (string) $revision->json('revision') : '');
+                }
+            }, $slug);
+        }
         echo json_encode($result, JSON_THROW_ON_ERROR)."\n";
     } else {
         throw new RuntimeException('staging_accountant_operation_invalid');

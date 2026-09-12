@@ -10,27 +10,33 @@ use App\Support\PublicProjectionCache;
 use RuntimeException;
 use Throwable;
 
-/** One explicitly authorized staging locale; content remains in the installed locale file. */
+/** Explicitly authorized Chinese staging pages; content remains in the installed locale file. */
 final class CareerStagingAccountantPublication
 {
     public const SLUG = 'accountants-and-auditors';
 
     public const LOCALE = 'zh-CN';
 
+    public const SLUGS = [self::SLUG, 'actors'];
+
+    private string $slug = self::SLUG;
+
     public function __construct(
         private readonly CareerGenerationAuthorityLoader $loader,
         private readonly CareerPageProjector $pages,
     ) {}
 
-    public function publish(string $releaseSha, callable $verifyHttp): array
+    public function publish(string $releaseSha, callable $verifyHttp, string $slug = self::SLUG): array
     {
+        $this->selectSlug($slug);
         $this->assertStaging($releaseSha);
         // Resolve every display reference before creating a publication candidate.
-        $page = $this->pages->read(self::SLUG, self::LOCALE);
+        $page = $this->pages->read($this->slug, self::LOCALE);
         if (($page['locale'] ?? null) !== self::LOCALE
-            || data_get($page, 'subject.canonical_slug') !== self::SLUG
+            || data_get($page, 'subject.canonical_slug') !== $this->slug
             || data_get($page, 'display.contract_version') !== 'career.detail.display.v1'
-            || data_get($page, 'hero.ai.availability') !== 'available'
+            || ($this->slug === self::SLUG && data_get($page, 'hero.ai.availability') !== 'available')
+            || ($this->slug === 'actors' && ! in_array(data_get($page, 'hero.ai.availability'), ['available', 'missing'], true))
             || count(data_get($page, 'hero.badges', [])) !== 3) {
             throw new RuntimeException('staging_accountant_file_incomplete');
         }
@@ -40,7 +46,7 @@ final class CareerStagingAccountantPublication
             $items = $before['projection']['items'];
             $target = null;
             foreach ($items as $index => $item) {
-                if ($item['slug'] === self::SLUG && $item['locale'] === 'zh') {
+                if ($item['slug'] === $this->slug && $item['locale'] === 'zh') {
                     $target = $index;
                 }
             }
@@ -60,7 +66,7 @@ final class CareerStagingAccountantPublication
                 'public_resolution_type' => 'public_canonical_job',
                 'runtime_publish_state' => 'published',
                 'detail_route_enabled' => true,
-                'canonical_url' => 'https://fermatmind.com/zh/career/jobs/'.self::SLUG,
+                'canonical_url' => 'https://fermatmind.com/zh/career/jobs/'.$this->slug,
                 'canonical_self' => true,
                 'robots_indexable' => true,
                 'release_gate_pass' => true,
@@ -86,8 +92,9 @@ final class CareerStagingAccountantPublication
     }
 
     /** A later deploy failure may restore only the publication version owned by that release. */
-    public function rollback(string $releaseSha): void
+    public function rollback(string $releaseSha, string $slug = self::SLUG): void
     {
+        $this->selectSlug($slug);
         $this->assertStaging($releaseSha);
         $this->withLock(function () use ($releaseSha): void {
             $active = $this->loader->loadStrict();
@@ -108,11 +115,41 @@ final class CareerStagingAccountantPublication
     {
         if ($status !== 200 || ! is_array($body)
             || ($body['bundle_kind'] ?? null) !== 'career_job_detail'
-            || data_get($body, 'identity.canonical_slug') !== self::SLUG
+            || ! in_array(data_get($expected, 'subject.canonical_slug'), self::SLUGS, true)
+            || data_get($body, 'identity.canonical_slug') !== data_get($expected, 'subject.canonical_slug')
             || data_get($body, 'locale_policy.requested_locale') !== self::LOCALE
             || CareerGenerationCanonicalJson::sha256($body['career_page'] ?? null)
                 !== CareerGenerationCanonicalJson::sha256($expected)) {
             throw new RuntimeException('staging_accountant_api_smoke_failed');
+        }
+    }
+
+    public static function assertWebResponse(int $status, string $html, array $page, string $revision): void
+    {
+        $rendered = preg_replace('~<script\b[^>]*>.*?</script>~is', '', $html) ?? '';
+        $normalize = static fn (string $text): string => preg_replace('/\s+/u', '', html_entity_decode(strip_tags($text), ENT_QUOTES | ENT_HTML5, 'UTF-8')) ?? '';
+        if ($status !== 200 || ! preg_match('/^[a-f0-9]{40}$/', $revision)
+            || ! str_contains($rendered, 'data-career-renderer-release="'.$revision.'"')
+            || ! str_contains($rendered, 'data-career-production-template="career-production-v1"')) {
+            throw new RuntimeException('staging_accountant_web_smoke_failed');
+        }
+        foreach (['career-production-ai-gauge', 'career-production-hero-badges', 'career-dossier-toc', 'career-display-faq'] as $marker) {
+            if (! str_contains($rendered, 'data-testid="'.$marker.'"')) {
+                throw new RuntimeException('staging_accountant_web_smoke_failed');
+            }
+        }
+        $expected = [$page['subject']['name'], ...$page['hero']['badges'], $page['display']['components']['hero']['quick_answer'],
+            $page['display']['components']['definition_block'], $page['display']['components']['faq_block']['items'][0]['question']];
+        foreach ($page['hero']['metrics'] as $metric) {
+            if ($metric['availability'] === 'available') {
+                $expected[] = $metric['fact']['display_value'];
+            }
+        }
+        $visible = $normalize($rendered);
+        foreach ($expected as $text) {
+            if (! is_string($text) || trim($text) === '' || ! str_contains($visible, $normalize($text))) {
+                throw new RuntimeException('staging_accountant_web_smoke_failed');
+            }
         }
     }
 
@@ -159,7 +196,7 @@ final class CareerStagingAccountantPublication
             'rollback' => ['eligible' => true, 'previous_generation_id' => $previousId],
             'timestamps' => ['created_at' => gmdate('Y-m-d\TH:i:s\Z'), 'activated_at' => gmdate('Y-m-d\TH:i:s\Z')],
             'activation_receipt' => ['identity' => 'activation:'.$id, 'sha256' => CareerGenerationCanonicalJson::sha256([
-                'release_sha' => $sha, 'slug' => self::SLUG, 'locale' => self::LOCALE,
+                'release_sha' => $sha, 'slug' => $this->slug, 'locale' => self::LOCALE,
                 'source_content_sha256' => $page['source_content_sha256'], 'display_sha256' => CareerGenerationCanonicalJson::sha256($page['display']),
             ])],
             'revocation_receipt' => null,
@@ -176,7 +213,7 @@ final class CareerStagingAccountantPublication
     /** The separately checked staging file page is outside the legacy bilingual directory/cache cohort. */
     public static function hasDedicatedStagingSmoke(array $item): bool
     {
-        return ($item['slug'] ?? null) === self::SLUG && ($item['locale'] ?? null) === 'zh'
+        return in_array($item['slug'] ?? null, self::SLUGS, true) && ($item['locale'] ?? null) === 'zh'
             && self::published($item) && ($item['dataset_visible'] ?? null) === false
             && ($item['search_visible'] ?? null) === false;
     }
@@ -185,6 +222,14 @@ final class CareerStagingAccountantPublication
     {
         return $item['runtime_publish_state'] === 'published' && ($item['detail_route_enabled'] ?? false) === true
             && ($item['robots_indexable'] ?? false) === true && ($item['release_gate_pass'] ?? false) === true;
+    }
+
+    private function selectSlug(string $slug): void
+    {
+        if (! in_array($slug, self::SLUGS, true)) {
+            throw new RuntimeException('staging_accountant_target_invalid');
+        }
+        $this->slug = $slug;
     }
 
     private function assertStaging(string $sha): void
@@ -196,7 +241,7 @@ final class CareerStagingAccountantPublication
 
     private function generationId(string $sha): string
     {
-        return 'staging-accountant-zh-'.$sha;
+        return ($this->slug === self::SLUG ? 'staging-accountant-zh-' : 'staging-actor-zh-').$sha;
     }
 
     private function root(): string

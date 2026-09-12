@@ -33,3 +33,11 @@ test('legacy directory verification retains its bilingual checks and scopes the 
   assert.ok(gate.includes("self::fail($safePrefix.'_BILINGUAL_SET_MISMATCH')"));
   assert.ok(deploy.includes("after('healthcheck:staging-big-five-report-delivery', 'career:staging-accountant-publish');"));
 });
+
+ test('actor publication shares the existing step and verifies its actual deployed web renderer', () => {
+  assert.match(script, /foreach \(CareerStagingAccountantPublication::SLUGS as \$slug\)/);
+  assert.match(script, /array_reverse\(CareerStagingAccountantPublication::SLUGS\)/);
+  assert.match(script, /CareerStagingAccountantPublication::assertWebResponse/);
+  assert.match(script, /staging\.fermatmind\.com\/revision/);
+  assert.match(script, /staging\.fermatmind\.com\/zh\/career\/jobs\/actors/);
+});
