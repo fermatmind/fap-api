@@ -7,7 +7,7 @@
 - Start ordinary work on a named `codex/` branch in a clean isolated worktree created from the latest `origin/main`; never edit, clean, switch, or reuse the operator's existing workspace or uncommitted files.
 - Deliver one small, demonstrable, reversible loop at a time. Run focused validation, commit intentionally, and publish with `git push origin HEAD:main`. Do not push the ordinary task branch, open a pull request, add an approval phrase, create an operation-specific workflow, or create a sidecar.
 - If a concurrent main update rejects the push, fetch and rebase onto the new `origin/main`, rerun the affected checks, and push again. Force-push and non-fast-forward updates are forbidden.
-- Follow the pushed exact SHA through `ci.yml` and `deploy.yml`. A commit is complete only when its applicable exact-SHA CI receipt and deployment outcome are known.
+- Follow the pushed exact SHA through `ci.yml` and `deploy.yml`. A delivery is complete only after its applicable exact-SHA acceptance and the Delivery closeout requirements below are satisfied.
 - A failed SHA stays out of production. Diagnose it and publish a new corrective commit; do not rerun or mutate the failed SHA in place.
 - The repository has four permanent workflow entrypoints: `ci.yml`, `deploy.yml`, `nightly.yml`, and `recovery.yml`. `recovery.yml` is the only manual entrypoint.
 - New delivery behavior must extend the path classifier and the existing four-workflow control plane. Task-specific or manual delivery workflows are prohibited.
@@ -37,6 +37,17 @@
 - **Fast lane:** documentation, rules, tests-only, dependency updates, and small low-risk fixes. Run focused CI. Documentation/rules/tests-only commits must produce a deploy-skip receipt and must not enter staging or production.
 - **Product lane:** user-visible APIs and non-payment product flows. Deliver one end-to-end loop; require focused tests, static checks, build or contract checks selected by the classifier, then automatic staging and production.
 - **Controlled lane:** migrations, payments, security, permissions, content authority, cache activation, and SEO/discoverability. Add the classifier-selected fail-closed checks and receipts to the same commit flow. Do not spread these controls to unrelated paths.
+
+## Delivery closeout
+
+- Acceptance -> closeout -> final report is mandatory. A delivery is complete only after applicable acceptance and local closeout; a known deployment outcome alone is not completion. Ordinary closeout needs no additional user confirmation.
+- For runtime releases, require successful exact-SHA CI, staging, production, and online acceptance before closeout. For documentation/rules/tests-only changes, require successful exact-SHA CI and deploy-skip; do not trigger staging or production. For failed or ambiguous releases, preserve the diagnostic worktree and necessary evidence while resolving the failure; do not report completion or remove the recovery context.
+- Before deletion, fetch origin and verify every task commit is contained in the latest `origin/main`. Inspect tracked changes, untracked files, and ignored local configuration; merged branch ancestry alone does not prove the worktree is disposable.
+- Delete delivered copies, reproducible caches, and explicitly superseded experiments owned by this task. Save useful undelivered files to the user-designated location, or the existing task delivery directory when none is designated; verify the saved bytes and report the path before removing the original. If no suitable destination exists or ownership is unclear, retain the files and report the specific reason. Do not require every draft to be committed or every file to be backed up; never merge unrelated files merely to clean the worktree.
+- Never delete pre-existing user changes, the main checkout, `main`, or another active task. Preserve user-requested previews and any worktree or files still needed by another task; report the retained dependency instead of breaking it.
+- Stop only temporary services started by this task and not requested to remain running. Verify process ownership and cross-task dependencies before stopping services or removing dependency directories; never kill by port alone.
+- After resolving remaining files and dependencies, leave the task worktree and remove its worktree and local branch from the main checkout. Use normal removal by default; dirty-worktree removal requires explicit accounting for every remaining file under the rules above, never a blanket force-clean.
+- Verify the final worktree/branch inventory and saved deliverables. The final report must include cleanup results and concrete reasons for anything retained; do not leave routine cleanup for the user or create a separate cleanup workflow, ledger, or blanket backup archive.
 
 ## Working contract
 

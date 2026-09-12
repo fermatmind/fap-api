@@ -32,6 +32,7 @@ Guard fap-api work so Codex changes only the declared files and behavior for the
 4. Treat generated artifacts, package files, workflows, configs, routes, controllers, and services as out of scope unless explicitly named.
 5. Stage only path-limited files after all checks pass, then push `HEAD:main` from the isolated worktree.
 6. Report any unrelated dirty files without touching them.
+7. After applicable acceptance, follow the repository Delivery closeout requirements before the final report.
 
 ## Acceptance commands
 ```bash
@@ -41,8 +42,12 @@ cd /Users/rainie/Desktop/GitHub/fap-api && bash backend/scripts/ci_verify_mbti.s
 cd /Users/rainie/Desktop/GitHub/fap-api && git diff --check
 ```
 
+## Delivery closeout
+
+Follow [AGENTS.md — Delivery closeout](../../../AGENTS.md#delivery-closeout): acceptance -> closeout -> final report. Apply it to both deployed and deploy-skip changes. Report cleanup results and concrete reasons for retained files, services, worktrees, or branches; ordinary closeout does not wait for another user request.
+
 ## Output contract
-- Always report changed files, acceptance commands run, PR URL if a PR was created, CI status, Deploy Application or deploy/runtime status when relevant, merge commit if merged, branch cleanup status when cleanup is requested, revalidation status for security-related work, stop reason when blocked, and confirmation that no unrelated files were touched.
+- Always report changed files, acceptance commands run, PR URL if a PR was created, CI status, Deploy Application or deploy/runtime status when relevant, merge commit if merged, branch/worktree cleanup results and reasons for retained items, revalidation status for security-related work, stop reason when blocked, and confirmation that no unrelated files were touched.
 - Report declared scope, changed files, unrelated dirty files, staged files, checks run, and any stop reason.
 
 ## Stop conditions

@@ -92,6 +92,10 @@ python3 "$HOME/.codex/skills/.system/skill-creator/scripts/quick_validate.py" \
 git diff --check
 ```
 
+## Delivery closeout
+
+Follow [AGENTS.md — Delivery closeout](../../../AGENTS.md#delivery-closeout): acceptance -> closeout -> final report. Apply it to both deployed and deploy-skip changes. Report cleanup results and concrete reasons for retained files, services, worktrees, or branches; ordinary closeout does not wait for another user request.
+
 ## Output
 
 Report exact SHA, active ruleset evidence, changed-path classification, staging run and receipt, production run/release, active revision, service/worker/Scheduler/RDS/Redis health, smoke results, performed/skipped actions, rollback readiness, and residual risks. Mention a PR only for the one-time transition or when the user explicitly requests one. Do not print private topology or secret values.

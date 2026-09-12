@@ -44,3 +44,50 @@ test("CI still listens only to main pushes", () => {
   assert.doesNotMatch(ciWorkflow, /pull_request\s*:/);
   assert.doesNotMatch(ciWorkflow, /workflow_dispatch\s*:/);
 });
+
+test("runtime acceptance before cleanup", () => {
+  assert.ok(rootRules.includes("successful exact-SHA CI, staging, production, and online acceptance before closeout"));
+});
+
+test("docs-only closeout without deployment", () => {
+  assert.ok(rootRules.includes("successful exact-SHA CI and deploy-skip; do not trigger staging or production"));
+});
+
+test("failed releases retain diagnostic context", () => {
+  assert.ok(rootRules.includes("preserve the diagnostic worktree and necessary evidence"));
+  assert.ok(rootRules.includes("do not report completion or remove the recovery context"));
+});
+
+test("undelivered files are saved without blanket commits or backups", () => {
+  assert.ok(rootRules.includes("Inspect tracked changes, untracked files, and ignored local configuration"));
+  assert.ok(rootRules.includes("verify the saved bytes"));
+  assert.ok(rootRules.includes("Do not require every draft to be committed or every file to be backed up"));
+});
+
+test("user work and dependent previews are preserved", () => {
+  assert.ok(rootRules.includes("Never delete pre-existing user changes"));
+  assert.ok(rootRules.includes("Preserve user-requested previews"));
+  assert.ok(rootRules.includes("still needed by another task"));
+  assert.ok(rootRules.includes("never kill by port alone"));
+});
+
+test("task-owned removal is verified", () => {
+  assert.ok(rootRules.includes("every task commit is contained in the latest `origin/main`"));
+  assert.ok(rootRules.includes("remove its worktree and local branch from the main checkout"));
+  assert.ok(rootRules.includes("Verify the final worktree/branch inventory"));
+});
+
+test("completion includes autonomous cleanup reporting", () => {
+  assert.ok(rootRules.includes("applicable exact-SHA acceptance and the Delivery closeout requirements"));
+  assert.ok(rootRules.includes("Ordinary closeout needs no additional user confirmation"));
+  assert.ok(rootRules.includes("final report must include cleanup results and concrete reasons"));
+});
+
+test("deployment and scope skills use the shared closeout contract", () => {
+  for (const name of ["fap-api-deploy-sre", "fermatmind-scope-guard"]) {
+    const skill = readFileSync(new URL(`../../.agents/skills/${name}/SKILL.md`, import.meta.url), "utf8");
+    assert.ok(skill.includes("../../../AGENTS.md#delivery-closeout"));
+    assert.ok(skill.includes("acceptance -> closeout -> final report"));
+    assert.ok(!skill.includes("when cleanup is requested"));
+  }
+});
