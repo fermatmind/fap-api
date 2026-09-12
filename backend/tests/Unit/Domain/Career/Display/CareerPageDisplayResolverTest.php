@@ -42,6 +42,23 @@ final class CareerPageDisplayResolverTest extends TestCase
         self::assertStringNotContainsString('"$item"', json_encode($page['display']));
     }
 
+    public function test_formal_actor_file_projects_complete_content_without_internal_authoring_fields(): void
+    {
+        $source = json_decode(file_get_contents(dirname(__DIR__, 5).'/content_assets/career/current/careers/actors/zh-CN.json'), true, 512, JSON_THROW_ON_ERROR);
+        $page = $this->project($source);
+        self::assertSame($source['source_content_sha256'], $page['source_content_sha256']);
+        self::assertSame('actors', $page['subject']['canonical_slug']);
+        self::assertSame('zh-CN', $page['locale']);
+        self::assertSame($source['blocks'], $page['content']['blocks']);
+        self::assertCount(22, $page['display']['components']);
+        self::assertCount(10, $page['display']['components']['faq_block']['items']);
+        self::assertSame('missing', $page['hero']['ai']['availability']);
+        self::assertCount(3, $page['hero']['badges']);
+        self::assertStringNotContainsString('authoring_structure', json_encode($page));
+        self::assertStringNotContainsString('"$item"', json_encode($page['display']));
+        self::assertStringNotContainsString('"$join"', json_encode($page['display']));
+    }
+
     public function test_editing_one_formal_file_field_updates_display_without_database_or_frontend_copy(): void
     {
         $source = $this->source();
@@ -61,6 +78,143 @@ final class CareerPageDisplayResolverTest extends TestCase
         $page = $this->project($source);
         self::assertSame('Single-file content edit', $page['display']['components']['definition_block']);
         self::assertSame('Single-file question edit?', $page['display']['components']['faq_block']['items'][0]['question']);
+    }
+
+    public function test_same_file_composition_keeps_original_text_and_identity(): void
+    {
+        $source = $this->source();
+        $before = $this->project($source)['display']['components']['definition_block'];
+        $reference = $source['display']['components']['definition_block'];
+        $source['display']['components']['definition_block'] = ['$join' => ['工作定义', $reference], 'separator' => '｜'];
+        self::assertSame('工作定义｜'.$before, $this->project($source)['display']['components']['definition_block']);
+        self::assertSame($reference['$item'], $source['display']['components']['definition_block']['$join'][1]['$item']);
+    }
+
+    public function test_composition_cannot_hide_missing_duplicate_or_non_text_content(): void
+    {
+        foreach (['missing', 'duplicate', 'non_text', 'unknown_key', 'separator'] as $case) {
+            $source = $this->source();
+            $ref = $source['display']['components']['definition_block'];
+            $join = ['$join' => [$ref], 'separator' => ''];
+            if ($case === 'missing') {
+                $join['$join'][0]['$item'] = 'missing-item';
+            } elseif ($case === 'duplicate') {
+                $join['$join'][] = $ref;
+            } elseif ($case === 'non_text') {
+                $join['$join'][] = null;
+            } elseif ($case === 'unknown_key') {
+                $join['unreviewed'] = true;
+            } else {
+                $join['separator'] = [];
+            }
+            $source['display']['components']['definition_block'] = $join;
+            try {
+                $this->project($source);
+                self::fail('Invalid composition accepted: '.$case);
+            } catch (CareerCurrentAuthorityPackageFailure $exception) {
+                self::assertSame('CAREER_PAGE_DISPLAY_INVALID', $exception->getMessage());
+            }
+        }
+    }
+
+    public function test_list_composition_keeps_every_boundary_in_the_visible_note(): void
+    {
+        $source = $this->source();
+        $before = $this->project($source)['display']['components']['boundary_notice'];
+        $reference = $source['display']['components']['boundary_notice'];
+        $source['display']['components']['boundary_notice'] = ['使用边界'];
+        $note = $source['display']['components']['source_card']['note'];
+        $source['display']['components']['source_card']['note'] = ['$join' => [$note, $reference], 'separator' => "\n"];
+        $result = $this->project($source)['display']['components']['source_card']['note'];
+        self::assertStringEndsWith(implode("\n", $before), $result);
+        $source['display']['components']['source_card']['note']['$join'][] = $reference;
+        $this->expectException(CareerCurrentAuthorityPackageFailure::class);
+        $this->project($source);
+    }
+
+    public function test_display_sources_follow_the_single_source_register(): void
+    {
+        $source = $this->source();
+        $register = null;
+        foreach ($source['blocks'] as $block) {
+            foreach ($block['items'] as $item) {
+                if ($item['type'] === 'sources') {
+                    $register = ['block' => $block['id'], ...$item];
+                    break 2;
+                }
+            }
+        }
+        self::assertNotNull($register);
+        $entry = $register['data']['entries'][0];
+        $ref = ['$source' => $entry['id'], 'item' => $register['id'], 'block' => $register['block'], 'copy_key' => $register['copy_key'], 'field' => 'name'];
+        $source['display']['components']['source_card']['registry_label'] = $ref;
+        self::assertSame($entry['name'], $this->project($source)['display']['components']['source_card']['registry_label']);
+        foreach (['unknown_source', 'forbidden_field', 'wrong_item', 'unknown_key'] as $case) {
+            $bad = $source;
+            $badRef = $ref;
+            if ($case === 'unknown_source') {
+                $badRef['$source'] = 'absent';
+            } elseif ($case === 'forbidden_field') {
+                $badRef['field'] = 'details';
+            } elseif ($case === 'wrong_item') {
+                $badRef['item'] = 'absent';
+            } else {
+                $badRef['fallback'] = 'No fallback';
+            }
+            $bad['display']['components']['source_card']['registry_label'] = $badRef;
+            try {
+                $this->project($bad);
+                self::fail('Invalid source accepted: '.$case);
+            } catch (CareerCurrentAuthorityPackageFailure $exception) {
+                self::assertSame('CAREER_PAGE_DISPLAY_INVALID', $exception->getMessage());
+            }
+        }
+    }
+
+    public function test_existing_entry_renderer_notice_types_are_preserved(): void
+    {
+        foreach (['career.item.entry-work-sample-data', 'career.item.recruitment-sample'] as $copyKey) {
+            $source = $this->source();
+            $item = ['id' => 'additional-local-notice', 'type' => 'notice', 'copy_key' => $copyKey, 'availability' => 'available', 'data' => ['paragraphs' => ['Original multi-paragraph brief.', 'Original scene and instructions.']]];
+            foreach ($source['blocks'] as &$block) {
+                if ($block['id'] === 'path') {
+                    $block['items'][] = $item;
+                }
+            }
+            unset($block);
+            $source['display']['native_items'][] = ['id' => $item['id'], 'block' => 'path', 'copy_key' => $copyKey, 'type' => 'notice', 'location' => 'entry_decisions'];
+            $source['authoring_structure']['inventory'] = \App\Domain\Career\Display\CareerAuthoringStructure::inventory($source, $source['authoring_structure']['slots']);
+            $page = $this->project($source);
+            $path = array_values(array_filter($page['content']['blocks'], static fn (array $block): bool => $block['id'] === 'path'))[0];
+            $retained = array_values(array_filter($path['items'], static fn (array $entry): bool => $entry['id'] === $item['id']))[0];
+            self::assertSame($item['data'], $retained['data']);
+        }
+    }
+
+    public function test_interface_labels_come_from_the_same_file(): void
+    {
+        $source = $this->source();
+        $key = 'interface.profile.responsibilities_heading';
+        $source['display']['interface'] = [$key => '职责核对'];
+        self::assertSame('职责核对', $this->project($source)['display']['interface'][$key]);
+        $source['display']['interface'][$key] = '工作任务';
+        self::assertSame('工作任务', $this->project($source)['display']['interface'][$key]);
+    }
+
+    public function test_unknown_interface_position_is_rejected(): void
+    {
+        $source = $this->source();
+        $source['display']['interface'] = ['interface.profile.unknown' => '未知位置'];
+        $this->expectException(CareerCurrentAuthorityPackageFailure::class);
+        $this->project($source);
+    }
+
+    public function test_empty_interface_label_is_rejected(): void
+    {
+        $source = $this->source();
+        $source['display']['interface'] = ['interface.profile.responsibilities_heading' => ' '];
+        $this->expectException(CareerCurrentAuthorityPackageFailure::class);
+        $this->project($source);
     }
 
     public function test_missing_reference_fails_instead_of_dropping_body(): void

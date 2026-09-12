@@ -37,14 +37,17 @@ final class CareerPageProjectorTest extends TestCase
         }
     }
 
-    public function test_actor_hourly_pay_is_not_annualized_and_china_slot_stays_missing(): void
+    public function test_actor_pay_keeps_hourly_and_historical_project_units(): void
     {
         $page = $this->projector()->read('actors', 'zh-CN');
         self::assertSame('美国时薪中位数', $page['hero']['metrics'][0]['label']);
         self::assertSame('29.05美元/小时', $page['hero']['metrics'][0]['fact']['display_value']);
-        self::assertSame('missing', $page['hero']['metrics'][4]['availability']);
-        self::assertNull($page['hero']['metrics'][4]['fact']);
-        self::assertCount(4, $page['content']['blocks'][0]['items']);
+        self::assertSame('available', $page['hero']['metrics'][4]['availability']);
+        self::assertSame('中国历史单项目特约演员日价', $page['hero']['metrics'][4]['label']);
+        self::assertSame('300–600元/天', $page['hero']['metrics'][4]['fact']['display_value']);
+        self::assertStringContainsString('不代表群众演员或全国职业收入', $page['hero']['metrics'][4]['fact']['occupation_scope']);
+        self::assertStringContainsString('不换算月薪', $page['hero']['metrics'][4]['fact']['derivation']);
+        self::assertSame(['r2-pay-1'], $page['hero']['metrics'][4]['fact']['source_refs']);
         self::assertStringNotContainsString('这行就稳', CareerCurrentAuthorityPackage::encodeCanonical($page));
     }
 

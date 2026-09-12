@@ -45,21 +45,10 @@ final class CareerAuthoringStructure
             'fact' => array_column($page['fact_register']['facts'] ?? [], null, 'fact_id')[$ref['id'] ?? ''] ?? null,
             default => null,
         };
-        foreach ($ref['path'] as $segment) {
-            if (! is_array($node)) {
-                self::fail();
-            }
-            if (is_array($segment) && array_keys($segment) === ['id']) {
-                $matches = array_values(array_filter($node, static fn ($entry): bool => is_array($entry) && ($entry['id'] ?? null) === $segment['id']));
-                if (count($matches) !== 1) {
-                    self::fail();
-                }
-                $node = $matches[0];
-            } elseif ((is_string($segment) || is_int($segment)) && array_key_exists($segment, $node)) {
-                $node = $node[$segment];
-            } else {
-                self::fail();
-            }
+        $node = self::atPath($node, $ref['path']);
+        if ($ref['source'] === 'display' && is_array($node) && array_key_exists('$join', $node)) {
+            // Use the production resolver's exact composition, including its validation.
+            $node = self::atPath((new CareerPageDisplayResolver)->resolve($page), $ref['path']);
         }
         if (isset($ref['key'])) {
             if (! is_array($node) || ! is_string($ref['key']) || ! array_key_exists($ref['key'], $node)) {
@@ -78,6 +67,28 @@ final class CareerAuthoringStructure
                 self::fail();
             }
             $node = trim($pieces[$part[1]]);
+        }
+
+        return $node;
+    }
+
+    private static function atPath(mixed $node, array $path): mixed
+    {
+        foreach ($path as $segment) {
+            if (! is_array($node)) {
+                self::fail();
+            }
+            if (is_array($segment) && array_keys($segment) === ['id']) {
+                $matches = array_values(array_filter($node, static fn ($entry): bool => is_array($entry) && ($entry['id'] ?? null) === $segment['id']));
+                if (count($matches) !== 1) {
+                    self::fail();
+                }
+                $node = $matches[0];
+            } elseif ((is_string($segment) || is_int($segment)) && array_key_exists($segment, $node)) {
+                $node = $node[$segment];
+            } else {
+                self::fail();
+            }
         }
 
         return $node;
@@ -107,6 +118,33 @@ final class CareerAuthoringStructure
                 $covered[$key][] = $ref;
             }
         }
+        // A composed field covers its inputs only if every displayed split is mapped.
+        $composed = [];
+        foreach ($slots as $slot) {
+            $ref = $slot['ref'] ?? null;
+            if (! is_array($ref) || ($ref['source'] ?? null) !== 'display' || isset($ref['key'])) {
+                continue;
+            }
+            $node = self::atPath($page['display'] ?? null, $ref['path']);
+            if (! is_array($node) || ! array_key_exists('$join', $node)) {
+                continue;
+            }
+            $base = $ref;
+            unset($base['parts']);
+            $key = CareerCurrentAuthorityPackage::encodeCanonical($base);
+            $composed[$key]['base'] = $base;
+            $composed[$key]['node'] = $node;
+            $composed[$key]['refs'][] = $ref;
+        }
+        foreach ($composed as $group) {
+            $value = self::reference($page, $group['base']);
+            if (is_string($value) && self::coversParts($value, $group['refs'])) {
+                foreach (self::compositionInputs($page, $group['node']) as $ref) {
+                    $key = CareerCurrentAuthorityPackage::encodeCanonical($ref);
+                    $covered[$key][] = $ref;
+                }
+            }
+        }
         $result = [];
         foreach (['item' => self::items($page), 'fact' => array_column($page['fact_register']['facts'] ?? [], null, 'fact_id')] as $source => $entries) {
             foreach ($entries as $id => $entry) {
@@ -126,6 +164,40 @@ final class CareerAuthoringStructure
         ksort($result, SORT_STRING);
 
         return $result;
+    }
+
+    /** Collect actual inputs only after the production resolver has accepted the composition. */
+    private static function compositionInputs(array $page, mixed $node): array
+    {
+        if (! is_array($node)) {
+            return [];
+        }
+        if (isset($node['$join'])) {
+            $refs = [];
+            foreach ($node['$join'] as $part) {
+                array_push($refs, ...self::compositionInputs($page, $part));
+            }
+
+            return $refs;
+        }
+        if (isset($node['$item'])) {
+            $item = self::items($page)[$node['$item']];
+            $leaves = [];
+            self::leaves($item['data'], ['source' => 'item', 'id' => $item['id'], 'path' => ['data']], $leaves);
+
+            return array_map(static fn (string $key): array => json_decode($key, true, 512, JSON_THROW_ON_ERROR), array_keys($leaves));
+        }
+        if (isset($node['$fact'])) {
+            return [['source' => 'fact', 'id' => $node['$fact'], 'path' => [$node['field']]]];
+        }
+        if (isset($node['$source'])) {
+            return [['source' => 'item', 'id' => $node['item'], 'path' => ['data', 'entries', ['id' => $node['$source']], $node['field']]]];
+        }
+        if (isset($node['$link'])) {
+            return [['source' => 'item', 'id' => $node['$link'], 'path' => ['data', 'entries', ['id' => $node['entry']], $node['field']]]];
+        }
+
+        return [];
     }
 
     private static function leaves(mixed $node, array $ref, array &$leaves): void
@@ -198,6 +270,12 @@ final class CareerAuthoringStructure
             self::fail();
         }
         $bindings = [];
+        $items = self::items($page);
+        $aliases = [
+            'interface.path.entry_decisions_heading' => 'career_path_block.entry_heading',
+            'interface.navigation.test_cta_label' => 'primary_cta.label',
+            'interface.sources.faq_heading' => 'sections.sources.title',
+        ];
         foreach ($structure['slots'] as $id => $slot) {
             if (! is_array($slot) || self::keys($slot) !== ['ref', 'status']) {
                 self::fail();
@@ -213,11 +291,19 @@ final class CareerAuthoringStructure
                 self::fail();
             }
             $binding = CareerCurrentAuthorityPackage::encodeCanonical($slot['ref']);
-            // Facts and identity can intentionally appear in more than one visual location.
-            if (isset($bindings[$binding]) && ! in_array($slot['ref']['source'], ['fact', 'page'], true)) {
+            // Source metadata is also reusable; this never permits duplicated prose.
+            $sourceMetadata = $slot['ref']['source'] === 'item'
+                && ($items[$slot['ref']['id']]['type'] ?? null) === 'sources'
+                && count($slot['ref']['path']) === 4
+                && array_slice($slot['ref']['path'], 0, 2) === ['data', 'entries']
+                && in_array($slot['ref']['path'][3], ['name', 'url', 'publisher', 'period', 'scope', 'market', 'accessed_at', 'evidence_type', 'limitation'], true);
+            $samePosition = isset($bindings[$binding])
+                && ($aliases[$id] ?? $id) === ($aliases[$bindings[$binding]] ?? $bindings[$binding]);
+            if (isset($bindings[$binding]) && ! in_array($slot['ref']['source'], ['fact', 'page'], true)
+                && ! $sourceMetadata && ! $samePosition) {
                 self::fail();
             }
-            $bindings[$binding] = true;
+            $bindings[$binding] = $id;
         }
         if ($structure['inventory'] !== self::inventory($page, $structure['slots'])) {
             self::fail();

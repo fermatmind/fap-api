@@ -32,6 +32,49 @@ final class CareerAuthoringStructureTest extends TestCase
         return (new CareerAuthoringLayout)->migrate($page, $this->baseline());
     }
 
+    public function test_composed_display_reference_covers_its_exact_source_items(): void
+    {
+        $page = $this->page('actors');
+        $ref = ['source' => 'display', 'path' => ['components', 'fermat_decision_card', 'summary']];
+        $composition = $page['display']['components']['fermat_decision_card']['summary'];
+        $ids = array_column($composition['$join'], '$item');
+        $items = CareerAuthoringStructure::items($page);
+        $expected = implode($composition['separator'], array_map(static fn (string $id): string => $items[$id]['data']['paragraphs'][0], $ids));
+        self::assertSame($expected, CareerAuthoringStructure::reference($page, $ref));
+        $inventory = CareerAuthoringStructure::inventory($page, [['status' => 'mapped', 'ref' => $ref]]);
+        foreach ($ids as $id) {
+            self::assertSame('mapped', $inventory['item:'.$id]['status']);
+        }
+        self::assertSame('pending_mapping', $inventory['item:actors.profile.work-context-block.3']['status']);
+    }
+
+    public function test_partial_composed_field_does_not_claim_all_inputs_are_mapped(): void
+    {
+        $page = $this->page('actors');
+        $page['display']['components']['fermat_decision_card']['summary']['separator'] = "\n";
+        $ref = ['source' => 'display', 'path' => ['components', 'fermat_decision_card', 'summary'], 'parts' => [["\n", 0, 2]]];
+        $slots = [['status' => 'mapped', 'ref' => $ref]];
+        $ids = array_column($page['display']['components']['fermat_decision_card']['summary']['$join'], '$item');
+        $partial = CareerAuthoringStructure::inventory($page, $slots);
+        foreach ($ids as $id) {
+            self::assertSame('pending_mapping', $partial['item:'.$id]['status']);
+        }
+        $ref['parts'][0][1] = 1;
+        $slots[] = ['status' => 'mapped', 'ref' => $ref];
+        $complete = CareerAuthoringStructure::inventory($page, $slots);
+        foreach ($ids as $id) {
+            self::assertSame('mapped', $complete['item:'.$id]['status']);
+        }
+    }
+
+    public function test_composed_authoring_reference_rejects_invalid_display_input(): void
+    {
+        $page = $this->page('actors');
+        $page['display']['components']['fermat_decision_card']['summary']['$join'][0]['$item'] = 'missing-item';
+        $this->expectException(CareerCurrentAuthorityPackageFailure::class);
+        CareerAuthoringStructure::reference($page, ['source' => 'display', 'path' => ['components', 'fermat_decision_card', 'summary']]);
+    }
+
     public function test_formal_chinese_inventory_has_completed_structural_migration(): void
     {
         $paths = glob(dirname(__DIR__, 5).'/content_assets/career/current/careers/*/zh-CN.json');
@@ -118,6 +161,26 @@ final class CareerAuthoringStructureTest extends TestCase
         self::assertSame('unfilled', $page['authoring_structure']['slots']['hero.ai.display_value']['status']);
     }
 
+    public function test_source_identity_can_be_referenced_in_multiple_modules(): void
+    {
+        $page = $this->page();
+        $sources = array_values(array_filter(CareerAuthoringStructure::items($page), static fn (array $item): bool => $item['type'] === 'sources'))[0];
+        $ref = ['source' => 'item', 'id' => $sources['id'], 'path' => ['data', 'entries', ['id' => $sources['data']['entries'][0]['id']], 'name']];
+        foreach (['career_risk_cards.source_links.01.label', 'career_path_block.source_links.01.label'] as $key) {
+            $page['authoring_structure']['slots'][$key] = ['status' => 'mapped', 'ref' => $ref];
+        }
+        $page['authoring_structure']['inventory'] = CareerAuthoringStructure::inventory($page, $page['authoring_structure']['slots']);
+        CareerAuthoringStructure::assert($page);
+        self::assertSame($sources['data']['entries'][0]['name'], CareerAuthoringStructure::reference($page, $ref));
+    }
+
+    public function test_interface_alias_reuses_existing_entry_heading(): void
+    {
+        $page = $this->page('actors');
+        self::assertSame($page['authoring_structure']['slots']['career_path_block.entry_heading']['ref'], $page['authoring_structure']['slots']['interface.path.entry_decisions_heading']['ref']);
+        CareerAuthoringStructure::assert($page);
+    }
+
     public function test_invalid_reference_is_rejected(): void
     {
         $page = $this->migrate($this->page());
@@ -144,9 +207,13 @@ final class CareerAuthoringStructureTest extends TestCase
 
     public function test_incomplete_content_cannot_be_marked_complete_or_enabled_by_authoring_state(): void
     {
-        $page = $this->migrate($this->page('actors'));
+        // Construct the pre-display state; the formal actor pilot now has display.
+        $source = $this->page('actors');
+        unset($source['display'], $source['authoring_structure']);
+        $page = $this->migrate($source);
         self::assertArrayNotHasKey('display', $page);
-        $id = array_key_first($page['authoring_structure']['inventory']);
+        $id = array_key_first(array_filter($page['authoring_structure']['inventory'], static fn (array $entry): bool => $entry['status'] === 'pending_mapping'));
+        self::assertNotNull($id);
         $page['authoring_structure']['inventory'][$id]['status'] = 'mapped';
         $this->expectException(CareerCurrentAuthorityPackageFailure::class);
         CareerAuthoringStructure::assert($page);

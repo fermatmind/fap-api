@@ -58,6 +58,29 @@ final class CareerPageDisplayResolver
             if (! is_array($node)) {
                 return $node;
             }
+            if (array_key_exists('$join', $node)) {
+                if (array_diff(array_keys($node), ['$join', 'separator']) !== []
+                    || ! is_array($node['$join']) || ! array_is_list($node['$join'])
+                    || $node['$join'] === [] || count($node['$join']) > 64
+                    || ! in_array($node['separator'] ?? null, ['', "\n", '｜', ' → ', '；'], true)) {
+                    $this->fail();
+                }
+                $parts = [];
+                foreach (array_map($resolve, $node['$join']) as $value) {
+                    $entries = is_array($value) && array_is_list($value) ? $value : [$value];
+                    if ($entries === []) {
+                        $this->fail();
+                    }
+                    foreach ($entries as $part) {
+                        if (! is_string($part)) {
+                            $this->fail();
+                        }
+                        $parts[] = $part;
+                    }
+                }
+
+                return implode($node['separator'], $parts);
+            }
             if (isset($node['$item'])) {
                 $id = $node['$item'];
                 $item = $read($node, $id, $node['type'] ?? '');
@@ -83,6 +106,20 @@ final class CareerPageDisplayResolver
                 }
 
                 return $item['data']['entries'];
+            }
+            if (isset($node['$source'])) {
+                if (array_diff(array_keys($node), ['$source', 'item', 'block', 'copy_key', 'field']) !== []) {
+                    $this->fail();
+                }
+                $item = $read($node, $node['item'] ?? '', 'sources');
+                $matches = array_values(array_filter($item['data']['entries'], static fn (array $entry): bool => ($entry['id'] ?? null) === $node['$source']));
+                $field = $node['field'] ?? '';
+                if (count($matches) !== 1 || ! in_array($field, ['name', 'url', 'publisher', 'period', 'limitation'], true)
+                    || ! is_string($matches[0][$field] ?? null) || trim($matches[0][$field]) === '') {
+                    $this->fail();
+                }
+
+                return $matches[0][$field];
             }
             if (isset($node['$link'])) {
                 $id = $node['$link'];
@@ -128,20 +165,33 @@ final class CareerPageDisplayResolver
             return $resolved;
         };
         $result = $resolve($display);
+        if (array_key_exists('interface', $result)) {
+            if (! is_array($result['interface']) || array_is_list($result['interface'])) {
+                $this->fail();
+            }
+            $positions = CareerAuthoringStructure::schema()['slots'];
+            foreach ($result['interface'] as $position => $label) {
+                if (! is_string($position) || ! str_starts_with($position, 'interface.')
+                    || ! array_key_exists($position, $positions)
+                    || ! is_string($label) || trim($label) === '') {
+                    $this->fail();
+                }
+            }
+        }
         foreach ($display['native_items'] ?? [] as $native) {
             $id = $native['id'] ?? '';
             $item = $read($native, $id, $native['type'] ?? '');
             $location = $native['location'] ?? '';
             $entryTypes = [
-                'career.item.entry-role-comparison' => 'table', 'career.item.employer-evidence' => 'cards',
-                'career.item.entry-work-sample-data' => 'cards', 'career.item.entry-portfolio' => 'cards',
-                'career.item.interview-probation' => 'table', 'career.item.seven-day-trial' => 'timeline',
-                'career.item.seven-day-decision' => 'list', 'career.item.credential-decision' => 'table',
-                'career.item.credential-boundary' => 'notice',
+                'career.item.entry-role-comparison' => ['table'], 'career.item.employer-evidence' => ['cards'],
+                'career.item.entry-work-sample-data' => ['cards', 'notice'], 'career.item.entry-portfolio' => ['cards'],
+                'career.item.interview-probation' => ['table'], 'career.item.seven-day-trial' => ['timeline'],
+                'career.item.seven-day-decision' => ['list'], 'career.item.credential-decision' => ['table'],
+                'career.item.credential-boundary' => ['notice'], 'career.item.recruitment-sample' => ['notice'],
             ];
             $valid = $location === 'sources' && $item['type'] === 'sources'
                 || $location === 'entry_decisions' && $item['block'] === 'path'
-                && ($entryTypes[$item['copy_key']] ?? null) === $item['type'];
+                && in_array($item['type'], $entryTypes[$item['copy_key']] ?? [], true);
             if (! $valid || isset($used[$id])) {
                 $this->fail();
             }
