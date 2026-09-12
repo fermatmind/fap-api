@@ -542,3 +542,13 @@ test("MBTI introduction publication is scoped to its bilingual assets and publis
     assert.equal(classifyPaths([path]).operations.mbti_result_introductions_publish, false, path);
   }
 });
+
+
+test("Chinese MBTI trait publication follows both assets and its publisher", () => {
+  for (const path of ["backend/content_assets/personality_public/mbti_trait_explanations.zh-CN.v1.json", "backend/content_assets/personality_public/mbti_trait_overviews.zh-CN.v1.json", "backend/app/Services/Cms/MbtiTraitExplanations.php", "backend/app/Console/Commands/PublishMbtiTraitContent.php"]) {
+    const result = classifyPaths([path]);
+    assert.equal(result.operations.mbti_trait_content_publish, true);
+    assert.equal(result.deploy, true);
+  }
+  assert.equal(classifyPaths(["backend/routes/api.php"]).operations.mbti_trait_content_publish, false);
+});

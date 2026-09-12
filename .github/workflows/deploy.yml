@@ -66,6 +66,7 @@ jobs:
       seo_competitive_evidence: ${{ steps.receipt.outputs.seo_competitive_evidence }}
       private_result_authority_publish_required: ${{ steps.receipt.outputs.private_result_authority_publish_required }}
       mbti_result_introductions_publish: ${{ steps.receipt.outputs.mbti_result_introductions_publish }}
+      mbti_trait_content_publish: ${{ steps.receipt.outputs.mbti_trait_content_publish }}
     steps:
       - name: Refuse non-main, PR, failed, or ambiguous CI runs
         shell: bash
@@ -374,6 +375,7 @@ jobs:
             echo "seo_competitive_evidence=$seo_competitive_evidence"
             echo "private_result_authority_publish_required=$private_result_authority_publish_required"
             echo "mbti_result_introductions_publish=$(jq -r '.classification.operations.mbti_result_introductions_publish // false' "$receipt")"
+            echo "mbti_trait_content_publish=$(jq -r '.classification.operations.mbti_trait_content_publish // false' "$receipt")"
           } >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         if: steps.receipt.outputs.career_current == 'true'
@@ -545,6 +547,7 @@ jobs:
             -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' \
             -o private_result_authority_publish_required='${{ needs.policy.outputs.private_result_authority_publish_required }}' \
             -o mbti_result_introductions_publish='${{ needs.policy.outputs.mbti_result_introductions_publish }}' \
+            -o mbti_trait_content_publish='${{ needs.policy.outputs.mbti_trait_content_publish }}' \
             -o career_data_recovery='${{ needs.policy.outputs.career_data_recovery }}' \
             -o seo_council_orchestration="$council_orchestration" \
             -o a08_gate_only='${{ needs.policy.outputs.a08_gate_only }}' \
@@ -1616,6 +1619,7 @@ jobs:
             -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' \
             -o private_result_authority_publish_required='${{ needs.policy.outputs.private_result_authority_publish_required }}' \
             -o mbti_result_introductions_publish='${{ needs.policy.outputs.mbti_result_introductions_publish }}' \
+            -o mbti_trait_content_publish='${{ needs.policy.outputs.mbti_trait_content_publish }}' \
             -o seo_council_orchestration="$production_council_closeout" \
             -o a08_gate_only='${{ needs.policy.outputs.a08_gate_only }}' \
             -o seo_competitive_evidence='${{ needs.policy.outputs.seo_competitive_evidence }}' \

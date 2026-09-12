@@ -187,6 +187,11 @@ export function classifyPaths(inputPaths) {
     mbti_zh_result_authority_release: paths.includes(
       "backend/content_assets/personality_public/mbti_zh_result_authority_release.v1.json",
     ),
+    mbti_trait_content_publish: paths.some((path) =>
+      /^backend\/content_assets\/personality_public\/mbti_trait_(?:explanations|overviews)\.zh-CN\.v1\.json$/.test(path)
+      || path === "backend/app/Services/Cms/MbtiTraitExplanations.php"
+      || path === "backend/app/Console/Commands/PublishMbtiTraitContent.php",
+    ),
     mbti_result_introductions_publish: paths.some((path) =>
       /^backend\/content_assets\/personality_public\/mbti_result_introductions\.(?:zh-CN|en)\.v1\.json$/.test(path)
       || path === "backend/app/Services/Cms/MbtiResultIntroductionPublisher.php"
