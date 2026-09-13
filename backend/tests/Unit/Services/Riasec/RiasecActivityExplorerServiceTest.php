@@ -46,7 +46,7 @@ final class RiasecActivityExplorerServiceTest extends TestCase
 
             foreach ($occupationExamples as $example) {
                 $this->assertSame('content_example_not_registry_match', data_get($example, 'source_status'));
-                $this->assertSame('活动场景例子，不是结果答案', data_get($example, 'display_label'));
+                $this->assertSame('工作场景示例', data_get($example, 'display_label'));
                 $this->assertSame('occupation_examples_boundary_v1.zh-CN', data_get($example, 'content_version'));
                 $this->assertTrue((bool) data_get($example, 'not_a_recommendation'));
                 $this->assertTrue((bool) data_get($example, 'examples_only'));
@@ -163,7 +163,7 @@ final class RiasecActivityExplorerServiceTest extends TestCase
 
             foreach ((array) data_get($payload, 'code_activity_pack.activities', []) as $activity) {
                 foreach ((array) data_get($activity, 'occupation_examples', []) as $example) {
-                    $this->assertSame('活动场景例子，不是结果答案', data_get($example, 'display_label'));
+                    $this->assertSame('工作场景示例', data_get($example, 'display_label'));
                     $this->assertTrue((bool) data_get($example, 'not_a_recommendation'));
                     $this->assertTrue((bool) data_get($example, 'examples_only'));
                     $this->assertFalse((bool) data_get($example, 'ranking_allowed'));

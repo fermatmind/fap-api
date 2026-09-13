@@ -23,6 +23,26 @@ final class RiasecCanonicalPrivateResultAuthorityTest extends TestCase
         $this->assertFalse($manifest['generated']['manual_edit_allowed']);
     }
 
+    public function test_activity_authority_contains_only_reachable_reader_examples(): void
+    {
+        $assets = app(RiasecPrivateResultCompileService::class)->compile()['payload']['assets'];
+        $activities = $assets['activity_task_examples_v1.zh-CN.jsonl'];
+        $examples = $assets['occupation_examples_boundary_v1.zh-CN.jsonl'];
+        $this->assertCount(18, $activities);
+        $this->assertCount(12, $examples);
+        $this->assertCount(18, array_unique(array_column($activities, 'activity_key')));
+        foreach (['R', 'I', 'A', 'S', 'E', 'C'] as $dimension) {
+            $this->assertCount(3, array_filter($activities, fn ($row) => $row['dimensions'] === [$dimension]));
+            $this->assertCount(2, array_filter($examples, fn ($row) => $row['primary_activity_dimension'] === $dimension));
+        }
+        foreach ($activities as $row) {
+            $this->assertSame('content_example_not_registry_match', $row['source_status']);
+            $this->assertStringNotContainsString('｜', $row['activity_label']);
+            $this->assertStringNotContainsString('先用 15 分钟完成', $row['low_risk_validation']);
+            $this->assertArrayNotHasKey('commercial_internal_notes', $row);
+        }
+    }
+
     public function test_no_new_private_result_source_is_outside_manifest_whitelist(): void
     {
         $root = base_path('content_assets/riasec');

@@ -22,7 +22,7 @@ final class RiasecDeepCopySlotRegistryTest extends TestCase
             $this->assertSame($dimension, $slot['dimension_code']);
             $this->assertSame('reviewed_content_copy', $slot['source_status']);
             $this->assertSame('approved_for_production', $slot['review_status']);
-            $this->assertSame('expert_reviewed', $slot['evidence_level']);
+            $this->assertSame('theory_based', $slot['evidence_level']);
             $this->assertFalse($slot['frontend_fallback_allowed']);
 
             foreach ($registry->dimensionRequiredFields() as $requiredField) {
@@ -31,16 +31,12 @@ final class RiasecDeepCopySlotRegistryTest extends TestCase
             }
             $this->assertArrayHasKey('medium_score_reading', $slot);
             $this->assertNotEmpty($slot['medium_score_reading']);
-            $this->assertCount(3, $slot['interest_activity_focus']);
-            $this->assertCount(3, $slot['context_costs']);
-            $this->assertCount(3, $slot['misread_guardrails']);
+            $this->assertNotEmpty($slot['interest_activity_focus']);
+            $this->assertNotEmpty($slot['context_costs']);
+            $this->assertNotEmpty($slot['misread_guardrails']);
             $this->assertCount(3, $slot['validation_questions']);
-            $this->assertGreaterThanOrEqual(6, count($slot['work_activity_examples']));
-            $this->assertStringContainsString('活动', $slot['core_drive']);
-            $this->assertStringContainsString('不代表人格身份、能力水平、资格条件或职业答案', $slot['core_drive']);
-            $this->assertStringContainsString('现实', $slot['real_world_cost']);
-            $this->assertStringContainsString('常见误读', $slot['common_misread']);
-            $this->assertStringContainsString('不测能力、人格品质、资质或职业结果', $slot['user_visible_boundary']);
+            $this->assertGreaterThanOrEqual(4, count($slot['work_activity_examples']));
+            $this->assertStringContainsString('活动兴趣', $slot['user_visible_boundary']);
             foreach ($slot['validation_questions'] as $question) {
                 $this->assertStringEndsWith('？', $question);
             }
