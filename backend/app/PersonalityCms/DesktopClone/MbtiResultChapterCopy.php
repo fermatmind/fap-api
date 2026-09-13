@@ -60,15 +60,57 @@ final class MbtiResultChapterCopy
     /** @param array<string,mixed> $content @return array<string,mixed> */
     public static function withoutEditorialSlots(array $content): array
     {
-        unset($content['faq']);
-        foreach (self::CHAPTERS as $chapter) {
-            unset($content['chapters'][$chapter]['intro']);
+        foreach (array_keys((array) ($content['faq'] ?? [])) as $index) {
+            self::maskText($content, 'faq.'.$index.'.question');
+            self::maskText($content, 'faq.'.$index.'.answer');
         }
-
+        foreach (self::CHAPTERS as $chapter) {
+            $path = 'chapters.'.$chapter;
+            foreach (array_keys((array) data_get($content, $path.'.intro', [])) as $index) {
+                self::maskText($content, $path.'.intro.'.$index);
+            }
+            self::maskText($content, $path.'.traits_unlock.intro');
+            foreach (array_keys((array) data_get($content, $path.'.influentialTraits', [])) as $index) {
+                self::maskText($content, $path.'.influentialTraits.'.$index.'.body');
+            }
+            $prefix = $chapter === 'relationships' ? 'relationship' : $chapter;
+            foreach (array_keys((array) data_get($content, $path.'.traits_unlock.items', [])) as $index) {
+                foreach (['definition', 'why_it_matters', $prefix.'_expression', $prefix.'_advantage', 'overuse_risk', 'real_world_signal', 'upgrade_hint'] as $field) {
+                    self::maskText($content, $path.'.traits_unlock.items.'.$index.'.'.$field);
+                }
+            }
+            $modules = $chapter === 'career'
+                ? ['strengths', 'weaknesses', 'career_ideas', 'work_styles']
+                : ['strengths', 'weaknesses'];
+            foreach ($modules as $module) {
+                foreach (array_keys((array) data_get($content, $path.'.'.$module.'.items', [])) as $index) {
+                    foreach (['title', 'description'] as $field) {
+                        self::maskText($content, $path.'.'.$module.'.items.'.$index.'.'.$field);
+                    }
+                }
+            }
+        }
         foreach (self::SCENARIO_MODULES as $path) {
-            data_forget($content, $path);
+            self::maskText($content, $path.'.intro');
+            foreach (array_keys((array) data_get($content, $path.'.items', [])) as $index) {
+                $itemPath = $path.'.items.'.$index;
+                foreach (['title', 'body', 'description', 'why_it_matters', 'actions.do', 'actions.avoid'] as $field) {
+                    self::maskText($content, $itemPath.'.'.$field);
+                }
+                foreach (array_keys((array) data_get($content, $itemPath.'.signals', [])) as $signal) {
+                    self::maskText($content, $itemPath.'.signals.'.$signal);
+                }
+            }
         }
 
         return $content;
+    }
+
+    /** Preserve keys, scalar types, order, identifiers and all non-editorial data. */
+    private static function maskText(array &$content, string $path): void
+    {
+        if (is_string(data_get($content, $path))) {
+            data_set($content, $path, '');
+        }
     }
 }

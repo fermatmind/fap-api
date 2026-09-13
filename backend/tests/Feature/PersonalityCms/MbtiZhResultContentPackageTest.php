@@ -66,6 +66,21 @@ final class MbtiZhResultContentPackageTest extends TestCase
         $this->assertSame(384, $count);
     }
 
+    public function test_work_style_titles_preserve_authored_copy_without_nickname_prefixes(): void
+    {
+        $source = json_decode((string) file_get_contents(base_path('../content_baselines/personality/mbti.zh-CN.json')), true, flags: JSON_THROW_ON_ERROR);
+        $variants = collect($source['variants'])->keyBy('runtime_type_code');
+        foreach (app(MbtiZhResultContentPackage::class)->compile()['rows'] as $row) {
+            $sections = collect($variants[$row['full_code']]['section_overrides'])->keyBy('section_key');
+            $items = $sections['career.upgrade_suggestions']['payload_json']['items'];
+            $compiled = data_get($row, 'content_json.chapters.career.work_styles.items');
+            $this->assertSame(array_column($items, 'title'), array_column($compiled, 'title'), $row['full_code']);
+            foreach ($compiled as $item) {
+                $this->assertDoesNotMatchRegularExpression('/视角[：:]|[=＝×]/u', $item['title']);
+            }
+        }
+    }
+
     public function test_package_is_deterministic_complete_and_has_no_consumable_media(): void
     {
         $first = app(MbtiZhResultContentPackage::class)->compile();

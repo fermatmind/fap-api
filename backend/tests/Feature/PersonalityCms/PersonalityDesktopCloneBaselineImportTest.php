@@ -64,23 +64,23 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
         $content['hero']['profile_identity']['nickname'] = 'Independent CMS edit';
         $record->forceFill(['content_json' => $content])->save();
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Content outside chapter introductions, FAQ and scenario modules changed');
+        $this->expectExceptionMessage('Content outside approved MBTI editorial text fields changed');
         app(MbtiZhResultContentReleaseService::class)->dryRun();
     }
 
-    public function test_scenario_publication_still_rejects_drift_in_growth_strengths(): void
+    public function test_editorial_publication_still_rejects_drift_in_strength_structure(): void
     {
         $this->seedReleasedChapterPreState();
         $record = PersonalityProfileVariantCloneContent::query()->firstOrFail();
         $content = $record->content_json;
-        $content['chapters']['growth']['strengths']['items'][0]['description'] = 'Independent strengths edit';
+        $content['chapters']['growth']['strengths']['items'][0]['unexpected'] = 'Independent structure edit';
         $record->forceFill(['content_json' => $content])->save();
         $before = PersonalityProfileVariantRevision::query()->count();
         try {
             app(MbtiZhResultContentReleaseService::class)->dryRun();
-            $this->fail('Unrelated published strengths must remain protected.');
+            $this->fail('Non-editorial fields must remain protected.');
         } catch (\RuntimeException $exception) {
-            $this->assertStringContainsString('Content outside chapter introductions, FAQ and scenario modules changed', $exception->getMessage());
+            $this->assertStringContainsString('Content outside approved MBTI editorial text fields changed', $exception->getMessage());
         }
         $this->assertSame($before, PersonalityProfileVariantRevision::query()->count());
         $this->assertSame($content, $record->fresh()->content_json);
@@ -94,7 +94,7 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
         $draft = $service->writeDraft($plan['package_hash'], $plan['pre_state_hash'], 1);
         $record = PersonalityProfileVariantCloneContent::query()->firstOrFail();
         $content = $record->content_json;
-        $content['chapters']['career']['intro'][0] = 'Concurrent editor content';
+        $content['chapters']['career']['traits_unlock']['items'][0]['definition'] = 'Concurrent editor content';
         $record->forceFill(['content_json' => $content])->save();
         try {
             $service->promote($plan['package_hash'], $plan['pre_state_hash'], $draft['candidate_revision_set_hash']);
@@ -102,7 +102,36 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
         } catch (\RuntimeException $exception) {
             $this->assertStringContainsString('Package or production pre-state changed', $exception->getMessage());
         }
-        $this->assertSame('Concurrent editor content', $record->fresh()->content_json['chapters']['career']['intro'][0]);
+        $this->assertSame('Concurrent editor content', $record->fresh()->content_json['chapters']['career']['traits_unlock']['items'][0]['definition']);
+    }
+
+    public function test_failure_mid_publication_rolls_back_all_target_records(): void
+    {
+        $this->seedReleasedChapterPreState();
+        $service = app(MbtiZhResultContentReleaseService::class);
+        $plan = $service->dryRun();
+        $draft = $service->writeDraft($plan['package_hash'], $plan['pre_state_hash'], 1);
+        $before = PersonalityProfileVariantCloneContent::query()->orderBy('id')->get()->toArray();
+        $revisionCount = PersonalityProfileVariantRevision::query()->count();
+        $updates = 0;
+        $event = 'eloquent.updated: '.PersonalityProfileVariantCloneContent::class;
+        \Illuminate\Support\Facades\Event::listen($event, static function () use (&$updates): void {
+            if (++$updates === 3) {
+                throw new \RuntimeException('Injected publication failure');
+            }
+        });
+        try {
+            $service->promote($plan['package_hash'], $plan['pre_state_hash'], $draft['candidate_revision_set_hash']);
+            $this->fail('A partial publication must roll back.');
+        } catch (\RuntimeException $exception) {
+            $this->assertSame('Injected publication failure', $exception->getMessage());
+        } finally {
+            \Illuminate\Support\Facades\Event::forget($event);
+        }
+        $this->assertSame(3, $updates);
+        $this->assertSame($before, PersonalityProfileVariantCloneContent::query()->orderBy('id')->get()->toArray());
+        $this->assertSame($revisionCount, PersonalityProfileVariantRevision::query()->count());
+        $this->assertSame($plan['pre_state_hash'], $service->dryRun()['pre_state_hash']);
     }
 
     private function seedReleasedChapterPreState(): void
@@ -119,16 +148,30 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
             foreach (MbtiResultChapterCopy::CHAPTERS as $chapter) {
                 $content['chapters'][$chapter]['intro'] = ['Previous first paragraph', 'Previous second paragraph'];
             }
+            foreach (MbtiResultChapterCopy::CHAPTERS as $chapter) {
+                $path = 'chapters.'.$chapter;
+                data_set($content, $path.'.traits_unlock.intro', 'Previous factors introduction');
+                $prefix = $chapter === 'relationships' ? 'relationship' : $chapter;
+                foreach (range(0, 3) as $index) {
+                    data_set($content, $path.'.influentialTraits.'.$index.'.body', 'Previous definition');
+                    foreach (['definition', 'why_it_matters', $prefix.'_expression', $prefix.'_advantage', 'overuse_risk', 'real_world_signal', 'upgrade_hint'] as $field) {
+                        data_set($content, $path.'.traits_unlock.items.'.$index.'.'.$field, 'Previous factor text');
+                    }
+                    foreach ($chapter === 'career' ? ['strengths', 'weaknesses', 'career_ideas', 'work_styles'] : ['strengths', 'weaknesses'] as $module) {
+                        foreach (['title', 'description'] as $field) {
+                            data_set($content, $path.'.'.$module.'.items.'.$index.'.'.$field, 'Previous summary text');
+                        }
+                    }
+                }
+            }
             $content['faq'][0]['answer'] = 'Previous answer';
             foreach (MbtiResultChapterCopy::SCENARIO_MODULES as $path) {
                 $module = data_get($content, $path);
                 foreach ($module['items'] as &$item) {
                     $item['body'] = $item['description'] = 'Previous scenario body';
-                    $item['signals'] = ['Previous signal one', 'Previous signal two'];
-                    $item['tags'] = ['legacy'];
+                    $item['signals'] = ['Previous signal'];
                 }
                 unset($item);
-                $module['items'][] = [...$module['items'][0], 'id' => 'previous-fourth-item'];
                 data_set($content, $path, $module);
             }
             $record->forceFill([
@@ -183,6 +226,23 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
             $promotion['rollback_revision_set_hash'],
         );
         $this->assertTrue($rollback['committed']);
+    }
+
+    public function test_readback_rejects_changed_text_even_with_the_expected_package_metadata(): void
+    {
+        $this->seedReleasedChapterPreState();
+        $service = app(MbtiZhResultContentReleaseService::class);
+        $plan = $service->dryRun();
+        $draft = $service->writeDraft($plan['package_hash'], $plan['pre_state_hash'], 1);
+        $service->promote($plan['package_hash'], $plan['pre_state_hash'], $draft['candidate_revision_set_hash']);
+        $record = PersonalityProfileVariantCloneContent::query()->firstOrFail();
+        $content = $record->content_json;
+        $content['chapters']['career']['traits_unlock']['items'][0]['definition'] = 'Unexpected post-publication text';
+        $record->forceFill(['content_json' => $content])->save();
+        $this->assertSame($plan['package_hash'], $record->fresh()->meta_json['package_hash']);
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Readback failed');
+        $service->readback($plan['package_hash']);
     }
 
     public function test_exact_release_readback_rejects_non_positive_revision_number(): void

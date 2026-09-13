@@ -10,6 +10,7 @@ use App\Models\PersonalityProfileVariantCloneContent;
 use App\Models\PersonalityProfileVariantRevision;
 use App\PersonalityCms\DesktopClone\MbtiResultChapterCopy;
 use App\PersonalityCms\DesktopClone\MbtiZhResultContentPackage;
+use App\PersonalityCms\DesktopClone\PersonalityDesktopCloneAssetSlotSupport;
 use App\Support\Idempotency\IdempotencyKey;
 use App\Support\Mbti\MbtiZhResultContentPolicy;
 use Illuminate\Database\Eloquent\Builder;
@@ -191,8 +192,13 @@ final class MbtiZhResultContentReleaseService
             $record = $target['record'];
             $row = $target['row'];
             $meta = is_array($record->meta_json) ? $record->meta_json : [];
+            // Model persistence canonicalizes empty decorative alt text to null.
+            $storedAssetSlots = PersonalityDesktopCloneAssetSlotSupport::normalizeAssetSlots($row['asset_slots_json']);
             if (($meta['package_hash'] ?? null) !== $expectedPackageHash
-                || trim((string) ($meta['package_id'] ?? '')) === ''
+                || ($meta['package_id'] ?? null) !== $state['package']['package_id']
+                || $record->schema_version !== $row['schema_version']
+                || ! hash_equals(IdempotencyKey::hashPayload((array) $record->content_json), IdempotencyKey::hashPayload($row['content_json']))
+                || ! hash_equals(IdempotencyKey::hashPayload((array) $record->asset_slots_json), IdempotencyKey::hashPayload($storedAssetSlots))
                 || ($meta['source_hash'] ?? null) !== $row['source_hash']
                 || (int) ($meta['revision_no'] ?? 0) <= 0
                 || count((array) $record->asset_slots_json) !== 7) {
@@ -289,7 +295,7 @@ final class MbtiZhResultContentReleaseService
             if ($record->status !== PersonalityProfileVariantCloneContent::STATUS_PUBLISHED) {
                 throw new RuntimeException('Current clone record must already be published for '.$row['full_code'].'.');
             }
-            // Existing releases may change only introductions, FAQ and the four scenario modules.
+            // Compare the complete structure while masking only explicitly editable text fields.
             // Baseline-only initialization keeps the original first-release path.
             if (isset($record->meta_json['package_hash']) && ! hash_equals(
                 IdempotencyKey::hashPayload(MbtiResultChapterCopy::withoutEditorialSlots(
@@ -299,7 +305,7 @@ final class MbtiZhResultContentReleaseService
                     MbtiZhResultContentPolicy::normalizeDesktopContent($row['content_json'], 'zh-CN'),
                 )),
             )) {
-                throw new RuntimeException('Content outside chapter introductions, FAQ and scenario modules changed for '.$row['full_code']);
+                throw new RuntimeException('Content outside approved MBTI editorial text fields changed for '.$row['full_code']);
             }
             $targets[] = ['row' => $row, 'variant' => $variant, 'record' => $record];
         }

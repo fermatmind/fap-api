@@ -183,12 +183,6 @@ final class MbtiZhResultContentPackage
                 }
             }
         }
-        foreach ((array) data_get($content, 'chapters.career.work_styles.items', []) as $index => $item) {
-            $title = trim((string) data_get($item, 'title', ''));
-            if ($title !== '') {
-                data_set($content, 'chapters.career.work_styles.items.'.$index.'.title', $prefix.$title);
-            }
-        }
 
         return $content;
     }
