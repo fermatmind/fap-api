@@ -3605,6 +3605,14 @@ task('reload:php-fpm', function () {
     run("sudo -n /usr/bin/systemctl reload {$service}");
 });
 
+task('ensure:nginx-dns-resilience', function () {
+    if (deployIsCodeOnly()) {
+        return;
+    }
+    $script = deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/install_nginx_dns_resilience.py');
+    run('sudo -n python3 '.$script, ['timeout' => 120]);
+});
+
 task('reload:nginx', function () {
     if (deployIsCodeOnly()) {
         writeln('<comment>Skip nginx reload in code_only deploy mode</comment>');
@@ -5095,7 +5103,8 @@ after('guard:public-content-release', 'prepare:release-bootstrap-cache-access');
 after('deploy:symlink', 'ensure:nginx-public-static-media-route');
 after('ensure:nginx-public-static-media-route', 'ensure:nginx-api-http-redirect');
 after('deploy:symlink', 'reload:php-fpm');
-after('ensure:nginx-api-http-redirect', 'reload:nginx');
+after('ensure:nginx-api-http-redirect', 'ensure:nginx-dns-resilience');
+after('ensure:nginx-dns-resilience', 'reload:nginx');
 after('deploy:symlink', 'queue:reload-workers');
 after('deploy:symlink', 'healthcheck:public');
 after('healthcheck:public', 'healthcheck:sitemap-source');

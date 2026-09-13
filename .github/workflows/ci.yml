@@ -115,6 +115,9 @@ jobs:
       - run: bash backend/scripts/ci/guard_no_committed_secrets.sh
       - run: bash backend/scripts/cae_gate.sh
       - run: git diff --check ${{ needs.classify.outputs.base_sha }} ${{ github.sha }}
+      - name: Verify Nginx DNS resilience and rollback
+        if: needs.classify.outputs.infrastructure == 'true'
+        run: python3 -m unittest discover -s backend/tests/Sre -p test_nginx_dns_resilience.py
       - name: Validate workflow source when deployment control changed
         if: needs.classify.outputs.infrastructure == 'true'
         run: >-
