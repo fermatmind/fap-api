@@ -306,11 +306,15 @@ final class PersonalityVariantCloneContentValidator
         foreach (self::INSIGHT_LIST_MODULE_PATHS as $modulePath) {
             $rules[$modulePath.'.schema_version'] = ['required', 'in:insight_list_v1'];
             $rules[$modulePath.'.intro'] = ['required', 'string'];
-            $rules[$modulePath.'.items'] = ['required', 'array', 'min:4'];
+            $items = (array) data_get($contentJson, substr($modulePath, 8).'.items', []);
+            $scenarioLayout = $items !== [] && collect($items)->every(
+                static fn ($item): bool => is_array($item) && in_array('scenario_editorial_v1', (array) ($item['tags'] ?? []), true),
+            );
+            $rules[$modulePath.'.items'] = ['required', 'array', $scenarioLayout ? 'min:3' : 'min:4'];
             $rules[$modulePath.'.items.*.id'] = ['required', 'string'];
             $rules[$modulePath.'.items.*.body'] = ['required', 'string'];
             $rules[$modulePath.'.items.*.why_it_matters'] = ['required', 'string'];
-            $rules[$modulePath.'.items.*.signals'] = ['required', 'array', 'min:2'];
+            $rules[$modulePath.'.items.*.signals'] = ['required', 'array', $scenarioLayout ? 'min:1' : 'min:2'];
             $rules[$modulePath.'.items.*.signals.*'] = ['required', 'string'];
             $rules[$modulePath.'.items.*.actions'] = ['required', 'array'];
             $rules[$modulePath.'.items.*.actions.do'] = ['required', 'string'];

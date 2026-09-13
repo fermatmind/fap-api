@@ -288,7 +288,7 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             '--upsert' => true,
         ])->assertExitCode(0);
 
-        foreach (['ENTJ-A', 'ENTJ-T', 'INFJ-A', 'INFJ-T'] as $fullCode) {
+        foreach (array_column(json_decode((string) file_get_contents(base_path('../content_baselines/personality/mbti.zh-CN.json')), true, flags: JSON_THROW_ON_ERROR)['variants'], 'runtime_type_code') as $fullCode) {
             $response = $this->getJson('/api/v0.5/personality/'.strtolower($fullCode).'/desktop-clone?locale=zh-CN')
                 ->assertOk()
                 ->assertJsonPath('ok', true)
@@ -1055,9 +1055,10 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
         $this->assertTrue((bool) data_get($module, 'is_locked'), sprintf('%s has unlocked %s', $fullCode, $modulePath));
 
         $items = (array) data_get($module, 'items');
-        $this->assertGreaterThanOrEqual(4, count($items), sprintf('%s has insufficient %s.items', $fullCode, $modulePath));
+        $this->assertCount(3, $items, sprintf('%s has invalid scenario count in %s', $fullCode, $modulePath));
 
         foreach ($items as $index => $item) {
+            $this->assertContains('scenario_editorial_v1', (array) data_get($item, 'tags'));
             $this->assertIsArray($item, sprintf('%s has invalid %s.items[%d]', $fullCode, $modulePath, $index));
             $this->assertNotSame('', trim((string) data_get($item, 'id')), sprintf('%s has empty %s.items[%d].id', $fullCode, $modulePath, $index));
             $this->assertNotSame('', trim((string) data_get($item, 'title')), sprintf('%s has empty %s.items[%d].title', $fullCode, $modulePath, $index));

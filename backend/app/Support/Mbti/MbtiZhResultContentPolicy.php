@@ -190,6 +190,7 @@ final class MbtiZhResultContentPolicy
         if (is_string($value)) {
             return str_replace(
                 [
+                    '？；',
                     '费马心理',
                     'FermatMind的',
                     '把把',
@@ -199,6 +200,7 @@ final class MbtiZhResultContentPolicy
                     '不是喊口号，而是',
                 ],
                 [
+                    '？',
                     '费马测试 / FermatMind',
                     'FermatMind 的',
                     '把',

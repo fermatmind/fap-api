@@ -17,6 +17,55 @@ final class MbtiZhResultContentPackageTest extends TestCase
         'A/T 是费马测试 / FermatMind 对压力、反馈敏感度与自我确认方式的扩展观察，不是官方 MBTI 第五轴，也不等同于抗压能力或心理健康水平。',
     ];
 
+    public function test_all_scenario_modules_preserve_reviewed_copy_and_stable_identifiers(): void
+    {
+        $baseline = json_decode((string) file_get_contents(base_path('../content_baselines/personality/mbti.zh-CN.json')), true, flags: JSON_THROW_ON_ERROR);
+        $variants = collect($baseline['variants'])->keyBy('runtime_type_code');
+        $paths = [
+            'growth.motivators' => 'growth.what_energizes',
+            'growth.drainers' => 'growth.what_drains',
+            'relationships.rel_advantages' => 'relationships.superpowers',
+            'relationships.rel_risks' => 'relationships.pitfalls',
+        ];
+        $count = 0;
+        foreach (app(MbtiZhResultContentPackage::class)->compile()['rows'] as $row) {
+            $code = $row['full_code'];
+            $sections = collect($variants[$code]['section_overrides'])->keyBy('section_key');
+            foreach ($paths as $sourcePath => $path) {
+                $context = $code.'.'.$path;
+                $source = $sections[$sourcePath]['payload_json'];
+                $module = data_get($row, 'content_json.chapters.'.$path);
+                $this->assertSame('insight_list_v1', $module['schema_version'], $context);
+                $this->assertSame($source['intro'], $module['intro'], $context);
+                $this->assertSame($source['intro'], $source['teaser'], $context);
+                $this->assertSame($source['intro'], $sections[$sourcePath]['body_md'], $context);
+                $this->assertCount(3, $module['items'], $context);
+                $this->assertSame(array_column($source['items'], 'id'), array_column($module['items'], 'id'), $context);
+                $chapter = explode('.', $path)[0];
+                $summaryItems = array_merge(
+                    data_get($row, 'content_json.chapters.'.$chapter.'.strengths.items', []),
+                    data_get($row, 'content_json.chapters.'.$chapter.'.weaknesses.items', []),
+                );
+                foreach ($module['items'] as $index => $item) {
+                    $this->assertContains('scenario_editorial_v1', $item['tags'], $context);
+                    $this->assertCount(1, $item['signals'], $context);
+                    $this->assertSame($item['body'], $item['description'], $context);
+                    foreach (['title', 'body', 'description', 'why_it_matters', 'signals', 'actions', 'tags'] as $field) {
+                        $this->assertSame($source['items'][$index][$field], $item[$field], $context.'.'.$field);
+                    }
+                    foreach ([$item['title'], $item['body'], $item['why_it_matters'], $item['signals'][0], $item['actions']['do'], $item['actions']['avoid']] as $text) {
+                        $this->assertNotSame('', trim($text), $context);
+                        $this->assertDoesNotMatchRegularExpression('/视角：|[。！？；][，。；]/u', $text, $context);
+                    }
+                    $this->assertNotContains($item['title'], array_column($summaryItems, 'title'), $context);
+                    $this->assertNotContains($item['body'], array_column($summaryItems, 'description'), $context);
+                    $count++;
+                }
+            }
+        }
+        $this->assertSame(384, $count);
+    }
+
     public function test_package_is_deterministic_complete_and_has_no_consumable_media(): void
     {
         $first = app(MbtiZhResultContentPackage::class)->compile();
