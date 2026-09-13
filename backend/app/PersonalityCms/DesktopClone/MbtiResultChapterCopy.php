@@ -12,6 +12,13 @@ final class MbtiResultChapterCopy
 {
     public const CHAPTERS = ['career', 'growth', 'relationships'];
 
+    public const SCENARIO_MODULES = [
+        'chapters.growth.what_energizes',
+        'chapters.growth.what_drains',
+        'chapters.relationships.superpowers',
+        'chapters.relationships.pitfalls',
+    ];
+
     /** @return array<string, array<string, mixed>> */
     public function load(): array
     {
@@ -56,6 +63,10 @@ final class MbtiResultChapterCopy
         unset($content['faq']);
         foreach (self::CHAPTERS as $chapter) {
             unset($content['chapters'][$chapter]['intro']);
+        }
+
+        foreach (self::SCENARIO_MODULES as $path) {
+            data_forget($content, $path);
         }
 
         return $content;

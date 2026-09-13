@@ -289,7 +289,7 @@ final class MbtiZhResultContentReleaseService
             if ($record->status !== PersonalityProfileVariantCloneContent::STATUS_PUBLISHED) {
                 throw new RuntimeException('Current clone record must already be published for '.$row['full_code'].'.');
             }
-            // Existing released packages may only change the four authored slots.
+            // Existing releases may change only introductions, FAQ and the four scenario modules.
             // Baseline-only initialization keeps the original first-release path.
             if (isset($record->meta_json['package_hash']) && ! hash_equals(
                 IdempotencyKey::hashPayload(MbtiResultChapterCopy::withoutEditorialSlots(
@@ -299,7 +299,7 @@ final class MbtiZhResultContentReleaseService
                     MbtiZhResultContentPolicy::normalizeDesktopContent($row['content_json'], 'zh-CN'),
                 )),
             )) {
-                throw new RuntimeException('Content outside chapter introductions and FAQ changed for '.$row['full_code']);
+                throw new RuntimeException('Content outside chapter introductions, FAQ and scenario modules changed for '.$row['full_code']);
             }
             $targets[] = ['row' => $row, 'variant' => $variant, 'record' => $record];
         }

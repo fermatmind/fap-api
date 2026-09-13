@@ -21,7 +21,7 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_chapter_revision_reaches_all_public_types_and_leaves_other_content_unchanged(): void
+    public function test_chapter_and_scenario_revision_reaches_all_public_types_and_leaves_other_content_unchanged(): void
     {
         $this->seedReleasedChapterPreState();
         $before = PersonalityProfileVariantCloneContent::query()->get()->keyBy('id');
@@ -36,6 +36,16 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
                 IdempotencyKey::hashPayload(MbtiResultChapterCopy::withoutEditorialSlots($before[$record->id]->content_json)),
                 IdempotencyKey::hashPayload(MbtiResultChapterCopy::withoutEditorialSlots($record->content_json)),
             );
+            foreach (MbtiResultChapterCopy::SCENARIO_MODULES as $path) {
+                $items = data_get($record->content_json, $path.'.items');
+                $this->assertCount(3, $items);
+                $this->assertSame(array_slice(array_column(data_get($before[$record->id]->content_json, $path.'.items'), 'id'), 0, 3), array_column($items, 'id'));
+                foreach ($items as $item) {
+                    $this->assertContains('scenario_editorial_v1', $item['tags']);
+                    $this->assertCount(1, $item['signals']);
+                    $this->assertNotSame('Previous scenario body', $item['body']);
+                }
+            }
             $code = $record->variant->runtime_type_code;
             $response = $this->getJson('/api/v0.5/personality/'.strtolower($code).'/desktop-clone?locale=zh-CN')->assertOk();
             $response->assertJsonPath('content.faq', $assets[$code]['faq']);
@@ -54,8 +64,26 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
         $content['hero']['profile_identity']['nickname'] = 'Independent CMS edit';
         $record->forceFill(['content_json' => $content])->save();
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Content outside chapter introductions and FAQ changed');
+        $this->expectExceptionMessage('Content outside chapter introductions, FAQ and scenario modules changed');
         app(MbtiZhResultContentReleaseService::class)->dryRun();
+    }
+
+    public function test_scenario_publication_still_rejects_drift_in_growth_strengths(): void
+    {
+        $this->seedReleasedChapterPreState();
+        $record = PersonalityProfileVariantCloneContent::query()->firstOrFail();
+        $content = $record->content_json;
+        $content['chapters']['growth']['strengths']['items'][0]['description'] = 'Independent strengths edit';
+        $record->forceFill(['content_json' => $content])->save();
+        $before = PersonalityProfileVariantRevision::query()->count();
+        try {
+            app(MbtiZhResultContentReleaseService::class)->dryRun();
+            $this->fail('Unrelated published strengths must remain protected.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('Content outside chapter introductions, FAQ and scenario modules changed', $exception->getMessage());
+        }
+        $this->assertSame($before, PersonalityProfileVariantRevision::query()->count());
+        $this->assertSame($content, $record->fresh()->content_json);
     }
 
     public function test_chapter_promotion_rejects_an_edit_after_draft_without_overwriting_it(): void
@@ -92,6 +120,17 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
                 $content['chapters'][$chapter]['intro'] = ['Previous first paragraph', 'Previous second paragraph'];
             }
             $content['faq'][0]['answer'] = 'Previous answer';
+            foreach (MbtiResultChapterCopy::SCENARIO_MODULES as $path) {
+                $module = data_get($content, $path);
+                foreach ($module['items'] as &$item) {
+                    $item['body'] = $item['description'] = 'Previous scenario body';
+                    $item['signals'] = ['Previous signal one', 'Previous signal two'];
+                    $item['tags'] = ['legacy'];
+                }
+                unset($item);
+                $module['items'][] = [...$module['items'][0], 'id' => 'previous-fourth-item'];
+                data_set($content, $path, $module);
+            }
             $record->forceFill([
                 'content_json' => $content,
                 'asset_slots_json' => $row['asset_slots_json'],
