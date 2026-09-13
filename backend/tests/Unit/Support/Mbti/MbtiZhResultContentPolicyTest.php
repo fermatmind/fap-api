@@ -126,6 +126,32 @@ final class MbtiZhResultContentPolicyTest extends TestCase
         $this->assertStringNotContainsString('不是喊口号', json_encode($content, JSON_UNESCAPED_UNICODE) ?: '');
     }
 
+    public function test_punctuation_join_repair_preserves_question_and_following_advice(): void
+    {
+        $source = ['chapters' => ['career' => ['signal' => '是在帮助推进，还是绕开沟通？；不要扩大判断。']],
+            'valid' => '先确认；再行动。真的吗？！他说：“可以。”省略……',
+            'url' => 'https://example.test/report?type=ISFJ-T&locale=zh-CN'];
+        $normalized = MbtiZhResultContentPolicy::normalizeDesktopContent($source, 'zh-CN');
+        $this->assertSame('是在帮助推进，还是绕开沟通？不要扩大判断。', $normalized['chapters']['career']['signal']);
+        $this->assertSame($source['valid'], $normalized['valid']);
+        $this->assertSame($source['url'], $normalized['url']);
+        $this->assertSame($normalized, MbtiZhResultContentPolicy::normalizeDesktopContent($normalized, 'zh-CN'));
+        $this->assertSame($source, MbtiZhResultContentPolicy::normalizeDesktopContent($source, 'en'));
+    }
+
+    public function test_all_mbti_result_baselines_have_no_invalid_adjacent_sentence_separators(): void
+    {
+        foreach (['personality_clone/mbti_desktop_clone.zh-CN.json', 'personality_clone/mbti_desktop_clone.en.json',
+            'personality/mbti.zh-CN.json', 'personality/mbti.en.json'] as $file) {
+            $baseline = $this->decodeBaseline($file);
+            array_walk_recursive($baseline, function (mixed $value, mixed $key) use ($file): void {
+                if (is_string($value)) {
+                    $this->assertDoesNotMatchRegularExpression('/[。！？][，,；;：:]|[，,；;：:][，；：]/u', $value, $file.' '.$key);
+                }
+            });
+        }
+    }
+
     /** @return array<string, mixed> */
     private function decodeBaseline(string $path): array
     {

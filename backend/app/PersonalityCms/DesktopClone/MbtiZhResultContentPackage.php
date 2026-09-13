@@ -169,7 +169,7 @@ final class MbtiZhResultContentPackage
         ];
         foreach ($modulePaths as $path) {
             foreach ((array) data_get($content, $path, []) as $itemIndex => $item) {
-                if (! is_array($item)) {
+                if (! is_array($item) || in_array('scenario_editorial_v1', (array) ($item['tags'] ?? []), true)) {
                     continue;
                 }
                 foreach ((array) ($item['signals'] ?? []) as $signalIndex => $signal) {
