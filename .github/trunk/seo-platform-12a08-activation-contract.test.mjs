@@ -63,6 +63,9 @@ test('existing workflows publish completed scoped evidence without runtime opera
  assert.match(nightly,/nightly-full-phpunit-\$\{\{ github\.sha \}\}-\$\{\{ github\.run_id \}\}/);
  assert.match(nightly,/continue-on-error: true/);
  assert.match(nightly,/steps\.full-tests\.outcome != 'success'/);
+ const evidence=readFileSync(new URL('./seo-platform-12a08-evidence-download.mjs',import.meta.url),'utf8');
+ assert.match(evidence,/actions\/jobs\/\$\{fullJob\.id\}\/logs/);
+ assert.doesNotMatch(evidence,/--log-failed/);
 });
 test('Nightly evidence accepts both Pest paths, deduplicates, and stays fail-closed',async()=>{
  const {assessNightly,parseLegacyNightlyFailures,parseJUnitNightlyFailures,selectNightlyArtifact}=await import('./seo-platform-12a08-release.mjs');
@@ -75,6 +78,22 @@ test('Nightly evidence accepts both Pest paths, deduplicates, and stays fail-clo
   {failed_test:'tests/Feature/PermissionTest.php',focused_test:'PermissionTest'},
   {failed_test:'tests/Unit/PolicyTest.php',focused_test:'PolicyTest'},
  ]);
+ const historical='FAIL  Tests\\Unit\\Domain\\Career\\Display\\CareerAccountantsZhFactsTest\n'
+  +'FAILED  Tests\\Unit\\Domain\\Career\\Display\\CareerAccountantsZhFactsTest > first\n  at tests/Unit/Domain/Career/Display/CareerAccountantsZhFactsTest.php:71\n'
+  +'FAILED  Tests\\Unit\\Domain\\Career\\Di…  CareerCurrentAuthorityPackageFailure\n  at app/Domain/Career/Display/CareerPageDisplayResolver.php:217';
+ assert.deepEqual(parseLegacyNightlyFailures(historical),[
+  {failed_test:'tests/Unit/Domain/Career/Display/CareerAccountantsZhFactsTest.php',focused_test:'CareerAccountantsZhFactsTest'},
+ ]);
+ const ambiguous='FAIL  Tests\\Feature\\Career\\FirstTest\nFAIL  Tests\\Feature\\Career\\SecondTest\n'
+  +'FAILED  Tests\\Feature\\Career\\…  RuntimeException\n  at app/Service.php:1\n'
+  +'FAILED  Tests\\Feature\\Career\\FirstTest > first\n  at tests/Feature/Career/FirstTest.php:1\n'
+  +'FAILED  Tests\\Feature\\Career\\SecondTest > second\n  1 tests/Feature/Career/SecondTest.php:2';
+ assert.deepEqual(parseLegacyNightlyFailures(ambiguous),[
+  {failed_test:'tests/Feature/Career/FirstTest.php',focused_test:'FirstTest'},
+  {failed_test:'tests/Feature/Career/SecondTest.php',focused_test:'SecondTest'},
+ ]);
+ assert.throws(()=>parseLegacyNightlyFailures('FAIL  Tests\\Feature\\KnownTest\nFAILED  Tests\\Feature\\Other…\n  at app/Service.php:1'),/UNKNOWN/);
+ assert.throws(()=>parseLegacyNightlyFailures('FAIL  Tests\\Feature\\KnownTest\nFAILED  Tests\\Feature\\KnownTest > first\n  at tests/Feature/KnownTest.php:1\nFAIL  Tests\\Unit\\MissingTest'),/UNKNOWN/);
  assert.throws(()=>parseLegacyNightlyFailures('FAILED  output was truncated'),/UNKNOWN/);
  const checks={sha:'b'.repeat(40),covered_classes:['Tests\\Feature\\PermissionTest','Tests\\Unit\\PolicyTest']};
  const result=assessNightly(run,full,legacy,checks);

@@ -91,6 +91,10 @@ if (process.argv[2] === 'build') {
 
 const nightlyPath = value => /(?:\bat\s+|\b\d+\s+)(tests\/[A-Za-z0-9_./-]+\.php):\d+/.exec(value)?.[1]
   ?? /\bfile=["'](tests\/[A-Za-z0-9_./-]+\.php)["']/.exec(value)?.[1];
+const pestClassPath = value => {
+  const name = /\b(Tests\\(?:Feature|Unit)\\[A-Za-z0-9_\\]+Test)\b/.exec(value)?.[1];
+  return name ? `${name.replace(/^Tests\\/, 'tests/').replaceAll('\\', '/')}.php` : null;
+};
 const focusedClass = (path, context = '') => {
   let focused = path.split('/').at(-1).replace('.php', '');
   if ((path === 'tests/Feature/SeoIntel/SeoPlatform09ScheduledCloseoutTest.php' && context.includes('Not to contain: runInBackground()'))
@@ -99,13 +103,33 @@ const focusedClass = (path, context = '') => {
 };
 export function parseLegacyNightlyFailures(log) {
   if (typeof log !== 'string' || !log.includes('FAILED')) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+  const declared = new Map();
+  for (const match of log.matchAll(/\bFAIL\s{2,}(Tests\\(?:Feature|Unit)\\[A-Za-z0-9_\\]+Test)\s*$/gm)) {
+    const path = pestClassPath(match[1]);
+    declared.set(path, match[1]);
+  }
   const blocks = log.split(/\bFAILED\s{2,}/).slice(1);
   if (!blocks.length) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
   const found = new Map();
+  const supported = new Set();
   for (const block of blocks) {
     const matches = [...block.matchAll(/(?:\bat\s+|\b\d+\s+)(tests\/[A-Za-z0-9_./-]+\.php):\d+/g)];
-    if (!matches.length) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
-    for (const match of matches) found.set(match[1], {failed_test:match[1], focused_test:focusedClass(match[1], block)});
+    if (matches.length) {
+      for (const match of matches) {
+        if (declared.size && !declared.has(match[1])) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+        supported.add(match[1]);
+        found.set(match[1], {failed_test:match[1], focused_test:focusedClass(match[1], block)});
+      }
+      continue;
+    }
+    const prefix = /\b(Tests\\(?:Feature|Unit)\\[A-Za-z0-9_\\]*)…/.exec(block)?.[1];
+    const candidates = prefix ? [...declared].filter(([,name]) => name.startsWith(prefix)) : [];
+    if (!candidates.length) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+    for (const [path] of candidates) supported.add(path);
+  }
+  if (declared.size) {
+    if ([...declared.keys()].some(path => !supported.has(path))) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+    return [...declared.keys()].map(path => ({failed_test:path, focused_test:focusedClass(path, log)}));
   }
   return [...found.values()];
 }

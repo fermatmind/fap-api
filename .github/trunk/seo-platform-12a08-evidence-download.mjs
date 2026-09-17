@@ -37,7 +37,9 @@ const nightlyRuns = api('actions/workflows/nightly.yml/runs?status=completed&per
 let nightly = null;
 for (const run of nightlyRuns) {
   const nightlyJobs = api(`actions/runs/${run.id}/jobs?per_page=100`).jobs;
-  if (!nightlyJobs.some(job=>job.name==='Full PHPUnit regression and performance contracts' && job.conclusion!=='skipped')) continue;
+  const fullJobs = nightlyJobs.filter(job=>job.name==='Full PHPUnit regression and performance contracts');
+  if (fullJobs.length !== 1 || fullJobs[0].conclusion === 'skipped') continue;
+  const fullJob = fullJobs[0];
   const listed = api(`actions/runs/${run.id}/artifacts?per_page=100`).artifacts;
   const artifact = selectNightlyArtifact(listed,run);
   let evidence;
@@ -51,7 +53,7 @@ for (const run of nightlyRuns) {
     if (!existsSync(junitPath)) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
     evidence={junit:readFileSync(junitPath,'utf8'),artifact_digest:artifact.digest};
   } else {
-    evidence={log:run.conclusion==='success' ? '' : execFileSync('gh',['run','view',String(run.id),'--log-failed'],{maxBuffer:32*1024*1024}).toString()};
+    evidence={log:fullJob.conclusion==='success' ? '' : execFileSync('gh',['api',`repos/${repo}/actions/jobs/${fullJob.id}/logs`],{maxBuffer:32*1024*1024}).toString()};
   }
   if (!checks && production.activation?.validation?.nightly_assessment?.run_id === run.id
     && MISSIONS.every(id=>mayCarry(production.activation,{production_sha:sha,version_vector:production.version_vector},id))) {
