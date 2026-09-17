@@ -6,6 +6,7 @@ namespace App\Console\Commands;
 
 use App\Services\SeoCouncil\Platform12\Platform12DailyScheduler;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Process;
 use Throwable;
 
@@ -49,6 +50,7 @@ final class SeoCouncilScheduledCommand extends Command
                 }
             } catch (Throwable) {
                 // No stderr, private paths or environment values enter receipts.
+                Log::warning('SEO_COUNCIL_SCHEDULED_IDENTITY_PROCESS_FAILED');
             }
             $this->line('{"status":"SCHEDULED_IDENTITY_HOLD","execution_allowed":false}');
 

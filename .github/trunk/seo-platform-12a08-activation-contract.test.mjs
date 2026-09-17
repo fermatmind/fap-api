@@ -59,16 +59,47 @@ test('existing workflows publish completed scoped evidence without runtime opera
  assert.match(deploy,/seo-council-a08-activation-\$\{\{/);
  const ci=readFileSync(new URL('../workflows/ci.yml',import.meta.url),'utf8');
  assert.match(ci,/--log-junit=/);assert.match(ci,/scoped-receipt/);
+ const nightly=readFileSync(new URL('../workflows/nightly.yml',import.meta.url),'utf8');
+ assert.match(nightly,/nightly-full-phpunit-\$\{\{ github\.sha \}\}-\$\{\{ github\.run_id \}\}/);
+ assert.match(nightly,/continue-on-error: true/);
+ assert.match(nightly,/steps\.full-tests\.outcome != 'success'/);
 });
-test('Nightly high-risk or unknown failures cannot hide behind daily or unrelated scoped tests',async()=>{
- const {assessNightly}=await import('./seo-platform-12a08-release.mjs');
+test('Nightly evidence accepts both Pest paths, deduplicates, and stays fail-closed',async()=>{
+ const {assessNightly,parseLegacyNightlyFailures,parseJUnitNightlyFailures,selectNightlyArtifact}=await import('./seo-platform-12a08-release.mjs');
  const run={id:1,head_sha:'a'.repeat(40)};
  const full=[{name:'Full PHPUnit regression and performance contracts',conclusion:'failure'}];
  assert.throws(()=>assessNightly(run,[{name:'CodeQL and Semgrep security scan',conclusion:'failure'}],'',{}),/HIGH_RISK/);
  assert.throws(()=>assessNightly(run,full,'FAILED  Test at tests/Feature/UnknownTest.php:12',{covered_classes:[]}),/UNKNOWN/);
- const result=assessNightly(run,full,'FAILED  Test at tests/Feature/PermissionTest.php:12',{sha:'b'.repeat(40),covered_classes:['Tests\\Feature\\PermissionTest']});
+ const legacy='FAILED  first\n  at tests/Feature/PermissionTest.php:12\nFAILED  second\n  1   tests/Feature/PermissionTest.php:18\n  2   tests/Unit/PolicyTest.php:9';
+ assert.deepEqual(parseLegacyNightlyFailures(legacy),[
+  {failed_test:'tests/Feature/PermissionTest.php',focused_test:'PermissionTest'},
+  {failed_test:'tests/Unit/PolicyTest.php',focused_test:'PolicyTest'},
+ ]);
+ assert.throws(()=>parseLegacyNightlyFailures('FAILED  output was truncated'),/UNKNOWN/);
+ const checks={sha:'b'.repeat(40),covered_classes:['Tests\\Feature\\PermissionTest','Tests\\Unit\\PolicyTest']};
+ const result=assessNightly(run,full,legacy,checks);
  assert.equal(result.disposition,'CURRENT_CANDIDATE_FOCUSED_REVALIDATION');
  assert.equal(result.check_scope,'weekly_full_checks');
+ assert.equal(result.evidence_source,'legacy_pest_log');
+ const junit='<?xml version="1.0"?><testsuites><testsuite><testcase name="failure" file="tests/Feature/PermissionTest.php"><failure>failed</failure></testcase><testcase name="error" file="tests/Unit/PolicyTest.php"><error>errored</error></testcase></testsuite></testsuites>';
+ assert.deepEqual(parseJUnitNightlyFailures(junit),[
+  {failed_test:'tests/Feature/PermissionTest.php',focused_test:'PermissionTest'},
+  {failed_test:'tests/Unit/PolicyTest.php',focused_test:'PolicyTest'},
+ ]);
+ const structured=assessNightly(run,full,{junit,artifact_digest:`sha256:${'c'.repeat(64)}`},checks);
+ assert.equal(structured.evidence_source,'junit');
+ assert.equal(structured.artifact_digest,`sha256:${'c'.repeat(64)}`);
+ const successJUnit='<testsuites><testsuite><testcase name="ok"/></testsuite></testsuites>';
+ assert.deepEqual(parseJUnitNightlyFailures(successJUnit),[]);
+ assert.equal(assessNightly(run,[],{junit:successJUnit,artifact_digest:`sha256:${'c'.repeat(64)}`},checks).status,'pass');
+ assert.throws(()=>assessNightly(run,full,{junit:'<testsuites><testcase>',artifact_digest:`sha256:${'c'.repeat(64)}`},checks),/UNKNOWN/);
+ assert.throws(()=>assessNightly(run,full,{junit:'<testsuites><testcase name="bad"><failure/></testcase></testsuites>',artifact_digest:`sha256:${'c'.repeat(64)}`},checks),/UNKNOWN/);
+ assert.throws(()=>assessNightly(run,full,{junit},checks),/ARTIFACT_BINDING/);
+ assert.equal(selectNightlyArtifact([],run),null);
+ const artifact={id:7,name:`nightly-full-phpunit-${run.head_sha}-${run.id}`,expired:false,digest:`sha256:${'d'.repeat(64)}`};
+ assert.equal(selectNightlyArtifact([artifact],run),artifact);
+ assert.throws(()=>selectNightlyArtifact([artifact,artifact],run),/BINDING/);
+ assert.throws(()=>selectNightlyArtifact([{...artifact,expired:true}],run),/BINDING/);
 });
 test('Current package body digests may change while schema, authority and identity stay bound',async()=>{
  const {contentIdentity}=await import('./seo-platform-12a08-activation.mjs');

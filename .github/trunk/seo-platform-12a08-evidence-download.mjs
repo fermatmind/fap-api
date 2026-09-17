@@ -1,7 +1,7 @@
 import { execFileSync } from 'node:child_process';
 import { writeFileSync, readFileSync, mkdirSync, existsSync } from 'node:fs';
 import { digest, mayCarry, MISSIONS } from './seo-platform-12a08-activation.mjs';
-import { verifyState, assessNightly } from './seo-platform-12a08-release.mjs';
+import { verifyState, assessNightly, selectNightlyArtifact } from './seo-platform-12a08-release.mjs';
 const repo = process.env.GITHUB_REPOSITORY;
 if (repo !== 'fermatmind/fap-api') throw new Error('REPOSITORY_HOLD');
 const sha = process.env.DEPLOY_SHA;
@@ -38,11 +38,25 @@ let nightly = null;
 for (const run of nightlyRuns) {
   const nightlyJobs = api(`actions/runs/${run.id}/jobs?per_page=100`).jobs;
   if (!nightlyJobs.some(job=>job.name==='Full PHPUnit regression and performance contracts' && job.conclusion!=='skipped')) continue;
-  const log = run.conclusion==='success' ? '' : execFileSync('gh',['run','view',String(run.id),'--log-failed'],{maxBuffer:32*1024*1024}).toString();
+  const listed = api(`actions/runs/${run.id}/artifacts?per_page=100`).artifacts;
+  const artifact = selectNightlyArtifact(listed,run);
+  let evidence;
+  if (artifact) {
+    const bytes = execFileSync('gh',['api',`repos/${repo}/actions/artifacts/${artifact.id}/zip`],{maxBuffer:64*1024*1024});
+    if (`sha256:${digest(bytes)}` !== artifact.digest) throw new Error('NIGHTLY_ARTIFACT_DIGEST_HOLD');
+    const directory=`nightly-${run.id}`;
+    writeFileSync(`${directory}.zip`,bytes);mkdirSync(directory,{recursive:true});
+    execFileSync('unzip',['-q',`${directory}.zip`,'-d',directory]);
+    const junitPath=`${directory}/nightly-full-phpunit.xml`;
+    if (!existsSync(junitPath)) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
+    evidence={junit:readFileSync(junitPath,'utf8'),artifact_digest:artifact.digest};
+  } else {
+    evidence={log:run.conclusion==='success' ? '' : execFileSync('gh',['run','view',String(run.id),'--log-failed'],{maxBuffer:32*1024*1024}).toString()};
+  }
   if (!checks && production.activation?.validation?.nightly_assessment?.run_id === run.id
     && MISSIONS.every(id=>mayCarry(production.activation,{production_sha:sha,version_vector:production.version_vector},id))) {
     nightly={...production.activation.validation.nightly_assessment,candidate_sha:sha,compatible_source_sha:production.activation.bound_production_sha};
-  } else { nightly = assessNightly(run,nightlyJobs,log,checks); }
+  } else { nightly = assessNightly(run,nightlyJobs,evidence,checks); }
   break;
 }
 if (!nightly) nightly = {status:'unavailable',disposition:'CURRENT_CANDIDATE_SCOPED_CHECKS_ONLY',candidate_sha:sha};

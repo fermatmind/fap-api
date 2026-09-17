@@ -642,7 +642,17 @@ jobs:
             tests/Feature/OpenApiDiffTest.php \
             tests/Feature/Ops/SeoUxImpl06AgentCouncilTest.php \
             tests/Feature/Ops/SeoAgentRolePresentationTest.php \
-            tests/Feature/Ops/SeoOperationsPageTest.php
+            tests/Feature/Ops/SeoOperationsPageTest.php \
+            tests/Feature/AssessmentFaqContentMigrationTest.php \
+            tests/Feature/AssessmentIntroContentMigrationTest.php \
+            tests/Feature/Career/CareerAiImpactAssetPreviewImportTest.php \
+            tests/Feature/Career/CareerDirectoryAuthorityApiTest.php \
+            tests/Feature/Career/CareerFilePageReaderTest.php \
+            tests/Feature/Career/CareerJobDetailApiTest.php \
+            tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php \
+            tests/Unit/Domain/Career/Compilation/CareerPresentationV2CompilerTest.php \
+            tests/Unit/Domain/Career/Display/CareerAccountantsZhFactsTest.php \
+            tests/Unit/Domain/Personality/Current/PersonalityCurrentAuthorityPackageTest.php
           find app/Services/SeoCouncil app/Console/Commands/SeoCouncil*.php app/Console/Commands/SeoCompetitiveEvidence*.php app/Http/Middleware/EnsureSeoCouncilMissionAuthorized.php app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoCouncilMissionController.php scripts/seo/*seo_council* database/migrations/seo_intel/2026_08_29_030000_create_seo_council_runtime_tables.php -type f -name '*.php' -print0 | xargs -0 -n1 php -l >/dev/null
           ./vendor/bin/pint --test \
             app/Services/SeoCouncil \
@@ -668,6 +678,21 @@ jobs:
             tests/Feature/SeoIntel/SeoPlatform11F*.php \
             tests/Feature/SeoIntel/SeoPlatform11G*.php \
             tests/Feature/SeoIntel/SeoPlatform11H*.php \
+            app/Domain/Career/Display/CareerPageProjector.php \
+            app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php \
+            app/Services/Career/CareerFilePageReader.php \
+            app/Support/PublicProjectionCache.php \
+            tests/Feature/AssessmentFaqContentMigrationTest.php \
+            tests/Feature/AssessmentIntroContentMigrationTest.php \
+            tests/Feature/Career/CareerAiImpactAssetPreviewImportTest.php \
+            tests/Feature/Career/CareerDirectoryAuthorityApiTest.php \
+            tests/Feature/Career/CareerFilePageReaderTest.php \
+            tests/Feature/Career/CareerJobDetailApiTest.php \
+            tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php \
+            tests/Feature/Career/CareerSearchEntryQualityBatchTest.php \
+            tests/Unit/Domain/Career/Compilation/CareerPresentationV2CompilerTest.php \
+            tests/Unit/Domain/Career/Display/CareerAccountantsZhFactsTest.php \
+            tests/Unit/Domain/Personality/Current/PersonalityCurrentAuthorityPackageTest.php \
             tests/Feature/SeoIntel/SeoPlatform11I*.php \
             tests/Feature/SeoIntel/SeoPlatform11J*.php \
             tests/Feature/SeoIntel/SeoPlatform11K*.php \

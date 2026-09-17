@@ -75,7 +75,9 @@ test('daily operations and weekly complete checks have independent schedules and
     assert.ok(jobSection(job, next).includes(`if: github.event_name == 'schedule' && github.event.schedule == '${dailySchedule}'`));
   }
   assert.ok(jobSection('nightly-summary').includes(`if: always() && github.event_name == 'schedule' && (github.event.schedule == '${dailySchedule}' || github.event.schedule == '${weeklySchedule}')`));
-  assert.doesNotMatch(workflow, /workflow_dispatch:|continue-on-error:/);
+  assert.doesNotMatch(workflow, /workflow_dispatch:/);
+  assert.equal((workflow.match(/continue-on-error: true/g) ?? []).length, 1);
+  assert.match(jobSection('full-phpunit', 'codeql'), /id: full-tests[\s\S]*continue-on-error: true[\s\S]*steps\.full-tests\.outcome != 'success'/);
 });
 
 function runSummary(schedule, overrides = {}) {

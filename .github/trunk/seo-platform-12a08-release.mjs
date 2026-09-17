@@ -89,24 +89,63 @@ if (process.argv[2] === 'build') {
   writeFileSync('activation.json',bytes);writeFileSync('activation.json.sha256',digest(bytes)+'\n');
 }
 
-export function assessNightly(run, jobs, log, checks) {
-  const failed = jobs.filter(job=>job.conclusion==='failure' && job.name !== 'Final failure-domain receipt');
-  if (!failed.length) return {run_id:run.id,sha:run.head_sha,check_scope:'weekly_full_checks',status:'pass',disposition:'INDEPENDENT_HEALTH_CHECK'};
-  if (failed.some(job=>job.name !== 'Full PHPUnit regression and performance contracts')) throw new Error('NIGHTLY_HIGH_RISK_FOCUSED_REVALIDATION_REQUIRED');
-  const failures = log.split(/\bFAILED  /).slice(1);
-  if (!failures.length) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
-  const covered = checks?.covered_classes ?? [];
-  const revalidated = failures.map(block=>{
-    const path = / at (tests\/[A-Za-z0-9_/]+\.php):/.exec(block)?.[1];
+const nightlyPath = value => /(?:\bat\s+|\b\d+\s+)(tests\/[A-Za-z0-9_./-]+\.php):\d+/.exec(value)?.[1]
+  ?? /\bfile=["'](tests\/[A-Za-z0-9_./-]+\.php)["']/.exec(value)?.[1];
+const focusedClass = (path, context = '') => {
+  let focused = path.split('/').at(-1).replace('.php', '');
+  if ((path === 'tests/Feature/SeoIntel/SeoPlatform09ScheduledCloseoutTest.php' && context.includes('Not to contain: runInBackground()'))
+    || (path === 'tests/Feature/SeoIntel/SeoPlatform10ProductionCloseoutContractTest.php' && context.includes("To contain: after('guard:no-pending-seo-intel-migrations', 'seo:platform-10-material-backfill')"))) focused = 'SeoPlatform12A08LegacyScheduleContractTest';
+  return focused;
+};
+export function parseLegacyNightlyFailures(log) {
+  if (typeof log !== 'string' || !log.includes('FAILED')) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+  const blocks = log.split(/\bFAILED\s{2,}/).slice(1);
+  if (!blocks.length) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+  const found = new Map();
+  for (const block of blocks) {
+    const matches = [...block.matchAll(/(?:\bat\s+|\b\d+\s+)(tests\/[A-Za-z0-9_./-]+\.php):\d+/g)];
+    if (!matches.length) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+    for (const match of matches) found.set(match[1], {failed_test:match[1], focused_test:focusedClass(match[1], block)});
+  }
+  return [...found.values()];
+}
+export function parseJUnitNightlyFailures(xml) {
+  if (typeof xml !== 'string' || !/<testsuites?\b/.test(xml) || !/<\/testsuites?>\s*$/.test(xml.trim())) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+  const found = new Map();
+  for (const match of xml.matchAll(/<testcase\b([^>]*)>([\s\S]*?)<\/testcase>/g)) {
+    const [, attributes, body] = match;
+    if (!/<(?:failure|error)\b/.test(body)) continue;
+    const path = /\bfile=["'](tests\/[A-Za-z0-9_./-]+\.php)["']/.exec(attributes)?.[1] ?? nightlyPath(body);
     if (!path) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
-    let focused = path.split('/').at(-1).replace('.php','');
-    if ((path === 'tests/Feature/SeoIntel/SeoPlatform09ScheduledCloseoutTest.php' && block.includes('Not to contain: runInBackground()'))
-      || (path === 'tests/Feature/SeoIntel/SeoPlatform10ProductionCloseoutContractTest.php' && block.includes("To contain: after('guard:no-pending-seo-intel-migrations', 'seo:platform-10-material-backfill')"))) focused='SeoPlatform12A08LegacyScheduleContractTest';
-    return {failed_test:path,focused_test:focused};
-  });
+    found.set(path, {failed_test:path, focused_test:focusedClass(path, body)});
+  }
+  return [...found.values()];
+}
+export function selectNightlyArtifact(artifacts, run) {
+  const name = `nightly-full-phpunit-${run.head_sha}-${run.id}`;
+  const matching = artifacts.filter(item => item.name === name);
+  if (!matching.length) return null;
+  if (matching.length !== 1 || matching[0].expired || !/^sha256:[a-f0-9]{64}$/.test(matching[0].digest ?? '')) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
+  return matching[0];
+}
+export function assessNightly(run, jobs, evidence, checks) {
+  const failed = jobs.filter(job=>job.conclusion==='failure' && job.name !== 'Final failure-domain receipt');
+  const structured = typeof evidence === 'object' && evidence !== null ? evidence : {log:evidence};
+  const source = structured.junit !== undefined ? 'junit' : 'legacy_pest_log';
+  if (source === 'junit' && !/^sha256:[a-f0-9]{64}$/.test(structured.artifact_digest ?? '')) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
+  const junitFailures = source === 'junit' ? parseJUnitNightlyFailures(structured.junit) : null;
+  const binding = structured.artifact_digest ? {artifact_digest:structured.artifact_digest} : {};
+  if (!failed.length) {
+    if (junitFailures?.length) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+    return {run_id:run.id,sha:run.head_sha,check_scope:'weekly_full_checks',status:'pass',disposition:'INDEPENDENT_HEALTH_CHECK',evidence_source:source,...binding};
+  }
+  if (failed.some(job=>job.name !== 'Full PHPUnit regression and performance contracts')) throw new Error('NIGHTLY_HIGH_RISK_FOCUSED_REVALIDATION_REQUIRED');
+  const revalidated = junitFailures ?? parseLegacyNightlyFailures(structured.log);
+  if (!revalidated.length) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+  const covered = checks?.covered_classes ?? [];
   if (!revalidated.every(item=>covered.some(name=>name.endsWith(item.focused_test)))) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
   return {run_id:run.id,sha:run.head_sha,check_scope:'weekly_full_checks',status:'failure',
-    disposition:'CURRENT_CANDIDATE_FOCUSED_REVALIDATION',candidate_sha:checks.sha,revalidated};
+    disposition:'CURRENT_CANDIDATE_FOCUSED_REVALIDATION',candidate_sha:checks.sha,evidence_source:source,...binding,revalidated};
 }
 
 if (process.argv[2] === 'bind-controlled') {
