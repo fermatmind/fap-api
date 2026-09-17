@@ -4289,20 +4289,38 @@ if [ "$challenge_curl_status" -ne 0 ] || [ "$challenge_status" != 404 ]; then
 fi
 
 if [ "$verify_renewal" = 1 ]; then
+    renewal_failure_reason='CERTBOT_RENEWAL_CHECK_UNKNOWN'
     verify_certbot_renewal() {
-        sudo -n /usr/bin/systemctl is-enabled --quiet certbot.timer || return $?
-        sudo -n /usr/bin/systemctl is-active --quiet certbot.timer || return $?
-        next_run="$(sudo -n /usr/bin/systemctl show certbot.timer --property=NextElapseUSecRealtime --value)" || return $?
-        test -n "$next_run" || return $?
-        test "$next_run" != n/a || return $?
-        sudo -n test -f "$renewal_config" || return $?
-        sudo -n grep -Eq '^[[:space:]]*authenticator[[:space:]]*=[[:space:]]*webroot[[:space:]]*$' "$renewal_config" || return $?
-        sudo -n grep -Fq "webroot_path = ${certbot_webroot}," "$renewal_config" || return $?
+        sudo -n /usr/bin/systemctl is-enabled --quiet certbot.timer \
+            || { renewal_failure_reason='CERTBOT_TIMER_NOT_ENABLED'; return 1; }
+        sudo -n /usr/bin/systemctl is-active --quiet certbot.timer \
+            || { renewal_failure_reason='CERTBOT_TIMER_NOT_ACTIVE'; return 1; }
+        next_run="$(sudo -n /usr/bin/systemctl show certbot.timer --property=NextElapseUSecRealtime --value)" \
+            || { renewal_failure_reason='CERTBOT_TIMER_SCHEDULE_UNAVAILABLE'; return 1; }
+        test -n "$next_run" && test "$next_run" != n/a \
+            || { renewal_failure_reason='CERTBOT_TIMER_SCHEDULE_INVALID'; return 1; }
+        sudo -n test -f "$renewal_config" \
+            || { renewal_failure_reason='CERTBOT_RENEWAL_CONFIG_MISSING'; return 1; }
+        sudo -n grep -Eq '^[[:space:]]*authenticator[[:space:]]*=[[:space:]]*webroot[[:space:]]*$' "$renewal_config" \
+            || { renewal_failure_reason='CERTBOT_AUTHENTICATOR_INVALID'; return 1; }
+        sudo -n grep -Fq "webroot_path = ${certbot_webroot}," "$renewal_config" \
+            || { renewal_failure_reason='CERTBOT_WEBROOT_MISMATCH'; return 1; }
         sudo -n find /etc/letsencrypt/renewal-hooks/deploy -maxdepth 1 -type f -perm -111 \
-            -exec grep -El 'systemctl[[:space:]]+reload[[:space:]]+nginx|nginx[[:space:]]+-s[[:space:]]+reload' {} + | grep -q . || return $?
-        timeout --signal=TERM --kill-after=15s 600s sudo -n /usr/bin/certbot renew \
-            --cert-name "$api_host" --dry-run --non-interactive \
-            --no-random-sleep-on-renew > "$tmp_certbot" 2>&1 || return $?
+            -exec grep -El 'systemctl[[:space:]]+reload[[:space:]]+nginx|nginx[[:space:]]+-s[[:space:]]+reload' {} + | grep -q . \
+            || { renewal_failure_reason='CERTBOT_RELOAD_HOOK_MISSING'; return 1; }
+
+        for attempt in 1 2; do
+            if timeout --signal=TERM --kill-after=15s 600s sudo -n /usr/bin/certbot renew \
+                --cert-name "$api_host" --dry-run --non-interactive \
+                --no-random-sleep-on-renew > "$tmp_certbot" 2>&1; then
+                renewal_failure_reason=''
+                return 0
+            fi
+            test "$attempt" -eq 2 || sleep 10
+        done
+
+        renewal_failure_reason='CERTBOT_DRY_RUN_FAILED'
+        return 1
     }
 
     set +e
@@ -4310,7 +4328,7 @@ if [ "$verify_renewal" = 1 ]; then
     renewal_status=$?
     set -e
     if [ "$renewal_status" -ne 0 ]; then
-        echo "API Certbot renewal verification failed" >&2
+        echo "API Certbot renewal verification failed reason=${renewal_failure_reason}" >&2
         restore_api_http_vhost "$renewal_status"
     fi
     echo "API Certbot renewal: timer, webroot, reload hook, and dry-run verified"

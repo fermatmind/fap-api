@@ -49,6 +49,10 @@ test("infrastructure releases verify Certbot renewal through the protected deplo
   assert.match(task, /timeout --signal=TERM --kill-after=15s 600s sudo -n \/usr\/bin\/certbot renew/);
   assert.match(task, /--no-random-sleep-on-renew/);
   assert.match(task, /> "\$tmp_certbot" 2>&1/);
+  assert.match(task, /for attempt in 1 2/);
+  assert.match(task, /CERTBOT_DRY_RUN_FAILED/);
+  assert.match(task, /CERTBOT_WEBROOT_MISMATCH/);
+  assert.match(task, /verification failed reason=\$\{renewal_failure_reason\}/);
 });
 
 test("the API redirect runs before the ordinary Nginx reload", () => {
