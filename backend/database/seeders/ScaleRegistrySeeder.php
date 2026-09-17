@@ -847,6 +847,12 @@ final class ScaleRegistrySeeder extends Seeder
                         $content[$locale][$key] = $value;
                     }
                 }
+                $restoredAttributes = [
+                    'code' => $attributes['code'],
+                    'content_i18n_json' => $content,
+                ];
+                $this->applyLandingContentSeo($restoredAttributes);
+                $content = $restoredAttributes['content_i18n_json'];
                 DB::table($table)->where('org_id', 0)->where('code', $attributes['code'])->update([
                     'content_i18n_json' => json_encode($content, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
                 ]);

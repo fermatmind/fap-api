@@ -188,6 +188,13 @@ class AssessmentEnglishLandingPublicationTest extends TestCase
                 $value = json_decode(DB::table($table)->where('code', $code)->value('content_i18n_json'), true);
                 $this->assertSame('Later English revision', $value['en']['why_choose']['title']);
                 $this->assertSame('Later FAQ revision', $value['en']['faq'][0]['a']);
+                if ($code === 'RIASEC') {
+                    $landingSeo = json_decode(file_get_contents(database_path('data/assessment_landing_content_seo_20260917.json')), true, 512, JSON_THROW_ON_ERROR);
+                    foreach ($landingSeo['scales']['RIASEC']['locales'] as $locale => $localizedPackage) {
+                        $this->assertSame($localizedPackage['version_comparison'], $value[$locale]['version_comparison']);
+                        $this->assertSame($localizedPackage['version_item'], collect($value[$locale]['why_choose']['items'])->firstWhere('id', 'versions'));
+                    }
+                }
             }
         }
     }
