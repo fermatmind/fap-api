@@ -216,7 +216,10 @@ jobs:
         run: |
           set -euo pipefail
           mapfile -t migrations < <(git diff --diff-filter=AM --name-only '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' -- 'backend/database/migrations/*.php' 'backend/database/migrations/**/*.php')
-          test "${#migrations[@]}" -gt 0
+          if [ "${#migrations[@]}" -eq 0 ]; then
+            echo "No added or modified migrations remain in the effective release range."
+            exit 0
+          fi
           node .github/trunk/validate-migrations.mjs "${migrations[@]}"
           cd backend
           mapfile -t default_migrations < <(printf '%s\n' "${migrations[@]}" | grep -E '^backend/database/migrations/[^/]+\.php$' || true)

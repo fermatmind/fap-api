@@ -90,4 +90,6 @@ test('CI uses the release-aware scope for downstream test and migration selectio
   assert.match(workflow, /node \.github\/trunk\/classify-release\.mjs/);
   assert.match(workflow, /base_sha="\$\(jq -r \.scope\.validation_base_sha/);
   assert.match(workflow, /PUSH_BEFORE: \$\{\{ github\.event\.before \}\}/);
+  assert.match(workflow, /if \[ "\$\{#migrations\[@\]\}" -eq 0 \]; then/);
+  assert.doesNotMatch(workflow, /test "\$\{#migrations\[@\]\}" -gt 0/);
 });
