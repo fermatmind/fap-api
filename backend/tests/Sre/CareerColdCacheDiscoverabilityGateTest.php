@@ -20,6 +20,8 @@ final class CareerColdCacheDiscoverabilityGateTest extends TestCase
 
         self::assertStringContainsString("CareerGenerationAuthorityLoader')->loadStrict()", $source);
         self::assertStringContainsString("['pointer']['artifacts']['projection']['sha256']", $source);
+        self::assertStringContainsString("'App\\\\Support\\\\PublicProjectionCache'", $source);
+        self::assertStringNotContainsString("'Illuminate\\\\Support\\\\Facades\\\\Cache'", $source);
         self::assertStringNotContainsString("career_runtime_publish_projection';", $source);
         self::assertStringNotContainsString('filemtime(', $source);
     }

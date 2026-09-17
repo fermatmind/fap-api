@@ -477,7 +477,10 @@ final class CareerColdCacheDiscoverabilityRunner
                     $runtimeItems,
                     static fn (string $slug, string $locale): bool => $discoverabilityGate->allows($slug, $locale),
                 );
-                $cacheFacade = 'Illuminate\\Support\\Facades\\Cache';
+                // Read through the same public-projection router used by the
+                // sitemap controller. In primary/isolated mode the default
+                // Laravel cache store is intentionally no longer authoritative.
+                $cacheFacade = 'App\\Support\\PublicProjectionCache';
                 $sitemapController = 'App\\Http\\Controllers\\API\\V0_5\\SEO\\SitemapSourceController';
                 $payload = $cacheFacade::get($sitemapController::CACHE_KEY_FRESH);
                 $snapshot['sitemap'] = CareerColdCacheDiscoverabilityValidator::sitemapSnapshot(
