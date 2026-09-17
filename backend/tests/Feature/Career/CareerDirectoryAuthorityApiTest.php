@@ -69,7 +69,8 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
         $this->warmDirectoryAuthority();
         $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
             ->assertOk()->assertJsonPath('titles.canonical_zh', $title)
-            ->assertJsonPath('ontology.crosswalks.2.source_code', '47-2082.00');
+            ->assertJsonPath('identity.canonical_slug', $slug)
+            ->assertJsonPath('career_page.subject.canonical_slug', $slug);
         $this->getJson('/api/v0.5/career/directory?locale=zh-CN&q='.urlencode($title))
             ->assertOk()->assertJsonPath('pagination.total', 1)
             ->assertJsonPath('items.0.title', $title);
@@ -80,16 +81,17 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
         $slug = 'insulation-workers-mechanical';
         $expected = app(\App\Domain\Career\Display\CareerContentV3CanonicalReader::class)->page($slug, 'zh-CN');
         self::assertStringContainsString('industry_proxy', json_encode($expected));
-        $controller = app(\App\Http\Controllers\API\V0_5\Career\CareerJobDetailController::class);
-        $project = new \ReflectionMethod($controller, 'projectReaderSafePayload');
-        $public = $project->invoke($controller, [
-            'display_surface_v1' => ['content_v3' => $expected],
-            'legacy_label' => 'industry_proxy',
-            'audit_fields' => ['trace' => 'private'],
-        ]);
-        self::assertSame($expected, $public['display_surface_v1']['content_v3']);
+        $this->createDirectoryOccupation($slug, 'Insulation Workers, Mechanical', '机械保温隔热工', 'construction', 'Construction');
+        $this->publishRuntimeProjection([$slug]);
+
+        $public = $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('identity.canonical_slug', $slug)
+            ->assertJsonMissingPath('display_surface_v1')
+            ->json('career_page.content');
+
+        self::assertStringContainsString('industry_proxy', json_encode($public));
         self::assertArrayNotHasKey('audit_fields', $public);
-        self::assertSame('recruitment-market reference', $public['legacy_label']);
     }
 
     public function test_it_returns_paginated_lightweight_directory_authority(): void

@@ -67,6 +67,14 @@ final class CareerAccountantsZhFactsTest extends TestCase
         self::assertFalse($sources->has('source-4'));
 
         foreach ($sources as $source) {
+            if ($source['url'] === null) {
+                self::assertSame('source-fermatmind-ai-rubric', $source['id']);
+                self::assertSame('FermatMind 任务级 rubric', $source['publisher']);
+                self::assertNotSame('', trim($source['limitation']));
+                self::assertNotSame([], $source['details']);
+
+                continue;
+            }
             foreach (['publisher', 'market', 'period', 'evidence_type', 'scope', 'limitation', 'accessed_at'] as $field) {
                 self::assertIsString($source[$field] ?? null, "{$source['id']} 缺少 {$field}");
                 self::assertNotSame('', trim($source[$field]), "{$source['id']} 的 {$field} 为空");

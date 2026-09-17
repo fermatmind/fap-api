@@ -20,12 +20,18 @@ final class CareerFilePageReader
         if (! $this->publication->jobDetailProjectionItemIsPublished($projection)) {
             return null;
         }
-        $page = $this->pages->read($slug, $locale);
-        // No pointer or legacy HTML can shadow the installed file contract.
-        $key = self::cacheKey($page);
+        $entry = $this->pages->fileEntry($slug, $locale);
+        $sourceHash = (string) $entry['source_content_sha256'];
+        $key = self::cacheKeyFromIdentity($slug, $locale, $sourceHash);
         $cached = Cache::get($key);
-        if ($cacheWrite && (! is_array($cached) || $cached !== $page)) {
-            Cache::put($key, $page, 86400);
+        if ($this->validCachedPage($cached, $slug, $locale, $sourceHash)) {
+            $page = $cached;
+        } else {
+            // No pointer or legacy HTML can shadow the installed file contract.
+            $page = $this->pages->read($slug, $locale);
+            if ($cacheWrite) {
+                Cache::put($key, $page, 86400);
+            }
         }
         $occupation = Occupation::query()->with(['aliases', 'crosswalks'])->where('canonical_slug', $slug)->first();
         $path = '/'.($locale === 'zh-CN' ? 'zh' : 'en').'/career/jobs/'.$slug;
@@ -58,7 +64,28 @@ final class CareerFilePageReader
 
     public static function cacheKey(array $page): string
     {
-        return 'career:page:'.CareerPageProjector::VERSION.':'.$page['subject']['canonical_slug'].':'.$page['locale'].':'.$page['source_content_sha256'];
+        return self::cacheKeyFromIdentity(
+            (string) $page['subject']['canonical_slug'],
+            (string) $page['locale'],
+            (string) $page['source_content_sha256'],
+        );
+    }
+
+    private static function cacheKeyFromIdentity(string $slug, string $locale, string $sourceHash): string
+    {
+        return 'career:page:'.CareerPageProjector::VERSION.":{$slug}:{$locale}:{$sourceHash}";
+    }
+
+    private function validCachedPage(mixed $page, string $slug, string $locale, string $sourceHash): bool
+    {
+        return is_array($page)
+            && ($page['contract_version'] ?? null) === CareerPageProjector::VERSION
+            && ($page['locale'] ?? null) === $locale
+            && data_get($page, 'subject.canonical_slug') === $slug
+            && ($page['source_content_sha256'] ?? null) === $sourceHash
+            && is_array($page['content'] ?? null)
+            && data_get($page, 'content.subject.canonical_slug') === $slug
+            && data_get($page, 'content.source_content_sha256') === $sourceHash;
     }
 
     public function seo(array $bundle): array

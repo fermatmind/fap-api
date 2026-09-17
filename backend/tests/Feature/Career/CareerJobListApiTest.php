@@ -296,7 +296,8 @@ final class CareerJobListApiTest extends TestCase
             ->assertOk()
             ->assertJsonPath('identity.canonical_slug', 'acupuncturists')
             ->assertJsonPath('seo_contract.index_eligible', true)
-            ->assertJsonPath('display_surface_v1.surface_version', 'display.surface.v1');
+            ->assertJsonPath('career_page.contract_version', 'career.detail.page.v1')
+            ->assertJsonMissingPath('display_surface_v1');
     }
 
     public function test_directory_draft_display_asset_list_work_stays_bounded(): void

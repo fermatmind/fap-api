@@ -62,10 +62,11 @@ final class CareerFilePageReaderTest extends TestCase
         $times = [];
         for ($i = 0; $i < 10; $i++) {
             $start = microtime(true);
-            $this->getJson('/api/v0.5/career/jobs/actors?locale=zh-CN')->assertOk()
+            $response = $this->getJson('/api/v0.5/career/jobs/actors?locale=zh-CN');
+            $times[] = (microtime(true) - $start) * 1000;
+            $response->assertOk()
                 ->assertJsonPath('career_page.subject.canonical_slug', 'actors')
                 ->assertJsonMissing(['poison' => 'old database prose']);
-            $times[] = (microtime(true) - $start) * 1000;
         }
         sort($times);
         self::assertLessThan(400, $times[8]);

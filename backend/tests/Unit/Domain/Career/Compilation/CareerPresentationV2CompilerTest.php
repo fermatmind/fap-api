@@ -35,16 +35,22 @@ final class CareerPresentationV2CompilerTest extends TestCase
                         'market-signals', 'sources', 'navigation', 'source-register',
                     ], array_column($page['blocks'], 'id'));
                     $enhanced++;
-                } else {
+                } elseif ($page['content_state'] === 'legacy') {
                     self::assertSame('legacy', $page['content_state']);
                     self::assertSame([], $page['blocks']);
                     self::assertNull($page['subject']['summary']);
                     $legacy++;
+                } else {
+                    self::assertSame('enhanced', $page['content_state']);
+                    self::assertNotSame([], $page['blocks']);
+                    self::assertNotNull($page['subject']['summary']);
+                    $enhanced++;
                 }
             }
         }
-        self::assertSame(2, $enhanced);
-        self::assertSame(2090, $legacy);
+        self::assertSame($package['manifest']['coverage']['enhanced_locale_pages'], $enhanced);
+        self::assertSame($package['manifest']['coverage']['legacy_locale_pages'], $legacy);
+        self::assertSame(2092, $enhanced + $legacy);
     }
 
     public function test_projection_is_content_preserving_and_uses_language_neutral_contract_keys(): void

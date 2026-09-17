@@ -1143,7 +1143,7 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
         $this->assertStringContainsString('maintenance risk', $enText);
     }
 
-    public function test_ai_impact_preview_asset_can_provide_restricted_detail_shell_when_bundle_is_missing(): void
+    public function test_current_file_page_remains_authoritative_when_preview_asset_exists(): void
     {
         Config::set('career_ai_impact_assets.staging_preview_enabled', true);
         Config::set('career_ai_impact_assets.preview_slugs', ['emergency-medicine-physicians']);
@@ -1177,13 +1177,10 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
         $response = $this->getJson('/api/v0.5/career/jobs/emergency-medicine-physicians?locale=en')
             ->assertOk()
             ->assertJsonPath('identity.canonical_slug', 'emergency-medicine-physicians')
-            ->assertJsonPath('display_surface_v1.surface_version', 'display.surface.v1')
-            ->assertJsonPath('display_surface_v1.status', 'ready_for_pilot')
-            ->assertJsonPath('display_surface_v1.subject.canonical_slug', 'emergency-medicine-physicians')
-            ->assertJsonPath('display_surface_v1.page.content.path', '/en/career/jobs/emergency-medicine-physicians')
-            ->assertJsonPath('seo_contract.index_eligible', false)
-            ->assertJsonPath('seo_contract.robots_policy', 'noindex,follow')
-            ->assertJsonPath('display_surface_v1.claim_permissions.allow_strong_claim', false);
+            ->assertJsonPath('career_page.subject.canonical_slug', 'emergency-medicine-physicians')
+            ->assertJsonPath('career_page.locale', 'en')
+            ->assertJsonPath('seo_contract.canonical_path', '/en/career/jobs/emergency-medicine-physicians')
+            ->assertJsonMissingPath('display_surface_v1');
 
         $encoded = json_encode($response->json(), JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
         $this->assertStringNotContainsString('evidence_id', $encoded);
@@ -1231,7 +1228,7 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
             ->assertNotFound();
     }
 
-    public function test_ai_impact_preview_detail_shell_covers_preview_slugs_without_standard_detail_bundles(): void
+    public function test_current_file_pages_cover_preview_slugs_without_legacy_detail_bundles(): void
     {
         $slugs = [
             'emergency-medicine-physicians',
@@ -1286,14 +1283,16 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
             $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
                 ->assertOk()
                 ->assertJsonPath('identity.canonical_slug', $slug)
-                ->assertJsonPath('display_surface_v1.subject.canonical_slug', $slug)
-                ->assertJsonPath('display_surface_v1.page.content.path', '/zh/career/jobs/'.$slug);
+                ->assertJsonPath('career_page.subject.canonical_slug', $slug)
+                ->assertJsonPath('seo_contract.canonical_path', '/zh/career/jobs/'.$slug)
+                ->assertJsonMissingPath('display_surface_v1');
 
             $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=en')
                 ->assertOk()
                 ->assertJsonPath('identity.canonical_slug', $slug)
-                ->assertJsonPath('display_surface_v1.subject.canonical_slug', $slug)
-                ->assertJsonPath('display_surface_v1.page.content.path', '/en/career/jobs/'.$slug);
+                ->assertJsonPath('career_page.subject.canonical_slug', $slug)
+                ->assertJsonPath('seo_contract.canonical_path', '/en/career/jobs/'.$slug)
+                ->assertJsonMissingPath('display_surface_v1');
         }
     }
 

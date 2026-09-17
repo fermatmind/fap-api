@@ -77,13 +77,12 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
         $this->assertFalse($payload['review_evidence_bound']);
         $this->assertDatabaseCount('review_attestations', 0);
 
-        $this->getJson('/api/v0.5/career/jobs/'.self::SLUG.'?locale=en')
-            ->assertOk()
-            ->assertJsonPath('trust_manifest.review_state', 'unknown')
-            ->assertJsonPath('trust_manifest.last_reviewed_at', null)
-            ->assertJsonPath('search_entry_tier', 'ineligible')
-            ->assertJsonPath('search_entry_authority.review_state', 'unknown')
-            ->assertJsonPath('search_entry_authority.search_entry_eligible', false);
+        $detail = $this->projectedDetail('en');
+        $this->assertSame('unknown', data_get($detail, 'trust_manifest.review_state'));
+        $this->assertNull(data_get($detail, 'trust_manifest.last_reviewed_at'));
+        $this->assertSame('ineligible', data_get($detail, 'search_entry_tier'));
+        $this->assertSame('unknown', data_get($detail, 'search_entry_authority.review_state'));
+        $this->assertFalse(data_get($detail, 'search_entry_authority.search_entry_eligible'));
         $this->getJson('/api/v0.5/career/jobs?locale=en')
             ->assertOk()
             ->assertJsonPath('items.0.trust_summary.review_state', 'unknown')
@@ -121,17 +120,16 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
             packageSha256: $package['package_sha256'],
         );
 
-        $detail = $this->getJson('/api/v0.5/career/jobs/'.self::SLUG.'?locale=en')
-            ->assertOk()
-            ->assertJsonPath('trust_manifest.review_state', 'approved')
-            ->assertJsonPath('trust_manifest.reviewer', null)
-            ->assertJsonPath('search_entry_tier', 'ineligible')
-            ->assertJsonPath('search_entry_authority.content_quality_tier', 'unknown')
-            ->assertJsonPath(
-                'search_entry_authority.reason_codes',
-                ['content_quality_tier_unknown', 'publish_track_unsupported'],
-            )
-            ->assertJsonPath('search_entry_authority.publish_track', 'runtime_publish_projection');
+        $detail = $this->projectedDetail('en');
+        $this->assertSame('approved', data_get($detail, 'trust_manifest.review_state'));
+        $this->assertNull(data_get($detail, 'trust_manifest.reviewer'));
+        $this->assertSame('ineligible', data_get($detail, 'search_entry_tier'));
+        $this->assertSame('unknown', data_get($detail, 'search_entry_authority.content_quality_tier'));
+        $this->assertSame(
+            ['content_quality_tier_unknown', 'publish_track_unsupported'],
+            data_get($detail, 'search_entry_authority.reason_codes'),
+        );
+        $this->assertSame('runtime_publish_projection', data_get($detail, 'search_entry_authority.publish_track'));
         $index = $this->getJson('/api/v0.5/career/jobs?locale=en')
             ->assertOk()
             ->assertJsonPath('items.0.trust_summary.review_state', 'approved')
@@ -142,7 +140,7 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
             ->assertOk()
             ->assertJsonPath('items.0.trust_summary.review_state', 'approved');
 
-        foreach ([$detail->getContent(), $index->getContent()] as $publicJson) {
+        foreach ([json_encode($detail, JSON_THROW_ON_ERROR), $index->getContent()] as $publicJson) {
             $this->assertStringNotContainsString('attested_by_admin_user_id', $publicJson);
             $this->assertStringNotContainsString('target_set_sha256', $publicJson);
             $this->assertStringNotContainsString('package_sha256', $publicJson);
@@ -170,10 +168,9 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
             );
         }
 
-        $this->getJson('/api/v0.5/career/jobs/'.self::SLUG.'?locale=en')
-            ->assertOk()
-            ->assertJsonPath('trust_manifest.review_state', 'unknown')
-            ->assertJsonPath('trust_manifest.last_reviewed_at', null);
+        $detail = $this->projectedDetail('en');
+        $this->assertSame('unknown', data_get($detail, 'trust_manifest.review_state'));
+        $this->assertNull(data_get($detail, 'trust_manifest.last_reviewed_at'));
 
         $package = app(CareerPilotReviewEvidenceBridge::class)->buildPackage([self::SLUG]);
         app(CareerSeoReviewAttestationService::class)->createAndBindReview(
@@ -188,15 +185,11 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
 
         $this->publishBilingualDetails('changed visible English content');
 
-        $this->getJson('/api/v0.5/career/jobs/'.self::SLUG.'?locale=zh-CN')
-            ->assertOk()
-            ->assertJsonPath('trust_manifest.review_state', 'unknown')
-            ->assertJsonPath('trust_manifest.last_reviewed_at', null)
-            ->assertJsonPath('search_entry_tier', 'ineligible')
-            ->assertJsonPath(
-                'search_entry_authority.reason_codes.0',
-                'reviewer_evidence_not_current',
-            );
+        $detail = $this->projectedDetail('zh-CN');
+        $this->assertSame('unknown', data_get($detail, 'trust_manifest.review_state'));
+        $this->assertNull(data_get($detail, 'trust_manifest.last_reviewed_at'));
+        $this->assertSame('ineligible', data_get($detail, 'search_entry_tier'));
+        $this->assertSame('reviewer_evidence_not_current', data_get($detail, 'search_entry_authority.reason_codes.0'));
     }
 
     public function test_newer_overlapping_rejection_cannot_be_overridden_by_older_approval(): void
@@ -222,10 +215,9 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
             packageSha256: $package['package_sha256'],
         );
 
-        $this->getJson('/api/v0.5/career/jobs/'.self::SLUG.'?locale=en')
-            ->assertOk()
-            ->assertJsonPath('trust_manifest.review_state', 'unknown')
-            ->assertJsonPath('trust_manifest.last_reviewed_at', null);
+        $detail = $this->projectedDetail('en');
+        $this->assertSame('unknown', data_get($detail, 'trust_manifest.review_state'));
+        $this->assertNull(data_get($detail, 'trust_manifest.last_reviewed_at'));
     }
 
     public function test_public_trust_evidence_and_exact_index_entry_drift_fail_closed(): void
@@ -242,9 +234,7 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
         );
 
         $this->publishBilingualDetails(trustSource: 'changed public source evidence');
-        $this->getJson('/api/v0.5/career/jobs/'.self::SLUG.'?locale=en')
-            ->assertOk()
-            ->assertJsonPath('trust_manifest.review_state', 'unknown');
+        $this->assertSame('unknown', data_get($this->projectedDetail('en'), 'trust_manifest.review_state'));
 
         $current = app(CareerPilotReviewEvidenceBridge::class)->buildPackage([self::SLUG]);
         app(CareerSeoReviewAttestationService::class)->createAndBindReview(
@@ -308,9 +298,7 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
         );
 
         $this->publishBilingualDetails(score: 99);
-        $this->getJson('/api/v0.5/career/jobs/'.self::SLUG.'?locale=en')
-            ->assertOk()
-            ->assertJsonPath('trust_manifest.review_state', 'unknown');
+        $this->assertSame('unknown', data_get($this->projectedDetail('en'), 'trust_manifest.review_state'));
     }
 
     public function test_current_seo_sha_drift_makes_search_entry_ineligible(): void
@@ -328,20 +316,16 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
 
         $this->publishBilingualDetails(robotsPolicy: 'noindex,follow');
 
-        $this->getJson('/api/v0.5/career/jobs/'.self::SLUG.'?locale=en')
-            ->assertOk()
-            ->assertJsonPath('trust_manifest.review_state', 'unknown')
-            ->assertJsonPath('search_entry_tier', 'ineligible')
-            ->assertJsonPath('search_entry_authority.robots_indexable', false)
-            ->assertJsonPath(
-                'search_entry_authority.reason_codes',
-                [
-                    'robots_not_indexable',
-                    'reviewer_evidence_not_current',
-                    'content_quality_tier_unknown',
-                    'publish_track_unsupported',
-                ],
-            );
+        $detail = $this->projectedDetail('en');
+        $this->assertSame('unknown', data_get($detail, 'trust_manifest.review_state'));
+        $this->assertSame('ineligible', data_get($detail, 'search_entry_tier'));
+        $this->assertFalse(data_get($detail, 'search_entry_authority.robots_indexable'));
+        $this->assertSame([
+            'robots_not_indexable',
+            'reviewer_evidence_not_current',
+            'content_quality_tier_unknown',
+            'publish_track_unsupported',
+        ], data_get($detail, 'search_entry_authority.reason_codes'));
     }
 
     public function test_unlisted_public_detail_field_drift_fails_closed(): void
@@ -358,9 +342,7 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
         );
 
         $this->publishBilingualDetails(alias: 'changed public alias');
-        $this->getJson('/api/v0.5/career/jobs/'.self::SLUG.'?locale=zh-CN')
-            ->assertOk()
-            ->assertJsonPath('trust_manifest.review_state', 'unknown');
+        $this->assertSame('unknown', data_get($this->projectedDetail('zh-CN'), 'trust_manifest.review_state'));
     }
 
     public function test_cached_approval_cannot_keep_index_eligible_after_opposite_locale_target_drift(): void
@@ -437,6 +419,15 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
         $cache = app(PublicCareerAuthorityResponseCache::class);
         $cache->publishJobDetailReadModel(self::SLUG, 'en', $this->detailPayload('en', $englishContent, $trustSource, $score, $alias, $robotsPolicy));
         $cache->publishJobDetailReadModel(self::SLUG, 'zh-CN', $this->detailPayload('zh-CN', '当前可见中文内容', $trustSource, $score, $alias, $robotsPolicy));
+    }
+
+    /** @return array<string,mixed> */
+    private function projectedDetail(string $locale): array
+    {
+        $payload = app(PublicCareerAuthorityResponseCache::class)->jobDetailPayload(self::SLUG, $locale);
+        $this->assertIsArray($payload);
+
+        return app(CareerPilotReviewEvidenceBridge::class)->projectDetailPayload(self::SLUG, $payload);
     }
 
     /** @return array<string,mixed> */

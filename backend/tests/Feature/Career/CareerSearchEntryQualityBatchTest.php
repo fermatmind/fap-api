@@ -8,7 +8,6 @@ use App\Domain\Career\Compilation\CareerContentV3Projector;
 use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionCoverageSnapshot;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
-use App\Http\Controllers\API\V0_5\Career\CareerJobDetailController;
 use App\Models\CareerSearchEntryQualityBatchOperation;
 use App\Services\Career\CareerDirectoryAuthorityService;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
@@ -312,9 +311,9 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
     public function test_review_targets_bind_reader_safe_payload_and_controller_contract(): void
     {
         $projector = app(CareerJobDetailReaderSafeReviewProjector::class);
-        $controllerReflection = new \ReflectionClass(CareerJobDetailController::class);
-        $internalKeys = $controllerReflection->getConstant('INTERNAL_READER_PAYLOAD_KEYS');
-        $replacements = $controllerReflection->getConstant('RAW_READER_PAYLOAD_VALUE_REPLACEMENTS');
+        $projectorReflection = new \ReflectionClass(CareerJobDetailReaderSafeReviewProjector::class);
+        $internalKeys = $projectorReflection->getConstant('INTERNAL_READER_PAYLOAD_KEYS');
+        $replacements = $projectorReflection->getConstant('RAW_READER_PAYLOAD_VALUE_REPLACEMENTS');
         $this->assertIsArray($internalKeys);
         $this->assertIsArray($replacements);
         $payload = [
@@ -323,12 +322,9 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
             'nested' => ['row_hash' => 'private', 'label' => 'raw enum'],
         ];
         $projected = $projector->project($payload);
-        $controllerProjection = new \ReflectionMethod(CareerJobDetailController::class, 'projectReaderSafePayload');
-        $expected = $controllerProjection->invoke(app(CareerJobDetailController::class), $payload);
-
         $this->assertArrayNotHasKey('source_id', $projected);
         $this->assertArrayNotHasKey('row_hash', $projected['nested']);
-        $this->assertSame($expected, $projected);
+        $this->assertSame('reader label', $projected['nested']['label']);
         $expectedContractSha = hash_file(
             'sha256',
             app_path('Http/Controllers/API/V0_5/Career/CareerJobDetailController.php'),

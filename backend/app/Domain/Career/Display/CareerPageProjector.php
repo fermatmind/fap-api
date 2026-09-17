@@ -20,6 +20,12 @@ final class CareerPageProjector
         return isset($this->reader->authority()['entries'][$slug]);
     }
 
+    /** @return array<string, mixed> */
+    public function fileEntry(string $slug, string $locale): array
+    {
+        return $this->reader->fileEntry($slug, $locale);
+    }
+
     public function read(string $slug, string $locale): array
     {
         $locale = in_array(strtolower($locale), ['zh', 'zh-cn'], true) ? 'zh-CN' : $locale;
