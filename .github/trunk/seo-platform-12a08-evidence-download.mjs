@@ -53,7 +53,7 @@ for (const run of nightlyRuns) {
     if (!existsSync(junitPath)) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
     evidence={junit:readFileSync(junitPath,'utf8'),artifact_digest:artifact.digest};
   } else {
-    evidence={log:fullJob.conclusion==='success' ? '' : execFileSync('gh',['api',`repos/${repo}/actions/jobs/${fullJob.id}/logs`],{maxBuffer:32*1024*1024}).toString()};
+    evidence={log:fullJob.conclusion==='success' ? '' : execFileSync('gh',['api','--allow-escape-sequences',`repos/${repo}/actions/jobs/${fullJob.id}/logs`],{maxBuffer:32*1024*1024}).toString()};
   }
   if (!checks && production.activation?.validation?.nightly_assessment?.run_id === run.id
     && MISSIONS.every(id=>mayCarry(production.activation,{production_sha:sha,version_vector:production.version_vector},id))) {

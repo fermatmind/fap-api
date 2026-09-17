@@ -66,6 +66,7 @@ test('existing workflows publish completed scoped evidence without runtime opera
  assert.match(nightly,/steps\.full-tests\.outcome != 'success'/);
  const evidence=readFileSync(new URL('./seo-platform-12a08-evidence-download.mjs',import.meta.url),'utf8');
  assert.match(evidence,/actions\/jobs\/\$\{fullJob\.id\}\/logs/);
+ assert.match(evidence,/\['api','--allow-escape-sequences',`repos\/\$\{repo\}\/actions\/jobs/);
  assert.doesNotMatch(evidence,/--log-failed/);
 });
 test('Nightly evidence accepts both Pest paths, deduplicates, and stays fail-closed',async()=>{
