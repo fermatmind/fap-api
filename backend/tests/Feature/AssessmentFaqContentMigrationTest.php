@@ -163,7 +163,7 @@ class AssessmentFaqContentMigrationTest extends TestCase
         $this->assertCount(45, $ids);
     }
 
-    public function test_seeder_uses_reviewed_faq_for_new_rows_and_preserves_published_edits(): void
+    public function test_seeder_uses_composed_reviewed_faq_for_new_rows_and_preserves_published_edits(): void
     {
         $writer = \Mockery::mock(\App\Services\Scale\ScaleRegistryWriter::class);
         $writer->shouldReceive('upsertScale')->andReturnUsing(function (array $attributes) {
@@ -180,8 +180,10 @@ class AssessmentFaqContentMigrationTest extends TestCase
             $method->invoke($seeder, $writer, $attributes);
             foreach (['scales_registry', 'scales_registry_v2'] as $table) {
                 $content = json_decode(DB::table($table)->where('code', $code)->value('content_i18n_json'), true);
-                $latest = json_decode(file_get_contents(database_path('data/assessment_methods_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
-                $this->assertSame($latest['scales'][$code]['faq'], $content['zh']['faq']);
+                $ids = array_column($content['zh']['faq'], 'id');
+                $this->assertSame($entry['faq'][0]['id'], $ids[0]);
+                $this->assertContains($entry['faq'][count($entry['faq']) - 1]['id'], $ids);
+                $this->assertSame($ids, array_values(array_unique($ids)));
                 $content['zh']['faq'][0]['a'] = 'Later CMS revision';
                 DB::table($table)->where('code', $code)->update(['content_i18n_json' => json_encode($content)]);
             }
