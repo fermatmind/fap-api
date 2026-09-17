@@ -171,7 +171,14 @@ class AssessmentEnglishLandingPublicationTest extends TestCase
             foreach (['scales_registry', 'scales_registry_v2'] as $table) {
                 $row = DB::table($table)->where('org_id', 0)->where('code', $code);
                 $value = json_decode($row->value('content_i18n_json'), true);
-                $this->assertSame($entry['content'], $value['en']);
+                $expectedEnglish = $entry['content'];
+                if ($code === 'RIASEC') {
+                    $landingSeo = json_decode(file_get_contents(database_path('data/assessment_landing_content_seo_20260917.json')), true, 512, JSON_THROW_ON_ERROR);
+                    $localizedPackage = $landingSeo['scales']['RIASEC']['locales']['en'];
+                    $expectedEnglish['why_choose']['items'][] = $localizedPackage['version_item'];
+                    $expectedEnglish['version_comparison'] = $localizedPackage['version_comparison'];
+                }
+                $this->assertSame($expectedEnglish, $value['en']);
                 $value['en']['why_choose']['title'] = 'Later English revision';
                 $value['en']['faq'][0]['a'] = 'Later FAQ revision';
                 $row->update(['content_i18n_json' => json_encode($value)]);

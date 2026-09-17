@@ -760,6 +760,27 @@ final class ScaleRegistrySeeder extends Seeder
         }
     }
 
+    private function applyLandingContentSeo(array &$attributes): void
+    {
+        $package = json_decode(file_get_contents(database_path('data/assessment_landing_content_seo_20260917.json')), true, 512, JSON_THROW_ON_ERROR);
+        foreach ($package['scales'][$attributes['code']]['locales'] ?? [] as $locale => $localizedPackage) {
+            $items = data_get($attributes['content_i18n_json'][$locale], 'why_choose.items');
+            if (! is_array($items)) {
+                throw new \RuntimeException($attributes['code'].'.'.$locale.'.why_choose.items is missing from the seed baseline.');
+            }
+
+            $versionItem = $localizedPackage['version_item'];
+            $index = array_search($versionItem['id'], array_column($items, 'id'), true);
+            if ($index === false) {
+                $items[] = $versionItem;
+            } else {
+                $items[$index] = $versionItem;
+            }
+            data_set($attributes['content_i18n_json'][$locale], 'why_choose.items', $items);
+            $attributes['content_i18n_json'][$locale]['version_comparison'] = $localizedPackage['version_comparison'];
+        }
+    }
+
     private function upsertAssessmentPreservingFaq(ScaleRegistryWriter $writer, array $attributes): \App\Models\ScaleRegistry
     {
         $package = json_decode(file_get_contents(database_path('data/assessment_faq_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
@@ -799,6 +820,7 @@ final class ScaleRegistrySeeder extends Seeder
 
         $english = json_decode(file_get_contents(database_path('data/assessment_landing_en_20260907.json')), true, 512, JSON_THROW_ON_ERROR);
         $attributes['content_i18n_json']['en'] = array_replace($attributes['content_i18n_json']['en'] ?? [], $english['scales'][$attributes['code']]['content']);
+        $this->applyLandingContentSeo($attributes);
 
         return DB::transaction(function () use ($writer, $attributes) {
             $published = [];
