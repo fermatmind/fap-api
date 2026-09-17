@@ -59,6 +59,7 @@ test('existing workflows publish completed scoped evidence without runtime opera
  assert.match(deploy,/seo-council-a08-activation-\$\{\{/);
  const ci=readFileSync(new URL('../workflows/ci.yml',import.meta.url),'utf8');
  assert.match(ci,/--log-junit=/);assert.match(ci,/scoped-receipt/);
+ assert.match(ci,/Install Redis server for public projection contracts[\s\S]*?apt-get install -y --no-install-recommends redis-server/);
  const nightly=readFileSync(new URL('../workflows/nightly.yml',import.meta.url),'utf8');
  assert.match(nightly,/nightly-full-phpunit-\$\{\{ github\.sha \}\}-\$\{\{ github\.run_id \}\}/);
  assert.match(nightly,/continue-on-error: true/);

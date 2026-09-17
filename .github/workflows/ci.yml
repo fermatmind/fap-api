@@ -593,6 +593,10 @@ jobs:
           coverage: none
           tools: composer:v2
           extensions: sodium, pdo_sqlite, sqlite3
+      - name: Install Redis server for public projection contracts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends redis-server
       - name: Install backend dependencies
         working-directory: backend
         run: composer install --no-interaction --prefer-dist --no-progress
