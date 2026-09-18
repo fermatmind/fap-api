@@ -7,6 +7,7 @@ namespace App\Services\Analytics;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\IpUtils;
 use Throwable;
 
@@ -28,8 +29,10 @@ final class AccessTestIdentity
                     Cache::put($this->trustedProxyCacheKey($normalized), true, now()->addDays(2));
                 }
             }
-        } catch (Throwable) {
-            // Statistics must remain fail-closed without affecting event ingestion.
+        } catch (Throwable $exception) {
+            Log::warning('ACCESS_TEST_TRUSTED_PROXY_CACHE_WRITE_FAILED', [
+                'exception_class' => $exception::class,
+            ]);
         }
     }
 
