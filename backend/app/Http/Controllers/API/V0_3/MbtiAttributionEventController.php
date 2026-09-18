@@ -6,6 +6,7 @@ namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Services\Analytics\AccessTestIdentity;
 use App\Services\Analytics\MeasurementFailureEventContract;
 use App\Support\SchemaBaseline;
 use Illuminate\Http\JsonResponse;
@@ -96,6 +97,13 @@ final class MbtiAttributionEventController extends Controller
         'browser_class',
         'endpoint_class',
         'retry_bucket',
+        'source_engine',
+        'consent_state',
+        'is_internal',
+        'is_qa',
+        'is_bot',
+        'environment',
+        'traffic_quality',
     ];
 
     /**
@@ -234,6 +242,13 @@ final class MbtiAttributionEventController extends Controller
             'payload.browser_class' => ['nullable', 'string', 'max:32'],
             'payload.endpoint_class' => ['nullable', 'string', 'max:32'],
             'payload.retry_bucket' => ['nullable', 'string', 'max:32'],
+            'payload.source_engine' => ['nullable', 'string', 'max:32'],
+            'payload.consent_state' => ['nullable', 'string', 'max:32'],
+            'payload.is_internal' => ['nullable', 'boolean'],
+            'payload.is_qa' => ['nullable', 'boolean'],
+            'payload.is_bot' => ['nullable', 'boolean'],
+            'payload.environment' => ['nullable', 'string', 'max:32'],
+            'payload.traffic_quality' => ['nullable', 'string', 'max:32'],
             'anonymousId' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'path' => ['nullable', 'string', 'max:512', 'regex:/\A\/[^\r\n]*\z/'],
             'timestamp' => ['nullable', 'date'],
@@ -262,6 +277,14 @@ final class MbtiAttributionEventController extends Controller
         }
         $anonymousId = $this->normalizeOptionalString($data['anonymousId'] ?? null, 128);
         $occurredAt = Carbon::parse((string) ($data['timestamp'] ?? now()->toISOString()));
+        $accessTestIdentity = app(AccessTestIdentity::class);
+        $accessTestIdentity->rememberAuthenticatedProxyChain($request);
+        $identity = $accessTestIdentity->snapshotTrustedDigest(
+            $request->header('X-FermatMind-IP-Day-Hash'),
+            $request->header('X-FermatMind-IP-Day'),
+            $payload,
+            $occurredAt
+        );
 
         $attemptId = $this->normalizeOptionalString(
             $payload['attempt_id']
@@ -334,6 +357,18 @@ final class MbtiAttributionEventController extends Controller
 
         if ($isFailureMeasurementEvent && SchemaBaseline::hasColumn('events', 'request_id')) {
             $attributes['request_id'] = $this->normalizeOptionalString($payload['request_id'] ?? null, 128);
+        }
+
+        if (SchemaBaseline::hasColumn('events', 'request_id') && empty($attributes['request_id'])) {
+            $attributes['request_id'] = $this->normalizeOptionalString($request->header('X-Request-Id'), 128);
+        }
+
+        if (SchemaBaseline::hasColumn('events', 'analytics_rule_version')) {
+            $attributes['analytics_ip_hash'] = $identity['ip_hash'];
+            $attributes['analytics_ip_status'] = $identity['ip_status'];
+            $attributes['analytics_eligible'] = $identity['eligible'];
+            $attributes['analytics_exclusion_reason'] = $identity['exclusion_reason'];
+            $attributes['analytics_rule_version'] = $identity['rule_version'];
         }
 
         if (SchemaBaseline::hasColumn('events', 'scale_code_v2')) {

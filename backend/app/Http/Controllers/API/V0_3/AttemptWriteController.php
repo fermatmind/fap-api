@@ -7,16 +7,22 @@ use App\DTO\Attempts\SubmitAttemptDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V0_3\StartAttemptRequest;
 use App\Http\Requests\V0_3\SubmitAttemptRequest;
+use App\Services\Analytics\AccessTestIdentity;
 use App\Services\Attempts\AttemptStartService;
 use App\Services\Attempts\AttemptSubmissionService;
 use App\Support\OrgContext;
+use App\Support\SchemaBaseline;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class AttemptWriteController extends Controller
 {
     public function __construct(
         private AttemptStartService $startService,
         private AttemptSubmissionService $submissionService,
+        private AccessTestIdentity $accessTestIdentity,
     ) {}
 
     /**
@@ -58,6 +64,7 @@ class AttemptWriteController extends Controller
         }
 
         $result = $this->startService->start($context, StartAttemptDTO::fromArray($payload));
+        $this->captureAttemptIdentity($request, (string) ($result['attempt_id'] ?? ''), 'start');
 
         return response()->json($result);
     }
@@ -103,7 +110,43 @@ class AttemptWriteController extends Controller
 
         $status = (int) ($outcome['http_status'] ?? 200);
         $result = is_array($outcome['payload'] ?? null) ? $outcome['payload'] : [];
+        if (in_array($status, [200, 202], true)) {
+            $this->captureAttemptIdentity($request, $attemptId, 'submit');
+        }
 
         return response()->json($result, $status);
+    }
+
+    private function captureAttemptIdentity(
+        StartAttemptRequest|SubmitAttemptRequest $request,
+        string $attemptId,
+        string $phase,
+    ): void {
+        if ($attemptId === '' || ! SchemaBaseline::hasColumn('attempts', 'analytics_rule_version')) {
+            return;
+        }
+
+        try {
+            $snapshot = $this->accessTestIdentity->snapshotRequest($request);
+            $prefix = $phase === 'submit' ? 'analytics_submit' : 'analytics_start';
+
+            DB::table('attempts')
+                ->where('id', $attemptId)
+                ->whereNull($prefix.'_ip_status')
+                ->update([
+                    $prefix.'_ip_hash' => $snapshot['ip_hash'],
+                    $prefix.'_ip_status' => $snapshot['ip_status'],
+                    $prefix.'_eligible' => $snapshot['eligible'],
+                    $prefix.'_exclusion_reason' => $snapshot['exclusion_reason'],
+                    'analytics_rule_version' => $snapshot['rule_version'],
+                    'updated_at' => now(),
+                ]);
+        } catch (Throwable $exception) {
+            Log::warning('ACCESS_TEST_IDENTITY_CAPTURE_FAILED', [
+                'attempt_id' => $attemptId,
+                'phase' => $phase,
+                'exception' => $exception,
+            ]);
+        }
     }
 }

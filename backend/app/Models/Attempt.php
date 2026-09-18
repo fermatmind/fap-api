@@ -111,6 +111,15 @@ class Attempt extends Model
         // ✅ v0.3 attempts submit lock
         'duration_ms',
         'answers_digest',
+        'analytics_start_ip_hash',
+        'analytics_start_ip_status',
+        'analytics_start_eligible',
+        'analytics_start_exclusion_reason',
+        'analytics_submit_ip_hash',
+        'analytics_submit_ip_status',
+        'analytics_submit_eligible',
+        'analytics_submit_exclusion_reason',
+        'analytics_rule_version',
     ];
 
     /**
@@ -126,6 +135,8 @@ class Attempt extends Model
         'result_json' => 'array',
         'duration_ms' => 'integer',
         'org_id' => 'integer',
+        'analytics_start_eligible' => 'boolean',
+        'analytics_submit_eligible' => 'boolean',
 
         'started_at' => 'datetime',
         'submitted_at' => 'datetime',

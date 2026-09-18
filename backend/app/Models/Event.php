@@ -52,6 +52,11 @@ class Event extends Model
         'utm_medium',
         'utm_campaign',
         'referrer',
+        'analytics_ip_hash',
+        'analytics_ip_status',
+        'analytics_eligible',
+        'analytics_exclusion_reason',
+        'analytics_rule_version',
     ];
 
     protected $casts = [
@@ -63,6 +68,7 @@ class Event extends Model
         'question_index' => 'integer',
         'duration_ms' => 'integer',
         'is_dropoff' => 'integer',
+        'analytics_eligible' => 'boolean',
     ];
 
     public static function allowOrgZeroContext(): bool

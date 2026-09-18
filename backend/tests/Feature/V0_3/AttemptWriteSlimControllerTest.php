@@ -51,6 +51,8 @@ class AttemptWriteSlimControllerTest extends TestCase
 
     public function test_start_returns_attempt_id_and_question_count(): void
     {
+        config()->set('analytics.access_test_statistics.hash_key', 'attempt-write-test-key');
+        config()->set('analytics.access_test_statistics.trusted_proxies', []);
         $this->seedScales();
 
         $start = $this->withHeaders([
@@ -63,10 +65,18 @@ class AttemptWriteSlimControllerTest extends TestCase
         $this->assertNotSame('', (string) $start->json('attempt_id'));
         $this->assertIsInt($start->json('question_count'));
         $this->assertGreaterThan(0, (int) $start->json('question_count'));
+        $this->assertDatabaseHas('attempts', [
+            'id' => (string) $start->json('attempt_id'),
+            'analytics_start_ip_status' => 'direct',
+            'analytics_start_eligible' => 1,
+            'analytics_rule_version' => 'access_test_statistics.v1',
+        ]);
     }
 
     public function test_submit_returns_result_and_report_structure(): void
     {
+        config()->set('analytics.access_test_statistics.hash_key', 'attempt-write-test-key');
+        config()->set('analytics.access_test_statistics.trusted_proxies', []);
         $this->seedScales();
 
         $anonId = 'slim-submit-anon';
@@ -109,6 +119,12 @@ class AttemptWriteSlimControllerTest extends TestCase
         $this->assertIsBool($submit->json('report.locked'));
         $this->assertIsString($submit->json('report.access_level'));
         $this->assertIsString($submit->json('report.variant'));
+
+        $attempt = DB::table('attempts')->where('id', $attemptId)->first();
+        $this->assertNotNull($attempt);
+        $this->assertSame('direct', $attempt->analytics_submit_ip_status);
+        $this->assertSame(1, (int) $attempt->analytics_submit_eligible);
+        $this->assertSame($attempt->analytics_start_ip_hash, $attempt->analytics_submit_ip_hash);
     }
 
     public function test_start_persists_numeric_user_owner_from_token_in_public_org_context(): void

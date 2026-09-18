@@ -3,6 +3,28 @@
 declare(strict_types=1);
 
 return [
+    'access_test_statistics' => [
+        'timezone' => 'Asia/Shanghai',
+        'collection_started_on' => env('ANALYTICS_ACCESS_COLLECTION_STARTED_ON', '2026-09-18'),
+        'hash_key' => env('ANALYTICS_IP_HASH_KEY', ''),
+        'retention_days' => max(30, (int) env('ANALYTICS_IP_DIGEST_RETENTION_DAYS', 90)),
+        'trusted_proxies' => array_values(array_filter(array_map(
+            static fn (string $value): string => trim($value),
+            explode(',', (string) env('ANALYTICS_TRUSTED_PROXIES', '127.0.0.1,::1'))
+        ))),
+        'bot_user_agent_tokens' => [
+            'bot',
+            'spider',
+            'crawler',
+            'googlebot',
+            'bingbot',
+            'baiduspider',
+            'bytespider',
+            'uptimerobot',
+            'healthcheck',
+        ],
+    ],
+
     'funnel_daily' => [
         'reporting_timezone' => env('ANALYTICS_FUNNEL_REPORTING_TIMEZONE', 'Asia/Shanghai'),
         'storage_timezone' => env('ANALYTICS_STORAGE_TIMEZONE', 'UTC'),

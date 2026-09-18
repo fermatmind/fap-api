@@ -12,6 +12,44 @@ final class MbtiAttributionEventIngestTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_seo_ingest_persists_only_the_authenticated_identity_digest_and_filter_labels(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+        $digest = str_repeat('d', 64);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ingest_test_token',
+            'X-Request-Id' => 'page-request-123',
+            'X-FermatMind-IP-Day' => '2026-09-18',
+            'X-FermatMind-IP-Day-Hash' => $digest,
+        ])->postJson('/api/v0.5/seo/attribution/events', [
+            'eventName' => 'landing_pv',
+            'path' => '/zh/articles/example',
+            'timestamp' => '2026-09-18T10:00:00+08:00',
+            'payload' => [
+                'url' => '/zh/articles/example',
+                'locale' => 'zh',
+                'environment' => 'production',
+                'traffic_quality' => 'human',
+                'is_bot' => false,
+                'is_qa' => false,
+                'is_internal' => false,
+            ],
+        ]);
+
+        $response->assertStatus(202);
+        $this->assertDatabaseHas('events', [
+            'request_id' => 'page-request-123',
+            'analytics_ip_hash' => $digest,
+            'analytics_ip_status' => 'trusted_digest',
+            'analytics_eligible' => 1,
+            'analytics_rule_version' => 'access_test_statistics.v1',
+        ]);
+
+        $encoded = json_encode(DB::table('events')->where('request_id', 'page-request-123')->first(), JSON_THROW_ON_ERROR);
+        $this->assertStringNotContainsString('203.0.113.', $encoded);
+    }
+
     public function test_public_ingest_rejects_server_authoritative_result_ready(): void
     {
         config()->set('fap.events.ingest_token', 'ingest_test_token');

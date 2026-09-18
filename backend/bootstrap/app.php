@@ -82,6 +82,15 @@ $app = Application::configure(basePath: dirname(__DIR__))
         $schedule->command('commerce:repair-paid-orders --limit=50')->everyFiveMinutes()->withoutOverlapping();
         $schedule->command('commerce:repair-post-commit-failed --limit=50')->everyFiveMinutes()->withoutOverlapping();
         $schedule->command('analytics:refresh-test-metrics-daily --scheduled-current-day')->everyFifteenMinutes()->withoutOverlapping(20);
+        $schedule->command('analytics:refresh-access-test-statistics --scheduled-recent')
+            ->everyFiveMinutes()
+            ->withoutOverlapping(10)
+            ->onOneServer();
+        $schedule->command('analytics:refresh-access-test-statistics --scheduled-history')
+            ->dailyAt('02:15')
+            ->timezone('Asia/Shanghai')
+            ->withoutOverlapping(120)
+            ->onOneServer();
         if ((bool) config('analytics.provider_freshness.enabled')) {
             $schedule->command('analytics:refresh-provider-freshness --json')
                 ->hourly()

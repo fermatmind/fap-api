@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Pages;
 
+use App\Filament\Ops\Widgets\AccessTestStatisticsWidget;
 use App\Filament\Ops\Widgets\CommerceKpiWidget;
 use App\Filament\Ops\Widgets\FunnelWidget;
 use App\Filament\Ops\Widgets\HealthzStatusWidget;
@@ -63,6 +64,10 @@ class OpsDashboard extends Dashboard
             array_unshift($widgets, TestKpiSummaryWidget::class, TestKpiDailyInlineWidget::class);
         }
 
+        if (AccessTestStatisticsWidget::canView()) {
+            array_unshift($widgets, AccessTestStatisticsWidget::class);
+        }
+
         if (CommerceKpiWidget::canView()) {
             array_unshift($widgets, CommerceKpiWidget::class);
         }
@@ -85,6 +90,9 @@ class OpsDashboard extends Dashboard
             Action::make('testKpiDaily')
                 ->label(__('ops.dashboard.actions.test_kpi_daily'))
                 ->url('/ops/test-kpi-daily?scope=global_org0'),
+            Action::make('accessTestStatistics')
+                ->label(__('ops.dashboard.actions.access_test_statistics'))
+                ->url('/ops/access-test-statistics?scope=global_org0'),
             Action::make('contentProbe')
                 ->label(__('ops.dashboard.actions.content_probe'))
                 ->url('/ops/content-pack-releases'),
