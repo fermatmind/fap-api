@@ -69,7 +69,8 @@ final class ArticleTranslationOpsPageTest extends TestCase
             ]],
         );
 
-        $this->assertStringContainsString('wire:click="approveTranslation(&quot;article&quot;, 47, &quot;en&quot;)"', $html);
+        $this->assertStringContainsString('wire:click="approveTranslation(&#039;article&#039;, 47, &#039;en&#039;)"', $html);
+        $this->assertStringContainsString("wire:target=\"approveTranslation('article', 47, 'en')\"", $html);
         $this->assertStringNotContainsString('@js(', $html);
     }
 

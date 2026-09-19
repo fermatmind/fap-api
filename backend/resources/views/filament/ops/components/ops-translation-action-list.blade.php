@@ -17,9 +17,9 @@
                 $wireExpression = sprintf(
                     '%s(%s, %d, %s)',
                     (string) $action['wire_action'],
-                    json_encode((string) ($action['content_type'] ?? ''), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_THROW_ON_ERROR),
+                    var_export((string) ($action['content_type'] ?? ''), true),
                     (int) ($action['record_id'] ?? 0),
-                    json_encode((string) ($action['target_locale'] ?? ''), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_THROW_ON_ERROR),
+                    var_export((string) ($action['target_locale'] ?? ''), true),
                 );
             @endphp
             <x-filament::button
@@ -43,9 +43,9 @@
                 $wireExpression = sprintf(
                     '%s(%s, %d, %s)',
                     (string) $action['wire_action'],
-                    json_encode((string) ($action['content_type'] ?? ''), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_THROW_ON_ERROR),
+                    var_export((string) ($action['content_type'] ?? ''), true),
                     (int) ($action['record_id'] ?? 0),
-                    json_encode((string) ($action['target_locale'] ?? ''), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_THROW_ON_ERROR),
+                    var_export((string) ($action['target_locale'] ?? ''), true),
                 );
             @endphp
             <x-filament::button
