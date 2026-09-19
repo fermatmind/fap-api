@@ -162,7 +162,7 @@ final class MbtiAttributionEventController extends Controller
 
     public function store(Request $request): JsonResponse
     {
-        $this->authorizeIngest($request);
+        $authenticatedServer = $this->authorizeIngest($request);
         $this->rejectUnexpectedKeys($request->all(), self::TOP_LEVEL_KEYS, 'request');
         $payloadInput = $request->input('payload');
         if ($payloadInput !== null && ! is_array($payloadInput)) {
@@ -278,13 +278,17 @@ final class MbtiAttributionEventController extends Controller
         $anonymousId = $this->normalizeOptionalString($data['anonymousId'] ?? null, 128);
         $occurredAt = Carbon::parse((string) ($data['timestamp'] ?? now()->toISOString()));
         $accessTestIdentity = app(AccessTestIdentity::class);
-        $accessTestIdentity->rememberAuthenticatedProxyChain($request);
-        $identity = $accessTestIdentity->snapshotTrustedDigest(
-            $request->header('X-FermatMind-IP-Day-Hash'),
-            $request->header('X-FermatMind-IP-Day'),
-            $payload,
-            $occurredAt
-        );
+        if ($authenticatedServer) {
+            $accessTestIdentity->rememberAuthenticatedProxyChain($request);
+            $identity = $accessTestIdentity->snapshotTrustedDigest(
+                $request->header('X-FermatMind-IP-Day-Hash'),
+                $request->header('X-FermatMind-IP-Day'),
+                $payload,
+                $occurredAt
+            );
+        } else {
+            $identity = $accessTestIdentity->snapshotRequest($request, $occurredAt);
+        }
 
         $attemptId = $this->normalizeOptionalString(
             $payload['attempt_id']
@@ -384,29 +388,39 @@ final class MbtiAttributionEventController extends Controller
         ], 202);
     }
 
-    private function authorizeIngest(Request $request): void
+    private function authorizeIngest(Request $request): bool
     {
         $configuredToken = trim((string) config('fap.events.ingest_token', ''));
-        if ($configuredToken === '') {
-            abort(response()->json([
-                'ok' => false,
-                'error_code' => 'INGEST_DISABLED',
-                'message' => 'MBTI attribution ingest is not configured.',
-            ], 503));
-        }
-
         $provided = trim((string) ($request->bearerToken() ?? ''));
         if ($provided === '') {
             $provided = trim((string) $request->header('X-Track-Ingest-Token', ''));
         }
 
-        if ($provided === '' || ! hash_equals($configuredToken, $provided)) {
-            abort(response()->json([
-                'ok' => false,
-                'error_code' => 'UNAUTHORIZED',
-                'message' => 'Invalid ingest token.',
-            ], 401));
+        if ($configuredToken !== '' && $provided !== '' && hash_equals($configuredToken, $provided)) {
+            return true;
         }
+
+        $eventName = strtolower(trim((string) $request->input('eventName', '')));
+        $origin = rtrim(trim((string) $request->header('Origin', '')), '/');
+        $allowedOrigins = array_map(
+            static fn (mixed $value): string => rtrim(trim((string) $value), '/'),
+            (array) config('cors.allowed_origins', [])
+        );
+        if ($eventName === 'landing_pv'
+            && $this->isSeoPrivacyIngest($request)
+            && $origin !== ''
+            && in_array($origin, $allowedOrigins, true)) {
+            return false;
+        }
+
+        $status = $configuredToken === '' ? 503 : 401;
+        abort(response()->json([
+            'ok' => false,
+            'error_code' => $status === 503 ? 'INGEST_DISABLED' : 'UNAUTHORIZED',
+            'message' => $status === 503
+                ? 'MBTI attribution ingest is not configured.'
+                : 'Invalid ingest token.',
+        ], $status));
     }
 
     private function resolveOrgId(Request $request): int

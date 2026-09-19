@@ -12,6 +12,63 @@ final class MbtiAttributionEventIngestTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_browser_page_view_ingest_uses_request_ip_without_a_server_token(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+
+        $response = $this->withServerVariables([
+            'REMOTE_ADDR' => '203.0.113.42',
+            'HTTP_USER_AGENT' => 'Mozilla/5.0',
+        ])->withHeaders([
+            'Origin' => 'https://fermatmind.com',
+            'X-FermatMind-IP-Day' => '2026-09-18',
+            'X-FermatMind-IP-Day-Hash' => str_repeat('f', 64),
+        ])->postJson('/api/v0.5/seo/attribution/events', [
+            'eventName' => 'landing_pv',
+            'path' => '/zh/brand',
+            'timestamp' => '2026-09-18T10:00:00+08:00',
+            'payload' => [
+                'url' => '/zh/brand',
+                'locale' => 'zh',
+                'page_type' => 'company',
+            ],
+        ]);
+
+        $response->assertStatus(202);
+        $this->assertDatabaseHas('events', [
+            'event_code' => 'landing_pv',
+            'analytics_ip_hash' => hash_hmac(
+                'sha256',
+                'access_test_statistics.v1|203.0.113.42',
+                'ingest_test_token'
+            ),
+            'analytics_ip_status' => 'direct',
+            'analytics_eligible' => 1,
+        ]);
+        $this->assertDatabaseMissing('events', [
+            'analytics_ip_hash' => str_repeat('f', 64),
+        ]);
+    }
+
+    public function test_browser_ingest_cannot_submit_other_events_or_omit_the_allowed_origin(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+        $payload = [
+            'path' => '/zh/brand',
+            'timestamp' => '2026-09-18T10:00:00+08:00',
+            'payload' => ['url' => '/zh/brand', 'locale' => 'zh'],
+        ];
+
+        $this->withHeaders(['Origin' => 'https://fermatmind.com'])
+            ->postJson('/api/v0.5/seo/attribution/events', ['eventName' => 'start_test', ...$payload])
+            ->assertUnauthorized();
+        $this->withHeaders(['Origin' => ''])
+            ->postJson('/api/v0.5/seo/attribution/events', ['eventName' => 'landing_pv', ...$payload])
+            ->assertUnauthorized();
+
+        $this->assertSame(0, DB::table('events')->count());
+    }
+
     public function test_seo_ingest_persists_only_the_authenticated_identity_digest_and_filter_labels(): void
     {
         config()->set('fap.events.ingest_token', 'ingest_test_token');
