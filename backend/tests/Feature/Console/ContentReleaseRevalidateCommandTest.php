@@ -375,6 +375,151 @@ final class ContentReleaseRevalidateCommandTest extends TestCase
         Http::assertNothingSent();
     }
 
+    public function test_article_detail_only_dry_run_locks_state_and_plans_one_path_without_http(): void
+    {
+        config()->set('ops.content_release_observability.cache_invalidation_urls', [
+            'https://cache.example.test/api/content-release/revalidate',
+        ]);
+        config()->set('ops.content_release_observability.cache_invalidation_secret', 'release-secret');
+        Http::fake();
+
+        $article = $this->articleWithSeoMeta('en', ['target_topics' => ['riasec']], 'exact-article');
+        $revision = $this->attachPublishedRevision($article);
+        $contentSha256 = hash('sha256', 'Release body');
+        $canonicalUrl = 'https://fermatmind.com/en/articles/exact-article';
+
+        $exitCode = Artisan::call('content-release:revalidate', $this->exactArticleOptions(
+            $article,
+            $revision,
+            $contentSha256,
+            $canonicalUrl,
+        ) + ['--dry-run' => true]);
+        $payload = $this->jsonOutput(Artisan::output());
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('would_revalidate_article_detail_only', $payload['action'] ?? null);
+        $this->assertSame('article_detail_only', $payload['allowed_path_scope'] ?? null);
+        $this->assertSame(['/en/articles/exact-article'], $payload['paths'] ?? []);
+        $this->assertSame([
+            'article-detail:en:exact-article',
+            'article-seo:en:exact-article',
+        ], $payload['expected_cache_tags'] ?? []);
+        $this->assertSame($revision->id, $payload['published_revision_id'] ?? null);
+        $this->assertSame($contentSha256, $payload['content_sha256'] ?? null);
+        $this->assertSame([], $payload['cache_receipts'] ?? null);
+        $this->assertContains('llms', $payload['excluded_path_classes'] ?? []);
+        $this->assertContains('article_index', $payload['excluded_path_classes'] ?? []);
+        $this->assertSame(0, $payload['database_authority_write_count'] ?? null);
+        Http::assertNothingSent();
+    }
+
+    public function test_article_detail_only_execute_sends_exact_payload_and_requires_exact_receipt(): void
+    {
+        config()->set('ops.content_release_observability.cache_invalidation_urls', [
+            'https://cache.example.test/api/content-release/revalidate',
+        ]);
+        config()->set('ops.content_release_observability.cache_invalidation_secret', 'release-secret');
+        config()->set('ops.content_release_observability.broadcast_webhook', 'https://broadcast.example.test/hook');
+        Http::fake([
+            'https://cache.example.test/*' => Http::response([
+                'ok' => true,
+                'revalidated_paths' => ['/en/articles/exact-execute'],
+                'invalidated_tags' => [
+                    'article-detail:en:exact-execute',
+                    'article-seo:en:exact-execute',
+                ],
+                'rejected_paths' => [],
+            ], 200),
+            'https://broadcast.example.test/*' => Http::response(['ok' => true], 200),
+        ]);
+
+        $article = $this->articleWithSeoMeta('en', [], 'exact-execute');
+        $revision = $this->attachPublishedRevision($article);
+        $contentSha256 = hash('sha256', 'Release body');
+
+        $exitCode = Artisan::call('content-release:revalidate', $this->exactArticleOptions(
+            $article,
+            $revision,
+            $contentSha256,
+            'https://fermatmind.com/en/articles/exact-execute',
+        ) + ['--execute' => true]);
+        $payload = $this->jsonOutput(Artisan::output());
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('article_detail_only_revalidation_dispatched', $payload['action'] ?? null);
+        $this->assertCount(1, $payload['cache_receipts'] ?? []);
+        $this->assertSame(['/en/articles/exact-execute'], data_get($payload, 'cache_receipts.0.revalidated_paths'));
+        Http::assertSentCount(1);
+        Http::assertSent(function ($request) use ($article, $revision, $contentSha256): bool {
+            return $request->url() === 'https://cache.example.test/api/content-release/revalidate'
+                && $this->hasValidRevalidationSignature($request, 'release-secret')
+                && data_get($request->data(), 'content.id') === (int) $article->id
+                && data_get($request->data(), 'content.path_scope') === 'article_detail_only'
+                && data_get($request->data(), 'content.published_revision_id') === (int) $revision->id
+                && data_get($request->data(), 'content.content_sha256') === $contentSha256
+                && data_get($request->data(), 'cache_signal.paths') === ['/en/articles/exact-execute'];
+        });
+        Http::assertNotSent(static fn ($request): bool => str_contains($request->url(), 'broadcast.example.test'));
+    }
+
+    public function test_article_detail_only_fails_closed_on_state_or_projection_drift(): void
+    {
+        config()->set('ops.content_release_observability.cache_invalidation_urls', [
+            'https://cache.example.test/api/content-release/revalidate',
+        ]);
+        config()->set('ops.content_release_observability.cache_invalidation_secret', 'release-secret');
+        Http::fake();
+
+        $article = $this->articleWithSeoMeta('en', [], 'exact-drift');
+        $revision = $this->attachPublishedRevision($article);
+        $article->forceFill(['content_md' => 'drifted projection'])->save();
+
+        $exitCode = Artisan::call('content-release:revalidate', $this->exactArticleOptions(
+            $article,
+            $revision,
+            hash('sha256', 'Release body'),
+            'https://fermatmind.com/en/articles/exact-drift',
+        ) + ['--execute' => true]);
+        $payload = $this->jsonOutput(Artisan::output());
+
+        $this->assertSame(1, $exitCode);
+        $this->assertContains('expected_content_sha256_mismatch', $payload['issues'] ?? []);
+        $this->assertContains('published_projection_content_mismatch', $payload['issues'] ?? []);
+        Http::assertNothingSent();
+    }
+
+    public function test_article_detail_only_fails_closed_when_frontend_receipt_expands_scope(): void
+    {
+        config()->set('ops.content_release_observability.cache_invalidation_urls', [
+            'https://cache.example.test/api/content-release/revalidate',
+        ]);
+        config()->set('ops.content_release_observability.cache_invalidation_secret', 'release-secret');
+        Http::fake([
+            'https://cache.example.test/*' => Http::response([
+                'ok' => true,
+                'revalidated_paths' => ['/en/articles/exact-receipt', '/en/articles'],
+                'invalidated_tags' => [],
+                'rejected_paths' => [],
+            ], 200),
+        ]);
+
+        $article = $this->articleWithSeoMeta('en', [], 'exact-receipt');
+        $revision = $this->attachPublishedRevision($article);
+
+        $exitCode = Artisan::call('content-release:revalidate', $this->exactArticleOptions(
+            $article,
+            $revision,
+            hash('sha256', 'Release body'),
+            'https://fermatmind.com/en/articles/exact-receipt',
+        ) + ['--execute' => true]);
+        $payload = $this->jsonOutput(Artisan::output());
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('will_skip', $payload['action'] ?? null);
+        $this->assertContains('revalidation_dispatch_failed', $payload['issues'] ?? []);
+        Http::assertSentCount(1);
+    }
+
     public function test_execute_blocks_when_revalidation_token_or_endpoint_config_is_missing(): void
     {
         config()->set('ops.content_release_observability.cache_invalidation_urls', []);
@@ -462,6 +607,30 @@ final class ContentReleaseRevalidateCommandTest extends TestCase
         ])->save();
 
         return $revision;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function exactArticleOptions(
+        Article $article,
+        ArticleTranslationRevision $revision,
+        string $contentSha256,
+        string $canonicalUrl,
+    ): array {
+        return [
+            '--type' => 'article',
+            '--article-id' => (string) $article->id,
+            '--scope' => 'article-detail-only',
+            '--expected-slug' => (string) $article->slug,
+            '--expected-locale' => (string) $article->locale,
+            '--expected-published-revision-id' => (string) $revision->id,
+            '--expected-content-sha256' => $contentSha256,
+            '--expected-canonical-url' => $canonicalUrl,
+            '--require-state-lock' => true,
+            '--source' => 't04_ri_002_body',
+            '--json' => true,
+        ];
     }
 
     private function hasValidRevalidationSignature(mixed $request, string $secret): bool

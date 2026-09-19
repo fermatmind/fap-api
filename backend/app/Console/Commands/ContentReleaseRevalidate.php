@@ -17,6 +17,12 @@ final class ContentReleaseRevalidate extends Command
     protected $signature = 'content-release:revalidate
         {--type=article : Content type to revalidate}
         {--article-id= : Article id when --type=article}
+        {--scope= : Optional bounded revalidation scope}
+        {--expected-slug= : Exact article slug lock}
+        {--expected-locale= : Exact article locale lock}
+        {--expected-published-revision-id= : Exact published revision id lock}
+        {--expected-content-sha256= : Exact published body SHA256 lock}
+        {--expected-canonical-url= : Exact canonical URL lock}
         {--article-ids= : Comma-separated article ids when --type=article-taxonomy}
         {--expected-slugs= : Comma-separated expected slugs in article-id order for identity locks}
         {--expected-published-revision-ids= : Comma-separated published revision ids in article-id order}
@@ -72,6 +78,14 @@ final class ContentReleaseRevalidate extends Command
      */
     private function articleSummary(ContentReleasePathPlanner $pathPlanner, bool $execute, bool $dryRun, array $issues): array
     {
+        $scope = trim((string) $this->option('scope'));
+        if ($scope === 'article-detail-only') {
+            return $this->articleDetailOnlySummary($execute, $dryRun, $issues);
+        }
+        if ($scope !== '') {
+            $issues[] = 'unsupported_scope';
+        }
+
         $articleId = (int) $this->option('article-id');
 
         if ($articleId <= 0) {
@@ -109,6 +123,170 @@ final class ContentReleaseRevalidate extends Command
         return $this->baseSummary($ok, $dryRun, $action, 'article', $paths, $issues) + [
             'article_id' => $articleId > 0 ? $articleId : null,
             'article_ids' => $articleId > 0 ? [$articleId] : [],
+        ];
+    }
+
+    /**
+     * @param  list<string>  $issues
+     * @return array<string,mixed>
+     */
+    private function articleDetailOnlySummary(bool $execute, bool $dryRun, array $issues): array
+    {
+        $articleId = (int) $this->option('article-id');
+        $expectedSlug = trim((string) $this->option('expected-slug'));
+        $expectedLocale = trim((string) $this->option('expected-locale'));
+        $expectedPublishedRevisionId = (int) $this->option('expected-published-revision-id');
+        $expectedContentSha256 = trim((string) $this->option('expected-content-sha256'));
+        $expectedCanonicalUrl = trim((string) $this->option('expected-canonical-url'));
+        $requireStateLock = (bool) $this->option('require-state-lock');
+
+        if ($articleId <= 0) {
+            $issues[] = 'article_id_required';
+        }
+        if (! $requireStateLock) {
+            $issues[] = 'state_lock_required';
+        }
+        if ($expectedSlug === '' || ! $this->isCanonicalSlug($expectedSlug)) {
+            $issues[] = 'expected_slug_required';
+        }
+        if (! in_array($expectedLocale, ['en', 'zh-CN'], true)) {
+            $issues[] = 'expected_locale_required';
+        }
+        if ($expectedPublishedRevisionId <= 0) {
+            $issues[] = 'expected_published_revision_id_required';
+        }
+        if (! $this->isSha256($expectedContentSha256)) {
+            $issues[] = 'expected_content_sha256_required';
+        }
+        if ($expectedCanonicalUrl === '' || filter_var($expectedCanonicalUrl, FILTER_VALIDATE_URL) === false) {
+            $issues[] = 'expected_canonical_url_required';
+        }
+
+        $article = null;
+        if ($articleId > 0) {
+            $article = Article::query()
+                ->withoutGlobalScopes()
+                ->with([
+                    'seoMeta' => static fn ($relation) => $relation->withoutGlobalScopes(),
+                    'publishedRevision' => static fn ($relation) => $relation->withoutGlobalScopes(),
+                ])
+                ->find($articleId);
+
+            if (! $article instanceof Article) {
+                $issues[] = 'article_not_found';
+            }
+        }
+
+        $slug = $article instanceof Article ? trim((string) $article->slug) : '';
+        $locale = $article instanceof Article ? trim((string) $article->locale) : '';
+        $publishedRevision = $article?->publishedRevision;
+        $seoMeta = $article?->seoMeta;
+        $publishedRevisionId = $article instanceof Article ? (int) ($article->published_revision_id ?? 0) : 0;
+        $contentSha256 = $article instanceof Article ? $this->valueHash((string) $article->content_md) : '';
+        $revisionContentSha256 = $publishedRevision instanceof ArticleTranslationRevision
+            ? $this->valueHash((string) $publishedRevision->content_md)
+            : '';
+        $canonicalUrl = $seoMeta instanceof ArticleSeoMeta ? trim((string) $seoMeta->canonical_url) : '';
+        $canonicalPath = $slug !== '' && $this->isCanonicalSlug($slug)
+            ? '/'.$this->localeSegment($locale).'/articles/'.$slug
+            : null;
+
+        if ($article instanceof Article) {
+            if ($slug !== $expectedSlug) {
+                $issues[] = 'expected_slug_mismatch';
+            }
+            if ($locale !== $expectedLocale) {
+                $issues[] = 'expected_locale_mismatch';
+            }
+            if ($publishedRevisionId !== $expectedPublishedRevisionId) {
+                $issues[] = 'expected_published_revision_id_mismatch';
+            }
+            if (! $this->isSha256($contentSha256) || ! hash_equals($expectedContentSha256, $contentSha256)) {
+                $issues[] = 'expected_content_sha256_mismatch';
+            }
+            if ($canonicalUrl !== $expectedCanonicalUrl) {
+                $issues[] = 'expected_canonical_url_mismatch';
+            }
+            if ((string) $article->status !== 'published' || ! (bool) $article->is_public) {
+                $issues[] = 'article_not_publicly_published';
+            }
+            if (! $publishedRevision instanceof ArticleTranslationRevision
+                || (int) $publishedRevision->id !== $publishedRevisionId
+                || (int) $publishedRevision->article_id !== (int) $article->id
+                || (int) $publishedRevision->org_id !== (int) $article->org_id
+                || (string) $publishedRevision->locale !== $locale
+                || (string) $publishedRevision->revision_status !== ArticleTranslationRevision::STATUS_PUBLISHED) {
+                $issues[] = 'published_revision_lock_invalid';
+            }
+            if (! $seoMeta instanceof ArticleSeoMeta) {
+                $issues[] = 'seo_meta_missing';
+            }
+            if ($revisionContentSha256 === '' || ! hash_equals($contentSha256, $revisionContentSha256)) {
+                $issues[] = 'published_projection_content_mismatch';
+            }
+            if ($canonicalPath === null || $expectedCanonicalUrl !== 'https://fermatmind.com'.$canonicalPath) {
+                $issues[] = 'canonical_path_mismatch';
+            }
+        }
+
+        $paths = $canonicalPath === null ? [] : [$canonicalPath];
+        $expectedTags = $canonicalPath === null ? [] : [
+            "article-detail:{$this->localeSegment($locale)}:{$slug}",
+            "article-seo:{$this->localeSegment($locale)}:{$slug}",
+        ];
+        $issues = $this->validateExecuteRuntime($execute, $issues);
+        $ok = $issues === [];
+        $action = $execute ? 'article_detail_only_revalidation_dispatched' : 'would_revalidate_article_detail_only';
+        $cacheReceipts = [];
+
+        if ($ok && $execute && $article instanceof Article) {
+            try {
+                $cacheReceipts = ContentReleaseFollowUp::dispatchExplicitPaths(
+                    'article',
+                    $article,
+                    $paths,
+                    $this->safeSource(),
+                    Request::create('/ops/content-release/revalidate-command', 'POST'),
+                    [
+                        'path_scope' => 'article_detail_only',
+                        'published_revision_id' => $publishedRevisionId,
+                        'content_sha256' => $contentSha256,
+                    ],
+                    broadcast: false,
+                    throwOnFailure: true,
+                    expectedCacheReceipt: [
+                        'revalidated_paths' => $paths,
+                        'invalidated_tags' => $expectedTags,
+                        'rejected_paths' => [],
+                    ],
+                );
+            } catch (\Throwable) {
+                $issues[] = 'revalidation_dispatch_failed';
+                $ok = false;
+            }
+        }
+        if (! $ok) {
+            $action = 'will_skip';
+        }
+
+        return $this->baseSummary($ok, $dryRun, $action, 'article', $paths, $issues) + [
+            'article_id' => $articleId > 0 ? $articleId : null,
+            'article_ids' => $articleId > 0 ? [$articleId] : [],
+            'slug' => $slug !== '' ? $slug : null,
+            'locale' => $locale !== '' ? $locale : null,
+            'published_revision_id' => $publishedRevisionId > 0 ? $publishedRevisionId : null,
+            'content_sha256' => $contentSha256 !== '' ? $contentSha256 : null,
+            'canonical_url' => $canonicalUrl !== '' ? $canonicalUrl : null,
+            'state_lock_required' => $requireStateLock,
+            'allowed_path_scope' => 'article_detail_only',
+            'expected_cache_tags' => $expectedTags,
+            'cache_receipts' => $cacheReceipts,
+            'excluded_path_classes' => ['alternate_locale', 'article_index', 'home', 'llms', 'topics', 'tests', 'search', 'schema_hreflang', 'sitemap'],
+            'sitemap_llms_mutation_attempted' => false,
+            'schema_hreflang_write_attempted' => false,
+            'broadcast_attempted' => false,
+            'cms_authority_write_count' => 0,
+            'database_authority_write_count' => 0,
         ];
     }
 

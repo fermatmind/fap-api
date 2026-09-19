@@ -33,7 +33,8 @@ final class ContentReleaseFollowUp
         array $contentExtras = [],
         bool $broadcast = true,
         bool $throwOnFailure = false,
-    ): void {
+        ?array $expectedCacheReceipt = null,
+    ): array {
         $payload = self::payload(
             type: $type,
             record: $record,
@@ -43,7 +44,7 @@ final class ContentReleaseFollowUp
             event: 'content_release_revalidate',
         );
 
-        self::dispatchPayload($request, $payload, $broadcast, $throwOnFailure);
+        return self::dispatchPayload($request, $payload, $broadcast, $throwOnFailure, $expectedCacheReceipt);
     }
 
     /**
@@ -54,7 +55,9 @@ final class ContentReleaseFollowUp
         array $payload,
         bool $broadcast = true,
         bool $throwOnFailure = false,
-    ): void {
+        ?array $expectedCacheReceipt = null,
+    ): array {
+        $cacheReceipts = [];
         $cacheInvalidationUrls = self::cacheInvalidationUrls();
         $cacheInvalidationSecret = self::cacheInvalidationSecret();
 
@@ -67,14 +70,18 @@ final class ContentReleaseFollowUp
             );
         } else {
             foreach ($cacheInvalidationUrls as $endpoint) {
-                self::postEvent(
+                $receipt = self::postEvent(
                     request: $request,
                     action: 'content_release_cache_signal',
                     endpoint: $endpoint,
                     payload: $payload,
                     alertLabel: 'cache invalidation',
                     throwOnFailure: $throwOnFailure,
+                    expectedReceipt: $expectedCacheReceipt,
                 );
+                if ($receipt !== null) {
+                    $cacheReceipts[] = $receipt;
+                }
             }
         }
 
@@ -88,6 +95,8 @@ final class ContentReleaseFollowUp
                 alertLabel: 'event broadcast'
             );
         }
+
+        return $cacheReceipts;
     }
 
     /**
@@ -218,7 +227,8 @@ final class ContentReleaseFollowUp
         array $payload,
         string $alertLabel,
         bool $throwOnFailure = false,
-    ): void {
+        ?array $expectedReceipt = null,
+    ): ?array {
         $audit = app(AuditLogger::class);
         $meta = [
             'endpoint' => SensitiveDiagnosticRedactor::redactString($endpoint),
@@ -249,6 +259,13 @@ final class ContentReleaseFollowUp
                 throw new RequestException($response);
             }
 
+            $receipt = $response->json();
+            if ($expectedReceipt !== null) {
+                if (! is_array($receipt) || ! self::receiptMatches($receipt, $expectedReceipt)) {
+                    throw new \RuntimeException('Cache revalidation receipt did not match the exact requested scope.');
+                }
+            }
+
             $audit->log(
                 $request,
                 $action,
@@ -258,6 +275,8 @@ final class ContentReleaseFollowUp
                 reason: 'cms_release_observability',
                 result: 'success',
             );
+
+            return is_array($receipt) ? $receipt : null;
         } catch (\Throwable $exception) {
             $audit->log(
                 $request,
@@ -274,7 +293,24 @@ final class ContentReleaseFollowUp
             if ($throwOnFailure) {
                 throw $exception;
             }
+
+            return null;
         }
+    }
+
+    /**
+     * @param  array<string, mixed>  $receipt
+     * @param  array<string, mixed>  $expected
+     */
+    private static function receiptMatches(array $receipt, array $expected): bool
+    {
+        foreach (['revalidated_paths', 'invalidated_tags', 'rejected_paths'] as $key) {
+            if (! array_key_exists($key, $receipt) || $receipt[$key] !== ($expected[$key] ?? null)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private static function cacheInvalidationSecret(): string
