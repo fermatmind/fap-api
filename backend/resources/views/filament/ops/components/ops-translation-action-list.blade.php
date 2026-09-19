@@ -13,11 +13,20 @@
                 {{ $action['label'] }}
             </x-filament::button>
         @elseif (($action['wire_action'] ?? null) && ($action['enabled'] ?? false))
+            @php
+                $wireExpression = sprintf(
+                    '%s(%s, %d, %s)',
+                    (string) $action['wire_action'],
+                    json_encode((string) ($action['content_type'] ?? ''), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_THROW_ON_ERROR),
+                    (int) ($action['record_id'] ?? 0),
+                    json_encode((string) ($action['target_locale'] ?? ''), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_THROW_ON_ERROR),
+                );
+            @endphp
             <x-filament::button
                 size="xs"
                 color="primary"
                 type="button"
-                wire:click="{{ $action['wire_action'] }}(@js($action['content_type']), {{ (int) $action['record_id'] }}, @js($action['target_locale'] ?? ''))"
+                wire:click="{{ $wireExpression }}"
             >
                 {{ $action['label'] }}
             </x-filament::button>
@@ -30,11 +39,20 @@
                 {{ $action['label'] }}
             </x-filament::button>
         @elseif (($action['wire_action'] ?? null) && ($action['enabled'] ?? false))
+            @php
+                $wireExpression = sprintf(
+                    '%s(%s, %d, %s)',
+                    (string) $action['wire_action'],
+                    json_encode((string) ($action['content_type'] ?? ''), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_THROW_ON_ERROR),
+                    (int) ($action['record_id'] ?? 0),
+                    json_encode((string) ($action['target_locale'] ?? ''), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_THROW_ON_ERROR),
+                );
+            @endphp
             <x-filament::button
                 size="xs"
                 color="gray"
                 type="button"
-                wire:click="{{ $action['wire_action'] }}(@js($action['content_type']), {{ (int) $action['record_id'] }}, @js($action['target_locale'] ?? ''))"
+                wire:click="{{ $wireExpression }}"
             >
                 {{ $action['label'] }}
             </x-filament::button>

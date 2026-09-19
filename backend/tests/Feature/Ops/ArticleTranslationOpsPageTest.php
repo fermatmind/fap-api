@@ -23,6 +23,7 @@ use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
 use Filament\PanelRegistry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -48,6 +49,28 @@ final class ArticleTranslationOpsPageTest extends TestCase
         parent::setUp();
 
         Filament::setCurrentPanel(app(PanelRegistry::class)->get('ops'));
+    }
+
+    public function test_translation_action_buttons_render_executable_livewire_arguments(): void
+    {
+        $html = Blade::render(
+            '<x-filament-ops::ops-translation-action-list :actions="$actions" />',
+            ['actions' => [
+                'primary' => [],
+                'secondary' => [[
+                    'label' => 'Approve translation',
+                    'enabled' => true,
+                    'wire_action' => 'approveTranslation',
+                    'content_type' => 'article',
+                    'record_id' => 47,
+                    'target_locale' => 'en',
+                ]],
+                'disabled' => [],
+            ]],
+        );
+
+        $this->assertStringContainsString('wire:click="approveTranslation(&quot;article&quot;, 47, &quot;en&quot;)"', $html);
+        $this->assertStringNotContainsString('@js(', $html);
     }
 
     public function test_translation_ops_page_lists_current_six_translation_groups(): void
