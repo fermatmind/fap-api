@@ -65,6 +65,7 @@ final class ArticleRepairTranslationLineageCommandTest extends TestCase
 
         $this->assertTrue($source->isSourceArticle());
         $this->assertFalse($target->isSourceArticle());
+        $this->assertSame(ArticleTranslationRevision::STATUS_SOURCE, (string) $sourceRevision->revision_status);
         $this->assertSame('zh-CN', (string) $target->source_locale);
         $this->assertSame((int) $source->id, (int) $target->source_article_id);
         $this->assertSame((int) $source->id, (int) $target->translated_from_article_id);

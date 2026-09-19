@@ -118,6 +118,7 @@ final class ArticleRepairTranslationLineage extends Command
                         'source_article_id' => (int) $source->id,
                         'source_locale' => (string) $source->locale,
                         'translated_from_version_hash' => $sourceHash,
+                        'revision_status' => ArticleTranslationRevision::STATUS_SOURCE,
                     ])->save();
 
                     foreach ([$targetPublishedRevision, $targetWorkingRevision] as $revision) {
@@ -244,8 +245,11 @@ final class ArticleRepairTranslationLineage extends Command
                 $errors[] = $this->issue($field, 'revision_ownership_mismatch', 'Revision ownership does not match the locked article identity.');
             }
         }
-        if ((string) $sourceRevision->revision_status !== ArticleTranslationRevision::STATUS_PUBLISHED) {
-            $errors[] = $this->issue('source_revision', 'source_revision_status_mismatch', 'The locked source revision must be the currently published source revision.');
+        if (! in_array((string) $sourceRevision->revision_status, [
+            ArticleTranslationRevision::STATUS_PUBLISHED,
+            ArticleTranslationRevision::STATUS_SOURCE,
+        ], true)) {
+            $errors[] = $this->issue('source_revision', 'source_revision_status_mismatch', 'The locked source revision must be the currently published source revision or the normalized source revision.');
         }
         if (! in_array((string) $targetWorkingRevision->revision_status, [
             ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
@@ -295,7 +299,7 @@ final class ArticleRepairTranslationLineage extends Command
         }
 
         $wouldWrite = ! $this->targetDesired($target, $source, $targetWorkingRevision, $sourceHash)
-            || ! $this->revisionDesired($sourceRevision, $source, $sourceHash)
+            || ! $this->sourceRevisionDesired($sourceRevision, $source, $sourceHash)
             || ! $this->revisionDesired($targetPublishedRevision, $source, $sourceHash)
             || ! $this->revisionDesired($targetWorkingRevision, $source, $sourceHash);
 
@@ -339,6 +343,12 @@ final class ArticleRepairTranslationLineage extends Command
             && (string) $revision->source_locale === (string) $source->locale
             && (string) $revision->source_version_hash === $sourceHash
             && (string) $revision->translated_from_version_hash === $sourceHash;
+    }
+
+    private function sourceRevisionDesired(ArticleTranslationRevision $revision, Article $source, string $sourceHash): bool
+    {
+        return $this->revisionDesired($revision, $source, $sourceHash)
+            && (string) $revision->revision_status === ArticleTranslationRevision::STATUS_SOURCE;
     }
 
     private function canonicalFor(Article $article): string
