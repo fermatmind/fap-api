@@ -166,8 +166,8 @@ final class AccessTestStatisticsPage extends Page
             'from' => $from->toDateString(),
             'to' => $to->toDateString(),
             'coverage' => implode(', ', $statuses),
-            'data_through_at' => $dataThrough,
-            'last_successful_refresh_at' => $lastRefresh,
+            'data_through_at' => $this->formatDatabaseTimestamp($dataThrough),
+            'last_successful_refresh_at' => $this->formatDatabaseTimestamp($lastRefresh),
             'source_version' => (string) ($rows->first()->source_version ?? ''),
             'is_multi_day' => $from->toDateString() !== $to->toDateString(),
         ];
@@ -296,9 +296,20 @@ final class AccessTestStatisticsPage extends Page
             'suspected_page_views' => (int) $row->suspected_page_views,
             'suspected_attempts' => (int) $row->suspected_attempts,
             'coverage_status' => (string) $row->coverage_status,
-            'data_through_at' => (string) ($row->data_through_at ?? ''),
-            'last_successful_refresh_at' => (string) $row->last_successful_refresh_at,
+            'data_through_at' => $this->formatDatabaseTimestamp($row->data_through_at ?? null),
+            'last_successful_refresh_at' => $this->formatDatabaseTimestamp($row->last_successful_refresh_at ?? null),
             'source_version' => (string) $row->source_version,
         ];
+    }
+
+    private function formatDatabaseTimestamp(mixed $value): string
+    {
+        if ($value === null || $value === '') {
+            return '';
+        }
+
+        return CarbonImmutable::parse((string) $value, 'UTC')
+            ->setTimezone('Asia/Shanghai')
+            ->format('Y-m-d H:i:s');
     }
 }

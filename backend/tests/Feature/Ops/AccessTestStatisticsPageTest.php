@@ -41,6 +41,8 @@ final class AccessTestStatisticsPageTest extends TestCase
         $this->assertCount(1, $page->dailyRows);
         $this->assertCount(1, $page->testRows);
         $this->assertSame('MBTI', $page->testRows[0]['scale_code']);
+        $this->assertSame('2026-09-18 18:00:00', $page->meta['data_through_at']);
+        $this->assertSame('2026-09-18 18:00:00', $page->dailyRows[0]['data_through_at']);
     }
 
     private function setOpsOrg(int $orgId): void
