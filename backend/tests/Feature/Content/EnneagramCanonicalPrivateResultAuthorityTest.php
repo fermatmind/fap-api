@@ -30,7 +30,7 @@ final class EnneagramCanonicalPrivateResultAuthorityTest extends TestCase
             array_column($compiled['manifest']['locale_source_files']['zh-CN'], 'path'),
             array_column($compiled['manifest']['locale_source_files']['en'], 'path'),
         );
-        $this->assertCount(24, $paths);
+        $this->assertCount(26, $paths);
         $this->assertFalse((bool) array_filter($paths, static fn (string $path): bool => str_contains($path, 'fixture') || str_ends_with($path, 'manifest.json')));
         foreach ($paths as $path) {
             $this->assertFileExists(base_path('content_packs/ENNEAGRAM/v2/registry/'.$path));

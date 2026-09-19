@@ -469,13 +469,15 @@ class ShareService
         $formSummary = $this->enneagramPublicFormSummaryBuilder->summarizeForAttempt($attempt, $result, $locale);
         $classification = is_array($reportV2['classification'] ?? null) ? $reportV2['classification'] : [];
         $top3Module = $this->firstModule($reportV2, 'top3_cards');
-        $topTypeCards = is_array(data_get($top3Module, 'content.cards')) ? data_get($top3Module, 'content.cards') : [];
+        $topTypeCards = is_array($reportV2['candidates'] ?? null)
+            ? $reportV2['candidates']
+            : (is_array(data_get($top3Module, 'content.cards')) ? data_get($top3Module, 'content.cards') : []);
         $all9Profile = is_array(data_get($projection, 'scores.all9_profile')) ? data_get($projection, 'scores.all9_profile') : [];
         $closeCallPair = is_array(data_get($projection, 'dynamics.close_call_pair')) ? data_get($projection, 'dynamics.close_call_pair') : [];
         $scope = (string) ($classification['interpretation_scope'] ?? data_get($projection, 'classification.interpretation_scope', 'clear'));
-        $primary = trim((string) (data_get($projection, 'scores.primary_candidate') ?? data_get($topTypeCards, '0.type', '')));
-        $second = trim((string) (data_get($projection, 'scores.second_candidate') ?? data_get($topTypeCards, '1.type', '')));
-        $third = trim((string) (data_get($projection, 'scores.third_candidate') ?? data_get($topTypeCards, '2.type', '')));
+        $primary = trim((string) (data_get($projection, 'scores.primary_candidate') ?? data_get($topTypeCards, '0.type_id', data_get($topTypeCards, '0.type', ''))));
+        $second = trim((string) (data_get($projection, 'scores.second_candidate') ?? data_get($topTypeCards, '1.type_id', data_get($topTypeCards, '1.type', ''))));
+        $third = trim((string) (data_get($projection, 'scores.third_candidate') ?? data_get($topTypeCards, '2.type_id', data_get($topTypeCards, '2.type', ''))));
         $shareCopy = data_get($this->enneagramPackLoader->loadRegistryPack(null, $locale), 'surface_registry.entries.share');
         if (! is_array($shareCopy)
             || trim((string) ($shareCopy['title'] ?? '')) === ''
@@ -521,7 +523,7 @@ class ShareService
             'third_candidate' => $third !== '' ? $third : null,
             'top_types' => array_values(array_map(
                 static fn (array $row): array => [
-                    'type' => trim((string) ($row['type'] ?? '')),
+                    'type' => trim((string) ($row['type_id'] ?? $row['type'] ?? '')),
                     'candidate_role' => trim((string) ($row['candidate_role'] ?? '')),
                 ],
                 array_filter($topTypeCards, static fn (mixed $row): bool => is_array($row))

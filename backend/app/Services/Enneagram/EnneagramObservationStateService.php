@@ -11,6 +11,7 @@ use App\Models\Result;
 use App\Services\Content\EnneagramPackLoader;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Validation\ValidationException;
 
 final class EnneagramObservationStateService
 {
@@ -52,9 +53,22 @@ final class EnneagramObservationStateService
     /**
      * @return array<string,mixed>
      */
-    public function assign(Attempt $attempt, Result $result): array
+    public function assign(Attempt $attempt, Result $result, ?string $selectedActionId = null): array
     {
-        $state = $this->upsertState($attempt, $result, function (EnneagramObservationState $state, array $basis): void {
+        $state = $this->upsertState($attempt, $result, function (EnneagramObservationState $state, array $basis) use ($selectedActionId): void {
+            $allowedTypes = array_values(array_filter([
+                $basis['primary_candidate'] ?? null,
+                $basis['second_candidate'] ?? null,
+                $basis['third_candidate'] ?? null,
+            ]));
+            $selectedActionId ??= 'type-'.strtolower(ltrim((string) ($allowedTypes[0] ?? ''), 'T')).'-action-01';
+            $actionType = preg_match('/^type-([1-9])-action-0[1-5]$/', $selectedActionId, $matches) === 1 ? $matches[1] : null;
+            if ($actionType === null || ! in_array('T'.$actionType, $allowedTypes, true)) {
+                throw ValidationException::withMessages(['selected_action_id' => ['The selected action must belong to a current Top 3 candidate.']]);
+            }
+            $storedPayload = is_array($state->payload_json) ? $state->payload_json : [];
+            $storedPayload['selected_action_id'] = $selectedActionId;
+            $state->payload_json = $storedPayload;
             $state->status = $state->assigned_at === null ? 'observation_assigned' : $this->normalizeStatus($state->status);
             $state->assigned_at = $state->assigned_at ?? now();
             $state->observation_completion_rate = max(0, (int) ($state->observation_completion_rate ?? 0));
@@ -230,6 +244,7 @@ final class EnneagramObservationStateService
                 'interpretation_scope' => $this->nullableText($basis['interpretation_scope'] ?? null),
                 'close_call_pair' => $this->closeCallPairSummary($basis),
                 'tasks' => $tasks,
+                'selected_action_id' => $this->nullableText($storedPayload['selected_action_id'] ?? null),
                 'day3_observation_feedback' => is_array($storedPayload['day3_observation_feedback'] ?? null)
                     ? $storedPayload['day3_observation_feedback']
                     : null,

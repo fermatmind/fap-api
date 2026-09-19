@@ -20,12 +20,13 @@ final class EnneagramPrivateResultCompileService
 
     public const COMPILER_SCHEMA = 'fap.enneagram.private_result.compiler.v1';
 
-    public const COMPILER_VERSION = '1.0.0';
+    public const COMPILER_VERSION = '1.1.0';
 
     public const ARTIFACT_FILENAME = 'private_result.compiled.json';
 
     /** @var array<string,array{registry_key:string,role:string,schema:string,surfaces:list<string>}> */
     public const SOURCE_CONTRACT = [
+        'chapter_registry.json' => ['registry_key' => 'enneagram_chapter_registry', 'role' => 'seven-chapter candidate sections and growth actions', 'schema' => 'fap.enneagram.chapter_registry.v1', 'surfaces' => ['result', 'report', 'pdf', 'history']],
         'group_registry.json' => ['registry_key' => 'enneagram_group_registry', 'role' => 'centers, stances, and harmonics', 'schema' => 'fap.enneagram.group_registry.v1', 'surfaces' => ['result', 'report']],
         'method_registry.json' => ['registry_key' => 'enneagram_method_registry', 'role' => 'E105 and FC144 method boundaries', 'schema' => 'fap.enneagram.method_registry.v1', 'surfaces' => ['result', 'report', 'technical_note', 'compare']],
         'observation_registry.json' => ['registry_key' => 'enneagram_observation_registry', 'role' => 'observation workflow copy', 'schema' => 'fap.enneagram.observation_registry.v1', 'surfaces' => ['result', 'history']],
@@ -155,11 +156,21 @@ final class EnneagramPrivateResultCompileService
         foreach (['zh-CN', 'en'] as $locale) {
             $assets = $localeAssets[$locale] ?? [];
             $types = array_column((array) ($assets['type_registry.json']['entries'] ?? []), 'type_id');
+            $chapterTypes = array_column((array) ($assets['chapter_registry.json']['entries'] ?? []), 'type_id');
             $pairs = array_column((array) ($assets['pair_registry.json']['entries'] ?? []), 'pair_key');
             sort($types, SORT_STRING);
+            sort($chapterTypes, SORT_STRING);
             sort($pairs, SORT_STRING);
-            if ($types !== ['1', '2', '3', '4', '5', '6', '7', '8', '9'] || $pairs !== $this->allPairKeys()) {
+            if ($types !== ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+                || $chapterTypes !== ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+                || $pairs !== $this->allPairKeys()) {
                 throw new RuntimeException("Enneagram canonical type or pair coverage is incomplete: {$locale}");
+            }
+            foreach ((array) ($assets['chapter_registry.json']['entries'] ?? []) as $entry) {
+                $sectionIds = array_column((array) ($entry['sections'] ?? []), 'section_id');
+                if ($sectionIds !== $this->requiredSectionIds() || count((array) ($entry['growth_actions'] ?? [])) < 3) {
+                    throw new RuntimeException("Enneagram canonical chapter coverage is incomplete: {$locale}:".(string) ($entry['type_id'] ?? 'unknown'));
+                }
             }
             foreach (['faq', 'technical_note', 'share', 'pdf', 'print', 'history', 'compare', 'secondary'] as $surface) {
                 if (! is_array($assets['surface_registry.json']['entries'][$surface] ?? null)) {
@@ -170,6 +181,7 @@ final class EnneagramPrivateResultCompileService
 
         return [
             'locales' => ['zh-CN', 'en'], 'types' => ['1', '2', '3', '4', '5', '6', '7', '8', '9'], 'pair_count' => 36,
+            'type_section_count' => 20, 'total_section_count_per_locale' => 180, 'growth_action_count_per_type' => 5,
             'groups' => ['centers', 'stances', 'harmonics'], 'interpretation_states' => ['clear', 'close_call', 'diffuse', 'low_quality'],
             'scenarios' => ['work', 'relationship', 'growth', 'state', 'observation'], 'forms' => ['e105', 'fc144'],
             'secondary_surfaces' => ['faq', 'technical_note', 'share', 'pdf', 'print', 'history', 'compare', 'secondary'],
@@ -187,6 +199,18 @@ final class EnneagramPrivateResultCompileService
         }
 
         return $keys;
+    }
+
+    /** @return list<string> */
+    private function requiredSectionIds(): array
+    {
+        return [
+            '2.1', '2.2', '2.3', '2.4', '2.5', '2.6',
+            '3.1', '3.2', '3.3',
+            '4.1', '4.2', '4.3',
+            '5.1', '5.2', '5.3',
+            '6.1', '6.2', '6.3', '6.4', '6.5',
+        ];
     }
 
     /** @param list<array<string,mixed>> $sourceFiles @param array<string,list<array<string,mixed>>> $localeFiles @param array<string,string> $localeHashes @param array<string,mixed> $coverage @param array<string,string> $compiler @return array<string,mixed> */

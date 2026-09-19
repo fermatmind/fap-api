@@ -68,7 +68,7 @@ final class EnneagramReportSnapshotBindingTest extends TestCase
             (string) data_get($reportFull, '_meta.enneagram_report_v2.schema_version')
         );
         $this->assertSame(
-            'page_1_result_overview',
+            'chapter_1_result',
             (string) data_get($reportFull, '_meta.enneagram_report_v2.pages.0.page_key')
         );
         $this->assertNotSame(

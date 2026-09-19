@@ -184,6 +184,7 @@ final class RegistryValidator
      * @var array<string,string>
      */
     private const REQUIRED_REGISTRIES = [
+        'enneagram_chapter_registry' => 'chapter_registry.json',
         'enneagram_type_registry' => 'type_registry.json',
         'enneagram_pair_registry' => 'pair_registry.json',
         'enneagram_group_registry' => 'group_registry.json',
@@ -211,6 +212,14 @@ final class RegistryValidator
     private const VALID_FALLBACK_POLICIES = ['required', 'optional', 'fallback_to_type_base', 'fallback_to_generic', 'none'];
 
     private const REQUIRED_TYPE_IDS = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+    private const REQUIRED_CHAPTER_SECTION_IDS = [
+        '2.1', '2.2', '2.3', '2.4', '2.5', '2.6',
+        '3.1', '3.2', '3.3',
+        '4.1', '4.2', '4.3',
+        '5.1', '5.2', '5.3',
+        '6.1', '6.2', '6.3', '6.4', '6.5',
+    ];
 
     private const REQUIRED_PAIR_KEYS = [
         '1_2', '1_3', '1_4', '1_5', '1_6', '1_7', '1_8', '1_9',
@@ -291,6 +300,8 @@ final class RegistryValidator
         $registries = is_array($registryPack['registries'] ?? null) ? $registryPack['registries'] : [];
 
         $errors = array_merge($errors, $this->validateManifest($manifest));
+        $manifestLocales = array_values(array_map('strval', is_array($manifest['locales'] ?? null) ? $manifest['locales'] : []));
+        $packLocale = trim((string) data_get($registries, 'enneagram_type_registry.locale', ''));
 
         foreach (self::REQUIRED_REGISTRIES as $registryKey => $file) {
             $payload = is_array($registries[$registryKey] ?? null) ? $registries[$registryKey] : null;
@@ -300,9 +311,17 @@ final class RegistryValidator
                 continue;
             }
             $errors = array_merge($errors, $this->validateRegistryMetadata($payload, $registryKey));
+            $payloadLocale = trim((string) ($payload['locale'] ?? ''));
+            if ($manifestLocales !== [] && ! in_array($payloadLocale, $manifestLocales, true)) {
+                $errors[] = "Registry {$registryKey} locale must match manifest locales";
+            }
+            if ($packLocale !== '' && $payloadLocale !== $packLocale) {
+                $errors[] = "Registry {$registryKey} locale must match the active registry pack locale";
+            }
         }
 
         if ($registries !== []) {
+            $errors = array_merge($errors, $this->validateChapterRegistry((array) ($registries['enneagram_chapter_registry'] ?? [])));
             $errors = array_merge($errors, $this->validateTypeRegistry((array) ($registries['enneagram_type_registry'] ?? [])));
             $errors = array_merge($errors, $this->validatePairRegistry((array) ($registries['enneagram_pair_registry'] ?? [])));
             $errors = array_merge($errors, $this->validateGroupRegistry((array) ($registries['enneagram_group_registry'] ?? [])));
@@ -316,6 +335,92 @@ final class RegistryValidator
             $errors = array_merge($errors, $this->validateSampleReportRegistry((array) ($registries['enneagram_sample_report_registry'] ?? [])));
             $errors = array_merge($errors, $this->validateTechnicalNoteRegistry((array) ($registries['enneagram_technical_note_registry'] ?? [])));
             $errors = array_merge($errors, $this->validateRegistryTextBoundaries($registries));
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @return list<string>
+     */
+    private function validateChapterRegistry(array $payload): array
+    {
+        $entries = is_array($payload['entries'] ?? null) ? $payload['entries'] : [];
+        $typeIds = [];
+        $errors = [];
+
+        foreach ($entries as $entry) {
+            if (! is_array($entry)) {
+                $errors[] = 'Chapter registry contains invalid entry';
+
+                continue;
+            }
+            $typeId = trim((string) ($entry['type_id'] ?? ''));
+            $typeIds[] = $typeId;
+            $sections = is_array($entry['sections'] ?? null) ? $entry['sections'] : [];
+            $sectionIds = [];
+            foreach ($sections as $section) {
+                if (! is_array($section)) {
+                    $errors[] = "Chapter registry {$typeId} contains invalid section";
+
+                    continue;
+                }
+                $sectionId = trim((string) ($section['section_id'] ?? ''));
+                $sectionIds[] = $sectionId;
+                foreach (['title', 'lead', 'reflection_question', 'evidence_level', 'content_maturity', 'fallback_policy'] as $field) {
+                    if (trim((string) ($section[$field] ?? '')) === '') {
+                        $errors[] = "Chapter registry {$typeId} section {$sectionId} missing {$field}";
+                    }
+                }
+                foreach (['paragraphs', 'points', 'source_refs'] as $field) {
+                    $values = is_array($section[$field] ?? null) ? array_values(array_filter($section[$field], static fn (mixed $value): bool => trim((string) $value) !== '')) : [];
+                    $minimum = $field === 'source_refs' ? 1 : 2;
+                    if (count($values) < $minimum) {
+                        $errors[] = "Chapter registry {$typeId} section {$sectionId} {$field} must include at least {$minimum} values";
+                    }
+                }
+                if (($section['fallback_policy'] ?? null) !== 'required') {
+                    $errors[] = "Chapter registry {$typeId} section {$sectionId} must fail closed with fallback_policy=required";
+                }
+                if ($sectionId === '6.4') {
+                    $levels = is_array($section['levels'] ?? null) ? $section['levels'] : [];
+                    if (count($levels) !== 9 || ($section['assignment_allowed'] ?? null) !== false) {
+                        $errors[] = "Chapter registry {$typeId} section 6.4 must contain nine theory-only levels with assignment disabled";
+                    }
+                }
+            }
+            if ($sectionIds !== self::REQUIRED_CHAPTER_SECTION_IDS) {
+                $errors[] = "Chapter registry {$typeId} must contain the twenty canonical sections in order";
+            }
+
+            $actions = is_array($entry['growth_actions'] ?? null) ? $entry['growth_actions'] : [];
+            $actionIds = [];
+            foreach ($actions as $action) {
+                if (! is_array($action)) {
+                    $errors[] = "Chapter registry {$typeId} contains invalid growth action";
+
+                    continue;
+                }
+                $actionId = trim((string) ($action['action_id'] ?? ''));
+                $actionIds[] = $actionId;
+                foreach (['action_id', 'title', 'instruction', 'observable_outcome'] as $field) {
+                    if (trim((string) ($action[$field] ?? '')) === '') {
+                        $errors[] = "Chapter registry {$typeId} growth action missing {$field}";
+                    }
+                }
+                if (! is_array($action['observation_days'] ?? null) || $action['observation_days'] !== [1, 3, 7]) {
+                    $errors[] = "Chapter registry {$typeId} action {$actionId} must bind observation days 1/3/7";
+                }
+            }
+            if (count($actions) < 3 || count($actionIds) !== count(array_unique($actionIds))) {
+                $errors[] = "Chapter registry {$typeId} must contain unique concrete growth actions";
+            }
+        }
+
+        sort($typeIds, SORT_STRING);
+        if ($typeIds !== self::REQUIRED_TYPE_IDS) {
+            $errors[] = 'Chapter registry must cover types 1-9 exactly once';
         }
 
         return $errors;
@@ -715,8 +820,29 @@ final class RegistryValidator
                 $errors[] = "Surface registry missing {$surface}";
             }
         }
-        if (count((array) ($entries['page_specs'] ?? [])) !== 5) {
-            $errors[] = 'Surface registry must define five report pages';
+        $pageSpecs = (array) ($entries['page_specs'] ?? []);
+        if (array_keys($pageSpecs) !== [
+            'chapter_1_result',
+            'chapter_2_core_pattern',
+            'chapter_3_strength_cost',
+            'chapter_4_relationships',
+            'chapter_5_work',
+            'chapter_6_stress_recovery',
+            'chapter_7_observation',
+        ]) {
+            $errors[] = 'Surface registry must define the seven canonical report chapters in order';
+        }
+        $sectionIds = [];
+        foreach ($pageSpecs as $pageSpec) {
+            if (! is_array($pageSpec)) {
+                continue;
+            }
+            foreach ((array) ($pageSpec['section_ids'] ?? []) as $sectionId) {
+                $sectionIds[] = (string) $sectionId;
+            }
+        }
+        if ($sectionIds !== self::REQUIRED_CHAPTER_SECTION_IDS) {
+            $errors[] = 'Surface registry chapter section_ids must reference the twenty canonical sections exactly once and in order';
         }
 
         return $errors;

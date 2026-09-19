@@ -119,4 +119,22 @@ final class EnneagramRegistryPackLoadTest extends TestCase
         $this->assertNotSame('', $first);
         $this->assertSame($first, $second);
     }
+
+    public function test_chapter_registry_fails_closed_on_missing_unknown_or_wrong_locale_content(): void
+    {
+        $loader = app(EnneagramPackLoader::class);
+        $validator = app(RegistryValidator::class);
+
+        $missing = $loader->loadRegistryPack();
+        array_pop($missing['registries']['enneagram_chapter_registry']['entries'][0]['sections']);
+        $this->assertStringContainsString('twenty canonical sections', implode("\n", $validator->validate($missing)));
+
+        $unknown = $loader->loadRegistryPack();
+        $unknown['registries']['enneagram_chapter_registry']['entries'][0]['sections'][0]['section_id'] = 'internal.unknown';
+        $this->assertStringContainsString('twenty canonical sections', implode("\n", $validator->validate($unknown)));
+
+        $wrongLocale = $loader->loadRegistryPack();
+        $wrongLocale['registries']['enneagram_chapter_registry']['locale'] = 'en';
+        $this->assertStringContainsString('locale', strtolower(implode("\n", $validator->validate($wrongLocale))));
+    }
 }

@@ -110,10 +110,10 @@ final class EnneagramReadReportContractTest extends TestCase
         $report->assertJsonPath('enneagram_public_projection_v2.locale', $expectedLocale);
         $report->assertJsonPath('enneagram_report_v2.schema_version', 'enneagram.report.v2');
         $report->assertJsonPath('enneagram_report_v2.locale', $expectedLocale);
-        $report->assertJsonCount(5, 'enneagram_report_v2.pages');
+        $report->assertJsonCount(7, 'enneagram_report_v2.pages');
         $report->assertJsonPath('report._meta.enneagram_public_projection_v2.schema_version', 'enneagram.public_projection.v2');
         $report->assertJsonPath('report._meta.enneagram_report_v2.schema_version', 'enneagram.report.v2');
-        $report->assertJsonPath('report._meta.enneagram_report_v2.pages.0.page_key', 'page_1_result_overview');
+        $report->assertJsonPath('report._meta.enneagram_report_v2.pages.0.page_key', 'chapter_1_result');
         $report->assertJsonPath('report._meta.enneagram_report_v2.provenance.report_engine_version', 'enneagram_report_engine.v2');
         $report->assertJsonPath(
             'report._meta.enneagram_report_v2.provenance.interpretation_context_id',
@@ -333,8 +333,14 @@ final class EnneagramReadReportContractTest extends TestCase
 
         $pages = is_array($reportV2['pages'] ?? null) ? $reportV2['pages'] : [];
         $modules = is_array($reportV2['modules'] ?? null) ? $reportV2['modules'] : [];
-        $this->assertCount(5, $pages);
-        $this->assertCount(29, $modules);
+        $this->assertCount(7, $pages);
+        $this->assertCount(8, $modules);
+        $this->assertCount(9, (array) ($reportV2['distribution'] ?? []));
+        $this->assertCount(3, (array) ($reportV2['candidates'] ?? []));
+        foreach ((array) ($reportV2['candidates'] ?? []) as $candidate) {
+            $this->assertCount(20, (array) ($candidate['sections'] ?? []));
+            $this->assertGreaterThanOrEqual(3, count((array) ($candidate['growth_actions'] ?? [])));
+        }
 
         foreach ($pages as $page) {
             $this->assertIsArray($page);
@@ -361,7 +367,7 @@ final class EnneagramReadReportContractTest extends TestCase
         }
 
         if ($expectedLocale === 'zh') {
-            $instantSummary = collect($modules)->firstWhere('module_key', 'instant_summary');
+            $instantSummary = collect($modules)->firstWhere('module_key', 'result_overview');
             $this->assertMatchesRegularExpression(
                 '/[\x{3400}-\x{9fff}\x{f900}-\x{faff}]/u',
                 (string) data_get($instantSummary, 'content.body')

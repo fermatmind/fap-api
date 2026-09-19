@@ -16,11 +16,13 @@
   "content_snapshot_hash": "derived_by_compiler",
   "entries": {
     "page_specs": {
-      "page_1_result_overview": {"title": "结果总览", "purpose": "输出当前结果结构、辨析边界和主候选阅读方式。", "modules": ["instant_summary", "top3_cards", "type_deep_dive_summary", "all9_profile", "close_call_card", "blind_spot_card", "wing_hint_visual"]},
-      "page_2_work_reality": {"title": "工作现实", "purpose": "输出工作风格、协作优势、摩擦点和工作触发点。", "modules": ["work_style_summary", "collaboration_strengths", "collaboration_friction", "leadership_pattern", "managed_by_others", "workplace_trigger_points"]},
-      "page_3_growth_spectrum": {"title": "成长光谱", "purpose": "输出成长轴、代价表达、压力信号和恢复动作。", "modules": ["growth_axis", "strength_expression", "cost_expression", "stress_trigger", "recovery_action", "state_spectrum"]},
-      "page_4_relationship_conflict": {"title": "关系与冲突", "purpose": "输出关系需要、冲突脚本和沟通说明书。", "modules": ["relationship_need", "relationship_strengths", "misread_by_others", "conflict_script", "communication_manual"]},
-      "page_5_method_observation_next": {"title": "方法、观察与下一步", "purpose": "输出方法边界、七天观察、样例和技术说明入口。", "modules": ["method_boundary", "seven_day_observation", "form_recommendation", "sample_report_link", "technical_note_link"]}
+      "chapter_1_result": {"number": "01", "title": "你的九型人格测试结果", "purpose": "呈现题型来源、九型完整分布、Top 3 候选和解释边界。", "modules": ["result_overview"]},
+      "chapter_2_core_pattern": {"number": "02", "title": "理解你的核心模式", "purpose": "按当前阅读候选理解注意力、需要、惯性循环、辨认边界和邻位理论。", "section_ids": ["2.1", "2.2", "2.3", "2.4", "2.5", "2.6"], "modules": ["candidate_chapter"]},
+      "chapter_3_strength_cost": {"number": "03", "title": "优势与容易付出的代价", "purpose": "区分同一种倾向作为资源、代价，以及用意与影响的错位。", "section_ids": ["3.1", "3.2", "3.3"], "modules": ["candidate_chapter"]},
+      "chapter_4_relationships": {"number": "04", "title": "你在关系中的样子", "purpose": "理解在乎的表达、反复关系难题和冲突修复。", "section_ids": ["4.1", "4.2", "4.3"], "modules": ["candidate_chapter"]},
+      "chapter_5_work": {"number": "05", "title": "你在工作中的样子", "purpose": "理解任务推进、协作摩擦、带人与被管理的条件。", "section_ids": ["5.1", "5.2", "5.3"], "modules": ["candidate_chapter"]},
+      "chapter_6_stress_recovery": {"number": "06", "title": "压力下的变化与恢复", "purpose": "理解压力、安全、成长方向、理论发展层次和恢复方式。", "section_ids": ["6.1", "6.2", "6.3", "6.4", "6.5"], "modules": ["candidate_chapter"]},
+      "chapter_7_observation": {"number": "07", "title": "接下来如何观察自己", "purpose": "选择具体成长行动，并接入 Day 1、Day 3、Day 7 观察反馈。", "modules": ["growth_actions", "seven_day_observation"]}
     },
     "faq": {"title": "常见问题", "items": [{"question": "这个结果是在给我定型吗？", "answer": "不是。结果是基于本次作答形成的解释假设，应结合真实情境和持续观察阅读。"}, {"question": "E105 和 FC144 的分数能直接比较吗？", "answer": "不能。两种题型共享同一九型内容模型，但作答任务和计分空间不同。"}]},
     "technical_note": {"title": "技术说明", "summary": "说明题型、计分空间、解释边界、数据状态和隐私处理，不提供诊断、招聘筛选或确定性人格结论。", "disclaimers": [{"key": "not_diagnostic", "label": "非诊断用途", "copy": "本测试用于人格模式理解与自我观察，不用于临床诊断或治疗建议。"}, {"key": "not_clinical", "label": "非临床效度声明", "copy": "当前版本不声明外部临床效度、准确率或预测能力。"}, {"key": "not_hiring_screening", "label": "非招聘筛选用途", "copy": "本测试不用于招聘、晋升或淘汰判断，也不适合做雇佣筛选工具。"}, {"key": "no_hard_theory_judgement", "label": "非硬判理论层", "copy": "wing、arrow、subtype、health level 在当前版本不作为系统硬判结论。"}, {"key": "no_cross_form_numeric_compare", "label": "跨 form 数值不直比", "copy": "E105 与 FC144 属于同一模型，但分数空间不同，不默认做跨 form 数值比较。"}, {"key": "user_confirmed_type_boundary", "label": "自我观察确认边界", "copy": "user_confirmed_type 只作为自我观察证据保存，不会静默改写系统 primary_candidate。"}]},

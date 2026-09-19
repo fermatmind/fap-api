@@ -196,6 +196,8 @@ final class EnneagramReportComposer
                     'confidence_level' => data_get($projectionV2, 'classification.confidence_level'),
                     'interpretation_reason' => data_get($projectionV2, 'classification.interpretation_reason'),
                 ],
+                'distribution' => array_values((array) data_get($projectionV2, 'scores.all9_profile', [])),
+                'candidates' => $this->buildCanonicalCandidates($projectionV2, $indexes),
                 'pages' => $pages,
                 'modules' => $modules,
                 'provenance' => [
@@ -264,6 +266,7 @@ final class EnneagramReportComposer
                 'fallback_policy' => (string) ($registry['fallback_policy'] ?? 'fallback_to_generic'),
             ], $registries),
             'type_entries' => $this->keyListBy($registries['enneagram_type_registry']['entries'] ?? [], 'type_id'),
+            'chapter_entries' => $this->keyListBy($registries['enneagram_chapter_registry']['entries'] ?? [], 'type_id'),
             'pair_entries' => $this->keyListBy($registries['enneagram_pair_registry']['entries'] ?? [], 'pair_key'),
             'group_entries' => $this->keyGroupEntries($registries['enneagram_group_registry']['entries'] ?? []),
             'scenario_entries' => $this->keyListBy($registries['enneagram_scenario_registry']['entries'] ?? [], 'module_key'),
@@ -295,9 +298,11 @@ final class EnneagramReportComposer
 
             $pages[] = [
                 'page_key' => $pageKey,
+                'number' => (string) ($pageSpec['number'] ?? ''),
                 'locale' => $language,
                 'title' => (string) ($pageSpec['title'] ?? ''),
                 'purpose' => (string) ($pageSpec['purpose'] ?? ''),
+                'section_ids' => array_values(array_map('strval', (array) ($pageSpec['section_ids'] ?? []))),
                 'modules' => $modules,
                 'visibility' => 'visible',
                 'source_registry_refs' => $this->pageRegistryRefs($modules),
@@ -315,6 +320,9 @@ final class EnneagramReportComposer
     private function buildModule(string $moduleKey, array $projectionV2, array $indexes, string $language): array
     {
         $module = match ($moduleKey) {
+            'result_overview' => $this->buildResultOverviewModule($projectionV2, $indexes, $language),
+            'candidate_chapter' => $this->buildCandidateChapterModule($projectionV2, $indexes),
+            'growth_actions' => $this->buildGrowthActionsModule($projectionV2, $indexes),
             'instant_summary' => $this->buildInstantSummaryModule($projectionV2, $indexes, $language),
             'top3_cards' => $this->buildTop3CardsModule($projectionV2, $indexes),
             'all9_profile' => $this->buildAll9ProfileModule($projectionV2, $language),
@@ -412,7 +420,7 @@ final class EnneagramReportComposer
             'form_recommendation' => $this->buildFormRecommendationModule($projectionV2, $indexes),
             'sample_report_link' => $this->buildSampleReportModule($projectionV2, $indexes),
             'technical_note_link' => $this->buildTechnicalNoteModule($projectionV2, $indexes),
-            default => $this->buildPlaceholderModule($projectionV2, $indexes, $moduleKey, 'placeholder_card', 'module_builder_not_implemented'),
+            default => throw new RuntimeException('ENNEAGRAM_REPORT_UNKNOWN_MODULE:'.$moduleKey),
         };
 
         $content = is_array($module['content'] ?? null) ? $module['content'] : [];
@@ -420,6 +428,143 @@ final class EnneagramReportComposer
         $module['content'] = $content;
 
         return $module;
+    }
+
+    /**
+     * @param  array<string,mixed>  $projectionV2
+     * @param  array<string,mixed>  $indexes
+     * @return list<array<string,mixed>>
+     */
+    private function buildCanonicalCandidates(array $projectionV2, array $indexes): array
+    {
+        $candidates = [];
+        foreach (array_slice((array) data_get($projectionV2, 'scores.top_types', []), 0, 3) as $row) {
+            if (! is_array($row)) {
+                throw new RuntimeException('ENNEAGRAM_TOP3_CANDIDATE_INVALID');
+            }
+            $typeId = trim((string) ($row['type'] ?? ''));
+            $chapterEntry = is_array($indexes['chapter_entries'][$typeId] ?? null) ? $indexes['chapter_entries'][$typeId] : [];
+            $typeEntry = $this->typeEntry($indexes, $typeId);
+            $sections = is_array($chapterEntry['sections'] ?? null) ? $chapterEntry['sections'] : [];
+            $actions = is_array($chapterEntry['growth_actions'] ?? null) ? $chapterEntry['growth_actions'] : [];
+            if ($typeId === '' || $typeEntry === [] || count($sections) !== 20 || count($actions) < 3) {
+                throw new RuntimeException('ENNEAGRAM_CANDIDATE_CONTENT_INCOMPLETE:'.$typeId);
+            }
+
+            $candidates[] = [
+                'type_id' => $typeId,
+                'rank' => (int) ($row['rank'] ?? 0),
+                'candidate_role' => (string) ($row['candidate_role'] ?? ''),
+                'type_name' => (string) ($typeEntry['type_name_'.($this->normalizeLanguage((string) data_get($projectionV2, 'locale', 'zh')) === 'en' ? 'en' : 'cn')] ?? ''),
+                'type_name_cn' => (string) ($typeEntry['type_name_cn'] ?? ''),
+                'type_name_en' => (string) ($typeEntry['type_name_en'] ?? ''),
+                'short_title' => (string) ($chapterEntry['short_title'] ?? $typeEntry['short_title'] ?? ''),
+                'score_norm' => $row['score_norm'] ?? null,
+                'score_display' => $row['score_display'] ?? null,
+                'score_source' => $row['score_source'] ?? null,
+                'sections' => array_values($sections),
+                'growth_actions' => array_values($actions),
+                'registry_ref' => 'enneagram_chapter_registry:'.$typeId,
+            ];
+        }
+
+        if (count($candidates) !== 3) {
+            throw new RuntimeException('ENNEAGRAM_TOP3_CANDIDATE_COVERAGE_INVALID');
+        }
+
+        return $candidates;
+    }
+
+    /** @return array<string,mixed> */
+    private function buildResultOverviewModule(array $projectionV2, array $indexes, string $language): array
+    {
+        $state = $this->state($projectionV2);
+        $uiKey = 'instant_summary.'.$state;
+        $ui = is_array($indexes['ui_entries'][$uiKey] ?? null) ? $indexes['ui_entries'][$uiKey] : [];
+        $formVariant = $this->formVariant($projectionV2);
+        $formBadgeKey = $formVariant === 'fc144' ? 'form_badge.fc144' : 'form_badge.e105';
+        $formBadge = is_array($indexes['ui_entries'][$formBadgeKey] ?? null) ? $indexes['ui_entries'][$formBadgeKey] : [];
+        $methodKey = $formVariant === 'fc144' ? 'fc144_forced_choice_methodology' : 'e105_standard_methodology';
+        $method = is_array($indexes['method_entries'][$methodKey] ?? null) ? $indexes['method_entries'][$methodKey] : [];
+        $sameModel = is_array($indexes['method_entries']['same_model_not_same_score_space'] ?? null) ? $indexes['method_entries']['same_model_not_same_score_space'] : [];
+
+        return $this->module(
+            'result_overview',
+            'result_overview',
+            'visible',
+            $formVariant,
+            [
+                'title' => (string) ($ui['title_template'] ?? ''),
+                'body' => (string) ($ui['body_template'] ?? ''),
+                'interpretation_scope' => $state,
+                'interpretation_reason' => data_get($projectionV2, 'classification.interpretation_reason'),
+                'confidence_level' => data_get($projectionV2, 'classification.confidence_level'),
+                'quality_level' => data_get($projectionV2, 'classification.quality_level'),
+                'form' => data_get($projectionV2, 'form', []),
+                'form_badge' => ['label' => $formBadge['label'] ?? null, 'body' => $formBadge['body_template'] ?? null],
+                'methodology_copy' => $method['copy'] ?? null,
+                'score_space_boundary' => $sameModel['copy'] ?? null,
+                'distribution' => array_values((array) data_get($projectionV2, 'scores.all9_profile', [])),
+                'top_candidates' => array_map(static fn (array $candidate): array => [
+                    'type_id' => $candidate['type_id'],
+                    'rank' => $candidate['rank'],
+                    'candidate_role' => $candidate['candidate_role'],
+                    'type_name' => $candidate['type_name'],
+                    'short_title' => $candidate['short_title'],
+                    'score_display' => $candidate['score_display'],
+                ], $this->buildCanonicalCandidates($projectionV2, $indexes)),
+                'locale' => $language,
+            ],
+            ['form', 'scores.all9_profile', 'scores.top_types', 'classification'],
+            ['enneagram_ui_copy_registry:'.$uiKey, 'enneagram_ui_copy_registry:'.$formBadgeKey, 'enneagram_method_registry:'.$methodKey],
+            ['algorithmic_meta.confidence_policy_version', 'algorithmic_meta.quality_policy_version'],
+            $this->mergeEntryMeta([$ui, $formBadge, $method], $this->registryMeta($indexes, 'enneagram_chapter_registry'))
+        );
+    }
+
+    /** @return array<string,mixed> */
+    private function buildCandidateChapterModule(array $projectionV2, array $indexes): array
+    {
+        return $this->module(
+            'candidate_chapter',
+            'candidate_chapter',
+            'visible',
+            'all',
+            [
+                'candidate_type_ids' => array_column($this->buildCanonicalCandidates($projectionV2, $indexes), 'type_id'),
+                'selection_behavior' => 'reading_perspective_only',
+                'system_result_mutation_allowed' => false,
+            ],
+            ['scores.top_types'],
+            ['enneagram_chapter_registry'],
+            ['classification.interpretation_scope'],
+            $this->registryMeta($indexes, 'enneagram_chapter_registry')
+        );
+    }
+
+    /** @return array<string,mixed> */
+    private function buildGrowthActionsModule(array $projectionV2, array $indexes): array
+    {
+        return $this->module(
+            'growth_actions',
+            'growth_actions',
+            'visible',
+            'all',
+            [
+                'candidates' => array_map(static fn (array $candidate): array => [
+                    'type_id' => $candidate['type_id'],
+                    'candidate_role' => $candidate['candidate_role'],
+                    'actions' => $candidate['growth_actions'],
+                ], $this->buildCanonicalCandidates($projectionV2, $indexes)),
+                'assignment_mode' => 'observation_evidence_only',
+                'system_result_mutation_allowed' => false,
+                'feedback_days' => [3, 7],
+            ],
+            ['scores.top_types'],
+            ['enneagram_chapter_registry', 'enneagram_observation_registry'],
+            ['calibration_data.user_confirmed_type'],
+            $this->registryMeta($indexes, 'enneagram_chapter_registry')
+        );
     }
 
     /**

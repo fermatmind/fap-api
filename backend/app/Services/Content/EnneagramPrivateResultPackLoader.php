@@ -118,6 +118,9 @@ final class EnneagramPrivateResultPackLoader
             || data_get($payload, 'coverage.locales') !== ['zh-CN', 'en']
             || (int) data_get($payload, 'coverage.pair_count', 0) !== 36
             || data_get($payload, 'coverage.forms') !== ['e105', 'fc144']
+            || (int) data_get($payload, 'coverage.type_section_count', 0) !== 20
+            || (int) data_get($payload, 'coverage.total_section_count_per_locale', 0) !== 180
+            || (int) data_get($payload, 'coverage.growth_action_count_per_type', 0) < 3
             || data_get($payload, 'form_projections.e105.source_hash') !== $sourceHash
             || data_get($payload, 'form_projections.fc144.source_hash') !== $sourceHash) {
             throw new RuntimeException('ENNEAGRAM_PRIVATE_RESULT_ACTIVE_ARTIFACT_CONTRACT_INVALID');

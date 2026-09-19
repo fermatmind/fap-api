@@ -26,12 +26,15 @@ final class EnneagramObservationStateContractTest extends TestCase
         $assign = $this->withHeaders([
             'Authorization' => 'Bearer '.$token,
             'X-Anon-Id' => $anonId,
-        ])->postJson("/api/v0.3/attempts/{$attemptId}/enneagram/observation/assign");
+        ])->postJson("/api/v0.3/attempts/{$attemptId}/enneagram/observation/assign", [
+            'selected_action_id' => 'type-4-action-01',
+        ]);
 
         $assign->assertStatus(200);
         $assign->assertJsonPath('ok', true);
         $assign->assertJsonPath('observation_state_v1.version', 'enneagram_observation_state.v1');
         $assign->assertJsonPath('observation_state_v1.status', 'observation_assigned');
+        $assign->assertJsonPath('observation_state_v1.selected_action_id', 'type-4-action-01');
         $assign->assertJsonPath('observation_state_v1.suggested_next_action', 'do_fc144');
         $this->assertCount(7, (array) $assign->json('observation_state_v1.tasks'));
 
@@ -62,15 +65,35 @@ final class EnneagramObservationStateContractTest extends TestCase
         $diffuse = $this->withHeaders([
             'Authorization' => 'Bearer '.$token,
             'X-Anon-Id' => $anonId,
-        ])->postJson("/api/v0.3/attempts/{$diffuseAttemptId}/enneagram/observation/assign");
+        ])->postJson("/api/v0.3/attempts/{$diffuseAttemptId}/enneagram/observation/assign", [
+            'selected_action_id' => 'type-4-action-01',
+        ]);
         $diffuse->assertStatus(200);
         $diffuse->assertJsonPath('observation_state_v1.suggested_next_action', 'read_top3');
 
         $lowQuality = $this->withHeaders([
             'Authorization' => 'Bearer '.$token,
             'X-Anon-Id' => $anonId,
-        ])->postJson("/api/v0.3/attempts/{$lowQualityAttemptId}/enneagram/observation/assign");
+        ])->postJson("/api/v0.3/attempts/{$lowQualityAttemptId}/enneagram/observation/assign", [
+            'selected_action_id' => 'type-4-action-01',
+        ]);
         $lowQuality->assertStatus(200);
         $lowQuality->assertJsonPath('observation_state_v1.suggested_next_action', 'retest_same_form');
+    }
+
+    public function test_assign_rejects_an_action_outside_the_current_top_three(): void
+    {
+        (new ScaleRegistrySeeder)->run();
+        $anonId = 'anon_observation_invalid_action';
+        $token = $this->issueAnonToken($anonId);
+        $attemptId = $this->createSubmittedEnneagramAttempt($anonId, $token);
+        $this->patchEnneagramProjection($attemptId, 'enneagram_likert_105', 'clear');
+
+        $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+            'X-Anon-Id' => $anonId,
+        ])->postJson("/api/v0.3/attempts/{$attemptId}/enneagram/observation/assign", [
+            'selected_action_id' => 'type-2-action-01',
+        ])->assertStatus(422)->assertJsonValidationErrors('selected_action_id');
     }
 }

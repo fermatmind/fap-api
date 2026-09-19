@@ -3324,7 +3324,10 @@ class AttemptReadController extends Controller
     public function assignEnneagramObservation(Request $request, string $id): JsonResponse
     {
         [$attempt, $result] = $this->resolveEnneagramObservationSubject($request, $id);
-        $contract = $this->enneagramObservationStateService->assign($attempt, $result);
+        $payload = $request->validate([
+            'selected_action_id' => ['sometimes', 'string', 'regex:/^type-[1-9]-action-0[1-5]$/'],
+        ]);
+        $contract = $this->enneagramObservationStateService->assign($attempt, $result, isset($payload['selected_action_id']) ? (string) $payload['selected_action_id'] : null);
         $request->merge(['attempt_id' => (string) $attempt->id]);
         $this->eventRecorder->recordFromRequest($request, 'enneagram_observation_assigned', $this->resolveUserId($request), $this->resolveEnneagramAnalyticsEventMeta(
             $attempt,
