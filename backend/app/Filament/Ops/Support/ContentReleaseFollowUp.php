@@ -158,8 +158,9 @@ final class ContentReleaseFollowUp
             'cache_signal' => [
                 'kind' => 'invalidate',
                 'paths' => $paths,
-                'urls' => $paths,
-            ],
+            ] + (data_get($contentExtras, 'path_scope') === 'article_detail_only'
+                ? []
+                : ['urls' => $paths]),
         ];
     }
 

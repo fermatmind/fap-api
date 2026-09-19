@@ -459,7 +459,8 @@ final class ContentReleaseRevalidateCommandTest extends TestCase
                 && data_get($request->data(), 'content.path_scope') === 'article_detail_only'
                 && data_get($request->data(), 'content.published_revision_id') === (int) $revision->id
                 && data_get($request->data(), 'content.content_sha256') === $contentSha256
-                && data_get($request->data(), 'cache_signal.paths') === ['/en/articles/exact-execute'];
+                && data_get($request->data(), 'cache_signal.paths') === ['/en/articles/exact-execute']
+                && ! array_key_exists('urls', (array) data_get($request->data(), 'cache_signal', []));
         });
         Http::assertNotSent(static fn ($request): bool => str_contains($request->url(), 'broadcast.example.test'));
     }
