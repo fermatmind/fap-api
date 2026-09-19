@@ -140,6 +140,15 @@
       "item:crematory-operators.path.career-path-block.8": {
         "status": "pending_mapping"
       },
+      "item:crematory-operators.path.credential-decision.current.v1": {
+        "status": "pending_mapping"
+      },
+      "item:crematory-operators.path.entry-role-comparison.current.v1": {
+        "status": "pending_mapping"
+      },
+      "item:crematory-operators.path.interview-probation.current.v1": {
+        "status": "pending_mapping"
+      },
       "item:crematory-operators.profile.career-quick-answers-block.1": {
         "status": "pending_mapping"
       },
@@ -201,6 +210,12 @@
         "status": "pending_mapping"
       },
       "item:crematory-operators.sources.boundary.1": {
+        "status": "pending_mapping"
+      },
+      "item:crematory-operators.sources.boundary.1.2": {
+        "status": "pending_mapping"
+      },
+      "item:crematory-operators.sources.boundary.1.3": {
         "status": "pending_mapping"
       },
       "item:crematory-operators.sources.faq.1": {
@@ -7232,7 +7247,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
               "适配信号：能反复核对标签与文件、遵守停机隔离、面对遗体保持尊重，并在任何身份或设备状态不一致时停止。"
@@ -7246,7 +7261,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
               "安全体验：只用本页完全虚构的编号卡做纸面身份链核对，不接触遗体、骨灰、设备、燃料或真实个人信息。"
@@ -7260,7 +7275,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
               "复核标准：逐案给出一致/不一致、缺失项、停止点和升级对象；未知状态不能默认为通过。"
@@ -7285,7 +7300,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "美国39-4012.00火化设备操作员精确职业数据（O*NET 2026更新，2026-08-30访问）：具体人或动物遗体范围及操作要求受州、地方和机构规则约束。"
+              "职业范围：本页只覆盖 O*NET-SOC 39-4012.00 火化设备操作员，即按州、地方与机构规则操作火化设备，把人或动物遗体还原为骨块，可能并承担遗体准备与设备一般维护；中国遗体火化与火化证明受《殡葬管理条例》与地方规程约束，与美国分类不是一一对应。"
             ]
           },
           "fact_refs": [
@@ -7386,7 +7401,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "协作对象包括殡仪人员、接运人员、主管、维修、安全环保人员及家属服务人员。"
+              "核心产出是依授权完成的火化过程记录与正确标识的骨灰；在身份、文件或设备状态不一致时，则产出清楚的停止、隔离、异常与交接记录。"
             ]
           },
           "id": "crematory-operators.profile.career-quick-answers-block.1",
@@ -7414,7 +7429,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "自动化、纸面练习或一般职业资料都不能授予启动、停机、解锁、维修、复机或遗体处置权限。"
+              "火化设备操作员操作设备并逐案核对身份与文件；殡仪人员与接运人员负责接待与转运、负责人组织排程与合规、维修人员处理设备故障，职责不能自动互换。自动化、纸面练习或一般职业资料都不能授予启动、停机、解锁、维修、复机或遗体处置权限。"
             ]
           },
           "id": "crematory-operators.profile.definition-block.2",
@@ -7657,7 +7672,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "暂无可安全使用的数据：本次核查的国家统计材料未提供火化设备操作员中国大陆全国精确职业工资分布。"
+              "证据不足：本次核查的国家统计材料未提供火化设备操作员（O*NET 39-4012.00 对应口径）中国大陆全国精确职业工资分布；不以行业门类平均工资或邻近职业数值替代。"
             ]
           },
           "id": "crematory-operators.china-salary.career-snapshot-primary-locale.1",
@@ -7699,7 +7714,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "数据缺口不表示没有报价；保存原公告、工资组成、岗位范围和访问日期。"
+              "数据缺口不表示没有报价：保存原公告、工资组成、岗位范围与访问日期，并区分税前税后、班次与统计期，不以行业或邻近职业数值替代。"
             ]
           },
           "id": "crematory-operators.china-salary.career-snapshot-primary-locale.4",
@@ -7721,7 +7736,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国39-4012.00精确职业数据：BLS 2025年年薪中位数为43,650美元。"
+              "美国火化设备操作员的工资与就业怎么看？"
             ]
           },
           "fact_refs": [
@@ -7738,7 +7753,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国39-4012.00精确职业数据：2025年第10至第90百分位为33,270至62,460美元/年。"
+              "美国 2025 年工资中位 43,650 美元/年（20.98 美元/时）；第 10 分位 33,270 美元、第 90 分位 62,460 美元。中位数不是起薪或个人保证。"
             ]
           },
           "fact_refs": [
@@ -7755,7 +7770,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "百分位是工资分布，不等于新手和资深的固定阶段。"
+              "工资分位与时薪口径"
             ]
           },
           "id": "crematory-operators.us-salary.career-snapshot-secondary-locale.3",
@@ -7769,7 +7784,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国数字不代表中国岗位、具体州、机构或个人收入。"
+              "读这些数字时要问的问题"
             ]
           },
           "id": "crematory-operators.us-salary.career-snapshot-secondary-locale.4",
@@ -7783,7 +7798,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "班次、地区、机构、资历和职责组合会影响报价。"
+              "这个职业分布在哪些行业？"
             ]
           },
           "id": "crematory-operators.us-salary.career-snapshot-secondary-locale.5",
@@ -7797,7 +7812,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "比较来源时保持代码、年份、地区、单位、统计量和覆盖人群一致。"
+              "什么因素会让同类岗位的收入不同？"
             ]
           },
           "id": "crematory-operators.us-salary.career-snapshot-secondary-locale.6",
@@ -7819,7 +7834,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "能把每个编号和文件逐一对应而不依赖记忆。"
+              "火化设备操作员适合什么样的人？"
             ]
           },
           "id": "crematory-operators.fit.riasec-fit-block.1",
@@ -7834,7 +7849,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "尊重遗体、骨灰、家属和同事，不用轻率语言处理敏感事项。"
+              "适配不是人格判断，而是把日常工作的真实要求——逐案核对身份与文件、尊重遗体与家属、严格按程序停机隔离、并在信息不完整时停止——与自己的行为证据对照。"
             ]
           },
           "id": "crematory-operators.fit.riasec-fit-block.2",
@@ -7849,7 +7864,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "能遵守检查、停机、隔离和交接程序。"
+              "愿意逐项核对编号与文件、尊重遗体与家属、并按检查与隔离程序作业的人，通常更容易适应。"
             ]
           },
           "id": "crematory-operators.fit.riasec-fit-block.3",
@@ -7864,7 +7879,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "能在高温设备与重复任务环境保持注意。"
+              "先核对高温设备与重复任务环境的耐受、面对排程压力时的停工习惯，以及能否承受错误后果不可逆的责任。"
             ]
           },
           "id": "crematory-operators.fit.riasec-fit-block.4",
@@ -7879,7 +7894,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "愿意记录异常，即使会影响排程。"
+              "先用本页完全虚构的编号练习完成一次身份链核对与停止分流，不接触遗体、骨灰、设备或真实个人信息，再判断偏好。"
             ]
           },
           "id": "crematory-operators.fit.riasec-fit-block.5",
@@ -7894,7 +7909,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "能区分核身、设备操作、清洁、维护和异常处置的不同权限，不因熟悉流程而自行扩大职责。"
+              "O*NET 为火化设备操作员（39-4012.00）公示的兴趣代码是 RC：现实型对应操作设备与体力机械活动，常规型对应遵循程序与规范记录。把代码当作活动类型线索，不要当作人格标签。"
             ]
           },
           "id": "crematory-operators.fit.riasec-fit-block.6",
@@ -7909,7 +7924,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "面对身份、文件、标签或设备可用状态不明确时，愿意保留原状并询问机构指定人员。"
+              "用核对记录、停机升级、隔离与交接等行为证据判断，不靠「不怕」或熟练感。"
             ]
           },
           "id": "crematory-operators.fit.riasec-fit-block.7",
@@ -7921,10 +7936,10 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.riasec-fit-block",
+          "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格标签不能证明适合，仍需纸面核身样本、正式培训和受监督绩效。"
+              "纸面练习不能证明真实设备操作能力、授权或对遗体的处置资格。"
             ]
           },
           "id": "crematory-operators.fit.riasec-fit-block.8",
@@ -7947,7 +7962,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "遗体标签与授权文件不一致会破坏身份链；不进入受影响步骤，隔离该案记录并交由机构指定人员核实。"
+              "身份与文件链不一致"
             ]
           },
           "id": "crematory-operators.risk.career-risk-cards.1",
@@ -7963,7 +7978,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "骨灰容器标签缺失或与个案不一致会造成错置；保持单案材料分开，暂停交接并交由指定人员复核。"
+              "设备状态未确认或危险能量未隔离"
             ]
           },
           "id": "crematory-operators.risk.career-risk-cards.2",
@@ -7978,7 +7993,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "设备可用状态没有按机构记录得到确认时，不启动或继续受影响步骤，保留控制记录并向指定人员升级。"
+              "骨灰容器标签缺失或错置"
             ]
           },
           "id": "crematory-operators.risk.career-risk-cards.3",
@@ -7993,7 +8008,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "清洁、检查或维护范围超出本人培训与授权时，不自行拆解、解卡或复机，记录现状并交由指定人员处理。"
+              "清洁维护超出培训与授权"
             ]
           },
           "id": "crematory-operators.risk.career-risk-cards.4",
@@ -8008,7 +8023,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "中国火葬场排放或监测记录出现超出适用要求、缺失或矛盾时，暂停受影响判断，保存原始记录并交由机构环保与主管人员处理。"
+              "排放或监测记录异常"
             ]
           },
           "id": "crematory-operators.risk.career-risk-cards.5",
@@ -8031,7 +8046,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "美国39-4012.00精确职业数据（O*NET 2026更新，2026-08-30访问）显示典型准备为高中学历或同等学历并接受在岗培训；还需学习身份链、设备检查、停机升级、记录与隐私，具体操作资格按机构和所在地规则。"
+              "火化设备操作员怎样入行与进阶？"
             ]
           },
           "fact_refs": [
@@ -8048,7 +8063,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "虚构材料：案A遗体标签CR-017、火化确认书CR-017、排程CR-017、容器标签CR-017，设备状态写“已由授权人员确认可用”；案B遗体标签CR-018、确认书CR-081，其他字段未给。"
+              "入行通常从机构在岗培训开始：先学会逐案核对身份与文件、按检查表确认设备状态、按程序停机隔离、收集并核对骨灰并完整记录；美国通常要求高中文凭或同等学历并接受在岗培训（Job Zone 1-2，SVP 低于 6.0），具体操作资格由州、地方与机构规则约束；中国遗体火化与殡葬服务受《殡葬管理条例》与地方规程约束，火化人员资质与培训按所在地与机构要求核验。"
             ]
           },
           "id": "crematory-operators.path.career-path-block.2",
@@ -8062,7 +8077,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "任务：逐案判断纸面身份链是否一致，列出缺失或冲突，并写允许的下一步；不得安排真实操作。"
+              "美国口径下该职业准备层级为 Job Zone 1-2（很少到有限准备，SVP 低于 6.0），通常要求高中文凭或同等学历，并接受从几天到一年的在岗培训；本职业在 O*NET 上的档案为部分发布，任务与准备层级以官方已发布部分为准；中国没有与 39-4012.00 一一对应的职业细类，资格与授权须按目标机构与所在地规定核对。"
             ]
           },
           "id": "crematory-operators.path.career-path-block.3",
@@ -8076,7 +8091,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参考答案A：四个编号一致且设备状态有授权确认，可进入机构的下一道人工复核，但练习本身不授权装载或启动。"
+              "资格、授权与责任要分项核对：美国州与地方的火化操作规则、机构的设备与安全培训、遗体处置与火化证明的法定要求不是同一层状态，不能互相替代；涉及火化证明、排放与殡葬服务的，须按现行规定执行。"
             ]
           },
           "id": "crematory-operators.path.career-path-block.4",
@@ -8090,7 +8105,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参考答案B：CR-018与CR-081冲突，必须停止、隔离该案并由主管核实；缺失字段保持未知。"
+              "在监督下完成身份与文件逐项核对、设备外观检查与记录填写，并用本页完全虚构的编号材料做纸面练习。"
             ]
           },
           "id": "crematory-operators.path.career-path-block.5",
@@ -8104,7 +8119,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "作品包括核对表、冲突说明、停止点和升级记录，不含真实姓名、日期或家属信息。"
+              "在授权范围内独立完成常规案件的核对、依授权操作与骨灰收集记录，处理常见异常并按条件停止。"
             ]
           },
           "id": "crematory-operators.path.career-path-block.6",
@@ -8118,7 +8133,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "七日可反复用同一材料做盲核、加入一个虚构缺失字段并比较记录错误；不参观或操作设备。"
+              "处理身份冲突、设备异常与排放记录问题，并配合带训与流程改进。"
             ]
           },
           "id": "crematory-operators.path.career-path-block.7",
@@ -8132,7 +8147,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "成长以能稳定维护身份链、设备记录、异常隔离和交接为证据，不承诺固定年限或自动授权。"
+              "组织排程、分工与合规记录，承担带训与身份链流程维护责任。"
             ]
           },
           "id": "crematory-operators.path.career-path-block.8",
@@ -8140,6 +8155,171 @@
             "onet-summary-394012"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-role-comparison",
+          "data": {
+            "column_keys": [
+              "role",
+              "initial_tasks",
+              "boundary",
+              "evidence",
+              "next_step"
+            ],
+            "rows": [
+              [
+                "受训辅助（在监督下）",
+                "在监督下完成身份与文件逐项核对、设备外观检查与记录填写。",
+                "不得独立操作、独立启动设备或自行判断授权。",
+                "一份完全虚构的编号核对与设备检查记录。",
+                "熟悉身份链与设备检查表。"
+              ],
+              [
+                "独立操作（授权范围内）",
+                "独立完成常规案件的核对、依授权操作与骨灰收集记录。",
+                "授权限机构、设备与班次范围，超出即由指定人员评估。",
+                "一份完全虚构的逐案核对表与操作记录。",
+                "学习异常处置与带训。"
+              ],
+              [
+                "班组骨干与带训",
+                "处理身份冲突与设备异常案件，并带教新人。",
+                "异常判定与恢复授权由指定人员决定。",
+                "一份完全虚构的异常处置与带训记录。",
+                "学习排放监测与记录管理。"
+              ],
+              [
+                "火化线或殡仪馆管理方向（相邻）",
+                "组织排程、分工、合规记录与异常处置决策。",
+                "授权与责任由单位制度规定。",
+                "一份完全虚构的排程与合规检查清单。",
+                "核对该方向的职责与任职要求。"
+              ],
+              [
+                "遗体防腐或殡葬服务方向（相邻）",
+                "从事遗体防腐修复或殡葬服务接待与流程支持。",
+                "属相邻职业，不承担火化设备控制。",
+                "一份完全虚构的遗体处理或服务流程记录。",
+                "核对目标方向的资质与要求。"
+              ]
+            ]
+          },
+          "id": "crematory-operators.path.entry-role-comparison.current.v1",
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.interview-probation",
+          "data": {
+            "column_keys": [
+              "stage",
+              "observed_evidence",
+              "possible_check",
+              "escalation"
+            ],
+            "rows": [
+              [
+                "身份链与文件问答",
+                "能否说清死亡与火化文件、遗体标签与授权之间的关系，以及不一致时的处置。",
+                "口头或书面测。",
+                "考核方式由机构规定。"
+              ],
+              [
+                "情景判断",
+                "遇到身份、文件或标签冲突以及设备状态异常时，能否说出核对顺序与停止条件。",
+                "答题记录。",
+                "考察范围由机构规定。"
+              ],
+              [
+                "检查与记录实操",
+                "按检查表核对设备状态，正确填写逐案核对与操作记录。",
+                "实操或模拟记录。",
+                "按机构与设备范围评价。"
+              ],
+              [
+                "试用期观察",
+                "授权范围内的操作是否规范、是否按停止条件停止并升级。",
+                "试用记录与带教评价。",
+                "聘任条件由机构规定。"
+              ]
+            ]
+          },
+          "id": "crematory-operators.path.interview-probation.current.v1",
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-decision",
+          "data": {
+            "column_keys": [
+              "credential",
+              "conditions",
+              "boundary",
+              "evidence",
+              "jurisdiction",
+              "next_step",
+              "review"
+            ],
+            "rows": [
+              [
+                "美国州与地方火化操作规则",
+                "按所在州、地方与机构规则执行火化与遗体处置。",
+                "限所在法域与机构。",
+                "规则文件与机构程序。",
+                "美国",
+                "按所在地与机构办理。",
+                "按现行规定复核。"
+              ],
+              [
+                "机构设备与安全培训",
+                "完成机构要求的设备操作、危险能量隔离与安全培训。",
+                "限授权设备与班次。",
+                "培训与授权记录。",
+                "按机构",
+                "按机构要求取证或授权。",
+                "按机构要求复核。"
+              ],
+              [
+                "中国遗体火化与火化证明要求",
+                "按《殡葬管理条例》与地方规程办理火化证明与影像保存。",
+                "限所在地殡葬管理要求。",
+                "火化证明与相关记录。",
+                "中国内地",
+                "按地方规程办理。",
+                "按现行规定复核。"
+              ],
+              [
+                "火葬场排放与监测要求",
+                "按 GB 13801-2015 控制排放并配合监测记录。",
+                "排放要求不是个人岗位资格或工资来源。",
+                "排放与监测记录。",
+                "中国内地",
+                "按机构环保要求执行。",
+                "按现行标准复核。"
+              ],
+              [
+                "在岗复训与带训能力",
+                "按机构要求复训并承担带教。",
+                "管理方向另核任职条件。",
+                "复训与带教记录。",
+                "按机构",
+                "按机构制度办理。",
+                "按岗位要求复核。"
+              ],
+              [
+                "家属沟通与隐私保护",
+                "按机构要求与家属沟通并最小必要处理个人信息。",
+                "不提供医疗、法律或财务建议。",
+                "沟通与信息处理记录。",
+                "按机构",
+                "按机构制度办理。",
+                "按岗位要求复核。"
+              ]
+            ]
+          },
+          "id": "crematory-operators.path.credential-decision.current.v1",
+          "type": "table"
         }
       ]
     },
@@ -8154,7 +8334,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国39-4012.00精确职业数据（O*NET 2026更新）：2024年就业约3,100人。"
+              "火化设备操作员的市场信号与相邻方向"
             ]
           },
           "fact_refs": [
@@ -8171,7 +8351,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国39-4012.00精确职业数据（O*NET 2026更新）：2024—2034预计增长3%至4%。"
+              "需求信号分三层：官方就业预测、行业与机构需求、招聘公告，三者不能互相替代。"
             ]
           },
           "fact_refs": [
@@ -8188,7 +8368,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国39-4012.00精确职业数据（O*NET 2026更新）：2024—2034年均空缺约600个。"
+              "美国 2024—2034 年预计年均约 600 个含增长与替补的空缺，预计增长 3%—4%。"
             ]
           },
           "fact_refs": [
@@ -8205,7 +8385,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业存量、增长区间和年均空缺不同；空缺含增长与替代，不代表个人录用概率。"
+              "共同能力：殡葬与遗体处理的规范意识、尊重与流程遵守。"
             ]
           },
           "id": "crematory-operators.market-signals.market-signal-card.4",
@@ -8219,7 +8399,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向防腐、殡仪服务或管理方向需补各自训练、许可、客户服务和责任证据。"
+              "需补足：火化设备操作、身份链核对与危险能量隔离。"
             ]
           },
           "id": "crematory-operators.market-signals.market-signal-card.5",
@@ -8244,6 +8424,7 @@
               {
                 "answer": "工作链包括核对遗体身份与文件、准备和装载、控制炉温、收集并处理骨灰、清洁设备、维修检查与完整记录。",
                 "id": "crematory-operators.faq.1",
+                "question": "火化设备操作员：日常工作如何形成闭环？",
                 "question_key": "career.faq.crematory-operators.daily-work",
                 "source_refs": [
                   "onet-394012"
@@ -8252,6 +8433,7 @@
               {
                 "answer": "火化设备操作员负责火化设备与遗体处理链；防腐师负责遗体防腐与修复；殡仪服务员偏仪式、接待与流程支持。",
                 "id": "crematory-operators.faq.2",
+                "question": "火化设备操作员：它与相邻职业有什么区别？",
                 "question_key": "career.faq.crematory-operators.role-comparison",
                 "source_refs": [
                   "onet-394012"
@@ -8260,6 +8442,7 @@
               {
                 "answer": "O*NET职业资料支持把尊重处理遗体、重视准确性和谨慎操作生产设备作为可观察工作风格与任务要求；它不规定具体停机或危险能量程序；适配可通过是否愿意核对身份与记录、尊重遗体、谨慎操作并在状态不明确时询问机构指定人员来验证。",
                 "id": "crematory-operators.faq.3",
+                "question": "火化设备操作员：什么行为信号可以帮助判断适配？",
                 "question_key": "career.faq.crematory-operators.fit",
                 "source_refs": [
                   "editorial-crematory-controls",
@@ -8269,6 +8452,7 @@
               {
                 "answer": "AI可辅助排程、文件核对和设备记录摘要，但任务暴露不等于岗位替代，遗体身份、设备状态与产出交接必须人工核验；自动化建议没有启动、停机、危险能量隔离或遗体处置授权；所有关键动作需要现场人员人工复核并留痕。",
                 "id": "crematory-operators.faq.4",
+                "question": "火化设备操作员：AI 可以辅助哪些任务？",
                 "question_key": "career.faq.crematory-operators.ai-impact",
                 "source_refs": [
                   "ilo-genai-2025"
@@ -8277,6 +8461,7 @@
               {
                 "answer": "中国GB 13801-2015规定火葬场大气污染物排放、监测与监控要求；该排放标准不支持遗体身份、骨灰核对、设备防护或个人操作资格结论；身份、文件、骨灰标签、设备可用状态或排放记录出现冲突、缺失或未经确认时，不进入或继续受影响步骤，保留原始状态并交由机构指定的有权限人员处理。",
                 "id": "crematory-operators.faq.5",
+                "question": "火化设备操作员：哪些判断必须由人负责？",
                 "question_key": "career.faq.crematory-operators.human-control",
                 "source_refs": [
                   "editorial-crematory-controls",
@@ -8286,6 +8471,7 @@
               {
                 "answer": "中国大陆国家统计数据没有火化设备操作员全国精确工资分布；居民服务行业平均工资不能写成该职业中位数或起薪。",
                 "id": "crematory-operators.faq.6",
+                "question": "火化设备操作员：中国大陆薪资应如何核对？",
                 "question_key": "career.faq.crematory-operators.china-pay",
                 "source_refs": [
                   "nbs-wages-2025"
@@ -8298,6 +8484,7 @@
                   "us-wage-range-2025"
                 ],
                 "id": "crematory-operators.faq.7",
+                "question": "火化设备操作员：美国工资数据应如何解释？",
                 "question_key": "career.faq.crematory-operators.us-pay",
                 "source_refs": [
                   "onet-wages-394012"
@@ -8309,6 +8496,7 @@
                   "us-entry-education-2025"
                 ],
                 "id": "crematory-operators.faq.8",
+                "question": "火化设备操作员：入行通常需要什么教育或训练？",
                 "question_key": "career.faq.crematory-operators.education-path",
                 "source_refs": [
                   "onet-summary-394012",
@@ -8318,6 +8506,7 @@
               {
                 "answer": "中国GB 13801-2015规定火葬场大气污染物排放、监测与监控要求；该排放标准不支持遗体身份、骨灰核对、设备防护或个人操作资格结论；身份、文件、骨灰标签、设备可用状态或排放记录出现冲突、缺失或未经确认时，不进入或继续受影响步骤，保留原始状态并交由机构指定的有权限人员处理。",
                 "id": "crematory-operators.faq.9",
+                "question": "火化设备操作员：这份工作的主要风险和停止条件是什么？",
                 "question_key": "career.faq.crematory-operators.risk-boundary",
                 "source_refs": [
                   "editorial-crematory-controls",
@@ -8331,6 +8520,7 @@
                   "us-openings-2024-2034"
                 ],
                 "id": "crematory-operators.faq.10",
+                "question": "火化设备操作员：就业展望与相邻转向应如何理解？",
                 "question_key": "career.faq.crematory-operators.outlook-transition",
                 "source_refs": [
                   "onet-summary-394012"
@@ -8339,6 +8529,7 @@
               {
                 "answer": "O*NET职业资料支持把尊重处理遗体、重视准确性和谨慎操作生产设备作为可观察工作风格与任务要求；它不规定具体停机或危险能量程序。",
                 "id": "crematory-operators.faq.11",
+                "question": "火化设备操作员：如何判断这条职业路径是否值得继续验证？",
                 "question_key": "career.faq.crematory-operators.career-worth",
                 "source_refs": [
                   "onet-summary-394012"
@@ -8363,10 +8554,8 @@
           "availability": "available",
           "copy_key": "career.item.boundary-notice",
           "data": {
-            "entries": [
-              "本页精确职业口径是美国O*NET 39-4012.00；中国文件规则、工资缺口与相邻岗位分别标注。",
-              "工资、就业、AI与风险按来源范围使用；虚构编号练习不构成遗体处置或设备操作授权。",
-              "具体许可、排放、设备、锁定挂牌和机构流程按所在地及雇主要求执行。"
+            "paragraphs": [
+              "本页精确职业口径是美国O*NET 39-4012.00；中国文件规则、工资缺口与相邻岗位分别标注。"
             ]
           },
           "id": "crematory-operators.sources.boundary.1",
@@ -8390,7 +8579,69 @@
             "source-pack-onet-localwages",
             "source-pack-onet-summary"
           ],
-          "type": "list"
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "paragraphs": [
+              "工资、就业、AI与风险按来源范围使用；虚构编号练习不构成遗体处置或设备操作授权。"
+            ]
+          },
+          "id": "crematory-operators.sources.boundary.1.2",
+          "source_refs": [
+            "editorial-crematory-controls",
+            "editorial-identity-exercise",
+            "ilo-genai-2025",
+            "mee-crematory-emissions-2015",
+            "nbs-wages-2025",
+            "onet-394012",
+            "onet-hot-tech-394012",
+            "onet-summary-394012",
+            "onet-wages-394012",
+            "samr-funeral-regulation-2025",
+            "source-pack-onet-custom",
+            "source-pack-onet-details",
+            "source-pack-onet-hot_tech",
+            "source-pack-onet-industry",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining",
+            "source-pack-onet-localwages",
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "paragraphs": [
+              "具体许可、排放、设备、锁定挂牌和机构流程按所在地及雇主要求执行。"
+            ]
+          },
+          "id": "crematory-operators.sources.boundary.1.3",
+          "source_refs": [
+            "editorial-crematory-controls",
+            "editorial-identity-exercise",
+            "ilo-genai-2025",
+            "mee-crematory-emissions-2015",
+            "nbs-wages-2025",
+            "onet-394012",
+            "onet-hot-tech-394012",
+            "onet-summary-394012",
+            "onet-wages-394012",
+            "samr-funeral-regulation-2025",
+            "source-pack-onet-custom",
+            "source-pack-onet-details",
+            "source-pack-onet-hot_tech",
+            "source-pack-onet-industry",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localtraining",
+            "source-pack-onet-localwages",
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
         }
       ]
     },
@@ -8493,11 +8744,11 @@
                 "accessed_at": "2026-09-06",
                 "details": [
                   "基于已核遗体身份、文件、设备操作、骨灰、清洁维护与排放任务，编辑形成不越权的停止、隔离、记录和升级建议。",
-                  "不声称具体门联锁、急停、PPE或锁定挂牌技术要求，不替代设备手册、机构程序或法规。"
+                  "不声称具体门联锁、急停、PPE 或锁定挂牌技术要求，不替代设备手册、机构程序或法规。"
                 ],
                 "evidence_type": "editorial synthesis",
                 "id": "editorial-crematory-controls",
-                "limitation": "不声称具体门联锁、急停、PPE或锁定挂牌技术要求，不替代设备手册、机构程序或法规。",
+                "limitation": "不声称具体门联锁、急停、PPE 或锁定挂牌技术要求，不替代设备手册、机构程序或法规。",
                 "market": "编辑综合",
                 "name": "火化设备操作员停止与升级编辑综合",
                 "period": "2026-09-06",
@@ -8556,12 +8807,12 @@
               {
                 "accessed_at": "2026-08-30",
                 "details": [
-                  "行业与岗位大类数据支持中国精确职业工资缺口。",
-                  "行业平均数不是律师助理职业中位数。"
+                  "按行业门类与人员类别发布平均工资。",
+                  "行业平均数不是本职业中位数，也不提供职业细类数值。"
                 ],
                 "evidence_type": "official national wage statistics",
                 "id": "nbs-wages-2025",
-                "limitation": "行业平均数不是律师助理职业中位数。",
+                "limitation": "行业平均数不是本职业中位数。",
                 "market": "中国大陆",
                 "name": "2025年城镇单位就业人员年平均工资情况",
                 "period": "2025 annual wages released 2026-05-15",
@@ -8588,7 +8839,7 @@
               {
                 "accessed_at": "2026-08-30",
                 "details": [
-                  "美国招聘样本中的软件信号。",
+                  "美国招聘样本中的软件与办公工具信号。",
                   "招聘样本不是法定门槛或采用率。"
                 ],
                 "evidence_type": "job posting market signal",
@@ -8604,7 +8855,7 @@
               {
                 "accessed_at": "2026-08-30",
                 "details": [
-                  "工作任务、准备度、工作风格、工资与就业趋势。",
+                  "工作任务、准备层级、工作风格与就业趋势。",
                   "美国分类与市场信息，不建立中国事实。"
                 ],
                 "evidence_type": "official occupational summary",
@@ -8636,7 +8887,7 @@
               {
                 "accessed_at": "2026-08-30",
                 "details": [
-                  "死亡证明、火化确认书、火化证明、影像保存和殡仪馆专门服务边界。",
+                  "死亡证明、火化确认书、火化证明、影像保存和殡仪服务边界。",
                   "制度与机构要求，不提供个人工资或统一资格。"
                 ],
                 "evidence_type": "administrative regulation",
@@ -8652,12 +8903,12 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Candidate only; Worker must reopen and bind reviewed claims for: tasks, skills, work context.",
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "职业档案入口：任务、技能与工作情境；本职业档案为部分发布，其余部分仍在补充。",
+                  "只用于 O*NET 39-4012.00 职业与美国市场；不建立中国映射、中国工资或法律授权。"
                 ],
                 "evidence_type": "official custom occupation profile",
                 "id": "source-pack-onet-custom",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "只用于 O*NET 39-4012.00 职业与美国市场；不建立中国映射、中国工资或法律授权。",
                 "market": "美国",
                 "name": "39-4012.00 - Crematory Operators",
                 "period": "current page; accessed 2026-09-02",
@@ -8668,12 +8919,12 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Candidate only; Worker must reopen and bind reviewed claims for: identity, workflow, work context, fit, risk.",
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "岗位职责、详细工作活动、工作风格与软件技能。",
+                  "只用于 O*NET 39-4012.00 职业与美国市场；不建立中国映射、中国工资或法律授权。"
                 ],
                 "evidence_type": "official occupation details",
                 "id": "source-pack-onet-details",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "只用于 O*NET 39-4012.00 职业与美国市场；不建立中国映射、中国工资或法律授权。",
                 "market": "美国",
                 "name": "39-4012.00 - Crematory Operators",
                 "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
@@ -8684,12 +8935,12 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Candidate only; Worker must reopen and bind reviewed claims for: technology and AI task change.",
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "美国招聘样本中的软件与办公工具信号。",
+                  "招聘样本不是法定门槛或采用率。"
                 ],
                 "evidence_type": "official technology profile",
                 "id": "source-pack-onet-hot_tech",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "招聘样本不是法定门槛或采用率。",
                 "market": "美国",
                 "name": "Hot Technologies: 39-4012.00 - Crematory Operators",
                 "period": "current page; accessed 2026-09-02",
@@ -8700,12 +8951,12 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Candidate only; Worker must reopen and bind reviewed claims for: work setting, market scope.",
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "2024 年行业就业占比：其他服务业（公共管理除外）90%，其余行业合计 10%。",
+                  "行业占比是就业结构，不是工资中位数。"
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "行业占比是就业结构，不是工资中位数。",
                 "market": "美国",
                 "name": "Industries: 39-4012.00 - Crematory Operators",
                 "period": "current page; accessed 2026-09-02",
@@ -8716,12 +8967,12 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Candidate only; Worker must reopen and bind reviewed claims for: credential boundary.",
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "美国全国性认证检索入口。",
+                  "认证清单不等于录用要求，也不建立中国资格。"
                 ],
                 "evidence_type": "official certification discovery",
                 "id": "source-pack-onet-localcert",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "认证清单不等于录用要求，也不建立中国资格。",
                 "market": "美国",
                 "name": "National Certifications: 39-4012.00 - Crematory Operators",
                 "period": "current page; accessed 2026-09-02",
@@ -8732,12 +8983,12 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Candidate only; Worker must reopen and bind reviewed claims for: entry education.",
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "美国培训与学徒检索入口。",
+                  "训练信息不等于法定资格，也不建立中国资格。"
                 ],
                 "evidence_type": "official local training discovery",
                 "id": "source-pack-onet-localtraining",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "训练信息不等于法定资格，也不建立中国资格。",
                 "market": "美国",
                 "name": "National Training: 39-4012.00 - Crematory Operators",
                 "period": "current page; accessed 2026-09-02",
@@ -8748,12 +8999,12 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Candidate only; Worker must reopen and bind reviewed claims for: US wage distribution.",
-                  "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page."
+                  "美国精确职业年薪与时薪的中位与第 10—第 90 百分位。",
+                  "保留 O*NET 显示期间、覆盖人群、地区与单位；美国全国统计不是中国工资。"
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "source-pack-onet-localwages",
-                "limitation": "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.",
+                "limitation": "保留 O*NET 显示期间、覆盖人群、地区与单位；美国全国统计不是中国工资。",
                 "market": "美国",
                 "name": "National Wages: 39-4012.00 - Crematory Operators",
                 "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
@@ -8764,12 +9015,12 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "Candidate only; Worker must reopen and bind reviewed claims for: identity, entry, outlook.",
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "职业身份、准备层级、工资与就业趋势。",
+                  "美国分类与市场信息，不建立中国事实。"
                 ],
                 "evidence_type": "official occupation summary",
                 "id": "source-pack-onet-summary",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "美国分类与市场信息，不建立中国事实。",
                 "market": "美国",
                 "name": "39-4012.00 - Crematory Operators",
                 "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
@@ -8787,6 +9038,2397 @@
   ],
   "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "display": {
+    "component_order": [
+      "breadcrumb",
+      "hero",
+      "primary_cta",
+      "fermat_decision_card",
+      "fit_decision_checklist",
+      "definition_block",
+      "responsibilities_block",
+      "work_context_block",
+      "career_ai_description_block",
+      "career_quick_answers_block",
+      "onet_structured_fields_block",
+      "adjacent_career_comparison_table",
+      "ai_impact_table",
+      "career_snapshot_primary_locale",
+      "career_snapshot_secondary_locale",
+      "riasec_fit_block",
+      "personality_fit_block",
+      "career_risk_cards",
+      "career_path_block",
+      "market_signal_card",
+      "faq_block",
+      "boundary_notice",
+      "source_card"
+    ],
+    "components": {
+      "adjacent_career_comparison_table": {
+        "conclusion": "结论：这些方向都在殡葬与遗体处理场景中工作，但对象（遗体防腐、仪式接待、松散材料装载、殡葬服务全流程）与是否承担火化设备、身份链与零错置责任差异明显；选择时应以目标岗位的实际职责与所在机构流程为准，而不是只看职业名称。",
+        "evidence_links": [
+          {
+            "href": {
+              "$source": "onet-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            }
+          }
+        ],
+        "evidence_note": "依据：O*NET OnLine 39-4012.00 与相邻职业（39-4011.00、39-4021.00、47-5022.00）的官方档案；相邻关系只用于职责比较，不代表自动转岗或资格互认。",
+        "heading": "火化设备操作员与相邻职业怎么比较？",
+        "intro": "下表把火化设备操作员与四个相邻方向，按职业方向、核心工作与产出、关键区别和更适合什么选择四项对照；相邻关系只用于方向比较，不代表自动转岗或资格互认。",
+        "rows": [
+          {
+            "关键区别": "对象是遗体防腐、修复与展示准备，通常不控制火化设备；火化设备操作员控制火化流程、骨灰收集与设备记录。",
+            "更适合什么选择": "更适合愿意从事遗体防腐与修复的人。",
+            "核心工作与产出": {
+              "$item": "crematory-operators.direction-comparison.adjacent-career-comparison-table.2",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "遗体防腐师（39-4011.00，相邻职业）"
+          },
+          {
+            "关键区别": "对象是接待、仪式与流程支持；本职业控制高温设备、身份链与骨灰产出。",
+            "更适合什么选择": "更适合愿意做接待、仪式与家属服务的人。",
+            "核心工作与产出": {
+              "$item": "crematory-operators.direction-comparison.adjacent-career-comparison-table.3",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "殡葬服务员（39-4021.00，相邻职业）"
+          },
+          {
+            "关键区别": "同为设备操作，但对象是松散材料挖掘装载，风险、法规与产出完全不同。",
+            "更适合什么选择": "更适合愿意在露天采掘场景操作装载设备的人。",
+            "核心工作与产出": {
+              "$item": "crematory-operators.direction-comparison.adjacent-career-comparison-table.4",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "露天采掘设备操作员（47-5022.00，相邻职业）"
+          },
+          {
+            "关键区别": "殡葬服务职业是上位职业群，不能把其全部职责或工资当作本精确职业。",
+            "更适合什么选择": "更适合先了解殡葬服务全流程再选细分方向的人。",
+            "核心工作与产出": {
+              "$item": "crematory-operators.direction-comparison.adjacent-career-comparison-table.5",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "殡葬服务职业群（相邻职业群）"
+          },
+          {
+            "关键区别": "对象是遗体处理与丧葬安排全流程，不承担火化设备操作与排放记录。",
+            "更适合什么选择": "更适合愿意承担殡仪承办、客户沟通与丧葬安排的人。",
+            "核心工作与产出": "负责遗体防腐、整容、丧葬安排与殡仪承办，并可能负责殡仪馆的日常运营与客户沟通。",
+            "职业方向": "殡葬师、殡仪承办人、殡葬安排员（相邻职业）"
+          },
+          {
+            "关键区别": "核心责任是身份链不断裂、零错置与异常时停止升级；本页只覆盖该单一职业口径。",
+            "更适合什么选择": "先用本页虚构编号练习核对身份链与停止条件，不接触遗体、骨灰或设备。",
+            "核心工作与产出": "读取身份与火化文件，确认授权与设备状态，操作火化设备、收集并核对骨灰并完整记录。",
+            "职业方向": "火化设备操作员（39-4012.00，本职业）"
+          }
+        ],
+        "transition": "下一步：用本页的虚构编号练习跟做一次身份链核对与停止分流，核对目标方向的资质、授权范围与责任边界，再决定方向。"
+      },
+      "ai_impact_table": {
+        "action_rows": [
+          {
+            "人群": "准备进入这个职业的人",
+            "应对重点": "先掌握身份链核对、设备检查、停机隔离与记录，再学使用辅助工具。"
+          },
+          {
+            "人群": "在岗操作员",
+            "应对重点": "把工具输出当作线索，保留对身份、设备与授权的独立判断并如实留痕。"
+          },
+          {
+            "人群": "机构与负责人",
+            "应对重点": "明确工具使用边界、人工复核点与责任链，把停止与隔离条件写进程序。"
+          }
+        ],
+        "answer": {
+          "$item": "crematory-operators.ai-impact.ai-impact-table.2",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "authority_links": [
+          {
+            "来源": {
+              "$source": "onet-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源口径支持职业身份、任务与工作边界",
+            "链接": {
+              "$source": "onet-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "onet-summary-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源口径支持职业身份、任务与工作边界",
+            "链接": {
+              "$source": "onet-summary-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "onet-wages-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源口径支持职业身份、任务与工作边界",
+            "链接": {
+              "$source": "onet-wages-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            }
+          }
+        ],
+        "difference_intro": {
+          "$item": "crematory-operators.ai-impact.ai-impact-table.4",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "difference_rows": [
+          {
+            "AI主要改变": "工具可检索文件、比对人名与编号、整理排程与日志。",
+            "仍由人负责": "确认身份、授权与文件一致性的现场事实。",
+            "方向": "信息检索与整理"
+          },
+          {
+            "AI主要改变": "工具可汇总设备记录与维护日志。",
+            "仍由人负责": "设备可用状态、隔离与恢复授权仍由有职责人员决定。",
+            "方向": "记录与归档"
+          },
+          {
+            "AI主要改变": "工具可协助标签核对与记录检索。",
+            "仍由人负责": "骨灰与容器标签须由现场身份链控制，不得由模型猜测。",
+            "方向": "骨灰与标签管理"
+          }
+        ],
+        "evidence_intro": {
+          "$item": "crematory-operators.ai-impact.ai-impact-table.3",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "evidence_rows": [
+          {
+            "使用限制": "属官方职业档案；本职业任务与工作情境为部分发布，其余部分仍在补充。",
+            "来源": {
+              "$source": "onet-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "研究对象": "O*NET 39-4012.00 任务与详细工作活动",
+            "结论": "提供本职业 11 项任务与详细工作活动（如阅读文件确认遗体身份、把遗体放入火化设备、粉碎骨块、清扫火化室收集骨灰）。",
+            "链接": {
+              "$source": "onet-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "属官方职业档案，不规定工具采用，也不等同中国资格。",
+            "来源": {
+              "$source": "onet-summary-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "研究对象": "O*NET 39-4012.00 工作风格与软件技能",
+            "结论": "列出 17 项工作风格（注重细节 92、可靠性 88、诚信 85 等）与软件技能（Office、Excel、Word 及遗体管理软件）。",
+            "链接": {
+              "$source": "onet-summary-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "属职业总体统计，不含工具采纳的因果数据。",
+            "来源": {
+              "$source": "onet-wages-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "研究对象": "O*NET 39-4012.00 工资与就业趋势（基于 BLS 数据）",
+            "结论": "提供 2024 年就业约 3,100 人与 2024—2034 年增长 3%—4%、年均空缺约 600 个，以及 2025 年工资中位 43,650 美元/年。",
+            "链接": {
+              "$source": "onet-wages-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            }
+          }
+        ],
+        "heading": {
+          "$item": "crematory-operators.ai-impact.ai-impact-table.1",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "method_cards": [
+          {
+            "含义": "整理排程草稿、比对文件字段、汇总设备记录与维护日志。",
+            "概念": "AI 可辅助的任务"
+          },
+          {
+            "含义": "技术演示不等于现场采用，采用取决于培训、责任与合规要求。",
+            "概念": "组织采用"
+          },
+          {
+            "含义": "不能从任务暴露推导编制或收入的因果变化。",
+            "概念": "岗位与收入结果"
+          }
+        ],
+        "questions": [
+          {
+            "回答": "不能从任务暴露推导岗位裁撤日期；本页没有单职业的替代数据。",
+            "来源": {
+              "$source": "onet-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "链接": {
+              "$source": "onet-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "问题": "AI 会直接取代火化设备操作员吗？"
+          },
+          {
+            "回答": "整理排程、比对文件字段、汇总设备记录与维护日志等辅助性任务。",
+            "来源": {
+              "$source": "onet-summary-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "链接": {
+              "$source": "onet-summary-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "问题": "AI 可以先辅助哪些任务？"
+          },
+          {
+            "回答": "身份与文件一致性、设备可用状态、危险能量隔离、骨灰标签与火化授权、停止决策。",
+            "来源": {
+              "$source": "onet-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "链接": {
+              "$source": "onet-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "问题": "哪些判断不能由工具承担？"
+          }
+        ],
+        "responsibility_intro": {
+          "$item": "crematory-operators.ai-impact.ai-impact-table.5",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "responsibility_steps": [
+          {
+            "步骤": "核对输入",
+            "说明": "确认身份、文件、排程与容器标签来自受控来源。"
+          },
+          {
+            "步骤": "限定范围",
+            "说明": "只在已知文件与设备状态范围内辅助，不生成火化或遗体处置授权。"
+          },
+          {
+            "步骤": "人工复核",
+            "说明": "身份与文件一致性、设备可用状态、危险能量隔离与骨灰标签由有职责人员复核。"
+          },
+          {
+            "步骤": "记录升级",
+            "说明": "保留输入范围、记录版本与人工核对项；冲突或缺失即停止并升级。"
+          }
+        ],
+        "risk_rows": [
+          {
+            "为什么重要": "工具不能确认真实身份、设备状态或授权，误用会放大风险。",
+            "控制方式": "工具输出只作辅助；火化与遗体处置授权回到受控文件与有职责人员。",
+            "风险": "工具输出被当作授权"
+          },
+          {
+            "为什么重要": "过期或错误的身份与文件会导致错置或误操作。",
+            "控制方式": "核对文件版本与来源，冲突时停止受影响结论。",
+            "风险": "输入文件过期或错误"
+          },
+          {
+            "为什么重要": "把工具建议当作最终结论会改变责任边界。",
+            "控制方式": "保留人工复核点与授权链，异常按流程升级。",
+            "风险": "责任链模糊"
+          }
+        ],
+        "task_rows": [
+          {
+            "人的控制点": "身份、授权与文件一致性仍须逐案回到受控原始记录。",
+            "任务": "核对身份与火化文件",
+            "工作方向": "文件与信息整理",
+            "当前变化": {
+              "$item": "crematory-operators.ai-impact.ai-impact-table.7",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": "设备状态与操作记录须由现场人员确认并留痕。",
+            "任务": "排程与记录整理",
+            "工作方向": "排程与记录",
+            "当前变化": {
+              "$item": "crematory-operators.ai-impact.ai-impact-table.8",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": "设备是否可用与是否隔离由有职责人员现场判定。",
+            "任务": "核对设备可用状态",
+            "工作方向": "设备状态",
+            "当前变化": "工具可提示维护到期与异常历史。"
+          },
+          {
+            "人的控制点": "骨灰与容器标签须由现场身份链控制，不得由模型猜测。",
+            "任务": "收集并核对骨灰标签",
+            "工作方向": "骨灰与标签",
+            "当前变化": "工具可协助标签核对与记录归档。"
+          },
+          {
+            "人的控制点": "个人与家属信息只能进入批准系统并按最小必要使用。",
+            "任务": "处理个人与家属信息",
+            "工作方向": "信息保护",
+            "当前变化": "工具可辅助最小必要的检索与整理。"
+          },
+          {
+            "人的控制点": "停机、隔离与恢复授权由现场有权限人员决定。",
+            "任务": "停机、隔离与升级",
+            "工作方向": "异常处置",
+            "当前变化": "工具可整理异常与交接记录。"
+          },
+          {
+            "人的控制点": "不能从任务暴露推导岗位裁撤日期或收入变化。",
+            "任务": "判断采用与替代影响",
+            "工作方向": "任务变化判断",
+            "当前变化": "现有材料不提供本职业生成式 AI 采用率或替代时间表。"
+          }
+        ],
+        "transition": {
+          "$item": "crematory-operators.ai-impact.ai-impact-table.6",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        }
+      },
+      "boundary_notice": [
+        "使用边界已在职业内容与来源说明中呈现。",
+        {
+          "$link": "crematory-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crematory-operators.navigation.1",
+          "field": "url"
+        },
+        {
+          "$link": "crematory-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crematory-operators.navigation.2",
+          "field": "url"
+        },
+        {
+          "$link": "crematory-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crematory-operators.navigation.3",
+          "field": "url"
+        },
+        {
+          "$link": "crematory-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crematory-operators.navigation.4",
+          "field": "url"
+        },
+        {
+          "$link": "crematory-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crematory-operators.navigation.5",
+          "field": "url"
+        },
+        {
+          "$link": "crematory-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crematory-operators.navigation.6",
+          "field": "url"
+        },
+        {
+          "$link": "crematory-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crematory-operators.navigation.7",
+          "field": "url"
+        },
+        {
+          "$link": "crematory-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crematory-operators.navigation.8",
+          "field": "url"
+        },
+        {
+          "$link": "crematory-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crematory-operators.navigation.9",
+          "field": "url"
+        },
+        {
+          "$link": "crematory-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crematory-operators.navigation.10",
+          "field": "url"
+        },
+        {
+          "$link": "crematory-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crematory-operators.navigation.11",
+          "field": "url"
+        }
+      ],
+      "breadcrumb": {
+        "label": {
+          "$subject": "name"
+        },
+        "slug": {
+          "$subject": "canonical_slug"
+        }
+      },
+      "career_ai_description_block": {
+        "body": [
+          "AI 可辅助排程、文件比对与设备记录整理，但不能替代身份确认、授权判断与最终责任。"
+        ],
+        "heading": "火化设备操作员的工作对象与 AI 边界"
+      },
+      "career_path_block": {
+        "boundary": "入口要求、授权与最终责任由具体法域、机构或雇主核验；本页练习为完全虚构的纸面材料，不构成遗体处置、设备操作或排放合规授权。",
+        "competence_ladder": [
+          {
+            "description": "在监督下完成身份与文件核对、设备检查与基础操作，建立零错置与安全习惯。",
+            "stage": "在监督下核对与操作"
+          },
+          {
+            "description": "独立完成授权范围内的火化操作、骨灰核对与完整记录，处理常规异常并停止升级。",
+            "stage": "独立操作与记录"
+          },
+          {
+            "description": "处理身份冲突、设备异常与排放记录问题，形成稳定判断与留痕。",
+            "stage": "异常与合规处置"
+          },
+          {
+            "description": "组织排程、分工与合规记录，承担带训与身份链流程维护责任。",
+            "stage": "带训与流程管理"
+          }
+        ],
+        "direct_answer": {
+          "$item": "crematory-operators.path.career-path-block.2",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "heading": {
+          "$item": "crematory-operators.path.career-path-block.1",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "locale_requirements": {
+          "credential_boundary": {
+            "$item": "crematory-operators.path.career-path-block.4",
+            "block": "path",
+            "copy_key": "career.item.career-path-block",
+            "type": "prose"
+          },
+          "jurisdiction": "适用法域：美国由州、地方与机构规则约束火化设备操作与遗体处置；中国遗体火化、火化证明与殡葬服务受《殡葬管理条例》及地方规程约束，火葬场排放执行 GB 13801-2015。",
+          "summary": {
+            "$item": "crematory-operators.path.career-path-block.3",
+            "block": "path",
+            "copy_key": "career.item.career-path-block",
+            "type": "prose"
+          }
+        },
+        "schema_version": "career.career_progression.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "onet-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "id": "onet-394012",
+            "label": {
+              "$source": "onet-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "source-pack-onet-localcert",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "id": "source-pack-onet-localcert",
+            "label": {
+              "$source": "source-pack-onet-localcert",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "source-pack-onet-localtraining",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "id": "source-pack-onet-localtraining",
+            "label": {
+              "$source": "source-pack-onet-localtraining",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "samr-funeral-regulation-2025",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "id": "samr-funeral-regulation-2025",
+            "label": {
+              "$source": "samr-funeral-regulation-2025",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "entry",
+            "stages": [
+              {
+                "credentials": "按机构与雇主规则核验。",
+                "next_moves": "熟悉身份链与设备检查表。",
+                "readiness_evidence": "能按核对表完成身份与文件逐项核对和记录填写。",
+                "responsibility": {
+                  "$item": "crematory-operators.path.career-path-block.5",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "受训辅助（在监督下）"
+              },
+              {
+                "credentials": "持有机构要求的培训与授权。",
+                "next_moves": "学习异常处置与带训。",
+                "readiness_evidence": "能独立完成常规案件的核对、操作与记录。",
+                "responsibility": {
+                  "$item": "crematory-operators.path.career-path-block.6",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "独立操作（授权范围内）"
+              },
+              {
+                "credentials": "按机构与设备范围核验。",
+                "next_moves": "学习排放监测与记录管理。",
+                "readiness_evidence": "能处理异常案件并带教新人。",
+                "responsibility": {
+                  "$item": "crematory-operators.path.career-path-block.7",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "班组骨干与带训"
+              },
+              {
+                "credentials": "按单位制度与管理方向任职要求核验。",
+                "next_moves": "核对该方向的任职要求。",
+                "readiness_evidence": "能组织排程、分工与合规记录。",
+                "responsibility": {
+                  "$item": "crematory-operators.path.career-path-block.8",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "火化线或殡仪馆管理方向（相邻）"
+              }
+            ],
+            "title": "入门与在岗训练路径"
+          },
+          {
+            "id": "specialist",
+            "stages": [
+              {
+                "credentials": "按设备与机构要求核验。",
+                "next_moves": "学习设备维护与检验记录。",
+                "readiness_evidence": "能识别异常并正确隔离。",
+                "responsibility": "在授权范围内操作火化设备并配合检查维护。",
+                "role": "高温设备操作与维护协作"
+              },
+              {
+                "credentials": "按机构环保要求核验。",
+                "next_moves": "学习排放标准与记录管理。",
+                "readiness_evidence": "能读懂监测记录并识别超限。",
+                "responsibility": "按标准记录并配合排放监测，发现异常即报告。",
+                "role": "排放与监测记录"
+              },
+              {
+                "credentials": "按机构程序要求。",
+                "next_moves": "学习流程改进与复盘。",
+                "readiness_evidence": "能说明核对点与停止条件。",
+                "responsibility": "设计并维护逐案身份链核对与骨灰交接流程。",
+                "role": "身份链与零错置流程"
+              },
+              {
+                "credentials": "按单位制度。",
+                "next_moves": "核对培训方向任职要求。",
+                "readiness_evidence": "能编写核对表与培训材料。",
+                "responsibility": "承担新人培训与合规检查。",
+                "role": "培训与合规"
+              }
+            ],
+            "title": "设备与合规深化路径"
+          },
+          {
+            "id": "management",
+            "stages": [
+              {
+                "credentials": "按机构要求核验。",
+                "next_moves": "学习交接与沟通规范。",
+                "readiness_evidence": "能准确复述交接内容并留痕。",
+                "responsibility": "与殡仪人员、接运人员协同完成身份与文件交接。",
+                "role": "与殡仪与接运协同"
+              },
+              {
+                "credentials": "按机构要求。",
+                "next_moves": "学习协同流程。",
+                "readiness_evidence": "能按程序报告异常。",
+                "responsibility": "与维修、安全环保人员配合设备与排放事项。",
+                "role": "与维修安全环保协同"
+              },
+              {
+                "credentials": "按机构要求。",
+                "next_moves": "学习服务与隐私规范。",
+                "readiness_evidence": "能按最小必要处理信息。",
+                "responsibility": "配合排程与家属服务安排，保护隐私。",
+                "role": "排程与家属服务配合"
+              },
+              {
+                "credentials": "按单位制度与任职要求。",
+                "next_moves": "核对该方向任职要求。",
+                "readiness_evidence": "能兼顾身份链、合规与服务边界。",
+                "responsibility": "负责排程、分工、合规记录与异常处置决策。",
+                "role": "火化线管理方向（相邻）"
+              }
+            ],
+            "title": "协作与管理路径"
+          }
+        ]
+      },
+      "career_quick_answers_block": {
+        "availability": "published",
+        "heading": "职业速答",
+        "items": [
+          {
+            "answer": {
+              "$item": "crematory-operators.profile.career-quick-answers-block.1",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa3",
+            "question": "这份工作先核对什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "对象",
+                  "secondary_value": null,
+                  "value": "火化设备操作员（O*NET-SOC 39-4012.00）"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "输入",
+                  "secondary_value": null,
+                  "value": "遗体标识、死亡与火化文件、排程、设备状态与容器标签"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "交付",
+                  "secondary_value": null,
+                  "value": "依授权完成的火化记录与正确标识的骨灰，或停止与升级记录"
+                }
+              ]
+            }
+          },
+          {
+            "answer": {
+              "$item": "crematory-operators.profile.career-quick-answers-block.2",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa2",
+            "question": "怎样判断工作闭环？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "闭环",
+                  "secondary_value": null,
+                  "value": "接收核身 → 文件核准 → 设备检查 → 装载前复核 → 依授权操作 → 冷却收集 → 再核身 → 记录交接"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤一",
+                  "secondary_value": null,
+                  "value": "接收核身"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤二",
+                  "secondary_value": null,
+                  "value": "文件核准"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤三",
+                  "secondary_value": null,
+                  "value": "设备检查"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤四",
+                  "secondary_value": null,
+                  "value": "装载前复核"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤五",
+                  "secondary_value": null,
+                  "value": "依授权操作与冷却收集"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤六",
+                  "secondary_value": null,
+                  "value": "再核身并记录交接"
+                }
+              ]
+            }
+          },
+          {
+            "answer": "资格、授权与最终责任须按适用法域、机构与雇主规则分别核验：美国由州、地方与机构规则约束火化设备操作；中国遗体火化与火化证明受《殡葬管理条例》与地方规程约束，火葬场排放执行 GB 13801-2015。",
+            "key": "qa1",
+            "question": "资格与授权边界是什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "边界",
+                  "secondary_value": null,
+                  "value": "需按法域与机构分别核验"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "美国",
+                  "secondary_value": null,
+                  "value": "州、地方与机构规则"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "中国",
+                  "secondary_value": null,
+                  "value": "《殡葬管理条例》与地方规程"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "设备",
+                  "secondary_value": null,
+                  "value": "高温设备须按培训与授权操作"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "排放",
+                  "secondary_value": null,
+                  "value": "火葬场大气污染物排放标准 GB 13801-2015"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "责任",
+                  "secondary_value": null,
+                  "value": "身份链与零错置由现场人员负责"
+                }
+              ]
+            }
+          }
+        ],
+        "schema_version": "career.quick_answers.v1"
+      },
+      "career_risk_cards": {
+        "boundary": "不可用本页替代法域、机构或雇主的安全规则。",
+        "context_links": [
+          {
+            "href": "#career-visual-group-risk",
+            "label": "查看职业风险"
+          }
+        ],
+        "direct_answer": "风险集中在身份链与高温设备本身：遗体标签、死亡或火化文件与授权不一致；设备可用状态未确认或危险能量未隔离；骨灰容器标签缺失或错置；清洁与维护超出培训与授权；以及排放与监测记录异常。错误后果往往不可逆且涉及家属信任，控制依赖受控文件、设备检查、隔离与记录。",
+        "evidence_scope": "风险场景来自 O*NET 39-4012.00 的任务（如阅读文件确认遗体身份、把遗体放入火化设备、粉碎骨块、清扫火化室收集骨灰、清洁设备）与详细工作活动；中国排放与文件边界参考《火葬场大气污染物排放标准》GB 13801-2015 与《殡葬管理条例》；本项目只按来源明确范围解释。",
+        "heading": "火化设备操作员的风险与控制点",
+        "risks": [
+          {
+            "affected_roles": "火化设备操作员",
+            "consequence": "会破坏身份链并可能错置遗体或骨灰，后果不可逆并严重损害家属信任。",
+            "evidence_refs": [
+              "onet-394012",
+              "samr-funeral-regulation-2025"
+            ],
+            "id": "risk-1",
+            "mitigation": "回到受控文件逐项核对编号、文件与标签，任何不一致即停止该案并升级。",
+            "scenario": "遗体标签、死亡或火化文件与授权不一致，或凭记忆代替逐项核对。",
+            "title": {
+              "$item": "crematory-operators.risk.career-risk-cards.1",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "火化设备操作员",
+            "consequence": "可能在操作或维护中受高温、机械或能量释放伤害。",
+            "evidence_refs": [
+              "onet-394012",
+              "mee-crematory-emissions-2015"
+            ],
+            "id": "risk-2",
+            "mitigation": "按班前检查确认设备状态，维护前按机构程序隔离并交由授权人员处理。",
+            "scenario": "设备可用状态未按机构记录确认，或清洁、检修时未隔离危险能量。",
+            "title": {
+              "$item": "crematory-operators.risk.career-risk-cards.2",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "火化设备操作员",
+            "consequence": "会造成骨灰错置，属不可逆后果。",
+            "evidence_refs": [
+              "onet-394012",
+              "editorial-crematory-controls"
+            ],
+            "id": "risk-3",
+            "mitigation": "保持单案材料分开、标签与身份链一致，暂停交接并由指定人员复核。",
+            "scenario": "骨灰容器标签缺失、模糊或与个案不一致，容器混用或未及时封闭。",
+            "title": {
+              "$item": "crematory-operators.risk.career-risk-cards.3",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "火化设备操作员",
+            "consequence": "可能受伤或使设备状态失控，影响后续案件。",
+            "evidence_refs": [
+              "editorial-crematory-controls",
+              "onet-394012"
+            ],
+            "id": "risk-4",
+            "mitigation": "不自行扩大职责范围，记录现状并交由指定人员处理。",
+            "scenario": "清洁、检查或维护范围超出本人培训与授权，自行拆解、解卡或复机。",
+            "title": {
+              "$item": "crematory-operators.risk.career-risk-cards.4",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "火化设备操作员",
+            "consequence": "可能违反排放标准并影响机构合规与从业资格。",
+            "evidence_refs": [
+              "mee-crematory-emissions-2015",
+              "editorial-crematory-controls"
+            ],
+            "id": "risk-5",
+            "mitigation": "暂停受影响判断，保存原始记录并交由机构环保与主管人员处理。",
+            "scenario": "火葬场排放或监测记录超出适用要求、缺失或矛盾。",
+            "title": {
+              "$item": "crematory-operators.risk.career-risk-cards.5",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "火化设备操作员",
+            "consequence": "可能产生不可逆后果。",
+            "evidence_refs": [
+              "editorial-crematory-controls"
+            ],
+            "id": "risk-boundary",
+            "mitigation": "停止并按授权链升级。",
+            "scenario": "遇到超出授权范围的任务。",
+            "title": "责任边界"
+          }
+        ],
+        "schema_version": "career.work_risk.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "onet-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "id": "onet-394012",
+            "label": {
+              "$source": "onet-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "mee-crematory-emissions-2015",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "id": "mee-crematory-emissions-2015",
+            "label": {
+              "$source": "mee-crematory-emissions-2015",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "samr-funeral-regulation-2025",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "id": "samr-funeral-regulation-2025",
+            "label": {
+              "$source": "samr-funeral-regulation-2025",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "onet-summary-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "id": "onet-summary-394012",
+            "label": {
+              "$source": "onet-summary-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ]
+      },
+      "career_snapshot_primary_locale": {
+        "salary": {
+          "bls_table": [
+            {
+              "指标": "中国大陆薪资口径",
+              "数值": "证据不足：未取得中国大陆该职业单列数值",
+              "说明": "中国大陆公开工资统计最高细分到行业门类与人员类别，不发布该职业细类数值，不以行业代理值替代。"
+            }
+          ],
+          "china_ai_row": {
+            "$item": "crematory-operators.china-salary.career-snapshot-primary-locale.4",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_class_row": {
+            "$item": "crematory-operators.china-salary.career-snapshot-primary-locale.3",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_edu_table": [
+            {
+              "学历段": "初中或高中＋机构在岗培训",
+              "岗位方向": "殡仪馆火化设备操作岗",
+              "说明": "按机构招聘与在岗培训要求核验。"
+            },
+            {
+              "学历段": "中专或职业学校相关专业",
+              "岗位方向": "殡葬服务与火化操作岗",
+              "说明": "专业名称与课程按机构要求核验。"
+            },
+            {
+              "学历段": "在岗经验＋设备与安全培训",
+              "岗位方向": "火化线班组骨干",
+              "说明": "设备与排放要求按所在地与机构核验。"
+            },
+            {
+              "学历段": "经验＋带训与管理能力",
+              "岗位方向": "火化线与殡仪馆管理方向",
+              "说明": "任职条件由单位规定。"
+            }
+          ],
+          "china_industry_table": [
+            {
+              "备注": "不以行业代理值替代单职业工资。",
+              "行业": "殡仪馆与殡葬服务机构",
+              "需求": "证据不足：未取得职业级需求数值"
+            },
+            {
+              "备注": "不以行业代理值替代单职业工资。",
+              "行业": "养老与临终服务机构",
+              "需求": "证据不足：未取得职业级需求数值"
+            },
+            {
+              "备注": "不以行业代理值替代单职业工资。",
+              "行业": "宠物殡葬服务",
+              "需求": "证据不足：未取得职业级需求数值"
+            }
+          ],
+          "china_intl": "中国与美国职业口径不作自动等同。",
+          "china_name_row": {
+            "$item": "crematory-operators.china-salary.career-snapshot-primary-locale.1",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_open": "中国大陆公开信息检索入口：国家统计局工资与统计发布页面、民政与殡葬管理公开文件；本轮未取得该职业单列数值。",
+          "china_ref": {
+            "$join": [
+              {
+                "$source": "nbs-wages-2025",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "crematory-operators.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "nbs-wages-2025",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "crematory-operators.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "china_salary_note": "中国公开来源仅用于说明口径边界。",
+          "china_salary_table": [
+            {
+              "城市/区间": "中国大陆（全国职业级口径）",
+              "月薪参考": "证据不足：未取得该口径数值"
+            },
+            {
+              "城市/区间": "中国大陆（行业均值代理口径）",
+              "月薪参考": "不适用（不用行业均值替代职业工资）"
+            },
+            {
+              "城市/区间": "中国大陆（招聘报价口径）",
+              "月薪参考": "证据不足：未取得可核对报价统计"
+            }
+          ],
+          "china_soc_row": {
+            "$item": "crematory-operators.china-salary.career-snapshot-primary-locale.2",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "sources_note": {
+            "$join": [
+              {
+                "$source": "onet-wages-394012",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "crematory-operators.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "onet-wages-394012",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "crematory-operators.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "ui": {
+            "ai_heading": "AI 或自动化会影响火化设备操作员的工资吗？",
+            "driver_heading": "火化作业怎样安排班次与周期？",
+            "official_heading": "官方统计口径与缺失说明",
+            "scenario_caption": "学历、训练与岗位方向（编辑整理，不是薪资统计）",
+            "scenario_heading": "不同学历与训练对应哪些岗位方向？",
+            "scenario_interpretation_label": "说明与核对建议",
+            "scenario_role_label": "学历与训练背景",
+            "scenario_value_label": "岗位方向"
+          },
+          "us_growth": "增长 3%—4%（2024—2034 年）",
+          "us_median": "43,650 美元/年（2025 年）"
+        }
+      },
+      "career_snapshot_secondary_locale": {
+        "authority_sources": {
+          "$join": [
+            {
+              "$source": "onet-wages-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "onet-wages-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            }
+          ],
+          "separator": ""
+        },
+        "bls_table": [
+          {
+            "指标": "美国薪资中位数",
+            "数值": "43,650 美元/年（20.98 美元/时，2025 年）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages-394012",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "crematory-operators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages-394012",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "crematory-operators.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资低位",
+            "数值": "33,270 美元/年（第 10 分位，2025 年）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages-394012",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "crematory-operators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages-394012",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "crematory-operators.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资高位",
+            "数值": "62,460 美元/年（第 90 分位，2025 年）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages-394012",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "crematory-operators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages-394012",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "crematory-operators.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资单位",
+            "数值": "年薪／时薪（OEWS 口径）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages-394012",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "crematory-operators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages-394012",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "crematory-operators.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资时期",
+            "数值": "2025 年",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages-394012",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "crematory-operators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages-394012",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "crematory-operators.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业规模",
+            "数值": "约 3,100 人（2024 年）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-summary-394012",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "crematory-operators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-summary-394012",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "crematory-operators.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业增长",
+            "数值": "增长 3%—4%（2024—2034 年）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-summary-394012",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "crematory-operators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-summary-394012",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "crematory-operators.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业空缺",
+            "数值": "约 600 个/年（2024—2034 年，含增长与替补）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-summary-394012",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "crematory-operators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-summary-394012",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "crematory-operators.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          }
+        ],
+        "boundary": "美国统计不代表中国职业工资或就业结果。",
+        "direct_answer": {
+          "$item": "crematory-operators.us-salary.career-snapshot-secondary-locale.2",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "factor_rows": [
+          {
+            "answer": "殡仪馆性质、地区与所在地规程影响岗位与计酬。",
+            "factor": "机构与地区"
+          },
+          {
+            "answer": "火化作业常按排程与值班安排，加班与值班影响实际收入。",
+            "factor": "班次与工时"
+          },
+          {
+            "answer": "是否持有设备操作与安全培训、是否承担带班职责影响报价。",
+            "factor": "资格与职责范围"
+          }
+        ],
+        "factors_heading": {
+          "$item": "crematory-operators.us-salary.career-snapshot-secondary-locale.6",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "growth": "增长 3%—4%（2024—2034 年）",
+        "heading": {
+          "$item": "crematory-operators.us-salary.career-snapshot-secondary-locale.1",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_heading": {
+          "$item": "crematory-operators.us-salary.career-snapshot-secondary-locale.5",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_period": "2024 年（O*NET 行业分布）",
+        "industry_rows": [
+          {
+            "industry": "其他服务业（公共管理除外）",
+            "median": "90%（2024 年就业占比）",
+            "note": "O*NET 单列行业。"
+          },
+          {
+            "industry": "其他行业合计",
+            "median": "10%（2024 年就业占比）",
+            "note": "O*NET 单列其余合计。"
+          },
+          {
+            "industry": "行业细分状态",
+            "median": "证据不足：未取得更多行业的职业级占比",
+            "note": "O*NET 本职业仅单列一个行业，其余合并为「其他行业」。"
+          },
+          {
+            "industry": "行业占比用途",
+            "median": "不适用（就业结构，不是工资）",
+            "note": "行业就业占比不能代表个人收入或岗位可得性。"
+          }
+        ],
+        "industry_value_label": "行业就业占比／统计状态",
+        "interpretation_heading": {
+          "$item": "crematory-operators.us-salary.career-snapshot-secondary-locale.4",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "interpretation_rows": [
+          {
+            "answer": "O*NET 全国工资 39-4012.00，2025 年 BLS OEWS 工资数据。",
+            "question": "美国工资数据的来源与期间是什么？"
+          },
+          {
+            "answer": "不能；行业分布是就业占比，不是工资中位数。",
+            "question": "行业分布能代表我的收入吗？"
+          },
+          {
+            "answer": "分位是统计位置，不是职级或资历等级。",
+            "question": "分位数应该怎样理解？"
+          },
+          {
+            "answer": "不是；预测是职业总量变化，年均空缺含增长与替补。",
+            "question": "预测为增长是否意味着容易入行？"
+          }
+        ],
+        "median": "43,650 美元/年（2025 年）",
+        "outlook_heading": "就业展望",
+        "outlook_period": "2024—2034 年（O*NET 就业趋势，基于 BLS 预测）",
+        "wage_column_labels": [
+          "工资位置",
+          "工资参考（年薪／时薪）",
+          "全年收入的换算边界",
+          "怎样理解这个位置"
+        ],
+        "wage_heading": {
+          "$item": "crematory-operators.us-salary.career-snapshot-secondary-locale.3",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "wage_tiers": [
+          {
+            "equivalent": "不可按固定工时年化",
+            "interpretation": "统计位置，不是入职起薪。",
+            "label": "较低工资位置（第 10 分位）",
+            "value": "33,270 美元/年"
+          },
+          {
+            "equivalent": "不等于固定月收入",
+            "interpretation": "分布中点，不是平均起薪。",
+            "label": "中位工资位置",
+            "value": "43,650 美元/年"
+          },
+          {
+            "equivalent": "不代表全年持续高收入",
+            "interpretation": "高分段与机构、地区与职责相关。",
+            "label": "较高工资位置（第 90 分位）",
+            "value": "62,460 美元/年"
+          }
+        ]
+      },
+      "definition_block": {
+        "$join": [
+          {
+            "$item": "crematory-operators.profile.definition-block.1",
+            "block": "profile",
+            "copy_key": "career.item.definition-block",
+            "type": "prose"
+          },
+          {
+            "$item": "crematory-operators.profile.definition-block.2",
+            "block": "profile",
+            "copy_key": "career.item.definition-block",
+            "type": "prose"
+          }
+        ],
+        "separator": "\n"
+      },
+      "faq_block": {
+        "items": {
+          "$item": "crematory-operators.sources.faq.1",
+          "block": "sources",
+          "copy_key": "career.item.faq-block",
+          "type": "faq"
+        }
+      },
+      "fermat_decision_card": {
+        "caveat": {
+          "$item": "crematory-operators.quick-decision.fermat-decision-card.1",
+          "block": "quick-decision",
+          "copy_key": "career.item.fermat-decision-card",
+          "type": "prose"
+        },
+        "summary": {
+          "$item": "crematory-operators.quick-decision.fermat-decision-card.2",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "title": "火化设备操作员适合什么样的人？"
+      },
+      "fit_decision_checklist": {
+        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "how": {
+          "$item": "crematory-operators.quick-decision.fermat-decision-card.3",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "suit": {
+          "$item": "crematory-operators.quick-decision.fermat-decision-card.4",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        }
+      },
+      "hero": {
+        "h1": {
+          "$subject": "name"
+        },
+        "quick_answer": {
+          "$subject": "summary"
+        },
+        "title": {
+          "$subject": "name"
+        }
+      },
+      "market_signal_card": {
+        "context_links": [
+          {
+            "href": "#career-visual-group-market-signals",
+            "label": "查看市场信号"
+          }
+        ],
+        "direct_answer": {
+          "$item": "crematory-operators.market-signals.market-signal-card.2",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "heading": {
+          "$item": "crematory-operators.market-signals.market-signal-card.1",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "outlook_evidence": [
+          {
+            "geography": "美国",
+            "horizon": "2024—2034 年",
+            "interpretation": "年均空缺含增长与替补，不等于每年净增 600 人。",
+            "limitation": "是职业总量统计，不是个人录用保证。",
+            "metric": "市场信号",
+            "occupation_scope": "O*NET 39-4012.00 火化设备操作员",
+            "value": {
+              "$item": "crematory-operators.market-signals.market-signal-card.3",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "geography": "美国",
+            "horizon": "当前来源时期",
+            "interpretation": "就业规模是存量统计，与职位空缺不是同一指标。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "就业规模",
+            "occupation_scope": "O*NET 39-4012.00",
+            "value": "约 3,100 人（2024 年）"
+          },
+          {
+            "geography": "美国",
+            "horizon": "当前来源时期",
+            "interpretation": "职位空缺含增长与替补，需按来源口径解释。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "职位空缺",
+            "occupation_scope": "O*NET 39-4012.00",
+            "value": "约 600 个/年（2024—2034 年）"
+          }
+        ],
+        "schema_version": "career.outlook_transitions.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "onet-summary-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "id": "onet-summary-394012",
+            "label": {
+              "$source": "onet-summary-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "onet-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "id": "onet-394012",
+            "label": {
+              "$source": "onet-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "ilo-genai-2025",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "id": "ilo-genai-2025",
+            "label": {
+              "$source": "ilo-genai-2025",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "source-pack-onet-industry",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "id": "source-pack-onet-industry",
+            "label": {
+              "$source": "source-pack-onet-industry",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ],
+        "transitions": [
+          {
+            "capability_gaps": {
+              "$item": "crematory-operators.market-signals.market-signal-card.5",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "crematory-operators.market-signals.market-signal-card.4",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "target_href": "/zh/career/jobs/embalmers",
+            "target_slug": "embalmers",
+            "target_title": "遗体防腐师（相邻职业）",
+            "transition_distance": "距离说明：从设备操作与身份链转向遗体防腐与修复。"
+          },
+          {
+            "capability_gaps": "需补足：接待、仪式与流程支持。",
+            "shared_capabilities": "共同能力：殡葬流程与家属沟通。",
+            "target_href": "/zh/career/jobs/funeral-attendants",
+            "target_slug": "funeral-attendants",
+            "target_title": "殡葬服务员（相邻职业）",
+            "transition_distance": "距离说明：从设备与骨灰操作转向接待与仪式服务。"
+          },
+          {
+            "capability_gaps": "需补足：丧葬安排、客户服务与商务职责。",
+            "shared_capabilities": "共同能力：殡葬流程与机构协作。",
+            "target_href": "/zh/career/jobs/funeral-service-occupations",
+            "target_slug": "funeral-service-occupations",
+            "target_title": "殡仪承办人与丧葬安排员（相邻职业）",
+            "transition_distance": "距离说明：从设备操作转向丧葬安排与承办。"
+          },
+          {
+            "capability_gaps": "需补足：遗体防腐、整容与丧葬安排。",
+            "shared_capabilities": "共同能力：遗体处理规范与尊重。",
+            "target_href": "/zh/career/jobs/morticians-undertakers-and-funeral-arrangers",
+            "target_slug": "morticians-undertakers-and-funeral-arrangers",
+            "target_title": "殡葬师、殡仪承办人、殡葬安排员（相邻职业）",
+            "transition_distance": "距离说明：从火化操作转向遗体处理与丧葬安排。"
+          },
+          {
+            "capability_gaps": "需补足：危险材料识别、清除与法规。",
+            "shared_capabilities": "共同能力：防护、隔离与程序遵守。",
+            "target_href": "/zh/career/jobs/hazardous-materials-removal-workers",
+            "target_slug": "hazardous-materials-removal-workers",
+            "target_title": "危险材料清除工（相邻职业）",
+            "transition_distance": "距离说明：从火化设备操作转向危险材料清除。"
+          },
+          {
+            "capability_gaps": "需补足：机械诊断、维修与工具使用。",
+            "shared_capabilities": "共同能力：设备检查与维护意识。",
+            "target_href": "/zh/career/jobs/maintenance-workers-machinery",
+            "target_slug": "maintenance-workers-machinery",
+            "target_title": "机械维护工（相邻职业）",
+            "transition_distance": "距离说明：从操作设备转向诊断与维修设备。"
+          }
+        ]
+      },
+      "onet_structured_fields_block": {
+        "availability": "published",
+        "heading": "O*NET 结构化字段",
+        "rows": [
+          {
+            "alternate_value": null,
+            "label": "研究输入",
+            "secondary_value": null,
+            "value": {
+              "$item": "crematory-operators.profile.onet-structured-fields-block.1",
+              "block": "profile",
+              "copy_key": "career.item.onet-structured-fields-block",
+              "type": "prose"
+            }
+          }
+        ],
+        "schema_version": "career.onet_structured_fields.v1"
+      },
+      "personality_fit_block": {
+        "assessments": [
+          {
+            "answer": {
+              "$item": "crematory-operators.fit.riasec-fit-block.6",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "riasec",
+            "label": "兴趣与任务",
+            "question": "我的兴趣类型与火化设备操作工作接近吗？",
+            "signals": [
+              "愿意操作设备",
+              "愿意按程序记录"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": {
+              "$item": "crematory-operators.fit.riasec-fit-block.7",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "big-five",
+            "label": "稳定执行",
+            "question": "我的性格特质对这类工作有帮助吗？",
+            "signals": [
+              "能按检查表稳定执行",
+              "能在压力下坚持核对与隔离"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": {
+              "$item": "crematory-operators.fit.riasec-fit-block.8",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "mbti",
+            "label": "偏好核对",
+            "question": "MBTI 能说明我适合独立操作还是团队协作吗？",
+            "signals": [
+              "能接受按流程与文件作业",
+              "能与班组协同"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": "动机线索不同，对应的选择不同；把它当作提问工具，不当作岗位结论。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "enneagram",
+            "label": "动机观察",
+            "question": "我为什么想从事火化设备操作？",
+            "signals": [
+              "能说清自己持续投入的理由",
+              "愿意用实际体验检验动机"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": "需要持续注意、对细节敏感与按程序判断；IQ 类量表与岗位要求没有官方对应。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "iq",
+            "label": "问题解决",
+            "question": "逐案核对与设备操作对认知有什么要求？",
+            "signals": [
+              "能持续注意并发现不一致",
+              "能按停止条件决策"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": "需要与殡仪人员、接运人员、主管及家属服务人员精确沟通，并在敏感事项上保持尊重；本职业没有单列的沟通情境百分比。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "eq",
+            "label": "协作边界",
+            "question": "需要很强的沟通能力吗？",
+            "signals": [
+              "能在敏感情境保持尊重",
+              "能在异常时按责任链升级"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          }
+        ],
+        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "direct_answer": {
+          "$item": "crematory-operators.fit.riasec-fit-block.2",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        },
+        "directions": [
+          {
+            "direction": "遗体防腐方向（相邻职业）",
+            "fit_signals": "共同能力：遗体处理规范与尊重。",
+            "target": {
+              "href": {
+                "$link": "crematory-operators.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "crematory-operators.parity.adjacent.1",
+                "field": "url"
+              },
+              "slug": "embalmers",
+              "title": {
+                "$link": "crematory-operators.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "crematory-operators.parity.adjacent.1",
+                "field": "entity"
+              }
+            },
+            "watchouts": "对象转为遗体防腐与修复，转入需补足防腐技术与许可。"
+          },
+          {
+            "direction": "殡葬服务方向（相邻职业）",
+            "fit_signals": "共同能力：殡葬流程与家属沟通。",
+            "target": {
+              "href": {
+                "$link": "crematory-operators.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "crematory-operators.parity.adjacent.3",
+                "field": "url"
+              },
+              "slug": "funeral-attendants",
+              "title": {
+                "$link": "crematory-operators.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "crematory-operators.parity.adjacent.3",
+                "field": "entity"
+              }
+            },
+            "watchouts": "对象转为接待、仪式与流程支持，不承担设备控制。"
+          },
+          {
+            "direction": "殡葬安排与管理方向（相邻职业）",
+            "fit_signals": "共同能力：殡葬流程与机构协作。",
+            "target": {
+              "href": {
+                "$link": "crematory-operators.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "crematory-operators.parity.adjacent.4",
+                "field": "url"
+              },
+              "slug": "funeral-service-occupations",
+              "title": {
+                "$link": "crematory-operators.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "crematory-operators.parity.adjacent.4",
+                "field": "entity"
+              }
+            },
+            "watchouts": "对象转为殡仪承办与丧葬安排，转入需补足客户服务与商务职责。"
+          },
+          {
+            "direction": "设备操作方向（相邻职业）",
+            "fit_signals": "共同能力：设备操作手感与安全程序。",
+            "target": {
+              "href": {
+                "$link": "crematory-operators.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "crematory-operators.parity.adjacent.2",
+                "field": "url"
+              },
+              "slug": "excavating-and-loading-machine-and-dragline-operators-surface-mining",
+              "title": {
+                "$link": "crematory-operators.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "crematory-operators.parity.adjacent.2",
+                "field": "entity"
+              }
+            },
+            "watchouts": "对象转为露天采掘装载设备，风险、法规与产出完全不同。"
+          },
+          {
+            "direction": "长期训练与取证",
+            "fit_signals": "共同能力：持续学习与安全习惯。",
+            "watchouts": "资格、授权与设备类型按法域、机构与雇主分别核验。"
+          },
+          {
+            "direction": "排放与合规深化",
+            "fit_signals": "共同能力：记录习惯与合规意识。",
+            "watchouts": "排放与监测要求按所在地机构与标准核验，不是个人岗位资格来源。"
+          }
+        ],
+        "heading": {
+          "$item": "crematory-operators.fit.riasec-fit-block.1",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        },
+        "questions": [
+          {
+            "answer": "设置停止与升级条件，不以进度覆盖身份链与安全。",
+            "question": "能否在信息不完整时停止操作？"
+          },
+          {
+            "answer": "编号、文件与标签不一致即中止并升级。",
+            "question": "能否严格逐项核对身份与文件？"
+          },
+          {
+            "answer": "保留设备检查、隔离与恢复授权记录。",
+            "question": "能否按检查与隔离程序作业？"
+          },
+          {
+            "answer": "对遗体、骨灰、家属与同事保持尊重并保护隐私。",
+            "question": "能否在敏感情境保持尊重？"
+          },
+          {
+            "answer": "交接对象、状态、隔离与责任人。",
+            "question": "能否清晰交接？"
+          },
+          {
+            "answer": "依据记录与授权修订做法。",
+            "question": "能否接受复核与纠正？"
+          },
+          {
+            "answer": "美国按州与机构规则，中国按《殡葬管理条例》与地方规程。",
+            "question": "能否按法域与机构补足资格？"
+          },
+          {
+            "answer": "完成一份完全虚构的编号练习并请有经验者评阅。",
+            "question": "如何继续验证？"
+          }
+        ],
+        "schema_version": "career.fit_decision_center.v1",
+        "signals": [
+          {
+            "body": {
+              "$item": "crematory-operators.fit.riasec-fit-block.3",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "fit",
+            "label": "适配信号",
+            "tone": "positive"
+          },
+          {
+            "body": {
+              "$item": "crematory-operators.fit.riasec-fit-block.4",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "caution",
+            "label": "注意信号",
+            "tone": "caution"
+          },
+          {
+            "body": {
+              "$item": "crematory-operators.fit.riasec-fit-block.5",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "experiment",
+            "label": "验证动作",
+            "tone": "action"
+          }
+        ],
+        "source_links": [
+          {
+            "href": {
+              "$source": "onet-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "mee-crematory-emissions-2015",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "label": {
+              "$source": "mee-crematory-emissions-2015",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "samr-funeral-regulation-2025",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "label": {
+              "$source": "samr-funeral-regulation-2025",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "onet-summary-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-summary-394012",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crematory-operators.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          }
+        ]
+      },
+      "primary_cta": {
+        "entry_surface": "career_job_detail",
+        "href": "/zh/tests/holland-career-interest-test-riasec",
+        "label": "测我的职业兴趣是否适合火化设备操作员",
+        "source_page_type": "career_job_detail",
+        "subject_key": {
+          "$subject": "canonical_slug"
+        },
+        "subject_kind": "career_job",
+        "target_action": "start_riasec_test",
+        "test_slug": "holland-career-interest-test-riasec"
+      },
+      "responsibilities_block": [
+        {
+          "$join": [
+            {
+              "$item": "crematory-operators.profile.responsibilities-block.1",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$join": [
+            {
+              "$item": "crematory-operators.profile.responsibilities-block.2",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$join": [
+            {
+              "$item": "crematory-operators.profile.responsibilities-block.3",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        }
+      ],
+      "riasec_fit_block": {
+        "fit_interest": "本职业在 O*NET 摘要页公示的兴趣代码为 RC：现实型对应操作设备与体力机械活动，常规型对应遵循程序与规范记录。请用实际任务核对——是否愿意在持续核对、尊重遗体与家属、严格按程序停机中坚持；兴趣代码只说明活动类型，不预测工作表现，也不构成录用标准。",
+        "interest": "现实型对应操作火化设备与体力机械活动；常规型对应遵循程序与规范、检查与记录。代码来自官方兴趣档案，不是人格标签。",
+        "riasec": "RC",
+        "riasec_short": "RC（现实型、常规型）"
+      },
+      "source_card": {
+        "eeat_signals": {
+          "author": "FermatMind research workflow",
+          "source": {
+            "$source": "onet-394012",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "name",
+            "item": "crematory-operators.source-register.published.1"
+          },
+          "updated_at": {
+            "$source": "onet-summary-394012",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "period",
+            "item": "crematory-operators.source-register.published.1"
+          }
+        },
+        "note": "来源范围、限制和统计时期按原始证据分别核对。"
+      },
+      "work_context_block": {
+        "$join": [
+          {
+            "$item": "crematory-operators.profile.work-context-block.1",
+            "block": "profile",
+            "copy_key": "career.item.work-context-block",
+            "type": "prose"
+          },
+          {
+            "$item": "crematory-operators.profile.work-context-block.2",
+            "block": "profile",
+            "copy_key": "career.item.work-context-block",
+            "type": "prose"
+          },
+          {
+            "$item": "crematory-operators.sources.boundary.1",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          },
+          {
+            "$item": "crematory-operators.sources.boundary.1.2",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          },
+          {
+            "$item": "crematory-operators.sources.boundary.1.3",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          }
+        ],
+        "separator": "\n"
+      }
+    },
+    "contract_version": "career.detail.display.v1",
+    "interface": {
+      "interface.fit.directions_heading": "你更可能适合哪条火化设备操作员方向？"
+    },
+    "locale": "zh-CN",
+    "native_items": [
+      {
+        "block": "source-register",
+        "copy_key": "career.item.published-sources",
+        "id": "crematory-operators.source-register.published.1",
+        "location": "sources",
+        "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-role-comparison",
+        "id": "crematory-operators.path.entry-role-comparison.current.v1",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.interview-probation",
+        "id": "crematory-operators.path.interview-probation.current.v1",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.credential-decision",
+        "id": "crematory-operators.path.credential-decision.current.v1",
+        "location": "entry_decisions",
+        "type": "table"
+      }
+    ],
+    "path": "/zh/career/jobs/crematory-operators",
+    "section_titles": {
+      "ai-impact": "AI 影响",
+      "china-salary": "中国大陆薪资参考",
+      "direction-comparison": "职业方向比较",
+      "fit": "职业适配指南",
+      "market-signals": "职业前景与相关职业转向",
+      "navigation": "页面导航",
+      "path": "入行、证书与职业发展",
+      "profile": "职业画像",
+      "quick-decision": "快速判断",
+      "risk": "工作压力、风险与职业边界",
+      "source-register": "来源登记",
+      "sources": "常见问题与资料来源",
+      "us-salary": "美国薪资参考"
+    }
+  },
   "fact_register": {
     "facts": [
       {
@@ -8882,37 +11524,41 @@
       "key": "ai",
       "label": "AI 任务暴露"
     },
-    "badges": [],
+    "badges": [
+      "个人服务 · 殡葬服务与火化操作",
+      "O*NET-SOC 39-4012.00 · 单一职业口径（BLS 就业预测经 O*NET 就业趋势页发布）· 复核边界",
+      "核身份与文件 · 查设备状态 · 依授权操作 · 收集核对骨灰 · 记录与交接"
+    ],
     "metrics": [
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-median-wage-2025",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "美国工资中位（2025，43,650 美元/年；20.98 美元/时）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-outlook-2024-2034",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国就业预测（2024—2034 年，增长 3%—4%）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-employment-2024",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国在岗人数（2024 年，约 3,100 人）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-openings-2024-2034",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国年均职位空缺（2024—2034 年，约 600 个/年）"
       },
       {
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "中国大陆薪资参考"
+        "label": "中国大陆薪资参考（职业级口径缺口，见中国薪资板块）"
       }
     ]
   },
@@ -8920,17 +11566,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "火化设备操作员在身份和文件链确认后依授权控制火化流程、骨灰收集、设备检查与记录。适配判断应优先验证尊重、零错置核对、停机隔离、隐私和高温设备授权边界。"
+      "text": "火化设备操作员（O*NET-SOC 39-4012.00）在身份与文件链确认后依授权控制火化设备、收集并核对骨灰、检查清洁设备并完整记录，并在身份或设备状态不一致时停止、隔离和升级；含美国 2025 年工资中位 43,650 美元/年（20.98 美元/时）、第 10 分位 33,270 美元、第 90 分位 62,460 美元，2024 年就业约 3,100 人、2024—2034 年预计增长 3%—4%、年均空缺约 600 个，以及中国大陆职业级工资缺口、身份链与零错置、危险能量隔离与排放边界。"
     },
     "title": {
       "availability": "available",
       "text": "火化设备操作员"
     }
   },
-  "source_content_sha256": "f69840326abe158cce8d1acc7f6e51f9fda5a04d15096f706bdba6196c4e776f",
+  "source_content_sha256": "b7c7de3e10558c9cf826f9fdff0ee3323dfa6b5a768a29f3f8d9db0abc7808c7",
   "subject": {
     "canonical_slug": "crematory-operators",
     "name": "火化设备操作员",
-    "summary": "火化设备操作员在身份和文件链确认后依授权控制火化流程、骨灰收集、设备检查与记录。适配判断应优先验证尊重、零错置核对、停机隔离、隐私和高温设备授权边界。"
+    "summary": "火化设备操作员在身份与文件链确认后，依授权控制火化设备与火化流程、收集并核对骨灰、检查清洁设备并完整记录；依据是死亡与火化文件、排程、设备状态和机构授权链，而不是进度压力。美国对应 O*NET-SOC 39-4012.00；中国遗体火化、火化证明与殡葬服务受《殡葬管理条例》与地方规程约束，两者不是一一对应。"
   }
 }

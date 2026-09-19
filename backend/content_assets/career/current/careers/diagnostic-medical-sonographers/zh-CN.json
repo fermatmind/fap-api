@@ -137,6 +137,15 @@
       "item:diagnostic-medical-sonographers.path.career-path-block.8": {
         "status": "pending_mapping"
       },
+      "item:diagnostic-medical-sonographers.path.credential-decision.current.v1": {
+        "status": "pending_mapping"
+      },
+      "item:diagnostic-medical-sonographers.path.entry-role-comparison.current.v1": {
+        "status": "pending_mapping"
+      },
+      "item:diagnostic-medical-sonographers.path.interview-probation.current.v1": {
+        "status": "pending_mapping"
+      },
       "item:diagnostic-medical-sonographers.profile.career-quick-answers-block.1": {
         "status": "pending_mapping"
       },
@@ -198,6 +207,12 @@
         "status": "pending_mapping"
       },
       "item:diagnostic-medical-sonographers.sources.boundary.1": {
+        "status": "pending_mapping"
+      },
+      "item:diagnostic-medical-sonographers.sources.boundary.1.2": {
+        "status": "pending_mapping"
+      },
+      "item:diagnostic-medical-sonographers.sources.boundary.1.3": {
         "status": "pending_mapping"
       },
       "item:diagnostic-medical-sonographers.sources.faq.1": {
@@ -7229,7 +7244,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
               "可观察信号：能在多条信息中持续核对身份、部位、顺序和文件标签；发现冲突不猜测，能暂停并向明确责任人说明缺什么。"
@@ -7243,7 +7258,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
               "安全小体验：只用本页提供的虚构工作列表、探头状态和文件名做纸面核对，输出异常清单、处理顺序与交接；不接触患者、不操作设备、不解释图像，也不作诊断。"
@@ -7257,7 +7272,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
               "复核标准：每个异常都能回到原始字段，身份、部位、文件归属和再处理状态分别核对；未知项保留未知，并明确谁确认后才能继续。"
@@ -7663,7 +7678,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "暂无可安全使用的数据：中国大陆 2025 年官方工资资料按行业和单位类型统计，未建立与美国 29-2032.00 一一对应的全国职业工资分布。"
+              "证据不足：未取得与医学超声诊断师（美国 O*NET 29-2032.00）对应的中国大陆全国单职业工资分布；中国大陆 2025 年官方工资资料按行业和单位类型统计，未建立与美国 29-2032.00 一一对应的全国职业工资分布。"
             ]
           },
           "id": "diagnostic-medical-sonographers.china-salary.career-snapshot-primary-locale.1",
@@ -7920,7 +7935,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.riasec-fit-block",
+          "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
               "兴趣测评只能提示探索方向；是否适合仍看可观察表现、正规训练、健康负荷、所在法域要求和监督反馈。"
@@ -8137,6 +8152,171 @@
             "editorial-work"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-role-comparison",
+          "data": {
+            "column_keys": [
+              "role",
+              "initial_tasks",
+              "boundary",
+              "evidence",
+              "next_step"
+            ],
+            "rows": [
+              [
+                "受监督的超声技术实习（在读或应届）",
+                "在带教监督下完成患者身份与检查部位核对、摆位、涂抹耦合剂与基础扫查，练习图像采集与文件命名。",
+                "不得独立出具测量与结论；侵入性或专科检查须在获授权人员监督下完成。",
+                "实习记录、受监督扫查清单与带教评语，可证明核对与操作习惯。",
+                "完成课程要求并累积专业认证考试所需的临床学时。"
+              ],
+              [
+                "入门级超声诊断师（常规检查）",
+                "独立完成腹部、小器官与妇产等常规检查的扫查、图像标注、测量与技术记录。",
+                "技术记录交医师使用；诊断与签字由医师负责，不越权解释图像。",
+                "独立完成的检查量、图像质量反馈与机构质量抽查结果。",
+                "质量稳定后扩展到更多检查类型或学习床旁操作。"
+              ],
+              [
+                "专科方向超声诊断师（心脏、血管等）",
+                "完成心脏超声、血管超声等专科检查的方案化扫查、测量与记录。",
+                "需相应专科训练与认证；不同专科的设备与方案要求不同，不跨专科自动通用。",
+                "专科认证（如心脏或血管方向）与专科检查的复核记录。",
+                "参加专科进阶培训并扩展复杂病例的独立处理。"
+              ],
+              [
+                "床旁与手术、介入配合超声",
+                "在重症、手术与介入场景中配合完成床旁超声、术中与介入引导的图像采集与记录。",
+                "需遵守无菌与感染控制要求，配合范围按机构制度与团队分工确定。",
+                "床旁与介入配合记录、无菌操作培训与团队反馈。",
+                "学习更复杂的介入配合流程与急救处置。"
+              ],
+              [
+                "带教与质量管理人员",
+                "承担新人带教、图像质量抽查、探头再处理与设备维护监督，参与流程改进。",
+                "管理职责需机构任命与相应培训；不因此获得医师的诊断与签字权。",
+                "质量改进记录、带教记录与设备维护台账。",
+                "向影像科室管理或超声技术管理方向发展。"
+              ]
+            ]
+          },
+          "id": "diagnostic-medical-sonographers.path.entry-role-comparison.current.v1",
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.interview-probation",
+          "data": {
+            "column_keys": [
+              "stage",
+              "observed_evidence",
+              "possible_check",
+              "escalation"
+            ],
+            "rows": [
+              [
+                "面试与录用前的资格核验",
+                "学历或证书、专业认证计划，以及对感染控制与设备安全的了解。",
+                "核对所持学历、认证与执照状态，并询问其对授权边界的理解。",
+                "资质与岗位要求不符时交招聘与用人部门确认，不由本人判断。"
+              ],
+              [
+                "入职与岗位培训期",
+                "完成机构培训、设备与信息系统操作、探头再处理流程的记录。",
+                "观察其是否按机构方案核对身份与部位、按要求处理探头。",
+                "培训未完成或考核未通过时暂停独立操作并安排补训。"
+              ],
+              [
+                "受监督的独立操作期",
+                "受监督下的检查量、图像质量反馈与异常交接记录。",
+                "抽查图像质量、测量一致性与异常上报的及时性。",
+                "重复出现质量或核对问题时转由带教人员处理并复训。"
+              ],
+              [
+                "常规独立值班期",
+                "独立值班的排班记录、质量抽查结果与继续教育记录。",
+                "核对认证与执照是否在有效期内，并评估质量与协作表现。",
+                "出现安全事件或超出授权的行为时按机构制度上报处理。"
+              ]
+            ]
+          },
+          "id": "diagnostic-medical-sonographers.path.interview-probation.current.v1",
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-decision",
+          "data": {
+            "column_keys": [
+              "credential",
+              "conditions",
+              "boundary",
+              "evidence",
+              "jurisdiction",
+              "next_step",
+              "review"
+            ],
+            "rows": [
+              [
+                "副学士学位或高中后证书（超声方向）",
+                "通常需完成获认可院校的超声技术课程，含课堂与临床学时。",
+                "学历本身不等于自动取得认证或执业授权。",
+                "毕业证与成绩单、临床实习记录。",
+                "按工作地和雇主核验。",
+                "核对目标机构对学历与课程的具体要求。",
+                "由教育机构与雇主确认。"
+              ],
+              [
+                "专业认证（如 RDMS 等）",
+                "通过认证机构要求的考试并满足其教育与临床条件。",
+                "认证不替代州执照，也不代表可独立承担医师的诊断与签字责任。",
+                "认证证书与有效期记录。",
+                "按工作地和雇主核验。",
+                "核对目标认证机构的报考条件与维持要求。",
+                "由认证机构确认。"
+              ],
+              [
+                "州执照（如适用）",
+                "部分地区要求执照，条件与考试按该州规定。",
+                "执照要求因州而异，跨州执业需另行核对。",
+                "执照与更新记录。",
+                "按具体州核验。",
+                "核对目标州的执照要求与互认安排。",
+                "由州监管机构确认。"
+              ],
+              [
+                "专科认证（心脏或血管方向）",
+                "需完成相应专科训练并通过该专科认证考试。",
+                "专科认证与通用认证范围不同，不跨专科自动通用。",
+                "专科认证证书与专科检查记录。",
+                "按工作地和雇主核验。",
+                "核对目标专科的报考与维持条件。",
+                "由认证机构确认。"
+              ],
+              [
+                "基础生命支持与急救训练（BLS/CPR）",
+                "按机构要求参加并定期复训。",
+                "急救训练不等于取得超声执业授权，也不能替代机构急救程序。",
+                "培训合格记录与有效期。",
+                "按机构与工作地要求核验。",
+                "按机构安排定期复训。",
+                "由培训机构与雇主确认。"
+              ],
+              [
+                "感染控制与探头再处理培训",
+                "按机构与指南要求学习探头清洁、消毒与再处理流程。",
+                "培训不替代机构感染控制制度，内腔探头须按要求高水平消毒。",
+                "培训记录与探头再处理台账。",
+                "按机构与工作地要求核验。",
+                "按机构安排复训并核对流程更新。",
+                "由感染控制负责人确认。"
+              ]
+            ]
+          },
+          "id": "diagnostic-medical-sonographers.path.credential-decision.current.v1",
+          "type": "table"
         }
       ]
     },
@@ -8236,6 +8416,7 @@
               {
                 "answer": "日常从核对申请、身份和部位开始，解释程序并摆位，选择探头与设置完成扫查，复核图像和测量，再归档技术记录并交接异常。",
                 "id": "diagnostic-medical-sonographers.faq.1",
+                "question": "医学超声诊断师：日常工作如何形成闭环？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.daily-work",
                 "source_refs": [
                   "bls-sonographer-current"
@@ -8244,6 +8425,7 @@
               {
                 "answer": "超声诊断师对患者采集体内图像和血流记录；临床实验室岗位处理体外标本，眼科医疗技术员围绕眼部检查。对象、设备和质量体系不能混写。",
                 "id": "diagnostic-medical-sonographers.faq.2",
+                "question": "医学超声诊断师：它与相邻职业有什么区别？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.role-comparison",
                 "source_refs": [
                   "adj-lab-technician",
@@ -8254,6 +8436,7 @@
               {
                 "answer": "适配看可观察表现：逐字段核对、手眼协调、患者沟通、重复体位耐受、图像质量复核和不确定时主动停止，而不是只看兴趣标签。",
                 "id": "diagnostic-medical-sonographers.faq.3",
+                "question": "医学超声诊断师：什么行为信号可以帮助判断适配？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.fit",
                 "source_refs": [
                   "editorial-work"
@@ -8262,6 +8445,7 @@
               {
                 "answer": "AI 可辅助排序、测量提示、部分质量检查和记录草稿，但不能证明身份正确、扫查完整，也不能给出可靠的职业替代率或时间表。",
                 "id": "diagnostic-medical-sonographers.faq.4",
+                "question": "医学超声诊断师：AI 可以辅助哪些任务？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.ai-impact",
                 "source_refs": [
                   "editorial-ai",
@@ -8271,6 +8455,7 @@
               {
                 "answer": "人员必须控制患者身份、部位、图像完整性、隐私、患者状态、探头再处理、异常升级和最终临床责任；未验证输出不能直接进入病历。",
                 "id": "diagnostic-medical-sonographers.faq.5",
+                "question": "医学超声诊断师：哪些判断必须由人负责？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.human-control",
                 "source_refs": [
                   "editorial-ai",
@@ -8280,6 +8465,7 @@
               {
                 "answer": "当前中国大陆官方工资材料没有与美国 29-2032.00 一一对应的全国职业工资分布，因此不展示精确中位数、分位数、起薪或月薪，也不以行业均值填补。",
                 "id": "diagnostic-medical-sonographers.faq.6",
+                "question": "医学超声诊断师：中国大陆薪资应如何核对？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.china-pay",
                 "source_refs": [
                   "nbs-wage"
@@ -8291,6 +8477,7 @@
                   "us-annual-wage"
                 ],
                 "id": "diagnostic-medical-sonographers.faq.7",
+                "question": "医学超声诊断师：美国工资数据应如何解释？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.us-pay",
                 "source_refs": [
                   "bls-sonographer-current",
@@ -8303,6 +8490,7 @@
                   "us-entry-route"
                 ],
                 "id": "diagnostic-medical-sonographers.faq.8",
+                "question": "医学超声诊断师：入行通常需要什么教育或训练？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.education-path",
                 "source_refs": [
                   "bls-sonographer-current",
@@ -8312,6 +8500,7 @@
               {
                 "answer": "身份或部位不一致、图像或文件缺失、患者状态变化、内腔探头再处理不明、设备异常和越权解释都应触发停止、核对或升级。",
                 "id": "diagnostic-medical-sonographers.faq.9",
+                "question": "医学超声诊断师：这份工作的主要风险和停止条件是什么？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.risk-boundary",
                 "source_refs": [
                   "cdc-probe-current",
@@ -8325,6 +8514,7 @@
                   "us-workforce-outlook"
                 ],
                 "id": "diagnostic-medical-sonographers.faq.10",
+                "question": "医学超声诊断师：就业展望与相邻转向应如何理解？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.outlook-transition",
                 "source_refs": [
                   "bls-sonographer-current"
@@ -8333,6 +8523,7 @@
               {
                 "answer": "如果你能长期保持身份与部位核对、细致操作、近距离沟通和清楚交接，并愿意通过正规训练承担体位与责任压力，这条路径值得继续验证。",
                 "id": "diagnostic-medical-sonographers.faq.11",
+                "question": "医学超声诊断师：如何判断这条职业路径是否值得继续验证？",
                 "question_key": "career.faq.diagnostic-medical-sonographers.career-worth",
                 "source_refs": [
                   "editorial-work"
@@ -8361,10 +8552,8 @@
           "availability": "available",
           "copy_key": "career.item.boundary-notice",
           "data": {
-            "entries": [
-              "本页精确职业口径是美国 O*NET 29-2032.00；中国超声医师、相邻职业和机构权限分别陈述，不跨法域互认。",
-              "工资、就业、资格、设备安全和感染控制按各自来源范围使用；编辑练习不冒充外部事实或临床培训。",
-              "本页用于职业探索，不替代医疗建议、机构程序、设备标签、执照认证或所在地法律要求。"
+            "paragraphs": [
+              "本页精确职业口径是美国 O*NET 29-2032.00；中国超声医师、相邻职业和机构权限分别陈述，不跨法域互认。"
             ]
           },
           "id": "diagnostic-medical-sonographers.sources.boundary.1",
@@ -8383,7 +8572,59 @@
             "onet-sonographer-current",
             "who-ai"
           ],
-          "type": "list"
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "paragraphs": [
+              "工资、就业、资格、设备安全和感染控制按各自来源范围使用；编辑练习不冒充外部事实或临床培训。"
+            ]
+          },
+          "id": "diagnostic-medical-sonographers.sources.boundary.1.2",
+          "source_refs": [
+            "adj-lab-technician",
+            "adj-lab-technologist",
+            "adj-ophthalmic-technician",
+            "bls-sonographer-current",
+            "cdc-probe-current",
+            "editorial-ai",
+            "editorial-risk",
+            "editorial-work",
+            "fda-ultrasound-current",
+            "nbs-wage",
+            "nhc-quality-current",
+            "onet-sonographer-current",
+            "who-ai"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "paragraphs": [
+              "本页用于职业探索，不替代医疗建议、机构程序、设备标签、执照认证或所在地法律要求。"
+            ]
+          },
+          "id": "diagnostic-medical-sonographers.sources.boundary.1.3",
+          "source_refs": [
+            "adj-lab-technician",
+            "adj-lab-technologist",
+            "adj-ophthalmic-technician",
+            "bls-sonographer-current",
+            "cdc-probe-current",
+            "editorial-ai",
+            "editorial-risk",
+            "editorial-work",
+            "fda-ultrasound-current",
+            "nbs-wage",
+            "nhc-quality-current",
+            "onet-sonographer-current",
+            "who-ai"
+          ],
+          "type": "prose"
         }
       ]
     },
@@ -8700,6 +8941,2384 @@
   ],
   "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "display": {
+    "component_order": [
+      "breadcrumb",
+      "hero",
+      "primary_cta",
+      "fermat_decision_card",
+      "fit_decision_checklist",
+      "definition_block",
+      "responsibilities_block",
+      "work_context_block",
+      "career_ai_description_block",
+      "career_quick_answers_block",
+      "onet_structured_fields_block",
+      "adjacent_career_comparison_table",
+      "ai_impact_table",
+      "career_snapshot_primary_locale",
+      "career_snapshot_secondary_locale",
+      "riasec_fit_block",
+      "personality_fit_block",
+      "career_risk_cards",
+      "career_path_block",
+      "market_signal_card",
+      "faq_block",
+      "boundary_notice",
+      "source_card"
+    ],
+    "components": {
+      "adjacent_career_comparison_table": {
+        "conclusion": "相邻职业与本职业在对象、工具与责任上不同，需分别补足工具、资格与责任证据。",
+        "evidence_links": [
+          {
+            "href": {
+              "$source": "adj-lab-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "label": {
+              "$source": "adj-lab-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            }
+          }
+        ],
+        "evidence_note": "相邻关系只用于方向比较，不代表自动转岗或资格互认。",
+        "heading": "相邻职业比较",
+        "intro": "比较核心产出、责任边界与工作模式，不按名称互换。",
+        "rows": [
+          {
+            "关键区别": "关键差异：实际涵盖 29-2011.00 与 29-2012.00 两个分支，处理体外血液、尿液与组织等标本。",
+            "更适合什么选择": "若偏好标本与仪器分析，可比较实验室方向。",
+            "核心工作与产出": {
+              "$item": "diagnostic-medical-sonographers.direction-comparison.adjacent-career-comparison-table.2",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "临床实验室技师与技术员（合并导航方向）"
+          },
+          {
+            "关键区别": "关键差异：执行常规实验室检测，可能在技师监督下工作。",
+            "更适合什么选择": "转向需补标本处理、分析仪器与实验室质量控制。",
+            "核心工作与产出": {
+              "$item": "diagnostic-medical-sonographers.direction-comparison.adjacent-career-comparison-table.3",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "医学与临床实验室技术员（29-2012.00）"
+          },
+          {
+            "关键区别": "关键差异：执行更复杂的体外检验，并可能培训或监督人员。",
+            "更适合什么选择": "对象、设备、样本链与质量体系与超声检查不同。",
+            "核心工作与产出": {
+              "$item": "diagnostic-medical-sonographers.direction-comparison.adjacent-career-comparison-table.4",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "医学与临床实验室技师（29-2011.00）"
+          },
+          {
+            "关键区别": "关键差异：协助眼科医师完成眼部检查并操作眼科设备。",
+            "更适合什么选择": "职位名含眼科超声也不能据此取得全身或血管超声岗位授权。",
+            "核心工作与产出": {
+              "$item": "diagnostic-medical-sonographers.direction-comparison.adjacent-career-comparison-table.5",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "眼科医疗技术员（29-2057.00）"
+          },
+          {
+            "关键区别": "本职业属超声技术职业；诊断与签字由医师负责。",
+            "更适合什么选择": "若偏好设备操作与图像质量，可把超声技术作为主线。",
+            "核心工作与产出": "操作超声设备生成内部器官与血流的图像与记录，完成测量与技术记录并交医师使用。",
+            "职业方向": "本职业方向：医学超声诊断师（29-2032.00）"
+          },
+          {
+            "关键区别": "资格与责任口径不同，须按所在地与机构核验。",
+            "更适合什么选择": "若面向中国大陆，应核对医师资格与执业注册路径。",
+            "核心工作与产出": "中国超声诊断由持《医师执业证书》的医师承担，属诊疗行为，不与美国 29-2032.00 技术职业一一互认。",
+            "职业方向": "跨法域对照：中国大陆超声医师口径"
+          }
+        ],
+        "transition": "下一步用可观察的受监督实操验证方向。"
+      },
+      "ai_impact_table": {
+        "action_rows": [
+          {
+            "人群": "入行者",
+            "应对重点": "先完成受监督实操与图像质量训练。"
+          },
+          {
+            "人群": "在岗者",
+            "应对重点": "把 AI 提示纳入既有质量复核流程。"
+          },
+          {
+            "人群": "管理者",
+            "应对重点": "先定权限、适用部位与停止条件。"
+          }
+        ],
+        "answer": {
+          "$item": "diagnostic-medical-sonographers.ai-impact.ai-impact-table.2",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "authority_links": [
+          {
+            "来源": {
+              "$source": "adj-lab-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "类型": "官方职业数据",
+            "适用范围": "仅按 O*NET 29-2032.00 口径使用。",
+            "链接": {
+              "$source": "adj-lab-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "adj-lab-technologist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "类型": "官方统计",
+            "适用范围": "仅按 BLS 2025 年工资与 2025—2035 年预测口径使用。",
+            "链接": {
+              "$source": "adj-lab-technologist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "adj-ophthalmic-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "类型": "官方设备与安全资料",
+            "适用范围": "仅按 FDA 与 CDC 原始口径使用。",
+            "链接": {
+              "$source": "adj-ophthalmic-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            }
+          }
+        ],
+        "difference_intro": {
+          "$item": "diagnostic-medical-sonographers.ai-impact.ai-impact-table.4",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "difference_rows": [
+          {
+            "AI主要改变": "记录整理与信息汇总",
+            "仍由人负责": "身份核对、图像质量与诊断责任",
+            "方向": "本职业任务"
+          },
+          {
+            "AI主要改变": "测量位置提示",
+            "仍由人负责": "扫查完整性、感染控制与升级决定",
+            "方向": "设备辅助"
+          }
+        ],
+        "evidence_intro": {
+          "$item": "diagnostic-medical-sonographers.ai-impact.ai-impact-table.3",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "evidence_rows": [
+          {
+            "使用限制": "仅适用于所列职业、市场与时期使用。",
+            "来源": {
+              "$source": "adj-lab-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "研究对象": "O*NET 职业档案",
+            "结论": "任务与工作情境有界",
+            "链接": {
+              "$source": "adj-lab-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "仅适用于美国 29-2032.00 口径。",
+            "来源": {
+              "$source": "adj-lab-technologist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "研究对象": "BLS 职业展望",
+            "结论": "工资与就业口径有界",
+            "链接": {
+              "$source": "adj-lab-technologist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "不提供本职业采用率、替代概率或时间表。",
+            "来源": {
+              "$source": "adj-ophthalmic-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "研究对象": "WHO AI 治理文件",
+            "结论": "治理原则供参考",
+            "链接": {
+              "$source": "adj-ophthalmic-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            }
+          }
+        ],
+        "heading": {
+          "$item": "diagnostic-medical-sonographers.ai-impact.ai-impact-table.1",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "method_cards": [
+          {
+            "含义": "先区分可辅助任务与最终诊断责任。",
+            "概念": "任务能力"
+          },
+          {
+            "含义": "技术演示不等于机构采用，需批准、验证与人员复核。",
+            "概念": "采用条件"
+          },
+          {
+            "含义": "不能从任务暴露推导替代率或时间表。",
+            "概念": "岗位结果"
+          }
+        ],
+        "questions": [
+          {
+            "回答": "不能从任务暴露推导替代日期；诊断与签字仍由医师负责。",
+            "来源": {
+              "$source": "adj-lab-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "链接": {
+              "$source": "adj-lab-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "问题": "AI 会取代超声诊断师吗？"
+          },
+          {
+            "回答": "先限定在工作列表整理、测量提示与记录起草。",
+            "来源": {
+              "$source": "adj-lab-technologist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "链接": {
+              "$source": "adj-lab-technologist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "问题": "AI 应先辅助什么？"
+          },
+          {
+            "回答": "身份核对、扫查完整性、诊断与签字、感染控制与升级。",
+            "来源": {
+              "$source": "adj-ophthalmic-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "链接": {
+              "$source": "adj-ophthalmic-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "问题": "什么不能自动授权？"
+          }
+        ],
+        "responsibility_intro": {
+          "$item": "diagnostic-medical-sonographers.ai-impact.ai-impact-table.5",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "responsibility_steps": [
+          {
+            "步骤": "核对输入",
+            "说明": "核对申请、患者身份、检查部位与设备、探头状态。"
+          },
+          {
+            "步骤": "限定任务",
+            "说明": "仅在机构批准的范围内使用 AI 辅助。"
+          },
+          {
+            "步骤": "人工复核",
+            "说明": "责任人复核 AI 输出并回看原始图像与测量。"
+          },
+          {
+            "步骤": "记录升级",
+            "说明": "发现异常立即停止并按规定上报。"
+          }
+        ],
+        "risk_rows": [
+          {
+            "为什么重要": "会让看似合理的输出进入错误病历。",
+            "控制方式": "先核对身份、部位与文件归属。",
+            "风险": "提示与身份错误绑定"
+          },
+          {
+            "为什么重要": "模型提示不能证明扫查已完整采集。",
+            "控制方式": "按方案确认扫查完整性与是否补采。",
+            "风险": "提示不等于结论"
+          },
+          {
+            "为什么重要": "病史、图像与设备日志含敏感健康信息。",
+            "控制方式": "限最小必要信息、权限控制与留痕。",
+            "风险": "数据与隐私"
+          }
+        ],
+        "task_rows": [
+          {
+            "人的控制点": "身份、部位与文件归属须由人员核对。",
+            "任务": "核对工作列表、患者身份与检查部位",
+            "工作方向": "输入与版本",
+            "当前变化": {
+              "$item": "diagnostic-medical-sonographers.ai-impact.ai-impact-table.7",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": "扫查完整性与是否补采由人员按方案判断。",
+            "任务": "按方案完成扫查并检查图像质量",
+            "工作方向": "图像采集",
+            "当前变化": {
+              "$item": "diagnostic-medical-sonographers.ai-impact.ai-impact-table.8",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": "测量与技术记录的真实性由人员负责。",
+            "任务": "完成测量并形成技术记录",
+            "工作方向": "测量与记录",
+            "当前变化": "可辅助测量定位与记录起草"
+          },
+          {
+            "人的控制点": "患者安全与状态观察不能交给系统。",
+            "任务": "观察并照护患者在检查中的安全与舒适",
+            "工作方向": "患者护理",
+            "当前变化": "以人为主"
+          },
+          {
+            "人的控制点": "内腔探头须按要求高水平消毒并由人员确认。",
+            "任务": "完成探头清洁与再处理",
+            "工作方向": "感染控制",
+            "当前变化": "以流程与留痕为主"
+          },
+          {
+            "人的控制点": "停止与升级由具备资格人员决定。",
+            "任务": "识别异常并按授权停止与上报",
+            "工作方向": "异常与升级",
+            "当前变化": "提示需回看原始图像"
+          },
+          {
+            "人的控制点": "诊断与签字由医师负责。",
+            "任务": "技术记录交医师用于诊断",
+            "工作方向": "责任与授权",
+            "当前变化": "不能替代医师诊断与签字"
+          }
+        ],
+        "transition": {
+          "$item": "diagnostic-medical-sonographers.ai-impact.ai-impact-table.6",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        }
+      },
+      "boundary_notice": [
+        "使用边界已在职业内容与来源登记中呈现；美国与中国大陆口径分别标注。",
+        {
+          "$link": "diagnostic-medical-sonographers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "diagnostic-medical-sonographers.navigation.1",
+          "field": "url"
+        },
+        {
+          "$link": "diagnostic-medical-sonographers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "diagnostic-medical-sonographers.navigation.2",
+          "field": "url"
+        },
+        {
+          "$link": "diagnostic-medical-sonographers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "diagnostic-medical-sonographers.navigation.3",
+          "field": "url"
+        },
+        {
+          "$link": "diagnostic-medical-sonographers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "diagnostic-medical-sonographers.navigation.4",
+          "field": "url"
+        },
+        {
+          "$link": "diagnostic-medical-sonographers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "diagnostic-medical-sonographers.navigation.5",
+          "field": "url"
+        },
+        {
+          "$link": "diagnostic-medical-sonographers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "diagnostic-medical-sonographers.navigation.6",
+          "field": "url"
+        },
+        {
+          "$link": "diagnostic-medical-sonographers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "diagnostic-medical-sonographers.navigation.7",
+          "field": "url"
+        },
+        {
+          "$link": "diagnostic-medical-sonographers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "diagnostic-medical-sonographers.navigation.8",
+          "field": "url"
+        },
+        {
+          "$link": "diagnostic-medical-sonographers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "diagnostic-medical-sonographers.navigation.9",
+          "field": "url"
+        },
+        {
+          "$link": "diagnostic-medical-sonographers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "diagnostic-medical-sonographers.navigation.10",
+          "field": "url"
+        },
+        {
+          "$link": "diagnostic-medical-sonographers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "diagnostic-medical-sonographers.navigation.11",
+          "field": "url"
+        }
+      ],
+      "breadcrumb": {
+        "label": {
+          "$subject": "name"
+        },
+        "slug": {
+          "$subject": "canonical_slug"
+        }
+      },
+      "career_ai_description_block": {
+        "body": [
+          "AI 可辅助记录整理与信息汇总，但不能替代授权判断和最终责任。"
+        ],
+        "heading": "医学超声诊断师的工作对象与 AI 边界"
+      },
+      "career_path_block": {
+        "boundary": "入口要求、执照、认证、训练与最终诊断责任由具体法域、机构或雇主核验。",
+        "competence_ladder": [
+          {
+            "description": "核对申请、患者身份、检查部位与设备、探头状态。",
+            "stage": "输入核对"
+          },
+          {
+            "description": "按机构方案完成扫查、测量与图像质量核对。",
+            "stage": "过程控制"
+          },
+          {
+            "description": "形成可复核的技术记录并交接异常与未完成事项。",
+            "stage": "结果复盘"
+          },
+          {
+            "description": "在授权范围内扩展检查类型与带教、质量管理职责。",
+            "stage": "责任扩展"
+          }
+        ],
+        "direct_answer": {
+          "$item": "diagnostic-medical-sonographers.path.career-path-block.2",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "heading": {
+          "$item": "diagnostic-medical-sonographers.path.career-path-block.1",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "locale_requirements": {
+          "credential_boundary": {
+            "$item": "diagnostic-medical-sonographers.path.career-path-block.4",
+            "block": "path",
+            "copy_key": "career.item.career-path-block",
+            "type": "prose"
+          },
+          "jurisdiction": "美国由各州与雇主规定；中国大陆超声诊断属诊疗行为，须按所在地与机构要求核验资格与授权。",
+          "summary": {
+            "$item": "diagnostic-medical-sonographers.path.career-path-block.3",
+            "block": "path",
+            "copy_key": "career.item.career-path-block",
+            "type": "prose"
+          }
+        },
+        "schema_version": "career.career_progression.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "adj-lab-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "id": "adj-lab-technician",
+            "label": {
+              "$source": "adj-lab-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj-lab-technologist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "id": "adj-lab-technologist",
+            "label": {
+              "$source": "adj-lab-technologist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj-ophthalmic-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "id": "adj-ophthalmic-technician",
+            "label": {
+              "$source": "adj-ophthalmic-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "bls-sonographer-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "id": "bls-sonographer-current",
+            "label": {
+              "$source": "bls-sonographer-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "entry",
+            "stages": [
+              {
+                "credentials": "完成获认可课程与临床学时；按机构要求参加培训。",
+                "next_moves": "完成课程与实习，准备认证考试。",
+                "readiness_evidence": "实习记录与受监督扫查清单，证明核对与操作习惯。",
+                "responsibility": {
+                  "$item": "diagnostic-medical-sonographers.path.career-path-block.5",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "受监督实习"
+              },
+              {
+                "credentials": "按工作地要求取得认证或州执照。",
+                "next_moves": "扩展检查类型或学习床旁操作。",
+                "readiness_evidence": "独立检查量与图像质量反馈。",
+                "responsibility": {
+                  "$item": "diagnostic-medical-sonographers.path.career-path-block.6",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "独立常规检查"
+              },
+              {
+                "credentials": "取得相应专科认证（心脏或血管方向）。",
+                "next_moves": "参加专科进阶培训并处理复杂病例。",
+                "readiness_evidence": "专科认证与复杂病例复核记录。",
+                "responsibility": {
+                  "$item": "diagnostic-medical-sonographers.path.career-path-block.7",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "专科方向操作"
+              },
+              {
+                "credentials": "按机构要求参加带教与质量管理培训。",
+                "next_moves": "向影像科室管理或超声技术管理方向发展。",
+                "readiness_evidence": "质量改进与带教记录。",
+                "responsibility": {
+                  "$item": "diagnostic-medical-sonographers.path.career-path-block.8",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "带教与质量把关"
+              }
+            ],
+            "title": "从受监督实习到常规检查"
+          },
+          {
+            "id": "specialist",
+            "stages": [
+              {
+                "credentials": "按专科要求参加培训与认证。",
+                "next_moves": "进入受监督的专科操作。",
+                "readiness_evidence": "专科理论与测量标准的学习记录。",
+                "responsibility": "学习目标专科的解剖、检查方案与测量标准。",
+                "role": "专科基础补充"
+              },
+              {
+                "credentials": "维持专科认证与继续教育。",
+                "next_moves": "承担更复杂的专科检查与带教。",
+                "readiness_evidence": "复杂病例复核与质量抽查结果。",
+                "responsibility": "独立完成复杂病例的扫查、测量与记录并接受复核。",
+                "role": "复杂病例处理"
+              },
+              {
+                "credentials": "按设备厂商与机构要求参加培训。",
+                "next_moves": "参与新技术的评估与推广。",
+                "readiness_evidence": "新技术的培训与操作记录。",
+                "responsibility": "掌握新设备与新技术的操作与质控要求。",
+                "role": "新技术与设备学习"
+              },
+              {
+                "credentials": "按岗位要求参加教学与质量管理培训。",
+                "next_moves": "向技术规范或培训负责人方向发展。",
+                "readiness_evidence": "规范与培训材料的评审记录。",
+                "responsibility": "形成可复用的技术规范与培训材料。",
+                "role": "技术规范与培训输出"
+              }
+            ],
+            "title": "专科深化与技术拓展"
+          },
+          {
+            "id": "management",
+            "stages": [
+              {
+                "credentials": "按机构要求参加管理培训。",
+                "next_moves": "承担质量抽查与反馈职责。",
+                "readiness_evidence": "排班与协调记录。",
+                "responsibility": "在授权范围内协调检查安排与人员分工。",
+                "role": "排班与任务协调"
+              },
+              {
+                "credentials": "按机构要求参加质量管理培训。",
+                "next_moves": "参与质量改进项目。",
+                "readiness_evidence": "质量抽查记录与改进意见。",
+                "responsibility": "抽查图像质量与测量一致性并反馈改进意见。",
+                "role": "质量抽查与反馈"
+              },
+              {
+                "credentials": "按机构要求参加设备与感染控制培训。",
+                "next_moves": "承担感染控制与设备管理职责。",
+                "readiness_evidence": "设备维护与再处理台账。",
+                "responsibility": "监督设备维护与探头再处理流程的落实。",
+                "role": "设备与感染控制管理"
+              },
+              {
+                "credentials": "按岗位要求参加管理与合规培训。",
+                "next_moves": "向影像科室管理方向发展。",
+                "readiness_evidence": "质量与安全管理记录。",
+                "responsibility": "按机构制度落实质量与安全责任并留存证据。",
+                "role": "制度与责任治理"
+              }
+            ],
+            "title": "协作与质量管理"
+          }
+        ]
+      },
+      "career_quick_answers_block": {
+        "availability": "published",
+        "heading": "职业速答",
+        "items": [
+          {
+            "answer": {
+              "$item": "diagnostic-medical-sonographers.profile.career-quick-answers-block.1",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa3",
+            "question": "这份工作先核对什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "对象",
+                  "secondary_value": null,
+                  "value": "医学超声诊断师"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "输入",
+                  "secondary_value": null,
+                  "value": "来源、权限和版本"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "交付",
+                  "secondary_value": null,
+                  "value": "可复核的工作结果"
+                }
+              ]
+            }
+          },
+          {
+            "answer": {
+              "$item": "diagnostic-medical-sonographers.profile.career-quick-answers-block.2",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa2",
+            "question": "怎样判断工作闭环？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "闭环",
+                  "secondary_value": null,
+                  "value": "输入、行动、交付与复盘"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤一",
+                  "secondary_value": null,
+                  "value": "核对输入"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤二",
+                  "secondary_value": null,
+                  "value": "人工复核"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤三",
+                  "secondary_value": null,
+                  "value": "执行并记录"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤四",
+                  "secondary_value": null,
+                  "value": "人工复核"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤五",
+                  "secondary_value": null,
+                  "value": "异常升级"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤六",
+                  "secondary_value": null,
+                  "value": "形成复盘"
+                }
+              ]
+            }
+          },
+          {
+            "answer": "资格、授权和最终责任仍由具体法域、机构或雇主核验。",
+            "key": "qa1",
+            "question": "资格边界是什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "边界",
+                  "secondary_value": null,
+                  "value": "需独立核验"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "法域",
+                  "secondary_value": null,
+                  "value": "按适用规则确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "责任",
+                  "secondary_value": null,
+                  "value": "由责任人确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "法域",
+                  "secondary_value": null,
+                  "value": "按适用规则确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "机构",
+                  "secondary_value": null,
+                  "value": "按授权链确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "训练",
+                  "secondary_value": null,
+                  "value": "按岗位要求确认"
+                }
+              ]
+            }
+          }
+        ],
+        "schema_version": "career.quick_answers.v1"
+      },
+      "career_risk_cards": {
+        "boundary": "不可用本页替代法域、机构或雇主的安全规则。",
+        "context_links": [
+          {
+            "href": "#career-visual-group-risk",
+            "label": "查看职业风险"
+          }
+        ],
+        "direct_answer": "先识别身份与部位、图像完整性、患者状态、感染控制与授权边界五类风险。",
+        "evidence_scope": "风险项按本职业内容与所列来源（O*NET 工作情境、CDC 与 FDA 设备与感染控制资料）边界解释。",
+        "heading": "医学超声诊断师的风险与控制点",
+        "risks": [
+          {
+            "affected_roles": "医学超声诊断师",
+            "consequence": "可能导致错误患者或错误部位的检查与归档，造成不可逆后果。",
+            "evidence_refs": [
+              "adj-lab-technician"
+            ],
+            "id": "risk-1",
+            "mitigation": "停止归档与扫查，回到原始记录按机构流程确认，不靠相似姓名猜测。",
+            "scenario": "申请、腕带或工作列表与检查部位不一致，或文件归属错误。",
+            "title": {
+              "$item": "diagnostic-medical-sonographers.risk.career-risk-cards.1",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "医学超声诊断师",
+            "consequence": "影响技术记录的可用性与医师判读，可能需要补做检查。",
+            "evidence_refs": [
+              "adj-lab-technician"
+            ],
+            "id": "risk-2",
+            "mitigation": "标记未完成并请获授权人员复核，不用单张代表图掩盖缺口。",
+            "scenario": "缺少规定视图、图像标记错误或测量不稳定。",
+            "title": {
+              "$item": "diagnostic-medical-sonographers.risk.career-risk-cards.2",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "医学超声诊断师",
+            "consequence": "可能危及患者安全。",
+            "evidence_refs": [
+              "adj-lab-technician"
+            ],
+            "id": "risk-3",
+            "mitigation": "停止相应步骤、保障患者安全并及时呼叫临床支持。",
+            "scenario": "患者在检查中出现疼痛、呼吸或意识变化，或体位耐受下降。",
+            "title": {
+              "$item": "diagnostic-medical-sonographers.risk.career-risk-cards.3",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "医学超声诊断师",
+            "consequence": "可能造成患者间交叉感染。",
+            "evidence_refs": [
+              "adj-lab-technician"
+            ],
+            "id": "risk-4",
+            "mitigation": "按机构与指南完成探头再处理并留痕，状态不明不得用于下一次检查。",
+            "scenario": "内腔探头使用后未按要求清洁与高水平消毒，或状态不明仍继续使用。",
+            "title": {
+              "$item": "diagnostic-medical-sonographers.risk.career-risk-cards.4",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "医学超声诊断师",
+            "consequence": "可能造成设备故障、图像不可用或越权责任。",
+            "evidence_refs": [
+              "adj-lab-technician"
+            ],
+            "id": "risk-5",
+            "mitigation": "按规范维护并提交维修申请，诊断与签字由医师负责。",
+            "scenario": "超声设备未按规范维护，或超出授权给出诊断意见与签字。",
+            "title": {
+              "$item": "diagnostic-medical-sonographers.risk.career-risk-cards.5",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "医学超声诊断师",
+            "consequence": "可能产生不可逆后果。",
+            "evidence_refs": [
+              "adj-lab-technician"
+            ],
+            "id": "risk-boundary",
+            "mitigation": "停止并按授权链升级。",
+            "scenario": "遇到超出授权范围的任务。",
+            "title": "责任边界"
+          }
+        ],
+        "schema_version": "career.work_risk.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "adj-lab-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "id": "adj-lab-technician",
+            "label": {
+              "$source": "adj-lab-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj-lab-technologist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "id": "adj-lab-technologist",
+            "label": {
+              "$source": "adj-lab-technologist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj-ophthalmic-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "id": "adj-ophthalmic-technician",
+            "label": {
+              "$source": "adj-ophthalmic-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "bls-sonographer-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "id": "bls-sonographer-current",
+            "label": {
+              "$source": "bls-sonographer-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ]
+      },
+      "career_snapshot_primary_locale": {
+        "salary": {
+          "bls_table": [
+            {
+              "指标": "中国大陆薪资口径",
+              "数值": "证据不足：未取得全国单职业口径",
+              "说明": "未取得全国单职业精确口径，不以行业代理值替代。"
+            }
+          ],
+          "china_ai_row": {
+            "$item": "diagnostic-medical-sonographers.china-salary.career-snapshot-primary-locale.4",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_class_row": {
+            "$item": "diagnostic-medical-sonographers.china-salary.career-snapshot-primary-locale.3",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_edu_table": [
+            {
+              "学历段": "超声医师（中国大陆口径）",
+              "岗位方向": "中国超声诊断属诊疗行为，由持《医师执业证书》的医师承担。",
+              "说明": "资格与执业注册按所在地与机构核验。"
+            },
+            {
+              "学历段": "医学影像与超声技术岗位",
+              "岗位方向": "技术人员配合完成图像采集、测量与技术记录。",
+              "说明": "岗位职责与授权按机构制度核验。"
+            },
+            {
+              "学历段": "岗位培训与继续教育",
+              "岗位方向": "设备操作、感染控制与图像质量培训。",
+              "说明": "按机构与主管部门要求参加。"
+            },
+            {
+              "学历段": "全国单职业工资分布",
+              "岗位方向": "未取得全国单职业精确口径。",
+              "说明": "不以行业代理值替代。"
+            }
+          ],
+          "china_industry_table": [
+            {
+              "备注": "不以行业代理值替代单职业工资。",
+              "行业": "医院与影像科室",
+              "需求": "证据不足：未取得全国单职业口径"
+            },
+            {
+              "备注": "岗位与地区差异明显。",
+              "行业": "门诊与体检机构",
+              "需求": "证据不足：未取得全国单职业口径"
+            },
+            {
+              "备注": "需按具体岗位核对。",
+              "行业": "地区与机构类型",
+              "需求": "证据不足：未取得全国单职业口径"
+            }
+          ],
+          "china_intl": "中国与美国职业口径不作自动等同。",
+          "china_name_row": {
+            "$item": "diagnostic-medical-sonographers.china-salary.career-snapshot-primary-locale.1",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_open": "证据不足：未取得全国单职业口径",
+          "china_ref": {
+            "$join": [
+              {
+                "$source": "adj-lab-technician",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "diagnostic-medical-sonographers.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "adj-lab-technician",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "diagnostic-medical-sonographers.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "china_salary_note": "中国公开来源仅用于说明口径边界。",
+          "china_salary_table": [
+            {
+              "城市/区间": "全国单职业",
+              "月薪参考": "证据不足：未取得全国单职业口径"
+            },
+            {
+              "城市/区间": "全国单职业",
+              "月薪参考": "证据不足：未取得全国单职业口径"
+            },
+            {
+              "城市/区间": "全国单职业",
+              "月薪参考": "证据不足：未取得全国单职业口径"
+            }
+          ],
+          "china_soc_row": {
+            "$item": "diagnostic-medical-sonographers.china-salary.career-snapshot-primary-locale.2",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "sources_note": {
+            "$join": [
+              {
+                "$source": "adj-lab-technologist",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "diagnostic-medical-sonographers.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "adj-lab-technologist",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "diagnostic-medical-sonographers.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "ui": {
+            "ai_heading": "AI 辅助边界",
+            "driver_heading": "影响因素",
+            "official_heading": "中国大陆公开口径",
+            "scenario_caption": "未取得全国单职业精确工资，不以行业代理值替代。",
+            "scenario_heading": "职业场景边界",
+            "scenario_interpretation_label": "解释",
+            "scenario_role_label": "职业",
+            "scenario_value_label": "口径"
+          },
+          "us_growth": "美国预测见美国薪资模块。",
+          "us_median": "美国工资见美国薪资模块。"
+        }
+      },
+      "career_snapshot_secondary_locale": {
+        "authority_sources": {
+          "$join": [
+            {
+              "$source": "adj-lab-technologist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "adj-lab-technologist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            }
+          ],
+          "separator": ""
+        },
+        "bls_table": [
+          {
+            "指标": "美国薪资中位数",
+            "数值": "96,590 美元/年",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "adj-lab-technician",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "diagnostic-medical-sonographers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "adj-lab-technician",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "diagnostic-medical-sonographers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资 10 分位",
+            "数值": "67,820 美元/年",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "adj-lab-technician",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "diagnostic-medical-sonographers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "adj-lab-technician",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "diagnostic-medical-sonographers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资 90 分位",
+            "数值": "129,370 美元/年",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "adj-lab-technician",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "diagnostic-medical-sonographers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "adj-lab-technician",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "diagnostic-medical-sonographers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资单位",
+            "数值": "美元/年；美元/时",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "adj-lab-technician",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "diagnostic-medical-sonographers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "adj-lab-technician",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "diagnostic-medical-sonographers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资时期",
+            "数值": "2025 年 5 月（BLS 2025 年工资数据）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "adj-lab-technician",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "diagnostic-medical-sonographers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "adj-lab-technician",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "diagnostic-medical-sonographers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业规模",
+            "数值": "约 92,200 人（2025）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "adj-lab-technologist",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "diagnostic-medical-sonographers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "adj-lab-technologist",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "diagnostic-medical-sonographers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业增长（2025—2035）",
+            "数值": "14%（远快于平均）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "adj-lab-technologist",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "diagnostic-medical-sonographers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "adj-lab-technologist",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "diagnostic-medical-sonographers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业空缺",
+            "数值": "约 6,000 个/年（2025—2035）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "adj-lab-technologist",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "diagnostic-medical-sonographers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "adj-lab-technologist",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "diagnostic-medical-sonographers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          }
+        ],
+        "boundary": "美国统计不代表中国职业工资或就业结果。",
+        "direct_answer": {
+          "$item": "diagnostic-medical-sonographers.us-salary.career-snapshot-secondary-locale.2",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "factor_rows": [
+          {
+            "answer": "按 29-2032.00 职业代码核对。",
+            "factor": "职业口径"
+          },
+          {
+            "answer": "按来源地区核对。",
+            "factor": "地区"
+          },
+          {
+            "answer": "按 2025 年工资数据与 2025—2035 年预测核对。",
+            "factor": "时期"
+          }
+        ],
+        "factors_heading": {
+          "$item": "diagnostic-medical-sonographers.us-salary.career-snapshot-secondary-locale.6",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "growth": "2025—2035 年预计增长 14%（远快于平均）",
+        "heading": {
+          "$item": "diagnostic-medical-sonographers.us-salary.career-snapshot-secondary-locale.1",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_heading": {
+          "$item": "diagnostic-medical-sonographers.us-salary.career-snapshot-secondary-locale.5",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_period": "2025 年工资数据（BLS）",
+        "industry_rows": [
+          {
+            "industry": "医院与医师诊所等医疗场所",
+            "median": "按来源",
+            "note": "岗位要求因机构不同。"
+          },
+          {
+            "industry": "影像中心与专科诊所",
+            "median": "按来源",
+            "note": "地区与专科影响结果。"
+          },
+          {
+            "industry": "地区",
+            "median": "需核对",
+            "note": "地区工资差异明显。"
+          },
+          {
+            "industry": "时期",
+            "median": "2025 年工资数据",
+            "note": "不得忽略时间口径。"
+          }
+        ],
+        "industry_value_label": "行业与工作情境",
+        "interpretation_heading": {
+          "$item": "diagnostic-medical-sonographers.us-salary.career-snapshot-secondary-locale.4",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "interpretation_rows": [
+          {
+            "answer": "按美国 29-2032.00 的职业与 2025 年工资、2025—2035 年预测口径解释。",
+            "question": "统计对象是什么？"
+          },
+          {
+            "answer": "不能；美国统计不外推到中国职业工资或就业。",
+            "question": "能否外推中国？"
+          },
+          {
+            "answer": "不能；分位是统计位置，不是个人起薪或录用保证。",
+            "question": "能否保证个人结果？"
+          },
+          {
+            "answer": "结合岗位、地区、时期与雇佣关系使用。",
+            "question": "如何使用？"
+          }
+        ],
+        "median": "96,590 美元/年（46.44 美元/时，2025 年）",
+        "outlook_heading": "就业展望",
+        "outlook_period": "2025—2035 年预测",
+        "wage_column_labels": [
+          "口径",
+          "数值",
+          "时期",
+          "限制"
+        ],
+        "wage_heading": {
+          "$item": "diagnostic-medical-sonographers.us-salary.career-snapshot-secondary-locale.3",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "wage_tiers": [
+          {
+            "equivalent": "10 分位",
+            "interpretation": "分布低端统计位置，不是入职起薪。",
+            "label": "低位",
+            "value": "67,820 美元/年"
+          },
+          {
+            "equivalent": "50 分位",
+            "interpretation": "一半从业者低于、一半高于该值。",
+            "label": "中位",
+            "value": "96,590 美元/年"
+          },
+          {
+            "equivalent": "90 分位",
+            "interpretation": "分布高端统计位置，与专科、地区与雇佣关系相关。",
+            "label": "高位",
+            "value": "129,370 美元/年"
+          }
+        ]
+      },
+      "definition_block": {
+        "$join": [
+          {
+            "$item": "diagnostic-medical-sonographers.profile.definition-block.1",
+            "block": "profile",
+            "copy_key": "career.item.definition-block",
+            "type": "prose"
+          },
+          {
+            "$item": "diagnostic-medical-sonographers.profile.definition-block.2",
+            "block": "profile",
+            "copy_key": "career.item.definition-block",
+            "type": "prose"
+          }
+        ],
+        "separator": "\n"
+      },
+      "faq_block": {
+        "items": {
+          "$item": "diagnostic-medical-sonographers.sources.faq.1",
+          "block": "sources",
+          "copy_key": "career.item.faq-block",
+          "type": "faq"
+        }
+      },
+      "fermat_decision_card": {
+        "caveat": {
+          "$item": "diagnostic-medical-sonographers.quick-decision.fermat-decision-card.1",
+          "block": "quick-decision",
+          "copy_key": "career.item.fermat-decision-card",
+          "type": "prose"
+        },
+        "summary": {
+          "$item": "diagnostic-medical-sonographers.quick-decision.fermat-decision-card.2",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "title": "医学超声诊断师适合什么样的人？"
+      },
+      "fit_decision_checklist": {
+        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "how": {
+          "$item": "diagnostic-medical-sonographers.quick-decision.fermat-decision-card.3",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "suit": {
+          "$item": "diagnostic-medical-sonographers.quick-decision.fermat-decision-card.4",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        }
+      },
+      "hero": {
+        "h1": {
+          "$subject": "name"
+        },
+        "quick_answer": {
+          "$subject": "summary"
+        },
+        "title": {
+          "$subject": "name"
+        }
+      },
+      "market_signal_card": {
+        "context_links": [
+          {
+            "href": "#career-visual-group-market-signals",
+            "label": "查看市场信号"
+          }
+        ],
+        "direct_answer": {
+          "$item": "diagnostic-medical-sonographers.market-signals.market-signal-card.2",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "heading": {
+          "$item": "diagnostic-medical-sonographers.market-signals.market-signal-card.1",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "outlook_evidence": [
+          {
+            "geography": "美国",
+            "horizon": "2025 年工资与 2025—2035 年预测",
+            "interpretation": "招聘样本、就业规模与职位空缺必须分别解释。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "市场信号",
+            "occupation_scope": "医学超声诊断师（29-2032.00）",
+            "value": {
+              "$item": "diagnostic-medical-sonographers.market-signals.market-signal-card.3",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "geography": "美国",
+            "horizon": "2025 年基期",
+            "interpretation": "就业规模与空缺不是同一指标。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "就业规模",
+            "occupation_scope": "医学超声诊断师（29-2032.00）",
+            "value": "2025 年约 92,200 人"
+          },
+          {
+            "geography": "美国",
+            "horizon": "2025—2035 年预测期",
+            "interpretation": "职位空缺需按来源口径解释。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "职位空缺",
+            "occupation_scope": "医学超声诊断师（29-2032.00）",
+            "value": "2025—2035 年年均约 6,000 个空缺"
+          }
+        ],
+        "schema_version": "career.outlook_transitions.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "adj-lab-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "id": "adj-lab-technician",
+            "label": {
+              "$source": "adj-lab-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj-lab-technologist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "id": "adj-lab-technologist",
+            "label": {
+              "$source": "adj-lab-technologist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj-ophthalmic-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "id": "adj-ophthalmic-technician",
+            "label": {
+              "$source": "adj-ophthalmic-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "bls-sonographer-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "id": "bls-sonographer-current",
+            "label": {
+              "$source": "bls-sonographer-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ],
+        "transitions": [
+          {
+            "capability_gaps": {
+              "$item": "diagnostic-medical-sonographers.market-signals.market-signal-card.5",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "diagnostic-medical-sonographers.market-signals.market-signal-card.4",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "target_href": "/zh/career/jobs/clinical-laboratory-technologists-and-technicians",
+            "target_slug": "clinical-laboratory-technologists-and-technicians",
+            "target_title": "临床实验室技师与技术员：与本职业在对象上的差异",
+            "transition_distance": "近，对象不同"
+          },
+          {
+            "capability_gaps": "需要补足：常规实验室检测与仪器操作。",
+            "shared_capabilities": "可转移能力：规范核对与技术记录经验。",
+            "target_href": "/zh/career/jobs/medical-and-clinical-laboratory-technicians",
+            "target_slug": "medical-and-clinical-laboratory-technicians",
+            "target_title": "医学与临床实验室技术员：与本职业在流程上的差异",
+            "transition_distance": "近，流程不同"
+          },
+          {
+            "capability_gaps": "需要补足：体外检验的复杂方法学与监督能力。",
+            "shared_capabilities": "可转移能力：质量控制与记录规范意识。",
+            "target_href": "/zh/career/jobs/medical-and-clinical-laboratory-technologists",
+            "target_slug": "medical-and-clinical-laboratory-technologists",
+            "target_title": "医学与临床实验室技师：与本职业在技术深度上的差异",
+            "transition_distance": "中等，技术不同"
+          },
+          {
+            "capability_gaps": "需要补足：眼科检查流程与眼科设备操作。",
+            "shared_capabilities": "可转移能力：患者沟通与设备操作习惯。",
+            "target_href": "/zh/career/jobs/ophthalmic-medical-technicians",
+            "target_slug": "ophthalmic-medical-technicians",
+            "target_title": "眼科医疗技术员：与本职业在检查对象上的差异",
+            "transition_distance": "近，对象不同"
+          },
+          {
+            "capability_gaps": "需要补足：磁共振原理、安全与设备操作。",
+            "shared_capabilities": "可转移能力：图像质量判断与患者护理经验。",
+            "target_href": "/zh/career/jobs/magnetic-resonance-imaging-technologists",
+            "target_slug": "magnetic-resonance-imaging-technologists",
+            "target_title": "磁共振成像技师：与本职业在成像原理上的差异",
+            "transition_distance": "中等，原理不同"
+          },
+          {
+            "capability_gaps": "需要补足：辐射安全、X 线设备与防护规范。",
+            "shared_capabilities": "可转移能力：影像质量意识与患者沟通。",
+            "target_href": "/zh/career/jobs/radiologic-technologists",
+            "target_slug": "radiologic-technologists",
+            "target_title": "放射技师：与本职业在辐射安全上的差异",
+            "transition_distance": "中等，原理不同"
+          }
+        ]
+      },
+      "onet_structured_fields_block": {
+        "availability": "published",
+        "heading": "O*NET 结构化字段",
+        "rows": [
+          {
+            "alternate_value": null,
+            "label": "研究输入",
+            "secondary_value": null,
+            "value": {
+              "$item": "diagnostic-medical-sonographers.profile.onet-structured-fields-block.1",
+              "block": "profile",
+              "copy_key": "career.item.onet-structured-fields-block",
+              "type": "prose"
+            }
+          }
+        ],
+        "schema_version": "career.onet_structured_fields.v1"
+      },
+      "personality_fit_block": {
+        "assessments": [
+          {
+            "answer": {
+              "$item": "diagnostic-medical-sonographers.fit.riasec-fit-block.6",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "riasec",
+            "label": "兴趣与任务",
+            "question": "面对重复性扫查与逐项核对，能否保持稳定细致？",
+            "signals": [
+              "扫查",
+              "记录"
+            ],
+            "watchout": "兴趣测评只提示探索方向，不作人格诊断或录用结论。"
+          },
+          {
+            "answer": {
+              "$item": "diagnostic-medical-sonographers.fit.riasec-fit-block.7",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "big-five",
+            "label": "稳定执行",
+            "question": "能否长时间保持手眼协调与体位稳定？",
+            "signals": [
+              "重复扫查",
+              "患者沟通"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": {
+              "$item": "diagnostic-medical-sonographers.fit.riasec-fit-block.8",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "mbti",
+            "label": "偏好观察",
+            "question": "更愿意操作设备，还是与患者沟通与照护？",
+            "signals": [
+              "设备",
+              "沟通"
+            ],
+            "watchout": "偏好描述不作能力结论。"
+          },
+          {
+            "answer": "用实际观察与机构反馈核验，而不是靠测评判断。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "enneagram",
+            "label": "动机观察",
+            "question": "能否接受感染暴露与不规则班次？",
+            "signals": [
+              "班次",
+              "防护"
+            ],
+            "watchout": "不作录用依据。"
+          },
+          {
+            "answer": "通过模拟或受监督场景观察其调整与请示方式。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "iq",
+            "label": "问题解决",
+            "question": "图像不达标时，能否按方案调整并请示？",
+            "signals": [
+              "调整",
+              "请示"
+            ],
+            "watchout": "不作能力评分。"
+          },
+          {
+            "answer": "用交接记录与团队反馈核验。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "eq",
+            "label": "协作边界",
+            "question": "能否清楚交接异常与未完成事项？",
+            "signals": [
+              "交接",
+              "升级"
+            ],
+            "watchout": "不作录用结论。"
+          }
+        ],
+        "boundary": "这是工作样本与训练观察核对，不是人格诊断或录用结论。",
+        "direct_answer": {
+          "$item": "diagnostic-medical-sonographers.fit.riasec-fit-block.2",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        },
+        "directions": [
+          {
+            "direction": "受监督实习",
+            "fit_signals": "能否按清单逐项核对身份与部位。",
+            "target": {
+              "href": {
+                "$link": "diagnostic-medical-sonographers.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "diagnostic-medical-sonographers.parity.adjacent.1",
+                "field": "url"
+              },
+              "slug": "clinical-laboratory-technologists-and-technicians",
+              "title": {
+                "$link": "diagnostic-medical-sonographers.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "diagnostic-medical-sonographers.parity.adjacent.1",
+                "field": "entity"
+              }
+            },
+            "watchouts": "注意授权与停止条件。"
+          },
+          {
+            "direction": "独立常规检查",
+            "fit_signals": "能否稳定完成图像采集与测量。",
+            "target": {
+              "href": {
+                "$link": "diagnostic-medical-sonographers.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "diagnostic-medical-sonographers.parity.adjacent.2",
+                "field": "url"
+              },
+              "slug": "medical-and-clinical-laboratory-technicians",
+              "title": {
+                "$link": "diagnostic-medical-sonographers.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "diagnostic-medical-sonographers.parity.adjacent.2",
+                "field": "entity"
+              }
+            },
+            "watchouts": "不把设备输出直接当作结论。"
+          },
+          {
+            "direction": "专科方向",
+            "fit_signals": "能否按专科方案完成扫查与测量。",
+            "target": {
+              "href": {
+                "$link": "diagnostic-medical-sonographers.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "diagnostic-medical-sonographers.parity.adjacent.3",
+                "field": "url"
+              },
+              "slug": "medical-and-clinical-laboratory-technologists",
+              "title": {
+                "$link": "diagnostic-medical-sonographers.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "diagnostic-medical-sonographers.parity.adjacent.3",
+                "field": "entity"
+              }
+            },
+            "watchouts": "专科认证不跨方向自动通用。"
+          },
+          {
+            "direction": "床旁与介入配合",
+            "fit_signals": "能否遵守无菌与感染控制要求。",
+            "target": {
+              "href": {
+                "$link": "diagnostic-medical-sonographers.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "diagnostic-medical-sonographers.parity.adjacent.4",
+                "field": "url"
+              },
+              "slug": "ophthalmic-medical-technicians",
+              "title": {
+                "$link": "diagnostic-medical-sonographers.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "diagnostic-medical-sonographers.parity.adjacent.4",
+                "field": "entity"
+              }
+            },
+            "watchouts": "不跳过安全与防护步骤。"
+          },
+          {
+            "direction": "带教与质量管理",
+            "fit_signals": "能否依据证据给出反馈。",
+            "watchouts": "保留记录与变更依据。"
+          },
+          {
+            "direction": "长期训练",
+            "fit_signals": "能否持续补足认证与继续教育。",
+            "watchouts": "认证与执照按法域核验。"
+          }
+        ],
+        "heading": {
+          "$item": "diagnostic-medical-sonographers.fit.riasec-fit-block.1",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        },
+        "questions": [
+          {
+            "answer": "用受监督实操与图像质量反馈验证。",
+            "question": "能否稳定完成扫查与记录？"
+          },
+          {
+            "answer": "在模拟或受监督场景中观察调整与请示。",
+            "question": "图像不达标时能否按方案调整？"
+          },
+          {
+            "answer": "设置停止与升级条件并保留记录。",
+            "question": "能否识别异常并停止？"
+          },
+          {
+            "answer": "说明交接对象、状态与责任人。",
+            "question": "能否清楚交接异常？"
+          },
+          {
+            "answer": "根据图像质量反馈修订做法。",
+            "question": "能否接受复核与反馈？"
+          },
+          {
+            "answer": "按所在地与雇主核验。",
+            "question": "能否补足认证与执照？"
+          },
+          {
+            "answer": "设备与 AI 输出不能替代人员核对与医师诊断。",
+            "question": "能否理解 AI 与设备辅助的边界？"
+          },
+          {
+            "answer": "完成一次可复核的模拟队列练习。",
+            "question": "如何继续验证？"
+          }
+        ],
+        "schema_version": "career.fit_decision_center.v1",
+        "signals": [
+          {
+            "body": {
+              "$item": "diagnostic-medical-sonographers.fit.riasec-fit-block.3",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "fit",
+            "label": "适配信号",
+            "tone": "positive"
+          },
+          {
+            "body": {
+              "$item": "diagnostic-medical-sonographers.fit.riasec-fit-block.4",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "caution",
+            "label": "注意信号",
+            "tone": "caution"
+          },
+          {
+            "body": {
+              "$item": "diagnostic-medical-sonographers.fit.riasec-fit-block.5",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "experiment",
+            "label": "验证动作",
+            "tone": "action"
+          }
+        ],
+        "source_links": [
+          {
+            "href": {
+              "$source": "adj-lab-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "label": {
+              "$source": "adj-lab-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "adj-lab-technologist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "label": {
+              "$source": "adj-lab-technologist",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "adj-ophthalmic-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "label": {
+              "$source": "adj-ophthalmic-technician",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "bls-sonographer-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "label": {
+              "$source": "bls-sonographer-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "diagnostic-medical-sonographers.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          }
+        ]
+      },
+      "primary_cta": {
+        "entry_surface": "career_job_detail",
+        "href": "/zh/tests/holland-career-interest-test-riasec",
+        "label": "测我的职业兴趣是否适合医学超声诊断师",
+        "source_page_type": "career_job_detail",
+        "subject_key": {
+          "$subject": "canonical_slug"
+        },
+        "subject_kind": "career_job",
+        "target_action": "start_riasec_test",
+        "test_slug": "holland-career-interest-test-riasec"
+      },
+      "responsibilities_block": [
+        {
+          "$join": [
+            {
+              "$item": "diagnostic-medical-sonographers.profile.responsibilities-block.1",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$join": [
+            {
+              "$item": "diagnostic-medical-sonographers.profile.responsibilities-block.2",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$join": [
+            {
+              "$item": "diagnostic-medical-sonographers.profile.responsibilities-block.3",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        }
+      ],
+      "riasec_fit_block": {
+        "fit_interest": "兴趣只提示探索方向，实际适配以受监督实操与训练反馈核验。",
+        "interest": "官方兴趣代码 RCI（现实型、常规型、研究型）：以设备操作、按程序核对与医学知识应用为主。",
+        "riasec": "RCI",
+        "riasec_short": "官方兴趣代码 RCI；不作人格诊断或录用依据。"
+      },
+      "source_card": {
+        "eeat_signals": {
+          "author": "FermatMind research workflow",
+          "source": {
+            "$source": "adj-lab-technician",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "name",
+            "item": "diagnostic-medical-sonographers.source-register.published.1"
+          },
+          "updated_at": {
+            "$source": "adj-lab-technician",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "period",
+            "item": "diagnostic-medical-sonographers.source-register.published.1"
+          }
+        },
+        "note": "来源范围、限制与统计时期按原始证据分别核对；未取得的数据在相应位置可见标记。"
+      },
+      "work_context_block": {
+        "$join": [
+          {
+            "$item": "diagnostic-medical-sonographers.profile.work-context-block.1",
+            "block": "profile",
+            "copy_key": "career.item.work-context-block",
+            "type": "prose"
+          },
+          {
+            "$item": "diagnostic-medical-sonographers.profile.work-context-block.2",
+            "block": "profile",
+            "copy_key": "career.item.work-context-block",
+            "type": "prose"
+          },
+          {
+            "$item": "diagnostic-medical-sonographers.sources.boundary.1",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          },
+          {
+            "$item": "diagnostic-medical-sonographers.sources.boundary.1.2",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          },
+          {
+            "$item": "diagnostic-medical-sonographers.sources.boundary.1.3",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          }
+        ],
+        "separator": "\n"
+      }
+    },
+    "contract_version": "career.detail.display.v1",
+    "locale": "zh-CN",
+    "native_items": [
+      {
+        "block": "source-register",
+        "copy_key": "career.item.published-sources",
+        "id": "diagnostic-medical-sonographers.source-register.published.1",
+        "location": "sources",
+        "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-role-comparison",
+        "id": "diagnostic-medical-sonographers.path.entry-role-comparison.current.v1",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.interview-probation",
+        "id": "diagnostic-medical-sonographers.path.interview-probation.current.v1",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.credential-decision",
+        "id": "diagnostic-medical-sonographers.path.credential-decision.current.v1",
+        "location": "entry_decisions",
+        "type": "table"
+      }
+    ],
+    "path": "/zh/career/jobs/diagnostic-medical-sonographers",
+    "section_titles": {
+      "ai-impact": "AI 影响",
+      "china-salary": "中国大陆薪资参考",
+      "direction-comparison": "职业方向比较",
+      "fit": "职业适配指南",
+      "market-signals": "职业前景与相关职业转向",
+      "navigation": "目录",
+      "path": "入行、证书与职业发展",
+      "profile": "职业画像",
+      "quick-decision": "快速判断",
+      "risk": "工作压力与职业边界",
+      "source-register": "来源登记",
+      "sources": "常见问题与资料来源",
+      "us-salary": "美国薪资参考"
+    }
+  },
   "fact_register": {
     "facts": [
       {
@@ -8783,37 +11402,41 @@
       "key": "ai",
       "label": "AI 任务暴露"
     },
-    "badges": [],
+    "badges": [
+      "超声设备操作 · 图像与测量复核 · 技术记录交接",
+      "O*NET-SOC 29-2032.00 · 2025 年工资数据",
+      "Job Zone 三级 · 副学士或高中后证书 · 兴趣代码 RCI"
+    ],
     "metrics": [
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-annual-wage",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "美国中位工资（2025 年，96,590 美元/年；46.44 美元/时）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-workforce-outlook",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国就业预测（2025—2035 年增长 14%，远快于平均）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-workforce-outlook",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国在岗人数（2025 年，约 92,200 人）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-workforce-outlook",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国年均职位空缺（2025—2035 年，约 6,000 个）"
       },
       {
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "中国大陆薪资参考"
+        "label": "中国大陆薪资参考（未取得全国单职业口径，见中国薪资板块）"
       }
     ]
   },
@@ -8828,7 +11451,7 @@
       "text": "医学超声诊断师"
     }
   },
-  "source_content_sha256": "275084376ff1752fcf3c4011b042e646e3bf3d68df62cd37f08c23a30de5fe0c",
+  "source_content_sha256": "9b7d820c320559882731c4e2d2560e830e06dcc19d1aea7bdb30fdab75328915",
   "subject": {
     "canonical_slug": "diagnostic-medical-sonographers",
     "name": "医学超声诊断师",

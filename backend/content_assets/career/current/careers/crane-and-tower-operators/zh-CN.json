@@ -143,6 +143,15 @@
       "item:crane-and-tower-operators.path.career-path-block.8": {
         "status": "pending_mapping"
       },
+      "item:crane-and-tower-operators.path.credential-decision.current.v1": {
+        "status": "pending_mapping"
+      },
+      "item:crane-and-tower-operators.path.entry-role-comparison.current.v1": {
+        "status": "pending_mapping"
+      },
+      "item:crane-and-tower-operators.path.interview-probation.current.v1": {
+        "status": "pending_mapping"
+      },
       "item:crane-and-tower-operators.profile.career-quick-answers-block.1": {
         "status": "pending_mapping"
       },
@@ -204,6 +213,12 @@
         "status": "pending_mapping"
       },
       "item:crane-and-tower-operators.sources.boundary.1": {
+        "status": "pending_mapping"
+      },
+      "item:crane-and-tower-operators.sources.boundary.1.2": {
+        "status": "pending_mapping"
+      },
+      "item:crane-and-tower-operators.sources.boundary.1.3": {
         "status": "pending_mapping"
       },
       "item:crane-and-tower-operators.sources.faq.1": {
@@ -7235,7 +7250,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
               "适合信号：你能反复核对载荷与幅度，持续观察吊钩、臂架和障碍物，清楚复诵指令，并在信息不完整时停机。"
@@ -7250,7 +7265,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
               "谨慎条件：如果你容易在进度压力下跳过检查、接受冲突信号或把估算当能力确认，应先练习检查表和停工升级。"
@@ -7265,7 +7280,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
               "安全试做：用四张完全虚构工单做纸面分流，不操作真实起重机，也不计算或批准真实吊装。"
@@ -7573,7 +7588,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具可协助整理班前检查、载荷表索引、日志和纸面模拟草稿。"
+              "AI 与自动化会怎样影响起重机与塔吊操作员？"
             ]
           },
           "id": "crane-and-tower-operators.ai-impact.ai-impact-table.1",
@@ -7587,7 +7602,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具输出不得成为真实起吊许可。"
+              "目前可核对的是任务层面的变化，而不是岗位替代的时间表：工具可协助检索载荷表、整理班前检查与日志、模拟盲吊路线；但真实载荷与配置、地基与索具状态、风况、禁入区与起吊授权仍由有职责人员核验。技术暴露不等于组织采用，更不等于岗位消失或收入变化。"
             ]
           },
           "id": "crane-and-tower-operators.ai-impact.ai-impact-table.2",
@@ -7601,7 +7616,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "设备配置、载荷、幅度与基础必须回到受控原始资料核验。"
+              "下面逐条列出本页使用的来源、它实际规范或统计的对象，以及使用限制。"
             ]
           },
           "id": "crane-and-tower-operators.ai-impact.ai-impact-table.3",
@@ -7615,7 +7630,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "索具、天气、信号和禁入区必须由现场责任人确认。"
+              "下面把任务分成更容易被工具改变的部分与仍由人承担判断与责任的部分。"
             ]
           },
           "id": "crane-and-tower-operators.ai-impact.ai-impact-table.4",
@@ -7629,7 +7644,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不得向通用工具输入客户机密、真实工地敏感信息或未经授权的设备资料。"
+              "引入工具时责任不能随系统一起转移；下面是本职业可执行的人工控制步骤。"
             ]
           },
           "id": "crane-and-tower-operators.ai-impact.ai-impact-table.5",
@@ -7643,7 +7658,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "冲突或缺失时停止受影响结论，记录并升级。"
+              "下一步：把上面三类任务变化与具体吊装场景逐项核对——哪些环节可由工具辅助，哪些仍需现场责任人判断，以及谁对起吊授权与安全负责。"
             ]
           },
           "id": "crane-and-tower-operators.ai-impact.ai-impact-table.6",
@@ -7693,7 +7708,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国精确职业工资：暂无可安全使用的数据。"
+              "证据不足：未取得中国大陆起重机与塔吊操作员（O*NET-SOC 53-7021.00）对应的职业级工资分布"
             ]
           },
           "id": "crane-and-tower-operators.china-salary.career-snapshot-primary-locale.1",
@@ -7707,7 +7722,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "现有材料未建立全国精确职业中位数、分位数或统一起薪。"
+              "现有材料未建立全国精确职业中位数、分位数或统一起薪；公开工资统计按行业门类与人员类别发布。"
             ]
           },
           "id": "crane-and-tower-operators.china-salary.career-snapshot-primary-locale.2",
@@ -7735,7 +7750,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "没有同口径样本时保留缺口，不用单个报价外推全国范围。"
+              "证据不足：未取得中国大陆该职业招聘或报价统计；单条报价不能代表全国水平。"
             ]
           },
           "id": "crane-and-tower-operators.china-salary.career-snapshot-primary-locale.4",
@@ -7757,7 +7772,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国2025年中位年薪68,080美元，中位时薪32.73美元。"
+              "美国起重机与塔吊操作员的工资与就业怎么看？"
             ]
           },
           "id": "crane-and-tower-operators.us-salary.career-snapshot-secondary-locale.1",
@@ -7771,7 +7786,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位数不是起薪或个人保证。"
+              "美国 2025 年 5 月工资中位 68,080 美元/年、32.73 美元/时；第 10 分位 42,640 美元、第 90 分位 103,570 美元。中位数不是起薪或个人保证。"
             ]
           },
           "id": "crane-and-tower-operators.us-salary.career-snapshot-secondary-locale.2",
@@ -7786,7 +7801,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国年工资第10分位42,640美元。"
+              "工资分位与时薪口径"
             ]
           },
           "id": "crane-and-tower-operators.us-salary.career-snapshot-secondary-locale.3",
@@ -7800,7 +7815,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国年工资第90分位103,570美元。"
+              "读这些数字时要问的问题"
             ]
           },
           "id": "crane-and-tower-operators.us-salary.career-snapshot-secondary-locale.4",
@@ -7814,7 +7829,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "比较岗位时另记地区、设备类型、班次、经验、资格与计薪单位。"
+              "这个职业分布在哪些行业？"
             ]
           },
           "id": "crane-and-tower-operators.us-salary.career-snapshot-secondary-locale.5",
@@ -7828,7 +7843,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资是2025年数据，就业预测期为2024—2034，不能混作同一期间。"
+              "什么因素会让同类岗位的收入不同？"
             ]
           },
           "id": "crane-and-tower-operators.us-salary.career-snapshot-secondary-locale.6",
@@ -7851,7 +7866,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "持续观察吊钩、臂架、负载和障碍物。"
+              "起重机与塔吊操作员适合什么样的人？"
             ]
           },
           "id": "crane-and-tower-operators.fit.riasec-fit-block.1",
@@ -7865,7 +7880,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "能精细操纵并保持平稳起停。"
+              "适配不是人格判断，而是把日常工作的真实要求——长时间持续观察与精细操纵、严格复诵唯一信号、对他人安全负很高责任、并在信息不完整时停工——"
             ]
           },
           "id": "crane-and-tower-operators.fit.riasec-fit-block.2",
@@ -7879,7 +7894,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "严格复诵唯一有效信号。"
+              "愿意长期保持专注观察与平稳操作、并按检查表逐项核对的人，通常更容易适应。"
             ]
           },
           "id": "crane-and-tower-operators.fit.riasec-fit-block.3",
@@ -7893,7 +7908,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "载荷、地面或指令不完整时停止操作。"
+              "先核对进度压力下的停工习惯、长时间高空与户外作业的耐受、以及能否承受高责任后果。"
             ]
           },
           "id": "crane-and-tower-operators.fit.riasec-fit-block.4",
@@ -7907,7 +7922,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "愿意反复使用检查表，不因熟悉而跳步。"
+              "先用本页虚构纸面练习完成一次检查与停工分流，或在不接触真实设备的前提下做一次模拟器练习，再判断偏好。"
             ]
           },
           "id": "crane-and-tower-operators.fit.riasec-fit-block.5",
@@ -7921,7 +7936,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "能记录异常、隔离状态和升级对象。"
+              "O*NET 为起重机与塔吊操作员（53-7021.00）公示的兴趣代码是 RC：现实型对应操作重型设备与体力、机械活动，常规型对应遵循程序与规范记录。把代码当作活动类型线索，不要当作人格标签。"
             ]
           },
           "id": "crane-and-tower-operators.fit.riasec-fit-block.6",
@@ -7935,7 +7950,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "用检查表和停工边界等行为证据判断，不靠“胆大”。"
+              "用检查表、指令复诵、异常记录和停工边界等行为证据判断，不靠「胆大」或熟练感。"
             ]
           },
           "id": "crane-and-tower-operators.fit.riasec-fit-block.7",
@@ -7946,7 +7961,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.riasec-fit-block",
+          "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
               "纸面练习不能证明真实设备操作能力或授权。"
@@ -7971,7 +7986,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "超载或载荷与能力不匹配时停止起吊，回到受控载荷资料。"
+              "超载或载荷与设备能力不匹配"
             ]
           },
           "id": "crane-and-tower-operators.risk.career-risk-cards.1",
@@ -7985,7 +8000,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "地基、支腿、索具或机构异常时隔离设备并交授权人员评估。"
+              "地基、支腿、索具或机构失效"
             ]
           },
           "id": "crane-and-tower-operators.risk.career-risk-cards.2",
@@ -7999,7 +8014,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风、能见度、雷电或多塔交叉条件变化时，以设备限制、方案和现场指挥为准。"
+              "风、能见度、雷电与多塔交叉条件变化"
             ]
           },
           "id": "crane-and-tower-operators.risk.career-risk-cards.3",
@@ -8013,7 +8028,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "信号冲突、视线丢失或人员进入禁入区时立即中止受影响步骤。"
+              "信号冲突、视线丢失或人员进入禁入区"
             ]
           },
           "id": "crane-and-tower-operators.risk.career-risk-cards.4",
@@ -8027,7 +8042,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "停工后记录时间、已知事实、未确认项、隔离状态和接收人，不越权宣布恢复。"
+              "停工后隔离与恢复授权不清"
             ]
           },
           "id": "crane-and-tower-operators.risk.career-risk-cards.5",
@@ -8049,7 +8064,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入行需掌握设备控制、载荷核对、班前检查、手势或无线电通信和安全停机，并接受与设备类型匹配的训练与实操评价。"
+              "起重机与塔吊操作员怎样入行与进阶？"
             ]
           },
           "id": "crane-and-tower-operators.path.career-path-block.1",
@@ -8063,7 +8078,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国建筑施工塔式起重机司机须按现行主管部门规则核验相应资格与授权范围；市场监管总局Q2范围和其他设备、法域须分别核验，不能自动互换。"
+              "入行通常从与设备类型匹配的训练和实操评价开始：掌握设备控制、载荷核对、班前检查、手势或无线电通信与安全停机；美国多数岗位要求职业学校培训、相关在职经验或副学士学位，岗位培训一到两年；中国塔式起重机司机须先取得建筑施工特种作业资格。"
             ]
           },
           "id": "crane-and-tower-operators.path.career-path-block.2",
@@ -8078,7 +8093,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "题内规则：工单必须给出设备配置、吊物重量、工作幅度、载荷资料核对结果、唯一信号人和禁入区状态；缺一项即“信息不全，不得授权”。"
+              "美国口径下该职业准备层级为 Job Zone Three（需要中等准备，SVP 6.0 至 7.0），通常要求职业学校培训、相关在职经验或副学士学位，岗位培训一到两年；中国没有与 53-7021.00 一一对应的职业细类，资格与授权须按目标单位与主管部门规定核对。"
             ]
           },
           "id": "crane-and-tower-operators.path.career-path-block.3",
@@ -8092,7 +8107,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "题内规则：载荷资料核对结果为“不适用”，或唯一信号人/禁入区状态为“否”，均“安全停止并升级”。"
+              "资格与授权要分项核对：OSHA 认证、建筑施工特种作业资格、设备类型专项训练与项目专项方案授权不是同一层状态，不能互相替代；涉及起重机械使用与检验、吊装方案审批与作业范围的，须按现行规定执行。"
             ]
           },
           "id": "crane-and-tower-operators.path.career-path-block.4",
@@ -8106,7 +8121,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "最高优先级是安全停止；即使其他字段完整，也不能被成本、进度或纸面结论覆盖。"
+              "在持证操作员监督下完成信号复诵、索具识别、场地与设备外观检查，并记录班前检查项。"
             ]
           },
           "id": "crane-and-tower-operators.path.career-path-block.5",
@@ -8120,7 +8135,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "四张工单结论：A纸面核对完整但仍不授权真实起吊；B信息不全；C安全停止并升级；D安全停止并升级。"
+              "独立操作授权设备完成常规吊运：读吊装计划、核载荷与幅度、试吊、平稳运移与落位。"
             ]
           },
           "id": "crane-and-tower-operators.path.career-path-block.6",
@@ -8134,7 +8149,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "交付工单号、已知事实、触发规则、分类、缺失信息和下一步；不得补造载荷或现场状态。"
+              "操作大型塔式或履带式设备完成高精度或交叉作业吊装，配合专项方案与现场指挥。"
             ]
           },
           "id": "crane-and-tower-operators.path.career-path-block.7",
@@ -8148,7 +8163,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "作品集可展示检查模板和虚构分流表，但不替代训练、资格、现场评价或授权。"
+              "组织吊装方案、分工与停工决策，协调信号工与司索工，并承担带训与现场安全责任。"
             ]
           },
           "id": "crane-and-tower-operators.path.career-path-block.8",
@@ -8156,6 +8171,171 @@
             "crane-editorial"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-role-comparison",
+          "data": {
+            "column_keys": [
+              "role",
+              "initial_tasks",
+              "boundary",
+              "evidence",
+              "next_step"
+            ],
+            "rows": [
+              [
+                "操作辅助与信号配合（受训期）",
+                "在持证操作员监督下完成信号复诵、索具识别与场地、设备外观检查，并记录班前检查项。",
+                "不得独立操作、独立起吊或自行判断授权。",
+                "一份虚构的班前检查与信号复诵记录。",
+                "熟悉载荷表与检查表。"
+              ],
+              [
+                "持证操作员（中小型设备）",
+                "独立操作授权设备完成常规吊运：读吊装计划、核载荷与幅度、试吊、平稳运移与落位。",
+                "授权限设备类型与项目范围，超出即由吊装负责人评估。",
+                "一份虚构的吊装计划与载荷核对记录。",
+                "学习复杂吊装与带教。"
+              ],
+              [
+                "大型或复杂吊装操作员",
+                "操作大型塔式或履带式设备完成高精度或交叉作业吊装，配合专项方案与现场指挥。",
+                "按专项方案与现场指挥执行，不得自行变更方案。",
+                "一份虚构复杂吊装的方案要点与分工记录。",
+                "学习方案与风险预判。"
+              ],
+              [
+                "吊装负责人方向（相邻）",
+                "组织吊装方案、分工与停工决策，协调信号工与司索工。",
+                "授权与责任由单位与专项方案规定。",
+                "一份虚构吊装方案与停工清单。",
+                "核对该方向的职责与任职要求。"
+              ],
+              [
+                "其他工程设备操作员（相邻方向）",
+                "操作推土机、平地机、装载机等土方机械挖掘、移动和整平土方。",
+                "属相邻职业，不承担起重设备载荷管理。",
+                "一份虚构的土方作业计划。",
+                "核对土方机械操作要求。"
+              ]
+            ]
+          },
+          "id": "crane-and-tower-operators.path.entry-role-comparison.current.v1",
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.interview-probation",
+          "data": {
+            "column_keys": [
+              "stage",
+              "observed_evidence",
+              "possible_check",
+              "escalation"
+            ],
+            "rows": [
+              [
+                "吊装与载荷问答",
+                "能否说清载荷表、幅度与配置的关系，以及超载的判定。",
+                "口头或书面测。",
+                "考核方式由单位规定。"
+              ],
+              [
+                "情景判断",
+                "遇到载荷与配置冲突、天气超限或信号冲突时能否说出核对顺序与停工条件。",
+                "答题记录。",
+                "考察范围由单位规定。"
+              ],
+              [
+                "检查与信号实操",
+                "按检查表核对设备与索具，正确复诵并确认唯一信号。",
+                "实操或模拟记录。",
+                "按设备与项目范围评价。"
+              ],
+              [
+                "试用期观察",
+                "授权范围内的操作是否平稳、是否按停工条件停止并升级。",
+                "试用记录与带教评价。",
+                "聘任条件由单位规定。"
+              ]
+            ]
+          },
+          "id": "crane-and-tower-operators.path.interview-probation.current.v1",
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-decision",
+          "data": {
+            "column_keys": [
+              "credential",
+              "conditions",
+              "boundary",
+              "evidence",
+              "jurisdiction",
+              "next_step",
+              "review"
+            ],
+            "rows": [
+              [
+                "美国 OSHA 操作员培训与认证",
+                "按 1926.1427 完成培训、认证与评估。",
+                "限所认证的设备类型。",
+                "培训与认证记录。",
+                "美国",
+                "按设备与雇主规则办理。",
+                "按现行标准复核。"
+              ],
+              [
+                "中国建筑施工特种作业资格（塔式起重机司机）",
+                "按现行主管部门规则取得相应资格。",
+                "限授权设备与项目范围。",
+                "资格证书。",
+                "中国内地",
+                "按主管部门规则取证。",
+                "按现行规定复核。"
+              ],
+              [
+                "设备类型专项训练",
+                "与设备类型匹配的训练与实操评价。",
+                "不同设备类型不自动互换。",
+                "训练与评价记录。",
+                "按工作地",
+                "按设备类型补训。",
+                "按岗位要求复核。"
+              ],
+              [
+                "起重机械使用与检验登记",
+                "进场登记、检验与设备状态确认。",
+                "设备不合规不得作业。",
+                "登记与检验记录。",
+                "中国内地",
+                "按建筑起重机械规定办理。",
+                "按现行规定复核。"
+              ],
+              [
+                "吊装专项方案与指挥链",
+                "按项目专项方案与信号指挥作业。",
+                "方案变更须经授权。",
+                "方案与交底记录。",
+                "按项目",
+                "按方案执行。",
+                "按项目复核。"
+              ],
+              [
+                "在岗复训与带训能力",
+                "按单位要求复训并承担带教。",
+                "管理方向另核任职条件。",
+                "复训与带教记录。",
+                "按单位",
+                "按单位制度办理。",
+                "按岗位要求复核。"
+              ]
+            ]
+          },
+          "id": "crane-and-tower-operators.path.credential-decision.current.v1",
+          "type": "table"
         }
       ]
     },
@@ -8170,7 +8350,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国该职业2024年就业42,300人，2034年预计43,500人。"
+              "起重机与塔吊操作员的市场信号与相邻方向"
             ]
           },
           "id": "crane-and-tower-operators.market-signals.market-signal-card.1",
@@ -8184,7 +8364,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034预计增长3%。"
+              "需求信号分三层：官方就业预测、行业与项目需求、招聘公告，三者不能互相替代。"
             ]
           },
           "id": "crane-and-tower-operators.market-signals.market-signal-card.2",
@@ -8198,7 +8378,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "同期预计平均每年3,800个职位空缺。"
+              "美国 2024—2034 年预计年均约 3,800 个含增长与替补的空缺，预计增长 3%。"
             ]
           },
           "id": "crane-and-tower-operators.market-signals.market-signal-card.3",
@@ -8212,7 +8392,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "年均空缺含增长与替补，不等于每年净增3,800人。"
+              "共同能力：现场安全意识、体力与团队配合。"
             ]
           },
           "id": "crane-and-tower-operators.market-signals.market-signal-card.4",
@@ -8227,7 +8407,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "这些是美国全国数据，不能外推为中国需求或个人录用保证。"
+              "需补足：起重设备控制、载荷核对与唯一信号协同。"
             ]
           },
           "id": "crane-and-tower-operators.market-signals.market-signal-card.5",
@@ -8252,6 +8432,7 @@
               {
                 "answer": "工作链包括读取吊装计划和载荷表、检查场地与设备、确认吊物重量和幅度、与信号工协同、试吊、平稳运行、落位并记录异常。",
                 "id": "crane-and-tower-operators.faq.1",
+                "question": "起重机与塔吊操作员：日常工作如何形成闭环？",
                 "question_key": "career.faq.crane-and-tower-operators.daily-work",
                 "source_refs": [
                   "crane-onet-current"
@@ -8260,6 +8441,7 @@
               {
                 "answer": "建筑劳工47-2061.00在工地从事体力任务、场地清理、挖沟或协助技工；起重机操作员53-7021.00控制机械臂架/钢缆设备吊运负载。 打桩机操作员47-2072.00操作安装在滑橇、驳船、履带或机车起重机上的打桩设备，把桩打入挡墙或基础；本职业主要吊运和放置材料、机器或产品。 其他工程设备操作员47-2073.00操作推土机、平地机、装载机等设备挖掘、移动和整平土方；本职业聚焦起重设备与悬吊负载。 钢结构工47-2221.00吊起、定位并连接梁柱等结构构件形成结构；起重机操作员负责设备和负载运动，不自动承担构件连接职责。 露天采掘设备操作员47-5022.00使用铲斗、铲或抓斗机械挖掘并装载松散材料；本职业按53-7021.00吊运多类负载。",
                 "id": "crane-and-tower-operators.faq.2",
+                "question": "起重机与塔吊操作员：它与相邻职业有什么区别？",
                 "question_key": "career.faq.crane-and-tower-operators.role-comparison",
                 "source_refs": [
                   "crane-adj-construction",
@@ -8273,6 +8455,7 @@
               {
                 "answer": "工具可协助整理班前检查、载荷表索引、日志和纸面模拟草稿，但不得生成或确认真实起吊许可。 真实设备配置、载荷、幅度、基础、索具、天气、信号和禁入区必须由有职责人员依据受控原始资料与现场状态核验；任何冲突都应停止受影响步骤并升级。",
                 "id": "crane-and-tower-operators.faq.3",
+                "question": "起重机与塔吊操作员：AI 可以辅助哪些任务？",
                 "question_key": "career.faq.crane-and-tower-operators.ai-impact",
                 "source_refs": [
                   "crane-editorial"
@@ -8281,6 +8464,7 @@
               {
                 "answer": "工具可协助整理班前检查、载荷表索引、日志和纸面模拟草稿，但不得生成或确认真实起吊许可。",
                 "id": "crane-and-tower-operators.faq.4",
+                "question": "起重机与塔吊操作员：哪些任务可能被工具辅助？",
                 "question_key": "career.faq.crane-and-tower-operators.automatable-tasks",
                 "source_refs": [
                   "crane-editorial"
@@ -8289,6 +8473,7 @@
               {
                 "answer": "真实设备配置、载荷、幅度、基础、索具、天气、信号和禁入区必须由有职责人员依据受控原始资料与现场状态核验；任何冲突都应停止受影响步骤并升级。",
                 "id": "crane-and-tower-operators.faq.5",
+                "question": "起重机与塔吊操作员：哪些判断必须由人负责？",
                 "question_key": "career.faq.crane-and-tower-operators.human-control",
                 "source_refs": [
                   "crane-editorial"
@@ -8297,6 +8482,7 @@
               {
                 "answer": "未建立中国大陆精确全国起重机与塔吊操作员工资分布。 中国求职记录应分别写设备类型、项目/行业、地区、班次、资格要求、计薪周期和样本量；没有精确统计时保留缺口。",
                 "id": "crane-and-tower-operators.faq.6",
+                "question": "起重机与塔吊操作员：中国大陆薪资应如何核对？",
                 "question_key": "career.faq.crane-and-tower-operators.china-pay",
                 "source_refs": [
                   "cn-wage-boundary",
@@ -8306,6 +8492,7 @@
               {
                 "answer": "美国53-7021.00在2025年5月年工资中位数68,080美元，小时中位数32.73美元。 美国该职业年工资第10分位42,640美元。 美国该职业年工资第90分位103,570美元。 美国全国工资分位不是起薪或个人报价；比较岗位时另记地区、设备类型、班次、经验、资格与计薪单位。",
                 "id": "crane-and-tower-operators.faq.7",
+                "question": "起重机与塔吊操作员：美国工资数据应如何解释？",
                 "question_key": "career.faq.crane-and-tower-operators.us-pay",
                 "source_refs": [
                   "crane-editorial",
@@ -8315,6 +8502,7 @@
               {
                 "answer": "适配信号包括能持续观察吊钩、臂架和障碍物，精细操纵，严格复诵信号，并在信息不完整时停止操作。 适配判断看检查表、指令复诵、异常记录和停工边界等行为证据；纸面练习不能证明真实操作能力或授权。",
                 "id": "crane-and-tower-operators.faq.8",
+                "question": "起重机与塔吊操作员：什么行为信号可以帮助判断适配？",
                 "question_key": "career.faq.crane-and-tower-operators.fit",
                 "source_refs": [
                   "crane-editorial",
@@ -8324,6 +8512,7 @@
               {
                 "answer": "职业判断应同时观察载荷与能力核对、场地和设备检查、唯一信号、平稳操纵与不确定时停工，不用“胆大”或熟练感替代记录。 就业基数、预测增长、年均空缺和行业分布是不同指标；美国全国数据不能外推为中国需求或个人录用保证。",
                 "id": "crane-and-tower-operators.faq.9",
+                "question": "起重机与塔吊操作员：如何判断这条职业路径是否值得继续验证？",
                 "question_key": "career.faq.crane-and-tower-operators.career-worth",
                 "source_refs": [
                   "crane-editorial"
@@ -8332,6 +8521,7 @@
               {
                 "answer": "超载、地基失稳、索具失效、碰撞、电力线接触或人员进入吊物下方可能造成严重事故；控制依赖载荷表、检查、隔离、信号和停工。 风、能见度、雷电和多塔交叉作业会改变风险；设备限制、专项方案和现场指挥优先于进度。",
                 "id": "crane-and-tower-operators.faq.10",
+                "question": "起重机与塔吊操作员：这份工作的主要风险和停止条件是什么？",
                 "question_key": "career.faq.crane-and-tower-operators.risk-boundary",
                 "source_refs": [
                   "mohurd-crane-rule",
@@ -8341,6 +8531,7 @@
               {
                 "answer": "入行需掌握设备控制、载荷计算、班前检查、手势或无线电通信和安全停机，并接受与设备类型匹配的训练与实操评价。",
                 "id": "crane-and-tower-operators.faq.11",
+                "question": "起重机与塔吊操作员：入行通常需要什么教育或训练？",
                 "question_key": "career.faq.crane-and-tower-operators.education-path",
                 "source_refs": [
                   "crane-onet-current"
@@ -8349,6 +8540,7 @@
               {
                 "answer": "中国建筑施工塔式起重机司机属于建筑施工特种作业人员，须按现行主管部门规则取得相应资格并在授权设备和项目范围内作业。",
                 "id": "crane-and-tower-operators.faq.12",
+                "question": "起重机与塔吊操作员：资格、证照和授权边界是什么？",
                 "question_key": "career.faq.crane-and-tower-operators.credentials",
                 "source_refs": [
                   "mohurd-special-2025"
@@ -8357,6 +8549,7 @@
               {
                 "answer": "美国该职业2024年就业42,300人。 美国该职业2034年预计就业43,500人。 美国该职业2024—2034年预计增长3%。 美国该职业2024—2034年预计年均职位空缺3,800个。 就业基数、预测增长、年均空缺和行业分布是不同指标；美国全国数据不能外推为中国需求或个人录用保证。",
                 "id": "crane-and-tower-operators.faq.13",
+                "question": "起重机与塔吊操作员：就业展望与相邻转向应如何理解？",
                 "question_key": "career.faq.crane-and-tower-operators.outlook-transition",
                 "source_refs": [
                   "crane-editorial",
@@ -8387,10 +8580,8 @@
           "availability": "available",
           "copy_key": "career.item.boundary-notice",
           "data": {
-            "entries": [
-              "本页对应O*NET 53-7021.00；页面列出的五个相邻职业仅用于职责比较，不并入本职业。",
-              "中国资格、美国工资与就业、编辑性工具边界和虚构练习分别陈述。",
-              "纸面练习不操作真实设备，也不构成起吊许可、资格或现场授权。"
+            "paragraphs": [
+              "本页对应O*NET 53-7021.00；页面列出的五个相邻职业仅用于职责比较，不并入本职业。"
             ]
           },
           "id": "crane-and-tower-operators.sources.boundary.1",
@@ -8411,7 +8602,63 @@
             "osha-operator",
             "samr-q2"
           ],
-          "type": "list"
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "paragraphs": [
+              "中国资格、美国工资与就业、编辑性工具边界和虚构练习分别陈述。"
+            ]
+          },
+          "id": "crane-and-tower-operators.sources.boundary.1.2",
+          "source_refs": [
+            "cn-wage-boundary",
+            "crane-adj-construction",
+            "crane-adj-equipment",
+            "crane-adj-mining",
+            "crane-adj-pile",
+            "crane-adj-steel",
+            "crane-editorial",
+            "crane-onet-current",
+            "crane-trends-current",
+            "crane-wage-current",
+            "mohurd-crane-rule",
+            "mohurd-special-2025",
+            "onet-details",
+            "osha-operator",
+            "samr-q2"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "paragraphs": [
+              "纸面练习不操作真实设备，也不构成起吊许可、资格或现场授权。"
+            ]
+          },
+          "id": "crane-and-tower-operators.sources.boundary.1.3",
+          "source_refs": [
+            "cn-wage-boundary",
+            "crane-adj-construction",
+            "crane-adj-equipment",
+            "crane-adj-mining",
+            "crane-adj-pile",
+            "crane-adj-steel",
+            "crane-editorial",
+            "crane-onet-current",
+            "crane-trends-current",
+            "crane-wage-current",
+            "mohurd-crane-rule",
+            "mohurd-special-2025",
+            "onet-details",
+            "osha-operator",
+            "samr-q2"
+          ],
+          "type": "prose"
         }
       ]
     },
@@ -8760,6 +9007,2414 @@
   ],
   "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "display": {
+    "component_order": [
+      "breadcrumb",
+      "hero",
+      "primary_cta",
+      "fermat_decision_card",
+      "fit_decision_checklist",
+      "definition_block",
+      "responsibilities_block",
+      "work_context_block",
+      "career_ai_description_block",
+      "career_quick_answers_block",
+      "onet_structured_fields_block",
+      "adjacent_career_comparison_table",
+      "ai_impact_table",
+      "career_snapshot_primary_locale",
+      "career_snapshot_secondary_locale",
+      "riasec_fit_block",
+      "personality_fit_block",
+      "career_risk_cards",
+      "career_path_block",
+      "market_signal_card",
+      "faq_block",
+      "boundary_notice",
+      "source_card"
+    ],
+    "components": {
+      "adjacent_career_comparison_table": {
+        "conclusion": "结论：这些方向都在施工与物料搬运场景中工作，但对象（悬吊负载、工地体力任务、打桩设备、土方机械、结构构件、松散材料）与是否承担设备与负载安全责任差异明显；选择时应以目标岗位的实际职责与所在流程为准，而不是只看职业名称。",
+        "evidence_links": [
+          {
+            "href": {
+              "$source": "crane-adj-construction",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "label": {
+              "$source": "crane-adj-construction",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            }
+          }
+        ],
+        "evidence_note": "依据：O*NET OnLine 53-7021.00 与相邻职业（47-2061.00、47-2072.00、47-2073.00、47-2221.00、47-5022.00）的官方档案；相邻关系只用于职责比较，不代表自动转岗或资格互认。",
+        "heading": "起重机与塔吊操作员与相邻职业怎么比较？",
+        "intro": "下表把起重机与塔吊操作员与五个相邻方向，按职业方向、核心工作与产出、关键区别和更适合什么选择四项对照；相邻关系只用于方向比较，不代表自动转岗或资格互认。",
+        "rows": [
+          {
+            "关键区别": "对象是工地体力与辅助任务，通常不控制起重设备；起重机操作员控制设备运动与悬吊负载。",
+            "更适合什么选择": "更适合愿意从工地体力与辅助任务起步的人。",
+            "核心工作与产出": {
+              "$item": "crane-and-tower-operators.direction-comparison.adjacent-career-comparison-table.2",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "建筑劳工（47-2061.00，相邻职业）"
+          },
+          {
+            "关键区别": "对象是打桩设备与桩基作业；本职业按 53-7021.00 吊运和放置多类材料、机器或产品。",
+            "更适合什么选择": "更适合愿意专做桩基与打桩设备的人。",
+            "核心工作与产出": {
+              "$item": "crane-and-tower-operators.direction-comparison.adjacent-career-comparison-table.3",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "打桩机操作员（47-2072.00，相邻职业）"
+          },
+          {
+            "关键区别": "对象是土方机械与地面作业；本职业聚焦起重设备与悬吊负载，需持续管理载荷与幅度。",
+            "更适合什么选择": "更适合愿意操作土方机械做地面工程的人。",
+            "核心工作与产出": {
+              "$item": "crane-and-tower-operators.direction-comparison.adjacent-career-comparison-table.4",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "其他工程设备操作员（47-2073.00，相邻职业）"
+          },
+          {
+            "关键区别": "对象是构件定位与连接；起重机操作员负责设备与负载运动，不自动承担构件连接职责。",
+            "更适合什么选择": "更适合愿意做结构构件安装与连接的人。",
+            "核心工作与产出": {
+              "$item": "crane-and-tower-operators.direction-comparison.adjacent-career-comparison-table.5",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "钢结构工（47-2221.00，相邻职业）"
+          },
+          {
+            "关键区别": "对象是松散材料挖掘装载；本职业按 53-7021.00 吊运材料、机器或产品。",
+            "更适合什么选择": "更适合愿意在露天采掘场景操作装载设备的人。",
+            "核心工作与产出": {
+              "$item": "crane-and-tower-operators.direction-comparison.adjacent-career-comparison-table.6",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "露天采掘设备操作员（47-5022.00，相邻职业）"
+          },
+          {
+            "关键区别": "核心责任是载荷受控、唯一信号与条件不成立时停工；本页只覆盖该单一职业口径。",
+            "更适合什么选择": "先用本页虚构纸面练习核对检查与停工偏好，不操作真实设备。",
+            "核心工作与产出": "读取吊装计划和受控载荷资料，检查场地与设备，控制臂架或塔式设备吊运多类负载。",
+            "职业方向": "起重机与塔吊操作员（53-7021.00，本职业）"
+          }
+        ],
+        "transition": "下一步：用本页的虚构纸面练习跟做一次检查与停工分流，核对目标方向的设备类型、授权范围与安全责任，再决定方向。"
+      },
+      "ai_impact_table": {
+        "action_rows": [
+          {
+            "人群": "准备进入这个职业的人",
+            "应对重点": "先掌握载荷核对、班前检查、信号复诵与停工条件，再学使用辅助工具。"
+          },
+          {
+            "人群": "在岗操作员",
+            "应对重点": "把工具输出当作线索，保留对载荷、现场与授权的独立判断并如实留痕。"
+          },
+          {
+            "人群": "机构与项目负责人",
+            "应对重点": "明确工具使用边界、人工复核点与责任链，把停工条件写进方案。"
+          }
+        ],
+        "answer": {
+          "$item": "crane-and-tower-operators.ai-impact.ai-impact-table.2",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "authority_links": [
+          {
+            "来源": {
+              "$source": "crane-onet-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源口径支持职业身份、任务与安全边界",
+            "链接": {
+              "$source": "crane-onet-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源口径支持职业身份、任务与安全边界",
+            "链接": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "crane-trends-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源口径支持职业身份、任务与安全边界",
+            "链接": {
+              "$source": "crane-trends-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            }
+          }
+        ],
+        "difference_intro": {
+          "$item": "crane-and-tower-operators.ai-impact.ai-impact-table.4",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "difference_rows": [
+          {
+            "AI主要改变": "工具可检索载荷表、整理日志与班前检查。",
+            "仍由人负责": "确认地基、索具、风况与吊物路径无人等现场事实。",
+            "方向": "信息检索与整理"
+          },
+          {
+            "AI主要改变": "模拟器与规划工具可辅助训练与路线预演。",
+            "仍由人负责": "真实起吊授权、责任认定与停工决策。",
+            "方向": "纸面预演与训练"
+          }
+        ],
+        "evidence_intro": {
+          "$item": "crane-and-tower-operators.ai-impact.ai-impact-table.3",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "evidence_rows": [
+          {
+            "使用限制": "任务与情境档案，不含技术采用或岗位替代数据。",
+            "来源": {
+              "$source": "crane-onet-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "研究对象": "O*NET 53-7021.00 任务与工作情境",
+            "结论": "提供本职业 11 项任务与工作情境百分比（如 94% 每天接触危险设备、76% 认为错误后果极其严重）。",
+            "链接": {
+              "$source": "crane-onet-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "属官方职业档案，不规定工具采用，也不等同中国资格。",
+            "来源": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "研究对象": "O*NET 53-7021.00 详细资料",
+            "结论": "列出本职业的岗位职责、能力与工作活动。",
+            "链接": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "属职业总体统计，不含工具采纳的因果数据。",
+            "来源": {
+              "$source": "crane-trends-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "研究对象": "O*NET 53-7021.00 就业趋势（基于 BLS 2024—2034 年预测）",
+            "结论": "提供 2024 年就业 42,300 人与 2024—2034 年增长 3%、年均空缺约 3,800 个。",
+            "链接": {
+              "$source": "crane-trends-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            }
+          }
+        ],
+        "heading": {
+          "$item": "crane-and-tower-operators.ai-impact.ai-impact-table.1",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "method_cards": [
+          {
+            "含义": "检索载荷表、识别日志异常、整理班前检查与模拟盲吊路线。",
+            "概念": "AI 可辅助的任务"
+          },
+          {
+            "含义": "技术演示不等于现场采用，采用取决于培训、责任与合规要求。",
+            "概念": "组织采用"
+          },
+          {
+            "含义": "不能从任务暴露推导编制或收入的因果变化。",
+            "概念": "岗位与收入结果"
+          }
+        ],
+        "questions": [
+          {
+            "回答": "不能从任务暴露推导岗位裁撤日期；本页没有单职业的替代数据。",
+            "来源": {
+              "$source": "crane-onet-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "链接": {
+              "$source": "crane-onet-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "问题": "AI 会直接取代起重机与塔吊操作员吗？"
+          },
+          {
+            "回答": "检索载荷表、整理班前检查与日志、模拟盲吊路线等辅助性任务。",
+            "来源": {
+              "$source": "crane-trends-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "链接": {
+              "$source": "crane-trends-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "问题": "AI 可以先辅助哪些任务？"
+          },
+          {
+            "回答": "载荷与配置确认、地基与索具状态、风况、禁入区与起吊授权、停工决策。",
+            "来源": {
+              "$source": "crane-onet-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "链接": {
+              "$source": "crane-onet-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "问题": "哪些判断不能由工具承担？"
+          }
+        ],
+        "responsibility_intro": {
+          "$item": "crane-and-tower-operators.ai-impact.ai-impact-table.5",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "responsibility_steps": [
+          {
+            "步骤": "核对输入",
+            "说明": "确认吊装计划、载荷资料与资料版本来自受控来源。"
+          },
+          {
+            "步骤": "限定范围",
+            "说明": "只在已知设备、载荷与场地条件范围内辅助，不生成起吊许可。"
+          },
+          {
+            "步骤": "人工复核",
+            "说明": "设备配置、载荷、幅度、基础、索具、信号与禁入区由有职责人员复核。"
+          },
+          {
+            "步骤": "记录升级",
+            "说明": "保留输入范围、资料版本与人工核对项；冲突或缺失即停止并升级。"
+          }
+        ],
+        "risk_rows": [
+          {
+            "为什么重要": "工具不能确认真实载荷、场地或授权，误用会放大风险。",
+            "控制方式": "工具输出只作辅助；起吊许可回到受控资料与有职责人员。",
+            "风险": "工具输出被当作起吊许可"
+          },
+          {
+            "为什么重要": "过期的载荷表或错误的场地数据会导致错误判断。",
+            "控制方式": "核对资料版本与来源，冲突时停止受影响结论。",
+            "风险": "输入资料过期或错误"
+          },
+          {
+            "为什么重要": "把工具建议当作最终结论会改变责任边界。",
+            "控制方式": "保留人工复核点与授权链，异常按流程升级。",
+            "风险": "责任链模糊"
+          }
+        ],
+        "task_rows": [
+          {
+            "人的控制点": "确认设备配置、载荷与幅度仍须回到受控原始资料。",
+            "任务": "读吊装计划与载荷表",
+            "工作方向": "读取与检索",
+            "当前变化": {
+              "$item": "crane-and-tower-operators.ai-impact.ai-impact-table.7",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": "地基承载与设备状态须由有职责人员现场核验。",
+            "任务": "检查场地与设备",
+            "工作方向": "检查与记录",
+            "当前变化": {
+              "$item": "crane-and-tower-operators.ai-impact.ai-impact-table.8",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": "重量、幅度与配置的最终核对不得由工具替代。",
+            "任务": "确认吊物重量与幅度",
+            "工作方向": "载荷核对",
+            "当前变化": "工具可辅助换算与比对。"
+          },
+          {
+            "人的控制点": "唯一有效信号与现场指挥仍由人确认。",
+            "任务": "与信号工协同",
+            "工作方向": "信号与协同",
+            "当前变化": "工具可协助记录信号约定。"
+          },
+          {
+            "人的控制点": "真实起吊与负载运动仍由持证操作员控制。",
+            "任务": "试吊与平稳运移",
+            "工作方向": "平稳操纵",
+            "当前变化": "模拟器可辅助训练与路线预演。"
+          },
+          {
+            "人的控制点": "异常判定、隔离与恢复授权由责任人决定。",
+            "任务": "落位并记录异常",
+            "工作方向": "交付与记录",
+            "当前变化": "工具可整理异常与交接记录。"
+          },
+          {
+            "人的控制点": "设备限制、专项方案与现场指挥优先于进度。",
+            "任务": "风与多塔交叉条件判断",
+            "工作方向": "条件判断",
+            "当前变化": "工具可接入气象与现场数据。"
+          }
+        ],
+        "transition": {
+          "$item": "crane-and-tower-operators.ai-impact.ai-impact-table.6",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        }
+      },
+      "boundary_notice": [
+        "使用边界已在职业内容与来源说明中呈现。",
+        {
+          "$link": "crane-and-tower-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crane-and-tower-operators.navigation.1",
+          "field": "url"
+        },
+        {
+          "$link": "crane-and-tower-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crane-and-tower-operators.navigation.2",
+          "field": "url"
+        },
+        {
+          "$link": "crane-and-tower-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crane-and-tower-operators.navigation.3",
+          "field": "url"
+        },
+        {
+          "$link": "crane-and-tower-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crane-and-tower-operators.navigation.4",
+          "field": "url"
+        },
+        {
+          "$link": "crane-and-tower-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crane-and-tower-operators.navigation.5",
+          "field": "url"
+        },
+        {
+          "$link": "crane-and-tower-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crane-and-tower-operators.navigation.6",
+          "field": "url"
+        },
+        {
+          "$link": "crane-and-tower-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crane-and-tower-operators.navigation.7",
+          "field": "url"
+        },
+        {
+          "$link": "crane-and-tower-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crane-and-tower-operators.navigation.8",
+          "field": "url"
+        },
+        {
+          "$link": "crane-and-tower-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crane-and-tower-operators.navigation.9",
+          "field": "url"
+        },
+        {
+          "$link": "crane-and-tower-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crane-and-tower-operators.navigation.10",
+          "field": "url"
+        },
+        {
+          "$link": "crane-and-tower-operators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "crane-and-tower-operators.navigation.11",
+          "field": "url"
+        }
+      ],
+      "breadcrumb": {
+        "label": {
+          "$subject": "name"
+        },
+        "slug": {
+          "$subject": "canonical_slug"
+        }
+      },
+      "career_ai_description_block": {
+        "body": [
+          "AI 可辅助记录整理与信息汇总，但不能替代授权判断和最终责任。"
+        ],
+        "heading": "起重机与塔吊操作员的工作对象与 AI 边界"
+      },
+      "career_path_block": {
+        "boundary": "入口要求、执照、训练和最终责任由具体法域、机构或雇主核验；本页练习为虚构纸面材料，不构成起吊许可或资格。",
+        "competence_ladder": [
+          {
+            "description": "在监督下完成检查、信号复诵与基础吊运，建立载荷与安全习惯。",
+            "stage": "受训与基础操作"
+          },
+          {
+            "description": "独立操作授权设备完成常规吊运，处理常规异常并按条件停工。",
+            "stage": "独立持证操作"
+          },
+          {
+            "description": "在专项方案下完成大件或交叉作业吊装，形成稳定判断。",
+            "stage": "复杂与交叉作业吊装"
+          },
+          {
+            "description": "组织方案、分工与停工决策，承担带训与现场安全责任。",
+            "stage": "吊装负责人与带训"
+          }
+        ],
+        "direct_answer": {
+          "$item": "crane-and-tower-operators.path.career-path-block.2",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "heading": {
+          "$item": "crane-and-tower-operators.path.career-path-block.1",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "locale_requirements": {
+          "credential_boundary": {
+            "$item": "crane-and-tower-operators.path.career-path-block.4",
+            "block": "path",
+            "copy_key": "career.item.career-path-block",
+            "type": "prose"
+          },
+          "jurisdiction": "适用法域：美国按 OSHA 1926.1427 的操作员培训、认证与评估；中国建筑施工塔式起重机司机属建筑施工特种作业人员，须按现行主管部门规则取证并在授权设备与项目范围内作业。",
+          "summary": {
+            "$item": "crane-and-tower-operators.path.career-path-block.3",
+            "block": "path",
+            "copy_key": "career.item.career-path-block",
+            "type": "prose"
+          }
+        },
+        "schema_version": "career.career_progression.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "crane-onet-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "id": "crane-onet-current",
+            "label": {
+              "$source": "crane-onet-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "mohurd-special-2025",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "id": "mohurd-special-2025",
+            "label": {
+              "$source": "mohurd-special-2025",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "osha-operator",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "id": "osha-operator",
+            "label": {
+              "$source": "osha-operator",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "crane-trends-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "id": "crane-trends-current",
+            "label": {
+              "$source": "crane-trends-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "entry",
+            "stages": [
+              {
+                "credentials": "按主管部门与雇主规则核验。",
+                "next_moves": "熟悉载荷表与检查表。",
+                "readiness_evidence": "能按检查表完成检查与信号复诵。",
+                "responsibility": {
+                  "$item": "crane-and-tower-operators.path.career-path-block.5",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "受训操作辅助"
+              },
+              {
+                "credentials": "持有授权设备类型的资格。",
+                "next_moves": "学习复杂吊装与带教。",
+                "readiness_evidence": "能独立完成常规吊运并记录。",
+                "responsibility": {
+                  "$item": "crane-and-tower-operators.path.career-path-block.6",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "持证操作员（中小型设备）"
+              },
+              {
+                "credentials": "按设备与项目范围核验。",
+                "next_moves": "学习方案与风险预判。",
+                "readiness_evidence": "能在专项方案下完成复杂吊装。",
+                "responsibility": {
+                  "$item": "crane-and-tower-operators.path.career-path-block.7",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "大型或复杂吊装操作员"
+              },
+              {
+                "credentials": "按单位制度与方案授权。",
+                "next_moves": "核对该方向的任职要求。",
+                "readiness_evidence": "能组织方案、分工与停工决策。",
+                "responsibility": {
+                  "$item": "crane-and-tower-operators.path.career-path-block.8",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "吊装负责人方向"
+              }
+            ],
+            "title": "入门与取证路径"
+          },
+          {
+            "id": "specialist",
+            "stages": [
+              {
+                "credentials": "按设备类型核验资格。",
+                "next_moves": "学习附着与爬升要点。",
+                "readiness_evidence": "能平稳操纵并遵守限位与方案。",
+                "responsibility": "在授权塔式设备上完成常规与交叉作业吊装。",
+                "role": "塔式起重机操作"
+              },
+              {
+                "credentials": "按设备类型核验资格。",
+                "next_moves": "学习复杂场地判断。",
+                "readiness_evidence": "能按支腿与基础条件作业。",
+                "responsibility": "操作履带式或汽车式设备完成场地吊运与转场作业。",
+                "role": "履带式与汽车式起重机操作"
+              },
+              {
+                "credentials": "按方案审批授权。",
+                "next_moves": "学习方案编制。",
+                "readiness_evidence": "能按专项方案与指挥协同。",
+                "responsibility": "完成大件、双机抬吊或盲吊等专项作业。",
+                "role": "大型与特殊吊装"
+              },
+              {
+                "credentials": "按设备与维修要求核验。",
+                "next_moves": "学习检验与维护记录。",
+                "readiness_evidence": "能识别异常并隔离设备。",
+                "responsibility": "参与班前检查、机构与索具检查并提出维护建议。",
+                "role": "设备检查与维护深化"
+              }
+            ],
+            "title": "设备类型深化路径"
+          },
+          {
+            "id": "management",
+            "stages": [
+              {
+                "credentials": "按岗位要求核验。",
+                "next_moves": "学习索具与信号规范。",
+                "readiness_evidence": "能准确复诵与确认唯一信号。",
+                "responsibility": "与信号工、司索工协同完成信号与索具确认。",
+                "role": "信号与索具协同"
+              },
+              {
+                "credentials": "按项目要求。",
+                "next_moves": "学习现场协调。",
+                "readiness_evidence": "能按现场指挥与流程协作。",
+                "responsibility": "与土建、安装等班组配合安排吊次与场地。",
+                "role": "班组与现场配合"
+              },
+              {
+                "credentials": "按方案与授权核验。",
+                "next_moves": "学习方案与风险控制。",
+                "readiness_evidence": "能按方案执行并按条件停工。",
+                "responsibility": "按专项方案组织吊装并落实禁入区与天气条件。",
+                "role": "吊装方案执行"
+              },
+              {
+                "credentials": "按单位制度与规定。",
+                "next_moves": "核对管理方向任职要求。",
+                "readiness_evidence": "能兼顾质量、安全与进度边界。",
+                "responsibility": "负责吊装安全、分工与停工决策，并处理跨方协调。",
+                "role": "现场吊装负责人方向"
+              }
+            ],
+            "title": "协作与管理路径"
+          }
+        ]
+      },
+      "career_quick_answers_block": {
+        "availability": "published",
+        "heading": "职业速答",
+        "items": [
+          {
+            "answer": {
+              "$item": "crane-and-tower-operators.profile.career-quick-answers-block.1",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa3",
+            "question": "这份工作先核对什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "对象",
+                  "secondary_value": null,
+                  "value": "起重机与塔吊操作员（O*NET-SOC 53-7021.00）"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "输入",
+                  "secondary_value": null,
+                  "value": "吊装计划、载荷表、场地与设备状态、唯一有效信号"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "交付",
+                  "secondary_value": null,
+                  "value": "安全完成的吊运，或停工、隔离与异常记录"
+                }
+              ]
+            }
+          },
+          {
+            "answer": {
+              "$item": "crane-and-tower-operators.profile.career-quick-answers-block.2",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa2",
+            "question": "怎样判断工作闭环？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "闭环",
+                  "secondary_value": null,
+                  "value": "核计划与载荷 → 核对设备与配置 → 查场地与基础 → 确认信号与禁入区 → 试吊与平稳运移 → 落位并记录异常"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤一",
+                  "secondary_value": null,
+                  "value": "核计划与载荷"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤二",
+                  "secondary_value": null,
+                  "value": "核对设备与配置"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤三",
+                  "secondary_value": null,
+                  "value": "查场地与基础"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤四",
+                  "secondary_value": null,
+                  "value": "确认信号与禁入区"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤五",
+                  "secondary_value": null,
+                  "value": "试吊与平稳运移"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤六",
+                  "secondary_value": null,
+                  "value": "落位并记录异常"
+                }
+              ]
+            }
+          },
+          {
+            "answer": "资格、授权和最终责任须按适用法域、设备和雇主规则分别核验：美国按 OSHA 1926.1427 培训、认证与评估，中国塔式起重机司机属建筑施工特种作业人员，须按现行主管部门规则取证并在授权设备与项目范围内作业。",
+            "key": "qa1",
+            "question": "资格与授权边界是什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "边界",
+                  "secondary_value": null,
+                  "value": "需按法域与设备分别核验"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "美国",
+                  "secondary_value": null,
+                  "value": "OSHA 1926.1427 培训、认证与评估"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "中国",
+                  "secondary_value": null,
+                  "value": "塔式起重机司机属建筑施工特种作业人员"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "设备",
+                  "secondary_value": null,
+                  "value": "按设备类型核验，不自动互换"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "责任",
+                  "secondary_value": null,
+                  "value": "吊装负责人组织方案与停工决策"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "训练",
+                  "secondary_value": null,
+                  "value": "与设备类型匹配的训练与实操评价"
+                }
+              ]
+            }
+          }
+        ],
+        "schema_version": "career.quick_answers.v1"
+      },
+      "career_risk_cards": {
+        "boundary": "不可用本页替代法域、机构或雇主的安全规则。",
+        "context_links": [
+          {
+            "href": "#career-visual-group-risk",
+            "label": "查看职业风险"
+          }
+        ],
+        "direct_answer": "风险集中在吊运本身与作业环境：超载或载荷与能力不匹配、地基或支腿失稳、索具与机构失效、风与能见度等天气变化、信号冲突或人员进入吊入下方，以及停工后的隔离与恢复授权不清；错误后果严重且往往不可逆，控制依赖载荷资料、检查、隔离、唯一信号和停工决策。",
+        "evidence_scope": "风险场景来自 O*NET 53-7021.00 的任务与工作情境（如 94% 每天接触危险设备、78% 对他人健康安全负很高责任、76% 认为错误后果极其严重）；载荷、检查、信号与停工的控制方向参考 OSHA 1926.1427 与中国建筑起重机械相关规定；本项目只按来源明确范围解释。",
+        "heading": "起重机与塔吊操作员的风险与控制点",
+        "risks": [
+          {
+            "affected_roles": "起重机与塔吊操作员",
+            "consequence": "可能导致整机倾覆、结构失效或负载坠落，造成严重人身伤害与设备损失。",
+            "evidence_refs": [
+              "crane-onet-current",
+              "osha-operator"
+            ],
+            "id": "risk-1",
+            "mitigation": "起吊前回到受控载荷资料核对重量、幅度、支腿或基础与配置，任何超出即停止并升级。",
+            "scenario": "吊物重量、幅度或配置超出受控载荷资料允许范围，或凭估算代替载荷表核对。",
+            "title": {
+              "$item": "crane-and-tower-operators.risk.career-risk-cards.1",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "起重机与塔吊操作员",
+            "consequence": "可能造成倾覆、断绳或负载脱落，后果往往不可逆。",
+            "evidence_refs": [
+              "crane-onet-current",
+              "mohurd-crane-rule"
+            ],
+            "id": "risk-2",
+            "mitigation": "按班前检查核对地面与基础、机构与索具状态，发现异常即隔离设备并交授权人员评估。",
+            "scenario": "地面承载不足、支腿或基础不稳、钢丝绳与吊钩磨损、索具连接不当或机构故障未被发现。",
+            "title": {
+              "$item": "crane-and-tower-operators.risk.career-risk-cards.2",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "起重机与塔吊操作员",
+            "consequence": "可能造成失控、碰撞或结构受损，风险随天气与现场条件快速变化。",
+            "evidence_refs": [
+              "mohurd-crane-rule",
+              "osha-operator"
+            ],
+            "id": "risk-3",
+            "mitigation": "以设备限制、专项方案和现场指挥为准，条件超限即停止并按方案复评。",
+            "scenario": "风速、能见度、雷电或多塔交叉作业超出设备限制或专项方案，未按现场指挥停止。",
+            "title": {
+              "$item": "crane-and-tower-operators.risk.career-risk-cards.3",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "起重机与塔吊操作员",
+            "consequence": "可能造成挤压、碰撞或坠物伤人。",
+            "evidence_refs": [
+              "crane-onet-current",
+              "osha-operator"
+            ],
+            "id": "risk-4",
+            "mitigation": "只接受唯一有效信号，视线或禁入区不满足即中止受影响步骤，恢复前重新确认。",
+            "scenario": "出现多个信号源、唯一信号失效、视线中断，或人员与车辆进入吊物与回转范围。",
+            "title": {
+              "$item": "crane-and-tower-operators.risk.career-risk-cards.4",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "起重机与塔吊操作员",
+            "consequence": "可能让未解决的问题重复出现，并造成责任不清。",
+            "evidence_refs": [
+              "mohurd-crane-rule",
+              "crane-onet-current"
+            ],
+            "id": "risk-5",
+            "mitigation": "记录停工时间、已知事实、未确认项、隔离状态与接收人，不越权宣布恢复。",
+            "scenario": "停工后未记录时间、已知事实与未确认项，或未授权即自行恢复起吊。",
+            "title": {
+              "$item": "crane-and-tower-operators.risk.career-risk-cards.5",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "起重机与塔吊操作员",
+            "consequence": "可能产生不可逆后果。",
+            "evidence_refs": [
+              "cn-wage-boundary"
+            ],
+            "id": "risk-boundary",
+            "mitigation": "停止并按授权链升级。",
+            "scenario": "遇到超出授权范围的任务。",
+            "title": "责任边界"
+          }
+        ],
+        "schema_version": "career.work_risk.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "crane-onet-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "id": "crane-onet-current",
+            "label": {
+              "$source": "crane-onet-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "osha-operator",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "id": "osha-operator",
+            "label": {
+              "$source": "osha-operator",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "mohurd-crane-rule",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "id": "mohurd-crane-rule",
+            "label": {
+              "$source": "mohurd-crane-rule",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "crane-trends-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "id": "crane-trends-current",
+            "label": {
+              "$source": "crane-trends-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ]
+      },
+      "career_snapshot_primary_locale": {
+        "salary": {
+          "bls_table": [
+            {
+              "指标": "中国大陆薪资口径",
+              "数值": "证据不足：未取得中国大陆该职业单列数值",
+              "说明": "中国大陆公开工资统计最高细分到行业门类与人员类别，不发布该职业细类数值，不以行业代理值替代。"
+            }
+          ],
+          "china_ai_row": {
+            "$item": "crane-and-tower-operators.china-salary.career-snapshot-primary-locale.4",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_class_row": {
+            "$item": "crane-and-tower-operators.china-salary.career-snapshot-primary-locale.3",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_edu_table": [
+            {
+              "学历段": "高中或中专＋特种作业培训",
+              "岗位方向": "塔式起重机司机（须持证）",
+              "说明": "按主管部门规则取证并在授权范围作业。"
+            },
+            {
+              "学历段": "职业学校培训或相关在职经验",
+              "岗位方向": "履带式与汽车式起重机操作",
+              "说明": "按设备类型分别核验资格。"
+            },
+            {
+              "学历段": "相关经验＋专项方案训练",
+              "岗位方向": "大型与复杂吊装作业",
+              "说明": "按项目与专项方案授权。"
+            },
+            {
+              "学历段": "经验＋带训能力",
+              "岗位方向": "吊装负责人方向",
+              "说明": "任职条件由单位规定。"
+            }
+          ],
+          "china_industry_table": [
+            {
+              "备注": "不以行业代理值替代单职业工资。",
+              "行业": "房屋建筑与市政工程",
+              "需求": "证据不足：未取得职业级需求数值"
+            },
+            {
+              "备注": "不以行业代理值替代单职业工资。",
+              "行业": "工业制造与物流",
+              "需求": "证据不足：未取得职业级需求数值"
+            },
+            {
+              "备注": "不以行业代理值替代单职业工资。",
+              "行业": "能源、石化与基础设施",
+              "需求": "证据不足：未取得职业级需求数值"
+            }
+          ],
+          "china_intl": "中国与美国职业口径不作自动等同。",
+          "china_name_row": {
+            "$item": "crane-and-tower-operators.china-salary.career-snapshot-primary-locale.1",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_open": "中国大陆公开信息检索入口：国家统计局工资与统计发布页面；本轮未取得该职业单列数值。",
+          "china_ref": {
+            "$join": [
+              {
+                "$source": "mohurd-crane-rule",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "crane-and-tower-operators.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "crane-adj-construction",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "crane-and-tower-operators.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "china_salary_note": "中国公开来源仅用于说明口径边界。",
+          "china_salary_table": [
+            {
+              "城市/区间": "中国大陆（全国职业级口径）",
+              "月薪参考": "证据不足：未取得该口径数值"
+            },
+            {
+              "城市/区间": "中国大陆（行业均值代理口径）",
+              "月薪参考": "不适用（不用行业均值替代职业工资）"
+            },
+            {
+              "城市/区间": "中国大陆（招聘报价口径）",
+              "月薪参考": "证据不足：未取得可核对报价统计"
+            }
+          ],
+          "china_soc_row": {
+            "$item": "crane-and-tower-operators.china-salary.career-snapshot-primary-locale.2",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "sources_note": {
+            "$join": [
+              {
+                "$source": "crane-onet-current",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "crane-and-tower-operators.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "crane-onet-current",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "crane-and-tower-operators.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "ui": {
+            "ai_heading": "AI 或自动化会影响起重机与塔吊操作员的工资吗？",
+            "driver_heading": "起重机与塔吊作业怎样安排班次与周期？",
+            "official_heading": "官方统计口径与缺失说明",
+            "scenario_caption": "资格、设备类型与岗位方向（编辑整理，不是薪资统计）",
+            "scenario_heading": "不同资格与设备类型对应哪些岗位方向？",
+            "scenario_interpretation_label": "说明与核对建议",
+            "scenario_role_label": "资格与训练背景",
+            "scenario_value_label": "岗位方向"
+          },
+          "us_growth": "增长 3%（2024—2034 年）",
+          "us_median": "68,080 美元/年（2025 年 5 月）"
+        }
+      },
+      "career_snapshot_secondary_locale": {
+        "authority_sources": {
+          "$join": [
+            {
+              "$source": "crane-wage-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "crane-wage-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            }
+          ],
+          "separator": ""
+        },
+        "bls_table": [
+          {
+            "指标": "美国薪资中位数",
+            "数值": "68,080 美元/年（32.73 美元/时，2025 年 5 月）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "crane-wage-current",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "crane-and-tower-operators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "crane-wage-current",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "crane-and-tower-operators.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资低位",
+            "数值": "42,640 美元/年（第 10 分位，2025 年 5 月）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "crane-wage-current",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "crane-and-tower-operators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "crane-wage-current",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "crane-and-tower-operators.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资高位",
+            "数值": "103,570 美元/年（第 90 分位，2025 年 5 月）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "crane-wage-current",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "crane-and-tower-operators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "crane-wage-current",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "crane-and-tower-operators.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资单位",
+            "数值": "年薪／时薪（OEWS 口径）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "crane-wage-current",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "crane-and-tower-operators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "crane-wage-current",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "crane-and-tower-operators.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资时期",
+            "数值": "2025 年 5 月",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "crane-wage-current",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "crane-and-tower-operators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "crane-wage-current",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "crane-and-tower-operators.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业规模",
+            "数值": "42,300 人（2024 年）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "crane-trends-current",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "crane-and-tower-operators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "crane-trends-current",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "crane-and-tower-operators.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业增长",
+            "数值": "增长 3%（2024—2034 年）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "crane-trends-current",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "crane-and-tower-operators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "crane-trends-current",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "crane-and-tower-operators.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业空缺",
+            "数值": "约 3,800 个/年（2024—2034 年，含增长与替补）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "crane-trends-current",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "crane-and-tower-operators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "crane-trends-current",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "crane-and-tower-operators.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          }
+        ],
+        "boundary": "美国统计不代表中国职业工资或就业结果。",
+        "direct_answer": {
+          "$item": "crane-and-tower-operators.us-salary.career-snapshot-secondary-locale.2",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "factor_rows": [
+          {
+            "answer": "塔式、履带式或汽车式起重机对应不同岗位与计酬。",
+            "factor": "设备与项目类型"
+          },
+          {
+            "answer": "建筑业、制造业与运输仓储的岗位与地区差异影响收入。",
+            "factor": "地区与行业"
+          },
+          {
+            "answer": "77% 表示每周超过 40 小时；加班与班次影响实际收入。",
+            "factor": "班次与工时"
+          }
+        ],
+        "factors_heading": {
+          "$item": "crane-and-tower-operators.us-salary.career-snapshot-secondary-locale.6",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "growth": "增长 3%（2024—2034 年）",
+        "heading": {
+          "$item": "crane-and-tower-operators.us-salary.career-snapshot-secondary-locale.1",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_heading": {
+          "$item": "crane-and-tower-operators.us-salary.career-snapshot-secondary-locale.5",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_period": "2024 年（O*NET 行业分布）",
+        "industry_rows": [
+          {
+            "industry": "建筑业",
+            "median": "42%（2024 年就业占比）",
+            "note": "O*NET 单列行业之一。"
+          },
+          {
+            "industry": "制造业",
+            "median": "22%（2024 年就业占比）",
+            "note": "O*NET 单列行业之一。"
+          },
+          {
+            "industry": "运输与仓储",
+            "median": "13%（2024 年就业占比）",
+            "note": "O*NET 单列行业之一。"
+          },
+          {
+            "industry": "批发贸易",
+            "median": "10%（2024 年就业占比）",
+            "note": "O*NET 单列行业之一。"
+          }
+        ],
+        "industry_value_label": "行业就业占比／统计状态",
+        "interpretation_heading": {
+          "$item": "crane-and-tower-operators.us-salary.career-snapshot-secondary-locale.4",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "interpretation_rows": [
+          {
+            "answer": "O*NET 全国工资 53-7021.00，2025 年 5 月工资数据。",
+            "question": "美国工资数据的来源与期间是什么？"
+          },
+          {
+            "answer": "不能；行业分布是就业占比，不是工资中位数。",
+            "question": "行业分布能代表我的收入吗？"
+          },
+          {
+            "answer": "分位是统计位置，不是职级或资历等级。",
+            "question": "分位数应该怎样理解？"
+          },
+          {
+            "answer": "不是；预测是职业总量变化，年均空缺含增长与替补。",
+            "question": "预测为增长是否意味着容易入行？"
+          }
+        ],
+        "median": "68,080 美元/年（2025 年 5 月）",
+        "outlook_heading": "就业展望",
+        "outlook_period": "2024—2034 年（O*NET 就业趋势，基于 BLS 预测）",
+        "wage_column_labels": [
+          "工资位置",
+          "工资参考（年薪／时薪）",
+          "全年收入的换算边界",
+          "怎样理解这个位置"
+        ],
+        "wage_heading": {
+          "$item": "crane-and-tower-operators.us-salary.career-snapshot-secondary-locale.3",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "wage_tiers": [
+          {
+            "equivalent": "不可按固定工时年化",
+            "interpretation": "统计位置，不是入职起薪。",
+            "label": "较低工资位置（第 10 分位）",
+            "value": "42,640 美元/年"
+          },
+          {
+            "equivalent": "不等于固定月收入",
+            "interpretation": "分布中点，不是平均起薪。",
+            "label": "中位工资位置",
+            "value": "68,080 美元/年"
+          },
+          {
+            "equivalent": "不代表全年持续高收入",
+            "interpretation": "高分段与设备、行业与地区相关。",
+            "label": "较高工资位置（第 90 分位）",
+            "value": "103,570 美元/年"
+          }
+        ]
+      },
+      "definition_block": {
+        "$join": [
+          {
+            "$item": "crane-and-tower-operators.profile.definition-block.1",
+            "block": "profile",
+            "copy_key": "career.item.definition-block",
+            "type": "prose"
+          },
+          {
+            "$item": "crane-and-tower-operators.profile.definition-block.2",
+            "block": "profile",
+            "copy_key": "career.item.definition-block",
+            "type": "prose"
+          }
+        ],
+        "separator": "\n"
+      },
+      "faq_block": {
+        "items": {
+          "$item": "crane-and-tower-operators.sources.faq.1",
+          "block": "sources",
+          "copy_key": "career.item.faq-block",
+          "type": "faq"
+        }
+      },
+      "fermat_decision_card": {
+        "caveat": {
+          "$item": "crane-and-tower-operators.quick-decision.fermat-decision-card.1",
+          "block": "quick-decision",
+          "copy_key": "career.item.fermat-decision-card",
+          "type": "prose"
+        },
+        "summary": {
+          "$item": "crane-and-tower-operators.quick-decision.fermat-decision-card.2",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "title": "起重机与塔吊操作员适合什么样的人？"
+      },
+      "fit_decision_checklist": {
+        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "how": {
+          "$item": "crane-and-tower-operators.quick-decision.fermat-decision-card.3",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "suit": {
+          "$item": "crane-and-tower-operators.quick-decision.fermat-decision-card.4",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        }
+      },
+      "hero": {
+        "h1": {
+          "$subject": "name"
+        },
+        "quick_answer": {
+          "$subject": "summary"
+        },
+        "title": {
+          "$subject": "name"
+        }
+      },
+      "market_signal_card": {
+        "context_links": [
+          {
+            "href": "#career-visual-group-market-signals",
+            "label": "查看市场信号"
+          }
+        ],
+        "direct_answer": {
+          "$item": "crane-and-tower-operators.market-signals.market-signal-card.2",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "heading": {
+          "$item": "crane-and-tower-operators.market-signals.market-signal-card.1",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "outlook_evidence": [
+          {
+            "geography": "美国",
+            "horizon": "2024—2034 年",
+            "interpretation": "年均空缺含增长与替补，不等于每年净增 3,800 人。",
+            "limitation": "是职业总量统计，不是个人录用保证。",
+            "metric": "市场信号",
+            "occupation_scope": "O*NET 53-7021.00 起重机与塔吊操作员",
+            "value": {
+              "$item": "crane-and-tower-operators.market-signals.market-signal-card.3",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "geography": "美国",
+            "horizon": "当前来源时期",
+            "interpretation": "就业规模是存量统计，与职位空缺不是同一指标。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "就业规模",
+            "occupation_scope": "O*NET 53-7021.00",
+            "value": "42,300 人（2024 年）"
+          },
+          {
+            "geography": "美国",
+            "horizon": "当前来源时期",
+            "interpretation": "职位空缺含增长与替补，需按来源口径解释。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "职位空缺",
+            "occupation_scope": "O*NET 53-7021.00",
+            "value": "约 3,800 个/年（2024—2034 年）"
+          }
+        ],
+        "schema_version": "career.outlook_transitions.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "crane-trends-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "id": "crane-trends-current",
+            "label": {
+              "$source": "crane-trends-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "crane-onet-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "id": "crane-onet-current",
+            "label": {
+              "$source": "crane-onet-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "osha-operator",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "id": "osha-operator",
+            "label": {
+              "$source": "osha-operator",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "mohurd-crane-rule",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "id": "mohurd-crane-rule",
+            "label": {
+              "$source": "mohurd-crane-rule",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ],
+        "transitions": [
+          {
+            "capability_gaps": {
+              "$item": "crane-and-tower-operators.market-signals.market-signal-card.5",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "crane-and-tower-operators.market-signals.market-signal-card.4",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "target_href": "/zh/career/jobs/construction-laborers",
+            "target_slug": "construction-laborers",
+            "target_title": "建筑工人（相邻职业）",
+            "transition_distance": "距离说明：从工地体力与辅助任务转向起重设备操作。"
+          },
+          {
+            "capability_gaps": "需补足：打桩设备操作与桩基作业流程。",
+            "shared_capabilities": "共同能力：吊装安全意识、索具与场地判断。",
+            "target_href": "/zh/career/jobs/pile-driver-operators",
+            "target_slug": "pile-driver-operators",
+            "target_title": "打桩机操作员（相邻职业）",
+            "transition_distance": "距离说明：从通用吊运转向桩基与打桩设备。"
+          },
+          {
+            "capability_gaps": "需补足：土方机械操作与开挖整平工艺。",
+            "shared_capabilities": "共同能力：设备操作手感与场地判断。",
+            "target_href": "/zh/career/jobs/operating-engineers-and-other-construction-equipment-operators",
+            "target_slug": "operating-engineers-and-other-construction-equipment-operators",
+            "target_title": "其他工程设备操作员（相邻职业）",
+            "transition_distance": "距离说明：从悬吊负载转向土方机械地面作业。"
+          },
+          {
+            "capability_gaps": "需补足：构件定位、连接与结构安装工艺。",
+            "shared_capabilities": "共同能力：高处作业安全意识与构件吊运配合。",
+            "target_href": "/zh/career/jobs/structural-iron-and-steel-workers",
+            "target_slug": "structural-iron-and-steel-workers",
+            "target_title": "钢结构工（相邻职业）",
+            "transition_distance": "距离说明：从设备与负载运动转向结构构件连接。"
+          },
+          {
+            "capability_gaps": "需补足：卷扬机与绞车的特定操作与维护。",
+            "shared_capabilities": "共同能力：悬吊设备控制与信号配合。",
+            "target_href": "/zh/career/jobs/hoist-and-winch-operators",
+            "target_slug": "hoist-and-winch-operators",
+            "target_title": "卷扬机操作员（相邻职业）",
+            "transition_distance": "距离说明：从起重臂架设备转向卷扬与绞车设备。"
+          },
+          {
+            "capability_gaps": "需补足：索具选型、连接与受力判断。",
+            "shared_capabilities": "共同能力：索具识别与吊装安全常识。",
+            "target_href": "/zh/career/jobs/riggers",
+            "target_slug": "riggers",
+            "target_title": "索具工（相邻职业）",
+            "transition_distance": "距离说明：从设备操作转向索具选配与连接。"
+          }
+        ]
+      },
+      "onet_structured_fields_block": {
+        "availability": "published",
+        "heading": "O*NET 结构化字段",
+        "rows": [
+          {
+            "alternate_value": null,
+            "label": "研究输入",
+            "secondary_value": null,
+            "value": {
+              "$item": "crane-and-tower-operators.profile.onet-structured-fields-block.1",
+              "block": "profile",
+              "copy_key": "career.item.onet-structured-fields-block",
+              "type": "prose"
+            }
+          }
+        ],
+        "schema_version": "career.onet_structured_fields.v1"
+      },
+      "personality_fit_block": {
+        "assessments": [
+          {
+            "answer": {
+              "$item": "crane-and-tower-operators.fit.riasec-fit-block.6",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "riasec",
+            "label": "兴趣与任务",
+            "question": "我的兴趣类型与起重设备操作工作接近吗？",
+            "signals": [
+              "愿意操作重型设备",
+              "愿意按程序记录"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": {
+              "$item": "crane-and-tower-operators.fit.riasec-fit-block.7",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "big-five",
+            "label": "稳定执行",
+            "question": "我的性格特质对这类工作有帮助吗？",
+            "signals": [
+              "能按检查表稳定执行",
+              "能在压力下坚持安全步骤"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": {
+              "$item": "crane-and-tower-operators.fit.riasec-fit-block.8",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "mbti",
+            "label": "偏好观察",
+            "question": "MBTI 能说明我适合独立操作还是团队协作吗？",
+            "signals": [
+              "能接受按流程与信号作业",
+              "能与班组协同"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": "动机线索不同，对应的选择不同；把它当作提问工具，不当作岗位结论。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "enneagram",
+            "label": "动机观察",
+            "question": "我为什么想做起重机操作？",
+            "signals": [
+              "能说清自己持续投入的理由",
+              "愿意用实际体验检验动机"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": "需要持续注意、手眼协调与问题发现能力；IQ 类量表与岗位要求没有官方对应。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "iq",
+            "label": "问题解决",
+            "question": "长期观察与精细操纵对认知有什么要求？",
+            "signals": [
+              "能持续注意并发现异常",
+              "能按停工条件决策"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": "需要与信号工、司索工和现场负责人精确沟通；99% 表示每天有面对面讨论。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "eq",
+            "label": "协作边界",
+            "question": "需要很强的沟通能力吗？",
+            "signals": [
+              "能精确复诵与交接信号",
+              "能在异常时按责任链升级"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          }
+        ],
+        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "direct_answer": {
+          "$item": "crane-and-tower-operators.fit.riasec-fit-block.2",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        },
+        "directions": [
+          {
+            "direction": "现场安全与吊装协同",
+            "fit_signals": "共同能力：现场安全意识与团队配合。",
+            "target": {
+              "href": {
+                "$link": "crane-and-tower-operators.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "construction-laborers",
+                "field": "url"
+              },
+              "slug": "construction-laborers",
+              "title": {
+                "$link": "crane-and-tower-operators.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "construction-laborers",
+                "field": "entity"
+              }
+            },
+            "watchouts": "已属相邻职业：以工地体力与辅助任务为主，需另行核对其职责。"
+          },
+          {
+            "direction": "打桩设备操作（相邻职业）",
+            "fit_signals": "共同能力：吊装安全与场地判断。",
+            "target": {
+              "href": {
+                "$link": "crane-and-tower-operators.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "pile-driver-operators",
+                "field": "url"
+              },
+              "slug": "pile-driver-operators",
+              "title": {
+                "$link": "crane-and-tower-operators.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "pile-driver-operators",
+                "field": "entity"
+              }
+            },
+            "watchouts": "对象转为打桩设备与桩基作业，转入需补足设备与工艺。"
+          },
+          {
+            "direction": "土方设备操作（相邻职业）",
+            "fit_signals": "共同能力：设备操作手感与场地判断。",
+            "target": {
+              "href": {
+                "$link": "crane-and-tower-operators.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "operating-engineers-and-other-construction-equipment-operators",
+                "field": "url"
+              },
+              "slug": "operating-engineers-and-other-construction-equipment-operators",
+              "title": {
+                "$link": "crane-and-tower-operators.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "operating-engineers-and-other-construction-equipment-operators",
+                "field": "entity"
+              }
+            },
+            "watchouts": "对象转为土方机械，转入需补足开挖整平工艺。"
+          },
+          {
+            "direction": "结构安装（相邻职业）",
+            "fit_signals": "共同能力：高处作业安全与构件吊运配合。",
+            "target": {
+              "href": {
+                "$link": "crane-and-tower-operators.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "structural-iron-and-steel-workers",
+                "field": "url"
+              },
+              "slug": "structural-iron-and-steel-workers",
+              "title": {
+                "$link": "crane-and-tower-operators.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "structural-iron-and-steel-workers",
+                "field": "entity"
+              }
+            },
+            "watchouts": "对象转为构件定位与连接，转入需补足结构安装工艺。"
+          },
+          {
+            "direction": "卷扬与绞车操作（相邻职业）",
+            "fit_signals": "共同能力：悬吊设备控制与信号配合。",
+            "target": {
+              "href": {
+                "$link": "crane-and-tower-operators.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "excavating-and-loading-machine-and-dragline-operators-surface-mining",
+                "field": "url"
+              },
+              "slug": "excavating-and-loading-machine-and-dragline-operators-surface-mining",
+              "title": {
+                "$link": "crane-and-tower-operators.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "excavating-and-loading-machine-and-dragline-operators-surface-mining",
+                "field": "entity"
+              }
+            },
+            "watchouts": "对象转为卷扬与绞车设备，转入需补足特定操作与维护。"
+          },
+          {
+            "direction": "长期训练与取证",
+            "fit_signals": "共同能力：持续学习与安全习惯。",
+            "watchouts": "资格与设备类型按法域与雇主分别核验。"
+          }
+        ],
+        "heading": {
+          "$item": "crane-and-tower-operators.fit.riasec-fit-block.1",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        },
+        "questions": [
+          {
+            "answer": "设置停止与升级条件，不以进度覆盖安全。",
+            "question": "能否在信息不完整时停止操作？"
+          },
+          {
+            "answer": "只接受唯一有效信号，信号冲突即中止。",
+            "question": "能否严格复诵唯一有效信号？"
+          },
+          {
+            "answer": "保留班前检查与异常记录。",
+            "question": "能否按检查表逐项执行？"
+          },
+          {
+            "answer": "交接对象、状态与责任人。",
+            "question": "能否清晰交接？"
+          },
+          {
+            "answer": "依据现场证据与授权修订做法。",
+            "question": "能否接受复核与纠正？"
+          },
+          {
+            "answer": "美国按 OSHA 1926.1427，中国按特种作业规定。",
+            "question": "能否按法域与设备补足资格？"
+          },
+          {
+            "answer": "工具不能替代起吊授权与责任判断。",
+            "question": "能否理解工具边界？"
+          },
+          {
+            "answer": "完成一份虚构纸面练习并请有经验者评阅。",
+            "question": "如何继续验证？"
+          }
+        ],
+        "schema_version": "career.fit_decision_center.v1",
+        "signals": [
+          {
+            "body": {
+              "$item": "crane-and-tower-operators.fit.riasec-fit-block.3",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "fit",
+            "label": "适配信号",
+            "tone": "positive"
+          },
+          {
+            "body": {
+              "$item": "crane-and-tower-operators.fit.riasec-fit-block.4",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "caution",
+            "label": "注意信号",
+            "tone": "caution"
+          },
+          {
+            "body": {
+              "$item": "crane-and-tower-operators.fit.riasec-fit-block.5",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "experiment",
+            "label": "验证动作",
+            "tone": "action"
+          }
+        ],
+        "source_links": [
+          {
+            "href": {
+              "$source": "crane-onet-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "label": {
+              "$source": "crane-onet-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "osha-operator",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "label": {
+              "$source": "osha-operator",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "mohurd-crane-rule",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "label": {
+              "$source": "mohurd-crane-rule",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "crane-trends-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "label": {
+              "$source": "crane-trends-current",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "crane-and-tower-operators.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          }
+        ]
+      },
+      "primary_cta": {
+        "entry_surface": "career_job_detail",
+        "href": "/zh/tests/holland-career-interest-test-riasec",
+        "label": "测我的职业兴趣是否适合起重机与塔吊操作员",
+        "source_page_type": "career_job_detail",
+        "subject_key": {
+          "$subject": "canonical_slug"
+        },
+        "subject_kind": "career_job",
+        "target_action": "start_riasec_test",
+        "test_slug": "holland-career-interest-test-riasec"
+      },
+      "responsibilities_block": [
+        {
+          "$join": [
+            {
+              "$item": "crane-and-tower-operators.profile.responsibilities-block.1",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$join": [
+            {
+              "$item": "crane-and-tower-operators.profile.responsibilities-block.2",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$join": [
+            {
+              "$item": "crane-and-tower-operators.profile.responsibilities-block.3",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        }
+      ],
+      "riasec_fit_block": {
+        "fit_interest": "本职业在 O*NET 摘要页公示的兴趣代码为 RC：现实型对应操作重型设备与体力机械活动，常规型对应遵循程序与规范记录。请用实际任务核对——是否愿意在持续观察、精细操纵与严格复诵中坚持；兴趣代码只说明活动类型，不预测工作表现，也不构成录用标准。",
+        "interest": "现实型对应操作起重机与重型设备、体力与机械活动；常规型对应遵循程序与规范、维护检查与记录。代码来自官方兴趣档案，不是人格标签。",
+        "riasec": "RC",
+        "riasec_short": "RC（现实型、常规型）"
+      },
+      "source_card": {
+        "eeat_signals": {
+          "author": "FermatMind research workflow",
+          "source": {
+            "$source": "crane-onet-current",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "name",
+            "item": "crane-and-tower-operators.source-register.published.1"
+          },
+          "updated_at": {
+            "$source": "crane-trends-current",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "period",
+            "item": "crane-and-tower-operators.source-register.published.1"
+          }
+        },
+        "note": "来源范围、限制和统计时期按原始证据分别核对。"
+      },
+      "work_context_block": {
+        "$join": [
+          {
+            "$item": "crane-and-tower-operators.profile.work-context-block.1",
+            "block": "profile",
+            "copy_key": "career.item.work-context-block",
+            "type": "prose"
+          },
+          {
+            "$item": "crane-and-tower-operators.profile.work-context-block.2",
+            "block": "profile",
+            "copy_key": "career.item.work-context-block",
+            "type": "prose"
+          },
+          {
+            "$item": "crane-and-tower-operators.sources.boundary.1",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          },
+          {
+            "$item": "crane-and-tower-operators.sources.boundary.1.2",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          },
+          {
+            "$item": "crane-and-tower-operators.sources.boundary.1.3",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          }
+        ],
+        "separator": "\n"
+      }
+    },
+    "contract_version": "career.detail.display.v1",
+    "interface": {
+      "interface.fit.directions_heading": "你更可能适合哪条起重机与塔吊操作员方向？"
+    },
+    "locale": "zh-CN",
+    "native_items": [
+      {
+        "block": "source-register",
+        "copy_key": "career.item.published-sources",
+        "id": "crane-and-tower-operators.source-register.published.1",
+        "location": "sources",
+        "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-role-comparison",
+        "id": "crane-and-tower-operators.path.entry-role-comparison.current.v1",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.interview-probation",
+        "id": "crane-and-tower-operators.path.interview-probation.current.v1",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.credential-decision",
+        "id": "crane-and-tower-operators.path.credential-decision.current.v1",
+        "location": "entry_decisions",
+        "type": "table"
+      }
+    ],
+    "path": "/zh/career/jobs/crane-and-tower-operators",
+    "section_titles": {
+      "ai-impact": "AI 影响",
+      "china-salary": "中国大陆薪资参考",
+      "direction-comparison": "职业方向比较",
+      "fit": "职业适配指南",
+      "market-signals": "职业前景与相关职业转向",
+      "navigation": "页面导航",
+      "path": "入行、证书与职业发展",
+      "profile": "职业画像",
+      "quick-decision": "快速判断",
+      "risk": "工作压力、风险与职业边界",
+      "source-register": "来源登记",
+      "sources": "常见问题与资料来源",
+      "us-salary": "美国薪资参考"
+    }
+  },
   "fact_register": {
     "facts": [
       {
@@ -8855,37 +11510,41 @@
       "key": "ai",
       "label": "AI 任务暴露"
     },
-    "badges": [],
+    "badges": [
+      "运输与物料搬运 · 起重与塔吊操作",
+      "O*NET-SOC 53-7021.00 · 单一职业口径（BLS 就业预测经 O*NET 就业趋势页发布）· 复核边界",
+      "读吊装计划 · 核载荷与配置 · 查场地设备 · 平稳操纵 · 停工与升级"
+    ],
     "metrics": [
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-wage-median",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "美国工资中位（2025-05，68,080 美元/年；32.73 美元/时）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国就业预测（2024—2034 年，增长 3%）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-employment",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国在岗人数（2024 年，42,300 人）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国年均职位空缺（2024—2034 年，约 3,800 个/年）"
       },
       {
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "中国大陆薪资参考"
+        "label": "中国大陆薪资参考（职业级口径缺口，见中国薪资板块）"
       }
     ]
   },
@@ -8893,17 +11552,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "起重机与塔吊操作员依据吊装计划和载荷资料检查场地、设备与信号，平稳控制负载，并在任何安全条件不成立时停工、隔离和升级。"
+      "text": "起重机与塔吊操作员（O*NET-SOC 53-7021.00）依据吊装计划和受控载荷资料，检查场地、设备与信号，平稳控制负载，并在任何安全条件不成立时停工、隔离和升级；含美国 2025 年 5 月工资中位 68,080 美元/年（32.73 美元/时）、第 10 分位 42,640 美元、第 90 分位 103,570 美元，2024 年就业 42,300 人、2024—2034 年预计增长 3%、年均空缺约 3,800 个，以及中国大陆精确职业工资缺口、载荷与地基风险、唯一信号与停工升级边界。"
     },
     "title": {
       "availability": "available",
       "text": "起重机与塔吊操作员"
     }
   },
-  "source_content_sha256": "aa250ac0befbc2a4a0f55d3869f4760a613b3f381bb1a43d37f3561b54deb551",
+  "source_content_sha256": "bb65edb5dcdd1d893fc02623ceef75c7cf8cd545f30d343e73b85d09768ab0fc",
   "subject": {
     "canonical_slug": "crane-and-tower-operators",
     "name": "起重机与塔吊操作员",
-    "summary": "起重机与塔吊操作员依据吊装计划和载荷资料检查场地、设备与信号，平稳控制负载，并在任何安全条件不成立时停工、隔离和升级。"
+    "summary": "起重机与塔吊操作员依据吊装计划与受控载荷资料检查场地、设备和信号，平稳控制负载，并在任何安全条件不成立时停工、隔离和升级。工作对象是吊装计划、载荷表、场地与设备状态和唯一有效信号，产出是安全完成的吊运，或清楚的停工、隔离、异常与交接记录；依据是载荷能力资料、设备限制、专项方案和现场指挥链，不是个人经验或进度压力。美国对应 O*NET-SOC 53-7021.00；中国建筑施工塔式起重机司机属于建筑施工特种作业人员，两者不是一一对应，任职与授权口径不能互换。"
   }
 }

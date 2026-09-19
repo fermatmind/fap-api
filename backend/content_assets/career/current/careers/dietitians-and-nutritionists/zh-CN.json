@@ -137,6 +137,15 @@
       "item:dietitians-and-nutritionists.path.career-path-block.8": {
         "status": "pending_mapping"
       },
+      "item:dietitians-and-nutritionists.path.credential-decision.current.v1": {
+        "status": "pending_mapping"
+      },
+      "item:dietitians-and-nutritionists.path.entry-role-comparison.current.v1": {
+        "status": "pending_mapping"
+      },
+      "item:dietitians-and-nutritionists.path.interview-probation.current.v1": {
+        "status": "pending_mapping"
+      },
       "item:dietitians-and-nutritionists.profile.career-quick-answers-block.1": {
         "status": "pending_mapping"
       },
@@ -201,6 +210,9 @@
         "status": "pending_mapping"
       },
       "item:dietitians-and-nutritionists.sources.boundary.1": {
+        "status": "pending_mapping"
+      },
+      "item:dietitians-and-nutritionists.sources.boundary.1.2": {
         "status": "pending_mapping"
       },
       "item:dietitians-and-nutritionists.sources.faq.1": {
@@ -7221,7 +7233,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "O*NET 29-1031.00 规划并实施膳食服务或营养项目以促进健康、控制疾病，可监督团体供餐、提供咨询或开展研究。"
+              "直接判断：这份工作的核心不是“推荐食谱”，而是把饮食与健康信息核实清楚、按指南与个人条件形成可执行方案、持续监测并守住临床授权边界。临床、社区和团体供餐岗位的职责差别很大，入门之前先确认目标方向与所在地资格。"
             ]
           },
           "id": "dietitians-and-nutritionists.quick-decision.fermat-decision-card.1",
@@ -7232,10 +7244,10 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适合继续探索的信号：能耐心核对饮食记录；把指南转成可执行选择；尊重文化和预算限制；愿意持续监测而非一次定论。"
+              "可观察信号：愿意反复核对饮食记录与标签单位；能把通用建议转成符合文化、预算与可及性的具体选择；发现信息矛盾或超出授权时会暂停并转交责任人，而不是给出确定结论。"
             ]
           },
           "id": "dietitians-and-nutritionists.quick-decision.fermat-decision-card.2",
@@ -7246,10 +7258,10 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "虚构 24 小时记录：早餐燕麦 40g+牛奶 250ml；午餐米饭 150g、豆腐 100g、青菜；晚餐面条 200g、鸡蛋 1 个；加餐含糖饮料 500ml。虚构标签：饮料每 100ml 含添加糖 9g；偏好/可及性：不吃坚果、每周可做饭 3 次、附近可买无糖饮料。"
+              "安全小体验：只用本页提供的虚构 24 小时进食记录和虚构食品标签做纸面核对，输出两个需要追问的问题和一个非治疗性的替换选项；不接触真实患者、不作诊断、不给治疗处方。"
             ]
           },
           "id": "dietitians-and-nutritionists.quick-decision.fermat-decision-card.3",
@@ -7260,10 +7272,10 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "任务：只整理记录并计算饮料添加糖；提出两个需要进一步询问的问题和一个非治疗性的替换选项。参考结果：饮料添加糖 45g；询问记录份量是否熟重及是否还有调味/零食；可讨论把部分含糖饮料换成可获得的无糖饮料。不给疾病处方。"
+              "复核标准：每个数字都能回到原始记录与标签；单位（每份／每 100 克或毫升）写清；未知项保留未知；并明确谁（本人、营养师、医师）确认后才能继续。"
             ]
           },
           "id": "dietitians-and-nutritionists.quick-decision.fermat-decision-card.4",
@@ -7274,10 +7286,10 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "如果你喜欢把食物记录、健康目标和可执行方案连接起来，并能与临床或社区团队协作，这个职业值得探索；临床权限、受监督实践和持续沟通是主要门槛。先确认目标方向是临床、社区还是餐饮管理，再核对当地资格。"
+              "如果你喜欢把食物记录、健康目标和可执行方案连接起来，并愿意在临床或社区团队中协作与持续学习，这个职业值得探索；临床权限、受监督实践、执照与持续沟通是主要门槛。先确定方向是临床、社区、公共卫生还是餐饮管理，再核对当地资格。"
             ]
           },
           "id": "dietitians-and-nutritionists.quick-decision.fermat-decision-card.5",
@@ -7299,7 +7311,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "O*NET 29-1031.00 规划并实施膳食服务或营养项目以促进健康、控制疾病，可监督团体供餐、提供咨询或开展研究。"
+              "本页精确对应美国 O*NET 29-1031.00 Dietitians and Nutritionists：规划并实施膳食服务或营养项目以促进健康、控制疾病，可监督团体供餐部门、为个人提供营养咨询或开展营养研究。"
             ]
           },
           "id": "dietitians-and-nutritionists.profile.definition-block.1",
@@ -7313,7 +7325,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "输入包括饮食记录、食物标签、偏好与可及性、健康史和在授权范围内使用的临床资料。"
+              "常见输入包括饮食与健康史、食物标签与配方、实验室检查、文化宗教与预算偏好、机构营养指南，以及在授权范围内使用的临床资料。"
             ]
           },
           "id": "dietitians-and-nutritionists.profile.responsibilities-block.1",
@@ -7327,7 +7339,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "交付包括营养评估记录、教育材料、菜单或项目方案、监测记录和需转介的问题清单。"
+              "核心产出是营养评估记录、个体化饮食照护计划、教育材料、菜单与项目方案、监测记录，以及需要转交医疗团队的问题清单。"
             ]
           },
           "id": "dietitians-and-nutritionists.profile.responsibilities-block.2",
@@ -7341,7 +7353,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "收集饮食与背景→核对标签/指南→评估需求→共同制定可执行目标→教育或实施项目→监测→复核/转介。"
+              "典型流程是收集饮食与背景—核对标签与指南—评估营养需求与风险—共同制定可执行目标—教育或实施项目—监测—复核并转介。"
             ]
           },
           "id": "dietitians-and-nutritionists.profile.responsibilities-block.3",
@@ -7355,7 +7367,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "判断饮食信息是否完整、建议是否符合指南与个人条件、哪些问题超出范围并需交医疗团队。"
+              "现场判断集中在信息是否完整、建议是否符合指南与个人条件、营养风险是否需要评估，以及哪些问题超出授权需交医师或临床营养团队。"
             ]
           },
           "id": "dietitians-and-nutritionists.profile.work-context-block.1",
@@ -7369,7 +7381,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "可在医院、社区、公共卫生、研究或团体供餐工作；面对面沟通、记录和运营责任比例因岗位而异。"
+              "工作通常在医院、社区、公共卫生、研究与团体供餐等环境，以沟通、记录和方案设计为主；暴露于疾病或感染、体力负荷与工作时段因岗位而异。"
             ]
           },
           "id": "dietitians-and-nutritionists.profile.work-context-block.2",
@@ -7383,7 +7395,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "营养分析、菜单、记录和数据工具辅助计算与整理；它们不承担疾病诊断或处方决定。"
+              "常用对象包括营养分析与膳食评估软件、电子病历、菜单与成本工具、食物成分数据库、人体测量与代谢检测设备；工具只辅助计算与整理，不承担诊断或处方决定。"
             ]
           },
           "id": "dietitians-and-nutritionists.profile.onet-structured-fields-block.1",
@@ -7397,7 +7409,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "与个人/家庭、医师、护士、餐饮与公共卫生团队协作；临床责任按机构和执业资格划分。"
+              "协作对象包括患者与家属、医师与护士、餐饮与食品服务团队、公共卫生与学校人员；交接需说明已完成、未完成、异常与待确认事项。"
             ]
           },
           "id": "dietitians-and-nutritionists.profile.career-quick-answers-block.1",
@@ -7411,7 +7423,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "质量看资料来源清楚、计算可复核、目标可执行、过敏/文化/预算等限制被纳入并持续监测。"
+              "质量要求同时覆盖来源可追溯、计算可复核、目标可执行、过敏与文化预算等限制被纳入、监测持续，以及临床判断由具备资格的人员作出。"
             ]
           },
           "id": "dietitians-and-nutritionists.profile.career-quick-answers-block.2",
@@ -7425,7 +7437,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "RDN、州许可、中国公共营养师与医疗机构临床职责属于不同制度，不能互相自动替代。"
+              "美国 RDN 注册与州执照、中国大陆临床营养科岗位与公共营养师技能等级属于不同制度，不能互相自动替代；资格、授权与责任须按所在地与机构另核。"
             ]
           },
           "id": "dietitians-and-nutritionists.profile.definition-block.2",
@@ -7496,7 +7508,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "健康教育专家设计和评估个人或群体健康教育项目；本职业直接进行营养评估、饮食方案和监测，转向需补项目评估、社区动员与传播能力。"
+              "健康教育工作者设计并评估个人或群体的健康教育项目；本职业直接进行营养评估、饮食照护计划与监测。转向需补项目需求评估、群体传播与效果评估能力。"
             ]
           },
           "id": "dietitians-and-nutritionists.direction-comparison.adjacent-career-comparison-table.2",
@@ -7512,7 +7524,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "药剂师审核和调配药物并说明用药；本职业处理食物、营养摄入和膳食支持，转向药学需完成专业学位、实习与执照，不能凭营养经验替代。"
+              "药剂师审核、调配并说明药物使用；本职业以食物、营养摄入与膳食支持为对象。转向药学需完成药学专业学位、实习与执照考试，不能凭营养经验替代。"
             ]
           },
           "id": "dietitians-and-nutritionists.direction-comparison.adjacent-career-comparison-table.3",
@@ -7528,7 +7540,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "作业治疗师通过活动与环境调整恢复日常功能；本职业以营养状况和饮食行为为对象，转向需补功能评估、康复技术和临床授权。"
+              "作业治疗师通过活动与环境调整恢复日常生活功能；本职业以营养状况与饮食行为为对象。转向需补功能评估、康复技术与相应临床授权。"
             ]
           },
           "id": "dietitians-and-nutritionists.direction-comparison.adjacent-career-comparison-table.4",
@@ -7544,7 +7556,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "运动生理学家评估并设计运动项目；本职业设计和监测营养干预，转向需补运动测试、生理监测及相应资格。"
+              "运动生理学家评估并设计运动项目以改善心肺、体成分与肌力；本职业设计与监测营养干预。转向需补运动测试、生理监测与相应资格。"
             ]
           },
           "id": "dietitians-and-nutritionists.direction-comparison.adjacent-career-comparison-table.5",
@@ -7560,7 +7572,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "注册护士评估健康需求并实施护理计划；本职业负责营养评估与膳食支持，转向护理需完成护理教育、临床实践和注册许可。"
+              "注册护士评估健康需求并实施护理计划；本职业负责营养评估与膳食支持。转向护理需完成护理教育、临床实践与注册许可，不能仅凭营养知识转岗。"
             ]
           },
           "id": "dietitians-and-nutritionists.direction-comparison.adjacent-career-comparison-table.6",
@@ -7584,7 +7596,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以下为基于职业任务的有限编辑推演，并非该职业的实际部署证据：工具可辅助饮食记录分类、标签计算、菜单格式和随访提醒。"
+              "AI 可辅助整理饮食记录、计算与核对标签数值、按模板起草教育材料或提示随访；它处理的是输入和候选输出，不会自动获得完整病史或临床授权。"
             ]
           },
           "id": "dietitians-and-nutritionists.ai-impact.ai-impact-table.1",
@@ -7598,7 +7610,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "采用取决于食物数据库质量、地区菜品覆盖、隐私和机构验证。"
+              "采用条件包括经机构批准的系统、可靠的食物成分数据库与地区菜品覆盖、明确适用人群、版本与更新管理、审计记录，以及受训人员能够复核。"
             ]
           },
           "id": "dietitians-and-nutritionists.ai-impact.ai-impact-table.2",
@@ -7612,7 +7624,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "自动营养估算必须核对份量、单位、配料和数据库版本。"
+              "自动营养估算必须先核对份量、单位（每份／每 100 克或毫升）、配料与数据库版本；错误的输入会被放大成看似合理的结论。"
             ]
           },
           "id": "dietitians-and-nutritionists.ai-impact.ai-impact-table.3",
@@ -7626,7 +7638,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "模型不能诊断疾病或生成无监督治疗性处方。"
+              "模型不能诊断疾病、生成治疗性处方或替代临床判断；营养诊断与营养治疗方案须由具备相应授权的医师或临床营养人员作出。"
             ]
           },
           "id": "dietitians-and-nutritionists.ai-impact.ai-impact-table.4",
@@ -7640,7 +7652,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "文化偏好、可及性和行为目标需要与本人共同确认。"
+              "文化、宗教与预算偏好、可及性和行为目标需要与本人共同确认，不能由模型替患者决定。"
             ]
           },
           "id": "dietitians-and-nutritionists.ai-impact.ai-impact-table.5",
@@ -7654,7 +7666,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "临床数据应在批准系统内处理并保留更正记录。"
+              "饮食与健康信息可能包含可识别个人信息与敏感医疗信息；只在机构批准的系统内按最小必要原则处理，并保留更正记录。"
             ]
           },
           "id": "dietitians-and-nutritionists.ai-impact.ai-impact-table.6",
@@ -7668,7 +7680,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "最终评估、临床建议和转介由有资格人员承担。"
+              "最终评估、临床建议、医疗膳食与肠内营养配制处方以及转介必须由具备资格的人员承担并留痕。"
             ]
           },
           "id": "dietitians-and-nutritionists.ai-impact.ai-impact-table.7",
@@ -7682,12 +7694,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO 暴露研究不等于本职业已采用工具或会减少净就业；目前没有本页细分职业的采用率、裁员率或因果就业证据，必须以具体机构与岗位验证。"
+              "国际劳工组织等研究把“任务暴露”与“实际采用、岗位增减”分开；本页没有本职业的采用率、裁员率或因果就业证据，这些数字保持未知，须以具体机构与岗位验证。"
             ]
           },
           "id": "dietitians-and-nutritionists.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "editorial-safe-exercise-v2",
+            "ilo-ai-exposure"
           ],
           "type": "prose"
         }
@@ -7704,12 +7717,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "暂无可安全使用的数据：国家统计局 2025 行业代理：城镇非私营‘卫生和社会工作’年平均工资 146,266 元、私营 75,631 元；不是营养师职业工资。"
+              "证据不足：未取得与中国大陆膳食与营养师对应的全国单职业工资口径。中国大陆官方工资资料按行业和单位类型统计，没有与美国 O*NET 29-1031.00 一一对应的全国职业工资分布。"
             ]
           },
           "id": "dietitians-and-nutritionists.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs-wage-2025"
+            "nbs-wage-2025",
+            "nhc-clinical-nutrition-2022",
+            "nhc-clinical-nutrition-2024",
+            "mohrss-public-nutritionist-2021"
           ],
           "type": "prose"
         },
@@ -7718,7 +7734,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "阅读工资时须保留地区、期间、币种、税前/税后、统计量和职业范围。"
+              "本页不把卫生与社会工作行业平均工资、招聘广告报价、美国工资或“公共营养师”证书溢价改写成本职业的中位数、分位数、起薪或月薪。"
             ]
           },
           "id": "dietitians-and-nutritionists.china-salary.career-snapshot-primary-locale.2",
@@ -7732,7 +7748,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业平均只描述行业就业人员，不能等同目标职业中位数或个人报价。"
+              "比较真实岗位时需另核城市、机构类型（医院临床营养科／社区卫生／学校与团体供餐／健康管理）、职业身份与执业范围、学历与资格、班次、绩效与福利，以及税前税后口径。"
             ]
           },
           "id": "dietitians-and-nutritionists.china-salary.career-snapshot-primary-locale.3",
@@ -7746,7 +7762,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "没有同口径职业数据时保留缺口，比跨法域或用招聘片段推算更可靠。"
+              "数据缺口只表示当前来源不能安全回答精确工资，不表示市场没有报价；决策时应保存岗位说明、报酬结构、工时与来源日期。"
             ]
           },
           "id": "dietitians-and-nutritionists.china-salary.career-snapshot-primary-locale.4",
@@ -7768,12 +7784,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 当前 2025–2035 表：就业约 86,300→93,000，增长 7.7%（OOH 四舍五入为 8%），年均 岗位空缺 5,700；2025 中位年薪 76,400 美元。"
+              "美国 29-1031.00 精确职业数据：2025 年全国工资中位数为每年 76,400 美元、每小时 36.73 美元（OEWS 2025 年 5 月）。"
             ]
           },
           "id": "dietitians-and-nutritionists.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "bls-current-2025-2035"
+            "bls-current-2025-2035",
+            "onet-wage-2025"
           ],
           "type": "prose"
         },
@@ -7782,7 +7799,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位数是分布中点，不是新手工资、到手收入或个人报价。"
+              "该数字来自美国全国职业口径，只对应 Dietitians and Nutritionists 29-1031.00，不代表中国岗位，也不代表营养技师或相邻的实验室、护理职业。"
             ]
           },
           "id": "dietitians-and-nutritionists.us-salary.career-snapshot-secondary-locale.2",
@@ -7796,7 +7813,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "employment 是就业存量，change 是净变化，岗位空缺 同时包含增长与替补。"
+              "小时与年薪是来源同时发布的统计单位；未知工时、加班或班次差异时，不能用简单乘法推成个人总收入。"
             ]
           },
           "id": "dietitians-and-nutritionists.us-salary.career-snapshot-secondary-locale.3",
@@ -7810,7 +7827,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "典型入门教育和训练是全国职业表口径，具体岗位仍以雇主与法域要求为准。"
+              "中位数描述覆盖人群的中间位置，不是新手起薪、某州报价、执照或证书溢价，也不是特定专科保证。"
             ]
           },
           "id": "dietitians-and-nutritionists.us-salary.career-snapshot-secondary-locale.4",
@@ -7824,7 +7841,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不同地区、行业、工时和经验会改变工资，不能从全国数直接推算本地收入。"
+              "本页以 BLS 职业展望 2025 年工资与 2025—2035 年预测为主口径，并列出 O*NET 摘要页 2024—2034 年口径作为对照；两者基期与预测期不同，不做平均或拼接。"
             ]
           },
           "id": "dietitians-and-nutritionists.us-salary.career-snapshot-secondary-locale.5",
@@ -7838,7 +7855,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本页只使用明确标注的 exact、combined 或 parent 范围，不把代理写成精确子职业数据。"
+              "比较机会时应保持地区、时期、职业代码、雇佣关系与福利一致，并另核执照、注册、待命、加班与自营收入。"
             ]
           },
           "id": "dietitians-and-nutritionists.us-salary.career-snapshot-secondary-locale.6",
@@ -7860,7 +7877,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "可观察信号 1：能耐心核对饮食记录。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+              "适配信号一：愿意逐项核对饮食记录、标签单位与配料，不凭记忆或相似名称补全，也不忽略过敏原信息。"
             ]
           },
           "id": "dietitians-and-nutritionists.fit.riasec-fit-block.1",
@@ -7874,7 +7891,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "可观察信号 2：把指南转成可执行选择。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+              "适配信号二：能把通用营养指南转成符合本人文化、预算与可及性的具体选择，并解释取舍依据。"
             ]
           },
           "id": "dietitians-and-nutritionists.fit.riasec-fit-block.2",
@@ -7888,7 +7905,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "可观察信号 3：尊重文化和预算限制。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+              "适配信号三：接受持续监测与反复调整，把一次结果当作过程数据，而不是一次定论。"
             ]
           },
           "id": "dietitians-and-nutritionists.fit.riasec-fit-block.3",
@@ -7902,7 +7919,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "可观察信号 4：愿意持续监测而非一次定论。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+              "可训练能力包括营养与食品科学基础、饮食评估、沟通与咨询、教育材料编写、菜单与成本管理、记录规范，以及在授权范围内使用临床资料。"
             ]
           },
           "id": "dietitians-and-nutritionists.fit.riasec-fit-block.4",
@@ -7916,7 +7933,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "可观察信号 5：能解释标签单位。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+              "工作负荷包括长时间沟通与记录、面对依从性差异与情绪化沟通、可能的感染暴露，以及部分岗位的集体供餐时间压力。"
             ]
           },
           "id": "dietitians-and-nutritionists.fit.riasec-fit-block.5",
@@ -7930,7 +7947,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "可观察信号 6：接受跨专业复核。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+              "反向信号包括厌恶反复核对与记录、倾向给出确定诊断或治疗承诺、难以接受文化差异与预算限制，或不愿意为超出授权的任务停下并转交。"
             ]
           },
           "id": "dietitians-and-nutritionists.fit.riasec-fit-block.6",
@@ -7944,7 +7961,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "可观察信号 7：不夸大单一食物效果。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+              "验证方法：先做本页纸面练习（进食记录核对与追问），再争取受监督的实习、志愿服务或跟岗观察；不拿真实患者做无监督练习。"
             ]
           },
           "id": "dietitians-and-nutritionists.fit.riasec-fit-block.7",
@@ -7955,10 +7972,10 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.riasec-fit-block",
+          "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可观察信号 8：能区分教育与治疗权限。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+              "兴趣测评只能提示探索方向；是否适合仍看可观察表现、正规教育、受监督实践、健康负荷与所在地资格要求。"
             ]
           },
           "id": "dietitians-and-nutritionists.fit.riasec-fit-block.8",
@@ -7980,7 +7997,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本页纸面练习若标签、配料与本人记录中的已知过敏原信息不一致，应停止给出结论并交有资格人员复核。"
+              "过敏原与饮食限制风险：纸面练习或实际配餐中，若标签、配料与本人记录中的已知过敏原信息不一致，应停止给出结论并交有资格人员复核。"
             ]
           },
           "id": "dietitians-and-nutritionists.risk.career-risk-cards.1",
@@ -7994,7 +8011,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "把每份、每 100 克或毫升等单位读错会使营养计算失真；保留原单位、写出公式并由第二人或原标签复核。"
+              "单位与计算风险：把每份、每 100 克或毫升读错或换算错误会使营养计算失真；保留原单位、写出计算过程并由第二人或原标签复核。"
             ]
           },
           "id": "dietitians-and-nutritionists.risk.career-risk-cards.2",
@@ -8008,7 +8025,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "把一般营养教育写成疾病诊断或治疗性处方会越过职责；停止输出并转交具有相应临床授权的人员。"
+              "越权风险：把一般营养教育写成疾病诊断或治疗性处方、自行调整治疗饮食或肠内营养方案会越过职责；停止输出并转交具有相应临床授权的人员。"
             ]
           },
           "id": "dietitians-and-nutritionists.risk.career-risk-cards.3",
@@ -8022,7 +8039,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "把可识别的饮食与健康信息输入未批准工具会造成隐私风险；只在机构批准系统按最小必要原则处理。"
+              "隐私风险：把可识别的饮食与健康信息输入未批准的工具或对外披露会造成个人信息与敏感医疗信息泄露；只在机构批准系统按最小必要原则处理并留痕。"
             ]
           },
           "id": "dietitians-and-nutritionists.risk.career-risk-cards.4",
@@ -8036,7 +8053,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "临床、社区和餐饮岗位的风险与授权不同；不确定时停止、保留依据并交负责人员复核。"
+              "法域与授权风险：临床、社区与餐饮岗位的授权与责任不同，资格与执照状态也可能失效；不确定时停止、保留依据并交负责人员复核，按法域核验资格。"
             ]
           },
           "id": "dietitians-and-nutritionists.risk.career-risk-cards.5",
@@ -8058,7 +8075,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "当前 BLS 表列典型入门为本科并含实习/受监督训练；具体资格与岗位要求应按工作地和雇主另行核对。"
+              "现实入口：美国通常需要学士或硕士学位并完成受监督实习（Internship/residency），多数州要求执照；课程、实习、执照与雇主要求须逐项核验。"
             ]
           },
           "id": "dietitians-and-nutritionists.path.career-path-block.1",
@@ -8072,7 +8089,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入门证据应展示能按规则处理真实岗位材料的能力，而不是只列软件名称。"
+              "入门证据应展示能按规则处理真实岗位材料的能力，例如记录核对、单位换算与书面交接，而不是只列软件名称或证书数量。"
             ]
           },
           "id": "dietitians-and-nutritionists.path.career-path-block.2",
@@ -8086,7 +8103,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "虚构 24 小时记录：早餐燕麦 40g+牛奶 250ml；午餐米饭 150g、豆腐 100g、青菜；晚餐面条 200g、鸡蛋 1 个；加餐含糖饮料 500ml。"
+              "完整虚构材料：虚构 24 小时进食记录——早餐燕麦 40 克＋牛奶 250 毫升；午餐米饭 150 克、豆腐 100 克、青菜；晚餐面条 200 克、鸡蛋 1 个；加餐含糖饮料 500 毫升。虚构标签：该饮料每 100 毫升含添加糖 9 克。偏好与可及性：不吃坚果；每周可做饭 3 次；附近可买到无糖饮料。没有任何真实病历、化验值或诊断信息。"
             ]
           },
           "id": "dietitians-and-nutritionists.path.career-path-block.3",
@@ -8100,7 +8117,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "虚构标签：饮料每 100ml 含添加糖 9g；偏好/可及性：不吃坚果、每周可做饭 3 次、附近可买无糖饮料。任务：只整理记录并计算饮料添加糖；提出两个需要进一步询问的问题和一个非治疗性的替换选项。"
+              "作品任务：在 30 分钟内只根据上述材料整理记录、计算该饮料的添加糖总量，并提出两个需要进一步询问的问题和一个非治疗性的替换选项；不得作疾病诊断、不得给出治疗性处方、不得补造未知字段。"
             ]
           },
           "id": "dietitians-and-nutritionists.path.career-path-block.4",
@@ -8114,7 +8131,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参考结果：饮料添加糖 45g；询问记录份量是否熟重及是否还有调味/零食；可讨论把部分含糖饮料换成可获得的无糖饮料。不给疾病处方。"
+              "参考答案：该饮料添加糖约 45 克（500 毫升 × 9 克/100 毫升）；需追问记录份量是熟重还是生重、是否还有未记录的调味与零食；可讨论把部分含糖饮料换成可获得的无糖饮料。全程保持在营养教育与生活方式讨论范围内，不给疾病处方。"
             ]
           },
           "id": "dietitians-and-nutritionists.path.career-path-block.5",
@@ -8128,7 +8145,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "七日体验：第1天：阅读同一套虚构材料和边界，圈出未知项；输出问题清单。 第2天：按纸面规则完成第一版；输出逐项判断与依据。 第3天：对照参考思路找出遗漏；输出更正记录。 第4天：把结论改写成可交接格式；输出一页交接稿。 第5天：请他人仅凭材料复核；输出歧义和反馈。 第6天：修订并记录精力、耐心和错误类型；输出第二版。 第7天：比较两版，判断自己是否愿意继续训练；输出继续/谨慎/停止及理由。"
+              "雇主证据可以是一页匿名化的模拟记录与核对表：字段来源、单位、计算过程、待追问问题、替换选项与边界说明清楚；不要展示真实健康信息，也不要把纸面题包装成临床能力。"
             ]
           },
           "id": "dietitians-and-nutritionists.path.career-path-block.6",
@@ -8142,7 +8159,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格与证书只在具体法域、雇主和授权范围内成立，先查当前原文。"
+              "七日体验：第 1 日读懂字段与单位；第 2 日完成第一版计算与记录；第 3 日对照参考思路找遗漏并更正；第 4 日改写成可交接的一页稿；第 5 日请他人仅凭材料复核并记录歧义；第 6 日修订并记录精力、耐心与错误类型；第 7 日比较两版，判断是否愿意继续训练并写出继续／谨慎／停止及理由。"
             ]
           },
           "id": "dietitians-and-nutritionists.path.career-path-block.7",
@@ -8156,7 +8173,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "进阶可走临床营养、社区/公共营养、餐饮与质量管理或教育研究方向；每条路径需要不同的受监督实践、资格与成果证据，不能把通用营养知识等同临床授权。"
+              "成长通常表现为能在受监督下独立完成更复杂的营养评估与监测、参与多学科团队、承担教育项目或餐饮与质量管理；每个方向都需要不同的受监督实践、资格与成果证据，不能把通用营养知识等同于临床授权。"
             ]
           },
           "id": "dietitians-and-nutritionists.path.career-path-block.8",
@@ -8164,6 +8181,171 @@
             "editorial-safe-exercise-v2"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-role-comparison",
+          "data": {
+            "column_keys": [
+              "role",
+              "initial_tasks",
+              "boundary",
+              "evidence",
+              "next_step"
+            ],
+            "rows": [
+              [
+                "受监督的临床营养实习（在读或应届）",
+                "在带教监督下核对饮食与健康史、协助营养筛查与评估、练习记录与教育材料编写。",
+                "不得独立作出营养诊断或治疗处方；肠内营养配制与医疗膳食配置须在获授权人员监督下完成。",
+                "实习记录、受监督的筛查与评估清单与带教评语。",
+                "完成课程与实习学时，准备执照或注册考试。"
+              ],
+              [
+                "入门级临床营养师（医院／门诊）",
+                "独立完成常规营养评估、饮食照护计划、营养教育与随访记录。",
+                "临床诊断与治疗处方由具备授权的医师或临床营养人员负责，不越权解释或处方。",
+                "独立完成的评估与随访记录、机构质量抽查结果。",
+                "质量稳定后扩展专科方向或参与多学科团队。"
+              ],
+              [
+                "专科方向营养师（糖尿病、肾病、肿瘤、儿科等）",
+                "按专科指南完成方案化评估、营养治疗配合、监测与教育。",
+                "需相应专科训练与经验；不同专科的方案与授权不同，不跨专科自动通用。",
+                "专科培训记录与专科病例的复核结果。",
+                "参加专科进阶培训并处理更复杂病例。"
+              ],
+              [
+                "社区与公共卫生营养",
+                "设计并实施群体营养项目、营养教育与监测，参与政策与健康促进。",
+                "项目效果与人群数据须按规范收集与解释；不把群体结论直接套用于个人诊疗。",
+                "项目方案、监测数据与效果评估报告。",
+                "承担项目负责或区域营养管理职责。"
+              ],
+              [
+                "团体供餐与营养管理／带教",
+                "负责菜单与食谱标准化、成本与质量管理，带教新人并参与流程改进。",
+                "管理职责需机构任命与相应培训；不因此获得临床诊断与处方权。",
+                "菜单与成本记录、质量改进与带教记录。",
+                "向营养科管理、餐饮管理或营养教育方向发展。"
+              ]
+            ]
+          },
+          "id": "dietitians-and-nutritionists.path.entry-role-comparison.current.v1",
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.interview-probation",
+          "data": {
+            "column_keys": [
+              "stage",
+              "observed_evidence",
+              "possible_check",
+              "escalation"
+            ],
+            "rows": [
+              [
+                "面试与录用前的资格核验",
+                "学历或学位、实习／受监督训练经历、执照或注册状态，以及对授权边界的理解。",
+                "核对所持学历、实习与执照状态，并询问其如何判断超出授权的任务。",
+                "资质与岗位要求不符时交招聘与用人部门确认，不由本人判断。"
+              ],
+              [
+                "入职与岗位培训期",
+                "完成机构培训、营养评估与记录系统、感染控制与食品安全流程的记录。",
+                "观察其是否按机构方案记录与复核、是否按规范处理过敏原信息。",
+                "培训未完成或考核未通过时暂停独立工作并安排补训。"
+              ],
+              [
+                "受监督的独立工作期",
+                "受监督下完成的评估与随访记录、计算复核结果与异常交接记录。",
+                "抽查记录完整性、单位与计算准确性以及异常上报的及时性。",
+                "重复出现记录或计算问题时转由带教人员处理并复训。"
+              ],
+              [
+                "常规独立岗位期",
+                "独立工作记录、质量抽查结果与继续教育记录。",
+                "核对执照或注册是否在有效期内，并评估质量与协作表现。",
+                "出现安全事件或超出授权的行为时按机构制度上报处理。"
+              ]
+            ]
+          },
+          "id": "dietitians-and-nutritionists.path.interview-probation.current.v1",
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-decision",
+          "data": {
+            "column_keys": [
+              "credential",
+              "conditions",
+              "boundary",
+              "evidence",
+              "jurisdiction",
+              "next_step",
+              "review"
+            ],
+            "rows": [
+              [
+                "学士或硕士学位（营养、营养学、食品与营养等相关专业）",
+                "通常需完成获认可院校的课程，并涵盖临床营养、食品服务系统与社区营养等模块。",
+                "学历本身不等于自动取得执照、注册或临床授权。",
+                "毕业证与成绩单、课程与实习记录。",
+                "按工作地和雇主核验。",
+                "核对目标机构对专业与课程的具体要求。",
+                "由教育机构与雇主确认。"
+              ],
+              [
+                "受监督实习／住院实习（Internship/residency）",
+                "在受监督环境中完成规定的临床与社区实践学时。",
+                "实习完成不等于取得执照或注册资格。",
+                "实习时长与带教评语记录。",
+                "按具体项目与法域核验。",
+                "核对目标执照或注册的实习时长要求。",
+                "由实习机构与执照机构确认。"
+              ],
+              [
+                "注册营养师（RDN，美国）",
+                "通过 CDR 要求的学历、实习与考试，并完成继续教育。",
+                "注册是专业资格，不替代州执照，也不代表可独立承担医师的诊断与处方责任。",
+                "注册证书与有效期、继续教育记录。",
+                "按工作地和雇主核验。",
+                "核对 CDR 的报考与维持要求。",
+                "由 CDR 确认。"
+              ],
+              [
+                "州执照（美国，多数州要求）",
+                "条件与考试按该州规定，部分州要求执照方可使用特定头衔或执业。",
+                "执照要求因州而异，跨州执业需另行核对。",
+                "执照与更新记录。",
+                "按具体州核验。",
+                "核对目标州的执照要求与互认安排。",
+                "由州监管机构确认。"
+              ],
+              [
+                "公共营养师职业技能等级证书（中国大陆）",
+                "按《公共营养师国家职业技能标准（2021 年版）》分级申报，由经人社部门备案的评价机构组织实施。",
+                "公共营养师不在《国家职业资格目录》准入类之列，证书不具医师执业资质，不得开展疾病诊疗或处方干预。",
+                "职业技能等级证书与联网查询记录。",
+                "按中国大陆规定核验。",
+                "核对评价机构备案与申报条件。",
+                "由评价机构与用人单位确认。"
+              ],
+              [
+                "临床营养专业培训与岗位授权（中国大陆医疗机构）",
+                "按《临床营养科建设与管理指南（试行）》接受临床营养专业教育或培训。",
+                "营养诊断与治疗由经临床营养专业培训的医师承担；营养专业技术人员在授权范围内开展咨询、筛查评估、肠内营养配制、医疗膳食配置与宣教。",
+                "培训记录与机构岗位授权文件。",
+                "按中国大陆与机构规定核验。",
+                "核对机构岗位职责与授权范围。",
+                "由机构与主管部门确认。"
+              ]
+            ]
+          },
+          "id": "dietitians-and-nutritionists.path.credential-decision.current.v1",
+          "type": "table"
         }
       ]
     },
@@ -8178,7 +8360,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "预测期已从旧版 2024–2034 更新为 2025–2035；岗位空缺 含增长和替补，不能当净新增。"
+              "美国 29-1031.00 精确职业数据：2025 年约有 86,300 个岗位。"
             ]
           },
           "id": "dietitians-and-nutritionists.market-signals.market-signal-card.1",
@@ -8192,7 +8374,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 职业说明覆盖医院、政府、门诊等不同工作场景；临床、社区和餐饮岗位的交付与授权不能互换。"
+              "2025—2035 年预计增长 8%（远快于平均），年均约 5,700 个职位空缺；增长率、就业存量与职位空缺不是同一指标。"
             ]
           },
           "id": "dietitians-and-nutritionists.market-signals.market-signal-card.2",
@@ -8206,7 +8388,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "当前没有有界招聘样本可证明某证书或软件的普遍频率；应按目标地区、机构类型和临床权限核对岗位。"
+              "O*NET 摘要页列出另一口径：2024 年约 90,900 人、2024—2034 年增长 5%～6%、空缺约 6,200 个；两口径基期与预测期不同，应分别解释。"
             ]
           },
           "id": "dietitians-and-nutritionists.market-signals.market-signal-card.3",
@@ -8220,7 +8402,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向健康教育项目，需要补需求评估、群体传播与项目效果评估，并用项目方案和复盘证明。"
+              "转向健康教育项目，需要补需求评估、群体传播与项目效果评估，并用项目方案与复盘证明。"
             ]
           },
           "id": "dietitians-and-nutritionists.market-signals.market-signal-card.4",
@@ -8259,8 +8441,9 @@
           "data": {
             "entries": [
               {
-                "answer": "O*NET 29-1031.00 规划并实施膳食服务或营养项目以促进健康、控制疾病，可监督团体供餐、提供咨询或开展研究。 输入包括饮食记录、食物标签、偏好与可及性、健康史和在授权范围内使用的临床资料。 交付包括营养评估记录、教育材料、菜单或项目方案、监测记录和需转介的问题清单。 收集饮食与背景→核对标签/指南→评估需求→共同制定可执行目标→教育或实施项目→监测→复核/转介。",
+                "answer": "日常从收集饮食与健康史、核对标签与指南开始，完成营养评估与风险筛查，与本人共同制定可执行目标，开展教育或实施项目，再持续监测并复核／转介，形成闭环。",
                 "id": "dietitians-and-nutritionists.faq.1",
+                "question": "膳食与营养师：日常工作如何形成闭环？",
                 "question_key": "career.faq.dietitians-and-nutritionists.daily-work",
                 "source_refs": [
                   "editorial-safe-exercise-v2",
@@ -8268,8 +8451,9 @@
                 ]
               },
               {
-                "answer": "健康教育专家设计和评估个人或群体健康教育项目。 本职业直接进行营养评估、饮食方案和监测。 转向需补项目评估、社区动员与传播能力。 药剂师审核和调配药物并说明用药。 本职业处理食物、营养摄入和膳食支持。 转向药学需完成专业学位、实习与执照，不能凭营养经验替代。 作业治疗师通过活动与环境调整恢复日常功能。 本职业以营养状况和饮食行为为对象。 转向需补功能评估、康复技术和临床授权。 运动生理学家评估并设计运动项目。 本职业设计和监测营养干预。 转向需补运动测试、生理监测及相应资格。 注册护士评估健康需求并实施护理计划。 本职业负责营养评估与膳食支持。 转向护理需完成护理教育、临床实践和注册许可。",
+                "answer": "健康教育工作者做群体项目设计与评估；药剂师审核与调配药物；作业治疗师通过活动与环境调整恢复功能；运动生理学家设计运动项目；注册护士实施护理计划。本职业以营养状况与饮食行为为对象，直接进行营养评估、饮食照护与监测。",
                 "id": "dietitians-and-nutritionists.faq.2",
+                "question": "膳食与营养师：它与相邻职业有什么区别？",
                 "question_key": "career.faq.dietitians-and-nutritionists.role-comparison",
                 "source_refs": [
                   "adjacent-onet-21-1091-00",
@@ -8282,24 +8466,27 @@
                 ]
               },
               {
-                "answer": "可观察信号 1：能耐心核对饮食记录。用一次小任务或岗位访谈验证，不用人格标签下结论。 可观察信号 2：把指南转成可执行选择。用一次小任务或岗位访谈验证，不用人格标签下结论。 可观察信号 3：尊重文化和预算限制。用一次小任务或岗位访谈验证，不用人格标签下结论。 可观察信号 4：愿意持续监测而非一次定论。用一次小任务或岗位访谈验证，不用人格标签下结论。",
+                "answer": "适配看可观察表现：能否逐项核对记录与单位、把指南转成可执行选择、尊重文化与预算限制、持续监测而非一次定论，以及是否愿意为超出授权的任务停下并转交。",
                 "id": "dietitians-and-nutritionists.faq.3",
+                "question": "膳食与营养师：什么行为信号可以帮助判断适配？",
                 "question_key": "career.faq.dietitians-and-nutritionists.fit",
                 "source_refs": [
                   "editorial-safe-exercise-v2"
                 ]
               },
               {
-                "answer": "以下为基于职业任务的有限编辑推演，并非该职业的实际部署证据：工具可辅助饮食记录分类、标签计算、菜单格式和随访提醒。 采用取决于食物数据库质量、地区菜品覆盖、隐私和机构验证。 自动营养估算必须核对份量、单位、配料和数据库版本。 ILO 暴露研究不等于本职业已采用工具或会减少净就业；目前没有本页细分职业的采用率、裁员率或因果就业证据，必须以具体机构与岗位验证。",
+                "answer": "AI 可辅助记录整理、标签与营养计算、教育材料起草与随访提醒，但不能诊断疾病、生成治疗性处方，也不能给出可靠的替代率或时间表。",
                 "id": "dietitians-and-nutritionists.faq.4",
+                "question": "膳食与营养师：AI 可以辅助哪些任务？",
                 "question_key": "career.faq.dietitians-and-nutritionists.ai-impact",
                 "source_refs": [
                   "editorial-safe-exercise-v2"
                 ]
               },
               {
-                "answer": "本页纸面练习若标签、配料与本人记录中的已知过敏原信息不一致，应停止给出结论并交有资格人员复核。 把每份、每 100 克或毫升等单位读错会使营养计算失真；保留原单位、写出公式并由第二人或原标签复核。 把一般营养教育写成疾病诊断或治疗性处方会越过职责；停止输出并转交具有相应临床授权的人员。 把可识别的饮食与健康信息输入未批准工具会造成隐私风险；只在机构批准系统按最小必要原则处理。",
+                "answer": "人员必须控制过敏原与饮食限制核对、单位与计算、隐私、越权诊断或处方，以及最终临床责任；未经验证的输出不能直接进入病历或照护计划。",
                 "id": "dietitians-and-nutritionists.faq.5",
+                "question": "膳食与营养师：哪些判断必须由人负责？",
                 "question_key": "career.faq.dietitians-and-nutritionists.human-control",
                 "source_refs": [
                   "cdr-scope",
@@ -8307,33 +8494,39 @@
                 ]
               },
               {
-                "answer": "暂无可安全使用的数据：国家统计局 2025 行业代理：城镇非私营‘卫生和社会工作’年平均工资 146,266 元、私营 75,631 元；不是营养师职业工资。 阅读工资时须保留地区、期间、币种、税前/税后、统计量和职业范围。",
+                "answer": "当前中国大陆官方工资材料没有与美国 29-1031.00 一一对应的全国职业工资分布，因此不展示精确中位数、分位数、起薪或月薪，也不以行业均值或招聘报价填补。",
                 "id": "dietitians-and-nutritionists.faq.6",
+                "question": "膳食与营养师：中国大陆薪资应如何核对？",
                 "question_key": "career.faq.dietitians-and-nutritionists.china-pay",
                 "source_refs": [
                   "nbs-wage-2025"
                 ]
               },
               {
-                "answer": "BLS 当前 2025–2035 表：就业约 86,300→93,000，增长 7.7%（OOH 四舍五入为 8%），年均 岗位空缺 5,700；2025 中位年薪 76,400 美元。 中位数是分布中点，不是新手工资、到手收入或个人报价。",
+                "answer": "美国 29-1031.00 在 2025 年的全国工资中位数为每年 76,400 美元、每小时 36.73 美元；这不是新手起薪、具体地区报价或个人总收入。",
                 "id": "dietitians-and-nutritionists.faq.7",
+                "question": "膳食与营养师：美国工资数据应如何解释？",
                 "question_key": "career.faq.dietitians-and-nutritionists.us-pay",
                 "source_refs": [
                   "bls-current-2025-2035"
                 ]
               },
               {
-                "answer": "当前 BLS 表列典型入门为本科并含实习/受监督训练；具体资格与岗位要求应按工作地和雇主另行核对。 虚构 24 小时记录：早餐燕麦 40g+牛奶 250ml；午餐米饭 150g、豆腐 100g、青菜；晚餐面条 200g、鸡蛋 1 个；加餐含糖饮料 500ml。 虚构标签：饮料每 100ml 含添加糖 9g；偏好/可及性：不吃坚果、每周可做饭 3 次、附近可买无糖饮料。任务：只整理记录并计算饮料添加糖；提出两个需要进一步询问的问题和一个非治疗性的替换选项。 参考结果：饮料添加糖 45g；询问记录份量是否熟重及是否还有调味/零食；可讨论把部分含糖饮料换成可获得的无糖饮料。不给疾病处方。 七日体验：第1天：阅读同一套虚构材料和边界，圈出未知项；输出问题清单。 第2天：按纸面规则完成第一版；输出逐项判断与依据。 第3天：对照参考思路找出遗漏；输出更正记录。 第4天：把结论改写成可交接格式；输出一页交接稿。 第5天：请他人仅凭材料复核；输出歧义和反馈。 第6天：修订并记录精力、耐心和错误类型；输出第二版。 第7天：比较两版，判断自己是否愿意继续训练；输出继续/谨慎/停止及理由。",
+                "answer": "美国通常需学士或硕士学位并完成受监督实习，多数州要求执照；中国大陆的临床营养科岗位与公共营养师技能等级是不同制度。具体课程、实习与资格须按所在地与雇主核验。",
                 "id": "dietitians-and-nutritionists.faq.8",
+                "question": "膳食与营养师：入行通常需要什么教育或训练？",
                 "question_key": "career.faq.dietitians-and-nutritionists.education-path",
                 "source_refs": [
                   "bls-current-2025-2035",
+                  "nhc-clinical-nutrition-2022",
+                  "mohrss-public-nutritionist-2021",
                   "editorial-safe-exercise-v2"
                 ]
               },
               {
-                "answer": "本页纸面练习若标签、配料与本人记录中的已知过敏原信息不一致，应停止给出结论并交有资格人员复核。 把每份、每 100 克或毫升等单位读错会使营养计算失真；保留原单位、写出公式并由第二人或原标签复核。 把一般营养教育写成疾病诊断或治疗性处方会越过职责；停止输出并转交具有相应临床授权的人员。 把可识别的饮食与健康信息输入未批准工具会造成隐私风险；只在机构批准系统按最小必要原则处理。 临床、社区和餐饮岗位的风险与授权不同；不确定时停止、保留依据并交负责人员复核。",
+                "answer": "过敏原或饮食限制信息不一致、单位与计算错误、越权给出诊断或治疗处方，以及未经批准处理可识别健康信息，都应触发停止、核对或升级。",
                 "id": "dietitians-and-nutritionists.faq.9",
+                "question": "膳食与营养师：这份工作的主要风险和停止条件是什么？",
                 "question_key": "career.faq.dietitians-and-nutritionists.risk-boundary",
                 "source_refs": [
                   "cdr-scope",
@@ -8341,8 +8534,9 @@
                 ]
               },
               {
-                "answer": "预测期已从旧版 2024–2034 更新为 2025–2035；岗位空缺 含增长和替补，不能当净新增。 BLS 职业说明覆盖医院、政府、门诊等不同工作场景；临床、社区和餐饮岗位的交付与授权不能互换。 当前没有有界招聘样本可证明某证书或软件的普遍频率；应按目标地区、机构类型和临床权限核对岗位。 转向健康教育项目，需要补需求评估、群体传播与项目效果评估，并用项目方案和复盘证明。 转向运动生理岗位，需要补运动测试、训练处方边界与生理监测；营养经验不能替代相应资格。",
+                "answer": "美国 29-1031.00 在 2025 年约有 86,300 个岗位，2025—2035 年预计增长 8%，年均空缺约 5,700；全国预测不代表个人录用。转向健康教育或运动生理等方向需补足相应能力与资格。",
                 "id": "dietitians-and-nutritionists.faq.10",
+                "question": "膳食与营养师：就业展望与相邻转向应如何理解？",
                 "question_key": "career.faq.dietitians-and-nutritionists.outlook-transition",
                 "source_refs": [
                   "bls-current-2025-2035",
@@ -8350,8 +8544,9 @@
                 ]
               },
               {
-                "answer": "如果你喜欢把食物记录、健康目标和可执行方案连接起来，并能与临床或社区团队协作，这个职业值得探索；临床权限、受监督实践和持续沟通是主要门槛。先确认目标方向是临床、社区还是餐饮管理，再核对当地资格。",
+                "answer": "如果你能长期保持记录核对、单位换算、跨专业沟通与持续监测，并愿意通过正规教育与受监督实践承担授权责任，这条路径值得继续验证。",
                 "id": "dietitians-and-nutritionists.faq.11",
+                "question": "膳食与营养师：如何判断这条职业路径是否值得继续验证？",
                 "question_key": "career.faq.dietitians-and-nutritionists.career-worth",
                 "source_refs": [
                   "editorial-safe-exercise-v2"
@@ -8378,9 +8573,8 @@
           "availability": "available",
           "copy_key": "career.item.boundary-notice",
           "data": {
-            "entries": [
-              "饮食记录与计算为虚构练习，不构成疾病诊断或治疗性处方。",
-              "临床营养、公共营养和餐饮岗位的资格与授权分别核对。"
+            "paragraphs": [
+              "本页精确职业口径是美国 O*NET 29-1031.00；中国大陆临床营养科岗位、公共营养师技能等级与相邻职业分别陈述，不跨法域互认。"
             ]
           },
           "id": "dietitians-and-nutritionists.sources.boundary.1",
@@ -8394,9 +8588,44 @@
             "cdr-scope",
             "editorial-safe-exercise-v2",
             "nbs-wage-2025",
-            "onet-details"
+            "onet-details",
+            "onet-wage-2025",
+            "nhc-clinical-nutrition-2022",
+            "nhc-clinical-nutrition-2024",
+            "mohrss-public-nutritionist-2021",
+            "nist-ai-rmf",
+            "ilo-ai-exposure"
           ],
-          "type": "list"
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "paragraphs": [
+              "工资、就业、执照与注册、临床授权按各自来源范围使用；编辑练习不冒充外部事实或临床培训。"
+            ]
+          },
+          "id": "dietitians-and-nutritionists.sources.boundary.1.2",
+          "source_refs": [
+            "adjacent-onet-21-1091-00",
+            "adjacent-onet-29-1051-00",
+            "adjacent-onet-29-1122-00",
+            "adjacent-onet-29-1128-00",
+            "adjacent-onet-29-1141-00",
+            "bls-current-2025-2035",
+            "cdr-scope",
+            "editorial-safe-exercise-v2",
+            "nbs-wage-2025",
+            "onet-details",
+            "onet-wage-2025",
+            "nhc-clinical-nutrition-2022",
+            "nhc-clinical-nutrition-2024",
+            "mohrss-public-nutritionist-2021",
+            "nist-ai-rmf",
+            "ilo-ai-exposure"
+          ],
+          "type": "prose"
         }
       ]
     },
@@ -8496,119 +8725,119 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-09-19",
                 "details": [
-                  "O*NET 将 Health Education Specialists 定义为：Provide and manage health education programs that help individuals, families, and their communities maximize and maintain healthy lifestyles. Use data to identify community needs prior to planning, implementing, monitoring, and evaluating programs designed to encourage healthy lifestyles, policies, and environments. May link health systems, health providers, insurers, and patients to address individual and population health needs. May serve as resource to assist individuals, other health professionals, or the community, and may administer fiscal resources for health education programs.",
-                  "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。"
+                  "核验健康教育项目设计与评估的职业边界。",
+                  "仅用于相邻职业比较。"
                 ],
                 "evidence_type": "official_guidance",
                 "id": "adjacent-onet-21-1091-00",
-                "limitation": "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。",
+                "limitation": "仅用于相邻职业比较。",
                 "market": "美国",
-                "name": "21-1091.00 - Health Education Specialists",
-                "period": "O*NET current occupation summary; accessed 2026-09-06",
-                "publisher": "O*NET OnLine",
+                "name": "21-1091.00 Health Education Specialists",
+                "period": "O*NET updated 2026; accessed 2026-09-19",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/21-1091.00"
+                "url": "https://www.onetonline.org/link/details/21-1091.00"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-09-19",
                 "details": [
-                  "O*NET 将 Pharmacists 定义为：Dispense drugs prescribed by physicians and other health practitioners and provide information to patients about medications and their use. May advise physicians and other health practitioners on the selection, dosage, interactions, and side effects of medications.",
-                  "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。"
+                  "核验药物审核、调配与用药管理的职业边界。",
+                  "仅用于相邻职业比较。"
                 ],
                 "evidence_type": "official_guidance",
                 "id": "adjacent-onet-29-1051-00",
-                "limitation": "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。",
+                "limitation": "仅用于相邻职业比较。",
                 "market": "美国",
-                "name": "29-1051.00 - Pharmacists",
-                "period": "O*NET current occupation summary; accessed 2026-09-06",
-                "publisher": "O*NET OnLine",
+                "name": "29-1051.00 Pharmacists",
+                "period": "O*NET updated 2026; accessed 2026-09-19",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/29-1051.00"
+                "url": "https://www.onetonline.org/link/details/29-1051.00"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-09-19",
                 "details": [
-                  "O*NET 将 Occupational Therapists 定义为：Assess, plan, and organize rehabilitative programs that help build or restore vocational, homemaking, and daily living skills, as well as general independence, to persons with disabilities or developmental delays. Use therapeutic techniques, adapt the individual's environment, teach skills, and modify specific tasks that present barriers to the individual.",
-                  "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。"
+                  "核验通过活动与环境调整恢复日常功能的职业边界。",
+                  "仅用于相邻职业比较。"
                 ],
                 "evidence_type": "official_guidance",
                 "id": "adjacent-onet-29-1122-00",
-                "limitation": "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。",
+                "limitation": "仅用于相邻职业比较。",
                 "market": "美国",
-                "name": "29-1122.00 - Occupational Therapists",
-                "period": "O*NET current occupation summary; accessed 2026-09-06",
-                "publisher": "O*NET OnLine",
+                "name": "29-1122.00 Occupational Therapists",
+                "period": "O*NET updated 2026; accessed 2026-09-19",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/29-1122.00"
+                "url": "https://www.onetonline.org/link/details/29-1122.00"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-09-19",
                 "details": [
-                  "O*NET 将 Exercise physiologists 定义为：Assess, plan, or implement fitness programs that include exercise or physical activities such as those designed to improve cardiorespiratory function, body composition, muscular strength, muscular endurance, or flexibility.",
-                  "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。"
+                  "核验评估与设计运动项目的职业边界。",
+                  "仅用于相邻职业比较。"
                 ],
                 "evidence_type": "official_guidance",
                 "id": "adjacent-onet-29-1128-00",
-                "limitation": "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。",
+                "limitation": "仅用于相邻职业比较。",
                 "market": "美国",
-                "name": "29-1128.00 - Exercise physiologists",
-                "period": "O*NET current occupation summary; accessed 2026-09-06",
-                "publisher": "O*NET OnLine",
+                "name": "29-1128.00 Exercise Physiologists",
+                "period": "O*NET updated 2026; accessed 2026-09-19",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/29-1128.00"
+                "url": "https://www.onetonline.org/link/details/29-1128.00"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-09-19",
                 "details": [
-                  "O*NET 将 Registered nurses 定义为：Assess patient health problems and needs, develop and implement nursing care plans, and maintain medical records. Administer nursing care to ill, injured, convalescent, or disabled patients. May advise patients on health maintenance and disease prevention or provide case management. Licensing or registration required.",
-                  "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。"
+                  "核验护理评估与护理计划实施的职业边界。",
+                  "仅用于相邻职业比较。"
                 ],
                 "evidence_type": "official_guidance",
                 "id": "adjacent-onet-29-1141-00",
-                "limitation": "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。",
+                "limitation": "仅用于相邻职业比较。",
                 "market": "美国",
-                "name": "29-1141.00 - Registered nurses",
-                "period": "O*NET current occupation summary; accessed 2026-09-06",
-                "publisher": "O*NET OnLine",
+                "name": "29-1141.00 Registered Nurses",
+                "period": "O*NET updated 2026; accessed 2026-09-19",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/29-1141.00"
+                "url": "https://www.onetonline.org/link/details/29-1141.00"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-09-19",
                 "details": [
-                  "BLS 2025–2035：就业 86.3 千增至 93.0 千，增长 7.7%（OOH 表述 8%），年均 openings 5.7 千，2025 中位年薪 76,400 美元。",
-                  "openings 同时含增长和替补；combined/parent 口径不得拆成目标子职业精确统计。"
+                  "核验 2025 年工资中位、2025—2035 年就业预测、年均空缺与典型入门教育。",
+                  "州与雇主要求仍需逐项核验。"
                 ],
                 "evidence_type": "official employment projections and wage table",
                 "id": "bls-current-2025-2035",
-                "limitation": "openings 同时含增长和替补；combined/parent 口径不得拆成目标子职业精确统计。",
+                "limitation": "美国全国职业概览；州与雇主要求仍需逐项核验。",
                 "market": "美国",
-                "name": "BLS Occupational projections and worker characteristics, 2025–2035",
-                "period": "2025 employment/wage and 2025-2035 projections",
+                "name": "Dietitians and Nutritionists, Occupational Outlook Handbook",
+                "period": "2025 median pay; 2025-2035 projections; accessed 2026-09-19",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+                "url": "https://www.bls.gov/ooh/healthcare/dietitians-and-nutritionists.htm"
               },
               {
-                "accessed_at": "2026-08-30",
+                "accessed_at": "2026-09-19",
                 "details": [
-                  "支持美国RDN实践范围、质量、教育与credential边界。",
+                  "核验美国 RDN 的实践范围、质量与注册边界。",
                   "专业标准不是州级执照法。"
                 ],
                 "evidence_type": "professional scope and standards",
                 "id": "cdr-scope",
                 "limitation": "专业标准不是州级执照法。",
-                "market": "US",
+                "market": "美国",
                 "name": "Revised 2024 Scope and Standards of Practice for the RDN",
-                "period": "2024; accessed 2026-08-30",
+                "period": "2024; accessed 2026-09-19",
                 "publisher": "Commission on Dietetic Registration",
                 "scope": "exact",
                 "url": "https://www.cdrnet.org/vault/2459/web/20231220%20Scope%20Standards%20of%20Practice%202024%20for%20the%20RDN_FINAL.pdf"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-09-19",
                 "details": [
                   "为本职业提供虚构、可复核且不触发真实危险或专业授权行为的纸面练习。",
                   "编辑设计不是外部职业事实、资格、法规、工资、采用率或就业证据。"
@@ -8618,42 +8847,138 @@
                 "limitation": "编辑设计不是外部职业事实、资格、法规、工资、采用率或就业证据。",
                 "market": "全球编辑设计",
                 "name": "FermatMind 安全纸面体验与边界设计",
-                "period": "2026-09-06 content repair",
+                "period": "2026-09-19 content repair",
                 "publisher": "FermatMind",
                 "scope": "editorial_synthesis",
                 "url": null
               },
               {
-                "accessed_at": "2026-08-30",
+                "accessed_at": "2026-09-19",
                 "details": [
-                  "国家统计局工资数据用于中国行业或单位类型层级的背景锚点，不代表该细分职业的个人工资或录用承诺。",
-                  "行业平均工资不是营养师职业工资且不覆盖个体经营者。"
+                  "国家统计局工资数据为行业与单位类型层级，未提供与美国 29-1031.00 一一对应的全国职业工资分布。",
+                  "行业平均工资不是营养师职业工资，也不覆盖个体经营者。"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs-wage-2025",
-                "limitation": "行业平均工资不是营养师职业工资且不覆盖个体经营者。",
-                "market": "CN",
+                "limitation": "行业平均工资不是营养师职业工资，且不覆盖个体经营者。",
+                "market": "中国大陆",
                 "name": "2025年城镇单位就业人员年平均工资情况",
-                "period": "2025; published 2026-05-15; accessed 2026-08-30",
+                "period": "2025; accessed 2026-09-19",
                 "publisher": "中华人民共和国国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-08-30",
+                "accessed_at": "2026-09-19",
                 "details": [
-                  "O*NET 将 Dietitians And Nutritionists 的核心职责定义为：Plan and conduct food service or nutritional programs to assist in the promotion of health and control of disease. May supervise activities of a department providing quantity food services, counsel individuals, or conduct nutritional research.",
+                  "核验职业身份、任务、工作活动与工作情境。",
                   "不定义中国资格、临床授权或工资。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-details",
                 "limitation": "不定义中国资格、临床授权或工资。",
-                "market": "US",
+                "market": "美国",
                 "name": "29-1031.00 Dietitians and Nutritionists",
-                "period": "updated 2026; accessed 2026-08-30",
-                "publisher": "O*NET",
+                "period": "updated 2026; accessed 2026-09-19",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/29-1031.00"
+              },
+              {
+                "accessed_at": "2026-09-19",
+                "details": [
+                  "核验 2025 年 5 月全国工资中位与分位（49,090／63,080／76,400／89,340／103,720 美元/年）。",
+                  "全国统计位置不是个人起薪或地区报价。"
+                ],
+                "evidence_type": "official employment projections and wage table",
+                "id": "onet-wage-2025",
+                "limitation": "全国统计位置不是个人起薪或地区报价。",
+                "market": "美国",
+                "name": "29-1031.00 Dietitians and Nutritionists 全国工资",
+                "period": "2025 年 5 月工资数据; accessed 2026-09-19",
+                "publisher": "O*NET OnLine / U.S. Department of Labor（数据来源 BLS OEWS）",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/29-1031.00"
+              },
+              {
+                "accessed_at": "2026-09-19",
+                "details": [
+                  "第四条列出临床营养科职责（营养筛查与评估、诊断、治疗、宣教、会诊与 MDT、医疗膳食、肠内肠外营养建议或处方、特殊医学用途食品使用管理）；第六条明确经临床营养专业教育或培训的营养专业技术人员可开展营养咨询、筛查及评估、肠内营养配制、医疗膳食配置与宣教；第八条要求医疗膳食及肠内营养制备部门建立岗位健康档案、食品原料档案、餐具消毒、食品留样与卫生检查制度。",
+                  "为中国大陆医疗机构临床营养科的岗位与流程要求，不等于美国 29-1031.00 的执照、注册或工资口径。"
+                ],
+                "evidence_type": "official guidance",
+                "id": "nhc-clinical-nutrition-2022",
+                "limitation": "为中国大陆医疗机构临床营养科的岗位与流程要求，不等于美国 29-1031.00 的执照、注册或工资口径。",
+                "market": "中国大陆",
+                "name": "临床营养科建设与管理指南（试行）（国卫办医函〔2022〕76号）",
+                "period": "国卫办医函〔2022〕76号，2022-03-18；accessed 2026-09-19",
+                "publisher": "中华人民共和国国家卫生健康委员会",
+                "scope": "industry_proxy",
+                "url": "https://www.nhc.gov.cn/yzygj/c100068/202203/54bd37a93e50431a87cfa804a0102c3d.shtml"
+              },
+              {
+                "accessed_at": "2026-09-19",
+                "details": [
+                  "要求医疗机构按《营养筛查及评估工作规范（试行）》规范开展营养筛查与评估，重点人群含老年、儿童、孕产妇、肿瘤与手术患者。",
+                  "为工作推进要求，不提供职业工资、岗位数量或个人录用承诺。"
+                ],
+                "evidence_type": "official guidance",
+                "id": "nhc-clinical-nutrition-2024",
+                "limitation": "为工作推进要求，不提供职业工资、岗位数量或个人录用承诺。",
+                "market": "中国大陆",
+                "name": "关于进一步推进临床营养工作的通知（国卫办医政函〔2024〕333号）",
+                "period": "国卫办医政函〔2024〕333号，2024-09-10；accessed 2026-09-19",
+                "publisher": "中华人民共和国国家卫生健康委员会办公厅",
+                "scope": "industry_proxy",
+                "url": "https://www.gov.cn/zhengce/zhengceku/202409/content_6975727.htm"
+              },
+              {
+                "accessed_at": "2026-09-19",
+                "details": [
+                  "职业编码 4-14-02-01；设四级/中级工、三级/高级工、二级/技师、一级/高级技师四个等级；普通受教育程度为高中毕业（或同等学力）。",
+                  "公共营养师不在《国家职业资格目录》准入类之列，属职业技能等级认定，证书不具医师执业资质。"
+                ],
+                "evidence_type": "official guidance",
+                "id": "mohrss-public-nutritionist-2021",
+                "limitation": "职业技能等级证书不具医师执业资质，不得开展疾病诊疗或处方干预；既不等于美国 RDN 注册，也不等于州执照。",
+                "market": "中国大陆",
+                "name": "公共营养师国家职业技能标准（2021 年版）",
+                "period": "人社厅发〔2021〕92 号公布，2021-12-02；accessed 2026-09-19",
+                "publisher": "中华人民共和国人力资源和社会保障部",
+                "scope": "industry_proxy",
+                "url": "https://www.mohrss.gov.cn/wap/zc/zcwj/202112/W020211227599132291203.pdf"
+              },
+              {
+                "accessed_at": "2026-09-19",
+                "details": [
+                  "支持把 AI 输出纳入可治理流程：明确用途、验证、人工监督、留痕与风险处置。",
+                  "框架提供风险管理方法，不提供本职业采用率、替代概率或合规结论。"
+                ],
+                "evidence_type": "official guidance",
+                "id": "nist-ai-rmf",
+                "limitation": "框架提供风险管理方法，不提供本职业采用率、替代概率或合规结论。",
+                "market": "美国",
+                "name": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
+                "period": "NIST AI 100-1, 2023; accessed 2026-09-19",
+                "publisher": "U.S. National Institute of Standards and Technology",
+                "scope": "industry_proxy",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "accessed_at": "2026-09-19",
+                "details": [
+                  "把任务层面的生成式 AI 暴露与「实际采用、岗位增减」区分开，避免把技术可能性当作就业结论。",
+                  "指数不提供本职业的采用率、裁员率或因果就业证据。"
+                ],
+                "evidence_type": "official guidance",
+                "id": "ilo-ai-exposure",
+                "limitation": "不提供本职业的采用率、裁员率或因果就业证据。",
+                "market": "全球",
+                "name": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "period": "ILO 2025; accessed 2026-09-19",
+                "publisher": "International Labour Organization",
+                "scope": "market_signal",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               }
             ]
           },
@@ -8665,11 +8990,2411 @@
   ],
   "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "display": {
+    "component_order": [
+      "breadcrumb",
+      "hero",
+      "primary_cta",
+      "fermat_decision_card",
+      "fit_decision_checklist",
+      "definition_block",
+      "responsibilities_block",
+      "work_context_block",
+      "career_ai_description_block",
+      "career_quick_answers_block",
+      "onet_structured_fields_block",
+      "adjacent_career_comparison_table",
+      "ai_impact_table",
+      "career_snapshot_primary_locale",
+      "career_snapshot_secondary_locale",
+      "riasec_fit_block",
+      "personality_fit_block",
+      "career_risk_cards",
+      "career_path_block",
+      "market_signal_card",
+      "faq_block",
+      "boundary_notice",
+      "source_card"
+    ],
+    "components": {
+      "adjacent_career_comparison_table": {
+        "conclusion": "相邻职业与本职业在对象、工具与授权上不同，需分别补足能力、资格与责任证据。",
+        "evidence_links": [
+          {
+            "href": {
+              "$source": "adjacent-onet-21-1091-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "label": {
+              "$source": "adjacent-onet-21-1091-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            }
+          }
+        ],
+        "evidence_note": "相邻关系只用于方向比较，不代表自动转岗或资格互认。",
+        "heading": "相邻职业比较",
+        "intro": "比较核心工作与产出、授权边界与工作模式，不按名称互换。",
+        "rows": [
+          {
+            "关键区别": "设计并评估群体健康教育项目；不直接进行个体营养评估与饮食照护计划。",
+            "更适合什么选择": "若偏好群体项目与传播，可比较健康教育方向。",
+            "核心工作与产出": {
+              "$item": "dietitians-and-nutritionists.direction-comparison.adjacent-career-comparison-table.2",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "健康教育工作者（21-1091.00）"
+          },
+          {
+            "关键区别": "审核、调配并说明药物使用；对象是药品而非食物与营养摄入。",
+            "更适合什么选择": "若偏好药物与用药安全，可比较药学方向。",
+            "核心工作与产出": {
+              "$item": "dietitians-and-nutritionists.direction-comparison.adjacent-career-comparison-table.3",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "药剂师（29-1051.00）"
+          },
+          {
+            "关键区别": "通过活动与环境调整恢复日常生活功能；对象是功能而非营养状况。",
+            "更适合什么选择": "若偏好功能康复，可比较作业治疗方向。",
+            "核心工作与产出": {
+              "$item": "dietitians-and-nutritionists.direction-comparison.adjacent-career-comparison-table.4",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "作业治疗师（29-1122.00）"
+          },
+          {
+            "关键区别": "评估并设计运动项目以改善体能；对象是运动而非营养干预。",
+            "更适合什么选择": "若偏好运动与体能，可比较运动生理方向。",
+            "核心工作与产出": {
+              "$item": "dietitians-and-nutritionists.direction-comparison.adjacent-career-comparison-table.5",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "运动生理学家（29-1128.00）"
+          },
+          {
+            "关键区别": "评估健康需求并实施护理计划；授权与责任链不同。",
+            "更适合什么选择": "若偏好临床护理，可比较护理方向。",
+            "核心工作与产出": {
+              "$item": "dietitians-and-nutritionists.direction-comparison.adjacent-career-comparison-table.6",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "注册护士（29-1141.00）"
+          },
+          {
+            "关键区别": "临床、社区与团体供餐职责不同；临床诊断与治疗处方须由具备授权的人员作出。",
+            "更适合什么选择": "若偏好营养与饮食行为，可把本职业作为主线。",
+            "核心工作与产出": "评估饮食与健康信息，规划营养项目或膳食服务，开展教育与咨询并监测结果。",
+            "职业方向": "本职业方向：膳食与营养师（29-1031.00）"
+          }
+        ],
+        "transition": "下一步用可观察的受监督实践或工作样本验证方向。"
+      },
+      "ai_impact_table": {
+        "action_rows": [
+          {
+            "人群": "入行者",
+            "应对重点": "先完成受监督的评估与记录训练。"
+          },
+          {
+            "人群": "在岗者",
+            "应对重点": "把 AI 输出纳入既有复核流程。"
+          },
+          {
+            "人群": "管理者",
+            "应对重点": "先定权限、适用人群与停止条件。"
+          }
+        ],
+        "answer": {
+          "$item": "dietitians-and-nutritionists.ai-impact.ai-impact-table.2",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "authority_links": [
+          {
+            "来源": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "类型": "官方职业数据",
+            "适用范围": "仅按 O*NET 29-1031.00 口径使用。",
+            "链接": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "bls-current-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "类型": "官方统计",
+            "适用范围": "仅按 BLS 2025 年工资与 2025—2035 年预测口径使用。",
+            "链接": {
+              "$source": "bls-current-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "nist-ai-rmf",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按 AI 治理来源的原始口径使用。",
+            "链接": {
+              "$source": "nist-ai-rmf",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            }
+          }
+        ],
+        "difference_intro": {
+          "$item": "dietitians-and-nutritionists.ai-impact.ai-impact-table.4",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "difference_rows": [
+          {
+            "AI主要改变": "记录整理与营养计算",
+            "仍由人负责": "评估、诊断与处方边界",
+            "方向": "本职业任务"
+          },
+          {
+            "AI主要改变": "检索与材料起草",
+            "仍由人负责": "原始记录核对与责任留痕",
+            "方向": "工具辅助"
+          }
+        ],
+        "evidence_intro": {
+          "$item": "dietitians-and-nutritionists.ai-impact.ai-impact-table.3",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "evidence_rows": [
+          {
+            "使用限制": "仅适用于所列职业、市场与时期，不映射中国岗位。",
+            "来源": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "研究对象": "O*NET 职业档案",
+            "结论": "任务与工作情境有界",
+            "链接": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "仅适用于美国 29-1031.00 与所列期间。",
+            "来源": {
+              "$source": "bls-current-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "研究对象": "BLS 职业展望与 OEWS 工资",
+            "结论": "工资与就业口径有界",
+            "链接": {
+              "$source": "bls-current-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "不提供本职业采用率、替代概率或时间表。",
+            "来源": {
+              "$source": "nist-ai-rmf",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "研究对象": "AI 治理与安全来源",
+            "结论": "治理原则供参考",
+            "链接": {
+              "$source": "nist-ai-rmf",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            }
+          }
+        ],
+        "heading": {
+          "$item": "dietitians-and-nutritionists.ai-impact.ai-impact-table.1",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "method_cards": [
+          {
+            "含义": "先区分可辅助任务与最终临床责任。",
+            "概念": "任务能力"
+          },
+          {
+            "含义": "技术演示不等于机构采用，需批准、验证与人员复核。",
+            "概念": "采用条件"
+          },
+          {
+            "含义": "不能从任务暴露推导替代率或时间表。",
+            "概念": "岗位结果"
+          }
+        ],
+        "questions": [
+          {
+            "回答": "不能从任务暴露推导替代日期；临床评估与处方仍由具备资格的人员负责。",
+            "来源": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "链接": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "问题": "AI 会取代膳食与营养师吗？"
+          },
+          {
+            "回答": "先限定在记录整理、营养计算与材料起草。",
+            "来源": {
+              "$source": "bls-current-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "链接": {
+              "$source": "bls-current-2025-2035",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "问题": "AI 应先辅助什么？"
+          },
+          {
+            "回答": "营养诊断、治疗性处方、医疗膳食与肠内营养配制处方以及最终责任。",
+            "来源": {
+              "$source": "nist-ai-rmf",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "链接": {
+              "$source": "nist-ai-rmf",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "问题": "什么不能自动授权？"
+          }
+        ],
+        "responsibility_intro": {
+          "$item": "dietitians-and-nutritionists.ai-impact.ai-impact-table.5",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "responsibility_steps": [
+          {
+            "步骤": "核对输入",
+            "说明": "核对记录、单位、配料与数据库版本。"
+          },
+          {
+            "步骤": "限定任务",
+            "说明": "仅在机构批准的范围内使用 AI 辅助。"
+          },
+          {
+            "步骤": "人工复核",
+            "说明": "责任人复核输出并回看原始记录。"
+          },
+          {
+            "步骤": "记录升级",
+            "说明": "发现过敏原或授权冲突立即停止并上报。"
+          }
+        ],
+        "risk_rows": [
+          {
+            "为什么重要": "会让看似合理的计算进入照护计划。",
+            "控制方式": "先核对份量、单位与配料。",
+            "风险": "错误输入"
+          },
+          {
+            "为什么重要": "模型提示不能替代营养评估。",
+            "控制方式": "评估与计划由具备资格的人员作出。",
+            "风险": "提示不等于结论"
+          },
+          {
+            "为什么重要": "饮食与健康信息含敏感个人信息。",
+            "控制方式": "限最小必要信息、权限控制与留痕。",
+            "风险": "数据与隐私"
+          }
+        ],
+        "task_rows": [
+          {
+            "人的控制点": "核对原始记录与失败模式。",
+            "任务": "整理饮食记录与标签信息",
+            "工作方向": "记录与信息管理",
+            "当前变化": {
+              "$item": "dietitians-and-nutritionists.ai-impact.ai-impact-table.7",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": "按授权链保留人工判断。",
+            "任务": "完成营养评估与饮食照护计划",
+            "工作方向": "评估与计划",
+            "当前变化": {
+              "$item": "dietitians-and-nutritionists.ai-impact.ai-impact-table.8",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": "按临床授权与转介流程升级。",
+            "任务": "区分营养教育与临床诊疗",
+            "工作方向": "越权边界",
+            "当前变化": "不作自动诊断或治疗处方"
+          },
+          {
+            "人的控制点": "由责任人确认结论。",
+            "任务": "形成监测与复盘记录",
+            "工作方向": "复盘与改进",
+            "当前变化": "可能辅助整理与检索"
+          },
+          {
+            "人的控制点": "回到原始记录与标签核对。",
+            "任务": "核对单位、配料与数据库版本",
+            "工作方向": "输入与版本",
+            "当前变化": "自动营养估算须人工核对份量与单位"
+          },
+          {
+            "人的控制点": "发现越界即停止并升级。",
+            "任务": "识别冲突或缺失信息",
+            "工作方向": "边界与异常",
+            "当前变化": "发现过敏原或授权冲突时停止并升级"
+          },
+          {
+            "人的控制点": "责任人确认权限、结论与留痕。",
+            "任务": "形成可追溯的照护记录",
+            "工作方向": "采用与责任",
+            "当前变化": "最终评估与临床责任由具备资格的人员承担"
+          }
+        ],
+        "transition": {
+          "$item": "dietitians-and-nutritionists.ai-impact.ai-impact-table.6",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        }
+      },
+      "boundary_notice": [
+        "使用边界已在职业内容与来源登记中呈现；美国与中国大陆口径分别标注。",
+        {
+          "$link": "dietitians-and-nutritionists.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "dietitians-and-nutritionists.navigation.1",
+          "field": "url"
+        },
+        {
+          "$link": "dietitians-and-nutritionists.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "dietitians-and-nutritionists.navigation.2",
+          "field": "url"
+        },
+        {
+          "$link": "dietitians-and-nutritionists.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "dietitians-and-nutritionists.navigation.3",
+          "field": "url"
+        },
+        {
+          "$link": "dietitians-and-nutritionists.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "dietitians-and-nutritionists.navigation.4",
+          "field": "url"
+        },
+        {
+          "$link": "dietitians-and-nutritionists.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "dietitians-and-nutritionists.navigation.5",
+          "field": "url"
+        },
+        {
+          "$link": "dietitians-and-nutritionists.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "dietitians-and-nutritionists.navigation.6",
+          "field": "url"
+        },
+        {
+          "$link": "dietitians-and-nutritionists.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "dietitians-and-nutritionists.navigation.7",
+          "field": "url"
+        },
+        {
+          "$link": "dietitians-and-nutritionists.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "dietitians-and-nutritionists.navigation.8",
+          "field": "url"
+        },
+        {
+          "$link": "dietitians-and-nutritionists.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "dietitians-and-nutritionists.navigation.9",
+          "field": "url"
+        },
+        {
+          "$link": "dietitians-and-nutritionists.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "dietitians-and-nutritionists.navigation.10",
+          "field": "url"
+        },
+        {
+          "$link": "dietitians-and-nutritionists.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "dietitians-and-nutritionists.navigation.11",
+          "field": "url"
+        }
+      ],
+      "breadcrumb": {
+        "label": {
+          "$subject": "name"
+        },
+        "slug": {
+          "$subject": "canonical_slug"
+        }
+      },
+      "career_ai_description_block": {
+        "body": [
+          "AI 可辅助记录整理、营养计算与材料起草，但不能替代营养评估、临床判断与最终责任。"
+        ],
+        "heading": "膳食与营养师的工作对象与 AI 边界"
+      },
+      "career_path_block": {
+        "boundary": "入口要求、执照、注册、训练与最终临床责任由具体法域、机构或雇主核验。",
+        "competence_ladder": [
+          {
+            "description": "核对饮食与健康史、标签单位、配料与授权范围。",
+            "stage": "输入核对"
+          },
+          {
+            "description": "按指南与机构方案完成评估、计划与教育。",
+            "stage": "过程控制"
+          },
+          {
+            "description": "形成可复核的记录并交接异常与未完成事项。",
+            "stage": "结果复盘"
+          },
+          {
+            "description": "在授权范围内扩展专科、项目与质量管理职责。",
+            "stage": "责任扩展"
+          }
+        ],
+        "direct_answer": {
+          "$item": "dietitians-and-nutritionists.path.career-path-block.2",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "heading": {
+          "$item": "dietitians-and-nutritionists.path.career-path-block.1",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "locale_requirements": {
+          "credential_boundary": {
+            "$item": "dietitians-and-nutritionists.path.career-path-block.4",
+            "block": "path",
+            "copy_key": "career.item.career-path-block",
+            "type": "prose"
+          },
+          "jurisdiction": "美国由各州与雇主规定执照与注册；中国大陆临床营养科岗位与公共营养师技能等级是不同制度，须按所在地与机构核验资格与授权。",
+          "summary": {
+            "$item": "dietitians-and-nutritionists.path.career-path-block.3",
+            "block": "path",
+            "copy_key": "career.item.career-path-block",
+            "type": "prose"
+          }
+        },
+        "schema_version": "career.career_progression.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "adjacent-onet-21-1091-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "id": "adjacent-onet-21-1091-00",
+            "label": {
+              "$source": "adjacent-onet-21-1091-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adjacent-onet-29-1051-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "id": "adjacent-onet-29-1051-00",
+            "label": {
+              "$source": "adjacent-onet-29-1051-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adjacent-onet-29-1122-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "id": "adjacent-onet-29-1122-00",
+            "label": {
+              "$source": "adjacent-onet-29-1122-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adjacent-onet-29-1128-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "id": "adjacent-onet-29-1128-00",
+            "label": {
+              "$source": "adjacent-onet-29-1128-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "entry",
+            "stages": [
+              {
+                "credentials": "完成获认可课程与实习学时。",
+                "next_moves": "完成实习，准备执照或注册考试。",
+                "readiness_evidence": "实习记录与受监督的筛查、评估清单。",
+                "responsibility": {
+                  "$item": "dietitians-and-nutritionists.path.career-path-block.5",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "受监督实习"
+              },
+              {
+                "credentials": "按工作地要求取得执照或注册。",
+                "next_moves": "扩展专科方向或参与多学科团队。",
+                "readiness_evidence": "独立完成的评估与随访记录与质量抽查结果。",
+                "responsibility": {
+                  "$item": "dietitians-and-nutritionists.path.career-path-block.6",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "独立常规工作"
+              },
+              {
+                "credentials": "取得相应专科训练与经验。",
+                "next_moves": "参加专科进阶培训并处理更复杂病例。",
+                "readiness_evidence": "专科培训记录与复杂病例复核结果。",
+                "responsibility": {
+                  "$item": "dietitians-and-nutritionists.path.career-path-block.7",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "专科方向"
+              },
+              {
+                "credentials": "按机构要求参加带教与质量管理培训。",
+                "next_moves": "向营养科管理、餐饮管理或营养教育方向发展。",
+                "readiness_evidence": "质量改进与带教记录。",
+                "responsibility": {
+                  "$item": "dietitians-and-nutritionists.path.career-path-block.8",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "带教与质量把关"
+              }
+            ],
+            "title": "从受监督实习到独立执业"
+          },
+          {
+            "id": "specialist",
+            "stages": [
+              {
+                "credentials": "按方向要求补足学历、实习与执照。",
+                "next_moves": "进入受监督的专科或项目实践。",
+                "readiness_evidence": "方向与资格的学习记录。",
+                "responsibility": "明确目标方向（临床、社区、公共卫生、餐饮管理或研究）与所需资格。",
+                "role": "方向定位"
+              },
+              {
+                "credentials": "维持执照、注册与继续教育。",
+                "next_moves": "承担更复杂的个案与带教。",
+                "readiness_evidence": "复杂个案复核与质量抽查结果。",
+                "responsibility": "独立完成复杂或高风险个案并接受复核。",
+                "role": "复杂个案处理"
+              },
+              {
+                "credentials": "按项目与主管部门要求参加培训。",
+                "next_moves": "参与区域或机构营养项目管理。",
+                "readiness_evidence": "项目方案与效果评估记录。",
+                "responsibility": "设计并评估群体营养项目，形成可复核的效果数据。",
+                "role": "项目设计与评估"
+              },
+              {
+                "credentials": "按岗位要求参加教学与质量管理培训。",
+                "next_moves": "向营养教育或质量负责人方向发展。",
+                "readiness_evidence": "规范与培训材料的评审记录。",
+                "responsibility": "形成可复用的流程、材料与培训内容。",
+                "role": "规范与培训输出"
+              }
+            ],
+            "title": "专业深化与项目管理"
+          },
+          {
+            "id": "management",
+            "stages": [
+              {
+                "credentials": "按机构要求参加管理培训。",
+                "next_moves": "承担质量抽查与反馈职责。",
+                "readiness_evidence": "排班与协调记录。",
+                "responsibility": "在授权范围内协调营养照护与供餐安排。",
+                "role": "任务协调"
+              },
+              {
+                "credentials": "按机构要求参加质量管理与食品安全培训。",
+                "next_moves": "参与质量改进项目。",
+                "readiness_evidence": "质量抽查与改进记录。",
+                "responsibility": "抽查记录质量、单位与计算准确性并反馈改进意见。",
+                "role": "质量与安全"
+              },
+              {
+                "credentials": "按机构要求参加相关培训。",
+                "next_moves": "承担合规与安全管理职责。",
+                "readiness_evidence": "风险与合规检查记录。",
+                "responsibility": "落实过敏原、感染控制与信息处理规范并留痕。",
+                "role": "风险与合规"
+              },
+              {
+                "credentials": "按岗位要求参加管理与合规培训。",
+                "next_moves": "向营养科管理或机构管理方向发展。",
+                "readiness_evidence": "质量与安全管理记录。",
+                "responsibility": "按机构制度落实质量与安全责任并留存证据。",
+                "role": "责任治理"
+              }
+            ],
+            "title": "协作与管理"
+          }
+        ]
+      },
+      "career_quick_answers_block": {
+        "availability": "published",
+        "heading": "职业速答",
+        "items": [
+          {
+            "answer": {
+              "$item": "dietitians-and-nutritionists.profile.career-quick-answers-block.1",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa3",
+            "question": "这份工作先核对什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "对象",
+                  "secondary_value": null,
+                  "value": "膳食与营养师"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "输入",
+                  "secondary_value": null,
+                  "value": "饮食与健康史、标签与指南"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "交付",
+                  "secondary_value": null,
+                  "value": "评估记录、照护计划与教育材料"
+                }
+              ]
+            }
+          },
+          {
+            "answer": {
+              "$item": "dietitians-and-nutritionists.profile.career-quick-answers-block.2",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa2",
+            "question": "怎样判断工作闭环？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "闭环",
+                  "secondary_value": null,
+                  "value": "评估、计划、实施与监测"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤一",
+                  "secondary_value": null,
+                  "value": "收集与核对"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤二",
+                  "secondary_value": null,
+                  "value": "评估需求"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤三",
+                  "secondary_value": null,
+                  "value": "制定目标"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤四",
+                  "secondary_value": null,
+                  "value": "教育与实施"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤五",
+                  "secondary_value": null,
+                  "value": "监测"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤六",
+                  "secondary_value": null,
+                  "value": "复核与转介"
+                }
+              ]
+            }
+          },
+          {
+            "answer": "资格、授权与最终责任由具体法域、机构或雇主核验；公共营养师证书不具医师执业资质。",
+            "key": "qa1",
+            "question": "资格边界是什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "边界",
+                  "secondary_value": null,
+                  "value": "需独立核验"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "法域",
+                  "secondary_value": null,
+                  "value": "按所在地与机构确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "责任",
+                  "secondary_value": null,
+                  "value": "由具备资格的人员确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "法域",
+                  "secondary_value": null,
+                  "value": "按岗位职责确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "机构",
+                  "secondary_value": null,
+                  "value": "按岗位授权确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "训练",
+                  "secondary_value": null,
+                  "value": "按岗位与标准确认"
+                }
+              ]
+            }
+          }
+        ],
+        "schema_version": "career.quick_answers.v1"
+      },
+      "career_risk_cards": {
+        "boundary": "不可用本页替代法域、机构或雇主的安全与执业规则。",
+        "context_links": [
+          {
+            "href": "#career-visual-group-risk",
+            "label": "查看职业风险"
+          }
+        ],
+        "direct_answer": "先识别过敏原与饮食限制、单位与计算、越权诊疗、隐私与授权边界五类风险。",
+        "evidence_scope": "风险项按本职业内容与所列来源（O*NET 工作情境、临床营养科岗位流程与 RDN 实践范围）边界解释。",
+        "heading": "膳食与营养师的风险与控制点",
+        "risks": [
+          {
+            "affected_roles": "膳食与营养师",
+            "consequence": "可能导致过敏暴露，造成不可逆后果。",
+            "evidence_refs": [
+              "adjacent-onet-21-1091-00"
+            ],
+            "id": "risk-1",
+            "mitigation": "停止给出结论，回到原始标签与记录核对，并交有资格人员复核。",
+            "scenario": "标签、配料与本人记录中的已知过敏原信息不一致。",
+            "title": {
+              "$item": "dietitians-and-nutritionists.risk.career-risk-cards.1",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "膳食与营养师",
+            "consequence": "使营养计算与方案失真，影响监测与教育效果。",
+            "evidence_refs": [
+              "adjacent-onet-21-1091-00"
+            ],
+            "id": "risk-2",
+            "mitigation": "保留原单位、写出计算过程，并由第二人或原标签复核。",
+            "scenario": "把每份、每 100 克或毫升等单位读错或换算错误。",
+            "title": {
+              "$item": "dietitians-and-nutritionists.risk.career-risk-cards.2",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "膳食与营养师",
+            "consequence": "越过职责范围，可能造成伤害与责任风险。",
+            "evidence_refs": [
+              "adjacent-onet-21-1091-00"
+            ],
+            "id": "risk-3",
+            "mitigation": "停止输出并转交具有相应临床授权的人员。",
+            "scenario": "把一般营养教育写成疾病诊断或治疗性处方、自行调整治疗饮食。",
+            "title": {
+              "$item": "dietitians-and-nutritionists.risk.career-risk-cards.3",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "膳食与营养师",
+            "consequence": "造成个人信息与敏感医疗信息泄露。",
+            "evidence_refs": [
+              "adjacent-onet-21-1091-00"
+            ],
+            "id": "risk-4",
+            "mitigation": "只在机构批准系统按最小必要原则处理并留痕。",
+            "scenario": "把可识别的饮食与健康信息输入未批准的工具或对外披露。",
+            "title": {
+              "$item": "dietitians-and-nutritionists.risk.career-risk-cards.4",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "膳食与营养师",
+            "consequence": "可能导致越权执业或资格失效。",
+            "evidence_refs": [
+              "adjacent-onet-21-1091-00"
+            ],
+            "id": "risk-5",
+            "mitigation": "不确定时停止、保留依据并交负责人员复核，按法域核验资格。",
+            "scenario": "临床、社区与餐饮岗位的授权与责任不同，或资格与执照状态不明。",
+            "title": {
+              "$item": "dietitians-and-nutritionists.risk.career-risk-cards.5",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "膳食与营养师",
+            "consequence": "可能产生不可逆后果。",
+            "evidence_refs": [
+              "adjacent-onet-21-1091-00"
+            ],
+            "id": "risk-boundary",
+            "mitigation": "停止并按授权链升级。",
+            "scenario": "遇到超出授权范围的任务。",
+            "title": "责任边界"
+          }
+        ],
+        "schema_version": "career.work_risk.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "adjacent-onet-21-1091-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "id": "adjacent-onet-21-1091-00",
+            "label": {
+              "$source": "adjacent-onet-21-1091-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adjacent-onet-29-1051-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "id": "adjacent-onet-29-1051-00",
+            "label": {
+              "$source": "adjacent-onet-29-1051-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adjacent-onet-29-1122-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "id": "adjacent-onet-29-1122-00",
+            "label": {
+              "$source": "adjacent-onet-29-1122-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adjacent-onet-29-1128-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "id": "adjacent-onet-29-1128-00",
+            "label": {
+              "$source": "adjacent-onet-29-1128-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ]
+      },
+      "career_snapshot_primary_locale": {
+        "salary": {
+          "bls_table": [
+            {
+              "指标": "中国大陆职业工资口径",
+              "数值": "证据不足：未取得全国单职业口径",
+              "说明": "未取得全国单职业精确口径，不以行业代理值替代。"
+            }
+          ],
+          "china_ai_row": {
+            "$item": "dietitians-and-nutritionists.china-salary.career-snapshot-primary-locale.4",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_class_row": {
+            "$item": "dietitians-and-nutritionists.china-salary.career-snapshot-primary-locale.3",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_edu_table": [
+            {
+              "学历段": "临床营养科岗位",
+              "岗位方向": "医院与门诊临床营养",
+              "说明": "按机构岗位职责与授权核验。"
+            },
+            {
+              "学历段": "社区与公共卫生",
+              "岗位方向": "社区、学校与公共卫生营养",
+              "说明": "按项目与主管部门要求核验。"
+            },
+            {
+              "学历段": "团体供餐与营养管理",
+              "岗位方向": "医院、学校、养老与餐饮",
+              "说明": "按机构与食品安全要求核验。"
+            },
+            {
+              "学历段": "职业级工资口径",
+              "岗位方向": "全国单职业",
+              "说明": "证据不足：未取得全国单职业口径。"
+            }
+          ],
+          "china_industry_table": [
+            {
+              "备注": "不以行业平均工资替代职业工资。",
+              "行业": "医院与临床营养科",
+              "需求": "证据不足：未取得全国单职业口径"
+            },
+            {
+              "备注": "岗位与地区差异明显。",
+              "行业": "社区、学校与公共卫生",
+              "需求": "证据不足：未取得全国单职业口径"
+            },
+            {
+              "备注": "需按具体岗位核对。",
+              "行业": "团体供餐与餐饮",
+              "需求": "证据不足：未取得全国单职业口径"
+            }
+          ],
+          "china_intl": "中国与美国职业口径不作自动等同。",
+          "china_name_row": {
+            "$item": "dietitians-and-nutritionists.china-salary.career-snapshot-primary-locale.1",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_open": "证据不足：未取得全国单职业口径",
+          "china_ref": {
+            "$join": [
+              {
+                "$source": "adjacent-onet-21-1091-00",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "dietitians-and-nutritionists.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "adjacent-onet-21-1091-00",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "dietitians-and-nutritionists.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "china_salary_note": "中国公开来源仅用于说明口径边界，不提供职业工资。",
+          "china_salary_table": [
+            {
+              "城市/区间": "全国单职业",
+              "月薪参考": "证据不足：未取得全国单职业口径"
+            },
+            {
+              "城市/区间": "行业平均工资（不可替代）",
+              "月薪参考": "证据不足：未取得全国单职业口径"
+            },
+            {
+              "城市/区间": "招聘报价（不可替代）",
+              "月薪参考": "证据不足：未取得全国单职业口径"
+            }
+          ],
+          "china_soc_row": {
+            "$item": "dietitians-and-nutritionists.china-salary.career-snapshot-primary-locale.2",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "sources_note": {
+            "$join": [
+              {
+                "$source": "adjacent-onet-29-1051-00",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "dietitians-and-nutritionists.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "adjacent-onet-29-1051-00",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "dietitians-and-nutritionists.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "ui": {
+            "ai_heading": "AI 辅助边界",
+            "driver_heading": "影响因素",
+            "official_heading": "中国大陆公开口径",
+            "scenario_caption": "未取得全国单职业精确工资，不以行业平均或招聘报价替代。",
+            "scenario_heading": "职业场景边界",
+            "scenario_interpretation_label": "解释",
+            "scenario_role_label": "职业",
+            "scenario_value_label": "口径"
+          },
+          "us_growth": "美国预测见美国薪资参考板块。",
+          "us_median": "美国工资见美国薪资参考板块。"
+        }
+      },
+      "career_snapshot_secondary_locale": {
+        "authority_sources": {
+          "$join": [
+            {
+              "$source": "adjacent-onet-29-1051-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "adjacent-onet-29-1051-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            }
+          ],
+          "separator": ""
+        },
+        "bls_table": [
+          {
+            "指标": "美国薪资中位数",
+            "数值": "76,400 美元/年",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "adjacent-onet-21-1091-00",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "dietitians-and-nutritionists.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "adjacent-onet-21-1091-00",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "dietitians-and-nutritionists.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资 10 分位",
+            "数值": "49,090 美元/年",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "adjacent-onet-21-1091-00",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "dietitians-and-nutritionists.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "adjacent-onet-21-1091-00",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "dietitians-and-nutritionists.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资 90 分位",
+            "数值": "103,720 美元/年",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "adjacent-onet-21-1091-00",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "dietitians-and-nutritionists.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "adjacent-onet-21-1091-00",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "dietitians-and-nutritionists.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资单位",
+            "数值": "美元/年；美元/时",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "adjacent-onet-21-1091-00",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "dietitians-and-nutritionists.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "adjacent-onet-21-1091-00",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "dietitians-and-nutritionists.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资时期",
+            "数值": "2025 年 5 月（OEWS）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "adjacent-onet-21-1091-00",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "dietitians-and-nutritionists.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "adjacent-onet-21-1091-00",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "dietitians-and-nutritionists.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业规模",
+            "数值": "约 86,300 人（2025）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "adjacent-onet-29-1051-00",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "dietitians-and-nutritionists.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "adjacent-onet-29-1051-00",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "dietitians-and-nutritionists.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业增长（2025—2035）",
+            "数值": "8%（远快于平均）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "adjacent-onet-29-1051-00",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "dietitians-and-nutritionists.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "adjacent-onet-29-1051-00",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "dietitians-and-nutritionists.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业年均空缺（2025—2035）",
+            "数值": "约 5,700 个/年（2025—2035）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "adjacent-onet-29-1051-00",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "dietitians-and-nutritionists.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "adjacent-onet-29-1051-00",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "dietitians-and-nutritionists.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          }
+        ],
+        "boundary": "美国统计不代表中国职业工资或就业结果。",
+        "direct_answer": {
+          "$item": "dietitians-and-nutritionists.us-salary.career-snapshot-secondary-locale.2",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "factor_rows": [
+          {
+            "answer": "按 29-1031.00 职业代码核对。",
+            "factor": "职业口径"
+          },
+          {
+            "answer": "按来源地区核对。",
+            "factor": "地区"
+          },
+          {
+            "answer": "按 2025 年工资数据与 2025—2035 年预测核对。",
+            "factor": "时期"
+          }
+        ],
+        "factors_heading": {
+          "$item": "dietitians-and-nutritionists.us-salary.career-snapshot-secondary-locale.6",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "growth": "2025—2035 年预计增长 8%（远快于平均）",
+        "heading": {
+          "$item": "dietitians-and-nutritionists.us-salary.career-snapshot-secondary-locale.1",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_heading": {
+          "$item": "dietitians-and-nutritionists.us-salary.career-snapshot-secondary-locale.5",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_period": "2025 年 5 月工资数据（OEWS）",
+        "industry_rows": [
+          {
+            "industry": "医院、门诊与长期照护机构",
+            "median": "按来源",
+            "note": "岗位要求因机构不同。"
+          },
+          {
+            "industry": "社区、学校与公共卫生",
+            "median": "按来源",
+            "note": "地区与项目类型影响结果。"
+          },
+          {
+            "industry": "地区",
+            "median": "需核对",
+            "note": "地区工资差异明显。"
+          },
+          {
+            "industry": "时期",
+            "median": "2025 年 5 月工资数据",
+            "note": "不得忽略时间口径。"
+          }
+        ],
+        "industry_value_label": "来源原始值",
+        "interpretation_heading": {
+          "$item": "dietitians-and-nutritionists.us-salary.career-snapshot-secondary-locale.4",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "interpretation_rows": [
+          {
+            "answer": "按美国 29-1031.00 的职业与 2025 年工资、2025—2035 年预测口径解释。",
+            "question": "统计对象是什么？"
+          },
+          {
+            "answer": "不能；美国统计不外推到中国职业工资或就业。",
+            "question": "能否外推中国？"
+          },
+          {
+            "answer": "不能；分位是统计位置，不是个人起薪或录用保证。",
+            "question": "能否保证个人结果？"
+          },
+          {
+            "answer": "结合岗位、地区、时期与雇佣关系使用。",
+            "question": "如何使用？"
+          }
+        ],
+        "median": "76,400 美元/年（36.73 美元/时，2025 年）",
+        "outlook_heading": "就业展望",
+        "outlook_period": "2025—2035 年预测",
+        "wage_column_labels": [
+          "口径",
+          "数值",
+          "时期",
+          "限制"
+        ],
+        "wage_heading": {
+          "$item": "dietitians-and-nutritionists.us-salary.career-snapshot-secondary-locale.3",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "wage_tiers": [
+          {
+            "equivalent": "10 分位",
+            "interpretation": "分布低端统计位置，不是入职起薪。",
+            "label": "低位",
+            "value": "49,090 美元/年"
+          },
+          {
+            "equivalent": "50 分位",
+            "interpretation": "一半从业者低于、一半高于该值。",
+            "label": "中位",
+            "value": "76,400 美元/年"
+          },
+          {
+            "equivalent": "90 分位",
+            "interpretation": "分布高端统计位置，与专科、地区与雇佣关系相关。",
+            "label": "高位",
+            "value": "103,720 美元/年"
+          }
+        ]
+      },
+      "definition_block": {
+        "$join": [
+          {
+            "$item": "dietitians-and-nutritionists.profile.definition-block.1",
+            "block": "profile",
+            "copy_key": "career.item.definition-block",
+            "type": "prose"
+          },
+          {
+            "$item": "dietitians-and-nutritionists.profile.definition-block.2",
+            "block": "profile",
+            "copy_key": "career.item.definition-block",
+            "type": "prose"
+          }
+        ],
+        "separator": "\n"
+      },
+      "faq_block": {
+        "items": {
+          "$item": "dietitians-and-nutritionists.sources.faq.1",
+          "block": "sources",
+          "copy_key": "career.item.faq-block",
+          "type": "faq"
+        }
+      },
+      "fermat_decision_card": {
+        "caveat": {
+          "$item": "dietitians-and-nutritionists.quick-decision.fermat-decision-card.1",
+          "block": "quick-decision",
+          "copy_key": "career.item.fermat-decision-card",
+          "type": "prose"
+        },
+        "summary": {
+          "$item": "dietitians-and-nutritionists.quick-decision.fermat-decision-card.2",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "title": "膳食与营养师适合什么样的人？"
+      },
+      "fit_decision_checklist": {
+        "boundary": "这是工作样本与授权边界核对，不是人格诊断或录用结论。",
+        "how": {
+          "$item": "dietitians-and-nutritionists.quick-decision.fermat-decision-card.3",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "suit": {
+          "$item": "dietitians-and-nutritionists.quick-decision.fermat-decision-card.4",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        }
+      },
+      "hero": {
+        "h1": {
+          "$subject": "name"
+        },
+        "quick_answer": {
+          "$subject": "summary"
+        },
+        "title": {
+          "$subject": "name"
+        }
+      },
+      "market_signal_card": {
+        "context_links": [
+          {
+            "href": "#career-visual-group-market-signals",
+            "label": "查看市场信号"
+          }
+        ],
+        "direct_answer": {
+          "$item": "dietitians-and-nutritionists.market-signals.market-signal-card.2",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "heading": {
+          "$item": "dietitians-and-nutritionists.market-signals.market-signal-card.1",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "outlook_evidence": [
+          {
+            "geography": "美国",
+            "horizon": "2025—2035 年预测期",
+            "interpretation": "招聘样本、就业规模与职位空缺必须分别解释。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "市场信号",
+            "occupation_scope": "膳食与营养师（29-1031.00）",
+            "value": {
+              "$item": "dietitians-and-nutritionists.market-signals.market-signal-card.3",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "geography": "美国",
+            "horizon": "2025 年基期",
+            "interpretation": "就业存量与空缺不是同一指标。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "就业规模",
+            "occupation_scope": "膳食与营养师（29-1031.00）",
+            "value": "2025 年约 86,300 人"
+          },
+          {
+            "geography": "美国",
+            "horizon": "2025—2035 年预测期",
+            "interpretation": "职位空缺需按来源口径解释。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "职位空缺",
+            "occupation_scope": "膳食与营养师（29-1031.00）",
+            "value": "2025—2035 年年均约 5,700 个空缺"
+          }
+        ],
+        "schema_version": "career.outlook_transitions.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "adjacent-onet-21-1091-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "id": "adjacent-onet-21-1091-00",
+            "label": {
+              "$source": "adjacent-onet-21-1091-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adjacent-onet-29-1051-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "id": "adjacent-onet-29-1051-00",
+            "label": {
+              "$source": "adjacent-onet-29-1051-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adjacent-onet-29-1122-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "id": "adjacent-onet-29-1122-00",
+            "label": {
+              "$source": "adjacent-onet-29-1122-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adjacent-onet-29-1128-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "id": "adjacent-onet-29-1128-00",
+            "label": {
+              "$source": "adjacent-onet-29-1128-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ],
+        "transitions": [
+          {
+            "capability_gaps": {
+              "$item": "dietitians-and-nutritionists.market-signals.market-signal-card.5",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "dietitians-and-nutritionists.market-signals.market-signal-card.4",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "target_href": "/zh/career/jobs/health-educators",
+            "target_slug": "health-educators",
+            "target_title": "健康教育工作者：与本职业在对象上的差异",
+            "transition_distance": "近，对象不同"
+          },
+          {
+            "capability_gaps": "需要补足：药学专业知识、实习与执照。",
+            "shared_capabilities": "可转移能力：营养知识与患者沟通习惯。",
+            "target_href": "/zh/career/jobs/pharmacists",
+            "target_slug": "pharmacists",
+            "target_title": "药剂师：与本职业在对象上的差异",
+            "transition_distance": "中，需补专业学位"
+          },
+          {
+            "capability_gaps": "需要补足：功能评估、康复技术与临床授权。",
+            "shared_capabilities": "可转移能力：评估与个体沟通经验。",
+            "target_href": "/zh/career/jobs/occupational-therapists",
+            "target_slug": "occupational-therapists",
+            "target_title": "作业治疗师：与本职业在目标上的差异",
+            "transition_distance": "中，需补康复技术"
+          },
+          {
+            "capability_gaps": "需要补足：运动测试、生理监测与相应资格。",
+            "shared_capabilities": "可转移能力：健康行为改变与监测经验。",
+            "target_href": "/zh/career/jobs/exercise-physiologists",
+            "target_slug": "exercise-physiologists",
+            "target_title": "运动生理学家：与本职业在方法上的差异",
+            "transition_distance": "中，需补运动生理"
+          },
+          {
+            "capability_gaps": "需要补足：护理教育、临床实践与注册许可。",
+            "shared_capabilities": "可转移能力：健康沟通与记录规范意识。",
+            "target_href": "/zh/career/jobs/registered-nurses",
+            "target_slug": "registered-nurses",
+            "target_title": "注册护士：与本职业在授权上的差异",
+            "transition_distance": "远，需护理教育"
+          },
+          {
+            "capability_gaps": "需要补足：在营养师监督下执行的经验与岗位训练。",
+            "shared_capabilities": "可转移能力：营养与膳食基础知识。",
+            "target_href": "/zh/career/jobs/dietetic-technicians",
+            "target_slug": "dietetic-technicians",
+            "target_title": "膳食技术员：与本职业在层级上的差异",
+            "transition_distance": "近，层级不同"
+          }
+        ]
+      },
+      "onet_structured_fields_block": {
+        "availability": "published",
+        "heading": "O*NET 结构化字段",
+        "rows": [
+          {
+            "alternate_value": null,
+            "label": "职业身份与任务",
+            "secondary_value": null,
+            "value": {
+              "$item": "dietitians-and-nutritionists.profile.onet-structured-fields-block.1",
+              "block": "profile",
+              "copy_key": "career.item.onet-structured-fields-block",
+              "type": "prose"
+            }
+          }
+        ],
+        "schema_version": "career.onet_structured_fields.v1"
+      },
+      "personality_fit_block": {
+        "assessments": [
+          {
+            "answer": {
+              "$item": "dietitians-and-nutritionists.fit.riasec-fit-block.6",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "riasec",
+            "label": "兴趣与任务",
+            "question": "面对反复的记录核对与饮食咨询，能否保持耐心与准确？",
+            "signals": [
+              "记录",
+              "咨询"
+            ],
+            "watchout": "兴趣测评只提示探索方向，不作人格诊断或录用结论。"
+          },
+          {
+            "answer": {
+              "$item": "dietitians-and-nutritionists.fit.riasec-fit-block.7",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "big-five",
+            "label": "稳定执行",
+            "question": "能否长期维持跨专业沟通与持续监测？",
+            "signals": [
+              "沟通",
+              "监测"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": {
+              "$item": "dietitians-and-nutritionists.fit.riasec-fit-block.8",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "mbti",
+            "label": "偏好观察",
+            "question": "更愿意做个体临床咨询，还是群体项目与公共卫生？",
+            "signals": [
+              "个体",
+              "群体"
+            ],
+            "watchout": "偏好描述不作能力结论。"
+          },
+          {
+            "answer": "用实际观察与机构反馈核验，而不是靠测评判断。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "enneagram",
+            "label": "动机观察",
+            "question": "能否接受预算与可及性限制、依从性差异与情绪化沟通？",
+            "signals": [
+              "限制",
+              "沟通"
+            ],
+            "watchout": "不作录用依据。"
+          },
+          {
+            "answer": "通过模拟或受监督场景观察其判断与转交方式。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "iq",
+            "label": "问题解决",
+            "question": "信息矛盾或超出授权时，能否停下并转交？",
+            "signals": [
+              "判断",
+              "转交"
+            ],
+            "watchout": "不作能力评分。"
+          },
+          {
+            "answer": "用交接记录与团队反馈核验。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "eq",
+            "label": "协作边界",
+            "question": "能否与医师、护士与餐饮团队清楚交接？",
+            "signals": [
+              "交接",
+              "升级"
+            ],
+            "watchout": "不作录用结论。"
+          }
+        ],
+        "boundary": "这是工作样本与训练观察核对，不是人格诊断或录用结论。",
+        "direct_answer": {
+          "$item": "dietitians-and-nutritionists.fit.riasec-fit-block.2",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        },
+        "directions": [
+          {
+            "direction": "记录与评估",
+            "fit_signals": "能否逐项核对记录、单位与配料。",
+            "target": {
+              "href": {
+                "$link": "dietitians-and-nutritionists.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "adjacent-1",
+                "field": "url"
+              },
+              "slug": "health-educators",
+              "title": {
+                "$link": "dietitians-and-nutritionists.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "adjacent-1",
+                "field": "entity"
+              }
+            },
+            "watchouts": "注意过敏原与授权边界。"
+          },
+          {
+            "direction": "饮食照护计划",
+            "fit_signals": "能否把指南转成可执行方案。",
+            "target": {
+              "href": {
+                "$link": "dietitians-and-nutritionists.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "adjacent-2",
+                "field": "url"
+              },
+              "slug": "pharmacists",
+              "title": {
+                "$link": "dietitians-and-nutritionists.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "adjacent-2",
+                "field": "entity"
+              }
+            },
+            "watchouts": "不把一般建议写成治疗处方。"
+          },
+          {
+            "direction": "群体项目",
+            "fit_signals": "能否按项目目标收集与解释数据。",
+            "target": {
+              "href": {
+                "$link": "dietitians-and-nutritionists.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "adjacent-3",
+                "field": "url"
+              },
+              "slug": "occupational-therapists",
+              "title": {
+                "$link": "dietitians-and-nutritionists.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "adjacent-3",
+                "field": "entity"
+              }
+            },
+            "watchouts": "不把群体结论套用于个人诊疗。"
+          },
+          {
+            "direction": "监测与随访",
+            "fit_signals": "能否持续监测而非一次定论。",
+            "target": {
+              "href": {
+                "$link": "dietitians-and-nutritionists.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "adjacent-4",
+                "field": "url"
+              },
+              "slug": "exercise-physiologists",
+              "title": {
+                "$link": "dietitians-and-nutritionists.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "adjacent-4",
+                "field": "entity"
+              }
+            },
+            "watchouts": "保留记录与变更依据。"
+          },
+          {
+            "direction": "压力场景",
+            "fit_signals": "能否面对依从性差异与情绪化沟通。",
+            "target": {
+              "href": {
+                "$link": "dietitians-and-nutritionists.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "adjacent-5",
+                "field": "url"
+              },
+              "slug": "registered-nurses",
+              "title": {
+                "$link": "dietitians-and-nutritionists.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "adjacent-5",
+                "field": "entity"
+              }
+            },
+            "watchouts": "不可越过临床授权。"
+          },
+          {
+            "direction": "长期训练",
+            "fit_signals": "能否持续补足学历、实习与执照要求。",
+            "watchouts": "资格与执照按法域核验。"
+          }
+        ],
+        "heading": {
+          "$item": "dietitians-and-nutritionists.fit.riasec-fit-block.1",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        },
+        "questions": [
+          {
+            "answer": "用受监督实践与记录复核验证。",
+            "question": "能否稳定完成记录与评估？"
+          },
+          {
+            "answer": "按流程保存并保留计算过程。",
+            "question": "能否保留原始记录与单位？"
+          },
+          {
+            "answer": "设置停止与升级条件并保留记录。",
+            "question": "能否识别过敏原或授权冲突？"
+          },
+          {
+            "answer": "说明交接对象、状态与责任人。",
+            "question": "能否清楚交接异常？"
+          },
+          {
+            "answer": "根据复核意见修订方案。",
+            "question": "能否接受复核与反馈？"
+          },
+          {
+            "answer": "按所在地与雇主核验。",
+            "question": "能否补足学历、实习与执照？"
+          },
+          {
+            "answer": "工具不能替代营养评估、诊断与处方。",
+            "question": "能否理解 AI 与工具的边界？"
+          },
+          {
+            "answer": "完成一次可复核的纸面记录核对练习。",
+            "question": "如何继续验证？"
+          }
+        ],
+        "schema_version": "career.fit_decision_center.v1",
+        "signals": [
+          {
+            "body": {
+              "$item": "dietitians-and-nutritionists.fit.riasec-fit-block.3",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "fit",
+            "label": "适配信号",
+            "tone": "positive"
+          },
+          {
+            "body": {
+              "$item": "dietitians-and-nutritionists.fit.riasec-fit-block.4",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "caution",
+            "label": "注意信号",
+            "tone": "caution"
+          },
+          {
+            "body": {
+              "$item": "dietitians-and-nutritionists.fit.riasec-fit-block.5",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "experiment",
+            "label": "验证动作",
+            "tone": "action"
+          }
+        ],
+        "source_links": [
+          {
+            "href": {
+              "$source": "adjacent-onet-21-1091-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "label": {
+              "$source": "adjacent-onet-21-1091-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "adjacent-onet-29-1051-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "label": {
+              "$source": "adjacent-onet-29-1051-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "adjacent-onet-29-1122-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "label": {
+              "$source": "adjacent-onet-29-1122-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "adjacent-onet-29-1128-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "label": {
+              "$source": "adjacent-onet-29-1128-00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "dietitians-and-nutritionists.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          }
+        ]
+      },
+      "primary_cta": {
+        "entry_surface": "career_job_detail",
+        "href": "/zh/tests/holland-career-interest-test-riasec",
+        "label": "测我的职业兴趣是否适合膳食与营养师",
+        "source_page_type": "career_job_detail",
+        "subject_key": {
+          "$subject": "canonical_slug"
+        },
+        "subject_kind": "career_job",
+        "target_action": "start_riasec_test",
+        "test_slug": "holland-career-interest-test-riasec"
+      },
+      "responsibilities_block": [
+        {
+          "$join": [
+            {
+              "$item": "dietitians-and-nutritionists.profile.responsibilities-block.1",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$join": [
+            {
+              "$item": "dietitians-and-nutritionists.profile.responsibilities-block.2",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$join": [
+            {
+              "$item": "dietitians-and-nutritionists.profile.responsibilities-block.3",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        }
+      ],
+      "riasec_fit_block": {
+        "fit_interest": "兴趣只提示探索方向；实际适配以受监督实践与训练反馈核验。",
+        "interest": "官方兴趣代码 SI（社会型、研究型）：以人际沟通、营养评估与基于证据的方案设计为主。",
+        "riasec": "SI",
+        "riasec_short": "官方兴趣代码 SI；不作人格诊断或录用依据。"
+      },
+      "source_card": {
+        "eeat_signals": {
+          "author": "FermatMind research workflow",
+          "source": {
+            "$source": "adjacent-onet-21-1091-00",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "name",
+            "item": "dietitians-and-nutritionists.source-register.published.1"
+          },
+          "updated_at": {
+            "$source": "adjacent-onet-21-1091-00",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "period",
+            "item": "dietitians-and-nutritionists.source-register.published.1"
+          }
+        },
+        "note": "来源范围、限制与统计时期按原始证据分别核对；未取得的数据在相应位置可见标记。"
+      },
+      "work_context_block": {
+        "$join": [
+          {
+            "$item": "dietitians-and-nutritionists.profile.work-context-block.1",
+            "block": "profile",
+            "copy_key": "career.item.work-context-block",
+            "type": "prose"
+          },
+          {
+            "$item": "dietitians-and-nutritionists.profile.work-context-block.2",
+            "block": "profile",
+            "copy_key": "career.item.work-context-block",
+            "type": "prose"
+          },
+          {
+            "$item": "dietitians-and-nutritionists.sources.boundary.1",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          },
+          {
+            "$item": "dietitians-and-nutritionists.sources.boundary.1.2",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          },
+          {
+            "$item": "dietitians-and-nutritionists.quick-decision.fermat-decision-card.5",
+            "block": "quick-decision",
+            "copy_key": "career.item.fit-decision-checklist",
+            "type": "prose"
+          }
+        ],
+        "separator": "\n"
+      }
+    },
+    "contract_version": "career.detail.display.v1",
+    "locale": "zh-CN",
+    "native_items": [
+      {
+        "block": "source-register",
+        "copy_key": "career.item.published-sources",
+        "id": "dietitians-and-nutritionists.source-register.published.1",
+        "location": "sources",
+        "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-role-comparison",
+        "id": "dietitians-and-nutritionists.path.entry-role-comparison.current.v1",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.interview-probation",
+        "id": "dietitians-and-nutritionists.path.interview-probation.current.v1",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.credential-decision",
+        "id": "dietitians-and-nutritionists.path.credential-decision.current.v1",
+        "location": "entry_decisions",
+        "type": "table"
+      }
+    ],
+    "path": "/zh/career/jobs/dietitians-and-nutritionists",
+    "section_titles": {
+      "ai-impact": "AI 影响",
+      "china-salary": "中国大陆薪资参考",
+      "direction-comparison": "职业方向比较",
+      "fit": "职业适配指南",
+      "market-signals": "职业前景与相关职业转向",
+      "navigation": "目录",
+      "path": "入行、资格与职业发展",
+      "profile": "职业画像",
+      "quick-decision": "快速判断",
+      "risk": "工作压力与职业边界",
+      "source-register": "来源登记",
+      "sources": "常见问题与资料来源",
+      "us-salary": "美国薪资参考"
+    }
+  },
   "fact_register": {
     "facts": [
       {
         "derivation": "正文可见条目直接引用，未进行跨口径计算。",
-        "display_value": "O*NET 29-1031.00 规划并实施膳食服务或营养项目以促进健康、控制疾病，可监督团体供餐、提供咨询或开展研究。",
+        "display_value": "O*NET 29-1031.00 规划并实施膳食服务或营养项目以促进健康、控制疾病；可监督团体供餐部门、为个人与群体提供营养咨询、开展营养筛查与评估，或从事营养研究。",
         "fact_id": "content-profile-1",
         "market": "US",
         "measure": "职业身份与职责",
@@ -8681,7 +11406,7 @@
       },
       {
         "derivation": "正文可见条目直接引用，未进行跨口径计算。",
-        "display_value": "暂无可安全使用的数据：国家统计局 2025 行业代理：城镇非私营‘卫生和社会工作’年平均工资 146,266 元、私营 75,631 元；不是营养师职业工资。",
+        "display_value": "证据不足：未取得与中国大陆膳食与营养师对应的全国单职业工资口径；不以行业平均工资、招聘报价或美国数据替代。",
         "fact_id": "content-china-salary-1",
         "market": "CN",
         "measure": "中国数据边界",
@@ -8693,7 +11418,7 @@
       },
       {
         "derivation": "正文可见条目直接引用，未进行跨口径计算。",
-        "display_value": "BLS 当前 2025–2035 表：就业约 86,300→93,000，增长 7.7%（OOH 四舍五入为 8%），年均 岗位空缺 5,700；2025 中位年薪 76,400 美元。",
+        "display_value": "美国 29-1031.00（2025 年）：就业约 86,300 人；2025—2035 年预计增长 8%（远快于平均，净增约 6,700 人），年均约 5,700 个职位空缺；2025 年 5 月中位年薪 76,400 美元（36.73 美元/时）。",
         "fact_id": "content-us-salary-1",
         "market": "美国",
         "measure": "美国工资与预测口径",
@@ -8705,7 +11430,7 @@
       },
       {
         "derivation": "正文可见条目直接引用，未进行跨口径计算。",
-        "display_value": "当前 BLS 表列典型入门为本科并含实习/受监督训练；具体资格与岗位要求应按工作地和雇主另行核对。",
+        "display_value": "美国通常需学士或硕士学位并完成受监督实习（Internship/residency），多数州要求执照；学历、实习与执照按所在地和雇主核验。",
         "fact_id": "content-path-1",
         "market": "美国",
         "measure": "典型入口或路径边界",
@@ -8736,37 +11461,41 @@
       "key": "ai",
       "label": "AI 任务暴露"
     },
-    "badges": [],
+    "badges": [
+      "营养评估与膳食方案 · 营养咨询与教育 · 项目与餐饮服务管理",
+      "O*NET-SOC 29-1031.00 · 2025 年工资数据",
+      "Job Zone 五级 · 学士或硕士＋实习 · 兴趣代码 SI"
+    ],
     "metrics": [
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "content-us-salary-1",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "美国中位工资（2025 年 5 月，76,400 美元/年；36.73 美元/时）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "content-us-salary-1",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国就业预测（2025—2035 年增长 8%，远快于平均）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "content-us-salary-1",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国在岗人数（2025 年，约 86,300 人）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "content-us-salary-1",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国年均职位空缺（2025—2035 年，约 5,700 个）"
       },
       {
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "中国大陆薪资参考"
+        "label": "中国大陆薪资参考（未取得全国单职业口径，见中国大陆薪资参考板块）"
       }
     ]
   },
@@ -8781,7 +11510,7 @@
       "text": "膳食与营养师"
     }
   },
-  "source_content_sha256": "75f14547b9ba6fdea584d62c0c0fef476cb8e4f18bd2096242cc05ed9e68428d",
+  "source_content_sha256": "a8f1c24c7b2f703714a97c508a5004a03f67ddc11621e3358e528e184e72912b",
   "subject": {
     "canonical_slug": "dietitians-and-nutritionists",
     "name": "膳食与营养师",

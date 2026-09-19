@@ -215,6 +215,12 @@
       "item:drywall-and-ceiling-tile-installers-and-tapers.sources.boundary.1": {
         "status": "pending_mapping"
       },
+      "item:drywall-and-ceiling-tile-installers-and-tapers.sources.boundary.1.2": {
+        "status": "pending_mapping"
+      },
+      "item:drywall-and-ceiling-tile-installers-and-tapers.sources.boundary.1.3": {
+        "status": "pending_mapping"
+      },
       "item:drywall-and-ceiling-tile-installers-and-tapers.sources.faq.1": {
         "status": "pending_mapping"
       },
@@ -7230,7 +7236,7 @@
       "items": [
         {
           "availability": "available",
-          "copy_key": "career.item.fit-decision-checklist",
+          "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
               "该组合职业把图纸和现场尺寸转成墙面或吊顶基层与饰面：安装工测量、切割和固定板材，接缝处理工贴带、嵌缝与打磨，吊顶安装工搭网格并安装板块。"
@@ -7294,7 +7300,7 @@
       "items": [
         {
           "availability": "available",
-          "copy_key": "career.item.work-context-block",
+          "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
               "本页是由两个官方 O*NET 精确职业组成的有界组合：47-2081.00 石膏板与吊顶板安装工负责测量、切割并固定墙板或吊顶板；47-2082.00 接缝处理工负责封接板缝、贴带、涂抹嵌缝料并打磨或修补表面。"
@@ -7308,7 +7314,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.work-context-block",
+          "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
               "真实输入包括施工图与房间尺寸、龙骨和基层、板材或吊顶板、开口与节点、紧固件、嵌缝材料和现场安全条件。"
@@ -7322,7 +7328,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.work-context-block",
+          "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
               "安装工放线测量、切割搬运并固定板材；吊顶工布置悬吊网格；接缝处理工贴带、分层嵌缝、打磨和修补。"
@@ -7336,7 +7342,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.work-context-block",
+          "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
               "关键判断包括排板和切口、接缝位置、表面平整度、材料损耗，以及发现潮湿、结构、机电或防火节点冲突时停下协调。"
@@ -7378,7 +7384,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.work-context-block",
+          "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
               "质量标准是尺寸、紧固间距、板缝与转角处理、表面等级和缺陷修补满足图纸与项目要求。"
@@ -7392,7 +7398,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.work-context-block",
+          "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
               "责任边界：真实从业者会搬运、切割、高处安装和打磨；这些动作必须受现场培训、防坠、粉尘和设备规则约束。"
@@ -7643,7 +7649,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆暂无可安全使用的数据：现有官方来源未提供与石膏板与吊顶板安装工及接缝处理工精确一一对应的全国职业工资分布。"
+              "证据不足：未取得与石膏板与吊顶板安装工及接缝处理工精确对应的中国大陆全国职业工资分布；现有官方来源为行业与单位类型聚合口径。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.china-salary.career-snapshot-primary-locale.1",
@@ -7657,7 +7663,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页不把行业平均写成职业中位数，也不提供统一起薪、月薪或个人到手收入。"
+              "证据不足：本页不把行业平均或单位类型聚合值写成职业中位数，也不提供统一起薪、月薪或个人到手收入。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.china-salary.career-snapshot-primary-locale.2",
@@ -7906,7 +7912,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.personality-fit-block",
+          "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
               "比较岗位时要区分安装、吊顶网格和接缝饰面的实际占比。"
@@ -8027,23 +8033,45 @@
             "column_keys": [
               "role",
               "initial_tasks",
-              "boundary"
+              "boundary",
+              "evidence",
+              "next_step"
             ],
             "rows": [
               [
                 "安装助手/学徒",
                 "搬运材料、测量标记并在监督下准备安装",
-                "不得独立承担高处或未授权工具作业"
+                "不得独立承担高处、用电或未授权工具作业",
+                "跟岗记录与带教评语；能回到图纸复核尺寸",
+                "在带教下独立完成基础安装工序"
               ],
               [
-                "Drywall/ceiling tile installer（47-2081）",
-                "切割、固定板材或吊顶系统并检查平整度",
-                "按图纸、现场规则和质量验收工作"
+                "石膏板与吊顶板安装工（47-2081.00）",
+                "放线测量、切割并固定墙板或吊顶板，检查平整度与紧固间距",
+                "按图纸、现场安全与质量验收要求施工",
+                "自检记录、尺寸复核与质量抽查结果",
+                "提升复杂布局与吊顶系统能力"
               ],
               [
-                "Taper（47-2082）",
-                "处理接缝、胶带和饰面",
-                "属于本组合的 47-2082.00 子角色；接缝职责不得归入 47-2081.00"
+                "接缝处理工（Taper，47-2082.00）",
+                "贴带、分层嵌缝、打磨并修补表面缺陷",
+                "接缝职责属 47-2082.00，不并入 47-2081.00",
+                "分层嵌缝与打磨记录、表面等级检查结果",
+                "提升表面等级控制与缺陷修补能力"
+              ],
+              [
+                "吊顶安装方向",
+                "布置悬吊网格、安装吊顶板并处理洞口与灯具节点",
+                "高处作业须按项目安全计划与防坠规则执行",
+                "吊顶网格与标高记录、隐蔽验收记录",
+                "承担复杂吊顶系统与节点协调"
+              ],
+              [
+                "现场协作与交接",
+                "与电工、管道、保温与油漆等工种交接工序界面",
+                "界面的质量与安全责任按项目分工确认",
+                "交接记录、遗留项清单与验收确认",
+                "按角色分工承担检查或带教职责"
               ]
             ]
           },
@@ -8128,23 +8156,33 @@
             "column_keys": [
               "stage",
               "observed_evidence",
-              "possible_check"
+              "possible_check",
+              "escalation"
             ],
             "rows": [
               [
                 "面试",
-                "按图说明测量、排版和减少返工的方法",
-                "能指出安装与 taper 边界"
+                "能按图纸说明测量、排版与减少返工的方法",
+                "能否说明安装与接缝处理的分工边界",
+                "界面或授权不明时交招聘与用人部门确认"
               ],
               [
                 "试工",
-                "在监督下完成指定小样并自检",
-                "遵守高处、粉尘和工具规则"
+                "在监督下完成指定小样并自检平整度与缺陷",
+                "是否遵守高处、用电与粉尘防护规则",
+                "未通过安全评估时暂停独立作业并安排补训"
               ],
               [
                 "交接",
-                "标出完成面、缺陷和待处理接缝",
-                "不掩盖基层问题"
+                "标出完成面、缺陷与待处理接缝并记录遗留项",
+                "是否掩盖基层或节点问题",
+                "发现隐瞒或重复缺陷时转项目负责人处理"
+              ],
+              [
+                "转正与独立作业",
+                "独立完成的工序记录与质量抽查结果",
+                "是否按图纸版本与验收标准施工",
+                "出现安全事件或越权行为时按项目制度处理"
               ]
             ]
           },
@@ -8162,28 +8200,66 @@
             "column_keys": [
               "credential",
               "conditions",
-              "boundary"
+              "boundary",
+              "evidence",
+              "jurisdiction",
+              "next_step",
+              "review"
             ],
             "rows": [
               [
-                "高中/基础施工训练",
-                "建立读图、测量、材料和安全基础",
-                "不是统一法定执照"
+                "高中或同等学历",
+                "无正式学历门槛，多数通过在职培训入行",
+                "学历本身不授予现场作业授权",
+                "学历材料与录用条件",
+                "按雇主与项目核验",
+                "核对目标岗位的教育与经验要求",
+                "由雇主确认"
               ],
               [
-                "学徒或在岗训练",
-                "按 47-2081.00 练安装与吊顶任务，按 47-2082.00 单独练接缝处理",
-                "两个子角色训练分别识别，不合并为统一授权"
+                "在职培训或学徒（47-2081.00）",
+                "在带教下练习测量、切割与板材固定",
+                "训练完成不等于现场高处作业授权",
+                "培训时长与带教评语",
+                "按雇主与项目核验",
+                "核对目标项目的训练要求",
+                "由雇主与项目确认"
+              ],
+              [
+                "在职培训或学徒（47-2082.00）",
+                "单独练习贴带、嵌缝、打磨与缺陷修补",
+                "接缝训练不并入 47-2081.00 的授权",
+                "培训记录与表面等级检查结果",
+                "按雇主与项目核验",
+                "核对目标项目的训练要求",
+                "由雇主与项目确认"
               ],
               [
                 "安全培训",
-                "按雇主和项目要求核对",
-                "培训不替代现场授权"
+                "按项目要求参加高处、用电与粉尘防护培训",
+                "培训不替代现场安全交底与作业许可",
+                "安全培训记录与考核结果",
+                "按项目与工作地核验",
+                "核对项目安全培训与证件要求",
+                "由项目安全负责人确认"
               ],
               [
-                "项目/工会要求",
-                "在目标地区和项目逐项确认",
-                "不能从全国组合统计推出"
+                "工会或项目规则",
+                "在目标地区与项目逐项确认学徒与用工规则",
+                "不能从全国组合统计推出",
+                "工会或项目文件、学徒登记记录",
+                "按工作地与项目核验",
+                "核对目标项目的用工与学徒规则",
+                "由工会或项目确认"
+              ],
+              [
+                "证书（可选）",
+                "O*NET 认证目录用于发现可能的证书",
+                "认证不等于许可证、雇主任命或签字权",
+                "证书与有效期记录",
+                "按工作地与雇主核验",
+                "核对雇主是否承认该证书",
+                "由雇主与发证机构确认"
               ]
             ]
           },
@@ -8280,39 +8356,46 @@
           "availability": "available",
           "copy_key": "career.item.entry-work-sample-data",
           "data": {
-            "column_keys": [
-              "evidence_id",
-              "description",
-              "boundary"
-            ],
-            "rows": [
-              [
-                "事实",
-                "逐条抄录编号、版本、单位或给定值",
-                "可回到材料定位"
-              ],
-              [
-                "判断",
-                "写公式或规则及结果",
-                "事实与假设分开"
-              ],
-              [
-                "边界",
-                "写停止条件与不可执行事项",
-                "不越权"
-              ],
-              [
-                "交接",
-                "写待核问题、责任人和下一步",
-                "接手者可复核"
-              ]
+            "entries": [
+              {
+                "id": "row-1",
+                "values": [
+                  "事实",
+                  "逐条抄录编号、版本、单位或给定值",
+                  "可回到材料定位"
+                ]
+              },
+              {
+                "id": "row-2",
+                "values": [
+                  "判断",
+                  "写公式或规则及结果",
+                  "事实与假设分开"
+                ]
+              },
+              {
+                "id": "row-3",
+                "values": [
+                  "边界",
+                  "写停止条件与不可执行事项",
+                  "不越权"
+                ]
+              },
+              {
+                "id": "row-4",
+                "values": [
+                  "交接",
+                  "写待核问题、责任人和下一步",
+                  "接手者可复核"
+                ]
+              }
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.path.entry-work-sample-data.3",
           "source_refs": [
             "g04-editor"
           ],
-          "type": "table"
+          "type": "cards"
         },
         {
           "availability": "available",
@@ -8428,7 +8511,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国合并职业口径，2026 年访问：组合职业 2025—2035 年预计增长 2%。预测不是个人录用概率。"
+              "美国组合职业口径（47-2081.00 与 47-2082.00）：2025—2035 年预计增长 2%（慢于平均）。"
             ]
           },
           "fact_refs": [
@@ -8446,7 +8529,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国合并职业口径，2026 年访问：同期年均岗位空缺约 7,600 个。空缺可能含替代需求，不等于净新增。"
+              "同期年均岗位空缺约 7,600 个；空缺含替代需求，不等于净新增。"
             ]
           },
           "fact_refs": [
@@ -8464,7 +8547,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "招聘样本必须分开标记 47-2081 installer 与 47-2082 taper，并记录项目类型、工会、学徒和安全要求。"
+              "2025 年组合职业在岗约 118,000 人。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.market-signals.market-signal-card.3",
@@ -8478,7 +8561,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "预制、测量或排版工具要映射到具体安装任务；现场误差、基层条件、高处和成品验收仍需人工判断。"
+              "可转移能力：测量、切割、现场质量意识与安全习惯。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.market-signals.market-signal-card.4",
@@ -8492,7 +8575,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "组合内比较 47-2081.00 与 47-2082.00 时分别核对材料、工序和训练；转向木工时按新职业重核，不用组合页统计代表任一精确职业。"
+              "需要补足：木结构与构件施工、模板与木工读图。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.market-signals.market-signal-card.5",
@@ -8517,6 +8600,7 @@
               {
                 "answer": "安装工放线测量、切割搬运并固定板材；吊顶工布置悬吊网格；接缝处理工贴带、分层嵌缝、打磨和修补。 质量标准是尺寸、紧固间距、板缝与转角处理、表面等级和缺陷修补满足图纸与项目要求。",
                 "id": "drywall-and-ceiling-tile-installers-and-tapers.faq.1",
+                "question": "石膏板与吊顶板安装工及接缝处理工：日常工作如何形成闭环？",
                 "question_key": "career.faq.drywall-and-ceiling-tile-installers-and-tapers.daily-work",
                 "source_refs": [
                   "repair-current-us"
@@ -8525,6 +8609,7 @@
               {
                 "answer": "Drywall and ceiling tile installer（47-2081）：测量、切割并固定石膏板或吊顶材料，交付重点是安装精度与基层质量；Taper（47-2082）：处理接缝、胶带与饰面，为后续表面完成做准备；它与 47-2081 是不同精确代码；吊顶安装：虽可落在 47-2081 范围内，但材料系统、悬挂布局与高处作业情境更突出；木工：覆盖更广的木结构、模板和构件施工，工具有交集但材料、读图与责任范围不同。",
                 "id": "drywall-and-ceiling-tile-installers-and-tapers.faq.2",
+                "question": "石膏板与吊顶板安装工及接缝处理工：它与相邻职业有什么区别？",
                 "question_key": "career.faq.drywall-and-ceiling-tile-installers-and-tapers.role-comparison",
                 "source_refs": [
                   "dir-carpenter",
@@ -8535,6 +8620,7 @@
               {
                 "answer": "喜欢用尺寸和手工结果直接看到进度；能重复搬运、举升、固定、嵌缝和打磨；对平整度、接缝和表面缺陷敏感；愿意在灰尘、噪声和多工种交叉现场工作；能按图纸又愿意现场复测；能接受项目节奏、早班或短期工地变化；不适合忽视高处、粉尘和搬运风险的人；比较岗位时要区分安装、吊顶网格和接缝饰面的实际占比。",
                 "id": "drywall-and-ceiling-tile-installers-and-tapers.faq.3",
+                "question": "石膏板与吊顶板安装工及接缝处理工：什么行为信号可以帮助判断适配？",
                 "question_key": "career.faq.drywall-and-ceiling-tile-installers-and-tapers.fit",
                 "source_refs": [
                   "repair-current-us"
@@ -8543,6 +8629,7 @@
               {
                 "answer": "编辑推演：工具可协助整理房间表、材料清单和纸面算量；这不证明工地已经采用生成式 AI。现有来源没有证明生成式 AI 对该组合职业产生确定的净就业影响。",
                 "id": "drywall-and-ceiling-tile-installers-and-tapers.faq.4",
+                "question": "石膏板与吊顶板安装工及接缝处理工：AI 可以辅助哪些任务？",
                 "question_key": "career.faq.drywall-and-ceiling-tile-installers-and-tapers.ai-impact",
                 "source_refs": [
                   "g04-editor"
@@ -8551,6 +8638,7 @@
               {
                 "answer": "编辑推演：可起草排板检查单或交接记录，但不能确认现场尺寸、节点、防火体系或可施工性；失败模式包括漏洞口和异形节点、混淆单位、采用错误损耗率，或把示意图当成施工图；采用前要确认图纸版本、现场联网、数据责任、主管复核和变更记录；本页没有部署率证据；人工控制是现场复测、对图纸和材料批次、检查基层与节点，再由现场责任人验收；本页采用保守使用边界：不让模型决定高处作业、动力切割、脚手、防坠、粉尘控制或结构/防火变更；剩余人工责任包括测量、搬运与安装手艺、表面判断、现场协调、缺陷修补和安全执行。",
                 "id": "drywall-and-ceiling-tile-installers-and-tapers.faq.5",
+                "question": "石膏板与吊顶板安装工及接缝处理工：哪些判断必须由人负责？",
                 "question_key": "career.faq.drywall-and-ceiling-tile-installers-and-tapers.human-control",
                 "source_refs": [
                   "g04-editor"
@@ -8559,14 +8647,16 @@
               {
                 "answer": "现有中国官方来源没有提供与石膏板与吊顶板安装工及接缝处理工精确一一对应的全国职业工资分布；本页不显示行业平均、统一起薪或个人报价。",
                 "id": "drywall-and-ceiling-tile-installers-and-tapers.faq.6",
+                "question": "石膏板与吊顶板安装工及接缝处理工：中国大陆薪资应如何核对？",
                 "question_key": "career.faq.drywall-and-ceiling-tile-installers-and-tapers.china-pay",
                 "source_refs": [
                   "nbs-wages"
                 ]
               },
               {
-                "answer": "先把岗位映射到组合内的精确角色：47-2081.00 聚焦测量、切割、固定墙板或吊顶板，47-2082.00 聚焦封缝、贴带、嵌缝、打磨与修补；训练、工资与现场权限按实际角色分别核对。",
+                "answer": "美国这个组合职业通常无正式学历门槛，多数通过在职培训或学徒入行；安装（47-2081.00）与接缝处理（47-2082.00）的训练分别识别，安全培训按项目要求参加。学历、培训、证书与现场作业授权须按工作地与雇主分别核验，培训完成不等于高处作业授权。",
                 "id": "drywall-and-ceiling-tile-installers-and-tapers.faq.7",
+                "question": "石膏板与吊顶板安装工及接缝处理工：入行通常需要什么教育或训练？",
                 "question_key": "career.faq.drywall-and-ceiling-tile-installers-and-tapers.education-path",
                 "source_refs": [
                   "g04-editor",
@@ -8577,6 +8667,7 @@
               {
                 "answer": "招聘样本必须分开标记 47-2081 installer 与 47-2082 taper，并记录项目类型、工会、学徒和安全要求。预制、测量或排版工具要映射到具体任务；现场误差、高处和成品验收仍需人工判断。组合内比较两种角色时分别核对材料、工序和训练；转向木工时按新职业重核，不用组合页统计代表任一精确职业。",
                 "id": "drywall-and-ceiling-tile-installers-and-tapers.faq.8",
+                "question": "石膏板与吊顶板安装工及接缝处理工：就业展望与相邻转向应如何理解？",
                 "question_key": "career.faq.drywall-and-ceiling-tile-installers-and-tapers.outlook-transition",
                 "source_refs": [
                   "g04-editor"
@@ -8600,10 +8691,8 @@
           "availability": "available",
           "copy_key": "career.item.boundary-notice",
           "data": {
-            "entries": [
-              "中国与美国数据分栏；精确职业、组合职业、父职业和行业口径不得互相改写。",
-              "AI 内容区分来源支持的通用边界与明确标注的编辑推演；不声称真实部署率、自动授权或净就业影响。",
-              "本页纸面练习只用于职业探索，不构成真实执业、设备操作、临床、教学、工程、法律或安全授权。"
+            "paragraphs": [
+              "中国与美国数据分栏；精确职业、组合职业、父职业和行业口径不得互相改写。"
             ]
           },
           "id": "drywall-and-ceiling-tile-installers-and-tapers.sources.boundary.1",
@@ -8620,7 +8709,55 @@
             "onet-trends",
             "repair-current-us"
           ],
-          "type": "list"
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "paragraphs": [
+              "AI 内容区分来源支持的通用边界与明确标注的编辑推演；不声称真实部署率、自动授权或净就业影响。"
+            ]
+          },
+          "id": "drywall-and-ceiling-tile-installers-and-tapers.sources.boundary.1.2",
+          "source_refs": [
+            "dir-carpenter",
+            "dir-floor-layer",
+            "dir-painter",
+            "g04-editor",
+            "nbs-wages",
+            "onet-details",
+            "onet-hot",
+            "onet-summary",
+            "onet-tapers",
+            "onet-trends",
+            "repair-current-us"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "paragraphs": [
+              "本页纸面练习只用于职业探索，不构成真实执业、设备操作、临床、教学、工程、法律或安全授权。"
+            ]
+          },
+          "id": "drywall-and-ceiling-tile-installers-and-tapers.sources.boundary.1.3",
+          "source_refs": [
+            "dir-carpenter",
+            "dir-floor-layer",
+            "dir-painter",
+            "g04-editor",
+            "nbs-wages",
+            "onet-details",
+            "onet-hot",
+            "onet-summary",
+            "onet-tapers",
+            "onet-trends",
+            "repair-current-us"
+          ],
+          "type": "prose"
         }
       ]
     },
@@ -8889,10 +9026,10 @@
                 "id": "repair-current-us",
                 "limitation": "中位数不是起薪；就业规模不是招聘量；预测不是个人录用保证；父职业数据不得改写为精确职业数据。",
                 "market": "美国",
-                "name": "石膏板与吊顶板安装工及接缝处理工美国工资与就业官方页面",
+                "name": "Drywall Installers, Ceiling Tile Installers, and Tapers（47-2081.00 与 47-2082.00 组合）",
                 "period": "2025 wages and latest displayed outlook; accessed 2026-09-06",
                 "publisher": "U.S. Bureau of Labor Statistics / O*NET OnLine",
-                "scope": "combined_official",
+                "scope": "exact",
                 "url": "https://www.bls.gov/ooh/construction-and-extraction/drywall-and-ceiling-tile-installers-and-tapers.htm"
               }
             ]
@@ -8905,11 +9042,2346 @@
   ],
   "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "display": {
+    "component_order": [
+      "breadcrumb",
+      "hero",
+      "primary_cta",
+      "fermat_decision_card",
+      "fit_decision_checklist",
+      "definition_block",
+      "responsibilities_block",
+      "work_context_block",
+      "career_ai_description_block",
+      "career_quick_answers_block",
+      "onet_structured_fields_block",
+      "adjacent_career_comparison_table",
+      "ai_impact_table",
+      "career_snapshot_primary_locale",
+      "career_snapshot_secondary_locale",
+      "riasec_fit_block",
+      "personality_fit_block",
+      "career_risk_cards",
+      "career_path_block",
+      "market_signal_card",
+      "faq_block",
+      "boundary_notice",
+      "source_card"
+    ],
+    "components": {
+      "adjacent_career_comparison_table": {
+        "conclusion": "相邻职业与本职业在对象、材料与授权上不同，需分别补足工具、资格与责任证据。",
+        "evidence_links": [
+          {
+            "href": {
+              "$source": "dir-carpenter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "label": {
+              "$source": "dir-carpenter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            }
+          }
+        ],
+        "evidence_note": {
+          "$join": [
+            "相邻关系只用于方向比较，不代表自动转岗或资格互认。",
+            {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.direction-comparison.adjacent-career-comparison-table.7",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            }
+          ],
+          "separator": "；"
+        },
+        "heading": "相邻职业比较",
+        "intro": "比较核心工作与产出、责任边界与工作模式，不按名称互换。",
+        "rows": [
+          {
+            "关键区别": "负责测量、切割并固定墙板或吊顶板，交付重点是安装精度与基层质量。",
+            "更适合什么选择": "若偏好板材安装与吊顶系统，选安装方向。",
+            "核心工作与产出": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.direction-comparison.adjacent-career-comparison-table.1",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "石膏板与吊顶板安装工（47-2081.00）"
+          },
+          {
+            "关键区别": "负责封缝、贴带、嵌缝与打磨饰面，为涂装或贴壁纸做准备。",
+            "更适合什么选择": "若偏好表面找平与饰面工序，选嵌缝方向。",
+            "核心工作与产出": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.direction-comparison.adjacent-career-comparison-table.2",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "接缝处理工（Taper，47-2082.00）"
+          },
+          {
+            "关键区别": "材料系统、悬挂网格与高处作业情境更突出。",
+            "更适合什么选择": "若关注吊顶系统与高处作业，选吊顶方向。",
+            "核心工作与产出": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.direction-comparison.adjacent-career-comparison-table.3",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "吊顶安装（组合内方向）"
+          },
+          {
+            "关键区别": "覆盖木结构、模板与构件施工；材料、读图与责任范围不同。",
+            "更适合什么选择": "若偏好木结构与构件，比较木工方向。",
+            "核心工作与产出": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.direction-comparison.adjacent-career-comparison-table.4",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "木工（Carpenters，47-2031.00）"
+          },
+          {
+            "关键区别": "承接已完成基层并涂装保护或装饰涂层；不以板材固定或接缝找平为核心。",
+            "更适合什么选择": "若偏好涂装饰面，比较油漆工方向。",
+            "核心工作与产出": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.direction-comparison.adjacent-career-comparison-table.5",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "建筑与维护油漆工（Painters，47-2141.00）"
+          },
+          {
+            "关键区别": "测量、切割并铺设地面覆盖材料；材料方向与基层判断不同。",
+            "更适合什么选择": "若偏好地面材料铺装，比较地面铺装方向。",
+            "核心工作与产出": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.direction-comparison.adjacent-career-comparison-table.6",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "地面铺装工（Floor Layers，47-2042.00）"
+          }
+        ],
+        "transition": "下一步用可观察交付或跟岗观察验证方向。"
+      },
+      "ai_impact_table": {
+        "action_rows": [
+          {
+            "人群": "入行者",
+            "应对重点": "先用纸面练习与跟岗观察建立复测与检查习惯。"
+          },
+          {
+            "人群": "在岗者",
+            "应对重点": "把工具输出纳入既有自检与交接流程。"
+          },
+          {
+            "人群": "管理者",
+            "应对重点": "先定图纸版本、复核与停止条件。"
+          }
+        ],
+        "answer": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.ai-impact.ai-impact-table.2",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "authority_links": [
+          {
+            "来源": {
+              "$source": "dir-carpenter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "dir-carpenter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "dir-floor-layer",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "dir-floor-layer",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "dir-painter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "dir-painter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            }
+          }
+        ],
+        "difference_intro": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.ai-impact.ai-impact-table.4",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "difference_rows": [
+          {
+            "AI主要改变": "尺寸与材料清单整理",
+            "仍由人负责": "现场复测、手艺与安全判断",
+            "方向": "本职业任务"
+          },
+          {
+            "AI主要改变": "排板与交接记录起草",
+            "仍由人负责": "原始记录核对与责任留痕",
+            "方向": "工作流程"
+          }
+        ],
+        "evidence_intro": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.ai-impact.ai-impact-table.3",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "evidence_rows": [
+          {
+            "使用限制": "仅适用于所列职业、市场与时期；不外推到中国或所有项目与雇主。",
+            "来源": {
+              "$source": "dir-carpenter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "研究对象": "来源覆盖范围",
+            "结论": "仅支持有界判断",
+            "链接": {
+              "$source": "dir-carpenter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "仅适用于所列职业、市场与时期；不外推到中国或所有项目与雇主。",
+            "来源": {
+              "$source": "dir-floor-layer",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "研究对象": "来源覆盖范围",
+            "结论": "仅支持有界判断",
+            "链接": {
+              "$source": "dir-floor-layer",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "仅适用于所列职业、市场与时期；不外推到中国或所有项目与雇主。",
+            "来源": {
+              "$source": "dir-painter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "研究对象": "来源覆盖范围",
+            "结论": "仅支持有界判断",
+            "链接": {
+              "$source": "dir-painter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            }
+          }
+        ],
+        "heading": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.ai-impact.ai-impact-table.1",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "method_cards": [
+          {
+            "含义": "先区分可辅助任务与必须由现场责任人完成的判断。",
+            "概念": "任务能力"
+          },
+          {
+            "含义": "技术演示不等于工地采用；需批准、验证与人员复核。",
+            "概念": "采用条件"
+          },
+          {
+            "含义": "不能从任务暴露推导裁撤时间或替代率。",
+            "概念": "岗位结果"
+          }
+        ],
+        "questions": [
+          {
+            "回答": "不能从任务暴露推导替代日期；现场复测、手艺与安全判断仍需人负责。",
+            "来源": {
+              "$source": "dir-carpenter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "链接": {
+              "$source": "dir-carpenter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "问题": "AI 会取代这个职业吗？"
+          },
+          {
+            "回答": "先限定在尺寸整理、材料清单与记录起草。",
+            "来源": {
+              "$source": "dir-floor-layer",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "链接": {
+              "$source": "dir-floor-layer",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "问题": "AI 应先辅助什么？"
+          },
+          {
+            "回答": "高处作业、动力切割、脚手架与防坠、粉尘控制与结构或防火变更。",
+            "来源": {
+              "$source": "dir-painter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "链接": {
+              "$source": "dir-painter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "问题": "什么不能自动授权？"
+          }
+        ],
+        "responsibility_intro": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.ai-impact.ai-impact-table.5",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "responsibility_steps": [
+          {
+            "步骤": "核对输入",
+            "说明": "确认图纸版本、尺寸来源与材料批次。"
+          },
+          {
+            "步骤": "限定任务",
+            "说明": "只在批准的范围内使用工具辅助。"
+          },
+          {
+            "步骤": "人工复核",
+            "说明": "现场责任人复核输出并回看图纸与实物。"
+          },
+          {
+            "步骤": "记录升级",
+            "说明": "发现节点冲突或安全隐患立即停止并上报。"
+          }
+        ],
+        "risk_rows": [
+          {
+            "为什么重要": "会把错误尺寸或损耗率带入施工。",
+            "控制方式": "核对图纸版本、尺寸与材料。",
+            "风险": "错误输入"
+          },
+          {
+            "为什么重要": "会改变高处、用电与防火的责任边界。",
+            "控制方式": "按现场授权链处理。",
+            "风险": "权限越界"
+          },
+          {
+            "为什么重要": "可能遗漏临边、洞口与防火节点。",
+            "控制方式": "保留人工判断与现场检查。",
+            "风险": "自动化误读"
+          }
+        ],
+        "task_rows": [
+          {
+            "人的控制点": "回到图纸与现场复核原始数值。",
+            "任务": "整理房间尺寸与材料清单",
+            "工作方向": "记录与信息管理",
+            "当前变化": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.ai-impact.ai-impact-table.7",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": "手艺、表面判断与现场协调由人负责。",
+            "任务": "执行安装与嵌缝核心任务",
+            "工作方向": "执行与协同",
+            "当前变化": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.ai-impact.ai-impact-table.8",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": "按现场安全与授权链升级。",
+            "任务": "高处、用电与防火关键判断",
+            "工作方向": "安全与授权",
+            "当前变化": "不作自动授权"
+          },
+          {
+            "人的控制点": "由现场责任人确认结论。",
+            "任务": "形成检查与交接记录",
+            "工作方向": "复盘与改进",
+            "当前变化": "可能辅助整理"
+          },
+          {
+            "人的控制点": "回到图纸与现场复测原始数值。",
+            "任务": "核对图纸版本与尺寸",
+            "工作方向": "输入与版本",
+            "当前变化": "编辑推演：工具可协助整理房间表、材料清单与纸面算量；这不证明工地已采用生成式 AI。"
+          },
+          {
+            "人的控制点": "发现越界或隐患即停止并升级。",
+            "任务": "识别节点冲突与缺失信息",
+            "工作方向": "边界与异常",
+            "当前变化": "编辑推演：可起草排板或交接检查单，但不能确认现场尺寸、节点、防火体系或可施工性。"
+          },
+          {
+            "人的控制点": "责任人确认权限、结论与留痕。",
+            "任务": "形成可追溯的施工与交接记录",
+            "工作方向": "采用与责任",
+            "当前变化": "编辑推演：失败模式包括洞口与异形节点、单位混用、错误损耗率，或把示意图当成施工图。"
+          }
+        ],
+        "transition": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.ai-impact.ai-impact-table.6",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        }
+      },
+      "boundary_notice": [
+        "使用边界已在职业内容与来源说明中呈现；美国与中国大陆口径分别标注，组合内两个精确职业不合并统计。",
+        {
+          "$link": "drywall-and-ceiling-tile-installers-and-tapers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "drywall-and-ceiling-tile-installers-and-tapers.navigation.1",
+          "field": "url"
+        },
+        {
+          "$link": "drywall-and-ceiling-tile-installers-and-tapers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "drywall-and-ceiling-tile-installers-and-tapers.navigation.2",
+          "field": "url"
+        },
+        {
+          "$link": "drywall-and-ceiling-tile-installers-and-tapers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "drywall-and-ceiling-tile-installers-and-tapers.navigation.3",
+          "field": "url"
+        },
+        {
+          "$link": "drywall-and-ceiling-tile-installers-and-tapers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "drywall-and-ceiling-tile-installers-and-tapers.navigation.4",
+          "field": "url"
+        },
+        {
+          "$link": "drywall-and-ceiling-tile-installers-and-tapers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "drywall-and-ceiling-tile-installers-and-tapers.navigation.5",
+          "field": "url"
+        },
+        {
+          "$link": "drywall-and-ceiling-tile-installers-and-tapers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "drywall-and-ceiling-tile-installers-and-tapers.navigation.6",
+          "field": "url"
+        },
+        {
+          "$link": "drywall-and-ceiling-tile-installers-and-tapers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "drywall-and-ceiling-tile-installers-and-tapers.navigation.7",
+          "field": "url"
+        },
+        {
+          "$link": "drywall-and-ceiling-tile-installers-and-tapers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "drywall-and-ceiling-tile-installers-and-tapers.navigation.8",
+          "field": "url"
+        },
+        {
+          "$link": "drywall-and-ceiling-tile-installers-and-tapers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "drywall-and-ceiling-tile-installers-and-tapers.navigation.9",
+          "field": "url"
+        },
+        {
+          "$link": "drywall-and-ceiling-tile-installers-and-tapers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "drywall-and-ceiling-tile-installers-and-tapers.navigation.10",
+          "field": "url"
+        },
+        {
+          "$link": "drywall-and-ceiling-tile-installers-and-tapers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "drywall-and-ceiling-tile-installers-and-tapers.navigation.11",
+          "field": "url"
+        }
+      ],
+      "breadcrumb": {
+        "label": {
+          "$subject": "name"
+        },
+        "slug": {
+          "$subject": "canonical_slug"
+        }
+      },
+      "career_ai_description_block": {
+        "body": [
+          "AI 与数字化工具可辅助整理房间尺寸表、材料清单与纸面算量、起草排板与交接检查单；但现场复测、节点处理、高处与用电安全、防火与结构变更的判断与最终责任仍由现场责任人承担。"
+        ],
+        "heading": "石膏板与吊顶板安装工及接缝处理工的工作对象与 AI 边界"
+      },
+      "career_path_block": {
+        "boundary": "入口要求、训练、安全授权与最终责任由具体工作地、项目或雇主核验。",
+        "competence_ladder": [
+          {
+            "description": "核对图纸版本、尺寸来源与材料批次。",
+            "stage": "读图与复测"
+          },
+          {
+            "description": "按规程完成安装或嵌缝并自检。",
+            "stage": "工序执行"
+          },
+          {
+            "description": "形成可复核记录并交接遗留项。",
+            "stage": "检查与交接"
+          },
+          {
+            "description": "在授权范围内承担复杂工序与带教。",
+            "stage": "责任扩展"
+          }
+        ],
+        "direct_answer": "组合内按角色分别成长：47-2081.00 从受监督测量与固定走向复杂布局或吊顶系统，47-2082.00 从贴带嵌缝走向表面等级控制与缺陷修补。",
+        "heading": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.path.career-path-block.1",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "locale_requirements": {
+          "credential_boundary": "证书与培训不等于现场高处或设备作业授权，也不等于雇主录用。",
+          "jurisdiction": "训练、安全授权与雇主规则按工作地、项目与雇主分别核验。",
+          "summary": "美国这个组合职业通常无正式学历门槛，通过在职培训或学徒入行；训练与安全要求按工作地与雇主核验。"
+        },
+        "schema_version": "career.career_progression.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "dir-carpenter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "id": "dir-carpenter",
+            "label": {
+              "$source": "dir-carpenter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "dir-floor-layer",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "id": "dir-floor-layer",
+            "label": {
+              "$source": "dir-floor-layer",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "dir-painter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "id": "dir-painter",
+            "label": {
+              "$source": "dir-painter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "id": "nbs-wages",
+            "label": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "entry",
+            "stages": [
+              {
+                "credentials": "按雇主与项目要求参加安全培训。",
+                "next_moves": "独立完成基础安装或嵌缝工序。",
+                "readiness_evidence": "跟岗记录与带教评语。",
+                "responsibility": "在带教下搬运材料、测量标记并准备安装。",
+                "role": "受监督学徒"
+              },
+              {
+                "credentials": "按项目与工会要求核验。",
+                "next_moves": "提升平整度与表面等级控制。",
+                "readiness_evidence": "自检与交接记录、质量抽查结果。",
+                "responsibility": "按图纸与规程完成常规板材固定或接缝处理。",
+                "role": "基础安装或嵌缝"
+              },
+              {
+                "credentials": "按工作地要求补充训练。",
+                "next_moves": "承担复杂布局或吊顶系统。",
+                "readiness_evidence": "独立作业记录与返修情况。",
+                "responsibility": "独立完成常规工序并处理常见缺陷。",
+                "role": "独立作业"
+              },
+              {
+                "credentials": "按项目要求补充专项训练。",
+                "next_moves": "承担带教与质量检查。",
+                "readiness_evidence": "复杂工序与验收记录。",
+                "responsibility": "处理异形节点、吊顶网格与高等级饰面。",
+                "role": "复杂工序"
+              }
+            ],
+            "title": "入门路径"
+          },
+          {
+            "id": "specialist",
+            "stages": [
+              {
+                "credentials": "按工作地与雇主核验。",
+                "next_moves": "补足材料与系统知识。",
+                "readiness_evidence": "能说明输入与限制。",
+                "responsibility": "明确安装与接缝工序的对象、材料与验收标准。",
+                "role": "工序定义"
+              },
+              {
+                "credentials": "按项目要求核验。",
+                "next_moves": "复核成品表面等级。",
+                "readiness_evidence": "保留工艺与检查记录。",
+                "responsibility": "按规程使用切割、固定、嵌缝与打磨工具。",
+                "role": "工具与工艺"
+              },
+              {
+                "credentials": "按工作地核验。",
+                "next_moves": "按授权链处理并留痕。",
+                "readiness_evidence": "有升级与处理记录。",
+                "responsibility": "识别基层、节点与湿度异常并停止。",
+                "role": "异常处理"
+              },
+              {
+                "credentials": "按工作地核验。",
+                "next_moves": "扩大责任前重新核验。",
+                "readiness_evidence": "复盘结论可追溯。",
+                "responsibility": "形成可复用的工序与缺陷修补经验。",
+                "role": "工艺复盘"
+              }
+            ],
+            "title": "专业深化"
+          },
+          {
+            "id": "management",
+            "stages": [
+              {
+                "credentials": "按雇主与项目要求核验。",
+                "next_moves": "检查完成面与遗留项。",
+                "readiness_evidence": "边界与责任人清楚。",
+                "responsibility": "在授权范围内安排工序与人员。",
+                "role": "任务分派"
+              },
+              {
+                "credentials": "按项目要求核验。",
+                "next_moves": "处理验收例外。",
+                "readiness_evidence": "记录偏差与整改。",
+                "responsibility": "复核尺寸、平整度与接缝质量。",
+                "role": "质量控制"
+              },
+              {
+                "credentials": "按项目安全要求培训。",
+                "next_moves": "保留决定依据。",
+                "readiness_evidence": "异常及时上报。",
+                "responsibility": "落实高处、用电、粉尘与防火措施。",
+                "role": "安全与风险"
+              },
+              {
+                "credentials": "按岗位要求核验。",
+                "next_moves": "向现场或项目管理方向发展。",
+                "readiness_evidence": "证据链完整。",
+                "responsibility": "按制度落实质量与安全责任。",
+                "role": "现场管理"
+              }
+            ],
+            "title": "协作与管理"
+          }
+        ]
+      },
+      "career_quick_answers_block": {
+        "availability": "published",
+        "heading": "职业速答",
+        "items": [
+          {
+            "answer": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.profile.work-context-block.8",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa3",
+            "question": "这份工作先核对什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "对象",
+                  "secondary_value": null,
+                  "value": "石膏板与吊顶板安装工及接缝处理工"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "输入",
+                  "secondary_value": null,
+                  "value": "图纸版本、房间尺寸、材料与基层"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "交付",
+                  "secondary_value": null,
+                  "value": "尺寸合格的安装面与接缝成品"
+                }
+              ]
+            }
+          },
+          {
+            "answer": "以读图与复测、安装或嵌缝、表面检查与交接形成闭环。",
+            "key": "qa2",
+            "question": "怎样判断工作闭环？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "闭环",
+                  "secondary_value": null,
+                  "value": "读图、复测、安装或嵌缝、检查与交接"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤一",
+                  "secondary_value": null,
+                  "value": "核对图纸与尺寸"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤二",
+                  "secondary_value": null,
+                  "value": "确认材料与基层"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤三",
+                  "secondary_value": null,
+                  "value": "安装或嵌缝作业"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤四",
+                  "secondary_value": null,
+                  "value": "自检平整度与缺陷"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤五",
+                  "secondary_value": null,
+                  "value": "记录并交接"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤六",
+                  "secondary_value": null,
+                  "value": "按反馈修补并复盘"
+                }
+              ]
+            }
+          },
+          {
+            "answer": "本组合职业通常无统一法定执照；雇主与项目要求、安全培训与工会或学徒规则按工作地核验。",
+            "key": "qa1",
+            "question": "资格边界是什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "边界",
+                  "secondary_value": null,
+                  "value": "通常无统一法定执照"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "法域",
+                  "secondary_value": null,
+                  "value": "在职培训或学徒"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "责任",
+                  "secondary_value": null,
+                  "value": "按项目要求参加"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "法域",
+                  "secondary_value": null,
+                  "value": "按工作地确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "机构",
+                  "secondary_value": null,
+                  "value": "按雇主规则确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "训练",
+                  "secondary_value": null,
+                  "value": "由现场责任人确认"
+                }
+              ]
+            }
+          }
+        ],
+        "schema_version": "career.quick_answers.v1"
+      },
+      "career_risk_cards": {
+        "boundary": "不可用本页替代工作地、项目或雇主的安全规则。",
+        "context_links": [
+          {
+            "href": "#career-visual-group-risk",
+            "label": "查看职业风险"
+          }
+        ],
+        "direct_answer": "先识别高处与搬运、粉尘与飞散物、图纸与尺寸、节点与防火冲突、基层与接缝隐蔽缺陷五类风险。",
+        "evidence_scope": "风险项按本职业内容与所列来源（O*NET 工作情境与官方职业资料）边界解释。",
+        "heading": "石膏板与吊顶板安装工及接缝处理工的风险与控制点",
+        "risks": [
+          {
+            "affected_roles": "石膏板与吊顶板安装工及接缝处理工",
+            "consequence": "可能造成跌落或材料碰伤，后果严重且不可逆。",
+            "evidence_refs": [
+              "dir-carpenter"
+            ],
+            "id": "risk-1",
+            "mitigation": "暂停作业、按项目安全计划确认搬运方式与作业设备，由现场负责人决定复工。",
+            "scenario": "板材需在高处定位或人工搬运而设备与分工未确认。",
+            "title": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.risk.career-risk-cards.1",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "石膏板与吊顶板安装工及接缝处理工",
+            "consequence": "可能造成施工人员与同场人员的粉尘暴露。",
+            "evidence_refs": [
+              "dir-carpenter"
+            ],
+            "id": "risk-2",
+            "mitigation": "按项目材料与安全要求使用适用控制，条件不明则交现场安全负责人。",
+            "scenario": "切割或打磨产生粉尘与飞散物而控制措施未确认。",
+            "title": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.risk.career-risk-cards.2",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "石膏板与吊顶板安装工及接缝处理工",
+            "consequence": "可能造成错位与返工，影响后续工种进度。",
+            "evidence_refs": [
+              "dir-carpenter"
+            ],
+            "id": "risk-3",
+            "mitigation": "先核对版本、复测并记录差异，由项目负责人确认变更。",
+            "scenario": "尺寸、放线或图纸版本不一致。",
+            "title": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.risk.career-risk-cards.3",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "石膏板与吊顶板安装工及接缝处理工",
+            "consequence": "相关系统可能被遮挡或失效，涉及安全与验收。",
+            "evidence_refs": [
+              "dir-carpenter"
+            ],
+            "id": "risk-4",
+            "mitigation": "保留开口、停止覆盖并交对应专业负责人确认。",
+            "scenario": "机电、防火或潮湿节点与板材方案冲突。",
+            "title": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.risk.career-risk-cards.4",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "石膏板与吊顶板安装工及接缝处理工",
+            "consequence": "业主与饰面工会承受返修与工期损失。",
+            "evidence_refs": [
+              "dir-carpenter"
+            ],
+            "id": "risk-5",
+            "mitigation": "分层检查、记录修补，由验收责任人确认再进入下一工序。",
+            "scenario": "基层或接缝缺陷只有在后续饰面下才显现。",
+            "title": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.risk.career-risk-cards.5",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "石膏板与吊顶板安装工及接缝处理工",
+            "consequence": "可能产生不可逆的安全后果。",
+            "evidence_refs": [
+              "dir-carpenter"
+            ],
+            "id": "risk-boundary",
+            "mitigation": "停止并按现场安全与授权链升级。",
+            "scenario": "遇到超出授权范围的高风险任务。",
+            "title": "责任边界"
+          }
+        ],
+        "schema_version": "career.work_risk.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "dir-carpenter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "id": "dir-carpenter",
+            "label": {
+              "$source": "dir-carpenter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "dir-floor-layer",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "id": "dir-floor-layer",
+            "label": {
+              "$source": "dir-floor-layer",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "dir-painter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "id": "dir-painter",
+            "label": {
+              "$source": "dir-painter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "id": "nbs-wages",
+            "label": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ]
+      },
+      "career_snapshot_primary_locale": {
+        "salary": {
+          "bls_table": [
+            {
+              "指标": "中国大陆职业工资口径",
+              "数值": "证据不足：未取得全国单职业口径",
+              "说明": "现有官方来源为行业与单位类型聚合，未建立与本职业精确对应的全国职业工资分布。"
+            }
+          ],
+          "china_ai_row": {
+            "$item": "drywall-and-ceiling-tile-installers-and-tapers.china-salary.career-snapshot-primary-locale.4",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_class_row": {
+            "$item": "drywall-and-ceiling-tile-installers-and-tapers.china-salary.career-snapshot-primary-locale.3",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_edu_table": [
+            {
+              "学历段": "无正式学历门槛",
+              "岗位方向": "板材安装与吊顶",
+              "说明": "多数通过在职培训或学徒入行。"
+            },
+            {
+              "学历段": "在职培训/学徒",
+              "岗位方向": "接缝贴带与嵌缝",
+              "说明": "技能随工序与表面等级要求提升。"
+            },
+            {
+              "学历段": "安全培训",
+              "岗位方向": "高处、用电与粉尘防护",
+              "说明": "按雇主与项目要求核验。"
+            },
+            {
+              "学历段": "职业级工资口径",
+              "岗位方向": "全国单职业",
+              "说明": "证据不足：未取得全国单职业口径。"
+            }
+          ],
+          "china_industry_table": [
+            {
+              "备注": "不以行业平均替代职业工资。",
+              "行业": "建筑业",
+              "需求": "证据不足：未取得全国单职业口径"
+            },
+            {
+              "备注": "岗位与地区差异明显。",
+              "行业": "建筑装饰装修",
+              "需求": "证据不足：未取得全国单职业口径"
+            },
+            {
+              "备注": "需按具体岗位核对。",
+              "行业": "既有建筑改造与维修",
+              "需求": "证据不足：未取得全国单职业口径"
+            }
+          ],
+          "china_intl": "中国与美国职业口径不作自动等同。",
+          "china_name_row": {
+            "$item": "drywall-and-ceiling-tile-installers-and-tapers.china-salary.career-snapshot-primary-locale.1",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_open": "证据不足：未取得全国单职业口径",
+          "china_ref": {
+            "$join": [
+              {
+                "$source": "dir-carpenter",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "dir-carpenter",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "china_salary_note": "中国公开来源仅用于说明口径边界，不提供本职业工资。",
+          "china_salary_table": [
+            {
+              "城市/区间": "全国单职业",
+              "月薪参考": "证据不足：未取得全国单职业口径"
+            },
+            {
+              "城市/区间": "行业平均工资（不可替代）",
+              "月薪参考": "证据不足：不以行业均值替代职业工资"
+            },
+            {
+              "城市/区间": "招聘报价（不可替代）",
+              "月薪参考": "证据不足：不以单条报价替代职业工资"
+            }
+          ],
+          "china_soc_row": {
+            "$item": "drywall-and-ceiling-tile-installers-and-tapers.china-salary.career-snapshot-primary-locale.2",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "sources_note": {
+            "$join": [
+              {
+                "$source": "dir-floor-layer",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "dir-floor-layer",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "ui": {
+            "ai_heading": "AI 辅助边界",
+            "driver_heading": "影响因素",
+            "official_heading": "中国大陆公开口径",
+            "scenario_caption": "未取得全国单职业精确工资，不以行业平均值或招聘报价替代。",
+            "scenario_heading": "职业场景边界",
+            "scenario_interpretation_label": "解释",
+            "scenario_role_label": "职业",
+            "scenario_value_label": "口径"
+          },
+          "us_growth": "美国预测见美国薪资参考板块。",
+          "us_median": "美国工资见美国薪资参考板块。"
+        }
+      },
+      "career_snapshot_secondary_locale": {
+        "authority_sources": {
+          "$join": [
+            {
+              "$source": "dir-floor-layer",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "dir-floor-layer",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            }
+          ],
+          "separator": ""
+        },
+        "bls_table": [
+          {
+            "指标": "美国薪资中位数",
+            "数值": "59,780 美元/年（28.74 美元/时，2025 年 5 月，组合职业）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "dir-carpenter",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "dir-carpenter",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资低位",
+            "数值": "58,930 美元/年（28.33 美元/时，石膏板与吊顶板安装工中位）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "dir-carpenter",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "dir-carpenter",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资高位",
+            "数值": "68,270 美元/年（32.82 美元/时，接缝处理工中位）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "dir-carpenter",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "dir-carpenter",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资单位",
+            "数值": "美元/年；美元/时",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "dir-carpenter",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "dir-carpenter",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资时期",
+            "数值": "2025 年 5 月",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "dir-carpenter",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "dir-carpenter",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业规模",
+            "数值": "约 118,000 人（2025 年）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "dir-floor-layer",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "dir-floor-layer",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业增长（2025—2035）",
+            "数值": "2%（慢于平均）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "dir-floor-layer",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "dir-floor-layer",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业空缺（2025—2035）",
+            "数值": "约 7,600 个/年",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "dir-floor-layer",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "dir-floor-layer",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          }
+        ],
+        "boundary": "美国统计不代表中国职业工资或就业结果。",
+        "direct_answer": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.us-salary.career-snapshot-secondary-locale.2",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "factor_rows": [
+          {
+            "answer": "按 47-2081.00 与 47-2082.00 组合职业核对。",
+            "factor": "职业口径"
+          },
+          {
+            "answer": "按来源地区核对。",
+            "factor": "地区"
+          },
+          {
+            "answer": "按 2025 年工资数据与 2025—2035 年预测核对。",
+            "factor": "时期"
+          }
+        ],
+        "factors_heading": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.us-salary.career-snapshot-secondary-locale.6",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "growth": "2025—2035 年预计增长 2%（慢于平均）",
+        "heading": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.us-salary.career-snapshot-secondary-locale.1",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_heading": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.us-salary.career-snapshot-secondary-locale.5",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_period": "2025 年 5 月工资数据",
+        "industry_rows": [
+          {
+            "industry": "建筑业（来源覆盖范围）",
+            "median": "按来源",
+            "note": "组合职业以建筑业为主要行业。"
+          },
+          {
+            "industry": "机构/雇主",
+            "median": "需核对",
+            "note": "培训与安全要求可能不同。"
+          },
+          {
+            "industry": "地区",
+            "median": "需核对",
+            "note": "地区工资差异明显。"
+          },
+          {
+            "industry": "时期",
+            "median": "2025 年 5 月工资数据",
+            "note": "不得忽略时间口径。"
+          }
+        ],
+        "industry_value_label": "来源原始值",
+        "interpretation_heading": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.us-salary.career-snapshot-secondary-locale.4",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "interpretation_rows": [
+          {
+            "answer": "美国组合职业（47-2081.00 与 47-2082.00），口径为官方公布的组合与分职业工资数据。",
+            "question": "统计对象是什么？"
+          },
+          {
+            "answer": "不能；中国与美国职业口径不作自动等同。",
+            "question": "能否外推中国？"
+          },
+          {
+            "answer": "不能；中位数不是起薪，空缺不等于净新增。",
+            "question": "能否保证个人结果？"
+          },
+          {
+            "answer": "结合岗位、地区、项目类型与雇佣关系使用。",
+            "question": "如何使用？"
+          }
+        ],
+        "median": "59,780 美元/年（28.74 美元/时，2025 年 5 月，组合职业）",
+        "outlook_heading": "就业展望",
+        "outlook_period": "2025—2035 年预测",
+        "wage_column_labels": [
+          "口径",
+          "数值",
+          "时期",
+          "限制"
+        ],
+        "wage_heading": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.us-salary.career-snapshot-secondary-locale.3",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "wage_tiers": [
+          {
+            "equivalent": "安装工中位",
+            "interpretation": "石膏板与吊顶板安装工的中位年薪；不是入职起薪。",
+            "label": "低位",
+            "value": "58,930 美元/年"
+          },
+          {
+            "equivalent": "组合职业中位",
+            "interpretation": "组合职业一半从业者低于、一半高于该值。",
+            "label": "中位",
+            "value": "59,780 美元/年"
+          },
+          {
+            "equivalent": "接缝处理工中位",
+            "interpretation": "接缝处理工的中位年薪；与工序与地区相关。",
+            "label": "高位",
+            "value": "68,270 美元/年"
+          }
+        ]
+      },
+      "definition_block": {
+        "$item": "drywall-and-ceiling-tile-installers-and-tapers.profile.work-context-block.1",
+        "block": "profile",
+        "copy_key": "career.item.definition-block",
+        "type": "prose"
+      },
+      "faq_block": {
+        "items": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.sources.faq.1",
+          "block": "sources",
+          "copy_key": "career.item.faq-block",
+          "type": "faq"
+        }
+      },
+      "fermat_decision_card": {
+        "caveat": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.quick-decision.fit-decision-checklist.1",
+          "block": "quick-decision",
+          "copy_key": "career.item.fermat-decision-card",
+          "type": "prose"
+        },
+        "summary": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.quick-decision.fit-decision-checklist.2",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "title": "石膏板与吊顶板安装工及接缝处理工适合什么样的人？"
+      },
+      "fit_decision_checklist": {
+        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "how": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.quick-decision.fit-decision-checklist.3",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "suit": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.quick-decision.fit-decision-checklist.4",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        }
+      },
+      "hero": {
+        "h1": {
+          "$subject": "name"
+        },
+        "quick_answer": {
+          "$subject": "summary"
+        },
+        "title": {
+          "$subject": "name"
+        }
+      },
+      "market_signal_card": {
+        "context_links": [
+          {
+            "href": "#career-visual-group-market-signals",
+            "label": "查看市场信号"
+          }
+        ],
+        "direct_answer": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.market-signals.market-signal-card.2",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "heading": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.market-signals.market-signal-card.1",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "outlook_evidence": [
+          {
+            "geography": "美国",
+            "horizon": "2025—2035 年",
+            "interpretation": "增长率、就业规模与空缺不是同一指标。",
+            "limitation": "预测不是个人录用保证。",
+            "metric": "就业增长",
+            "occupation_scope": "组合职业（47-2081.00 与 47-2082.00）",
+            "value": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.market-signals.market-signal-card.3",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "geography": "美国",
+            "horizon": "2025 年",
+            "interpretation": "就业规模与空缺不是同一指标。",
+            "limitation": "预测不是个人录用保证。",
+            "metric": "就业规模",
+            "occupation_scope": "组合职业（47-2081.00 与 47-2082.00）",
+            "value": "2025 年约 118,000 人"
+          },
+          {
+            "geography": "美国",
+            "horizon": "2025—2035 年",
+            "interpretation": "空缺含替代需求，不等于净新增。",
+            "limitation": "预测不是个人录用保证。",
+            "metric": "职位空缺",
+            "occupation_scope": "组合职业（47-2081.00 与 47-2082.00）",
+            "value": "2025—2035 年年均约 7,600 个"
+          }
+        ],
+        "schema_version": "career.outlook_transitions.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "dir-carpenter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "id": "dir-carpenter",
+            "label": {
+              "$source": "dir-carpenter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "dir-floor-layer",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "id": "dir-floor-layer",
+            "label": {
+              "$source": "dir-floor-layer",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "dir-painter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "id": "dir-painter",
+            "label": {
+              "$source": "dir-painter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "id": "nbs-wages",
+            "label": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ],
+        "transitions": [
+          {
+            "capability_gaps": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.market-signals.market-signal-card.5",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.market-signals.market-signal-card.4",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "target_href": "/zh/career/jobs/carpenters",
+            "target_slug": "carpenters",
+            "target_title": "木工：与本职业在材料与结构上的差异",
+            "transition_distance": "近，材料工具有交集"
+          },
+          {
+            "capability_gaps": "需要补足：涂装工艺、材料与饰面标准。",
+            "shared_capabilities": "可转移能力：基层处理与现场质量意识。",
+            "target_href": "/zh/career/jobs/painters-construction-and-maintenance",
+            "target_slug": "painters-construction-and-maintenance",
+            "target_title": "建筑与维护油漆工：与本职业在饰面工序上的差异",
+            "transition_distance": "中，需补涂装工艺"
+          },
+          {
+            "capability_gaps": "需要补足：地面材料与铺装工艺。",
+            "shared_capabilities": "可转移能力：测量、切割与基层判断。",
+            "target_href": "/zh/career/jobs/floor-layers-except-carpet-wood-and-hard-tiles",
+            "target_slug": "floor-layers-except-carpet-wood-and-hard-tiles",
+            "target_title": "地面铺装工：与本职业在铺装对象上的差异",
+            "transition_distance": "中，需补铺装工艺"
+          },
+          {
+            "capability_gaps": "需要补足：瓷砖石材铺贴与防水。",
+            "shared_capabilities": "可转移能力：放线、切割与找平。",
+            "target_href": "/zh/career/jobs/tile-and-stone-setters",
+            "target_slug": "tile-and-stone-setters",
+            "target_title": "瓷砖与石材铺设工：与本职业在材料与工序上的差异",
+            "transition_distance": "中，需补铺贴与防水"
+          },
+          {
+            "capability_gaps": "需要补足：砌筑工艺与砂浆配比。",
+            "shared_capabilities": "可转移能力：放线与砌筑基础常识。",
+            "target_href": "/zh/career/jobs/brickmasons-and-blockmasons",
+            "target_slug": "brickmasons-and-blockmasons",
+            "target_title": "砖石与砌块工：与本职业在基层与材料上的差异",
+            "transition_distance": "远，需补砌筑工艺"
+          },
+          {
+            "capability_gaps": "需要补足：保温材料、防潮与热工要求。",
+            "shared_capabilities": "可转移能力：板材施工与现场安全习惯。",
+            "target_href": "/zh/career/jobs/insulation-workers-floor-ceiling-and-wall",
+            "target_slug": "insulation-workers-floor-ceiling-and-wall",
+            "target_title": "保温工：与本职业在系统与安全要求上的差异",
+            "transition_distance": "中，需补保温与热工"
+          }
+        ]
+      },
+      "onet_structured_fields_block": {
+        "availability": "published",
+        "heading": "O*NET 结构化字段",
+        "rows": [
+          {
+            "alternate_value": null,
+            "label": "质量标准",
+            "secondary_value": null,
+            "value": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.profile.work-context-block.7",
+              "block": "profile",
+              "copy_key": "career.item.onet-structured-fields-block",
+              "type": "prose"
+            }
+          }
+        ],
+        "schema_version": "career.onet_structured_fields.v1"
+      },
+      "personality_fit_block": {
+        "assessments": [
+          {
+            "answer": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.fit.personality-fit-block.6",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "riasec",
+            "label": "兴趣与任务",
+            "question": "能否持续核对尺寸、平整度与接缝缺陷？",
+            "signals": [
+              "任务",
+              "记录"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.fit.personality-fit-block.7",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "big-five",
+            "label": "稳定执行",
+            "question": "能否长期在高处、粉尘与噪声环境中保持专注？",
+            "signals": [
+              "任务",
+              "记录"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.fit.personality-fit-block.8",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "mbti",
+            "label": "偏好观察",
+            "question": "更愿意做板材安装，还是接缝饰面？",
+            "signals": [
+              "任务",
+              "记录"
+            ],
+            "watchout": "偏好描述不作能力结论。"
+          },
+          {
+            "answer": "用一段跟岗观察与记录核验。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "enneagram",
+            "label": "动机观察",
+            "question": "能否接受项目节奏、早班与工地变化？",
+            "signals": [
+              "任务",
+              "记录"
+            ],
+            "watchout": "不作录用依据。"
+          },
+          {
+            "answer": "用模拟或现场场景观察其判断与转交方式。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "iq",
+            "label": "问题解决",
+            "question": "发现图纸与现场冲突时能否停下并上报？",
+            "signals": [
+              "任务",
+              "记录"
+            ],
+            "watchout": "不作能力评分。"
+          },
+          {
+            "answer": "用交接记录与团队反馈核验。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "eq",
+            "label": "协作边界",
+            "question": "能否与电工、管道与油漆等工种清楚交接？",
+            "signals": [
+              "任务",
+              "记录"
+            ],
+            "watchout": "不作录用结论。"
+          }
+        ],
+        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "direct_answer": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.fit.personality-fit-block.2",
+          "block": "fit",
+          "copy_key": "career.item.personality-fit-block",
+          "type": "prose"
+        },
+        "directions": [
+          {
+            "direction": "读图与复测",
+            "fit_signals": "能否按图纸与现场复测尺寸。",
+            "watchouts": "不凭记忆或相似经验补全。"
+          },
+          {
+            "direction": "板材安装",
+            "fit_signals": "能否按规程固定板面并控制平整度。",
+            "watchouts": "不跳过紧固间距要求。"
+          },
+          {
+            "direction": "接缝与饰面",
+            "fit_signals": "能否分层嵌缝、打磨并控制表面等级。",
+            "watchouts": "不掩盖基层缺陷。"
+          },
+          {
+            "direction": "现场协作",
+            "fit_signals": "能否与机电与饰面工种清楚交接。",
+            "watchouts": "按责任链升级冲突。"
+          },
+          {
+            "direction": "安全执行",
+            "fit_signals": "能否遵守高处、用电与粉尘防护。",
+            "watchouts": "不可跳过安全步骤。"
+          },
+          {
+            "direction": "长期训练",
+            "fit_signals": "能否持续补足工序与资格要求。",
+            "watchouts": "资格按工作地与雇主核验。"
+          }
+        ],
+        "heading": {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.fit.personality-fit-block.1",
+          "block": "fit",
+          "copy_key": "career.item.personality-fit-block",
+          "type": "prose"
+        },
+        "questions": [
+          {
+            "answer": "用跟岗或小样练习验证。",
+            "question": "能否稳定完成可复核的安装或嵌缝工作？"
+          },
+          {
+            "answer": "按流程保存并复测。",
+            "question": "能否保留图纸版本与尺寸记录？"
+          },
+          {
+            "answer": "设置停止与升级条件。",
+            "question": "能否识别基层与节点异常？"
+          },
+          {
+            "answer": "说明交接对象、完成面与遗留项。",
+            "question": "能否与相邻工种清楚交接？"
+          },
+          {
+            "answer": "按复核意见修补并记录。",
+            "question": "能否接受复核与返修？"
+          },
+          {
+            "answer": "按工作地与雇主核验。",
+            "question": "能否补足安全与雇主资格要求？"
+          },
+          {
+            "answer": "工具不能替代现场复测与安全判断。",
+            "question": "能否理解工具与 AI 的边界？"
+          },
+          {
+            "answer": "完成一次可复核的纸面量算与检查练习。",
+            "question": "如何继续验证？"
+          }
+        ],
+        "schema_version": "career.fit_decision_center.v1",
+        "signals": [
+          {
+            "body": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.fit.personality-fit-block.3",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "id": "fit",
+            "label": "适配信号",
+            "tone": "positive"
+          },
+          {
+            "body": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.fit.personality-fit-block.4",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "id": "caution",
+            "label": "注意信号",
+            "tone": "caution"
+          },
+          {
+            "body": {
+              "$item": "drywall-and-ceiling-tile-installers-and-tapers.fit.personality-fit-block.5",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "id": "experiment",
+            "label": "验证动作",
+            "tone": "action"
+          }
+        ],
+        "source_links": [
+          {
+            "href": {
+              "$source": "dir-carpenter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "label": {
+              "$source": "dir-carpenter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "dir-floor-layer",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "label": {
+              "$source": "dir-floor-layer",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "dir-painter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "label": {
+              "$source": "dir-painter",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "label": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          }
+        ]
+      },
+      "primary_cta": {
+        "entry_surface": "career_job_detail",
+        "href": "/zh/tests/holland-career-interest-test-riasec",
+        "label": "测我的职业兴趣是否适合石膏板与吊顶板安装工及接缝处理工",
+        "source_page_type": "career_job_detail",
+        "subject_key": {
+          "$subject": "canonical_slug"
+        },
+        "subject_kind": "career_job",
+        "target_action": "start_riasec_test",
+        "test_slug": "holland-career-interest-test-riasec"
+      },
+      "responsibilities_block": [
+        {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.profile.work-context-block.2",
+          "block": "profile",
+          "copy_key": "career.item.responsibilities-block",
+          "type": "prose"
+        },
+        {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.profile.work-context-block.3",
+          "block": "profile",
+          "copy_key": "career.item.responsibilities-block",
+          "type": "prose"
+        },
+        {
+          "$item": "drywall-and-ceiling-tile-installers-and-tapers.profile.work-context-block.4",
+          "block": "profile",
+          "copy_key": "career.item.responsibilities-block",
+          "type": "prose"
+        }
+      ],
+      "riasec_fit_block": {
+        "fit_interest": "兴趣只提示探索方向；实际适配以跟岗观察与训练反馈核验。",
+        "interest": "官方兴趣代码 RC（现实型、常规型）：以手工操作、结构安装、按规程与标准施工为主。",
+        "riasec": "RC",
+        "riasec_short": "官方兴趣代码 RC；不作人格诊断或录用依据。"
+      },
+      "source_card": {
+        "eeat_signals": {
+          "author": "FermatMind research workflow",
+          "source": {
+            "$source": "dir-carpenter",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "name",
+            "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+          },
+          "updated_at": {
+            "$source": "dir-carpenter",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "period",
+            "item": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1"
+          }
+        },
+        "note": "来源范围、限制与统计时期按原始证据分别核对；未取得的数据在相应位置可见标记。"
+      },
+      "work_context_block": {
+        "$join": [
+          {
+            "$item": "drywall-and-ceiling-tile-installers-and-tapers.profile.work-context-block.5",
+            "block": "profile",
+            "copy_key": "career.item.work-context-block",
+            "type": "prose"
+          },
+          {
+            "$item": "drywall-and-ceiling-tile-installers-and-tapers.profile.work-context-block.6",
+            "block": "profile",
+            "copy_key": "career.item.work-context-block",
+            "type": "prose"
+          },
+          {
+            "$item": "drywall-and-ceiling-tile-installers-and-tapers.sources.boundary.1",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          },
+          {
+            "$item": "drywall-and-ceiling-tile-installers-and-tapers.sources.boundary.1.2",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          },
+          {
+            "$item": "drywall-and-ceiling-tile-installers-and-tapers.sources.boundary.1.3",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          }
+        ],
+        "separator": "\n"
+      }
+    },
+    "contract_version": "career.detail.display.v1",
+    "locale": "zh-CN",
+    "native_items": [
+      {
+        "block": "source-register",
+        "copy_key": "career.item.published-sources",
+        "id": "drywall-and-ceiling-tile-installers-and-tapers.source-register.published.1",
+        "location": "sources",
+        "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.recruitment-sample",
+        "id": "drywall-and-ceiling-tile-installers-and-tapers.path.recruitment-sample.1",
+        "location": "entry_decisions",
+        "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-role-comparison",
+        "id": "drywall-and-ceiling-tile-installers-and-tapers.path.entry-role-comparison.1",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.employer-evidence",
+        "id": "drywall-and-ceiling-tile-installers-and-tapers.path.employer-evidence.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-portfolio",
+        "id": "drywall-and-ceiling-tile-installers-and-tapers.path.entry-portfolio.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.interview-probation",
+        "id": "drywall-and-ceiling-tile-installers-and-tapers.path.interview-probation.1",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.credential-decision",
+        "id": "drywall-and-ceiling-tile-installers-and-tapers.path.credential-decision.1",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.credential-boundary",
+        "id": "drywall-and-ceiling-tile-installers-and-tapers.path.credential-boundary.1",
+        "location": "entry_decisions",
+        "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "drywall-and-ceiling-tile-installers-and-tapers.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "drywall-and-ceiling-tile-installers-and-tapers.path.entry-work-sample-data.2",
+        "location": "entry_decisions",
+        "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "drywall-and-ceiling-tile-installers-and-tapers.path.entry-work-sample-data.3",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "drywall-and-ceiling-tile-installers-and-tapers.path.entry-work-sample-data.4",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "drywall-and-ceiling-tile-installers-and-tapers.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "drywall-and-ceiling-tile-installers-and-tapers.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
+      }
+    ],
+    "path": "/zh/career/jobs/drywall-and-ceiling-tile-installers-and-tapers",
+    "section_titles": {
+      "ai-impact": "AI 影响",
+      "china-salary": "中国大陆薪资参考",
+      "direction-comparison": "职业方向比较",
+      "fit": "职业适配指南",
+      "market-signals": "职业前景与相关职业转向",
+      "navigation": "目录",
+      "path": "入行、资格与职业发展",
+      "profile": "职业画像",
+      "quick-decision": "快速判断",
+      "risk": "工作压力与职业边界",
+      "source-register": "来源登记",
+      "sources": "常见问题与资料来源",
+      "us-salary": "美国薪资参考"
+    }
+  },
   "fact_register": {
     "facts": [
       {
         "derivation": null,
-        "display_value": "O*NET 47-2081.00 + 47-2082.00",
+        "display_value": "O*NET-SOC 47-2081.00（石膏板与吊顶板安装工）与 47-2082.00（接缝处理工）的有界组合，按合并职业口径呈现。",
         "fact_id": "v3-identity",
         "market": "美国",
         "measure": "occupation identity",
@@ -8921,7 +11393,7 @@
       },
       {
         "derivation": null,
-        "display_value": "$58,930",
+        "display_value": "美国 2025 年 5 月中位年薪：石膏板与吊顶板安装工 58,930 美元（28.33 美元/时）。",
         "fact_id": "repair-us-1",
         "market": "美国",
         "measure": "installer median annual wage",
@@ -8933,7 +11405,7 @@
       },
       {
         "derivation": null,
-        "display_value": "$68,270",
+        "display_value": "美国 2025 年 5 月中位年薪：接缝处理工 68,270 美元（32.82 美元/时）。",
         "fact_id": "repair-us-2",
         "market": "美国",
         "measure": "taper median annual wage",
@@ -8945,7 +11417,7 @@
       },
       {
         "derivation": null,
-        "display_value": "2%",
+        "display_value": "美国组合职业 2025—2035 年预计增长 2%（慢于平均），2025 年在岗约 118,000 人。",
         "fact_id": "repair-us-3",
         "market": "美国",
         "measure": "projected growth",
@@ -8957,7 +11429,7 @@
       },
       {
         "derivation": null,
-        "display_value": "7,600",
+        "display_value": "美国组合职业 2025—2035 年年均约 7,600 个职位空缺（含替代需求）。",
         "fact_id": "repair-us-4",
         "market": "美国",
         "measure": "annual openings",
@@ -8976,37 +11448,41 @@
       "key": "ai",
       "label": "AI 任务暴露"
     },
-    "badges": [],
+    "badges": [
+      "石膏板与吊顶板安装 · 接缝贴带与嵌缝 · 吊顶网格与高处作业",
+      "O*NET-SOC 47-2081.00 ＋ 47-2082.00 · 2025 年 5 月工资数据",
+      "Job Zone 1-2 · 兴趣代码 RC · 2025—2035 年「慢于平均（2%）」"
+    ],
     "metrics": [
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "repair-us-1",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "美国中位年薪（2025 年 5 月：石膏板与吊顶板安装工 58,930 美元；接缝处理工 68,270 美元）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "repair-us-3",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国就业预测（2025—2035 年增长 2%，慢于平均）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "repair-us-3",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国在岗人数（2025 年，组合职业约 118,000 人）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "repair-us-4",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国年均职位空缺（2025—2035 年，约 7,600 个）"
       },
       {
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "中国大陆薪资参考"
+        "label": "中国大陆薪资参考（未取得全国单职业口径，见中国大陆薪资参考板块）"
       }
     ]
   },
@@ -9021,7 +11497,7 @@
       "text": "石膏板与吊顶板安装工及接缝处理工"
     }
   },
-  "source_content_sha256": "10923ecac9ba723cca511c4de816f9edceecf7fe70bb13128acbb5fea75a040b",
+  "source_content_sha256": "44821e7d02dcbb8e6ce00fe3b2ab9e0d56399b3a9fae25a14fbc9bf660c5efcc",
   "subject": {
     "canonical_slug": "drywall-and-ceiling-tile-installers-and-tapers",
     "name": "石膏板与吊顶板安装工及接缝处理工",

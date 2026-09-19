@@ -209,6 +209,12 @@
       "item:coroners.sources.boundary.1": {
         "status": "pending_mapping"
       },
+      "item:coroners.sources.boundary.1.2": {
+        "status": "pending_mapping"
+      },
+      "item:coroners.sources.boundary.1.3": {
+        "status": "pending_mapping"
+      },
       "item:coroners.sources.faq.1": {
         "status": "pending_mapping"
       },
@@ -7224,7 +7230,7 @@
       "items": [
         {
           "availability": "available",
-          "copy_key": "career.item.fit-decision-checklist",
+          "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
               "验尸官承担法定死亡调查协调，但职位产生方式、是否必须为医师、能否下令尸检或签发文件都依法域而异；核心是把现场、遗体、身份、病史和检验资料形成可追溯结论。"
@@ -7288,7 +7294,7 @@
       "items": [
         {
           "availability": "available",
-          "copy_key": "career.item.work-context-block",
+          "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
               "真实产出可能包括死亡调查案卷、死亡证明相关认定、现场与证据记录、家属沟通和跨机构转介；具体权限依法域。"
@@ -7302,7 +7308,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.work-context-block",
+          "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
               "真实输入包括报案和现场观察、遗体与身份信息、病史、证人陈述、照片、物证链、毒理或病理结果及执法记录。"
@@ -7316,7 +7322,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.work-context-block",
+          "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
               "典型流程是确认管辖与身份，检查或协调现场和遗体记录，保存证据，获取病史与检验资料，综合事实并完成法定文件。"
@@ -7330,7 +7336,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.work-context-block",
+          "copy_key": "career.item.responsibilities-block",
           "data": {
             "paragraphs": [
               "关键判断是区分观察、证言和专业推断，并决定哪些事项需法医、病理、毒理、执法或法院介入。"
@@ -7372,7 +7378,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.work-context-block",
+          "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
               "质量标准是身份、时间线、证据编号、移交链、检验来源和更正记录可追溯，并保护敏感信息。"
@@ -7386,7 +7392,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.work-context-block",
+          "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
               "责任边界：验尸官确会处理真实案件并可能依法认定死因/死亡方式；医学程序、尸检和签署权限必须按当地法律依次核对。"
@@ -7610,7 +7616,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆暂无可安全使用的数据：现有官方来源未提供与验尸官精确一一对应的全国职业工资分布。"
+              "证据不足：现有官方来源未提供与验尸官精确一一对应的全国职业工资分布，本页因此不发布中国全国中位数或统一起薪。"
             ]
           },
           "id": "coroners.china-salary.career-snapshot-primary-locale.1",
@@ -7742,7 +7748,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本轮只核对上述 BLS 职业范围；该来源报告中位工资，未取得可解释为目标职业独立起薪的同范围数据。中位数不是起薪，就业人数不是招聘数，预测也不是个人录用概率。"
+              "证据不足：本轮只核对上述 BLS 职业范围；该来源只报告中位工资，未取得可解释为目标职业独立起薪的同范围数据。中位数不是起薪，就业人数不是招聘数，预测也不是个人录用概率。"
             ]
           },
           "id": "coroners.us-salary.career-snapshot-secondary-locale.5",
@@ -7873,7 +7879,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.personality-fit-block",
+          "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
               "比较岗位时须核对是否选举/任命、医学资格、现场任务和签发权限。"
@@ -7976,7 +7982,8 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "第一步不是报班，而是确认目标县/州采用 coroner 还是 medical examiner 制度、任命或选举方式、最低资格与实际空缺；只有法域官方要求能回答是否可申请。"
+              "第一步不是报班，而是先确认目标县或州采用 coroner 还是 medical examiner 制度、职位由选举还是任命产生、最低资格与是否要求医学背景；这些只能由该法域的官方规则回答，通用证书不能直接换取职位。",
+              "招募或任命公告通常只列资格与程序，不等于真实空缺数量或统一流程；比较时应记录法域、职位性质、任期、薪酬与信息来源日期，并区分 coroner、medical examiner、死亡调查员与法证技术员等不同岗位。"
             ]
           },
           "id": "coroners.path.recruitment-sample.1",
@@ -7992,23 +7999,45 @@
             "column_keys": [
               "role",
               "initial_tasks",
-              "boundary"
+              "boundary",
+              "evidence",
+              "next_step"
             ],
             "rows": [
               [
-                "死亡调查支持/记录岗位",
-                "在机构授权下协助现场记录、身份与材料流转",
-                "不作法定死因或死亡方式裁决"
+                "死亡调查支持与记录岗位（受监督）",
+                "在机构授权下协助通知与响应、到场记录、死者身份与遗体信息、证据与移交记录。",
+                "不作死因或死亡方式裁决，不签署死亡证明；超出授权即停止并升级。",
+                "能按 NIJ 2024 现场调查步骤（通知与响应、到场、记录和评估现场、记录和评估遗体、记录死者资料、完成现场调查）保留可追溯记录。",
+                "先确认目标法域的官方资格与招募程序，再考虑受监督的辅助岗位。"
               ],
               [
-                "Coroner",
-                "承担当地法律规定的死亡调查或行政职责",
-                "资格、产生方式和权限随法域变化"
+                "Coroner（选举或任命）",
+                "在法定辖区内组织或承担死亡调查，依当地法律认定死因或死亡方式并签署相关文件。",
+                "是否必须为医师、能否下令尸检、有无下属团队都由州与地方规则决定。",
+                "能以法域原文说明职位产生方式、权限范围与责任边界。",
+                "核对该州县 coroner 的现行法规与职位说明，而非通用培训广告。"
               ],
               [
-                "Medical examiner 路径",
-                "医师主导的法医死亡调查",
-                "需独立医学与法医训练，不能由 coroner 经验替代"
+                "Medical examiner（医师主导）",
+                "由具备法医病理训练的医师主导死亡调查与尸检认定。",
+                "进入需独立医学与法医病理训练，coroner 经验不能替代。",
+                "能核对本州 medical examiner 制度的法定要求与任命方式。",
+                "把医学训练路径与 coroner 路径分别核对，不互相套用。"
+              ],
+              [
+                "Medicolegal death investigator（死亡调查员）",
+                "负责现场响应、死者与证据记录、与家属和执法沟通及案卷协调。",
+                "授权范围由具体机构与法域决定，不自行作医学或法定结论。",
+                "能提供受监督的现场记录、证据链与案卷协调样本。",
+                "查目标机构是否为该岗位设置独立资格与训练要求。"
+              ],
+              [
+                "法证科学技术员（相邻）",
+                "收集、保存或分析刑事与物证材料，交付实验室结果。",
+                "职业对象与法定死亡裁决不同，不能按名称互换。",
+                "能说明物证处理与实验室交付的操作证据。",
+                "分别核对实验室岗位的教育与授权要求。"
               ]
             ]
           },
@@ -8025,27 +8054,35 @@
           "data": {
             "entries": [
               {
-                "id": "materials",
+                "id": "education",
                 "values": [
-                  "真实材料",
-                  "法域规则、现场记录、身份资料、医学与证据链文件",
-                  "能区分来源、保管状态和待核项"
+                  "学历与训练要求",
+                  "美国口径下验尸官的进入要求由各州规定，部分州不要求为医师，而尸检在一些州只能由病理医师进行；训练与资格差异很大。",
+                  "证据不足：本轮未取得中国大陆与 coroner 精确对应的职业资格公开条件，须按目标单位与主管部门现行规定核对，不与美国口径等同。"
                 ]
               },
               {
-                "id": "judgment",
+                "id": "safety",
                 "values": [
-                  "职业判断",
-                  "识别管辖、身份、现场或记录冲突",
-                  "超出授权时保全记录并升级"
+                  "健康与安全作业条件",
+                  "现场调查可能接触感染、化学与创伤材料，通常要求个人防护、暴露后处置与心理支持，具体由机构与主管部门规定。",
+                  "本页不构成安全操作、设备使用或临床授权；须按机构现行安全规程核对。"
                 ]
               },
               {
-                "id": "delivery",
+                "id": "capability",
                 "values": [
-                  "可复核交付",
-                  "可追溯个案记录、通知与交接",
-                  "不把初步观察写成最终法定结论"
+                  "可观察的专业能力证据",
+                  "能在死者身份与遗体、现场医疗与调查记录、死亡证明与证据之间维持精确、可追溯的记录；能区分观察、陈述与专业推断并主动升级（来自 O*NET 13-1041.06 任务与工作情境）。",
+                  "这些是任务与情境观察点，不是人格标签或录用阈值。"
+                ]
+              },
+              {
+                "id": "tools",
+                "values": [
+                  "常见工具与系统范围",
+                  "案卷与死亡登记/报告系统、摄影与测量工具、证据封装与移交记录、与病理与毒理实验室的送检流程；数据现代化强调标准字段、权限与交换，而不是替代调查判断。",
+                  "工具与系统熟练度是招聘信号，不等于资格或授权。"
                 ]
               }
             ]
@@ -8062,19 +8099,34 @@
           "data": {
             "entries": [
               {
-                "id": "work-sample",
+                "id": "scene",
                 "values": [
-                  "职业化作品",
-                  "只使用 NIJ 教学框架与纯虚构案例，展示现场清单、证据链、管辖核对和交接；不得使用真实死者信息或声称完成法定鉴定。",
-                  "仅证明过程与表达，不冒充真实资格或授权"
+                  "作品一：到场与现场记录清单",
+                  "交付物：一份完全虚构的到场记录清单，含通知与响应、到场时间、现场与遗体观察、编号与移交。",
+                  "写明每项信息的来源（现场观察、他人陈述或待检测），时间与编号不得自相矛盾。"
                 ]
               },
               {
-                "id": "review-log",
+                "id": "evidence",
                 "values": [
-                  "复核日志",
-                  "保留一次同伴或导师复核、修改理由和前后差异",
-                  "区分事实错误、范围变化与意见差异"
+                  "作品二：证据链与记录缺口表",
+                  "交付物：一页表格列出材料事实、已发生移交、待核对项与责任对象。",
+                  "区分事实与推断，缺口处标「待核」，不得补造。"
+                ]
+              },
+              {
+                "id": "boundary",
+                "values": [
+                  "作品三：升级与边界说明",
+                  "交付物：一段说明，写清哪些事项超出本人授权（管辖、死因、死亡方式、通知家属或签署文件）以及应向谁升级。",
+                  "不得使用真实遗体图像或个人医疗信息。"
+                ]
+              },
+              {
+                "id": "reflection",
+                "values": [
+                  "作品四：复盘说明",
+                  "交付物：一页说明，写清哪一步最耗时、哪一处最容易出错、下一步要补什么，并注明所用材料全部为虚构。"
                 ]
               }
             ]
@@ -8092,23 +8144,33 @@
             "column_keys": [
               "stage",
               "observed_evidence",
-              "possible_check"
+              "possible_check",
+              "escalation"
             ],
             "rows": [
               [
-                "法域核对",
-                "说清目标机构的制度、资格和权限来源",
-                "引用官方规则而非培训广告"
+                "法域与资格核对",
+                "能说清目标县或州采用 coroner 还是 medical examiner 制度、职位如何产生、最低资格与权限来源。",
+                "以法域官方规则或职位说明作答，而非培训广告。",
+                "资格与权限以该法域现行规则为准；本页不构成录用或资格结论。"
               ],
               [
-                "面试",
-                "处理身份、管辖或证据链冲突的记录顺序",
-                "不越权下结论"
+                "记录与证据链情景",
+                "用虚构案例说明如何记录到场、身份与遗体、编号与移交，并标注冲突与待核项。",
+                "区分观察、陈述与推断，缺信息时明确待核。",
+                "情景由招聘机构设计，本页不推断具体考核标准。"
               ],
               [
-                "试用/交接",
-                "按机构政策维护材料与通知状态",
-                "主管可逐项复核"
+                "沟通与隐私边界",
+                "在信息未确认时如何与家属、执法和公共卫生机构沟通，并保护敏感信息。",
+                "既不提前给结论，也不泄露未确认信息。",
+                "通知与信息发布以机构和法域规定为准。"
+              ],
+              [
+                "跟班与试用观察",
+                "在受监督条件下完成记录、案卷整理、材料流转与升级动作。",
+                "主管可按记录质量、边界意识与升级判断逐项复核。",
+                "考核与聘任条件由机构规定；涉及遗体、尸检或签署权限的动作须在授权范围内执行。"
               ]
             ]
           },
@@ -8126,28 +8188,66 @@
             "column_keys": [
               "credential",
               "conditions",
-              "boundary"
+              "boundary",
+              "evidence",
+              "jurisdiction",
+              "next_step",
+              "review"
             ],
             "rows": [
               [
                 "法域最低资格",
-                "以州、县或机构官方规则为准",
-                "美国不存在单一全国 coroner 门槛"
+                "以州、县或机构的官方规则为准（可能涉及年龄、居住、培训或考试）。",
+                "美国不存在统一的全国 coroner 门槛。",
+                "能引用该法域现行法规原文说明资格与产生方式。",
+                "按目标州县规则核对，不与美国其他州或中国口径混用。",
+                "先查法域官方职位说明与法规，再考虑培训。",
+                "资格规则随法域与时点变化，须核对生效版本。"
               ],
               [
-                "调查与证据训练",
-                "用于建立现场、记录和证据链能力",
-                "课程不授予法定职位"
+                "职位产生方式（选举或任命）",
+                "部分州由选举产生，部分州由任命或与 medical examiner 制度并行。",
+                "选举或任命程序决定任期与问责方式，不等于专业资格证明。",
+                "能说明本州该职位的产生与任期规定。",
+                "按该州县制度核对。",
+                "核对该职位的实际产生方式与任期。",
+                "不同州的产生方式不同，不能沿用他州结论。"
               ],
               [
-                "医学/法医训练",
-                "仅适用于 medical examiner 等医师路径",
-                "不可与 coroner 资格混写"
+                "医学或法医训练（medical examiner 路径）",
+                "仅适用于医师主导的法医病理方向，通常要求医学学位与法医病理训练。",
+                "不可与 coroner 资格混写，也不能由 coroner 经验替代。",
+                "能说明该路径的教育与训练阶段。",
+                "按 medical examiner 制度的法定要求核对。",
+                "把医学路径与 coroner 路径分开规划。",
+                "训练时长与要求以医学教育与专业机构规则为准。"
               ],
               [
-                "机构任命/选举/授权",
-                "按当地制度取得实际职责",
-                "未获职位和授权不得执行法定职能"
+                "死亡调查与记录训练",
+                "用于建立现场响应、记录与证据链能力的课程或受监督训练。",
+                "课程或证书通常不授予法定职位、尸检或签署权限。",
+                "能说明训练内容与实际可执行动作的对应。",
+                "按提供方与机构要求核对。",
+                "选择与目标岗位任务对应的训练。",
+                "训练不等于资格认定或作业授权。"
+              ],
+              [
+                "尸检与医学鉴定授权",
+                "由法域规定并通常与病理医师或 medical examiner 制度相关。",
+                "未获授权不得下令、执行或解释尸检与医学鉴定。",
+                "能引用法域规则说明尸检授权归属。",
+                "按具体法域与机构核对。",
+                "在授权范围内仅做记录与协调，不越权解释。",
+                "尸检授权范围依法域而异，须逐案核对。"
+              ],
+              [
+                "机构授权与签字责任",
+                "由机构制度与实际职位授予，涉及死亡证明与司法转介的签署。",
+                "未获职位与授权不得签署法定文件或以验尸官名义行事。",
+                "能说明签字文件的种类与授权来源。",
+                "按机构制度与法域规则核对。",
+                "明确本人可签署与不可签署的文件类型。",
+                "签字责任与授权链须以现行制度为准。"
               ]
             ]
           },
@@ -8162,7 +8262,10 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "Coroner 的选举或任命、专业门槛和权限因州与地方而异；任何通用证书都不能替代法域资格、正式职位和机构授权。"
+              "美国没有统一的全国 coroner 门槛：是否必须为医师、如何产生、能否下令尸检、由谁签署死亡证明，都取决于州与地方制度；部分州不要求 coroner 是医师，而尸检在一些州只能由病理医师进行。",
+              "因此本页把「法域最低资格」「职位产生方式」「医学/法医训练」「死亡调查训练」「尸检与医学鉴定授权」「机构授权与签字责任」分开核对：它们是不同层级的条件，不能互相替代。",
+              "中国大陆口径：本轮未取得与 coroner 精确对应的全国职业资格与工资公开条件，也不能把中国法医岗位机械映射为验尸官；具体要求须按目标单位与主管部门现行规定核对。",
+              "任何资格与授权都应以适用法域与机构的现行文本为准；本页不构成资格意见、作业授权或录用承诺。"
             ]
           },
           "id": "coroners.path.credential-boundary.1",
@@ -8176,7 +8279,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "可先积累受监督的记录、证据链与个案协调能力，再按本地制度竞聘或承担更复杂管理；法医医师、实验室法证和公共卫生数据是独立分支，不是统一晋升链。"
+              "验尸官怎样入行与进阶？"
             ]
           },
           "id": "coroners.path.career-path-block.1",
@@ -8242,39 +8345,46 @@
           "availability": "available",
           "copy_key": "career.item.entry-work-sample-data",
           "data": {
-            "column_keys": [
-              "evidence_id",
-              "description",
-              "boundary"
-            ],
-            "rows": [
-              [
-                "事实",
-                "逐条抄录编号、版本、单位或给定值",
-                "可回到材料定位"
-              ],
-              [
-                "判断",
-                "写公式或规则及结果",
-                "事实与假设分开"
-              ],
-              [
-                "边界",
-                "写停止条件与不可执行事项",
-                "不越权"
-              ],
-              [
-                "交接",
-                "写待核问题、责任人和下一步",
-                "接手者可复核"
-              ]
+            "entries": [
+              {
+                "id": "row-1",
+                "values": [
+                  "事实",
+                  "逐条抄录编号、版本、单位或给定值",
+                  "可回到材料定位"
+                ]
+              },
+              {
+                "id": "row-2",
+                "values": [
+                  "判断",
+                  "写公式或规则及结果",
+                  "事实与假设分开"
+                ]
+              },
+              {
+                "id": "row-3",
+                "values": [
+                  "边界",
+                  "写停止条件与不可执行事项",
+                  "不越权"
+                ]
+              },
+              {
+                "id": "row-4",
+                "values": [
+                  "交接",
+                  "写待核问题、责任人和下一步",
+                  "接手者可复核"
+                ]
+              }
             ]
           },
           "id": "coroners.path.entry-work-sample-data.3",
           "source_refs": [
             "g04-editor"
           ],
-          "type": "table"
+          "type": "cards"
         },
         {
           "availability": "available",
@@ -8307,50 +8417,50 @@
               {
                 "id": "day-1",
                 "values": [
-                  "第1日",
-                  "抄录全部材料并标编号"
+                  "第 1 日：读一份公开材料",
+                  "找一份公开的死亡调查或公共卫生死亡数据材料，标出三条关于记录或授权的要求，写下你想核实的地方。"
                 ]
               },
               {
                 "id": "day-2",
                 "values": [
-                  "第2日",
-                  "区分事实、冲突与待核问题"
+                  "第 2 日：整理现场调查步骤清单",
+                  "用虚构场景，把 NIJ 2024 的六步（通知与响应、到场、记录和评估现场、记录和评估遗体、记录死者资料、完成现场调查）整理成可执行清单。"
                 ]
               },
               {
                 "id": "day-3",
                 "values": [
-                  "第3日",
-                  "按输出模板完成首版"
+                  "第 3 日：做一次记录冲突练习",
+                  "用虚构材料，找出时间、地点或编号相互矛盾之处，列成待核清单，不判断死因。"
                 ]
               },
               {
                 "id": "day-4",
                 "values": [
-                  "第4日",
-                  "逐项重算或回查版本与单位"
+                  "第 4 日：写一次证据链说明",
+                  "为虚构材料写一段证据与移交链说明，标明每次移交的对象、时间与状态，缺信息处标待核。"
                 ]
               },
               {
                 "id": "day-5",
                 "values": [
-                  "第5日",
-                  "让他人只凭材料复核"
+                  "第 5 日：写一次升级与边界说明",
+                  "说明哪些事项超出本人授权（管辖、死因、死亡方式、通知家属或签署文件），应向谁升级。"
                 ]
               },
               {
                 "id": "day-6",
                 "values": [
-                  "第6日",
-                  "按反馈修订并保留差异"
+                  "第 6 日：让他人只凭材料复核",
+                  "让一位同伴只看你的材料复核你的结论与缺口标记，记录对方提出的问题。"
                 ]
               },
               {
                 "id": "day-7",
                 "values": [
-                  "第7日",
-                  "对照参考答案复盘是否愿意持续做这种工作"
+                  "第 7 日：对照标准复盘是否继续",
+                  "回到本页判断清单，写下你愿意继续的三条理由与需要慎重的两条条件。"
                 ]
               }
             ]
@@ -8366,9 +8476,12 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "能否连续七天回到同一套材料而不厌烦细节？",
-              "能否主动暴露不确定性并接受复核？",
-              "是否愿意补齐具体知识缺口，而不是把一次纸面练习当成职业资格？"
+              "具体变化：你能按虚构材料写清记录、冲突、证据链与升级条件，而不是只写「注意安全」吗？",
+              "事实与选择：你更愿意做法域内的法定调查、现场与记录协调，还是医学病理或公共卫生数据方向？",
+              "练习消耗：感染与创伤材料、值班响应、家属沟通与长时间记录，哪一步最消耗你，能否在每个个案中反复出现？",
+              "材料边界：练习材料必须全部为虚构，不得使用真实遗体图像、个人医疗信息或真实案件材料。",
+              "反馈反应：当你的记录被指出编号或移交链缺口时，你是否愿意回到原始材料补齐？",
+              "下一步：若前五步你愿意继续，下一步是在合规前提下完成一次从笔记核对到法域资格核实的闭环并请有经验者评阅。"
             ]
           },
           "id": "coroners.path.seven-day-decision.1",
@@ -8438,7 +8551,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "数字化记录或辅助分析只能落到资料整理和复核任务，不能推导法定裁决权或岗位替代。"
+              "能在记录与证据链中保持准确，并按授权边界停止和升级。"
             ]
           },
           "id": "coroners.market-signals.market-signal-card.4",
@@ -8452,7 +8565,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向死亡调查、法证实验室或公共卫生数据时，要分别核对机构、教育和授权，不能把它们合并为一条招聘路径。"
+              "法证科学技术员还要求物证处理与实验室交付的训练与授权。"
             ]
           },
           "id": "coroners.market-signals.market-signal-card.5",
@@ -8477,6 +8590,7 @@
               {
                 "answer": "典型流程是确认管辖与身份，检查或协调现场和遗体记录，保存证据，获取病史与检验资料，综合事实并完成法定文件。 质量标准是身份、时间线、证据编号、移交链、检验来源和更正记录可追溯，并保护敏感信息。",
                 "id": "coroners.faq.1",
+                "question": "验尸官：日常工作如何形成闭环？",
                 "question_key": "career.faq.coroners.daily-work",
                 "source_refs": [
                   "onet-coroners"
@@ -8485,6 +8599,7 @@
               {
                 "answer": "Coroner：是否由选举或任命产生、需要何种专业背景以及可承担哪些职责，首先取决于州与地方制度；Medical examiner：通常是医师主导的法医死亡调查体系，不能把 coroner 的进入路径直接套用到该方向；Medicolegal death investigator：更偏现场与记录、身份和证据链协调，授权仍由具体机构与法域决定；法证科学技术员：主要收集、保存或分析刑事与物证材料，职业对象和实验室交付不同于法定死亡裁决。",
                 "id": "coroners.faq.2",
+                "question": "验尸官：它与相邻职业有什么区别？",
                 "question_key": "career.faq.coroners.role-comparison",
                 "source_refs": [
                   "cdc-laws",
@@ -8495,6 +8610,7 @@
               {
                 "answer": "能面对死亡、创伤材料和家属情绪而保持准确与尊重；愿意反复核对身份、时间线和证据链；能区分亲眼观察、他人陈述和专业推断；能接受夜间出勤、法域差异和公共问责；愿意与执法、医疗、法医和公共卫生协作；能在信息不全时明确待核而不补造；不适合追求快速结论或回避敏感沟通的人；比较岗位时须核对是否选举/任命、医学资格、现场任务和签发权限。",
                 "id": "coroners.faq.3",
+                "question": "验尸官：什么行为信号可以帮助判断适配？",
                 "question_key": "career.faq.coroners.fit",
                 "source_refs": [
                   "onet-coroners"
@@ -8503,6 +8619,7 @@
               {
                 "answer": "编辑推演：工具可在获准、去标识化环境中整理案卷字段、时间线和缺失项；这不是机构采用证据。现有来源没有证明生成式 AI 对验尸官岗位数量造成净增减。",
                 "id": "coroners.faq.4",
+                "question": "验尸官：AI 可以辅助哪些任务？",
                 "question_key": "career.faq.coroners.ai-impact",
                 "source_refs": [
                   "g04-editor"
@@ -8511,6 +8628,7 @@
               {
                 "answer": "编辑推演：可生成记录完整性清单或文书初稿，但不得认定身份、管辖、死因、死亡方式或证据真实性；失败模式包括补造案情、合并同名人员、颠倒时间线、错配物证编号，或把概率写成法定结论；采用前需满足法域规则、刑事司法与健康数据权限、证据链、审计日志、采购和验证要求；本页没有部署率证据；人工控制是逐项回到现场记录、身份材料、移交表和检验报告，并由具有相应权限者复核和签署；本页采用保守使用边界：不让模型决定管辖、下令尸检、签署死亡证明、通知家属结论或改变证据记录；剩余人工责任包括现场判断、遗体检查或协调、家属沟通、跨机构取证、法定认定和出庭责任。",
                 "id": "coroners.faq.5",
+                "question": "验尸官：哪些判断必须由人负责？",
                 "question_key": "career.faq.coroners.human-control",
                 "source_refs": [
                   "g04-editor"
@@ -8519,6 +8637,7 @@
               {
                 "answer": "现有中国官方来源没有提供与验尸官精确一一对应的全国职业工资分布；本页不显示行业平均、统一起薪或个人报价。",
                 "id": "coroners.faq.6",
+                "question": "验尸官：中国大陆薪资应如何核对？",
                 "question_key": "career.faq.coroners.china-pay",
                 "source_refs": [
                   "nbs-wage-method"
@@ -8527,6 +8646,7 @@
               {
                 "answer": "第一步不是报班，而是确认目标县/州采用 coroner 还是 medical examiner 制度、任命或选举方式、最低资格与实际空缺；只有法域官方要求能回答是否可申请。",
                 "id": "coroners.faq.7",
+                "question": "验尸官：入行通常需要什么教育或训练？",
                 "question_key": "career.faq.coroners.education-path",
                 "source_refs": [
                   "cdc-laws"
@@ -8535,6 +8655,7 @@
               {
                 "answer": "市场核对先按州县区分 coroner 与 medical examiner 制度，再看职位产生方式、资格、预算和真实空缺。 数字化记录或辅助分析只能落到资料整理和复核任务，不能推导法定裁决权或岗位替代。 转向死亡调查、法证实验室或公共卫生数据时，要分别核对机构、教育和授权，不能把它们合并为一条招聘路径。",
                 "id": "coroners.faq.8",
+                "question": "验尸官：就业展望与相邻转向应如何理解？",
                 "question_key": "career.faq.coroners.outlook-transition",
                 "source_refs": [
                   "g04-editor"
@@ -8557,10 +8678,8 @@
           "availability": "available",
           "copy_key": "career.item.boundary-notice",
           "data": {
-            "entries": [
-              "中国与美国数据分栏；精确职业、组合职业、父职业和行业口径不得互相改写。",
-              "AI 内容区分来源支持的通用边界与明确标注的编辑推演；不声称真实部署率、自动授权或净就业影响。",
-              "本页纸面练习只用于职业探索，不构成真实执业、设备操作、临床、教学、工程、法律或安全授权。"
+            "paragraphs": [
+              "中国与美国数据分栏；精确职业、组合职业、父职业和行业口径不得互相改写。"
             ]
           },
           "id": "coroners.sources.boundary.1",
@@ -8575,7 +8694,51 @@
             "onet-coroners",
             "repair-current-us"
           ],
-          "type": "list"
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "paragraphs": [
+              "AI 内容区分来源支持的通用边界与明确标注的编辑推演；不声称真实部署率、自动授权或净就业影响。"
+            ]
+          },
+          "id": "coroners.sources.boundary.1.2",
+          "source_refs": [
+            "cdc-laws",
+            "cdc-mec",
+            "cdc-modernization",
+            "dir-forensic",
+            "g04-editor",
+            "nbs-wage-method",
+            "nij-guide",
+            "onet-coroners",
+            "repair-current-us"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "paragraphs": [
+              "本页纸面练习只用于职业探索，不构成真实执业、设备操作、临床、教学、工程、法律或安全授权。"
+            ]
+          },
+          "id": "coroners.sources.boundary.1.3",
+          "source_refs": [
+            "cdc-laws",
+            "cdc-mec",
+            "cdc-modernization",
+            "dir-forensic",
+            "g04-editor",
+            "nbs-wage-method",
+            "nij-guide",
+            "onet-coroners",
+            "repair-current-us"
+          ],
+          "type": "prose"
         }
       ]
     },
@@ -8828,6 +8991,2328 @@
   ],
   "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "display": {
+    "component_order": [
+      "breadcrumb",
+      "hero",
+      "primary_cta",
+      "fermat_decision_card",
+      "fit_decision_checklist",
+      "definition_block",
+      "responsibilities_block",
+      "work_context_block",
+      "career_ai_description_block",
+      "career_quick_answers_block",
+      "onet_structured_fields_block",
+      "adjacent_career_comparison_table",
+      "ai_impact_table",
+      "career_snapshot_primary_locale",
+      "career_snapshot_secondary_locale",
+      "riasec_fit_block",
+      "personality_fit_block",
+      "career_risk_cards",
+      "career_path_block",
+      "market_signal_card",
+      "faq_block",
+      "boundary_notice",
+      "source_card"
+    ],
+    "components": {
+      "adjacent_career_comparison_table": {
+        "conclusion": "相邻方向必须分别补足工具、资格与责任证据。",
+        "evidence_links": [
+          {
+            "href": {
+              "$source": "dir-forensic",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            },
+            "label": {
+              "$source": "dir-forensic",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            }
+          }
+        ],
+        "evidence_note": "相邻关系只用于方向比较，不代表自动转岗或资格互认。",
+        "heading": "相邻职业比较",
+        "intro": "比较核心产出、责任边界和资格差异，不按职位名称互换。",
+        "rows": [
+          {
+            "关键区别": "职位产生方式、是否要求医学背景与权限随州与地方制度变化。",
+            "更适合什么选择": "若愿意在法域框架内承担法定调查与文件责任，先核该州县规则。",
+            "核心工作与产出": {
+              "$item": "coroners.direction-comparison.adjacent-career-comparison-table.1",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "Coroner（验尸官）"
+          },
+          {
+            "关键区别": "医师主导，需独立医学与法医病理训练。",
+            "更适合什么选择": "若愿意走完整医学训练路径，再核对本州制度。",
+            "核心工作与产出": {
+              "$item": "coroners.direction-comparison.adjacent-career-comparison-table.2",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "Medical examiner（法医官方向）"
+          },
+          {
+            "关键区别": "偏现场响应、记录与证据链协调，授权由机构决定。",
+            "更适合什么选择": "若更愿意做现场与记录，先查机构资格要求。",
+            "核心工作与产出": {
+              "$item": "coroners.direction-comparison.adjacent-career-comparison-table.3",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "Medicolegal death investigator（死亡调查员）"
+          },
+          {
+            "关键区别": "面向物证收集、保存或分析，交付实验室结果。",
+            "更适合什么选择": "若偏好实验室与物证工作，核对实验室岗位要求。",
+            "核心工作与产出": {
+              "$item": "coroners.direction-comparison.adjacent-career-comparison-table.4",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "法证科学技术员"
+          },
+          {
+            "关键区别": "重在死亡证明质量与统计，不做个案法定裁决。",
+            "更适合什么选择": "若偏好数据与统计，核对公共卫生岗位要求。",
+            "核心工作与产出": {
+              "$item": "coroners.direction-comparison.adjacent-career-comparison-table.5",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "公共卫生死亡数据方向"
+          },
+          {
+            "关键区别": "美国工资与就业统计以父职业 Compliance Officers（13-1041）为代理，不等于验尸官精确数据。",
+            "更适合什么选择": "只用该口径理解统计位置，不能当作本职业收入结论。",
+            "核心工作与产出": "可先积累受监督的记录、证据链与个案协调能力，再按本地制度竞聘或承担更复杂管理；法医医师、实验室法证和公共卫生数据是独立分支，不是统一晋升链。",
+            "职业方向": "合规官（父职业代理口径）"
+          }
+        ],
+        "transition": "下一步用可观察的现场记录或案卷样本验证方向。"
+      },
+      "ai_impact_table": {
+        "action_rows": [
+          {
+            "人群": "入行者",
+            "应对重点": "练习可复核工作样本。"
+          },
+          {
+            "人群": "在岗者",
+            "应对重点": "保留过程与失败记录。"
+          },
+          {
+            "人群": "管理者",
+            "应对重点": "先定权限和停止条件。"
+          }
+        ],
+        "answer": {
+          "$item": "coroners.ai-impact.ai-impact-table.2",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "authority_links": [
+          {
+            "来源": {
+              "$source": "dir-forensic",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "dir-forensic",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "onet-coroners",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "onet-coroners",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "repair-current-us",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "repair-current-us",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            }
+          }
+        ],
+        "difference_intro": {
+          "$item": "coroners.ai-impact.ai-impact-table.4",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "difference_rows": [
+          {
+            "AI主要改变": "信息整理",
+            "仍由人负责": "责任与授权",
+            "方向": "验尸官"
+          },
+          {
+            "AI主要改变": "检索与复盘",
+            "仍由人负责": "原始记录核对",
+            "方向": "工作流程"
+          }
+        ],
+        "evidence_intro": {
+          "$item": "coroners.ai-impact.ai-impact-table.3",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "evidence_rows": [
+          {
+            "使用限制": "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。",
+            "来源": {
+              "$source": "dir-forensic",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "研究对象": "来源覆盖范围",
+            "结论": "仅支持有界判断",
+            "链接": {
+              "$source": "dir-forensic",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。",
+            "来源": {
+              "$source": "onet-coroners",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "研究对象": "来源覆盖范围",
+            "结论": "仅支持有界判断",
+            "链接": {
+              "$source": "onet-coroners",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。",
+            "来源": {
+              "$source": "repair-current-us",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "研究对象": "来源覆盖范围",
+            "结论": "仅支持有界判断",
+            "链接": {
+              "$source": "repair-current-us",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            }
+          }
+        ],
+        "heading": {
+          "$item": "coroners.ai-impact.ai-impact-table.1",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "method_cards": [
+          {
+            "含义": "先区分可辅助任务与最终责任。",
+            "概念": "任务能力"
+          },
+          {
+            "含义": "技术演示不等于组织采用。",
+            "概念": "采用条件"
+          },
+          {
+            "含义": "不能从任务暴露推导裁撤时间。",
+            "概念": "岗位结果"
+          }
+        ],
+        "questions": [
+          {
+            "回答": "不能从任务暴露推导岗位裁撤日期。",
+            "来源": {
+              "$source": "dir-forensic",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "链接": {
+              "$source": "dir-forensic",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            },
+            "问题": "AI 会取代岗位吗？"
+          },
+          {
+            "回答": "先限定在信息整理和记录复核。",
+            "来源": {
+              "$source": "onet-coroners",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "链接": {
+              "$source": "onet-coroners",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            },
+            "问题": "AI 应先辅助什么？"
+          },
+          {
+            "回答": "关键判断、责任认定和停止升级。",
+            "来源": {
+              "$source": "repair-current-us",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "链接": {
+              "$source": "repair-current-us",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            },
+            "问题": "什么不能自动授权？"
+          }
+        ],
+        "responsibility_intro": {
+          "$item": "coroners.ai-impact.ai-impact-table.5",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "responsibility_steps": [
+          {
+            "步骤": "核对输入",
+            "说明": "确认来源、权限和版本。"
+          },
+          {
+            "步骤": "限定任务",
+            "说明": "只在已知范围内辅助。"
+          },
+          {
+            "步骤": "人工复核",
+            "说明": "责任人复核输出。"
+          },
+          {
+            "步骤": "记录升级",
+            "说明": "异常立即停止并上报。"
+          }
+        ],
+        "risk_rows": [
+          {
+            "为什么重要": "会放大错误结论。",
+            "控制方式": "核对原始材料。",
+            "风险": "错误输入"
+          },
+          {
+            "为什么重要": "会改变责任边界。",
+            "控制方式": "按授权链处理。",
+            "风险": "权限越界"
+          },
+          {
+            "为什么重要": "可能遗漏例外。",
+            "控制方式": "保留人工判断。",
+            "风险": "自动化误读"
+          }
+        ],
+        "task_rows": [
+          {
+            "人的控制点": "核对原始记录与失败模式。",
+            "任务": "整理记录",
+            "工作方向": "记录与信息管理",
+            "当前变化": {
+              "$item": "coroners.ai-impact.ai-impact-table.7",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": "按授权链保留人工判断。",
+            "任务": "执行核心任务",
+            "工作方向": "执行与协同",
+            "当前变化": {
+              "$item": "coroners.ai-impact.ai-impact-table.8",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": "按法定授权和指挥链升级。",
+            "任务": "关键判断",
+            "工作方向": "安全与授权",
+            "当前变化": "不作自动授权"
+          },
+          {
+            "人的控制点": "由责任人确认结论。",
+            "任务": "形成复盘记录",
+            "工作方向": "复盘与改进",
+            "当前变化": "可能辅助整理"
+          },
+          {
+            "人的控制点": "回到职业现场的原始资料。",
+            "任务": "核对工作输入",
+            "工作方向": "输入与版本",
+            "当前变化": "编辑推演：工具可在获准、去标识化环境中整理案卷字段、时间线和缺失项；这不是机构采用证据。"
+          },
+          {
+            "人的控制点": "发现越界即停止并升级。",
+            "任务": "识别冲突或缺失",
+            "工作方向": "边界与异常",
+            "当前变化": "编辑推演：可生成记录完整性清单或文书初稿，但不得认定身份、管辖、死因、死亡方式或证据真实性。"
+          },
+          {
+            "人的控制点": "责任人确认权限、结论和留痕。",
+            "任务": "形成可追溯交付",
+            "工作方向": "采用与责任",
+            "当前变化": "失败模式包括补造案情、合并同名人员、颠倒时间线、错配物证编号，或把概率写成法定结论。"
+          }
+        ],
+        "transition": {
+          "$item": "coroners.ai-impact.ai-impact-table.6",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        }
+      },
+      "boundary_notice": [
+        "使用边界已在职业内容与来源说明中呈现。",
+        {
+          "$link": "coroners.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "coroners.navigation.1",
+          "field": "url"
+        },
+        {
+          "$link": "coroners.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "coroners.navigation.2",
+          "field": "url"
+        },
+        {
+          "$link": "coroners.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "coroners.navigation.3",
+          "field": "url"
+        },
+        {
+          "$link": "coroners.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "coroners.navigation.4",
+          "field": "url"
+        },
+        {
+          "$link": "coroners.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "coroners.navigation.5",
+          "field": "url"
+        },
+        {
+          "$link": "coroners.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "coroners.navigation.6",
+          "field": "url"
+        },
+        {
+          "$link": "coroners.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "coroners.navigation.7",
+          "field": "url"
+        },
+        {
+          "$link": "coroners.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "coroners.navigation.8",
+          "field": "url"
+        },
+        {
+          "$link": "coroners.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "coroners.navigation.9",
+          "field": "url"
+        },
+        {
+          "$link": "coroners.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "coroners.navigation.10",
+          "field": "url"
+        },
+        {
+          "$link": "coroners.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "coroners.navigation.11",
+          "field": "url"
+        }
+      ],
+      "breadcrumb": {
+        "label": {
+          "$subject": "name"
+        },
+        "slug": {
+          "$subject": "canonical_slug"
+        }
+      },
+      "career_ai_description_block": {
+        "body": [
+          "AI 可辅助案卷字段校验、时间线整理与死亡证明草稿检查，但不能取得法域权限、判断死因或死亡方式，也不能替代尸检与毒理分析。"
+        ],
+        "heading": "验尸官的工作对象与 AI 边界"
+      },
+      "career_path_block": {
+        "boundary": "本板块的虚构练习与七天安排为编辑设计，材料均为虚构，不构成真实执业、尸检、医学鉴定、现场调查或安全操作授权，也不构成录用承诺。",
+        "competence_ladder": [
+          {
+            "description": "按通知与响应、到场与记录步骤保留可追溯材料。",
+            "stage": "响应与记录"
+          },
+          {
+            "description": "维护证据链、送检与案卷字段，缺口标待核。",
+            "stage": "证据与案卷"
+          },
+          {
+            "description": "区分观察、陈述与推断，越权前停止并升级。",
+            "stage": "边界与升级"
+          },
+          {
+            "description": "在授权范围内完成死亡证明与统计字段，不越权下结论。",
+            "stage": "法定与统计"
+          }
+        ],
+        "direct_answer": "入行通常不要求先读医学：可先从受监督的记录、证据链与个案协调做起，再按法域制度竞聘；coroner、medical examiner、法医病理与公共卫生数据是不同分支，进入前先核对目标法域的资格与职位产生方式。",
+        "heading": {
+          "$item": "coroners.path.career-path-block.1",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "locale_requirements": {
+          "credential_boundary": "coroner 的最低资格、medical examiner 的医学训练、尸检与签署权限、机构授权不是同一状态，不能互相替代。",
+          "jurisdiction": "适用法域：死亡调查制度、资格与尸检授权均按州、县或国家规则核定。",
+          "summary": "美国口径来自 O*NET 13-1041.06、CDC 州法综述与 NIJ 2024 死亡现场调查指南；中国大陆口径参考主管部门公开资料，具体资格以目标单位与法域现行规定为准。"
+        },
+        "schema_version": "career.career_progression.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "cdc-laws",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            },
+            "id": "cdc-laws",
+            "label": {
+              "$source": "cdc-laws",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "cdc-mec",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            },
+            "id": "cdc-mec",
+            "label": {
+              "$source": "cdc-mec",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "cdc-modernization",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            },
+            "id": "cdc-modernization",
+            "label": {
+              "$source": "cdc-modernization",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "dir-forensic",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            },
+            "id": "dir-forensic",
+            "label": {
+              "$source": "dir-forensic",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "entry",
+            "stages": [
+              {
+                "credentials": "按机构与法域规定。",
+                "next_moves": "熟悉 NIJ 现场调查步骤。",
+                "readiness_evidence": "记录编号、时间与来源一致。",
+                "responsibility": "在授权下协助通知与响应、到场与现场记录。",
+                "role": "现场响应辅助"
+              },
+              {
+                "credentials": "按机构与法域规定。",
+                "next_moves": "练习冲突与缺口识别。",
+                "readiness_evidence": "移交链完整、缺口标待核。",
+                "responsibility": "维护证据链、送检与移交记录。",
+                "role": "证据与移交记录"
+              },
+              {
+                "credentials": "按机构与法域规定。",
+                "next_moves": "区分观察、陈述与推断。",
+                "readiness_evidence": "案卷可被他人复核重建。",
+                "responsibility": "整理案卷字段并衔接医疗与调查资料。",
+                "role": "案卷与记录协调"
+              },
+              {
+                "credentials": "按机构与法域规定。",
+                "next_moves": "核对独立承担所需资格。",
+                "readiness_evidence": "边界清楚、越权前升级。",
+                "responsibility": "在法定人员指导下配合完成完整现场调查。",
+                "role": "受监督的现场调查"
+              }
+            ],
+            "title": "受监督的记录与响应"
+          },
+          {
+            "id": "specialist",
+            "stages": [
+              {
+                "credentials": "按医学教育与专业机构规则。",
+                "next_moves": "分别核对入学与住院训练条件。",
+                "readiness_evidence": "能说明教育与训练阶段。",
+                "responsibility": "核对医学学位与法医病理训练要求。",
+                "role": "medical examiner 路径准备"
+              },
+              {
+                "credentials": "尸检授权依法域而异。",
+                "next_moves": "确认本州尸检执行主体。",
+                "readiness_evidence": "能引用法域规则说明授权归属。",
+                "responsibility": "在授权范围内参与或解读尸检与毒理资料。",
+                "role": "尸检与医学鉴定方向"
+              },
+              {
+                "credentials": "按机构与实验室要求。",
+                "next_moves": "练习资料缺口核对。",
+                "readiness_evidence": "送检与结果记录可追溯。",
+                "responsibility": "协调病理、毒理与实验室送检及结果衔接。",
+                "role": "证据与毒理资料协调"
+              },
+              {
+                "credentials": "按法域与法院规则。",
+                "next_moves": "核对出庭与证据规则。",
+                "readiness_evidence": "结论与原始记录一致。",
+                "responsibility": "按程序提供可复核的调查与记录说明。",
+                "role": "专家证言与司法配合"
+              }
+            ],
+            "title": "医学与法定方向（需另行核对）"
+          },
+          {
+            "id": "management",
+            "stages": [
+              {
+                "credentials": "按法域与登记机构规则。",
+                "next_moves": "核对字段与更正流程。",
+                "readiness_evidence": "字段与个案材料一致。",
+                "responsibility": "按法域规则与个案材料核对死亡证明字段。",
+                "role": "死亡证明质量"
+              },
+              {
+                "credentials": "按法域与公共卫生机构规则。",
+                "next_moves": "核对统计口径与发布流程。",
+                "readiness_evidence": "统计字段可追溯。",
+                "responsibility": "确保死亡登记与统计的字段与时效。",
+                "role": "公共卫生数据衔接"
+              },
+              {
+                "credentials": "按机构制度。",
+                "next_moves": "练习冲突升级。",
+                "readiness_evidence": "协调记录完整、边界清楚。",
+                "responsibility": "与执法、医疗、殡葬和公共卫生机构协调信息。",
+                "role": "跨机构协作"
+              },
+              {
+                "credentials": "按机构制度与法域规则。",
+                "next_moves": "核对管理岗位的法定责任。",
+                "readiness_evidence": "制度与质量记录完整。",
+                "responsibility": "管理人力、预算与质量，同时承担法定责任。",
+                "role": "团队与预算管理"
+              }
+            ],
+            "title": "行政与公共卫生方向"
+          }
+        ]
+      },
+      "career_quick_answers_block": {
+        "availability": "published",
+        "heading": "职业速答",
+        "items": [
+          {
+            "answer": {
+              "$item": "coroners.profile.work-context-block.8",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa3",
+            "question": "这份工作先核对什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "对象",
+                  "secondary_value": null,
+                  "value": "验尸官"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "输入",
+                  "secondary_value": null,
+                  "value": "法域规则、死者身份与遗体、现场医疗与调查记录"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "交付",
+                  "secondary_value": null,
+                  "value": "可追溯案卷、死亡证明相关认定与司法转介"
+                }
+              ]
+            }
+          },
+          {
+            "answer": "以通知与响应、到场、记录与评估、取证与检验、认定与转介形成闭环。",
+            "key": "qa2",
+            "question": "怎样判断工作闭环？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "闭环",
+                  "secondary_value": null,
+                  "value": "通知与响应 → 到场 → 记录与评估 → 取证与检验 → 认定与转介 → 复核"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤一",
+                  "secondary_value": null,
+                  "value": "通知与响应"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤二",
+                  "secondary_value": null,
+                  "value": "到场并记录现场"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤三",
+                  "secondary_value": null,
+                  "value": "记录与评估遗体"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤四",
+                  "secondary_value": null,
+                  "value": "记录死者资料"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤五",
+                  "secondary_value": null,
+                  "value": "协调检验与鉴定"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤六",
+                  "secondary_value": null,
+                  "value": "完成现场调查并转介"
+                }
+              ]
+            }
+          },
+          {
+            "answer": "资格、医学训练、尸检授权与签字责任按法域与机构分别核验，不能互相替代。",
+            "key": "qa1",
+            "question": "资格边界是什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "边界",
+                  "secondary_value": null,
+                  "value": "法域资格、医学训练与机构授权分列"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "法域",
+                  "secondary_value": null,
+                  "value": "按州、县或国家规则"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "责任",
+                  "secondary_value": null,
+                  "value": "死亡证明与司法转介由有权者签署"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "法域",
+                  "secondary_value": null,
+                  "value": "尸检授权按法域归属"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "机构",
+                  "secondary_value": null,
+                  "value": "按机构制度授予"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "训练",
+                  "secondary_value": null,
+                  "value": "按岗位与专业机构要求"
+                }
+              ]
+            }
+          }
+        ],
+        "schema_version": "career.quick_answers.v1"
+      },
+      "career_risk_cards": {
+        "boundary": "不可用本页替代法域、机构或雇主的安全与授权规则。",
+        "context_links": [
+          {
+            "href": "#career-visual-group-risk",
+            "label": "查看职业风险"
+          }
+        ],
+        "direct_answer": "先识别法域权限、证据链与不可逆后果三类风险。",
+        "evidence_scope": "风险项按当前职业内容与所列来源（CDC 州法综述、NIJ 2024 指南）边界解释。",
+        "heading": "验尸官的风险与控制点",
+        "risks": [
+          {
+            "affected_roles": "验尸官",
+            "consequence": "调查与死亡认证可能失去合法基础，后续司法与统计受影响。",
+            "evidence_refs": [
+              "cdc-laws"
+            ],
+            "id": "risk-1",
+            "mitigation": "先确认法域、管辖与授权归属；无法确认即停止作实体判断并升级。",
+            "scenario": "在错误法域或超出医学授权的情况下推进调查。",
+            "title": {
+              "$item": "coroners.risk.career-risk-cards.1",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "验尸官",
+            "consequence": "调查团队与后续审查者可能无法重建事实。",
+            "evidence_refs": [
+              "cdc-laws"
+            ],
+            "id": "risk-2",
+            "mitigation": "保持原始状态、逐次记录移交，编号与时间冲突处标待核。",
+            "scenario": "现场、身份或证据链记录不完整或编号不一致。",
+            "title": {
+              "$item": "coroners.risk.career-risk-cards.2",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "验尸官",
+            "consequence": "可能误导家属、公共记录与司法使用者。",
+            "evidence_refs": [
+              "cdc-laws"
+            ],
+            "id": "risk-3",
+            "mitigation": "明确标注暂定与依据；最终结论由有权限者按程序形成。",
+            "scenario": "把初步观察写成最终死因或死亡方式。",
+            "title": {
+              "$item": "coroners.risk.career-risk-cards.3",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "验尸官",
+            "consequence": "登记机构与公共卫生统计可能收到错误数据。",
+            "evidence_refs": [
+              "cdc-laws"
+            ],
+            "id": "risk-4",
+            "mitigation": "按个案材料与法域规则核对字段，疑义交法域责任人确认。",
+            "scenario": "死亡证明字段缺失或套用不适用模板。",
+            "title": {
+              "$item": "coroners.risk.career-risk-cards.4",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "验尸官",
+            "consequence": "家属与调查链可能收到相互矛盾的信息。",
+            "evidence_refs": [
+              "cdc-laws"
+            ],
+            "id": "risk-5",
+            "mitigation": "停止扩展判断、保全记录，并把冲突交正式责任链处理。",
+            "scenario": "权限、身份、证据或通知对象发生冲突。",
+            "title": {
+              "$item": "coroners.risk.career-risk-cards.5",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "验尸官",
+            "consequence": "可能产生不可逆后果。",
+            "evidence_refs": [
+              "cdc-laws"
+            ],
+            "id": "risk-boundary",
+            "mitigation": "停止并按授权链升级。",
+            "scenario": "遇到超出授权范围的任务。",
+            "title": "责任边界"
+          }
+        ],
+        "schema_version": "career.work_risk.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "cdc-laws",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            },
+            "id": "cdc-laws",
+            "label": {
+              "$source": "cdc-laws",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "cdc-mec",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            },
+            "id": "cdc-mec",
+            "label": {
+              "$source": "cdc-mec",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "cdc-modernization",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            },
+            "id": "cdc-modernization",
+            "label": {
+              "$source": "cdc-modernization",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "dir-forensic",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            },
+            "id": "dir-forensic",
+            "label": {
+              "$source": "dir-forensic",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ]
+      },
+      "career_snapshot_primary_locale": {
+        "salary": {
+          "bls_table": [
+            {
+              "指标": "中国大陆薪资口径",
+              "数值": "暂无安全数值",
+              "说明": "未取得全国单职业精确口径，不以行业代理值替代。"
+            }
+          ],
+          "china_ai_row": {
+            "$item": "coroners.china-salary.career-snapshot-primary-locale.4",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_class_row": {
+            "$item": "coroners.china-salary.career-snapshot-primary-locale.3",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_edu_table": [
+            {
+              "学历段": "入口要求",
+              "岗位方向": "验尸官",
+              "说明": "按工作地和雇主核验。"
+            },
+            {
+              "学历段": "入口要求",
+              "岗位方向": "验尸官",
+              "说明": "按工作地和雇主核验。"
+            },
+            {
+              "学历段": "入口要求",
+              "岗位方向": "验尸官",
+              "说明": "按工作地和雇主核验。"
+            },
+            {
+              "学历段": "入口要求",
+              "岗位方向": "验尸官",
+              "说明": "按工作地和雇主核验。"
+            }
+          ],
+          "china_industry_table": [
+            {
+              "备注": "不以行业代理值替代单职业工资。",
+              "行业": "来源覆盖范围",
+              "需求": "暂无安全数值"
+            },
+            {
+              "备注": "不以行业代理值替代单职业工资。",
+              "行业": "来源覆盖范围",
+              "需求": "暂无安全数值"
+            },
+            {
+              "备注": "不以行业代理值替代单职业工资。",
+              "行业": "来源覆盖范围",
+              "需求": "暂无安全数值"
+            }
+          ],
+          "china_intl": "中国与美国职业口径不作自动等同。",
+          "china_name_row": {
+            "$item": "coroners.china-salary.career-snapshot-primary-locale.1",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_open": "暂无安全数值",
+          "china_ref": {
+            "$join": [
+              {
+                "$source": "dir-forensic",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "coroners.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "dir-forensic",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "coroners.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "china_salary_note": "中国公开来源仅用于说明口径边界。",
+          "china_salary_table": [
+            {
+              "城市/区间": "全国单职业",
+              "月薪参考": "暂无安全数值"
+            },
+            {
+              "城市/区间": "全国单职业",
+              "月薪参考": "暂无安全数值"
+            },
+            {
+              "城市/区间": "全国单职业",
+              "月薪参考": "暂无安全数值"
+            }
+          ],
+          "china_soc_row": {
+            "$item": "coroners.china-salary.career-snapshot-primary-locale.2",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "sources_note": {
+            "$join": [
+              {
+                "$source": "nbs-wage-method",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "coroners.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "nbs-wage-method",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "coroners.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "ui": {
+            "ai_heading": "AI 辅助边界",
+            "driver_heading": "影响因素",
+            "official_heading": "中国大陆公开口径",
+            "scenario_caption": "未取得全国单职业精确工资，不以行业代理值替代。",
+            "scenario_heading": "职业场景边界",
+            "scenario_interpretation_label": "解释",
+            "scenario_role_label": "职业",
+            "scenario_value_label": "口径"
+          },
+          "us_growth": "暂无安全数值",
+          "us_median": "暂无安全数值"
+        }
+      },
+      "career_snapshot_secondary_locale": {
+        "authority_sources": {
+          "$join": [
+            {
+              "$source": "nbs-wage-method",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "nbs-wage-method",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            }
+          ],
+          "separator": ""
+        },
+        "bls_table": [
+          {
+            "指标": "美国薪资中位数",
+            "数值": "暂无安全数值",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "dir-forensic",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "coroners.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "dir-forensic",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "coroners.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资低位",
+            "数值": "暂无安全数值",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "dir-forensic",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "coroners.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "dir-forensic",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "coroners.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资高位",
+            "数值": "暂无安全数值",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "dir-forensic",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "coroners.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "dir-forensic",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "coroners.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资单位",
+            "数值": "按来源原始单位",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "dir-forensic",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "coroners.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "dir-forensic",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "coroners.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资时期",
+            "数值": "按来源时期",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "dir-forensic",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "coroners.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "dir-forensic",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "coroners.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业规模",
+            "数值": "暂无安全数值",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "nbs-wage-method",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "coroners.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "nbs-wage-method",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "coroners.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业增长 outlook",
+            "数值": "暂无安全数值",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "nbs-wage-method",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "coroners.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "nbs-wage-method",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "coroners.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业空缺",
+            "数值": "暂无安全数值",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "nbs-wage-method",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "coroners.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "nbs-wage-method",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "coroners.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          }
+        ],
+        "boundary": "美国统计不代表中国职业工资或就业结果。",
+        "direct_answer": {
+          "$item": "coroners.us-salary.career-snapshot-secondary-locale.2",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "factor_rows": [
+          {
+            "answer": "按来源职业代码核对。",
+            "factor": "职业口径"
+          },
+          {
+            "answer": "按来源地区核对。",
+            "factor": "地区"
+          },
+          {
+            "answer": "按来源时期核对。",
+            "factor": "时期"
+          }
+        ],
+        "factors_heading": {
+          "$item": "coroners.us-salary.career-snapshot-secondary-locale.6",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "growth": "暂无安全数值",
+        "heading": {
+          "$item": "coroners.us-salary.career-snapshot-secondary-locale.1",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_heading": {
+          "$item": "coroners.us-salary.career-snapshot-secondary-locale.5",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_period": "按来源时期",
+        "industry_rows": [
+          {
+            "industry": "来源覆盖范围",
+            "median": "按原始来源",
+            "note": "不作跨市场换算。"
+          },
+          {
+            "industry": "机构/雇主",
+            "median": "需核对",
+            "note": "岗位要求可能不同。"
+          },
+          {
+            "industry": "地区",
+            "median": "需核对",
+            "note": "地区影响结果。"
+          },
+          {
+            "industry": "时期",
+            "median": "按来源",
+            "note": "不得忽略时间口径。"
+          }
+        ],
+        "industry_value_label": "来源原始值",
+        "interpretation_heading": {
+          "$item": "coroners.us-salary.career-snapshot-secondary-locale.4",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "interpretation_rows": [
+          {
+            "answer": "按所列职业和时期解释。",
+            "question": "统计对象是什么？"
+          },
+          {
+            "answer": "不能。",
+            "question": "能否外推中国？"
+          },
+          {
+            "answer": "不能。",
+            "question": "能否保证个人结果？"
+          },
+          {
+            "answer": "结合岗位和来源边界。",
+            "question": "如何使用？"
+          }
+        ],
+        "median": "暂无安全数值",
+        "outlook_heading": "就业展望",
+        "outlook_period": "按来源时期",
+        "wage_column_labels": [
+          "口径",
+          "数值",
+          "时期",
+          "限制"
+        ],
+        "wage_heading": {
+          "$item": "coroners.us-salary.career-snapshot-secondary-locale.3",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "wage_tiers": [
+          {
+            "equivalent": "不作换算",
+            "interpretation": "保留原始单位。",
+            "label": "低位",
+            "value": "按来源"
+          },
+          {
+            "equivalent": "不作换算",
+            "interpretation": "保留原始单位。",
+            "label": "中位",
+            "value": "按来源"
+          },
+          {
+            "equivalent": "不作换算",
+            "interpretation": "保留原始单位。",
+            "label": "高位",
+            "value": "按来源"
+          }
+        ]
+      },
+      "definition_block": {
+        "$item": "coroners.profile.work-context-block.1",
+        "block": "profile",
+        "copy_key": "career.item.definition-block",
+        "type": "prose"
+      },
+      "faq_block": {
+        "items": {
+          "$item": "coroners.sources.faq.1",
+          "block": "sources",
+          "copy_key": "career.item.faq-block",
+          "type": "faq"
+        }
+      },
+      "fermat_decision_card": {
+        "caveat": {
+          "$item": "coroners.quick-decision.fit-decision-checklist.1",
+          "block": "quick-decision",
+          "copy_key": "career.item.fermat-decision-card",
+          "type": "prose"
+        },
+        "summary": {
+          "$item": "coroners.quick-decision.fit-decision-checklist.2",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "title": "验尸官适合什么样的人？"
+      },
+      "fit_decision_checklist": {
+        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "how": {
+          "$item": "coroners.quick-decision.fit-decision-checklist.3",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "suit": {
+          "$item": "coroners.quick-decision.fit-decision-checklist.4",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        }
+      },
+      "hero": {
+        "h1": {
+          "$subject": "name"
+        },
+        "quick_answer": {
+          "$subject": "summary"
+        },
+        "title": {
+          "$subject": "name"
+        }
+      },
+      "market_signal_card": {
+        "context_links": [
+          {
+            "href": "#career-visual-group-market-signals",
+            "label": "查看市场信号"
+          }
+        ],
+        "direct_answer": {
+          "$item": "coroners.market-signals.market-signal-card.2",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "heading": {
+          "$item": "coroners.market-signals.market-signal-card.1",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "outlook_evidence": [
+          {
+            "geography": "来源覆盖范围",
+            "horizon": "当前来源时期",
+            "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "市场信号",
+            "occupation_scope": "验尸官",
+            "value": {
+              "$item": "coroners.market-signals.market-signal-card.3",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "geography": "来源覆盖范围",
+            "horizon": "当前来源时期",
+            "interpretation": "就业规模与空缺不是同一指标。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "就业规模",
+            "occupation_scope": "验尸官",
+            "value": "暂无安全数值"
+          },
+          {
+            "geography": "来源覆盖范围",
+            "horizon": "当前来源时期",
+            "interpretation": "职位空缺需按来源口径解释。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "职位空缺",
+            "occupation_scope": "验尸官",
+            "value": "暂无安全数值"
+          }
+        ],
+        "schema_version": "career.outlook_transitions.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "cdc-laws",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            },
+            "id": "cdc-laws",
+            "label": {
+              "$source": "cdc-laws",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "cdc-mec",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            },
+            "id": "cdc-mec",
+            "label": {
+              "$source": "cdc-mec",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "cdc-modernization",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            },
+            "id": "cdc-modernization",
+            "label": {
+              "$source": "cdc-modernization",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "dir-forensic",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            },
+            "id": "dir-forensic",
+            "label": {
+              "$source": "dir-forensic",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ],
+        "transitions": [
+          {
+            "capability_gaps": {
+              "$item": "coroners.market-signals.market-signal-card.5",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "coroners.market-signals.market-signal-card.4",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "target_href": "/zh/career/jobs/forensic-science-technicians",
+            "target_slug": "forensic-science-technicians",
+            "target_title": "法证科学技术员",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "完整医学教育、住院训练与病理执业资格。",
+            "shared_capabilities": "能读懂医学与实验室资料并把结论与原始记录对应。",
+            "target_href": "/zh/career/jobs/physicians-pathologists",
+            "target_slug": "physicians-pathologists",
+            "target_title": "医师、病理医师",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "合规领域的法规、审计与行业规则训练。",
+            "shared_capabilities": "能在规则框架内核对事实、保留证据并撰写可复核文书。",
+            "target_href": "/zh/career/jobs/compliance-officers",
+            "target_slug": "compliance-officers",
+            "target_title": "合规专员",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "健康信息系统的登记、编码与隐私合规训练。",
+            "shared_capabilities": "能维护标准化记录与字段质量，并处理隐私要求。",
+            "target_href": "/zh/career/jobs/health-information-technologists-and-medical-registrars",
+            "target_slug": "health-information-technologists-and-medical-registrars",
+            "target_title": "健康信息技师与医疗登记专员",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "殡葬法规、许可与遗体处置流程要求。",
+            "shared_capabilities": "能在敏感场景中与家属沟通并按规定处理遗体交接。",
+            "target_href": "/zh/career/jobs/morticians-undertakers-and-funeral-arrangers",
+            "target_slug": "morticians-undertakers-and-funeral-arrangers",
+            "target_title": "殡葬师、殡仪承办人",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "执法授权、调查程序与法定权限的准入要求。",
+            "shared_capabilities": "能保护现场、记录证据并按程序转介。",
+            "target_href": "/zh/career/jobs/police-and-detectives",
+            "target_slug": "police-and-detectives",
+            "target_title": "警察与侦探",
+            "transition_distance": "需补证据"
+          }
+        ]
+      },
+      "onet_structured_fields_block": {
+        "availability": "published",
+        "heading": "O*NET 结构化字段",
+        "rows": [
+          {
+            "alternate_value": null,
+            "label": "研究输入",
+            "secondary_value": null,
+            "value": {
+              "$item": "coroners.profile.work-context-block.7",
+              "block": "profile",
+              "copy_key": "career.item.onet-structured-fields-block",
+              "type": "prose"
+            }
+          }
+        ],
+        "schema_version": "career.onet_structured_fields.v1"
+      },
+      "personality_fit_block": {
+        "assessments": [
+          {
+            "answer": {
+              "$item": "coroners.fit.personality-fit-block.6",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "riasec",
+            "label": "兴趣与任务",
+            "question": "能否在信息不全时仍保持精确记录并主动标待核？",
+            "signals": [
+              "记录",
+              "待核"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": {
+              "$item": "coroners.fit.personality-fit-block.7",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "big-five",
+            "label": "压力与情绪负荷",
+            "question": "能否面对创伤材料与家属沟通仍保持准确与尊重？",
+            "signals": [
+              "情绪负荷",
+              "沟通"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": {
+              "$item": "coroners.fit.personality-fit-block.8",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "mbti",
+            "label": "边界与升级",
+            "question": "能否在越权前停止并按规定升级？",
+            "signals": [
+              "授权边界",
+              "升级"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": "用实际样本验证。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "enneagram",
+            "label": "动机观察",
+            "question": "能否长期面对不确定的死因与家属情绪而不急于给结论？",
+            "signals": [
+              "任务",
+              "记录"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": "用实际样本验证。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "iq",
+            "label": "问题解决",
+            "question": "能否在信息冲突或缺失时理清事实并标出待核项？",
+            "signals": [
+              "任务",
+              "记录"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": "用实际样本验证。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "eq",
+            "label": "协作边界",
+            "question": "能否在执法、医疗与家属之间保持边界与尊重？",
+            "signals": [
+              "任务",
+              "记录"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          }
+        ],
+        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "direct_answer": {
+          "$item": "coroners.fit.personality-fit-block.2",
+          "block": "fit",
+          "copy_key": "career.item.personality-fit-block",
+          "type": "prose"
+        },
+        "directions": [
+          {
+            "direction": "任务样本",
+            "fit_signals": "能否稳定完成可复核交付",
+            "watchouts": "注意授权和停止条件。"
+          },
+          {
+            "direction": "工具使用",
+            "fit_signals": "能否保留原始记录",
+            "watchouts": "不把工具输出当作结论。"
+          },
+          {
+            "direction": "协作交接",
+            "fit_signals": "能否清晰交接",
+            "watchouts": "按责任链升级异常。"
+          },
+          {
+            "direction": "反馈复盘",
+            "fit_signals": "能否依据证据修订",
+            "watchouts": "保留版本和变更记录。"
+          },
+          {
+            "direction": "压力场景",
+            "fit_signals": "能否遵守流程",
+            "watchouts": "不可跳过安全步骤。"
+          },
+          {
+            "direction": "长期训练",
+            "fit_signals": "能否持续补证据",
+            "watchouts": "资格按法域核验。"
+          }
+        ],
+        "heading": {
+          "$item": "coroners.fit.personality-fit-block.1",
+          "block": "fit",
+          "copy_key": "career.item.personality-fit-block",
+          "type": "prose"
+        },
+        "questions": [
+          {
+            "answer": "用实际样本验证。",
+            "question": "能否稳定完成工作样本？"
+          },
+          {
+            "answer": "按流程保存。",
+            "question": "能否保留原始记录？"
+          },
+          {
+            "answer": "设置停止和升级条件。",
+            "question": "能否识别异常？"
+          },
+          {
+            "answer": "交接对象、状态和责任人。",
+            "question": "能否清晰交接？"
+          },
+          {
+            "answer": "根据证据修订。",
+            "question": "能否接受复核？"
+          },
+          {
+            "answer": "按法域和雇主核验。",
+            "question": "能否补足资格？"
+          },
+          {
+            "answer": "工具不能替代授权判断。",
+            "question": "能否理解工具边界？"
+          },
+          {
+            "answer": "完成一份可复核练习。",
+            "question": "如何继续验证？"
+          }
+        ],
+        "schema_version": "career.fit_decision_center.v1",
+        "signals": [
+          {
+            "body": {
+              "$item": "coroners.fit.personality-fit-block.3",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "id": "fit",
+            "label": "适配信号",
+            "tone": "positive"
+          },
+          {
+            "body": {
+              "$item": "coroners.fit.personality-fit-block.4",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "id": "caution",
+            "label": "注意信号",
+            "tone": "caution"
+          },
+          {
+            "body": {
+              "$item": "coroners.fit.personality-fit-block.5",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "id": "experiment",
+            "label": "验证动作",
+            "tone": "action"
+          }
+        ],
+        "source_links": [
+          {
+            "href": {
+              "$source": "cdc-laws",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            },
+            "label": {
+              "$source": "cdc-laws",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "cdc-mec",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            },
+            "label": {
+              "$source": "cdc-mec",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "cdc-modernization",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            },
+            "label": {
+              "$source": "cdc-modernization",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "dir-forensic",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "coroners.source-register.published.1"
+            },
+            "label": {
+              "$source": "dir-forensic",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "coroners.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          }
+        ]
+      },
+      "primary_cta": {
+        "entry_surface": "career_job_detail",
+        "href": "/zh/tests/holland-career-interest-test-riasec",
+        "label": "测我的职业兴趣是否适合验尸官",
+        "source_page_type": "career_job_detail",
+        "subject_key": {
+          "$subject": "canonical_slug"
+        },
+        "subject_kind": "career_job",
+        "target_action": "start_riasec_test",
+        "test_slug": "holland-career-interest-test-riasec"
+      },
+      "responsibilities_block": [
+        {
+          "$item": "coroners.profile.work-context-block.2",
+          "block": "profile",
+          "copy_key": "career.item.responsibilities-block",
+          "type": "prose"
+        },
+        {
+          "$item": "coroners.profile.work-context-block.3",
+          "block": "profile",
+          "copy_key": "career.item.responsibilities-block",
+          "type": "prose"
+        },
+        {
+          "$item": "coroners.profile.work-context-block.4",
+          "block": "profile",
+          "copy_key": "career.item.responsibilities-block",
+          "type": "prose"
+        }
+      ],
+      "riasec_fit_block": {
+        "fit_interest": "工作样本优先",
+        "interest": "按现场响应、记录与授权边界核对兴趣适配，不作为人格或资格判断。",
+        "riasec": "I/C/E",
+        "riasec_short": "调查型 · 常规型 · 企业型"
+      },
+      "source_card": {
+        "eeat_signals": {
+          "author": "FermatMind research workflow",
+          "source": {
+            "$source": "cdc-laws",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "name",
+            "item": "coroners.source-register.published.1"
+          },
+          "updated_at": {
+            "$source": "cdc-laws",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "period",
+            "item": "coroners.source-register.published.1"
+          }
+        },
+        "note": "来源范围、限制和统计时期按原始证据分别核对。"
+      },
+      "work_context_block": {
+        "$join": [
+          {
+            "$item": "coroners.profile.work-context-block.5",
+            "block": "profile",
+            "copy_key": "career.item.work-context-block",
+            "type": "prose"
+          },
+          {
+            "$item": "coroners.profile.work-context-block.6",
+            "block": "profile",
+            "copy_key": "career.item.work-context-block",
+            "type": "prose"
+          },
+          {
+            "$item": "coroners.sources.boundary.1",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          },
+          {
+            "$item": "coroners.sources.boundary.1.2",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          },
+          {
+            "$item": "coroners.sources.boundary.1.3",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          }
+        ],
+        "separator": "\n"
+      }
+    },
+    "contract_version": "career.detail.display.v1",
+    "interface": {
+      "interface.fit.directions_heading": "你更可能适合哪条验尸官方向？"
+    },
+    "locale": "zh-CN",
+    "native_items": [
+      {
+        "block": "source-register",
+        "copy_key": "career.item.published-sources",
+        "id": "coroners.source-register.published.1",
+        "location": "sources",
+        "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.recruitment-sample",
+        "id": "coroners.path.recruitment-sample.1",
+        "location": "entry_decisions",
+        "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-role-comparison",
+        "id": "coroners.path.entry-role-comparison.1",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.employer-evidence",
+        "id": "coroners.path.employer-evidence.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-portfolio",
+        "id": "coroners.path.entry-portfolio.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.interview-probation",
+        "id": "coroners.path.interview-probation.1",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.credential-decision",
+        "id": "coroners.path.credential-decision.1",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.credential-boundary",
+        "id": "coroners.path.credential-boundary.1",
+        "location": "entry_decisions",
+        "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "coroners.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "coroners.path.entry-work-sample-data.2",
+        "location": "entry_decisions",
+        "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "coroners.path.entry-work-sample-data.3",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "coroners.path.entry-work-sample-data.4",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "coroners.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "coroners.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
+      }
+    ],
+    "path": "/zh/career/jobs/coroners",
+    "section_titles": {
+      "ai-impact": "AI 影响",
+      "china-salary": "中国大陆薪资",
+      "direction-comparison": "方向比较",
+      "fit": "适配判断",
+      "market-signals": "市场信号",
+      "navigation": "页面导航",
+      "path": "入行与进阶",
+      "profile": "职业概览",
+      "quick-decision": "快速判断",
+      "risk": "风险与控制",
+      "source-register": "来源登记",
+      "sources": "来源与常见问题",
+      "us-salary": "美国薪资"
+    }
+  },
   "fact_register": {
     "facts": [
       {
@@ -8944,7 +11429,7 @@
       "text": "验尸官"
     }
   },
-  "source_content_sha256": "3e5b31b75d0c237275eac72cb071fc331eee2258294fa2978a910ef3ed8016ca",
+  "source_content_sha256": "716373039624c1e8074ed7f95bf02921b075a0df5f6a967b9f7898b4d7bbe9ed",
   "subject": {
     "canonical_slug": "coroners",
     "name": "验尸官",
