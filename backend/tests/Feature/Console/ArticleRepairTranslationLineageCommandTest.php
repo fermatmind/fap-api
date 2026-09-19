@@ -133,7 +133,7 @@ final class ArticleRepairTranslationLineageCommandTest extends TestCase
             'is_indexable' => true,
         ]);
 
-        $sourceRevision = $this->revision($source, 1, ArticleTranslationRevision::STATUS_SOURCE, '## 源文章正文');
+        $sourceRevision = $this->revision($source, 1, ArticleTranslationRevision::STATUS_PUBLISHED, '## 源文章正文');
         $publishedRevision = $this->revision($target, 1, ArticleTranslationRevision::STATUS_PUBLISHED, '## Published target body');
         $workingRevision = $this->revision($target, 2, ArticleTranslationRevision::STATUS_HUMAN_REVIEW, '## Working target body');
 

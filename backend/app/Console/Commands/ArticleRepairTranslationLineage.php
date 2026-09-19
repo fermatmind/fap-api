@@ -244,8 +244,8 @@ final class ArticleRepairTranslationLineage extends Command
                 $errors[] = $this->issue($field, 'revision_ownership_mismatch', 'Revision ownership does not match the locked article identity.');
             }
         }
-        if ((string) $sourceRevision->revision_status !== ArticleTranslationRevision::STATUS_SOURCE) {
-            $errors[] = $this->issue('source_revision', 'source_revision_status_mismatch', 'The source revision must remain source.');
+        if ((string) $sourceRevision->revision_status !== ArticleTranslationRevision::STATUS_PUBLISHED) {
+            $errors[] = $this->issue('source_revision', 'source_revision_status_mismatch', 'The locked source revision must be the currently published source revision.');
         }
         if (! in_array((string) $targetWorkingRevision->revision_status, [
             ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
