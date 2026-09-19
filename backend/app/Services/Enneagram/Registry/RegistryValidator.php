@@ -255,20 +255,12 @@ final class RegistryValidator
     ];
 
     private const REQUIRED_UI_COPY_KEYS = [
-        'instant_summary.clear',
-        'instant_summary.close_call',
-        'instant_summary.diffuse',
-        'instant_summary.low_quality',
+        'result_overview.clear',
+        'result_overview.close_call',
+        'result_overview.diffuse',
+        'result_overview.low_quality',
         'form_badge.e105',
         'form_badge.fc144',
-        'close_call_card.title',
-        'diffuse_boundary.title',
-        'low_quality_boundary.title',
-        'technical_note.link_label',
-        'observation.assign_cta',
-        'observation.day3_title',
-        'observation.day7_title',
-        'observation.self_confirmation_boundary',
     ];
 
     private const VALID_TECHNICAL_NOTE_DATA_STATUS = ['planned', 'collecting', 'provisional', 'available', 'deprecated'];

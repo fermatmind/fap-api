@@ -15,19 +15,19 @@
     "preview_enabled": true,
     "fallback_policy": "required",
     "entries": {
-        "instant_summary.clear": {
+        "result_overview.clear": {
             "title_template": "The current primary candidates are relatively clear",
             "body_template": "This answer presents a relatively concentrated primary candidate, which can be used to sort out recent common motivations, attention and coping methods. Please treat this result as an observable, retrospective explanatory hypothesis rather than an absolute label or diagnostic conclusion on personality."
         },
-        "instant_summary.close_call": {
+        "result_overview.close_call": {
             "title_template": "The leading candidates need close-call comparison",
             "body_template": "The first two candidates are close in this response. Compare their stress triggers, relationship expectations, work patterns, and conflict reactions side by side, and look for recent situations that contradict either candidate. For the next seven days, record the situation, trigger, first reaction, and later reflection without fixing a personality label."
         },
-        "instant_summary.diffuse": {
+        "result_overview.diffuse": {
             "title_template": "The current profile is broadly distributed",
             "body_template": "Signals are spread across several types, so the first candidate does not support a single-type conclusion. Read the top three candidates, center cues, and observation task together, then record which motivations recur in real situations and which appear only occasionally."
         },
-        "instant_summary.low_quality": {
+        "result_overview.low_quality": {
             "title_template": "The current result has a quality boundary",
             "body_template": "The results are still readable this time, but the response signal shows that the boundaries of interpretation need to be relaxed: it is more suitable for helping you look back at which questions, situations, or states affected your choices, and is not suitable for confirming the primary type, evaluating personality stability, or inferring ability. This prompt does not blame the respondent, nor does it mean that you are not serious; it only shows that the answer sheet does not provide an interpretable signal to the system. A more prudent next step is to retest the same question type when your attention and state are more stable; switching to another form can only be used as a supplementary observation and cannot be regarded as finding better answers or comparing across question types."
         },
@@ -38,31 +38,6 @@
         "form_badge.fc144": {
             "label": "FC144 Two-option Forced-choice Form",
             "body_template": "Uses two-option forced-choice responses to observe relative preference signals; scores are interpreted only within the FC144 scoring context."
-        },
-        "close_call_card.title": {
-            "label": "First-vs-second candidate comparison"
-        },
-        "diffuse_boundary.title": {
-            "label": "Explanation of scatter in results"
-        },
-        "low_quality_boundary.title": {
-            "label": "Quality Boundary Description"
-        },
-        "technical_note.link_label": {
-            "label": "View technical note",
-            "body_template": "Explain the level of evidence, known limitations, form boundaries, indicator status, and privacy handling methods of this test; do not package the Enneagram results into diagnosis, recruitment screening, treatment recommendations, or definitive personality certification."
-        },
-        "observation.assign_cta": {
-            "label": "Start 7 days of observation"
-        },
-        "observation.day3_title": {
-            "label": "Day3 Observation and Feedback"
-        },
-        "observation.day7_title": {
-            "label": "Day7 resonance feedback"
-        },
-        "observation.self_confirmation_boundary": {
-            "label": "Feedback only records your self-observation evidence and will not overwrite this measurement score, primary type candidates, or historical results."
         }
     }
 }

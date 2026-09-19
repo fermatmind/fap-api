@@ -374,7 +374,7 @@ final class EnneagramReportComposer
     private function buildResultOverviewModule(array $projectionV2, array $indexes, string $language): array
     {
         $state = $this->state($projectionV2);
-        $uiKey = 'instant_summary.'.$state;
+        $uiKey = 'result_overview.'.$state;
         $ui = is_array($indexes['ui_entries'][$uiKey] ?? null) ? $indexes['ui_entries'][$uiKey] : [];
         $formVariant = $this->formVariant($projectionV2);
         $formBadgeKey = $formVariant === 'fc144' ? 'form_badge.fc144' : 'form_badge.e105';
@@ -546,16 +546,15 @@ final class EnneagramReportComposer
     }
 
     /**
-     * Keep the full scientific/use disclaimer in method_boundary and the single
-     * short overview boundary in instant_summary. Other modules may retain only
-     * limits that are specific to the claim they make.
+     * Keep the short scientific/use boundary in the result overview. Other
+     * modules may retain only limits that are specific to the claim they make.
      *
      * @param  array<string,mixed>  $content
      * @return array<string,mixed>
      */
     private function compactDisplayContent(string $moduleKey, array $content): array
     {
-        if (in_array($moduleKey, ['method_boundary', 'instant_summary'], true)) {
+        if ($moduleKey === 'result_overview') {
             return $content;
         }
 

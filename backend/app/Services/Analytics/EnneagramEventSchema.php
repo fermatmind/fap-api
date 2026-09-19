@@ -43,7 +43,6 @@ final class EnneagramEventSchema
         'enneagram_attempt_submitted' => [],
         'enneagram_result_viewed' => [],
         'enneagram_report_viewed' => [],
-        'enneagram_instant_summary_viewed' => [],
         'enneagram_close_call_exposed' => [],
         'enneagram_close_call_expanded' => [],
         'enneagram_observation_assigned' => ['observation_status', 'suggested_next_action'],

@@ -15,19 +15,19 @@
     "preview_enabled": true,
     "fallback_policy": "required",
     "entries": {
-        "instant_summary.clear": {
+        "result_overview.clear": {
             "title_template": "当前主候选相对清晰",
             "body_template": "这次作答呈现出一个相对集中的主候选，可以先用它整理近期常见的动机、注意力和应对方式。请把这个结果当作可观察、可回看的解释假设，而不是对人格的绝对标签或诊断结论。"
         },
-        "instant_summary.close_call": {
+        "result_overview.close_call": {
             "title_template": "当前需要接近型辨析",
             "body_template": "这次作答中第一候选与第二候选距离较近，适合并排比较两种解释线索在压力启动点、关系期待、工作推进和冲突反应中的差异，并寻找不符合其中某一候选的近期反例。接下来 7 天只记录具体情境、触发点、第一反应和事后复盘，不急着固定自我标签。"
         },
-        "instant_summary.diffuse": {
+        "result_overview.diffuse": {
             "title_template": "当前轮廓较分散",
             "body_template": "这次作答的分布较分散，多个类型线索同时出现，第一候选还不足以单独承载整页解释。请先并排阅读前三候选、三中心提示和观察任务，记录哪些动机在真实情境中反复出现，哪些只是偶然状态。"
         },
-        "instant_summary.low_quality": {
+        "result_overview.low_quality": {
             "title_template": "当前结果有质量边界",
             "body_template": "这次结果仍可阅读，但作答信号显示解释边界需要放宽：它更适合帮助你回看哪些题目、情境或状态影响了选择，不适合用来确认主型、评价人格稳定性或推断能力。这个提示不是在责备作答者，也不是说你不认真；它只说明本次答卷给系统的可解释信号不足。更稳妥的下一步是在注意力和状态较稳定时重测同一题型；切换到另一题型只能作为补充观察，不能被当成寻找更好答案或跨题型比较。"
         },
@@ -38,31 +38,6 @@
         "form_badge.fc144": {
             "label": "FC144 二选一迫选版",
             "body_template": "采用二选一迫选作答，用于观察相对取舍线索；分数只在 FC144 自身计分语境内阅读。"
-        },
-        "close_call_card.title": {
-            "label": "第一候选与第二候选辨析"
-        },
-        "diffuse_boundary.title": {
-            "label": "结果分散说明"
-        },
-        "low_quality_boundary.title": {
-            "label": "质量边界说明"
-        },
-        "technical_note.link_label": {
-            "label": "查看技术说明",
-            "body_template": "说明本测试的证据层级、已知局限、题型边界、指标状态与隐私处理方式；不把九型结果包装成诊断、招聘筛选、治疗建议或确定性人格证明。"
-        },
-        "observation.assign_cta": {
-            "label": "开始 7 天观察"
-        },
-        "observation.day3_title": {
-            "label": "Day3 观察反馈"
-        },
-        "observation.day7_title": {
-            "label": "第 7 天共鸣反馈"
-        },
-        "observation.self_confirmation_boundary": {
-            "label": "反馈只记录你的自我观察证据，不会改写本次测量分数、主型候选或历史结果。"
         }
     }
 }

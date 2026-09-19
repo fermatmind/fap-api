@@ -2,18 +2,18 @@
     "artifacts": [
         {
             "path": "private_result.compiled.json",
-            "sha256": "5488cacac3b844c6c77bb2ccb8894fa9ee8f8be437bf78ddb754a72c14fb6618"
+            "sha256": "cc0fc01dd522e14a62fb245bb006746d969c52507cdb21c22924318014896a9a"
         }
     ],
     "authority_id": "FERMATMIND_ENNEAGRAM_PRIVATE_RESULT_CANONICAL",
     "authority_root": "backend/content_packs/ENNEAGRAM/v2/registry",
-    "compiled_hash": "6a0eb13dc83452b2fcf3b514a634b8f44b59fe158b188761f402946575e56be8",
+    "compiled_hash": "df084468282d011624125c2cca2d6bc654a613bf59424843b852c554ee5f2c07",
     "compiled_hash_rule": "sha256(canonical JSON of compiled payload excluding compiled_hash)",
     "compiler": {
         "schema": "fap.enneagram.private_result.compiler.v1",
         "version": "1.1.0"
     },
-    "content_hash": "4e1705bb66c5818e212008b466e96a7c48d36bcbe60ba53c55057d325194bd34",
+    "content_hash": "08917013da6b5990341978dffe9dc0773f0c25157e025e23e940d170692a908d",
     "content_maturity_values": [
         "scaffold",
         "p0_placeholder",
@@ -343,7 +343,7 @@
                 ],
                 "role": "result states and form labels",
                 "schema": "fap.enneagram.ui_copy_registry.v1",
-                "sha256": "ca7fc989564154be9a8c60d2cd7feaff0c331adb146ceccedb8ef7274ddb5faf"
+                "sha256": "6350eae7721fa83ba49f79ce7d37f953646d2b15128ab701be1f9f5ff6f82348"
             }
         ],
         "zh-CN": [
@@ -599,13 +599,13 @@
                 ],
                 "role": "result states and form labels",
                 "schema": "fap.enneagram.ui_copy_registry.v1",
-                "sha256": "3c31f377602036fd3ebe85813ac5b9880788d876cd2a4a913dfe8ec5db4ad35f"
+                "sha256": "69fe10dde5cfa6a6cbbfd6f8fed62c22da175cd22e0ac6b40ca492dc439bb6d1"
             }
         ]
     },
     "locale_source_hashes": {
-        "en": "685e01080673a7397808f2ffdc7c194fe3c33979d7065b208b950332277a2641",
-        "zh-CN": "7cc2a50d8879fd85e88f087375bcb6067a417f719e642ba6580c17b4ec8a7944"
+        "en": "6d72fca881953ebedeb3ef65dd049becc1e0f406c532ae87a4dd061632c877a2",
+        "zh-CN": "18dfea140b09ddfc610ee1eabb44b7cdb4f26715af360e243a9b136ed654f522"
     },
     "locales": [
         "en"
@@ -943,10 +943,10 @@
             ],
             "role": "result states and form labels",
             "schema": "fap.enneagram.ui_copy_registry.v1",
-            "sha256": "ca7fc989564154be9a8c60d2cd7feaff0c331adb146ceccedb8ef7274ddb5faf"
+            "sha256": "6350eae7721fa83ba49f79ce7d37f953646d2b15128ab701be1f9f5ff6f82348"
         }
     ],
-    "source_hash": "4e1705bb66c5818e212008b466e96a7c48d36bcbe60ba53c55057d325194bd34",
+    "source_hash": "08917013da6b5990341978dffe9dc0773f0c25157e025e23e940d170692a908d",
     "source_hash_rule": "sha256(concat(sorted locale/path + NUL + sha256(canonical decoded JSON) + LF))",
     "supported_context_modes": [
         "individual",
