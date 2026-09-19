@@ -10,6 +10,24 @@ use Tests\TestCase;
 
 final class AccessTestIdentityTest extends TestCase
 {
+    public function test_it_falls_back_to_the_application_key_when_dedicated_keys_are_absent(): void
+    {
+        config()->set('analytics.access_test_statistics.hash_key', '');
+        config()->set('fap.events.ingest_token', '');
+        config()->set('app.key', 'base64:existing-production-application-key');
+
+        $digest = app(AccessTestIdentity::class)->digestIp('203.0.113.42');
+
+        $this->assertSame(
+            hash_hmac(
+                'sha256',
+                'access_test_statistics.v1|203.0.113.42',
+                'base64:existing-production-application-key'
+            ),
+            $digest
+        );
+    }
+
     public function test_it_normalizes_addresses_and_uses_only_a_configured_proxy_chain(): void
     {
         config()->set('analytics.access_test_statistics.hash_key', 'identity-test-key');

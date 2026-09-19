@@ -225,7 +225,12 @@ final class AccessTestIdentity
             return $configured;
         }
 
-        return trim((string) config('fap.events.ingest_token', ''));
+        $ingestToken = trim((string) config('fap.events.ingest_token', ''));
+        if ($ingestToken !== '') {
+            return $ingestToken;
+        }
+
+        return trim((string) config('app.key', ''));
     }
 
     /** @param list<string> $configured */
