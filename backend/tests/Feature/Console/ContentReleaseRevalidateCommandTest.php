@@ -387,6 +387,7 @@ final class ContentReleaseRevalidateCommandTest extends TestCase
         $revision = $this->attachPublishedRevision($article);
         $contentSha256 = hash('sha256', 'Release body');
         $canonicalUrl = 'https://fermatmind.com/en/articles/exact-article';
+        $article->seoMeta()->update(['canonical_url' => '/en/articles/exact-article']);
 
         $exitCode = Artisan::call('content-release:revalidate', $this->exactArticleOptions(
             $article,
@@ -406,6 +407,7 @@ final class ContentReleaseRevalidateCommandTest extends TestCase
         ], $payload['expected_cache_tags'] ?? []);
         $this->assertSame($revision->id, $payload['published_revision_id'] ?? null);
         $this->assertSame($contentSha256, $payload['content_sha256'] ?? null);
+        $this->assertSame($canonicalUrl, $payload['canonical_url'] ?? null);
         $this->assertSame([], $payload['cache_receipts'] ?? null);
         $this->assertContains('llms', $payload['excluded_path_classes'] ?? []);
         $this->assertContains('article_index', $payload['excluded_path_classes'] ?? []);

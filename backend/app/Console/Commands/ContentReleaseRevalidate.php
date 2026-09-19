@@ -186,7 +186,9 @@ final class ContentReleaseRevalidate extends Command
         $revisionContentSha256 = $publishedRevision instanceof ArticleTranslationRevision
             ? $this->valueHash((string) $publishedRevision->content_md)
             : '';
-        $canonicalUrl = $seoMeta instanceof ArticleSeoMeta ? trim((string) $seoMeta->canonical_url) : '';
+        $canonicalUrl = $seoMeta instanceof ArticleSeoMeta
+            ? $this->absoluteCanonicalUrl((string) $seoMeta->canonical_url)
+            : '';
         $canonicalPath = $slug !== '' && $this->isCanonicalSlug($slug)
             ? '/'.$this->localeSegment($locale).'/articles/'.$slug
             : null;
@@ -614,6 +616,16 @@ final class ContentReleaseRevalidate extends Command
     private function isSha256(string $value): bool
     {
         return preg_match('/^[0-9a-f]{64}$/', $value) === 1;
+    }
+
+    private function absoluteCanonicalUrl(string $value): string
+    {
+        $canonical = trim($value);
+        if (str_starts_with($canonical, '/')) {
+            return 'https://fermatmind.com'.$canonical;
+        }
+
+        return $canonical;
     }
 
     private function valueHash(string $value): string
