@@ -24,7 +24,7 @@
         </include>
     </source>
     <php>
-        <ini name="memory_limit" value="1024M"/>
+        <ini name="memory_limit" value="2048M"/>
         <env name="APP_ENV" value="testing"/>
         <env name="MBTI_REPORT_ACCESS_MODE" value="paid_unlock"/>
         <env name="APP_KEY" value="fap_api_phpunit_test_key_32bytes"/>
