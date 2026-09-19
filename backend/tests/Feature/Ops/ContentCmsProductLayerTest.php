@@ -1058,6 +1058,98 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->assertSame(EditorialReview::STATE_APPROVED, (string) $workflow->workflow_state);
     }
 
+    public function test_editorial_review_lists_published_source_without_approval_and_published_target_with_pending_revision(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_WRITE,
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+        ]);
+        $session = $this->opsSession((int) $admin->id);
+
+        $source = $this->seedArticle([
+            'org_id' => 0,
+            'slug' => 'published-source-needs-review',
+            'locale' => 'zh-CN',
+            'source_locale' => 'zh-CN',
+            'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
+            'translation_group_id' => 'published-lineage-review-group',
+            'title' => 'Published source needs review',
+            'excerpt' => 'Published source excerpt',
+            'content_md' => 'Published source body',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subDay(),
+        ]);
+        $this->ensureSeoReady(0, 'article', $source);
+        $sourceRevision = ArticleTranslationRevision::query()->create([
+            'org_id' => 0,
+            'article_id' => (int) $source->id,
+            'source_article_id' => (int) $source->id,
+            'translation_group_id' => 'published-lineage-review-group',
+            'locale' => 'zh-CN',
+            'source_locale' => 'zh-CN',
+            'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_SOURCE,
+            'source_version_hash' => hash('sha256', 'published-source'),
+            'translated_from_version_hash' => hash('sha256', 'published-source'),
+            'title' => (string) $source->title,
+            'excerpt' => (string) $source->excerpt,
+            'content_md' => (string) $source->content_md,
+        ]);
+        $source->forceFill([
+            'working_revision_id' => (int) $sourceRevision->id,
+            'published_revision_id' => (int) $sourceRevision->id,
+        ])->save();
+
+        $target = $this->seedArticle([
+            'org_id' => 0,
+            'slug' => 'published-target-pending-review',
+            'locale' => 'en',
+            'source_locale' => 'zh-CN',
+            'translation_status' => Article::TRANSLATION_STATUS_HUMAN_REVIEW,
+            'translation_group_id' => 'published-lineage-review-group',
+            'source_article_id' => (int) $source->id,
+            'translated_from_article_id' => (int) $source->id,
+            'title' => 'Published target pending review',
+            'excerpt' => 'Published target excerpt',
+            'content_md' => 'Published target body',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subDay(),
+        ]);
+        $this->ensureSeoReady(0, 'article', $target);
+        $publishedRevision = ArticleTranslationRevision::query()->create([
+            'org_id' => 0,
+            'article_id' => (int) $target->id,
+            'source_article_id' => (int) $source->id,
+            'translation_group_id' => 'published-lineage-review-group',
+            'locale' => 'en',
+            'source_locale' => 'zh-CN',
+            'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+            'source_version_hash' => $sourceRevision->source_version_hash,
+            'translated_from_version_hash' => $sourceRevision->source_version_hash,
+            'title' => (string) $target->title,
+            'excerpt' => (string) $target->excerpt,
+            'content_md' => (string) $target->content_md,
+        ]);
+        $workingRevision = $publishedRevision->replicate();
+        $workingRevision->revision_number = 2;
+        $workingRevision->revision_status = ArticleTranslationRevision::STATUS_HUMAN_REVIEW;
+        $workingRevision->content_md = 'Updated target working body';
+        $workingRevision->save();
+        $target->forceFill([
+            'working_revision_id' => (int) $workingRevision->id,
+            'published_revision_id' => (int) $publishedRevision->id,
+        ])->save();
+
+        $this->setOpsContext((int) $session['ops_org_id'], $admin, '/ops/editorial-review');
+        $items = collect(Livewire::test(EditorialReviewPage::class)->assertOk()->get('reviewItems'));
+
+        $this->assertTrue($items->contains(fn (array $item): bool => (int) $item['id'] === (int) $source->id));
+        $this->assertTrue($items->contains(fn (array $item): bool => (int) $item['id'] === (int) $target->id));
+    }
+
     public function test_reassigning_reviewer_invalidates_existing_approval_until_resubmitted(): void
     {
         config()->set('review_governance.mode', 'team_separated');

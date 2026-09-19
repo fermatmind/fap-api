@@ -254,11 +254,39 @@ class EditorialReviewPage extends Page
 
         $articles = Article::query()
             ->withoutGlobalScopes()
-            ->with('seoMeta')
+            ->with(['seoMeta', 'workingRevision', 'publishedRevision'])
             ->whereIn('org_id', $currentOrgIds)
-            ->where('status', 'draft')
+            ->where(function ($query): void {
+                $query->where('status', 'draft')
+                    ->orWhere(function ($pendingRevision): void {
+                        $pendingRevision
+                            ->whereNotNull('working_revision_id')
+                            ->where(function ($differentRevision): void {
+                                $differentRevision
+                                    ->whereNull('published_revision_id')
+                                    ->orWhereColumn('working_revision_id', '!=', 'published_revision_id');
+                            });
+                    })
+                    ->orWhere(function ($publishedSource): void {
+                        $publishedSource
+                            ->where('status', 'published')
+                            ->where('translation_status', Article::TRANSLATION_STATUS_SOURCE);
+                    });
+            })
             ->latest('updated_at')
             ->get()
+            ->filter(function (Article $record): bool {
+                if ((string) $record->status === 'draft') {
+                    return true;
+                }
+
+                if ((int) $record->working_revision_id !== (int) $record->published_revision_id) {
+                    return true;
+                }
+
+                return $record->isSourceArticle()
+                    && (EditorialReviewAudit::latestState('article', $record)['state'] ?? null) !== EditorialReviewAudit::STATE_APPROVED;
+            })
             ->map(fn (Article $record): array => $this->reviewRowForArticle($record));
 
         $guides = CareerGuide::query()
