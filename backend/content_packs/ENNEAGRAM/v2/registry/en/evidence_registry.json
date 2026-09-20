@@ -1,0 +1,94 @@
+{
+  "id": "enneagram_evidence_registry_v1",
+  "schema_version": "fap.enneagram.evidence_registry.v1",
+  "registry_key": "enneagram_evidence_registry",
+  "locale": "en",
+  "form_variant": "all",
+  "context_mode": "individual",
+  "status": "published",
+  "version": "v1",
+  "release_id": "enneagram_registry_canonical_v2",
+  "content_release_hash": "sha256:pending_loader_resolution",
+  "content_snapshot_hash": null,
+  "content_maturity": "p1_expanded",
+  "evidence_level": "descriptive",
+  "preview_enabled": false,
+  "fallback_policy": "none",
+  "entries": [
+    {
+      "evidence_id": "enneagram-evidence-review-2021",
+      "source_kind": "systematic_review",
+      "citation": "Hook, Hall, Davis, Van Tongeren, and Conner (2021), The Enneagram: A systematic review of the literature and directions for future research, Journal of Clinical Psychology, 77(4), 865–883.",
+      "url": "https://doi.org/10.1002/jclp.23097",
+      "supports": [
+        "Enneagram research reports some theory-consistent associations and reflective or growth-oriented uses.",
+        "Reliability, validity, and factor-structure evidence is mixed, so results should remain candidates for observation."
+      ],
+      "limitations": [
+        "It does not establish nine discrete personality categories as consistently validated.",
+        "Evidence for wings, arrows, subtypes, and intertype movement remains limited."
+      ]
+    },
+    {
+      "evidence_id": "enneagram-theory-riso-hudson",
+      "source_kind": "theory_source",
+      "citation": "Riso and Hudson (1996), Personality Types: Using the Enneagram for Self-Discovery, revised edition.",
+      "url": "https://books.google.com/books?id=5F0hYV65F1QC",
+      "supports": [
+        "Provenance for Enneagram type, adjacency, and development-level concepts."
+      ],
+      "limitations": [
+        "A theory source is not evidence of measurement validity.",
+        "The registry paraphrases concepts independently and does not reproduce copyrighted passages."
+      ]
+    },
+    {
+      "evidence_id": "implementation-intentions-gollwitzer-1999",
+      "source_kind": "peer_reviewed_review",
+      "citation": "Gollwitzer (1999), Implementation intentions: Strong effects of simple plans, American Psychologist, 54(7), 493–503.",
+      "url": "https://doi.org/10.1037/0003-066X.54.7.493",
+      "supports": [
+        "Linking a defined situation to a specific response can make intended action more executable."
+      ],
+      "limitations": [
+        "It does not show that an action belongs exclusively to one Enneagram candidate."
+      ]
+    },
+    {
+      "evidence_id": "goal-monitoring-harkin-2016",
+      "source_kind": "meta_analysis",
+      "citation": "Harkin et al. (2016), Does monitoring goal progress promote goal attainment? A meta-analysis of the experimental evidence, Psychological Bulletin, 142(2), 198–229.",
+      "url": "https://doi.org/10.1037/bul0000025",
+      "supports": [
+        "Recording a behavior and its outcome can form part of concrete goal-progress monitoring."
+      ],
+      "limitations": [
+        "Resonance records are observation evidence; they do not validate or overwrite a personality result."
+      ]
+    },
+    {
+      "evidence_id": "emotion-regulation-gross-2015",
+      "source_kind": "peer_reviewed_review",
+      "citation": "Gross (2015), Emotion regulation: Current status and future prospects, Psychological Inquiry, 26(1), 1–26.",
+      "url": "https://doi.org/10.1080/1047840X.2015.989751",
+      "supports": [
+        "Separating situation, attention, appraisal, and response helps turn emotion processes into observable stages."
+      ],
+      "limitations": [
+        "An Enneagram candidate cannot replace clinical assessment or diagnosis."
+      ]
+    },
+    {
+      "evidence_id": "feedback-interventions-kluger-denisi-1996",
+      "source_kind": "meta_analysis",
+      "citation": "Kluger and DeNisi (1996), The effects of feedback interventions on performance: A historical review, a meta-analysis, and a preliminary feedback intervention theory, Psychological Bulletin, 119(2), 254–284.",
+      "url": "https://doi.org/10.1037/0033-2909.119.2.254",
+      "supports": [
+        "Feedback focus and delivery affect outcomes; task-specific information is generally more actionable than identity judgment."
+      ],
+      "limitations": [
+        "It does not support using Enneagram candidates to infer competence, performance, or job fit."
+      ]
+    }
+  ]
+}

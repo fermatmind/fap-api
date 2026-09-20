@@ -23,6 +23,7 @@ final class EnneagramRegistryPackLoadTest extends TestCase
         $this->assertSame('enneagram_registry.v1', data_get($pack, 'manifest.registry_version'));
         $this->assertSame('enneagram_registry_canonical_v2', data_get($pack, 'manifest.release_id'));
         $this->assertSame('enneagram_type_registry', data_get($pack, 'type_registry.registry_key'));
+        $this->assertSame('enneagram_evidence_registry', data_get($pack, 'evidence_registry.registry_key'));
         $this->assertSame('enneagram_method_registry', data_get($pack, 'method_registry.registry_key'));
         $this->assertSame('当前主候选相对清晰', data_get($uiEntries['result_overview.clear'] ?? [], 'title_template'));
         $this->assertSame('clear_sample', data_get($sampleEntries['clear_sample'] ?? [], 'sample_key'));
@@ -141,5 +142,23 @@ final class EnneagramRegistryPackLoadTest extends TestCase
         $wrongLocale = $loader->loadRegistryPack();
         $wrongLocale['registries']['enneagram_chapter_registry']['locale'] = 'en';
         $this->assertStringContainsString('locale', strtolower(implode("\n", $validator->validate($wrongLocale))));
+    }
+
+    public function test_evidence_claims_fail_closed_when_missing_or_unresolved(): void
+    {
+        $loader = app(EnneagramPackLoader::class);
+        $validator = app(RegistryValidator::class);
+
+        $missing = $loader->loadRegistryPack();
+        unset($missing['registries']['enneagram_chapter_registry']['entries'][0]['sections'][0]['claim_refs']);
+        $this->assertStringContainsString('claim_refs', implode("\n", $validator->validate($missing)));
+
+        $unknown = $loader->loadRegistryPack();
+        $unknown['registries']['enneagram_pair_registry']['entries'][0]['claim_refs'][] = 'unknown-evidence';
+        $this->assertStringContainsString('unresolved claim_ref unknown-evidence', implode("\n", $validator->validate($unknown)));
+
+        $conflict = $loader->loadRegistryPack();
+        $conflict['registries']['enneagram_chapter_registry']['entries'][0]['growth_actions'][0]['claim_refs'][] = 'enneagram-theory-riso-hudson';
+        $this->assertStringContainsString('conflicting claim_ref enneagram-theory-riso-hudson', implode("\n", $validator->validate($conflict)));
     }
 }

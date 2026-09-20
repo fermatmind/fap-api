@@ -30,7 +30,7 @@ final class EnneagramCanonicalPrivateResultAuthorityTest extends TestCase
             array_column($compiled['manifest']['locale_source_files']['zh-CN'], 'path'),
             array_column($compiled['manifest']['locale_source_files']['en'], 'path'),
         );
-        $this->assertCount(26, $paths);
+        $this->assertCount(28, $paths);
         $this->assertFalse((bool) array_filter($paths, static fn (string $path): bool => str_contains($path, 'fixture') || str_ends_with($path, 'manifest.json')));
         foreach ($paths as $path) {
             $this->assertFileExists(base_path('content_packs/ENNEAGRAM/v2/registry/'.$path));
@@ -67,6 +67,43 @@ final class EnneagramCanonicalPrivateResultAuthorityTest extends TestCase
         $this->assertSame(['clear', 'close_call', 'diffuse', 'low_quality'], $manifest['coverage']['interpretation_states']);
         $this->assertSame(['e105', 'fc144'], $manifest['coverage']['forms']);
         $this->assertSame(['faq', 'technical_note', 'share', 'pdf', 'print', 'history', 'compare', 'secondary'], $manifest['coverage']['secondary_surfaces']);
+    }
+
+    public function test_editorial_assets_are_evidence_bound_and_free_of_retired_scaffolds(): void
+    {
+        $payload = app(EnneagramPrivateResultCompileService::class)->compile()['payload'];
+
+        foreach (['zh-CN', 'en'] as $locale) {
+            $assets = $payload['locale_assets'][$locale];
+            $evidenceIds = collect($assets['evidence_registry.json']['entries'])->pluck('evidence_id')->all();
+            $this->assertContains('enneagram-evidence-review-2021', $evidenceIds);
+            $this->assertContains('implementation-intentions-gollwitzer-1999', $evidenceIds);
+
+            foreach ($assets['chapter_registry.json']['entries'] as $entry) {
+                $this->assertCount(20, $entry['sections']);
+                $this->assertCount(5, $entry['growth_actions']);
+                foreach ($entry['sections'] as $section) {
+                    $this->assertContains('enneagram-evidence-review-2021', $section['claim_refs']);
+                    $this->assertContains('enneagram-theory-riso-hudson', $section['claim_refs']);
+                }
+                foreach ($entry['growth_actions'] as $action) {
+                    $this->assertContains('implementation-intentions-gollwitzer-1999', $action['claim_refs']);
+                    $this->assertContains('goal-monitoring-harkin-2016', $action['claim_refs']);
+                }
+            }
+            foreach ($assets['pair_registry.json']['entries'] as $pair) {
+                $this->assertContains('enneagram-evidence-review-2021', $pair['claim_refs']);
+                $this->assertContains('enneagram-theory-riso-hudson', $pair['claim_refs']);
+            }
+
+            $visible = json_encode([
+                $assets['chapter_registry.json'],
+                $assets['pair_registry.json'],
+            ], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+            $this->assertStringNotContainsString('在这个候选下，要结合', $visible);
+            $this->assertStringNotContainsString('Use a concrete cross-check:', $visible);
+            $this->assertStringNotContainsString('Choose one low-risk setting during the next seven days', $visible);
+        }
     }
 
     public function test_compiled_output_is_not_an_editable_source(): void

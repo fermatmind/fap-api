@@ -185,6 +185,7 @@ final class RegistryValidator
      */
     private const REQUIRED_REGISTRIES = [
         'enneagram_chapter_registry' => 'chapter_registry.json',
+        'enneagram_evidence_registry' => 'evidence_registry.json',
         'enneagram_type_registry' => 'type_registry.json',
         'enneagram_pair_registry' => 'pair_registry.json',
         'enneagram_group_registry' => 'group_registry.json',
@@ -314,6 +315,7 @@ final class RegistryValidator
 
         if ($registries !== []) {
             $errors = array_merge($errors, $this->validateChapterRegistry((array) ($registries['enneagram_chapter_registry'] ?? [])));
+            $errors = array_merge($errors, $this->validateEvidenceRegistry((array) ($registries['enneagram_evidence_registry'] ?? [])));
             $errors = array_merge($errors, $this->validateTypeRegistry((array) ($registries['enneagram_type_registry'] ?? [])));
             $errors = array_merge($errors, $this->validatePairRegistry((array) ($registries['enneagram_pair_registry'] ?? [])));
             $errors = array_merge($errors, $this->validateGroupRegistry((array) ($registries['enneagram_group_registry'] ?? [])));
@@ -326,6 +328,7 @@ final class RegistryValidator
             $errors = array_merge($errors, $this->validateUiCopyRegistry((array) ($registries['enneagram_ui_copy_registry'] ?? [])));
             $errors = array_merge($errors, $this->validateSampleReportRegistry((array) ($registries['enneagram_sample_report_registry'] ?? [])));
             $errors = array_merge($errors, $this->validateTechnicalNoteRegistry((array) ($registries['enneagram_technical_note_registry'] ?? [])));
+            $errors = array_merge($errors, $this->validateEvidenceBindings($registries));
             $errors = array_merge($errors, $this->validateRegistryTextBoundaries($registries));
         }
 
@@ -413,6 +416,118 @@ final class RegistryValidator
         sort($typeIds, SORT_STRING);
         if ($typeIds !== self::REQUIRED_TYPE_IDS) {
             $errors[] = 'Chapter registry must cover types 1-9 exactly once';
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @return list<string>
+     */
+    private function validateEvidenceRegistry(array $payload): array
+    {
+        $entries = is_array($payload['entries'] ?? null) ? $payload['entries'] : [];
+        $ids = [];
+        $errors = [];
+
+        foreach ($entries as $entry) {
+            if (! is_array($entry)) {
+                $errors[] = 'Evidence registry contains invalid entry';
+
+                continue;
+            }
+            $id = trim((string) ($entry['evidence_id'] ?? ''));
+            if ($id === '') {
+                $errors[] = 'Evidence registry entry missing evidence_id';
+            }
+            $ids[] = $id;
+            foreach (['source_kind', 'citation', 'url'] as $field) {
+                if (trim((string) ($entry[$field] ?? '')) === '') {
+                    $errors[] = "Evidence registry {$id} missing {$field}";
+                }
+            }
+            foreach (['supports', 'limitations'] as $field) {
+                $values = is_array($entry[$field] ?? null) ? array_values(array_filter($entry[$field], static fn (mixed $value): bool => trim((string) $value) !== '')) : [];
+                if ($values === []) {
+                    $errors[] = "Evidence registry {$id} must include {$field}";
+                }
+            }
+            if (filter_var((string) ($entry['url'] ?? ''), FILTER_VALIDATE_URL) === false) {
+                $errors[] = "Evidence registry {$id} has invalid url";
+            }
+        }
+        if ($entries === [] || count($ids) !== count(array_unique($ids))) {
+            $errors[] = 'Evidence registry must contain unique evidence identities';
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param  array<string,array<string,mixed>>  $registries
+     * @return list<string>
+     */
+    private function validateEvidenceBindings(array $registries): array
+    {
+        $evidenceEntries = (array) data_get($registries, 'enneagram_evidence_registry.entries', []);
+        $ids = [];
+        foreach ($evidenceEntries as $entry) {
+            if (is_array($entry) && trim((string) ($entry['evidence_id'] ?? '')) !== '') {
+                $ids[(string) $entry['evidence_id']] = $entry;
+            }
+        }
+        $errors = [];
+        $check = static function (mixed $refs, string $path, array $required = [], array $forbiddenSourceKinds = []) use (&$errors, $ids): void {
+            $values = is_array($refs) ? array_values(array_map('strval', $refs)) : [];
+            if ($values === [] || count($values) !== count(array_unique($values))) {
+                $errors[] = "{$path} must contain unique claim_refs";
+
+                return;
+            }
+            foreach ($values as $ref) {
+                if (! isset($ids[$ref])) {
+                    $errors[] = "{$path} contains unresolved claim_ref {$ref}";
+                } elseif (in_array((string) ($ids[$ref]['source_kind'] ?? ''), $forbiddenSourceKinds, true)) {
+                    $errors[] = "{$path} contains conflicting claim_ref {$ref}";
+                }
+            }
+            foreach ($required as $ref) {
+                if (! in_array($ref, $values, true)) {
+                    $errors[] = "{$path} missing required claim_ref {$ref}";
+                }
+            }
+        };
+
+        foreach ((array) data_get($registries, 'enneagram_chapter_registry.entries', []) as $entry) {
+            if (! is_array($entry)) {
+                continue;
+            }
+            $typeId = (string) ($entry['type_id'] ?? '');
+            foreach ((array) ($entry['sections'] ?? []) as $section) {
+                if (is_array($section)) {
+                    if (($section['evidence_level'] ?? null) !== 'theory_based') {
+                        $errors[] = "Chapter registry {$typeId} section ".(string) ($section['section_id'] ?? '').' must use theory_based evidence level';
+                    }
+                    $check($section['claim_refs'] ?? null, "Chapter registry {$typeId} section ".(string) ($section['section_id'] ?? ''), ['enneagram-evidence-review-2021', 'enneagram-theory-riso-hudson']);
+                }
+            }
+            foreach ((array) ($entry['growth_actions'] ?? []) as $action) {
+                if (is_array($action)) {
+                    if (($action['evidence_level'] ?? null) !== 'descriptive') {
+                        $errors[] = 'Chapter registry action '.(string) ($action['action_id'] ?? '').' must use descriptive evidence level';
+                    }
+                    $check($action['claim_refs'] ?? null, 'Chapter registry action '.(string) ($action['action_id'] ?? ''), ['implementation-intentions-gollwitzer-1999', 'goal-monitoring-harkin-2016'], ['theory_source']);
+                }
+            }
+        }
+        foreach ((array) data_get($registries, 'enneagram_pair_registry.entries', []) as $pair) {
+            if (is_array($pair)) {
+                if (($pair['evidence_level'] ?? null) !== 'theory_based') {
+                    $errors[] = 'Pair registry '.(string) ($pair['pair_key'] ?? '').' must use theory_based evidence level';
+                }
+                $check($pair['claim_refs'] ?? null, 'Pair registry '.(string) ($pair['pair_key'] ?? ''), ['enneagram-evidence-review-2021', 'enneagram-theory-riso-hudson']);
+            }
         }
 
         return $errors;

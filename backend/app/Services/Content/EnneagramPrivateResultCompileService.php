@@ -20,15 +20,22 @@ final class EnneagramPrivateResultCompileService
 
     public const COMPILER_SCHEMA = 'fap.enneagram.private_result.compiler.v1';
 
-    public const COMPILER_VERSION = '1.2.0';
+    public const COMPILER_VERSION = '1.3.0';
 
-    private const MAX_SECTION_BIGRAM_SIMILARITY = 0.75;
+    private const MAX_SECTION_BIGRAM_SIMILARITY = 0.62;
+
+    private const MAX_INTRA_TYPE_SECTION_BIGRAM_SIMILARITY = 0.68;
+
+    private const MAX_ACTION_BIGRAM_SIMILARITY = 0.65;
+
+    private const MAX_PAIR_BIGRAM_SIMILARITY = 0.70;
 
     public const ARTIFACT_FILENAME = 'private_result.compiled.json';
 
     /** @var array<string,array{registry_key:string,role:string,schema:string,surfaces:list<string>}> */
     public const SOURCE_CONTRACT = [
         'chapter_registry.json' => ['registry_key' => 'enneagram_chapter_registry', 'role' => 'seven-chapter candidate sections and growth actions', 'schema' => 'fap.enneagram.chapter_registry.v1', 'surfaces' => ['result', 'report', 'pdf', 'history']],
+        'evidence_registry.json' => ['registry_key' => 'enneagram_evidence_registry', 'role' => 'non-rendered evidence and theory provenance', 'schema' => 'fap.enneagram.evidence_registry.v1', 'surfaces' => ['technical_note']],
         'group_registry.json' => ['registry_key' => 'enneagram_group_registry', 'role' => 'centers, stances, and harmonics', 'schema' => 'fap.enneagram.group_registry.v1', 'surfaces' => ['result', 'report']],
         'method_registry.json' => ['registry_key' => 'enneagram_method_registry', 'role' => 'E105 and FC144 method boundaries', 'schema' => 'fap.enneagram.method_registry.v1', 'surfaces' => ['result', 'report', 'technical_note', 'compare']],
         'observation_registry.json' => ['registry_key' => 'enneagram_observation_registry', 'role' => 'observation workflow copy', 'schema' => 'fap.enneagram.observation_registry.v1', 'surfaces' => ['result', 'history']],
@@ -199,6 +206,7 @@ final class EnneagramPrivateResultCompileService
             }
             $this->validateChapterDifferentiation((array) ($assets['chapter_registry.json']['entries'] ?? []), $locale);
             $this->validatePairDifferentiation((array) ($assets['pair_registry.json']['entries'] ?? []), $locale);
+            $this->validateEvidenceClaims($assets, $locale);
             foreach (['faq', 'technical_note', 'share', 'pdf', 'print', 'history', 'compare', 'secondary'] as $surface) {
                 if (! is_array($assets['surface_registry.json']['entries'][$surface] ?? null)) {
                     throw new RuntimeException("Enneagram canonical secondary surface is incomplete: {$locale}:{$surface}");
@@ -244,6 +252,8 @@ final class EnneagramPrivateResultCompileService
     private function validateChapterDifferentiation(array $entries, string $locale): void
     {
         $bySection = [];
+        $byType = [];
+        $actions = [];
         foreach ($entries as $entry) {
             $typeId = (string) ($entry['type_id'] ?? '');
             foreach ((array) ($entry['sections'] ?? []) as $section) {
@@ -251,6 +261,16 @@ final class EnneagramPrivateResultCompileService
                     continue;
                 }
                 $sectionId = (string) ($section['section_id'] ?? '');
+                $reflectionQuestion = trim((string) ($section['reflection_question'] ?? ''));
+                $reflectionLength = mb_strlen($reflectionQuestion);
+                $reflectionBounds = $locale === 'en' ? [80, 420] : [24, 160];
+                if (count((array) ($section['paragraphs'] ?? [])) < 2
+                    || count((array) ($section['points'] ?? [])) < 2
+                    || $reflectionLength < $reflectionBounds[0]
+                    || $reflectionLength > $reflectionBounds[1]
+                    || ! str_contains($reflectionQuestion, $locale === 'en' ? '?' : '？')) {
+                    throw new RuntimeException("Enneagram canonical section semantic completeness invalid: {$locale}:{$typeId}:{$sectionId}");
+                }
                 if (in_array($sectionId, ['2.6', '6.4'], true)) {
                     continue;
                 }
@@ -258,12 +278,27 @@ final class EnneagramPrivateResultCompileService
                     (string) ($section['lead'] ?? ''),
                     ...array_map('strval', (array) ($section['paragraphs'] ?? [])),
                     ...array_map('strval', (array) ($section['points'] ?? [])),
-                    (string) ($section['reflection_question'] ?? ''),
+                    $reflectionQuestion,
                 ], static fn (string $value): bool => trim($value) !== ''));
                 $bySection[$sectionId][$typeId] = [
                     'text' => implode(' ', $sentences),
                     'sentences' => $sentences,
                 ];
+                $byType[$typeId][$sectionId] = [
+                    'text' => implode(' ', $sentences),
+                    'sentences' => $sentences,
+                ];
+            }
+            foreach ((array) ($entry['growth_actions'] ?? []) as $action) {
+                if (! is_array($action)) {
+                    continue;
+                }
+                $actionId = (string) ($action['action_id'] ?? '');
+                $title = trim((string) ($action['title'] ?? ''));
+                $text = trim((string) ($action['instruction'] ?? '')).' '.trim((string) ($action['observable_outcome'] ?? ''));
+                $normalized = str_ireplace($title, ' ', $text);
+                $normalized = preg_replace('/(?:type\s*)?[1-9]|[1-9]号[\x{3400}-\x{9fff}]*型/iu', ' type ', $normalized) ?? $normalized;
+                $actions[$actionId] = $this->normalizeDifferentiationText($normalized, $locale);
             }
         }
 
@@ -296,12 +331,66 @@ final class EnneagramPrivateResultCompileService
                 }
             }
         }
+
+        foreach ($byType as $typeId => $sections) {
+            $seenSentences = [];
+            foreach ($sections as $sectionId => $section) {
+                foreach ($section['sentences'] as $sentence) {
+                    if (isset($seenSentences[$sentence])) {
+                        throw new RuntimeException("Enneagram canonical intra-type sentence duplication: {$locale}:{$typeId}:{$sectionId}:{$seenSentences[$sentence]}");
+                    }
+                    $seenSentences[$sentence] = $sectionId;
+                }
+            }
+            $sectionIds = array_keys($sections);
+            for ($left = 0; $left < count($sectionIds); $left++) {
+                for ($right = $left + 1; $right < count($sectionIds); $right++) {
+                    $leftSection = $sectionIds[$left];
+                    $rightSection = $sectionIds[$right];
+                    $similarity = $this->bigramSimilarity(
+                        $this->normalizeDifferentiationText($sections[$leftSection]['text'], $locale),
+                        $this->normalizeDifferentiationText($sections[$rightSection]['text'], $locale),
+                        $locale
+                    );
+                    if ($similarity > self::MAX_INTRA_TYPE_SECTION_BIGRAM_SIMILARITY) {
+                        throw new RuntimeException(sprintf(
+                            'Enneagram canonical intra-type section similarity exceeds %.2f: %s:%s:%s:%s:%.4f',
+                            self::MAX_INTRA_TYPE_SECTION_BIGRAM_SIMILARITY,
+                            $locale,
+                            $typeId,
+                            $leftSection,
+                            $rightSection,
+                            $similarity
+                        ));
+                    }
+                }
+            }
+        }
+
+        $actionIds = array_keys($actions);
+        for ($left = 0; $left < count($actionIds); $left++) {
+            for ($right = $left + 1; $right < count($actionIds); $right++) {
+                $similarity = $this->bigramSimilarity($actions[$actionIds[$left]], $actions[$actionIds[$right]], $locale);
+                if ($similarity > self::MAX_ACTION_BIGRAM_SIMILARITY) {
+                    throw new RuntimeException(sprintf(
+                        'Enneagram canonical action similarity exceeds %.2f: %s:%s:%s:%.4f',
+                        self::MAX_ACTION_BIGRAM_SIMILARITY,
+                        $locale,
+                        $actionIds[$left],
+                        $actionIds[$right],
+                        $similarity
+                    ));
+                }
+            }
+        }
     }
 
     /** @param list<array<string,mixed>> $entries */
     private function validatePairDifferentiation(array $entries, string $locale): void
     {
         $signatures = [];
+        $fieldValues = [];
+        $comparisonSignatures = [];
         foreach ($entries as $entry) {
             $pairKey = (string) ($entry['pair_key'] ?? '');
             $typeA = (string) ($entry['type_a'] ?? '');
@@ -310,6 +399,7 @@ final class EnneagramPrivateResultCompileService
                 throw new RuntimeException("Enneagram canonical pair identity invalid: {$locale}:{$pairKey}");
             }
             $parts = [];
+            $motivationParts = [];
             foreach (['core_motivation_difference', 'fear_difference', 'stress_reaction_difference', 'relationship_difference', 'work_difference'] as $field) {
                 $sides = is_array($entry[$field] ?? null) ? $entry[$field] : [];
                 $left = trim((string) ($sides[$typeA] ?? ''));
@@ -317,8 +407,18 @@ final class EnneagramPrivateResultCompileService
                 if ($left === '' || $right === '' || $left === $right) {
                     throw new RuntimeException("Enneagram canonical pair side content invalid: {$locale}:{$pairKey}:{$field}");
                 }
+                foreach ([$left, $right] as $value) {
+                    if (isset($fieldValues[$field][$value])) {
+                        throw new RuntimeException("Enneagram canonical pair side content reused: {$locale}:{$pairKey}:{$field}:{$fieldValues[$field][$value]}");
+                    }
+                    $fieldValues[$field][$value] = $pairKey;
+                }
                 $parts[] = $left;
                 $parts[] = $right;
+                if ($field === 'core_motivation_difference') {
+                    $motivationParts[] = $left;
+                    $motivationParts[] = $right;
+                }
             }
             foreach (['shared_surface_similarity', 'seven_day_observation_question', 'resonance_feedback_prompt', 'short_compare_copy'] as $field) {
                 $value = trim((string) ($entry[$field] ?? ''));
@@ -333,6 +433,92 @@ final class EnneagramPrivateResultCompileService
                 throw new RuntimeException("Enneagram canonical pair template duplication: {$locale}:{$pairKey}:{$signatures[$signature]}");
             }
             $signatures[$signature] = $pairKey;
+            $comparisonSignatures[$pairKey] = $this->normalizeDifferentiationText(implode(' ', $motivationParts), $locale);
+        }
+
+        $pairKeys = array_keys($comparisonSignatures);
+        for ($left = 0; $left < count($pairKeys); $left++) {
+            for ($right = $left + 1; $right < count($pairKeys); $right++) {
+                $similarity = $this->bigramSimilarity($comparisonSignatures[$pairKeys[$left]], $comparisonSignatures[$pairKeys[$right]], $locale);
+                if ($similarity > self::MAX_PAIR_BIGRAM_SIMILARITY) {
+                    throw new RuntimeException(sprintf(
+                        'Enneagram canonical pair similarity exceeds %.2f: %s:%s:%s:%.4f',
+                        self::MAX_PAIR_BIGRAM_SIMILARITY,
+                        $locale,
+                        $pairKeys[$left],
+                        $pairKeys[$right],
+                        $similarity
+                    ));
+                }
+            }
+        }
+    }
+
+    /** @param array<string,array<string,mixed>> $assets */
+    private function validateEvidenceClaims(array $assets, string $locale): void
+    {
+        $entries = (array) ($assets['evidence_registry.json']['entries'] ?? []);
+        $evidence = [];
+        foreach ($entries as $entry) {
+            if (! is_array($entry)) {
+                throw new RuntimeException("Enneagram canonical evidence entry invalid: {$locale}");
+            }
+            $id = trim((string) ($entry['evidence_id'] ?? ''));
+            if ($id === '' || isset($evidence[$id])) {
+                throw new RuntimeException("Enneagram canonical evidence identity invalid: {$locale}:{$id}");
+            }
+            foreach (['source_kind', 'citation', 'url'] as $field) {
+                if (trim((string) ($entry[$field] ?? '')) === '') {
+                    throw new RuntimeException("Enneagram canonical evidence field missing: {$locale}:{$id}:{$field}");
+                }
+            }
+            foreach (['supports', 'limitations'] as $field) {
+                if (! is_array($entry[$field] ?? null) || count($entry[$field]) === 0) {
+                    throw new RuntimeException("Enneagram canonical evidence field missing: {$locale}:{$id}:{$field}");
+                }
+            }
+            $evidence[$id] = $entry;
+        }
+
+        $validateRefs = function (array $refs, string $path, array $required = [], array $forbiddenSourceKinds = []) use ($evidence, $locale): void {
+            if ($refs === [] || count($refs) !== count(array_unique($refs))) {
+                throw new RuntimeException("Enneagram canonical claim refs invalid: {$locale}:{$path}");
+            }
+            foreach ($refs as $ref) {
+                if (! isset($evidence[$ref])) {
+                    throw new RuntimeException("Enneagram canonical claim ref unresolved: {$locale}:{$path}:{$ref}");
+                }
+                if (in_array((string) ($evidence[$ref]['source_kind'] ?? ''), $forbiddenSourceKinds, true)) {
+                    throw new RuntimeException("Enneagram canonical claim evidence conflict: {$locale}:{$path}:{$ref}");
+                }
+            }
+            foreach ($required as $ref) {
+                if (! in_array($ref, $refs, true)) {
+                    throw new RuntimeException("Enneagram canonical claim ref required: {$locale}:{$path}:{$ref}");
+                }
+            }
+        };
+
+        foreach ((array) ($assets['chapter_registry.json']['entries'] ?? []) as $entry) {
+            $typeId = (string) ($entry['type_id'] ?? '');
+            foreach ((array) ($entry['sections'] ?? []) as $section) {
+                if (($section['evidence_level'] ?? null) !== 'theory_based') {
+                    throw new RuntimeException("Enneagram canonical section evidence level invalid: {$locale}:{$typeId}:".(string) ($section['section_id'] ?? ''));
+                }
+                $validateRefs(array_values(array_map('strval', (array) ($section['claim_refs'] ?? []))), 'type-'.$typeId.':section-'.(string) ($section['section_id'] ?? ''), ['enneagram-evidence-review-2021', 'enneagram-theory-riso-hudson']);
+            }
+            foreach ((array) ($entry['growth_actions'] ?? []) as $action) {
+                if (($action['evidence_level'] ?? null) !== 'descriptive') {
+                    throw new RuntimeException("Enneagram canonical action evidence level invalid: {$locale}:".(string) ($action['action_id'] ?? ''));
+                }
+                $validateRefs(array_values(array_map('strval', (array) ($action['claim_refs'] ?? []))), (string) ($action['action_id'] ?? ''), ['implementation-intentions-gollwitzer-1999', 'goal-monitoring-harkin-2016'], ['theory_source']);
+            }
+        }
+        foreach ((array) ($assets['pair_registry.json']['entries'] ?? []) as $pair) {
+            if (($pair['evidence_level'] ?? null) !== 'theory_based') {
+                throw new RuntimeException("Enneagram canonical pair evidence level invalid: {$locale}:".(string) ($pair['pair_key'] ?? ''));
+            }
+            $validateRefs(array_values(array_map('strval', (array) ($pair['claim_refs'] ?? []))), 'pair-'.(string) ($pair['pair_key'] ?? ''), ['enneagram-evidence-review-2021', 'enneagram-theory-riso-hudson']);
         }
     }
 
@@ -351,16 +537,29 @@ final class EnneagramPrivateResultCompileService
         $tokenize = static function (string $text) use ($locale): array {
             if ($locale === 'en') {
                 preg_match_all('/[a-z]+/u', $text, $matches);
+                $ignoredWords = array_fill_keys([
+                    'a', 'an', 'and', 'are', 'as', 'at', 'be', 'been', 'being', 'but', 'by', 'candidate', 'does', 'for', 'from',
+                    'had', 'has', 'have', 'how', 'if', 'in', 'into', 'is', 'it', 'its', 'may', 'more', 'not', 'of', 'on', 'or',
+                    'same', 'setting', 'situation', 'than', 'that', 'the', 'their', 'them', 'then', 'there', 'these', 'they', 'this',
+                    'those', 'to', 'type', 'under', 'when', 'where', 'whether', 'which', 'while', 'with', 'you', 'your',
+                ], true);
 
-                return $matches[0] ?? [];
+                return array_values(array_filter($matches[0] ?? [], static fn (string $token): bool => ! isset($ignoredWords[$token])));
             }
             preg_match_all('/[\x{3400}-\x{9fff}]/u', $text, $matches);
 
             return $matches[0] ?? [];
         };
-        $bigrams = static function (array $tokens): array {
+        $bigrams = static function (array $tokens) use ($locale): array {
+            $ignored = $locale === 'en'
+                ? []
+                : array_fill_keys(['可能', '观察', '情境', '候选', '不是', '需要', '行为', '类型', '解释', '记录', '结果', '关系', '工作', '注意', '信息', '支持', '稳定', '压力', '具体', '实际', '影响', '判断', '不能', '仍然', '对方', '自己', '通过', '以及', '同时', '这个', '一种', '进行', '提示', '线索', '反例', '核对', '本节', '焦点', '辨认', '怎样', '第一', '出现', '变得', '哪些', '退到', '背景', '同样', '主要', '来自', '短期', '降低', '权重', '事实', '不同', '关于', '面对', '场景', '更可', '围绕', '组织', '行动', '守住', '首先', '改变', '标准', '边界', '责任', '一侧', '值得', '继续', '相关', '资源', '更有', '上升', '充分', '保护', '同一', '反应', '更好', '路径', '反复', '遇到', '表达', '在乎', '回应', '失望', '没有', '得到', '照顾', '处理', '通常', '描述', '推进', '顺序', '代表', '能力', '绩效', '岗位', '适配', '比较', '两者', '选择', '理想', '自我', '未来', '七天', '三次', '单次', '决定', '强制'], true);
             $result = [];
             for ($index = 0; $index + 1 < count($tokens); $index++) {
+                $display = $tokens[$index].$tokens[$index + 1];
+                if (isset($ignored[$display])) {
+                    continue;
+                }
                 $result[$tokens[$index]."\0".$tokens[$index + 1]] = true;
             }
 

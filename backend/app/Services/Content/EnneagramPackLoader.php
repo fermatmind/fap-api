@@ -19,6 +19,7 @@ final class EnneagramPackLoader
      */
     private const REGISTRY_FILE_MAP = [
         'enneagram_chapter_registry' => 'chapter_registry.json',
+        'enneagram_evidence_registry' => 'evidence_registry.json',
         'enneagram_type_registry' => 'type_registry.json',
         'enneagram_pair_registry' => 'pair_registry.json',
         'enneagram_group_registry' => 'group_registry.json',
@@ -220,6 +221,7 @@ final class EnneagramPackLoader
             'authority' => $loaded['authority'],
             'registries' => $registries,
             'chapter_registry' => $registries['enneagram_chapter_registry'],
+            'evidence_registry' => $registries['enneagram_evidence_registry'],
             'type_registry' => $registries['enneagram_type_registry'],
             'pair_registry' => $registries['enneagram_pair_registry'],
             'group_registry' => $registries['enneagram_group_registry'],

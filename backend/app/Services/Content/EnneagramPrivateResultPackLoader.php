@@ -9,7 +9,7 @@ use RuntimeException;
 
 final class EnneagramPrivateResultPackLoader
 {
-    private const SUPPORTED_COMPILER_VERSIONS = ['1.1.0', '1.2.0'];
+    private const SUPPORTED_COMPILER_VERSIONS = ['1.1.0', '1.2.0', '1.3.0'];
 
     public function __construct(
         private readonly ContentPackV2Resolver $resolver,

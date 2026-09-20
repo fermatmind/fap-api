@@ -23,6 +23,7 @@ final class EnneagramRegistryManifestTest extends TestCase
 
         $this->assertSame([
             'enneagram_chapter_registry',
+            'enneagram_evidence_registry',
             'enneagram_group_registry',
             'enneagram_method_registry',
             'enneagram_observation_registry',

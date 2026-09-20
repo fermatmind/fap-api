@@ -1,0 +1,94 @@
+{
+  "id": "enneagram_evidence_registry_v1",
+  "schema_version": "fap.enneagram.evidence_registry.v1",
+  "registry_key": "enneagram_evidence_registry",
+  "locale": "zh-CN",
+  "form_variant": "all",
+  "context_mode": "individual",
+  "status": "published",
+  "version": "v1",
+  "release_id": "enneagram_registry_canonical_v2",
+  "content_release_hash": "sha256:pending_loader_resolution",
+  "content_snapshot_hash": null,
+  "content_maturity": "p1_expanded",
+  "evidence_level": "descriptive",
+  "preview_enabled": false,
+  "fallback_policy": "none",
+  "entries": [
+    {
+      "evidence_id": "enneagram-evidence-review-2021",
+      "source_kind": "systematic_review",
+      "citation": "Hook, Hall, Davis, Van Tongeren, and Conner (2021), The Enneagram: A systematic review of the literature and directions for future research, Journal of Clinical Psychology, 77(4), 865–883.",
+      "url": "https://doi.org/10.1002/jclp.23097",
+      "supports": [
+        "九型相关研究存在部分理论一致的关联，也有人将其用于自我反思与成长。",
+        "现有信度、效度和因子结构证据混合，结果应以候选和观察语言呈现。"
+      ],
+      "limitations": [
+        "不能据此声称九种离散人格已被稳定验证。",
+        "对翼型、箭头、亚型和类型间移动的实证支持有限。"
+      ]
+    },
+    {
+      "evidence_id": "enneagram-theory-riso-hudson",
+      "source_kind": "theory_source",
+      "citation": "Riso and Hudson (1996), Personality Types: Using the Enneagram for Self-Discovery, revised edition.",
+      "url": "https://books.google.com/books?id=5F0hYV65F1QC",
+      "supports": [
+        "九型类型、邻位和发展层次的理论出处。"
+      ],
+      "limitations": [
+        "理论出处不等于测量效度证据。",
+        "本资产只作独立转述，不复制受版权保护的原文。"
+      ]
+    },
+    {
+      "evidence_id": "implementation-intentions-gollwitzer-1999",
+      "source_kind": "peer_reviewed_review",
+      "citation": "Gollwitzer (1999), Implementation intentions: Strong effects of simple plans, American Psychologist, 54(7), 493–503.",
+      "url": "https://doi.org/10.1037/0003-066X.54.7.493",
+      "supports": [
+        "把触发情境与具体行动连接起来可提高行动执行的可操作性。"
+      ],
+      "limitations": [
+        "不证明某项行动只适用于某个九型候选。"
+      ]
+    },
+    {
+      "evidence_id": "goal-monitoring-harkin-2016",
+      "source_kind": "meta_analysis",
+      "citation": "Harkin et al. (2016), Does monitoring goal progress promote goal attainment? A meta-analysis of the experimental evidence, Psychological Bulletin, 142(2), 198–229.",
+      "url": "https://doi.org/10.1037/bul0000025",
+      "supports": [
+        "对行动及结果进行具体记录，可作为目标进展观察的一部分。"
+      ],
+      "limitations": [
+        "记录到的共鸣只构成自我观察证据，不会验证或改写人格类型。"
+      ]
+    },
+    {
+      "evidence_id": "emotion-regulation-gross-2015",
+      "source_kind": "peer_reviewed_review",
+      "citation": "Gross (2015), Emotion regulation: Current status and future prospects, Psychological Inquiry, 26(1), 1–26.",
+      "url": "https://doi.org/10.1080/1047840X.2015.989751",
+      "supports": [
+        "区分情境、注意、解释和反应有助于把情绪过程拆成可观察环节。"
+      ],
+      "limitations": [
+        "不能用九型候选替代临床评估或情绪障碍诊断。"
+      ]
+    },
+    {
+      "evidence_id": "feedback-interventions-kluger-denisi-1996",
+      "source_kind": "meta_analysis",
+      "citation": "Kluger and DeNisi (1996), The effects of feedback interventions on performance: A historical review, a meta-analysis, and a preliminary feedback intervention theory, Psychological Bulletin, 119(2), 254–284.",
+      "url": "https://doi.org/10.1037/0033-2909.119.2.254",
+      "supports": [
+        "反馈的焦点和表达方式会影响反馈结果，具体任务信息通常比人格评价更可操作。"
+      ],
+      "limitations": [
+        "不支持用九型候选推断工作能力、绩效或岗位适配。"
+      ]
+    }
+  ]
+}

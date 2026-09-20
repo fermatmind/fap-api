@@ -22,7 +22,7 @@ final class EnneagramPrivateResultCompileDeterminismTest extends TestCase
         $this->assertSame($first['compiled_hash'], $second['compiled_hash']);
         $this->assertMatchesRegularExpression('/\A[a-f0-9]{64}\z/', $first['source_hash']);
         $this->assertMatchesRegularExpression('/\A[a-f0-9]{64}\z/', $first['compiled_hash']);
-        $this->assertCount(26, array_merge($first['manifest']['locale_source_files']['zh-CN'], $first['manifest']['locale_source_files']['en']));
+        $this->assertCount(28, array_merge($first['manifest']['locale_source_files']['zh-CN'], $first['manifest']['locale_source_files']['en']));
         $this->assertSame($first['source_hash'], $first['payload']['form_projections']['e105']['source_hash']);
         $this->assertSame($first['source_hash'], $first['payload']['form_projections']['fc144']['source_hash']);
         $this->assertSame(36, $first['manifest']['coverage']['pair_count']);
