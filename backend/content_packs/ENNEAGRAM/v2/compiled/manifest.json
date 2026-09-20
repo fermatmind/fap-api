@@ -2,18 +2,18 @@
     "artifacts": [
         {
             "path": "private_result.compiled.json",
-            "sha256": "cc0fc01dd522e14a62fb245bb006746d969c52507cdb21c22924318014896a9a"
+            "sha256": "1529c14953377ed9626d53786a07658d29667acbee18c85d43f61b59cf88baee"
         }
     ],
     "authority_id": "FERMATMIND_ENNEAGRAM_PRIVATE_RESULT_CANONICAL",
     "authority_root": "backend/content_packs/ENNEAGRAM/v2/registry",
-    "compiled_hash": "df084468282d011624125c2cca2d6bc654a613bf59424843b852c554ee5f2c07",
+    "compiled_hash": "60bf502b630f444bd131fb17de7db8cc38a12691ea12ebe73ec1257c56029edf",
     "compiled_hash_rule": "sha256(canonical JSON of compiled payload excluding compiled_hash)",
     "compiler": {
         "schema": "fap.enneagram.private_result.compiler.v1",
         "version": "1.1.0"
     },
-    "content_hash": "08917013da6b5990341978dffe9dc0773f0c25157e025e23e940d170692a908d",
+    "content_hash": "d889953add0812f126e21569fe3a7b9ea4e4733ea3bf0d4b6cfcf6843a7fad15",
     "content_maturity_values": [
         "scaffold",
         "p0_placeholder",
@@ -109,7 +109,7 @@
                 ],
                 "role": "seven-chapter candidate sections and growth actions",
                 "schema": "fap.enneagram.chapter_registry.v1",
-                "sha256": "ed56d334fb5e8c3c46e012687c8b5072112e55d2d033d7129015d9df79aa27de"
+                "sha256": "1c49f81d89f30f024ba159f788ef5e8479d38d2ae44689ab223dffa00a6ebd68"
             },
             {
                 "consumer_surfaces": [
@@ -325,7 +325,7 @@
                 ],
                 "role": "nine type private-result bodies",
                 "schema": "fap.enneagram.type_registry.v1",
-                "sha256": "6026115290a4c3b8aa8f7d743b12c56bdaef65ea4b02344aeb0ab36f9b93b704"
+                "sha256": "d3ebdc475a72cb7ddcb90b2f14c9a6a23c1a973bc9756eb3bfcb472581f56646"
             },
             {
                 "consumer_surfaces": [
@@ -604,7 +604,7 @@
         ]
     },
     "locale_source_hashes": {
-        "en": "6d72fca881953ebedeb3ef65dd049becc1e0f406c532ae87a4dd061632c877a2",
+        "en": "7a103d54ded777f29028e7ace01639a637ecd063ed91bfea795ded8eb302fc1d",
         "zh-CN": "18dfea140b09ddfc610ee1eabb44b7cdb4f26715af360e243a9b136ed654f522"
     },
     "locales": [
@@ -947,7 +947,7 @@
             "sha256": "69fe10dde5cfa6a6cbbfd6f8fed62c22da175cd22e0ac6b40ca492dc439bb6d1"
         }
     ],
-    "source_hash": "08917013da6b5990341978dffe9dc0773f0c25157e025e23e940d170692a908d",
+    "source_hash": "d889953add0812f126e21569fe3a7b9ea4e4733ea3bf0d4b6cfcf6843a7fad15",
     "source_hash_rule": "sha256(concat(sorted locale/path + NUL + sha256(canonical decoded JSON) + LF))",
     "supported_context_modes": [
         "individual",

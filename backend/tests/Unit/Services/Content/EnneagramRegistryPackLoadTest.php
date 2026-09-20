@@ -45,6 +45,7 @@ final class EnneagramRegistryPackLoadTest extends TestCase
         $loader = app(EnneagramPackLoader::class);
         $pack = $loader->loadRegistryPack(null, 'en');
         $serialized = json_encode($pack['registries'], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        $chapterCopy = json_encode($pack['chapter_registry'], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
 
         $this->assertSame(['en'], data_get($pack, 'manifest.locales'));
         $this->assertSame('en', data_get($pack, 'type_registry.locale'));
@@ -55,6 +56,10 @@ final class EnneagramRegistryPackLoadTest extends TestCase
         $this->assertDoesNotMatchRegularExpression(
             '/perfect type|ego type|am i (?:a )?(?:size|number) [1-9]|knowledge precipitation|career adaptation|personnel decision-making conclusions|current outline is scattered|central judgments|grading conclusion|default default|staying alive|low-resource hypothesis|self-requirements/i',
             $serialized,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/you can always say it|you can change everything|responseable request|recovery operations entrance|the other party|a established|low-threshold|when he |if he |being urged to express his|surface harmony|border is not visible|low volume comments|take over disagreements/i',
+            $chapterCopy,
         );
         $this->assertSame(
             ['The Reformer', 'The Helper', 'The Achiever', 'The Individualist', 'The Investigator', 'The Loyalist', 'The Enthusiast', 'The Challenger', 'The Peacemaker'],
