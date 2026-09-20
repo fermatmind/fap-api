@@ -27,6 +27,10 @@ set('seo_competitive_writer_env', '');
 set('seo_council_closeout_deferred', false);
 set('career_current_parity_required', false);
 set('career_data_recovery', false);
+set('career_content_package_archive', '');
+set('career_content_package_sha256', '');
+set('career_content_package_base_sha', '');
+set('career_content_package_tree_sha', '');
 set('private_result_authority_publish_required', true);
 set('mbti_result_introductions_publish', false);
 set('mbti_trait_content_publish', false);
@@ -5078,7 +5082,99 @@ task('deploy:update_code', function () {
 
     deployRunGitRemoteUpdateWithBoundedRetry("$git remote update 2>&1", $environment);
 
-    if (get('update_code_strategy') === 'archive') {
+    if (deployIsCareerContentOnly()) {
+        $archive = (string) get('career_content_package_archive', '');
+        $archiveSha256 = strtolower(trim((string) get('career_content_package_sha256', '')));
+        $baseSha = strtolower(trim((string) get('career_content_package_base_sha', '')));
+        $treeSha = strtolower(trim((string) get('career_content_package_tree_sha', '')));
+        $resolvedArchive = realpath($archive);
+        if (! is_string($resolvedArchive) || ! is_file($resolvedArchive) || is_link($archive)
+            || preg_match('/\A[0-9a-f]{64}\z/', $archiveSha256) !== 1
+            || preg_match('/\A[0-9a-f]{40}\z/', $baseSha) !== 1
+            || preg_match('/\A[0-9a-f]{40}\z/', $treeSha) !== 1
+            || ! hash_equals($archiveSha256, hash_file('sha256', $resolvedArchive))) {
+            throw new \RuntimeException('CAREER_CONTENT_PACKAGE_LOCAL_BINDING_INVALID');
+        }
+        $targetTree = trim(run("$git rev-parse $target^{tree}"));
+        if (! hash_equals($treeSha, $targetTree)) {
+            throw new \RuntimeException('CAREER_CONTENT_PACKAGE_TARGET_TREE_MISMATCH');
+        }
+
+        $remoteArchive = parse('{{deploy_path}}/.dep/career-content-package-{{release_name}}.tar.gz');
+        upload($resolvedArchive, $remoteArchive);
+        $releasePath = deployPlaceholderPathArg('{{release_path}}');
+        $deployPath = deployPlaceholderPathArg('{{deploy_path}}');
+        $remoteArchiveArg = escapeshellarg($remoteArchive);
+        $archiveSha256Arg = escapeshellarg($archiveSha256);
+        $baseShaArg = escapeshellarg($baseSha);
+        $targetArg = escapeshellarg(trim(run("$git rev-list $target -1")));
+        $treeShaArg = escapeshellarg($treeSha);
+        run(<<<BASH
+set -euo pipefail
+release_path={$releasePath}
+deploy_path={$deployPath}
+archive={$remoteArchiveArg}
+expected_archive_sha={$archiveSha256Arg}
+expected_base_sha={$baseShaArg}
+expected_head_sha={$targetArg}
+expected_tree_sha={$treeShaArg}
+package_dir="\$deploy_path/.dep/career-content-package-{{release_name}}"
+cleanup_package() { rm -f -- "\$archive"; rm -rf -- "\$package_dir"; }
+trap cleanup_package EXIT
+test "\$(sha256sum "\$archive" | awk '{print \$1}')" = "\$expected_archive_sha"
+mkdir -p "\$package_dir"
+while IFS= read -r entry; do
+  normalized="\${entry#./}"
+  case "\$normalized" in
+    ''|*/|binding.json|projection-index.json|payload/*) ;;
+    *) echo "career content package path refused" >&2; exit 1 ;;
+  esac
+  case "/\$normalized/" in *'/../'*|*'//'*) echo "career content package traversal refused" >&2; exit 1 ;; esac
+done < <(tar -tzf "\$archive")
+tar -xzf "\$archive" -C "\$package_dir"
+binding="\$package_dir/binding.json"
+jq -e --arg base "\$expected_base_sha" --arg head "\$expected_head_sha" --arg tree "\$expected_tree_sha" '
+  .schema_version == "fermatmind.career-content-package.v1"
+  and .base_sha == \$base and .head_sha == \$head and .candidate_tree_sha == \$tree
+  and .no_deletions == true and .payload_file_count == (.files | length)
+  and (.files | length) >= 3
+  and ([.files[].path] | length) == ([.files[].path] | unique | length)
+' "\$binding" >/dev/null
+
+incremental=true
+current="\$(readlink -f "\$deploy_path/current" 2>/dev/null || true)"
+case "\$current" in "\$deploy_path"/releases/*) ;; *) incremental=false ;; esac
+if [ "\$incremental" = true ] && [ "\$(tr -d '\\r\\n' < "\$current/REVISION" 2>/dev/null || true)" != "\$expected_base_sha" ]; then
+  incremental=false
+fi
+if [ "\$incremental" = true ]; then
+  while IFS="\$(printf '\\t')" read -r path before_sha; do
+    case "\$path" in backend/content_assets/career/current/*) ;; *) incremental=false; break ;; esac
+    case "/\$path/" in *'/../'*|*'//'*) incremental=false; break ;; esac
+    source="\$current/\$path"
+    if [ ! -f "\$source" ] || [ -L "\$source" ] || [ "\$(sha256sum "\$source" | awk '{print \$1}')" != "\$before_sha" ]; then
+      incremental=false
+      break
+    fi
+  done < <(jq -r '.files[] | [.path,.before_sha256] | @tsv' "\$binding")
+fi
+
+if [ "\$incremental" = true ]; then
+  cp -a "\$current/." "\$release_path/"
+  cp -a "\$package_dir/payload/." "\$release_path/"
+  while IFS="\$(printf '\\t')" read -r path after_sha; do
+    candidate="\$release_path/\$path"
+    test -f "\$candidate" && test ! -L "\$candidate"
+    test "\$(sha256sum "\$candidate" | awk '{print \$1}')" = "\$after_sha"
+  done < <(jq -r '.files[] | [.path,.after_sha256] | @tsv' "\$binding")
+  echo 'career_content_materialization=incremental'
+else
+  {$git} archive {$targetWithDir} | tar -x -f - -C "\$release_path" 2>&1
+  echo 'career_content_materialization=full_fallback'
+fi
+printf '%s\n' "\$expected_head_sha" > "\$release_path/REVISION"
+BASH);
+    } elseif (get('update_code_strategy') === 'archive') {
         run("$git archive $targetWithDir | tar -x -f - -C {{release_path}} 2>&1");
     } elseif (get('update_code_strategy') === 'clone') {
         cd('{{release_path}}');
@@ -5091,8 +5187,10 @@ task('deploy:update_code', function () {
         );
     }
 
-    $revision = escapeshellarg(run("$git rev-list $target -1"));
-    run("echo $revision > {{release_path}}/REVISION");
+    if (! deployIsCareerContentOnly()) {
+        $revision = escapeshellarg(run("$git rev-list $target -1"));
+        run("echo $revision > {{release_path}}/REVISION");
+    }
 });
 
 /**

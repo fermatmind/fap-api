@@ -29,6 +29,12 @@ final class CareerCurrentAuthorityParityTest extends TestCase
         self::assertSame(2092, $receipt['full_scan']['counts']['locale_pages']);
         self::assertSame(2092, $receipt['full_scan']['counts']['encoded']);
         self::assertSame(2092, $receipt['full_scan']['counts']['decoded']);
+        self::assertCount(2092, $receipt['full_scan']['projection_index']);
+        self::assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', $receipt['full_scan']['projection_index_sha256']);
+        self::assertSame(
+            ['slug', 'locale', 'path', 'source_sha256', 'projection_sha256', 'codec_sha256'],
+            array_keys($receipt['full_scan']['projection_index'][0]),
+        );
         self::assertGreaterThan(0, $receipt['full_scan']['bytes']['max_single_key']);
         self::assertSame(
             $receipt['full_scan']['bytes']['candidate_total']

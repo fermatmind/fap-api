@@ -78,7 +78,7 @@ final class CareerCurrentAuthorityParity
         $slugs = $authority['slugs'];
         $this->assertAuthorityShape($authority);
         $redis = $this->redisContract($redisMode);
-        $full = $this->scanPages($authority, $slugs, true, $redisMode);
+        $full = $this->scanPages($authority, $slugs, true, $redisMode, $mode === self::MODE_PACKAGE);
         if ($redisMode === 'readonly') {
             self::assertCapacityWithinBudget($full['bytes']['worst_state_amplification'] + $redis['used_memory_bytes'], 0, self::LOCKED_CAREER_BUDGET_BYTES);
         }
@@ -137,8 +137,13 @@ final class CareerCurrentAuthorityParity
      * @param  list<string>  $slugs
      * @return array<string,mixed>
      */
-    private function scanPages(array $authority, array $slugs, bool $includeCapacity, string $redisMode): array
-    {
+    private function scanPages(
+        array $authority,
+        array $slugs,
+        bool $includeCapacity,
+        string $redisMode,
+        bool $includeProjectionIndex = false,
+    ): array {
         $hashes = array_fill_keys(['content_v3', 'codec_roundtrip'], []);
         $counts = [
             'slugs' => count($slugs), 'locales' => count(CareerCurrentAuthorityPackage::LOCALES),
@@ -157,6 +162,7 @@ final class CareerCurrentAuthorityParity
             'disposable_probe_write_count' => 0,
         ];
         $memoryUsageKeys = [];
+        $projectionIndex = [];
         foreach (array_chunk($slugs, 32) as $chunk) {
             foreach ($chunk as $slug) {
                 foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
@@ -173,7 +179,24 @@ final class CareerCurrentAuthorityParity
                     $states[$state]++;
                     $counts['locale_pages']++;
                     $hashes['content_v3'][] = CareerCurrentAuthorityPackage::hashValue($content);
-                    $hashes['codec_roundtrip'][] = CareerCurrentAuthorityPackage::hashValue($payload);
+                    $projectionSha256 = CareerCurrentAuthorityPackage::hashValue($payload);
+                    $codecSha256 = CareerCurrentAuthorityPackage::hashValue($stored);
+                    $hashes['codec_roundtrip'][] = $projectionSha256;
+                    if ($includeProjectionIndex) {
+                        $entry = $authority['entries'][$slug][$locale] ?? null;
+                        if (! is_array($entry)
+                            || preg_match('/\A[0-9a-f]{64}\z/', (string) ($entry['sha256'] ?? '')) !== 1) {
+                            throw new RuntimeException('CAREER_PARITY_PROJECTION_INDEX_INVALID');
+                        }
+                        $projectionIndex[] = [
+                            'slug' => $slug,
+                            'locale' => $locale,
+                            'path' => 'backend/content_assets/career/current/'.$entry['path'],
+                            'source_sha256' => $entry['sha256'],
+                            'projection_sha256' => $projectionSha256,
+                            'codec_sha256' => $codecSha256,
+                        ];
+                    }
                     $counts['encoded']++;
                     $counts['decoded']++;
                     $json = json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
@@ -218,10 +241,16 @@ final class CareerCurrentAuthorityParity
             self::assertCapacityWithinBudget($bytes['worst_state_amplification'], $redisMemory['memory_usage_total'], $budget);
         }
 
-        return [
+        $result = [
             'status' => 'pass', 'counts' => $counts, 'content_states' => $states,
             'aggregate_hashes' => $hashes, 'bytes' => $bytes, 'redis' => $redisMemory,
         ];
+        if ($includeProjectionIndex) {
+            $result['projection_index'] = $projectionIndex;
+            $result['projection_index_sha256'] = CareerCurrentAuthorityPackage::hashValue($projectionIndex);
+        }
+
+        return $result;
     }
 
     public static function assertCapacityWithinBudget(

@@ -7,6 +7,7 @@ const deploy = readFileSync(new URL('../../deploy.php', import.meta.url), 'utf8'
 const publisher = readFileSync(new URL('../../backend/app/Domain/Career/Display/CareerCurrentAuthorityPublisher.php', import.meta.url), 'utf8');
 const parity = readFileSync(new URL('../../backend/app/Domain/Career/Display/CareerCurrentAuthorityParity.php', import.meta.url), 'utf8');
 const responseCache = readFileSync(new URL('../../backend/app/Services/Career/PublicCareerAuthorityResponseCache.php', import.meta.url), 'utf8');
+const ci = readFileSync(new URL('../workflows/ci.yml', import.meta.url), 'utf8');
 
 test('content-only policy is receipt-bound and selects the dedicated deploy task', () => {
   assert.match(workflow, /career_content_only: \$\{\{ steps\.receipt\.outputs\.career_content_only \}\}/);
@@ -19,6 +20,9 @@ test('content-only policy is receipt-bound and selects the dedicated deploy task
   assert.match(workflow, /CAREER_CURRENT_PUBLISH_CHANGED_PAGE_SET_SHA256=/);
   assert.match(workflow, /Download exact CI validation receipt\n\s+if: env\.CAREER_CONTENT_ONLY == 'true'/);
   assert.match(workflow, /run-id: \$\{\{ github\.event\.workflow_run\.id \}\}/);
+  assert.match(workflow, /Expected one \$\{expected\} artifact/);
+  assert.match(workflow, /career_package_artifact_id/);
+  assert.match(workflow, /CAREER_CURRENT_PUBLISH_CONTENT_PACKAGE_SHA256=/);
 });
 
 test('dedicated mode preserves parity and atomic publish while excluding unrelated runtime work', () => {
@@ -30,6 +34,20 @@ test('dedicated mode preserves parity and atomic publish while excluding unrelat
   assert.match(deploy, /Skip URL Truth probe because the Career URL set is unchanged/);
   assert.match(deploy, /task\('healthcheck:career-content-only'/);
   assert.match(workflow, /deploy_task=deploy\n/);
+  assert.match(deploy, /career_content_materialization=incremental/);
+  assert.match(deploy, /career_content_materialization=full_fallback/);
+  assert.match(deploy, /\.before_sha256/);
+  assert.match(deploy, /cp -a "\\\$current\/\."/);
+});
+
+test('CI builds one deterministic SHA-bound package and deploy stages consume it', () => {
+  assert.match(ci, /Build deterministic exact-SHA Career content package/);
+  assert.match(ci, /tar --sort=name --format=ustar --mtime=@0 --owner=0 --group=0 --numeric-owner/);
+  assert.match(ci, /cmp "\$artifact\/career-content-package\.tar\.gz"/);
+  assert.match(ci, /career_content_package:\$career_package/);
+  assert.match(workflow, /Download the bound Career content package/);
+  assert.match(workflow, /Download the bound production Career content package/);
+  assert.match(workflow, /Download exact Career content package for publisher/);
 });
 
 test('publisher batches full readback and fails closed on out-of-set drift', () => {

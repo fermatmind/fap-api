@@ -345,10 +345,47 @@ jobs:
             and .full_scan.counts.locale_pages == 2092
             and .full_scan.counts.encoded == 2092
             and .full_scan.counts.decoded == 2092
+            and (.full_scan.projection_index | length) == 2092
+            and (.full_scan.projection_index_sha256 | test("^[0-9a-f]{64}$"))
             and .redis.disposable_probe_write_count == 6276
             and ([.write_counts[]] | all(. == 0))
             and (.receipt_digest | test("^[0-9a-f]{64}$"))
           ' career-current-authority-parity.json >/dev/null
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        if: needs.classify.outputs.career_content_only == 'true'
+        with:
+          name: trunk-classification-${{ github.sha }}
+          path: career-classification
+      - name: Build deterministic exact-SHA Career content package
+        if: needs.classify.outputs.career_content_only == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          staging="$RUNNER_TEMP/career-content-package-staging"
+          artifact="$GITHUB_WORKSPACE/career-content-package"
+          mkdir -p "$staging" "$artifact"
+          node .github/trunk/career-content-package.mjs prepare \
+            --root="$GITHUB_WORKSPACE" \
+            --classification="$GITHUB_WORKSPACE/career-classification/trunk-path-classification.json" \
+            --parity="$GITHUB_WORKSPACE/backend/career-current-authority-parity.json" \
+            --output="$staging"
+          tar --sort=name --format=ustar --mtime=@0 --owner=0 --group=0 --numeric-owner \
+            -C "$staging" -cf - . | gzip -n > "$artifact/career-content-package.tar.gz"
+          tar --sort=name --format=ustar --mtime=@0 --owner=0 --group=0 --numeric-owner \
+            -C "$staging" -cf - . | gzip -n > "$RUNNER_TEMP/career-content-package-repeat.tar.gz"
+          cmp "$artifact/career-content-package.tar.gz" "$RUNNER_TEMP/career-content-package-repeat.tar.gz"
+          node .github/trunk/career-content-package.mjs finalize \
+            --staging="$staging" \
+            --archive="$artifact/career-content-package.tar.gz" \
+            --receipt="$artifact/package-receipt.json"
+          node .github/trunk/career-content-package.mjs verify \
+            --archive="$artifact/career-content-package.tar.gz" \
+            --receipt="$artifact/package-receipt.json" \
+            --head="$GITHUB_SHA" \
+            --base="$(jq -r .career_content_change.base_sha career-classification/trunk-path-classification.json)" \
+            --tree="$(git rev-parse 'HEAD^{tree}')" \
+            --compiler="$(jq -r .package.compiler_digest backend/career-current-authority-parity.json)" \
+            --codec="$(jq -r .package.codec_digest backend/career-current-authority-parity.json)"
       - name: Record non-required publisher receipt
         if: needs.classify.outputs.publisher_required != 'true'
         run: >-
@@ -361,6 +398,13 @@ jobs:
           path: backend/career-current-authority-parity.json
           if-no-files-found: error
           retention-days: 90
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: needs.classify.outputs.career_content_only == 'true'
+        with:
+          name: career-content-package-${{ github.sha }}
+          path: career-content-package
+          if-no-files-found: error
+          retention-days: 30
 
   seo-platform-11a-closeout:
     name: SEO Platform 11A exact-tree reconciliation
@@ -996,6 +1040,11 @@ jobs:
           name: career-current-authority-parity-${{ github.sha }}
           path: career-parity
       - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        if: needs.classify.outputs.career_content_only == 'true'
+        with:
+          name: career-content-package-${{ github.sha }}
+          path: career-content-package
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
         if: needs.classify.outputs.seo_platform_11a_closeout == 'true'
         with:
           name: seo-platform-11a-closeout-${{ github.sha }}
@@ -1063,8 +1112,23 @@ jobs:
               and .read_only == true
             ' career-content-change-receipt.json >/dev/null
             career_change="$(jq -c . career-content-change-receipt.json)"
+            jq -e --arg sha "$GITHUB_SHA" --arg base "$(jq -r .scope.validation_base_sha trunk-path-classification.json)" \
+              --arg tree "$(jq -r .career_content_change.candidate_tree_sha trunk-path-classification.json)" \
+              --arg compiler "$(jq -r .package.compiler_digest career-parity/career-current-authority-parity.json)" \
+              --arg codec "$(jq -r .package.codec_digest career-parity/career-current-authority-parity.json)" '
+                .schema_version == "fermatmind.career-content-package.v1"
+                and .status == "ready"
+                and .head_sha == $sha and .base_sha == $base and .candidate_tree_sha == $tree
+                and .compiler_digest == $compiler and .codec_digest == $codec
+                and (.archive_sha256 | test("^[0-9a-f]{64}$"))
+                and (.binding_digest | test("^[0-9a-f]{64}$"))
+                and (.projection_index_sha256 | test("^[0-9a-f]{64}$"))
+                and (.receipt_digest | test("^[0-9a-f]{64}$"))
+              ' career-content-package/package-receipt.json >/dev/null
+            career_package="$(jq -c . career-content-package/package-receipt.json)"
           else
             career_change='{"status":"not_applicable"}'
+            career_package='{"status":"not_applicable"}'
           fi
           closeout_required="$(jq -r .operations.seo_platform_11a_closeout trunk-path-classification.json)"
           if [ "$closeout_required" = true ]; then
@@ -1294,7 +1358,8 @@ jobs:
           fi
           jq -n --arg sha "$GITHUB_SHA" --arg run_id "$GITHUB_RUN_ID" --slurpfile classification trunk-path-classification.json \
             --slurpfile parity career-parity/career-current-authority-parity.json --argjson career_change "$career_change" --argjson closeout "$closeout" --argjson evidence "$evidence" --argjson gateway "$gateway" --argjson council "$council" --argjson competitive "$competitive" \
-            '{schema_version:"fermatmind.trunk-validation.v1",sha:$sha,ci_run_id:$run_id,result:"success",classification:$classification[0],career_content_change:$career_change,publisher:{required:$classification[0].operations.publisher_required,parity:$parity[0]},seo_platform_11a_closeout:$closeout,seo_agent_evidence_boundary:$evidence,seo_agent_policy_gateway:$gateway,seo_council_orchestration:$council,seo_competitive_evidence:$competitive}' \
+            --argjson career_package "$career_package" \
+            '{schema_version:"fermatmind.trunk-validation.v1",sha:$sha,ci_run_id:$run_id,result:"success",classification:$classification[0],career_content_change:$career_change,career_content_package:$career_package,publisher:{required:$classification[0].operations.publisher_required,parity:$parity[0]},seo_platform_11a_closeout:$closeout,seo_agent_evidence_boundary:$evidence,seo_agent_policy_gateway:$gateway,seo_council_orchestration:$council,seo_competitive_evidence:$competitive}' \
             > trunk-validation.json
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:

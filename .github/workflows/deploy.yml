@@ -55,6 +55,11 @@ jobs:
       career_parity_receipt_digest: ${{ steps.receipt.outputs.career_parity_receipt_digest }}
       career_parity_compiler_digest: ${{ steps.receipt.outputs.career_parity_compiler_digest }}
       career_parity_codec_digest: ${{ steps.receipt.outputs.career_parity_codec_digest }}
+      career_package_artifact_id: ${{ steps.career-package-artifact.outputs.id }}
+      career_package_artifact_digest: ${{ steps.career-package-artifact.outputs.digest }}
+      career_package_archive_sha256: ${{ steps.career-package.outputs.archive_sha256 }}
+      career_package_base_sha: ${{ steps.career-package.outputs.base_sha }}
+      career_package_tree_sha: ${{ steps.career-package.outputs.tree_sha }}
       mbti_zh_result_release: ${{ steps.receipt.outputs.mbti_zh_result_release }}
       mbti_zh_result_package_hash: ${{ steps.mbti-zh-result.outputs.package_hash }}
       mbti_zh_result_actor: ${{ steps.mbti-zh-result.outputs.actor }}
@@ -345,9 +350,19 @@ jobs:
               and .career_content_change.invariants.discoverability == false
               and .career_content_change.invariants.search_submission == false
               and .career_content_change.read_only == true
+              and .career_content_package.schema_version == "fermatmind.career-content-package.v1"
+              and .career_content_package.status == "ready"
+              and .career_content_package.head_sha == $sha
+              and .career_content_package.base_sha == .career_content_change.base_sha
+              and .career_content_package.candidate_tree_sha == .career_content_change.candidate_tree_sha
+              and .career_content_package.changed_page_set_sha256 == .career_content_change.changed_page_set_sha256
+              and .career_content_package.compiler_digest == .publisher.parity.package.compiler_digest
+              and .career_content_package.codec_digest == .publisher.parity.package.codec_digest
+              and (.career_content_package.archive_sha256 | test("^[0-9a-f]{64}$"))
+              and (.career_content_package.receipt_digest | test("^[0-9a-f]{64}$"))
             ' "$receipt" >/dev/null
           else
-            jq -e '.career_content_change.status == "not_applicable"' "$receipt" >/dev/null
+            jq -e '.career_content_change.status == "not_applicable" and .career_content_package.status == "not_applicable"' "$receipt" >/dev/null
           fi
           career_current_release="$(jq -r '.classification.operations.career_current_authority_release == true' "$receipt")"
           career_data_recovery="$(jq -r '.classification.operations.career_data_recovery == true' "$receipt")"
@@ -407,6 +422,57 @@ jobs:
           ref: ${{ github.event.workflow_run.head_sha }}
           fetch-depth: 0
           persist-credentials: false
+      - id: career-package-artifact
+        if: steps.receipt.outputs.career_content_only == 'true'
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        env:
+          CI_RUN_ID: ${{ github.event.workflow_run.id }}
+        with:
+          script: |
+            const expected = `career-content-package-${process.env.DEPLOY_SHA}`;
+            const { data } = await github.rest.actions.listWorkflowRunArtifacts({
+              owner: context.repo.owner, repo: context.repo.repo,
+              run_id: Number(process.env.CI_RUN_ID), per_page: 100,
+            });
+            const matches = data.artifacts.filter((artifact) => artifact.name === expected && !artifact.expired);
+            if (matches.length !== 1) return core.setFailed(`Expected one ${expected} artifact; found ${matches.length}`);
+            if (!/^sha256:[0-9a-f]{64}$/.test(String(matches[0].digest || ''))) return core.setFailed('Career package artifact digest is missing');
+            core.setOutput('id', String(matches[0].id));
+            core.setOutput('digest', matches[0].digest);
+      - id: career-package
+        name: Verify exact Career content package artifact
+        if: steps.receipt.outputs.career_content_only == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_ID: ${{ steps.career-package-artifact.outputs.id }}
+          EXPECTED_DIGEST: ${{ steps.career-package-artifact.outputs.digest }}
+        run: |
+          set -euo pipefail
+          zip="$RUNNER_TEMP/career-content-package.zip"
+          directory="$RUNNER_TEMP/career-content-package"
+          curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip" -o "$zip"
+          test "sha256:$(sha256sum "$zip" | awk '{print $1}')" = "$EXPECTED_DIGEST"
+          unzip -q "$zip" -d "$directory"
+          package_receipt="$directory/package-receipt.json"
+          archive="$directory/career-content-package.tar.gz"
+          validation="$RUNNER_TEMP/validation/trunk-validation.json"
+          test ! -L "$package_receipt" && test ! -L "$archive"
+          test "$(sha256sum "$archive" | awk '{print $1}')" = "$(jq -r .archive_sha256 "$package_receipt")"
+          jq -e --argjson expected "$(jq -c .career_content_package "$validation")" '. == $expected' "$package_receipt" >/dev/null
+          node .github/trunk/career-content-package.mjs verify \
+            --archive="$archive" --receipt="$package_receipt" \
+            --head="$DEPLOY_SHA" \
+            --base="$(jq -r .base_sha "$package_receipt")" \
+            --tree="$(jq -r .candidate_tree_sha "$package_receipt")" \
+            --compiler="$(jq -r .compiler_digest "$package_receipt")" \
+            --codec="$(jq -r .codec_digest "$package_receipt")"
+          {
+            echo "archive_sha256=$(jq -r .archive_sha256 "$package_receipt")"
+            echo "base_sha=$(jq -r .base_sha "$package_receipt")"
+            echo "tree_sha=$(jq -r .candidate_tree_sha "$package_receipt")"
+          } >> "$GITHUB_OUTPUT"
       - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         if: steps.receipt.outputs.career_current == 'true'
         with:
@@ -513,6 +579,31 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
           fetch-depth: 0
+      - name: Download the bound Career content package
+        if: needs.policy.outputs.career_content_only == 'true'
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          artifact-ids: ${{ needs.policy.outputs.career_package_artifact_id }}
+          path: artifacts/career-content-package
+          merge-multiple: true
+          github-token: ${{ github.token }}
+          run-id: ${{ github.event.workflow_run.id }}
+      - name: Verify staging Career content package bytes
+        if: needs.policy.outputs.career_content_only == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          directory="$GITHUB_WORKSPACE/artifacts/career-content-package"
+          archive="$directory/career-content-package.tar.gz"
+          receipt="$directory/package-receipt.json"
+          test "$(sha256sum "$archive" | awk '{print $1}')" = '${{ needs.policy.outputs.career_package_archive_sha256 }}'
+          node .github/trunk/career-content-package.mjs verify \
+            --archive="$archive" --receipt="$receipt" --head="$DEPLOY_SHA" \
+            --base='${{ needs.policy.outputs.career_package_base_sha }}' \
+            --tree='${{ needs.policy.outputs.career_package_tree_sha }}' \
+            --compiler='${{ needs.policy.outputs.career_parity_compiler_digest }}' \
+            --codec='${{ needs.policy.outputs.career_parity_codec_digest }}'
+          echo "CAREER_CONTENT_PACKAGE_ARCHIVE=$archive" >> "$GITHUB_ENV"
       - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
           php-version: '8.4'
@@ -569,6 +660,15 @@ jobs:
             deploy_task=deploy:career-content-only
             deploy_mode=career_content_only
           fi
+          package_args=()
+          if [ "$deploy_mode" = career_content_only ]; then
+            package_args=(
+              -o career_content_package_archive="$CAREER_CONTENT_PACKAGE_ARCHIVE"
+              -o career_content_package_sha256='${{ needs.policy.outputs.career_package_archive_sha256 }}'
+              -o career_content_package_base_sha='${{ needs.policy.outputs.career_package_base_sha }}'
+              -o career_content_package_tree_sha='${{ needs.policy.outputs.career_package_tree_sha }}'
+            )
+          fi
           deploy_timeout=30m
           if test "$council_orchestration" = true; then deploy_timeout=60m; fi
           timeout --signal=TERM --kill-after=30s "$deploy_timeout" php /tmp/dep.phar "$deploy_task" staging -f deploy.php --revision "$DEPLOY_SHA" \
@@ -583,7 +683,7 @@ jobs:
             -o seo_council_orchestration="$council_orchestration" \
             -o a08_gate_only='${{ needs.policy.outputs.a08_gate_only }}' \
             -o seo_competitive_evidence='${{ needs.policy.outputs.seo_competitive_evidence }}' \
-            -o seo_council_closeout_deferred="$council_orchestration" --no-interaction
+            -o seo_council_closeout_deferred="$council_orchestration" "${package_args[@]}" --no-interaction
       - name: Materialize inactive staging measurement candidate
         if: needs.policy.outputs.seo_council_runtime_closeout == 'true'
         env:
@@ -1401,6 +1501,31 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
           fetch-depth: 0
+      - name: Download the bound production Career content package
+        if: needs.policy.outputs.career_content_only == 'true'
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          artifact-ids: ${{ needs.policy.outputs.career_package_artifact_id }}
+          path: artifacts/career-content-package
+          merge-multiple: true
+          github-token: ${{ github.token }}
+          run-id: ${{ github.event.workflow_run.id }}
+      - name: Verify production Career content package bytes
+        if: needs.policy.outputs.career_content_only == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          directory="$GITHUB_WORKSPACE/artifacts/career-content-package"
+          archive="$directory/career-content-package.tar.gz"
+          receipt="$directory/package-receipt.json"
+          test "$(sha256sum "$archive" | awk '{print $1}')" = '${{ needs.policy.outputs.career_package_archive_sha256 }}'
+          node .github/trunk/career-content-package.mjs verify \
+            --archive="$archive" --receipt="$receipt" --head="$DEPLOY_SHA" \
+            --base='${{ needs.policy.outputs.career_package_base_sha }}' \
+            --tree='${{ needs.policy.outputs.career_package_tree_sha }}' \
+            --compiler='${{ needs.policy.outputs.career_parity_compiler_digest }}' \
+            --codec='${{ needs.policy.outputs.career_parity_codec_digest }}'
+          echo "CAREER_CONTENT_PACKAGE_ARCHIVE=$archive" >> "$GITHUB_ENV"
       - name: Verify production 11G configuration before transport
         if: needs.policy.outputs.seo_competitive_evidence == 'true'
         env:
@@ -1645,6 +1770,15 @@ jobs:
             deploy_task=deploy:career-content-only
             deploy_mode=career_content_only
           fi
+          package_args=()
+          if [ "$deploy_mode" = career_content_only ]; then
+            package_args=(
+              -o career_content_package_archive="$CAREER_CONTENT_PACKAGE_ARCHIVE"
+              -o career_content_package_sha256='${{ needs.policy.outputs.career_package_archive_sha256 }}'
+              -o career_content_package_base_sha='${{ needs.policy.outputs.career_package_base_sha }}'
+              -o career_content_package_tree_sha='${{ needs.policy.outputs.career_package_tree_sha }}'
+            )
+          fi
           deploy_timeout=30m
           if test "$competitive_evidence" = true; then deploy_timeout=35m; fi
           if test "$production_council_closeout" = true; then deploy_timeout=60m; fi
@@ -1664,7 +1798,7 @@ jobs:
             -o a08_gate_only='${{ needs.policy.outputs.a08_gate_only }}' \
             -o seo_competitive_evidence='${{ needs.policy.outputs.seo_competitive_evidence }}' \
             -o seo_measurement_sync_env="$remote_env" \
-            -o seo_competitive_writer_env="$remote_writer_env" --no-interaction
+            -o seo_competitive_writer_env="$remote_writer_env" "${package_args[@]}" --no-interaction
           deploy_rc=$?
           set -e
           if [ "$deploy_rc" -eq 0 ]; then exit 0; fi
@@ -2377,6 +2511,15 @@ jobs:
           path: artifacts/trunk-validation
           github-token: ${{ github.token }}
           run-id: ${{ github.event.workflow_run.id }}
+      - name: Download exact Career content package for publisher
+        if: env.CAREER_CONTENT_ONLY == 'true'
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          artifact-ids: ${{ needs.policy.outputs.career_package_artifact_id }}
+          path: artifacts/career-content-package
+          merge-multiple: true
+          github-token: ${{ github.token }}
+          run-id: ${{ github.event.workflow_run.id }}
       - name: Download exact production Career parity receipt
         uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
         with:
@@ -2409,6 +2552,8 @@ jobs:
           remote_stderr="$RUNNER_TEMP/career-current-authority-publish.stderr"
           production_parity_receipt="artifacts/career-current-production-parity/career-current-authority-production-preactivation-parity.json"
           validation_receipt="artifacts/trunk-validation/trunk-validation.json"
+          package_archive="artifacts/career-content-package/career-content-package.tar.gz"
+          package_receipt="artifacts/career-content-package/package-receipt.json"
           mkdir -p "$dir"
           [[ "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]
           [[ "$SOURCE_MERGE_SHA" =~ ^[0-9a-f]{40}$ ]]
@@ -2444,6 +2589,8 @@ jobs:
           [[ "$FULL_SCAN" =~ ^[01]$ ]]
           changed_pages_base64=''
           changed_page_set_sha256=''
+          content_package_sha256=''
+          content_package_receipt_digest=''
           CHANGED_PAGE_COUNT=0
           if [ "$CAREER_CONTENT_ONLY" = true ]; then
             jq -e --arg sha "$DEPLOY_SHA" '
@@ -2454,13 +2601,31 @@ jobs:
               and (.career_content_change.changed_pages | length) == .career_content_change.changed_page_count
               and .career_content_change.changed_page_count > 0
             ' "$validation_receipt" >/dev/null
-            changed_pages_base64="$(jq -c '[.career_content_change.changed_pages[] | {slug,locale}]' "$validation_receipt" | base64 -w0)"
-            CHANGED_PAGE_COUNT="$(jq -r .career_content_change.changed_page_count "$validation_receipt")"
-            changed_page_set_sha256="$(jq -r .career_content_change.changed_page_set_sha256 "$validation_receipt")"
+            test "$(sha256sum "$package_archive" | awk '{print $1}')" = '${{ needs.policy.outputs.career_package_archive_sha256 }}'
+            node .github/trunk/career-content-package.mjs verify \
+              --archive="$package_archive" --receipt="$package_receipt" --head="$DEPLOY_SHA" \
+              --base='${{ needs.policy.outputs.career_package_base_sha }}' \
+              --tree='${{ needs.policy.outputs.career_package_tree_sha }}' \
+              --compiler="$PARITY_COMPILER_DIGEST" --codec="$PARITY_CODEC_DIGEST"
+            tar -xOzf "$package_archive" ./binding.json > "$RUNNER_TEMP/career-content-package-binding.json"
+            jq -e --argjson change "$(jq -c .career_content_change "$validation_receipt")" '
+              .head_sha == $change.head_sha
+              and .base_sha == $change.base_sha
+              and .candidate_tree_sha == $change.candidate_tree_sha
+              and .changed_page_set_sha256 == $change.changed_page_set_sha256
+              and ([.files[].path | select(test("/careers/[^/]+/(en|zh-CN)\\.json$"))] | length) == $change.changed_page_count
+            ' "$RUNNER_TEMP/career-content-package-binding.json" >/dev/null
+            changed_pages_base64="$(jq -c '[.files[].path | select(test("/careers/[^/]+/(en|zh-CN)\\.json$")) | capture("/careers/(?<slug>[^/]+)/(?<locale>en|zh-CN)\\.json$")]' "$RUNNER_TEMP/career-content-package-binding.json" | base64 -w0)"
+            CHANGED_PAGE_COUNT="$(jq -r .changed_page_count "$RUNNER_TEMP/career-content-package-binding.json")"
+            changed_page_set_sha256="$(jq -r .changed_page_set_sha256 "$RUNNER_TEMP/career-content-package-binding.json")"
+            content_package_sha256="$(jq -r .archive_sha256 "$package_receipt")"
+            content_package_receipt_digest="$(jq -r .receipt_digest "$package_receipt")"
             test -n "$changed_pages_base64"
             [[ "$changed_page_set_sha256" =~ ^[0-9a-f]{64}$ ]]
+            [[ "$content_package_sha256" =~ ^[0-9a-f]{64}$ ]]
+            [[ "$content_package_receipt_digest" =~ ^[0-9a-f]{64}$ ]]
           fi
-          export CHANGED_PAGE_COUNT changed_page_set_sha256
+          export CHANGED_PAGE_COUNT changed_page_set_sha256 content_package_sha256 content_package_receipt_digest
           printf -v q_path '%q' "$DEPLOY_PATH"
           printf -v q_release '%q' "$DEPLOY_SHA"
           printf -v q_assets '%q' "$ASSETS_SHA256"
@@ -2475,9 +2640,11 @@ jobs:
           printf -v q_full_scan '%q' "$FULL_SCAN"
           printf -v q_changed_pages '%q' "$changed_pages_base64"
           printf -v q_changed_page_set '%q' "$changed_page_set_sha256"
+          printf -v q_content_package '%q' "$content_package_sha256"
+          printf -v q_content_package_receipt '%q' "$content_package_receipt_digest"
           printf -v q_run '%q' "$GITHUB_RUN_ID"
           printf -v q_attempt '%q' "$GITHUB_RUN_ATTEMPT"
-          remote="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_release; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_CURRENT_PUBLISH_EXECUTE=1 CAREER_CURRENT_PUBLISH_BACKEND_ROOT=\"\$current/backend\" CAREER_CURRENT_PUBLISH_RELEASE_SHA=$q_release CAREER_CURRENT_PUBLISH_RELEASE_NAME=\"\$release_name\" CAREER_CURRENT_PUBLISH_SOURCE_MERGE_SHA=$q_source CAREER_CURRENT_PUBLISH_MANIFEST_SHA256=$q_manifest CAREER_CURRENT_PUBLISH_ASSETS_SHA256=$q_assets CAREER_CURRENT_PUBLISH_VERSIONLESS_PROJECTION_SHA256=$q_projection CAREER_CURRENT_PUBLISH_OPERATION_KEY=$q_operation CAREER_CURRENT_PUBLISH_CI_PACKAGE_SCAN_RECEIPT_DIGEST=$q_ci_package_scan CAREER_CURRENT_PUBLISH_PRODUCTION_PARITY_RECEIPT_DIGEST=$q_production_parity CAREER_CURRENT_PUBLISH_PARITY_COMPILER_DIGEST=$q_compiler CAREER_CURRENT_PUBLISH_PARITY_CODEC_DIGEST=$q_codec CAREER_CURRENT_PUBLISH_FULL_SCAN=$q_full_scan CAREER_CURRENT_PUBLISH_CHANGED_PAGES_BASE64=$q_changed_pages CAREER_CURRENT_PUBLISH_CHANGED_PAGE_SET_SHA256=$q_changed_page_set CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ID=$q_run CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ATTEMPT=$q_attempt \"\$current/backend/scripts/deploy/run_career_current_authority_publisher.sh\""
+          remote="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_release; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_CURRENT_PUBLISH_EXECUTE=1 CAREER_CURRENT_PUBLISH_BACKEND_ROOT=\"\$current/backend\" CAREER_CURRENT_PUBLISH_RELEASE_SHA=$q_release CAREER_CURRENT_PUBLISH_RELEASE_NAME=\"\$release_name\" CAREER_CURRENT_PUBLISH_SOURCE_MERGE_SHA=$q_source CAREER_CURRENT_PUBLISH_MANIFEST_SHA256=$q_manifest CAREER_CURRENT_PUBLISH_ASSETS_SHA256=$q_assets CAREER_CURRENT_PUBLISH_VERSIONLESS_PROJECTION_SHA256=$q_projection CAREER_CURRENT_PUBLISH_OPERATION_KEY=$q_operation CAREER_CURRENT_PUBLISH_CI_PACKAGE_SCAN_RECEIPT_DIGEST=$q_ci_package_scan CAREER_CURRENT_PUBLISH_PRODUCTION_PARITY_RECEIPT_DIGEST=$q_production_parity CAREER_CURRENT_PUBLISH_PARITY_COMPILER_DIGEST=$q_compiler CAREER_CURRENT_PUBLISH_PARITY_CODEC_DIGEST=$q_codec CAREER_CURRENT_PUBLISH_FULL_SCAN=$q_full_scan CAREER_CURRENT_PUBLISH_CHANGED_PAGES_BASE64=$q_changed_pages CAREER_CURRENT_PUBLISH_CHANGED_PAGE_SET_SHA256=$q_changed_page_set CAREER_CURRENT_PUBLISH_CONTENT_PACKAGE_SHA256=$q_content_package CAREER_CURRENT_PUBLISH_CONTENT_PACKAGE_RECEIPT_DIGEST=$q_content_package_receipt CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ID=$q_run CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ATTEMPT=$q_attempt \"\$current/backend/scripts/deploy/run_career_current_authority_publisher.sh\""
           set +e
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -o ServerAliveInterval=15 -o ServerAliveCountMax=4 -p "$DEPLOY_PORT" \
@@ -2508,6 +2675,12 @@ jobs:
               and .parity.production_preactivation_receipt_digest == env.PRODUCTION_PARITY_RECEIPT_DIGEST
               and .parity.compiler_digest == env.PARITY_COMPILER_DIGEST
               and .parity.codec_digest == env.PARITY_CODEC_DIGEST
+              and ((env.CAREER_CONTENT_ONLY == "true"
+                  and .parity.content_package_sha256 == env.content_package_sha256
+                  and .parity.content_package_receipt_digest == env.content_package_receipt_digest)
+                or (env.CAREER_CONTENT_ONLY != "true"
+                  and .parity.content_package_sha256 == null
+                  and .parity.content_package_receipt_digest == null))
               and .full_scan == ($full_scan == 1)
               and .resource_guard == {
                 "schema_version": "career.current_authority_publish.resource_guard.v1",

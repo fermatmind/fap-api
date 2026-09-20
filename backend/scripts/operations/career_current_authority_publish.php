@@ -37,6 +37,8 @@ $parityCodecDigest = $env('CAREER_CURRENT_PUBLISH_PARITY_CODEC_DIGEST');
 $fullScan = $env('CAREER_CURRENT_PUBLISH_FULL_SCAN') === '1';
 $changedPagesBase64 = $env('CAREER_CURRENT_PUBLISH_CHANGED_PAGES_BASE64');
 $changedPageSetSha256 = $env('CAREER_CURRENT_PUBLISH_CHANGED_PAGE_SET_SHA256');
+$contentPackageSha256 = $env('CAREER_CURRENT_PUBLISH_CONTENT_PACKAGE_SHA256');
+$contentPackageReceiptDigest = $env('CAREER_CURRENT_PUBLISH_CONTENT_PACKAGE_RECEIPT_DIGEST');
 $changedPages = null;
 $changedPagesInvalid = false;
 if ($changedPagesBase64 !== '') {
@@ -88,6 +90,8 @@ $receipt = [
         'production_preactivation_receipt_digest' => $productionParityReceiptDigest,
         'compiler_digest' => $parityCompilerDigest,
         'codec_digest' => $parityCodecDigest,
+        'content_package_sha256' => $contentPackageSha256 !== '' ? $contentPackageSha256 : null,
+        'content_package_receipt_digest' => $contentPackageReceiptDigest !== '' ? $contentPackageReceiptDigest : null,
     ],
     'workflow_run_id' => ctype_digit($workflowRunId) ? (int) $workflowRunId : null,
     'workflow_run_attempt' => ctype_digit($workflowRunAttempt) ? (int) $workflowRunAttempt : null,
@@ -152,6 +156,8 @@ try {
         || ! hash_equals(CareerJobDetailCanonicalCacheReader::codecDigest(), $parityCodecDigest)
         || $changedPagesInvalid
         || (($changedPages !== null) !== (preg_match('/\A[0-9a-f]{64}\z/', $changedPageSetSha256) === 1))
+        || (($changedPages !== null) !== (preg_match('/\A[0-9a-f]{64}\z/', $contentPackageSha256) === 1))
+        || (($changedPages !== null) !== (preg_match('/\A[0-9a-f]{64}\z/', $contentPackageReceiptDigest) === 1))
         || $resourceGuard !== [
             'schema_version' => 'career.current_authority_publish.resource_guard.v1',
             'timeout_seconds' => 900,
