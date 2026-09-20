@@ -142,6 +142,21 @@ class ArticleTranslationRevision extends Model
             && (int) $this->source_article_id === (int) $article->id;
     }
 
+    public function isPubliclyReadableForArticle(?Article $article = null): bool
+    {
+        if ((string) $this->revision_status === self::STATUS_PUBLISHED) {
+            return true;
+        }
+
+        $article ??= $this->article;
+
+        return (string) $this->revision_status === self::STATUS_SOURCE
+            && $article instanceof Article
+            && $article->isSourceArticle()
+            && (int) $this->article_id === (int) $article->id
+            && (int) $this->source_article_id === (int) $article->id;
+    }
+
     /**
      * @return array<int, string>
      */

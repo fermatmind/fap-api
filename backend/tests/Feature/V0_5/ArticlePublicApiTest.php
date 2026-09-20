@@ -444,6 +444,13 @@ final class ArticlePublicApiTest extends TestCase
         $this->getJson('/api/v0.5/articles/source-revision-zh?locale=zh-CN')->assertOk();
         $this->getJson('/api/v0.5/articles/source-revision-en?locale=en')->assertOk();
 
+        $this->getJson('/api/v0.5/articles/source-revision-zh/seo?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('meta.article_authority_v1.published_revision_backed', true)
+            ->assertJsonPath('meta.article_authority_v1.alternate_eligibility.eligible_locales', ['en', 'zh-CN'])
+            ->assertJsonPath('meta.article_authority_v1.alternate_eligibility.alternates.en', 'https://staging.fermatmind.com/en/articles/source-revision-en')
+            ->assertJsonPath('meta.article_authority_v1.alternate_eligibility.alternates.zh-CN', 'https://staging.fermatmind.com/zh/articles/source-revision-zh');
+
         $this->getJson('/api/v0.5/articles/source-revision-en/seo?locale=en')
             ->assertOk()
             ->assertJsonPath('meta.alternates.en', 'https://staging.fermatmind.com/en/articles/source-revision-en')

@@ -294,14 +294,7 @@ final class ContentReleaseRevalidate extends Command
 
     private function isPublicRevisionLockValid(Article $article, ArticleTranslationRevision $revision): bool
     {
-        if ((string) $revision->revision_status === ArticleTranslationRevision::STATUS_PUBLISHED) {
-            return true;
-        }
-
-        return (string) $revision->revision_status === ArticleTranslationRevision::STATUS_SOURCE
-            && $article->isSourceArticle()
-            && (int) $revision->article_id === (int) $article->id
-            && (int) $revision->source_article_id === (int) $article->id;
+        return $revision->isPubliclyReadableForArticle($article);
     }
 
     /**

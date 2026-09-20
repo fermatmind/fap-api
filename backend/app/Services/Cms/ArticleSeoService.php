@@ -426,7 +426,7 @@ final class ArticleSeoService
         ?array $bigFiveStructuredData = null,
     ): array {
         $publishedRevisionBacked = $revision instanceof ArticleTranslationRevision
-            && $revision->revision_status === ArticleTranslationRevision::STATUS_PUBLISHED;
+            && $revision->isPubliclyReadableForArticle($article);
         $publiclyIndexable = $publishedRevisionBacked
             && (string) $article->status === 'published'
             && (bool) $article->is_public
