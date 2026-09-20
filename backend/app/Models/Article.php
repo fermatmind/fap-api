@@ -182,7 +182,19 @@ class Article extends Model
                     ->whereColumn('article_translation_revisions.article_id', 'articles.id')
                     ->whereColumn('article_translation_revisions.org_id', 'articles.org_id')
                     ->whereColumn('article_translation_revisions.locale', 'articles.locale')
-                    ->where('article_translation_revisions.revision_status', ArticleTranslationRevision::STATUS_PUBLISHED)
+                    ->where(static function ($statusQuery): void {
+                        $statusQuery
+                            ->where('article_translation_revisions.revision_status', ArticleTranslationRevision::STATUS_PUBLISHED)
+                            ->orWhere(static function ($sourceStatusQuery): void {
+                                $sourceStatusQuery
+                                    ->where('article_translation_revisions.revision_status', ArticleTranslationRevision::STATUS_SOURCE)
+                                    ->whereColumn('article_translation_revisions.source_article_id', 'articles.id')
+                                    ->where('articles.translation_status', self::TRANSLATION_STATUS_SOURCE)
+                                    ->whereColumn('articles.source_locale', 'articles.locale')
+                                    ->whereNull('articles.source_article_id')
+                                    ->whereNull('articles.translated_from_article_id');
+                            });
+                    })
                     ->where(static function ($publishedAtQuery): void {
                         $publishedAtQuery
                             ->whereNull('article_translation_revisions.published_at')

@@ -409,6 +409,49 @@ final class ArticlePublicApiTest extends TestCase
         $this->assertNull(data_get($response->json(), 'meta.alternates.x-default'));
     }
 
+    public function test_source_revision_is_public_and_restores_bilingual_alternates(): void
+    {
+        config([
+            'app.url' => 'https://api.staging.fermatmind.com',
+            'app.frontend_url' => 'https://staging.fermatmind.com',
+        ]);
+
+        $groupId = 'article_source_revision_public_read_v1';
+        $source = $this->createArticle([
+            'slug' => 'source-revision-zh',
+            'locale' => 'zh-CN',
+            'title' => '公开源文章',
+            'translation_group_id' => $groupId,
+            'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
+            'source_locale' => 'zh-CN',
+        ], [
+            'revision_status' => ArticleTranslationRevision::STATUS_SOURCE,
+        ]);
+        $this->createArticle([
+            'slug' => 'source-revision-en',
+            'locale' => 'en',
+            'title' => 'Public source translation',
+            'translation_group_id' => $groupId,
+            'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED,
+            'source_locale' => 'zh-CN',
+            'source_article_id' => (int) $source->id,
+            'translated_from_article_id' => (int) $source->id,
+        ], [
+            'source_article_id' => (int) $source->id,
+            'source_locale' => 'zh-CN',
+        ]);
+
+        $this->getJson('/api/v0.5/articles/source-revision-zh?locale=zh-CN')->assertOk();
+        $this->getJson('/api/v0.5/articles/source-revision-en?locale=en')->assertOk();
+
+        $this->getJson('/api/v0.5/articles/source-revision-en/seo?locale=en')
+            ->assertOk()
+            ->assertJsonPath('meta.alternates.en', 'https://staging.fermatmind.com/en/articles/source-revision-en')
+            ->assertJsonPath('meta.alternates.zh', 'https://staging.fermatmind.com/zh/articles/source-revision-zh')
+            ->assertJsonPath('meta.alternates.zh-CN', 'https://staging.fermatmind.com/zh/articles/source-revision-zh')
+            ->assertJsonPath('meta.article_authority_v1.alternate_eligibility.eligible_locales', ['en', 'zh-CN']);
+    }
+
     public function test_article_seo_alternates_exclude_draft_and_noindex_siblings(): void
     {
         config(['app.frontend_url' => 'https://staging.fermatmind.com']);

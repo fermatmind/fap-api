@@ -415,6 +415,29 @@ final class ContentReleaseRevalidateCommandTest extends TestCase
         Http::assertNothingSent();
     }
 
+    public function test_article_detail_only_accepts_exact_self_bound_source_revision(): void
+    {
+        Http::fake();
+
+        $article = $this->articleWithSeoMeta('zh-CN', [], 'exact-source-article');
+        $revision = $this->attachPublishedRevision($article);
+        $revision->forceFill(['revision_status' => ArticleTranslationRevision::STATUS_SOURCE])->save();
+        $contentSha256 = hash('sha256', 'Release body');
+
+        $exitCode = Artisan::call('content-release:revalidate', $this->exactArticleOptions(
+            $article,
+            $revision,
+            $contentSha256,
+            'https://fermatmind.com/zh/articles/exact-source-article',
+        ) + ['--dry-run' => true]);
+        $payload = $this->jsonOutput(Artisan::output());
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('would_revalidate_article_detail_only', $payload['action'] ?? null);
+        $this->assertSame(['/zh/articles/exact-source-article'], $payload['paths'] ?? []);
+        Http::assertNothingSent();
+    }
+
     public function test_article_detail_only_execute_sends_exact_payload_and_requires_exact_receipt(): void
     {
         config()->set('ops.content_release_observability.cache_invalidation_urls', [

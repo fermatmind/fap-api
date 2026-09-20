@@ -217,7 +217,7 @@ final class ContentReleaseRevalidate extends Command
                 || (int) $publishedRevision->article_id !== (int) $article->id
                 || (int) $publishedRevision->org_id !== (int) $article->org_id
                 || (string) $publishedRevision->locale !== $locale
-                || (string) $publishedRevision->revision_status !== ArticleTranslationRevision::STATUS_PUBLISHED) {
+                || ! $this->isPublicRevisionLockValid($article, $publishedRevision)) {
                 $issues[] = 'published_revision_lock_invalid';
             }
             if (! $seoMeta instanceof ArticleSeoMeta) {
@@ -290,6 +290,18 @@ final class ContentReleaseRevalidate extends Command
             'cms_authority_write_count' => 0,
             'database_authority_write_count' => 0,
         ];
+    }
+
+    private function isPublicRevisionLockValid(Article $article, ArticleTranslationRevision $revision): bool
+    {
+        if ((string) $revision->revision_status === ArticleTranslationRevision::STATUS_PUBLISHED) {
+            return true;
+        }
+
+        return (string) $revision->revision_status === ArticleTranslationRevision::STATUS_SOURCE
+            && $article->isSourceArticle()
+            && (int) $revision->article_id === (int) $article->id
+            && (int) $revision->source_article_id === (int) $article->id;
     }
 
     /**
