@@ -175,13 +175,15 @@ final class ScalesLookupSeoMetadataTest extends TestCase
         $package = json_decode(file_get_contents(database_path('data/assessment_methods_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
 
         if ($code === 'MBTI') {
-            $copyPackage = json_decode(file_get_contents(database_path('data/assessment_mbti_copy_zh_20260908.json')), true, 512, JSON_THROW_ON_ERROR);
-            foreach ($copyPackage['updates'] as $update) {
-                if (($update['collection'] ?? null) !== 'faq') {
-                    continue;
+            foreach (['assessment_mbti_copy_zh_20260908.json', 'assessment_mbti_method_consolidation_zh_20260920.json'] as $filename) {
+                $copyPackage = json_decode(file_get_contents(database_path('data/'.$filename)), true, 512, JSON_THROW_ON_ERROR);
+                foreach ($copyPackage['updates'] as $update) {
+                    if (($update['collection'] ?? null) !== 'faq') {
+                        continue;
+                    }
+                    $index = array_search($update['id'], array_column($package['scales'][$code]['faq'], 'id'), true);
+                    $package['scales'][$code]['faq'][$index][$update['field']] = $update['value'];
                 }
-                $index = array_search($update['id'], array_column($package['scales'][$code]['faq'], 'id'), true);
-                $package['scales'][$code]['faq'][$index][$update['field']] = $update['value'];
             }
         }
 
