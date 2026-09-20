@@ -182,6 +182,7 @@ export function classifyPaths(inputPaths) {
     a08_readonly_wiring: a08ReadonlyWiring,
     a08_scoped_checks: paths.some(inRuntimeScope),
     publisher_required: publisherRequired,
+    career_content_only: false,
     career_current_authority_release: paths.some(isCareerAuthorityReleaseBoundary),
     personality_current_authority_release: paths.some(isPersonalityCurrentBoundary),
     mbti_zh_result_authority_release: paths.some((path) => [

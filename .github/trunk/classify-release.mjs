@@ -1,5 +1,7 @@
 import { execFileSync, spawnSync } from 'node:child_process';
 import { classifyPaths } from './classify-paths.mjs';
+import { analyzeCareerContentOnlyFromGit } from './classify-career-content-only.mjs';
+import { writeFileSync } from 'node:fs';
 
 const productionJob = 'Production exact-SHA activation, smoke, and LKG fallback';
 const activationStep = 'Deploy once and automatically restore LKG after committed smoke failure';
@@ -51,6 +53,20 @@ export function classifyRelease({ pushBase, head, baseline, diffPaths, isAncesto
   };
 }
 
+export function applyCareerContentOnly(classification, careerReceipt) {
+  const careerContentOnly = careerReceipt.status === 'eligible';
+  classification.operations.career_content_only = careerContentOnly;
+  if (careerContentOnly) classification.operations.a08_scoped_checks = false;
+  classification.career_content_change = {
+    status: careerReceipt.status,
+    reason: careerReceipt.reason,
+    receipt_digest: careerReceipt.receipt_digest ?? null,
+    changed_page_count: careerReceipt.changed_page_count ?? 0,
+    changed_slug_count: careerReceipt.changed_slug_count ?? 0,
+  };
+  return classification;
+}
+
 async function cli() {
   const repository = process.env.GITHUB_REPOSITORY;
   if (!/^[\w.-]+\/[\w.-]+$/.test(repository ?? '')) throw new Error('Invalid repository');
@@ -82,6 +98,13 @@ async function cli() {
       encoding: 'utf8',
     }).split('\0').filter(Boolean),
   });
+  const careerReceipt = analyzeCareerContentOnlyFromGit(
+    classification.scope.validation_base_sha,
+    process.env.GITHUB_SHA,
+    classification.paths,
+  );
+  applyCareerContentOnly(classification, careerReceipt);
+  writeFileSync('career-content-change-receipt.json', `${JSON.stringify(careerReceipt, null, 2)}\n`);
   process.stdout.write(`${JSON.stringify(classification, null, 2)}\n`);
 }
 

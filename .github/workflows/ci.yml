@@ -32,6 +32,7 @@ jobs:
       tests_changed: ${{ steps.classify.outputs.tests_changed }}
       publisher_required: ${{ steps.classify.outputs.publisher_required }}
       career_current_authority_release: ${{ steps.classify.outputs.career_current_authority_release }}
+      career_content_only: ${{ steps.classify.outputs.career_content_only }}
       personality_current_authority_release: ${{ steps.classify.outputs.personality_current_authority_release }}
       seo_platform_10_closeout: ${{ steps.classify.outputs.seo_platform_10_closeout }}
       seo_platform_11a_closeout: ${{ steps.classify.outputs.seo_platform_11a_closeout }}
@@ -82,6 +83,7 @@ jobs:
             echo "tests_changed=$(jq -r .tests_changed "$RUNNER_TEMP/classification.json")"
             echo "publisher_required=$(jq -r .operations.publisher_required "$RUNNER_TEMP/classification.json")"
             echo "career_current_authority_release=$(jq -r .operations.career_current_authority_release "$RUNNER_TEMP/classification.json")"
+            echo "career_content_only=$(jq -r .operations.career_content_only "$RUNNER_TEMP/classification.json")"
             echo "career_data_recovery=$(jq -r .operations.career_data_recovery "$RUNNER_TEMP/classification.json")"
             echo "personality_current_authority_release=$(jq -r .operations.personality_current_authority_release "$RUNNER_TEMP/classification.json")"
             echo "seo_platform_10_closeout=$(jq -r .operations.seo_platform_10_closeout "$RUNNER_TEMP/classification.json")"
@@ -99,7 +101,9 @@ jobs:
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: trunk-classification-${{ github.sha }}
-          path: trunk-path-classification.json
+          path: |
+            trunk-path-classification.json
+            career-content-change-receipt.json
           if-no-files-found: error
           retention-days: 30
 
@@ -285,14 +289,14 @@ jobs:
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
       - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
-        if: needs.classify.outputs.content == 'true' || needs.classify.outputs.application == 'true'
+        if: (needs.classify.outputs.content == 'true' && needs.classify.outputs.career_content_only != 'true') || needs.classify.outputs.application == 'true'
         with:
           php-version: '8.4'
           coverage: none
           tools: composer:v2
           extensions: mbstring, intl, pdo_sqlite, sqlite3, redis
       - name: Focused Big Five regression
-        if: needs.classify.outputs.content == 'true' || needs.classify.outputs.application == 'true'
+        if: (needs.classify.outputs.content == 'true' && needs.classify.outputs.career_content_only != 'true') || needs.classify.outputs.application == 'true'
         working-directory: backend
         run: |
           composer install --no-interaction --prefer-dist --no-progress
@@ -300,7 +304,7 @@ jobs:
           php artisan key:generate --force
           bash scripts/ci/prepare_sqlite.sh
           php artisan test --filter='(BigFive|Big5|NonMbtiReportContractRegressionTest)' --no-ansi
-      - if: needs.classify.outputs.content != 'true' && needs.classify.outputs.application != 'true'
+      - if: (needs.classify.outputs.content != 'true' || needs.classify.outputs.career_content_only == 'true') && needs.classify.outputs.application != 'true'
         run: echo "Big Five runtime boundary unchanged."
 
   career-publisher-parity:
@@ -1041,6 +1045,27 @@ jobs:
             and (($required and .status == "pass" and (.receipt_digest | test("^[0-9a-f]{64}$")))
               or (($required | not) and .status == "skipped"))
           ' career-parity/career-current-authority-parity.json >/dev/null
+          career_content_only="$(jq -r .operations.career_content_only trunk-path-classification.json)"
+          if [ "$career_content_only" = true ]; then
+            jq -e --arg sha "$GITHUB_SHA" --arg base "$(jq -r .scope.validation_base_sha trunk-path-classification.json)" '
+              .contract_version == "fermatmind.career-content-only-change.v1"
+              and .status == "eligible"
+              and .base_sha == $base
+              and .head_sha == $sha
+              and (.candidate_tree_sha | test("^[0-9a-f]{40}$"))
+              and (.receipt_digest | test("^[0-9a-f]{64}$"))
+              and (.changed_page_set_sha256 | test("^[0-9a-f]{64}$"))
+              and .changed_page_count > 0
+              and (.changed_pages | length) == .changed_page_count
+              and .invariants.manual_hold_slugs == ["software-developers"]
+              and .invariants.discoverability == false
+              and .invariants.search_submission == false
+              and .read_only == true
+            ' career-content-change-receipt.json >/dev/null
+            career_change="$(jq -c . career-content-change-receipt.json)"
+          else
+            career_change='{"status":"not_applicable"}'
+          fi
           closeout_required="$(jq -r .operations.seo_platform_11a_closeout trunk-path-classification.json)"
           if [ "$closeout_required" = true ]; then
             test "$SEO_PLATFORM_11A_CLOSEOUT_RESULT" = success
@@ -1268,8 +1293,8 @@ jobs:
             competitive='{"required":false,"result":"skipped"}'
           fi
           jq -n --arg sha "$GITHUB_SHA" --arg run_id "$GITHUB_RUN_ID" --slurpfile classification trunk-path-classification.json \
-            --slurpfile parity career-parity/career-current-authority-parity.json --argjson closeout "$closeout" --argjson evidence "$evidence" --argjson gateway "$gateway" --argjson council "$council" --argjson competitive "$competitive" \
-            '{schema_version:"fermatmind.trunk-validation.v1",sha:$sha,ci_run_id:$run_id,result:"success",classification:$classification[0],publisher:{required:$classification[0].operations.publisher_required,parity:$parity[0]},seo_platform_11a_closeout:$closeout,seo_agent_evidence_boundary:$evidence,seo_agent_policy_gateway:$gateway,seo_council_orchestration:$council,seo_competitive_evidence:$competitive}' \
+            --slurpfile parity career-parity/career-current-authority-parity.json --argjson career_change "$career_change" --argjson closeout "$closeout" --argjson evidence "$evidence" --argjson gateway "$gateway" --argjson council "$council" --argjson competitive "$competitive" \
+            '{schema_version:"fermatmind.trunk-validation.v1",sha:$sha,ci_run_id:$run_id,result:"success",classification:$classification[0],career_content_change:$career_change,publisher:{required:$classification[0].operations.publisher_required,parity:$parity[0]},seo_platform_11a_closeout:$closeout,seo_agent_evidence_boundary:$evidence,seo_agent_policy_gateway:$gateway,seo_council_orchestration:$council,seo_competitive_evidence:$competitive}' \
             > trunk-validation.json
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
