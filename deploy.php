@@ -3588,7 +3588,12 @@ task('guard:queue-reload-capability', function () {
                     .' --supervisorctl='.$quotedSupervisorctl
                     .' --program='.escapeshellarg($program)
                     .' --retries=5 --delay-seconds=2';
-                if (! test($statusCommand)) {
+                try {
+                    $statusOutput = trim((string) run($statusCommand));
+                    if ($statusOutput !== '') {
+                        writeln('<comment>'.$statusOutput.'</comment>');
+                    }
+                } catch (\Throwable) {
                     throw new \RuntimeException("queue capability preflight requires a recoverable supervisor program [{$program}] before release activation");
                 }
             }
