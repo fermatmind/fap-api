@@ -904,6 +904,17 @@ final class ScaleRegistrySeeder extends Seeder
         $english = json_decode(file_get_contents(database_path('data/assessment_landing_en_20260907.json')), true, 512, JSON_THROW_ON_ERROR);
         $attributes['content_i18n_json']['en'] = array_replace($attributes['content_i18n_json']['en'] ?? [], $english['scales'][$attributes['code']]['content']);
 
+        $englishMethodPackage = json_decode(file_get_contents(database_path('data/assessment_mbti_method_consolidation_en_20260920.json')), true, 512, JSON_THROW_ON_ERROR);
+        foreach ($englishMethodPackage['updates'] as $update) {
+            $collection = data_get($attributes['content_i18n_json']['en'], $update['collection']);
+            $index = is_array($collection) ? array_search($update['id'], array_column($collection, 'id'), true) : false;
+            if ($index === false) {
+                throw new \RuntimeException($update['collection'].'.'.$update['id'].' is missing from the MBTI English seed baseline.');
+            }
+            $collection[$index][$update['field']] = $update['value'];
+            data_set($attributes['content_i18n_json']['en'], $update['collection'], $collection);
+        }
+
         return DB::transaction(function () use ($writer, $attributes) {
             $published = [];
             foreach (['scales_registry', 'scales_registry_v2'] as $table) {

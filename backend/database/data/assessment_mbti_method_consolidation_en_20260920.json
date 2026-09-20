@@ -1,0 +1,81 @@
+{
+  "schema_version": "assessment.exact-field-copy.v2",
+  "scale_code": "MBTI",
+  "locale": "en",
+  "updates": [
+    {
+      "collection": "why_choose.items",
+      "id": "method",
+      "field": "title",
+      "expected": "Understand the four MBTI preference pairs",
+      "value": "Understand MBTI through evidence-based methods"
+    },
+    {
+      "collection": "why_choose.items",
+      "id": "method",
+      "field": "body",
+      "expected": "FermatMind explains E/I, S/N, T/F and J/P, with links to methods and evidence. Check which preferences the questions describe and how the results can be used.\n\nA personality model and a particular questionnaire are different things. External research helps explain MBTI; the measurement quality of this version requires its own validation. The FAQ discusses reliability, validity and appropriate uses.",
+      "value": "FermatMind interprets results across the four core preference pairs: E/I, S/N, T/F and J/P. This section brings together how answers become preference percentages, how a four-letter type is assigned, and how the results should and should not be used. The percentages describe the position of your answers within this result; they are not population percentiles, ability levels, diagnostic probabilities or a type \"accuracy\" score.\n\nEvaluating measurement quality requires separate attention to reliability, validity and intended use. Reliability concerns consistency; validity concerns evidence supporting a particular interpretation or use. Type boundaries remain debated, and small differences near the midpoint should not be exaggerated into two fundamentally different kinds of people.\n\nExternal research can help explain a personality model, but it cannot by itself establish that FermatMind's 93- or 144-question version is valid. Evaluation still requires evidence for the questionnaire, language, sample, scoring method, retest performance and intended use. This page does not borrow another product's data to claim an accuracy rate or use results for hiring selection, ability ranking or mental health diagnosis."
+    },
+    {
+      "collection": "why_choose.items",
+      "id": "method",
+      "field": "link",
+      "expected": {
+        "href": "#faq-validity",
+        "label": "Is the MBTI test accurate? What reliability and validity evidence matters?"
+      },
+      "value": {
+        "href": "/en/reliability-validity",
+        "label": "Read about reliability, validity, and appropriate use"
+      }
+    },
+    {
+      "collection": "faq",
+      "id": "faq-mbti-calculation",
+      "field": "a",
+      "expected": "Five-point answers are mapped to −2 through 2, then oriented using each item’s direction and preference pole. For an axis with n items and an oriented score sum S, the first pole is P = round[100 × (S + 2n) ÷ (4n)]; the other pole is 100 − P. The current base algorithm weights items equally. A compatible weighted version uses P = round[50 + 25 × Σ(w × x) ÷ Σw]; the scoring version for the attempt determines which formula applies.\n\nFor 10 items with an oriented sum of 8, the two percentages are 70 and 30. This describes the position of your answers on a preference axis, not a population percentile, ability level or type accuracy. The oriented x already accounts for reverse scoring; answer-option letters cannot simply be added together.",
+      "value": "Answers are first oriented to the four preference axes, then aggregated under the scoring version and mapped to two-pole percentages. The four letters come from comparing the two poles on each axis. These percentages describe the position of your answers within this result, not a population percentile, ability level or accuracy rate. See \"Methods and limits\" for the full formulas, worked example, tie rules and the boundary of the additional A/T axis."
+    },
+    {
+      "collection": "faq",
+      "id": "faq-mbti-calculation",
+      "field": "related_links",
+      "expected_exists": false,
+      "value": [
+        {
+          "href": "#method-and-evidence",
+          "label": "See the full scoring and type-assignment method"
+        }
+      ]
+    },
+    {
+      "collection": "faq",
+      "id": "faq-validity",
+      "field": "a",
+      "expected": "Separate consistency, what a test measures and whether it suits your purpose. Reliability concerns consistency; validity concerns evidence supporting a particular interpretation or use of scores. A description feeling familiar may prompt reflection, but that alone does not establish psychometric quality.\n\nType boundaries are debated. McCrae and Costa’s research did not support interpreting MBTI preferences as sharply separate categories, while finding associations with some Five-Factor Model dimensions. Small differences near a boundary should not be exaggerated into two fundamentally different kinds of person.\n\nFor any online version, check the questionnaire, language, sample, scoring, retest research and validated uses. Research on official MBTI instruments does not validate every online test with a similar name. FermatMind does not borrow another version’s data to promise an accuracy rate or use type results for ability rankings or diagnosis.",
+      "value": "Assess the questionnaire's reliability, validity, retest performance and intended uses in the relevant language and population. A description merely feeling accurate is not enough, and research on a different MBTI instrument cannot be applied directly. See \"Methods and limits\" and the reliability and validity guide for FermatMind's explanation and use boundaries."
+    },
+    {
+      "collection": "faq",
+      "id": "faq-validity",
+      "field": "related_links",
+      "expected": [
+        {
+          "href": "/en/reliability-validity",
+          "label": "Reliability and validity"
+        }
+      ],
+      "value": [
+        {
+          "href": "#method-and-evidence",
+          "label": "See this page's methods and limits"
+        },
+        {
+          "href": "/en/reliability-validity",
+          "label": "Reliability and validity"
+        }
+      ]
+    }
+  ]
+}

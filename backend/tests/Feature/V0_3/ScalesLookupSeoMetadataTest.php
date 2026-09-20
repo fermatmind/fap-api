@@ -61,6 +61,23 @@ final class ScalesLookupSeoMetadataTest extends TestCase
 
     }
 
+    public function test_mbti_en_lookup_uses_consolidated_method_and_faq_authority(): void
+    {
+        $response = $this->getJson('/api/v0.3/scales/lookup?slug=mbti-personality-test-16-personality-types&locale=en')
+            ->assertOk();
+        $package = json_decode(file_get_contents(database_path('data/assessment_mbti_method_consolidation_en_20260920.json')), true, 512, JSON_THROW_ON_ERROR);
+        $english = $response->json('content_i18n_json.en');
+
+        foreach ($package['updates'] as $update) {
+            $item = collect(data_get($english, $update['collection']))->firstWhere('id', $update['id']);
+            $this->assertSame($update['value'], $item[$update['field']] ?? null, $update['collection'].'.'.$update['id'].'.'.$update['field']);
+        }
+
+        $validity = collect($english['faq'])->firstWhere('id', 'faq-validity');
+        $this->assertCount(2, $validity['references']);
+        $this->assertSame(['#method-and-evidence', '/en/reliability-validity'], array_column($validity['related_links'], 'href'));
+    }
+
     public function test_subsequent_default_seed_preserves_published_mbti_content(): void
     {
         $expected = [];

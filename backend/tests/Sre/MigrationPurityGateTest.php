@@ -54,6 +54,8 @@ final class MigrationPurityGateTest extends TestCase
         '2026_09_08_120000_refine_assessment_professional_intros_zh.php',
         // MbtiMethodConsolidationPublicationTest covers exact target fields, two-registry parity, idempotence, and mixed-state rollback.
         '2026_09_20_090000_consolidate_mbti_method_content_zh.php',
+        // MbtiEnglishMethodConsolidationPublicationTest covers exact target fields, locale preservation, idempotence, and mixed-state rollback.
+        '2026_09_20_100000_consolidate_mbti_method_content_en.php',
     ];
 
     private const BASELINE_CUTOFF_MIGRATION = '2026_04_21_000000';
