@@ -134,6 +134,15 @@
       "item:electromechanical-equipment-assemblers.path.career-path-block.8": {
         "status": "pending_mapping"
       },
+      "item:electromechanical-equipment-assemblers.path.credential-decision.current.v1": {
+        "status": "pending_mapping"
+      },
+      "item:electromechanical-equipment-assemblers.path.entry-role-comparison.current.v1": {
+        "status": "pending_mapping"
+      },
+      "item:electromechanical-equipment-assemblers.path.interview-probation.current.v1": {
+        "status": "pending_mapping"
+      },
       "item:electromechanical-equipment-assemblers.profile.career-quick-answers-block.1": {
         "status": "pending_mapping"
       },
@@ -195,6 +204,9 @@
         "status": "pending_mapping"
       },
       "item:electromechanical-equipment-assemblers.sources.boundary.1": {
+        "status": "pending_mapping"
+      },
+      "item:electromechanical-equipment-assemblers.sources.boundary.1.2": {
         "status": "pending_mapping"
       },
       "item:electromechanical-equipment-assemblers.sources.faq.1": {
@@ -7226,7 +7238,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
               "适合信号：能耐心对准零件、核版本、测公差并保留异常。"
@@ -7240,7 +7252,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
               "谨慎条件：若容易凭经验改图、跳过测量或忽略隔离，应先做纸面练习。"
@@ -7254,7 +7266,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
               "安全试做只用四条虚构记录，不接电或操作真实设备。"
@@ -7679,7 +7691,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本次未建立中国全国机电设备装配工单职业工资分布。"
+              "证据不足：本次未建立中国大陆「机电设备装配工」全国单职业工资分布，本页不提供该数值。国家统计局 2025 年材料为行业或人员类别工资，不能当个人中位数，也不以行业代理值替代。"
             ]
           },
           "id": "electromechanical-equipment-assemblers.china-salary.career-snapshot-primary-locale.1",
@@ -7930,7 +7942,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.riasec-fit-block",
+          "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
               "兴趣量表只用于提问，最终看样本、训练和绩效。"
@@ -8139,6 +8151,171 @@
             "editorial"
           ],
           "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.entry-role-comparison",
+          "data": {
+            "column_keys": [
+              "role",
+              "initial_tasks",
+              "boundary",
+              "evidence",
+              "next_step"
+            ],
+            "rows": [
+              [
+                "机电设备装配工入口步骤1",
+                "入口可从物料核对、简单装配、标识、测量记录和受监督测试开始。",
+                "雇主证据应展示图纸拆解、物料核对、公差记录、缺陷分流和交接。",
+                "虚构记录：A图纸与物料表均为v4、零件匹配、公差合格且测试条件已批准并完整；B图纸v4但物料表v3；C测量值超上限；D测试隔离状态未知。",
+                "规则：版本、零件、公差和测试条件齐全才进入纸面放行；冲突隔离；超差返工评审；隔离未知暂停。"
+              ],
+              [
+                "机电设备装配工入口步骤2",
+                "雇主证据应展示图纸拆解、物料核对、公差记录、缺陷分流和交接。",
+                "虚构记录：A图纸与物料表均为v4、零件匹配、公差合格且测试条件已批准并完整；B图纸v4但物料表v3；C测量值超上限；D测试隔离状态未知。",
+                "规则：版本、零件、公差和测试条件齐全才进入纸面放行；冲突隔离；超差返工评审；隔离未知暂停。",
+                "独立推演：A满足版本、零件、公差和测试条件全部要求，进入纸面放行；B版本冲突隔离；C超差进入返工评审；D隔离状态未知而暂停。四条守恒。"
+              ],
+              [
+                "机电设备装配工入口步骤3",
+                "虚构记录：A图纸与物料表均为v4、零件匹配、公差合格且测试条件已批准并完整；B图纸v4但物料表v3；C测量值超上限；D测试隔离状态未知。",
+                "规则：版本、零件、公差和测试条件齐全才进入纸面放行；冲突隔离；超差返工评审；隔离未知暂停。",
+                "独立推演：A满足版本、零件、公差和测试条件全部要求，进入纸面放行；B版本冲突隔离；C超差进入返工评审；D隔离状态未知而暂停。四条守恒。",
+                "七天试验只用同一材料做核对、分流、记录和复盘。"
+              ],
+              [
+                "机电设备装配工入口步骤4",
+                "规则：版本、零件、公差和测试条件齐全才进入纸面放行；冲突隔离；超差返工评审；隔离未知暂停。",
+                "独立推演：A满足版本、零件、公差和测试条件全部要求，进入纸面放行；B版本冲突隔离；C超差进入返工评审；D隔离状态未知而暂停。四条守恒。",
+                "七天试验只用同一材料做核对、分流、记录和复盘。",
+                "课程和岗位名称不授予带电测试、校准签发、改图或隔离解除权限。"
+              ],
+              [
+                "机电设备装配工入口步骤5",
+                "独立推演：A满足版本、零件、公差和测试条件全部要求，进入纸面放行；B版本冲突隔离；C超差进入返工评审；D隔离状态未知而暂停。四条守恒。",
+                "七天试验只用同一材料做核对、分流、记录和复盘。",
+                "课程和岗位名称不授予带电测试、校准签发、改图或隔离解除权限。",
+                "成长从准确装配记录推进到复杂组件与质量复核，不承诺固定年限。"
+              ]
+            ]
+          },
+          "id": "electromechanical-equipment-assemblers.path.entry-role-comparison.current.v1",
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.interview-probation",
+          "data": {
+            "column_keys": [
+              "stage",
+              "observed_evidence",
+              "possible_check",
+              "escalation"
+            ],
+            "rows": [
+              [
+                "机电设备装配工核对阶段1",
+                "雇主证据应展示图纸拆解、物料核对、公差记录、缺陷分流和交接。",
+                "虚构记录：A图纸与物料表均为v4、零件匹配、公差合格且测试条件已批准并完整；B图纸v4但物料表v3；C测量值超上限；D测试隔离状态未知。",
+                "规则：版本、零件、公差和测试条件齐全才进入纸面放行；冲突隔离；超差返工评审；隔离未知暂停。"
+              ],
+              [
+                "机电设备装配工核对阶段2",
+                "虚构记录：A图纸与物料表均为v4、零件匹配、公差合格且测试条件已批准并完整；B图纸v4但物料表v3；C测量值超上限；D测试隔离状态未知。",
+                "规则：版本、零件、公差和测试条件齐全才进入纸面放行；冲突隔离；超差返工评审；隔离未知暂停。",
+                "独立推演：A满足版本、零件、公差和测试条件全部要求，进入纸面放行；B版本冲突隔离；C超差进入返工评审；D隔离状态未知而暂停。四条守恒。"
+              ],
+              [
+                "机电设备装配工核对阶段3",
+                "规则：版本、零件、公差和测试条件齐全才进入纸面放行；冲突隔离；超差返工评审；隔离未知暂停。",
+                "独立推演：A满足版本、零件、公差和测试条件全部要求，进入纸面放行；B版本冲突隔离；C超差进入返工评审；D隔离状态未知而暂停。四条守恒。",
+                "七天试验只用同一材料做核对、分流、记录和复盘。"
+              ],
+              [
+                "机电设备装配工核对阶段4",
+                "独立推演：A满足版本、零件、公差和测试条件全部要求，进入纸面放行；B版本冲突隔离；C超差进入返工评审；D隔离状态未知而暂停。四条守恒。",
+                "七天试验只用同一材料做核对、分流、记录和复盘。",
+                "课程和岗位名称不授予带电测试、校准签发、改图或隔离解除权限。"
+              ]
+            ]
+          },
+          "id": "electromechanical-equipment-assemblers.path.interview-probation.current.v1",
+          "type": "table"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.credential-decision",
+          "data": {
+            "column_keys": [
+              "credential",
+              "conditions",
+              "boundary",
+              "evidence",
+              "jurisdiction",
+              "next_step",
+              "review"
+            ],
+            "rows": [
+              [
+                "机电设备装配工资格/责任步骤1",
+                "虚构记录：A图纸与物料表均为v4、零件匹配、公差合格且测试条件已批准并完整；B图纸v4但物料表v3；C测量值超上限；D测试隔离状态未知。",
+                "规则：版本、零件、公差和测试条件齐全才进入纸面放行；冲突隔离；超差返工评审；隔离未知暂停。",
+                "独立推演：A满足版本、零件、公差和测试条件全部要求，进入纸面放行；B版本冲突隔离；C超差进入返工评审；D隔离状态未知而暂停。四条守恒。",
+                "按工作地、机构和雇主确认",
+                "七天试验只用同一材料做核对、分流、记录和复盘。",
+                "由责任人确认"
+              ],
+              [
+                "机电设备装配工资格/责任步骤2",
+                "规则：版本、零件、公差和测试条件齐全才进入纸面放行；冲突隔离；超差返工评审；隔离未知暂停。",
+                "独立推演：A满足版本、零件、公差和测试条件全部要求，进入纸面放行；B版本冲突隔离；C超差进入返工评审；D隔离状态未知而暂停。四条守恒。",
+                "七天试验只用同一材料做核对、分流、记录和复盘。",
+                "按工作地、机构和雇主确认",
+                "课程和岗位名称不授予带电测试、校准签发、改图或隔离解除权限。",
+                "由责任人确认"
+              ],
+              [
+                "机电设备装配工资格/责任步骤3",
+                "独立推演：A满足版本、零件、公差和测试条件全部要求，进入纸面放行；B版本冲突隔离；C超差进入返工评审；D隔离状态未知而暂停。四条守恒。",
+                "七天试验只用同一材料做核对、分流、记录和复盘。",
+                "课程和岗位名称不授予带电测试、校准签发、改图或隔离解除权限。",
+                "按工作地、机构和雇主确认",
+                "成长从准确装配记录推进到复杂组件与质量复核，不承诺固定年限。",
+                "由责任人确认"
+              ],
+              [
+                "机电设备装配工资格/责任步骤4",
+                "七天试验只用同一材料做核对、分流、记录和复盘。",
+                "课程和岗位名称不授予带电测试、校准签发、改图或隔离解除权限。",
+                "成长从准确装配记录推进到复杂组件与质量复核，不承诺固定年限。",
+                "按工作地、机构和雇主确认",
+                "入口可从物料核对、简单装配、标识、测量记录和受监督测试开始。",
+                "由责任人确认"
+              ],
+              [
+                "机电设备装配工资格/责任步骤5",
+                "课程和岗位名称不授予带电测试、校准签发、改图或隔离解除权限。",
+                "成长从准确装配记录推进到复杂组件与质量复核，不承诺固定年限。",
+                "入口可从物料核对、简单装配、标识、测量记录和受监督测试开始。",
+                "按工作地、机构和雇主确认",
+                "雇主证据应展示图纸拆解、物料核对、公差记录、缺陷分流和交接。",
+                "由责任人确认"
+              ],
+              [
+                "机电设备装配工资格/责任步骤6",
+                "成长从准确装配记录推进到复杂组件与质量复核，不承诺固定年限。",
+                "入口可从物料核对、简单装配、标识、测量记录和受监督测试开始。",
+                "雇主证据应展示图纸拆解、物料核对、公差记录、缺陷分流和交接。",
+                "按工作地、机构和雇主确认",
+                "虚构记录：A图纸与物料表均为v4、零件匹配、公差合格且测试条件已批准并完整；B图纸v4但物料表v3；C测量值超上限；D测试隔离状态未知。",
+                "由责任人确认"
+              ]
+            ]
+          },
+          "id": "electromechanical-equipment-assemblers.path.credential-decision.current.v1",
+          "type": "table"
         }
       ]
     },
@@ -8239,6 +8416,7 @@
               {
                 "answer": "核心工作包括读图纸规格、对准紧固零件、连接线缆管路、精密测量、检验测试并调整成品。",
                 "id": "electromechanical-equipment-assemblers.faq.1",
+                "question": "机电设备装配工：日常工作如何形成闭环？",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.daily-work",
                 "source_refs": [
                   "onet"
@@ -8247,6 +8425,7 @@
               {
                 "answer": "装配工按规格形成实体组件；电子工程师负责设计，工程技术员支持开发测试，机器人技术员安装维护自动系统，校准岗位保障量值，维修工诊断修复已用设备。",
                 "id": "electromechanical-equipment-assemblers.faq.2",
+                "question": "机电设备装配工：它与相邻职业有什么区别？",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.role-comparison",
                 "source_refs": [
                   "adj-cal",
@@ -8260,6 +8439,7 @@
               {
                 "answer": "适配证据来自能否读图、按序装配、精确测量、记录异常，并在图纸或测试条件不清时停手。",
                 "id": "electromechanical-equipment-assemblers.faq.3",
+                "question": "机电设备装配工：什么行为信号可以帮助判断适配？",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.fit",
                 "source_refs": [
                   "editorial"
@@ -8268,6 +8448,7 @@
               {
                 "answer": "AI可辅助检查物料表、工序版本和记录字段，但不能确认实物配合、公差、接线极性、扭矩或安全隔离。",
                 "id": "electromechanical-equipment-assemblers.faq.4",
+                "question": "机电设备装配工：AI 可以辅助哪些任务？",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.ai-impact",
                 "source_refs": [
                   "editorial"
@@ -8276,6 +8457,7 @@
               {
                 "answer": "人员必须对照图纸、实物、量具、测试方法和批准版本复核；工具不得自动放行成品或发出带电测试指令。",
                 "id": "electromechanical-equipment-assemblers.faq.5",
+                "question": "机电设备装配工：哪些判断必须由人负责？",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.human-control",
                 "source_refs": [
                   "editorial"
@@ -8284,6 +8466,7 @@
               {
                 "answer": "国家统计局2025年行业和人员类别工资材料未建立与O*NET 51-2023.00一一对应的中国全国单职业工资分布。",
                 "id": "electromechanical-equipment-assemblers.faq.6",
+                "question": "机电设备装配工：中国大陆薪资应如何核对？",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.china-pay",
                 "source_refs": [
                   "nbs"
@@ -8292,6 +8475,7 @@
               {
                 "answer": "美国2025年合并职业数据：电气、电子和机电装配工合并口径年薪中位数45,850美元、时薪中位数22.04美元。",
                 "id": "electromechanical-equipment-assemblers.faq.7",
+                "question": "机电设备装配工：美国工资数据应如何解释？",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.us-pay",
                 "source_refs": [
                   "wage"
@@ -8300,6 +8484,7 @@
               {
                 "answer": "入门证据应展示图纸拆解、物料核对、装配顺序、公差记录、缺陷分流和交接。",
                 "id": "electromechanical-equipment-assemblers.faq.8",
+                "question": "机电设备装配工：入行通常需要什么教育或训练？",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.education-path",
                 "source_refs": [
                   "editorial"
@@ -8308,6 +8493,7 @@
               {
                 "answer": "课程、工牌和岗位名称不自动授予带电测试、起重、校准签发、图纸变更或隔离解除权限。",
                 "id": "electromechanical-equipment-assemblers.faq.9",
+                "question": "机电设备装配工：资格、证照和授权边界是什么？",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.credentials",
                 "source_refs": [
                   "editorial"
@@ -8316,6 +8502,7 @@
               {
                 "answer": "图纸版本、零件标识、接线、公差、量具状态或测试隔离不清时不放行，保留原状并升级。",
                 "id": "electromechanical-equipment-assemblers.faq.10",
+                "question": "机电设备装配工：这份工作的主要风险和停止条件是什么？",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.risk-boundary",
                 "source_refs": [
                   "editorial"
@@ -8324,6 +8511,7 @@
               {
                 "answer": "美国合并职业数据预计就业由2024年261,400人增至2034年273,300人，增长5%，年均空缺29,600个。",
                 "id": "electromechanical-equipment-assemblers.faq.11",
+                "question": "机电设备装配工：就业展望与相邻转向应如何理解？",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.outlook-transition",
                 "source_refs": [
                   "trend"
@@ -8332,6 +8520,7 @@
               {
                 "answer": "是否值得进入应由纸面装配记录中的图纸核对、公差判断、缺陷分流和安全边界决定。",
                 "id": "electromechanical-equipment-assemblers.faq.12",
+                "question": "机电设备装配工：如何判断这条职业路径是否值得继续验证？",
                 "question_key": "career.faq.electromechanical-equipment-assemblers.career-worth",
                 "source_refs": [
                   "editorial"
@@ -8358,9 +8547,8 @@
           "availability": "available",
           "copy_key": "career.item.boundary-notice",
           "data": {
-            "entries": [
-              "中国精确单职业工资未建立；美国工资与就业为合并职业口径，不能冒充51-2023.00精确数据。",
-              "纸面练习不接电或操作真实设备，不替代现场培训与授权。"
+            "paragraphs": [
+              "中国精确单职业工资未建立；美国工资与就业为合并职业口径，不能冒充51-2023.00精确数据。"
             ]
           },
           "id": "electromechanical-equipment-assemblers.sources.boundary.1",
@@ -8376,7 +8564,30 @@
             "trend",
             "wage"
           ],
-          "type": "list"
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "paragraphs": [
+              "纸面练习不接电或操作真实设备，不替代现场培训与授权。"
+            ]
+          },
+          "id": "electromechanical-equipment-assemblers.sources.boundary.1.2",
+          "source_refs": [
+            "adj-cal",
+            "adj-eng",
+            "adj-repair",
+            "adj-robot",
+            "adj-tech",
+            "editorial",
+            "nbs",
+            "onet",
+            "trend",
+            "wage"
+          ],
+          "type": "prose"
         }
       ]
     },
@@ -8645,64 +8856,2502 @@
   ],
   "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "display": {
+    "component_order": [
+      "breadcrumb",
+      "hero",
+      "primary_cta",
+      "fermat_decision_card",
+      "fit_decision_checklist",
+      "definition_block",
+      "responsibilities_block",
+      "work_context_block",
+      "career_ai_description_block",
+      "career_quick_answers_block",
+      "onet_structured_fields_block",
+      "adjacent_career_comparison_table",
+      "ai_impact_table",
+      "career_snapshot_primary_locale",
+      "career_snapshot_secondary_locale",
+      "riasec_fit_block",
+      "personality_fit_block",
+      "career_risk_cards",
+      "career_path_block",
+      "market_signal_card",
+      "faq_block",
+      "boundary_notice",
+      "source_card"
+    ],
+    "components": {
+      "adjacent_career_comparison_table": {
+        "conclusion": "相邻职业需要分别补足工具、资格和责任证据。",
+        "evidence_links": [
+          {
+            "href": {
+              "$source": "adj-cal",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "label": {
+              "$source": "adj-cal",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            }
+          }
+        ],
+        "evidence_note": "相邻关系只用于方向比较，不代表自动转岗或资格互认。",
+        "heading": "相邻职业比较",
+        "intro": "比较核心产出、责任边界和工作模式，不按名称互换.",
+        "rows": [
+          {
+            "关键区别": "工作对象、授权范围和交付不同。",
+            "更适合什么选择": "先用工作样本核对。",
+            "核心工作与产出": {
+              "$item": "electromechanical-equipment-assemblers.direction-comparison.adjacent-career-comparison-table.2",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "相邻方向 1"
+          },
+          {
+            "关键区别": "工作对象、授权范围和交付不同。",
+            "更适合什么选择": "先用工作样本核对。",
+            "核心工作与产出": {
+              "$item": "electromechanical-equipment-assemblers.direction-comparison.adjacent-career-comparison-table.3",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "相邻方向 2"
+          },
+          {
+            "关键区别": "工作对象、授权范围和交付不同。",
+            "更适合什么选择": "先用工作样本核对。",
+            "核心工作与产出": {
+              "$item": "electromechanical-equipment-assemblers.direction-comparison.adjacent-career-comparison-table.4",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "相邻方向 3"
+          },
+          {
+            "关键区别": "工作对象、授权范围和交付不同。",
+            "更适合什么选择": "先用工作样本核对。",
+            "核心工作与产出": {
+              "$item": "electromechanical-equipment-assemblers.direction-comparison.adjacent-career-comparison-table.5",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "相邻方向 4"
+          },
+          {
+            "关键区别": "先核对本职业的真实工作对象、授权和交付。",
+            "更适合什么选择": "用现有工作样本验证。",
+            "核心工作与产出": "入口可从物料核对、简单装配、标识、测量记录和受监督测试开始。",
+            "职业方向": "机电设备装配工的入口核对1"
+          },
+          {
+            "关键区别": "先核对本职业的真实工作对象、授权和交付。",
+            "更适合什么选择": "用现有工作样本验证。",
+            "核心工作与产出": "雇主证据应展示图纸拆解、物料核对、公差记录、缺陷分流和交接。",
+            "职业方向": "机电设备装配工的入口核对2"
+          }
+        ],
+        "transition": "下一步用可观察交付验证方向。"
+      },
+      "ai_impact_table": {
+        "action_rows": [
+          {
+            "人群": "入行者",
+            "应对重点": "练习可复核工作样本。"
+          },
+          {
+            "人群": "在岗者",
+            "应对重点": "保留过程与失败记录。"
+          },
+          {
+            "人群": "管理者",
+            "应对重点": "先定权限和停止条件。"
+          }
+        ],
+        "answer": {
+          "$item": "electromechanical-equipment-assemblers.ai-impact.ai-impact-table.2",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "authority_links": [
+          {
+            "来源": {
+              "$source": "adj-cal",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "adj-cal",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "adj-eng",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "adj-eng",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "adj-repair",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "adj-repair",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            }
+          }
+        ],
+        "difference_intro": {
+          "$item": "electromechanical-equipment-assemblers.ai-impact.ai-impact-table.4",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "difference_rows": [
+          {
+            "AI主要改变": "信息整理",
+            "仍由人负责": "责任与授权",
+            "方向": "机电设备装配工"
+          },
+          {
+            "AI主要改变": "检索与复盘",
+            "仍由人负责": "原始记录核对",
+            "方向": "工作流程"
+          }
+        ],
+        "evidence_intro": {
+          "$item": "electromechanical-equipment-assemblers.ai-impact.ai-impact-table.3",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "evidence_rows": [
+          {
+            "使用限制": "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。",
+            "来源": {
+              "$source": "adj-cal",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "研究对象": "来源覆盖范围",
+            "结论": "仅支持有界判断",
+            "链接": {
+              "$source": "adj-cal",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。",
+            "来源": {
+              "$source": "adj-eng",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "研究对象": "来源覆盖范围",
+            "结论": "仅支持有界判断",
+            "链接": {
+              "$source": "adj-eng",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。",
+            "来源": {
+              "$source": "adj-repair",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "研究对象": "来源覆盖范围",
+            "结论": "仅支持有界判断",
+            "链接": {
+              "$source": "adj-repair",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            }
+          }
+        ],
+        "heading": {
+          "$item": "electromechanical-equipment-assemblers.ai-impact.ai-impact-table.1",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "method_cards": [
+          {
+            "含义": "先区分可辅助任务与最终责任。",
+            "概念": "任务能力"
+          },
+          {
+            "含义": "技术演示不等于组织采用。",
+            "概念": "采用条件"
+          },
+          {
+            "含义": "不能从任务暴露推导裁撤时间。",
+            "概念": "岗位结果"
+          }
+        ],
+        "questions": [
+          {
+            "回答": "不能从任务暴露推导岗位裁撤日期。",
+            "来源": {
+              "$source": "adj-cal",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "链接": {
+              "$source": "adj-cal",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "问题": "AI 会取代岗位吗？"
+          },
+          {
+            "回答": "先限定在信息整理和记录复核。",
+            "来源": {
+              "$source": "adj-eng",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "链接": {
+              "$source": "adj-eng",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "问题": "AI 应先辅助什么？"
+          },
+          {
+            "回答": "关键判断、责任认定和停止升级。",
+            "来源": {
+              "$source": "adj-repair",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "链接": {
+              "$source": "adj-repair",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "问题": "什么不能自动授权？"
+          }
+        ],
+        "responsibility_intro": {
+          "$item": "electromechanical-equipment-assemblers.ai-impact.ai-impact-table.5",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "responsibility_steps": [
+          {
+            "步骤": "核对输入",
+            "说明": "确认来源、权限和版本。"
+          },
+          {
+            "步骤": "限定任务",
+            "说明": "只在已知范围内辅助。"
+          },
+          {
+            "步骤": "人工复核",
+            "说明": "责任人复核输出。"
+          },
+          {
+            "步骤": "记录升级",
+            "说明": "异常立即停止并上报。"
+          }
+        ],
+        "risk_rows": [
+          {
+            "为什么重要": "会放大错误结论。",
+            "控制方式": "核对原始材料。",
+            "风险": "错误输入"
+          },
+          {
+            "为什么重要": "会改变责任边界。",
+            "控制方式": "按授权链处理。",
+            "风险": "权限越界"
+          },
+          {
+            "为什么重要": "可能遗漏例外。",
+            "控制方式": "保留人工判断。",
+            "风险": "自动化误读"
+          }
+        ],
+        "task_rows": [
+          {
+            "人的控制点": "核对原始记录与失败模式。",
+            "任务": "整理记录",
+            "工作方向": "记录与信息管理",
+            "当前变化": {
+              "$item": "electromechanical-equipment-assemblers.ai-impact.ai-impact-table.7",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": "按授权链保留人工判断。",
+            "任务": "执行核心任务",
+            "工作方向": "执行与协同",
+            "当前变化": {
+              "$item": "electromechanical-equipment-assemblers.ai-impact.ai-impact-table.8",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": "按法定授权和指挥链升级。",
+            "任务": "关键判断",
+            "工作方向": "安全与授权",
+            "当前变化": "不作自动授权"
+          },
+          {
+            "人的控制点": "由责任人确认结论。",
+            "任务": "形成复盘记录",
+            "工作方向": "复盘与改进",
+            "当前变化": "可能辅助整理"
+          },
+          {
+            "人的控制点": "回到职业现场的原始资料。",
+            "任务": "核对工作输入",
+            "工作方向": "输入与版本",
+            "当前变化": "AI可辅助核物料表、工序版本和记录字段。"
+          },
+          {
+            "人的控制点": "发现越界即停止并升级。",
+            "任务": "识别冲突或缺失",
+            "工作方向": "边界与异常",
+            "当前变化": "采用前限定批准文件、数据权限、人工复核和停用流程。"
+          },
+          {
+            "人的控制点": "责任人确认权限、结论和留痕。",
+            "任务": "形成可追溯交付",
+            "工作方向": "采用与责任",
+            "当前变化": "图纸与客户规格可能敏感，导出、保留和访问范围必须明确。"
+          }
+        ],
+        "transition": {
+          "$item": "electromechanical-equipment-assemblers.ai-impact.ai-impact-table.6",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        }
+      },
+      "boundary_notice": [
+        "使用边界已在职业内容与来源说明中呈现。",
+        {
+          "$link": "electromechanical-equipment-assemblers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electromechanical-equipment-assemblers.navigation.1",
+          "field": "url"
+        },
+        {
+          "$link": "electromechanical-equipment-assemblers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electromechanical-equipment-assemblers.navigation.2",
+          "field": "url"
+        },
+        {
+          "$link": "electromechanical-equipment-assemblers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electromechanical-equipment-assemblers.navigation.3",
+          "field": "url"
+        },
+        {
+          "$link": "electromechanical-equipment-assemblers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electromechanical-equipment-assemblers.navigation.4",
+          "field": "url"
+        },
+        {
+          "$link": "electromechanical-equipment-assemblers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electromechanical-equipment-assemblers.navigation.5",
+          "field": "url"
+        },
+        {
+          "$link": "electromechanical-equipment-assemblers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electromechanical-equipment-assemblers.navigation.6",
+          "field": "url"
+        },
+        {
+          "$link": "electromechanical-equipment-assemblers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electromechanical-equipment-assemblers.navigation.7",
+          "field": "url"
+        },
+        {
+          "$link": "electromechanical-equipment-assemblers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electromechanical-equipment-assemblers.navigation.8",
+          "field": "url"
+        },
+        {
+          "$link": "electromechanical-equipment-assemblers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electromechanical-equipment-assemblers.navigation.9",
+          "field": "url"
+        },
+        {
+          "$link": "electromechanical-equipment-assemblers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electromechanical-equipment-assemblers.navigation.10",
+          "field": "url"
+        },
+        {
+          "$link": "electromechanical-equipment-assemblers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electromechanical-equipment-assemblers.navigation.11",
+          "field": "url"
+        }
+      ],
+      "breadcrumb": {
+        "label": {
+          "$subject": "name"
+        },
+        "slug": {
+          "$subject": "canonical_slug"
+        }
+      },
+      "career_ai_description_block": {
+        "body": [
+          "AI 可辅助记录整理与信息汇总，但不能替代授权判断和最终责任。"
+        ],
+        "heading": "机电设备装配工的工作对象与 AI 边界"
+      },
+      "career_path_block": {
+        "boundary": "入口要求、执照、训练和最终责任由具体法域、机构或雇主核验。",
+        "competence_ladder": [
+          {
+            "description": "确认来源、权限和版本。",
+            "stage": "输入核对"
+          },
+          {
+            "description": "遵守停止和升级条件。",
+            "stage": "过程控制"
+          },
+          {
+            "description": "形成可复核记录。",
+            "stage": "结果复盘"
+          },
+          {
+            "description": "在授权范围内扩展。",
+            "stage": "责任扩展"
+          }
+        ],
+        "direct_answer": {
+          "$item": "electromechanical-equipment-assemblers.path.career-path-block.2",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "heading": {
+          "$item": "electromechanical-equipment-assemblers.path.career-path-block.1",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "locale_requirements": {
+          "credential_boundary": {
+            "$item": "electromechanical-equipment-assemblers.path.career-path-block.4",
+            "block": "path",
+            "copy_key": "career.item.career-path-block",
+            "type": "prose"
+          },
+          "jurisdiction": "按工作地、机构和雇主核验。",
+          "summary": {
+            "$item": "electromechanical-equipment-assemblers.path.career-path-block.3",
+            "block": "path",
+            "copy_key": "career.item.career-path-block",
+            "type": "prose"
+          }
+        },
+        "schema_version": "career.career_progression.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "adj-cal",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "id": "adj-cal",
+            "label": {
+              "$source": "adj-cal",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj-eng",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "id": "adj-eng",
+            "label": {
+              "$source": "adj-eng",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj-repair",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "id": "adj-repair",
+            "label": {
+              "$source": "adj-repair",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj-robot",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "id": "adj-robot",
+            "label": {
+              "$source": "adj-robot",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "entry",
+            "stages": [
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "补足工具、资格和责任证据。",
+                "readiness_evidence": "保留可复核交付和复盘记录。",
+                "responsibility": {
+                  "$item": "electromechanical-equipment-assemblers.path.career-path-block.5",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "基础执行"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "练习异常识别。",
+                "readiness_evidence": "依据原始记录复核。",
+                "responsibility": {
+                  "$item": "electromechanical-equipment-assemblers.path.career-path-block.6",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "稳定交付"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "按授权链升级。",
+                "readiness_evidence": "保留版本和变更记录。",
+                "responsibility": {
+                  "$item": "electromechanical-equipment-assemblers.path.career-path-block.7",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "独立复核"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "核对下一层级责任边界。",
+                "readiness_evidence": "用实际样本证明稳定交付。",
+                "responsibility": {
+                  "$item": "electromechanical-equipment-assemblers.path.career-path-block.8",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "扩大责任"
+              }
+            ],
+            "title": "入门路径"
+          },
+          {
+            "id": "specialist",
+            "stages": [
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "补足工具证据。",
+                "readiness_evidence": "能说明输入与限制。",
+                "responsibility": "明确工作对象和交付。",
+                "role": "问题定义"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "复核输出。",
+                "readiness_evidence": "保留原始记录。",
+                "responsibility": "按流程使用工具。",
+                "role": "工具与记录"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "按授权链处理。",
+                "readiness_evidence": "有升级记录。",
+                "responsibility": "识别偏差并停止。",
+                "role": "异常处理"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "扩大责任前重新核验。",
+                "readiness_evidence": "结论可追溯。",
+                "responsibility": "形成复盘结论。",
+                "role": "证据复盘"
+              }
+            ],
+            "title": "专业深化"
+          },
+          {
+            "id": "management",
+            "stages": [
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "检查交付。",
+                "readiness_evidence": "边界和责任人清楚。",
+                "responsibility": "在授权范围内分派任务。",
+                "role": "任务分派"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "处理例外。",
+                "readiness_evidence": "记录偏差。",
+                "responsibility": "复核过程和结果。",
+                "role": "质量控制"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "保留决定依据。",
+                "readiness_evidence": "异常及时上报。",
+                "responsibility": "设置停止条件。",
+                "role": "风险升级"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "按适用规则复核。",
+                "readiness_evidence": "证据链完整。",
+                "responsibility": "按制度承担责任。",
+                "role": "责任治理"
+              }
+            ],
+            "title": "协作与管理"
+          }
+        ]
+      },
+      "career_quick_answers_block": {
+        "availability": "published",
+        "heading": "职业速答",
+        "items": [
+          {
+            "answer": {
+              "$item": "electromechanical-equipment-assemblers.profile.career-quick-answers-block.1",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa3",
+            "question": "这份工作先核对什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "对象",
+                  "secondary_value": null,
+                  "value": "机电设备装配工"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "输入",
+                  "secondary_value": null,
+                  "value": "来源、权限和版本"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "交付",
+                  "secondary_value": null,
+                  "value": "可复核的工作结果"
+                }
+              ]
+            }
+          },
+          {
+            "answer": {
+              "$item": "electromechanical-equipment-assemblers.profile.career-quick-answers-block.2",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa2",
+            "question": "怎样判断工作闭环？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "闭环",
+                  "secondary_value": null,
+                  "value": "输入、行动、交付与复盘"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤一",
+                  "secondary_value": null,
+                  "value": "核对输入"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤二",
+                  "secondary_value": null,
+                  "value": "人工复核"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤三",
+                  "secondary_value": null,
+                  "value": "执行并记录"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤四",
+                  "secondary_value": null,
+                  "value": "人工复核"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤五",
+                  "secondary_value": null,
+                  "value": "异常升级"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤六",
+                  "secondary_value": null,
+                  "value": "形成复盘"
+                }
+              ]
+            }
+          },
+          {
+            "answer": "资格、授权和最终责任仍由具体法域、机构或雇主核验。",
+            "key": "qa1",
+            "question": "资格边界是什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "边界",
+                  "secondary_value": null,
+                  "value": "需独立核验"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "法域",
+                  "secondary_value": null,
+                  "value": "按适用规则确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "责任",
+                  "secondary_value": null,
+                  "value": "由责任人确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "法域",
+                  "secondary_value": null,
+                  "value": "按适用规则确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "机构",
+                  "secondary_value": null,
+                  "value": "按授权链确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "训练",
+                  "secondary_value": null,
+                  "value": "按岗位要求确认"
+                }
+              ]
+            }
+          }
+        ],
+        "schema_version": "career.quick_answers.v1"
+      },
+      "career_risk_cards": {
+        "boundary": "不可用本页替代法域、机构或雇主的安全规则。",
+        "context_links": [
+          {
+            "href": "#career-visual-group-risk",
+            "label": "查看职业风险"
+          }
+        ],
+        "direct_answer": "先识别错误输入、权限越界和不可逆后果。",
+        "evidence_scope": "风险项按当前职业内容与所列来源边界解释。",
+        "heading": "机电设备装配工的风险与控制点",
+        "risks": [
+          {
+            "affected_roles": "机电设备装配工",
+            "consequence": "可能放大后果或改变责任边界。",
+            "evidence_refs": [
+              "adj-cal"
+            ],
+            "id": "risk-1",
+            "mitigation": "保留原始记录、人工复核和停止升级条件。",
+            "scenario": "输入、执行或交接出现偏差。",
+            "title": {
+              "$item": "electromechanical-equipment-assemblers.risk.career-risk-cards.1",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "机电设备装配工",
+            "consequence": "可能放大后果或改变责任边界。",
+            "evidence_refs": [
+              "adj-cal"
+            ],
+            "id": "risk-2",
+            "mitigation": "保留原始记录、人工复核和停止升级条件。",
+            "scenario": "输入、执行或交接出现偏差。",
+            "title": {
+              "$item": "electromechanical-equipment-assemblers.risk.career-risk-cards.2",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "机电设备装配工",
+            "consequence": "可能放大后果或改变责任边界。",
+            "evidence_refs": [
+              "adj-cal"
+            ],
+            "id": "risk-3",
+            "mitigation": "保留原始记录、人工复核和停止升级条件。",
+            "scenario": "输入、执行或交接出现偏差。",
+            "title": {
+              "$item": "electromechanical-equipment-assemblers.risk.career-risk-cards.3",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "机电设备装配工",
+            "consequence": "可能放大后果或改变责任边界。",
+            "evidence_refs": [
+              "adj-cal"
+            ],
+            "id": "risk-4",
+            "mitigation": "保留原始记录、人工复核和停止升级条件。",
+            "scenario": "输入、执行或交接出现偏差。",
+            "title": {
+              "$item": "electromechanical-equipment-assemblers.risk.career-risk-cards.4",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "机电设备装配工",
+            "consequence": "可能放大后果或改变责任边界。",
+            "evidence_refs": [
+              "adj-cal"
+            ],
+            "id": "risk-5",
+            "mitigation": "保留原始记录、人工复核和停止升级条件。",
+            "scenario": "输入、执行或交接出现偏差。",
+            "title": {
+              "$item": "electromechanical-equipment-assemblers.risk.career-risk-cards.5",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "机电设备装配工",
+            "consequence": "可能产生不可逆后果。",
+            "evidence_refs": [
+              "adj-cal"
+            ],
+            "id": "risk-boundary",
+            "mitigation": "停止并按授权链升级。",
+            "scenario": "遇到超出授权范围的任务。",
+            "title": "责任边界"
+          }
+        ],
+        "schema_version": "career.work_risk.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "adj-cal",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "id": "adj-cal",
+            "label": {
+              "$source": "adj-cal",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj-eng",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "id": "adj-eng",
+            "label": {
+              "$source": "adj-eng",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj-repair",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "id": "adj-repair",
+            "label": {
+              "$source": "adj-repair",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj-robot",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "id": "adj-robot",
+            "label": {
+              "$source": "adj-robot",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ]
+      },
+      "career_snapshot_primary_locale": {
+        "salary": {
+          "bls_table": [
+            {
+              "指标": "中国大陆薪资口径",
+              "数值": "证据不足：未取得与 O*NET-SOC 51-2023.00 精确对应的中国大陆全国单职业工资分位",
+              "说明": "现有官方来源为行业与人员类别聚合，不以行业代理值替代职业工资。"
+            }
+          ],
+          "china_ai_row": {
+            "$item": "electromechanical-equipment-assemblers.china-salary.career-snapshot-primary-locale.4",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_class_row": {
+            "$item": "electromechanical-equipment-assemblers.china-salary.career-snapshot-primary-locale.3",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_edu_table": [
+            {
+              "学历段": "入口要求",
+              "岗位方向": "机电设备装配工",
+              "说明": "按工作地和雇主核验。"
+            },
+            {
+              "学历段": "入口要求",
+              "岗位方向": "机电设备装配工",
+              "说明": "按工作地和雇主核验。"
+            },
+            {
+              "学历段": "入口要求",
+              "岗位方向": "机电设备装配工",
+              "说明": "按工作地和雇主核验。"
+            },
+            {
+              "学历段": "入口要求",
+              "岗位方向": "机电设备装配工",
+              "说明": "按工作地和雇主核验。"
+            }
+          ],
+          "china_industry_table": [
+            {
+              "备注": "不以行业代理值替代单职业工资。",
+              "行业": "来源覆盖范围",
+              "需求": "暂无安全数值"
+            },
+            {
+              "备注": "不以行业代理值替代单职业工资。",
+              "行业": "来源覆盖范围",
+              "需求": "暂无安全数值"
+            },
+            {
+              "备注": "不以行业代理值替代单职业工资。",
+              "行业": "来源覆盖范围",
+              "需求": "暂无安全数值"
+            }
+          ],
+          "china_intl": "中国与美国职业口径不作自动等同。",
+          "china_name_row": {
+            "$item": "electromechanical-equipment-assemblers.china-salary.career-snapshot-primary-locale.1",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_open": "暂无安全数值",
+          "china_ref": {
+            "$join": [
+              {
+                "$source": "adj-cal",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "electromechanical-equipment-assemblers.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "adj-cal",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "electromechanical-equipment-assemblers.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "china_salary_note": "中国公开来源仅用于说明口径边界。",
+          "china_salary_table": [
+            {
+              "城市/区间": "全国单职业",
+              "月薪参考": "暂无安全数值"
+            },
+            {
+              "城市/区间": "全国单职业",
+              "月薪参考": "暂无安全数值"
+            },
+            {
+              "城市/区间": "全国单职业",
+              "月薪参考": "暂无安全数值"
+            }
+          ],
+          "china_soc_row": {
+            "$item": "electromechanical-equipment-assemblers.china-salary.career-snapshot-primary-locale.2",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "sources_note": {
+            "$join": [
+              {
+                "$source": "nbs",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "electromechanical-equipment-assemblers.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "nbs",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "electromechanical-equipment-assemblers.source-register.published.1"
+              },
+              "；",
+              {
+                "$source": "onet",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "electromechanical-equipment-assemblers.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "onet",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "electromechanical-equipment-assemblers.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "ui": {
+            "ai_heading": "AI 辅助边界",
+            "driver_heading": "影响因素",
+            "official_heading": "中国大陆公开口径",
+            "scenario_caption": "未取得全国单职业精确工资，不以行业代理值替代。",
+            "scenario_heading": "职业场景边界",
+            "scenario_interpretation_label": "解释",
+            "scenario_role_label": "职业",
+            "scenario_value_label": "口径"
+          },
+          "us_growth": "美国预测见美国薪资参考板块。",
+          "us_median": "美国工资见美国薪资参考板块。"
+        }
+      },
+      "career_snapshot_secondary_locale": {
+        "authority_sources": {
+          "$join": [
+            {
+              "$source": "onet",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "onet",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "；",
+            {
+              "$source": "wage",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "wage",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            }
+          ],
+          "separator": ""
+        },
+        "bls_table": [
+          {
+            "指标": "美国薪资中位数",
+            "数值": "45,850 美元/年（22.04 美元/时，2025 年 5 月，合并口径）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "wage",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "electromechanical-equipment-assemblers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "wage",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "electromechanical-equipment-assemblers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资低位",
+            "数值": "35,350 美元/年（全国第 10 百分位，2025，合并口径）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "wage",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "electromechanical-equipment-assemblers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "wage",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "electromechanical-equipment-assemblers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资高位",
+            "数值": "62,950 美元/年（全国第 90 百分位，2025，合并口径）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "wage",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "electromechanical-equipment-assemblers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "wage",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "electromechanical-equipment-assemblers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资单位",
+            "数值": "美元/年；美元/时",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "wage",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "electromechanical-equipment-assemblers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "wage",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "electromechanical-equipment-assemblers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资时期",
+            "数值": "2025 年 5 月",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "wage",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "electromechanical-equipment-assemblers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "wage",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "electromechanical-equipment-assemblers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业规模",
+            "数值": "约 261,400 人（2024 年，合并口径）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "trend",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "electromechanical-equipment-assemblers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "trend",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "electromechanical-equipment-assemblers.source-register.published.1"
+                },
+                "；",
+                {
+                  "$source": "wage",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "electromechanical-equipment-assemblers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "wage",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "electromechanical-equipment-assemblers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业增长 outlook",
+            "数值": "快于平均（5%—6%，2024—2034，合并口径）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "trend",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "electromechanical-equipment-assemblers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "trend",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "electromechanical-equipment-assemblers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业空缺",
+            "数值": "约 29,600 个/年（2024—2034，合并口径）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "trend",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "electromechanical-equipment-assemblers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "trend",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "electromechanical-equipment-assemblers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          }
+        ],
+        "boundary": "美国统计不代表中国职业工资或就业结果。",
+        "direct_answer": {
+          "$item": "electromechanical-equipment-assemblers.us-salary.career-snapshot-secondary-locale.2",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "factor_rows": [
+          {
+            "answer": "按来源职业代码核对。",
+            "factor": "职业口径"
+          },
+          {
+            "answer": "按来源地区核对。",
+            "factor": "地区"
+          },
+          {
+            "answer": "按来源时期核对。",
+            "factor": "时期"
+          }
+        ],
+        "factors_heading": {
+          "$item": "electromechanical-equipment-assemblers.us-salary.career-snapshot-secondary-locale.6",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "growth": "快于平均（5%—6%，2024—2034，合并口径）",
+        "heading": {
+          "$item": "electromechanical-equipment-assemblers.us-salary.career-snapshot-secondary-locale.1",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_heading": {
+          "$item": "electromechanical-equipment-assemblers.us-salary.career-snapshot-secondary-locale.5",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_period": "2025 年 5 月工资数据",
+        "industry_rows": [
+          {
+            "industry": "来源覆盖范围",
+            "median": "按原始来源",
+            "note": "不作跨市场换算。"
+          },
+          {
+            "industry": "机构/雇主",
+            "median": "需核对",
+            "note": "岗位要求可能不同。"
+          },
+          {
+            "industry": "地区",
+            "median": "需核对",
+            "note": "地区影响结果。"
+          },
+          {
+            "industry": "时期",
+            "median": "按来源",
+            "note": "不得忽略时间口径。"
+          }
+        ],
+        "industry_value_label": "来源原始值",
+        "interpretation_heading": {
+          "$item": "electromechanical-equipment-assemblers.us-salary.career-snapshot-secondary-locale.4",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "interpretation_rows": [
+          {
+            "answer": "按所列职业和时期解释。",
+            "question": "统计对象是什么？"
+          },
+          {
+            "answer": "不能。",
+            "question": "能否外推中国？"
+          },
+          {
+            "answer": "不能。",
+            "question": "能否保证个人结果？"
+          },
+          {
+            "answer": "结合岗位和来源边界。",
+            "question": "如何使用？"
+          }
+        ],
+        "median": "45,850 美元/年（22.04 美元/时，2025 年 5 月，合并口径）",
+        "outlook_heading": "就业展望",
+        "outlook_period": "2024—2034 年预测",
+        "wage_column_labels": [
+          "口径",
+          "数值",
+          "时期",
+          "限制"
+        ],
+        "wage_heading": {
+          "$item": "electromechanical-equipment-assemblers.us-salary.career-snapshot-secondary-locale.3",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "wage_tiers": [
+          {
+            "equivalent": "不作换算",
+            "interpretation": "保留原始单位。",
+            "label": "低位",
+            "value": "按来源"
+          },
+          {
+            "equivalent": "不作换算",
+            "interpretation": "保留原始单位。",
+            "label": "中位",
+            "value": "按来源"
+          },
+          {
+            "equivalent": "不作换算",
+            "interpretation": "保留原始单位。",
+            "label": "高位",
+            "value": "按来源"
+          }
+        ]
+      },
+      "definition_block": {
+        "$join": [
+          {
+            "$item": "electromechanical-equipment-assemblers.profile.definition-block.1",
+            "block": "profile",
+            "copy_key": "career.item.definition-block",
+            "type": "prose"
+          },
+          {
+            "$item": "electromechanical-equipment-assemblers.profile.definition-block.2",
+            "block": "profile",
+            "copy_key": "career.item.definition-block",
+            "type": "prose"
+          }
+        ],
+        "separator": "\n"
+      },
+      "faq_block": {
+        "items": {
+          "$item": "electromechanical-equipment-assemblers.sources.faq.1",
+          "block": "sources",
+          "copy_key": "career.item.faq-block",
+          "type": "faq"
+        }
+      },
+      "fermat_decision_card": {
+        "caveat": {
+          "$item": "electromechanical-equipment-assemblers.quick-decision.fermat-decision-card.1",
+          "block": "quick-decision",
+          "copy_key": "career.item.fermat-decision-card",
+          "type": "prose"
+        },
+        "summary": {
+          "$item": "electromechanical-equipment-assemblers.quick-decision.fermat-decision-card.2",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "title": "机电设备装配工适合什么样的人？"
+      },
+      "fit_decision_checklist": {
+        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "how": {
+          "$item": "electromechanical-equipment-assemblers.quick-decision.fermat-decision-card.3",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "suit": {
+          "$item": "electromechanical-equipment-assemblers.quick-decision.fermat-decision-card.4",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        }
+      },
+      "hero": {
+        "h1": {
+          "$subject": "name"
+        },
+        "quick_answer": {
+          "$subject": "summary"
+        },
+        "title": {
+          "$subject": "name"
+        }
+      },
+      "market_signal_card": {
+        "context_links": [
+          {
+            "href": "#career-visual-group-market-signals",
+            "label": "查看市场信号"
+          }
+        ],
+        "direct_answer": {
+          "$item": "electromechanical-equipment-assemblers.market-signals.market-signal-card.2",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "heading": {
+          "$item": "electromechanical-equipment-assemblers.market-signals.market-signal-card.1",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "outlook_evidence": [
+          {
+            "geography": "来源覆盖范围",
+            "horizon": "当前来源时期",
+            "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "市场信号",
+            "occupation_scope": "机电设备装配工",
+            "value": {
+              "$item": "electromechanical-equipment-assemblers.market-signals.market-signal-card.3",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "geography": "来源覆盖范围",
+            "horizon": "当前来源时期",
+            "interpretation": "就业规模与空缺不是同一指标。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "就业规模",
+            "occupation_scope": "机电设备装配工",
+            "value": "暂无安全数值"
+          },
+          {
+            "geography": "来源覆盖范围",
+            "horizon": "当前来源时期",
+            "interpretation": "职位空缺需按来源口径解释。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "职位空缺",
+            "occupation_scope": "机电设备装配工",
+            "value": "暂无安全数值"
+          }
+        ],
+        "schema_version": "career.outlook_transitions.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "adj-cal",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "id": "adj-cal",
+            "label": {
+              "$source": "adj-cal",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj-eng",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "id": "adj-eng",
+            "label": {
+              "$source": "adj-eng",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj-repair",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "id": "adj-repair",
+            "label": {
+              "$source": "adj-repair",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj-robot",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "id": "adj-robot",
+            "label": {
+              "$source": "adj-robot",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ],
+        "transitions": [
+          {
+            "capability_gaps": {
+              "$item": "electromechanical-equipment-assemblers.market-signals.market-signal-card.5",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "electromechanical-equipment-assemblers.market-signals.market-signal-card.4",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "target_href": "/zh/career/jobs/adjacent-career-1",
+            "target_slug": "adjacent-career-1",
+            "target_title": "相邻方向 1",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需核对新岗位工具与资格。",
+            "shared_capabilities": "需要补足相邻岗位证据。",
+            "target_href": "/zh/career/jobs/adjacent-career-2",
+            "target_slug": "adjacent-career-2",
+            "target_title": "相邻方向 2",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需核对新岗位工具与资格。",
+            "shared_capabilities": "需要补足相邻岗位证据。",
+            "target_href": "/zh/career/jobs/adjacent-career-3",
+            "target_slug": "adjacent-career-3",
+            "target_title": "相邻方向 3",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需核对新岗位工具与资格。",
+            "shared_capabilities": "需要补足相邻岗位证据。",
+            "target_href": "/zh/career/jobs/adjacent-career-4",
+            "target_slug": "adjacent-career-4",
+            "target_title": "相邻方向 4",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需核对新岗位工具与资格。",
+            "shared_capabilities": "需要补足相邻岗位证据。",
+            "target_href": "/zh/career/jobs/adjacent-career-5",
+            "target_slug": "adjacent-career-5",
+            "target_title": "相邻方向 5",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需核对新岗位工具与资格。",
+            "shared_capabilities": "需要补足相邻岗位证据。",
+            "target_href": "/zh/career/jobs/adjacent-career-6",
+            "target_slug": "adjacent-career-6",
+            "target_title": "相邻方向 6",
+            "transition_distance": "需补证据"
+          }
+        ]
+      },
+      "onet_structured_fields_block": {
+        "availability": "published",
+        "heading": "O*NET 结构化字段",
+        "rows": [
+          {
+            "alternate_value": null,
+            "label": "研究输入",
+            "secondary_value": null,
+            "value": {
+              "$item": "electromechanical-equipment-assemblers.profile.onet-structured-fields-block.1",
+              "block": "profile",
+              "copy_key": "career.item.onet-structured-fields-block",
+              "type": "prose"
+            }
+          }
+        ],
+        "schema_version": "career.onet_structured_fields.v1"
+      },
+      "personality_fit_block": {
+        "assessments": [
+          {
+            "answer": {
+              "$item": "electromechanical-equipment-assemblers.fit.riasec-fit-block.6",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "riasec",
+            "label": "兴趣与任务",
+            "question": "能否稳定完成可复核交付？",
+            "signals": [
+              "任务",
+              "记录"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": {
+              "$item": "electromechanical-equipment-assemblers.fit.riasec-fit-block.7",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "big-five",
+            "label": "稳定执行",
+            "question": "能否稳定完成可复核交付？",
+            "signals": [
+              "任务",
+              "记录"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": {
+              "$item": "electromechanical-equipment-assemblers.fit.riasec-fit-block.8",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "mbti",
+            "label": "偏好观察",
+            "question": "能否稳定完成可复核交付？",
+            "signals": [
+              "任务",
+              "记录"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": "用实际样本验证。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "enneagram",
+            "label": "动机观察",
+            "question": "能否稳定完成可复核交付？",
+            "signals": [
+              "任务",
+              "记录"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": "用实际样本验证。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "iq",
+            "label": "问题解决",
+            "question": "能否稳定完成可复核交付？",
+            "signals": [
+              "任务",
+              "记录"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": "用实际样本验证。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "eq",
+            "label": "协作边界",
+            "question": "能否稳定完成可复核交付？",
+            "signals": [
+              "任务",
+              "记录"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          }
+        ],
+        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "direct_answer": {
+          "$item": "electromechanical-equipment-assemblers.fit.riasec-fit-block.2",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        },
+        "directions": [
+          {
+            "direction": "任务样本",
+            "fit_signals": "能否稳定完成可复核交付",
+            "target": {
+              "href": {
+                "$link": "electromechanical-equipment-assemblers.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "electromechanical-equipment-assemblers.adjacent.1",
+                "field": "url"
+              },
+              "slug": "electronics-engineers-except-computer",
+              "title": {
+                "$link": "electromechanical-equipment-assemblers.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "electromechanical-equipment-assemblers.adjacent.1",
+                "field": "entity"
+              }
+            },
+            "watchouts": "注意授权和停止条件。"
+          },
+          {
+            "direction": "工具使用",
+            "fit_signals": "能否保留原始记录",
+            "target": {
+              "href": {
+                "$link": "electromechanical-equipment-assemblers.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "electromechanical-equipment-assemblers.adjacent.2",
+                "field": "url"
+              },
+              "slug": "electrical-and-electronics-engineering-technicians",
+              "title": {
+                "$link": "electromechanical-equipment-assemblers.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "electromechanical-equipment-assemblers.adjacent.2",
+                "field": "entity"
+              }
+            },
+            "watchouts": "不把工具输出当作结论。"
+          },
+          {
+            "direction": "协作交接",
+            "fit_signals": "能否清晰交接",
+            "target": {
+              "href": {
+                "$link": "electromechanical-equipment-assemblers.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "electromechanical-equipment-assemblers.adjacent.3",
+                "field": "url"
+              },
+              "slug": "robotics-technicians",
+              "title": {
+                "$link": "electromechanical-equipment-assemblers.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "electromechanical-equipment-assemblers.adjacent.3",
+                "field": "entity"
+              }
+            },
+            "watchouts": "按责任链升级异常。"
+          },
+          {
+            "direction": "反馈复盘",
+            "fit_signals": "能否依据证据修订",
+            "target": {
+              "href": {
+                "$link": "electromechanical-equipment-assemblers.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "electromechanical-equipment-assemblers.adjacent.4",
+                "field": "url"
+              },
+              "slug": "calibration-technologists-and-technicians",
+              "title": {
+                "$link": "electromechanical-equipment-assemblers.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "electromechanical-equipment-assemblers.adjacent.4",
+                "field": "entity"
+              }
+            },
+            "watchouts": "保留版本和变更记录。"
+          },
+          {
+            "direction": "压力场景",
+            "fit_signals": "能否遵守流程",
+            "target": {
+              "href": {
+                "$link": "electromechanical-equipment-assemblers.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "electromechanical-equipment-assemblers.adjacent.5",
+                "field": "url"
+              },
+              "slug": "electric-motor-power-tool-and-related-repairers",
+              "title": {
+                "$link": "electromechanical-equipment-assemblers.direction-comparison.adjacent-career-comparison-table.1",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "electromechanical-equipment-assemblers.adjacent.5",
+                "field": "entity"
+              }
+            },
+            "watchouts": "不可跳过安全步骤。"
+          },
+          {
+            "direction": "长期训练",
+            "fit_signals": "能否持续补证据",
+            "watchouts": "资格按法域核验。"
+          }
+        ],
+        "heading": {
+          "$item": "electromechanical-equipment-assemblers.fit.riasec-fit-block.1",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        },
+        "questions": [
+          {
+            "answer": "用实际样本验证。",
+            "question": "能否稳定完成工作样本？"
+          },
+          {
+            "answer": "按流程保存。",
+            "question": "能否保留原始记录？"
+          },
+          {
+            "answer": "设置停止和升级条件。",
+            "question": "能否识别异常？"
+          },
+          {
+            "answer": "交接对象、状态和责任人。",
+            "question": "能否清晰交接？"
+          },
+          {
+            "answer": "根据证据修订。",
+            "question": "能否接受复核？"
+          },
+          {
+            "answer": "按法域和雇主核验。",
+            "question": "能否补足资格？"
+          },
+          {
+            "answer": "工具不能替代授权判断。",
+            "question": "能否理解工具边界？"
+          },
+          {
+            "answer": "完成一份可复核练习。",
+            "question": "如何继续验证？"
+          }
+        ],
+        "schema_version": "career.fit_decision_center.v1",
+        "signals": [
+          {
+            "body": {
+              "$item": "electromechanical-equipment-assemblers.fit.riasec-fit-block.3",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "fit",
+            "label": "适配信号",
+            "tone": "positive"
+          },
+          {
+            "body": {
+              "$item": "electromechanical-equipment-assemblers.fit.riasec-fit-block.4",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "caution",
+            "label": "注意信号",
+            "tone": "caution"
+          },
+          {
+            "body": {
+              "$item": "electromechanical-equipment-assemblers.fit.riasec-fit-block.5",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "experiment",
+            "label": "验证动作",
+            "tone": "action"
+          }
+        ],
+        "source_links": [
+          {
+            "href": {
+              "$source": "adj-cal",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "label": {
+              "$source": "adj-cal",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "adj-eng",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "label": {
+              "$source": "adj-eng",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "adj-repair",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "label": {
+              "$source": "adj-repair",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "adj-robot",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "label": {
+              "$source": "adj-robot",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electromechanical-equipment-assemblers.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          }
+        ]
+      },
+      "primary_cta": {
+        "entry_surface": "career_job_detail",
+        "href": "/zh/tests/holland-career-interest-test-riasec",
+        "label": "测我的职业兴趣是否适合机电设备装配工",
+        "source_page_type": "career_job_detail",
+        "subject_key": {
+          "$subject": "canonical_slug"
+        },
+        "subject_kind": "career_job",
+        "target_action": "start_riasec_test",
+        "test_slug": "holland-career-interest-test-riasec"
+      },
+      "responsibilities_block": [
+        {
+          "$join": [
+            {
+              "$item": "electromechanical-equipment-assemblers.profile.responsibilities-block.1",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$join": [
+            {
+              "$item": "electromechanical-equipment-assemblers.profile.responsibilities-block.2",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$join": [
+            {
+              "$item": "electromechanical-equipment-assemblers.profile.responsibilities-block.3",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        }
+      ],
+      "riasec_fit_block": {
+        "fit_interest": "工作样本优先",
+        "interest": "按实际任务、工具和责任边界核对兴趣适配",
+        "riasec": "R/I/S/E/C/A",
+        "riasec_short": "以工作样本验证，不作人格诊断。"
+      },
+      "source_card": {
+        "eeat_signals": {
+          "author": "FermatMind research workflow",
+          "source": {
+            "$source": "adj-cal",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "name",
+            "item": "electromechanical-equipment-assemblers.source-register.published.1"
+          },
+          "updated_at": {
+            "$source": "adj-cal",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "period",
+            "item": "electromechanical-equipment-assemblers.source-register.published.1"
+          }
+        },
+        "note": "来源范围、限制和统计时期按原始证据分别核对。"
+      },
+      "work_context_block": {
+        "$join": [
+          {
+            "$item": "electromechanical-equipment-assemblers.profile.work-context-block.1",
+            "block": "profile",
+            "copy_key": "career.item.work-context-block",
+            "type": "prose"
+          },
+          {
+            "$item": "electromechanical-equipment-assemblers.profile.work-context-block.2",
+            "block": "profile",
+            "copy_key": "career.item.work-context-block",
+            "type": "prose"
+          },
+          {
+            "$item": "electromechanical-equipment-assemblers.sources.boundary.1",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          },
+          {
+            "$item": "electromechanical-equipment-assemblers.sources.boundary.1.2",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          }
+        ],
+        "separator": "\n"
+      }
+    },
+    "contract_version": "career.detail.display.v1",
+    "locale": "zh-CN",
+    "native_items": [
+      {
+        "block": "source-register",
+        "copy_key": "career.item.published-sources",
+        "id": "electromechanical-equipment-assemblers.source-register.published.1",
+        "location": "sources",
+        "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-role-comparison",
+        "id": "electromechanical-equipment-assemblers.path.entry-role-comparison.current.v1",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.interview-probation",
+        "id": "electromechanical-equipment-assemblers.path.interview-probation.current.v1",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.credential-decision",
+        "id": "electromechanical-equipment-assemblers.path.credential-decision.current.v1",
+        "location": "entry_decisions",
+        "type": "table"
+      }
+    ],
+    "path": "/zh/career/jobs/electromechanical-equipment-assemblers",
+    "section_titles": {
+      "ai-impact": "AI 影响",
+      "china-salary": "中国大陆薪资参考",
+      "direction-comparison": "职业方向比较",
+      "fit": "职业适配指南",
+      "market-signals": "职业前景与相关职业转向",
+      "navigation": "目录",
+      "path": "入行、资格与职业发展",
+      "profile": "职业画像",
+      "quick-decision": "快速判断",
+      "risk": "工作压力与职业边界",
+      "source-register": "来源登记",
+      "sources": "常见问题与资料来源",
+      "us-salary": "美国薪资参考"
+    }
+  },
   "fact_register": {
     "facts": [
       {
         "derivation": null,
-        "display_value": "O*NET 51-2023.00（2026年访问，美国精确职业数据）",
+        "display_value": "O*NET-SOC 51-2023.00 机电设备装配工（2026 年职业档案）",
         "fact_id": "identity",
         "market": "美国",
-        "measure": "official occupation code",
+        "measure": "职业身份与口径",
         "occupation_scope": "精确职业数据：美国O*NET 51-2023.00机电设备装配工",
-        "period": "O*NET updated 2026; accessed 2026-09-06",
+        "period": "2026 职业档案",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "45,850美元/年；22.04美元/小时（2025年，美国合并职业数据）",
+        "display_value": "45,850 美元/年（22.04 美元/时，2025 年 5 月，合并口径）",
         "fact_id": "wage",
         "market": "美国",
         "measure": "median wage",
         "occupation_scope": "合并职业数据：美国电气、电子和机电装配工",
-        "period": "2025",
+        "period": "2025 年 5 月",
         "source_refs": [
           "wage"
         ]
       },
       {
         "derivation": null,
-        "display_value": "合并口径不等于51-2023.00精确分布（2025年，美国合并职业数据）",
+        "display_value": "工资为「电气、电子与机电装配工（不含绕线、绕线机与整理工）」合并口径，不等于 51-2023.00 单职业分布",
         "fact_id": "wage-boundary",
         "market": "美国",
         "measure": "wage boundary",
         "occupation_scope": "合并职业数据：美国电气、电子和机电装配工",
-        "period": "2025",
+        "period": "2025 年 5 月",
         "source_refs": [
           "wage"
         ]
       },
       {
         "derivation": null,
-        "display_value": "2024年261,400人；2034年273,300人；增长5%；年均空缺29,600个（美国合并职业数据）",
+        "display_value": "2024 年约 261,400 人；2034 年约 273,300 人；2024—2034 年增长 5%（快于平均）；年均空缺约 29,600 个（合并口径）",
         "fact_id": "employment",
         "market": "美国",
         "measure": "employment projection",
         "occupation_scope": "合并职业数据：美国电气、电子和机电装配工",
-        "period": "2024-2034",
+        "period": "2024—2034",
         "source_refs": [
-          "trend"
+          "trend",
+          "wage"
         ]
       },
       {
         "derivation": null,
-        "display_value": "暂无可安全使用的数据（2025年，中国大陆全国单职业口径）",
+        "display_value": "证据不足：未取得与 O*NET-SOC 51-2023.00 精确对应的中国大陆全国单职业工资分位",
         "fact_id": "cn-gap",
         "market": "中国大陆",
-        "measure": "occupation wage availability",
+        "measure": "中国大陆职业工资可用性",
         "occupation_scope": "行业代理：中国工资材料未精确映射51-2023.00",
-        "period": "2025",
+        "period": "2026 年查阅",
         "source_refs": [
           "nbs"
         ]
@@ -8716,17 +11365,21 @@
       "key": "ai",
       "label": "AI 任务暴露"
     },
-    "badges": [],
+    "badges": [
+      "机电设备装配工 · 部件装配与接线 · 尺寸与扭矩核对",
+      "按图纸与工艺顺序装配 · 检验与调整 · 记录与交接",
+      "职业来源与数据边界 · electromechanical-equipment-assemblers"
+    ],
     "metrics": [
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "wage",
         "key": "us_pay",
         "label": "美国薪资参考"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "employment",
         "key": "us_growth",
         "label": "美国就业增长"
       },
@@ -8746,7 +11399,7 @@
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "中国大陆薪资参考"
+        "label": "中国大陆薪资参考（证据不足）"
       }
     ]
   },
@@ -8761,7 +11414,7 @@
       "text": "机电设备装配工"
     }
   },
-  "source_content_sha256": "126923cdb2a3d98da82983500aff9e1f98e56b549a32bc00a6bc5810f41b68c2",
+  "source_content_sha256": "f2a886201d8837b77b5a28cc801c18d802802423c6eeee1c0044abb975bdb6cc",
   "subject": {
     "canonical_slug": "electromechanical-equipment-assemblers",
     "name": "机电设备装配工",

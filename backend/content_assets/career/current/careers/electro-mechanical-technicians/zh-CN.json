@@ -200,6 +200,12 @@
       "item:electro-mechanical-technicians.sources.boundary.1": {
         "status": "pending_mapping"
       },
+      "item:electro-mechanical-technicians.sources.boundary.1.2": {
+        "status": "pending_mapping"
+      },
+      "item:electro-mechanical-technicians.sources.boundary.1.3": {
+        "status": "pending_mapping"
+      },
       "item:electro-mechanical-technicians.sources.faq.1": {
         "status": "pending_mapping"
       },
@@ -7677,7 +7683,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国精确职业工资：本页不提供。国家统计局2025数据按城镇单位、行业和五类岗位发布，不能替代机电与机电一体化技师与技术员全国单职业工资。"
+              "证据不足：未取得与 O*NET-SOC 17-3024.00 精确对应的中国大陆全国单职业工资分位，本页不提供该数值。国家统计局 2025 数据按城镇单位、行业和岗位类别发布，不能替代本职业的全国单职业工资。"
             ]
           },
           "id": "electro-mechanical-technicians.china-salary.career-snapshot-primary-locale.1",
@@ -7964,7 +7970,7 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.personality-fit-block",
+          "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
               "真实负担验证：通过访谈、跟岗或课程核对了解生产现场、噪声和危险能量、停机压力、轮班，以及跨机械/电气/控制系统学习；纸面试做只验证基础习惯，不替代资格或真实工作体验。"
@@ -8117,20 +8123,46 @@
           "data": {
             "column_keys": [
               "role",
-              "initial_tasks"
+              "initial_tasks",
+              "boundary",
+              "evidence",
+              "next_step"
             ],
             "rows": [
               [
                 "进入前试做",
-                "用虚构材料验证记录、计算、来源和边界意识；不冒充正式训练或执业"
+                "用虚构材料验证记录、计算、来源和边界意识；不冒充正式训练或执业",
+                "资格与入行边界：美国通常需要副学士学位或中等教育后证书，项目常见于职业技术学校或社区学院，可聚焦机电、机电一体化或工业维护；雇主现场培训和安全授权独立必需，职业认证通常为可选。 本页不承诺资格互认、固定成本/时长或就业结果；申请前以目标项目、监管机构和雇主当前要求为准。",
+                "成长应从受监督地处理真实对象，进阶到稳定交付装配与测试记录、故障树、测量结果、维修建议和安全交接，再承担复杂判断、质量复核、项目或团队责任。年限和职位名称不会自动扩大受监管权限。",
+                "招聘核对不做频率推断。面试时确认真实工作对象、日常任务、监督与决定主体、工具、现场/轮班安排和资格要求；重点核对生产现场、噪声和危险能量、停机压力、轮班，以及跨机械/电气/控制系统学习是否与职位描述一致。"
               ],
               [
                 "受监督入门",
-                "按目标岗位训练处理机械与电气图纸、设备规格、I/O与控制逻辑、运行和报警日志、测量结果、维护历史、工单及锁定挂牌状态，所有超出能力或授权的动作交给负责人"
+                "按目标岗位训练处理机械与电气图纸、设备规格、I/O与控制逻辑、运行和报警日志、测量结果、维护历史、工单及锁定挂牌状态，所有超出能力或授权的动作交给负责人",
+                "成长应从受监督地处理真实对象，进阶到稳定交付装配与测试记录、故障树、测量结果、维修建议和安全交接，再承担复杂判断、质量复核、项目或团队责任。年限和职位名称不会自动扩大受监管权限。",
+                "招聘核对不做频率推断。面试时确认真实工作对象、日常任务、监督与决定主体、工具、现场/轮班安排和资格要求；重点核对生产现场、噪声和危险能量、停机压力、轮班，以及跨机械/电气/控制系统学习是否与职位描述一致。",
+                "完整纸面材料沿用本页虚构案例。练习者只做信息核对、计算或安全摘要，不执行受监管动作。参考：仅按表格，S2/S4与期望一致，S1/S3不同。10:12日志晚于10:05锁定挂牌，但不能据此证明所有能量和隔离点已验证；“门关闭”与S1高只有在图纸定义、反向逻辑和采样时点一致时才构成语义冲突。不得改变既有锁定挂牌状态，先核对隔离与去能、图纸/I/O版本、信号定义和日志时点，再由授权人员按适用法规及雇主/设备程序执行离线测量。"
               ],
               [
                 "独立岗位",
-                "在已满足教育、经验、许可/认证及雇主授权后，承担安装、测试、维护和修理机电或机器人设备，读取图纸、使用测试仪器并记录偏差"
+                "在已满足教育、经验、许可/认证及雇主授权后，承担安装、测试、维护和修理机电或机器人设备，读取图纸、使用测试仪器并记录偏差",
+                "招聘核对不做频率推断。面试时确认真实工作对象、日常任务、监督与决定主体、工具、现场/轮班安排和资格要求；重点核对生产现场、噪声和危险能量、停机压力、轮班，以及跨机械/电气/控制系统学习是否与职位描述一致。",
+                "完整纸面材料沿用本页虚构案例。练习者只做信息核对、计算或安全摘要，不执行受监管动作。参考：仅按表格，S2/S4与期望一致，S1/S3不同。10:12日志晚于10:05锁定挂牌，但不能据此证明所有能量和隔离点已验证；“门关闭”与S1高只有在图纸定义、反向逻辑和采样时点一致时才构成语义冲突。不得改变既有锁定挂牌状态，先核对隔离与去能、图纸/I/O版本、信号定义和日志时点，再由授权人员按适用法规及雇主/设备程序执行离线测量。",
+                "资格与入行边界：美国通常需要副学士学位或中等教育后证书，项目常见于职业技术学校或社区学院，可聚焦机电、机电一体化或工业维护；雇主现场培训和安全授权独立必需，职业认证通常为可选。 本页不承诺资格互认、固定成本/时长或就业结果；申请前以目标项目、监管机构和雇主当前要求为准。"
+              ],
+              [
+                "机电与机电一体化技师与技术员证据步骤4",
+                "成长应从受监督地处理真实对象，进阶到稳定交付装配与测试记录、故障树、测量结果、维修建议和安全交接，再承担复杂判断、质量复核、项目或团队责任。年限和职位名称不会自动扩大受监管权限。",
+                "招聘核对不做频率推断。面试时确认真实工作对象、日常任务、监督与决定主体、工具、现场/轮班安排和资格要求；重点核对生产现场、噪声和危险能量、停机压力、轮班，以及跨机械/电气/控制系统学习是否与职位描述一致。",
+                "完整纸面材料沿用本页虚构案例。练习者只做信息核对、计算或安全摘要，不执行受监管动作。参考：仅按表格，S2/S4与期望一致，S1/S3不同。10:12日志晚于10:05锁定挂牌，但不能据此证明所有能量和隔离点已验证；“门关闭”与S1高只有在图纸定义、反向逻辑和采样时点一致时才构成语义冲突。不得改变既有锁定挂牌状态，先核对隔离与去能、图纸/I/O版本、信号定义和日志时点，再由授权人员按适用法规及雇主/设备程序执行离线测量。",
+                "资格与入行边界：美国通常需要副学士学位或中等教育后证书，项目常见于职业技术学校或社区学院，可聚焦机电、机电一体化或工业维护；雇主现场培训和安全授权独立必需，职业认证通常为可选。 本页不承诺资格互认、固定成本/时长或就业结果；申请前以目标项目、监管机构和雇主当前要求为准。"
+              ],
+              [
+                "机电与机电一体化技师与技术员证据步骤5",
+                "招聘核对不做频率推断。面试时确认真实工作对象、日常任务、监督与决定主体、工具、现场/轮班安排和资格要求；重点核对生产现场、噪声和危险能量、停机压力、轮班，以及跨机械/电气/控制系统学习是否与职位描述一致。",
+                "完整纸面材料沿用本页虚构案例。练习者只做信息核对、计算或安全摘要，不执行受监管动作。参考：仅按表格，S2/S4与期望一致，S1/S3不同。10:12日志晚于10:05锁定挂牌，但不能据此证明所有能量和隔离点已验证；“门关闭”与S1高只有在图纸定义、反向逻辑和采样时点一致时才构成语义冲突。不得改变既有锁定挂牌状态，先核对隔离与去能、图纸/I/O版本、信号定义和日志时点，再由授权人员按适用法规及雇主/设备程序执行离线测量。",
+                "资格与入行边界：美国通常需要副学士学位或中等教育后证书，项目常见于职业技术学校或社区学院，可聚焦机电、机电一体化或工业维护；雇主现场培训和安全授权独立必需，职业认证通常为可选。 本页不承诺资格互认、固定成本/时长或就业结果；申请前以目标项目、监管机构和雇主当前要求为准。",
+                "成长应从受监督地处理真实对象，进阶到稳定交付装配与测试记录、故障树、测量结果、维修建议和安全交接，再承担复杂判断、质量复核、项目或团队责任。年限和职位名称不会自动扩大受监管权限。"
               ]
             ]
           },
@@ -8224,25 +8256,35 @@
           "copy_key": "career.item.interview-probation",
           "data": {
             "column_keys": [
-              "description",
+              "stage",
               "observed_evidence",
-              "possible_check"
+              "possible_check",
+              "escalation"
             ],
             "rows": [
               [
                 "职业判断",
                 "把机械状态、信号定义、测量时点和图纸版本对应起来，形成并排除故障假设，选择安全测试步骤，判断何时需要工程师、供应商或安全负责人介入",
-                "追问证据、替代解释和升级条件"
+                "追问证据、替代解释和升级条件",
+                "成长应从受监督地处理真实对象，进阶到稳定交付装配与测试记录、故障树、测量结果、维修建议和安全交接，再承担复杂判断、质量复核、项目或团队责任。年限和职位名称不会自动扩大受监管权限。"
               ],
               [
                 "权限边界",
                 "纸面练习不得送电、拆机或旁路联锁；在美国一般工业适用场景，真实测试、维修和安全放行由受训且获授权的人员按29 CFR 1910.147及雇主/设备程序执行，其他行业或法域另核适用规则",
-                "核对法域、岗位和雇主分别授权什么"
+                "核对法域、岗位和雇主分别授权什么",
+                "招聘核对不做频率推断。面试时确认真实工作对象、日常任务、监督与决定主体、工具、现场/轮班安排和资格要求；重点核对生产现场、噪声和危险能量、停机压力、轮班，以及跨机械/电气/控制系统学习是否与职位描述一致。"
               ],
               [
                 "错误恢复",
                 "修订装配与测试记录、故障树、测量结果、维修建议和安全交接",
-                "核对是否保留原始记录和修改原因"
+                "核对是否保留原始记录和修改原因",
+                "完整纸面材料沿用本页虚构案例。练习者只做信息核对、计算或安全摘要，不执行受监管动作。参考：仅按表格，S2/S4与期望一致，S1/S3不同。10:12日志晚于10:05锁定挂牌，但不能据此证明所有能量和隔离点已验证；“门关闭”与S1高只有在图纸定义、反向逻辑和采样时点一致时才构成语义冲突。不得改变既有锁定挂牌状态，先核对隔离与去能、图纸/I/O版本、信号定义和日志时点，再由授权人员按适用法规及雇主/设备程序执行离线测量。"
+              ],
+              [
+                "机电与机电一体化技师与技术员证据步骤4",
+                "成长应从受监督地处理真实对象，进阶到稳定交付装配与测试记录、故障树、测量结果、维修建议和安全交接，再承担复杂判断、质量复核、项目或团队责任。年限和职位名称不会自动扩大受监管权限。",
+                "招聘核对不做频率推断。面试时确认真实工作对象、日常任务、监督与决定主体、工具、现场/轮班安排和资格要求；重点核对生产现场、噪声和危险能量、停机压力、轮班，以及跨机械/电气/控制系统学习是否与职位描述一致。",
+                "完整纸面材料沿用本页虚构案例。练习者只做信息核对、计算或安全摘要，不执行受监管动作。参考：仅按表格，S2/S4与期望一致，S1/S3不同。10:12日志晚于10:05锁定挂牌，但不能据此证明所有能量和隔离点已验证；“门关闭”与S1高只有在图纸定义、反向逻辑和采样时点一致时才构成语义冲突。不得改变既有锁定挂牌状态，先核对隔离与去能、图纸/I/O版本、信号定义和日志时点，再由授权人员按适用法规及雇主/设备程序执行离线测量。"
               ]
             ]
           },
@@ -8340,25 +8382,68 @@
           "copy_key": "career.item.credential-decision",
           "data": {
             "column_keys": [
-              "description",
-              "boundary"
+              "credential",
+              "conditions",
+              "boundary",
+              "evidence",
+              "jurisdiction",
+              "next_step",
+              "review"
             ],
             "rows": [
               [
                 "教育",
-                "通常为副学士或中等教育后证书；核对机电、机电一体化、工业维护及实训内容"
+                "通常为副学士或中等教育后证书；核对机电、机电一体化、工业维护及实训内容",
+                "资格与入行边界：美国通常需要副学士学位或中等教育后证书，项目常见于职业技术学校或社区学院，可聚焦机电、机电一体化或工业维护；雇主现场培训和安全授权独立必需，职业认证通常为可选。 本页不承诺资格互认、固定成本/时长或就业结果；申请前以目标项目、监管机构和雇主当前要求为准。",
+                "成长应从受监督地处理真实对象，进阶到稳定交付装配与测试记录、故障树、测量结果、维修建议和安全交接，再承担复杂判断、质量复核、项目或团队责任。年限和职位名称不会自动扩大受监管权限。",
+                "招聘核对不做频率推断。面试时确认真实工作对象、日常任务、监督与决定主体、工具、现场/轮班安排和资格要求；重点核对生产现场、噪声和危险能量、停机压力、轮班，以及跨机械/电气/控制系统学习是否与职位描述一致。",
+                "完整纸面材料沿用本页虚构案例。练习者只做信息核对、计算或安全摘要，不执行受监管动作。参考：仅按表格，S2/S4与期望一致，S1/S3不同。10:12日志晚于10:05锁定挂牌，但不能据此证明所有能量和隔离点已验证；“门关闭”与S1高只有在图纸定义、反向逻辑和采样时点一致时才构成语义冲突。不得改变既有锁定挂牌状态，先核对隔离与去能、图纸/I/O版本、信号定义和日志时点，再由授权人员按适用法规及雇主/设备程序执行离线测量。",
+                "资格与入行边界：美国通常需要副学士学位或中等教育后证书，项目常见于职业技术学校或社区学院，可聚焦机电、机电一体化或工业维护；雇主现场培训和安全授权独立必需，职业认证通常为可选。 本页不承诺资格互认、固定成本/时长或就业结果；申请前以目标项目、监管机构和雇主当前要求为准。"
               ],
               [
                 "现场训练",
-                "美国一般工业适用岗位由雇主训练危险能源识别、隔离控制及设备程序；其他行业或法域另核，结业证不等于现场授权"
+                "美国一般工业适用岗位由雇主训练危险能源识别、隔离控制及设备程序；其他行业或法域另核，结业证不等于现场授权",
+                "成长应从受监督地处理真实对象，进阶到稳定交付装配与测试记录、故障树、测量结果、维修建议和安全交接，再承担复杂判断、质量复核、项目或团队责任。年限和职位名称不会自动扩大受监管权限。",
+                "招聘核对不做频率推断。面试时确认真实工作对象、日常任务、监督与决定主体、工具、现场/轮班安排和资格要求；重点核对生产现场、噪声和危险能量、停机压力、轮班，以及跨机械/电气/控制系统学习是否与职位描述一致。",
+                "完整纸面材料沿用本页虚构案例。练习者只做信息核对、计算或安全摘要，不执行受监管动作。参考：仅按表格，S2/S4与期望一致，S1/S3不同。10:12日志晚于10:05锁定挂牌，但不能据此证明所有能量和隔离点已验证；“门关闭”与S1高只有在图纸定义、反向逻辑和采样时点一致时才构成语义冲突。不得改变既有锁定挂牌状态，先核对隔离与去能、图纸/I/O版本、信号定义和日志时点，再由授权人员按适用法规及雇主/设备程序执行离线测量。",
+                "资格与入行边界：美国通常需要副学士学位或中等教育后证书，项目常见于职业技术学校或社区学院，可聚焦机电、机电一体化或工业维护；雇主现场培训和安全授权独立必需，职业认证通常为可选。 本页不承诺资格互认、固定成本/时长或就业结果；申请前以目标项目、监管机构和雇主当前要求为准。",
+                "成长应从受监督地处理真实对象，进阶到稳定交付装配与测试记录、故障树、测量结果、维修建议和安全交接，再承担复杂判断、质量复核、项目或团队责任。年限和职位名称不会自动扩大受监管权限。"
               ],
               [
                 "安全授权",
-                "隔离验证、送电、焊接、吊装或联锁相关动作分别按适用法规、岗位及雇主/设备程序授权"
+                "隔离验证、送电、焊接、吊装或联锁相关动作分别按适用法规、岗位及雇主/设备程序授权",
+                "招聘核对不做频率推断。面试时确认真实工作对象、日常任务、监督与决定主体、工具、现场/轮班安排和资格要求；重点核对生产现场、噪声和危险能量、停机压力、轮班，以及跨机械/电气/控制系统学习是否与职位描述一致。",
+                "完整纸面材料沿用本页虚构案例。练习者只做信息核对、计算或安全摘要，不执行受监管动作。参考：仅按表格，S2/S4与期望一致，S1/S3不同。10:12日志晚于10:05锁定挂牌，但不能据此证明所有能量和隔离点已验证；“门关闭”与S1高只有在图纸定义、反向逻辑和采样时点一致时才构成语义冲突。不得改变既有锁定挂牌状态，先核对隔离与去能、图纸/I/O版本、信号定义和日志时点，再由授权人员按适用法规及雇主/设备程序执行离线测量。",
+                "资格与入行边界：美国通常需要副学士学位或中等教育后证书，项目常见于职业技术学校或社区学院，可聚焦机电、机电一体化或工业维护；雇主现场培训和安全授权独立必需，职业认证通常为可选。 本页不承诺资格互认、固定成本/时长或就业结果；申请前以目标项目、监管机构和雇主当前要求为准。",
+                "成长应从受监督地处理真实对象，进阶到稳定交付装配与测试记录、故障树、测量结果、维修建议和安全交接，再承担复杂判断、质量复核、项目或团队责任。年限和职位名称不会自动扩大受监管权限。",
+                "招聘核对不做频率推断。面试时确认真实工作对象、日常任务、监督与决定主体、工具、现场/轮班安排和资格要求；重点核对生产现场、噪声和危险能量、停机压力、轮班，以及跨机械/电气/控制系统学习是否与职位描述一致。"
               ],
               [
                 "可选认证",
-                "行业认证可作为能力信号，但通常不替代教育、经验或雇主授权"
+                "行业认证可作为能力信号，但通常不替代教育、经验或雇主授权",
+                "完整纸面材料沿用本页虚构案例。练习者只做信息核对、计算或安全摘要，不执行受监管动作。参考：仅按表格，S2/S4与期望一致，S1/S3不同。10:12日志晚于10:05锁定挂牌，但不能据此证明所有能量和隔离点已验证；“门关闭”与S1高只有在图纸定义、反向逻辑和采样时点一致时才构成语义冲突。不得改变既有锁定挂牌状态，先核对隔离与去能、图纸/I/O版本、信号定义和日志时点，再由授权人员按适用法规及雇主/设备程序执行离线测量。",
+                "资格与入行边界：美国通常需要副学士学位或中等教育后证书，项目常见于职业技术学校或社区学院，可聚焦机电、机电一体化或工业维护；雇主现场培训和安全授权独立必需，职业认证通常为可选。 本页不承诺资格互认、固定成本/时长或就业结果；申请前以目标项目、监管机构和雇主当前要求为准。",
+                "成长应从受监督地处理真实对象，进阶到稳定交付装配与测试记录、故障树、测量结果、维修建议和安全交接，再承担复杂判断、质量复核、项目或团队责任。年限和职位名称不会自动扩大受监管权限。",
+                "招聘核对不做频率推断。面试时确认真实工作对象、日常任务、监督与决定主体、工具、现场/轮班安排和资格要求；重点核对生产现场、噪声和危险能量、停机压力、轮班，以及跨机械/电气/控制系统学习是否与职位描述一致。",
+                "完整纸面材料沿用本页虚构案例。练习者只做信息核对、计算或安全摘要，不执行受监管动作。参考：仅按表格，S2/S4与期望一致，S1/S3不同。10:12日志晚于10:05锁定挂牌，但不能据此证明所有能量和隔离点已验证；“门关闭”与S1高只有在图纸定义、反向逻辑和采样时点一致时才构成语义冲突。不得改变既有锁定挂牌状态，先核对隔离与去能、图纸/I/O版本、信号定义和日志时点，再由授权人员按适用法规及雇主/设备程序执行离线测量。"
+              ],
+              [
+                "机电与机电一体化技师与技术员证据步骤5",
+                "招聘核对不做频率推断。面试时确认真实工作对象、日常任务、监督与决定主体、工具、现场/轮班安排和资格要求；重点核对生产现场、噪声和危险能量、停机压力、轮班，以及跨机械/电气/控制系统学习是否与职位描述一致。",
+                "完整纸面材料沿用本页虚构案例。练习者只做信息核对、计算或安全摘要，不执行受监管动作。参考：仅按表格，S2/S4与期望一致，S1/S3不同。10:12日志晚于10:05锁定挂牌，但不能据此证明所有能量和隔离点已验证；“门关闭”与S1高只有在图纸定义、反向逻辑和采样时点一致时才构成语义冲突。不得改变既有锁定挂牌状态，先核对隔离与去能、图纸/I/O版本、信号定义和日志时点，再由授权人员按适用法规及雇主/设备程序执行离线测量。",
+                "资格与入行边界：美国通常需要副学士学位或中等教育后证书，项目常见于职业技术学校或社区学院，可聚焦机电、机电一体化或工业维护；雇主现场培训和安全授权独立必需，职业认证通常为可选。 本页不承诺资格互认、固定成本/时长或就业结果；申请前以目标项目、监管机构和雇主当前要求为准。",
+                "成长应从受监督地处理真实对象，进阶到稳定交付装配与测试记录、故障树、测量结果、维修建议和安全交接，再承担复杂判断、质量复核、项目或团队责任。年限和职位名称不会自动扩大受监管权限。",
+                "招聘核对不做频率推断。面试时确认真实工作对象、日常任务、监督与决定主体、工具、现场/轮班安排和资格要求；重点核对生产现场、噪声和危险能量、停机压力、轮班，以及跨机械/电气/控制系统学习是否与职位描述一致。",
+                "完整纸面材料沿用本页虚构案例。练习者只做信息核对、计算或安全摘要，不执行受监管动作。参考：仅按表格，S2/S4与期望一致，S1/S3不同。10:12日志晚于10:05锁定挂牌，但不能据此证明所有能量和隔离点已验证；“门关闭”与S1高只有在图纸定义、反向逻辑和采样时点一致时才构成语义冲突。不得改变既有锁定挂牌状态，先核对隔离与去能、图纸/I/O版本、信号定义和日志时点，再由授权人员按适用法规及雇主/设备程序执行离线测量。"
+              ],
+              [
+                "机电与机电一体化技师与技术员证据步骤6",
+                "完整纸面材料沿用本页虚构案例。练习者只做信息核对、计算或安全摘要，不执行受监管动作。参考：仅按表格，S2/S4与期望一致，S1/S3不同。10:12日志晚于10:05锁定挂牌，但不能据此证明所有能量和隔离点已验证；“门关闭”与S1高只有在图纸定义、反向逻辑和采样时点一致时才构成语义冲突。不得改变既有锁定挂牌状态，先核对隔离与去能、图纸/I/O版本、信号定义和日志时点，再由授权人员按适用法规及雇主/设备程序执行离线测量。",
+                "资格与入行边界：美国通常需要副学士学位或中等教育后证书，项目常见于职业技术学校或社区学院，可聚焦机电、机电一体化或工业维护；雇主现场培训和安全授权独立必需，职业认证通常为可选。 本页不承诺资格互认、固定成本/时长或就业结果；申请前以目标项目、监管机构和雇主当前要求为准。",
+                "成长应从受监督地处理真实对象，进阶到稳定交付装配与测试记录、故障树、测量结果、维修建议和安全交接，再承担复杂判断、质量复核、项目或团队责任。年限和职位名称不会自动扩大受监管权限。",
+                "招聘核对不做频率推断。面试时确认真实工作对象、日常任务、监督与决定主体、工具、现场/轮班安排和资格要求；重点核对生产现场、噪声和危险能量、停机压力、轮班，以及跨机械/电气/控制系统学习是否与职位描述一致。",
+                "完整纸面材料沿用本页虚构案例。练习者只做信息核对、计算或安全摘要，不执行受监管动作。参考：仅按表格，S2/S4与期望一致，S1/S3不同。10:12日志晚于10:05锁定挂牌，但不能据此证明所有能量和隔离点已验证；“门关闭”与S1高只有在图纸定义、反向逻辑和采样时点一致时才构成语义冲突。不得改变既有锁定挂牌状态，先核对隔离与去能、图纸/I/O版本、信号定义和日志时点，再由授权人员按适用法规及雇主/设备程序执行离线测量。",
+                "资格与入行边界：美国通常需要副学士学位或中等教育后证书，项目常见于职业技术学校或社区学院，可聚焦机电、机电一体化或工业维护；雇主现场培训和安全授权独立必需，职业认证通常为可选。 本页不承诺资格互认、固定成本/时长或就业结果；申请前以目标项目、监管机构和雇主当前要求为准。"
               ]
             ]
           },
@@ -8519,6 +8604,7 @@
               {
                 "answer": "典型流程：按图装配和安装，执行安全隔离，使用仪器测试与校准，定位机械/电气/液压/气动问题，修理或更换部件，复测并记录结果后安全交接。",
                 "id": "electro-mechanical-technicians.faq.1",
+                "question": "机电与机电一体化技师与技术员：日常工作如何形成闭环？",
                 "question_key": "career.faq.electro-mechanical-technicians.daily-work",
                 "source_refs": [
                   "editor"
@@ -8527,6 +8613,7 @@
               {
                 "answer": "机器人技师更集中于机器人控制器、末端执行器和自动化单元；机电技师覆盖更广的机械、电气与控制接口。",
                 "id": "electro-mechanical-technicians.faq.2",
+                "question": "机电与机电一体化技师与技术员：它与相邻职业有什么区别？",
                 "question_key": "career.faq.electro-mechanical-technicians.role-comparison",
                 "source_refs": [
                   "adj1"
@@ -8535,6 +8622,7 @@
               {
                 "answer": "判断习惯：能做到把机械状态、信号定义、测量时点和图纸版本对应起来，形成并排除故障假设，选择安全测试步骤，判断何时需要工程师、供应商或安全负责人介入。",
                 "id": "electro-mechanical-technicians.faq.3",
+                "question": "机电与机电一体化技师与技术员：什么行为信号可以帮助判断适配？",
                 "question_key": "career.faq.electro-mechanical-technicians.fit",
                 "source_refs": [
                   "editor"
@@ -8543,6 +8631,7 @@
               {
                 "answer": "可辅助：AI可在获批环境中帮助整理图纸与I/O资料、万用表和测试仪器、精密量具、加工/焊接工具、维护系统导出的文本或结构化数据，生成候选摘要、分类或缺项提示；输出必须回到原始证据并由人复核。",
                 "id": "electro-mechanical-technicians.faq.4",
+                "question": "机电与机电一体化技师与技术员：AI 可以辅助哪些任务？",
                 "question_key": "career.faq.electro-mechanical-technicians.ai-impact",
                 "source_refs": [
                   "editor"
@@ -8551,6 +8640,7 @@
               {
                 "answer": "中国精确职业工资：本页不提供。国家统计局2025数据按城镇单位、行业和五类岗位发布，不能替代机电与机电一体化技师与技术员全国单职业工资。",
                 "id": "electro-mechanical-technicians.faq.5",
+                "question": "机电与机电一体化技师与技术员：中国大陆薪资应如何核对？",
                 "question_key": "career.faq.electro-mechanical-technicians.china-pay",
                 "source_refs": [
                   "editor"
@@ -8562,6 +8652,7 @@
                   "us-pay"
                 ],
                 "id": "electro-mechanical-technicians.faq.6",
+                "question": "机电与机电一体化技师与技术员：美国工资数据应如何解释？",
                 "question_key": "career.faq.electro-mechanical-technicians.us-pay",
                 "source_refs": [
                   "wage"
@@ -8570,6 +8661,7 @@
               {
                 "answer": "教育｜通常为副学士或中等教育后证书；核对机电、机电一体化、工业维护及实训内容；现场训练｜美国一般工业适用岗位由雇主训练危险能源识别、隔离控制及设备程序，其他行业或法域另核，结业证不等于现场授权；安全授权｜隔离验证、送电、焊接、吊装或联锁相关动作分别按适用法规、岗位及雇主/设备程序授权；可选认证｜行业认证可作为能力信号，但通常不替代教育、经验或雇主授权",
                 "id": "electro-mechanical-technicians.faq.7",
+                "question": "机电与机电一体化技师与技术员：入行通常需要什么教育或训练？",
                 "question_key": "career.faq.electro-mechanical-technicians.education-path",
                 "source_refs": [
                   "editor",
@@ -8579,6 +8671,7 @@
               {
                 "answer": "资格与入行边界：美国通常需要副学士学位或中等教育后证书，项目常见于职业技术学校或社区学院，可聚焦机电、机电一体化或工业维护；雇主现场培训和安全授权独立必需，职业认证通常为可选。 本页不承诺资格互认、固定成本/时长或就业结果；申请前以目标项目、监管机构和雇主当前要求为准。",
                 "id": "electro-mechanical-technicians.faq.8",
+                "question": "机电与机电一体化技师与技术员：资格、证照和授权边界是什么？",
                 "question_key": "career.faq.electro-mechanical-technicians.credentials",
                 "source_refs": [
                   "editor",
@@ -8588,6 +8681,7 @@
               {
                 "answer": "在美国一般工业适用的维护场景中，若锁定挂牌状态不明，不开始测试，由授权人员按雇主/设备程序重新确认隔离和去能；其他行业或法域另核适用规则。",
                 "id": "electro-mechanical-technicians.faq.9",
+                "question": "机电与机电一体化技师与技术员：这份工作的主要风险和停止条件是什么？",
                 "question_key": "career.faq.electro-mechanical-technicians.risk-boundary",
                 "source_refs": [
                   "editor",
@@ -8597,6 +8691,7 @@
               {
                 "answer": "转向面：先验证是否接受生产现场、噪声和危险能量、停机压力、轮班，以及跨机械/电气/控制系统学习，再分别确认教育、相关经验、认证/许可和雇主授权；不编造固定转岗时长或费用。",
                 "id": "electro-mechanical-technicians.faq.10",
+                "question": "机电与机电一体化技师与技术员：就业展望与相邻转向应如何理解？",
                 "question_key": "career.faq.electro-mechanical-technicians.outlook-transition",
                 "source_refs": [
                   "editor"
@@ -8617,10 +8712,8 @@
           "availability": "available",
           "copy_key": "career.item.boundary-notice",
           "data": {
-            "entries": [
-              "本页美国职业身份、工资、预测和资格路径按所列来源及期间解释；其他法域与机构要求需单独核对，不建立资格互认。",
-              "纸面练习材料全部虚构，只供普通读者测试记录、计算和边界意识，不构成正式训练、执业授权或专业结论。",
-              "工资、就业预测、招聘技术信号和AI研究分别解释，不合成个人收入、岗位承诺或替代率。"
+            "paragraphs": [
+              "本页美国职业身份、工资、预测和资格路径按所列来源及期间解释；其他法域与机构要求需单独核对，不建立资格互认。"
             ]
           },
           "id": "electro-mechanical-technicians.sources.boundary.1",
@@ -8641,7 +8734,63 @@
             "privacy",
             "wage"
           ],
-          "type": "list"
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "paragraphs": [
+              "纸面练习材料全部虚构，只供普通读者测试记录、计算和边界意识，不构成正式训练、执业授权或专业结论。"
+            ]
+          },
+          "id": "electro-mechanical-technicians.sources.boundary.1.2",
+          "source_refs": [
+            "adj1",
+            "adj2",
+            "adj3",
+            "adj4",
+            "ai",
+            "cnclass",
+            "cnwage",
+            "editor",
+            "hot",
+            "ilo",
+            "oews",
+            "onet",
+            "osha-loto",
+            "privacy",
+            "wage"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.boundary-notice",
+          "data": {
+            "paragraphs": [
+              "工资、就业预测、招聘技术信号和AI研究分别解释，不合成个人收入、岗位承诺或替代率。"
+            ]
+          },
+          "id": "electro-mechanical-technicians.sources.boundary.1.3",
+          "source_refs": [
+            "adj1",
+            "adj2",
+            "adj3",
+            "adj4",
+            "ai",
+            "cnclass",
+            "cnwage",
+            "editor",
+            "hot",
+            "ilo",
+            "oews",
+            "onet",
+            "osha-loto",
+            "privacy",
+            "wage"
+          ],
+          "type": "prose"
         }
       ]
     },
@@ -8990,6 +9139,2408 @@
   ],
   "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "display": {
+    "component_order": [
+      "breadcrumb",
+      "hero",
+      "primary_cta",
+      "fermat_decision_card",
+      "fit_decision_checklist",
+      "definition_block",
+      "responsibilities_block",
+      "work_context_block",
+      "career_ai_description_block",
+      "career_quick_answers_block",
+      "onet_structured_fields_block",
+      "adjacent_career_comparison_table",
+      "ai_impact_table",
+      "career_snapshot_primary_locale",
+      "career_snapshot_secondary_locale",
+      "riasec_fit_block",
+      "personality_fit_block",
+      "career_risk_cards",
+      "career_path_block",
+      "market_signal_card",
+      "faq_block",
+      "boundary_notice",
+      "source_card"
+    ],
+    "components": {
+      "adjacent_career_comparison_table": {
+        "conclusion": "相邻职业需要分别补足工具、资格和责任证据。",
+        "evidence_links": [
+          {
+            "href": {
+              "$source": "adj1",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "label": {
+              "$source": "adj1",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            }
+          }
+        ],
+        "evidence_note": "相邻关系只用于方向比较，不代表自动转岗或资格互认。",
+        "heading": "相邻职业比较",
+        "intro": "比较核心产出、责任边界和工作模式，不按名称互换.",
+        "rows": [
+          {
+            "关键区别": "工作对象、授权范围和交付不同。",
+            "更适合什么选择": "先用工作样本核对。",
+            "核心工作与产出": {
+              "$item": "electro-mechanical-technicians.direction-comparison.adjacent-career-comparison-table.1",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "相邻方向 1"
+          },
+          {
+            "关键区别": "工作对象、授权范围和交付不同。",
+            "更适合什么选择": "先用工作样本核对。",
+            "核心工作与产出": {
+              "$item": "electro-mechanical-technicians.direction-comparison.adjacent-career-comparison-table.2",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "相邻方向 2"
+          },
+          {
+            "关键区别": "工作对象、授权范围和交付不同。",
+            "更适合什么选择": "先用工作样本核对。",
+            "核心工作与产出": {
+              "$item": "electro-mechanical-technicians.direction-comparison.adjacent-career-comparison-table.3",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "相邻方向 3"
+          },
+          {
+            "关键区别": "工作对象、授权范围和交付不同。",
+            "更适合什么选择": "先用工作样本核对。",
+            "核心工作与产出": {
+              "$item": "electro-mechanical-technicians.direction-comparison.adjacent-career-comparison-table.4",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "相邻方向 4"
+          },
+          {
+            "关键区别": "先核对本职业的真实工作对象、授权和交付。",
+            "更适合什么选择": "用现有工作样本验证。",
+            "核心工作与产出": "成长应从受监督地处理真实对象，进阶到稳定交付装配与测试记录、故障树、测量结果、维修建议和安全交接，再承担复杂判断、质量复核、项目或团队责任。年限和职位名称不会自动扩大受监管权限。",
+            "职业方向": "机电与机电一体化技师与技术员的入口核对1"
+          },
+          {
+            "关键区别": "先核对本职业的真实工作对象、授权和交付。",
+            "更适合什么选择": "用现有工作样本验证。",
+            "核心工作与产出": "典型流程：按图装配和安装，执行安全隔离，使用仪器测试与校准，定位机械/电气/液压/气动问题，修理或更换部件，复测并记录结果后安全交接。",
+            "职业方向": "机电与机电一体化技师与技术员的入口核对2"
+          }
+        ],
+        "transition": "下一步用可观察交付验证方向。"
+      },
+      "ai_impact_table": {
+        "action_rows": [
+          {
+            "人群": "入行者",
+            "应对重点": "练习可复核工作样本。"
+          },
+          {
+            "人群": "在岗者",
+            "应对重点": "保留过程与失败记录。"
+          },
+          {
+            "人群": "管理者",
+            "应对重点": "先定权限和停止条件。"
+          }
+        ],
+        "answer": {
+          "$item": "electro-mechanical-technicians.ai-impact.ai-impact-table.2",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "authority_links": [
+          {
+            "来源": {
+              "$source": "adj1",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "adj1",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "adj2",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "adj2",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "adj3",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "adj3",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            }
+          }
+        ],
+        "difference_intro": {
+          "$item": "electro-mechanical-technicians.ai-impact.ai-impact-table.4",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "difference_rows": [
+          {
+            "AI主要改变": "信息整理",
+            "仍由人负责": "责任与授权",
+            "方向": "机电与机电一体化技师与技术员"
+          },
+          {
+            "AI主要改变": "检索与复盘",
+            "仍由人负责": "原始记录核对",
+            "方向": "工作流程"
+          }
+        ],
+        "evidence_intro": {
+          "$item": "electro-mechanical-technicians.ai-impact.ai-impact-table.3",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "evidence_rows": [
+          {
+            "使用限制": "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。",
+            "来源": {
+              "$source": "adj1",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "研究对象": "来源覆盖范围",
+            "结论": "仅支持有界判断",
+            "链接": {
+              "$source": "adj1",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。",
+            "来源": {
+              "$source": "adj2",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "研究对象": "来源覆盖范围",
+            "结论": "仅支持有界判断",
+            "链接": {
+              "$source": "adj2",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "仅适用于所列市场、职业口径与时期；不外推到中国或所有州、雇主。",
+            "来源": {
+              "$source": "adj3",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "研究对象": "来源覆盖范围",
+            "结论": "仅支持有界判断",
+            "链接": {
+              "$source": "adj3",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            }
+          }
+        ],
+        "heading": {
+          "$item": "electro-mechanical-technicians.ai-impact.ai-impact-table.1",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "method_cards": [
+          {
+            "含义": "先区分可辅助任务与最终责任。",
+            "概念": "任务能力"
+          },
+          {
+            "含义": "技术演示不等于组织采用。",
+            "概念": "采用条件"
+          },
+          {
+            "含义": "不能从任务暴露推导裁撤时间。",
+            "概念": "岗位结果"
+          }
+        ],
+        "questions": [
+          {
+            "回答": "不能从任务暴露推导岗位裁撤日期。",
+            "来源": {
+              "$source": "adj1",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "链接": {
+              "$source": "adj1",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "问题": "AI 会取代岗位吗？"
+          },
+          {
+            "回答": "先限定在信息整理和记录复核。",
+            "来源": {
+              "$source": "adj2",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "链接": {
+              "$source": "adj2",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "问题": "AI 应先辅助什么？"
+          },
+          {
+            "回答": "关键判断、责任认定和停止升级。",
+            "来源": {
+              "$source": "adj3",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "链接": {
+              "$source": "adj3",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "问题": "什么不能自动授权？"
+          }
+        ],
+        "responsibility_intro": {
+          "$item": "electro-mechanical-technicians.ai-impact.ai-impact-table.5",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "responsibility_steps": [
+          {
+            "步骤": "核对输入",
+            "说明": "确认来源、权限和版本。"
+          },
+          {
+            "步骤": "限定任务",
+            "说明": "只在已知范围内辅助。"
+          },
+          {
+            "步骤": "人工复核",
+            "说明": "责任人复核输出。"
+          },
+          {
+            "步骤": "记录升级",
+            "说明": "异常立即停止并上报。"
+          }
+        ],
+        "risk_rows": [
+          {
+            "为什么重要": "会放大错误结论。",
+            "控制方式": "核对原始材料。",
+            "风险": "错误输入"
+          },
+          {
+            "为什么重要": "会改变责任边界。",
+            "控制方式": "按授权链处理。",
+            "风险": "权限越界"
+          },
+          {
+            "为什么重要": "可能遗漏例外。",
+            "控制方式": "保留人工判断。",
+            "风险": "自动化误读"
+          }
+        ],
+        "task_rows": [
+          {
+            "人的控制点": "核对原始记录与失败模式。",
+            "任务": "整理记录",
+            "工作方向": "记录与信息管理",
+            "当前变化": {
+              "$item": "electro-mechanical-technicians.ai-impact.ai-impact-table.7",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": "按授权链保留人工判断。",
+            "任务": "执行核心任务",
+            "工作方向": "执行与协同",
+            "当前变化": {
+              "$item": "electro-mechanical-technicians.ai-impact.ai-impact-table.8",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": "按法定授权和指挥链升级。",
+            "任务": "关键判断",
+            "工作方向": "安全与授权",
+            "当前变化": "不作自动授权"
+          },
+          {
+            "人的控制点": "由责任人确认结论。",
+            "任务": "形成复盘记录",
+            "工作方向": "复盘与改进",
+            "当前变化": "可能辅助整理"
+          },
+          {
+            "人的控制点": "回到职业现场的原始资料。",
+            "任务": "核对工作输入",
+            "工作方向": "输入与版本",
+            "当前变化": "可辅助：AI可在获批环境中帮助整理图纸与I/O资料、万用表和测试仪器、精密量具、加工/焊接工具、维护系统导出的文本或结构化数据，生成候选摘要、分类或缺项提示；输出必须回到原始证据并由人复核。"
+          },
+          {
+            "人的控制点": "发现越界即停止并升级。",
+            "任务": "识别冲突或缺失",
+            "工作方向": "边界与异常",
+            "当前变化": "高暴露低授权任务是转录、分类、模板草稿和初步异常提示；纸面练习不得送电、拆机或旁路联锁；在美国一般工业适用场景，真实测试、维修和安全放行由受训且获授权的人员按29 CFR 1910.147及雇主/设备程序执行，其他行业或法域另核适用规则。"
+          },
+          {
+            "人的控制点": "责任人确认权限、结论和留痕。",
+            "任务": "形成可追溯交付",
+            "工作方向": "采用与责任",
+            "当前变化": "采用前提：组织需定义数据权限、版本、允许字段和停止条件；含个人或受限资料时不得上传未批准工具。"
+          }
+        ],
+        "transition": {
+          "$item": "electro-mechanical-technicians.ai-impact.ai-impact-table.6",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        }
+      },
+      "boundary_notice": [
+        "使用边界已在职业内容与来源说明中呈现。",
+        {
+          "$link": "electro-mechanical-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electro-mechanical-technicians.navigation.1",
+          "field": "url"
+        },
+        {
+          "$link": "electro-mechanical-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electro-mechanical-technicians.navigation.2",
+          "field": "url"
+        },
+        {
+          "$link": "electro-mechanical-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electro-mechanical-technicians.navigation.3",
+          "field": "url"
+        },
+        {
+          "$link": "electro-mechanical-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electro-mechanical-technicians.navigation.4",
+          "field": "url"
+        },
+        {
+          "$link": "electro-mechanical-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electro-mechanical-technicians.navigation.5",
+          "field": "url"
+        },
+        {
+          "$link": "electro-mechanical-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electro-mechanical-technicians.navigation.6",
+          "field": "url"
+        },
+        {
+          "$link": "electro-mechanical-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electro-mechanical-technicians.navigation.7",
+          "field": "url"
+        },
+        {
+          "$link": "electro-mechanical-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electro-mechanical-technicians.navigation.8",
+          "field": "url"
+        },
+        {
+          "$link": "electro-mechanical-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electro-mechanical-technicians.navigation.9",
+          "field": "url"
+        },
+        {
+          "$link": "electro-mechanical-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electro-mechanical-technicians.navigation.10",
+          "field": "url"
+        },
+        {
+          "$link": "electro-mechanical-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "electro-mechanical-technicians.navigation.11",
+          "field": "url"
+        }
+      ],
+      "breadcrumb": {
+        "label": {
+          "$subject": "name"
+        },
+        "slug": {
+          "$subject": "canonical_slug"
+        }
+      },
+      "career_ai_description_block": {
+        "body": [
+          "AI 可辅助记录整理与信息汇总，但不能替代授权判断和最终责任。"
+        ],
+        "heading": "机电与机电一体化技师与技术员的工作对象与 AI 边界"
+      },
+      "career_path_block": {
+        "boundary": "入口要求、执照、训练和最终责任由具体法域、机构或雇主核验。",
+        "competence_ladder": [
+          {
+            "description": "确认来源、权限和版本。",
+            "stage": "输入核对"
+          },
+          {
+            "description": "遵守停止和升级条件。",
+            "stage": "过程控制"
+          },
+          {
+            "description": "形成可复核记录。",
+            "stage": "结果复盘"
+          },
+          {
+            "description": "在授权范围内扩展。",
+            "stage": "责任扩展"
+          }
+        ],
+        "direct_answer": "按授权范围完成可复核工作。",
+        "heading": {
+          "$item": "electro-mechanical-technicians.path.career-path-block.1",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "locale_requirements": {
+          "credential_boundary": "按授权范围完成可复核工作。",
+          "jurisdiction": "按工作地、机构和雇主核验。",
+          "summary": "按授权范围完成可复核工作。"
+        },
+        "schema_version": "career.career_progression.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "adj1",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "id": "adj1",
+            "label": {
+              "$source": "adj1",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj2",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "id": "adj2",
+            "label": {
+              "$source": "adj2",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj3",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "id": "adj3",
+            "label": {
+              "$source": "adj3",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj4",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "id": "adj4",
+            "label": {
+              "$source": "adj4",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "entry",
+            "stages": [
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "补足工具、资格和责任证据。",
+                "readiness_evidence": "保留可复核交付和复盘记录。",
+                "responsibility": "按授权范围完成可复核工作。",
+                "role": "基础执行"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "练习异常识别。",
+                "readiness_evidence": "依据原始记录复核。",
+                "responsibility": "按授权范围完成可复核工作。",
+                "role": "稳定交付"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "按授权链升级。",
+                "readiness_evidence": "保留版本和变更记录。",
+                "responsibility": "按授权范围完成可复核工作。",
+                "role": "独立复核"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "核对下一层级责任边界。",
+                "readiness_evidence": "用实际样本证明稳定交付。",
+                "responsibility": "按授权范围完成可复核工作。",
+                "role": "扩大责任"
+              }
+            ],
+            "title": "入门路径"
+          },
+          {
+            "id": "specialist",
+            "stages": [
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "补足工具证据。",
+                "readiness_evidence": "能说明输入与限制。",
+                "responsibility": "明确工作对象和交付。",
+                "role": "问题定义"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "复核输出。",
+                "readiness_evidence": "保留原始记录。",
+                "responsibility": "按流程使用工具。",
+                "role": "工具与记录"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "按授权链处理。",
+                "readiness_evidence": "有升级记录。",
+                "responsibility": "识别偏差并停止。",
+                "role": "异常处理"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "扩大责任前重新核验。",
+                "readiness_evidence": "结论可追溯。",
+                "responsibility": "形成复盘结论。",
+                "role": "证据复盘"
+              }
+            ],
+            "title": "专业深化"
+          },
+          {
+            "id": "management",
+            "stages": [
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "检查交付。",
+                "readiness_evidence": "边界和责任人清楚。",
+                "responsibility": "在授权范围内分派任务。",
+                "role": "任务分派"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "处理例外。",
+                "readiness_evidence": "记录偏差。",
+                "responsibility": "复核过程和结果。",
+                "role": "质量控制"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "保留决定依据。",
+                "readiness_evidence": "异常及时上报。",
+                "responsibility": "设置停止条件。",
+                "role": "风险升级"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "按适用规则复核。",
+                "readiness_evidence": "证据链完整。",
+                "responsibility": "按制度承担责任。",
+                "role": "责任治理"
+              }
+            ],
+            "title": "协作与管理"
+          }
+        ]
+      },
+      "career_quick_answers_block": {
+        "availability": "published",
+        "heading": "职业速答",
+        "items": [
+          {
+            "answer": {
+              "$item": "electro-mechanical-technicians.profile.career-quick-answers-block.1",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa3",
+            "question": "这份工作先核对什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "对象",
+                  "secondary_value": null,
+                  "value": "机电与机电一体化技师与技术员"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "输入",
+                  "secondary_value": null,
+                  "value": "来源、权限和版本"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "交付",
+                  "secondary_value": null,
+                  "value": "可复核的工作结果"
+                }
+              ]
+            }
+          },
+          {
+            "answer": {
+              "$item": "electro-mechanical-technicians.profile.career-quick-answers-block.2",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa2",
+            "question": "怎样判断工作闭环？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "闭环",
+                  "secondary_value": null,
+                  "value": "输入、行动、交付与复盘"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤一",
+                  "secondary_value": null,
+                  "value": "核对输入"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤二",
+                  "secondary_value": null,
+                  "value": "人工复核"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤三",
+                  "secondary_value": null,
+                  "value": "执行并记录"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤四",
+                  "secondary_value": null,
+                  "value": "人工复核"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤五",
+                  "secondary_value": null,
+                  "value": "异常升级"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤六",
+                  "secondary_value": null,
+                  "value": "形成复盘"
+                }
+              ]
+            }
+          },
+          {
+            "answer": "资格、授权和最终责任仍由具体法域、机构或雇主核验。",
+            "key": "qa1",
+            "question": "资格边界是什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "边界",
+                  "secondary_value": null,
+                  "value": "需独立核验"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "法域",
+                  "secondary_value": null,
+                  "value": "按适用规则确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "责任",
+                  "secondary_value": null,
+                  "value": "由责任人确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "法域",
+                  "secondary_value": null,
+                  "value": "按适用规则确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "机构",
+                  "secondary_value": null,
+                  "value": "按授权链确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "训练",
+                  "secondary_value": null,
+                  "value": "按岗位要求确认"
+                }
+              ]
+            }
+          }
+        ],
+        "schema_version": "career.quick_answers.v1"
+      },
+      "career_risk_cards": {
+        "boundary": "不可用本页替代法域、机构或雇主的安全规则。",
+        "context_links": [
+          {
+            "href": "#career-visual-group-risk",
+            "label": "查看职业风险"
+          }
+        ],
+        "direct_answer": "先识别错误输入、权限越界和不可逆后果。",
+        "evidence_scope": "风险项按当前职业内容与所列来源边界解释。",
+        "heading": "机电与机电一体化技师与技术员的风险与控制点",
+        "risks": [
+          {
+            "affected_roles": "机电与机电一体化技师与技术员",
+            "consequence": "可能放大后果或改变责任边界。",
+            "evidence_refs": [
+              "adj1"
+            ],
+            "id": "risk-1",
+            "mitigation": "保留原始记录、人工复核和停止升级条件。",
+            "scenario": "输入、执行或交接出现偏差。",
+            "title": {
+              "$item": "electro-mechanical-technicians.risk.career-risk-cards.1",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "机电与机电一体化技师与技术员",
+            "consequence": "可能放大后果或改变责任边界。",
+            "evidence_refs": [
+              "adj1"
+            ],
+            "id": "risk-2",
+            "mitigation": "保留原始记录、人工复核和停止升级条件。",
+            "scenario": "输入、执行或交接出现偏差。",
+            "title": {
+              "$item": "electro-mechanical-technicians.risk.career-risk-cards.2",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "机电与机电一体化技师与技术员",
+            "consequence": "可能放大后果或改变责任边界。",
+            "evidence_refs": [
+              "adj1"
+            ],
+            "id": "risk-3",
+            "mitigation": "保留原始记录、人工复核和停止升级条件。",
+            "scenario": "输入、执行或交接出现偏差。",
+            "title": {
+              "$item": "electro-mechanical-technicians.risk.career-risk-cards.3",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "机电与机电一体化技师与技术员",
+            "consequence": "可能放大后果或改变责任边界。",
+            "evidence_refs": [
+              "adj1"
+            ],
+            "id": "risk-4",
+            "mitigation": "保留原始记录、人工复核和停止升级条件。",
+            "scenario": "输入、执行或交接出现偏差。",
+            "title": {
+              "$item": "electro-mechanical-technicians.risk.career-risk-cards.4",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "机电与机电一体化技师与技术员",
+            "consequence": "可能放大后果或改变责任边界。",
+            "evidence_refs": [
+              "adj1"
+            ],
+            "id": "risk-5",
+            "mitigation": "保留原始记录、人工复核和停止升级条件。",
+            "scenario": "输入、执行或交接出现偏差。",
+            "title": {
+              "$item": "electro-mechanical-technicians.risk.career-risk-cards.5",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "机电与机电一体化技师与技术员",
+            "consequence": "可能产生不可逆后果。",
+            "evidence_refs": [
+              "adj1"
+            ],
+            "id": "risk-boundary",
+            "mitigation": "停止并按授权链升级。",
+            "scenario": "遇到超出授权范围的任务。",
+            "title": "责任边界"
+          }
+        ],
+        "schema_version": "career.work_risk.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "adj1",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "id": "adj1",
+            "label": {
+              "$source": "adj1",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj2",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "id": "adj2",
+            "label": {
+              "$source": "adj2",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj3",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "id": "adj3",
+            "label": {
+              "$source": "adj3",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj4",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "id": "adj4",
+            "label": {
+              "$source": "adj4",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ]
+      },
+      "career_snapshot_primary_locale": {
+        "salary": {
+          "bls_table": [
+            {
+              "指标": "中国大陆薪资口径",
+              "数值": "证据不足：未取得与 O*NET-SOC 17-3024.00 精确对应的中国大陆全国单职业工资分位",
+              "说明": "现有官方来源为行业与人员大类聚合，不以行业代理值替代职业工资。"
+            }
+          ],
+          "china_ai_row": {
+            "$item": "electro-mechanical-technicians.china-salary.career-snapshot-primary-locale.4",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_class_row": {
+            "$item": "electro-mechanical-technicians.china-salary.career-snapshot-primary-locale.3",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_edu_table": [
+            {
+              "学历段": "入口要求",
+              "岗位方向": "机电与机电一体化技师与技术员",
+              "说明": "按工作地和雇主核验。"
+            },
+            {
+              "学历段": "入口要求",
+              "岗位方向": "机电与机电一体化技师与技术员",
+              "说明": "按工作地和雇主核验。"
+            },
+            {
+              "学历段": "入口要求",
+              "岗位方向": "机电与机电一体化技师与技术员",
+              "说明": "按工作地和雇主核验。"
+            },
+            {
+              "学历段": "入口要求",
+              "岗位方向": "机电与机电一体化技师与技术员",
+              "说明": "按工作地和雇主核验。"
+            }
+          ],
+          "china_industry_table": [
+            {
+              "备注": "不以行业代理值替代单职业工资。",
+              "行业": "来源覆盖范围",
+              "需求": "暂无安全数值"
+            },
+            {
+              "备注": "不以行业代理值替代单职业工资。",
+              "行业": "来源覆盖范围",
+              "需求": "暂无安全数值"
+            },
+            {
+              "备注": "不以行业代理值替代单职业工资。",
+              "行业": "来源覆盖范围",
+              "需求": "暂无安全数值"
+            }
+          ],
+          "china_intl": "中国与美国职业口径不作自动等同。",
+          "china_name_row": {
+            "$item": "electro-mechanical-technicians.china-salary.career-snapshot-primary-locale.1",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_open": "暂无安全数值",
+          "china_ref": {
+            "$join": [
+              {
+                "$source": "adj1",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "electro-mechanical-technicians.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "adj1",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "electro-mechanical-technicians.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "china_salary_note": "中国公开来源仅用于说明口径边界，不提供本职业精确工资。",
+          "china_salary_table": [
+            {
+              "城市/区间": "全国单职业",
+              "月薪参考": "暂无安全数值"
+            },
+            {
+              "城市/区间": "全国单职业",
+              "月薪参考": "暂无安全数值"
+            },
+            {
+              "城市/区间": "全国单职业",
+              "月薪参考": "暂无安全数值"
+            }
+          ],
+          "china_soc_row": {
+            "$item": "electro-mechanical-technicians.china-salary.career-snapshot-primary-locale.2",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "sources_note": {
+            "$join": [
+              {
+                "$source": "cnwage",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "electro-mechanical-technicians.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "cnwage",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "electro-mechanical-technicians.source-register.published.1"
+              },
+              "；",
+              {
+                "$source": "onet",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "electro-mechanical-technicians.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "onet",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "electro-mechanical-technicians.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "ui": {
+            "ai_heading": "AI 辅助边界",
+            "driver_heading": "影响因素",
+            "official_heading": "中国大陆公开口径",
+            "scenario_caption": "未取得全国单职业精确工资，不以行业代理值替代。",
+            "scenario_heading": "职业场景边界",
+            "scenario_interpretation_label": "解释",
+            "scenario_role_label": "职业",
+            "scenario_value_label": "口径"
+          },
+          "us_growth": "美国预测见美国薪资参考板块。",
+          "us_median": "美国工资见美国薪资参考板块。"
+        }
+      },
+      "career_snapshot_secondary_locale": {
+        "authority_sources": {
+          "$join": [
+            {
+              "$source": "onet",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "onet",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "；",
+            {
+              "$source": "oews",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "oews",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            }
+          ],
+          "separator": ""
+        },
+        "bls_table": [
+          {
+            "指标": "美国薪资中位数",
+            "数值": "73,900 美元/年（35.53 美元/时，2025 年 5 月）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "electro-mechanical-technicians.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "electro-mechanical-technicians.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资低位",
+            "数值": "47,840 美元/年（全国第 10 百分位，2025）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "electro-mechanical-technicians.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "electro-mechanical-technicians.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资高位",
+            "数值": "109,890 美元/年（全国第 90 百分位，2025）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "electro-mechanical-technicians.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "electro-mechanical-technicians.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资单位",
+            "数值": "美元/年；美元/时",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "electro-mechanical-technicians.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "electro-mechanical-technicians.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国薪资时期",
+            "数值": "2025 年 5 月",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "electro-mechanical-technicians.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "electro-mechanical-technicians.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业规模",
+            "数值": "约 15,000 人（2024 年）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "electro-mechanical-technicians.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "electro-mechanical-technicians.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业增长 outlook",
+            "数值": "慢于平均（1%—2%，2024—2034）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "electro-mechanical-technicians.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "electro-mechanical-technicians.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "美国就业空缺",
+            "数值": "约 1,300 个/年（2024—2034）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "electro-mechanical-technicians.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "electro-mechanical-technicians.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          }
+        ],
+        "boundary": "美国统计不代表中国职业工资或就业结果。",
+        "direct_answer": {
+          "$item": "electro-mechanical-technicians.us-salary.career-snapshot-secondary-locale.2",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "factor_rows": [
+          {
+            "answer": "按来源职业代码核对。",
+            "factor": "职业口径"
+          },
+          {
+            "answer": "按来源地区核对。",
+            "factor": "地区"
+          },
+          {
+            "answer": "按来源时期核对。",
+            "factor": "时期"
+          }
+        ],
+        "factors_heading": {
+          "$item": "electro-mechanical-technicians.us-salary.career-snapshot-secondary-locale.6",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "growth": "慢于平均（1%—2%，2024—2034）",
+        "heading": {
+          "$item": "electro-mechanical-technicians.us-salary.career-snapshot-secondary-locale.1",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_heading": {
+          "$item": "electro-mechanical-technicians.us-salary.career-snapshot-secondary-locale.5",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_period": "2025 年 5 月工资数据",
+        "industry_rows": [
+          {
+            "industry": "来源覆盖范围",
+            "median": "按原始来源",
+            "note": "不作跨市场换算。"
+          },
+          {
+            "industry": "机构/雇主",
+            "median": "需核对",
+            "note": "岗位要求可能不同。"
+          },
+          {
+            "industry": "地区",
+            "median": "需核对",
+            "note": "地区影响结果。"
+          },
+          {
+            "industry": "时期",
+            "median": "按来源",
+            "note": "不得忽略时间口径。"
+          }
+        ],
+        "industry_value_label": "来源原始值",
+        "interpretation_heading": {
+          "$item": "electro-mechanical-technicians.us-salary.career-snapshot-secondary-locale.4",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "interpretation_rows": [
+          {
+            "answer": "按所列职业和时期解释。",
+            "question": "统计对象是什么？"
+          },
+          {
+            "answer": "不能。",
+            "question": "能否外推中国？"
+          },
+          {
+            "answer": "不能。",
+            "question": "能否保证个人结果？"
+          },
+          {
+            "answer": "结合岗位和来源边界。",
+            "question": "如何使用？"
+          }
+        ],
+        "median": "73,900 美元/年（35.53 美元/时，2025 年 5 月）",
+        "outlook_heading": "就业展望",
+        "outlook_period": "2024—2034 年预测",
+        "wage_column_labels": [
+          "口径",
+          "数值",
+          "统计位置",
+          "限制"
+        ],
+        "wage_heading": {
+          "$item": "electro-mechanical-technicians.us-salary.career-snapshot-secondary-locale.3",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "wage_tiers": [
+          {
+            "equivalent": "不作换算",
+            "interpretation": "保留原始单位。",
+            "label": "低位",
+            "value": "按来源"
+          },
+          {
+            "equivalent": "不作换算",
+            "interpretation": "保留原始单位。",
+            "label": "中位",
+            "value": "按来源"
+          },
+          {
+            "equivalent": "不作换算",
+            "interpretation": "保留原始单位。",
+            "label": "高位",
+            "value": "按来源"
+          }
+        ]
+      },
+      "definition_block": {
+        "$join": [
+          {
+            "$item": "electro-mechanical-technicians.profile.definition-block.1",
+            "block": "profile",
+            "copy_key": "career.item.definition-block",
+            "type": "prose"
+          },
+          {
+            "$item": "electro-mechanical-technicians.profile.definition-block.2",
+            "block": "profile",
+            "copy_key": "career.item.definition-block",
+            "type": "prose"
+          }
+        ],
+        "separator": "\n"
+      },
+      "faq_block": {
+        "items": {
+          "$item": "electro-mechanical-technicians.sources.faq.1",
+          "block": "sources",
+          "copy_key": "career.item.faq-block",
+          "type": "faq"
+        }
+      },
+      "fermat_decision_card": {
+        "caveat": {
+          "$item": "electro-mechanical-technicians.quick-decision.fermat-decision-card.1",
+          "block": "quick-decision",
+          "copy_key": "career.item.fermat-decision-card",
+          "type": "prose"
+        },
+        "summary": {
+          "$item": "electro-mechanical-technicians.quick-decision.fit-decision-checklist.1",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "title": "机电与机电一体化技师与技术员适合什么样的人？"
+      },
+      "fit_decision_checklist": {
+        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "how": {
+          "$item": "electro-mechanical-technicians.quick-decision.fit-decision-checklist.2",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "suit": {
+          "$item": "electro-mechanical-technicians.quick-decision.fit-decision-checklist.3",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        }
+      },
+      "hero": {
+        "h1": {
+          "$subject": "name"
+        },
+        "quick_answer": {
+          "$subject": "summary"
+        },
+        "title": {
+          "$subject": "name"
+        }
+      },
+      "market_signal_card": {
+        "context_links": [
+          {
+            "href": "#career-visual-group-market-signals",
+            "label": "查看市场信号"
+          }
+        ],
+        "direct_answer": {
+          "$item": "electro-mechanical-technicians.market-signals.market-signal-card.2",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "heading": {
+          "$item": "electro-mechanical-technicians.market-signals.market-signal-card.1",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "outlook_evidence": [
+          {
+            "geography": "来源覆盖范围",
+            "horizon": "当前来源时期",
+            "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "市场信号",
+            "occupation_scope": "机电与机电一体化技师与技术员",
+            "value": {
+              "$item": "electro-mechanical-technicians.market-signals.market-signal-card.3",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "geography": "来源覆盖范围",
+            "horizon": "当前来源时期",
+            "interpretation": "就业规模与空缺不是同一指标。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "就业规模",
+            "occupation_scope": "机电与机电一体化技师与技术员",
+            "value": "暂无安全数值"
+          },
+          {
+            "geography": "来源覆盖范围",
+            "horizon": "当前来源时期",
+            "interpretation": "职位空缺需按来源口径解释。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "职位空缺",
+            "occupation_scope": "机电与机电一体化技师与技术员",
+            "value": "暂无安全数值"
+          }
+        ],
+        "schema_version": "career.outlook_transitions.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "adj1",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "id": "adj1",
+            "label": {
+              "$source": "adj1",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj2",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "id": "adj2",
+            "label": {
+              "$source": "adj2",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj3",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "id": "adj3",
+            "label": {
+              "$source": "adj3",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          },
+          {
+            "href": {
+              "$source": "adj4",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "id": "adj4",
+            "label": {
+              "$source": "adj4",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "scope": "仅按该来源明确陈述的对象、市场、时期和职业口径使用。"
+          }
+        ],
+        "transitions": [
+          {
+            "capability_gaps": {
+              "$item": "electro-mechanical-technicians.market-signals.market-signal-card.5",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "electro-mechanical-technicians.market-signals.market-signal-card.4",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "target_href": "/zh/career/jobs/adjacent-career-1",
+            "target_slug": "adjacent-career-1",
+            "target_title": "相邻方向 1",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需核对新岗位工具与资格。",
+            "shared_capabilities": "需要补足相邻岗位证据。",
+            "target_href": "/zh/career/jobs/adjacent-career-2",
+            "target_slug": "adjacent-career-2",
+            "target_title": "相邻方向 2",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需核对新岗位工具与资格。",
+            "shared_capabilities": "需要补足相邻岗位证据。",
+            "target_href": "/zh/career/jobs/adjacent-career-3",
+            "target_slug": "adjacent-career-3",
+            "target_title": "相邻方向 3",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需核对新岗位工具与资格。",
+            "shared_capabilities": "需要补足相邻岗位证据。",
+            "target_href": "/zh/career/jobs/adjacent-career-4",
+            "target_slug": "adjacent-career-4",
+            "target_title": "相邻方向 4",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需核对新岗位工具与资格。",
+            "shared_capabilities": "需要补足相邻岗位证据。",
+            "target_href": "/zh/career/jobs/adjacent-career-5",
+            "target_slug": "adjacent-career-5",
+            "target_title": "相邻方向 5",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需核对新岗位工具与资格。",
+            "shared_capabilities": "需要补足相邻岗位证据。",
+            "target_href": "/zh/career/jobs/adjacent-career-6",
+            "target_slug": "adjacent-career-6",
+            "target_title": "相邻方向 6",
+            "transition_distance": "需补证据"
+          }
+        ]
+      },
+      "onet_structured_fields_block": {
+        "availability": "published",
+        "heading": "O*NET 结构化字段",
+        "rows": [
+          {
+            "alternate_value": null,
+            "label": "研究输入",
+            "secondary_value": null,
+            "value": {
+              "$item": "electro-mechanical-technicians.profile.onet-structured-fields-block.1",
+              "block": "profile",
+              "copy_key": "career.item.onet-structured-fields-block",
+              "type": "prose"
+            }
+          }
+        ],
+        "schema_version": "career.onet_structured_fields.v1"
+      },
+      "personality_fit_block": {
+        "assessments": [
+          {
+            "answer": {
+              "$item": "electro-mechanical-technicians.fit.personality-fit-block.6",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "riasec",
+            "label": "兴趣与任务",
+            "question": "能否稳定完成可复核交付？",
+            "signals": [
+              "任务",
+              "记录"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": {
+              "$item": "electro-mechanical-technicians.fit.personality-fit-block.7",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "big-five",
+            "label": "稳定执行",
+            "question": "能否稳定完成可复核交付？",
+            "signals": [
+              "任务",
+              "记录"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": {
+              "$item": "electro-mechanical-technicians.fit.personality-fit-block.8",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "mbti",
+            "label": "偏好观察",
+            "question": "能否稳定完成可复核交付？",
+            "signals": [
+              "任务",
+              "记录"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": "用实际样本验证。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "enneagram",
+            "label": "动机观察",
+            "question": "能否稳定完成可复核交付？",
+            "signals": [
+              "任务",
+              "记录"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": "用实际样本验证。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "iq",
+            "label": "问题解决",
+            "question": "能否稳定完成可复核交付？",
+            "signals": [
+              "任务",
+              "记录"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          },
+          {
+            "answer": "用实际样本验证。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣测试",
+            "evidence_level": "工作样本",
+            "id": "eq",
+            "label": "协作边界",
+            "question": "能否稳定完成可复核交付？",
+            "signals": [
+              "任务",
+              "记录"
+            ],
+            "watchout": "不作人格诊断或录用结论。"
+          }
+        ],
+        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "direct_answer": {
+          "$item": "electro-mechanical-technicians.fit.personality-fit-block.2",
+          "block": "fit",
+          "copy_key": "career.item.personality-fit-block",
+          "type": "prose"
+        },
+        "directions": [
+          {
+            "direction": "任务样本",
+            "fit_signals": "能否稳定完成可复核交付",
+            "target": {
+              "href": {
+                "$link": "electro-mechanical-technicians.direction-comparison.adjacent-career-comparison-table.5",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "adj-link-1",
+                "field": "url"
+              },
+              "slug": "robotics-technicians",
+              "title": {
+                "$link": "electro-mechanical-technicians.direction-comparison.adjacent-career-comparison-table.5",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "adj-link-1",
+                "field": "entity"
+              }
+            },
+            "watchouts": "注意授权和停止条件。"
+          },
+          {
+            "direction": "工具使用",
+            "fit_signals": "能否保留原始记录",
+            "target": {
+              "href": {
+                "$link": "electro-mechanical-technicians.direction-comparison.adjacent-career-comparison-table.5",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "adj-link-2",
+                "field": "url"
+              },
+              "slug": "aerospace-engineers",
+              "title": {
+                "$link": "electro-mechanical-technicians.direction-comparison.adjacent-career-comparison-table.5",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "adj-link-2",
+                "field": "entity"
+              }
+            },
+            "watchouts": "不把工具输出当作结论。"
+          },
+          {
+            "direction": "协作交接",
+            "fit_signals": "能否清晰交接",
+            "target": {
+              "href": {
+                "$link": "electro-mechanical-technicians.direction-comparison.adjacent-career-comparison-table.5",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "adj-link-3",
+                "field": "url"
+              },
+              "slug": "electrical-engineers",
+              "title": {
+                "$link": "electro-mechanical-technicians.direction-comparison.adjacent-career-comparison-table.5",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "adj-link-3",
+                "field": "entity"
+              }
+            },
+            "watchouts": "按责任链升级异常。"
+          },
+          {
+            "direction": "反馈复盘",
+            "fit_signals": "能否依据证据修订",
+            "target": {
+              "href": {
+                "$link": "electro-mechanical-technicians.direction-comparison.adjacent-career-comparison-table.5",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "adj-link-4",
+                "field": "url"
+              },
+              "slug": "electronics-engineers-except-computer",
+              "title": {
+                "$link": "electro-mechanical-technicians.direction-comparison.adjacent-career-comparison-table.5",
+                "block": "direction-comparison",
+                "copy_key": "career.item.adjacent-career-comparison-table",
+                "entry": "adj-link-4",
+                "field": "entity"
+              }
+            },
+            "watchouts": "保留版本和变更记录。"
+          },
+          {
+            "direction": "压力场景",
+            "fit_signals": "能否遵守流程",
+            "watchouts": "不可跳过安全步骤。"
+          },
+          {
+            "direction": "长期训练",
+            "fit_signals": "能否持续补证据",
+            "watchouts": "资格按法域核验。"
+          }
+        ],
+        "heading": {
+          "$item": "electro-mechanical-technicians.fit.personality-fit-block.1",
+          "block": "fit",
+          "copy_key": "career.item.personality-fit-block",
+          "type": "prose"
+        },
+        "questions": [
+          {
+            "answer": "用实际样本验证。",
+            "question": "能否稳定完成工作样本？"
+          },
+          {
+            "answer": "按流程保存。",
+            "question": "能否保留原始记录？"
+          },
+          {
+            "answer": "设置停止和升级条件。",
+            "question": "能否识别异常？"
+          },
+          {
+            "answer": "交接对象、状态和责任人。",
+            "question": "能否清晰交接？"
+          },
+          {
+            "answer": "根据证据修订。",
+            "question": "能否接受复核？"
+          },
+          {
+            "answer": "按法域和雇主核验。",
+            "question": "能否补足资格？"
+          },
+          {
+            "answer": "工具不能替代授权判断。",
+            "question": "能否理解工具边界？"
+          },
+          {
+            "answer": "完成一份可复核练习。",
+            "question": "如何继续验证？"
+          }
+        ],
+        "schema_version": "career.fit_decision_center.v1",
+        "signals": [
+          {
+            "body": {
+              "$item": "electro-mechanical-technicians.fit.personality-fit-block.3",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "id": "fit",
+            "label": "适配信号",
+            "tone": "positive"
+          },
+          {
+            "body": {
+              "$item": "electro-mechanical-technicians.fit.personality-fit-block.4",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "id": "caution",
+            "label": "注意信号",
+            "tone": "caution"
+          },
+          {
+            "body": {
+              "$item": "electro-mechanical-technicians.fit.personality-fit-block.5",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "id": "experiment",
+            "label": "验证动作",
+            "tone": "action"
+          }
+        ],
+        "source_links": [
+          {
+            "href": {
+              "$source": "adj1",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "label": {
+              "$source": "adj1",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "adj2",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "label": {
+              "$source": "adj2",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "adj3",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "label": {
+              "$source": "adj3",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          },
+          {
+            "href": {
+              "$source": "adj4",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "label": {
+              "$source": "adj4",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "electro-mechanical-technicians.source-register.published.1"
+            },
+            "usage": "仅支持该来源明确的职业、市场、时期和工作边界。"
+          }
+        ]
+      },
+      "primary_cta": {
+        "entry_surface": "career_job_detail",
+        "href": "/zh/tests/holland-career-interest-test-riasec",
+        "label": "测我的职业兴趣是否适合机电与机电一体化技师与技术员",
+        "source_page_type": "career_job_detail",
+        "subject_key": {
+          "$subject": "canonical_slug"
+        },
+        "subject_kind": "career_job",
+        "target_action": "start_riasec_test",
+        "test_slug": "holland-career-interest-test-riasec"
+      },
+      "responsibilities_block": [
+        {
+          "$join": [
+            {
+              "$item": "electro-mechanical-technicians.profile.responsibilities-block.1",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        }
+      ],
+      "riasec_fit_block": {
+        "fit_interest": "工作样本优先",
+        "interest": "按实际任务、工具和责任边界核对兴趣适配",
+        "riasec": "R/I/S/E/C/A",
+        "riasec_short": "以工作样本验证，不作人格诊断。"
+      },
+      "source_card": {
+        "eeat_signals": {
+          "author": "FermatMind research workflow",
+          "source": {
+            "$source": "adj1",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "name",
+            "item": "electro-mechanical-technicians.source-register.published.1"
+          },
+          "updated_at": {
+            "$source": "adj1",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "period",
+            "item": "electro-mechanical-technicians.source-register.published.1"
+          }
+        },
+        "note": "来源范围、限制和统计时期按原始证据分别核对。"
+      },
+      "work_context_block": {
+        "$join": [
+          {
+            "$item": "electro-mechanical-technicians.profile.work-context-block.1",
+            "block": "profile",
+            "copy_key": "career.item.work-context-block",
+            "type": "prose"
+          },
+          {
+            "$item": "electro-mechanical-technicians.profile.work-context-block.2",
+            "block": "profile",
+            "copy_key": "career.item.work-context-block",
+            "type": "prose"
+          },
+          {
+            "$item": "electro-mechanical-technicians.sources.boundary.1",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          },
+          {
+            "$item": "electro-mechanical-technicians.sources.boundary.1.2",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          },
+          {
+            "$item": "electro-mechanical-technicians.sources.boundary.1.3",
+            "block": "sources",
+            "copy_key": "career.item.boundary-notice",
+            "type": "prose"
+          }
+        ],
+        "separator": "\n"
+      }
+    },
+    "contract_version": "career.detail.display.v1",
+    "locale": "zh-CN",
+    "native_items": [
+      {
+        "block": "source-register",
+        "copy_key": "career.item.published-sources",
+        "id": "electro-mechanical-technicians.source-register.published.1",
+        "location": "sources",
+        "type": "sources"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.recruitment-sample",
+        "id": "electro-mechanical-technicians.path.recruitment-sample.1",
+        "location": "entry_decisions",
+        "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-work-sample-data",
+        "id": "electro-mechanical-technicians.path.entry-work-sample-data.1",
+        "location": "entry_decisions",
+        "type": "notice"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-role-comparison",
+        "id": "electro-mechanical-technicians.path.entry-role-comparison.1",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.employer-evidence",
+        "id": "electro-mechanical-technicians.path.employer-evidence.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.entry-portfolio",
+        "id": "electro-mechanical-technicians.path.entry-portfolio.1",
+        "location": "entry_decisions",
+        "type": "cards"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.interview-probation",
+        "id": "electro-mechanical-technicians.path.interview-probation.1",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-trial",
+        "id": "electro-mechanical-technicians.path.seven-day-trial.1",
+        "location": "entry_decisions",
+        "type": "timeline"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.seven-day-decision",
+        "id": "electro-mechanical-technicians.path.seven-day-decision.1",
+        "location": "entry_decisions",
+        "type": "list"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.credential-decision",
+        "id": "electro-mechanical-technicians.path.credential-decision.1",
+        "location": "entry_decisions",
+        "type": "table"
+      },
+      {
+        "block": "path",
+        "copy_key": "career.item.credential-boundary",
+        "id": "electro-mechanical-technicians.path.credential-boundary.1",
+        "location": "entry_decisions",
+        "type": "notice"
+      }
+    ],
+    "path": "/zh/career/jobs/electro-mechanical-technicians",
+    "section_titles": {
+      "ai-impact": "AI 影响",
+      "china-salary": "中国大陆薪资参考",
+      "direction-comparison": "职业方向比较",
+      "fit": "职业适配指南",
+      "market-signals": "职业前景与相关职业转向",
+      "navigation": "目录",
+      "path": "入行、资格与职业发展",
+      "profile": "职业画像",
+      "quick-decision": "快速判断",
+      "risk": "工作压力与职业边界",
+      "source-register": "来源登记",
+      "sources": "常见问题与资料来源",
+      "us-salary": "美国薪资参考"
+    }
+  },
   "fact_register": {
     "facts": [
       {
@@ -9030,26 +11581,26 @@
       },
       {
         "derivation": null,
-        "display_value": "73,900美元/年",
+        "display_value": "73,900 美元/年（35.53 美元/时，2025 年 5 月）",
         "fact_id": "us-pay",
         "market": "美国",
         "measure": "美国工资边界",
         "occupation_scope": "机电与机电一体化技师与技术员（17-3024.00）精确职业数据",
-        "period": "2025工资；展望按页面当前期间",
+        "period": "2025 年 5 月",
         "source_refs": [
-          "wage"
+          "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "2025–2035增长3%",
+        "display_value": "2024—2034 年预计增长慢于平均（1%—2%）；2024 年就业约 15,000 人，年均空缺约 1,300 个",
         "fact_id": "us-outlook",
         "market": "美国",
         "measure": "美国就业展望边界",
         "occupation_scope": "机电与机电一体化技师与技术员（17-3024.00）精确职业数据",
-        "period": "2025工资；展望按页面当前期间",
+        "period": "2024—2034",
         "source_refs": [
-          "wage"
+          "onet"
         ]
       }
     ]
@@ -9061,17 +11612,21 @@
       "key": "ai",
       "label": "AI 任务暴露"
     },
-    "badges": [],
+    "badges": [
+      "机电与机电一体化技师与技术员 · 装配与测试 · 测量记录",
+      "断电纸面试做 · 偏差与故障记录 · 责任交接",
+      "职业来源与数据边界 · electro-mechanical-technicians"
+    ],
     "metrics": [
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-pay",
         "key": "us_pay",
         "label": "美国薪资参考"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-outlook",
         "key": "us_growth",
         "label": "美国就业增长"
       },
@@ -9091,7 +11646,7 @@
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "中国大陆薪资参考"
+        "label": "中国大陆薪资参考（证据不足）"
       }
     ]
   },
@@ -9106,10 +11661,10 @@
       "text": "机电与机电一体化技师与技术员"
     }
   },
-  "source_content_sha256": "6d392d840621b6c2689704d4742fc7c96a67698a365e4338ef52b95715b3e0b7",
+  "source_content_sha256": "1611ae8242800dc60635ef7ccb149d502cf973c67feae72eaa27c9f97e90df6e",
   "subject": {
     "canonical_slug": "electro-mechanical-technicians",
     "name": "机电与机电一体化技师与技术员",
-    "summary": "机电与机电一体化技师/技术员安装、操作、测试、维护、修理和升级机电或机器人设备，读取图纸、精密测量、分析测试结果并记录维修。本页保留断电纸面试做，但明确真实工作由受训且获安全授权的人员在现场完成。"
+    "summary": "安装、测试、维护与修理机电及机器人设备，读取图纸、精密测量并记录偏差；本页只用断电纸面试做，真实作业须在安全授权下完成。"
   }
 }
