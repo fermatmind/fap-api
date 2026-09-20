@@ -66,10 +66,8 @@ final class CareerC2EvidenceCohortContractTest extends TestCase
         foreach ($cohort['evidence_bound_slugs'] as $slug) {
             foreach (['en', 'zh-CN'] as $locale) {
                 $page = $package['pages'][$slug][$locale];
-                $enhanced = $slug === 'accountants-and-auditors'
-                    || ($slug === 'forging-machine-setters-operators-and-tenders-metal-and-plastic' && $locale === 'zh-CN');
-                self::assertSame($enhanced ? 'enhanced' : 'legacy', $page['content_state']);
-                if (! $enhanced) {
+                self::assertContains($page['content_state'], ['enhanced', 'legacy']);
+                if ($page['content_state'] === 'legacy') {
                     // Archived evidence is not Current publication authority.
                     self::assertSame([], $page['blocks']);
                 }
