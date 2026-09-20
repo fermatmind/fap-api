@@ -394,6 +394,8 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
             $cacheMock->shouldReceive('put')->andReturnUsing(fn (...$args) => $cacheManager->put(...$args));
             $cacheMock->shouldReceive('get')
                 ->andReturnUsing(static fn (string $key, mixed $default = null): mixed => $cacheManager->get($key, $default));
+            $cacheMock->shouldReceive('many')
+                ->andReturnUsing(static fn (array $keys): array => $cacheManager->many($keys));
             $cacheMock->shouldReceive('has')
                 ->andReturnUsing(static fn (string $key): bool => $cacheManager->has($key));
             $cacheMock->shouldReceive('forget')
@@ -441,6 +443,8 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
                 ->andReturnUsing(static fn (string $key, int $seconds) => $cacheManager->lock($key, $seconds));
             $cacheMock->shouldReceive('get')
                 ->andReturnUsing(static fn (string $key, mixed $default = null): mixed => $cacheManager->get($key, $default));
+            $cacheMock->shouldReceive('many')
+                ->andReturnUsing(static fn (array $keys): array => $cacheManager->many($keys));
             $cacheMock->shouldReceive('has')
                 ->andReturnUsing(static fn (string $key): bool => $cacheManager->has($key));
             $cacheMock->shouldReceive('forget')
@@ -576,6 +580,8 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
         try {
             $cacheMock = Cache::partialMock();
             $cacheMock->shouldReceive('put')->andReturnUsing(fn (...$args) => $cacheManager->put(...$args));
+            $cacheMock->shouldReceive('many')
+                ->andReturnUsing(static fn (array $keys): array => $cacheManager->many($keys));
             $cacheMock->shouldReceive('lock')
                 ->andReturnUsing(static fn (string $key, int $seconds) => $cacheManager->lock($key, $seconds));
             $cacheMock->shouldReceive('get')
@@ -694,6 +700,20 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
                     }
 
                     return $cacheManager->get($key, $default);
+                });
+            $cacheMock->shouldReceive('many')
+                ->andReturnUsing(function (array $keys) use ($cacheManager, $lockState, &$detailReadinessReads): array {
+                    foreach ($keys as $key) {
+                        if (
+                            str_starts_with($key, PublicCareerAuthorityResponseCache::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX.':')
+                            && (str_ends_with($key, ':active') || str_ends_with($key, ':lkg'))
+                        ) {
+                            $detailReadinessReads++;
+                            $this->assertSame(2, $lockState->depth, 'Detail readiness was inspected before both locale rebuild locks were held.');
+                        }
+                    }
+
+                    return $cacheManager->many($keys);
                 });
             $cacheMock->shouldReceive('has')
                 ->andReturnUsing(static fn (string $key): bool => $cacheManager->has($key));
