@@ -16,6 +16,12 @@ return new class extends Migration
             512,
             JSON_THROW_ON_ERROR,
         );
+        if (($package['schema_version'] ?? null) !== 'assessment.exact-field-copy.v2'
+            || ($package['scale_code'] ?? null) !== 'MBTI'
+            || ($package['locale'] ?? null) !== 'zh'
+            || count($package['updates'] ?? []) !== 6) {
+            throw new RuntimeException('MBTI method consolidation package identity is invalid.');
+        }
         $expectedTables = ['scales_registry', 'scales_registry_v2'];
 
         DB::transaction(function () use ($package, $expectedTables): void {

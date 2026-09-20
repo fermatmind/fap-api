@@ -93,6 +93,12 @@ class MbtiMethodConsolidationPublicationTest extends TestCase
 
     public function test_updates_only_exact_fields_in_both_registries_and_is_idempotent(): void
     {
+        $package = $this->package();
+        $this->assertSame('assessment.exact-field-copy.v2', $package['schema_version']);
+        $this->assertSame('MBTI', $package['scale_code']);
+        $this->assertSame('zh', $package['locale']);
+        $this->assertCount(6, $package['updates']);
+
         $before = $this->baseline();
         foreach (['scales_registry', 'scales_registry_v2'] as $table) {
             $this->insert($table, $before);
