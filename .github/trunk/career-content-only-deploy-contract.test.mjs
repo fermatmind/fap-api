@@ -33,6 +33,7 @@ test('dedicated mode preserves parity and atomic publish while excluding unrelat
 });
 
 test('publisher batches full readback and fails closed on out-of-set drift', () => {
+  assert.match(publisher, /array_chunk\(\$identities, 64\)/);
   assert.match(publisher, /PublicProjectionCache::many\(array_column\(\$candidates, 'key'\)\)/);
   assert.match(publisher, /CURRENT_UNCHANGED_FILE_PAGE_DRIFT/);
   assert.match(publisher, /changed_locale_page_set_sha256/);

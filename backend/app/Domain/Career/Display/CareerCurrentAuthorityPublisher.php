@@ -35,7 +35,7 @@ final class CareerCurrentAuthorityPublisher
         $authority = $this->loader->indexForPublish($backendRoot);
         $writes = 0;
         $hashes = [];
-        $candidates = [];
+        $identities = [];
         $allowedChanges = null;
         if ($changedPages !== null) {
             $allowedChanges = [];
@@ -51,33 +51,43 @@ final class CareerCurrentAuthorityPublisher
         }
         foreach ($authority['slugs'] as $slug) {
             foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
-                $page = $this->pages->project($this->loader->pageFromPublishIndex($authority, $slug, $locale));
-                $key = \App\Services\Career\CareerFilePageReader::cacheKey($page);
-                $candidates[$slug.'|'.$locale] = ['key' => $key, 'page' => $page];
-                $hashes[] = CareerCurrentAuthorityPackage::hashValue($page);
+                $identities[] = ['slug' => $slug, 'locale' => $locale];
             }
         }
-        $before = \App\Support\PublicProjectionCache::many(array_column($candidates, 'key'));
         $mismatches = [];
-        foreach ($candidates as $identity => $candidate) {
-            $key = $candidate['key'];
-            $page = $candidate['page'];
-            if (($before[$key] ?? null) !== $page) {
-                if ($allowedChanges !== null && ! isset($allowedChanges[$identity])) {
-                    throw new CareerCurrentAuthorityPublisherFailure('CURRENT_UNCHANGED_FILE_PAGE_DRIFT', null, 'confirmed_zero_write');
+        foreach (array_chunk($identities, 64) as $identityChunk) {
+            $candidates = $this->candidateChunk($authority, $identityChunk);
+            $before = \App\Support\PublicProjectionCache::many(array_column($candidates, 'key'));
+            foreach ($candidates as $identity => $candidate) {
+                $key = $candidate['key'];
+                $page = $candidate['page'];
+                $hashes[] = CareerCurrentAuthorityPackage::hashValue($page);
+                if (($before[$key] ?? null) !== $page) {
+                    if ($allowedChanges !== null && ! isset($allowedChanges[$identity])) {
+                        throw new CareerCurrentAuthorityPublisherFailure('CURRENT_UNCHANGED_FILE_PAGE_DRIFT', null, 'confirmed_zero_write');
+                    }
+                    $mismatches[] = ['slug' => $candidate['slug'], 'locale' => $candidate['locale']];
                 }
-                $mismatches[] = $candidate;
+            }
+            unset($before, $candidates);
+            gc_collect_cycles();
+        }
+        foreach (array_chunk($mismatches, 64) as $identityChunk) {
+            foreach ($this->candidateChunk($authority, $identityChunk) as $candidate) {
+                \App\Support\PublicProjectionCache::put($candidate['key'], $candidate['page'], 86400);
+                $writes++;
             }
         }
-        foreach ($mismatches as $candidate) {
-            \App\Support\PublicProjectionCache::put($candidate['key'], $candidate['page'], 86400);
-            $writes++;
-        }
-        $readback = \App\Support\PublicProjectionCache::many(array_column($candidates, 'key'));
-        foreach ($candidates as $candidate) {
-            if (($readback[$candidate['key']] ?? null) !== $candidate['page']) {
-                throw new CareerCurrentAuthorityPublisherFailure('CURRENT_FILE_PAGE_CACHE_READBACK_FAILED');
+        foreach (array_chunk($identities, 64) as $identityChunk) {
+            $candidates = $this->candidateChunk($authority, $identityChunk);
+            $readback = \App\Support\PublicProjectionCache::many(array_column($candidates, 'key'));
+            foreach ($candidates as $candidate) {
+                if (($readback[$candidate['key']] ?? null) !== $candidate['page']) {
+                    throw new CareerCurrentAuthorityPublisherFailure('CURRENT_FILE_PAGE_CACHE_READBACK_FAILED');
+                }
             }
+            unset($readback, $candidates);
+            gc_collect_cycles();
         }
         $hold = $this->publication->filePagePublication('software-developers', 'zh-CN');
         if ($this->publication->jobDetailProjectionItemIsPublished($hold)) {
@@ -125,5 +135,28 @@ final class CareerCurrentAuthorityPublisher
             ],
             'state_sha256' => $digest,
         ];
+    }
+
+    /**
+     * @param  array{entries:array<string,array<string,array<string,mixed>>>}  $authority
+     * @param  list<array{slug:string,locale:string}>  $identities
+     * @return array<string,array{slug:string,locale:string,key:string,page:array<string,mixed>}>
+     */
+    private function candidateChunk(array $authority, array $identities): array
+    {
+        $candidates = [];
+        foreach ($identities as $identity) {
+            $slug = $identity['slug'];
+            $locale = $identity['locale'];
+            $page = $this->pages->project($this->loader->pageFromPublishIndex($authority, $slug, $locale));
+            $candidates[$slug.'|'.$locale] = [
+                'slug' => $slug,
+                'locale' => $locale,
+                'key' => \App\Services\Career\CareerFilePageReader::cacheKey($page),
+                'page' => $page,
+            ];
+        }
+
+        return $candidates;
     }
 }
