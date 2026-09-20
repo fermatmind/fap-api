@@ -233,8 +233,8 @@ final class ContentReleaseRevalidate extends Command
 
         $paths = $canonicalPath === null ? [] : [$canonicalPath];
         $expectedTags = $canonicalPath === null ? [] : [
-            "article-detail:{$this->localeSegment($locale)}:{$slug}",
-            "article-seo:{$this->localeSegment($locale)}:{$slug}",
+            "article-detail:{$locale}:{$slug}",
+            "article-seo:{$locale}:{$slug}",
         ];
         $issues = $this->validateExecuteRuntime($execute, $issues);
         $ok = $issues === [];

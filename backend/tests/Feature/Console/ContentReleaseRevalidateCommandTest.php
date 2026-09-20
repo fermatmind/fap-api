@@ -435,6 +435,10 @@ final class ContentReleaseRevalidateCommandTest extends TestCase
         $this->assertSame(0, $exitCode, Artisan::output());
         $this->assertSame('would_revalidate_article_detail_only', $payload['action'] ?? null);
         $this->assertSame(['/zh/articles/exact-source-article'], $payload['paths'] ?? []);
+        $this->assertSame([
+            'article-detail:zh-CN:exact-source-article',
+            'article-seo:zh-CN:exact-source-article',
+        ], $payload['expected_cache_tags'] ?? []);
         Http::assertNothingSent();
     }
 
