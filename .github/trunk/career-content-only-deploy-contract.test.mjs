@@ -17,6 +17,8 @@ test('content-only policy is receipt-bound and selects the dedicated deploy task
   assert.match(workflow, /a08-evidence:[\s\S]*?needs\.policy\.outputs\.career_content_only != 'true'/);
   assert.match(workflow, /CAREER_CURRENT_PUBLISH_CHANGED_PAGES_BASE64=/);
   assert.match(workflow, /CAREER_CURRENT_PUBLISH_CHANGED_PAGE_SET_SHA256=/);
+  assert.match(workflow, /Download exact CI validation receipt\n\s+if: env\.CAREER_CONTENT_ONLY == 'true'/);
+  assert.match(workflow, /run-id: \$\{\{ github\.event\.workflow_run\.id \}\}/);
 });
 
 test('dedicated mode preserves parity and atomic publish while excluding unrelated runtime work', () => {

@@ -2367,10 +2367,13 @@ jobs:
           ref: ${{ github.event.workflow_run.head_sha }}
           persist-credentials: false
       - name: Download exact CI validation receipt
+        if: env.CAREER_CONTENT_ONLY == 'true'
         uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
         with:
           name: trunk-validation-${{ github.event.workflow_run.head_sha }}
           path: artifacts/trunk-validation
+          github-token: ${{ github.token }}
+          run-id: ${{ github.event.workflow_run.id }}
       - name: Download exact production Career parity receipt
         uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
         with:
