@@ -62,6 +62,7 @@ final class EnneagramPrivateResultCompileService
                 $path = $this->root().'/'.$relative;
                 $decoded = $this->decode($path, $relative);
                 $this->validateSource($decoded, $contract, $locale, $relative);
+                $this->validateEditorialHygiene($decoded, $locale, $relative);
                 $digest = hash('sha256', $this->canonicalJson($decoded));
                 $files[] = [
                     'path' => $relative,
@@ -149,6 +150,28 @@ final class EnneagramPrivateResultCompileService
     {
         if (($decoded['schema_version'] ?? null) !== $contract['schema'] || ($decoded['registry_key'] ?? null) !== $contract['registry_key'] || ($decoded['locale'] ?? null) !== $locale || ! is_array($decoded['entries'] ?? null)) {
             throw new RuntimeException("Enneagram canonical source contract mismatch: {$relative}");
+        }
+    }
+
+    private function validateEditorialHygiene(mixed $value, string $locale, string $relative, string $path = '$'): void
+    {
+        if (is_array($value)) {
+            foreach ($value as $key => $item) {
+                $this->validateEditorialHygiene($item, $locale, $relative, $path.'.'.(string) $key);
+            }
+
+            return;
+        }
+
+        if (! is_string($value)) {
+            return;
+        }
+
+        $pattern = $locale === 'en'
+            ? '/\b([a-z]{2,})\s+\1\b(?!-)/iu'
+            : '/([\x{3400}-\x{9fff}]{2})\1/u';
+        if (preg_match($pattern, $value) === 1) {
+            throw new RuntimeException("Enneagram canonical editorial word duplication: {$relative}:{$path}");
         }
     }
 
