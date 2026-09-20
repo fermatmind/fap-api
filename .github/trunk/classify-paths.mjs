@@ -80,6 +80,10 @@ const isPersonalityCurrentBoundary = (path) => PERSONALITY_CURRENT_BOUNDARY_MATR
   (boundary) => boundary.endsWith("/") ? path.startsWith(boundary) : path === boundary,
 );
 
+const isEnneagramPrivateResultAuthorityBoundary = (path) =>
+  path.startsWith("backend/content_packs/ENNEAGRAM/v2/registry/")
+  || path.startsWith("backend/content_packs/ENNEAGRAM/v2/compiled/");
+
 const SEO_COUNCIL_CONTROL_PLANE_PATHS = new Set([
   ".github/trunk/seo-council-workflow-contract.test.mjs",
   ".github/trunk/seo-platform-11e-runtime-dependency-contract.test.mjs",
@@ -185,6 +189,9 @@ export function classifyPaths(inputPaths) {
     career_content_only: false,
     career_current_authority_release: paths.some(isCareerAuthorityReleaseBoundary),
     personality_current_authority_release: paths.some(isPersonalityCurrentBoundary),
+    enneagram_private_result_authority_release: paths.some(
+      isEnneagramPrivateResultAuthorityBoundary,
+    ),
     mbti_zh_result_authority_release: paths.some((path) => [
       "backend/content_assets/personality_public/mbti_zh_result_authority_release.v1.json",
       "backend/content_assets/personality_public/mbti_result_chapters.zh-CN.v1.json",

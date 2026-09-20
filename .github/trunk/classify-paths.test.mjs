@@ -264,6 +264,25 @@ test("binds only the exact MBTI zh authority release manifest to its operation",
   }
   assert.equal(classifyPaths(["backend/content_assets/personality_public/mbti_result_chapters.en.v1.json"]).operations.mbti_zh_result_authority_release, false);
 });
+test("binds Enneagram v2 authority assets to private result publication", () => {
+  for (const path of [
+    "backend/content_packs/ENNEAGRAM/v2/registry/chapter_registry.json",
+    "backend/content_packs/ENNEAGRAM/v2/registry/en/pair_registry.json",
+    "backend/content_packs/ENNEAGRAM/v2/compiled/private_result.compiled.json",
+  ]) {
+    assert.equal(
+      classifyPaths([path]).operations.enneagram_private_result_authority_release,
+      true,
+      path,
+    );
+  }
+
+  assert.equal(
+    classifyPaths(["backend/content_packs/ENNEAGRAM/v1-likert-105/manifest.json"])
+      .operations.enneagram_private_result_authority_release,
+    false,
+  );
+});
 test("binds SEO Platform 10 closeout only to its exact controlled operation config", () => {
   const exact = classifyPaths(["backend/config/seo_platform_10.php"]);
   const adjacent = classifyPaths(["backend/config/seo_platform_10_notes.php"]);
