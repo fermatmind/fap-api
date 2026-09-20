@@ -22,6 +22,7 @@ final class EnneagramPairRegistryScaffoldTest extends TestCase
         $this->assertSame('1_2', $pairKeys[0]);
         $this->assertSame('8_9', $pairKeys[35]);
         $this->assertFalse($entries->contains(fn ($entry): bool => trim((string) ($entry['fallback_policy'] ?? '')) === ''));
+        $this->assertFalse($entries->contains(fn ($entry): bool => ($entry['fallback_policy'] ?? null) !== 'none'));
         $this->assertFalse($entries->contains(fn ($entry): bool => trim((string) ($entry['short_compare_copy'] ?? '')) === ''));
         $this->assertFalse($entries->contains(fn ($entry): bool => ($entry['content_maturity'] ?? null) !== 'p0_ready'));
         $this->assertFalse($entries->contains(fn ($entry): bool => ($entry['evidence_level'] ?? null) !== 'theory_based'));
@@ -29,5 +30,15 @@ final class EnneagramPairRegistryScaffoldTest extends TestCase
             ['motivation_difference', 'observation_question', 'pressure_difference', 'relationship_difference', 'same_surface', 'work_difference'],
             collect($fallbackTemplate)->keys()->sort()->values()->all()
         );
+        foreach ($entries as $entry) {
+            $typeA = (string) $entry['type_a'];
+            $typeB = (string) $entry['type_b'];
+            $this->assertSame($typeA.'_'.$typeB, $entry['pair_key']);
+            foreach (['core_motivation_difference', 'fear_difference', 'stress_reaction_difference', 'relationship_difference', 'work_difference'] as $field) {
+                $this->assertNotSame('', trim((string) data_get($entry, $field.'.'.$typeA)));
+                $this->assertNotSame('', trim((string) data_get($entry, $field.'.'.$typeB)));
+                $this->assertNotSame(data_get($entry, $field.'.'.$typeA), data_get($entry, $field.'.'.$typeB));
+            }
+        }
     }
 }

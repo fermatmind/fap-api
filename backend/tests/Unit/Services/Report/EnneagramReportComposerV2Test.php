@@ -43,7 +43,7 @@ final class EnneagramReportComposerV2Test extends TestCase
         ], collect($report['pages'])->pluck('page_key')->all());
         $this->assertSame(['01', '02', '03', '04', '05', '06', '07'], collect($report['pages'])->pluck('number')->all());
         $this->assertSame(self::SECTION_IDS, collect($report['pages'])->flatMap(fn (array $page): array => $page['section_ids'])->all());
-        $this->assertCount(8, $report['modules']);
+        $this->assertCount(9, $report['modules']);
         $this->assertCount(9, $report['distribution']);
         $this->assertCount(3, $report['candidates']);
         $this->assertSame(['primary', 'secondary', 'tertiary'], collect($report['candidates'])->pluck('candidate_role')->all());
@@ -135,6 +135,52 @@ final class EnneagramReportComposerV2Test extends TestCase
 
         $this->assertSame(['1', '2', '3'], collect(data_get($first, 'report._meta.enneagram_report_v2.candidates'))->pluck('type_id')->all());
         $this->assertSame(data_get($first, 'report._meta.enneagram_report_v2.candidates'), data_get($second, 'report._meta.enneagram_report_v2.candidates'));
+    }
+
+    public function test_all_thirty_six_close_call_pairs_resolve_deterministically_in_both_candidate_orders(): void
+    {
+        foreach (range(1, 8) as $typeA) {
+            foreach (range($typeA + 1, 9) as $typeB) {
+                foreach ([[$typeA, $typeB], [$typeB, $typeA]] as [$first, $second]) {
+                    $scores = array_fill_keys(array_map(static fn (int $id): string => 'T'.$id, range(1, 9)), 10.0);
+                    $scores['T'.$first] = 81.0;
+                    $scores['T'.$second] = 79.0;
+                    $payload = $this->compose($this->syntheticProjectionInput(
+                        'enneagram_likert_105',
+                        $scores,
+                        ['interpretation_state' => 'mixed_close_call', 'close_call_candidates' => ['T'.$first, 'T'.$second]]
+                    ), 'en');
+                    $module = $this->module($payload, 'candidate_pair_comparison');
+                    $context = "first={$first} second={$second}";
+
+                    $this->assertSame('visible', $module['visibility'], $context);
+                    $this->assertTrue((bool) data_get($module, 'content.available'), $context);
+                    $this->assertSame($typeA.'_'.$typeB, data_get($module, 'content.pair_key'), $context);
+                    $this->assertSame([(string) $first, (string) $second], collect(data_get($module, 'content.candidate_order'))->pluck('type_id')->all(), $context);
+                    $this->assertCount(5, data_get($module, 'content.dimensions'), $context);
+                    foreach ((array) data_get($module, 'content.dimensions') as $dimension) {
+                        $this->assertCount(2, $dimension['sides'], $context);
+                        $this->assertNotSame($dimension['sides'][0]['copy'], $dimension['sides'][1]['copy'], $context);
+                    }
+                }
+            }
+        }
+    }
+
+    public function test_pair_comparison_is_unavailable_outside_close_call(): void
+    {
+        foreach (['clear', 'diffuse', 'low_quality'] as $state) {
+            [$analysis, $quality] = $this->stateOverrides(8, $state);
+            $payload = $this->compose(
+                $this->syntheticProjectionInput('enneagram_forced_choice_144', $this->scoreShape(8, $state), $analysis, $quality),
+                'zh-CN'
+            );
+            $module = $this->module($payload, 'candidate_pair_comparison');
+
+            $this->assertSame('unavailable', $module['visibility'], $state);
+            $this->assertFalse((bool) data_get($module, 'content.available'), $state);
+            $this->assertNull(data_get($module, 'content.pair_key'), $state);
+        }
     }
 
     public function test_theory_boundaries_and_actions_are_structured_and_non_assigning(): void

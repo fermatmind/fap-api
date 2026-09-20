@@ -334,7 +334,11 @@ final class EnneagramReadReportContractTest extends TestCase
         $pages = is_array($reportV2['pages'] ?? null) ? $reportV2['pages'] : [];
         $modules = is_array($reportV2['modules'] ?? null) ? $reportV2['modules'] : [];
         $this->assertCount(7, $pages);
-        $this->assertCount(8, $modules);
+        $this->assertCount(9, $modules);
+        $pairModule = collect($modules)->firstWhere('module_key', 'candidate_pair_comparison');
+        $this->assertIsArray($pairModule);
+        $scope = (string) data_get($reportV2, 'classification.interpretation_scope');
+        $this->assertSame($scope === 'close_call' ? 'visible' : 'unavailable', $pairModule['visibility']);
         $this->assertCount(9, (array) ($reportV2['distribution'] ?? []));
         $this->assertCount(3, (array) ($reportV2['candidates'] ?? []));
         foreach ((array) ($reportV2['candidates'] ?? []) as $candidate) {

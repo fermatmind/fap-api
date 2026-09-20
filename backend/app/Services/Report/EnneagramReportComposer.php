@@ -265,6 +265,7 @@ final class EnneagramReportComposer
             ], $registries),
             'type_entries' => $this->keyListBy($registries['enneagram_type_registry']['entries'] ?? [], 'type_id'),
             'chapter_entries' => $this->keyListBy($registries['enneagram_chapter_registry']['entries'] ?? [], 'type_id'),
+            'pair_entries' => $this->keyListBy($registries['enneagram_pair_registry']['entries'] ?? [], 'pair_key'),
             'observation_entries' => $this->keyListBy($registries['enneagram_observation_registry']['entries'] ?? [], 'day'),
             'method_entries' => $this->keyListBy($registries['enneagram_method_registry']['entries'] ?? [], 'method_key'),
             'ui_entries' => is_array($registries['enneagram_ui_copy_registry']['entries'] ?? null) ? $registries['enneagram_ui_copy_registry']['entries'] : [],
@@ -312,6 +313,7 @@ final class EnneagramReportComposer
     {
         $module = match ($moduleKey) {
             'result_overview' => $this->buildResultOverviewModule($projectionV2, $indexes, $language),
+            'candidate_pair_comparison' => $this->buildCandidatePairComparisonModule($projectionV2, $indexes),
             'candidate_chapter' => $this->buildCandidateChapterModule($projectionV2, $indexes),
             'growth_actions' => $this->buildGrowthActionsModule($projectionV2, $indexes),
             'seven_day_observation' => $this->buildObservationModule($projectionV2, $indexes),
@@ -435,6 +437,120 @@ final class EnneagramReportComposer
             ['classification.interpretation_scope'],
             $this->registryMeta($indexes, 'enneagram_chapter_registry')
         );
+    }
+
+    /** @return array<string,mixed> */
+    private function buildCandidatePairComparisonModule(array $projectionV2, array $indexes): array
+    {
+        $state = $this->state($projectionV2);
+        if ($state !== 'close_call') {
+            return $this->module(
+                'candidate_pair_comparison',
+                'candidate_pair_comparison',
+                'unavailable',
+                'all',
+                ['interpretation_scope' => 'unavailable', 'available' => false],
+                ['classification.interpretation_scope'],
+                ['enneagram_pair_registry'],
+                ['classification.interpretation_scope'],
+                $this->registryMeta($indexes, 'enneagram_pair_registry')
+            );
+        }
+
+        $candidates = $this->buildCanonicalCandidates($projectionV2, $indexes);
+        $first = $candidates[0] ?? [];
+        $second = $candidates[1] ?? [];
+        $firstType = trim((string) ($first['type_id'] ?? ''));
+        $secondType = trim((string) ($second['type_id'] ?? ''));
+        if (! preg_match('/^[1-9]$/', $firstType) || ! preg_match('/^[1-9]$/', $secondType) || $firstType === $secondType) {
+            throw new RuntimeException('ENNEAGRAM_CLOSE_CALL_CANDIDATES_INVALID');
+        }
+
+        $orderedTypes = [$firstType, $secondType];
+        sort($orderedTypes, SORT_NUMERIC);
+        $pairKey = implode('_', $orderedTypes);
+        $pair = is_array($indexes['pair_entries'][$pairKey] ?? null) ? $indexes['pair_entries'][$pairKey] : [];
+        if ($pair === []
+            || (string) ($pair['type_a'] ?? '') !== $orderedTypes[0]
+            || (string) ($pair['type_b'] ?? '') !== $orderedTypes[1]
+            || (string) ($pair['fallback_policy'] ?? '') !== 'none'
+        ) {
+            throw new RuntimeException('ENNEAGRAM_CLOSE_CALL_PAIR_INVALID:'.$pairKey);
+        }
+
+        $dimensions = [];
+        foreach ([
+            'core_motivation_difference' => 'core_motivation',
+            'fear_difference' => 'core_concern',
+            'stress_reaction_difference' => 'stress_reaction',
+            'relationship_difference' => 'relationship_pattern',
+            'work_difference' => 'work_pattern',
+        ] as $sourceField => $dimensionKey) {
+            $source = is_array($pair[$sourceField] ?? null) ? $pair[$sourceField] : [];
+            $firstCopy = trim((string) ($source[$firstType] ?? ''));
+            $secondCopy = trim((string) ($source[$secondType] ?? ''));
+            if ($firstCopy === '' || $secondCopy === '') {
+                throw new RuntimeException('ENNEAGRAM_CLOSE_CALL_PAIR_FIELD_MISSING:'.$pairKey.':'.$sourceField);
+            }
+            $dimensions[] = [
+                'dimension_key' => $dimensionKey,
+                'sides' => [
+                    $this->pairSide($first, $firstCopy),
+                    $this->pairSide($second, $secondCopy),
+                ],
+            ];
+        }
+
+        foreach (['shared_surface_similarity', 'seven_day_observation_question', 'resonance_feedback_prompt', 'short_compare_copy'] as $field) {
+            if (trim((string) ($pair[$field] ?? '')) === '') {
+                throw new RuntimeException('ENNEAGRAM_CLOSE_CALL_PAIR_FIELD_MISSING:'.$pairKey.':'.$field);
+            }
+        }
+
+        return $this->module(
+            'candidate_pair_comparison',
+            'candidate_pair_comparison',
+            'visible',
+            'all',
+            [
+                'interpretation_scope' => 'close_call',
+                'available' => true,
+                'pair_key' => $pairKey,
+                'candidate_order' => [
+                    $this->pairSide($first),
+                    $this->pairSide($second),
+                ],
+                'shared_surface_similarity' => $pair['shared_surface_similarity'],
+                'dimensions' => $dimensions,
+                'seven_day_observation_question' => $pair['seven_day_observation_question'],
+                'resonance_feedback_prompt' => $pair['resonance_feedback_prompt'],
+                'short_compare_copy' => $pair['short_compare_copy'],
+            ],
+            ['scores.top_types', 'classification.interpretation_scope'],
+            ['enneagram_pair_registry:'.$pairKey],
+            ['classification.interpretation_scope', 'algorithmic_meta.close_call_rule_version'],
+            $this->entryMeta($pair, $this->registryMeta($indexes, 'enneagram_pair_registry'))
+        );
+    }
+
+    /**
+     * @param  array<string,mixed>  $candidate
+     * @return array<string,mixed>
+     */
+    private function pairSide(array $candidate, ?string $copy = null): array
+    {
+        $side = [
+            'type_id' => (string) ($candidate['type_id'] ?? ''),
+            'rank' => (int) ($candidate['rank'] ?? 0),
+            'candidate_role' => (string) ($candidate['candidate_role'] ?? ''),
+            'type_name' => (string) ($candidate['type_name'] ?? ''),
+            'short_title' => (string) ($candidate['short_title'] ?? ''),
+        ];
+        if ($copy !== null) {
+            $side['copy'] = $copy;
+        }
+
+        return $side;
     }
 
     /** @return array<string,mixed> */

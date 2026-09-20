@@ -405,8 +405,8 @@ final class RegistryValidator
                     $errors[] = "Chapter registry {$typeId} action {$actionId} must bind observation days 1/3/7";
                 }
             }
-            if (count($actions) < 3 || count($actionIds) !== count(array_unique($actionIds))) {
-                $errors[] = "Chapter registry {$typeId} must contain unique concrete growth actions";
+            if (count($actions) !== 5 || count($actionIds) !== count(array_unique($actionIds))) {
+                $errors[] = "Chapter registry {$typeId} must contain exactly five unique concrete growth actions";
             }
         }
 
@@ -623,6 +623,11 @@ final class RegistryValidator
             }
             $pairKey = (string) ($entry['pair_key'] ?? '');
             $keys[] = $pairKey;
+            $typeA = (string) ($entry['type_a'] ?? '');
+            $typeB = (string) ($entry['type_b'] ?? '');
+            if ($pairKey !== $typeA.'_'.$typeB || (int) $typeA >= (int) $typeB) {
+                $errors[] = "Pair registry {$pairKey} has invalid canonical identity";
+            }
             foreach ([
                 'type_a',
                 'type_b',
@@ -645,6 +650,17 @@ final class RegistryValidator
             }
             if (! in_array((string) ($entry['fallback_policy'] ?? ''), self::VALID_FALLBACK_POLICIES, true)) {
                 $errors[] = "Pair registry {$pairKey} has invalid fallback_policy";
+            }
+            if (($entry['fallback_policy'] ?? null) !== 'none') {
+                $errors[] = "Pair registry {$pairKey} must fail closed with fallback_policy=none";
+            }
+            foreach (['core_motivation_difference', 'fear_difference', 'stress_reaction_difference', 'relationship_difference', 'work_difference'] as $field) {
+                $sides = is_array($entry[$field] ?? null) ? $entry[$field] : [];
+                $left = trim((string) ($sides[$typeA] ?? ''));
+                $right = trim((string) ($sides[$typeB] ?? ''));
+                if ($left === '' || $right === '' || $left === $right) {
+                    $errors[] = "Pair registry {$pairKey} {$field} must contain distinct content for both sides";
+                }
             }
         }
         sort($keys);

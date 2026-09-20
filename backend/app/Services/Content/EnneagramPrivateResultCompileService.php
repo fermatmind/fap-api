@@ -20,7 +20,9 @@ final class EnneagramPrivateResultCompileService
 
     public const COMPILER_SCHEMA = 'fap.enneagram.private_result.compiler.v1';
 
-    public const COMPILER_VERSION = '1.1.0';
+    public const COMPILER_VERSION = '1.2.0';
+
+    private const MAX_SECTION_BIGRAM_SIMILARITY = 0.75;
 
     public const ARTIFACT_FILENAME = 'private_result.compiled.json';
 
@@ -168,10 +170,12 @@ final class EnneagramPrivateResultCompileService
             }
             foreach ((array) ($assets['chapter_registry.json']['entries'] ?? []) as $entry) {
                 $sectionIds = array_column((array) ($entry['sections'] ?? []), 'section_id');
-                if ($sectionIds !== $this->requiredSectionIds() || count((array) ($entry['growth_actions'] ?? [])) < 3) {
+                if ($sectionIds !== $this->requiredSectionIds() || count((array) ($entry['growth_actions'] ?? [])) !== 5) {
                     throw new RuntimeException("Enneagram canonical chapter coverage is incomplete: {$locale}:".(string) ($entry['type_id'] ?? 'unknown'));
                 }
             }
+            $this->validateChapterDifferentiation((array) ($assets['chapter_registry.json']['entries'] ?? []), $locale);
+            $this->validatePairDifferentiation((array) ($assets['pair_registry.json']['entries'] ?? []), $locale);
             foreach (['faq', 'technical_note', 'share', 'pdf', 'print', 'history', 'compare', 'secondary'] as $surface) {
                 if (! is_array($assets['surface_registry.json']['entries'][$surface] ?? null)) {
                     throw new RuntimeException("Enneagram canonical secondary surface is incomplete: {$locale}:{$surface}");
@@ -211,6 +215,142 @@ final class EnneagramPrivateResultCompileService
             '5.1', '5.2', '5.3',
             '6.1', '6.2', '6.3', '6.4', '6.5',
         ];
+    }
+
+    /** @param list<array<string,mixed>> $entries */
+    private function validateChapterDifferentiation(array $entries, string $locale): void
+    {
+        $bySection = [];
+        foreach ($entries as $entry) {
+            $typeId = (string) ($entry['type_id'] ?? '');
+            foreach ((array) ($entry['sections'] ?? []) as $section) {
+                if (! is_array($section)) {
+                    continue;
+                }
+                $sectionId = (string) ($section['section_id'] ?? '');
+                if (in_array($sectionId, ['2.6', '6.4'], true)) {
+                    continue;
+                }
+                $sentences = array_values(array_filter([
+                    (string) ($section['lead'] ?? ''),
+                    ...array_map('strval', (array) ($section['paragraphs'] ?? [])),
+                    ...array_map('strval', (array) ($section['points'] ?? [])),
+                    (string) ($section['reflection_question'] ?? ''),
+                ], static fn (string $value): bool => trim($value) !== ''));
+                $bySection[$sectionId][$typeId] = [
+                    'text' => implode(' ', $sentences),
+                    'sentences' => $sentences,
+                ];
+            }
+        }
+
+        foreach ($bySection as $sectionId => $types) {
+            $typeIds = array_keys($types);
+            for ($left = 0; $left < count($typeIds); $left++) {
+                for ($right = $left + 1; $right < count($typeIds); $right++) {
+                    $leftType = $typeIds[$left];
+                    $rightType = $typeIds[$right];
+                    $duplicates = array_intersect($types[$leftType]['sentences'], $types[$rightType]['sentences']);
+                    if ($duplicates !== []) {
+                        throw new RuntimeException("Enneagram canonical section sentence duplication: {$locale}:{$sectionId}:{$leftType}:{$rightType}");
+                    }
+                    $similarity = $this->bigramSimilarity(
+                        $this->normalizeDifferentiationText($types[$leftType]['text'], $locale),
+                        $this->normalizeDifferentiationText($types[$rightType]['text'], $locale),
+                        $locale
+                    );
+                    if ($similarity > self::MAX_SECTION_BIGRAM_SIMILARITY) {
+                        throw new RuntimeException(sprintf(
+                            'Enneagram canonical section similarity exceeds %.2f: %s:%s:%s:%s:%.4f',
+                            self::MAX_SECTION_BIGRAM_SIMILARITY,
+                            $locale,
+                            $sectionId,
+                            $leftType,
+                            $rightType,
+                            $similarity
+                        ));
+                    }
+                }
+            }
+        }
+    }
+
+    /** @param list<array<string,mixed>> $entries */
+    private function validatePairDifferentiation(array $entries, string $locale): void
+    {
+        $signatures = [];
+        foreach ($entries as $entry) {
+            $pairKey = (string) ($entry['pair_key'] ?? '');
+            $typeA = (string) ($entry['type_a'] ?? '');
+            $typeB = (string) ($entry['type_b'] ?? '');
+            if ($pairKey !== $typeA.'_'.$typeB || ! preg_match('/^[1-8]$/', $typeA) || ! preg_match('/^[2-9]$/', $typeB) || (int) $typeA >= (int) $typeB) {
+                throw new RuntimeException("Enneagram canonical pair identity invalid: {$locale}:{$pairKey}");
+            }
+            $parts = [];
+            foreach (['core_motivation_difference', 'fear_difference', 'stress_reaction_difference', 'relationship_difference', 'work_difference'] as $field) {
+                $sides = is_array($entry[$field] ?? null) ? $entry[$field] : [];
+                $left = trim((string) ($sides[$typeA] ?? ''));
+                $right = trim((string) ($sides[$typeB] ?? ''));
+                if ($left === '' || $right === '' || $left === $right) {
+                    throw new RuntimeException("Enneagram canonical pair side content invalid: {$locale}:{$pairKey}:{$field}");
+                }
+                $parts[] = $left;
+                $parts[] = $right;
+            }
+            foreach (['shared_surface_similarity', 'seven_day_observation_question', 'resonance_feedback_prompt', 'short_compare_copy'] as $field) {
+                $value = trim((string) ($entry[$field] ?? ''));
+                if ($value === '') {
+                    throw new RuntimeException("Enneagram canonical pair content missing: {$locale}:{$pairKey}:{$field}");
+                }
+                $parts[] = $value;
+            }
+            $signature = $this->normalizeDifferentiationText(implode(' ', $parts), $locale);
+            $signature = preg_replace('/\b(?:type)?[1-9]\b/iu', ' type ', $signature) ?? $signature;
+            if (isset($signatures[$signature])) {
+                throw new RuntimeException("Enneagram canonical pair template duplication: {$locale}:{$pairKey}:{$signatures[$signature]}");
+            }
+            $signatures[$signature] = $pairKey;
+        }
+    }
+
+    private function normalizeDifferentiationText(string $text, string $locale): string
+    {
+        $text = mb_strtolower($text);
+        $text = preg_replace('/type\s*[1-9](?:,?\s*the\s+[a-z-]+)?/iu', ' type ', $text) ?? $text;
+        $text = preg_replace('/[1-9]号[\x{3400}-\x{9fff}]+型/u', ' 类型 ', $text) ?? $text;
+        $text = preg_replace('/\b[1-9]\b/u', ' type ', $text) ?? $text;
+
+        return trim($text);
+    }
+
+    private function bigramSimilarity(string $left, string $right, string $locale): float
+    {
+        $tokenize = static function (string $text) use ($locale): array {
+            if ($locale === 'en') {
+                preg_match_all('/[a-z]+/u', $text, $matches);
+
+                return $matches[0] ?? [];
+            }
+            preg_match_all('/[\x{3400}-\x{9fff}]/u', $text, $matches);
+
+            return $matches[0] ?? [];
+        };
+        $bigrams = static function (array $tokens): array {
+            $result = [];
+            for ($index = 0; $index + 1 < count($tokens); $index++) {
+                $result[$tokens[$index]."\0".$tokens[$index + 1]] = true;
+            }
+
+            return $result;
+        };
+        $leftBigrams = $bigrams($tokenize($left));
+        $rightBigrams = $bigrams($tokenize($right));
+        $denominator = count($leftBigrams) + count($rightBigrams);
+        if ($denominator === 0) {
+            return 0.0;
+        }
+
+        return (2 * count(array_intersect_key($leftBigrams, $rightBigrams))) / $denominator;
     }
 
     /** @param list<array<string,mixed>> $sourceFiles @param array<string,list<array<string,mixed>>> $localeFiles @param array<string,string> $localeHashes @param array<string,mixed> $coverage @param array<string,string> $compiler @return array<string,mixed> */
