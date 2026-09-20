@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Career;
 
 use App\Domain\Career\Publish\CareerJobDetailExposureReadiness;
+use App\Domain\Career\Publish\CareerJobDetailExposureReadinessBatch;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionCoverageSnapshot;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 
@@ -52,13 +53,23 @@ final class CareerJobDetailCacheCoverageService
         $examples = array_fill_keys(array_keys($counts), []);
         $rows = [];
         $exampleLimit = min(25, max(0, $exampleLimit));
+        $targets = [];
+        foreach ($slugs as $slug) {
+            foreach ($normalizedLocales as $locale) {
+                $targets[] = ['slug' => $slug, 'locale' => $locale];
+            }
+        }
+        $readiness = $this->responseCache instanceof CareerJobDetailExposureReadinessBatch
+            ? $this->responseCache->jobDetailCacheReadinessBatch($targets, false)
+            : null;
 
         foreach ($slugs as $slug) {
             foreach ($normalizedLocales as $locale) {
                 $projectionItem = $projectionSnapshot[$slug.'|'.$locale]
                     ?? ($projectionSnapshot === null ? $this->runtimeProjection->itemForSlug($slug, $locale) : null);
                 $classification = $this->responseCache->jobDetailProjectionItemIsPublished($projectionItem)
-                    ? $this->responseCache->jobDetailCacheReadiness($slug, $locale)['classification']
+                    ? ($readiness[$slug.'|'.$locale]['classification']
+                        ?? $this->responseCache->jobDetailCacheReadiness($slug, $locale)['classification'])
                     : 'held_or_unpublished_excluded';
                 $counts[$classification]++;
                 $repairable = in_array($classification, self::REPAIRABLE_CLASSIFICATIONS, true);

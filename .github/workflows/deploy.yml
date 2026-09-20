@@ -46,6 +46,7 @@ jobs:
       career_current_release: ${{ steps.receipt.outputs.career_current_release }}
       career_data_recovery: ${{ steps.receipt.outputs.career_data_recovery }}
       career_current_full_scan: ${{ steps.receipt.outputs.career_current_full_scan }}
+      career_content_only: ${{ steps.receipt.outputs.career_content_only }}
       career_current_assets_sha256: ${{ steps.career-current.outputs.assets_sha256 }}
       career_current_source_merge_sha: ${{ steps.career-current.outputs.source_merge_sha }}
       career_current_manifest_sha256: ${{ steps.career-current.outputs.manifest_sha256 }}
@@ -329,6 +330,25 @@ jobs:
           ' \
             "$receipt" >/dev/null
           classification="$(jq -c .classification "$receipt")"
+          career_content_only="$(jq -r '.classification.operations.career_content_only == true' "$receipt")"
+          if [ "$career_content_only" = true ]; then
+            jq -e --arg sha "$DEPLOY_SHA" '
+              .career_content_change.contract_version == "fermatmind.career-content-only-change.v1"
+              and .career_content_change.status == "eligible"
+              and .career_content_change.head_sha == $sha
+              and .career_content_change.base_sha == .classification.scope.validation_base_sha
+              and .career_content_change.receipt_digest == .classification.career_content_change.receipt_digest
+              and .career_content_change.changed_page_count == .classification.career_content_change.changed_page_count
+              and (.career_content_change.changed_pages | length) == .career_content_change.changed_page_count
+              and .career_content_change.changed_page_count > 0
+              and .career_content_change.invariants.manual_hold_slugs == ["software-developers"]
+              and .career_content_change.invariants.discoverability == false
+              and .career_content_change.invariants.search_submission == false
+              and .career_content_change.read_only == true
+            ' "$receipt" >/dev/null
+          else
+            jq -e '.career_content_change.status == "not_applicable"' "$receipt" >/dev/null
+          fi
           career_current_release="$(jq -r '.classification.operations.career_current_authority_release == true' "$receipt")"
           career_data_recovery="$(jq -r '.classification.operations.career_data_recovery == true' "$receipt")"
           career_current="$(jq -r '.publisher.required == true' "$receipt")"
@@ -361,6 +381,7 @@ jobs:
             echo "career_current_release=$career_current_release"
             echo "career_data_recovery=$career_data_recovery"
             echo "career_current_full_scan=$career_current_full_scan"
+            echo "career_content_only=$career_content_only"
             echo "career_parity_receipt_digest=$(jq -r '.publisher.parity.receipt_digest // ""' "$receipt")"
             echo "career_parity_compiler_digest=$(jq -r '.publisher.parity.package.compiler_digest // ""' "$receipt")"
             echo "career_parity_codec_digest=$(jq -r '.publisher.parity.package.codec_digest // ""' "$receipt")"
@@ -518,6 +539,7 @@ jobs:
           echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
           printf '%s\n' "$STAGING_REPO_READ_SSH_KEY" | ssh-add - >/dev/null 2>&1
       - name: Read staging A08 state before deployment
+        if: needs.policy.outputs.career_content_only != 'true'
         env:
           A08_GATE_ONLY: ${{ needs.policy.outputs.a08_gate_only }}
         run: bash backend/scripts/deploy/seo_a08_transport.sh state a08-staging-before.json
@@ -538,10 +560,16 @@ jobs:
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$DEPLOY_SHA"
           council_orchestration='${{ needs.policy.outputs.seo_council_runtime_closeout }}'
+          deploy_task=deploy
+          deploy_mode=standard
+          if [ '${{ needs.policy.outputs.career_content_only }}' = true ]; then
+            deploy_task=deploy:career-content-only
+            deploy_mode=career_content_only
+          fi
           deploy_timeout=30m
           if test "$council_orchestration" = true; then deploy_timeout=60m; fi
-          timeout --signal=TERM --kill-after=30s "$deploy_timeout" php /tmp/dep.phar deploy staging -f deploy.php --revision "$DEPLOY_SHA" \
-            -o release_name="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode=standard \
+          timeout --signal=TERM --kill-after=30s "$deploy_timeout" php /tmp/dep.phar "$deploy_task" staging -f deploy.php --revision "$DEPLOY_SHA" \
+            -o release_name="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode="$deploy_mode" \
             -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' \
             -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' \
             -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' \
@@ -1298,10 +1326,13 @@ jobs:
             and .execution_allowed == false and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
       - name: Verify isolated staging cache transaction fencing and pause restoration
+        if: needs.policy.outputs.career_content_only != 'true'
         run: bash backend/scripts/deploy/seo_a08_transport.sh staging-safety a08-staging-safety.json
       - name: Check fixed staging A08 sources without execution
+        if: needs.policy.outputs.career_content_only != 'true'
         run: bash backend/scripts/deploy/seo_a08_transport.sh sources a08-staging-sources
       - name: Verify staging A08 pause and read-only Operations preservation
+        if: needs.policy.outputs.career_content_only != 'true'
         env:
           A08_GATE_ONLY: ${{ needs.policy.outputs.a08_gate_only }}
         run: |
@@ -1432,7 +1463,7 @@ jobs:
           echo "skip=false" >> "$GITHUB_OUTPUT"
           echo "active=$active" >> "$GITHUB_OUTPUT"
       - name: Read production A08 state before deployment
-        if: steps.baseline.outputs.skip != 'true'
+        if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.career_content_only != 'true'
         env:
           A08_GATE_ONLY: ${{ needs.policy.outputs.a08_gate_only }}
         run: bash backend/scripts/deploy/seo_a08_transport.sh state a08-production-before.json
@@ -1605,12 +1636,18 @@ jobs:
           release="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}"
           candidate_sha="$DEPLOY_SHA"
           lkg_sha='${{ steps.baseline.outputs.active }}'
+          deploy_task=deploy
+          deploy_mode=standard
+          if [ '${{ needs.policy.outputs.career_content_only }}' = true ]; then
+            deploy_task=deploy:career-content-only
+            deploy_mode=career_content_only
+          fi
           deploy_timeout=30m
           if test "$competitive_evidence" = true; then deploy_timeout=35m; fi
           if test "$production_council_closeout" = true; then deploy_timeout=60m; fi
           set +e
-          timeout --signal=TERM --kill-after=30s "$deploy_timeout" php /tmp/dep.phar deploy production -f deploy.php --revision "$DEPLOY_SHA" \
-            -o release_name="$release" -o deploy_mode=standard \
+          timeout --signal=TERM --kill-after=30s "$deploy_timeout" php /tmp/dep.phar "$deploy_task" production -f deploy.php --revision "$DEPLOY_SHA" \
+            -o release_name="$release" -o deploy_mode="$deploy_mode" \
             -o verify_api_certbot_renewal='${{ needs.policy.outputs.infrastructure }}' \
             -o career_current_parity_required='${{ needs.policy.outputs.career_current }}' \
             -o career_data_recovery='${{ needs.policy.outputs.career_data_recovery }}' \
@@ -2054,10 +2091,10 @@ jobs:
               and (.receipt_digest | test("^[0-9a-f]{64}$"))
             ' "$receipt" >/dev/null
       - name: Check fixed production A08 sources without execution
-        if: steps.baseline.outputs.skip != 'true'
+        if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.career_content_only != 'true'
         run: bash backend/scripts/deploy/seo_a08_transport.sh sources a08-production-sources
       - name: Verify production A08 pause and read-only Operations preservation
-        if: steps.baseline.outputs.skip != 'true'
+        if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.career_content_only != 'true'
         env:
           A08_GATE_ONLY: ${{ needs.policy.outputs.a08_gate_only }}
         run: |
@@ -2318,6 +2355,7 @@ jobs:
       PARITY_COMPILER_DIGEST: ${{ needs.policy.outputs.career_parity_compiler_digest }}
       PARITY_CODEC_DIGEST: ${{ needs.policy.outputs.career_parity_codec_digest }}
       FULL_SCAN: ${{ needs.policy.outputs.career_current_full_scan == 'true' && '1' || '0' }}
+      CAREER_CONTENT_ONLY: ${{ needs.policy.outputs.career_content_only }}
       DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
       DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
       DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
@@ -2328,6 +2366,11 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
           persist-credentials: false
+      - name: Download exact CI validation receipt
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          name: trunk-validation-${{ github.event.workflow_run.head_sha }}
+          path: artifacts/trunk-validation
       - name: Download exact production Career parity receipt
         uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
         with:
@@ -2359,6 +2402,7 @@ jobs:
           receipt="$dir/receipt.json"
           remote_stderr="$RUNNER_TEMP/career-current-authority-publish.stderr"
           production_parity_receipt="artifacts/career-current-production-parity/career-current-authority-production-preactivation-parity.json"
+          validation_receipt="artifacts/trunk-validation/trunk-validation.json"
           mkdir -p "$dir"
           [[ "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]
           [[ "$SOURCE_MERGE_SHA" =~ ^[0-9a-f]{40}$ ]]
@@ -2392,6 +2436,25 @@ jobs:
           [[ "$PARITY_COMPILER_DIGEST" =~ ^[0-9a-f]{64}$ ]]
           [[ "$PARITY_CODEC_DIGEST" =~ ^[0-9a-f]{64}$ ]]
           [[ "$FULL_SCAN" =~ ^[01]$ ]]
+          changed_pages_base64=''
+          changed_page_set_sha256=''
+          CHANGED_PAGE_COUNT=0
+          if [ "$CAREER_CONTENT_ONLY" = true ]; then
+            jq -e --arg sha "$DEPLOY_SHA" '
+              .sha == $sha
+              and .classification.operations.career_content_only == true
+              and .career_content_change.status == "eligible"
+              and .career_content_change.head_sha == $sha
+              and (.career_content_change.changed_pages | length) == .career_content_change.changed_page_count
+              and .career_content_change.changed_page_count > 0
+            ' "$validation_receipt" >/dev/null
+            changed_pages_base64="$(jq -c '[.career_content_change.changed_pages[] | {slug,locale}]' "$validation_receipt" | base64 -w0)"
+            CHANGED_PAGE_COUNT="$(jq -r .career_content_change.changed_page_count "$validation_receipt")"
+            changed_page_set_sha256="$(jq -r .career_content_change.changed_page_set_sha256 "$validation_receipt")"
+            test -n "$changed_pages_base64"
+            [[ "$changed_page_set_sha256" =~ ^[0-9a-f]{64}$ ]]
+          fi
+          export CHANGED_PAGE_COUNT changed_page_set_sha256
           printf -v q_path '%q' "$DEPLOY_PATH"
           printf -v q_release '%q' "$DEPLOY_SHA"
           printf -v q_assets '%q' "$ASSETS_SHA256"
@@ -2404,9 +2467,11 @@ jobs:
           printf -v q_compiler '%q' "$PARITY_COMPILER_DIGEST"
           printf -v q_codec '%q' "$PARITY_CODEC_DIGEST"
           printf -v q_full_scan '%q' "$FULL_SCAN"
+          printf -v q_changed_pages '%q' "$changed_pages_base64"
+          printf -v q_changed_page_set '%q' "$changed_page_set_sha256"
           printf -v q_run '%q' "$GITHUB_RUN_ID"
           printf -v q_attempt '%q' "$GITHUB_RUN_ATTEMPT"
-          remote="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_release; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_CURRENT_PUBLISH_EXECUTE=1 CAREER_CURRENT_PUBLISH_BACKEND_ROOT=\"\$current/backend\" CAREER_CURRENT_PUBLISH_RELEASE_SHA=$q_release CAREER_CURRENT_PUBLISH_RELEASE_NAME=\"\$release_name\" CAREER_CURRENT_PUBLISH_SOURCE_MERGE_SHA=$q_source CAREER_CURRENT_PUBLISH_MANIFEST_SHA256=$q_manifest CAREER_CURRENT_PUBLISH_ASSETS_SHA256=$q_assets CAREER_CURRENT_PUBLISH_VERSIONLESS_PROJECTION_SHA256=$q_projection CAREER_CURRENT_PUBLISH_OPERATION_KEY=$q_operation CAREER_CURRENT_PUBLISH_CI_PACKAGE_SCAN_RECEIPT_DIGEST=$q_ci_package_scan CAREER_CURRENT_PUBLISH_PRODUCTION_PARITY_RECEIPT_DIGEST=$q_production_parity CAREER_CURRENT_PUBLISH_PARITY_COMPILER_DIGEST=$q_compiler CAREER_CURRENT_PUBLISH_PARITY_CODEC_DIGEST=$q_codec CAREER_CURRENT_PUBLISH_FULL_SCAN=$q_full_scan CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ID=$q_run CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ATTEMPT=$q_attempt \"\$current/backend/scripts/deploy/run_career_current_authority_publisher.sh\""
+          remote="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_release; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_CURRENT_PUBLISH_EXECUTE=1 CAREER_CURRENT_PUBLISH_BACKEND_ROOT=\"\$current/backend\" CAREER_CURRENT_PUBLISH_RELEASE_SHA=$q_release CAREER_CURRENT_PUBLISH_RELEASE_NAME=\"\$release_name\" CAREER_CURRENT_PUBLISH_SOURCE_MERGE_SHA=$q_source CAREER_CURRENT_PUBLISH_MANIFEST_SHA256=$q_manifest CAREER_CURRENT_PUBLISH_ASSETS_SHA256=$q_assets CAREER_CURRENT_PUBLISH_VERSIONLESS_PROJECTION_SHA256=$q_projection CAREER_CURRENT_PUBLISH_OPERATION_KEY=$q_operation CAREER_CURRENT_PUBLISH_CI_PACKAGE_SCAN_RECEIPT_DIGEST=$q_ci_package_scan CAREER_CURRENT_PUBLISH_PRODUCTION_PARITY_RECEIPT_DIGEST=$q_production_parity CAREER_CURRENT_PUBLISH_PARITY_COMPILER_DIGEST=$q_compiler CAREER_CURRENT_PUBLISH_PARITY_CODEC_DIGEST=$q_codec CAREER_CURRENT_PUBLISH_FULL_SCAN=$q_full_scan CAREER_CURRENT_PUBLISH_CHANGED_PAGES_BASE64=$q_changed_pages CAREER_CURRENT_PUBLISH_CHANGED_PAGE_SET_SHA256=$q_changed_page_set CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ID=$q_run CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ATTEMPT=$q_attempt \"\$current/backend/scripts/deploy/run_career_current_authority_publisher.sh\""
           set +e
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -o ServerAliveInterval=15 -o ServerAliveCountMax=4 -p "$DEPLOY_PORT" \
@@ -2429,6 +2494,10 @@ jobs:
               and .versionless_projection_sha256 == $projection
               and .versionless_projection_sha256 == .package.versionless_projection_sha256
               and .operation_key == $operation
+              and ((env.CAREER_CONTENT_ONLY == "true" and .authority.changed_locale_page_count == (env.CHANGED_PAGE_COUNT | tonumber))
+                or (env.CAREER_CONTENT_ONLY != "true" and .authority.changed_locale_page_count == 0))
+              and ((env.CAREER_CONTENT_ONLY == "true" and .changed_page_set_sha256 == env.changed_page_set_sha256)
+                or (env.CAREER_CONTENT_ONLY != "true" and .changed_page_set_sha256 == null))
               and .parity.ci_package_scan_receipt_digest == env.CI_PACKAGE_SCAN_RECEIPT_DIGEST
               and .parity.production_preactivation_receipt_digest == env.PRODUCTION_PARITY_RECEIPT_DIGEST
               and .parity.compiler_digest == env.PARITY_COMPILER_DIGEST
@@ -2459,6 +2528,18 @@ jobs:
               and .negative_guarantees.search_channel_executed == false
               and .automatic_retry_allowed == false
             ' "$receipt" >/dev/null
+          if [ "$CAREER_CONTENT_ONLY" = true ]; then
+            smoke_slug="$(jq -r '.career_content_change.changed_pages[0].slug' "$validation_receipt")"
+            smoke_locale="$(jq -r '.career_content_change.changed_pages[0].locale' "$validation_receipt")"
+            [[ "$smoke_slug" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]]
+            [[ "$smoke_locale" =~ ^(en|zh-CN)$ ]]
+            curl -fsS --retry 2 --retry-delay 2 --max-time 15 -o /dev/null \
+              "https://api.fermatmind.com/api/v0.5/career/jobs/$smoke_slug?locale=$smoke_locale&projection_contract=career.detail.page.v1"
+            web_locale=en
+            if [ "$smoke_locale" = zh-CN ]; then web_locale=zh; fi
+            curl -fsS --retry 2 --retry-delay 2 --max-time 15 -o /dev/null \
+              "https://fermatmind.com/$web_locale/career/jobs/$smoke_slug"
+          fi
       - name: Upload Career Current publish receipt
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
@@ -2471,7 +2552,7 @@ jobs:
   a08-evidence:
     name: Publish scoped A08 evidence and authorized daily acceptance
     needs: [policy, staging, production]
-    if: needs.production.result == 'success' && needs.production.outputs.skipped != 'true'
+    if: needs.production.result == 'success' && needs.production.outputs.skipped != 'true' && needs.policy.outputs.career_content_only != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     environment: production

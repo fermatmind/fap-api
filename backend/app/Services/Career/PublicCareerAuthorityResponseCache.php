@@ -7,6 +7,7 @@ namespace App\Services\Career;
 use App\Domain\Career\Display\CareerCurrentIdentity;
 use App\Domain\Career\Display\CareerJobDetailCanonicalCacheReader;
 use App\Domain\Career\Publish\CareerJobDetailExposureReadiness;
+use App\Domain\Career\Publish\CareerJobDetailExposureReadinessBatch;
 use App\Domain\Career\Publish\CareerLaunchGovernanceClosureService;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionCoverageSnapshot;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
@@ -30,7 +31,7 @@ use Throwable;
 /**
  * @review-surface career_trust_manifest
  */
-final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposureReadiness
+final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposureReadiness, CareerJobDetailExposureReadinessBatch
 {
     public const DATASET_HUB_CACHE_KEY = 'career:public-authority:dataset-hub:v3';
 
@@ -358,68 +359,126 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     {
         $normalizedSlug = strtolower(trim($slug));
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
-        $issues = [];
 
-        foreach ([
-            'ready_active' => $this->jobDetailActiveVersionKey($normalizedSlug, $normalizedLocale),
-            'ready_lkg' => $this->jobDetailLkgVersionKey($normalizedSlug, $normalizedLocale),
-        ] as $classification => $pointerKey) {
-            $version = Cache::get($pointerKey);
-            if ($version === null) {
+        return $this->jobDetailCacheReadinessBatch([[
+            'slug' => $normalizedSlug,
+            'locale' => $normalizedLocale,
+        ]])[$normalizedSlug.'|'.$normalizedLocale];
+    }
+
+    public function jobDetailCacheReadinessBatch(array $targets, bool $includePayload = true): array
+    {
+        $result = [];
+        foreach (array_chunk($targets, 256) as $chunk) {
+            $result += $this->jobDetailCacheReadinessBatchChunk($chunk, $includePayload);
+        }
+
+        return $result;
+    }
+
+    /** @param list<array{slug:string,locale:string}> $targets */
+    private function jobDetailCacheReadinessBatchChunk(array $targets, bool $includePayload): array
+    {
+        $normalizedTargets = [];
+        foreach ($targets as $target) {
+            $slug = strtolower(trim((string) ($target['slug'] ?? '')));
+            $locale = $this->normalizePublicLocale((string) ($target['locale'] ?? ''));
+            if ($slug === '' || preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $slug) !== 1) {
+                throw new \InvalidArgumentException('Invalid Career cache readiness target.');
+            }
+            $normalizedTargets[$slug.'|'.$locale] = ['slug' => $slug, 'locale' => $locale];
+        }
+        if ($normalizedTargets === []) {
+            return [];
+        }
+
+        $pointerKeys = [];
+        foreach ($normalizedTargets as $target) {
+            $pointerKeys[] = $this->jobDetailActiveVersionKey($target['slug'], $target['locale']);
+            $pointerKeys[] = $this->jobDetailLkgVersionKey($target['slug'], $target['locale']);
+        }
+        $pointers = Cache::many(array_values(array_unique($pointerKeys)));
+        $payloadKeys = [];
+        foreach ($normalizedTargets as $target) {
+            foreach ([
+                $this->jobDetailActiveVersionKey($target['slug'], $target['locale']),
+                $this->jobDetailLkgVersionKey($target['slug'], $target['locale']),
+            ] as $pointerKey) {
+                $version = $pointers[$pointerKey] ?? null;
+                if (is_string($version) && trim($version) !== '') {
+                    $payloadKeys[] = $this->jobDetailVersionPayloadKey($target['slug'], $target['locale'], $version);
+                }
+            }
+        }
+        $payloads = Cache::many(array_values(array_unique($payloadKeys)));
+        $legacyKeys = array_map(
+            fn (array $target): string => $this->jobDetailCacheKey($target['slug'], $target['locale']),
+            array_values($normalizedTargets),
+        );
+        $legacyPayloads = Cache::many($legacyKeys);
+        $result = [];
+        foreach ($normalizedTargets as $identity => $target) {
+            $issues = [];
+            foreach ([
+                'ready_active' => $this->jobDetailActiveVersionKey($target['slug'], $target['locale']),
+                'ready_lkg' => $this->jobDetailLkgVersionKey($target['slug'], $target['locale']),
+            ] as $classification => $pointerKey) {
+                $version = $pointers[$pointerKey] ?? null;
+                if ($version === null) {
+                    continue;
+                }
+                if (! is_string($version) || trim($version) === '') {
+                    $issues[] = 'broken_pointer';
+
+                    continue;
+                }
+                $storedPayload = $payloads[$this->jobDetailVersionPayloadKey($target['slug'], $target['locale'], $version)] ?? null;
+                if ($storedPayload === null) {
+                    $issues[] = 'missing_payload';
+
+                    continue;
+                }
+                $payload = $this->canonicalJobDetailReader->read($storedPayload, $target['slug'], $target['locale']);
+                if ($payload === null) {
+                    $issues[] = 'invalid_payload';
+
+                    continue;
+                }
+                $result[$identity] = [
+                    'classification' => $classification,
+                    'payload' => $includePayload ? $payload : null,
+                    'version' => $version,
+                ];
+
+                continue 2;
+            }
+
+            $legacyKey = $this->jobDetailCacheKey($target['slug'], $target['locale']);
+            $legacy = $legacyPayloads[$legacyKey] ?? null;
+            $legacyPayload = $this->canonicalJobDetailReader->read($legacy, $target['slug'], $target['locale']);
+            if (is_array($legacyPayload)) {
+                $result[$identity] = [
+                    'classification' => 'legacy_migratable',
+                    'payload' => $includePayload ? $legacyPayload : null,
+                    'version' => 'legacy-v1',
+                ];
+
                 continue;
             }
-            if (! is_string($version) || trim($version) === '') {
-                $issues[] = 'broken_pointer';
-
-                continue;
-            }
-
-            $storedPayload = Cache::get(
-                $this->jobDetailVersionPayloadKey($normalizedSlug, $normalizedLocale, $version),
-            );
-            if ($storedPayload === null) {
-                $issues[] = 'missing_payload';
-
-                continue;
-            }
-            $payload = $this->canonicalJobDetailReader->read(
-                $storedPayload,
-                $normalizedSlug,
-                $normalizedLocale,
-            );
-            if ($payload === null) {
+            if ($legacy !== null) {
                 $issues[] = 'invalid_payload';
-
-                continue;
             }
-
-            return [
-                'classification' => $classification,
-                'payload' => $payload,
-                'version' => $version,
-            ];
-        }
-
-        $legacy = Cache::get($this->jobDetailCacheKey($normalizedSlug, $normalizedLocale));
-        $legacyPayload = $this->canonicalJobDetailReader->read($legacy, $normalizedSlug, $normalizedLocale);
-        if (is_array($legacyPayload)) {
-            return [
-                'classification' => 'legacy_migratable',
-                'payload' => $legacyPayload,
-                'version' => 'legacy-v1',
-            ];
-        }
-        if ($legacy !== null) {
-            $issues[] = 'invalid_payload';
-        }
-
-        foreach (['invalid_payload', 'missing_payload', 'broken_pointer'] as $issue) {
-            if (in_array($issue, $issues, true)) {
-                return ['classification' => $issue, 'payload' => null, 'version' => null];
+            $classification = 'missing_pointer';
+            foreach (['invalid_payload', 'missing_payload', 'broken_pointer'] as $issue) {
+                if (in_array($issue, $issues, true)) {
+                    $classification = $issue;
+                    break;
+                }
             }
+            $result[$identity] = ['classification' => $classification, 'payload' => null, 'version' => null];
         }
 
-        return ['classification' => 'missing_pointer', 'payload' => null, 'version' => null];
+        return $result;
     }
 
     public function jobDetailCacheIsReady(string $slug, string $publicLocale = 'zh-CN'): bool

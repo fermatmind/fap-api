@@ -89,6 +89,21 @@ final class PublicProjectionCache
         return Cache::store(in_array(self::state()['mode'], ['primary', 'isolated'], true) ? 'public_projection' : null);
     }
 
+    /** @param list<string> $keys @return array<string,mixed> */
+    public static function many(array $keys): array
+    {
+        if ($keys === []) {
+            return [];
+        }
+        if (array_filter($keys, static fn (string $key): bool => ! self::selected($key)) !== []) {
+            throw new \LogicException('Mixed public projection cache batch is unsupported.');
+        }
+
+        return self::state()['mode'] === 'legacy'
+            ? Cache::many($keys)
+            : self::store()->many($keys);
+    }
+
     private static int $lockDepth = 0;
 
     public static function mutation(callable $operation, bool $force = false): mixed

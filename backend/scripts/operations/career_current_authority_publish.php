@@ -35,6 +35,17 @@ $productionParityReceiptDigest = $env('CAREER_CURRENT_PUBLISH_PRODUCTION_PARITY_
 $parityCompilerDigest = $env('CAREER_CURRENT_PUBLISH_PARITY_COMPILER_DIGEST');
 $parityCodecDigest = $env('CAREER_CURRENT_PUBLISH_PARITY_CODEC_DIGEST');
 $fullScan = $env('CAREER_CURRENT_PUBLISH_FULL_SCAN') === '1';
+$changedPagesBase64 = $env('CAREER_CURRENT_PUBLISH_CHANGED_PAGES_BASE64');
+$changedPageSetSha256 = $env('CAREER_CURRENT_PUBLISH_CHANGED_PAGE_SET_SHA256');
+$changedPages = null;
+$changedPagesInvalid = false;
+if ($changedPagesBase64 !== '') {
+    $decodedChangedPages = base64_decode($changedPagesBase64, true);
+    $changedPages = is_string($decodedChangedPages)
+        ? json_decode($decodedChangedPages, true, 64)
+        : null;
+    $changedPagesInvalid = ! is_array($changedPages) || $changedPages === [];
+}
 $resourceGuard = [
     'schema_version' => $env('CAREER_CURRENT_PUBLISH_RESOURCE_GUARD_SCHEMA'),
     'timeout_seconds' => (int) $env('CAREER_CURRENT_PUBLISH_TIMEOUT_SECONDS'),
@@ -81,6 +92,8 @@ $receipt = [
     'workflow_run_id' => ctype_digit($workflowRunId) ? (int) $workflowRunId : null,
     'workflow_run_attempt' => ctype_digit($workflowRunAttempt) ? (int) $workflowRunAttempt : null,
     'full_scan' => $fullScan,
+    'changed_pages' => $changedPages,
+    'changed_page_set_sha256' => $changedPageSetSha256 !== '' ? $changedPageSetSha256 : null,
     'resource_guard' => $resourceGuard,
     'write_commit_state' => 'ambiguous',
     'writes_committed' => false,
@@ -137,6 +150,8 @@ try {
         || preg_match('/\A[0-9a-f]{64}\z/', $productionParityReceiptDigest) !== 1
         || ! hash_equals(CareerJobDetailCanonicalCacheReader::compilerDigest(), $parityCompilerDigest)
         || ! hash_equals(CareerJobDetailCanonicalCacheReader::codecDigest(), $parityCodecDigest)
+        || $changedPagesInvalid
+        || (($changedPages !== null) !== (preg_match('/\A[0-9a-f]{64}\z/', $changedPageSetSha256) === 1))
         || $resourceGuard !== [
             'schema_version' => 'career.current_authority_publish.resource_guard.v1',
             'timeout_seconds' => 900,
@@ -215,7 +230,7 @@ try {
 
     /** @var CareerCurrentAuthorityPublisher $publisher */
     $publisher = $app->make(CareerCurrentAuthorityPublisher::class);
-    $result = $publisher->execute($backendRoot, $fullScan);
+    $result = $publisher->execute($backendRoot, $fullScan, $changedPages);
     foreach (['package', 'authority', 'public_readback', 'manual_hold_verified', 'idempotent_noop', 'write_counts', 'state_sha256'] as $key) {
         $receipt[$key] = $result[$key];
     }
@@ -233,6 +248,7 @@ try {
         || ($result['authority']['target_count'] ?? null) !== 1046
         || ($result['authority']['unique_slug_count'] ?? null) !== 1046
         || ($result['authority']['valid_component_order_count'] ?? null) !== 1046
+        || ($changedPages !== null && ($result['authority']['changed_locale_page_count'] ?? null) !== count($changedPages))
         || ($result['manual_hold_verified'] ?? null) !== true
         || ($fullScan && ($result['public_readback']['verified_slug_count'] ?? null) !== 1046)
         || ($fullScan && ($result['public_readback']['verified_locale_page_count'] ?? null) !== 2092)

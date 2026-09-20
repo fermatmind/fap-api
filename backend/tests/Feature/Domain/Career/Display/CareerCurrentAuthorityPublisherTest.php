@@ -22,8 +22,13 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         self::assertSame(2092, $first['write_counts']['cache_candidate_write_count']);
         self::assertSame(0, $first['write_counts']['database_update_count']);
         self::assertSame(0, $first['write_counts']['cache_pointer_activation_count']);
-        $second = $publisher->execute(base_path());
+        $second = $publisher->execute(base_path(), false, [[
+            'slug' => 'accountants-and-auditors',
+            'locale' => 'en',
+        ]]);
         self::assertTrue($second['idempotent_noop']);
+        self::assertSame(1, $second['authority']['changed_slug_count']);
+        self::assertSame(1, $second['authority']['changed_locale_page_count']);
         self::assertSame($first['state_sha256'], $second['state_sha256']);
     }
 }

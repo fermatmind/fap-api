@@ -29,23 +29,54 @@ final class CareerCurrentAuthorityPublisher
     ) {}
 
     /** Files activate atomically with the release. Cache entries are disposable, fingerprint-bound derivatives. */
-    public function execute(string $backendRoot, bool $fullScan = false): array
+    /** @param null|list<array{slug:string,locale:string}> $changedPages */
+    public function execute(string $backendRoot, bool $fullScan = false, ?array $changedPages = null): array
     {
         $authority = $this->loader->indexForPublish($backendRoot);
         $writes = 0;
         $hashes = [];
+        $candidates = [];
+        $allowedChanges = null;
+        if ($changedPages !== null) {
+            $allowedChanges = [];
+            foreach ($changedPages as $changedPage) {
+                $slug = strtolower(trim((string) ($changedPage['slug'] ?? '')));
+                $locale = (string) ($changedPage['locale'] ?? '');
+                if (! in_array($locale, CareerCurrentAuthorityPackage::LOCALES, true)
+                    || ! in_array($slug, $authority['slugs'], true)) {
+                    throw new CareerCurrentAuthorityPublisherFailure('CURRENT_CHANGED_PAGE_SET_INVALID', null, 'confirmed_zero_write');
+                }
+                $allowedChanges[$slug.'|'.$locale] = true;
+            }
+        }
         foreach ($authority['slugs'] as $slug) {
             foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
                 $page = $this->pages->project($this->loader->pageFromPublishIndex($authority, $slug, $locale));
                 $key = \App\Services\Career\CareerFilePageReader::cacheKey($page);
-                if (\App\Support\PublicProjectionCache::get($key) !== $page) {
-                    \App\Support\PublicProjectionCache::put($key, $page, 86400);
-                    $writes++;
-                }
-                if (\App\Support\PublicProjectionCache::get($key) !== $page) {
-                    throw new CareerCurrentAuthorityPublisherFailure('CURRENT_FILE_PAGE_CACHE_READBACK_FAILED');
-                }
+                $candidates[$slug.'|'.$locale] = ['key' => $key, 'page' => $page];
                 $hashes[] = CareerCurrentAuthorityPackage::hashValue($page);
+            }
+        }
+        $before = \App\Support\PublicProjectionCache::many(array_column($candidates, 'key'));
+        $mismatches = [];
+        foreach ($candidates as $identity => $candidate) {
+            $key = $candidate['key'];
+            $page = $candidate['page'];
+            if (($before[$key] ?? null) !== $page) {
+                if ($allowedChanges !== null && ! isset($allowedChanges[$identity])) {
+                    throw new CareerCurrentAuthorityPublisherFailure('CURRENT_UNCHANGED_FILE_PAGE_DRIFT', null, 'confirmed_zero_write');
+                }
+                $mismatches[] = $candidate;
+            }
+        }
+        foreach ($mismatches as $candidate) {
+            \App\Support\PublicProjectionCache::put($candidate['key'], $candidate['page'], 86400);
+            $writes++;
+        }
+        $readback = \App\Support\PublicProjectionCache::many(array_column($candidates, 'key'));
+        foreach ($candidates as $candidate) {
+            if (($readback[$candidate['key']] ?? null) !== $candidate['page']) {
+                throw new CareerCurrentAuthorityPublisherFailure('CURRENT_FILE_PAGE_CACHE_READBACK_FAILED');
             }
         }
         $hold = $this->publication->filePagePublication('software-developers', 'zh-CN');
@@ -58,12 +89,21 @@ final class CareerCurrentAuthorityPublisher
         }
         $digest = CareerCurrentAuthorityPackage::hashValue($hashes);
         $count = count($authority['slugs']);
+        $changedIdentities = array_keys($allowedChanges ?? []);
+        sort($changedIdentities, SORT_STRING);
+        $changedSlugs = array_values(array_unique(array_map(
+            static fn (string $identity): string => explode('|', $identity, 2)[0],
+            $changedIdentities,
+        )));
 
         return [
             'package' => $authority['summary'],
             'authority' => [
                 'target_count' => $count, 'unique_slug_count' => $count, 'valid_component_order_count' => $count,
-                'changed_slug_count' => 0, 'changed_slug_set_sha256' => CareerCurrentAuthorityPackage::hashValue([]),
+                'changed_slug_count' => count($changedSlugs),
+                'changed_slug_set_sha256' => CareerCurrentAuthorityPackage::hashValue($changedSlugs),
+                'changed_locale_page_count' => count($changedIdentities),
+                'changed_locale_page_set_sha256' => CareerCurrentAuthorityPackage::hashValue($changedIdentities),
                 'first_governance_cleanup' => $fullScan,
                 'before_state_sha256' => $authority['summary']['aggregate_sha256'],
                 'after_state_sha256' => $after['summary']['aggregate_sha256'],

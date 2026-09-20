@@ -153,8 +153,10 @@ final class CareerCurrentAuthorityParity
         $redisMemory = [
             'memory_usage_total' => 0,
             'memory_usage_max_key' => 0,
+            'memory_usage_command_batches' => 0,
             'disposable_probe_write_count' => 0,
         ];
+        $memoryUsageKeys = [];
         foreach (array_chunk($slugs, 32) as $chunk) {
             foreach ($chunk as $slug) {
                 foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
@@ -189,22 +191,22 @@ final class CareerCurrentAuthorityParity
                             $key = $this->payloadKey($slug, $locale, $version);
                             Cache::forever($key, $payload);
                             $redisMemory['disposable_probe_write_count']++;
-                            $usage = $this->memoryUsage($key);
-                            $redisMemory['memory_usage_total'] += $usage;
-                            $redisMemory['memory_usage_max_key'] = max($redisMemory['memory_usage_max_key'], $usage);
+                            $memoryUsageKeys[] = $key;
                         }
                     } elseif ($includeCapacity && $redisMode === 'readonly') {
                         // A first file release has no derived entry yet; installed files are validated above.
-                        $key = \App\Services\Career\CareerFilePageReader::cacheKey($payload);
-                        $usage = $this->memoryUsage($key);
-                        $redisMemory['memory_usage_total'] += $usage;
-                        $redisMemory['memory_usage_max_key'] = max($redisMemory['memory_usage_max_key'], $usage);
+                        $memoryUsageKeys[] = \App\Services\Career\CareerFilePageReader::cacheKey($payload);
                     }
                     unset($content, $payload, $stored);
                 }
             }
             gc_collect_cycles();
         }
+        foreach ($this->memoryUsageBatch($memoryUsageKeys) as $usage) {
+            $redisMemory['memory_usage_total'] += $usage;
+            $redisMemory['memory_usage_max_key'] = max($redisMemory['memory_usage_max_key'], $usage);
+        }
+        $redisMemory['memory_usage_command_batches'] = (int) ceil(count($memoryUsageKeys) / 256);
         foreach ($hashes as &$values) {
             sort($values, SORT_STRING);
             $values = CareerCurrentAuthorityPackage::hashValue($values);
@@ -277,13 +279,27 @@ final class CareerCurrentAuthorityParity
         ];
     }
 
-    private function memoryUsage(string $cacheKey): int
+    /** @param list<string> $cacheKeys @return list<int> */
+    private function memoryUsageBatch(array $cacheKeys): array
     {
-        $key = (string) config('database.redis.options.prefix').(string) config('cache.prefix').$cacheKey;
-        $client = Cache::store()->getStore()->connection()->client();
-        $usage = $client->rawCommand('MEMORY', 'USAGE', $key);
+        if ($cacheKeys === []) {
+            return [];
+        }
+        $prefix = (string) config('database.redis.options.prefix').(string) config('cache.prefix');
+        $connection = Cache::store()->getStore()->connection();
+        $usages = [];
+        foreach (array_chunk($cacheKeys, 256) as $chunk) {
+            $batch = $connection->pipeline(static function ($pipe) use ($chunk, $prefix): void {
+                foreach ($chunk as $cacheKey) {
+                    $pipe->rawCommand('MEMORY', 'USAGE', $prefix.$cacheKey);
+                }
+            });
+            foreach ($batch as $usage) {
+                $usages[] = is_numeric($usage) ? (int) $usage : 0;
+            }
+        }
 
-        return is_numeric($usage) ? (int) $usage : 0;
+        return $usages;
     }
 
     private function pointerKey(string $slug, string $locale, string $state): string

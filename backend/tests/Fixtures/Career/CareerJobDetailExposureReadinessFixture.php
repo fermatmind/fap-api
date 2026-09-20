@@ -5,9 +5,14 @@ declare(strict_types=1);
 namespace Tests\Fixtures\Career;
 
 use App\Domain\Career\Publish\CareerJobDetailExposureReadiness;
+use App\Domain\Career\Publish\CareerJobDetailExposureReadinessBatch;
 
-final class CareerJobDetailExposureReadinessFixture implements CareerJobDetailExposureReadiness
+final class CareerJobDetailExposureReadinessFixture implements CareerJobDetailExposureReadiness, CareerJobDetailExposureReadinessBatch
 {
+    public int $singleCallCount = 0;
+
+    public int $batchCallCount = 0;
+
     /**
      * @param  array<string, string>  $classifications
      */
@@ -19,6 +24,7 @@ final class CareerJobDetailExposureReadinessFixture implements CareerJobDetailEx
 
     public function jobDetailCacheReadiness(string $slug, string $publicLocale = 'zh-CN'): array
     {
+        $this->singleCallCount++;
         $key = strtolower(trim($slug)).'|'.$this->normalizeLocale($publicLocale);
         $classification = $this->classifications[$key] ?? $this->defaultClassification;
         $ready = in_array($classification, ['ready_active', 'ready_lkg', 'legacy_migratable'], true);
@@ -28,6 +34,28 @@ final class CareerJobDetailExposureReadinessFixture implements CareerJobDetailEx
             'payload' => $ready ? ['fixture' => true] : null,
             'version' => $ready ? 'fixture-v1' : null,
         ];
+    }
+
+    public function jobDetailCacheReadinessBatch(array $targets, bool $includePayload = true): array
+    {
+        $this->batchCallCount++;
+        $result = [];
+        foreach ($targets as $target) {
+            $slug = strtolower(trim((string) ($target['slug'] ?? '')));
+            $locale = str_starts_with(strtolower(trim((string) ($target['locale'] ?? ''))), 'zh') ? 'zh-CN' : 'en';
+            $key = $slug.'|'.$locale;
+            $classification = $this->classifications[$key]
+                ?? $this->classifications[$slug.'|'.$this->normalizeLocale($locale)]
+                ?? $this->defaultClassification;
+            $ready = in_array($classification, ['ready_active', 'ready_lkg', 'legacy_migratable'], true);
+            $result[$key] = [
+                'classification' => $classification,
+                'payload' => $ready && $includePayload ? ['fixture' => true] : null,
+                'version' => $ready ? 'fixture-v1' : null,
+            ];
+        }
+
+        return $result;
     }
 
     public function jobDetailCacheIsReady(string $slug, string $publicLocale = 'zh-CN'): bool

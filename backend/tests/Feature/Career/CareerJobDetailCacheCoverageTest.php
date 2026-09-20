@@ -16,6 +16,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Queue;
+use Tests\Fixtures\Career\CareerJobDetailExposureReadinessFixture;
 use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\Support\DynamicCareerContentV3CanonicalReader;
 use Tests\TestCase;
@@ -78,6 +79,25 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         foreach ($report['examples'] as $examples) {
             $this->assertCount(1, $examples);
         }
+    }
+
+    public function test_it_uses_one_batch_readiness_call_for_the_full_target_set(): void
+    {
+        $projection = new CareerRuntimePublishProjectionVisibilityFixture(
+            defaultItemPublished: true,
+            items: [
+                'one' => ['slug' => 'one', 'runtime_publish_state' => 'published', 'detail_route_enabled' => true, 'robots_indexable' => true, 'release_gate_pass' => true],
+                'two' => ['slug' => 'two', 'runtime_publish_state' => 'published', 'detail_route_enabled' => true, 'robots_indexable' => true, 'release_gate_pass' => true],
+            ],
+        );
+        $readiness = new CareerJobDetailExposureReadinessFixture;
+        $service = new CareerJobDetailCacheCoverageService($projection, $readiness);
+
+        $report = $service->inspect(['en', 'zh-CN'])['report'];
+
+        $this->assertSame(4, $report['expected_target_count']);
+        $this->assertSame(1, $readiness->batchCallCount);
+        $this->assertSame(0, $readiness->singleCallCount);
     }
 
     public function test_generated_1046_slug_fixture_reports_2092_dynamic_targets(): void
