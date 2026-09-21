@@ -1,7 +1,7 @@
 import { execFileSync } from 'node:child_process';
 import { writeFileSync, readFileSync, mkdirSync, existsSync } from 'node:fs';
 import { digest, mayCarry, MISSIONS } from './seo-platform-12a08-activation.mjs';
-import { verifyState, assessNightly, selectNightlyArtifact } from './seo-platform-12a08-release.mjs';
+import { verifyState, assessNightly, completedNightlyFullJob, selectNightlyArtifact } from './seo-platform-12a08-release.mjs';
 const repo = process.env.GITHUB_REPOSITORY;
 if (repo !== 'fermatmind/fap-api') throw new Error('REPOSITORY_HOLD');
 const sha = process.env.DEPLOY_SHA;
@@ -37,9 +37,8 @@ const nightlyRuns = api('actions/workflows/nightly.yml/runs?status=completed&per
 let nightly = null;
 for (const run of nightlyRuns) {
   const nightlyJobs = api(`actions/runs/${run.id}/jobs?per_page=100`).jobs;
-  const fullJobs = nightlyJobs.filter(job=>job.name==='Full PHPUnit regression and performance contracts');
-  if (fullJobs.length !== 1 || fullJobs[0].conclusion === 'skipped') continue;
-  const fullJob = fullJobs[0];
+  const fullJob = completedNightlyFullJob(nightlyJobs);
+  if (!fullJob) continue;
   const listed = api(`actions/runs/${run.id}/artifacts?per_page=100`).artifacts;
   const artifact = selectNightlyArtifact(listed,run);
   let evidence;

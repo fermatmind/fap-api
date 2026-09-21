@@ -134,9 +134,11 @@ export function parseLegacyNightlyFailures(log) {
   return [...found.values()];
 }
 export function parseJUnitNightlyFailures(xml) {
-  if (typeof xml !== 'string' || !/<testsuites?\b/.test(xml) || !/<\/testsuites?>\s*$/.test(xml.trim())) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+  const normalized = typeof xml === 'string' ? xml.trim() : '';
+  const root = /<(testsuites?)\b/.exec(normalized)?.[1];
+  if (!normalized || !root || !new RegExp(`</${root}>\\s*$`).test(normalized)) throw new Error('NIGHTLY_ARTIFACT_INCOMPLETE');
   const found = new Map();
-  for (const match of xml.matchAll(/<testcase\b([^>]*)>([\s\S]*?)<\/testcase>/g)) {
+  for (const match of normalized.matchAll(/<testcase\b([^>]*)>([\s\S]*?)<\/testcase>/g)) {
     const [, attributes, body] = match;
     if (!/<(?:failure|error)\b/.test(body)) continue;
     const path = /\bfile=["'](tests\/[A-Za-z0-9_./-]+\.php)["']/.exec(attributes)?.[1] ?? nightlyPath(body);
@@ -144,6 +146,11 @@ export function parseJUnitNightlyFailures(xml) {
     found.set(path, {failed_test:path, focused_test:focusedClass(path, body)});
   }
   return [...found.values()];
+}
+export function completedNightlyFullJob(jobs) {
+  const matching = jobs.filter(job=>job.name==='Full PHPUnit regression and performance contracts');
+  if (matching.length !== 1 || !['success','failure'].includes(matching[0].conclusion)) return null;
+  return matching[0];
 }
 export function selectNightlyArtifact(artifacts, run) {
   const name = `nightly-full-phpunit-${run.head_sha}-${run.id}`;

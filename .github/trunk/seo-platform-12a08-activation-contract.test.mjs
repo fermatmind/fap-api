@@ -70,7 +70,7 @@ test('existing workflows publish completed scoped evidence without runtime opera
  assert.doesNotMatch(evidence,/--log-failed/);
 });
 test('Nightly evidence accepts both Pest paths, deduplicates, and stays fail-closed',async()=>{
- const {assessNightly,parseLegacyNightlyFailures,parseJUnitNightlyFailures,selectNightlyArtifact}=await import('./seo-platform-12a08-release.mjs');
+ const {assessNightly,completedNightlyFullJob,parseLegacyNightlyFailures,parseJUnitNightlyFailures,selectNightlyArtifact}=await import('./seo-platform-12a08-release.mjs');
  const run={id:1,head_sha:'a'.repeat(40)};
  const full=[{name:'Full PHPUnit regression and performance contracts',conclusion:'failure'}];
  assert.throws(()=>assessNightly(run,[{name:'CodeQL and Semgrep security scan',conclusion:'failure'}],'',{}),/HIGH_RISK/);
@@ -113,9 +113,21 @@ test('Nightly evidence accepts both Pest paths, deduplicates, and stays fail-clo
  const successJUnit='<testsuites><testsuite><testcase name="ok"/></testsuite></testsuites>';
  assert.deepEqual(parseJUnitNightlyFailures(successJUnit),[]);
  assert.equal(assessNightly(run,[],{junit:successJUnit,artifact_digest:`sha256:${'c'.repeat(64)}`},checks).status,'pass');
- assert.throws(()=>assessNightly(run,full,{junit:'<testsuites><testcase>',artifact_digest:`sha256:${'c'.repeat(64)}`},checks),/UNKNOWN/);
+ for (const incomplete of ['', '<testsuites><testcase>', '<testsuite></testsuites>', '<not-junit/>']) {
+  assert.throws(()=>assessNightly(run,full,{junit:incomplete,artifact_digest:`sha256:${'c'.repeat(64)}`},checks),/NIGHTLY_ARTIFACT_INCOMPLETE/);
+  assert.throws(()=>assessNightly(run,[{name:full[0].name,conclusion:'success'}],{junit:incomplete,artifact_digest:`sha256:${'c'.repeat(64)}`},checks),/NIGHTLY_ARTIFACT_INCOMPLETE/);
+ }
  assert.throws(()=>assessNightly(run,full,{junit:'<testsuites><testcase name="bad"><failure/></testcase></testsuites>',artifact_digest:`sha256:${'c'.repeat(64)}`},checks),/UNKNOWN/);
  assert.throws(()=>assessNightly(run,full,{junit},checks),/ARTIFACT_BINDING/);
+ const cancelled=[{name:full[0].name,conclusion:'cancelled',artifact:{bytes:0}}];
+ const candidates=[cancelled,full];
+ assert.equal(candidates.map(completedNightlyFullJob).find(Boolean),full[0]);
+ for (const conclusion of ['cancelled','timed_out','skipped','neutral','',undefined]) {
+  assert.equal(completedNightlyFullJob([{name:full[0].name,conclusion}]),null);
+ }
+ assert.equal(completedNightlyFullJob([full[0],full[0]]),null);
+ assert.equal(completedNightlyFullJob([{name:full[0].name,conclusion:'success'}]).conclusion,'success');
+ assert.equal(completedNightlyFullJob(full),full[0]);
  assert.equal(selectNightlyArtifact([],run),null);
  const artifact={id:7,name:`nightly-full-phpunit-${run.head_sha}-${run.id}`,expired:false,digest:`sha256:${'d'.repeat(64)}`};
  assert.equal(selectNightlyArtifact([artifact],run),artifact);
