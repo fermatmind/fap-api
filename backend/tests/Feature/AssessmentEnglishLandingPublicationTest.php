@@ -172,11 +172,32 @@ class AssessmentEnglishLandingPublicationTest extends TestCase
                 $row = DB::table($table)->where('org_id', 0)->where('code', $code);
                 $value = json_decode($row->value('content_i18n_json'), true);
                 $expectedEnglish = $entry['content'];
+                if ($code === 'MBTI') {
+                    $methodPackage = json_decode(file_get_contents(database_path('data/assessment_mbti_method_consolidation_en_20260920.json')), true, 512, JSON_THROW_ON_ERROR);
+                    foreach ($methodPackage['updates'] as $update) {
+                        $collection = data_get($expectedEnglish, $update['collection']);
+                        $index = array_search($update['id'], array_column($collection, 'id'), true);
+                        $collection[$index][$update['field']] = $update['value'];
+                        data_set($expectedEnglish, $update['collection'], $collection);
+                    }
+                }
                 if ($code === 'RIASEC') {
                     $landingSeo = json_decode(file_get_contents(database_path('data/assessment_landing_content_seo_20260917.json')), true, 512, JSON_THROW_ON_ERROR);
                     $localizedPackage = $landingSeo['scales']['RIASEC']['locales']['en'];
                     $expectedEnglish['why_choose']['items'][] = $localizedPackage['version_item'];
                     $expectedEnglish['version_comparison'] = $localizedPackage['version_comparison'];
+                    $parityPackage = json_decode(file_get_contents(database_path('data/assessment_riasec_parity_en_20260921.json')), true, 512, JSON_THROW_ON_ERROR);
+                    foreach ($parityPackage['updates'] as $update) {
+                        if (isset($update['path'])) {
+                            data_set($expectedEnglish, $update['path'], $update['value']);
+
+                            continue;
+                        }
+                        $collection = data_get($expectedEnglish, $update['collection']);
+                        $index = array_search($update['id'], array_column($collection, 'id'), true);
+                        $collection[$index][$update['field']] = $update['value'];
+                        data_set($expectedEnglish, $update['collection'], $collection);
+                    }
                 }
                 $this->assertSame($expectedEnglish, $value['en']);
                 $value['en']['why_choose']['title'] = 'Later English revision';

@@ -78,6 +78,32 @@ final class ScalesLookupSeoMetadataTest extends TestCase
         $this->assertSame(['#method-and-evidence', '/en/reliability-validity'], array_column($validity['related_links'], 'href'));
     }
 
+    public function test_riasec_en_lookup_uses_bilingual_parity_copy_without_changing_other_fields(): void
+    {
+        $response = $this->getJson('/api/v0.3/scales/lookup?slug=holland-career-interest-test-riasec&locale=en')
+            ->assertOk()
+            ->assertJsonPath('forms.0.form_code', 'riasec_60')
+            ->assertJsonPath('forms.0.question_count', 60)
+            ->assertJsonPath('forms.0.estimated_minutes', 8)
+            ->assertJsonPath('forms.1.form_code', 'riasec_140')
+            ->assertJsonPath('forms.1.question_count', 140)
+            ->assertJsonPath('forms.1.estimated_minutes', 18);
+        $package = json_decode(file_get_contents(database_path('data/assessment_riasec_parity_en_20260921.json')), true, 512, JSON_THROW_ON_ERROR);
+        $english = $response->json('content_i18n_json.en');
+
+        foreach ($package['updates'] as $update) {
+            $actual = isset($update['path'])
+                ? data_get($english, $update['path'])
+                : collect(data_get($english, $update['collection']))->firstWhere('id', $update['id'])[$update['field']];
+            $this->assertSame($update['value'], $actual);
+        }
+
+        $modelFaq = collect($english['faq'])->firstWhere('id', 'faq-riasec-model');
+        $this->assertSame('What is a Holland Code test? What do the RIASEC letters mean?', $modelFaq['q']);
+        $this->assertSame('https://www.onetcenter.org/reports/IP_Manual.html', $modelFaq['references'][0]['href']);
+        $this->assertCount(5, $english['version_comparison']['rows']);
+    }
+
     public function test_subsequent_default_seed_preserves_published_mbti_content(): void
     {
         $expected = [];

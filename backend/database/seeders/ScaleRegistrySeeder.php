@@ -781,6 +781,30 @@ final class ScaleRegistrySeeder extends Seeder
         }
     }
 
+    private function applyRiasecEnglishParity(array &$attributes): void
+    {
+        if (($attributes['code'] ?? null) !== 'RIASEC') {
+            return;
+        }
+
+        $package = json_decode(file_get_contents(database_path('data/assessment_riasec_parity_en_20260921.json')), true, 512, JSON_THROW_ON_ERROR);
+        foreach ($package['updates'] as $update) {
+            if (isset($update['path'])) {
+                data_set($attributes['content_i18n_json']['en'], $update['path'], $update['value']);
+
+                continue;
+            }
+
+            $collection = data_get($attributes['content_i18n_json']['en'], $update['collection']);
+            $index = is_array($collection) ? array_search($update['id'], array_column($collection, 'id'), true) : false;
+            if ($index === false) {
+                throw new \RuntimeException('RIASEC.'.$update['collection'].'.'.$update['id'].' is missing from the English seed baseline.');
+            }
+            $collection[$index][$update['field']] = $update['value'];
+            data_set($attributes['content_i18n_json']['en'], $update['collection'], $collection);
+        }
+    }
+
     private function upsertAssessmentPreservingFaq(ScaleRegistryWriter $writer, array $attributes): \App\Models\ScaleRegistry
     {
         $package = json_decode(file_get_contents(database_path('data/assessment_faq_zh_20260906.json')), true, 512, JSON_THROW_ON_ERROR);
@@ -820,6 +844,7 @@ final class ScaleRegistrySeeder extends Seeder
 
         $english = json_decode(file_get_contents(database_path('data/assessment_landing_en_20260907.json')), true, 512, JSON_THROW_ON_ERROR);
         $attributes['content_i18n_json']['en'] = array_replace($attributes['content_i18n_json']['en'] ?? [], $english['scales'][$attributes['code']]['content']);
+        $this->applyRiasecEnglishParity($attributes);
         $this->applyLandingContentSeo($attributes);
 
         return DB::transaction(function () use ($writer, $attributes) {
