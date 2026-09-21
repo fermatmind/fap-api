@@ -68,6 +68,11 @@ for (const count of [1, 100, 200]) {
     const classification = applyCareerContentOnly(classifyPaths(input.paths), receipt);
     assert.equal(classification.operations.career_content_only, true);
     assert.equal(classification.operations.a08_scoped_checks, false);
+    assert.equal(classification.career_content_change.contract_version, receipt.contract_version);
+    assert.equal(classification.career_content_change.base_sha, receipt.base_sha);
+    assert.equal(classification.career_content_change.head_sha, receipt.head_sha);
+    assert.equal(classification.career_content_change.candidate_tree_sha, receipt.candidate_tree_sha);
+    assert.deepEqual(classification.career_content_change.changed_pages, receipt.changed_pages);
   });
 }
 

@@ -57,13 +57,7 @@ export function applyCareerContentOnly(classification, careerReceipt) {
   const careerContentOnly = careerReceipt.status === 'eligible';
   classification.operations.career_content_only = careerContentOnly;
   if (careerContentOnly) classification.operations.a08_scoped_checks = false;
-  classification.career_content_change = {
-    status: careerReceipt.status,
-    reason: careerReceipt.reason,
-    receipt_digest: careerReceipt.receipt_digest ?? null,
-    changed_page_count: careerReceipt.changed_page_count ?? 0,
-    changed_slug_count: careerReceipt.changed_slug_count ?? 0,
-  };
+  classification.career_content_change = structuredClone(careerReceipt);
   return classification;
 }
 
