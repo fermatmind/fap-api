@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Events\PublicAuthorityChanged;
 use App\Models\Concerns\HasOrgScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -63,6 +64,55 @@ class CareerGuide extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    protected static function booted(): void
+    {
+        static::saved(static function (self $guide): void {
+            if ($guide->isDirty()) {
+                $guide->dispatchUrlTruthChanges(false);
+            }
+        });
+        static::deleted(static fn (self $guide) => $guide->dispatchUrlTruthChanges(true));
+    }
+
+    private function dispatchUrlTruthChanges(bool $deleted): void
+    {
+        $before = $this->getRawOriginal();
+        $after = $this->getAttributes();
+        $wasPublic = $this->isUrlTruthCandidate($before);
+        $isPublic = ! $deleted && $this->isUrlTruthCandidate($after);
+        $locales = [];
+        if ($wasPublic && (! $isPublic || $before['locale'] !== $after['locale'])) {
+            $locales[(string) $before['locale']] = 'unpublish';
+        }
+        if ($isPublic) {
+            $locales[(string) $after['locale']] = 'authority_revision';
+        }
+        foreach ($locales as $locale => $change) {
+            event(new PublicAuthorityChanged(
+                pageEntityType: 'career_guide',
+                entityIdentity: (string) $this->getKey(),
+                locale: $locale,
+                revision: hash('sha256', json_encode([
+                    $after, $deleted, $locale, $change,
+                ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES)),
+                change: $change,
+            ));
+        }
+    }
+
+    /** @param array<string,mixed> $attributes */
+    private function isUrlTruthCandidate(array $attributes): bool
+    {
+        return isset($attributes['org_id']) && (int) $attributes['org_id'] === 0
+            && ($attributes['status'] ?? null) === self::STATUS_PUBLISHED
+            && (bool) ($attributes['is_public'] ?? false)
+            && (bool) ($attributes['is_indexable'] ?? false)
+            && in_array($attributes['locale'] ?? null, self::SUPPORTED_LOCALES, true)
+            && trim((string) ($attributes['slug'] ?? '')) !== ''
+            && (($attributes['published_at'] ?? null) === null
+                || $this->asDateTime($attributes['published_at'])->lte(now()));
+    }
 
     public static function allowOrgZeroContext(): bool
     {

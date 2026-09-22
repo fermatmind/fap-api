@@ -5,13 +5,16 @@ declare(strict_types=1);
 namespace Tests\Feature\SeoIntel;
 
 use App\Events\PublicAuthorityChanged;
+use App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth;
 use App\Listeners\QueueUrlTruthIncrementalSync;
+use App\Models\CareerGuide;
 use App\Services\SeoIntel\Sources\UrlTruthInventorySource;
 use App\Services\SeoIntel\UrlTruth\EffectivePublicUrlEvaluator;
 use App\Services\SeoIntel\UrlTruth\IncrementalUrlTruthSyncService;
 use App\Services\SeoIntel\UrlTruthInventoryRecord;
 use App\Services\SeoIntel\UrlTruthInventoryRecordWriter;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
@@ -119,13 +122,272 @@ final class SeoPlatform05IncrementalUrlTruthSyncTest extends TestCase
         self::assertSame(1, DB::connection('seo_intel')->table('seo_url_entities')->where('binding_status', 'current')->count());
     }
 
-    private function record(): UrlTruthInventoryRecord
+    public function test_guide_publication_dispatches_only_after_commit_and_rollback_dispatches_nothing(): void
+    {
+        $this->prepareSchema();
+        $this->prepareGuideSchema();
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => true]);
+        Bus::fake([SyncPublicAuthorityUrlTruth::class]);
+        $connection = DB::connection('seo_intel');
+        $connection->beginTransaction();
+        $guide = $this->createGuide();
+        Bus::assertNotDispatched(SyncPublicAuthorityUrlTruth::class);
+        $connection->commit();
+        Bus::assertDispatched(SyncPublicAuthorityUrlTruth::class, fn ($job): bool => $job->pageEntityType === 'career_guide'
+            && $job->entityIdentity === (string) $guide->id
+            && $job->locale === 'en'
+            && preg_match('/^[a-f0-9]{64}$/', $job->revision) === 1);
+        Bus::assertDispatchedTimes(SyncPublicAuthorityUrlTruth::class, 1);
+
+        $connection->beginTransaction();
+        $guide->update(['slug' => 'rolled-back-guide']);
+        $connection->rollBack();
+        Bus::assertDispatchedTimes(SyncPublicAuthorityUrlTruth::class, 1);
+        self::assertSame('safe-guide', $connection->table('career_guides')->value('slug'));
+    }
+
+    public function test_guide_draft_tenant_and_disabled_write_events_do_not_dispatch_jobs(): void
+    {
+        $this->prepareSchema();
+        $this->prepareGuideSchema();
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => true]);
+        Bus::fake([SyncPublicAuthorityUrlTruth::class]);
+        $this->createGuide(['status' => 'draft']);
+        $this->createGuide(['is_public' => false]);
+        $this->createGuide(['is_indexable' => false]);
+        $this->createGuide(['org_id' => 7]);
+        config(['seo_intel.write_enabled' => false]);
+        $this->createGuide();
+        Bus::assertNotDispatched(SyncPublicAuthorityUrlTruth::class);
+    }
+
+    public function test_guide_changed_locale_and_unpublication_keep_the_old_identity_syncable(): void
+    {
+        $this->prepareSchema();
+        $this->prepareGuideSchema();
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => true]);
+        Bus::fake([SyncPublicAuthorityUrlTruth::class]);
+        $guide = $this->createGuide();
+        $guide->save();
+        Bus::assertDispatchedTimes(SyncPublicAuthorityUrlTruth::class, 1);
+        $guide->update(['locale' => 'zh-CN']);
+        Bus::assertDispatchedTimes(SyncPublicAuthorityUrlTruth::class, 3);
+        $guide->update(['status' => 'draft']);
+        Bus::assertDispatchedTimes(SyncPublicAuthorityUrlTruth::class, 4);
+        Bus::assertDispatched(SyncPublicAuthorityUrlTruth::class, fn ($job): bool => $job->locale === 'en' && $job->change === 'unpublish');
+        Bus::assertDispatched(SyncPublicAuthorityUrlTruth::class, fn ($job): bool => $job->locale === 'zh-CN' && $job->change === 'unpublish');
+    }
+
+    public function test_incremental_readback_failure_rolls_back_url_and_binding(): void
+    {
+        $this->prepareSchema();
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => true]);
+        $record = $this->record();
+        $source = new class($record) implements UrlTruthInventorySource
+        {
+            public function __construct(private UrlTruthInventoryRecord $record) {}
+
+            public function candidates(): array
+            {
+                return [$this->record];
+            }
+
+            public function metadata(): array
+            {
+                return [];
+            }
+        };
+        $connection = DB::connection('seo_intel');
+        $connection->unprepared("CREATE TRIGGER corrupt_truth AFTER INSERT ON seo_urls BEGIN UPDATE seo_urls SET entity_id_or_slug = 'wrong-identity' WHERE id = NEW.id; END");
+        $service = new IncrementalUrlTruthSyncService($source, new EffectivePublicUrlEvaluator, new UrlTruthInventoryRecordWriter);
+        $failure = null;
+        try {
+            $service->sync('career_job', 'safe-job', 'en', 'revision-1', 'publish');
+        } catch (\RuntimeException $exception) {
+            $failure = $exception;
+        }
+        self::assertNotNull($failure);
+        self::assertStringContainsString('readback', $failure->getMessage());
+        self::assertSame(0, $connection->table('seo_urls')->count());
+        self::assertSame(0, $connection->table('seo_url_entities')->count());
+    }
+
+    public function test_incremental_sync_does_not_overwrite_another_identity_at_the_same_url(): void
+    {
+        $this->prepareSchema();
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => true]);
+        $record = $this->record();
+        $source = new class($record) implements UrlTruthInventorySource
+        {
+            public function __construct(private UrlTruthInventoryRecord $record) {}
+
+            public function candidates(): array
+            {
+                return [$this->record];
+            }
+
+            public function metadata(): array
+            {
+                return [];
+            }
+        };
+        (new UrlTruthInventoryRecordWriter)->write([$record]);
+        $connection = DB::connection('seo_intel');
+        $connection->table('seo_urls')->update(['entity_id_or_slug' => 'another-identity']);
+        $before = $connection->table('seo_urls')->get()->toJson();
+        $service = new IncrementalUrlTruthSyncService($source, new EffectivePublicUrlEvaluator, new UrlTruthInventoryRecordWriter);
+        $failure = null;
+        try {
+            $service->sync('career_job', 'safe-job', 'en', 'revision-1', 'publish');
+        } catch (\RuntimeException $exception) {
+            $failure = $exception;
+        }
+        self::assertNotNull($failure);
+        self::assertStringContainsString('conflict', $failure->getMessage());
+        self::assertSame($before, $connection->table('seo_urls')->get()->toJson());
+    }
+
+    public function test_authority_change_during_incremental_sync_rolls_back(): void
+    {
+        $this->prepareSchema();
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => true]);
+        $source = new class($this->record()) implements UrlTruthInventorySource
+        {
+            private int $reads = 0;
+
+            public function __construct(private UrlTruthInventoryRecord $record) {}
+
+            public function candidates(): array
+            {
+                return ++$this->reads === 1 ? [$this->record] : [];
+            }
+
+            public function metadata(): array
+            {
+                return [];
+            }
+        };
+        $service = new IncrementalUrlTruthSyncService($source, new EffectivePublicUrlEvaluator, new UrlTruthInventoryRecordWriter);
+        $failure = null;
+        try {
+            $service->sync('career_job', 'safe-job', 'en', 'revision-1', 'publish');
+        } catch (\RuntimeException $exception) {
+            $failure = $exception;
+        }
+        self::assertNotNull($failure);
+        self::assertStringContainsString('authority changed', $failure->getMessage());
+        self::assertSame(0, DB::connection('seo_intel')->table('seo_urls')->count());
+        self::assertSame(0, DB::connection('seo_intel')->table('seo_url_entities')->count());
+    }
+
+    public function test_wrong_binding_repair_preserves_history_and_non_target_semantics(): void
+    {
+        $this->prepareSchema();
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => true]);
+        $record = $this->record();
+        $other = $this->record('another-job');
+        $source = new class($record, $other) implements UrlTruthInventorySource
+        {
+            public function __construct(private UrlTruthInventoryRecord $record, private UrlTruthInventoryRecord $other) {}
+
+            public function candidates(): array
+            {
+                return [$this->record, $this->other];
+            }
+
+            public function metadata(): array
+            {
+                return [];
+            }
+        };
+        (new UrlTruthInventoryRecordWriter)->write([$record, $other]);
+        $connection = DB::connection('seo_intel');
+        $otherBefore = $connection->table('seo_urls')->where('entity_id_or_slug', 'another-job')->get()->toJson();
+        $connection->table('seo_url_entities')->where('entity_id_or_slug', 'safe-job')->update(['canonical_url_hash' => hash('sha256', 'old-canonical')]);
+        $service = new IncrementalUrlTruthSyncService($source, new EffectivePublicUrlEvaluator, new UrlTruthInventoryRecordWriter);
+        self::assertSame('synced', $service->sync('career_job', 'safe-job', 'en', 'revision-1', 'publish')['status']);
+        self::assertSame($otherBefore, $connection->table('seo_urls')->where('entity_id_or_slug', 'another-job')->get()->toJson());
+        self::assertSame(1, $connection->table('seo_url_entities')->where('entity_id_or_slug', 'safe-job')->where('binding_status', 'current')->count());
+        self::assertSame(1, $connection->table('seo_url_entities')->where('entity_id_or_slug', 'safe-job')->where('binding_status', 'superseded_canonical')->whereNotNull('superseded_by_id')->count());
+        $beforeRerun = $connection->table('seo_url_entities')->orderBy('id')->get()->toJson();
+        self::assertSame('no_change', $service->sync('career_job', 'safe-job', 'en', 'revision-1', 'publish')['status']);
+        self::assertSame($beforeRerun, $connection->table('seo_url_entities')->orderBy('id')->get()->toJson());
+    }
+
+    public function test_duplicate_canonical_binding_is_rejected_without_mutating_history(): void
+    {
+        $this->prepareSchema();
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => true]);
+        $record = $this->record();
+        $source = new class($record) implements UrlTruthInventorySource
+        {
+            public function __construct(private UrlTruthInventoryRecord $record) {}
+
+            public function candidates(): array
+            {
+                return [$this->record];
+            }
+
+            public function metadata(): array
+            {
+                return [];
+            }
+        };
+        (new UrlTruthInventoryRecordWriter)->write([$record]);
+        $connection = DB::connection('seo_intel');
+        $duplicate = (array) $connection->table('seo_url_entities')->first();
+        unset($duplicate['id']);
+        $duplicate['entity_id_or_slug'] = 'other-identity';
+        $duplicate['current_binding_key'] = hash('sha256', 'other-key');
+        $connection->table('seo_url_entities')->insert($duplicate);
+        $before = $connection->table('seo_url_entities')->orderBy('id')->get()->toJson();
+        $failure = null;
+        try {
+            (new IncrementalUrlTruthSyncService($source, new EffectivePublicUrlEvaluator, new UrlTruthInventoryRecordWriter))
+                ->sync('career_job', 'safe-job', 'en', 'revision-1', 'publish');
+        } catch (\RuntimeException $exception) {
+            $failure = $exception;
+        }
+        self::assertNotNull($failure);
+        self::assertStringContainsString('canonical binding conflict', $failure->getMessage());
+        self::assertSame($before, $connection->table('seo_url_entities')->orderBy('id')->get()->toJson());
+    }
+
+    private function prepareGuideSchema(): void
+    {
+        Schema::connection('seo_intel')->create('career_guides', function (Blueprint $table): void {
+            $table->id();
+            $table->integer('org_id');
+            $table->string('slug');
+            $table->string('locale');
+            $table->string('status');
+            $table->boolean('is_public');
+            $table->boolean('is_indexable');
+            $table->timestamp('published_at')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    private function createGuide(array $attributes = []): CareerGuide
+    {
+        $guide = new CareerGuide;
+        $guide->setConnection('seo_intel');
+        $guide->forceFill($attributes + [
+            'org_id' => 0, 'slug' => 'safe-guide', 'locale' => 'en',
+            'status' => 'published', 'is_public' => true, 'is_indexable' => true,
+            'published_at' => now()->subMinute(),
+        ])->save();
+
+        return $guide;
+    }
+
+    private function record(string $slug = 'safe-job'): UrlTruthInventoryRecord
     {
         return new UrlTruthInventoryRecord(
-            canonicalUrl: 'https://fermatmind.com/en/career/jobs/safe-job',
+            canonicalUrl: 'https://fermatmind.com/en/career/jobs/'.$slug,
             locale: 'en',
             pageEntityType: 'career_job',
-            entityIdOrSlug: 'safe-job',
+            entityIdOrSlug: $slug,
             sourceAuthority: 'career_runtime_publish_projection',
             indexabilityState: 'indexable',
             cluster: 'career',

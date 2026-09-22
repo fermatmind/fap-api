@@ -61,35 +61,87 @@ final class IncrementalUrlTruthSyncService
         }
 
         $authorityRevision = $this->revisionHash((string) ($evaluation['authority_revision'] ?? ''));
+        $family = (string) $evaluation['family_id'];
         $connection = $this->connection();
-        $currentUrl = $connection->table('seo_urls')
-            ->where('locale', $locale)
+
+        return $connection->transaction(function () use ($connection, $record, $authorityRevision, $family, $pageEntityType, $entityIdentity, $locale, $revision, $change): array {
+            $url = $connection->table('seo_urls')
+                ->where('locale', $locale)
+                ->where('canonical_url_hash', $record->canonicalUrlHash())
+                ->lockForUpdate()->first();
+            if ($url !== null && ((string) $url->page_entity_type !== $pageEntityType
+                || (string) $url->entity_id_or_slug !== $entityIdentity)) {
+                throw new RuntimeException('incremental URL Truth canonical identity conflict.');
+            }
+            $bindings = $connection->table('seo_url_entities')
+                ->where('current_binding_key', $this->bindingKey($pageEntityType, $entityIdentity, $locale))
+                ->lockForUpdate()->get();
+            if ($bindings->count() > 1 || $bindings->contains(fn ($binding): bool => (string) $binding->page_entity_type !== $pageEntityType
+                || (string) $binding->entity_id_or_slug !== $entityIdentity
+                || (string) $binding->locale !== $locale)) {
+                throw new RuntimeException('incremental URL Truth current identity conflict.');
+            }
+            $conflictingCanonicalBinding = $connection->table('seo_url_entities')
+                ->where('canonical_url_hash', $record->canonicalUrlHash())
+                ->where('locale', $locale)
+                ->where('binding_status', 'current')
+                ->whereNotNull('current_binding_key')
+                ->where('current_binding_key', '!=', $this->bindingKey($pageEntityType, $entityIdentity, $locale))
+                ->lockForUpdate()->exists();
+            if ($conflictingCanonicalBinding) {
+                throw new RuntimeException('incremental URL Truth canonical binding conflict.');
+            }
+            if ($this->hasCurrentReadback($record, $authorityRevision, $family)) {
+                return $this->receipt('no_change', $pageEntityType, $locale, $revision, $change, false);
+            }
+
+            $this->writer->write([$record]);
+            $fresh = array_values(array_filter($this->authority->candidates(), static fn (UrlTruthInventoryRecord $candidate): bool => $candidate->pageEntityType === $pageEntityType
+                && (string) $candidate->entityIdOrSlug === $entityIdentity
+                && $candidate->locale === $locale));
+            if (count($fresh) !== 1 || $fresh[0]->canonicalUrl !== $record->canonicalUrl
+                || $fresh[0]->sourceAuthority !== $record->sourceAuthority
+                || $fresh[0]->entitySource !== $record->entitySource
+                || $this->evaluator->evaluate($fresh[0]) !== $this->evaluator->evaluate($record)) {
+                throw new RuntimeException('incremental URL Truth authority changed during synchronization.');
+            }
+            if (! $this->hasCurrentReadback($record, $authorityRevision, $family)) {
+                throw new RuntimeException('incremental URL Truth URL and binding readback failed.');
+            }
+
+            return $this->receipt('synced', $pageEntityType, $locale, $revision, $change, true);
+        });
+    }
+
+    private function hasCurrentReadback(UrlTruthInventoryRecord $record, string $revision, string $family): bool
+    {
+        $connection = $this->connection();
+        $urlCount = $connection->table('seo_urls')
+            ->where('locale', $record->locale)
             ->where('canonical_url_hash', $record->canonicalUrlHash())
+            ->where('canonical_url', $record->canonicalUrl)
+            ->where('page_entity_type', $record->pageEntityType)
+            ->where('entity_id_or_slug', $record->entityIdOrSlug)
+            ->where('source_authority', $record->sourceAuthority)
             ->where('indexability_state', 'indexable')
-            ->where('authority_revision', $authorityRevision)
-            ->exists();
-        $currentBinding = $connection->table('seo_url_entities')
-            ->where('current_binding_key', $this->bindingKey($pageEntityType, $entityIdentity, $locale))
-            ->where('canonical_url_hash', $record->canonicalUrlHash())
-            ->where('binding_status', 'current')
-            ->where('authority_revision', $authorityRevision)
-            ->count() === 1;
-        if ($currentUrl && $currentBinding) {
-            return $this->receipt('no_change', $pageEntityType, $locale, $revision, $change, false);
-        }
-
-        $this->writer->write([$record]);
-
-        $readback = $connection->table('seo_url_entities')
-            ->where('current_binding_key', $this->bindingKey($pageEntityType, $entityIdentity, $locale))
-            ->where('canonical_url_hash', $record->canonicalUrlHash())
-            ->where('binding_status', 'current')
+            ->where('is_private_flow', false)
+            ->where('page_family', $family)
+            ->where('authority_revision', $revision)
             ->count();
-        if ($readback !== 1) {
-            throw new RuntimeException('incremental URL Truth current binding readback failed.');
-        }
+        $bindingCount = $connection->table('seo_url_entities')
+            ->where('current_binding_key', $this->bindingKey($record->pageEntityType, (string) $record->entityIdOrSlug, $record->locale))
+            ->where('canonical_url_hash', $record->canonicalUrlHash())
+            ->where('locale', $record->locale)
+            ->where('page_entity_type', $record->pageEntityType)
+            ->where('entity_id_or_slug', $record->entityIdOrSlug)
+            ->where('entity_source', $record->entitySource)
+            ->where('authority_status', $record->authorityStatus)
+            ->where('binding_status', 'current')
+            ->where('page_family', $family)
+            ->where('authority_revision', $revision)
+            ->count();
 
-        return $this->receipt('synced', $pageEntityType, $locale, $revision, $change, true);
+        return $urlCount === 1 && $bindingCount === 1;
     }
 
     /** @return array<string,mixed> */
