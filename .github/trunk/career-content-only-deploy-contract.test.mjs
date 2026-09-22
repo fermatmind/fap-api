@@ -53,6 +53,7 @@ test('CI builds one deterministic SHA-bound package and deploy stages consume it
 test('remote package traversal guard accepts tar directory entries without weakening rejection', () => {
   const guard = deploy.match(/normalized="\\\$\{entry#\.\/\}"[\s\S]*?done < <\(tar -tzf "\\\$archive"\)/)?.[0] ?? '';
   assert.match(guard, /path_for_check="\\\$\{normalized%\/\}"/);
+  assert.match(guard, /if \[ -n "\\\$path_for_check" \]; then/);
   assert.ok(guard.includes('case "/\\$path_for_check/" in *\'/../\'*|*\'//\'*)'));
   assert.ok(!guard.includes('case "/\\$normalized/" in *\'/../\'*|*\'//\'*)'));
 });

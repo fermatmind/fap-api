@@ -5139,7 +5139,9 @@ while IFS= read -r entry; do
     *) echo "career content package path refused" >&2; exit 1 ;;
   esac
   path_for_check="\${normalized%/}"
-  case "/\$path_for_check/" in *'/../'*|*'//'*) echo "career content package traversal refused" >&2; exit 1 ;; esac
+  if [ -n "\$path_for_check" ]; then
+    case "/\$path_for_check/" in *'/../'*|*'//'*) echo "career content package traversal refused" >&2; exit 1 ;; esac
+  fi
 done < <(tar -tzf "\$archive")
 tar -xzf "\$archive" -C "\$package_dir"
 binding="\$package_dir/binding.json"
