@@ -69,12 +69,12 @@ final class SeoPlatform12A08SourceCheckTest extends TestCase
     {
         Schema::connection('seo_intel')->create('seo_gsc_sync_runs', function (Blueprint $table): void {
             $table->id();
-            foreach (['trigger_mode', 'status', 'started_at', 'finished_at', 'receipt_json', 'rows_seen', 'failure_code'] as $field) {
+            foreach (['trigger_mode', 'status', 'created_at', 'started_at', 'finished_at', 'receipt_json', 'rows_seen', 'failure_code'] as $field) {
                 $table->text($field)->nullable();
             }
         });
         DB::connection('seo_intel')->table('seo_gsc_sync_runs')->insert([
-            'trigger_mode' => 'scheduled', 'status' => 'failed', 'started_at' => now()->subMinute(),
+            'trigger_mode' => 'scheduled', 'status' => 'failed', 'started_at' => now()->subMinute(), 'created_at' => now()->subMinute(),
             'finished_at' => now(), 'rows_seen' => 0, 'failure_code' => 'upstream_failure',
         ]);
         Schema::connection('seo_intel')->create('seo_runtime_probe_receipts', function (Blueprint $table): void {

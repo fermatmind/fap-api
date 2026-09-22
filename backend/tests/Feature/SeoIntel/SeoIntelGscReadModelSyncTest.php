@@ -170,6 +170,10 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
     #[Test]
     public function scheduled_full_window_reconciles_all_dates_and_emits_only_sanitized_closeout_statistics(): void
     {
+        $expand = require database_path('migrations/seo_intel/2026_09_22_160000_expand_gsc_run_utc_start.php');
+        (new \ReflectionProperty($expand, 'connection'))->setValue($expand, 'seo_intel_gsc_sync_test');
+        $expand->up();
+        $expand->up();
         config([
             'seo_intel.gsc_sync.max_pages_per_run' => 20,
             'seo_intel.url_truth_inventory.backend_authority_canary_candidates' => [[
@@ -194,6 +198,10 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
         $result = app(GscReadModelSyncService::class)->sync(7, ['web'], true, 'scheduled');
 
         $this->assertSame('success', $result['status']);
+        $run = DB::connection('seo_intel_gsc_sync_test')->table('seo_gsc_sync_runs')->where('sync_run_uid', $result['sync_run_uid'])->first();
+        $this->assertSame('2026-08-23 12:00:00.000000', $run->started_at_utc);
+        $this->assertNotNull($run->finished_at);
+        $this->assertNotNull($run->receipt_json);
         $this->assertSame('full_window', $result['fetch_mode']);
         $this->assertSame('scheduled', $result['trigger_mode']);
         $this->assertSame('America/Los_Angeles', $result['reporting_timezone']);

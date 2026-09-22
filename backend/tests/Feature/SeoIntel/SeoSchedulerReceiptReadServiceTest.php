@@ -37,6 +37,7 @@ final class SeoSchedulerReceiptReadServiceTest extends TestCase
             $table->string('trigger_mode', 32);
             $table->string('status', 32);
             $table->timestamp('started_at');
+            $table->timestamp('created_at')->nullable();
             $table->timestamp('finished_at')->nullable();
             $table->json('receipt_json')->nullable();
         });
@@ -78,6 +79,7 @@ final class SeoSchedulerReceiptReadServiceTest extends TestCase
             'trigger_mode' => 'scheduled',
             'status' => 'success',
             'started_at' => $now,
+            'created_at' => $now,
             'finished_at' => $now,
             'receipt_json' => json_encode([
                 'trigger_mode' => 'scheduled',

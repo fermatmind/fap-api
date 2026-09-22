@@ -44,16 +44,16 @@ final class SeoSchedulerReceiptReadService
             return ['status' => 'missing'];
         }
 
-        $row = DB::connection($connection)->table('seo_gsc_sync_runs')
-            ->where('trigger_mode', 'scheduled')
-            ->orderByDesc('started_at')
-            ->first(['status', 'started_at', 'finished_at', 'receipt_json']);
+        $row = \App\Services\SeoIntel\GscRunStartTime::latest(
+            DB::connection($connection)->table('seo_gsc_sync_runs')->where('trigger_mode', 'scheduled'),
+            ['status', 'finished_at', 'receipt_json'],
+        );
         if ($row === null) {
             return ['status' => 'missing'];
         }
 
         $receipt = json_decode((string) ($row->receipt_json ?? ''), true);
-        $completedAt = $row->finished_at ?? $row->started_at;
+        $completedAt = $row->finished_at ?? $row->run_started_at_utc;
 
         return [
             'status' => (string) $row->status,

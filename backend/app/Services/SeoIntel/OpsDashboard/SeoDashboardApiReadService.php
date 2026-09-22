@@ -368,7 +368,7 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
             return ['state' => 'disconnected', 'failure_code' => null, 'last_success_at' => null, 'last_attempt_at' => null];
         }
 
-        $latest = $this->table('seo_gsc_sync_runs')->orderByDesc('started_at')->first();
+        $latest = \App\Services\SeoIntel\GscRunStartTime::latest($this->table('seo_gsc_sync_runs'), ['status', 'failure_code', 'finished_at']);
         $lastSuccess = $this->table('seo_gsc_sync_runs')
             ->where('status', 'success')
             ->orderByDesc('finished_at')
@@ -384,7 +384,7 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
             },
             'failure_code' => isset($latest->failure_code) ? (string) $latest->failure_code : null,
             'last_success_at' => $this->normalizeTimestamp($lastSuccess->finished_at ?? null),
-            'last_attempt_at' => $this->normalizeTimestamp($latest->finished_at ?? $latest->started_at ?? null),
+            'last_attempt_at' => $this->normalizeTimestamp($latest->finished_at ?? $latest->run_started_at_utc ?? null),
         ];
     }
 

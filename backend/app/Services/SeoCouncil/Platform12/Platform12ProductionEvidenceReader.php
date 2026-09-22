@@ -190,10 +190,13 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
     {
         // Read the latest scheduled attempt, including a failure; never hide it
         // by falling back to an older successful run.
-        $row = $this->connection()->table('seo_gsc_sync_runs')->where('trigger_mode', 'scheduled')
-            ->orderByDesc('started_at')->first(['status', 'started_at', 'finished_at', 'receipt_json', 'rows_seen', 'failure_code']);
+        $row = \App\Services\SeoIntel\GscRunStartTime::latest(
+            $this->connection()->table('seo_gsc_sync_runs')->where('trigger_mode', 'scheduled'),
+            ['status', 'finished_at', 'receipt_json', 'rows_seen', 'failure_code'],
+            $now,
+        );
         if ($row !== null && in_array($row->status, ['failed', 'quality_failed', 'running'], true)) {
-            $observed = CarbonImmutable::parse($row->finished_at ?? $row->started_at, 'UTC');
+            $observed = CarbonImmutable::parse($row->finished_at ?? $row->run_started_at_utc, 'UTC');
             if ($observed->gt($now)) {
                 throw new \RuntimeException('GSC_RECEIPT_INVALID');
             }

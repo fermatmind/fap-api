@@ -94,7 +94,7 @@ final class GscReadModelSyncService
         $runUid = (string) Str::uuid();
         $now = CarbonImmutable::now('UTC');
 
-        $connection->table('seo_gsc_sync_runs')->insert([
+        $run = [
             'sync_run_uid' => $runUid,
             'window_days' => $windowDays,
             'start_date' => $startDate->toDateString(),
@@ -105,7 +105,11 @@ final class GscReadModelSyncService
             'started_at' => $now->toDateTimeString(),
             'created_at' => $now->toDateTimeString(),
             'updated_at' => $now->toDateTimeString(),
-        ]);
+        ];
+        if (GscRunStartTime::expanded($connection)) {
+            $run['started_at_utc'] = $now->format('Y-m-d H:i:s.u');
+        }
+        $connection->table('seo_gsc_sync_runs')->insert($run);
 
         try {
             [$rows, $pages, $failure] = $this->fetchRows($startDate, $endDate, $searchTypes);

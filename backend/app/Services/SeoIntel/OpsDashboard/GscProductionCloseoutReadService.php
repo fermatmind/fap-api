@@ -105,11 +105,15 @@ final class GscProductionCloseoutReadService extends AbstractSeoDashboardReadSer
             ];
         }
 
+        $start = \App\Services\SeoIntel\GscRunStartTime::expression($this->connection());
+        $now = now('UTC');
+        $unknownStarts = $this->table('seo_gsc_sync_runs')->where('trigger_mode', 'scheduled')
+            ->where(fn ($query) => $query->whereRaw($start.' IS NULL')->orWhereRaw($start.' > ?', [$now->format('Y-m-d H:i:s.u')]))->count();
         $rows = $this->table('seo_gsc_sync_runs')
             ->where('trigger_mode', 'scheduled')
-            ->where('started_at', '>=', now('UTC')->subDays(27)->startOfDay())
-            ->orderBy('started_at')
-            ->get(['status', 'end_date', 'receipt_json', 'started_at']);
+            ->whereRaw($start.' BETWEEN ? AND ?', [$now->copy()->subDays(27)->startOfDay()->format('Y-m-d H:i:s'), $now->format('Y-m-d H:i:s.u')])
+            ->select(['status', 'end_date', 'receipt_json'])->selectRaw($start.' AS run_started_at_utc')
+            ->orderByRaw($start)->get();
         $successful = $rows->where('status', 'success');
         $completeReceipts = 0;
         $maximumLag = null;
@@ -130,12 +134,12 @@ final class GscProductionCloseoutReadService extends AbstractSeoDashboardReadSer
                 $maximumLag = max($maximumLag ?? 0, (float) $receipt['data_lag_days']);
             }
         }
-        $firstRunAt = $rows->first()?->started_at;
+        $firstRunAt = $rows->first()?->run_started_at_utc;
         $coverageDays = $firstRunAt === null ? 0 : min(28, now('UTC')->diffInDays($firstRunAt, true) + 1);
         $scheduled = $rows->count();
 
         return [
-            'state' => $successful->isNotEmpty() ? 'production_healthy_observing' : 'production_unproven',
+            'state' => $successful->isNotEmpty() && $unknownStarts === 0 ? 'production_healthy_observing' : 'production_unproven',
             'window_days' => 28,
             'planned_run_count' => 28,
             'observed_run_count' => $scheduled,
@@ -147,7 +151,8 @@ final class GscProductionCloseoutReadService extends AbstractSeoDashboardReadSer
                 ? round(($completeReceipts / $successful->count()) * 100, 2)
                 : null,
             'coverage_days' => $coverageDays,
-            'complete_28_day_proof' => $coverageDays >= 28,
+            'complete_28_day_proof' => $coverageDays >= 28 && $unknownStarts === 0,
+            'unknown_run_start_count' => $unknownStarts,
             'target_success_rate_percent' => 95,
             'target_maximum_data_lag_days' => 3,
             'handoff' => 'SEO-PLATFORM-12',

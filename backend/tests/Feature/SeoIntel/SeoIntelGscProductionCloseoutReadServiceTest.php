@@ -42,6 +42,24 @@ final class SeoIntelGscProductionCloseoutReadServiceTest extends TestCase
         $this->seedReadModels();
     }
 
+    public function test_scheduler_slo_uses_creation_instead_of_a_later_automatic_start_update(): void
+    {
+        $runs = DB::connection(self::CONNECTION)->table('seo_gsc_sync_runs');
+        $runs->insert(['trigger_mode' => 'scheduled', 'status' => 'failed',
+            'started_at' => now('UTC'), 'created_at' => now('UTC')->subDays(40),
+            'end_date' => now('UTC')->subDays(43)->toDateString()]);
+        $reader = new GscProductionCloseoutReadService(self::CONNECTION);
+        $slo = $reader->read()['scheduler_slo_28d'];
+        $this->assertSame(1, $slo['observed_run_count']);
+        $this->assertSame(0, $slo['unknown_run_start_count']);
+        $runs->insert(['trigger_mode' => 'scheduled', 'status' => 'running',
+            'started_at' => now('UTC'), 'created_at' => null, 'end_date' => now('UTC')->toDateString()]);
+        $unknown = $reader->read()['scheduler_slo_28d'];
+        $this->assertSame(1, $unknown['unknown_run_start_count']);
+        $this->assertSame('production_unproven', $unknown['state']);
+        $this->assertFalse($unknown['complete_28_day_proof']);
+    }
+
     public function test_read_surface_reconciles_full_detail_and_classifies_opaque_unmapped_hashes(): void
     {
         $result = (new GscProductionCloseoutReadService(self::CONNECTION))->read();
@@ -206,6 +224,7 @@ final class SeoIntelGscProductionCloseoutReadServiceTest extends TestCase
             $table->date('end_date');
             $table->json('receipt_json')->nullable();
             $table->timestamp('started_at');
+            $table->timestamp('created_at')->nullable();
         });
         $schema->create('seo_issue_queue', function (Blueprint $table): void {
             $table->id();
@@ -260,6 +279,7 @@ final class SeoIntelGscProductionCloseoutReadServiceTest extends TestCase
             'status' => 'success',
             'end_date' => $date,
             'started_at' => now('UTC')->subHour(),
+            'created_at' => now('UTC')->subHour(),
             'receipt_json' => json_encode([
                 'application_sha' => $sha,
                 'workflow_sha' => $sha,

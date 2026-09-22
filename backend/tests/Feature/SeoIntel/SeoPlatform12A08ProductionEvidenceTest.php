@@ -38,24 +38,34 @@ final class SeoPlatform12A08ProductionEvidenceTest extends TestCase
     {
         Schema::connection('seo_intel')->create('seo_gsc_sync_runs', function (Blueprint $table): void {
             $table->id();
-            foreach (['trigger_mode', 'status', 'started_at', 'finished_at', 'receipt_json', 'rows_seen', 'failure_code'] as $field) {
+            foreach (['trigger_mode', 'status', 'created_at', 'started_at_utc', 'started_at', 'finished_at', 'receipt_json', 'rows_seen', 'failure_code'] as $field) {
                 $table->text($field)->nullable();
             }
         });
         $at = CarbonImmutable::now('UTC');
         $table = DB::connection('seo_intel')->table('seo_gsc_sync_runs');
-        $table->insert(['trigger_mode' => 'scheduled', 'status' => 'success', 'started_at' => $at->subMinutes(3),
+        $table->insert(['trigger_mode' => 'scheduled', 'status' => 'success', 'started_at' => $at->addHours(8), 'created_at' => $at->subMinutes(3),
             'finished_at' => $at->subMinutes(2), 'receipt_json' => json_encode(['schema_version' => 'seo.gsc_refresh_receipt.v2',
                 'trigger_mode' => 'scheduled', 'unmapped_rows' => 0, 'rows_seen' => 0, 'data_max_date' => $at->subDay()->toDateString(),
                 'quality_gate' => ['status' => 'pass']])]);
         $result = $this->read('gsc', $at);
         $this->assertSame(0, $result['row_count']);
         $this->assertSame('READY', $result['data_quality_state']);
-        $table->insert(['trigger_mode' => 'scheduled', 'status' => 'failed', 'started_at' => $at->subMinute(),
+        $table->insert(['trigger_mode' => 'scheduled', 'status' => 'failed', 'started_at' => $at->subMinute(), 'created_at' => $at->subMinute(),
             'finished_at' => $at, 'receipt_json' => null]);
         $capture = app(Platform12ProductionEvidenceReader::class)->capture(Platform12DailyMissionSet::IDS[0]);
         $this->assertSame('failed', $capture['input']['gsc']['scheduled_receipt_status']);
         $this->assertNotContains('gsc_scheduled_receipt', $capture['source_gaps']);
+        $table->insert(['trigger_mode' => 'scheduled', 'status' => 'running',
+            'started_at_utc' => $at->subSeconds(30)->format('Y-m-d H:i:s.u'),
+            'started_at' => $at->addHours(8), 'created_at' => $at->subSeconds(30)]);
+        $running = $this->read('gsc', $at);
+        $this->assertSame('running', $running['scheduled_receipt_status']);
+        $this->assertSame($at->subSeconds(30)->toAtomString(), $running['observed_at']);
+        $table->insert(['trigger_mode' => 'scheduled', 'status' => 'running', 'started_at' => $at]);
+        $unknown = app(Platform12ProductionEvidenceReader::class)->capture(Platform12DailyMissionSet::IDS[0]);
+        $this->assertNull($unknown['input']['gsc']);
+        $this->assertContains('gsc_scheduled_receipt', $unknown['source_gaps']);
         Http::assertNothingSent();
     }
 
