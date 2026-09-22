@@ -107,7 +107,7 @@ final class CouncilRunRepository
 
         try {
             $this->connection()->transaction(function () use ($receipt, $idempotencyKey): void {
-                $now = now();
+                $now = now('UTC');
                 $this->connection()->table('seo_council_runs')->insert([
                     'run_id' => $receipt['run_id'],
                     'idempotency_key' => $idempotencyKey,

@@ -126,7 +126,17 @@ final readonly class Platform12SchedulerStore
                         'updated_at' => $this->timestamp($now),
                     ]);
 
-                return $updated === 1
+                // currentFence holds the row lock. MySQL may report changed
+                // rows rather than matched rows for a same-second renewal.
+                $renewed = $updated === 1 || ($updated === 0
+                    && $connection->table('seo_council_scheduler_leases')
+                        ->where('id', (int) $decision['lease']->id)
+                        ->where('owner_token_hash', $this->ownerHash($ownerToken))
+                        ->where('fencing_token', $fencingToken)
+                        ->where('lease_expires_at', $this->timestamp($expiresAt))
+                        ->where('updated_at', $this->timestamp($now))->exists());
+
+                return $renewed
                     ? $this->leaseDecision('LEASE_RENEWED', true, $leaseKey, $fencingToken, $expiresAt)
                     : $this->leaseDecision('STALE_FENCE', false, $leaseKey);
             });
@@ -265,7 +275,7 @@ final readonly class Platform12SchedulerStore
                         'fencing_token' => $fencingToken,
                         'version_vector_hash' => $vectorHash,
                         'status' => 'CLAIMED',
-                        'updated_at' => $this->timestamp($now),
+                        'updated_at' => $this->eventTimestamp(),
                     ]);
 
                 return $this->deliveryDecision(
@@ -313,7 +323,7 @@ final readonly class Platform12SchedulerStore
                     // the computation must not be retried a third time.
                     $connection->table('seo_council_schedule_deliveries')->where('id', $delivery->id)
                         ->update(['lease_key' => $leaseKey, 'fencing_token' => $fencingToken,
-                            'status' => 'RECOVERED', 'updated_at' => $this->timestamp($now)]);
+                            'status' => 'RECOVERED', 'updated_at' => $this->eventTimestamp()]);
 
                     return $this->deliveryDecision('RECOVERY_EXHAUSTED_HOLD', true, (string) $delivery->delivery_id);
                 }
@@ -327,7 +337,7 @@ final readonly class Platform12SchedulerStore
                         'fencing_token' => $fencingToken,
                         'attempt' => (int) $delivery->attempt + 1,
                         'status' => 'RECOVERED',
-                        'updated_at' => $this->timestamp($now),
+                        'updated_at' => $this->eventTimestamp(),
                     ]);
 
                 return $this->deliveryDecision(
@@ -411,7 +421,7 @@ final readonly class Platform12SchedulerStore
                             'status' => $terminalStatus,
                             'terminal_receipt_reference' => $terminalReceiptReference,
                             'terminal_receipt_hash' => $terminalReceiptHash,
-                            'updated_at' => $this->timestamp($now),
+                            'updated_at' => $this->eventTimestamp(),
                         ]);
 
                     return $this->terminalDecision(
@@ -481,7 +491,7 @@ final readonly class Platform12SchedulerStore
                 $connection->table('seo_council_schedule_deliveries')
                     ->where('delivery_id', $deliveryId)
                     ->whereNotIn('status', self::TERMINAL_STATES)
-                    ->update(['status' => 'BACKPRESSURE_HOLD', 'updated_at' => $this->timestamp($this->databaseNow($connection))]);
+                    ->update(['status' => 'BACKPRESSURE_HOLD', 'updated_at' => $this->eventTimestamp()]);
 
                 return ['status' => 'BACKPRESSURE_HOLD', 'reason' => $reason, 'delivery_id' => $deliveryId];
             });
@@ -685,6 +695,8 @@ final readonly class Platform12SchedulerStore
         return $expiresAt->isAfter($now->addSeconds($maxFuture));
     }
 
+    // Legacy lease comparisons deliberately use the database session wall clock.
+    // Event instants use eventTimestamp() and must never reuse this clock.
     private function databaseNow(ConnectionInterface $connection): CarbonImmutable
     {
         $row = $connection->selectOne('SELECT CURRENT_TIMESTAMP AS database_time');
@@ -703,6 +715,11 @@ final readonly class Platform12SchedulerStore
     private function timestamp(CarbonImmutable $value): string
     {
         return $value->utc()->format('Y-m-d H:i:s');
+    }
+
+    private function eventTimestamp(): string
+    {
+        return $this->timestamp(CarbonImmutable::now('UTC'));
     }
 
     private function ownerHash(string $ownerToken): string
@@ -728,7 +745,8 @@ final readonly class Platform12SchedulerStore
             'acquired' => $acquired,
             'lease_key' => $leaseKey,
             'fencing_token' => $fencingToken,
-            'lease_expires_at' => $expiresAt?->format('Y-m-d\TH:i:s\Z'),
+            'lease_expires_at' => $expiresAt?->format('Y-m-d H:i:s'),
+            'lease_clock' => 'database_session',
         ];
     }
 
