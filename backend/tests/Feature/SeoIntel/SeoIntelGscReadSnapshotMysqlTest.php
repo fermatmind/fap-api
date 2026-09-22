@@ -82,6 +82,25 @@ final class SeoIntelGscReadSnapshotMysqlTest extends TestCase
         parent::tearDown();
     }
 
+    public function test_merged_position_coverage_matches_mysql_and_streamed_metrics(): void
+    {
+        $connection = DB::connection('gsc_snapshot_test');
+        $connection->table('seo_gsc_daily')->where('id', 1)->update([
+            'impressions' => 30, 'average_position_milli' => 4000,
+            'metadata_json' => json_encode(['_canonical_metric_weights' => [
+                'version' => 1, 'standard_numerator' => 40000, 'standard_denominator' => 10,
+            ]]),
+        ]);
+        $row = $connection->table('seo_gsc_daily')
+            ->selectRaw(\App\Services\SeoIntel\GscMetricWeights::sumSql('numerator').' AS n')
+            ->selectRaw(\App\Services\SeoIntel\GscMetricWeights::sumSql('denominator').' AS d')->first();
+        $this->assertSame(100040000, (int) $row->n);
+        $this->assertSame(50010, (int) $row->d);
+        $snapshot = app(GscRunCloseoutSummarizer::class)->readModelSnapshot($connection,
+            CarbonImmutable::parse('2026-09-18'), CarbonImmutable::parse('2026-09-18'), ['web']);
+        $this->assertSame(round(100040000 / 50010 / 1000, 4), $snapshot['metrics']['average_position']);
+    }
+
     public function test_metric_pages_and_distinct_count_use_one_snapshot_during_concurrent_update(): void
     {
         $changed = false;

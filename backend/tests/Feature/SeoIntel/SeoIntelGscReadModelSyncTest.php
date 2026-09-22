@@ -53,6 +53,116 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
     }
 
     #[Test]
+    public function canonical_variants_preserve_metrics_null_coverage_and_repeat_sync(): void
+    {
+        $this->seedPreviousSuccess();
+        $sources = [
+            ['same', 'https://fermatmind.com/en/tests', 2, 20, 4],
+            ['same', 'https://www.fermatmind.com/en/tests/', 3, 30, null],
+            ['same', 'http://fermatmind.com/en/tests/', 0, 0, 8],
+            ['other', 'https://fermatmind.com/en/tests', 1, 10, 10],
+        ];
+        $this->fakeSourceRows($sources);
+        foreach ([1, 2] as $attempt) {
+            $receipt = app(GscReadModelSyncService::class)->sync(7, ['web']);
+            $this->assertSame('success', $receipt['status']);
+            $this->assertSame(4, $receipt['mapped_rows']);
+            $this->assertSame(2, $receipt['mapping_readback']['persisted_rows']);
+            $this->assertSame(2, $receipt['mapping_readback']['canonical_variant_merges']);
+            $this->assertSame(6, $receipt['mapping_readback']['clicks']);
+            $this->assertSame(60, $receipt['mapping_readback']['impressions']);
+            $this->assertSame(6.0, data_get($receipt, 'gsc_data_quality.read_model_after.metrics.average_position'));
+            $rows = DB::connection('seo_intel_gsc_sync_test')->table('seo_gsc_daily');
+            $this->assertSame(2, $rows->count());
+            $merged = (clone $rows)->where('query_hash', hash('sha256', 'same'))->first();
+            $this->assertSame([80000, 20], \App\Services\SeoIntel\GscMetricWeights::fromRow($merged));
+            $this->assertSame([88000, 51], \App\Services\SeoIntel\GscMetricWeights::fromRow($merged, 'minimum_one_all'));
+            $this->assertSame([80000, 20], \App\Services\SeoIntel\GscMetricWeights::fromRow($merged, 'positive_position'));
+            $changed = (array) $merged;
+            $metadata = json_decode($changed['metadata_json'], true);
+            $metadata['_canonical_metric_weights']['positive_position_denominator'] = 19;
+            $changed['metadata_json'] = $metadata;
+            $this->assertNotSame(\App\Services\SeoIntel\Decision\SeoOpportunityEvidence::rowHash((array) $merged),
+                \App\Services\SeoIntel\Decision\SeoOpportunityEvidence::rowHash($changed));
+            $this->assertSame([88000, 21], \App\Services\SeoIntel\GscMetricWeights::fromRow($merged, 'minimum_one'));
+            $sql = $rows->selectRaw(\App\Services\SeoIntel\GscMetricWeights::sumSql('numerator').' AS n')
+                ->selectRaw(\App\Services\SeoIntel\GscMetricWeights::sumSql('denominator').' AS d')->first();
+            $this->assertSame(180000, (int) $sql->n);
+            $this->assertSame(30, (int) $sql->d);
+        }
+    }
+
+    #[Test]
+    public function source_duplicates_keep_last_observation_across_fetch_pages(): void
+    {
+        $this->seedPreviousSuccess();
+        $sources = [['same', 'https://fermatmind.com/en/tests', 2, 20, 4]];
+        for ($i = 0; $i < 498; $i++) {
+            $sources[] = ['filler-'.$i, 'https://fermatmind.com/en/tests', 0, 1, null];
+        }
+        $sources[] = ['same', 'https://www.fermatmind.com/en/tests/', 3, 30, 8];
+        $sources[] = ['same', 'https://fermatmind.com/en/tests', 4, 40, 4];
+        $this->fakeSourceRows($sources, 500);
+        $receipt = app(GscReadModelSyncService::class)->sync(7, ['web']);
+        $this->assertSame('success', $receipt['status']);
+        $this->assertSame(501, $receipt['mapped_rows']);
+        $this->assertSame(1, $receipt['mapping_readback']['duplicate_source_rows']);
+        $this->assertSame(1, $receipt['mapping_readback']['canonical_variant_merges']);
+        $this->assertSame(499, $receipt['mapping_readback']['persisted_rows']);
+        $merged = DB::connection('seo_intel_gsc_sync_test')->table('seo_gsc_daily')->where('query_hash', hash('sha256', 'same'))->first();
+        $this->assertSame(7, $merged->clicks);
+        $this->assertSame(70, $merged->impressions);
+        $this->assertSame([400000, 70], \App\Services\SeoIntel\GscMetricWeights::fromRow($merged));
+    }
+
+    #[Test]
+    public function later_batch_failure_rolls_back_all_mapped_metrics(): void
+    {
+        $this->seedPreviousSuccess();
+        $sources = [];
+        for ($i = 0; $i < 502; $i++) {
+            $sources[] = ['row-'.$i, 'https://fermatmind.com/en/tests', 1, 10, 4];
+        }
+        $this->fakeSourceRows($sources, 500);
+        $connection = DB::connection('seo_intel_gsc_sync_test');
+        $bad = hash('sha256', 'row-501');
+        $connection->unprepared("CREATE TRIGGER reject_late_gsc_row BEFORE INSERT ON seo_gsc_daily WHEN NEW.query_hash = '{$bad}' BEGIN SELECT RAISE(ABORT, 'synthetic batch failure'); END");
+        $receipt = app(GscReadModelSyncService::class)->sync(7, ['web']);
+        $this->assertSame('blocked', $receipt['status']);
+        $this->assertSame('gsc_sync_internal_failure', $receipt['issue']);
+        $this->assertSame(0, $connection->table('seo_gsc_daily')->count());
+    }
+
+    #[Test]
+    public function incorrect_persisted_position_fails_readback_and_rolls_back(): void
+    {
+        $this->seedPreviousSuccess();
+        $this->fakeSourceRows([
+            ['same', 'https://fermatmind.com/en/tests', 2, 20, 4],
+            ['same', 'https://www.fermatmind.com/en/tests/', 3, 30, 8],
+        ]);
+        $connection = DB::connection('seo_intel_gsc_sync_test');
+        $connection->unprepared("CREATE TRIGGER corrupt_gsc_position AFTER INSERT ON seo_gsc_daily BEGIN UPDATE seo_gsc_daily SET metadata_json = '{}', average_position_milli = 1 WHERE id = NEW.id; END");
+        $receipt = app(GscReadModelSyncService::class)->sync(7, ['web']);
+        $this->assertSame('blocked', $receipt['status']);
+        $this->assertSame('gsc_sync_internal_failure', $receipt['issue']);
+        $this->assertSame(0, $connection->table('seo_gsc_daily')->count());
+    }
+
+    private function fakeSourceRows(array $sources, int $limit = 1): void
+    {
+        config(['seo_intel.gsc_readonly_adapter.default_limit' => $limit, 'seo_intel.gsc_readonly_adapter.max_limit' => $limit]);
+        Http::fake(static function (Request $request) use ($sources, $limit) {
+            $rows = array_map(static fn (array $r): array => [
+                'keys' => [$r[0], $r[1], 'MOBILE', 'USA'],
+                'clicks' => $r[2], 'impressions' => $r[3], 'position' => $r[4],
+            ], array_slice($sources, (int) $request['startRow'], $limit));
+
+            return Http::response(['rows' => $rows], 200);
+        });
+    }
+
+    #[Test]
     public function sync_paginates_maps_url_truth_and_is_idempotent(): void
     {
         $url = 'https://fermatmind.com/zh/articles/gsc-live';

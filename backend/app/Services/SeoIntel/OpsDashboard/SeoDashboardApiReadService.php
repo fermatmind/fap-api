@@ -167,8 +167,8 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
         $totals = (clone $query)
             ->selectRaw('COALESCE(SUM(clicks), 0) AS clicks')
             ->selectRaw('COALESCE(SUM(impressions), 0) AS impressions')
-            ->selectRaw('COALESCE(SUM(CASE WHEN average_position_milli IS NOT NULL AND impressions > 0 THEN average_position_milli * impressions ELSE 0 END), 0) AS position_weight')
-            ->selectRaw('COALESCE(SUM(CASE WHEN average_position_milli IS NOT NULL AND impressions > 0 THEN impressions ELSE 0 END), 0) AS position_impressions')
+            ->selectRaw(\App\Services\SeoIntel\GscMetricWeights::sumSql('numerator').' AS position_weight')
+            ->selectRaw(\App\Services\SeoIntel\GscMetricWeights::sumSql('denominator').' AS position_impressions')
             ->first();
         $clicks = (int) ($totals->clicks ?? 0);
         $impressions = (int) ($totals->impressions ?? 0);
@@ -313,8 +313,8 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
             ->selectRaw("COALESCE(NULLIF($dimension, ''), 'unknown') AS dimension")
             ->selectRaw('COALESCE(SUM(clicks), 0) AS clicks')
             ->selectRaw('COALESCE(SUM(impressions), 0) AS impressions')
-            ->selectRaw('COALESCE(SUM(CASE WHEN average_position_milli IS NOT NULL AND impressions > 0 THEN average_position_milli * impressions ELSE 0 END), 0) AS position_weight')
-            ->selectRaw('COALESCE(SUM(CASE WHEN average_position_milli IS NOT NULL AND impressions > 0 THEN impressions ELSE 0 END), 0) AS position_impressions')
+            ->selectRaw(\App\Services\SeoIntel\GscMetricWeights::sumSql('numerator').' AS position_weight')
+            ->selectRaw(\App\Services\SeoIntel\GscMetricWeights::sumSql('denominator').' AS position_impressions')
             ->groupBy($dimension)
             ->orderByDesc('impressions')
             ->get()
@@ -344,8 +344,8 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
             ->selectRaw("$familySql AS dimension")
             ->selectRaw('COALESCE(SUM(clicks), 0) AS clicks')
             ->selectRaw('COALESCE(SUM(impressions), 0) AS impressions')
-            ->selectRaw('COALESCE(SUM(CASE WHEN average_position_milli IS NOT NULL AND impressions > 0 THEN average_position_milli * impressions ELSE 0 END), 0) AS position_weight')
-            ->selectRaw('COALESCE(SUM(CASE WHEN average_position_milli IS NOT NULL AND impressions > 0 THEN impressions ELSE 0 END), 0) AS position_impressions')
+            ->selectRaw(\App\Services\SeoIntel\GscMetricWeights::sumSql('numerator').' AS position_weight')
+            ->selectRaw(\App\Services\SeoIntel\GscMetricWeights::sumSql('denominator').' AS position_impressions')
             ->groupByRaw($familySql)
             ->orderByDesc('impressions')
             ->get()

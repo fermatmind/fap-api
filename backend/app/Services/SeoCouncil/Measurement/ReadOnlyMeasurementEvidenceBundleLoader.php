@@ -746,8 +746,7 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
         $clicks = array_sum(array_column($rows, 'clicks'));
         $impressions = array_sum(array_column($rows, 'impressions'));
         $positionWeight = array_sum(array_map(
-            static fn (array $row): int => (int) ($row['average_position_milli'] ?? 0)
-                * (int) ($row['impressions'] ?? 0),
+            static fn (array $row): int => \App\Services\SeoIntel\GscMetricWeights::fromRow($row)[0],
             $rows,
         ));
 

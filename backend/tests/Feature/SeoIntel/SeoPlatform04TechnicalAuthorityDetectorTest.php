@@ -49,6 +49,26 @@ final class SeoPlatform04TechnicalAuthorityDetectorTest extends TestCase
     }
 
     #[Test]
+    public function registered_chinese_locale_is_preserved_before_applicability_and_dedupe(): void
+    {
+        foreach (['zh-CN', 'zh-cn', ' ZH-CN '] as $locale) {
+            $result = $this->evaluate('public_collection_split', [
+                'locale' => $locale,
+                'same_revision_snapshots' => true,
+                'collection_set_diff_count' => 3,
+            ]);
+            $this->assertSame('issue', $result['outcome']);
+            $this->assertSame('zh-CN', $result['locale']);
+        }
+        $unsupported = $this->evaluate('public_collection_split', [
+            'locale' => 'fr',
+            'same_revision_snapshots' => true,
+            'collection_set_diff_count' => 3,
+        ]);
+        $this->assertSame('not_applicable', $unsupported['root_cause_or_error_code']);
+    }
+
+    #[Test]
     public function expected_retirement_and_unrequired_locale_pair_pass(): void
     {
         $gone = $this->evaluate('http_410', [

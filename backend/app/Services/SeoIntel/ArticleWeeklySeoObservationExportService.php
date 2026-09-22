@@ -205,12 +205,9 @@ final class ArticleWeeklySeoObservationExportService
         $positionWeighted = 0;
         $positionWeight = 0;
         foreach ($rows as $row) {
-            $rowImpressions = (int) ($row->impressions ?? 0);
-            $positionMilli = $row->average_position_milli ?? null;
-            if ($rowImpressions > 0 && $positionMilli !== null) {
-                $positionWeighted += ((int) $positionMilli) * $rowImpressions;
-                $positionWeight += $rowImpressions;
-            }
+            [$numerator, $denominator] = GscMetricWeights::fromRow($row);
+            $positionWeighted += $numerator;
+            $positionWeight += $denominator;
         }
 
         $topQueries = $rows

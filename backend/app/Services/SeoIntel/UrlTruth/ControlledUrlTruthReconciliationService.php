@@ -371,7 +371,7 @@ final class ControlledUrlTruthReconciliationService
             ];
         }
 
-        $authorityHashes = array_fill_keys(array_column($accepted, 'hash'), true);
+        $authorityHashes = array_fill_keys(array_map(static fn (array $item): string => hash('sha256', rtrim($item['record']->canonicalUrl, '/')), $accepted), true);
         $localeCounts = ['zh-CN' => 0, 'en' => 0];
         foreach ($sitemapUrls as $url) {
             if (! is_string($url)) {
@@ -400,52 +400,74 @@ final class ControlledUrlTruthReconciliationService
             if ($count === 0) {
                 continue;
             }
-            $jobs[] = [
-                'detector_id' => 'public_collection_split',
-                'evidence' => [
-                    'source_state' => 'available',
-                    'evidence_complete' => true,
-                    'direct_evidence' => true,
-                    'same_revision_snapshots' => true,
-                    'collection_set_diff_count' => $count,
-                    'page_family' => 'other_public',
-                    'locale' => $locale,
-                    'indexability_state' => 'indexable',
-                    'canonical_url_hash' => hash('sha256', 'sitemap_without_authority|'.$locale.'|'.$artifact['artifact_hash']),
-                    'authority_revision' => $artifact['authority_revision_digest'],
-                    'url_truth_revision' => $artifact['artifact_hash'],
-                    'policy_version' => PageFamilyPolicyRegistry::VERSION,
-                    'affected_url_count' => $count,
-                    'private_negative_set_checked' => true,
-                    'evidence_observed_at' => $observedAt,
-                    'root_cause_or_error_code' => 'sitemap_without_authority',
-                    'verified_impact' => 'bounded',
-                ],
-            ];
-        }
-        $detectorArtifact = $this->detectorRunner->run($jobs, [
-            'dry_run' => ! $execute,
-            'max_urls' => min(500, max(1, $differenceCount)),
-            'timeout_ms' => 2_000,
-            'max_evidence_age_seconds' => 86_400,
-            'expected_policy_version' => PageFamilyPolicyRegistry::VERSION,
-            'expected_authority_revision' => $artifact['authority_revision_digest'],
-            'now' => $observedAt,
-        ]);
-        $materialization = $this->detectorMaterializer->materialize($detectorArtifact, $execute, $observedAt);
-        if ($execute) {
-            $counts = $materialization['counts'] ?? [];
-            $materialized = array_sum(array_intersect_key($counts, array_flip(['created', 'updated', 'reopened', 'no_change'])));
-            if ($materialized !== count($jobs)) {
-                throw new RuntimeException('URL_TRUTH_DETECTOR_READBACK_FAILED');
+            for ($offset = 0; $offset < $count; $offset += 500) {
+                $batchCount = min(500, $count - $offset);
+                $identity = 'sitemap_without_authority|'.$locale.'|'.$artifact['artifact_hash'];
+                if ($count > 500) {
+                    $identity .= '|batch:'.intdiv($offset, 500);
+                }
+                $jobs[] = [
+                    'detector_id' => 'public_collection_split',
+                    'evidence' => [
+                        'source_state' => 'available',
+                        'evidence_complete' => true,
+                        'direct_evidence' => true,
+                        'same_revision_snapshots' => true,
+                        'collection_set_diff_count' => $batchCount,
+                        'page_family' => 'other_public',
+                        'locale' => $locale,
+                        'indexability_state' => 'indexable',
+                        'canonical_url_hash' => hash('sha256', $identity),
+                        'authority_revision' => $artifact['authority_revision_digest'],
+                        'url_truth_revision' => $artifact['artifact_hash'],
+                        'policy_version' => PageFamilyPolicyRegistry::VERSION,
+                        'affected_url_count' => $batchCount,
+                        'private_negative_set_checked' => true,
+                        'evidence_observed_at' => $observedAt,
+                        'root_cause_or_error_code' => 'sitemap_without_authority',
+                        'verified_impact' => 'bounded',
+                    ],
+                ];
             }
         }
+        $receipts = [];
+        $artifactHashes = [];
+        $counts = [];
+        foreach ($jobs as $job) {
+            // Each complete artifact stays within the existing 500-URL budget.
+            // An oversized locale must not become an unprocessable partial job.
+            $detectorArtifact = $this->detectorRunner->run([$job], [
+                'dry_run' => ! $execute,
+                'max_urls' => (int) $job['evidence']['affected_url_count'],
+                'timeout_ms' => 2_000,
+                'max_evidence_age_seconds' => 86_400,
+                'expected_policy_version' => PageFamilyPolicyRegistry::VERSION,
+                'expected_authority_revision' => $artifact['authority_revision_digest'],
+                'now' => $observedAt,
+            ]);
+            $receipt = $this->detectorMaterializer->materialize($detectorArtifact, $execute, $observedAt);
+            $batchCounts = $receipt['counts'] ?? [];
+            $materialized = array_sum(array_intersect_key($batchCounts, array_flip(['created', 'updated', 'reopened', 'no_change'])));
+            if ($execute && $materialized !== 1) {
+                throw new RuntimeException('URL_TRUTH_DETECTOR_READBACK_FAILED');
+            }
+            foreach ($batchCounts as $key => $value) {
+                $counts[$key] = ($counts[$key] ?? 0) + $value;
+            }
+            $artifactHashes[] = $detectorArtifact['artifact_hash'];
+            $receipts[] = $receipt;
+        }
+        $materialization = count($receipts) === 1 ? $receipts[0] : [
+            'mode' => $execute ? 'controlled_materialization' : 'dry_run', 'counts' => $counts,
+            'writes_committed' => $execute, 'batches' => $receipts,
+        ];
 
         return [
             'status' => 'success',
             'sitemap_without_authority_count' => $differenceCount,
             'planned_issues' => count($jobs),
-            'detector_artifact_hash' => $detectorArtifact['artifact_hash'],
+            'detector_artifact_hash' => count($artifactHashes) === 1 ? $artifactHashes[0] : hash('sha256', implode('|', $artifactHashes)),
+            'detector_artifact_hashes' => $artifactHashes,
             'materialization' => $materialization,
             'writes_committed' => (bool) ($materialization['writes_committed'] ?? false),
             'raw_urls_emitted' => false,
@@ -467,8 +489,9 @@ final class ControlledUrlTruthReconciliationService
         $bindings = $connection->table('seo_url_entities')->whereIn('current_binding_key', $identities)->count();
         $semantic = $this->plan($batch['items'], [], 0);
         $consumerMissing = [];
+        $normalizedHashes = array_map(static fn (array $item): string => hash('sha256', rtrim($item['record']->canonicalUrl, '/')), $batch['items']);
         foreach (($evidence['consumer_urls'] ?? []) as $name => $urls) {
-            $consumerMissing[$name] = $urls === null ? null : $this->missingHashes($hashes, $urls);
+            $consumerMissing[$name] = $urls === null ? null : $this->missingHashes($normalizedHashes, $urls);
         }
 
         return [
