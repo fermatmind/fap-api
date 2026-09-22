@@ -20,6 +20,68 @@ final class SeoIntelMbti64PersonalityUrlTruthInventoryTest extends TestCase
     use RefreshDatabase;
 
     #[Test]
+    public function large_mbti_sections_are_read_with_bounded_memory_without_losing_candidates(): void
+    {
+        $this->seedPublishedMbti64Profiles();
+        foreach (PersonalityProfileVariant::query()->get() as $variant) {
+            PersonalityProfileVariantSection::query()->create([
+                'personality_profile_variant_id' => $variant->id,
+                'section_key' => 'quick_answer',
+                'render_variant' => 'callout',
+                'body_md' => str_repeat('x', 512 * 1024),
+                'payload_json' => ['summary' => $variant->runtime_type_code],
+                'sort_order' => 10,
+                'is_enabled' => true,
+            ]);
+        }
+        unset($variant);
+        gc_collect_cycles();
+        memory_reset_peak_usage();
+        $baseline = memory_get_usage();
+
+        $source = new BackendAuthorityUrlTruthSource;
+        $records = collect($source->candidates())->filter(static fn ($record): bool => in_array(
+            $record->pageEntityType,
+            ['personality_profile_variant', 'personality_profile_comparison'],
+            true,
+        ));
+        $peakIncrease = memory_get_peak_usage() - $baseline;
+
+        $this->assertCount(96, $records);
+        $this->assertCount(64, $records->where('pageEntityType', 'personality_profile_variant'));
+        $this->assertCount(32, $records->where('pageEntityType', 'personality_profile_comparison'));
+        $this->assertTrue($source->metadata()['personality_profiles_available']);
+        $this->assertLessThan(16 * 1024 * 1024, $peakIncrease, 'The reader must not retain every MBTI section body.');
+    }
+
+    #[Test]
+    public function a_later_profile_read_failure_discards_partial_personality_candidates(): void
+    {
+        $this->seedPublishedMbti64Profiles();
+        $dispatcher = PersonalityProfile::getEventDispatcher();
+        PersonalityProfile::setEventDispatcher(clone $dispatcher);
+        $retrieved = 0;
+        PersonalityProfile::retrieved(static function () use (&$retrieved): void {
+            if (++$retrieved === 2) {
+                throw new \RuntimeException('Simulated later profile read failure.');
+            }
+        });
+
+        try {
+            $source = new BackendAuthorityUrlTruthSource;
+            $records = collect($source->candidates());
+            $this->assertSame(2, $retrieved);
+            $this->assertCount(0, $records->whereIn('pageEntityType', [
+                'personality_profile_variant', 'personality_profile_comparison',
+            ]));
+            $this->assertFalse($source->metadata()['personality_profiles_available']);
+            $this->assertSame('personality_profiles_unavailable', $source->metadata()['personality_profiles_unavailable_reason']);
+        } finally {
+            PersonalityProfile::setEventDispatcher($dispatcher);
+        }
+    }
+
+    #[Test]
     public function backend_authority_source_emits_mbti64_variant_and_comparison_url_truth_candidates(): void
     {
         config(['seo_intel.public_canonical_host' => 'https://fermatmind.com']);

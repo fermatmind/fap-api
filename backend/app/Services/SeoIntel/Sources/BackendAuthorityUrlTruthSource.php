@@ -342,82 +342,83 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
                 })
                 ->orderBy('locale')
                 ->orderBy('type_code')
-                ->get();
+                // Bound eager-loaded MBTI sections to one profile at a time.
+                ->lazy(1);
+
+            $records = [];
+            foreach ($profiles as $profile) {
+                if (! $profile instanceof PersonalityProfile || ! $this->hasRequiredPersonalityProfileFields($profile)) {
+                    continue;
+                }
+
+                $variants = $profile->variants
+                    ->filter(static fn (PersonalityProfileVariant $variant): bool => trim((string) $variant->runtime_type_code) !== '')
+                    ->values();
+
+                foreach ($variants as $variant) {
+                    $path = $this->personalityVariantCanonicalPath($profile, $variant);
+                    if ($path === null) {
+                        continue;
+                    }
+                    $freshness = $this->personalityVariantFreshness($profile, $variant, $path);
+
+                    $records[] = $this->personalityRecord(
+                        canonicalPath: $path,
+                        locale: (string) $profile->locale,
+                        pageEntityType: 'personality_profile_variant',
+                        entityIdOrSlug: (string) $variant->id,
+                        entitySource: 'personality_profile_variants',
+                        lastmodSource: (string) $freshness['lastmod_source'],
+                        sourceUpdatedAt: $freshness['source_updated_at'],
+                        lastmodAt: $freshness['lastmod_at'],
+                        extraMetadata: [
+                            'profile_id_hash' => hash('sha256', (string) $profile->id),
+                            'variant_id_hash' => hash('sha256', (string) $variant->id),
+                            'runtime_type_code_hash' => hash('sha256', (string) $variant->runtime_type_code),
+                            'canonical_type_code_hash' => hash('sha256', (string) $variant->canonical_type_code),
+                            'content_hash' => (string) $freshness['content_hash'],
+                            'content_hash_source' => (string) $freshness['content_hash_source'],
+                        ],
+                        extraAttributes: [
+                            'profile_id_hash' => hash('sha256', (string) $profile->id),
+                            'variant_id_hash' => hash('sha256', (string) $variant->id),
+                            'runtime_type_code_hash' => hash('sha256', (string) $variant->runtime_type_code),
+                            'content_hash' => (string) $freshness['content_hash'],
+                        ],
+                    );
+                }
+
+                $comparisonPath = $this->personalityComparisonCanonicalPath($profile, $variants);
+                if ($comparisonPath !== null) {
+                    $freshness = $this->personalityComparisonFreshness($profile, $comparisonPath);
+                    $records[] = $this->personalityRecord(
+                        canonicalPath: $comparisonPath,
+                        locale: (string) $profile->locale,
+                        pageEntityType: 'personality_profile_comparison',
+                        entityIdOrSlug: (string) $profile->id,
+                        entitySource: 'personality_profiles',
+                        lastmodSource: (string) $freshness['lastmod_source'],
+                        sourceUpdatedAt: $freshness['source_updated_at'],
+                        lastmodAt: $freshness['lastmod_at'],
+                        extraMetadata: [
+                            'profile_id_hash' => hash('sha256', (string) $profile->id),
+                            'canonical_type_code_hash' => hash('sha256', (string) $profile->canonical_type_code),
+                            'comparison_kind' => 'a_vs_t',
+                            'content_hash' => (string) $freshness['content_hash'],
+                            'content_hash_source' => (string) $freshness['content_hash_source'],
+                        ],
+                        extraAttributes: [
+                            'profile_id_hash' => hash('sha256', (string) $profile->id),
+                            'canonical_type_code_hash' => hash('sha256', (string) $profile->canonical_type_code),
+                            'content_hash' => (string) $freshness['content_hash'],
+                        ],
+                    );
+                }
+            }
         } catch (\Throwable) {
             $this->personalityProfilesUnavailableReason = 'personality_profiles_unavailable';
 
             return [];
-        }
-
-        $records = [];
-        foreach ($profiles as $profile) {
-            if (! $profile instanceof PersonalityProfile || ! $this->hasRequiredPersonalityProfileFields($profile)) {
-                continue;
-            }
-
-            $variants = $profile->variants
-                ->filter(static fn (PersonalityProfileVariant $variant): bool => trim((string) $variant->runtime_type_code) !== '')
-                ->values();
-
-            foreach ($variants as $variant) {
-                $path = $this->personalityVariantCanonicalPath($profile, $variant);
-                if ($path === null) {
-                    continue;
-                }
-                $freshness = $this->personalityVariantFreshness($profile, $variant, $path);
-
-                $records[] = $this->personalityRecord(
-                    canonicalPath: $path,
-                    locale: (string) $profile->locale,
-                    pageEntityType: 'personality_profile_variant',
-                    entityIdOrSlug: (string) $variant->id,
-                    entitySource: 'personality_profile_variants',
-                    lastmodSource: (string) $freshness['lastmod_source'],
-                    sourceUpdatedAt: $freshness['source_updated_at'],
-                    lastmodAt: $freshness['lastmod_at'],
-                    extraMetadata: [
-                        'profile_id_hash' => hash('sha256', (string) $profile->id),
-                        'variant_id_hash' => hash('sha256', (string) $variant->id),
-                        'runtime_type_code_hash' => hash('sha256', (string) $variant->runtime_type_code),
-                        'canonical_type_code_hash' => hash('sha256', (string) $variant->canonical_type_code),
-                        'content_hash' => (string) $freshness['content_hash'],
-                        'content_hash_source' => (string) $freshness['content_hash_source'],
-                    ],
-                    extraAttributes: [
-                        'profile_id_hash' => hash('sha256', (string) $profile->id),
-                        'variant_id_hash' => hash('sha256', (string) $variant->id),
-                        'runtime_type_code_hash' => hash('sha256', (string) $variant->runtime_type_code),
-                        'content_hash' => (string) $freshness['content_hash'],
-                    ],
-                );
-            }
-
-            $comparisonPath = $this->personalityComparisonCanonicalPath($profile, $variants);
-            if ($comparisonPath !== null) {
-                $freshness = $this->personalityComparisonFreshness($profile, $comparisonPath);
-                $records[] = $this->personalityRecord(
-                    canonicalPath: $comparisonPath,
-                    locale: (string) $profile->locale,
-                    pageEntityType: 'personality_profile_comparison',
-                    entityIdOrSlug: (string) $profile->id,
-                    entitySource: 'personality_profiles',
-                    lastmodSource: (string) $freshness['lastmod_source'],
-                    sourceUpdatedAt: $freshness['source_updated_at'],
-                    lastmodAt: $freshness['lastmod_at'],
-                    extraMetadata: [
-                        'profile_id_hash' => hash('sha256', (string) $profile->id),
-                        'canonical_type_code_hash' => hash('sha256', (string) $profile->canonical_type_code),
-                        'comparison_kind' => 'a_vs_t',
-                        'content_hash' => (string) $freshness['content_hash'],
-                        'content_hash_source' => (string) $freshness['content_hash_source'],
-                    ],
-                    extraAttributes: [
-                        'profile_id_hash' => hash('sha256', (string) $profile->id),
-                        'canonical_type_code_hash' => hash('sha256', (string) $profile->canonical_type_code),
-                        'content_hash' => (string) $freshness['content_hash'],
-                    ],
-                );
-            }
         }
 
         $this->personalityProfilesAvailable = $records !== [];
