@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import test from 'node:test';
 
 const workflow = readFileSync(new URL('../workflows/deploy.yml', import.meta.url), 'utf8');
@@ -75,4 +76,105 @@ test('cache coverage batches pointer payload and legacy reads without retaining 
   assert.match(responseCache, /array_chunk\(\$targets, 256\)/);
   assert.match(responseCache, /Cache::many/);
   assert.match(responseCache, /'payload' => \$includePayload \? \$payload : null/);
+});
+
+// Execute the real task bodies with remote I/O stubbed, not just source regexes.
+function coverageTasks(options = {}) {
+  const body = name => {
+    const start = deploy.indexOf(`task('${name}', function () {`);
+    assert.notEqual(start, -1);
+    const from = deploy.indexOf('{', start) + 1;
+    return deploy.slice(from, deploy.indexOf('\n});', from));
+  };
+  const input = Buffer.from(JSON.stringify(options)).toString('base64');
+  return JSON.parse(execFileSync('php', ['-r', `
+namespace Deployer;
+$input = json_decode(base64_decode('${input}'), true);
+$config = ['release_path' => '/fixture/candidate'];
+$commands = [];
+$host = $input['host'] ?? 'production';
+function get($key, $default = null) { return $GLOBALS['config'][$key] ?? $default; }
+function set($key, $value) { $GLOBALS['config'][$key] = $value; }
+function currentHost() { return new class { function getAlias() { return $GLOBALS['host']; } }; }
+function deploySkipsAuthorityMutations() { return $GLOBALS['input']['skip'] ?? false; }
+function deployCareerDetailMinimumTargets($host) { return 1; }
+function deployPlaceholderPathArg($root, $suffix) { return $root.'/'.$suffix; }
+function writeln($message) {}
+function run($command) {
+    $GLOBALS['commands'][] = $command;
+    return json_encode($GLOBALS['input']['report'] ?? []);
+}
+$repair = function () { ${body('career:repair-published-detail-cache-coverage')} };
+$guard = function () { ${body('guard:career-detail-cache-coverage')} };
+$error = null;
+try {
+    if (! ($input['standalone'] ?? false)) { $repair(); }
+    if ($input['other_release'] ?? false) { set('release_path', '/fixture/other'); }
+    if ($input['other_host'] ?? false) { $host = 'staging'; }
+    $guard();
+    if ($input['second_guard'] ?? false) { $guard(); }
+} catch (\\Throwable $e) { $error = $e->getMessage(); }
+echo json_encode(['commands' => $commands, 'error' => $error, 'coverage' => get('career_detail_post_repair_coverage')]);
+`], { encoding: 'utf8' }));
+}
+
+function coverageReport(slugs = 1046, writes = false) {
+  return {
+    contract_version: 'career.job_detail_cache_coverage.v1', status: 'sync_repair_completed',
+    coverage_status: 'ready', locales: ['en', 'zh-CN'], locale_count: 2,
+    published_slug_count: slugs, expected_target_count: slugs * 2,
+    excluded_count: 2, eligible_target_count: slugs * 2 - 2, covered_target_count: slugs * 2 - 2,
+    missing_count: 0, broken_count: 0, minimum_target_count: 1, minimum_target_count_met: true,
+    repair: { write_executed: writes },
+  };
+}
+
+test('standard deploy consumes complete post-repair coverage once without a redundant remote scan', () => {
+  for (const host of ['production', 'staging']) {
+    for (const writes of [false, true]) {
+      const result = coverageTasks({ host, report: coverageReport(host === 'production' ? 1046 : 30, writes) });
+      assert.equal(result.error, null);
+      assert.equal(result.commands.length, 1);
+      assert.match(result.commands[0], /--repair-missing-sync/);
+      assert.equal(result.coverage, null);
+    }
+  }
+  assert.match(deploy, /after\('career:repair-published-detail-cache-coverage', 'guard:career-detail-cache-coverage'\)/);
+});
+
+test('standalone and repeated coverage guards still perform live read-only verification', () => {
+  const standalone = coverageTasks({ standalone: true });
+  assert.equal(standalone.error, null);
+  assert.equal(standalone.commands.length, 1);
+  assert.match(standalone.commands[0], /--verify-only/);
+  const repeated = coverageTasks({ report: coverageReport(), second_guard: true });
+  assert.equal(repeated.error, null);
+  assert.equal(repeated.commands.length, 2);
+  assert.match(repeated.commands[1], /--verify-only/);
+});
+
+test('incomplete or differently bound post-repair coverage fails closed', () => {
+  for (const change of [
+    { contract_version: 'wrong' }, { status: 'sync_repair_incomplete' }, { coverage_status: 'incomplete' },
+    { locales: ['en'] }, { locale_count: 1 }, { published_slug_count: 1045 },
+    { expected_target_count: 60 }, { eligible_target_count: 0 }, { covered_target_count: 1 },
+    { excluded_count: -1 }, { missing_count: 1 }, { broken_count: 1 },
+    { minimum_target_count: 0 }, { minimum_target_count_met: false },
+  ]) {
+    const result = coverageTasks({ report: { ...coverageReport(), ...change } });
+    assert.ok(result.error, JSON.stringify(change));
+    assert.equal(result.commands.length, 1);
+    assert.equal(result.coverage, null);
+  }
+  for (const change of [{ other_release: true }, { other_host: true }]) {
+    const result = coverageTasks({ report: coverageReport(), ...change });
+    assert.ok(result.error);
+    assert.equal(result.commands.length, 1);
+  }
+});
+
+test('content-only and other non-mutating deploy modes retain the existing skip', () => {
+  const result = coverageTasks({ skip: true });
+  assert.equal(result.error, null);
+  assert.deepEqual(result.commands, []);
 });

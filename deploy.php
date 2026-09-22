@@ -762,6 +762,38 @@ task('guard:career-detail-cache-coverage', function () {
     }
 
     $minimumTargets = deployCareerDetailMinimumTargets(currentHost()->getAlias());
+    // The immediately preceding repair task already performs a full read-only
+    // post-repair inspection. Consume that result once in this process; never
+    // persist it or reuse it for a different candidate/host.
+    $coverage = get('career_detail_post_repair_coverage', null);
+    set('career_detail_post_repair_coverage', null);
+    if ($coverage !== null) {
+        $report = $coverage['report'] ?? [];
+        if (($coverage['release_path'] ?? null) !== get('release_path')
+            || ($coverage['host'] ?? null) !== currentHost()->getAlias()
+            || ($report['contract_version'] ?? null) !== 'career.job_detail_cache_coverage.v1'
+            || ($report['status'] ?? null) !== 'sync_repair_completed'
+            || ($report['coverage_status'] ?? null) !== 'ready'
+            || ($report['locales'] ?? null) !== ['en', 'zh-CN']
+            || ($report['locale_count'] ?? null) !== 2
+            || ! is_int($report['published_slug_count'] ?? null)
+            || ($report['expected_target_count'] ?? null) !== $report['published_slug_count'] * 2
+            || ! is_int($report['excluded_count'] ?? null)
+            || $report['excluded_count'] < 0
+            || ($report['minimum_target_count'] ?? null) !== $minimumTargets
+            || ($report['minimum_target_count_met'] ?? null) !== true
+            || ! is_int($report['eligible_target_count'] ?? null)
+            || $report['eligible_target_count'] < $minimumTargets
+            || $report['expected_target_count'] !== $report['eligible_target_count'] + $report['excluded_count']
+            || ($report['covered_target_count'] ?? null) !== $report['eligible_target_count']
+            || ($report['missing_count'] ?? null) !== 0
+            || ($report['broken_count'] ?? null) !== 0) {
+            throw new \RuntimeException('Career post-repair coverage is invalid for this candidate.');
+        }
+        writeln('<info>Career detail cache coverage verified by the full post-repair readback.</info>');
+
+        return;
+    }
     $timeoutSeconds = (int) (getenv('DEPLOY_CAREER_DETAIL_COVERAGE_TIMEOUT') ?: 180);
     $timeoutSeconds = max(60, $timeoutSeconds);
 
@@ -781,6 +813,7 @@ task('guard:career-detail-cache-coverage', function () {
  * read-only gate below as the activation authority.
  */
 task('career:repair-published-detail-cache-coverage', function () {
+    set('career_detail_post_repair_coverage', null);
     if (deploySkipsAuthorityMutations()) {
         writeln('<comment>Skipping Career detail cache repair because this isolated release does not mutate Career authority caches.</comment>');
 
@@ -819,6 +852,11 @@ task('career:repair-published-detail-cache-coverage', function () {
     }
 
     set('career_detail_cache_repair_executed', $repairReport['repair']['write_executed']);
+    set('career_detail_post_repair_coverage', [
+        'release_path' => get('release_path'),
+        'host' => $hostAlias,
+        'report' => $repairReport,
+    ]);
 });
 
 before('deploy:symlink', 'guard:queue-reload-capability');
