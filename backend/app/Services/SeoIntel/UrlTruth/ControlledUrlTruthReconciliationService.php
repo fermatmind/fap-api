@@ -246,13 +246,13 @@ final class ControlledUrlTruthReconciliationService
             throw new RuntimeException('URL_TRUTH_READ_BOUND_EXCEEDED');
         }
         $truthRows = $connection->table('seo_urls')->orderBy('id')->when($lock, fn ($q) => $q->lockForUpdate())->get([
-            'id', 'canonical_url_hash', 'locale', 'page_entity_type', 'entity_id_or_slug', 'source_authority',
+            'id', 'canonical_url_hash', 'canonical_url', 'locale', 'page_entity_type', 'entity_id_or_slug', 'source_authority',
             'indexability_state', 'is_private_flow', 'page_family', 'authority_revision', 'canonical_revision',
         ])->keyBy(
             static fn (object $row): string => (string) $row->locale.'|'.(string) $row->canonical_url_hash,
         );
         $bindings = $connection->table('seo_url_entities')->whereNotNull('current_binding_key')->orderBy('id')
-            ->when($lock, fn ($q) => $q->lockForUpdate())->get(['id', 'canonical_url_hash', 'locale', 'current_binding_key', 'binding_status', 'authority_revision', 'canonical_revision'])->keyBy('current_binding_key');
+            ->when($lock, fn ($q) => $q->lockForUpdate())->get(['id', 'canonical_url_hash', 'locale', 'page_entity_type', 'entity_id_or_slug', 'entity_source', 'authority_status', 'current_binding_key', 'binding_status', 'authority_revision', 'canonical_revision'])->keyBy('current_binding_key');
         $acceptedKeys = [];
         $counts = ['added' => 0, 'updated' => 0, 'retired' => 0, 'conflict' => $sourceConflicts, 'rejected' => (int) ($rejectionCounts['rejected_records'] ?? 0), 'no_change' => 0, 'duplicate' => 0];
 
@@ -599,6 +599,7 @@ final class ControlledUrlTruthReconciliationService
         $record = $item['record'];
 
         return (string) $truth->page_entity_type === $record->pageEntityType
+            && (string) $truth->canonical_url === $record->canonicalUrl
             && (string) $truth->entity_id_or_slug === (string) $record->entityIdOrSlug
             && (string) $truth->source_authority === $record->sourceAuthority
             && (string) $truth->indexability_state === 'indexable'
@@ -607,6 +608,11 @@ final class ControlledUrlTruthReconciliationService
             && (string) $truth->authority_revision === $item['authority_revision']
             && (string) $truth->canonical_revision === $item['canonical_revision']
             && $binding !== null
+            && (string) $binding->locale === $record->locale
+            && (string) $binding->page_entity_type === $record->pageEntityType
+            && (string) $binding->entity_id_or_slug === (string) $record->entityIdOrSlug
+            && (string) $binding->entity_source === $record->entitySource
+            && (string) $binding->authority_status === $record->authorityStatus
             && (string) $binding->canonical_url_hash === $item['hash']
             && (string) $binding->binding_status === 'current'
             && (string) $binding->authority_revision === $item['authority_revision']

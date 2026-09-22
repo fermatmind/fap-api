@@ -216,6 +216,9 @@ final class SeoPlatform05ControlledUrlTruthReconciliationTest extends TestCase
             'middle batch' => ["CREATE TRIGGER break_write BEFORE INSERT ON seo_urls WHEN NEW.entity_id_or_slug = 'bravo' BEGIN SELECT RAISE(ABORT, 'synthetic_failure'); END"],
             'truth readback' => ["CREATE TRIGGER break_write AFTER INSERT ON seo_urls BEGIN UPDATE seo_urls SET authority_revision = 'wrong' WHERE id = NEW.id; END"],
             'binding readback' => ["CREATE TRIGGER break_write AFTER INSERT ON seo_url_entities BEGIN UPDATE seo_url_entities SET canonical_revision = 'wrong' WHERE id = NEW.id; END"],
+            'canonical payload' => ["CREATE TRIGGER break_write AFTER INSERT ON seo_urls BEGIN UPDATE seo_urls SET canonical_url = 'https://invalid.example.test/' WHERE id = NEW.id; END"],
+            'binding identity' => ["CREATE TRIGGER break_write AFTER INSERT ON seo_url_entities BEGIN UPDATE seo_url_entities SET entity_id_or_slug = 'wrong' WHERE id = NEW.id; END"],
+            'binding authority' => ["CREATE TRIGGER break_write AFTER INSERT ON seo_url_entities BEGIN UPDATE seo_url_entities SET authority_status = 'observed' WHERE id = NEW.id; END"],
             'second pass' => ["CREATE TRIGGER break_write AFTER UPDATE ON seo_urls WHEN NEW.entity_id_or_slug != 'orphan' BEGIN UPDATE seo_urls SET authority_revision = 'wrong' WHERE id = NEW.id; END"],
             'retirement' => ["CREATE TRIGGER break_write BEFORE UPDATE ON seo_urls WHEN NEW.indexability_state = 'retired_authority' BEGIN SELECT RAISE(ABORT, 'synthetic_failure'); END"],
         ];
