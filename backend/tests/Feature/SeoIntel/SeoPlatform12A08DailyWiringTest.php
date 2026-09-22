@@ -206,7 +206,7 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
         $this->assertSame('TERMINAL_COMMITTED', app(Platform12DailyScheduler::class)->tick(Platform12DailyMissionSet::IDS[0])['status']);
     }
 
-    public function test_unchanged_failure_is_quiet_and_recovery_is_enqueued_once_without_verdict_changes(): void
+    public function test_unchanged_failure_is_quiet_and_controlled_health_never_recovers_it(): void
     {
         $this->startAtSlot();
         Http::fake(['*' => Http::response('', 200)]);
@@ -230,8 +230,8 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
         }
         $events = DB::connection('seo_intel')->table('seo_council_notification_outbox');
         $this->assertSame(1, (clone $events)->where('event_type', 'AUTHORITY_INDEXABILITY_P0')->count());
-        $this->assertSame(1, (clone $events)->where('event_type', 'AUTHORITY_INDEXABILITY_P0_RECOVERY')->count());
-        $this->assertSame(2, $events->count());
+        $this->assertSame(0, (clone $events)->where('event_type', 'AUTHORITY_INDEXABILITY_P0_RECOVERY')->count());
+        $this->assertSame(1, $events->count());
         $item = app(Platform12SystemHealthReadService::class)->snapshot()['daily_missions']['items'][1];
         $this->assertContains($item['state'], ['READY', 'STALE']);
         $this->assertSame($item['state'] === 'STALE' ? 'STALE_EVIDENCE_HOLD' : 'READY', $item['reason_code']);
@@ -334,11 +334,267 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
         app(Platform12RuntimeControl::class)->change(false, Platform12DailyMissionSet::IDS);
     }
 
+    public function test_verified_acceptance_wait_keeps_hold_and_never_creates_failure_or_recovery(): void
+    {
+        $this->clock('2026-09-22T06:34:51Z');
+        app(Platform12RuntimeControl::class)->change(false, [Platform12DailyMissionSet::IDS[0]]);
+        $reader = $this->fixtureReader();
+        $this->successfulSync($reader);
+        $scheduler = app(Platform12DailyScheduler::class);
+        $result = $scheduler->tick(Platform12DailyMissionSet::IDS[0]);
+        $this->assertSame('TERMINAL_COMMITTED', $result['status']);
+        $this->assertSame('DATA_FRESHNESS_HOLD', $result['mission_verdict']);
+        $this->assertSame('ACCEPTANCE_ALREADY_RECORDED', $scheduler->tick(Platform12DailyMissionSet::IDS[0])['status']);
+        $receipt = json_decode(DB::connection('seo_intel')->table('seo_council_run_receipts')->value('receipt_json'), true);
+        $this->assertSame('ACCEPTANCE_REFRESH_NOT_DUE', collect($receipt['route_plan'])->firstWhere('kind', 'notification_classification')['reason_code']);
+        $this->assertSame(0, $this->events()->count());
+        $reader->overrides = [];
+        $reader->gscSource = null;
+        $this->clock('2026-09-22T22:20:04Z');
+        $this->assertSame('READY', $scheduler->tick()['mission_verdict']);
+        $this->assertSame(0, $this->events()->count());
+    }
+
+    public function test_wait_requires_latest_success_quality_mapping_hash_and_before_refresh_boundary(): void
+    {
+        $this->clock('2026-09-22T06:34:51Z');
+        app(Platform12RuntimeControl::class)->change(false, [Platform12DailyMissionSet::IDS[0]]);
+        $reader = $this->fixtureReader();
+        $this->successfulSync($reader);
+        $result = app(Platform12DailyScheduler::class)->tick(Platform12DailyMissionSet::IDS[0]);
+        $evidence = app(\App\Services\SeoCouncil\Platform12\Notification\Platform12NotificationEvidence::class);
+        $context = $evidence->terminal($result['receipt_hash']);
+        $this->assertTrue($evidence->expectedAcceptanceWait($context));
+        $syncs = DB::connection('seo_intel')->table('seo_gsc_sync_runs');
+        $original = $syncs->first();
+        foreach (['failed', 'running', 'quality_failed'] as $status) {
+            $syncs->insert(['sync_run_uid' => $status, 'trigger_mode' => 'scheduled', 'status' => $status,
+                'created_at' => '2026-09-22 05:00:00']);
+            $this->assertFalse($evidence->expectedAcceptanceWait($context), $status.' must not fall back to success');
+            (clone $syncs)->where('sync_run_uid', $status)->delete();
+        }
+        foreach (['quality_gate' => ['status' => 'fail'], 'unmapped_rows' => 1,
+            'completeness' => ['pagination_complete' => false, 'truncated' => true], 'data_max_date' => '2026-09-17'] as $field => $value) {
+            $r = json_decode($original->receipt_json, true);
+            $r[$field] = $value;
+            $r['receipt_hash'] = app(\App\Services\SeoAgentGovernance\SeoRegistryHasher::class)->hashWithout($r, 'receipt_hash');
+            $syncs->update(['receipt_json' => json_encode($r)]);
+            $this->assertFalse($evidence->expectedAcceptanceWait($context), $field);
+        }
+        $syncs->update(['receipt_json' => $original->receipt_json]);
+        $context['at'] = CarbonImmutable::parse('2026-09-22T18:17:00Z');
+        $this->assertFalse($evidence->expectedAcceptanceWait($context));
+        $context['at'] = CarbonImmutable::parse('2026-09-22T18:16:59Z');
+        $this->assertTrue($evidence->expectedAcceptanceWait($context));
+        $context['trigger'] = 'unknown';
+        $this->assertFalse($evidence->expectedAcceptanceWait($context));
+        $this->assertStringContainsString('cron: "17 18 * * *"', file_get_contents(base_path('../.github/workflows/nightly.yml')));
+    }
+
+    public function test_natural_cycles_preserve_legacy_identity_across_policy_changes_and_acceptance_success(): void
+    {
+        config()->set('seo_council.notification_dispatch_enabled', true);
+        $transport = new class implements \App\Services\SeoCouncil\Platform12\Notification\Platform12NotificationTransport
+        {
+            public array $deliveries = [];
+
+            public function send(string $notificationId, array $sanitizedPayload): void
+            {
+                $this->deliveries[] = $sanitizedPayload;
+            }
+        };
+        $this->app->instance(\App\Services\SeoCouncil\Platform12\Notification\Platform12NotificationTransport::class, $transport);
+        $this->clock('2026-09-22T22:19:00Z');
+        app(Platform12RuntimeControl::class)->change(false, [Platform12DailyMissionSet::IDS[0]]);
+        $reader = $this->fixtureReader();
+        $reader->overrides = ['gsc' => ['data_max_date' => '2026-09-17']];
+        $scheduler = app(Platform12DailyScheduler::class);
+        $this->clock('2026-09-22T22:20:04Z');
+        $first = $scheduler->tick();
+        $this->assertSame('DATA_FRESHNESS_HOLD', $first['mission_verdict']);
+        $this->events()->update(['status' => 'sent', 'sent_at' => '2026-09-22 22:21:00',
+            'subject_hash' => hash('sha256', 'legacy-subject'), 'policy_revision' => str_repeat('b', 64)]);
+        $reader->overrides = [];
+        $this->clock('2026-09-23T06:00:00Z');
+        $this->assertSame('READY', $scheduler->tick(Platform12DailyMissionSet::IDS[0])['mission_verdict']);
+        $this->assertSame(1, $this->events()->count());
+        $reader->overrides = ['gsc' => ['data_max_date' => '2026-09-17']];
+        $this->clock('2026-09-23T22:20:04Z');
+        $this->assertSame('DATA_FRESHNESS_HOLD', $scheduler->tick()['mission_verdict']);
+        $this->assertSame(1, $this->events()->count());
+        $reader->overrides = [];
+        $this->clock('2026-09-24T22:20:04Z');
+        $healthy = $scheduler->tick();
+        $this->assertSame('READY', $healthy['mission_verdict']);
+        $this->assertSame(1, $this->events()->where('incident_state', 'healthy')->count());
+        $this->assertSame(hash('sha256', 'legacy-subject'), $this->events()->where('incident_state', 'healthy')->value('subject_hash'));
+        $reader->overrides = ['gsc' => ['data_max_date' => '2026-09-17']];
+        $this->clock('2026-09-25T22:20:04Z');
+        $this->assertSame('DATA_FRESHNESS_HOLD', $scheduler->tick()['mission_verdict']);
+        $this->assertSame(2, $this->events()->where('incident_state', 'failed')->count());
+        $this->assertSame(2, $this->events()->where('incident_state', 'failed')->distinct()->count('subject_hash'));
+        $this->assertCount(1, $transport->deliveries);
+        $this->assertSame('DATA_FAILURE_RECOVERY', $transport->deliveries[0]['event_type']);
+        $evidence = app(\App\Services\SeoCouncil\Platform12\Notification\Platform12NotificationEvidence::class);
+        $good = $evidence->terminal($healthy['receipt_hash']);
+        $bad = $evidence->terminal($first['receipt_hash']);
+        $this->assertTrue($evidence->resolves($good, $bad));
+        $other = $bad;
+        $other['mission'] = Platform12DailyMissionSet::IDS[1];
+        $this->assertFalse($evidence->resolves($good, $other));
+        $old = $good;
+        $old['at'] = $bad['at']->subMinute();
+        $this->assertFalse($evidence->resolves($old, $bad));
+        $old = $good;
+        foreach ($old['envelope']['evidence']['sources'] as &$source) {
+            $source['observed_at'] = $bad['at']->subMinute()->toAtomString();
+        }
+        unset($source);
+        $this->assertFalse($evidence->resolves($old, $bad));
+        $good['trigger'] = 'unknown';
+        $this->assertFalse($evidence->resolves($good, $bad));
+
+    }
+
+    public function test_unsent_failed_or_unknown_delivery_never_generates_recovery_only_mail(): void
+    {
+        $this->clock('2026-09-22T22:19:00Z');
+        app(Platform12RuntimeControl::class)->change(false, [Platform12DailyMissionSet::IDS[0]]);
+        $reader = $this->fixtureReader();
+        $reader->overrides = ['gsc' => ['data_max_date' => '2026-09-17']];
+        $scheduler = app(Platform12DailyScheduler::class);
+        $this->clock('2026-09-22T22:20:04Z');
+        $scheduler->tick();
+        $failure = $this->events()->first();
+        // Keep pending rows out of drain; the test only exercises terminal closure.
+        $this->events()->update(['available_at' => '2099-01-01 00:00:00']);
+        $reader->overrides = [];
+        $this->clock('2026-09-23T22:20:04Z');
+        $healthy = $scheduler->tick();
+        $this->assertSame('READY', $healthy['mission_verdict']);
+        $this->assertSame('suppressed', $this->events()->value('status'));
+        $outbox = app(\App\Services\SeoCouncil\Platform12\Notification\Platform12NotificationOutbox::class);
+        foreach (['pending', 'failed', 'sending'] as $status) {
+            $this->events()->update(['status' => $status, 'last_error_code' => $status === 'failed' ? 'DELIVERY_ACK_UNKNOWN' : null]);
+            $r = $outbox->enqueueRecovery($failure->event_type, $failure->subject_hash, $failure->policy_revision,
+                [['id' => 'council:daily-terminal', 'hash' => $healthy['receipt_hash']]], now('UTC')->addDay()->toAtomString(), 'READY');
+            $this->assertSame('FAILURE_NOT_DELIVERED', $r['reason_code']);
+            $this->assertSame($status === 'pending' ? 'suppressed' : $status, $this->events()->value('status'));
+        }
+        $this->assertSame(1, $this->events()->count());
+    }
+
+    public function test_controlled_real_failures_remain_alerts_and_invalid_receipts_cannot_recover(): void
+    {
+        $this->clock('2026-09-22T06:34:51Z');
+        app(Platform12RuntimeControl::class)->change(false, Platform12DailyMissionSet::IDS);
+        $reader = $this->fixtureReader();
+        $reader->overrides = ['gsc' => ['scheduled_receipt_status' => 'failed']];
+        $result = app(Platform12DailyScheduler::class)->tick(Platform12DailyMissionSet::IDS[0]);
+        $this->assertSame('GSC_UNAVAILABLE_HOLD', $result['mission_verdict']);
+        $this->assertSame(1, $this->events()->count());
+        $reader->overrides = [];
+        $reader->canonicalFault = true;
+        app(Platform12DailyScheduler::class)->tick(Platform12DailyMissionSet::IDS[1]);
+        $reader->overrides = ['query_security' => ['pii_state' => 'PRESENT']];
+        app(Platform12DailyScheduler::class)->tick(Platform12DailyMissionSet::IDS[2]);
+        $this->assertSame(1, $this->events()->where('event_type', 'AUTHORITY_INDEXABILITY_P0')->count());
+        $this->assertSame(1, $this->events()->where('event_type', 'PRIVATE_OR_SAFETY')->count());
+        $evidence = app(\App\Services\SeoCouncil\Platform12\Notification\Platform12NotificationEvidence::class);
+        $this->assertNull($evidence->terminal(str_repeat('a', 64)));
+        $row = DB::connection('seo_intel')->table('seo_council_run_receipts')->where('receipt_hash', $result['receipt_hash'])->first();
+        $r = json_decode($row->receipt_json, true);
+        $r['status'] = 'DAILY_MISSION_READY';
+        DB::connection('seo_intel')->table('seo_council_run_receipts')->where('id', $row->id)->update(['receipt_json' => json_encode($r)]);
+        $this->assertNull($evidence->terminal($result['receipt_hash']));
+    }
+
+    public function test_legacy_pending_wait_is_audited_without_touching_sending_or_unknown_delivery(): void
+    {
+        $this->clock('2026-09-22T06:34:51Z');
+        app(Platform12RuntimeControl::class)->change(false, [Platform12DailyMissionSet::IDS[0]]);
+        $reader = $this->fixtureReader();
+        $this->successfulSync($reader);
+        $result = app(Platform12DailyScheduler::class)->tick(Platform12DailyMissionSet::IDS[0]);
+        $policy = app(\App\Services\SeoCouncil\Platform12\Notification\Platform12NotificationPolicyContract::class);
+        $event = ['event_type' => 'DATA_FAILURE', 'severity' => 'P1', 'subject_hash' => hash('sha256', 'legacy-wait'),
+            'evidence_refs' => [['id' => 'council:daily-terminal', 'hash' => $result['receipt_hash']]],
+            'policy_revision' => $policy->reference()['hash'], 'state' => 'ACTIVE',
+            'expires_at' => now('UTC')->addDay()->toAtomString(), 'decision_metrics' => null];
+        $outbox = app(\App\Services\SeoCouncil\Platform12\Notification\Platform12NotificationOutbox::class);
+        $outbox->enqueue($policy->evaluate($event), 'failed', 'HOLD');
+        $this->assertSame('ACCEPTANCE_REFRESH_NOT_DUE', $outbox->claim('worker:legacy-wait')['status']);
+        $this->assertSame('suppressed', $this->events()->value('status'));
+        $this->assertSame('ACCEPTANCE_REFRESH_NOT_DUE', $this->events()->value('last_error_code'));
+        $this->events()->update(['status' => 'sending', 'last_error_code' => 'DISPATCH_IN_FLIGHT', 'lease_expires_at' => '2000-01-01 00:00:00']);
+        $this->assertSame('DELIVERY_ACK_UNKNOWN', $outbox->claim('worker:unknown-send')['status']);
+        $this->assertSame('failed', $this->events()->value('status'));
+        $this->assertSame('EMPTY', $outbox->claim('worker:no-replay')['status']);
+        $this->assertSame(1, $this->events()->count());
+    }
+
+    public function test_natural_data_quality_mapping_missing_and_runtime_faults_keep_their_alerts(): void
+    {
+        $this->clock('2026-09-22T22:19:00Z');
+        app(Platform12RuntimeControl::class)->change(false, [Platform12DailyMissionSet::IDS[0]]);
+        $reader = $this->fixtureReader();
+        foreach ([['gsc' => ['mapping_state' => 'FAILED']], ['gsc' => ['data_quality_state' => 'HOLD']],
+            ['gsc' => ['window_state' => 'INCOMPLETE']], ['gsc' => ['availability' => 'UNAVAILABLE']],
+            ['runtime' => ['public_api_state' => 'FAILED']]] as $day => $override) {
+            $this->clock(CarbonImmutable::parse('2026-09-22T22:20:04Z')->addDays($day)->toAtomString());
+            $reader->overrides = $override;
+            $r = app(Platform12DailyScheduler::class)->tick();
+            $this->assertSame('TERMINAL_COMMITTED', $r['status']);
+            $this->assertNotSame('READY', $r['mission_verdict']);
+        }
+        $this->assertSame(5, $this->events()->where('event_type', 'DATA_FAILURE')->count());
+        $this->assertSame(0, $this->events()->where('incident_state', 'healthy')->count());
+    }
+
+    private function clock(string $instant): void
+    {
+        CarbonImmutable::setTestNow(CarbonImmutable::parse($instant));
+        \Carbon\Carbon::setTestNow(CarbonImmutable::parse($instant));
+    }
+
+    private function events(): \Illuminate\Database\Query\Builder
+    {
+        return DB::connection('seo_intel')->table('seo_council_notification_outbox');
+    }
+
+    private function successfulSync(object $reader): void
+    {
+        DB::connection('seo_intel')->getSchemaBuilder()->create('seo_gsc_sync_runs', function ($t): void {
+            $t->string('sync_run_uid')->primary();
+            foreach (['trigger_mode', 'status', 'created_at', 'finished_at', 'receipt_json'] as $field) {
+                $t->text($field)->nullable();
+            }
+        });
+        $h = app(\App\Services\SeoAgentGovernance\SeoRegistryHasher::class);
+        $r = ['schema_version' => 'seo.gsc_refresh_receipt.v2', 'sync_run_uid' => 'test-sync', 'status' => 'success',
+            'trigger_mode' => 'scheduled', 'reporting_timezone' => 'America/Los_Angeles', 'quality_gate' => ['status' => 'pass'],
+            'unmapped_rows' => 0, 'rows_seen' => 42, 'data_max_date' => '2026-09-18', 'end_date' => '2026-09-18',
+            'completeness' => ['pagination_complete' => true, 'truncated' => false]];
+        $r['receipt_hash'] = $h->hash($r);
+        DB::connection('seo_intel')->table('seo_gsc_sync_runs')->insert(['sync_run_uid' => 'test-sync', 'trigger_mode' => 'scheduled',
+            'status' => 'success', 'created_at' => '2026-09-21 21:58:21', 'finished_at' => '2026-09-21 22:03:39', 'receipt_json' => json_encode($r)]);
+        $gsc = ['availability' => 'AVAILABLE', 'scheduled_receipt_status' => 'success',
+            'observed_at' => '2026-09-21T22:03:39Z', 'source_hash' => $h->hash($r), 'trigger_mode' => 'scheduled',
+            'mapping_state' => 'READY', 'data_quality_state' => 'READY', 'window_state' => 'COMPLETE', 'row_count' => 42, 'data_max_date' => '2026-09-18'];
+        $reader->overrides = ['gsc' => array_diff_key($gsc, ['observed_at' => true, 'source_hash' => true])];
+        $reader->gscSource = ['id' => 'gsc_scheduled_receipt', 'hash' => $h->hash($gsc),
+            'read_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'), 'observed_at' => $gsc['observed_at']];
+    }
+
     private function fixtureReader(): Platform12EvidenceReader
     {
         $reader = new class implements Platform12EvidenceReader
         {
             public int $reads = 0;
+
+            public array $overrides = [];
+
+            public ?array $gscSource = null;
 
             public bool $pauseAfterRead = false;
 
@@ -375,8 +631,10 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
                     $input['url_truth']['current_url_truth_count'] = 99;
                 }
 
+                $input = array_replace_recursive($input, $this->overrides);
+
                 return ['input' => ['evaluated_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'), ...$input],
-                    'sources' => array_map(static fn (string $id): array => ['id' => $id, 'hash' => str_repeat('d', 64),
+                    'sources' => array_map(fn (string $id): array => $id === 'gsc_scheduled_receipt' && $this->gscSource !== null ? $this->gscSource : ['id' => $id, 'hash' => str_repeat('d', 64),
                         'read_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
                         'observed_at' => now('UTC')->subMinute()->format('Y-m-d\TH:i:s\Z')], Platform12SourceCheck::SOURCES[$missionId]),
                     'source_gaps' => [], 'captured_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),

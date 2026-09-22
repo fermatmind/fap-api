@@ -57,21 +57,42 @@ final readonly class Platform12NotificationOutbox
                 $missionVerdict,
             ): array {
                 $connection = $this->connection();
-                $failedExists = $connection->table('seo_council_notification_outbox')
+                $failure = $connection->table('seo_council_notification_outbox')
                     ->where('event_type', $eventType)
                     ->where('subject_hash', $subjectHash)
                     ->where('incident_state', 'failed')
                     ->lockForUpdate()
-                    ->exists();
-                if (! $failedExists) {
+                    ->first();
+                if ($failure === null) {
                     return $this->enqueueResult('suppressed', 'RECOVERY_WITHOUT_FAILURE', null, $missionVerdict);
+                }
+
+                $evidence = app(Platform12NotificationEvidence::class);
+                $healthy = $evidence->fromPayload(['evidence_refs' => $evidenceRefs], true);
+                $failed = $evidence->fromPayload(json_decode($failure->payload_json, true, 64, JSON_THROW_ON_ERROR));
+                if ($healthy === null || $failed === null || $evidence->eventType($failed) !== $eventType
+                    || CarbonImmutable::parse($healthy['envelope']['evidence']['expires_at'])->lte(now('UTC'))
+                    || ! $evidence->resolves($healthy, $failed)) {
+                    return $this->enqueueResult('suppressed', 'RECOVERY_EVIDENCE_MISMATCH', null, $missionVerdict);
+                }
+                if ($failure->status !== 'sent' || $failure->sent_at === null) {
+                    // A terminal healthy observation may close an unsent business
+                    // fault, but must never create a recovery-only email. Do not
+                    // take over sending or acknowledgement-unknown rows.
+                    $connection->table('seo_council_notification_outbox')
+                        ->where('id', $failure->id)->whereIn('status', ['pending', 'failed'])
+                        ->where(function ($query): void {
+                            $query->whereNull('last_error_code')->orWhereNotIn('last_error_code', ['DELIVERY_ACK_UNKNOWN']);
+                        })->update(['status' => 'suppressed', 'last_error_code' => 'RESOLVED_BEFORE_NOTIFICATION']);
+
+                    return $this->enqueueResult('suppressed', 'FAILURE_NOT_DELIVERED', null, $missionVerdict);
                 }
 
                 $event = [
                     'event_type' => $eventType.'_RECOVERY',
                     'severity' => 'INFO',
                     'subject_hash' => $subjectHash,
-                    'evidence_refs' => $evidenceRefs,
+                    'evidence_refs' => [...$evidenceRefs, ['id' => 'council:failed-terminal', 'hash' => $failed['hash']]],
                     'policy_revision' => $policyRevision,
                     'state' => 'RESOLVED',
                     'expires_at' => $expiresAt,
@@ -126,8 +147,28 @@ final readonly class Platform12NotificationOutbox
                 if (! is_object($row)) {
                     return ['status' => 'EMPTY', 'claim' => null];
                 }
+                $payload = json_decode((string) $row->payload_json, true) ?? [];
+                if ($row->status === 'pending' && str_ends_with($row->event_type, '_RECOVERY')
+                    && ! $this->recoverySupported($payload)) {
+                    $connection->table('seo_council_notification_outbox')->where('id', $row->id)
+                        ->where('status', 'pending')->update(['status' => 'suppressed',
+                            'last_error_code' => 'RECOVERY_EVIDENCE_MISMATCH', 'updated_at' => $timestamp]);
+
+                    return ['status' => 'RECOVERY_EVIDENCE_MISMATCH', 'claim' => null];
+                }
                 if (! $this->payloadAllowed(json_decode((string) $row->payload_json, true) ?? [], $runtime['generation'])) {
                     return ['status' => 'MISSION_NOT_AUTHORIZED', 'claim' => null];
+                }
+                if ($row->status === 'pending' && $row->incident_state === 'failed') {
+                    $evidence = app(Platform12NotificationEvidence::class);
+                    $context = $evidence->fromPayload(json_decode($row->payload_json, true));
+                    if ($context !== null && $evidence->expectedAcceptanceWait($context, true)) {
+                        $connection->table('seo_council_notification_outbox')->where('id', $row->id)
+                            ->where('status', 'pending')->update(['status' => 'suppressed',
+                                'last_error_code' => 'ACCEPTANCE_REFRESH_NOT_DUE', 'updated_at' => $timestamp]);
+
+                        return ['status' => 'ACCEPTANCE_REFRESH_NOT_DUE', 'claim' => null];
+                    }
                 }
                 if ($row->status === 'sending' && $row->last_error_code === 'DISPATCH_IN_FLIGHT') {
                     // The webhook has no recipient-side idempotency contract. An
@@ -269,8 +310,29 @@ final readonly class Platform12NotificationOutbox
         }
     }
 
+    private function recoverySupported(array $payload): bool
+    {
+        $type = substr((string) ($payload['event_type'] ?? ''), 0, -9);
+        $row = $this->connection()->table('seo_council_notification_outbox')
+            ->where('event_type', $type)->where('subject_hash', $payload['subject_hash'] ?? '')
+            ->where('incident_state', 'failed')->where('status', 'sent')->whereNotNull('sent_at')->first();
+        if ($row === null) {
+            return false;
+        }
+        $evidence = app(Platform12NotificationEvidence::class);
+        $healthy = $evidence->fromPayload($payload);
+        $failed = $evidence->fromPayload(json_decode($row->payload_json, true));
+        $bound = collect($payload['evidence_refs'] ?? [])->firstWhere('id', 'council:failed-terminal');
+
+        return $healthy !== null && $failed !== null && $evidence->eventType($failed) === $type
+            && ($bound === null || $bound['hash'] === $failed['hash']) && $evidence->resolves($healthy, $failed);
+    }
+
     private function payloadAllowed(array $payload, ?string $generation): bool
     {
+        if (str_ends_with((string) ($payload['event_type'] ?? ''), '_RECOVERY') && ! $this->recoverySupported($payload)) {
+            return false;
+        }
         $refs = $payload['evidence_refs'] ?? [];
         $hashes = [];
         foreach ($refs as $ref) {
@@ -350,8 +412,16 @@ final readonly class Platform12NotificationOutbox
         string $incidentState,
         string $missionVerdict,
     ): array {
+        // Preserve identities created by older policy revisions. New records
+        // also have a revision-independent unique fingerprint for concurrent enqueue.
+        $existing = $connection->table('seo_council_notification_outbox')
+            ->where('event_type', $event['event_type'])->where('subject_hash', $event['subject_hash'])
+            ->where('incident_state', $incidentState)->first(['notification_id']);
+        if ($existing !== null) {
+            return $this->enqueueResult('suppressed', 'UNCHANGED_INCIDENT_SUPPRESSED', $existing->notification_id, $missionVerdict);
+        }
         $fingerprint = hash('sha256', implode('|', [
-            $event['event_type'], $event['subject_hash'], $event['policy_revision'], $incidentState,
+            $event['event_type'], $event['subject_hash'], $incidentState,
         ]));
         $notificationId = hash('sha256', 'seo-council-notification|'.$fingerprint);
         $now = $this->databaseNow($connection);

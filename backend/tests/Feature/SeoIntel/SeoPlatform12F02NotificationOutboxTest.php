@@ -81,7 +81,7 @@ final class SeoPlatform12F02NotificationOutboxTest extends TestCase
         $this->assertSame(3, (int) $row->max_attempts);
         $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/D', $row->fingerprint);
         $this->assertSame(hash('sha256', implode('|', [
-            $row->event_type, $row->subject_hash, $row->policy_revision, $row->incident_state,
+            $row->event_type, $row->subject_hash, $row->incident_state,
         ])), $row->fingerprint);
 
         $this->migration()->down();
@@ -109,6 +109,19 @@ final class SeoPlatform12F02NotificationOutboxTest extends TestCase
         $this->assertSame('suppressed', $replay['status']);
         $this->assertCount(1, $this->transport->deliveries);
         $this->assertSame('sent', DB::connection('seo_intel')->table('seo_council_notification_outbox')->value('status'));
+    }
+
+    public function test_policy_revision_does_not_duplicate_an_existing_incident(): void
+    {
+        $outbox = app(Platform12NotificationOutbox::class);
+        $classification = $this->classification('policy-cycle');
+        $first = $outbox->enqueue($classification, 'failed', 'HOLD');
+        DB::connection('seo_intel')->table('seo_council_notification_outbox')
+            ->update(['policy_revision' => str_repeat('b', 64), 'fingerprint' => hash('sha256', 'legacy-fingerprint')]);
+        $second = $outbox->enqueue($classification, 'failed', 'HOLD');
+        $this->assertSame('UNCHANGED_INCIDENT_SUPPRESSED', $second['reason_code']);
+        $this->assertSame($first['notification_id'], $second['notification_id']);
+        $this->assertSame(1, DB::connection('seo_intel')->table('seo_council_notification_outbox')->count());
     }
 
     public function test_database_clock_query_uses_a_mysql_safe_alias(): void
@@ -173,7 +186,7 @@ final class SeoPlatform12F02NotificationOutboxTest extends TestCase
             ->table('seo_council_notification_outbox')->value('last_error_code'));
     }
 
-    public function test_failed_to_healthy_transition_creates_exactly_one_recovery_notification(): void
+    public function test_failure_receipt_cannot_be_reused_as_health_to_forge_recovery(): void
     {
         $outbox = app(Platform12NotificationOutbox::class);
         $classification = $this->classification('recovery');
@@ -197,11 +210,10 @@ final class SeoPlatform12F02NotificationOutboxTest extends TestCase
             'CLOSED',
         );
 
-        $this->assertSame('pending', $first['status']);
+        $this->assertSame('RECOVERY_EVIDENCE_MISMATCH', $first['reason_code']);
         $this->assertSame('suppressed', $duplicate['status']);
-        $this->assertSame($first['notification_id'], $duplicate['notification_id']);
-        $this->assertSame(2, DB::connection('seo_intel')->table('seo_council_notification_outbox')->count());
-        $this->assertSame(1, DB::connection('seo_intel')->table('seo_council_notification_outbox')
+        $this->assertSame(1, DB::connection('seo_intel')->table('seo_council_notification_outbox')->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_council_notification_outbox')
             ->where('incident_state', 'healthy')->count());
     }
 

@@ -13,6 +13,7 @@ final readonly class Platform12DailyNotifications
         private Platform12NotificationPolicyContract $policy,
         private Platform12NotificationOutbox $outbox,
         private Platform12RuntimeControl $runtime,
+        private Platform12NotificationEvidence $evidence,
     ) {}
 
     /** Called inside the fenced Council terminal transaction. */
@@ -21,33 +22,27 @@ final readonly class Platform12DailyNotifications
         if ($receipt['status'] === 'DAILY_STOPPED_HOLD') {
             return;
         }
-        $evaluation = collect($receipt['route_plan'])->firstWhere('kind', 'daily_evaluation');
-        $output = $evaluation['output'] ?? [];
-        // Report unavailable observations honestly; notification delivery never
-        // promotes a source gap to a completed wiring acceptance.
-        $eventType = match ($output['state'] ?? null) {
-            'WRONG_CANONICAL_HOLD' => 'AUTHORITY_INDEXABILITY_P0',
-            'FALSE_NOINDEX_HOLD' => 'AUTHORITY_INDEXABILITY_P1',
-            'DENY' => ($output['reason_codes'] ?? []) === ['INPUT_UNAVAILABLE'] ? null : 'PRIVATE_OR_SAFETY',
-            'DATA_FRESHNESS_HOLD', 'GSC_UNAVAILABLE_HOLD', 'MAPPING_FAILED_HOLD', 'WINDOW_INCOMPLETE_HOLD', 'DATA_QUALITY_HOLD',
-            'RUNTIME_UNAVAILABLE_HOLD', 'URL_TRUTH_UNAVAILABLE_HOLD', 'CLUSTER_DEDUPE_UNAVAILABLE_HOLD', 'OBSERVATION_UNAVAILABLE_HOLD', 'INPUT_HOLD' => 'DATA_FAILURE',
-            'HOLD' => in_array('AUTHORITY_HASH_DRIFT_HOLD', $output['reason_codes'] ?? [], true)
-                && in_array('DRIFT', $output['drift'] ?? [], true) ? 'POLICY_HASH_DRIFT'
-                    : (array_intersect(['SECURITY_EVIDENCE_UNAVAILABLE', 'INPUT_UNAVAILABLE'], $output['reason_codes'] ?? []) !== [] ? 'DATA_FAILURE' : null),
-            default => null,
-        };
-        $lastHealthy = \Illuminate\Support\Facades\DB::connection((string) config('seo_council.connection', 'seo_intel'))
-            ->table('seo_council_schedule_deliveries')->where('mission_id', $mission->envelope['slot']['mission_id'])
-            ->where('status', 'CLOSED')->orderByDesc('id')->value('terminal_receipt_hash');
-        // Same failure episode is quiet; a later regression after recovery is new.
-        $subject = hash('sha256', $mission->envelope['slot']['mission_id'].'|'.($lastHealthy ?? 'initial'));
-        $revision = $this->policy->reference()['hash'];
-        if ($eventType === 'POLICY_HASH_DRIFT') {
-            $revision = $mission->envelope['version_vector']['policy'];
+        $context = $this->evidence->context($mission, $receipt);
+        if ($context === null) {
+            throw new \RuntimeException('NOTIFICATION_TERMINAL_INTEGRITY_HOLD');
         }
+        $eventType = $this->evidence->eventType($context);
+        if ($this->evidence->expectedAcceptanceWait($context)) {
+            return;
+        }
+        $revision = $eventType === 'POLICY_HASH_DRIFT'
+            ? $mission->envelope['version_vector']['policy'] : $this->policy->reference()['hash'];
         $refs = [['id' => 'council:daily-terminal', 'hash' => $receipt['receipt_hash']]];
         $expiry = now('UTC')->addDay()->format('Y-m-d\TH:i:s\Z');
+        $scope = $this->scope($context);
+        $existing = $this->failures($context, $eventType);
         if ($eventType !== null) {
+            foreach ($existing as [$row, $failure]) {
+                if ($this->scope($failure) === $scope && ! $this->evidence->healthyBetween($failure, $context)) {
+                    return; // Includes legacy identities and policy revisions.
+                }
+            }
+            $subject = hash('sha256', implode('|', [$context['mission'], $scope, $eventType, $context['hash']]));
             $event = ['event_type' => $eventType,
                 'severity' => in_array($eventType, ['AUTHORITY_INDEXABILITY_P0', 'PRIVATE_OR_SAFETY'], true) ? 'P0' : 'P1',
                 'subject_hash' => $subject, 'evidence_refs' => $refs, 'policy_revision' => $revision,
@@ -56,12 +51,53 @@ final readonly class Platform12DailyNotifications
             if ($result['reason_code'] === 'OUTBOX_UNAVAILABLE') {
                 throw new \RuntimeException('TERMINAL_OUTBOX_UNAVAILABLE');
             }
-        } elseif ($receipt['status'] === 'DAILY_MISSION_READY') {
-            foreach (['AUTHORITY_INDEXABILITY_P0', 'AUTHORITY_INDEXABILITY_P1', 'PRIVATE_OR_SAFETY', 'DATA_FAILURE', 'POLICY_HASH_DRIFT'] as $type) {
-                $result = $this->outbox->enqueueRecovery($type, $subject, $revision, $refs, $expiry, $receipt['status']);
+        } elseif ($this->evidence->healthy($context)) {
+            foreach ($existing as [$row, $failure]) {
+                if (! $this->evidence->resolves($context, $failure)) {
+                    continue;
+                }
+                $result = $this->outbox->enqueueRecovery($row->event_type, $row->subject_hash, $revision,
+                    $refs, $expiry, $receipt['status']);
                 if ($result['reason_code'] === 'OUTBOX_UNAVAILABLE') {
                     throw new \RuntimeException('TERMINAL_RECOVERY_OUTBOX_UNAVAILABLE');
                 }
+            }
+        }
+    }
+
+    /** Stored in the existing immutable terminal receipt, including quiet waits. */
+    public function classification(Platform12FrozenMission $mission, array $receipt): array
+    {
+        $context = $this->evidence->context($mission, $receipt);
+
+        return ['kind' => 'notification_classification',
+            'reason_code' => $context === null || in_array($context['trigger'], ['unknown', 'missed'], true)
+                ? 'NOTIFICATION_SOURCE_UNVERIFIED'
+                : ($this->evidence->expectedAcceptanceWait($context) ? 'ACCEPTANCE_REFRESH_NOT_DUE' : 'OPERATIONAL_POLICY_APPLIES'),
+            'trigger_mode' => $context['trigger'] ?? 'unknown'];
+    }
+
+    private function scope(array $context): string
+    {
+        return match ($context['output']['state'] ?? '') {
+            'DATA_FRESHNESS_HOLD', 'GSC_UNAVAILABLE_HOLD', 'MAPPING_FAILED_HOLD', 'WINDOW_INCOMPLETE_HOLD', 'DATA_QUALITY_HOLD' => 'gsc_scheduled_receipt:'.$context['output']['state'],
+            'RUNTIME_UNAVAILABLE_HOLD', 'RUNTIME_READBACK_HOLD' => 'scheduled_runtime_probe',
+            default => (string) ($context['output']['state'] ?? 'unavailable'),
+        };
+    }
+
+    private function failures(array $context, ?string $type): \Generator
+    {
+        $query = \Illuminate\Support\Facades\DB::connection((string) config('seo_council.connection', 'seo_intel'))
+            ->table('seo_council_notification_outbox')->where('incident_state', 'failed');
+        if ($type !== null) {
+            $query->where('event_type', $type);
+        }
+        foreach ($query->orderBy('id')->cursor() as $row) {
+            $failure = $this->evidence->fromPayload(json_decode($row->payload_json, true, 64, JSON_THROW_ON_ERROR));
+            if ($failure !== null && $failure['mission'] === $context['mission'] && $failure['at']->lte($context['at'])
+                && ! $this->evidence->expectedAcceptanceWait($failure, true)) {
+                yield [$row, $failure];
             }
         }
     }

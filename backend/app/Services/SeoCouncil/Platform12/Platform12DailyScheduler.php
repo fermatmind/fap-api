@@ -148,6 +148,8 @@ final readonly class Platform12DailyScheduler
                 'elapsed_ms' => (int) ((hrtime(true) - $start) / 1e6),
             ];
             $receipt['receipt_hash'] = $this->hasher->hashWithout($receipt, 'receipt_hash');
+            $receipt['route_plan'][] = $this->notifications->classification($mission, $receipt);
+            $receipt['receipt_hash'] = $this->hasher->hashWithout($receipt, 'receipt_hash');
             $result = $this->control->withControlLock(fn () => $this->store->completeDelivery($row->delivery_id, self::LEASE, $owner, $fence,
                 $receipt['receipt_id'], $receipt['receipt_hash'], $receipt['status'] === 'DAILY_MISSION_READY' ? 'CLOSED' : 'HELD',
                 function ($connection) use ($mission, $receipt, $state, $vector): void {
