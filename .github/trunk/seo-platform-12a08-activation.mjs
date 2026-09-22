@@ -120,7 +120,7 @@ export const CHECKS = {
 };
 export function scopedReceipt(junit, sha, root = process.cwd()) {
   if (!/^[a-f0-9]{40}$/.test(sha) || !junit.includes('<testcase') || /<(?:failure|error)\b/.test(junit)) throw new Error('SCOPED_TEST_RESULTS_HOLD');
-  const cases = [...junit.matchAll(/<testcase\b[^>]*(?:\/>|>[\s\S]*?<\/testcase>)/g)].map(match=>match[0]);
+  const cases = [...junit.matchAll(/<testcase\b[^>]*?(?:\/>|>[\s\S]*?<\/testcase>)/g)].map(match=>match[0]);
   const prints = fingerprint(root, sha);
   const checks = {};
   for (const [id, tests] of Object.entries(CHECKS)) {

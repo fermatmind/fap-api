@@ -46,6 +46,26 @@ test('offline receipts cannot omit test scope or manufacture real source evidenc
  assert.throws(()=>scopedReceipt('<testcase name="unrelated"/>',execFileSync('git',['rev-parse','HEAD']).toString().trim()),/COVERAGE|RESULTS/);
  assert.throws(()=>scopedReceipt('<testcase/><failure/>','a'.repeat(40)),/RESULTS/);
 });
+test('self-closing passed cases cannot absorb a following unrelated skipped case',()=>{
+ const root=mkdtempSync(`${tmpdir()}/a08-junit-`);
+ const git=(...args)=>execFileSync('git',args,{cwd:root}).toString().trim();
+ try {
+  git('init','-q');git('config','user.email','test@example.test');git('config','user.name','Test');
+  git('commit','--allow-empty','-qm','fixture');
+  const sha=git('rev-parse','HEAD');
+  const names=[...new Set(Object.values(CHECKS).flat())];
+  const passed=names.map(name=>`<testcase class="${name}" name="passes"/>`).join('');
+  const skipped='<testcase class="OptionalMysqlTest" name="requires_mysql"><skipped/></testcase>';
+  const receipt=scopedReceipt(`<testsuite>${passed}${skipped}</testsuite>`,sha,root);
+  assert.equal(receipt.checks.public.status,'pass');
+  assert.equal(receipt.covered_classes.includes('OptionalMysqlTest'),false);
+  for(const required of [names[0],names.at(-1)]) {
+   const invalid=passed.replace(`<testcase class="${required}" name="passes"/>`,
+    `<testcase class="${required}" name="passes"><skipped/></testcase>`);
+   assert.throws(()=>scopedReceipt(`<testsuite>${invalid}</testsuite>`,sha,root),/COVERAGE/);
+  }
+ } finally {rmSync(root,{recursive:true,force:true});}
+});
 test('pause, generation, pending counts and exact SHA must be preserved',()=>{
  const state={gate_only:true,sha:'a'.repeat(40),paused:true,generation:'x',counts:{runs:0},selected_missions:[],business_guards_closed:true,operations_readonly:true};
  assert.equal(verifyState(state,state,state.sha),true);
