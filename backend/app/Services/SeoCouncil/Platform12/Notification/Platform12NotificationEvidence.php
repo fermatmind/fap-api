@@ -162,9 +162,10 @@ final readonly class Platform12NotificationEvidence
     /** A new full natural health observation must cover the whole affected Mission. */
     public function healthyBetween(array $failure, array $current): bool
     {
+        // A catch-up slot can predate the fault while its observation follows
+        // it. Only verified capture/observation instants determine resolution.
         $rows = $this->connection()->table('seo_council_schedule_deliveries')
             ->where('mission_id', $failure['mission'])->where('status', 'CLOSED')
-            ->where('scheduled_for', '>', $failure['at']->format('Y-m-d H:i:s'))
             ->where('scheduled_for', '<=', $current['at']->format('Y-m-d H:i:s'))
             ->orderByDesc('id')->cursor(['terminal_receipt_hash']);
         foreach ($rows as $row) {

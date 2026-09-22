@@ -551,6 +551,26 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
         $this->assertSame(0, $this->events()->where('incident_state', 'healthy')->count());
     }
 
+    public function test_late_natural_catchup_health_closes_cycle_by_observation_not_planned_slot(): void
+    {
+        $this->clock('2026-09-22T22:19:00Z');
+        app(Platform12RuntimeControl::class)->change(false, [Platform12DailyMissionSet::IDS[0]]);
+        $reader = $this->fixtureReader();
+        $reader->overrides = ['gsc' => ['data_max_date' => '2026-09-17']];
+        $scheduler = app(Platform12DailyScheduler::class);
+        $this->clock('2026-09-22T22:30:00Z');
+        $this->assertSame('DATA_FRESHNESS_HOLD', $scheduler->tick(Platform12DailyMissionSet::IDS[0])['mission_verdict']);
+        $this->events()->update(['status' => 'sent', 'sent_at' => '2026-09-22 22:31:00']);
+        $reader->overrides = [];
+        $this->clock('2026-09-22T22:40:00Z');
+        $this->assertSame('READY', $scheduler->tick()['mission_verdict']);
+        $this->assertSame(1, $this->events()->where('incident_state', 'healthy')->count());
+        $reader->overrides = ['gsc' => ['data_max_date' => '2026-09-17']];
+        $this->clock('2026-09-23T22:20:04Z');
+        $this->assertSame('DATA_FRESHNESS_HOLD', $scheduler->tick()['mission_verdict']);
+        $this->assertSame(2, $this->events()->where('incident_state', 'failed')->count());
+    }
+
     private function clock(string $instant): void
     {
         CarbonImmutable::setTestNow(CarbonImmutable::parse($instant));
