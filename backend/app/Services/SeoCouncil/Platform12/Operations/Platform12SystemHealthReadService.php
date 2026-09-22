@@ -51,7 +51,7 @@ final readonly class Platform12SystemHealthReadService
             if ($rows->count() > 200 || $leases->count() > 200) {
                 return $this->unavailableSnapshot();
             }
-            $daily = $this->dailyMissions($rows, $runtime, $now);
+            $daily = $this->dailyMissions($rows, $leases, $runtime, $now);
             $pending = $running = $future = $anomalies = $unknown = $workUnknown = $stale = 0;
             foreach ($rows as $row) {
                 if ($row->status === 'PLANNED') {
@@ -77,9 +77,9 @@ final readonly class Platform12SystemHealthReadService
                     $receipt = $this->receipt($row);
                     if ($receipt === null) {
                         $unknown++;
-                    } elseif (($receipt['status'] ?? null) !== 'DAILY_MISSION_HOLD') {
+                    } elseif ($this->executionHold($receipt)) {
                         $anomalies++;
-                    } elseif (! is_array($this->evaluation($receipt))) {
+                    } elseif (($receipt['status'] ?? null) !== 'DAILY_MISSION_HOLD' || ! is_array($this->evaluation($receipt))) {
                         $unknown++;
                     }
                 } elseif ($row->status !== 'CLOSED') {
@@ -160,6 +160,20 @@ final readonly class Platform12SystemHealthReadService
         return $receipt;
     }
 
+    /** Match the orchestrator's execution gates, not arbitrary HELD strings. */
+    private function executionHold(array $receipt): bool
+    {
+        return in_array($receipt['status'] ?? null, [
+            'DAILY_STOPPED_HOLD', 'POLICY_HOLD', 'DEPENDENCY_HOLD', 'STALE_RESUME_HOLD',
+            'ROUTING_SCOPE_HOLD', 'MISSION_SCOPE_HOLD', 'REQUESTED_ROLE_EXPANSION_HOLD',
+            'EVIDENCE_HOLD', 'PERSISTENCE_HOLD',
+        ], true) || (($receipt['status'] ?? null) === 'DAILY_MISSION_HOLD'
+            && in_array($receipt['stop_reason'] ?? null, [
+                'daily_runtime_gate_hold', 'daily_scope_or_runtime_hold', 'daily_version_drift',
+                'daily_evidence_expired', 'daily_stopped_before_commit',
+            ], true));
+    }
+
     private function evaluation(array $receipt): ?array
     {
         $output = collect($receipt['route_plan'] ?? [])->firstWhere('kind', 'daily_evaluation')['output'] ?? null;
@@ -189,7 +203,7 @@ final readonly class Platform12SystemHealthReadService
         };
     }
 
-    private function dailyMissions($rows, array $runtime, CarbonImmutable $now): array
+    private function dailyMissions($rows, $leases, array $runtime, CarbonImmutable $now): array
     {
         $set = app(Platform12DailyMissionSet::class);
         $items = [];
@@ -199,20 +213,25 @@ final readonly class Platform12SystemHealthReadService
             $row = $rows->firstWhere('mission_id', $mission['mission_id']);
             $receipt = $row === null ? null : $this->receipt($row);
             $missingReceipts += (int) ($receipt === null);
+            $scheduled = $receipt === null ? null : collect($receipt['route_plan'] ?? [])->firstWhere('kind', 'scheduled_delivery');
             $output = $receipt === null ? null : $this->evaluation($receipt);
             $observed = Platform12OperationsTime::instant($output['evaluated_at'] ?? null);
             $stale = $observed !== null && $observed->lt($now->subHours(26));
             $execution = $row?->status ?? 'NOT_STARTED';
-            $validResult = $receipt !== null && $output !== null
+            $lease = $row === null ? null : $leases->get($row->lease_key);
+            $interrupted = in_array($execution, ['CLAIMED', 'RECOVERED'], true)
+                && ($lease === null || ! $lease->active || (int) $lease->fencing_token !== (int) $row->fencing_token);
+            $validResult = $receipt !== null && $output !== null && empty($scheduled['source_gaps']) && ! $this->executionHold($receipt)
                 && (($execution === 'CLOSED' && ($receipt['status'] ?? null) === 'DAILY_MISSION_READY' && $output['state'] === 'READY')
                     || ($execution === 'HELD' && ($receipt['status'] ?? null) === 'DAILY_MISSION_HOLD' && $output['state'] !== 'READY'));
             $state = match (true) {
                 $row === null => 'NOT_STARTED',
+                $interrupted => 'EXECUTION_HOLD',
                 in_array($execution, ['CLAIMED', 'RECOVERED'], true) => 'RUNNING',
                 $execution === 'PLANNED' => 'PENDING',
                 $execution === 'FAILED' => 'FAILED',
                 $execution === 'BACKPRESSURE_HOLD' => 'EXECUTION_HOLD',
-                $receipt !== null && ($receipt['status'] ?? null) === 'DAILY_STOPPED_HOLD' => 'EXECUTION_HOLD',
+                $receipt !== null && $this->executionHold($receipt) => 'EXECUTION_HOLD',
                 ! $validResult || $observed === null || $observed->gt($now) => 'UNAVAILABLE',
                 $stale => 'STALE',
                 $output['state'] === 'READY' => 'READY',
@@ -221,13 +240,12 @@ final readonly class Platform12SystemHealthReadService
             $businessHolds += (int) ($state === 'HOLD');
             $evidenceIssues += (int) in_array($state, ['STALE', 'UNAVAILABLE', 'NOT_STARTED'], true);
             $observedAt = Platform12OperationsTime::iso($observed);
-            $scheduled = $receipt === null ? null : collect($receipt['route_plan'] ?? [])->firstWhere('kind', 'scheduled_delivery');
             $explanation = $this->explanations->for(in_array($state, ['READY', 'HOLD', 'STALE'], true) ? $output : [], $state, ! empty($scheduled['source_gaps']));
             $gate = $runtime['missions'][$mission['mission_id']] ?? [];
             $step = $this->gateStep($gate, $runtime);
             $items[] = [
                 'label_key' => 'seo-council.missions.'.$index, 'state' => $state, ...$explanation,
-                'execution_state' => $this->safeCode($execution),
+                'execution_state' => $interrupted ? 'EXECUTION_INTERRUPTED' : $this->safeCode($execution),
                 'business_result' => $validResult ? $this->safeCode($output['state']) : 'UNAVAILABLE',
                 'source_checks' => $this->sourceChecks($scheduled, $output ?? []),
                 'observed_at' => $observedAt,

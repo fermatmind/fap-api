@@ -195,7 +195,7 @@ final class SeoPlatform12E02SystemHealthUiTest extends TestCase
     {
         $this->insertDelivery('CLAIMED', now()->utc());
         $db = DB::connection('seo_intel');
-        $db->table('seo_council_schedule_deliveries')->update(['lease_key' => 'fixture', 'fencing_token' => 1]);
+        $db->table('seo_council_schedule_deliveries')->update(['lease_key' => 'fixture', 'fencing_token' => 1, 'mission_id' => Platform12DailyMissionSet::IDS[1]]);
         $db->table('seo_council_scheduler_leases')->insert(['lease_key' => 'fixture', 'owner_token_hash' => str_repeat('a', 64),
             'fencing_token' => 1, 'lease_expires_at' => now()->utc()->addMinute(), 'created_at' => now(), 'updated_at' => now()]);
         $snapshot = app(Platform12SystemHealthReadService::class)->snapshot($this->runtime());
@@ -203,9 +203,11 @@ final class SeoPlatform12E02SystemHealthUiTest extends TestCase
         $this->assertSame(1, $items['lease_backlog']['count']);
         $this->assertSame('RUNNING', $items['lease_backlog']['state']);
         $this->assertSame(1, $items['active_leases']['count']);
+        $this->assertSame('RUNNING', $snapshot['daily_missions']['items'][1]['state']);
         $db->table('seo_council_scheduler_leases')->update(['lease_expires_at' => now()->utc()]);
         $items = collect(app(Platform12SystemHealthReadService::class)->snapshot($this->runtime())['items'])->keyBy('component');
         $this->assertSame('HOLD', $items['execution_anomalies']['state']);
+        $this->assertSame('EXECUTION_HOLD', app(Platform12SystemHealthReadService::class)->snapshot($this->runtime())['daily_missions']['items'][1]['state']);
         $db->table('seo_council_schedule_deliveries')->delete();
         $this->insertDelivery('PLANNED', now()->utc()->addDay());
         $items = collect(app(Platform12SystemHealthReadService::class)->snapshot($this->runtime())['items'])->keyBy('component');
@@ -314,6 +316,32 @@ final class SeoPlatform12E02SystemHealthUiTest extends TestCase
         $this->assertSame(1, $items['execution_anomalies']['count']);
         $this->assertSame(0, $snapshot['daily_missions']['business_hold_count']);
         $this->assertSame('EXECUTION_HOLD', $snapshot['daily_missions']['items'][1]['state']);
+        foreach (['UNRECOGNIZED_RECEIPT' => 'UNAVAILABLE', 'POLICY_HOLD' => 'EXECUTION_HOLD'] as $status => $expected) {
+            $receipt['status'] = $status;
+            $receipt['receipt_hash'] = app(SeoRegistryHasher::class)->hashWithout($receipt, 'receipt_hash');
+            $db->table('seo_council_run_receipts')->update(['receipt_hash' => $receipt['receipt_hash'], 'receipt_json' => json_encode($receipt)]);
+            $db->table('seo_council_schedule_deliveries')->update(['terminal_receipt_hash' => $receipt['receipt_hash']]);
+            $snapshot = app(Platform12SystemHealthReadService::class)->snapshot($this->runtime());
+            $this->assertSame($expected, $snapshot['daily_missions']['items'][1]['state']);
+            $this->assertSame($expected === 'UNAVAILABLE' ? 'UNAVAILABLE' : 'HOLD', collect($snapshot['items'])->keyBy('component')['execution_anomalies']['state']);
+        }
+        $receipt['status'] = 'DAILY_MISSION_HOLD';
+        $receipt['stop_reason'] = 'daily_stopped_before_commit';
+        $receipt['route_plan'][] = ['kind' => 'daily_evaluation', 'output' => ['state' => 'DATA_FRESHNESS_HOLD', 'evaluated_at' => now()->utc()->format('Y-m-d\TH:i:s\Z')]];
+        $receipt['receipt_hash'] = app(SeoRegistryHasher::class)->hashWithout($receipt, 'receipt_hash');
+        $db->table('seo_council_run_receipts')->update(['receipt_hash' => $receipt['receipt_hash'], 'receipt_json' => json_encode($receipt)]);
+        $db->table('seo_council_schedule_deliveries')->update(['terminal_receipt_hash' => $receipt['receipt_hash']]);
+        $snapshot = app(Platform12SystemHealthReadService::class)->snapshot($this->runtime());
+        $this->assertSame('EXECUTION_HOLD', $snapshot['daily_missions']['items'][1]['state']);
+        $this->assertSame(0, $snapshot['daily_missions']['business_hold_count']);
+        unset($receipt['stop_reason']);
+        $receipt['route_plan'][0]['source_gaps'] = ['url_truth_reconciliation'];
+        $receipt['receipt_hash'] = app(SeoRegistryHasher::class)->hashWithout($receipt, 'receipt_hash');
+        $db->table('seo_council_run_receipts')->update(['receipt_hash' => $receipt['receipt_hash'], 'receipt_json' => json_encode($receipt)]);
+        $db->table('seo_council_schedule_deliveries')->update(['terminal_receipt_hash' => $receipt['receipt_hash']]);
+        $snapshot = app(Platform12SystemHealthReadService::class)->snapshot($this->runtime());
+        $this->assertSame('UNAVAILABLE', $snapshot['daily_missions']['items'][1]['state']);
+        $this->assertSame(0, $snapshot['daily_missions']['business_hold_count']);
         $db->table('seo_council_schedule_deliveries')->update(['mission_request_hash' => str_repeat('f', 64)]);
         $snapshot = app(Platform12SystemHealthReadService::class)->snapshot($this->runtime());
         $this->assertSame('UNAVAILABLE', $snapshot['daily_missions']['items'][1]['state']);

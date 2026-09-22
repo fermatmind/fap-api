@@ -67,7 +67,7 @@
                     <small>{{ __('seo-council.acceptance_ready') }}: {{ ($mission['acceptance_ready'] ?? false) ? 'READY' : 'HOLD' }} · {{ $mission['gate_reason'] ?? 'UNAVAILABLE' }}</small>
                     <strong>{{ __('seo-council.'.($mission['gate_next_step'] ?? 'authorization_unknown')) }}</strong>
                     @if (($mission['gate_next_step'] ?? null) === 'natural_run_authorized')
-                        <small>{{ __('seo-council.'.(in_array($mission['execution_state'] ?? '', ['CLAIMED', 'RECOVERED'], true) ? 'currently_executing' : 'waiting_window')) }}</small>
+                        <small>{{ __('seo-council.'.(in_array($mission['state'], ['FAILED', 'EXECUTION_HOLD'], true) ? 'reasons.EXECUTION_HOLD.problem' : ($mission['state'] === 'RUNNING' ? 'currently_executing' : 'waiting_window'))) }}</small>
                     @endif
                     <small>{{ __('seo-council.source_accepted') }}: {{ isset($mission['source_accepted']) ? ($mission['source_accepted'] ? 'READY' : 'HOLD') : 'UNAVAILABLE' }} · {{ __('seo-council.end_to_end_accepted') }}: {{ isset($mission['end_to_end_accepted']) ? ($mission['end_to_end_accepted'] ? 'READY' : 'HOLD') : 'UNAVAILABLE' }}</small>
                     <small>{{ __('seo-council.selected') }}: {{ isset($mission['selected']) ? ($mission['selected'] ? 'YES' : 'NO') : 'UNAVAILABLE' }} · {{ __('seo-council.run_allowed') }}: {{ isset($mission['run_allowed']) ? ($mission['run_allowed'] ? 'YES' : 'NO') : 'UNAVAILABLE' }}</small>
