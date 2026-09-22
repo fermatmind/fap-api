@@ -62,7 +62,11 @@ final class CurrentPublicUrlAuthoritySource implements UrlTruthInventorySource
                 }
                 $items = [];
             }
-            if ($items === [] && config('seo_intel.enabled', false)) {
+            // A published locale can legitimately have browsable identities but no
+            // indexable bodies. Cache/read failures still throw above; only a truly
+            // empty browse authority is indeterminate.
+            if ($items === [] && config('seo_intel.enabled', false)
+                && $this->careerAuthority->browseItems($locale, false) === []) {
                 throw new \RuntimeException('PUBLIC_AUTHORITY_CAREER_UNDETERMINED');
             }
             foreach ($items as $item) {
