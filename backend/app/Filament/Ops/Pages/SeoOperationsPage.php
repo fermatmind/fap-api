@@ -201,6 +201,15 @@ class SeoOperationsPage extends Page
         $this->refreshSeoIntel();
     }
 
+    public function rendering(): void
+    {
+        // Council receipts have their own readers. Load the general SEO models
+        // only when a workspace that consumes them is rendered.
+        if ($this->platformReadModels === []) {
+            $this->refreshSeoIntel();
+        }
+    }
+
     public function updatedSelectedIssueUid(): void
     {
         $this->syncSelectedIssueVersion();
@@ -900,6 +909,10 @@ class SeoOperationsPage extends Page
 
     private function refreshSeoIntel(): void
     {
+        if ($this->activeWorkspace === 'automation' && $this->activeAutomationSection === 'agents') {
+            return;
+        }
+
         $reader = app(SeoOperationsReadService::class);
         $this->platformReadModels = $reader->read([
             'days' => $this->gscDays,

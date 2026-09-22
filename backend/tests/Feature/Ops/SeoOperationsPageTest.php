@@ -62,6 +62,35 @@ final class SeoOperationsPageTest extends TestCase
         }
     }
 
+    public function test_council_entry_does_not_preload_unused_seo_models_and_navigation_loads_them(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $org = $this->createOrganization('Council Lazy Reads');
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $this->withSession($this->opsSession($admin, $org));
+        app(OrgContext::class)->set((int) $org->id, (int) $admin->id, 'admin');
+
+        foreach (['workspace', 'section', 'saved_view', 'binding'] as $navigation) {
+            $page = Livewire::withQueryParams([
+                'workspace' => 'automation',
+                'automation-view' => 'agents',
+            ])->test(SeoOperationsPage::class)
+                ->assertSet('platformReadModels', [])
+                ->assertSee('Council roles')
+                ->assertSee('M1')
+                ->set('gscDays', 7)
+                ->assertSet('platformReadModels', []);
+
+            match ($navigation) {
+                'workspace' => $page->call('openDecisionWorkspace', 'performance'),
+                'section' => $page->call('openAutomationSection', 'scheduler'),
+                'saved_view' => $page->call('applySavedView', 'high_impressions_low_ctr'),
+                'binding' => $page->set('activeWorkspace', 'overview'),
+            };
+            $page->assertSet('platformReadModels', static fn (array $models): bool => isset($models['overview'], $models['performance']));
+        }
+    }
+
     public function test_council_workspace_is_not_accessible_without_content_permission(): void
     {
         $admin = $this->createAdminWithPermissions([]);
@@ -326,7 +355,7 @@ final class SeoOperationsPageTest extends TestCase
             ->assertSee('<select id="ops-seo-issue-filter"', false)
             ->assertDontSee('ops-seo-intro', false)
             ->assertSee('28-day visibility trend')
-            ->assertSee('Priority decisions')
+            ->assertSee('Candidate suggestions')
             ->assertSee('Weekly decisions are on MEASUREMENT_HOLD')
             ->assertSee('Data sources & freshness')
             ->assertDontSee('Growth diagnostics')
