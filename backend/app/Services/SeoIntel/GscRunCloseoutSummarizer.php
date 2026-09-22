@@ -89,8 +89,8 @@ final class GscRunCloseoutSummarizer
             ->selectRaw('COUNT(*) AS row_count')
             ->selectRaw('COALESCE(SUM(clicks), 0) AS clicks')
             ->selectRaw('COALESCE(SUM(impressions), 0) AS impressions')
-            ->selectRaw('COALESCE(SUM(CASE WHEN average_position_milli IS NOT NULL AND impressions > 0 THEN average_position_milli * impressions ELSE 0 END), 0) AS position_weight')
-            ->selectRaw('COALESCE(SUM(CASE WHEN average_position_milli IS NOT NULL AND impressions > 0 THEN impressions ELSE 0 END), 0) AS position_impressions')
+            ->selectRaw(\App\Services\SeoIntel\GscMetricWeights::sumSql('numerator').' AS position_weight')
+            ->selectRaw(\App\Services\SeoIntel\GscMetricWeights::sumSql('denominator').' AS position_impressions')
             ->first();
         $aggregateClicks = (int) ($aggregateRow->clicks ?? 0);
         $aggregateImpressions = (int) ($aggregateRow->impressions ?? 0);
@@ -199,7 +199,7 @@ final class GscRunCloseoutSummarizer
             'id', 'report_date', 'canonical_url_hash', 'canonical_url', 'query_hash',
             'source_engine', 'device', 'country', 'search_type', 'clicks',
             'impressions', 'average_position_milli',
-        ])->lazyById(5000);
+        ])->selectRaw(GscMetricWeights::projectionSql())->lazyById(5000);
     }
 
     /** @return array<string,mixed> */
@@ -255,11 +255,9 @@ final class GscRunCloseoutSummarizer
             $clicks += (int) $this->value($row, 'clicks');
             $rowImpressions = (int) $this->value($row, 'impressions');
             $impressions += $rowImpressions;
-            $position = $this->value($row, 'average_position_milli');
-            if ($position !== null) {
-                $positionWeight += (int) $position * $rowImpressions;
-                $positionImpressions += $rowImpressions;
-            }
+            [$numerator, $denominator] = GscMetricWeights::fromRow($row);
+            $positionWeight += $numerator;
+            $positionImpressions += $denominator;
             if ($uniqueCount === null) {
                 $keys[$this->naturalKey($row)] = true;
             }

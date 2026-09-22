@@ -418,9 +418,9 @@ final class SeoAgentGscPostPublishFeedbackCommand extends RetiredSeoAgentCommand
         $impressions = array_sum(array_map(static fn (array $row): int => (int) ($row['impressions'] ?? 0), $selected));
         $weightedPosition = 0;
         foreach ($selected as $row) {
-            $weightedPosition += ((int) ($row['average_position_milli'] ?? 0)) * max(1, (int) ($row['impressions'] ?? 0));
+            $weightedPosition += \App\Services\SeoIntel\GscMetricWeights::fromRow($row, 'minimum_one_all')[0];
         }
-        $positionDenominator = array_sum(array_map(static fn (array $row): int => max(1, (int) ($row['impressions'] ?? 0)), $selected));
+        $positionDenominator = array_sum(array_map(static fn (array $row): int => \App\Services\SeoIntel\GscMetricWeights::fromRow($row, 'minimum_one_all')[1], $selected));
 
         return [
             'date_start' => $start->toDateString(),

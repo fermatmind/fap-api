@@ -134,7 +134,7 @@ final class GscReadModelSyncService
                 );
             }
 
-            [$upserted, $excluded] = $this->persistRows($connection, $runUid, $rows);
+            [$upserted, $excluded, $mappingReadback] = $this->persistRows($connection, $runUid, $rows);
             $closeout = $this->closeoutSummarizer->summarize(
                 $connection,
                 $rows,
@@ -182,6 +182,7 @@ final class GscReadModelSyncService
                 'rows_upserted' => $upserted,
                 'unmapped_rows' => 0,
                 'mapped_rows' => $upserted,
+                'mapping_readback' => $mappingReadback,
                 'excluded_non_authority_rows' => $excluded,
                 'quality_gate' => $quality,
                 ...$closeout,
@@ -309,7 +310,7 @@ final class GscReadModelSyncService
 
     /**
      * @param  list<array<string,mixed>>  $rows
-     * @return array{0:int,1:int}
+     * @return array{0:int,1:int,2:array<string,mixed>}
      */
     private function persistRows(ConnectionInterface $connection, string $runUid, array $rows): array
     {
@@ -340,11 +341,13 @@ final class GscReadModelSyncService
         $now = CarbonImmutable::now('UTC')->toDateTimeString();
         $payloads = [];
         $qualityRows = [];
+        $mappedCount = 0;
 
         foreach ($rows as $row) {
             if (! $hmacColumnsAvailable) {
                 unset($row['query_hmac'], $row['query_hmac_key_version']);
             }
+            $sourceKey = $this->idempotencyKey($row);
             $sourceHash = (string) ($row['canonical_url_hash'] ?? '');
             $truthRow = $truth->get($sourceHash);
             $authorityRow = $truthRow === null ? ($authority['variants'][$sourceHash] ?? null) : null;
@@ -394,7 +397,9 @@ final class GscReadModelSyncService
             $row['canonical_url'] = $canonicalUrl;
             $row['locale'] = $locale;
             $row['metadata_json'] = $metadata;
-            $payloads[] = [
+            $mappedCount++;
+            // Preserve last-observation semantics for repeated source natural keys.
+            $payloads[$sourceKey] = [
                 ...$row,
                 'url_truth_id' => $truthRow !== null ? (int) $truthRow->id : null,
                 'mapping_state' => 'mapped',
@@ -408,7 +413,18 @@ final class GscReadModelSyncService
 
         }
 
-        $connection->transaction(function () use ($connection, $payloads, $qualityRows, $hmacColumnsAvailable): void {
+        $sourceCount = count($payloads);
+        $payloads = $this->mergeCanonicalPayloads($payloads);
+        $expectedClicks = array_sum(array_column($payloads, 'clicks'));
+        $expectedImpressions = array_sum(array_column($payloads, 'impressions'));
+        $expectedPosition = [0, 0];
+        foreach ($payloads as $payload) {
+            [$numerator, $denominator] = GscMetricWeights::fromRow($payload);
+            $expectedPosition[0] += $numerator;
+            $expectedPosition[1] += $denominator;
+        }
+        unset($payload);
+        $connection->transaction(function () use ($connection, $payloads, $qualityRows, $hmacColumnsAvailable, $runUid, $expectedClicks, $expectedImpressions, $expectedPosition): void {
             $updateColumns = [
                 'url_truth_id', 'canonical_url', 'mapping_state', 'sync_run_uid', 'locale', 'clicks', 'impressions',
                 'ctr_ppm', 'average_position_milli', 'data_state', 'collected_at', 'metadata_json', 'updated_at',
@@ -423,12 +439,82 @@ final class GscReadModelSyncService
                     $updateColumns,
                 );
             }
+            $actual = $connection->table('seo_gsc_daily')->where('sync_run_uid', $runUid)
+                ->selectRaw('COUNT(*) AS rows_written, COALESCE(SUM(clicks), 0) AS clicks, COALESCE(SUM(impressions), 0) AS impressions')
+                ->selectRaw(GscMetricWeights::sumSql('numerator').' AS position_numerator')
+                ->selectRaw(GscMetricWeights::sumSql('denominator').' AS position_denominator')->first();
+            if ((int) $actual->rows_written !== count($payloads)
+                || (int) $actual->clicks !== $expectedClicks || (int) $actual->impressions !== $expectedImpressions
+                || (int) $actual->position_numerator !== $expectedPosition[0]
+                || (int) $actual->position_denominator !== $expectedPosition[1]) {
+                throw new \RuntimeException('GSC_MAPPING_READBACK_FAILED');
+            }
             foreach (array_chunk($qualityRows, 500) as $chunk) {
                 $connection->table('seo_gsc_data_quality_queue')->insertOrIgnore($chunk);
             }
         });
 
-        return [count($payloads), count($qualityRows)];
+        return [$mappedCount, count($qualityRows), [
+            'status' => 'passed', 'mapped_source_rows' => $mappedCount,
+            'distinct_source_rows' => $sourceCount, 'persisted_rows' => count($payloads),
+            'duplicate_source_rows' => $mappedCount - $sourceCount,
+            'canonical_variant_merges' => $sourceCount - count($payloads),
+            'clicks' => $expectedClicks, 'impressions' => $expectedImpressions,
+            'position_numerator' => $expectedPosition[0], 'position_denominator' => $expectedPosition[1],
+        ]];
+    }
+
+    /** @param array<string,array<string,mixed>> $payloads @return list<array<string,mixed>> */
+    private function mergeCanonicalPayloads(array &$payloads): array
+    {
+        $merged = [];
+        while ($payloads !== []) {
+            $sourceKey = array_key_first($payloads);
+            $payload = $payloads[$sourceKey];
+            unset($payloads[$sourceKey]);
+            $key = $payload['idempotency_key'];
+            if (! isset($merged[$key])) {
+                $merged[$key] = $payload;
+
+                continue;
+            }
+            $target = &$merged[$key];
+            if (! isset($target['_weights'])) {
+                $target['_weights'] = ['version' => 1];
+                foreach (['standard', 'minimum_one', 'positive_position', 'minimum_one_all'] as $mode) {
+                    [$target['_weights'][$mode.'_numerator'], $target['_weights'][$mode.'_denominator']] = GscMetricWeights::fromRow($target, $mode);
+                }
+            }
+            foreach (['standard', 'minimum_one', 'positive_position', 'minimum_one_all'] as $mode) {
+                [$numerator, $denominator] = GscMetricWeights::fromRow($payload, $mode);
+                $target['_weights'][$mode.'_numerator'] += $numerator;
+                $target['_weights'][$mode.'_denominator'] += $denominator;
+            }
+            $target['clicks'] += $payload['clicks'];
+            $target['impressions'] += $payload['impressions'];
+            // An exact current binding remains preferable to a URL-variant mapping.
+            if ($target['url_truth_id'] === null && $payload['url_truth_id'] !== null) {
+                $target['url_truth_id'] = $payload['url_truth_id'];
+                $target['metadata_json'] = $payload['metadata_json'];
+            }
+            unset($target);
+        }
+        foreach ($merged as &$payload) {
+            if (isset($payload['_weights'])) {
+                $weights = $payload['_weights'];
+                $metadata = json_decode($payload['metadata_json'], true, 32, JSON_THROW_ON_ERROR);
+                $metadata['_canonical_metric_weights'] = $weights;
+                $payload['metadata_json'] = json_encode($metadata, JSON_THROW_ON_ERROR);
+                $payload['average_position_milli'] = $weights['standard_denominator'] > 0
+                    ? (int) round($weights['standard_numerator'] / $weights['standard_denominator']) : null;
+                $payload['ctr_ppm'] = $payload['impressions'] > 0
+                    ? (int) round($payload['clicks'] / $payload['impressions'] * 1_000_000) : null;
+            }
+            unset($payload['_weights']);
+        }
+        unset($payload);
+
+        return array_values($merged);
     }
 
     /** @return array{variants:array<string,array<string,string>>,revision:string} */

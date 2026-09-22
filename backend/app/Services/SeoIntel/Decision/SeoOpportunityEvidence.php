@@ -159,6 +159,7 @@ final class SeoOpportunityEvidence
             }
             $key = implode('|', [$r['report_date'], $r['query_hash'], $r['device'], $r['country'], 'web']);
             $values = [(int) $r['clicks'], (int) $r['impressions'], $r['average_position_milli'] === null ? null : (int) $r['average_position_milli']];
+            $values[] = \App\Services\SeoIntel\GscMetricWeights::fromRow($r, 'positive_position');
             if (isset($normalized[$key])) {
                 if ($normalized[$key]['values'] !== $values) {
                     return ['reason' => 'conflicting_source_dimensions'];
@@ -170,10 +171,9 @@ final class SeoOpportunityEvidence
             $daily[$r['query_hash']][$r['report_date']] = true;
             $clicks += $values[0];
             $impressions += $values[1];
-            if ($values[2] !== null && $values[2] > 0) {
-                $positionWeight += $values[1];
-                $weightedPosition += $values[1] * $values[2];
-            }
+            [$numerator, $denominator] = $values[3];
+            $positionWeight += $denominator;
+            $weightedPosition += $numerator;
             $sources[] = ['row_id' => (int) $r['id'], 'sync_run_uid' => $r['sync_run_uid'], 'sync_receipt_hash' => $proof['receipt_hash'], 'row_hash' => self::rowHash($r)];
         }
         foreach ($queries as $query) {
@@ -253,7 +253,11 @@ final class SeoOpportunityEvidence
             $values[$key] = isset($row[$key]) ? (int) $row[$key] : null;
         }
         $values['is_brand_query'] = (bool) ($row['is_brand_query'] ?? true);
-        $values['data_origin'] = self::json($row['metadata_json'] ?? null)['data_origin'] ?? null;
+        $metadata = self::json($row['metadata_json'] ?? null);
+        $values['data_origin'] = $metadata['data_origin'] ?? null;
+        if (($metadata['_canonical_metric_weights']['version'] ?? null) === 1) {
+            $values['canonical_position_weights'] = \App\Services\SeoIntel\GscMetricWeights::fromRow($row, 'positive_position');
+        }
 
         return SeoWeeklyDecisionReceiptValidator::hash($values);
     }

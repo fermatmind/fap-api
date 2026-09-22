@@ -195,7 +195,7 @@ final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadServi
                 'seo_gsc_daily.is_brand_query',
                 'seo_gsc_daily.query_type',
             ])
-            ->selectRaw("CASE WHEN JSON_VALID(seo_gsc_daily.metadata_json) THEN JSON_OBJECT('data_origin', JSON_EXTRACT(seo_gsc_daily.metadata_json, '$.data_origin'), 'row_source', JSON_EXTRACT(seo_gsc_daily.metadata_json, '$.row_source')) ELSE NULL END AS metadata_json")
+            ->selectRaw("CASE WHEN JSON_VALID(seo_gsc_daily.metadata_json) THEN JSON_OBJECT('data_origin', JSON_EXTRACT(seo_gsc_daily.metadata_json, '$.data_origin'), 'row_source', JSON_EXTRACT(seo_gsc_daily.metadata_json, '$.row_source'), '_canonical_metric_weights', CASE WHEN LENGTH(JSON_EXTRACT(seo_gsc_daily.metadata_json, '$._canonical_metric_weights')) <= 1024 THEN JSON_EXTRACT(seo_gsc_daily.metadata_json, '$._canonical_metric_weights') ELSE NULL END) ELSE NULL END AS metadata_json")
             ->where('seo_gsc_daily.source_engine', 'google')
             ->orderByDesc('seo_gsc_daily.report_date')
             ->orderBy('seo_gsc_daily.id')
@@ -381,8 +381,8 @@ final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadServi
         $first = $group->sortByDesc('report_date')->first();
         $impressions = (int) $group->sum('impressions');
         $clicks = (int) $group->sum('clicks');
-        $weightedPosition = (int) $group->sum(static fn (array $row): int => (int) ($row['average_position_milli'] ?? 0) * max(1, (int) ($row['impressions'] ?? 0)));
-        $positionWeight = (int) $group->sum(static fn (array $row): int => $row['average_position_milli'] === null ? 0 : max(1, (int) ($row['impressions'] ?? 0)));
+        $weightedPosition = (int) $group->sum(static fn (array $row): int => \App\Services\SeoIntel\GscMetricWeights::fromRow($row, 'minimum_one')[0]);
+        $positionWeight = (int) $group->sum(static fn (array $row): int => \App\Services\SeoIntel\GscMetricWeights::fromRow($row, 'minimum_one')[1]);
         $recent = $recentBoundary === null ? collect() : $group->filter(static fn (array $row): bool => CarbonImmutable::parse((string) $row['report_date'])->gte($recentBoundary));
         $prior = $priorBoundary === null || $recentBoundary === null ? collect() : $group->filter(static function (array $row) use ($priorBoundary, $recentBoundary): bool {
             $date = CarbonImmutable::parse((string) $row['report_date']);

@@ -177,7 +177,11 @@ final class SeoIntelGscProductionCloseoutReadServiceTest extends TestCase
         $this->assertCount(3, $queries);
         foreach ($queries as $sql) {
             $this->assertStringNotContainsString('select *', strtolower($sql));
-            $this->assertStringNotContainsString('metadata_json', $sql);
+            $this->assertStringNotContainsString('"metadata_json",', $sql);
+            if (str_contains($sql, 'metadata_json')) {
+                $this->assertStringContainsString('<= 1024', $sql);
+                $this->assertStringContainsString('$._canonical_metric_weights', $sql);
+            }
         }
     }
 
