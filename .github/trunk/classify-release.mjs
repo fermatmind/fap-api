@@ -57,6 +57,16 @@ export function applyCareerContentOnly(classification, careerReceipt) {
   const careerContentOnly = careerReceipt.status === 'eligible';
   classification.operations.career_content_only = careerContentOnly;
   if (careerContentOnly) classification.operations.a08_scoped_checks = false;
+  if (['BODY_ELIGIBILITY_CHANGED', 'BODY_ELIGIBILITY_UNPROVEN'].includes(careerReceipt.reason)) {
+    classification.flags.seo_discoverability = true;
+    if (!classification.categories.includes('seo_discoverability')) {
+      classification.categories.push('seo_discoverability');
+    }
+    classification.mixed = classification.categories.length > 1;
+    classification.reasons.seo_discoverability.push(...classification.paths.filter(
+      (path) => /^backend\/content_assets\/career\/current\/careers\//.test(path),
+    ));
+  }
   classification.career_content_change = structuredClone(careerReceipt);
   return classification;
 }
