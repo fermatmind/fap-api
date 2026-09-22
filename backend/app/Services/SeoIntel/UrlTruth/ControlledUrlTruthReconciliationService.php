@@ -458,7 +458,7 @@ final class ControlledUrlTruthReconciliationService
             $receipts[] = $receipt;
         }
         $materialization = count($receipts) === 1 ? $receipts[0] : [
-            'mode' => 'bounded_batches', 'counts' => $counts,
+            'mode' => $execute ? 'controlled_materialization' : 'dry_run', 'counts' => $counts,
             'writes_committed' => $execute, 'batches' => $receipts,
         ];
 

@@ -177,8 +177,23 @@ final class SeoPlatform05ControlledUrlTruthReconciliationTest extends TestCase
         Http::fake(fn ($request) => $request->url() === 'https://fermatmind.com/sitemap.xml'
             ? Http::response('<urlset>'.implode('', $urls).'</urlset>', 200) : Http::response('', 200));
         $service = app(ControlledUrlTruthReconciliationService::class);
+        $dry = $service->run([$this->record('alpha')], ['revision' => 'fixture'], false, true, 1000, 10);
+        $this->assertSame('dry_run', data_get($dry, 'sitemap_authority_detector.materialization.mode'));
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_issue_queue')->count());
         $receipt = $this->reconcile($service, [$this->record('alpha')], ['revision' => 'fixture'], true, true, 1000, 10);
         $this->assertSame('success', $receipt['status']);
+        $this->assertSame('controlled_materialization', data_get($receipt, 'sitemap_authority_detector.materialization.mode'));
+        $deploy = (string) file_get_contents(dirname(__DIR__, 4).'/deploy.php');
+        $task = explode("task('seo:url-truth-controlled-reconcile'", $deploy, 2)[1];
+        $predicate = explode("\n' || exit 43", explode("{{bin/php}} -r '\n", $task, 2)[1], 2)[0];
+        $accept = new \Symfony\Component\Process\Process([PHP_BINARY, '-r', $predicate], env: ['COMMAND_STATUS' => '0']);
+        $accept->setInput(json_encode($receipt, JSON_THROW_ON_ERROR));
+        $this->assertSame(0, $accept->run(), $accept->getErrorOutput());
+        $invalid = $receipt;
+        $invalid['sitemap_authority_detector']['materialization']['mode'] = 'bounded_batches';
+        $reject = new \Symfony\Component\Process\Process([PHP_BINARY, '-r', $predicate], env: ['COMMAND_STATUS' => '0']);
+        $reject->setInput(json_encode($invalid, JSON_THROW_ON_ERROR));
+        $this->assertSame(1, $reject->run());
         $this->assertSame(601, data_get($receipt, 'sitemap_authority_detector.sitemap_without_authority_count'));
         $this->assertSame(2, data_get($receipt, 'sitemap_authority_detector.planned_issues'));
         $this->assertSame(1, DB::connection('seo_intel')->table('seo_urls')->count());
