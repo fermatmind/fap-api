@@ -28,6 +28,7 @@ final class SeoPlatformControlledUrlTruthReconcileCommand extends Command
         ControlledUrlTruthReconciliationService $service,
     ): int {
         $originalWrite = config('seo_intel.write_enabled', false);
+        $originalConnection = config('seo_intel.connection', 'seo_intel');
         $expected = trim((string) $this->option('expected-plan-hash'));
         // Keep the existing natural command and its scheduling mutex identity.
         $maintenance = $this->option('maintenance')
@@ -38,6 +39,7 @@ final class SeoPlatformControlledUrlTruthReconcileCommand extends Command
                     throw new \RuntimeException('SCOPED_URL_TRUTH_CLI_REQUIRED');
                 }
                 config(['seo_intel.write_enabled' => true]);
+                config(['seo_intel.connection' => $this->scopedWriteConnection()]);
             }
             $records = $source->candidates();
             $metadata = $source->metadata();
@@ -69,6 +71,7 @@ final class SeoPlatformControlledUrlTruthReconcileCommand extends Command
             ];
         } finally {
             config(['seo_intel.write_enabled' => $originalWrite]);
+            config(['seo_intel.connection' => $originalConnection]);
         }
 
         if ((bool) $this->option('json')) {
@@ -81,5 +84,25 @@ final class SeoPlatformControlledUrlTruthReconcileCommand extends Command
         }
 
         return ($receipt['status'] ?? null) === 'success' ? self::SUCCESS : self::FAILURE;
+    }
+
+    private function scopedWriteConnection(): string
+    {
+        $reader = (string) config('seo_intel.connection', 'seo_intel');
+        $writer = (string) config('seo_council.connection', $reader);
+        $read = config('database.connections.'.$reader);
+        $write = config('database.connections.'.$writer);
+        if (! is_array($read) || ! is_array($write)) {
+            throw new \RuntimeException('URL_TRUTH_WRITER_UNAVAILABLE');
+        }
+        // The deployed Council writer is already authorized for these derived
+        // tables. Never broaden the web reader's grants or cross a database.
+        foreach (['driver', 'host', 'port', 'unix_socket', 'database', 'prefix', 'charset', 'collation', 'url', 'read', 'write'] as $key) {
+            if (($read[$key] ?? null) !== ($write[$key] ?? null)) {
+                throw new \RuntimeException('URL_TRUTH_WRITER_DATABASE_MISMATCH');
+            }
+        }
+
+        return $writer;
     }
 }

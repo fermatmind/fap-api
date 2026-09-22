@@ -319,6 +319,32 @@ final class SeoPlatform05ControlledUrlTruthReconciliationTest extends TestCase
         $this->assertSame(0, DB::connection('seo_intel')->table('seo_urls')->count());
     }
 
+    public function test_scoped_writer_must_share_the_readers_database(): void
+    {
+        $this->prepareSchema();
+        $reader = config('database.connections.seo_intel');
+        config(['seo_council.connection' => 'seo_council', 'database.connections.seo_council' => $reader]);
+        $command = app(\App\Console\Commands\SeoPlatformControlledUrlTruthReconcileCommand::class);
+        $select = new \ReflectionMethod($command, 'scopedWriteConnection');
+        $this->assertSame('seo_council', $select->invoke($command));
+        config(['database.connections.seo_council.database' => 'another_database']);
+        $this->expectExceptionMessage('URL_TRUTH_WRITER_DATABASE_MISMATCH');
+        $select->invoke($command);
+    }
+
+    public function test_scoped_connection_is_restored_when_authority_read_fails(): void
+    {
+        $this->prepareSchema();
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => false,
+            'seo_council.connection' => 'seo_council',
+            'database.connections.seo_council' => config('database.connections.seo_intel')]);
+        $this->artisan('seo-intel:url-truth-controlled-reconcile', ['--execute' => true,
+            '--maintenance' => true, '--no-http' => true, '--json' => true])->assertFailed();
+        $this->assertSame('seo_intel', config('seo_intel.connection'));
+        $this->assertFalse(config('seo_intel.write_enabled'));
+        DB::purge('seo_council');
+    }
+
     private function reconcile(ControlledUrlTruthReconciliationService $service, array $records, array $metadata, bool $execute, bool $probe, int $max, int $batch): array
     {
         $metadata['complete_authority_read'] = true;
