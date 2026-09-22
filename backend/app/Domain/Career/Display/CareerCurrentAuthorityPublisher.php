@@ -58,11 +58,12 @@ final class CareerCurrentAuthorityPublisher
         foreach (array_chunk($identities, 64) as $identityChunk) {
             $candidates = $this->candidateChunk($authority, $identityChunk);
             $before = \App\Support\PublicProjectionCache::many(array_column($candidates, 'key'));
+            $expiring = \App\Support\PublicProjectionCache::expiringCareerPageKeys(array_column($candidates, 'key'));
             foreach ($candidates as $identity => $candidate) {
                 $key = $candidate['key'];
                 $page = $candidate['page'];
                 $hashes[] = CareerCurrentAuthorityPackage::hashValue($page);
-                if (($before[$key] ?? null) !== $page) {
+                if (($before[$key] ?? null) !== $page || isset($expiring[$key])) {
                     if ($allowedChanges !== null && ! isset($allowedChanges[$identity])) {
                         throw new CareerCurrentAuthorityPublisherFailure('CURRENT_UNCHANGED_FILE_PAGE_DRIFT', null, 'confirmed_zero_write');
                     }
@@ -74,15 +75,18 @@ final class CareerCurrentAuthorityPublisher
         }
         foreach (array_chunk($mismatches, 64) as $identityChunk) {
             foreach ($this->candidateChunk($authority, $identityChunk) as $candidate) {
-                \App\Support\PublicProjectionCache::put($candidate['key'], $candidate['page'], 86400);
+                // The key includes source_content_sha256, so this projection is
+                // immutable and must not expire between body-only releases.
+                \App\Support\PublicProjectionCache::forever($candidate['key'], $candidate['page']);
                 $writes++;
             }
         }
         foreach (array_chunk($identities, 64) as $identityChunk) {
             $candidates = $this->candidateChunk($authority, $identityChunk);
             $readback = \App\Support\PublicProjectionCache::many(array_column($candidates, 'key'));
+            $expiring = \App\Support\PublicProjectionCache::expiringCareerPageKeys(array_column($candidates, 'key'));
             foreach ($candidates as $candidate) {
-                if (($readback[$candidate['key']] ?? null) !== $candidate['page']) {
+                if (($readback[$candidate['key']] ?? null) !== $candidate['page'] || isset($expiring[$candidate['key']])) {
                     throw new CareerCurrentAuthorityPublisherFailure('CURRENT_FILE_PAGE_CACHE_READBACK_FAILED');
                 }
             }

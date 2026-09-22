@@ -78,6 +78,32 @@ final class PublicProjectionMigrationTest extends TestCase
         return $base;
     }
 
+    public function test_career_page_expiry_detection_and_retention_follow_the_serving_and_mirror_stores(): void
+    {
+        $key = 'career:page:career.detail.page.v1:actors:zh-CN:'.str_repeat('a', 64);
+        $page = ['body' => 'immutable Career page'];
+        foreach (['legacy', 'mirror', 'primary', 'isolated'] as $mode) {
+            Projection::writeState(['version' => 1, 'mode' => $mode]);
+            Projection::put($key, $page, 86400);
+            self::assertSame([$key => true], Projection::expiringCareerPageKeys([$key]));
+            Projection::forever($key, $page);
+            self::assertSame([], Projection::expiringCareerPageKeys([$key]));
+            self::assertSame($page, Projection::many([$key])[$key]);
+            if (in_array($mode, ['mirror', 'primary'], true)) {
+                $secondary = Cache::store($mode === 'mirror' ? 'public_projection' : null);
+                $secondary->put($key, $page, 86400);
+                self::assertSame([$key => true], Projection::expiringCareerPageKeys([$key]));
+                Projection::forever($key, $page);
+                self::assertSame([], Projection::expiringCareerPageKeys([$key]));
+                self::assertSame($page, $secondary->get($key));
+            }
+        }
+        Projection::forget($key);
+        self::assertSame([], Projection::expiringCareerPageKeys([$key]));
+        $this->expectException(\LogicException::class);
+        Projection::expiringCareerPageKeys(['queues:default']);
+    }
+
     public function test_compatible_prepare_then_verified_switch_and_rollback_preserve_queue_locks_and_withdrawals(): void
     {
         $base = $this->seedProjections();

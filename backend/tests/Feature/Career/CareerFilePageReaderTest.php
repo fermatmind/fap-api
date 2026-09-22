@@ -32,6 +32,10 @@ final class CareerFilePageReaderTest extends TestCase
         self::assertArrayNotHasKey('display_surface_v1', $bundle);
         self::assertArrayNotHasKey('truth_layer', $bundle);
         self::assertSame($bundle['career_page']['seo']['title']['text'], $reader->seo($bundle)['meta']['title']);
+        $this->travel(2)->days();
+        self::assertSame($bundle['career_page'], \App\Support\PublicProjectionCache::get(
+            CareerFilePageReader::cacheKey($bundle['career_page']),
+        ));
         foreach (DB::getQueryLog() as $query) {
             self::assertStringNotContainsString('career_job_display_assets', $query['query']);
             self::assertStringNotContainsString('career_jobs', $query['query']);

@@ -6,7 +6,7 @@ namespace App\Services\Career;
 
 use App\Domain\Career\Display\CareerPageProjector;
 use App\Models\Occupation;
-use App\Support\PublicProjectionCache as Cache;
+use App\Support\PublicProjectionCache;
 
 /** Reader copy comes exclusively from locale files; publication and identity remain business authority. */
 final class CareerFilePageReader
@@ -23,14 +23,17 @@ final class CareerFilePageReader
         $entry = $this->pages->fileEntry($slug, $locale);
         $sourceHash = (string) $entry['source_content_sha256'];
         $key = self::cacheKeyFromIdentity($slug, $locale, $sourceHash);
-        $cached = Cache::get($key);
+        $cached = PublicProjectionCache::get($key);
         if ($this->validCachedPage($cached, $slug, $locale, $sourceHash)) {
             $page = $cached;
         } else {
             // No pointer or legacy HTML can shadow the installed file contract.
             $page = $this->pages->read($slug, $locale);
             if ($cacheWrite) {
-                Cache::put($key, $page, 86400);
+                // The cache key is content-addressed by source_content_sha256;
+                // a new body produces a new key, so the old immutable value
+                // does not need a time-based expiry.
+                PublicProjectionCache::forever($key, $page);
             }
         }
         $occupation = Occupation::query()->with(['aliases', 'crosswalks'])->where('canonical_slug', $slug)->first();

@@ -106,6 +106,52 @@ final class PublicProjectionCache
 
     private static int $lockDepth = 0;
 
+    /** Find legacy TTLs in both serving and mirrored Career page stores without changing them.
+     * @param  list<string>  $keys
+     * @return array<string, true>
+     */
+    public static function expiringCareerPageKeys(array $keys): array
+    {
+        foreach ($keys as $key) {
+            if (preg_match('~^career:page:career\.detail\.page\.v1:[a-z0-9-]+:(?:en|zh-CN):[a-f0-9]{64}$~D', $key) !== 1) {
+                throw new \LogicException('Only content-addressed Career pages may be retained.');
+            }
+        }
+        if ($keys === []) {
+            return [];
+        }
+        $mode = self::state()['mode'];
+        $repositories = [self::store()];
+        if (in_array($mode, ['mirror', 'primary'], true)) {
+            $repositories[] = Cache::store($mode === 'mirror' ? 'public_projection' : null);
+        }
+        $expiring = [];
+        foreach ($repositories as $repository) {
+            $store = $repository->getStore();
+            if (! $store instanceof \Illuminate\Cache\RedisStore) {
+                continue; // Local array/file stores are not deployed Redis projections.
+            }
+            $ttls = $store->connection()->pipeline(function ($pipeline) use ($store, $keys): void {
+                foreach ($keys as $key) {
+                    $pipeline->pttl($store->getPrefix().$key);
+                }
+            });
+            if (! is_array($ttls) || count($ttls) !== count($keys)) {
+                throw new \RuntimeException('Career page expiry snapshot incomplete.');
+            }
+            foreach ($keys as $index => $key) {
+                if (! is_int($ttls[$index]) || $ttls[$index] < -2) {
+                    throw new \RuntimeException('Career page expiry snapshot invalid.');
+                }
+                if ($ttls[$index] >= 0) {
+                    $expiring[$key] = true;
+                }
+            }
+        }
+
+        return $expiring;
+    }
+
     public static function mutation(callable $operation, bool $force = false): mixed
     {
         if (self::$lockDepth > 0) {
