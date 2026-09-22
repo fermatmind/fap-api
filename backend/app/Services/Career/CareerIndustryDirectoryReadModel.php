@@ -11,20 +11,14 @@ final class CareerIndustryDirectoryReadModel
     private const DISCOVERY_JOB_LIMIT = 3;
 
     public function __construct(
-        private readonly PublicCareerAuthorityResponseCache $responseCache,
+        private readonly CareerDirectoryAuthorityService $directory,
     ) {}
 
     /** @return array<string, mixed> */
     public function payload(string $locale): array
     {
         $publicLocale = $this->normalizePublicLocale($locale);
-        $readModel = $this->responseCache->directoryReadModelPayload($publicLocale);
-        $items = array_values(array_filter(
-            is_array($readModel['items'] ?? null) ? $readModel['items'] : [],
-            static fn (mixed $item): bool => is_array($item)
-                && ($item['indexable'] ?? false) === true
-                && ($item['detail_ready'] ?? false) === true,
-        ));
+        $items = $this->directory->browseItems($publicLocale);
         $industries = $this->industries($items, $publicLocale);
 
         return [
@@ -32,7 +26,7 @@ final class CareerIndustryDirectoryReadModel
             'bundle_kind' => 'career_industry_directory',
             'bundle_version' => 'career.industry_directory.v1',
             'locale' => $publicLocale,
-            'public_detail_indexable_count' => count($items),
+            'public_detail_indexable_count' => count(array_filter($items, static fn (array $item): bool => $item['indexable'])),
             'industry_count' => count($industries),
             'industries' => $industries,
         ];
@@ -72,7 +66,7 @@ final class CareerIndustryDirectoryReadModel
 
             $industries[$familySlug]['count']++;
             $industries[$familySlug]['public_detail_count']++;
-            $industries[$familySlug]['indexable_count']++;
+            $industries[$familySlug]['indexable_count'] += ($item['indexable'] ?? false) ? 1 : 0;
             $industries[$familySlug]['discovery_jobs'][] = [
                 'slug' => $jobSlug,
                 'title' => $this->localizedTitle($item, $locale, $jobSlug),

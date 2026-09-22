@@ -8,11 +8,16 @@ use Throwable;
 
 class CareerContentV3CanonicalReader
 {
+    public const BODY_QUALIFICATION_VERSION = 'career.public_body.v1';
+
     /** @var array<string,array<string,mixed>> */
     private array $indexes = [];
 
     /** @var array<string,array<string,mixed>> */
     private array $pages = [];
+
+    /** @var array<string,bool> Request-local, source-bound eligibility; never a publication pointer. */
+    private array $publicBodies = [];
 
     public function __construct(
         private readonly CareerContentV3AuthorityPackage $package,
@@ -60,6 +65,63 @@ class CareerContentV3CanonicalReader
         }
 
         throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_PAGE_MISSING');
+    }
+
+    /** Identity publication is checked by callers; this only qualifies its installed locale body. */
+    public function hasPublicBody(string $slug, string $locale, ?string $backendRoot = null): bool
+    {
+        $slug = strtolower(trim($slug));
+        $locale = $this->locale($locale);
+        $index = $this->authority($backendRoot);
+        if (! isset($index['entries'][$slug][$locale])) {
+            return false;
+        }
+        $entry = $this->fileEntry($slug, $locale, $backendRoot);
+        $key = $index['root'].'|'.$slug.'|'.$locale.'|'.$entry['source_content_sha256'];
+        if (array_key_exists($key, $this->publicBodies)) {
+            return $this->publicBodies[$key];
+        }
+        // This qualification is compiled and checked by the existing package gate,
+        // covered by the manifest aggregate and bound to this exact source version.
+        $qualification = $entry['body_qualification'] ?? null;
+        if (is_array($qualification)) {
+            return $this->publicBodies[$key] = $qualification['has_public_body'];
+        }
+        $source = $this->package->pageFromIndexForRuntime($index, $slug, $locale);
+
+        return $this->publicBodies[$key] = self::sourceHasPublicBody($source);
+    }
+
+    /** Valid body primitives are independent of derived display success. */
+    public static function sourceHasPublicBody(array $source): bool
+    {
+        // Invalid content remains an error, not a claimed empty page. Missing hero facts or
+        // a failing display projection cannot revoke otherwise valid authored body content.
+        // Full authoring, evidence and display validation belongs to package publication.
+        // Directory qualification must not resolve every display or interpret a broken
+        // display binding as absence of the separately validated body primitives.
+        CareerContentV3Contract::assertEnvelope($source);
+        $seenBlocks = [];
+        $seenItems = [];
+        foreach ($source['blocks'] as $block) {
+            CareerContentV3Contract::assertBlock($block, $seenBlocks, $seenItems);
+        }
+        if (($source['content_state'] ?? null) === 'enhanced') {
+            foreach ($source['blocks'] as $block) {
+                if ($block['availability'] !== 'available') {
+                    continue;
+                }
+                foreach ($block['items'] as $item) {
+                    if ($item['availability'] === 'available'
+                        && ($item['visibility'] ?? 'public') === 'public'
+                        && ! in_array($item['type'], ['links', 'sources'], true)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -161,6 +223,7 @@ class CareerContentV3CanonicalReader
     {
         $this->indexes = [];
         $this->pages = [];
+        $this->publicBodies = [];
     }
 
     public function forgetLoadedPages(): void

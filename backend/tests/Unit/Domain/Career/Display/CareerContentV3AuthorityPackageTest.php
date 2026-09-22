@@ -6,6 +6,7 @@ namespace Tests\Unit\Domain\Career\Display;
 
 use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
 use App\Domain\Career\Display\CareerContentV3CanonicalReader;
+use App\Domain\Career\Display\CareerContentV3Contract;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -40,6 +41,15 @@ final class CareerContentV3AuthorityPackageTest extends TestCase
             $manifest['files'][1] = $manifest['files'][0];
             self::write($root.'/manifest.json', $manifest);
         }, 'CURRENT_CONTENT_V3_DUPLICATE_BINDING'];
+        yield 'stale compiled qualification' => [static function (string $root): void {
+            $manifest = self::read($root.'/manifest.json');
+            $manifest['files'][0]['body_qualification'] = [
+                'version' => CareerContentV3CanonicalReader::BODY_QUALIFICATION_VERSION,
+                'source_content_sha256' => str_repeat('0', 64),
+                'has_public_body' => true,
+            ];
+            self::write($root.'/manifest.json', $manifest);
+        }, 'CURRENT_CONTENT_V3_BODY_QUALIFICATION_INVALID'];
         yield 'wrong locale' => [static function (string $root, self $test): void {
             $path = $root.'/careers/actors/en.json';
             $page = self::read($path);
@@ -190,6 +200,76 @@ final class CareerContentV3AuthorityPackageTest extends TestCase
             $this->expectExceptionMessage('CURRENT_CONTENT_V3_COVERAGE_INVALID');
             (new CareerContentV3AuthorityPackage(1, 2, null, CareerCurrentAuthorityPackage::hashValue(['actors'])))
                 ->loadRoot($root);
+        } finally {
+            $this->deleteDirectory($root);
+        }
+    }
+
+    public function test_body_qualification_does_not_confuse_display_failure_with_empty_or_invalid_body(): void
+    {
+        $fixture = $this->fixture();
+        $backend = $fixture.'-backend';
+        mkdir($backend.'/content_assets/career', 0700, true);
+        $root = $backend.'/content_assets/career/current';
+        rename($fixture, $root);
+        $reader = new CareerContentV3CanonicalReader($this->package(), $backend);
+        try {
+            $page = $this->page('en');
+            $page['content_state'] = 'enhanced';
+            $page['display'] = ['invalid-display' => true];
+            self::write($root.'/careers/actors/en.json', $page);
+            $this->refreshManifest($root);
+            self::assertTrue($reader->hasPublicBody('actors', 'en'));
+            try {
+                CareerContentV3Contract::assert($page);
+                self::fail('The invalid display must still fail full publication validation.');
+            } catch (CareerCurrentAuthorityPackageFailure) {
+                // A display failure must be repaired, not relabelled as absent prose.
+            }
+
+            unset($page['display']);
+            $page['blocks'][0]['items'][0]['visibility'] = 'internal';
+            self::write($root.'/careers/actors/en.json', $page);
+            $this->refreshManifest($root);
+            $reader->forgetLoadedAuthority();
+            self::assertFalse($reader->hasPublicBody('actors', 'en'));
+
+            $page['blocks'] = [];
+            self::write($root.'/careers/actors/en.json', $page);
+            $this->refreshManifest($root);
+            $reader->forgetLoadedAuthority();
+            self::assertFalse($reader->hasPublicBody('actors', 'en'));
+
+            $page['blocks'] = $this->page('en')['blocks'];
+            $page['blocks'][0]['items'][0]['type'] = 'raw-html';
+            self::write($root.'/careers/actors/en.json', $page);
+            $this->refreshManifest($root);
+            $reader->forgetLoadedAuthority();
+            $this->expectException(CareerCurrentAuthorityPackageFailure::class);
+            $this->expectExceptionMessage('CURRENT_CONTENT_V3_INVALID');
+            $reader->hasPublicBody('actors', 'en');
+        } finally {
+            $this->deleteDirectory($backend);
+        }
+    }
+
+    public function test_compiled_qualification_is_version_bound_and_publication_checks_its_meaning(): void
+    {
+        $root = $this->fixture();
+        try {
+            $manifest = self::read($root.'/manifest.json');
+            $manifest['files'][0]['body_qualification'] = [
+                'version' => CareerContentV3CanonicalReader::BODY_QUALIFICATION_VERSION,
+                'source_content_sha256' => $manifest['files'][0]['source_content_sha256'],
+                'has_public_body' => true, // Valid structure, wrong meaning for this legacy page.
+            ];
+            $projection = $manifest;
+            unset($projection['aggregate_sha256']);
+            $manifest['aggregate_sha256'] = CareerCurrentAuthorityPackage::hashValue($projection);
+            self::write($root.'/manifest.json', $manifest);
+            $this->expectException(CareerCurrentAuthorityPackageFailure::class);
+            $this->expectExceptionMessage('CURRENT_CONTENT_V3_BODY_QUALIFICATION_MISMATCH');
+            $this->package()->loadRoot($root);
         } finally {
             $this->deleteDirectory($root);
         }

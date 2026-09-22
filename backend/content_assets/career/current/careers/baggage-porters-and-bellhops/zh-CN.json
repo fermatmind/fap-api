@@ -15236,7 +15236,7 @@
       },
       "fit_decision_checklist.boundary": {
         "ref": {
-          "id": "baggage-porters-and-bellhops.quick-decision.fit-decision-checklist.1",
+          "id": "baggage-porters-and-bellhops.quick-decision.fit-decision-checklist.3",
           "path": [
             "data",
             "paragraphs",
@@ -15248,7 +15248,7 @@
       },
       "fit_decision_checklist.how": {
         "ref": {
-          "id": "baggage-porters-and-bellhops.quick-decision.fit-decision-checklist.2",
+          "id": "baggage-porters-and-bellhops.quick-decision.fit-decision-checklist.1",
           "path": [
             "data",
             "paragraphs",
@@ -15260,7 +15260,7 @@
       },
       "fit_decision_checklist.suit": {
         "ref": {
-          "id": "baggage-porters-and-bellhops.quick-decision.fit-decision-checklist.3",
+          "id": "baggage-porters-and-bellhops.quick-decision.fit-decision-checklist.2",
           "path": [
             "data",
             "paragraphs",
@@ -23514,7 +23514,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：按本页证据口径（`documented_unavailable`、严重度 material、`cn_mapping_status` none），中国大陆未取得与该职业精确对应的公开职业条目与全国职业工资分布；中文页面语言不构成中国等价职业或工资映射。证据包明确「行业或岗位大类不能替代职业工资」，国家统计局《2025 年城镇单位就业人员年平均工资情况》只有行业门类与岗位大类口径、没有本职业的精确职业条目，因此本页不发布任何中国大陆职业工资数值，也不以美国数字换算填充。需要比较时应按用人单位类型（酒店与住宿、交通枢纽与运输、其他服务场所）与岗位职责与班次与小费安排逐项核对。"
+              "中国大陆侧：按本页证据口径（暂无可安全使用的数据、尚未建立精确职业映射），中国大陆未取得与该职业精确对应的公开职业条目与全国职业工资分布；中文页面语言不构成中国等价职业或工资映射。证据包明确「行业或岗位大类不能替代职业工资」，国家统计局《2025 年城镇单位就业人员年平均工资情况》只有行业门类与岗位大类口径、没有本职业的精确职业条目，因此本页不发布任何中国大陆职业工资数值，也不以美国数字换算填充。需要比较时应按用人单位类型（酒店与住宿、交通枢纽与运输、其他服务场所）与岗位职责与班次与小费安排逐项核对。"
             ]
           },
           "id": "baggage-porters-and-bellhops.profile.onet-structured-fields-block.3",
@@ -26311,7 +26311,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "截至 2026 年 9 月，有界检索未找到单列行李搬运员与行李员（或与之精确对应的行李服务职业序列）的公开职业条目与全国收入统计；按本页证据口径（documented_unavailable、severity material、cn_mapping_status none），本页不陈述该职业的官方月薪、起薪、中位数或分位数，也不以美国数字换算填充。"
+              "截至 2026 年 9 月，有界检索未找到单列行李搬运员与行李员（或与之精确对应的行李服务职业序列）的公开职业条目与全国收入统计；按本页证据口径（暂无可安全使用的数据、尚未建立精确职业映射），本页不陈述该职业的官方月薪、起薪、中位数或分位数，也不以美国数字换算填充。"
             ]
           },
           "id": "baggage-porters-and-bellhops.china-salary.career-snapshot-primary-locale.8",
@@ -35802,19 +35802,19 @@
       },
       "fit_decision_checklist": {
         "boundary": {
-          "$item": "baggage-porters-and-bellhops.quick-decision.fit-decision-checklist.1",
+          "$item": "baggage-porters-and-bellhops.quick-decision.fit-decision-checklist.3",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
         "how": {
-          "$item": "baggage-porters-and-bellhops.quick-decision.fit-decision-checklist.2",
+          "$item": "baggage-porters-and-bellhops.quick-decision.fit-decision-checklist.1",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
         "suit": {
-          "$item": "baggage-porters-and-bellhops.quick-decision.fit-decision-checklist.3",
+          "$item": "baggage-porters-and-bellhops.quick-decision.fit-decision-checklist.2",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
@@ -37296,6 +37296,7 @@
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪个相邻方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
+      "interface.quick_decision.experiment_heading": "这项工作主要做什么？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -37775,7 +37776,7 @@
       "text": "行李搬运员行李员"
     }
   },
-  "source_content_sha256": "2d2b0b0f3f3fe53f49fe7fb07c60ef228d12ce91fe7e04990952271a1368bc5c",
+  "source_content_sha256": "43cdaa863e2d86585b493176dd93243d2683d0e2a20dd39a693d77528ec7d9bb",
   "subject": {
     "canonical_slug": "baggage-porters-and-bellhops",
     "name": "行李搬运员行李员",

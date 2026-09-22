@@ -117,6 +117,7 @@ final class CareerContentV3AuthorityPackage
     {
         $page = $this->pageFromIndexForRuntime($index, $slug, $locale);
         CareerContentV3Contract::assert($page);
+        $this->assertBodyQualification($index['entries'][$slug][$locale], $page);
         (new CareerContentV3FactResolver)->resolve($page);
 
         return $page;
@@ -211,6 +212,7 @@ final class CareerContentV3AuthorityPackage
             }
             $page = $this->decodeCanonicalPretty($bytes);
             CareerContentV3Contract::assert($page);
+            $this->assertBodyQualification($entry, $page);
             (new CareerContentV3FactResolver)->resolve($page);
             if (($page['locale'] ?? null) !== $locale
                 || data_get($page, 'subject.canonical_slug') !== $slug
@@ -411,18 +413,35 @@ final class CareerContentV3AuthorityPackage
         }
     }
 
+    private function assertBodyQualification(array $entry, array $page): void
+    {
+        if (isset($entry['body_qualification'])
+            && $entry['body_qualification']['has_public_body'] !== CareerContentV3CanonicalReader::sourceHasPublicBody($page)) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_BODY_QUALIFICATION_MISMATCH');
+        }
+    }
+
     private function assertFileEntry(mixed $entry): void
     {
         if (! is_array($entry) || array_is_list($entry)) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_FILE_DECLARATION_INVALID');
         }
-        $keys = array_keys(array_diff_key($entry, array_flip(['legacy_projection_sha256', 'legacy_row_sha256'])));
+        $keys = array_keys(array_diff_key($entry, array_flip(['legacy_projection_sha256', 'legacy_row_sha256', 'body_qualification'])));
         sort($keys, SORT_STRING);
         if ($keys !== [
             'bytes', 'canonical_slug', 'locale',
             'path', 'sha256', 'source_content_sha256',
         ]) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_FILE_DECLARATION_INVALID');
+        }
+        if (array_key_exists('body_qualification', $entry)) {
+            $qualification = $entry['body_qualification'];
+            if (! is_array($qualification) || count($qualification) !== 3
+                || ($qualification['version'] ?? null) !== CareerContentV3CanonicalReader::BODY_QUALIFICATION_VERSION
+                || ($qualification['source_content_sha256'] ?? null) !== ($entry['source_content_sha256'] ?? null)
+                || ! is_bool($qualification['has_public_body'] ?? null)) {
+                throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_BODY_QUALIFICATION_INVALID');
+            }
         }
         $slug = $entry['canonical_slug'] ?? null;
         $locale = $entry['locale'] ?? null;

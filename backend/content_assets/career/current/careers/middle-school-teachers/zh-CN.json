@@ -8607,7 +8607,7 @@
         "market": "US",
         "measure": "就业人数",
         "occupation_scope": "美国25-2022初中教师精确职业数据",
-        "period": "2025-2035",
+        "period": "2025",
         "source_refs": [
           "bls-projections"
         ]
@@ -8684,26 +8684,26 @@
     "badges": [],
     "metrics": [
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-wage-median",
         "key": "us_pay",
-        "label": "美国薪资参考"
+        "label": "美国年薪中位数"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国就业变化（2025—2035）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-employment",
         "key": "us_employment",
         "label": "美国在岗人数"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-openings",
         "key": "us_openings",
         "label": "美国年均职位空缺"
       },
@@ -8726,7 +8726,7 @@
       "text": "初中教师（不含特殊与职业技术教育）"
     }
   },
-  "source_content_sha256": "40bb7c550bfdb86ff7dc7cfb17f7e3856206292687be7284d7f7e9eb86628d4b",
+  "source_content_sha256": "a3fbf5df23f6cb00847b6f6dcf8c168d9b3056f48cd36de392510887d0a28be0",
   "subject": {
     "canonical_slug": "middle-school-teachers",
     "name": "初中教师（不含特殊与职业技术教育）",

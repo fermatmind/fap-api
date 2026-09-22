@@ -24241,7 +24241,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆：本条证据路由把精确职业工资登记为已核实不可得（cn-exact-wage-unavailable，status=documented_unavailable，severity=material），resolution 为「已打开中国主管机关发现入口，但本轮未建立与该 O*NET 职业一一对应的全国工资口径」，因此本页不给出中国大陆的月薪区间、分位或起薪，也不以行业均值、美国数据或招聘样本填补；职业级缺口只在可见字段标注具体缺口。"
+              "中国大陆：本条证据路由把精确职业工资登记为已核实不可得（数据状态：暂无可安全使用的数据），处理说明 为「已打开中国主管机关发现入口，但本轮未建立与该 O*NET 职业一一对应的全国工资口径」，因此本页不给出中国大陆的月薪区间、分位或起薪，也不以行业均值、美国数据或招聘样本填补；职业级缺口只在可见字段标注具体缺口。"
             ]
           },
           "id": "clinical-data-managers.profile.onet-structured-fields-block.3",
@@ -26340,7 +26340,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得与中国大陆临床数据管理工作精确对应的全国职业工资分布；本条证据路由把该缺口登记为 cn-exact-wage-unavailable（status=documented_unavailable，severity=material）"
+              "证据不足：未取得与中国大陆临床数据管理工作精确对应的全国职业工资分布；本条证据路由把该缺口登记为 （数据状态：暂无可安全使用的数据）"
             ]
           },
           "id": "clinical-data-managers.china-salary.career-snapshot-primary-locale.7",
@@ -31331,7 +31331,7 @@
                 "question_key": "career.faq.clinical-data-managers.career-worth"
               },
               {
-                "answer": "本条证据路由把精确职业工资登记为已核实不可得（cn-exact-wage-unavailable，status=documented_unavailable，severity=material），resolution 为「已打开中国主管机关发现入口，但本轮未建立与该 O*NET 职业一一对应的全国工资口径」。因此本页不给出月薪区间或城市排名，也不以行业均值或相邻岗位报价推算。",
+                "answer": "本条证据路由把精确职业工资登记为已核实不可得（数据状态：暂无可安全使用的数据），处理说明 为「已打开中国主管机关发现入口，但本轮未建立与该 O*NET 职业一一对应的全国工资口径」。因此本页不给出月薪区间或城市排名，也不以行业均值或相邻岗位报价推算。",
                 "id": "clinical-data-managers.faq.12",
                 "question": "中国大陆的数据为什么没有给出？",
                 "question_key": "career.faq.clinical-data-managers.china-data-scope"
@@ -37009,7 +37009,7 @@
       "text": "临床数据经理"
     }
   },
-  "source_content_sha256": "157cd56e1cf4744e23c07b991fe73cb23d6a322e98cef2f991585ccd905e0b83",
+  "source_content_sha256": "2ee5554cd829b5413f4a94bb9eb08fb59ad6c04e20561ab5a8f15038d49f260a",
   "subject": {
     "canonical_slug": "clinical-data-managers",
     "name": "临床数据经理",

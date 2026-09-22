@@ -15236,7 +15236,7 @@
       },
       "fit_decision_checklist.boundary": {
         "ref": {
-          "id": "avionics-technicians.quick-decision.fit-decision-checklist.1",
+          "id": "avionics-technicians.quick-decision.fit-decision-checklist.3",
           "path": [
             "data",
             "paragraphs",
@@ -15248,7 +15248,7 @@
       },
       "fit_decision_checklist.how": {
         "ref": {
-          "id": "avionics-technicians.quick-decision.fit-decision-checklist.2",
+          "id": "avionics-technicians.quick-decision.fit-decision-checklist.1",
           "path": [
             "data",
             "paragraphs",
@@ -15260,7 +15260,7 @@
       },
       "fit_decision_checklist.suit": {
         "ref": {
-          "id": "avionics-technicians.quick-decision.fit-decision-checklist.3",
+          "id": "avionics-technicians.quick-decision.fit-decision-checklist.2",
           "path": [
             "data",
             "paragraphs",
@@ -23514,7 +23514,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：按本页证据口径（`documented_unavailable`、严重度 non_material），中国大陆未取得与该职业精确对应的公开职业条目与全国职业工资分布；中文页面语言不构成中国等价职业或工资映射。为便于比较，本节仅引用人力资源社会保障部《企业薪酬调查信息（2024 年）》按《职业分类大典（2022 年版）》职业中类公布的代理口径：「202 工程技术人员」中位数 7.68 万元/年（10% 分位 4.00、25% 分位 5.36、75% 分位 12.00、90% 分位 18.81），「623 铁路、船舶、航空设备制造人员」中位数 7.68 万元/年，「625 计算机、通信和其他电子设备制造人员」中位数 7.13 万元/年；这些均为职业中类代理，不是本职业的精确工资。"
+              "中国大陆侧：按本页证据口径（暂无可安全使用的数据），中国大陆未取得与该职业精确对应的公开职业条目与全国职业工资分布；中文页面语言不构成中国等价职业或工资映射。为便于比较，本节仅引用人力资源社会保障部《企业薪酬调查信息（2024 年）》按《职业分类大典（2022 年版）》职业中类公布的代理口径：「202 工程技术人员」中位数 7.68 万元/年（10% 分位 4.00、25% 分位 5.36、75% 分位 12.00、90% 分位 18.81），「623 铁路、船舶、航空设备制造人员」中位数 7.68 万元/年，「625 计算机、通信和其他电子设备制造人员」中位数 7.13 万元/年；这些均为职业中类代理，不是本职业的精确工资。"
             ]
           },
           "id": "avionics-technicians.profile.onet-structured-fields-block.3",
@@ -26311,7 +26311,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "截至 2026 年 9 月，有界检索未找到单列航空电子技术员（或与之精确对应的航空电子技术序列）的公开职业条目与全国收入统计；按本页证据口径（documented_unavailable、severity non_material），本页不陈述该职业的官方月薪、起薪、中位数或分位数，也不以美国数字换算填充。"
+              "截至 2026 年 9 月，有界检索未找到单列航空电子技术员（或与之精确对应的航空电子技术序列）的公开职业条目与全国收入统计；按本页证据口径（暂无可安全使用的数据），本页不陈述该职业的官方月薪、起薪、中位数或分位数，也不以美国数字换算填充。"
             ]
           },
           "id": "avionics-technicians.china-salary.career-snapshot-primary-locale.8",
@@ -35802,19 +35802,19 @@
       },
       "fit_decision_checklist": {
         "boundary": {
-          "$item": "avionics-technicians.quick-decision.fit-decision-checklist.1",
+          "$item": "avionics-technicians.quick-decision.fit-decision-checklist.3",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
         "how": {
-          "$item": "avionics-technicians.quick-decision.fit-decision-checklist.2",
+          "$item": "avionics-technicians.quick-decision.fit-decision-checklist.1",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
         "suit": {
-          "$item": "avionics-technicians.quick-decision.fit-decision-checklist.3",
+          "$item": "avionics-technicians.quick-decision.fit-decision-checklist.2",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
@@ -37296,6 +37296,7 @@
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪个相邻方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
+      "interface.quick_decision.experiment_heading": "这项工作主要做什么？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -37775,7 +37776,7 @@
       "text": "航空电子技术员"
     }
   },
-  "source_content_sha256": "b5d1b68de118c6e785abce0e0446dab3d8952cdf955c763be431c3fc2015dcc4",
+  "source_content_sha256": "184c71e9c70e3e8851b52853a92a842a84893a1cbd9901fc6772b56b5555f74c",
   "subject": {
     "canonical_slug": "avionics-technicians",
     "name": "航空电子技术员",

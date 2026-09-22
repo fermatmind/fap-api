@@ -15236,7 +15236,7 @@
       },
       "fit_decision_checklist.boundary": {
         "ref": {
-          "id": "bartenders.quick-decision.fit-decision-checklist.1",
+          "id": "bartenders.quick-decision.fit-decision-checklist.3",
           "path": [
             "data",
             "paragraphs",
@@ -15248,7 +15248,7 @@
       },
       "fit_decision_checklist.how": {
         "ref": {
-          "id": "bartenders.quick-decision.fit-decision-checklist.2",
+          "id": "bartenders.quick-decision.fit-decision-checklist.1",
           "path": [
             "data",
             "paragraphs",
@@ -15260,7 +15260,7 @@
       },
       "fit_decision_checklist.suit": {
         "ref": {
-          "id": "bartenders.quick-decision.fit-decision-checklist.3",
+          "id": "bartenders.quick-decision.fit-decision-checklist.2",
           "path": [
             "data",
             "paragraphs",
@@ -23514,7 +23514,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：按本页证据口径（documented_unavailable、严重度 material、cn_mapping_status none），未取得与 35-3011.00 精确对应的中国大陆公开职业条目与全国职业工资分布，故本页不陈述该职业的月薪、起薪、中位数或分位数。按证据口径允许的唯一代理是「以 2024 年住宿和餐饮业年平均工资作明示行业代理」：国家统计局《2024 年城镇单位就业人员年平均工资情况》显示住宿和餐饮业城镇非私营单位就业人员年平均工资为 60,240 元（名义增长 3.7%）、城镇私营单位为 54,042 元、规模以上企业为 57,911 元。这些是行业平均，不含本职业精确条目，且调酒师收入含小费与提成与自雇成分，不能替代本职业工资；需要比较时应按城市与场所类型与任职方式与班次与小费与提成结构逐项核对。"
+              "中国大陆侧：按本页证据口径（暂无可安全使用的数据、尚未建立精确职业映射），未取得与 35-3011.00 精确对应的中国大陆公开职业条目与全国职业工资分布，故本页不陈述该职业的月薪、起薪、中位数或分位数。按证据口径允许的唯一代理是「以 2024 年住宿和餐饮业年平均工资作明示行业代理」：国家统计局《2024 年城镇单位就业人员年平均工资情况》显示住宿和餐饮业城镇非私营单位就业人员年平均工资为 60,240 元（名义增长 3.7%）、城镇私营单位为 54,042 元、规模以上企业为 57,911 元。这些是行业平均，不含本职业精确条目，且调酒师收入含小费与提成与自雇成分，不能替代本职业工资；需要比较时应按城市与场所类型与任职方式与班次与小费与提成结构逐项核对。"
             ]
           },
           "id": "bartenders.profile.onet-structured-fields-block.3",
@@ -26311,7 +26311,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "截至 2026 年 9 月，有界检索未找到单列调酒师（或与之精确对应的酒吧与酒水调制职业序列）的公开职业条目与全国收入统计；按本页证据口径（documented_unavailable、severity material、cn_mapping_status none），本页不陈述该职业的官方月薪、起薪、中位数或分位数，仅以 2024 年住宿和餐饮业年平均工资作明示行业代理。"
+              "截至 2026 年 9 月，有界检索未找到单列调酒师（或与之精确对应的酒吧与酒水调制职业序列）的公开职业条目与全国收入统计；按本页证据口径（暂无可安全使用的数据、尚未建立精确职业映射），本页不陈述该职业的官方月薪、起薪、中位数或分位数，仅以 2024 年住宿和餐饮业年平均工资作明示行业代理。"
             ]
           },
           "id": "bartenders.china-salary.career-snapshot-primary-locale.8",
@@ -35802,19 +35802,19 @@
       },
       "fit_decision_checklist": {
         "boundary": {
-          "$item": "bartenders.quick-decision.fit-decision-checklist.1",
+          "$item": "bartenders.quick-decision.fit-decision-checklist.3",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
         "how": {
-          "$item": "bartenders.quick-decision.fit-decision-checklist.2",
+          "$item": "bartenders.quick-decision.fit-decision-checklist.1",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
         "suit": {
-          "$item": "bartenders.quick-decision.fit-decision-checklist.3",
+          "$item": "bartenders.quick-decision.fit-decision-checklist.2",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
@@ -37296,6 +37296,7 @@
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪个相邻方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
+      "interface.quick_decision.experiment_heading": "这项工作主要做什么？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -37775,7 +37776,7 @@
       "text": "调酒师"
     }
   },
-  "source_content_sha256": "2c023f28db072aed440806ed0da3f6dbd3305016ed289889fec503cfeb2162a4",
+  "source_content_sha256": "c9a4f34b16b9baaa32c3298708b5bfbab892a280388d969f10161ecf6db34286",
   "subject": {
     "canonical_slug": "bartenders",
     "name": "调酒师",

@@ -27361,7 +27361,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国 2024—2034 职业预测为 2024 年就业 71,600；预计增长 5%—6%；十年约 4,500 个空缺；空缺包含增长与替补，不能理解为净新增，也不能外推中国。"
+              "美国 2024—2034 职业预测为 2024 年就业 71,600；预计增长 6%；预测期内平均每年约 4,500 个职位空缺；空缺包含增长与替补，不能理解为净新增，也不能外推中国。"
             ]
           },
           "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.28",
@@ -27446,7 +27446,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国 2024—2034 职业预测为 2024 年就业 71,600；预计增长 5%—6%；十年约 4,500 个空缺；空缺包含增长与替补，不能理解为净新增，也不能外推中国。"
+              "美国 2024—2034 职业预测为 2024 年就业 71,600；预计增长 6%；预测期内平均每年约 4,500 个职位空缺；空缺包含增长与替补，不能理解为净新增，也不能外推中国。"
             ]
           },
           "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.34",
@@ -27530,7 +27530,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国 2024—2034 职业预测为 2024 年就业 71,600；预计增长 5%—6%；十年约 4,500 个空缺；空缺包含增长与替补，不能理解为净新增，也不能外推中国。"
+              "美国 2024—2034 职业预测为 2024 年就业 71,600；预计增长 6%；预测期内平均每年约 4,500 个职位空缺；空缺包含增长与替补，不能理解为净新增，也不能外推中国。"
             ]
           },
           "id": "aerospace-engineers.us-salary.career-snapshot-secondary-locale.40",
@@ -32505,6 +32505,22 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/custom/17-2011.00"
+              },
+              {
+                "accessed_at": "2026-09-22",
+                "details": [
+                  "美国 2024 年就业 71,600 人；2024—2034 年增长 6%；年均职位空缺 4,500 个。",
+                  "预测期增长与年均空缺是不同指标，空缺包含增长和替代需求。"
+                ],
+                "evidence_type": "official custom occupation profile",
+                "id": "onet-aerospace-trends-2024",
+                "limitation": "美国全国职业数据，不代表中国市场，也不构成个人就业保证。",
+                "market": "来源覆盖地区",
+                "name": "O*NET National Employment Trends — Aerospace Engineers 17-2011.00",
+                "period": "2024; 2024–2034",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/17-2011.00"
               }
             ]
           },
@@ -33267,7 +33283,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "概念": "AI 能处理哪些行政服务任务？"
+            "概念": "AI 能辅助哪些本职业任务？"
           },
           {
             "含义": {
@@ -36359,7 +36375,7 @@
         "rows": [
           {
             "alternate_value": null,
-            "label": "O*NET 航空航天工程师职业档案（11-3012.00）",
+            "label": "O*NET 航空航天工程师职业档案（17-2011.00）",
             "secondary_value": null,
             "value": {
               "$item": "aerospace-engineers.profile.onet-structured-fields-block.1",
@@ -37313,7 +37329,7 @@
     },
     "contract_version": "career.detail.display.v1",
     "interface": {
-      "interface.fit.directions_heading": "你更可能适合哪条行政服务方向？",
+      "interface.fit.directions_heading": "你更可能适合哪些工作方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
@@ -37498,38 +37514,38 @@
       },
       {
         "derivation": null,
-        "display_value": "6%",
+        "display_value": "71,600 人",
         "fact_id": "us-employment-2025",
-        "market": "中国大陆与美国分开核对",
+        "market": "美国",
         "measure": "就业人数",
         "occupation_scope": "航空航天工程师",
-        "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+        "period": "2024",
         "source_refs": [
-          "onet"
+          "onet-aerospace-trends-2024"
         ]
       },
       {
         "derivation": null,
         "display_value": "6%",
         "fact_id": "us-growth-2025-2035",
-        "market": "中国大陆与美国分开核对",
-        "measure": "就业增长率与官方净变化",
+        "market": "美国",
+        "measure": "预测期就业增长率",
         "occupation_scope": "航空航天工程师",
-        "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+        "period": "2024—2034",
         "source_refs": [
-          "onet"
+          "onet-aerospace-trends-2024"
         ]
       },
       {
         "derivation": null,
-        "display_value": "2024 年就业 71,600；预计增长 5%—6%；十年约 4,500 个空缺",
+        "display_value": "4,500 个/年",
         "fact_id": "us-openings-2025-2035",
-        "market": "中国大陆与美国分开核对",
-        "measure": "年均职位空缺（2025–2035 平均）",
+        "market": "美国",
+        "measure": "年均职位空缺",
         "occupation_scope": "航空航天工程师",
         "period": "2024—2034",
         "source_refs": [
-          "onet"
+          "onet-aerospace-trends-2024"
         ]
       },
       {
@@ -37738,10 +37754,10 @@
       },
       {
         "derivation": "O*NET 展示 BLS 就业与预测；空缺不作净新增。",
-        "display_value": "2024 年就业 71,600；预计增长 5%—6%；十年约 4,500 个空缺",
+        "display_value": "2024 年就业 71,600；预计增长 6%；预测期内平均每年约 4,500 个职位空缺",
         "fact_id": "us-outlook-2024-2034",
-        "market": "资料市场",
-        "measure": "就业与职业预测",
+        "market": "美国",
+        "measure": "就业人数、就业增长与年均职位空缺（2024—2034）",
         "occupation_scope": "航空航天工程师",
         "period": "2024—2034",
         "source_refs": [
@@ -37833,19 +37849,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国就业增长（2024—2034）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数"
+        "label": "美国在岗人数（2024）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国年均职位空缺（2024—2034）"
       },
       {
         "availability": "missing",
@@ -37866,7 +37882,7 @@
       "text": "航空航天工程师"
     }
   },
-  "source_content_sha256": "1936ac19a124cc844d005754057ba7a1759669f4d8d577c9440c5bde65f4dfea",
+  "source_content_sha256": "34ecd2abe9e23f284b85a10bb098b4447b697599c3854cbc238653037613ee04",
   "subject": {
     "canonical_slug": "aerospace-engineers",
     "name": "航空航天工程师",

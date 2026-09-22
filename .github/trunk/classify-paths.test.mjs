@@ -10,6 +10,21 @@ import {
 
 const has = (paths, flag) => classifyPaths(paths).flags[flag];
 
+test("Career body and locale eligibility enters discoverability validation", () => {
+  for (const path of [
+    "backend/app/Domain/Career/Display/CareerContentV3CanonicalReader.php",
+    "backend/app/Services/Career/CareerFilePageReader.php",
+    "backend/app/Services/Career/CareerDirectoryAuthorityService.php",
+    "backend/app/Domain/Career/Display/CareerContentV3AuthorityPackage.php",
+    "backend/app/Domain/Career/Display/CareerContentV3PageUpdater.php",
+    "backend/app/Services/Career/CareerIndustryDirectoryReadModel.php",
+  ]) {
+    assert.equal(has([path], "seo_discoverability"), true, path);
+    assert.equal(has([path], "application_code"), true, path);
+  }
+  assert.equal(has(["backend/content_assets/career/current/careers/actuaries/zh-CN.json"], "seo_discoverability"), false);
+});
+
 test("reviewed Ops presentation keeps CI and deployment without live Council source readiness", () => {
   for (const path of SEO_OPS_PRESENTATION_PATHS) {
     const result = classifyPaths([path]);

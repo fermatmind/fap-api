@@ -24241,7 +24241,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆：本条证据路由按行业均值代理登记，而不是把代理值写成本职业口径。路由登记的两条 claim 为：2025 年城镇非私营单位「交通运输、仓储和邮政业」年平均工资 133,981 元，以及城镇私营单位同行业年平均工资 73,133 元；证据路由把该口径的缺口标记为 cn-exact-wage-unavailable（closure_reason=scope_narrowed，severity=non_material，状态 closed），并明确「不能把交通运输行业平均工资写成飞行员中位数或起薪」。因此本页在使用时逐处标注代理性质：它们描述的是行业与用工形式层面的平均水平，不是本职业的月薪、分位或起薪，也不能据此推算个人收入。"
+              "中国大陆：本条证据路由按行业均值代理登记，而不是把代理值写成本职业口径。路由登记的两条 claim 为：2025 年城镇非私营单位「交通运输、仓储和邮政业」年平均工资 133,981 元，以及城镇私营单位同行业年平均工资 73,133 元；证据路由把该口径的缺口标记为 （仅在收窄后的范围内使用，处理状态：已按说明处理），并明确「不能把交通运输行业平均工资写成飞行员中位数或起薪」。因此本页在使用时逐处标注代理性质：它们描述的是行业与用工形式层面的平均水平，不是本职业的月薪、分位或起薪，也不能据此推算个人收入。"
             ]
           },
           "id": "commercial-pilots.profile.onet-structured-fields-block.3",
@@ -26351,7 +26351,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本轮查阅范围为：本条证据路由登记的 2025 年城镇单位就业人员年平均工资公开口径（国家统计局发布，2026-05-16），以及本职业的 O*NET 精确职业来源；后者其市场与辖区明确为美国，不支持中国精确工资口径。本条证据路由对中国大陆的缺口标记为 cn-exact-wage-unavailable（closure_reason=scope_narrowed、severity=non_material、状态 closed），提供的中国大陆数值只有「交通运输、仓储和邮政业」行业均值，因此本页把它作为显式代理使用，并逐处标注它不是本职业口径。"
+              "本轮查阅范围为：本条证据路由登记的 2025 年城镇单位就业人员年平均工资公开口径（国家统计局发布，2026-05-16），以及本职业的 O*NET 精确职业来源；后者其市场与辖区明确为美国，不支持中国精确工资口径。本条证据路由对中国大陆的缺口标记为 （仅在收窄后的范围内使用、处理状态：已按说明处理），提供的中国大陆数值只有「交通运输、仓储和邮政业」行业均值，因此本页把它作为显式代理使用，并逐处标注它不是本职业口径。"
             ]
           },
           "id": "commercial-pilots.china-salary.career-snapshot-primary-locale.8",
@@ -30900,7 +30900,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本条证据路由为中国大陆工资登记的是行业均值代理：2025 年城镇非私营单位「交通运输、仓储和邮政业」年平均工资 133,981 元、城镇私营单位同行业 73,133 元；证据路由把该口径标记为 cn-exact-wage-unavailable（closure_reason=scope_narrowed、severity=non_material、状态 closed），并写明不能把行业平均工资写成飞行员中位数或起薪。"
+              "本条证据路由为中国大陆工资登记的是行业均值代理：2025 年城镇非私营单位「交通运输、仓储和邮政业」年平均工资 133,981 元、城镇私营单位同行业 73,133 元；证据路由把该口径标记为 （仅在收窄后的范围内使用、处理状态：已按说明处理），并写明不能把行业平均工资写成飞行员中位数或起薪。"
             ]
           },
           "id": "commercial-pilots.market-signals.market-signal-card.25",
@@ -31332,7 +31332,7 @@
                 "question_key": "career.faq.commercial-pilots.career-worth"
               },
               {
-                "answer": "本条证据路由为中国大陆登记的是行业均值代理而非职业级数值：2025 年城镇非私营单位「交通运输、仓储和邮政业」年平均工资 133,981 元、城镇私营单位同行业 73,133 元；证据路由把该口径标记为 cn-exact-wage-unavailable（closure_reason=scope_narrowed、severity=non_material、状态 closed），并写明不能把交通运输行业平均工资写成飞行员中位数或起薪。因此本页在使用时逐处标注代理性质，并同时说明本职业精确口径未取得。",
+                "answer": "本条证据路由为中国大陆登记的是行业均值代理而非职业级数值：2025 年城镇非私营单位「交通运输、仓储和邮政业」年平均工资 133,981 元、城镇私营单位同行业 73,133 元；证据路由把该口径标记为 （仅在收窄后的范围内使用、处理状态：已按说明处理），并写明不能把交通运输行业平均工资写成飞行员中位数或起薪。因此本页在使用时逐处标注代理性质，并同时说明本职业精确口径未取得。",
                 "id": "commercial-pilots.faq.12",
                 "question": "中国大陆的数据为什么是行业代理？",
                 "question_key": "career.faq.commercial-pilots.china-data-scope"
@@ -31637,7 +31637,7 @@
                 ],
                 "evidence_type": "industry_proxy",
                 "id": "nbs-wages",
-                "limitation": "本条证据路由据此类口径提供「交通运输、仓储和邮政业」行业均值代理（城镇非私营单位 133,981 元/年、城镇私营单位 73,133 元/年）；证据路由把该口径标记为 cn-exact-wage-unavailable（scope_narrowed、non_material、closed），并写明不能写成飞行员中位数或起薪。",
+                "limitation": "本条证据路由据此类口径提供「交通运输、仓储和邮政业」行业均值代理（城镇非私营单位 133,981 元/年、城镇私营单位 73,133 元/年）；证据路由把该口径标记为 （仅在限定范围内使用），并写明不能写成飞行员中位数或起薪。",
                 "market": "中国大陆",
                 "name": "国家统计局《城镇单位就业人员年平均工资情况》检索入口",
                 "period": "2025 年数据（2026-05-16 发布）",
@@ -37046,7 +37046,7 @@
       "text": "商业飞行员"
     }
   },
-  "source_content_sha256": "e4f8bb9c5f77bca17947cad409b7832c0ce189c86f52ed42fd17797b13b83eb4",
+  "source_content_sha256": "8733a467f1742518ab79bdc2cc81c27d161c988897503f9c733050a6ba44498b",
   "subject": {
     "canonical_slug": "commercial-pilots",
     "name": "商业飞行员",

@@ -15236,7 +15236,7 @@
       },
       "fit_decision_checklist.boundary": {
         "ref": {
-          "id": "audiologists.quick-decision.fit-decision-checklist.1",
+          "id": "audiologists.quick-decision.fit-decision-checklist.3",
           "path": [
             "data",
             "paragraphs",
@@ -15248,7 +15248,7 @@
       },
       "fit_decision_checklist.how": {
         "ref": {
-          "id": "audiologists.quick-decision.fit-decision-checklist.2",
+          "id": "audiologists.quick-decision.fit-decision-checklist.1",
           "path": [
             "data",
             "paragraphs",
@@ -15260,7 +15260,7 @@
       },
       "fit_decision_checklist.suit": {
         "ref": {
-          "id": "audiologists.quick-decision.fit-decision-checklist.3",
+          "id": "audiologists.quick-decision.fit-decision-checklist.2",
           "path": [
             "data",
             "paragraphs",
@@ -35802,19 +35802,19 @@
       },
       "fit_decision_checklist": {
         "boundary": {
-          "$item": "audiologists.quick-decision.fit-decision-checklist.1",
+          "$item": "audiologists.quick-decision.fit-decision-checklist.3",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
         "how": {
-          "$item": "audiologists.quick-decision.fit-decision-checklist.2",
+          "$item": "audiologists.quick-decision.fit-decision-checklist.1",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
         "suit": {
-          "$item": "audiologists.quick-decision.fit-decision-checklist.3",
+          "$item": "audiologists.quick-decision.fit-decision-checklist.2",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
@@ -37296,6 +37296,7 @@
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪个相邻方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
+      "interface.quick_decision.experiment_heading": "这项工作主要做什么？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -37775,7 +37776,7 @@
       "text": "听力学家"
     }
   },
-  "source_content_sha256": "1d3706d24f5434145383de89d1bd9934be42cf6051f567f0e8e83417ed8ef65e",
+  "source_content_sha256": "b8002e563409acbce464587833f8fb45dc3307f57fed0f56521b4c0d044f3dee",
   "subject": {
     "canonical_slug": "audiologists",
     "name": "听力学家",

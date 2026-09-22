@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career;
 
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Display\CareerCurrentIdentity;
 
 final class CareerDirectoryAuthorityService
@@ -18,6 +19,7 @@ final class CareerDirectoryAuthorityService
 
     public function __construct(
         private readonly PublicCareerAuthorityResponseCache $responseCache,
+        private readonly CareerContentV3CanonicalReader $content,
     ) {}
 
     /**
@@ -35,11 +37,8 @@ final class CareerDirectoryAuthorityService
         $page = max(1, $page);
         $perPage = min(100, max(1, $perPage));
 
-        $readModel = $this->responseCache->directoryReadModelPayload($publicLocale, $recordCacheState);
-        $items = $this->readyIndexableItems(
-            app(CareerCurrentIdentity::class)->projectPayload(is_array($readModel['items'] ?? null) ? $readModel['items'] : [], $publicLocale),
-        );
-        $publicDetailIndexableCount = count($items);
+        $items = $this->browseItems($publicLocale, $recordCacheState);
+        $publicDetailIndexableCount = count(array_filter($items, static fn (array $item): bool => $item['indexable']));
         $queryNormalized = $this->normalizeFilter($query);
         $familyNormalized = $this->normalizeFilter($family);
 
@@ -71,7 +70,7 @@ final class CareerDirectoryAuthorityService
             'bundle_version' => 'career.directory.v1',
             'public_truth' => [
                 'public_detail_indexable_count' => $publicDetailIndexableCount,
-                'directory_member_count' => $publicDetailIndexableCount,
+                'directory_member_count' => count($items),
                 'future_scale_ready' => true,
                 'excluded_slugs' => self::EXCLUDED_SLUGS,
             ],
@@ -101,12 +100,34 @@ final class CareerDirectoryAuthorityService
     public function indexableItems(string $locale, bool $recordCacheState = true): array
     {
         $publicLocale = $this->normalizePublicLocale($locale);
+        $items = array_values(array_filter($this->browseItems($publicLocale, $recordCacheState), static fn (array $item): bool => $item['indexable']));
+
+        return array_map(fn (array $item): array => $this->publicItem($item), $items);
+    }
+
+    /** @return list<array<string, mixed>> */
+    public function browseItems(string $locale, bool $recordCacheState = true): array
+    {
+        $publicLocale = $this->normalizePublicLocale($locale);
         $readModel = $this->responseCache->directoryReadModelPayload($publicLocale, $recordCacheState);
         $items = $this->readyIndexableItems(
             app(CareerCurrentIdentity::class)->projectPayload(is_array($readModel['items'] ?? null) ? $readModel['items'] : [], $publicLocale),
         );
 
-        return array_map(fn (array $item): array => $this->publicItem($item), $items);
+        return array_map(fn (array $item): array => $this->publicItem($item), $this->withBodyEligibility($items, $publicLocale));
+    }
+
+    /** Keep published identities browsable; detail_ready retains its route-readiness meaning. */
+    private function withBodyEligibility(array $items, string $locale): array
+    {
+        return array_map(function (array $item) use ($locale): array {
+            $slug = (string) $item['slug'];
+            $item['indexable'] = $this->content->hasPublicBody($slug, $locale);
+            $item['indexability_state'] = $item['indexable'] ? 'indexable' : 'noindex';
+            $item['robots_policy'] = $item['indexable'] ? 'index,follow' : 'noindex,follow';
+
+            return $item;
+        }, $items);
     }
 
     /**

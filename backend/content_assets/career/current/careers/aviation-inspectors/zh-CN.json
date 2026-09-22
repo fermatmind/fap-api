@@ -15236,7 +15236,7 @@
       },
       "fit_decision_checklist.boundary": {
         "ref": {
-          "id": "aviation-inspectors.quick-decision.fit-decision-checklist.1",
+          "id": "aviation-inspectors.quick-decision.fit-decision-checklist.3",
           "path": [
             "data",
             "paragraphs",
@@ -15248,7 +15248,7 @@
       },
       "fit_decision_checklist.how": {
         "ref": {
-          "id": "aviation-inspectors.quick-decision.fit-decision-checklist.2",
+          "id": "aviation-inspectors.quick-decision.fit-decision-checklist.1",
           "path": [
             "data",
             "paragraphs",
@@ -15260,7 +15260,7 @@
       },
       "fit_decision_checklist.suit": {
         "ref": {
-          "id": "aviation-inspectors.quick-decision.fit-decision-checklist.3",
+          "id": "aviation-inspectors.quick-decision.fit-decision-checklist.2",
           "path": [
             "data",
             "paragraphs",
@@ -23514,7 +23514,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：按本页证据口径（`documented_unavailable`、严重度 material），中国大陆未取得与 53-6051.01 精确等价的公开职业条目，也未取得该职业的全国精确工资分布；本页不声称中国精确等价的职责或准入，也不发布全国月薪或中位数，不以行业平均或美国数字换算填充。如需比较中国大陆岗位，应按用人单位类型与授权范围（监管机构检查、制造方质量与适航检查、运营方维修质量检查、第三方检验与合规检查）逐项核对城市、任职方式与税前税后口径。"
+              "中国大陆侧：按本页证据口径（暂无可安全使用的数据），中国大陆未取得与 53-6051.01 精确等价的公开职业条目，也未取得该职业的全国精确工资分布；本页不声称中国精确等价的职责或准入，也不发布全国月薪或中位数，不以行业平均或美国数字换算填充。如需比较中国大陆岗位，应按用人单位类型与授权范围（监管机构检查、制造方质量与适航检查、运营方维修质量检查、第三方检验与合规检查）逐项核对城市、任职方式与税前税后口径。"
             ]
           },
           "id": "aviation-inspectors.profile.onet-structured-fields-block.3",
@@ -35802,19 +35802,19 @@
       },
       "fit_decision_checklist": {
         "boundary": {
-          "$item": "aviation-inspectors.quick-decision.fit-decision-checklist.1",
+          "$item": "aviation-inspectors.quick-decision.fit-decision-checklist.3",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
         "how": {
-          "$item": "aviation-inspectors.quick-decision.fit-decision-checklist.2",
+          "$item": "aviation-inspectors.quick-decision.fit-decision-checklist.1",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
         "suit": {
-          "$item": "aviation-inspectors.quick-decision.fit-decision-checklist.3",
+          "$item": "aviation-inspectors.quick-decision.fit-decision-checklist.2",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
@@ -37296,6 +37296,7 @@
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪个相邻方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
+      "interface.quick_decision.experiment_heading": "这项工作主要做什么？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -37775,7 +37776,7 @@
       "text": "航空检查员"
     }
   },
-  "source_content_sha256": "d3d82732f46b3b83b6058e481bc262ba3a3a2eae31c448e69e8e6bb7eeaf43fa",
+  "source_content_sha256": "cbd6e3ec68d4c76eba617d24e3bc38df42306c428c228927ee2daea0af68c8ef",
   "subject": {
     "canonical_slug": "aviation-inspectors",
     "name": "航空检查员",

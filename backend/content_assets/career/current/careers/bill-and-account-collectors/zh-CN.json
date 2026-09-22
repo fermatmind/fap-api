@@ -15236,7 +15236,7 @@
       },
       "fit_decision_checklist.boundary": {
         "ref": {
-          "id": "bill-and-account-collectors.quick-decision.fit-decision-checklist.1",
+          "id": "bill-and-account-collectors.quick-decision.fit-decision-checklist.3",
           "path": [
             "data",
             "paragraphs",
@@ -15248,7 +15248,7 @@
       },
       "fit_decision_checklist.how": {
         "ref": {
-          "id": "bill-and-account-collectors.quick-decision.fit-decision-checklist.2",
+          "id": "bill-and-account-collectors.quick-decision.fit-decision-checklist.1",
           "path": [
             "data",
             "paragraphs",
@@ -15260,7 +15260,7 @@
       },
       "fit_decision_checklist.suit": {
         "ref": {
-          "id": "bill-and-account-collectors.quick-decision.fit-decision-checklist.3",
+          "id": "bill-and-account-collectors.quick-decision.fit-decision-checklist.2",
           "path": [
             "data",
             "paragraphs",
@@ -23514,7 +23514,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：按本页证据口径（documented_unavailable、严重度 material、cn_mapping_status none），未取得与 43-3011.00 精确对应的中国大陆公开职业工资条目，故本页不陈述该职业的月薪、起薪或分位数。按证据口径允许的官方代理各自标注行业与岗位类别范围：① 国家统计局《2025 年城镇单位就业人员年平均工资情况》显示租赁和商务服务业城镇非私营单位就业人员年平均工资 110,162 元、城镇私营单位 68,919 元，规模以上企业同门类 92,849 元，其中办事人员和有关人员 88,460 元、社会生产服务和生活服务人员 67,001 元、专业技术人员 149,542 元、中层及以上管理人员 269,264 元。以上分别是行业门类平均与行业内的岗位类别平均，都不是账单与账款催收员的工资，该门类含大量与本职业无关的岗位，不能用于估算个人报价。"
+              "中国大陆侧：按本页证据口径（暂无可安全使用的数据、尚未建立精确职业映射），未取得与 43-3011.00 精确对应的中国大陆公开职业工资条目，故本页不陈述该职业的月薪、起薪或分位数。按证据口径允许的官方代理各自标注行业与岗位类别范围：① 国家统计局《2025 年城镇单位就业人员年平均工资情况》显示租赁和商务服务业城镇非私营单位就业人员年平均工资 110,162 元、城镇私营单位 68,919 元，规模以上企业同门类 92,849 元，其中办事人员和有关人员 88,460 元、社会生产服务和生活服务人员 67,001 元、专业技术人员 149,542 元、中层及以上管理人员 269,264 元。以上分别是行业门类平均与行业内的岗位类别平均，都不是账单与账款催收员的工资，该门类含大量与本职业无关的岗位，不能用于估算个人报价。"
             ]
           },
           "id": "bill-and-account-collectors.profile.onet-structured-fields-block.3",
@@ -26311,7 +26311,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "截至 2026 年 9 月，有界检索未找到单列账单与账款催收员（或与之精确对应的账款催收职业序列）的公开职业工资条目；按本页证据口径（documented_unavailable、severity material、cn_mapping_status none），本页不陈述该职业的月薪、起薪或分位数，仅展示官方行业与岗位类别代理并逐一标注范围。"
+              "截至 2026 年 9 月，有界检索未找到单列账单与账款催收员（或与之精确对应的账款催收职业序列）的公开职业工资条目；按本页证据口径（暂无可安全使用的数据、尚未建立精确职业映射），本页不陈述该职业的月薪、起薪或分位数，仅展示官方行业与岗位类别代理并逐一标注范围。"
             ]
           },
           "id": "bill-and-account-collectors.china-salary.career-snapshot-primary-locale.8",
@@ -35802,19 +35802,19 @@
       },
       "fit_decision_checklist": {
         "boundary": {
-          "$item": "bill-and-account-collectors.quick-decision.fit-decision-checklist.1",
+          "$item": "bill-and-account-collectors.quick-decision.fit-decision-checklist.3",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
         "how": {
-          "$item": "bill-and-account-collectors.quick-decision.fit-decision-checklist.2",
+          "$item": "bill-and-account-collectors.quick-decision.fit-decision-checklist.1",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
         "suit": {
-          "$item": "bill-and-account-collectors.quick-decision.fit-decision-checklist.3",
+          "$item": "bill-and-account-collectors.quick-decision.fit-decision-checklist.2",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
@@ -37296,6 +37296,7 @@
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪个相邻方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
+      "interface.quick_decision.experiment_heading": "这项工作主要做什么？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -37775,7 +37776,7 @@
       "text": "账单与账款催收员"
     }
   },
-  "source_content_sha256": "0f37e7de399dae43b1e6002dd773253e050c4175047350335b6425e9a40d8521",
+  "source_content_sha256": "433e1138e017a47f3197f07c0aea2e7cb4fdf99e4a6707acbdb2b0ca27e81eb5",
   "subject": {
     "canonical_slug": "bill-and-account-collectors",
     "name": "账单与账款催收员",
