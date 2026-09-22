@@ -96,6 +96,39 @@ final class SeoTechnicalAuditOpportunityReadModelsTest extends TestCase
     }
 
     #[Test]
+    public function large_metadata_preserves_full_discovery_ranking_without_resident_payloads(): void
+    {
+        $hash = $this->seedUrl('large-metadata');
+        $this->gscRow($hash, hash('sha256', 'synthetic query'), '2026-08-20', 1, 100, 8000);
+        $db = DB::connection('seo_task7_test');
+        $row = (array) $db->table('seo_gsc_daily')->first();
+        unset($row['id']);
+        $row['metadata_json'] = json_encode(['row_source' => 'live_gsc_api', 'padding' => str_repeat('x', 8192)]);
+        $db->table('seo_gsc_daily')->delete();
+        for ($i = 0; $i < 50; $i++) {
+            $db->table('seo_gsc_daily')->insert(array_fill(0, 100, $row));
+        }
+        gc_collect_cycles();
+        memory_reset_peak_usage();
+        $before = memory_get_usage(true);
+        $reader = new SeoOpportunityQueueReadService('seo_task7_test');
+        $result = $reader->read(100);
+        $this->assertLessThan(32 * 1024 * 1024, memory_get_peak_usage(true) - $before);
+        $this->assertSame('connected', $result['state']);
+        $this->assertSame(1, $result['total_count']);
+        $this->assertSame(500000, data_get($result, 'recent_rows.0.metrics.impressions'));
+        $this->assertSame(5000, data_get($result, 'recent_rows.0.metrics.clicks'));
+        $discovery = $reader->planningDiscovery();
+        $this->assertSame(5000, $discovery['rows_scanned']);
+        $this->assertTrue($discovery['discovery_limited']);
+        $this->assertSame($result['recent_rows'], $discovery['candidates']);
+        $db->table('seo_gsc_daily')->where('id', $db->table('seo_gsc_daily')->min('id'))->update(['metadata_json' => '{invalid']);
+        $failed = $reader->read();
+        $this->assertSame('quality_failed', $failed['state']);
+        $this->assertSame([], $failed['recent_rows']);
+    }
+
+    #[Test]
     public function disconnected_opportunity_source_returns_no_zero_or_mock_candidates(): void
     {
         $result = (new SeoOpportunityQueueReadService('seo_task7_test'))->read();

@@ -6,6 +6,7 @@ namespace App\Services\SeoIntel\OpsDashboard;
 
 use App\Services\SeoIntel\Detector\SeoDetectorRegistry;
 use App\Services\SeoIntel\GscDataQualityGate;
+use App\Services\SeoIntel\GscReadSnapshot;
 use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueEligibilityEvaluator;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
@@ -174,6 +175,11 @@ final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadServi
      */
     private function gscRows(): array
     {
+        return GscReadSnapshot::read($this->connection(), fn (): array => $this->gscRowsWithinSnapshot());
+    }
+
+    private function gscRowsWithinSnapshot(): array
+    {
         $rows = $this->table('seo_gsc_daily')
             ->select([
                 'seo_gsc_daily.report_date',
@@ -188,8 +194,8 @@ final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadServi
                 'seo_gsc_daily.average_position_milli',
                 'seo_gsc_daily.is_brand_query',
                 'seo_gsc_daily.query_type',
-                'seo_gsc_daily.metadata_json',
             ])
+            ->selectRaw("CASE WHEN JSON_VALID(seo_gsc_daily.metadata_json) THEN JSON_OBJECT('data_origin', JSON_EXTRACT(seo_gsc_daily.metadata_json, '$.data_origin'), 'row_source', JSON_EXTRACT(seo_gsc_daily.metadata_json, '$.row_source')) ELSE NULL END AS metadata_json")
             ->where('seo_gsc_daily.source_engine', 'google')
             ->orderByDesc('seo_gsc_daily.report_date')
             ->orderBy('seo_gsc_daily.id')
