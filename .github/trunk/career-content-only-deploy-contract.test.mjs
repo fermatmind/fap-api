@@ -50,6 +50,13 @@ test('CI builds one deterministic SHA-bound package and deploy stages consume it
   assert.match(workflow, /Download exact Career content package for publisher/);
 });
 
+test('remote package traversal guard accepts tar directory entries without weakening rejection', () => {
+  const guard = deploy.match(/normalized="\\\$\{entry#\.\/\}"[\s\S]*?done < <\(tar -tzf "\\\$archive"\)/)?.[0] ?? '';
+  assert.match(guard, /path_for_check="\\\$\{normalized%\/\}"/);
+  assert.ok(guard.includes('case "/\\$path_for_check/" in *\'/../\'*|*\'//\'*)'));
+  assert.ok(!guard.includes('case "/\\$normalized/" in *\'/../\'*|*\'//\'*)'));
+});
+
 test('publisher batches full readback and fails closed on out-of-set drift', () => {
   assert.match(publisher, /array_chunk\(\$identities, 64\)/);
   assert.match(publisher, /PublicProjectionCache::many\(array_column\(\$candidates, 'key'\)\)/);
