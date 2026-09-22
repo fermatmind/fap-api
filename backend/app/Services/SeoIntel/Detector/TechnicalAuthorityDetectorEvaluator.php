@@ -83,7 +83,10 @@ final class TechnicalAuthorityDetectorEvaluator
         return [
             'detector' => $detectorId,
             'page_family' => $this->safeAxis($evidence['page_family'] ?? 'unclassified'),
-            'locale' => $this->safeAxis($evidence['locale'] ?? 'unknown'),
+            'locale' => match ($this->safeAxis($evidence['locale'] ?? 'unknown')) {
+                'zh-cn' => 'zh-CN',
+                default => $this->safeAxis($evidence['locale'] ?? 'unknown'),
+            },
             'indexability_state' => $this->safeAxis($evidence['indexability_state'] ?? 'unknown'),
             'canonical_url_hash' => $this->sha256OrNull($evidence['canonical_url_hash'] ?? null),
             'authority_revision' => $this->safeRevision($evidence['authority_revision'] ?? null),

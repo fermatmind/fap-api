@@ -157,6 +157,60 @@ final class SeoPlatform05ControlledUrlTruthReconciliationTest extends TestCase
         $this->assertFalse((bool) data_get($receipt, 'boundaries.sitemap_can_create_authority', true));
     }
 
+    public static function sitemapCohorts(): array
+    {
+        return ['large locale' => [601, 0], 'combined locales' => [300, 301]];
+    }
+
+    #[\PHPUnit\Framework\Attributes\DataProvider('sitemapCohorts')]
+    public function test_sitemap_differences_above_one_detector_budget_are_complete_and_idempotent(int $english, int $chinese): void
+    {
+        $this->prepareSchema();
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => true,
+            'seo_intel.public_canonical_host' => 'https://fermatmind.com', 'app.public_api_url' => 'https://api.fermatmind.com']);
+        $urls = [];
+        foreach (['en' => $english, 'zh' => $chinese] as $locale => $count) {
+            for ($i = 0; $i < $count; $i++) {
+                $urls[] = '<url><loc>https://fermatmind.com/'.$locale.'/sitemap-only-'.$i.'</loc></url>';
+            }
+        }
+        Http::fake(fn ($request) => $request->url() === 'https://fermatmind.com/sitemap.xml'
+            ? Http::response('<urlset>'.implode('', $urls).'</urlset>', 200) : Http::response('', 200));
+        $service = app(ControlledUrlTruthReconciliationService::class);
+        $receipt = $this->reconcile($service, [$this->record('alpha')], ['revision' => 'fixture'], true, true, 1000, 10);
+        $this->assertSame('success', $receipt['status']);
+        $this->assertSame(601, data_get($receipt, 'sitemap_authority_detector.sitemap_without_authority_count'));
+        $this->assertSame(2, data_get($receipt, 'sitemap_authority_detector.planned_issues'));
+        $this->assertSame(1, DB::connection('seo_intel')->table('seo_urls')->count());
+        $issues = DB::connection('seo_intel')->table('seo_issue_queue')->get();
+        $this->assertCount(2, $issues);
+        $counts = $issues->pluck('affected_url_count')->map(fn ($count) => (int) $count);
+        $this->assertSame(601, $counts->sum());
+        $this->assertLessThanOrEqual(500, $counts->max());
+        $again = $this->reconcile($service, [$this->record('alpha')], ['revision' => 'fixture'], true, true, 1000, 10);
+        $this->assertTrue($again['idempotent_rerun']['passed']);
+        $this->assertSame(2, DB::connection('seo_intel')->table('seo_issue_queue')->count());
+    }
+
+    public function test_sitemap_root_normalization_preserves_the_distinct_zh_path(): void
+    {
+        $this->prepareSchema();
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => true,
+            'seo_intel.public_canonical_host' => 'https://fermatmind.com', 'app.public_api_url' => 'https://api.fermatmind.com']);
+        Http::fake(fn ($request) => $request->url() === 'https://fermatmind.com/sitemap.xml'
+            ? Http::response('<urlset><url><loc>https://fermatmind.com/</loc></url><url><loc>https://fermatmind.com/zh</loc></url></urlset>', 200)
+            : Http::response('', 200));
+        $root = new UrlTruthInventoryRecord(canonicalUrl: 'https://fermatmind.com/', locale: 'zh-CN',
+            pageEntityType: 'home', entityIdOrSlug: 'home', sourceAuthority: 'backend_public_surface',
+            entitySource: 'backend_authority', authorityStatus: 'published_approved',
+            metadata: ['authority_revision' => 'root-fixture']);
+        $receipt = $this->reconcile(app(ControlledUrlTruthReconciliationService::class), [$root], [], true, true, 100, 10);
+        $this->assertSame('success', $receipt['status']);
+        $this->assertSame(1, data_get($receipt, 'sitemap_authority_detector.sitemap_without_authority_count'));
+        $this->assertSame(0, data_get($receipt, 'batches.0.consumer_missing.sitemap'));
+        $this->assertSame(['https://fermatmind.com/'], DB::connection('seo_intel')->table('seo_urls')->pluck('canonical_url')->all());
+    }
+
     #[Test]
     public function deploy_runs_the_controlled_reconcile_after_the_read_only_snapshot(): void
     {
@@ -266,27 +320,34 @@ final class SeoPlatform05ControlledUrlTruthReconciliationTest extends TestCase
         $this->assertTrue($again['idempotent_rerun']['passed']);
     }
 
-    public function test_detector_failure_rolls_back_truth_bindings_and_retirement(): void
+    public static function detectorFailures(): array
+    {
+        return ['first batch' => [0], 'second batch' => [1]];
+    }
+
+    #[\PHPUnit\Framework\Attributes\DataProvider('detectorFailures')]
+    public function test_detector_failure_rolls_back_truth_bindings_and_retirement(int $completed): void
     {
         $this->prepareSchema();
         config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => true,
             'seo_intel.public_canonical_host' => 'https://fermatmind.com', 'app.public_api_url' => 'https://api.fermatmind.com']);
         Http::fake(static function ($request) {
             return str_ends_with($request->url(), '/sitemap.xml')
-                ? Http::response('<urlset><url><loc>https://fermatmind.com/en/sitemap-only</loc></url></urlset>', 200)
+                ? Http::response('<urlset>'.implode('', array_map(fn ($i) => '<url><loc>https://fermatmind.com/en/sitemap-only-'.$i.'</loc></url>', range(1, 601))).'</urlset>', 200)
                 : Http::response(['data' => []], 200);
         });
         $db = DB::connection('seo_intel');
-        $db->unprepared("CREATE TRIGGER break_detector BEFORE INSERT ON seo_issue_queue BEGIN SELECT RAISE(ABORT, 'synthetic_detector_failure'); END");
+        (new UrlTruthInventoryRecordWriter)->write([$this->record('orphan')]);
+        $before = [$db->table('seo_urls')->get()->toJson(), $db->table('seo_url_entities')->get()->toJson()];
+        $db->unprepared("CREATE TRIGGER break_detector BEFORE INSERT ON seo_issue_queue WHEN (SELECT COUNT(*) FROM seo_issue_queue) = {$completed} BEGIN SELECT RAISE(ABORT, 'synthetic_detector_failure'); END");
         try {
             $this->reconcile(app(ControlledUrlTruthReconciliationService::class), [$this->record('alpha')], [], true, true, 100, 1);
             $this->fail('Detector failure must roll back Truth.');
         } catch (\RuntimeException $exception) {
             $this->assertNotSame('', $exception->getMessage());
         }
-        foreach (['seo_urls', 'seo_url_entities', 'seo_issue_queue'] as $table) {
-            $this->assertSame(0, $db->table($table)->count());
-        }
+        $this->assertSame($before, [$db->table('seo_urls')->get()->toJson(), $db->table('seo_url_entities')->get()->toJson()]);
+        $this->assertSame(0, $db->table('seo_issue_queue')->count());
     }
 
     public function test_same_url_with_conflicting_formal_identities_cannot_retire_existing_truth(): void
@@ -343,6 +404,23 @@ final class SeoPlatform05ControlledUrlTruthReconciliationTest extends TestCase
         $this->assertSame('seo_intel', config('seo_intel.connection'));
         $this->assertFalse(config('seo_intel.write_enabled'));
         DB::purge('seo_council');
+    }
+
+    public function test_failure_receipt_keeps_codes_without_sql_or_exception_text(): void
+    {
+        $command = app(\App\Console\Commands\SeoPlatformControlledUrlTruthReconcileCommand::class);
+        $details = new \ReflectionMethod($command, 'failureDetails');
+        $this->assertSame(['code' => 'URL_TRUTH_BATCH_READBACK_FAILED'],
+            $details->invoke($command, new \RuntimeException('URL_TRUTH_BATCH_READBACK_FAILED')));
+        $this->assertSame(['code' => 'URL_TRUTH_UNCLASSIFIED_FAILURE'],
+            $details->invoke($command, new \RuntimeException('private exception content')));
+        $pdo = new \PDOException('private database details');
+        $pdo->errorInfo = ['42000', 1142, 'private database details'];
+        $query = new \Illuminate\Database\QueryException('private_connection', 'SELECT private_column FROM private_table', [], $pdo);
+        $this->assertSame(['code' => 'URL_TRUTH_DATABASE_FAILURE', 'sqlstate' => '42000', 'driver_code' => 1142],
+            $details->invoke($command, $query));
+        $this->assertSame(['code' => 'URL_TRUTH_ARTICLE_BINDING_REJECTED'],
+            $details->invoke($command, new \InvalidArgumentException('candidate_not_bound_to_backend_authority:12')));
     }
 
     private function reconcile(ControlledUrlTruthReconciliationService $service, array $records, array $metadata, bool $execute, bool $probe, int $max, int $batch): array

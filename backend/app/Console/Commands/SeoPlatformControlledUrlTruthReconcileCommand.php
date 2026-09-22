@@ -61,12 +61,13 @@ final class SeoPlatformControlledUrlTruthReconcileCommand extends Command
                 $expected === '' ? null : $expected,
                 fn (): array => [$source->candidates(), $source->metadata()],
             );
-        } catch (Throwable) {
+        } catch (Throwable $exception) {
             $receipt = [
                 'schema_version' => ControlledUrlTruthReconciliationService::SCHEMA_VERSION,
                 'status' => 'blocked',
                 'issues' => ['controlled_reconciliation_unavailable'],
                 'writes_committed' => false,
+                'failure' => $this->failureDetails($exception),
                 'boundaries' => ['search_submission_allowed' => false, 'raw_error_output' => false],
             ];
         } finally {
@@ -104,5 +105,36 @@ final class SeoPlatformControlledUrlTruthReconcileCommand extends Command
         }
 
         return $writer;
+    }
+
+    private function failureDetails(Throwable $exception): array
+    {
+        $known = ['SCOPED_URL_TRUTH_CLI_REQUIRED', 'URL_TRUTH_MAINTENANCE_MODE_INVALID',
+            'URL_TRUTH_WRITER_UNAVAILABLE', 'URL_TRUTH_WRITER_DATABASE_MISMATCH',
+            'URL_TRUTH_PLAN_CHANGED', 'URL_TRUTH_BATCH_READBACK_FAILED', 'URL_TRUTH_IDEMPOTENCY_FAILED',
+            'URL_TRUTH_READ_BOUND_EXCEEDED', 'URL_TRUTH_DETECTOR_READBACK_FAILED',
+            'URL_TRUTH_AUTHORITY_UNAVAILABLE', 'URL_TRUTH_AUTHORITY_CHANGED',
+            'PUBLIC_AUTHORITY_CAREER_UNAVAILABLE', 'PUBLIC_AUTHORITY_CAREER_UNDETERMINED',
+            'PUBLIC_AUTHORITY_IDENTITY_CONFLICT', 'PUBLIC_AUTHORITY_SOURCE_UNAVAILABLE'];
+        $message = $exception->getMessage();
+        if (in_array($message, $known, true)) {
+            return ['code' => $message];
+        }
+        if ($message === 'Partial detector artifacts cannot be materialized.') {
+            return ['code' => 'URL_TRUTH_DETECTOR_PARTIAL'];
+        }
+        if ($exception instanceof \Illuminate\Database\QueryException) {
+            $state = $exception->errorInfo[0] ?? null;
+            $driver = $exception->errorInfo[1] ?? null;
+
+            return ['code' => 'URL_TRUTH_DATABASE_FAILURE',
+                'sqlstate' => is_string($state) && preg_match('/^[A-Z0-9]{5}$/D', $state) ? $state : null,
+                'driver_code' => is_int($driver) ? $driver : null];
+        }
+        if (preg_match('/^candidate_not_bound_to_backend_authority:\d+(?:,candidate_not_bound_to_backend_authority:\d+)*$/D', $message)) {
+            return ['code' => 'URL_TRUTH_ARTICLE_BINDING_REJECTED'];
+        }
+
+        return ['code' => 'URL_TRUTH_UNCLASSIFIED_FAILURE'];
     }
 }
