@@ -9,7 +9,6 @@ use App\Models\AdminUser;
 use App\Models\Article;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
-use App\Models\OpsDeployEvent;
 use App\Services\Audit\AuditLogger;
 use App\Services\Ops\SeoContentScopeViewModel;
 use App\Services\Ops\SeoOperationsReadService;
@@ -142,18 +141,6 @@ class SeoOperationsPage extends Page
 
     public bool $seoIntelAvailable = false;
 
-    /** @var array<string, mixed> */
-    public array $searchPerformance = [];
-
-    /** @var list<array<string, mixed>> */
-    public array $opportunityQueue = [];
-
-    /** @var array<string, mixed> */
-    public array $opportunityReadModel = [];
-
-    /** @var array<string, mixed> */
-    public array $technicalAudit = [];
-
     /** @var list<array<string, mixed>> */
     public array $issueClusters = [];
 
@@ -186,11 +173,14 @@ class SeoOperationsPage extends Page
     /** @var list<array<string, mixed>> */
     public array $scopeSummary = [];
 
-    /** @var list<array<string, mixed>> */
-    public array $deploymentEvents = [];
-
     /** @var array<string,array<string,mixed>> */
     public array $platformReadModels = [];
+
+    private ?string $loadedSeoView = null;
+
+    private ?string $loadedClusterQuery = null;
+
+    private ?string $loadedClusterUrlsQuery = null;
 
     public function mount(SeoOperationsService $service): void
     {
@@ -203,11 +193,19 @@ class SeoOperationsPage extends Page
 
     public function rendering(): void
     {
-        // Council receipts have their own readers. Load the general SEO models
-        // only when a workspace that consumes them is rendered.
-        if ($this->platformReadModels === []) {
+        if ($this->loadedSeoView !== $this->seoViewKey()) {
             $this->refreshSeoIntel();
         }
+    }
+
+    private function seoViewKey(): string
+    {
+        return $this->normalizedWorkspace($this->activeWorkspace).'|'.$this->normalizedAutomationSection($this->activeAutomationSection);
+    }
+
+    private function usesIssueClusters(): bool
+    {
+        return $this->activeWorkspace === 'automation' && $this->activeAutomationSection === 'operations';
     }
 
     public function updatedSelectedIssueUid(): void
@@ -258,7 +256,10 @@ class SeoOperationsPage extends Page
     public function updatedSortBy(): void
     {
         $this->issueClusterPage = 1;
-        $this->refreshIssueClusters(app(SeoOperationsReadService::class));
+        if ($this->usesIssueClusters()) {
+            $this->refreshIssueClusters(app(SeoOperationsReadService::class));
+            $this->loadedSeoView = $this->seoViewKey();
+        }
     }
 
     public function updatedDisplayPreset(): void
@@ -909,12 +910,11 @@ class SeoOperationsPage extends Page
 
     private function refreshSeoIntel(): void
     {
-        if ($this->activeWorkspace === 'automation' && $this->activeAutomationSection === 'agents') {
-            return;
-        }
-
+        $this->activeWorkspace = $this->normalizedWorkspace($this->activeWorkspace);
+        $this->activeAutomationSection = $this->normalizedAutomationSection($this->activeAutomationSection);
+        $this->loadedSeoView = $this->seoViewKey();
         $reader = app(SeoOperationsReadService::class);
-        $this->platformReadModels = $reader->read([
+        $this->platformReadModels = $reader->readForWorkspace($this->activeWorkspace, $this->activeAutomationSection, [
             'days' => $this->gscDays,
             'device' => $this->gscDevice,
             'country' => $this->gscCountry,
@@ -922,35 +922,7 @@ class SeoOperationsPage extends Page
             'search_type' => $this->gscSearchType,
         ]);
 
-        try {
-            $this->searchPerformance = (array) data_get($this->platformReadModels, 'performance.gsc', [
-                'connected' => false,
-                'state' => 'unavailable',
-                'totals' => [],
-                'daily' => [],
-                'query_page_rows' => [],
-            ]);
-            $this->opportunityReadModel = (array) data_get($this->platformReadModels, 'opportunities', [
-                'state' => 'unavailable',
-                'recent_rows' => [],
-            ]);
-            $this->opportunityQueue = (array) data_get($this->opportunityReadModel, 'recent_rows', []);
-            $this->technicalAudit = (array) data_get($this->platformReadModels, 'technical.audit', [
-                'state' => 'unavailable',
-                'rows' => [],
-                'sources' => [],
-            ]);
-            $this->refreshIssueClusters($reader);
-            if ($this->selectedClusterUid !== '') {
-                $this->refreshClusterUrls($reader);
-            }
-            $this->seoIntelAvailable = collect($this->platformReadModels)
-                ->contains(fn (array $model): bool => ($model['state'] ?? null) === 'connected');
-        } catch (Throwable) {
-            $this->searchPerformance = ['connected' => false, 'state' => 'unavailable', 'totals' => [], 'daily' => [], 'query_page_rows' => []];
-            $this->opportunityQueue = [];
-            $this->opportunityReadModel = ['state' => 'unavailable', 'recent_rows' => []];
-            $this->technicalAudit = ['state' => 'unavailable', 'rows' => [], 'sources' => []];
+        if (! $this->usesIssueClusters()) {
             $this->issueClusters = [];
             $this->issueClusterSummary = [];
             $this->issueClusterTotal = 0;
@@ -958,41 +930,55 @@ class SeoOperationsPage extends Page
             $this->clusterUrls = [];
             $this->clusterUrlTotal = 0;
             $this->clusterUrlLastPage = 1;
-            $this->seoIntelAvailable = false;
+            $this->pageInspector = [];
+        }
+        $this->seoIntelAvailable = collect($this->platformReadModels)
+            ->contains(fn (array $model): bool => ($model['state'] ?? null) === 'connected');
+        if ($this->usesIssueClusters()) {
+            try {
+                $this->refreshIssueClusters($reader);
+                if ($this->selectedClusterUid !== '') {
+                    $this->refreshClusterUrls($reader);
+                }
+            } catch (Throwable) {
+                $this->issueClusters = [];
+                $this->issueClusterSummary = [];
+                $this->issueClusterTotal = 0;
+                $this->clusterUrls = [];
+                $this->clusterUrlTotal = 0;
+                $this->seoIntelAvailable = false;
+            }
         }
 
-        $gscConnected = (bool) ($this->searchPerformance['source_connected'] ?? $this->searchPerformance['connected'] ?? false);
+        $searchPerformance = data_get($this->platformReadModels, 'performance.gsc');
+        if (! is_array($searchPerformance)) {
+            $searchPerformance = $reader->gscSourceStatus();
+            $searchPerformance['source_connected'] = ($searchPerformance['last_success_at'] ?? null) !== null;
+        }
+        $gscConnected = (bool) ($searchPerformance['source_connected'] ?? $searchPerformance['connected'] ?? false);
         $this->dataSources = [
             ['key' => 'cms', 'label' => __('ops.custom_pages.seo_operations.sources.cms'), 'connected' => true, 'state' => 'connected', 'source' => 'primary_database', 'updated_at' => now()->toAtomString(), 'unavailable_reason' => null],
-            ['key' => 'gsc', 'label' => __('ops.custom_pages.seo_operations.sources.gsc'), 'connected' => $gscConnected, 'state' => $this->searchPerformance['state'] ?? 'unavailable', 'source' => 'seo_intel.seo_gsc_daily', 'updated_at' => $this->searchPerformance['last_success_at'] ?? $this->searchPerformance['updated_at'] ?? null, 'unavailable_reason' => $gscConnected ? null : ($this->searchPerformance['failure_code'] ?? 'gsc_read_model_unavailable')],
+            ['key' => 'gsc', 'label' => __('ops.custom_pages.seo_operations.sources.gsc'), 'connected' => $gscConnected, 'state' => $searchPerformance['state'] ?? 'unavailable', 'source' => 'seo_intel.seo_gsc_daily', 'updated_at' => $searchPerformance['last_success_at'] ?? $searchPerformance['updated_at'] ?? null, 'unavailable_reason' => $gscConnected ? null : ($searchPerformance['failure_code'] ?? 'gsc_read_model_unavailable')],
             ['key' => 'cwv', 'label' => __('ops.custom_pages.seo_operations.sources.cwv'), 'connected' => false, 'state' => 'not_connected', 'source' => 'crux_or_pagespeed_field_data', 'updated_at' => null, 'unavailable_reason' => 'provider_not_connected'],
             ['key' => 'rank', 'label' => __('ops.custom_pages.seo_operations.sources.rank_tracking'), 'connected' => false, 'state' => 'not_implemented', 'source' => 'rank_tracking', 'updated_at' => null, 'unavailable_reason' => 'not_implemented'],
             ['key' => 'ai', 'label' => __('ops.custom_pages.seo_operations.workspace.ai'), 'connected' => false, 'state' => 'not_implemented', 'source' => 'seo_agent_runtime', 'updated_at' => null, 'unavailable_reason' => 'not_implemented'],
             ['key' => 'backlinks', 'label' => __('ops.custom_pages.seo_operations.sources.backlinks'), 'connected' => false, 'state' => 'not_connected', 'source' => 'backlink_provider', 'updated_at' => null, 'unavailable_reason' => 'provider_not_connected'],
         ];
 
-        try {
-            $this->deploymentEvents = OpsDeployEvent::query()
-                ->where('occurred_at', '>=', now()->subDays($this->gscDays - 1))
-                ->latest('occurred_at')
-                ->limit(20)
-                ->get(['revision', 'status', 'env', 'occurred_at'])
-                ->map(static fn (OpsDeployEvent $event): array => [
-                    'revision' => (string) $event->revision,
-                    'status' => (string) $event->status,
-                    'environment' => (string) $event->env,
-                    'occurred_at' => optional($event->occurred_at)->toAtomString(),
-                ])
-                ->all();
-        } catch (Throwable) {
-            $this->deploymentEvents = [];
-        }
-
     }
 
     private function refreshIssueClusters(SeoOperationsReadService $reader): void
     {
+        if (! $this->usesIssueClusters()) {
+            return;
+        }
+
+        $key = json_encode([$this->clusterFilters(), $this->issueClusterPage], JSON_THROW_ON_ERROR);
+        if ($this->loadedClusterQuery === $key) {
+            return;
+        }
         $result = $reader->issueClusters($this->clusterFilters(), page: $this->issueClusterPage, perPage: self::ISSUE_QUEUE_PER_PAGE);
+        $this->loadedClusterQuery = $key;
         $this->issueClusters = (array) ($result['rows'] ?? []);
         $this->issueClusterSummary = (array) ($result['summary'] ?? []);
         $this->issueClusterTotal = (int) ($result['total_count'] ?? 0);
@@ -1048,12 +1034,17 @@ class SeoOperationsPage extends Page
             return;
         }
 
+        $key = json_encode([$this->selectedClusterUid, $this->clusterFilters(), $this->clusterUrlPage], JSON_THROW_ON_ERROR);
+        if ($this->loadedClusterUrlsQuery === $key) {
+            return;
+        }
         $result = $reader->issueClusterUrls(
             $this->selectedClusterUid,
             $this->clusterFilters(),
             page: $this->clusterUrlPage,
             perPage: self::ISSUE_QUEUE_PER_PAGE,
         );
+        $this->loadedClusterUrlsQuery = $key;
         $this->clusterUrls = (array) ($result['rows'] ?? []);
         $this->clusterUrlTotal = (int) ($result['total_count'] ?? 0);
         $this->clusterUrlPage = (int) ($result['page'] ?? 1);

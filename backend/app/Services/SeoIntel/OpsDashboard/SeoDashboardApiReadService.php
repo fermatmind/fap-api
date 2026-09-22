@@ -13,9 +13,9 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
     /**
      * @return array<string, mixed>
      */
-    public function overview(): array
+    public function overview(?array $urlTruth = null): array
     {
-        return (new SeoDashboardOverviewReadService($this->connectionName))->read();
+        return (new SeoDashboardOverviewReadService($this->connectionName))->read($urlTruth);
     }
 
     /** @return array<string,mixed> */
@@ -361,7 +361,7 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
     }
 
     /** @return array{state:string,failure_code:?string,last_success_at:?string,last_attempt_at:?string} */
-    private function gscSyncState(): array
+    public function gscSyncState(): array
     {
         $connectionName = $this->connectionName ?? (string) config('seo_intel.connection', 'seo_intel');
         if (! \App\Support\SchemaBaseline::tableExists('seo_gsc_sync_runs', $connectionName)) {

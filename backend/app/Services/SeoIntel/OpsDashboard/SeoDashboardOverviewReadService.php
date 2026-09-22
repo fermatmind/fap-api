@@ -12,9 +12,9 @@ final class SeoDashboardOverviewReadService extends AbstractSeoDashboardReadServ
      *     safety:list<array{key:string,label:string,value:int,alert:bool}>
      * }
      */
-    public function read(): array
+    public function read(?array $urlTruth = null): array
     {
-        $urlTruth = (new SeoUrlTruthReadService($this->connectionName))->read();
+        $urlTruth ??= (new SeoUrlTruthReadService($this->connectionName))->read();
         $queue = (new SeoSearchChannelQueueReadService($this->connectionName))->read();
 
         return [

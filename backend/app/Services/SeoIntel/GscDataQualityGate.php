@@ -10,10 +10,10 @@ use Throwable;
 final class GscDataQualityGate
 {
     /**
-     * @param  list<array<string, mixed>>  $rows
+     * @param  iterable<array<string, mixed>>  $rows
      * @return array<string, mixed>
      */
-    public function evaluate(array $rows, ?CarbonImmutable $now = null): array
+    public function evaluate(iterable $rows, ?CarbonImmutable $now = null): array
     {
         $now ??= CarbonImmutable::now();
         $lagDays = max(0, (int) config('seo_intel.gsc_backfill_lag_days', 3));
@@ -31,15 +31,14 @@ final class GscDataQualityGate
 
         $reasons = [];
         $origins = [];
-        $reportDates = [];
+        $minDate = null;
+        $maxDate = null;
+        $rowsChecked = 0;
         $missingRequiredMetricRows = 0;
         $nonGoogleRows = 0;
 
-        if (count($rows) < $minRows) {
-            $reasons[] = 'insufficient_rows';
-        }
-
         foreach ($rows as $row) {
+            $rowsChecked++;
             $metadata = is_array($row['metadata_json'] ?? null) ? $row['metadata_json'] : [];
             $origin = $this->normalizeOrigin(
                 $metadata['data_origin']
@@ -51,11 +50,11 @@ final class GscDataQualityGate
             $origins[$origin] = true;
 
             if (in_array($origin, $forbiddenOrigins, true)) {
-                $reasons[] = 'fixture_or_mock_source';
+                $reasons['fixture_or_mock_source'] = true;
             }
 
             if (! in_array($origin, $allowedOrigins, true)) {
-                $reasons[] = 'untrusted_data_origin';
+                $reasons['untrusted_data_origin'] = true;
             }
 
             if (($row['source_engine'] ?? null) !== 'google') {
@@ -64,9 +63,10 @@ final class GscDataQualityGate
 
             $date = $this->parseReportDate($row['report_date'] ?? null);
             if ($date === null) {
-                $reasons[] = 'missing_report_date';
+                $reasons['missing_report_date'] = true;
             } else {
-                $reportDates[] = $date;
+                $minDate = $minDate === null || $date->lessThan($minDate) ? $date : $minDate;
+                $maxDate = $maxDate === null || $date->greaterThan($maxDate) ? $date : $maxDate;
             }
 
             if (
@@ -80,41 +80,37 @@ final class GscDataQualityGate
         }
 
         if ($nonGoogleRows > 0) {
-            $reasons[] = 'non_google_source_engine';
+            $reasons['non_google_source_engine'] = true;
         }
 
         if ($missingRequiredMetricRows > 0) {
-            $reasons[] = 'missing_required_metric_fields';
+            $reasons['missing_required_metric_fields'] = true;
         }
 
-        if ($reportDates !== []) {
-            usort($reportDates, static fn (CarbonImmutable $a, CarbonImmutable $b): int => $a <=> $b);
-
-            $minDate = $reportDates[0];
-            $maxDate = $reportDates[count($reportDates) - 1];
+        if ($maxDate !== null) {
             $latestFinalDate = $now->subDays($lagDays)->startOfDay();
             $oldestAllowedDate = $now->subDays($maxAgeDays)->startOfDay();
 
             if ($maxDate->greaterThan($latestFinalDate)) {
-                $reasons[] = 'gsc_finalization_lag_not_met';
+                $reasons['gsc_finalization_lag_not_met'] = true;
             }
 
             if ($maxDate->lessThan($oldestAllowedDate)) {
-                $reasons[] = 'stale_gsc_report_date';
+                $reasons['stale_gsc_report_date'] = true;
             }
-        } else {
-            $minDate = null;
-            $maxDate = null;
         }
 
-        $reasons = array_values(array_unique($reasons));
+        $reasons = array_keys($reasons);
+        if ($rowsChecked < $minRows) {
+            array_unshift($reasons, 'insufficient_rows');
+        }
         $passed = $reasons === [];
 
         return [
             'status' => $passed ? 'pass' : 'blocked',
             'opportunity_queue_eligible' => $passed,
             'reasons' => $reasons,
-            'rows_checked' => count($rows),
+            'rows_checked' => $rowsChecked,
             'data_origins' => array_keys($origins),
             'freshness' => [
                 'lag_days_required' => $lagDays,

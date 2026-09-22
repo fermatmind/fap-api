@@ -1,5 +1,8 @@
 <x-filament-panels::page>
     @php
+        $searchPerformance = (array) data_get($platformReadModels, 'performance.gsc', []);
+        $opportunityReadModel = (array) data_get($platformReadModels, 'opportunities', []);
+        $opportunityQueue = (array) ($opportunityReadModel['recent_rows'] ?? []);
         $typeFilterOptions = [
             'all' => __('ops.custom_pages.seo_operations.filters.all_visible'),
             'article' => __('ops.custom_pages.common.filters.articles'),

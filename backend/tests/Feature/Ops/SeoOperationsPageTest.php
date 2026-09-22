@@ -87,7 +87,50 @@ final class SeoOperationsPageTest extends TestCase
                 'saved_view' => $page->call('applySavedView', 'high_impressions_low_ctr'),
                 'binding' => $page->set('activeWorkspace', 'overview'),
             };
-            $page->assertSet('platformReadModels', static fn (array $models): bool => isset($models['overview'], $models['performance']));
+            $expected = match ($navigation) {
+                'workspace', 'saved_view' => ['performance', 'opportunities'],
+                'section' => ['overview'],
+                'binding' => [],
+            };
+            $page->assertSet('platformReadModels', static fn (array $models): bool => array_keys($models) === $expected)
+                ->call('openDecisionWorkspace', 'automation')
+                ->call('openAutomationSection', 'agents')
+                ->set('sortBy', 'impact')
+                ->call('$refresh')
+                ->assertSet('platformReadModels', [])
+                ->assertSet('issueClusters', [])
+                ->assertSet('clusterUrls', []);
+        }
+    }
+
+    public function test_every_workspace_and_automation_entry_loads_only_its_consumed_models(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $org = $this->createOrganization('SEO view composition');
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $this->withSession($this->opsSession($admin, $org));
+        app(OrgContext::class)->set((int) $org->id, (int) $admin->id, 'admin');
+        $entries = [
+            ['overview', 'experiments', []], ['performance', 'experiments', ['performance', 'opportunities']],
+            ['technical', 'experiments', []], ['url-truth', 'experiments', ['overview', 'opportunities']],
+            ['content', 'experiments', []], ['automation', 'experiments', []],
+            ['automation', 'agents', []], ['automation', 'scheduler', ['overview']],
+            ['automation', 'operations', ['ai', 'execution']],
+        ];
+        foreach ($entries as [$workspace, $section, $expected]) {
+            $page = Livewire::withQueryParams(['workspace' => $workspace, 'automation-view' => $section])
+                ->test(SeoOperationsPage::class)
+                ->assertSuccessful()
+                ->assertSet('platformReadModels', static fn (array $models): bool => array_keys($models) === $expected)
+                ->call('$refresh')
+                ->assertSet('platformReadModels', static fn (array $models): bool => array_keys($models) === $expected);
+            $this->assertArrayNotHasKey('clusters', $page->get('platformReadModels')['execution'] ?? []);
+            $page->call('openDecisionWorkspace', 'performance')
+                ->set('gscDays', 90)->set('gscDevice', 'mobile')->set('gscCountry', 'USA')->set('gscLocale', 'en')
+                ->set('gscSearchType', 'web')
+                ->assertSet('platformReadModels', static fn (array $models): bool => array_keys($models) === ['performance', 'opportunities'])
+                ->call('openDecisionWorkspace', $workspace)->call('openAutomationSection', $section)
+                ->assertSet('platformReadModels', static fn (array $models): bool => array_keys($models) === $expected);
         }
     }
 

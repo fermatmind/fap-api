@@ -33,6 +33,9 @@ final class SeoExperimentLedgerUiContract
     /** @return array<string, mixed> */
     public static function snapshot(): array
     {
-        return app(SeoLedgerSnapshotReadService::class)->snapshot();
+        return [
+            ...self::unavailableSnapshot(),
+            ...app(SeoLedgerSnapshotReadService::class)->snapshot(),
+        ];
     }
 }

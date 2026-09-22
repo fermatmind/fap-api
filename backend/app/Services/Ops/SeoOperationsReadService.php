@@ -8,6 +8,7 @@ use App\Services\SeoIntel\OpsDashboard\SeoCrawlerLogObservationReadService;
 use App\Services\SeoIntel\OpsDashboard\SeoDashboardApiReadService;
 use App\Services\SeoIntel\OpsDashboard\SeoSchedulerReceiptReadService;
 use App\Services\SeoIntel\OpsDashboard\SeoSearchChannelQueueReadService;
+use App\Services\SeoIntel\PageFamily\PageFamilyPolicyRegistry;
 use Throwable;
 
 /**
@@ -27,36 +28,63 @@ final class SeoOperationsReadService
      */
     public function read(array $filters = []): array
     {
-        $reader = new SeoDashboardApiReadService($this->connectionName);
-        $overview = $this->available('seo_intel.dashboard_overview', fn (): array => [
-            'authority' => $reader->overview(),
-            'url_truth' => $reader->urlTruth(),
-            'issues' => $reader->issues(10),
-            'search_channel' => (new SeoSearchChannelQueueReadService($this->connectionName))->read(10),
-            'crawler' => (new SeoCrawlerLogObservationReadService($this->connectionName))->read(10),
-            'scheduler' => (new SeoSchedulerReceiptReadService)->read(),
-            'search_submission' => [
-                'state' => 'measurement_hold',
-                'enabled' => false,
-                'source' => 'search_channel_queue_policy',
-                'observed_at' => now()->toAtomString(),
-                'unavailable_reason' => 'global_search_submission_disabled',
-            ],
-        ]);
+        return $this->compose($filters, ['overview', 'performance', 'technical', 'opportunities', 'ai', 'execution']);
+    }
 
-        return [
-            'overview' => $overview,
-            'performance' => $this->available('seo_intel.seo_gsc_daily', fn (): array => [
+    /** @param array<string,mixed> $filters @return array<string,array<string,mixed>> */
+    public function readForWorkspace(string $workspace, string $automationSection, array $filters = []): array
+    {
+        $models = match ($workspace) {
+            'performance' => ['performance', 'opportunities'],
+            'url-truth' => ['overview', 'opportunities'],
+            'automation' => match ($automationSection) {
+                'operations' => ['ai', 'execution'],
+                'scheduler' => ['scheduler'],
+                default => [],
+            },
+            // These workspaces render their own purpose-built read contracts.
+            default => [],
+        };
+
+        return $this->compose($filters, $models, false);
+    }
+
+    /** @param array<string,mixed> $filters @param list<string> $models @return array<string,array<string,mixed>> */
+    private function compose(array $filters, array $models, bool $includeClusters = true): array
+    {
+        $reader = new SeoDashboardApiReadService($this->connectionName);
+        // Lifetime is this composition call, never a cross-request cache.
+        $truth = null;
+        $urlTruth = static function () use ($reader, &$truth): array {
+            return $truth ??= $reader->urlTruth();
+        };
+        $loaders = [
+            'overview' => fn (): array => $this->available('seo_intel.dashboard_overview', fn (): array => [
+                'authority' => $reader->overview($urlTruth()),
+                'url_truth' => $urlTruth(),
+                'issues' => $reader->issues(10),
+                'search_channel' => (new SeoSearchChannelQueueReadService($this->connectionName))->read(10),
+                'crawler' => (new SeoCrawlerLogObservationReadService($this->connectionName))->read(10),
+                'scheduler' => (new SeoSchedulerReceiptReadService)->read(),
+                'search_submission' => [
+                    'state' => 'measurement_hold',
+                    'enabled' => false,
+                    'source' => 'search_channel_queue_policy',
+                    'observed_at' => now()->toAtomString(),
+                    'unavailable_reason' => 'global_search_submission_disabled',
+                ],
+            ]),
+            'performance' => fn (): array => $this->available('seo_intel.seo_gsc_daily', fn (): array => [
                 'gsc' => $reader->searchPerformance($filters),
                 'public_funnel' => $reader->conversionFunnel(0, ['group_by' => 'url'], 25),
             ]),
-            'technical' => $this->available('seo_intel.technical_read_models', fn (): array => [
+            'technical' => fn (): array => $this->available('seo_intel.technical_read_models', fn (): array => [
                 'audit' => $reader->technicalAudits(25),
-                'url_truth' => $reader->urlTruth(),
+                'url_truth' => $urlTruth(),
                 'crawler' => (new SeoCrawlerLogObservationReadService($this->connectionName))->read(10),
             ]),
-            'opportunities' => $this->available('seo_intel.opportunity_queue', fn (): array => $this->opportunities($reader)),
-            'ai' => [
+            'opportunities' => fn (): array => $this->available('seo_intel.opportunity_queue', fn (): array => $this->opportunities($reader)),
+            'ai' => fn (): array => [
                 'state' => 'not_implemented',
                 'source' => 'seo_agent_runtime',
                 'observed_at' => now()->toAtomString(),
@@ -64,12 +92,12 @@ final class SeoOperationsReadService
                 'unavailable_reason' => 'seo_agent_operations_workspace_not_implemented',
                 'connected' => false,
                 'recommendations' => [],
-                'risk_caps' => (array) data_get($overview, 'url_truth.page_family_policy.agent_risk_caps', []),
+                'risk_caps' => array_map(static fn (array $family): string => (string) $family['agent_risk_cap'], (new PageFamilyPolicyRegistry)->families()),
                 'blocking_reasons' => ['not_implemented'],
             ],
-            'execution' => $this->available('seo_intel.issue_and_search_channel_queues', fn (): array => [
+            'execution' => fn (): array => $this->available('seo_intel.issue_and_search_channel_queues', fn (): array => [
                 'issues' => $reader->issues(25),
-                'clusters' => $reader->issueClusters([], 1, 25),
+                ...($includeClusters ? ['clusters' => $reader->issueClusters([], 1, 25)] : []),
                 'search_channel' => (new SeoSearchChannelQueueReadService($this->connectionName))->read(25),
                 'boundaries' => [
                     'cms_publish_allowed' => false,
@@ -79,7 +107,22 @@ final class SeoOperationsReadService
                     'career_canary_sequence' => ['1-3', '10', '50', 'cohort'],
                 ],
             ]),
+            'scheduler' => fn (): array => $this->available('seo_intel.scheduler', fn (): array => [
+                'scheduler' => (new SeoSchedulerReceiptReadService)->read(),
+            ]),
         ];
+        $result = [];
+        foreach ($models as $model) {
+            $result[$model === 'scheduler' ? 'overview' : $model] = $loaders[$model]();
+        }
+
+        return $result;
+    }
+
+    /** @return array<string,mixed> */
+    public function gscSourceStatus(): array
+    {
+        return $this->available('seo_intel.seo_gsc_sync_runs', fn (): array => (new SeoDashboardApiReadService($this->connectionName))->gscSyncState());
     }
 
     /** @param array<string,string> $filters @return array<string,mixed> */

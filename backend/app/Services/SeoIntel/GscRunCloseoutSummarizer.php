@@ -9,6 +9,7 @@ use App\Services\SeoIntel\PageFamily\PageFamilyClassifier;
 use App\Services\SeoIntel\Sources\BackendAuthorityUrlTruthSource;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\ConnectionInterface;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 
 /** Builds sanitized, aggregate-only evidence for a completed readonly GSC sync. */
@@ -40,13 +41,12 @@ final class GscRunCloseoutSummarizer
         CarbonImmutable $endDate,
         array $searchTypes,
     ): array {
-        $rows = $connection->table('seo_gsc_daily')
+        $query = $connection->table('seo_gsc_daily')
             ->whereBetween('report_date', [$startDate->toDateString(), $endDate->toDateString()])
             ->where('source_engine', 'google')
-            ->whereIn('search_type', $searchTypes)
-            ->get();
+            ->whereIn('search_type', $searchTypes);
 
-        return $this->metricSnapshot($rows);
+        return $connection->transaction(fn (): array => $this->persistedMetricSnapshot($query));
     }
 
     /**
@@ -61,6 +61,12 @@ final class GscRunCloseoutSummarizer
         int $windowDays = 90,
         array $searchTypes = ['web'],
     ): array {
+        return $connection->transaction(fn (): array => $this->summarizePersistedWindow($connection, $windowDays, $searchTypes));
+    }
+
+    /** @param list<string> $searchTypes @return array<string,mixed> */
+    private function summarizePersistedWindow(ConnectionInterface $connection, int $windowDays, array $searchTypes): array
+    {
         $windowDays = max(1, min($windowDays, 90));
         $latest = $connection->table('seo_gsc_daily')
             ->where('source_engine', 'google')
@@ -76,20 +82,9 @@ final class GscRunCloseoutSummarizer
             ->whereBetween('report_date', [$startDate->toDateString(), $endDate->toDateString()])
             ->where('source_engine', 'google')
             ->whereIn('search_type', $searchTypes);
-        $rows = (clone $query)->get([
-            'report_date',
-            'canonical_url_hash',
-            'canonical_url',
-            'query_hash',
-            'source_engine',
-            'device',
-            'country',
-            'search_type',
-            'clicks',
-            'impressions',
-            'average_position_milli',
-        ])->map(static fn (object $row): array => (array) $row)->all();
-        $detail = $this->metricSnapshot(collect($rows));
+        $rows = $this->metricRows($this->detailRows($query), $this->persistedUniqueCount($query));
+        $unmapped = $this->unmappedClassification($connection, $rows);
+        $detail = $rows->getReturn();
         $aggregateRow = (clone $query)
             ->selectRaw('COUNT(*) AS row_count')
             ->selectRaw('COALESCE(SUM(clicks), 0) AS clicks')
@@ -134,13 +129,13 @@ final class GscRunCloseoutSummarizer
                     && (int) data_get($detail, 'metrics.impressions', -1) === $aggregateImpressions
                     && data_get($detail, 'metrics.average_position') === $databaseAggregate['average_position'],
                 'detail_read_limit' => null,
-                'aggregation_strategy' => 'unbounded_database_aggregate_reconciled_to_full_detail_set',
+                'aggregation_strategy' => 'database_aggregate_reconciled_to_chunked_full_detail_set',
                 'fresh_api_pagination_receipt' => 'production_unproven',
                 'row_completeness' => 'production_unproven',
                 'scheduled_overlap' => 'production_unproven',
                 'scheduled_rerun_accumulation' => 'production_unproven',
             ],
-            'unmapped_classification' => $this->unmappedClassification($connection, $rows),
+            'unmapped_classification' => $unmapped,
             'issue_clusters' => $this->issueClusters->closeoutSummary(),
         ];
     }
@@ -197,30 +192,94 @@ final class GscRunCloseoutSummarizer
         ];
     }
 
-    /** @param Collection<int,mixed> $rows @return array<string,mixed> */
-    private function metricSnapshot(Collection $rows): array
+    /** @return iterable<object> */
+    private function detailRows(Builder $query): iterable
     {
-        $dates = $rows->map(fn (mixed $row): string => (string) $this->value($row, 'report_date'))->filter()->unique()->sort()->values();
-        $clicks = $rows->sum(fn (mixed $row): int => (int) $this->value($row, 'clicks'));
-        $impressions = $rows->sum(fn (mixed $row): int => (int) $this->value($row, 'impressions'));
-        $positionWeight = $rows->sum(function (mixed $row): int {
-            $position = $this->value($row, 'average_position_milli');
-            $impressions = (int) $this->value($row, 'impressions');
+        return (clone $query)->select([
+            'id', 'report_date', 'canonical_url_hash', 'canonical_url', 'query_hash',
+            'source_engine', 'device', 'country', 'search_type', 'clicks',
+            'impressions', 'average_position_milli',
+        ])->lazyById(5000);
+    }
 
-            return $position === null ? 0 : (int) $position * $impressions;
-        });
-        $positionImpressions = $rows->sum(fn (mixed $row): int => $this->value($row, 'average_position_milli') === null ? 0 : (int) $this->value($row, 'impressions'));
-        $naturalKeys = $rows->map(fn (mixed $row): string => $this->naturalKey($row));
+    /** @return array<string,mixed> */
+    private function persistedMetricSnapshot(Builder $query): array
+    {
+        return $this->metricSnapshot($this->detailRows($query), $this->persistedUniqueCount($query));
+    }
+
+    private function persistedUniqueCount(Builder $query): int
+    {
+        // SQL owns the unbounded distinct set. Match naturalKey's null-as-empty
+        // and case-sensitive identity, independently of the database collation.
+        $parts = array_map(static fn (string $column): string => "COALESCE($column, '')", [
+            'report_date', 'canonical_url_hash', 'query_hash', 'source_engine', 'device', 'country', 'search_type',
+        ]);
+        $identity = $query->getConnection()->getDriverName() === 'mysql'
+            ? 'CAST(CONCAT('.implode(", '|', ", $parts).') AS BINARY)'
+            : '('.implode(" || '|' || ", $parts).') COLLATE BINARY';
+        $groups = (clone $query)->selectRaw('1 AS natural_key')->groupByRaw($identity);
+
+        return $query->getConnection()->query()->fromSub($groups, 'natural_keys')->count();
+    }
+
+    /** @param iterable<mixed> $rows @return array<string,mixed> */
+    private function metricSnapshot(iterable $rows, ?int $uniqueCount = null): array
+    {
+        $stream = $this->metricRows($rows, $uniqueCount);
+        foreach ($stream as $_) {
+            // Exhaust this bounded stream to obtain its aggregate return value.
+        }
+
+        return $stream->getReturn();
+    }
+
+    /**
+     * Forward each row to classification while accumulating metrics, so both
+     * consumers share one database scan without retaining the detail set.
+     *
+     * @param  iterable<mixed>  $rows
+     * @return \Generator<int,mixed,void,array<string,mixed>>
+     */
+    private function metricRows(iterable $rows, ?int $uniqueCount = null): \Generator
+    {
+        $dates = [];
+        $keys = [];
+        $count = $clicks = $impressions = $positionWeight = $positionImpressions = 0;
+        foreach ($rows as $row) {
+            $count++;
+            $date = (string) $this->value($row, 'report_date');
+            if ($date !== '') {
+                $dates[$date] = true;
+            }
+            $clicks += (int) $this->value($row, 'clicks');
+            $rowImpressions = (int) $this->value($row, 'impressions');
+            $impressions += $rowImpressions;
+            $position = $this->value($row, 'average_position_milli');
+            if ($position !== null) {
+                $positionWeight += (int) $position * $rowImpressions;
+                $positionImpressions += $rowImpressions;
+            }
+            if ($uniqueCount === null) {
+                $keys[$this->naturalKey($row)] = true;
+            }
+            yield $row;
+        }
+        $dateValues = array_keys($dates);
+        sort($dateValues, SORT_STRING);
+        $minDate = $dateValues[0] ?? null;
+        $maxDate = $dateValues === [] ? null : $dateValues[count($dateValues) - 1];
+        $uniqueCount ??= count($keys);
 
         return [
-            'row_count' => $rows->count(),
-            'natural_unique_key_count' => $naturalKeys->unique()->count(),
-            'natural_key_duplicate_count' => max(0, $naturalKeys->count() - $naturalKeys->unique()->count()),
-            'date_point_count' => $dates->count(),
-            'min_report_date' => $dates->first(),
-            'max_report_date' => $dates->last(),
-            'latest_data_lag_days' => is_string($dates->last())
-                ? CarbonImmutable::parse((string) $dates->last(), 'UTC')->diffInDays(CarbonImmutable::now('UTC')->startOfDay())
+            'row_count' => $count,
+            'natural_unique_key_count' => $uniqueCount,
+            'natural_key_duplicate_count' => max(0, $count - $uniqueCount),
+            'date_point_count' => count($dates),
+            'min_report_date' => $minDate,
+            'max_report_date' => $maxDate,
+            'latest_data_lag_days' => is_string($maxDate)
+                ? CarbonImmutable::parse($maxDate, 'UTC')->diffInDays(CarbonImmutable::now('UTC')->startOfDay())
                 : null,
             'metrics' => [
                 'clicks' => $clicks,
@@ -231,22 +290,29 @@ final class GscRunCloseoutSummarizer
         ];
     }
 
-    /** @param list<array<string,mixed>> $rows @return array<string,mixed> */
-    private function unmappedClassification(ConnectionInterface $connection, array $rows): array
+    /** @param iterable<array<string,mixed>|object> $rows @return array<string,mixed> */
+    private function unmappedClassification(ConnectionInterface $connection, iterable $rows): array
     {
-        $truth = $connection->table('seo_urls')->get()->keyBy(fn (object $row): string => (string) ($row->canonical_url_hash ?? ''));
+        $truth = $connection->table('seo_urls')->get(['canonical_url_hash', 'canonical_url', 'is_private_flow', 'indexability_state', 'source_authority'])->keyBy(fn (object $row): string => (string) ($row->canonical_url_hash ?? ''));
         $backendAuthority = $this->backendAuthorityCandidates();
-        $unmappedRows = collect($rows)->filter(fn (array $row): bool => ! $truth->has((string) ($row['canonical_url_hash'] ?? '')))->values();
+        $unmappedCount = 0;
         $unique = [];
         $combos = [];
+        $classifications = [];
 
         $opaqueHashIndex = $this->opaqueHashClassificationIndex($truth, $backendAuthority);
-        foreach ($unmappedRows as $row) {
+        foreach ($rows as $row) {
+            $row = (array) $row;
+            if ($truth->has((string) ($row['canonical_url_hash'] ?? ''))) {
+                continue;
+            }
+            $unmappedCount++;
             $rawUrl = (string) ($row['canonical_url'] ?? '');
             $rawHash = (string) ($row['canonical_url_hash'] ?? '');
-            $classified = $rawUrl !== ''
+            $rawIdentity = hash('sha256', $rawHash.'|'.$rawUrl);
+            $classified = $classifications[$rawIdentity] ??= ($rawUrl !== ''
                 ? $this->classifyUrl($rawUrl, $truth, $backendAuthority)
-                : $this->classifyOpaqueHash($rawHash, $backendAuthority, $opaqueHashIndex);
+                : $this->classifyOpaqueHash($rawHash, $backendAuthority, $opaqueHashIndex));
             $identity = $classified['normalized_canonical_url_hash'] ?: (string) ($row['canonical_url_hash'] ?? 'missing');
             $unique[$identity] ??= $classified;
             $combos[hash('sha256', implode('|', [
@@ -273,7 +339,7 @@ final class GscRunCloseoutSummarizer
         }
 
         return [
-            'unmapped_detail_row_count' => $unmappedRows->count(),
+            'unmapped_detail_row_count' => $unmappedCount,
             'unique_normalized_canonical_url_count' => count($unique),
             'unique_query_page_date_combination_count' => count($combos),
             'page_family_distribution' => $families,

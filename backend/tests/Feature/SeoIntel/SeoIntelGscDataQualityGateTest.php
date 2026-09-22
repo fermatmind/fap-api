@@ -88,6 +88,55 @@ final class SeoIntelGscDataQualityGateTest extends TestCase
         $this->assertFalse((bool) ($decoded['writes_committed'] ?? true));
     }
 
+    #[Test]
+    public function single_pass_input_preserves_reason_order_and_date_extremes(): void
+    {
+        config(['seo_intel.gsc_data_quality.min_rows' => 5]);
+        $rows = [
+            [...$this->liveRow('2026-06-16'), 'metadata_json' => ['data_origin' => 'fixture']],
+            [...$this->liveRow('invalid-date'), 'source_engine' => 'bing', 'query_hash' => null],
+            $this->liveRow('2026-06-17'),
+            $this->liveRow('2026-06-01'),
+        ];
+        $visited = 0;
+        $input = (function () use ($rows, &$visited): \Generator {
+            foreach ($rows as $row) {
+                $visited++;
+                yield $row;
+            }
+        })();
+        $actual = (new GscDataQualityGate)->evaluate($input, CarbonImmutable::parse('2026-06-20'));
+
+        $this->assertSame(4, $visited);
+        $this->assertSame(4, $actual['rows_checked']);
+        $this->assertSame([
+            'insufficient_rows', 'fixture_or_mock_source', 'untrusted_data_origin',
+            'missing_report_date', 'non_google_source_engine', 'missing_required_metric_fields',
+        ], $actual['reasons']);
+        $this->assertSame('2026-06-01', $actual['freshness']['min_report_date']);
+        $this->assertSame('2026-06-17', $actual['freshness']['max_report_date']);
+        $this->assertSame(['fixture', 'live_gsc_api'], $actual['data_origins']);
+    }
+
+    #[Test]
+    public function large_stream_does_not_retain_row_dates_or_repeated_failures(): void
+    {
+        $row = [...$this->liveRow('2026-06-17'), 'metadata_json' => ['data_origin' => 'fixture']];
+        $baseline = memory_get_usage();
+        $max = $baseline;
+        $rows = (function () use ($row, &$max): \Generator {
+            for ($i = 0; $i < 100000; $i++) {
+                $max = max($max, memory_get_usage());
+                yield $row;
+            }
+        })();
+        $result = (new GscDataQualityGate)->evaluate($rows, CarbonImmutable::parse('2026-06-20'));
+
+        $this->assertSame(100000, $result['rows_checked']);
+        $this->assertSame(['fixture_or_mock_source', 'untrusted_data_origin'], $result['reasons']);
+        $this->assertLessThan(8 * 1024 * 1024, $max - $baseline);
+    }
+
     /**
      * @return array<string, mixed>
      */

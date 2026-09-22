@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SeoIntel;
 
+use App\Services\SeoIntel\GscRunCloseoutSummarizer;
 use App\Services\SeoIntel\OpsDashboard\GscProductionCloseoutReadService;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -102,6 +104,63 @@ final class SeoIntelGscProductionCloseoutReadServiceTest extends TestCase
             $this->assertStringNotContainsString($forbidden, $encoded);
         }
         $this->assertDoesNotMatchRegularExpression('/[a-f0-9]{64}/', $encoded);
+    }
+
+    public function test_snapshot_keeps_cross_batch_identity_and_weighted_metric_semantics(): void
+    {
+        $connection = DB::connection(self::CONNECTION);
+        $connection->table('seo_gsc_daily')->delete();
+        $base = [
+            'report_date' => '2026-06-17',
+            'canonical_url_hash' => hash('sha256', 'https://example.test/en/test'),
+            'canonical_url' => 'https://example.test/en/test',
+            'query_hash' => hash('sha256', 'synthetic-0'),
+            'source_engine' => 'google', 'device' => null, 'country' => null,
+            'search_type' => 'web', 'clicks' => 1, 'impressions' => 2,
+            'average_position_milli' => 10000,
+        ];
+        for ($offset = 0; $offset < 5001; $offset += 100) {
+            $batch = [];
+            for ($i = $offset; $i < min(5001, $offset + 100); $i++) {
+                $batch[] = [...$base, 'query_hash' => hash('sha256', 'synthetic-'.$i)];
+            }
+            $connection->table('seo_gsc_daily')->insert($batch);
+        }
+        $connection->table('seo_gsc_daily')->insert([
+            [...$base, 'device' => '', 'average_position_milli' => null],
+            [...$base, 'device' => 'mobile'],
+            [...$base, 'device' => 'MOBILE'],
+            [...$base, 'device' => 'zero', 'clicks' => 2, 'impressions' => 0, 'average_position_milli' => 5000],
+            [...$base, 'search_type' => 'image', 'impressions' => 99999],
+            [...$base, 'report_date' => '2026-01-01', 'impressions' => 99999],
+            [...$base, 'source_engine' => 'bing', 'impressions' => 99999],
+            [...$base, 'device' => 'a|b', 'country' => 'c'],
+            [...$base, 'device' => 'a', 'country' => 'b|c'],
+        ]);
+        $queries = [];
+        $connection->listen(static function ($query) use (&$queries): void {
+            if (str_contains($query->sql, 'seo_gsc_daily')) {
+                $queries[] = $query->sql;
+            }
+        });
+        $result = app(GscRunCloseoutSummarizer::class)->readModelSnapshot(
+            $connection, CarbonImmutable::parse('2026-06-01'), CarbonImmutable::parse('2026-06-17'), ['web'],
+        );
+
+        $this->assertSame(5007, $result['row_count']);
+        $this->assertSame(5005, $result['natural_unique_key_count']);
+        $this->assertSame(2, $result['natural_key_duplicate_count']);
+        $this->assertSame(1, $result['date_point_count']);
+        $this->assertSame('2026-06-17', $result['min_report_date']);
+        $this->assertSame('2026-06-17', $result['max_report_date']);
+        $this->assertSame(5008, $result['metrics']['clicks']);
+        $this->assertSame(10012, $result['metrics']['impressions']);
+        $this->assertSame(10.0, $result['metrics']['average_position']);
+        $this->assertCount(3, $queries);
+        foreach ($queries as $sql) {
+            $this->assertStringNotContainsString('select *', strtolower($sql));
+            $this->assertStringNotContainsString('metadata_json', $sql);
+        }
     }
 
     private function createSchema(): void

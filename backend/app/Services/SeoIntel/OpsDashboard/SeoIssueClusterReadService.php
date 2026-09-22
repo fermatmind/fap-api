@@ -290,18 +290,27 @@ final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
     /** @return array{quality_passed:bool,metrics:array<string,array{clicks:int,impressions:int}>} */
     private function gscContext(): array
     {
+        // Keep the all-history quality check and URL totals on the same read
+        // snapshot. Only a database page and the per-URL totals live in PHP.
+        return $this->connection()->transaction(fn (): array => $this->readGscContext());
+    }
+
+    /** @return array{quality_passed:bool,metrics:array<string,array{clicks:int,impressions:int}>} */
+    private function readGscContext(): array
+    {
         $rows = $this->table('seo_gsc_daily')
             ->select([
+                'id',
                 'report_date',
                 'canonical_url_hash',
                 'query_hash',
                 'source_engine',
                 'clicks',
                 'impressions',
-                'metadata_json',
             ])
+            ->selectRaw("CASE WHEN JSON_VALID(metadata_json) THEN JSON_OBJECT('data_origin', JSON_EXTRACT(metadata_json, '$.data_origin'), 'row_source', JSON_EXTRACT(metadata_json, '$.row_source')) ELSE NULL END AS metadata_json")
             ->where('source_engine', 'google')
-            ->get()
+            ->lazyById(5000)
             ->map(fn (object $row): array => [
                 'report_date' => (string) $row->report_date,
                 'canonical_url_hash' => (string) ($row->canonical_url_hash ?? ''),
@@ -311,19 +320,20 @@ final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
                 'impressions' => (int) ($row->impressions ?? 0),
                 'metadata_json' => $this->decodeJson($row->metadata_json ?? null),
             ]);
-        $gate = $this->gscDataQualityGate->evaluate($rows->all());
+        $metrics = [];
+        $checkedRows = (function () use ($rows, &$metrics): \Generator {
+            foreach ($rows as $row) {
+                $hash = (string) ($row['canonical_url_hash'] ?? '');
+                if ($hash !== '') {
+                    $metrics[$hash]['clicks'] = ($metrics[$hash]['clicks'] ?? 0) + (int) $row['clicks'];
+                    $metrics[$hash]['impressions'] = ($metrics[$hash]['impressions'] ?? 0) + (int) $row['impressions'];
+                }
+                yield $row;
+            }
+        })();
+        $gate = $this->gscDataQualityGate->evaluate($checkedRows);
         if (! (bool) ($gate['opportunity_queue_eligible'] ?? false)) {
             return ['quality_passed' => false, 'metrics' => []];
-        }
-
-        $metrics = [];
-        foreach ($rows as $row) {
-            $hash = (string) ($row['canonical_url_hash'] ?? '');
-            if ($hash === '') {
-                continue;
-            }
-            $metrics[$hash]['clicks'] = ($metrics[$hash]['clicks'] ?? 0) + (int) $row['clicks'];
-            $metrics[$hash]['impressions'] = ($metrics[$hash]['impressions'] ?? 0) + (int) $row['impressions'];
         }
 
         return ['quality_passed' => true, 'metrics' => $metrics];

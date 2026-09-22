@@ -179,6 +179,49 @@ final class SeoIssueClusterReadServiceTest extends TestCase
         $this->assertSame(46.33, data_get($titleCluster, 'priority.score'));
     }
 
+    public function test_all_history_quality_and_totals_survive_chunk_boundaries_and_malformed_metadata(): void
+    {
+        $connection = DB::connection('seo_issue_cluster_test');
+        $row = [
+            'report_date' => now()->subDays(3)->toDateString(),
+            'canonical_url_hash' => hash('sha256', 'https://fermatmind.com/en/articles/title-1'),
+            'query_hash' => hash('sha256', 'synthetic'), 'source_engine' => 'google',
+            'clicks' => 1, 'impressions' => 2,
+            'metadata_json' => json_encode(['data_origin' => 'live_gsc_api', 'padding' => str_repeat('x', 2048)]),
+        ];
+        $connection->table('seo_gsc_daily')->insert($row);
+        for ($i = 0; $i < 50; $i++) {
+            // Older observations still contribute; this service has no 90-day filter.
+            $connection->table('seo_gsc_daily')->insert(array_fill(0, 100, [...$row, 'report_date' => '2020-01-01']));
+        }
+        $reader = new SeoIssueClusterReadService('seo_issue_cluster_test');
+        $result = $reader->read(['locale' => 'en'], 1, 1);
+        $this->assertSame(2, $result['total_count']);
+        $this->assertCount(1, $result['rows']);
+        $this->assertSame(5001, data_get($result, 'rows.0.priority.impact.gsc.clicks'));
+        $this->assertSame(10002, data_get($result, 'rows.0.priority.impact.gsc.impressions'));
+        $second = $reader->read(['locale' => 'en'], 2, 1);
+        $export = $reader->export(['locale' => 'en']);
+        $this->assertSame(
+            [$result['rows'][0]['cluster_uid'], $second['rows'][0]['cluster_uid']],
+            array_column($export['clusters'], 'cluster_uid'),
+        );
+        $this->assertSame(4, array_sum(array_map('count', $export['urls'])));
+
+        $connection->table('seo_gsc_daily')->insert([...$row, 'metadata_json' => '{invalid']);
+        $blocked = $reader->read();
+        foreach ($blocked['rows'] as $cluster) {
+            $this->assertSame('cms_technical_only_no_eligible_gsc', data_get($cluster, 'priority.impact.gsc.basis'));
+        }
+    }
+
+    public function test_gsc_read_failure_is_not_reported_as_zero_metrics(): void
+    {
+        Schema::connection('seo_issue_cluster_test')->drop('seo_gsc_daily');
+        $this->expectException(\Illuminate\Database\QueryException::class);
+        (new SeoIssueClusterReadService('seo_issue_cluster_test'))->read();
+    }
+
     public function test_hundreds_of_repeated_url_rows_collapse_without_losing_export_members(): void
     {
         foreach (range(4, 250) as $index) {
