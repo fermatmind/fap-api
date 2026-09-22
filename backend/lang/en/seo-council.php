@@ -1,6 +1,19 @@
 <?php
 
 return [
+    'latest_natural' => 'Latest natural result',
+    'latest_controlled' => 'Latest controlled result',
+    'evaluated_at' => 'Formal evaluation time',
+    'source_observed_at' => 'Source observed at',
+    'source_read_at' => 'Source read at',
+    'data_max_date' => 'Maximum data date',
+    'utc_lag' => 'UTC calendar-day lag',
+    'lag_explanation' => 'Lag uses this receipt’s UTC evaluation date; the same source can gain one day of lag across UTC midnight.',
+    'pt_collection' => 'PT collection range',
+    'pt_cutoff' => 'PT request cutoff',
+    'source_unlinked' => 'Corresponding frozen source cannot be reliably linked',
+    'result_receipt' => 'Formal receipt',
+    'runtime_dimensions' => ['core_runtime_state' => 'Core runtime', 'public_api_state' => 'Public API', 'readback_state' => 'Content readback'],
     'scheduler_enabled' => 'Scheduler configuration',
     'natural_run_authorized' => 'Authorized for natural runs',
     'mission_paused' => 'Selected; currently paused',

@@ -47,12 +47,13 @@
                     <small>{{ __('seo-council.recommendation') }}：{{ __($mission['recommendation_key']) }}</small>
                     @foreach ($mission['source_checks'] as $source)
                         <small>
-                            {{ __($source['label_key']) }} · {{ $source['state'] }} ·
+                            {{ __($source['label_key']) }} · {{ $source['state'] }} · {{ __('seo-council.source_observed_at') }}:
                             @if ($source['observed_at'])
                                 <time datetime="{{ $source['observed_at'] }}">{{ Platform12OperationsTime::display($source['observed_at']) ?? __('seo-council.time_unknown') }}</time>
                             @else
                                 {{ __('seo-council.time_unknown') }}
                             @endif
+                            · {{ __('seo-council.source_read_at') }}: {{ Platform12OperationsTime::display($source['read_at'] ?? null) ?? __('seo-council.time_unknown') }}
                         </small>
                     @endforeach
                     <small>{{ __('seo-council.check_time') }}:
@@ -64,6 +65,8 @@
                     </small>
                     <small>{{ __('seo-council.record_updated') }}: {{ __('seo-council.time_unknown') }}</small>
                     <small>{{ __('seo-council.evidence_origin') }}: {{ __('seo-council.origins.'.($mission['evidence_origin'] ?? 'unknown')) }}</small>
+                    <x-filament-ops::ops-mission-result-evidence label="latest_natural" :result="$mission['latest_natural'] ?? null" />
+                    <x-filament-ops::ops-mission-result-evidence label="latest_controlled" :result="$mission['latest_controlled'] ?? null" />
                     <small>{{ __('seo-council.acceptance_ready') }}: {{ ($mission['acceptance_ready'] ?? false) ? 'READY' : 'HOLD' }} · {{ $mission['gate_reason'] ?? 'UNAVAILABLE' }}</small>
                     <strong>{{ __('seo-council.'.($mission['gate_next_step'] ?? 'authorization_unknown')) }}</strong>
                     @if (($mission['gate_next_step'] ?? null) === 'natural_run_authorized')

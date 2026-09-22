@@ -29,12 +29,17 @@ final readonly class Platform12SystemHealthReadService
             // Latest record per mission plus EVERY unfinished delivery: unrelated new
             // work must never hide an old unfinished task. Refuse a truncated read.
             $latest = $connection->table('seo_council_schedule_deliveries')->selectRaw('MAX(id)')->groupBy('mission_id');
+            $latestResults = $connection->table('seo_council_schedule_deliveries')->selectRaw('MAX(id)')
+                ->whereIn('mission_id', Platform12DailyMissionSet::IDS)
+                ->whereIn('status', self::TERMINAL)->groupBy('mission_id')
+                ->groupByRaw("CASE WHEN slot_key LIKE 'a08:acceptance:%' THEN 1 ELSE 0 END");
             $rows = $connection->table('seo_council_schedule_deliveries AS d')
                 ->leftJoin('seo_council_run_receipts AS r', 'd.terminal_receipt_reference', '=', 'r.receipt_id')
-                ->where(fn ($query) => $query->whereNotIn('d.status', self::TERMINAL)->orWhereIn('d.id', $latest))
-                ->select(['d.id', 'd.mission_id', 'd.status', 'd.scheduled_for', 'd.lease_key', 'd.fencing_token',
+                ->where(fn ($query) => $query->whereNotIn('d.status', self::TERMINAL)->orWhereIn('d.id', $latest)->orWhereIn('d.id', $latestResults))
+                ->select(['d.id', 'd.slot_key', 'd.mission_id', 'd.status', 'd.scheduled_for', 'd.lease_key', 'd.fencing_token',
                     'd.terminal_receipt_reference', 'd.terminal_receipt_hash', 'd.mission_request_hash',
                     'r.receipt_hash AS stored_receipt_hash'])
+                ->selectRaw("CASE WHEN d.mission_id IN (?, ?, ?) AND d.status IN ('CLOSED', 'HELD', 'FAILED') AND LENGTH(d.mission_request_json) <= 131072 THEN d.mission_request_json ELSE NULL END AS mission_request_json", Platform12DailyMissionSet::IDS)
                 ->selectRaw('CASE WHEN LENGTH(r.receipt_json) <= 262144 THEN r.receipt_json ELSE NULL END AS receipt_json')
                 ->orderByDesc('d.id')->limit(201)->get();
             $maxLeaseWindow = (int) config('seo_council.scheduler_max_lease_ttl_seconds', 300)
@@ -54,6 +59,9 @@ final readonly class Platform12SystemHealthReadService
             $daily = $this->dailyMissions($rows, $leases, $runtime, $now);
             $pending = $running = $future = $anomalies = $unknown = $workUnknown = $stale = 0;
             foreach ($rows as $row) {
+                if (in_array($row->status, self::TERMINAL, true) && $rows->firstWhere('mission_id', $row->mission_id)->id !== $row->id) {
+                    continue;
+                }
                 if ($row->status === 'PLANNED') {
                     $scheduled = Platform12OperationsTime::utcDatetime($row->scheduled_for);
                     if ($scheduled === null) {
@@ -239,7 +247,7 @@ final readonly class Platform12SystemHealthReadService
             };
             $businessHolds += (int) ($state === 'HOLD');
             $evidenceIssues += (int) in_array($state, ['STALE', 'UNAVAILABLE', 'NOT_STARTED'], true);
-            $observedAt = Platform12OperationsTime::iso($observed);
+            $observedAt = $observed !== null && $observed->lte($now) ? Platform12OperationsTime::iso($observed) : null;
             $explanation = $this->explanations->for(in_array($state, ['READY', 'HOLD', 'STALE'], true) ? $output : [], $state, ! empty($scheduled['source_gaps']));
             $gate = $runtime['missions'][$mission['mission_id']] ?? [];
             $step = $this->gateStep($gate, $runtime);
@@ -247,7 +255,9 @@ final readonly class Platform12SystemHealthReadService
                 'label_key' => 'seo-council.missions.'.$index, 'state' => $state, ...$explanation,
                 'execution_state' => $interrupted ? 'EXECUTION_INTERRUPTED' : $this->safeCode($execution),
                 'business_result' => $validResult ? $this->safeCode($output['state']) : 'UNAVAILABLE',
-                'source_checks' => $this->sourceChecks($scheduled, $output ?? []),
+                'source_checks' => $this->sourceChecks($scheduled, $output ?? [], $now),
+                'latest_natural' => $this->latestResult($rows, $mission['mission_id'], false, $now),
+                'latest_controlled' => $this->latestResult($rows, $mission['mission_id'], true, $now),
                 'observed_at' => $observedAt,
                 // updated_at has mixed writers (UTC reservation, DB-wall completion).
                 // It is not business evaluation evidence and is not guessed here.
@@ -284,13 +294,22 @@ final readonly class Platform12SystemHealthReadService
             'actionable_count' => $businessHolds + $evidenceIssues, 'items' => $items];
     }
 
+    private function latestResult($rows, string $missionId, bool $controlled, CarbonImmutable $now): ?array
+    {
+        $row = $rows->first(fn ($row) => $row->mission_id === $missionId
+            && in_array($row->status, self::TERMINAL, true)
+            && str_starts_with($row->slot_key, 'a08:acceptance:') === $controlled);
+
+        return $row === null ? null : app(Platform12MissionEvidenceReadService::class)->summary($row, $this->receipt($row), $now);
+    }
+
     private function safeCode(mixed $value): string
     {
         return is_string($value) && preg_match('/^[A-Z][A-Z0-9_]{1,63}$/D', $value) === 1 ? $value : 'UNAVAILABLE';
     }
 
     /** @return list<array{label_key:string,state:string,observed_at:?string,hash:string}> */
-    private function sourceChecks(mixed $scheduled, array $output = []): array
+    private function sourceChecks(mixed $scheduled, array $output, CarbonImmutable $now): array
     {
         if (! is_array($scheduled)) {
             return [];
@@ -304,7 +323,10 @@ final readonly class Platform12SystemHealthReadService
             if (! is_array($source) || ! in_array($source['id'] ?? null, $allowed, true)) {
                 continue;
             }
-            $observed = $source['observed_at'] ?? $source['read_at'] ?? null;
+            $observed = Platform12OperationsTime::instant($source['observed_at'] ?? null);
+            $read = Platform12OperationsTime::instant($source['read_at'] ?? null);
+            $observed = $observed !== null && $observed->lte($now) ? $observed : null;
+            $read = $read !== null && $read->lte($now) ? $read : null;
             $count = match ($source['id']) {
                 'gsc_scheduled_receipt' => data_get($output, 'gsc.row_count'),
                 'd1_observation' => data_get($output, 'd1_observation.candidate_denominator'),
@@ -312,8 +334,8 @@ final readonly class Platform12SystemHealthReadService
                 'evidence_expiry' => data_get($output, 'evidence_freshness.total_count'),
                 default => null,
             };
-            $items[] = ['label_key' => 'seo-council.sources.'.$source['id'], 'state' => $count === 0 ? 'VALID_ZERO' : 'AVAILABLE',
-                'observed_at' => Platform12OperationsTime::iso(Platform12OperationsTime::instant($observed)),
+            $items[] = ['label_key' => 'seo-council.sources.'.$source['id'], 'state' => $observed === null ? 'UNAVAILABLE' : ($count === 0 ? 'VALID_ZERO' : 'AVAILABLE'),
+                'observed_at' => Platform12OperationsTime::iso($observed), 'read_at' => Platform12OperationsTime::iso($read),
                 'hash' => preg_match('/^[a-f0-9]{64}$/D', (string) ($source['hash'] ?? '')) === 1 ? $source['hash'] : 'unavailable'];
         }
         foreach (array_slice($scheduled['source_gaps'] ?? [], 0, 8 - count($items)) as $gap) {
@@ -321,7 +343,7 @@ final readonly class Platform12SystemHealthReadService
             $id = $stale ? substr($gap, 0, -6) : $gap;
             if (in_array($id, $allowed, true)) {
                 $items[] = ['label_key' => 'seo-council.sources.'.$id, 'state' => $stale ? 'STALE' : 'UNAVAILABLE',
-                    'observed_at' => null, 'hash' => 'unavailable'];
+                    'observed_at' => null, 'read_at' => null, 'hash' => 'unavailable'];
             }
         }
 

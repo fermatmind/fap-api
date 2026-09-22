@@ -1,6 +1,19 @@
 <?php
 
 return [
+    'latest_natural' => '最近自然结果',
+    'latest_controlled' => '最新受控结果',
+    'evaluated_at' => '正式评估时间',
+    'source_observed_at' => '来源观测时间',
+    'source_read_at' => '来源读取时间',
+    'data_max_date' => '数据最大日期',
+    'utc_lag' => 'UTC 日历日延迟',
+    'lag_explanation' => '延迟按该回执的 UTC 评估日期计算；同一来源跨 UTC 日评估可能增加一天。',
+    'pt_collection' => 'PT 实际采集范围',
+    'pt_cutoff' => 'PT 请求截止日期',
+    'source_unlinked' => '无法可靠关联对应冻结来源',
+    'result_receipt' => '正式回执',
+    'runtime_dimensions' => ['core_runtime_state' => '核心运行状态', 'public_api_state' => '公开 API 状态', 'readback_state' => '内容读回状态'],
     'scheduler_enabled' => '调度配置',
     'natural_run_authorized' => '已授权自然运行',
     'mission_paused' => '已选择，当前已暂停',
