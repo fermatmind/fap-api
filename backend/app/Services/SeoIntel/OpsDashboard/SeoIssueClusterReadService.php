@@ -292,7 +292,7 @@ final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
     {
         // Keep the all-history quality check and URL totals on the same read
         // snapshot. Only a database page and the per-URL totals live in PHP.
-        return $this->connection()->transaction(fn (): array => $this->readGscContext());
+        return \App\Services\SeoIntel\GscReadSnapshot::read($this->connection(), fn (): array => $this->readGscContext());
     }
 
     /** @return array{quality_passed:bool,metrics:array<string,array{clicks:int,impressions:int}>} */

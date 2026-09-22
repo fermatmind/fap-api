@@ -46,7 +46,7 @@ final class GscRunCloseoutSummarizer
             ->where('source_engine', 'google')
             ->whereIn('search_type', $searchTypes);
 
-        return $connection->transaction(fn (): array => $this->persistedMetricSnapshot($query));
+        return GscReadSnapshot::read($connection, fn (): array => $this->persistedMetricSnapshot($query));
     }
 
     /**
@@ -61,7 +61,7 @@ final class GscRunCloseoutSummarizer
         int $windowDays = 90,
         array $searchTypes = ['web'],
     ): array {
-        return $connection->transaction(fn (): array => $this->summarizePersistedWindow($connection, $windowDays, $searchTypes));
+        return GscReadSnapshot::read($connection, fn (): array => $this->summarizePersistedWindow($connection, $windowDays, $searchTypes));
     }
 
     /** @param list<string> $searchTypes @return array<string,mixed> */
