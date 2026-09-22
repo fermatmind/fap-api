@@ -23,6 +23,20 @@ use Illuminate\Support\Carbon;
 
 final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
 {
+    private bool $requireComplete = false;
+
+    /** Read all source families or fail; an incomplete set cannot retire Truth. */
+    public function completeCandidates(): array
+    {
+        $previous = $this->requireComplete;
+        $this->requireComplete = true;
+        try {
+            return $this->candidates();
+        } finally {
+            $this->requireComplete = $previous;
+        }
+    }
+
     private bool $scaleCatalogAttempted = false;
 
     private bool $scaleCatalogAvailable = false;
@@ -132,7 +146,10 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
                 ->orderBy('locale')
                 ->orderBy('slug')
                 ->get();
-        } catch (\Throwable) {
+        } catch (\Throwable $exception) {
+            if ($this->requireComplete) {
+                throw new \RuntimeException('PUBLIC_AUTHORITY_SOURCE_UNAVAILABLE', 0, $exception);
+            }
             $this->articlesUnavailableReason = 'articles_unavailable';
 
             return [];
@@ -214,7 +231,11 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
                 ->orderBy('locale')
                 ->orderBy('slug')
                 ->get();
-        } catch (\Throwable) {
+        } catch (\Throwable $exception) {
+            if ($this->requireComplete) {
+                throw new \RuntimeException('PUBLIC_AUTHORITY_SOURCE_UNAVAILABLE', 0, $exception);
+            }
+
             return [];
         }
 
@@ -270,7 +291,11 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
                 ->orderBy('locale')
                 ->orderBy('slug')
                 ->get();
-        } catch (\Throwable) {
+        } catch (\Throwable $exception) {
+            if ($this->requireComplete) {
+                throw new \RuntimeException('PUBLIC_AUTHORITY_SOURCE_UNAVAILABLE', 0, $exception);
+            }
+
             return [];
         }
 
@@ -415,7 +440,10 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
                     );
                 }
             }
-        } catch (\Throwable) {
+        } catch (\Throwable $exception) {
+            if ($this->requireComplete) {
+                throw new \RuntimeException('PUBLIC_AUTHORITY_SOURCE_UNAVAILABLE', 0, $exception);
+            }
             $this->personalityProfilesUnavailableReason = 'personality_profiles_unavailable';
 
             return [];
@@ -445,7 +473,10 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
                 ->orderBy('locale')
                 ->orderBy('slug')
                 ->get();
-        } catch (\Throwable) {
+        } catch (\Throwable $exception) {
+            if ($this->requireComplete) {
+                throw new \RuntimeException('PUBLIC_AUTHORITY_SOURCE_UNAVAILABLE', 0, $exception);
+            }
             $this->contentPagesUnavailableReason = 'content_pages_unavailable';
 
             return [];
@@ -515,7 +546,11 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
     {
         try {
             $readModel = app(Mbti64CrossTypeComparisonPublicReadModel::class);
-        } catch (\Throwable) {
+        } catch (\Throwable $exception) {
+            if ($this->requireComplete) {
+                throw new \RuntimeException('PUBLIC_AUTHORITY_SOURCE_UNAVAILABLE', 0, $exception);
+            }
+
             return [];
         }
 
@@ -523,7 +558,11 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
         foreach (PersonalityProfile::SUPPORTED_LOCALES as $locale) {
             try {
                 $items = $readModel->list($locale);
-            } catch (\Throwable) {
+            } catch (\Throwable $exception) {
+                if ($this->requireComplete) {
+                    throw new \RuntimeException('PUBLIC_AUTHORITY_SOURCE_UNAVAILABLE', 0, $exception);
+                }
+
                 continue;
             }
             foreach ($items as $item) {
@@ -576,7 +615,11 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
                 ->orderBy('entity_type')
                 ->orderBy('entity_key')
                 ->get();
-        } catch (\Throwable) {
+        } catch (\Throwable $exception) {
+            if ($this->requireComplete) {
+                throw new \RuntimeException('PUBLIC_AUTHORITY_SOURCE_UNAVAILABLE', 0, $exception);
+            }
+
             return [];
         }
 
@@ -647,7 +690,10 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
                 ->orderBy('entity_type')
                 ->orderBy('entity_key')
                 ->get();
-        } catch (\Throwable) {
+        } catch (\Throwable $exception) {
+            if ($this->requireComplete) {
+                throw new \RuntimeException('PUBLIC_AUTHORITY_SOURCE_UNAVAILABLE', 0, $exception);
+            }
             $this->enneagramAssetsUnavailableReason = 'enneagram_personality_public_content_assets_unavailable';
 
             return [];
@@ -719,6 +765,9 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
         try {
             $rows = app(ScaleRegistry::class)->listActivePublic(0);
         } catch (\Throwable $exception) {
+            if ($this->requireComplete) {
+                throw new \RuntimeException('PUBLIC_AUTHORITY_SOURCE_UNAVAILABLE', 0, $exception);
+            }
             $this->scaleCatalogUnavailableReason = 'scale_catalog_unavailable';
 
             return [];
@@ -784,10 +833,17 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
                 ->orderBy('slug')
                 ->limit(max(1, (int) config('seo_intel.url_truth_inventory.research_report_candidate_limit', 100)))
                 ->get();
-        } catch (\Throwable) {
+        } catch (\Throwable $exception) {
+            if ($this->requireComplete) {
+                throw new \RuntimeException('PUBLIC_AUTHORITY_SOURCE_UNAVAILABLE', 0, $exception);
+            }
             $this->researchReportsUnavailableReason = 'research_reports_unavailable';
 
             return [];
+        }
+
+        if ($this->requireComplete && ResearchReport::query()->publiclyReadable()->count() > $reports->count()) {
+            throw new \RuntimeException('PUBLIC_AUTHORITY_SOURCE_TRUNCATED');
         }
 
         $records = [];
@@ -1336,14 +1392,7 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
      */
     private function uniqueRecords(array $records): array
     {
-        $unique = [];
-
-        foreach ($records as $record) {
-            $key = $record->locale.'|'.$record->canonicalUrlHash();
-            $unique[$key] ??= $record;
-        }
-
-        return array_values($unique);
+        return PublicAuthorityCandidateResolver::resolve($records);
     }
 
     private function canonicalUrl(string $path): string

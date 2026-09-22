@@ -22,18 +22,15 @@ final class CurrentPublicUrlAuthoritySource implements UrlTruthInventorySource
     public function candidates(): array
     {
         $records = [
-            ...$this->backendAuthority->candidates(),
+            ...(config('seo_intel.enabled', false)
+                ? $this->backendAuthority->completeCandidates()
+                : $this->backendAuthority->candidates()),
             ...$this->careerRecords(),
             ...$this->careerCurrentManifestRecords(),
             ...$this->staticRecords(),
         ];
-        $unique = [];
-        foreach ($records as $record) {
-            $unique[$record->locale.'|'.$record->canonicalUrlHash()] ??= $record;
-        }
-        ksort($unique);
 
-        return array_values($unique);
+        return PublicAuthorityCandidateResolver::resolve($records);
     }
 
     /** @return array<string,mixed> */
@@ -41,6 +38,7 @@ final class CurrentPublicUrlAuthoritySource implements UrlTruthInventorySource
     {
         return [
             'source' => 'current_backend_cms_public_url_authority',
+            'complete_authority_read' => (bool) config('seo_intel.enabled', false),
             'backend_authority' => $this->backendAuthority->metadata(),
             'career_authority_revision' => CareerDirectoryAuthorityService::AUTHORITY_VERSION,
             'career_current_manifest_authority' => CareerContentV3AuthorityPackage::CONTRACT_VERSION,
@@ -58,8 +56,14 @@ final class CurrentPublicUrlAuthoritySource implements UrlTruthInventorySource
         foreach (['zh-CN', 'en'] as $locale) {
             try {
                 $items = $this->careerAuthority->indexableItems($locale, false);
-            } catch (\Throwable) {
+            } catch (\Throwable $exception) {
+                if (config('seo_intel.enabled', false)) {
+                    throw new \RuntimeException('PUBLIC_AUTHORITY_CAREER_UNAVAILABLE', 0, $exception);
+                }
                 $items = [];
+            }
+            if ($items === [] && config('seo_intel.enabled', false)) {
+                throw new \RuntimeException('PUBLIC_AUTHORITY_CAREER_UNDETERMINED');
             }
             foreach ($items as $item) {
                 $path = trim((string) ($item['canonical_path'] ?? ''));
