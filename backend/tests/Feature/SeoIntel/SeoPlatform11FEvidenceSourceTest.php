@@ -219,6 +219,8 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
             'receipt_json' => json_encode($receipt, JSON_THROW_ON_ERROR),
             'started_at' => now('UTC'),
             'finished_at' => now('UTC'),
+            'created_at' => now('UTC'),
+            'updated_at' => now('UTC'),
         ]);
         $loader = app(ReadOnlyMeasurementEvidenceBundleLoader::class);
         $this->assertSame('NONE', $loader->diagnoseForScope('mission:cross-sha', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
@@ -467,9 +469,11 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         });
         Schema::create('seo_gsc_sync_runs', function (Blueprint $table): void {
             $table->string('status');
+            $table->string('failure_code')->nullable();
             $table->text('receipt_json')->nullable();
             $table->timestamp('started_at');
             $table->timestamp('finished_at')->nullable();
+            $table->timestamps();
         });
     }
 
