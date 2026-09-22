@@ -7,10 +7,12 @@ namespace App\Services\SeoIntel\UrlTruth;
 use App\Services\SeoIntel\Detector\BoundedDetectorRunner;
 use App\Services\SeoIntel\Detector\DetectorQueueMaterializer;
 use App\Services\SeoIntel\PageFamily\PageFamilyPolicyRegistry;
+use App\Services\SeoIntel\Sources\PublicAuthorityCandidateResolver;
 use App\Services\SeoIntel\UrlTruthInventoryRecord;
 use App\Services\SeoIntel\UrlTruthInventoryRecordWriter;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use RuntimeException;
 use Throwable;
 
 final class ControlledUrlTruthReconciliationService
@@ -38,6 +40,8 @@ final class ControlledUrlTruthReconciliationService
         bool $probeHttp,
         int $maxRecords = 5000,
         int $batchSize = 250,
+        ?string $expectedPlanHash = null,
+        ?callable $authorityReadback = null,
     ): array {
         $maxRecords = min(10000, max(1, $maxRecords));
         $batchSize = min(250, max(1, $batchSize));
@@ -51,6 +55,7 @@ final class ControlledUrlTruthReconciliationService
         [$accepted, $rejectionCounts, $sourceConflicts] = $this->classifyAuthority($authorityRecords);
         $artifact = $this->artifact($accepted, $sourceMetadata, $maxRecords, $batchSize);
         $before = $this->plan($accepted, $rejectionCounts, $sourceConflicts);
+        $before['plan_hash'] = $this->planHash($artifact, $before);
         $batches = $this->batches($accepted, $batchSize);
         $evidence = $this->consumerEvidence($batches, $probeHttp);
         $detector = $this->sitemapAuthorityDetector($accepted, $artifact, $evidence, false);
@@ -64,13 +69,37 @@ final class ControlledUrlTruthReconciliationService
         if ($sourceConflicts > 0) {
             return $this->blocked('authority_binding_conflict', true, $maxRecords, $batchSize, $artifact, $before);
         }
+        if ($probeHttp && ($detector['status'] ?? null) !== 'success') {
+            return $this->blocked('detector_evidence_unavailable', true, $maxRecords, $batchSize, $artifact, $before);
+        }
 
-        [$batchReceipts, $idempotency, $detector] = $this->connection()->transaction(function () use ($accepted, $artifact, $batches, $evidence): array {
+        if (($sourceMetadata['complete_authority_read'] ?? false) !== true || $accepted === []) {
+            return $this->blocked('complete_authority_required', true, $maxRecords, $batchSize, $artifact, $before);
+        }
+        if ($expectedPlanHash === null || ! hash_equals($before['plan_hash'], $expectedPlanHash)) {
+            return $this->blocked('frozen_plan_mismatch', true, $maxRecords, $batchSize, $artifact, $before);
+        }
+        if ($authorityReadback === null) {
+            return $this->blocked('authority_readback_required', true, $maxRecords, $batchSize, $artifact, $before);
+        }
+
+        [$batchReceipts, $idempotency, $detector] = $this->connection()->transaction(function () use ($accepted, $artifact, $batches, $evidence, $expectedPlanHash, $authorityReadback, $maxRecords, $batchSize): array {
+            $locked = $this->plan($accepted, [], 0, true);
+            // Rejection counts belong to the frozen source, not mutable Truth.
+            if (! hash_equals($expectedPlanHash, $this->planHash($artifact, $locked))) {
+                throw new RuntimeException('URL_TRUTH_PLAN_CHANGED');
+            }
+            $this->assertAuthorityUnchanged($authorityReadback, $artifact, $maxRecords, $batchSize);
             $batchReceipts = [];
             foreach ($batches as $batch) {
                 $records = array_map(static fn (array $item): UrlTruthInventoryRecord => $item['record'], $batch['items']);
+                $this->retireReplacedBindings($batch['items']);
                 $this->writer->write($records);
-                $batchReceipts[] = $this->batchReadback($batch, $evidence);
+                $readback = $this->batchReadback($batch, $evidence);
+                if (! $readback['database_readback_ok']) {
+                    throw new RuntimeException('URL_TRUTH_BATCH_READBACK_FAILED');
+                }
+                $batchReceipts[] = $readback;
             }
             $retired = $this->retireOrphans($accepted);
 
@@ -97,9 +126,14 @@ final class ControlledUrlTruthReconciliationService
                     && (int) $rerun['counts']['duplicate'] === 0
                     && (int) $rerun['counts']['updated'] === 0
                     && $privateLeakage === 0
-                    && $bindingConflicts === 0,
+                    && $bindingConflicts === 0
+                    && (int) $rerun['counts']['retired'] === 0,
             ];
+            if (! $idempotency['passed']) {
+                throw new RuntimeException('URL_TRUTH_IDEMPOTENCY_FAILED');
+            }
             $detector = $this->sitemapAuthorityDetector($accepted, $artifact, $evidence, true);
+            $this->assertAuthorityUnchanged($authorityReadback, $artifact, $maxRecords, $batchSize);
 
             return [$batchReceipts, $idempotency, $detector];
         });
@@ -124,7 +158,7 @@ final class ControlledUrlTruthReconciliationService
         $accepted = [];
         $rejectionCounts = [];
         $identities = [];
-        foreach ($records as $record) {
+        foreach (PublicAuthorityCandidateResolver::resolve($records) as $record) {
             $evaluation = $this->evaluator->evaluate($record);
             if (! (bool) $evaluation['effective_public']) {
                 $rejectionCounts['rejected_records'] = ($rejectionCounts['rejected_records'] ?? 0) + 1;
@@ -205,13 +239,20 @@ final class ControlledUrlTruthReconciliationService
     }
 
     /** @param list<array<string,mixed>> $accepted @return array<string,mixed> */
-    private function plan(array $accepted, array $rejectionCounts, int $sourceConflicts): array
+    private function plan(array $accepted, array $rejectionCounts, int $sourceConflicts, bool $lock = false): array
     {
         $connection = $this->connection();
-        $truthRows = $connection->table('seo_urls')->get()->keyBy(
+        if ($connection->table('seo_urls')->count() > 10000 || $connection->table('seo_url_entities')->count() > 12000) {
+            throw new RuntimeException('URL_TRUTH_READ_BOUND_EXCEEDED');
+        }
+        $truthRows = $connection->table('seo_urls')->orderBy('id')->when($lock, fn ($q) => $q->lockForUpdate())->get([
+            'id', 'canonical_url_hash', 'locale', 'page_entity_type', 'entity_id_or_slug', 'source_authority',
+            'indexability_state', 'is_private_flow', 'page_family', 'authority_revision', 'canonical_revision',
+        ])->keyBy(
             static fn (object $row): string => (string) $row->locale.'|'.(string) $row->canonical_url_hash,
         );
-        $bindings = $connection->table('seo_url_entities')->whereNotNull('current_binding_key')->get()->keyBy('current_binding_key');
+        $bindings = $connection->table('seo_url_entities')->whereNotNull('current_binding_key')->orderBy('id')
+            ->when($lock, fn ($q) => $q->lockForUpdate())->get(['id', 'canonical_url_hash', 'locale', 'current_binding_key', 'binding_status', 'authority_revision', 'canonical_revision'])->keyBy('current_binding_key');
         $acceptedKeys = [];
         $counts = ['added' => 0, 'updated' => 0, 'retired' => 0, 'conflict' => $sourceConflicts, 'rejected' => (int) ($rejectionCounts['rejected_records'] ?? 0), 'no_change' => 0, 'duplicate' => 0];
 
@@ -240,7 +281,8 @@ final class ControlledUrlTruthReconciliationService
         }
         $counts['duplicate'] = $this->currentBindingConflictCount();
 
-        return ['status' => 'success', 'counts' => $counts, 'rejection_counts' => $rejectionCounts];
+        return ['status' => 'success', 'counts' => $counts, 'rejection_counts' => $rejectionCounts,
+            'snapshot_hash' => hash('sha256', json_encode([$truthRows->all(), $bindings->all()], JSON_THROW_ON_ERROR))];
     }
 
     /** @param list<array<string,mixed>> $accepted @return list<array<string,mixed>> */
@@ -260,7 +302,7 @@ final class ControlledUrlTruthReconciliationService
                 if ($offset >= count($items)) {
                     break;
                 }
-                $slice = array_slice($items, $offset, $step);
+                $slice = array_slice($items, $offset, min($step, $batchSize));
                 $batches[] = $this->batch($family, $locale, $slice, $offset === 0 ? 'canary' : 'ramp');
                 $offset += count($slice);
             }
@@ -391,6 +433,13 @@ final class ControlledUrlTruthReconciliationService
             'now' => $observedAt,
         ]);
         $materialization = $this->detectorMaterializer->materialize($detectorArtifact, $execute, $observedAt);
+        if ($execute) {
+            $counts = $materialization['counts'] ?? [];
+            $materialized = array_sum(array_intersect_key($counts, array_flip(['created', 'updated', 'reopened', 'no_change'])));
+            if ($materialized !== count($jobs)) {
+                throw new RuntimeException('URL_TRUTH_DETECTOR_READBACK_FAILED');
+            }
+        }
 
         return [
             'status' => 'success',
@@ -416,6 +465,7 @@ final class ControlledUrlTruthReconciliationService
             ->where('is_private_flow', false)
             ->count();
         $bindings = $connection->table('seo_url_entities')->whereIn('current_binding_key', $identities)->count();
+        $semantic = $this->plan($batch['items'], [], 0);
         $consumerMissing = [];
         foreach (($evidence['consumer_urls'] ?? []) as $name => $urls) {
             $consumerMissing[$name] = $urls === null ? null : $this->missingHashes($hashes, $urls);
@@ -431,7 +481,8 @@ final class ControlledUrlTruthReconciliationService
             'authority_bound' => true,
             'url_truth_readback' => $truth,
             'current_binding_readback' => $bindings,
-            'database_readback_ok' => $truth === $batch['record_count'] && $bindings === $batch['record_count'],
+            'database_readback_ok' => $truth === $batch['record_count'] && $bindings === $batch['record_count']
+                && $semantic['counts']['no_change'] === $batch['record_count'],
             'consumer_missing' => $consumerMissing,
             'runtime_canonical_evidence_state' => (string) data_get($evidence, 'live_http.state', 'measurement_hold'),
         ];
@@ -445,7 +496,7 @@ final class ControlledUrlTruthReconciliationService
             $accepted,
         ), true);
         $connection = $this->connection();
-        $rows = $connection->table('seo_urls')->where('indexability_state', 'indexable')->get();
+        $rows = $connection->table('seo_urls')->where('indexability_state', 'indexable')->where('is_private_flow', false)->get();
         $retired = 0;
         foreach ($rows as $row) {
             $key = (string) $row->locale.'|'.(string) $row->canonical_url_hash;
@@ -464,6 +515,7 @@ final class ControlledUrlTruthReconciliationService
                 $connection->table('seo_url_entities')
                     ->where('canonical_url_hash', $row->canonical_url_hash)
                     ->where('locale', $row->locale)
+                    ->whereNotNull('current_binding_key')
                     ->update([
                         'authority_status' => 'retired_authority',
                         'binding_status' => 'retired_authority',
@@ -556,7 +608,9 @@ final class ControlledUrlTruthReconciliationService
             && (string) $truth->canonical_revision === $item['canonical_revision']
             && $binding !== null
             && (string) $binding->canonical_url_hash === $item['hash']
-            && (string) $binding->binding_status === 'current';
+            && (string) $binding->binding_status === 'current'
+            && (string) $binding->authority_revision === $item['authority_revision']
+            && (string) $binding->canonical_revision === $item['canonical_revision'];
     }
 
     private function rowIsCurrent(object $row): bool
@@ -608,13 +662,47 @@ final class ControlledUrlTruthReconciliationService
 
     private function currentBindingConflictCount(): int
     {
-        return $this->connection()->table('seo_url_entities')
+        $urlConflicts = $this->connection()->table('seo_url_entities')
+            ->whereNotNull('current_binding_key')->select('locale', 'canonical_url_hash')
+            ->groupBy('locale', 'canonical_url_hash')->havingRaw('COUNT(*) > 1')->get()->count();
+
+        return $urlConflicts + $this->connection()->table('seo_url_entities')
             ->whereNotNull('current_binding_key')
             ->select('current_binding_key')
             ->groupBy('current_binding_key')
             ->havingRaw('COUNT(*) > 1')
             ->get()
             ->count();
+    }
+
+    private function planHash(array $artifact, array $plan): string
+    {
+        return hash('sha256', $artifact['artifact_hash'].'|'.$plan['snapshot_hash']);
+    }
+
+    private function assertAuthorityUnchanged(callable $readback, array $artifact, int $maxRecords, int $batchSize): void
+    {
+        [$records, $metadata] = $readback();
+        if (($metadata['complete_authority_read'] ?? false) !== true || count($records) > $maxRecords) {
+            throw new RuntimeException('URL_TRUTH_AUTHORITY_UNAVAILABLE');
+        }
+        [$accepted, , $conflicts] = $this->classifyAuthority($records);
+        $current = $this->artifact($accepted, $metadata, $maxRecords, $batchSize);
+        if ($conflicts > 0 || ! hash_equals($artifact['artifact_hash'], $current['artifact_hash'])) {
+            throw new RuntimeException('URL_TRUTH_AUTHORITY_CHANGED');
+        }
+    }
+
+    private function retireReplacedBindings(array $items): void
+    {
+        foreach ($items as $item) {
+            $this->connection()->table('seo_url_entities')->where('locale', $item['record']->locale)
+                ->where('canonical_url_hash', $item['hash'])->whereNotNull('current_binding_key')
+                ->where('current_binding_key', '!=', $item['identity'])->update([
+                    'current_binding_key' => null, 'binding_status' => 'superseded_canonical',
+                    'retired_at' => now(), 'updated_at' => now(),
+                ]);
+        }
     }
 
     private function schemaReady(): bool

@@ -336,6 +336,23 @@ final class SeoPlatform05DynamicUrlTruthSnapshotTest extends TestCase
         );
     }
 
+    public function test_root_storage_hash_and_current_revisions_must_reconcile(): void
+    {
+        $record = new UrlTruthInventoryRecord(canonicalUrl: 'https://fermatmind.com/', locale: 'zh-CN',
+            pageEntityType: 'home', entityIdOrSlug: 'home:zh', sourceAuthority: 'backend_public_surface',
+            entitySource: 'backend_authority', authorityStatus: 'published_approved',
+            metadata: ['authority_revision' => 'static-v1']);
+        $truth = $this->truthRow($record) + ['canonical_url_hash' => $record->canonicalUrlHash()];
+        $binding = array_replace($this->bindingRow($record), ['canonical_url_hash' => $record->canonicalUrlHash(),
+            'authority_revision' => $truth['authority_revision']]);
+        $snapshot = new UrlTruthReconciliationSnapshot;
+        $this->assertSame(1, $snapshot->build([$record], [$truth], [$binding], [])['counts']['url_truth_valid']);
+        $stale = array_replace($truth, ['authority_revision' => str_repeat('a', 64)]);
+        $this->assertSame(0, $snapshot->build([$record], [$stale], [$binding], [])['counts']['url_truth_valid']);
+        $binding['authority_revision'] = str_repeat('b', 64);
+        $this->assertSame(0, $snapshot->build([$record], [$truth], [$binding], [])['counts']['url_truth_valid']);
+    }
+
     /** @return array<string,mixed> */
     private function truthRow(UrlTruthInventoryRecord $record): array
     {

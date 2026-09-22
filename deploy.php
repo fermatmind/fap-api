@@ -2810,35 +2810,28 @@ BASH);
 });
 
 task('seo:url-truth-controlled-reconcile', function () {
+    if (deploySkipsAuthorityMutations() || deploySeoPlatform10SkipsDisabledStaging('URL Truth reconciliation')) {
+        return;
+    }
+
     within('{{release_path}}/backend', function (): void {
         run(<<<'BASH'
 set -euo pipefail
-set +e
-{{bin/php}} -r 'require "vendor/autoload.php"; $app = require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); exit(config("seo_intel.enabled") && config("seo_intel.write_enabled") ? 0 : 42);'
-write_status="$?"
-set -e
-args=(--no-http)
-if [ "$write_status" -eq 0 ]; then
-  args=(--execute --batch-size=250 --max-records=5000)
-fi
+plan="$({{bin/php}} artisan seo-intel:url-truth-controlled-reconcile --no-http --max-records=5000 --batch-size=250 --json --no-interaction --no-ansi)"
+printf '%s\n' "$plan"
+plan_hash="$(printf '%s' "$plan" | {{bin/php}} -r '$p=json_decode(stream_get_contents(STDIN),true,flags:JSON_THROW_ON_ERROR); $h=$p["plan"]["plan_hash"]??""; if (($p["status"]??null)!=="success" || !preg_match("/^[a-f0-9]{64}$/D",$h)) exit(41); echo $h;')"
+args=(--execute --scoped-write --expected-plan-hash="$plan_hash" --batch-size=250 --max-records=5000)
 set +e
 receipt="$({{bin/php}} artisan seo-intel:url-truth-controlled-reconcile "${args[@]}" --json --no-interaction --no-ansi)"
 command_status="$?"
 set -e
 printf '%s\n' "$receipt"
-printf '%s' "$receipt" | WRITE_STATUS="$write_status" COMMAND_STATUS="$command_status" {{bin/php}} -r '
+printf '%s' "$receipt" | COMMAND_STATUS="$command_status" {{bin/php}} -r '
 $payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
 $boundaries = $payload["boundaries"] ?? [];
 $ok = ($payload["schema_version"] ?? null) === "seo-platform-controlled-url-truth-reconciliation.v1"
     && ($boundaries["search_submission_allowed"] ?? null) === false
     && ($boundaries["hard_delete"] ?? null) === false;
-if ((int) getenv("WRITE_STATUS") === 42) {
-    $ok = $ok
-        && (int) getenv("COMMAND_STATUS") !== 0
-        && ($payload["status"] ?? null) === "blocked"
-        && in_array("url_truth_hardened_schema_unavailable", $payload["issues"] ?? [], true)
-        && ($payload["writes_committed"] ?? null) === false;
-} else {
     $rerun = $payload["idempotent_rerun"] ?? [];
     $batches = $payload["batches"] ?? [];
     $detector = $payload["sitemap_authority_detector"] ?? [];
@@ -2875,7 +2868,6 @@ if ((int) getenv("WRITE_STATUS") === 42) {
             || (($detector["planned_issues"] ?? 0) > 0
                 && ($detector["materialization"]["mode"] ?? null) === "controlled_materialization"
                 && $detectorMaterialized > 0));
-}
 exit($ok ? 0 : 1);
 ' || exit 43
 BASH, timeout: 1800);
@@ -5362,7 +5354,8 @@ after('healthcheck:public', 'healthcheck:sitemap-source');
 after('healthcheck:sitemap-source', 'healthcheck:public-dns');
 after('healthcheck:public-dns', 'healthcheck:career-data-recovery');
 after('healthcheck:public-dns', 'seo:url-truth-reconciliation-receipt');
-after('seo:url-truth-reconciliation-receipt', 'seo:platform-10-public-closeout');
+after('seo:url-truth-reconciliation-receipt', 'seo:url-truth-controlled-reconcile');
+after('seo:url-truth-controlled-reconcile', 'seo:platform-10-public-closeout');
 after('deploy:symlink', 'healthcheck:auth-guest-contract');
 after('deploy:symlink', 'healthcheck:public-static-media-assets');
 after('deploy:symlink', 'healthcheck:scale-lookup');

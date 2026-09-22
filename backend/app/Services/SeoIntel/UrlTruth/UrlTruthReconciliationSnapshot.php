@@ -119,7 +119,12 @@ final class UrlTruthReconciliationSnapshot
             if (count($rows) === 1
                 && count($currentBindings) === 1
                 && $this->truthMatchesAuthority($rows[0], $record)
-                && hash_equals((string) $record['hash'], (string) ($currentBindings[0]['canonical_url_hash'] ?? ''))) {
+                && (! $revisionComparable || hash_equals((string) $record['authority_revision'], (string) ($rows[0]['authority_revision'] ?? '')))
+                && (! array_key_exists('authority_revision', $currentBindings[0])
+                    || hash_equals((string) $record['authority_revision'], (string) $currentBindings[0]['authority_revision']))
+                // Identity comparisons normalize URLs; bindings retain the writer's
+                // exact URL hash, including the root slash. Do not mix these keys.
+                && hash_equals((string) ($rows[0]['canonical_url_hash'] ?? $record['hash']), (string) ($currentBindings[0]['canonical_url_hash'] ?? ''))) {
                 $valid++;
             } else {
                 $bindingMismatch++;
