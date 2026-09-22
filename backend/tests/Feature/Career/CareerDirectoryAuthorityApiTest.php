@@ -157,6 +157,49 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
         Log::shouldNotHaveReceived('info');
     }
 
+    public function test_url_truth_accepts_browsable_locale_with_zero_indexable_bodies(): void
+    {
+        $this->createDirectoryOccupation('actuaries', 'Actuaries', '精算师', 'business-finance', 'Business and Finance');
+        $this->publishRuntimeProjection(['actuaries']);
+        $this->warmDirectoryAuthority();
+        config(['seo_intel.enabled' => true]);
+
+        $directory = app(\App\Services\Career\CareerDirectoryAuthorityService::class);
+        $this->assertCount(1, $directory->browseItems('en', false));
+        $this->assertSame([], $directory->indexableItems('en', false));
+        $records = app(\App\Services\SeoIntel\Sources\CurrentPublicUrlAuthoritySource::class)->candidates();
+        $this->assertNotEmpty($records);
+        $this->assertSame([], array_values(array_filter($records, static fn ($record): bool => $record->locale === 'en' && $record->sourceAuthority === 'career_runtime_publish_projection')));
+        $manifestRecord = current(array_filter($records, static fn ($record): bool => $record->locale === 'en' && $record->sourceAuthority === 'career_current_manifest'
+            && $record->entityIdOrSlug === 'actuaries'));
+        $this->assertNotFalse($manifestRecord);
+        $this->assertFalse((new \App\Services\SeoIntel\UrlTruth\EffectivePublicUrlEvaluator)
+            ->evaluate($manifestRecord)['effective_public']);
+    }
+
+    public function test_url_truth_still_rejects_unavailable_directory_authority(): void
+    {
+        $this->createDirectoryOccupation('actuaries', 'Actuaries', '精算师', 'business-finance', 'Business and Finance');
+        $this->publishRuntimeProjection(['actuaries']);
+        $this->warmDirectoryAuthority();
+        Cache::flush();
+        config(['seo_intel.enabled' => true]);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('PUBLIC_AUTHORITY_CAREER_UNAVAILABLE');
+        app(\App\Services\SeoIntel\Sources\CurrentPublicUrlAuthoritySource::class)->candidates();
+    }
+
+    public function test_url_truth_still_rejects_truly_empty_directory_authority(): void
+    {
+        $this->warmDirectoryAuthority();
+        config(['seo_intel.enabled' => true]);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('PUBLIC_AUTHORITY_CAREER_UNDETERMINED');
+        app(\App\Services\SeoIntel\Sources\CurrentPublicUrlAuthoritySource::class)->candidates();
+    }
+
     public function test_signed_verify_only_directory_failure_returns_bounded_503_without_logging(): void
     {
         Log::spy();
