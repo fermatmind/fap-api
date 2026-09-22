@@ -21,14 +21,14 @@ final class CareerIndustryDirectoryApiTest extends TestCase
             ->assertJsonPath('bundle_kind', 'career_industry_directory')
             ->assertJsonPath('bundle_version', 'career.industry_directory.v1')
             ->assertJsonPath('locale', 'en')
-            ->assertJsonPath('public_detail_indexable_count', 5)
+            ->assertJsonPath('public_detail_indexable_count', 0)
             ->assertJsonPath('industry_count', 2)
             ->assertJsonCount(2, 'industries')
             ->assertJsonPath('industries.0.slug', 'business-finance')
             ->assertJsonPath('industries.0.title', 'Business and Finance')
             ->assertJsonPath('industries.0.count', 4)
             ->assertJsonPath('industries.0.public_detail_count', 4)
-            ->assertJsonPath('industries.0.indexable_count', 4)
+            ->assertJsonPath('industries.0.indexable_count', 0)
             ->assertJsonPath('industries.0.canonical_path', '/en/career/industries/business-finance')
             ->assertJsonCount(3, 'industries.0.discovery_jobs')
             ->assertJsonPath('industries.0.discovery_jobs.0.slug', 'accountants')
@@ -63,11 +63,11 @@ final class CareerIndustryDirectoryApiTest extends TestCase
 
         $response = $this->getJson('/api/v0.5/career/industries?locale=en')
             ->assertOk()
-            ->assertJsonPath('public_detail_indexable_count', 4)
+            ->assertJsonPath('public_detail_indexable_count', 0)
             ->assertJsonPath('industries.0.slug', 'business-finance')
             ->assertJsonPath('industries.0.count', 3)
             ->assertJsonPath('industries.0.public_detail_count', 3)
-            ->assertJsonPath('industries.0.indexable_count', 3);
+            ->assertJsonPath('industries.0.indexable_count', 0);
 
         $discoverySlugs = collect($response->json('industries'))
             ->flatMap(static fn (array $industry): array => $industry['discovery_jobs'] ?? [])
@@ -85,6 +85,20 @@ final class CareerIndustryDirectoryApiTest extends TestCase
             ->assertJsonPath('ok', false)
             ->assertJsonPath('error_code', 'CAREER_INDUSTRY_DIRECTORY_UNAVAILABLE')
             ->assertJsonMissingPath('exception');
+    }
+
+    public function test_it_counts_actual_published_body_separately_from_browsable_identity(): void
+    {
+        $payload = $this->directoryPayload();
+        $payload['items'][3]['slug'] = 'accountants-and-auditors';
+        $this->putDirectoryVersion('en', 'body-qualified', $payload);
+
+        $this->getJson('/api/v0.5/career/industries?locale=en')
+            ->assertOk()
+            ->assertJsonPath('public_detail_indexable_count', 1)
+            ->assertJsonPath('industries.0.public_detail_count', 4)
+            ->assertJsonPath('industries.0.indexable_count', 1)
+            ->assertJsonPath('industries.1.indexable_count', 0);
     }
 
     public function test_it_rejects_unknown_locales(): void

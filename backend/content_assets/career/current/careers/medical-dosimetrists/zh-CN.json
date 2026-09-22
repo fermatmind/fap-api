@@ -8413,7 +8413,7 @@
             "entries": [
               "中国、美国、全球与具体法域证据分别陈述；工资、就业、资格、安全和AI结论不得跨范围拼接。",
               "医学剂量师页面提供职业决策与安全试验信息，不替代所在地法律、医疗、金融、安全、执业或其他专业意见。",
-              "任何documented_unavailable都只表示有界检索后未建立安全数据，不允许用代理或模型记忆伪造数字。"
+              "任何暂无可安全使用的数据都只表示有界检索后未建立安全数据，不允许用代理或模型记忆伪造数字。"
             ]
           },
           "id": "medical-dosimetrists.sources.boundary.1",
@@ -8566,11 +8566,11 @@
                 "accessed_at": "2026-09-06",
                 "details": [
                   "未取得可读的29-2036.00中国大陆精确职业工资分布。",
-                  "只支持documented_unavailable，不支持任何工资数值。"
+                  "只支持暂无可安全使用的数据，不支持任何工资数值。"
                 ],
                 "evidence_type": "bounded research log",
                 "id": "bounded-research-log",
-                "limitation": "只支持documented_unavailable，不支持任何工资数值。",
+                "limitation": "只支持暂无可安全使用的数据，不支持任何工资数值。",
                 "market": "中国大陆",
                 "name": "2026-09-06 医学剂量师中国大陆工资有界检索记录",
                 "period": "reviewed 2026-09-06",
@@ -8848,7 +8848,7 @@
       "text": "医学剂量师"
     }
   },
-  "source_content_sha256": "35c9c6abbd0a690472e5fe0b99a1e6096e4d12bc837e9018bd7cd27c982808e9",
+  "source_content_sha256": "19c593b17e19c6e6498ad82abf4d6f00147b27b638e2c660a68aee1985a696f0",
   "subject": {
     "canonical_slug": "medical-dosimetrists",
     "name": "医学剂量师",

@@ -15236,7 +15236,7 @@
       },
       "fit_decision_checklist.boundary": {
         "ref": {
-          "id": "automotive-service-technicians-and-mechanics.quick-decision.fit-decision-checklist.1",
+          "id": "automotive-service-technicians-and-mechanics.quick-decision.fit-decision-checklist.3",
           "path": [
             "data",
             "paragraphs",
@@ -15248,7 +15248,7 @@
       },
       "fit_decision_checklist.how": {
         "ref": {
-          "id": "automotive-service-technicians-and-mechanics.quick-decision.fit-decision-checklist.2",
+          "id": "automotive-service-technicians-and-mechanics.quick-decision.fit-decision-checklist.1",
           "path": [
             "data",
             "paragraphs",
@@ -15260,7 +15260,7 @@
       },
       "fit_decision_checklist.suit": {
         "ref": {
-          "id": "automotive-service-technicians-and-mechanics.quick-decision.fit-decision-checklist.3",
+          "id": "automotive-service-technicians-and-mechanics.quick-decision.fit-decision-checklist.2",
           "path": [
             "data",
             "paragraphs",
@@ -23514,7 +23514,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：按本页证据口径（`documented_unavailable`、严重度 material），中国大陆未取得与该职业精确对应的全国职业工资分布，本页不发布全国月薪或中位数，也不以行业平均或美国数字换算填充。如需比较中国大陆岗位，应按用人单位性质与作业范围（品牌授权服务中心、综合汽修厂、连锁快修门店、事故车修复中心、新能源专修门店）逐项核对城市、工时与提成或计件口径与税前税后口径。该职业未在《中华人民共和国职业分类大典（2022 年版）》中单列，相关作业归入机动车维修经营项目。"
+              "中国大陆侧：按本页证据口径（暂无可安全使用的数据），中国大陆未取得与该职业精确对应的全国职业工资分布，本页不发布全国月薪或中位数，也不以行业平均或美国数字换算填充。如需比较中国大陆岗位，应按用人单位性质与作业范围（品牌授权服务中心、综合汽修厂、连锁快修门店、事故车修复中心、新能源专修门店）逐项核对城市、工时与提成或计件口径与税前税后口径。该职业未在《中华人民共和国职业分类大典（2022 年版）》中单列，相关作业归入机动车维修经营项目。"
             ]
           },
           "id": "automotive-service-technicians-and-mechanics.profile.onet-structured-fields-block.3",
@@ -35802,19 +35802,19 @@
       },
       "fit_decision_checklist": {
         "boundary": {
-          "$item": "automotive-service-technicians-and-mechanics.quick-decision.fit-decision-checklist.1",
+          "$item": "automotive-service-technicians-and-mechanics.quick-decision.fit-decision-checklist.3",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
         "how": {
-          "$item": "automotive-service-technicians-and-mechanics.quick-decision.fit-decision-checklist.2",
+          "$item": "automotive-service-technicians-and-mechanics.quick-decision.fit-decision-checklist.1",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
         "suit": {
-          "$item": "automotive-service-technicians-and-mechanics.quick-decision.fit-decision-checklist.3",
+          "$item": "automotive-service-technicians-and-mechanics.quick-decision.fit-decision-checklist.2",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
@@ -37296,6 +37296,7 @@
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪个相邻方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
+      "interface.quick_decision.experiment_heading": "这项工作主要做什么？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -37775,7 +37776,7 @@
       "text": "汽车维修技师与机械师"
     }
   },
-  "source_content_sha256": "b7b6412729a4cb0dec329782b23d746768ef9fe0a073c920eedc6aee5695dacb",
+  "source_content_sha256": "5893f6f2f8a7d108faa868465d0e65fbee001e04708e16add1d2ae01a80e4d3c",
   "subject": {
     "canonical_slug": "automotive-service-technicians-and-mechanics",
     "name": "汽车维修技师与机械师",

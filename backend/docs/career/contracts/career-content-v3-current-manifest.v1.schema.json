@@ -76,6 +76,16 @@
         "additionalProperties": false,
         "properties": {
           "bytes": { "minimum": 1, "type": "integer" },
+          "body_qualification": {
+            "additionalProperties": false,
+            "properties": {
+              "version": { "const": "career.public_body.v1" },
+              "source_content_sha256": { "$ref": "#/$defs/hash" },
+              "has_public_body": { "type": "boolean" }
+            },
+            "required": ["version", "source_content_sha256", "has_public_body"],
+            "type": "object"
+          },
           "canonical_slug": { "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$", "type": "string" },
           "legacy_projection_sha256": { "$ref": "#/$defs/hash" },
           "legacy_row_sha256": { "$ref": "#/$defs/hash" },

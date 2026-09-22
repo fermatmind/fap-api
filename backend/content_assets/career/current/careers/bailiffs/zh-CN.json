@@ -15236,7 +15236,7 @@
       },
       "fit_decision_checklist.boundary": {
         "ref": {
-          "id": "bailiffs.quick-decision.fit-decision-checklist.1",
+          "id": "bailiffs.quick-decision.fit-decision-checklist.3",
           "path": [
             "data",
             "paragraphs",
@@ -15248,7 +15248,7 @@
       },
       "fit_decision_checklist.how": {
         "ref": {
-          "id": "bailiffs.quick-decision.fit-decision-checklist.2",
+          "id": "bailiffs.quick-decision.fit-decision-checklist.1",
           "path": [
             "data",
             "paragraphs",
@@ -15260,7 +15260,7 @@
       },
       "fit_decision_checklist.suit": {
         "ref": {
-          "id": "bailiffs.quick-decision.fit-decision-checklist.3",
+          "id": "bailiffs.quick-decision.fit-decision-checklist.2",
           "path": [
             "data",
             "paragraphs",
@@ -23514,7 +23514,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：按本页证据口径（`documented_unavailable`、严重度 non_material、`cn_mapping_status` none），中国大陆未取得与中国人民法院司法警察可比、且与美国 Bailiffs 同口径的全国职业工资分布；不以城镇单位或行业平均工资替代。中国大陆人民法院司法警察使用国家专项编制并实行警官警员职务序列（最高人民法院《人民法院司法警察条例》），其任用、强制权限与组织管理不等同于美国 O*NET 33-3011.00 Bailiffs；评估岗位时应查看实际招录公告中的编制、职位层级、地区、津补贴与任用条件，本页不发布任何中国大陆职业工资数值。"
+              "中国大陆侧：按本页证据口径（暂无可安全使用的数据、尚未建立精确职业映射），中国大陆未取得与中国人民法院司法警察可比、且与美国 Bailiffs 同口径的全国职业工资分布；不以城镇单位或行业平均工资替代。中国大陆人民法院司法警察使用国家专项编制并实行警官警员职务序列（最高人民法院《人民法院司法警察条例》），其任用、强制权限与组织管理不等同于美国 O*NET 33-3011.00 Bailiffs；评估岗位时应查看实际招录公告中的编制、职位层级、地区、津补贴与任用条件，本页不发布任何中国大陆职业工资数值。"
             ]
           },
           "id": "bailiffs.profile.onet-structured-fields-block.3",
@@ -26311,7 +26311,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "截至 2026 年 9 月，有界检索未找到与人民法院司法警察可比、且与美国 Bailiffs 同口径的公开职业条目与全国收入统计；按本页证据口径（documented_unavailable、severity non_material、cn_mapping_status none），本页不陈述该职业的官方月薪、起薪、中位数或分位数，也不以美国数字换算填充。"
+              "截至 2026 年 9 月，有界检索未找到与人民法院司法警察可比、且与美国 Bailiffs 同口径的公开职业条目与全国收入统计；按本页证据口径（暂无可安全使用的数据、尚未建立精确职业映射），本页不陈述该职业的官方月薪、起薪、中位数或分位数，也不以美国数字换算填充。"
             ]
           },
           "id": "bailiffs.china-salary.career-snapshot-primary-locale.8",
@@ -35802,19 +35802,19 @@
       },
       "fit_decision_checklist": {
         "boundary": {
-          "$item": "bailiffs.quick-decision.fit-decision-checklist.1",
+          "$item": "bailiffs.quick-decision.fit-decision-checklist.3",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
         "how": {
-          "$item": "bailiffs.quick-decision.fit-decision-checklist.2",
+          "$item": "bailiffs.quick-decision.fit-decision-checklist.1",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
         "suit": {
-          "$item": "bailiffs.quick-decision.fit-decision-checklist.3",
+          "$item": "bailiffs.quick-decision.fit-decision-checklist.2",
           "block": "quick-decision",
           "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
@@ -37296,6 +37296,7 @@
     "interface": {
       "interface.fit.directions_heading": "你更可能适合哪个相邻方向？",
       "interface.fit.interest_code_heading": "怎样理解兴趣代码",
+      "interface.quick_decision.experiment_heading": "这项工作主要做什么？",
       "interface.us_salary.industry.industry_header": "行业",
       "interface.us_salary.industry.interpretation_header": "这个值怎么理解",
       "interface.us_salary.section_label": "美国薪资参考",
@@ -37775,7 +37776,7 @@
       "text": "法警"
     }
   },
-  "source_content_sha256": "6e6b2d8505c5196a7de5e505d1b4de634e54a0241605e7d63043f511c20d6777",
+  "source_content_sha256": "b6f032e5f1a0c42a3ffe80405c1bf95bc950ad76f356ed5440417d4fc8ddd395",
   "subject": {
     "canonical_slug": "bailiffs",
     "name": "法警",

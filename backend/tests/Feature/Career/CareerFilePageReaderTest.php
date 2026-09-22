@@ -48,6 +48,29 @@ final class CareerFilePageReaderTest extends TestCase
         $bundle = app(CareerFilePageReader::class)->read('health-educators', 'en');
         self::assertSame([], $bundle['career_page']['content']['blocks']);
         self::assertSame('missing', $bundle['career_page']['hero']['metrics'][4]['availability']);
+        self::assertFalse($bundle['seo_contract']['index_eligible']);
+        self::assertSame('noindex,follow', $bundle['seo_contract']['robots_policy']);
+        $seo = app(CareerFilePageReader::class)->seo($bundle);
+        self::assertSame('noindex,follow', $seo['meta']['robots']);
+        self::assertSame([], $seo['meta']['hreflang']);
+        self::assertSame('excluded', $seo['seo_surface_v1']['sitemap_state']);
+        self::assertSame('/en/career/jobs/health-educators', $seo['meta']['canonical']);
+    }
+
+    public function test_body_qualification_preserves_missing_metrics_and_excludes_empty_language_pairs(): void
+    {
+        $this->publication(true);
+        $reader = app(CareerFilePageReader::class);
+        $middle = $reader->read('middle-school-teachers', 'zh-CN');
+        self::assertNotEmpty($middle['career_page']['content']['blocks']);
+        self::assertTrue($middle['seo_contract']['index_eligible']);
+        self::assertSame('missing', $middle['career_page']['hero']['metrics'][4]['availability']);
+        self::assertArrayNotHasKey('en', $reader->seo($middle)['meta']['hreflang']);
+        $accountant = $reader->read('accountants-and-auditors', 'zh-CN');
+        self::assertSame([
+            'en' => '/en/career/jobs/accountants-and-auditors',
+            'zh-CN' => '/zh/career/jobs/accountants-and-auditors',
+        ], $reader->seo($accountant)['meta']['hreflang']);
     }
 
     public function test_unpublished_identity_does_not_gain_a_public_page(): void

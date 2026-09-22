@@ -13,6 +13,10 @@ function fixture(count = 1) {
     path: `careers/career-${String(Math.floor(index / 2) + 1).padStart(4, '0')}/${index % 2 ? 'zh-CN' : 'en'}.json`,
     canonical_slug: `career-${String(Math.floor(index / 2) + 1).padStart(4, '0')}`,
     locale: index % 2 ? 'zh-CN' : 'en',
+    source_content_sha256: '1'.repeat(64),
+    body_qualification: {
+      version: 'career.public_body.v1', source_content_sha256: '1'.repeat(64), has_public_body: true,
+    },
   }));
   const manifest = {
     contract_version: 'career.content_v3_current.manifest.v1',
@@ -57,6 +61,41 @@ function fixture(count = 1) {
     },
   };
 }
+
+test('a Current locale gaining body leaves the content-only lane and requires discoverability checks', () => {
+  const item = fixture();
+  const path = item.pages[0].path.replace(/^backend\/content_assets\/career\/current\//, '');
+  item.values.get(`${baseSha}:${MANIFEST_PATH}`).files.find((entry) => entry.path === path).body_qualification.has_public_body = false;
+  const receipt = analyzeCareerContentOnly(item.input);
+  assert.equal(receipt.reason, 'BODY_ELIGIBILITY_CHANGED');
+  const classification = applyCareerContentOnly(classifyPaths(item.paths), receipt);
+  assert.equal(classification.operations.career_content_only, false);
+  assert.equal(classification.flags.seo_discoverability, true);
+  assert.equal(classification.categories.includes('seo_discoverability'), true);
+});
+
+test('missing version-bound body qualification fails closed into discoverability checks', () => {
+  const item = fixture();
+  const path = item.pages[0].path.replace(/^backend\/content_assets\/career\/current\//, '');
+  delete item.values.get(`${headSha}:${MANIFEST_PATH}`).files.find((entry) => entry.path === path).body_qualification;
+  const receipt = analyzeCareerContentOnly(item.input);
+  assert.equal(receipt.reason, 'BODY_ELIGIBILITY_UNPROVEN');
+  const classification = applyCareerContentOnly(classifyPaths(item.paths), receipt);
+  assert.equal(classification.flags.seo_discoverability, true);
+  assert.equal(classification.operations.career_content_only, false);
+});
+
+test('a mixed runtime release still detects a Current body eligibility transition', () => {
+  const item = fixture();
+  const path = item.pages[0].path.replace(/^backend\/content_assets\/career\/current\//, '');
+  item.values.get(`${baseSha}:${MANIFEST_PATH}`).files.find((entry) => entry.path === path).body_qualification.has_public_body = false;
+  const runtimePath = 'backend/app/Services/Career/SomeAdapter.php';
+  item.input.paths.push(runtimePath);
+  item.input.statuses.push({ status: 'M', path: runtimePath });
+  const receipt = analyzeCareerContentOnly(item.input);
+  assert.equal(receipt.reason, 'BODY_ELIGIBILITY_CHANGED');
+  assert.equal(applyCareerContentOnly(classifyPaths(item.input.paths), receipt).flags.seo_discoverability, true);
+});
 
 for (const count of [1, 100, 200]) {
   test(`accepts an identity-stable ${count}-page Career content change`, () => {

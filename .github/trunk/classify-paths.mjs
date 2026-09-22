@@ -30,6 +30,7 @@ export const CAREER_PUBLISHER_BOUNDARY_MATRIX = [
   "backend/app/Domain/Career/Compilation/CareerContentV3Compiler.php",
   "backend/app/Domain/Career/Compilation/CareerContentV3Projector.php",
   "backend/app/Domain/Career/Display/CareerContentV3AuthorityPackage.php",
+  "backend/app/Domain/Career/Display/CareerContentV3PageUpdater.php",
   "backend/app/Domain/Career/Display/CareerPageProjector.php",
   "backend/app/Services/Career/CareerFilePageReader.php",
   "backend/app/Console/Commands/CareerCurrentManifest.php",
@@ -279,11 +280,19 @@ export function classifyPaths(inputPaths) {
       /^backend\/scripts\/seo\/gsc_restricted_connect_proxy\.mjs$/,
       /^backend\/database\/migrations\/seo_intel\/\d{4}_\d{2}_\d{2}_\d+_expand_gsc_read_models\.php$/,
     ]);
-    const seo = !careerCurrentManagedCache && !retiredEqMirror && !opsUi && !opsExecutionMigration && !opsReadonlyGsc && !seoCouncilOrchestrationBoundary && matches(path, [
+    const careerBodyEligibility = [
+      "backend/app/Domain/Career/Display/CareerContentV3CanonicalReader.php",
+      "backend/app/Services/Career/CareerFilePageReader.php",
+      "backend/app/Services/Career/CareerDirectoryAuthorityService.php",
+      "backend/app/Domain/Career/Display/CareerContentV3AuthorityPackage.php",
+      "backend/app/Domain/Career/Display/CareerContentV3PageUpdater.php",
+      "backend/app/Services/Career/CareerIndustryDirectoryReadModel.php",
+    ].includes(path);
+    const seo = careerBodyEligibility || (!careerCurrentManagedCache && !retiredEqMirror && !opsUi && !opsExecutionMigration && !opsReadonlyGsc && !seoCouncilOrchestrationBoundary && matches(path, [
       /(?:^|\/)(?:seo|search|discoverability|sitemap|robots|llms)(?:\/|\.|-|_)/i,
       /(?:canonical|hreflang|indexnow|indexability|gsc)/i,
       /(?:Seo|Search|Discoverability|Sitemap|Robots|Llms)/,
-    ]);
+    ]));
     const content = matches(path, [
       /^(?:content_packages|content_baselines)\//,
       /^backend\/(?:content_assets|content_packs|content_packages)\//,

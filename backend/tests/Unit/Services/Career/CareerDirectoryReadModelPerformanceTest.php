@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Services\Career;
 
+use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Models\OccupationFamily;
 use App\Services\Career\CareerDirectoryAuthorityService;
 use App\Services\Career\CareerDirectoryReadModelBuilder;
@@ -16,6 +18,53 @@ use Tests\TestCase;
 final class CareerDirectoryReadModelPerformanceTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function test_installed_corpus_qualification_is_reused_by_fresh_request_readers(): void
+    {
+        $authority = app(CareerContentV3CanonicalReader::class)->authority();
+        $rows = array_map(static fn (string $slug): array => [
+            'identity' => ['canonical_slug' => $slug],
+            'titles' => ['canonical_en' => $slug, 'canonical_zh' => $slug],
+            'seo_contract' => ['index_eligible' => true, 'index_state' => 'indexable', 'robots_policy' => 'index,follow'],
+        ], $authority['slugs']);
+        $observations = [];
+        foreach (['zh-CN', 'en'] as $locale) {
+            $model = app(CareerDirectoryReadModelBuilder::class)->build($rows, $locale, static fn (): bool => true);
+            Cache::forever(PublicCareerAuthorityResponseCache::DIRECTORY_READ_MODEL_CACHE_KEY_PREFIX.':'.$locale, $model);
+            $times = [];
+            for ($i = 0; $i < 5; $i++) {
+                $reader = new CareerContentV3CanonicalReader(new CareerContentV3AuthorityPackage, base_path());
+                $service = new CareerDirectoryAuthorityService(app(PublicCareerAuthorityResponseCache::class), $reader);
+                $started = hrtime(true);
+                $payload = $service->payload($locale);
+                $times[] = $this->elapsedMs($started);
+                self::assertArrayNotHasKey('body_qualification', $payload);
+            }
+            self::assertLessThan(400, max($times), 'Installed-corpus request exceeded the existing cold-request budget.');
+            $observations[$locale] = ['request_ms' => $times, 'indexable' => $payload['public_truth']['public_detail_indexable_count']];
+            self::assertTrue($authority['entries']['accountants-and-auditors'][$locale]['body_qualification']['has_public_body']);
+            self::assertSame($locale === 'zh-CN', $authority['entries']['actuaries'][$locale]['body_qualification']['has_public_body']);
+        }
+        fwrite(STDOUT, "\ncareer_installed_directory_metrics=".json_encode($observations, JSON_THROW_ON_ERROR)."\n");
+    }
+
+    public function test_untrusted_cache_qualification_cannot_override_installed_body_qualification(): void
+    {
+        $model = app(CareerDirectoryReadModelBuilder::class)->build([[
+            'identity' => ['canonical_slug' => 'actors'],
+            'titles' => ['canonical_en' => 'Actors', 'canonical_zh' => '演员'],
+            'seo_contract' => ['index_eligible' => true, 'index_state' => 'indexable', 'robots_policy' => 'index,follow'],
+        ]], 'en', static fn (): bool => true);
+        $model['body_qualification']['items']['actors'] = ['file_sha256' => str_repeat('0', 64), 'has_public_body' => true];
+        Cache::forever(PublicCareerAuthorityResponseCache::DIRECTORY_READ_MODEL_CACHE_KEY_PREFIX.':en', $model);
+        $reader = new CareerContentV3CanonicalReader(new CareerContentV3AuthorityPackage, base_path());
+        $payload = (new CareerDirectoryAuthorityService(app(PublicCareerAuthorityResponseCache::class), $reader))->payload('en');
+        self::assertSame(1, $payload['public_truth']['directory_member_count']);
+        self::assertSame(0, $payload['public_truth']['public_detail_indexable_count']);
+        self::assertTrue($payload['items'][0]['detail_ready']);
+        self::assertFalse($payload['items'][0]['indexable']);
+        self::assertSame('noindex,follow', $payload['items'][0]['robots_policy']);
+    }
 
     public function test_real_1046_and_10000_row_read_models_stay_inside_warm_budgets(): void
     {

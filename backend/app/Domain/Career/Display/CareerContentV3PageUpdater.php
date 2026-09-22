@@ -145,15 +145,20 @@ final class CareerContentV3PageUpdater
     }
 
     /** @param array<string,mixed> $manifest @param array<string,mixed> $candidate */
-    private function sourceSummary(string $currentRoot, array $manifest, string $slug, string $locale, array $candidate): array
+    private function sourceSummary(string $currentRoot, array &$manifest, string $slug, string $locale, array $candidate): array
     {
         $registries = [];
         $counts = ['enhanced' => 0, 'legacy' => 0];
-        foreach ($manifest['files'] as $entry) {
+        foreach ($manifest['files'] as &$entry) {
             $identity = $entry['canonical_slug'].'|'.$entry['locale'];
             $page = $entry['canonical_slug'] === $slug && $entry['locale'] === $locale
                 ? $candidate
                 : $this->read($currentRoot.'/'.$entry['path'], 'CURRENT_CONTENT_V3_JSON_INVALID');
+            $entry['body_qualification'] = [
+                'version' => CareerContentV3CanonicalReader::BODY_QUALIFICATION_VERSION,
+                'source_content_sha256' => $entry['source_content_sha256'],
+                'has_public_body' => CareerContentV3CanonicalReader::sourceHasPublicBody($page),
+            ];
             $state = $page['content_state'] ?? null;
             if (! is_string($state) || ! array_key_exists($state, $counts)) {
                 throw new CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_INVALID');

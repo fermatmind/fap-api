@@ -75,6 +75,15 @@ const ineligible = (baseSha, headSha, reason) => ({
   read_only: true,
 });
 
+const qualifiedBody = (manifest, path) => {
+  const entry = manifest.files?.find((file) => file.path === path.replace(/^backend\/content_assets\/career\/current\//, ''));
+  const qualification = entry?.body_qualification;
+  return qualification?.version === 'career.public_body.v1'
+    && qualification.source_content_sha256 === entry.source_content_sha256
+    && typeof qualification.has_public_body === 'boolean'
+    ? qualification.has_public_body : null;
+};
+
 export function analyzeCareerContentOnly({ baseSha, headSha, paths, statuses, readJson, hashFile, treeSha }) {
   try {
     if (!/^[a-f0-9]{40}$/.test(baseSha) || !/^[a-f0-9]{40}$/.test(headSha) || baseSha === headSha) {
@@ -82,6 +91,20 @@ export function analyzeCareerContentOnly({ baseSha, headSha, paths, statuses, re
     }
     const uniquePaths = [...new Set(paths)].sort();
     const pagePaths = uniquePaths.filter((path) => PAGE_PATTERN.test(path));
+    if (pagePaths.length > 0 && uniquePaths.includes(MANIFEST_PATH)) {
+      const beforeManifest = readJson(baseSha, MANIFEST_PATH);
+      const afterManifest = readJson(headSha, MANIFEST_PATH);
+      for (const path of pagePaths) {
+        const beforeBody = qualifiedBody(beforeManifest, path);
+        const afterBody = qualifiedBody(afterManifest, path);
+        if (beforeBody === null || afterBody === null) {
+          return ineligible(baseSha, headSha, 'BODY_ELIGIBILITY_UNPROVEN');
+        }
+        if (beforeBody !== afterBody) {
+          return ineligible(baseSha, headSha, 'BODY_ELIGIBILITY_CHANGED');
+        }
+      }
+    }
     if (pagePaths.length === 0 || !uniquePaths.includes(MANIFEST_PATH) || !uniquePaths.includes(INTENT_PATH)
       || uniquePaths.some((path) => path !== MANIFEST_PATH && path !== INTENT_PATH && !PAGE_PATTERN.test(path))) {
       return ineligible(baseSha, headSha, 'PATH_SCOPE_MISMATCH');

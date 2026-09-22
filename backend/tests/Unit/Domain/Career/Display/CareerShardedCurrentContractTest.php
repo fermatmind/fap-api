@@ -22,6 +22,12 @@ final class CareerShardedCurrentContractTest extends TestCase
         self::assertSame(1046, $contract['current_inventory']['career_directories']);
         self::assertSame(2092, $contract['current_inventory']['files']);
         self::assertSame(CareerContentV3AuthorityPackage::CONTRACT_VERSION, $schema['properties']['contract_version']['const']);
+        $bodyQualification = $schema['properties']['files']['items']['properties']['body_qualification'];
+        self::assertFalse($bodyQualification['additionalProperties']);
+        self::assertSame(['version', 'source_content_sha256', 'has_public_body'], $bodyQualification['required']);
+        self::assertSame('career.public_body.v1', $bodyQualification['properties']['version']['const']);
+        self::assertSame('boolean', $bodyQualification['properties']['has_public_body']['type']);
+        self::assertSame('content_v3_page_updater_source_hash_bound_body_derivation', $ownership['fields']['body_qualification']);
         self::assertSame('per_page_current_authority', $ownership['fields']['blocks']);
         self::assertContains('sharded_current', $ownership['prohibited_competing_authorities']);
     }
