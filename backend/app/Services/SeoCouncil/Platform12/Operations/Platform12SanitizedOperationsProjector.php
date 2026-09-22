@@ -84,6 +84,7 @@ final readonly class Platform12SanitizedOperationsProjector
             $freshness === 'STALE' => 'STALE',
             $total === 0 => 'VALID_ZERO',
             $held !== [] => 'HOLD',
+            $kind === 'system_health' && array_filter($safe, static fn (array $item): bool => in_array($item['state'], ['UNAVAILABLE', 'STALE'], true)) !== [] => 'HOLD',
             default => 'READY',
         };
 
@@ -115,9 +116,8 @@ final readonly class Platform12SanitizedOperationsProjector
         }
         if (! is_string($safe['state'] ?? null)
             || preg_match('/^[A-Z][A-Z0-9_]{1,31}$/D', $safe['state']) !== 1
-            || ! is_int($safe['count'] ?? null)
-            || $safe['count'] < 0
-            || $safe['count'] > 1000000) {
+            || (! (array_key_exists('count', $safe) && $safe['count'] === null && $kind === 'system_health' && $safe['state'] === 'UNAVAILABLE')
+                && (! is_int($safe['count'] ?? null) || $safe['count'] < 0 || $safe['count'] > 1000000))) {
             return null;
         }
         foreach (['observed_at', 'expires_at'] as $time) {

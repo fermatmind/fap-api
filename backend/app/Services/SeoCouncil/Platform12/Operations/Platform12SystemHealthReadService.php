@@ -8,247 +8,267 @@ use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoCouncil\Platform12\Platform12DailyMissionSet;
 use App\Services\SeoCouncil\Platform12\Platform12RuntimeControl;
 use Carbon\CarbonImmutable;
-use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
 final readonly class Platform12SystemHealthReadService
 {
-    private const ACTIVE_DELIVERY_STATES = ['PLANNED', 'CLAIMED', 'RECOVERED'];
-
-    private const HOLD_DELIVERY_STATES = ['HELD', 'FAILED'];
+    private const TERMINAL = ['CLOSED', 'HELD', 'FAILED'];
 
     public function __construct(
         private Platform12SanitizedOperationsProjector $projector,
         private Platform12IssueExplanation $explanations,
     ) {}
 
-    /** @return array<string, mixed> */
     public function snapshot(?array $runtime = null): array
     {
         try {
             $runtime ??= app(Platform12RuntimeControl::class)->status();
             $connection = DB::connection((string) config('seo_council.connection', 'seo_intel'));
             $now = CarbonImmutable::now('UTC');
-            $activeLeases = $connection->table('seo_council_scheduler_leases')
-                ->where('lease_expires_at', '>', $now->format('Y-m-d H:i:s'))
-                ->count();
-            $deliveryCounts = $this->deliveryCounts($connection);
-            $latest = $connection->table('seo_council_schedule_deliveries')
-                ->select(['status', 'updated_at'])
-                ->orderByDesc('updated_at')
-                ->first();
-            try {
-                $daily = $this->dailyMissions($connection, $runtime);
-            } catch (Throwable) {
-                $daily = ['runtime_state' => 'UNAVAILABLE', 'enabled' => false, 'audit_enabled' => false,
-                    'business_write_enabled' => false, 'actionable_count' => null, 'items' => []];
+            // Latest record per mission plus EVERY unfinished delivery: unrelated new
+            // work must never hide an old unfinished task. Refuse a truncated read.
+            $latest = $connection->table('seo_council_schedule_deliveries')->selectRaw('MAX(id)')->groupBy('mission_id');
+            $rows = $connection->table('seo_council_schedule_deliveries AS d')
+                ->leftJoin('seo_council_run_receipts AS r', 'd.terminal_receipt_reference', '=', 'r.receipt_id')
+                ->where(fn ($query) => $query->whereNotIn('d.status', self::TERMINAL)->orWhereIn('d.id', $latest))
+                ->select(['d.id', 'd.mission_id', 'd.status', 'd.scheduled_for', 'd.lease_key', 'd.fencing_token',
+                    'd.terminal_receipt_reference', 'd.terminal_receipt_hash', 'd.mission_request_hash',
+                    'r.receipt_hash AS stored_receipt_hash'])
+                ->selectRaw('CASE WHEN LENGTH(r.receipt_json) <= 262144 THEN r.receipt_json ELSE NULL END AS receipt_json')
+                ->orderByDesc('d.id')->limit(201)->get();
+            $maxLeaseWindow = (int) config('seo_council.scheduler_max_lease_ttl_seconds', 300)
+                + (int) config('seo_council.scheduler_max_clock_drift_seconds', 30);
+            $leaseLimit = match ($connection->getDriverName()) {
+                'mysql' => 'DATE_ADD(CURRENT_TIMESTAMP, INTERVAL '.$maxLeaseWindow.' SECOND)',
+                'sqlite' => "datetime(CURRENT_TIMESTAMP, '+".$maxLeaseWindow." seconds')",
+                default => throw new \RuntimeException('UNPROVEN_SCHEDULER_CLOCK'),
+            };
+            $leases = $connection->table('seo_council_scheduler_leases')
+                ->select(['lease_key', 'fencing_token'])
+                ->selectRaw('CASE WHEN lease_expires_at > CURRENT_TIMESTAMP AND lease_expires_at <= '.$leaseLimit.' THEN 1 ELSE 0 END AS active')
+                ->limit(201)->get()->keyBy('lease_key');
+            if ($rows->count() > 200 || $leases->count() > 200) {
+                return $this->unavailableSnapshot();
             }
+            $daily = $this->dailyMissions($rows, $runtime, $now);
+            $pending = $running = $future = $anomalies = $unknown = $workUnknown = $stale = 0;
+            foreach ($rows as $row) {
+                if ($row->status === 'PLANNED') {
+                    $scheduled = Platform12OperationsTime::utcDatetime($row->scheduled_for);
+                    if ($scheduled === null) {
+                        $unknown++;
+                        $workUnknown++;
+                    } elseif ($scheduled->gt($now)) {
+                        $future++;
+                    } else {
+                        $pending++;
+                        $stale += (int) $scheduled->lt($now->subDay());
+                    }
+                } elseif (in_array($row->status, ['CLAIMED', 'RECOVERED'], true)) {
+                    $running++;
+                    $lease = $leases->get($row->lease_key);
+                    if ($lease === null || ! $lease->active || (int) $lease->fencing_token !== (int) $row->fencing_token) {
+                        $anomalies++;
+                    }
+                } elseif ($row->status === 'FAILED' || $row->status === 'BACKPRESSURE_HOLD') {
+                    $anomalies++;
+                } elseif ($row->status === 'HELD') {
+                    $receipt = $this->receipt($row);
+                    if ($receipt === null) {
+                        $unknown++;
+                    } elseif (($receipt['status'] ?? null) !== 'DAILY_MISSION_HOLD') {
+                        $anomalies++;
+                    } elseif (! is_array($this->evaluation($receipt))) {
+                        $unknown++;
+                    }
+                } elseif ($row->status !== 'CLOSED') {
+                    $unknown++;
+                    $workUnknown++;
+                }
+            }
+            $workload = $pending + $running;
+            $backlogState = $workUnknown > 0 ? 'UNAVAILABLE' : ($stale > 0 ? 'STALE' : ($running > 0 ? 'RUNNING' : ($workload > 0 ? 'READY' : 'VALID_ZERO')));
+            $scheduler = ! config('seo_council.scheduler_enabled', false) ? 'DISABLED' : (($runtime['computation_enabled'] ?? false) ? 'READY' : 'HOLD');
+            $records = [
+                $this->record('scheduler', 'production_council_scheduler_'.strtolower($scheduler), $scheduler, 0),
+                $this->record('lease_backlog', 'active_lease_and_delivery_backlog', $backlogState, $workUnknown > 0 ? null : $workload),
+                $this->record('pending_deliveries', 'pending_deliveries', $pending ? 'READY' : 'VALID_ZERO', $pending),
+                $this->record('running_deliveries', 'running_deliveries', $running ? 'RUNNING' : 'VALID_ZERO', $running),
+                $this->record('scheduled_deliveries', 'scheduled_deliveries', $future ? 'READY' : 'VALID_ZERO', $future),
+                $this->record('active_leases', 'active_leases', 'READY', $leases->where('active', 1)->count()),
+                $this->record('execution_anomalies', 'execution_anomalies', $anomalies ? 'HOLD' : ($unknown ? 'UNAVAILABLE' : 'VALID_ZERO'), $anomalies ?: ($unknown ? null : 0)),
+                $this->record('business_checks', 'business_checks', $daily['business_hold_count'] ? 'HOLD' : ($daily['evidence_issue_count'] ? 'UNAVAILABLE' : 'VALID_ZERO'), $daily['business_hold_count'] ?: ($daily['evidence_issue_count'] ? null : 0)),
+                $this->record('check_evidence', 'check_evidence', $daily['evidence_issue_count'] ? 'UNAVAILABLE' : 'READY', $daily['evidence_issue_count']),
+            ];
+            foreach (['data_freshness', 'policy_drift', 'registry_drift', 'tool_drift', 'schema_drift', 'trace_completeness'] as $component) {
+                $health = $daily['health'][$component] ?? ['state' => 'UNAVAILABLE', 'time' => null];
+                $records[] = $this->record($component, $component, $health['state'], 0, $health['time']);
+            }
+            $notification = 'DISABLED';
+            $notificationFailures = 0;
+            if (($runtime['computation_enabled'] ?? false) || config('seo_council.notification_dispatch_enabled', false)) {
+                try {
+                    $notificationFailures = $connection->table('seo_council_notification_outbox')->where('status', 'failed')->count();
+                    $notification = $notificationFailures > 0 ? 'HOLD' : 'READY';
+                } catch (Throwable) {
+                    $notification = 'UNAVAILABLE';
+                    $notificationFailures = null;
+                }
+            }
+            $records[] = $this->record('cost', 'model_runtime_cost_events', config('seo_council.model_runtime_enabled') ? 'HOLD' : 'VALID_ZERO', 0);
+            $records[] = $this->record('notification_transport', 'notification_dispatch_'.($notification === 'DISABLED' ? 'disabled' : 'enabled'), $notification, $notificationFailures);
+            $records[] = $this->record('write_guards', 'production_write_guards_closed', app(Platform12RuntimeControl::class)->businessGuardsClosed() ? 'READY' : 'HOLD', 0);
 
-            return [...$this->projector->systemHealth([
-                'availability' => 'AVAILABLE',
-                'freshness' => 'FRESH',
-                'records' => $this->records($now, $activeLeases, $deliveryCounts, $latest, $daily, $runtime),
-            ]), 'daily_missions' => $daily];
+            return [...$this->projector->systemHealth(['availability' => 'AVAILABLE', 'freshness' => 'FRESH', 'records' => $records]), 'daily_missions' => $daily];
         } catch (Throwable) {
             return $this->unavailableSnapshot();
         }
     }
 
-    /** @return array<string, mixed> */
     public function unavailableSnapshot(): array
     {
-        return $this->projector->systemHealth([
-            'availability' => 'UNAVAILABLE',
-            'freshness' => 'UNKNOWN',
-            'records' => [],
-        ]);
+        return $this->projector->systemHealth(['availability' => 'UNAVAILABLE', 'freshness' => 'UNKNOWN', 'records' => []]);
     }
 
-    /** @return array<string, int> */
-    private function deliveryCounts(ConnectionInterface $connection): array
+    private function record(string $component, string $summaryCode, string $state, ?int $count, ?string $observedAt = null): array
     {
-        $counts = [];
-        foreach ($connection->table('seo_council_schedule_deliveries')
-            ->selectRaw('status, COUNT(*) AS aggregate_count')
-            ->groupBy('status')
-            ->get() as $row) {
-            $counts[(string) $row->status] = (int) $row->aggregate_count;
+        return ['component' => $component, 'summary_code' => $summaryCode, 'state' => $state, 'count' => $count, 'observed_at' => $observedAt];
+    }
+
+    private function receipt(object $row): ?array
+    {
+        if (! is_string($row->receipt_json) || strlen($row->receipt_json) > 262144) {
+            return null;
+        }
+        $receipt = json_decode($row->receipt_json, true);
+        if (! is_array($receipt) || ! is_string($row->terminal_receipt_hash)
+            || ($receipt['request_hash'] ?? null) !== $row->mission_request_hash
+            || ($receipt['receipt_id'] ?? null) !== $row->terminal_receipt_reference
+            || ($receipt['receipt_hash'] ?? null) !== $row->terminal_receipt_hash
+            || $row->stored_receipt_hash !== $row->terminal_receipt_hash
+            || ! hash_equals(app(SeoRegistryHasher::class)->hashWithout($receipt, 'receipt_hash'), $row->terminal_receipt_hash)) {
+            return null;
+        }
+        $scheduled = collect($receipt['route_plan'] ?? [])->firstWhere('kind', 'scheduled_delivery');
+        $instant = Platform12OperationsTime::instant($scheduled['scheduled_for'] ?? null);
+        $stored = Platform12OperationsTime::utcDatetime($row->scheduled_for);
+        if (($scheduled['mission_id'] ?? null) !== $row->mission_id || $instant === null || $stored === null || ! $instant->eq($stored)) {
+            return null;
         }
 
-        return $counts;
+        return $receipt;
     }
 
-    /**
-     * @param  array<string, int>  $deliveryCounts
-     * @return list<array<string, mixed>>
-     */
-    private function records(CarbonImmutable $now, int $activeLeases, array $deliveryCounts, ?object $latest, array $daily, array $control): array
+    private function evaluation(array $receipt): ?array
     {
-        $schedulerEnabled = (bool) config('seo_council.scheduler_enabled', false);
-        $activeDeliveries = $this->sumStates($deliveryCounts, self::ACTIVE_DELIVERY_STATES);
-        $heldDeliveries = isset($daily['health']) ? $daily['actionable_count'] : $this->sumStates($deliveryCounts, self::HOLD_DELIVERY_STATES);
-        $latestAt = $latest === null ? null : CarbonImmutable::parse((string) $latest->updated_at, 'UTC');
-        $isStale = $latestAt !== null && $latestAt->lt($now->subDay());
-        $backlogState = match (true) {
-            $heldDeliveries > 0 => 'HOLD',
-            $isStale && $activeDeliveries > 0 => 'STALE',
-            $activeLeases + $activeDeliveries === 0 => 'VALID_ZERO',
-            default => 'READY',
+        $output = collect($receipt['route_plan'] ?? [])->firstWhere('kind', 'daily_evaluation')['output'] ?? null;
+
+        return is_array($output) && is_string($output['state'] ?? null) ? $output : null;
+    }
+
+    private function gateStep(array $gate, array $runtime): string
+    {
+        $selected = $gate['selected'] ?? null;
+        $allowed = $gate['run_allowed'] ?? null;
+        $pause = $runtime['pause_intent'] ?? null;
+        if (! is_bool($selected) || ! is_bool($allowed) || ! in_array($pause, ['RUNNING', 'PAUSED'], true)
+            || ($allowed && (! $selected || $pause === 'PAUSED' || ($runtime['public_gate'] ?? null) !== 'READY'
+                || ! ($gate['acceptance_ready'] ?? false) || ! ($gate['source_accepted'] ?? false) || ! ($gate['end_to_end_accepted'] ?? false)))) {
+            return 'authorization_unknown';
+        }
+
+        return match (true) {
+            ! $selected => 'explicit_selection_required',
+            $pause === 'PAUSED' => 'mission_paused',
+            $allowed => 'natural_run_authorized',
+            ($runtime['public_gate'] ?? null) !== 'READY', ! ($gate['acceptance_ready'] ?? false) => 'public_checks_required',
+            ! ($gate['source_accepted'] ?? false) => 'source_acceptance_required',
+            ! ($gate['end_to_end_accepted'] ?? false) => 'end_to_end_required',
+            default => 'runtime_blocked',
         };
-        $runtimeState = ! $schedulerEnabled ? 'DISABLED'
-            : ($control['computation_enabled'] ? 'READY' : 'HOLD');
-        $freshnessState = match (true) {
-            $latestAt === null => 'UNAVAILABLE',
-            $isStale => 'STALE',
-            default => 'READY',
-        };
-        $health = $daily['health'] ?? [];
-        $observedAt = $latestAt?->format('Y-m-d\TH:i:s\Z');
-        $notification = 'DISABLED';
-        $notificationFailures = 0;
-        if ($control['computation_enabled'] || config('seo_council.notification_dispatch_enabled', false)) {
-            try {
-                $notificationFailures = DB::connection((string) config('seo_council.connection', 'seo_intel'))
-                    ->table('seo_council_notification_outbox')->where('status', 'failed')->count();
-                $notification = $notificationFailures > 0 ? 'HOLD' : 'READY';
-            } catch (Throwable) {
-                $notification = 'UNAVAILABLE';
-            }
-        }
-
-        return [
-            $this->record('scheduler', 'production_council_scheduler_'.strtolower($runtimeState), $runtimeState, 0),
-            $this->record('lease_backlog', 'active_lease_and_delivery_backlog', $backlogState, $activeLeases + $activeDeliveries),
-            $this->record('data_freshness', 'latest_scheduler_delivery', $health['data_freshness'] ?? $freshnessState, $latestAt === null ? 0 : 1, $observedAt),
-            $this->record('policy_drift', 'runtime_policy_vector', $health['policy'] ?? 'UNAVAILABLE', 0, $observedAt),
-            $this->record('registry_drift', 'runtime_registry_vector', $health['registry'] ?? 'UNAVAILABLE', 0, $observedAt),
-            $this->record('tool_drift', 'runtime_tool_vector', $health['tool'] ?? 'UNAVAILABLE', 0, $observedAt),
-            $this->record('schema_drift', 'runtime_schema_vector', $health['schema'] ?? 'UNAVAILABLE', 0, $observedAt),
-            $this->record('trace_completeness', 'scheduler_trace_coverage', $health['trace'] ?? 'UNAVAILABLE', 0, $observedAt),
-            $this->record('cost', 'model_runtime_cost_events', config('seo_council.model_runtime_enabled') ? 'HOLD' : 'VALID_ZERO', 0),
-            $this->record(
-                'notification_transport',
-                'notification_dispatch_'.($notification === 'DISABLED' ? 'disabled' : 'enabled'),
-                $notification,
-                $notificationFailures,
-            ),
-            $this->record('write_guards', 'production_write_guards_closed', $this->writeGuardsClosed() ? 'READY' : 'HOLD', 0),
-        ];
     }
 
-    /** @return array{component:string,summary_code:string,state:string,count:int,observed_at?:string} */
-    private function record(string $component, string $summaryCode, string $state, int $count, ?string $observedAt = null): array
+    private function dailyMissions($rows, array $runtime, CarbonImmutable $now): array
     {
-        $record = compact('component', 'state', 'count');
-        $record['summary_code'] = $summaryCode;
-        if ($observedAt !== null) {
-            $record['observed_at'] = $observedAt;
-        }
-
-        return $record;
-    }
-
-    /** @param list<string> $states */
-    private function sumStates(array $counts, array $states): int
-    {
-        return array_sum(array_map(static fn (string $state): int => $counts[$state] ?? 0, $states));
-    }
-
-    private function writeGuardsClosed(): bool
-    {
-        return app(Platform12RuntimeControl::class)->businessGuardsClosed();
-    }
-
-    private function dailyMissions(ConnectionInterface $connection, array $runtime): array
-    {
-        $latest = $connection->table('seo_council_schedule_deliveries')
-            ->selectRaw('MAX(id) AS id')->whereIn('mission_id', Platform12DailyMissionSet::IDS)->groupBy('mission_id');
-        $rows = $connection->table('seo_council_schedule_deliveries AS d')
-            ->joinSub($latest, 'latest', 'd.id', '=', 'latest.id')
-            ->leftJoin('seo_council_run_receipts AS r', 'd.terminal_receipt_reference', '=', 'r.receipt_id')
-            ->limit(3)->get(['d.mission_id', 'd.status', 'd.scheduled_for', 'd.updated_at', 'd.terminal_receipt_hash', 'r.receipt_json'])
-            ->keyBy('mission_id');
         $set = app(Platform12DailyMissionSet::class);
         $items = [];
         $health = [];
-        $verified = 0;
-        $terminal = 0;
+        $businessHolds = $evidenceIssues = $missingReceipts = 0;
         foreach ($set->missions() as $index => $mission) {
-            $row = $rows->get($mission['mission_id']);
-            $receipt = $row !== null && is_string($row->receipt_json) && strlen($row->receipt_json) <= 262144
-                ? json_decode($row->receipt_json, true) : null;
-            if (is_array($receipt) && (! is_string($row->terminal_receipt_hash)
-                || ! hash_equals(app(SeoRegistryHasher::class)->hashWithout($receipt, 'receipt_hash'), $row->terminal_receipt_hash))) {
-                $receipt = null;
-            }
-            if ($row !== null && in_array($row->status, ['CLOSED', 'HELD', 'FAILED'], true)) {
-                $terminal++;
-                $verified += (int) is_array($receipt);
-            }
-            $status = $row === null ? 'NOT_STARTED' : match ($row->status) {
-                'CLOSED' => is_array($receipt) ? 'READY' : 'UNAVAILABLE',
-                'HELD', 'FAILED' => 'HOLD',
-                'PLANNED', 'CLAIMED', 'RECOVERED' => 'RUNNING',
-                default => 'UNAVAILABLE',
+            $row = $rows->firstWhere('mission_id', $mission['mission_id']);
+            $receipt = $row === null ? null : $this->receipt($row);
+            $missingReceipts += (int) ($receipt === null);
+            $output = $receipt === null ? null : $this->evaluation($receipt);
+            $observed = Platform12OperationsTime::instant($output['evaluated_at'] ?? null);
+            $stale = $observed !== null && $observed->lt($now->subHours(26));
+            $execution = $row?->status ?? 'NOT_STARTED';
+            $validResult = $receipt !== null && $output !== null
+                && (($execution === 'CLOSED' && ($receipt['status'] ?? null) === 'DAILY_MISSION_READY' && $output['state'] === 'READY')
+                    || ($execution === 'HELD' && ($receipt['status'] ?? null) === 'DAILY_MISSION_HOLD' && $output['state'] !== 'READY'));
+            $state = match (true) {
+                $row === null => 'NOT_STARTED',
+                in_array($execution, ['CLAIMED', 'RECOVERED'], true) => 'RUNNING',
+                $execution === 'PLANNED' => 'PENDING',
+                $execution === 'FAILED' => 'FAILED',
+                $execution === 'BACKPRESSURE_HOLD' => 'EXECUTION_HOLD',
+                $receipt !== null && ($receipt['status'] ?? null) === 'DAILY_STOPPED_HOLD' => 'EXECUTION_HOLD',
+                ! $validResult || $observed === null || $observed->gt($now) => 'UNAVAILABLE',
+                $stale => 'STALE',
+                $output['state'] === 'READY' => 'READY',
+                default => 'HOLD',
             };
-            $scheduled = collect($receipt['route_plan'] ?? [])->firstWhere('kind', 'scheduled_delivery');
-            $output = collect($receipt['route_plan'] ?? [])->firstWhere('kind', 'daily_evaluation')['output'] ?? [];
-            $stale = $row !== null && CarbonImmutable::parse($row->updated_at, 'UTC')->lt(CarbonImmutable::now('UTC')->subHours(26));
-            if ($stale && $status === 'READY') {
-                $status = 'STALE';
-            }
+            $businessHolds += (int) ($state === 'HOLD');
+            $evidenceIssues += (int) in_array($state, ['STALE', 'UNAVAILABLE', 'NOT_STARTED'], true);
+            $observedAt = Platform12OperationsTime::iso($observed);
+            $scheduled = $receipt === null ? null : collect($receipt['route_plan'] ?? [])->firstWhere('kind', 'scheduled_delivery');
+            $explanation = $this->explanations->for(in_array($state, ['READY', 'HOLD', 'STALE'], true) ? $output : [], $state, ! empty($scheduled['source_gaps']));
+            $gate = $runtime['missions'][$mission['mission_id']] ?? [];
+            $step = $this->gateStep($gate, $runtime);
+            $items[] = [
+                'label_key' => 'seo-council.missions.'.$index, 'state' => $state, ...$explanation,
+                'execution_state' => $this->safeCode($execution),
+                'business_result' => $validResult ? $this->safeCode($output['state']) : 'UNAVAILABLE',
+                'source_checks' => $this->sourceChecks($scheduled, $output ?? []),
+                'observed_at' => $observedAt,
+                // updated_at has mixed writers (UTC reservation, DB-wall completion).
+                // It is not business evaluation evidence and is not guessed here.
+                'record_updated_at' => null,
+                'evidence_origin' => in_array($scheduled['trigger_mode'] ?? null, ['scheduled', 'catch_up', 'missed', 'controlled_acceptance'], true) ? $scheduled['trigger_mode'] : 'unknown',
+                'next_run' => $step === 'natural_run_authorized' ? $set->nextRun($mission, $now) : null,
+                'planned_time' => $set->nextRun($mission, $now),
+                'selected' => $gate['selected'] ?? null, 'run_allowed' => $gate['run_allowed'] ?? null,
+                'pause_intent' => $runtime['pause_intent'] ?? 'UNSET',
+                'acceptance_ready' => $gate['acceptance_ready'] ?? null,
+                'source_accepted' => $gate['source_accepted'] ?? null,
+                'end_to_end_accepted' => $gate['end_to_end_accepted'] ?? null,
+                'gate_reason' => $this->safeCode($gate['reason'] ?? null), 'gate_next_step' => $step,
+                'receipt_hash' => $receipt === null ? null : $row->terminal_receipt_hash,
+            ];
             if ($index === 0) {
-                $health['data_freshness'] = $stale ? 'STALE' : (isset($output['gsc']) ? ($output['state'] === 'READY' ? 'READY' : 'HOLD') : 'UNAVAILABLE');
+                $health['data_freshness'] = ['state' => $state === 'HOLD' && isset($output['gsc']) ? 'HOLD' : ($state === 'READY' && isset($output['gsc']) ? 'READY' : ($stale ? 'STALE' : 'UNAVAILABLE')), 'time' => $observedAt];
             }
             if ($index === 2) {
-                foreach (['policy', 'tool', 'schema'] as $dimension) {
-                    $health[$dimension] = $stale ? 'STALE' : match ($output['drift'][$dimension] ?? null) {
-                        'MATCH' => 'READY', 'DRIFT' => 'HOLD', default => 'UNAVAILABLE',
-                    };
+                foreach (['policy', 'tool', 'schema', 'registry'] as $dimension) {
+                    $value = $dimension === 'registry' ? array_intersect_key($output['drift'] ?? [], array_flip(['role', 'binding', 'prompt'])) : [$output['drift'][$dimension] ?? null];
+                    $expected = $dimension === 'registry' ? 3 : 1;
+                    $health[$dimension.'_drift'] = ['state' => ! $validResult || $observed === null ? 'UNAVAILABLE' : ($stale ? 'STALE' : ($observed->gt($now) ? 'UNAVAILABLE' : (in_array('DRIFT', $value, true) ? 'HOLD' : (count($value) === $expected && count(array_filter($value, static fn ($v) => $v === 'MATCH')) === $expected ? 'READY' : 'UNAVAILABLE')))), 'time' => $observedAt];
                 }
-                $states = array_intersect_key($output['drift'] ?? [], array_flip(['role', 'binding', 'prompt']));
-                $health['registry'] = $stale ? 'STALE' : (count($states) !== 3 || in_array('UNAVAILABLE', $states, true)
-                    ? 'UNAVAILABLE' : (in_array('DRIFT', $states, true) ? 'HOLD' : 'READY'));
             }
-            $gate = $runtime['missions'][$mission['mission_id']] ?? [];
-            $selected = $gate['selected'] ?? false;
-            $runAllowed = $gate['run_allowed'] ?? false;
-            if (! $selected) {
-                $status = 'NOT_AUTHORIZED';
-            } elseif (($runtime['pause_intent'] ?? null) === 'PAUSED') {
-                $status = 'PAUSED';
-            } elseif ($row === null && ! ($gate['end_to_end_accepted'] ?? false)) {
-                $status = 'PENDING_ACCEPTANCE';
-            }
-            $sourceGaps = $scheduled['source_gaps'] ?? null;
-            $explanation = $this->explanations->for($output, $status, is_array($sourceGaps) && $sourceGaps !== []);
-            $items[] = [
-                'label_key' => 'seo-council.missions.'.$index,
-                'state' => $status,
-                ...$explanation,
-                'source_checks' => $this->sourceChecks($scheduled, $output),
-                'observed_at' => $row !== null ? CarbonImmutable::parse($row->updated_at, 'UTC')->toAtomString() : null,
-                'next_run' => $runAllowed ? $set->nextRun($mission, CarbonImmutable::now('UTC')) : null,
-                'planned_time' => $set->nextRun($mission, CarbonImmutable::now('UTC')),
-                'selected' => $selected, 'run_allowed' => $runAllowed,
-                'acceptance_ready' => $gate['acceptance_ready'] ?? false,
-                'source_accepted' => $gate['source_accepted'] ?? false,
-                'gate_reason' => $gate['reason'] ?? 'ACTIVATION_EVIDENCE_MISSING',
-                'gate_next_step' => ! ($gate['acceptance_ready'] ?? false) ? 'public_checks_required'
-                    : (! ($gate['source_accepted'] ?? false) ? 'source_acceptance_required' : 'explicit_selection_required'),
-                'receipt_hash' => preg_match('/^[a-f0-9]{64}$/D', (string) $row?->terminal_receipt_hash) === 1
-                    ? $row->terminal_receipt_hash : null,
-            ];
         }
+        $health['trace_completeness'] = ['state' => $missingReceipts ? 'UNAVAILABLE' : 'READY', 'time' => null];
 
-        $health['trace'] = $terminal === 0 ? 'UNAVAILABLE' : ($verified === $terminal ? 'READY' : 'HOLD');
+        return ['public_gate' => $this->safeCode($runtime['public_gate'] ?? null), 'pause_intent' => $this->safeCode($runtime['pause_intent'] ?? null),
+            'scheduler_enabled' => (bool) config('seo_council.scheduler_enabled', false),
+            'runtime_state' => $this->safeCode($runtime['state'] ?? null), 'enabled' => $runtime['computation_enabled'] ?? false,
+            'audit_enabled' => $runtime['audit_enabled'] ?? false, 'business_write_enabled' => false, 'health' => $health,
+            'business_hold_count' => $businessHolds, 'evidence_issue_count' => $evidenceIssues,
+            'actionable_count' => $businessHolds + $evidenceIssues, 'items' => $items];
+    }
 
-        return ['public_gate' => $runtime['public_gate'] ?? 'UNAVAILABLE', 'pause_intent' => $runtime['pause_intent'] ?? 'UNSET',
-            'runtime_state' => $runtime['state'], 'enabled' => $runtime['computation_enabled'],
-            'audit_enabled' => $runtime['audit_enabled'], 'business_write_enabled' => false, 'health' => $health,
-            'actionable_count' => count(array_filter($items, static fn (array $item): bool => in_array($item['state'], ['HOLD', 'STALE', 'UNAVAILABLE'], true))),
-            'items' => $items];
+    private function safeCode(mixed $value): string
+    {
+        return is_string($value) && preg_match('/^[A-Z][A-Z0-9_]{1,63}$/D', $value) === 1 ? $value : 'UNAVAILABLE';
     }
 
     /** @return list<array{label_key:string,state:string,observed_at:?string,hash:string}> */
@@ -275,7 +295,7 @@ final readonly class Platform12SystemHealthReadService
                 default => null,
             };
             $items[] = ['label_key' => 'seo-council.sources.'.$source['id'], 'state' => $count === 0 ? 'VALID_ZERO' : 'AVAILABLE',
-                'observed_at' => is_string($observed) ? $observed : null,
+                'observed_at' => Platform12OperationsTime::iso(Platform12OperationsTime::instant($observed)),
                 'hash' => preg_match('/^[a-f0-9]{64}$/D', (string) ($source['hash'] ?? '')) === 1 ? $source['hash'] : 'unavailable'];
         }
         foreach (array_slice($scheduled['source_gaps'] ?? [], 0, 8 - count($items)) as $gap) {

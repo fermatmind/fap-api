@@ -11,14 +11,16 @@ final class Platform12IssueExplanation
     public function for(array $output, string $state, bool $hasSourceGap): array
     {
         $reason = match (true) {
-            $hasSourceGap => 'SOURCE_UNAVAILABLE',
             $state === 'STALE' => 'STALE_EVIDENCE_HOLD',
+            in_array($state, ['NOT_STARTED', 'PENDING', 'RUNNING', 'FAILED', 'EXECUTION_HOLD', 'UNAVAILABLE'], true) => $state,
+            $hasSourceGap => 'SOURCE_UNAVAILABLE',
             default => (string) (($output['reason_codes'][0] ?? null) ?: ($output['state'] ?? $state)),
         };
         if (preg_match('/^[A-Z][A-Z0-9_]{1,63}$/D', $reason) !== 1) {
             $reason = 'UNCLASSIFIED_HOLD';
         }
         $known = [
+            'NOT_STARTED', 'PENDING', 'RUNNING', 'FAILED', 'EXECUTION_HOLD', 'UNAVAILABLE',
             'READY', 'SOURCE_UNAVAILABLE', 'GSC_UNAVAILABLE_HOLD', 'MAPPING_FAILED_HOLD',
             'WINDOW_INCOMPLETE_HOLD', 'DATA_FRESHNESS_HOLD', 'DATA_QUALITY_HOLD',
             'RUNTIME_UNAVAILABLE_HOLD', 'RUNTIME_READBACK_HOLD', 'URL_TRUTH_UNAVAILABLE_HOLD',
