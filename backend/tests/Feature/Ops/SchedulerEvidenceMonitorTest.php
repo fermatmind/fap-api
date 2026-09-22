@@ -226,7 +226,7 @@ final class SchedulerEvidenceMonitorTest extends TestCase
         $releaseSha = str_repeat('b', 40);
         $capabilityRevision = SeoWeeklyDecisionReceiptService::capabilityRevision();
         $selection = [
-            'schema_version' => SeoWeeklyDecisionReceiptService::SELECTION_CONTRACT_VERSION,
+            'schema_version' => 'seo.weekly_decision_selection_receipt.v2',
             'receipt_hash_algorithm' => SeoWeeklyDecisionReceiptValidator::HASH_ALGORITHM,
             'status' => 'scheduled_completed',
             'trigger' => 'scheduled',
@@ -257,7 +257,7 @@ final class SchedulerEvidenceMonitorTest extends TestCase
             'created_at' => $slot,
         ]);
         $capability = array_merge($selection, [
-            'schema_version' => SeoWeeklyDecisionReceiptService::CONTRACT_VERSION,
+            'schema_version' => 'seo.weekly_decision_receipt.v3',
             'capability_version' => SeoWeeklyDecisionReceiptService::CAPABILITY_VERSION,
             'capability_revision' => $capabilityRevision,
         ]);

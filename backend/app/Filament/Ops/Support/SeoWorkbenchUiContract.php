@@ -15,7 +15,7 @@ final class SeoWorkbenchUiContract
     /** @return array<string, mixed> */
     public static function snapshot(): array
     {
-        $selection = app(SeoWeeklyDecisionSelector::class)->snapshot();
+        $selection = app(SeoWeeklyDecisionSelector::class)->snapshot() + app(\App\Services\SeoIntel\Decision\SeoWeeklyPlanningReadService::class)->additions();
 
         return array_merge($selection, [
             'trend_state' => SeoOperationsUiState::MEASUREMENT_HOLD,

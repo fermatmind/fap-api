@@ -20,10 +20,15 @@ final class SeoWeeklyDecisionSelector
         private readonly SeoDecisionCardReadService $readService,
     ) {}
 
+    public function connectionName(): string
+    {
+        return $this->readService->connectionName();
+    }
+
     /** @return array<string, mixed> */
     public function snapshot(?CarbonImmutable $now = null, int $limit = self::DEFAULT_COUNT): array
     {
-        $source = $this->readService->snapshot();
+        $source = $this->readService->snapshot($now);
         $isoWeek = ($now ?? CarbonImmutable::now('UTC'))->setTimezone('UTC')->format('o-\WW');
         if ($source['state'] === 'unavailable') {
             return $this->response('unavailable', $isoWeek, [], null);
@@ -49,7 +54,8 @@ final class SeoWeeklyDecisionSelector
     /** @param array<string, mixed> $card */
     private function eligible(array $card): bool
     {
-        if (! in_array($card['status'] ?? null, self::ELIGIBLE_STATES, true)
+        if (($card['executable'] ?? false) !== true
+            || ! in_array($card['status'] ?? null, self::ELIGIBLE_STATES, true)
             || ($card['measurement_state'] ?? null) === 'MEASUREMENT_HOLD'
             || ($card['evidence_freshness'] ?? null) !== 'fresh'
             || ! is_numeric($card['priority_score'] ?? null)) {

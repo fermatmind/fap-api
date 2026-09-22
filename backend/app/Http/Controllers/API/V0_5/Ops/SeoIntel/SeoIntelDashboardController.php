@@ -99,7 +99,7 @@ final class SeoIntelDashboardController
 
     public function weeklyDecisions(): JsonResponse
     {
-        $snapshot = $this->weeklyDecisionSelector->snapshot();
+        $snapshot = $this->weeklyDecisionSelector->snapshot() + app(\App\Services\SeoIntel\Decision\SeoWeeklyPlanningReadService::class)->additions();
 
         return response()->json([
             'ok' => true,

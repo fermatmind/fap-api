@@ -97,7 +97,16 @@ final class SeoDecisionLifecycleMaterializer
                 'l4_enabled' => false,
                 'search_submission_allowed' => false,
             ];
-            $eventEvidenceJson = json_encode($eventEvidence, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
+            $brief = ($card['brief']['schema_version'] ?? null) === SeoOpportunityCardGenerator::VERSION
+                ? $card['brief']
+                : ($current === null ? null : (new SeoDecisionBrief($this->connection))->load($current));
+            if ($brief !== null) {
+                $eventEvidence['brief'] = $brief;
+                $eventEvidence['brief_hash_algorithm'] = SeoWeeklyDecisionReceiptValidator::HASH_ALGORITHM;
+            }
+            $eventEvidenceJson = $brief === null
+                ? json_encode($eventEvidence, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES)
+                : SeoWeeklyDecisionReceiptValidator::encode($eventEvidence);
             $eventId = $this->deterministicUuid($eventKey.'|'.$card['ledger_id']);
 
             $this->db()->table('seo_change_ledger_events')->insert([

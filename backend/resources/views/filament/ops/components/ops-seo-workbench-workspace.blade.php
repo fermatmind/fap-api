@@ -42,7 +42,7 @@
         <div class="ops-seo-section-heading">
             <div>
                 <span class="ops-shell-eyebrow">{{ __($copy.'.decisions.eyebrow') }}</span>
-                <h2 id="seo-workbench-decisions-title">{{ __($copy.'.decisions.title') }}</h2>
+                <h2 id="seo-workbench-decisions-title">{{ app()->getLocale() === 'en' ? 'Candidate suggestions' : '候选建议' }}</h2>
             </div>
             <span class="ops-tag">{{ $snapshot['iso_week'] }} · {{ $snapshot['count'] }} / {{ $snapshot['max_count'] }}</span>
         </div>
@@ -51,7 +51,7 @@
                 <span>{{ __($copy.'.decisions.columns.'.$column) }}</span>
             @endforeach
         </div>
-        @forelse ($snapshot['decisions'] as $decision)
+        @forelse ($snapshot['candidates']['decisions'] as $decision)
             <article
                 class="ops-seo-workbench-home__decision-head"
                 data-cluster-uid="{{ $decision['cluster_uid'] }}"
@@ -63,6 +63,7 @@
                 <span class="tnum">{{ $decision['priority_score'] }} / {{ $decision['affected_unique_url_count'] }}</span>
                 <span>{{ $decision['highest_allowed_action'] }} / {{ $decision['next_step'] }}</span>
             </article>
+            @include('filament.ops.components.ops-seo-decision-brief', ['decision' => $decision])
         @empty
             <x-filament-ops::ops-state-message
                 :state="$snapshot['state']"
@@ -70,6 +71,24 @@
                 :description="''"
             />
         @endforelse
+    </section>
+
+    <section aria-labelledby="seo-persisted-weekly-title">
+        <h2 id="seo-persisted-weekly-title">{{ app()->getLocale() === 'en' ? 'Selected this week — verified receipt versions' : '本周已选择 · 已验证回执的精确版本' }}</h2>
+        <p>{{ $snapshot['this_week_selected']['state'] }} · {{ $snapshot['this_week_selected']['scheduled_for'] ?? '—' }}</p>
+        <p>{{ $snapshot['this_week_selected']['receipt_hash'] ?? '—' }}</p>
+        @foreach ($snapshot['this_week_selected']['decisions'] as $decision)
+            @include('filament.ops.components.ops-seo-decision-brief', ['decision' => $decision])
+        @endforeach
+        @if ($snapshot['this_week_selected']['generation_summary'] ?? null)
+            <details><summary>{{ app()->getLocale() === 'en' ? 'Generation summary (counts by signal / page / card)' : '生成摘要（信号／页面／卡片分别计数）' }}</summary>
+                <pre>{{ json_encode($snapshot['this_week_selected']['generation_summary'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) }}</pre>
+            </details>
+        @endif
+        @foreach ($snapshot['held_cards'] as $decision)
+            @include('filament.ops.components.ops-seo-decision-brief', ['decision' => $decision])
+        @endforeach
+        <p>{{ app()->getLocale() === 'en' ? 'The natural task may write SEO planning records. Human review is required. Model, tools, publication, experiments and search submission remain disabled.' : '自然任务仅可写 SEO 规划记录，待人工判断。模型、工具、内容发布、实验与搜索提交权限保持关闭。' }}</p>
     </section>
 
     <section class="ops-seo-workbench-home__health" aria-labelledby="seo-workbench-health-title">

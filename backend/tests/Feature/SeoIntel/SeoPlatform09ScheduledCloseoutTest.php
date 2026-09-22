@@ -192,7 +192,7 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
         $workflow = (string) file_get_contents(base_path('../.github/workflows/deploy.yml'));
         $this->assertMatchesRegularExpression('/staging:[\s\S]+timeout-minutes: 120[\s\S]+environment: staging/', $workflow);
         $this->assertMatchesRegularExpression('/production:[\s\S]+timeout-minutes: 90[\s\S]+environment: production/', $workflow);
-        $this->assertSame(2, substr_count($workflow, 'kill-after=30s "$deploy_timeout" php /tmp/dep.phar deploy'));
+        $this->assertSame(2, substr_count($workflow, 'kill-after=30s "$deploy_timeout" php /tmp/dep.phar "$deploy_task"'));
         $this->assertMatchesRegularExpression('/concurrency:\s+group: trunk-deploy-\$\{\{ github\.repository \}\}\s+cancel-in-progress: false/', $workflow);
         $this->assertStringContainsString('TRUNK_DEPLOY_SERIALIZED: "true"', $workflow);
         $this->assertStringContainsString('DEPLOY_LOCK_RUN_ID: ${{ github.run_id }}', $workflow);
@@ -274,7 +274,7 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
             'owner' => 'seo_ops',
             'first_observed_at' => '2026-08-27 00:00:00',
             'last_observed_at' => '2026-08-27 00:00:00',
-            'expires_at' => '2026-08-28 00:00:00',
+            'expires_at' => '2026-09-11 00:00:00',
             'status' => 'candidate',
             'evidence_hash' => hash('sha256', 'weekly-candidate-evidence'),
             'created_at' => '2026-08-27 00:00:00',

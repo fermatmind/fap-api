@@ -17,8 +17,15 @@ final class SeoPlatform12E03DecisionExperimentUiTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        \Carbon\CarbonImmutable::setTestNow('2026-09-06T12:00:00Z');
         config()->set('database.connections.seo_intel', ['driver' => 'sqlite', 'database' => ':memory:', 'prefix' => '', 'foreign_key_constraints' => false]);
         DB::purge('seo_intel');
+    }
+
+    protected function tearDown(): void
+    {
+        \Carbon\CarbonImmutable::setTestNow();
+        parent::tearDown();
     }
 
     public function test_missing_sources_are_unavailable_and_never_fabricated(): void

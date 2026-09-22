@@ -14,8 +14,13 @@ final class SeoDecisionCardReadService
         private readonly string $connection = 'seo_intel',
     ) {}
 
+    public function connectionName(): string
+    {
+        return $this->connection;
+    }
+
     /** @return array{state:string,items:list<array<string,mixed>>,count:int,read_only:bool} */
-    public function snapshot(): array
+    public function snapshot(?\Carbon\CarbonImmutable $now = null): array
     {
         try {
             $schema = Schema::connection($this->connection);
@@ -42,7 +47,7 @@ final class SeoDecisionCardReadService
 
             $items = [];
             foreach ($rows as $row) {
-                $card = $this->present($row);
+                $card = $this->present($row, $now);
                 if (! SeoDecisionCardContract::isCard($card)) {
                     return $this->unavailable();
                 }
@@ -61,7 +66,7 @@ final class SeoDecisionCardReadService
     }
 
     /** @return array<string, mixed> */
-    private function present(object $row): array
+    public function present(object $row, ?\Carbon\CarbonImmutable $now = null): array
     {
         $card = [
             'schema_version' => (string) $row->schema_version,
@@ -83,6 +88,21 @@ final class SeoDecisionCardReadService
                 default => $row->{$field},
             };
         }
+
+        $now ??= \Carbon\CarbonImmutable::now('UTC');
+        $briefs = new SeoDecisionBrief($this->connection);
+        $brief = $briefs->load($row);
+        $reason = empty($row->expires_at) || \Carbon\CarbonImmutable::parse($row->expires_at, 'UTC')->lte($now) ? 'expired' : null;
+        if ($reason === null && $row->detector === SeoOpportunityCardGenerator::ID) {
+            $reason = $brief === null ? 'brief_missing' : $briefs->holdReason($brief, $now);
+        }
+        if ($reason === null && ($row->measurement_state === 'MEASUREMENT_HOLD' || $row->evidence_freshness !== 'fresh')) {
+            $reason = 'evidence_on_hold';
+        }
+        $card['brief'] = SeoDecisionBrief::project($brief);
+        $card['brief_state'] = $brief === null ? 'not_provided' : 'available';
+        $card['hold_reason'] = $reason;
+        $card['executable'] = $reason === null && in_array($row->status, ['candidate', 'selected', 'in_progress', 'recovery_pending'], true);
 
         return $card;
     }

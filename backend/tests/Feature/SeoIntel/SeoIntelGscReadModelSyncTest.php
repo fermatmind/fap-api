@@ -93,6 +93,11 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
 
         $this->assertSame('success', $first['status']);
         $this->assertSame(2, $first['pages_fetched']);
+        $this->assertTrue($first['completeness']['pagination_complete']);
+        $this->assertFalse($first['completeness']['truncated']);
+        $this->assertSame(['query', 'page', 'device', 'country'], $first['completeness']['dimensions']);
+        $this->assertSame($first['start_date'], $first['completeness']['covered_start_date']);
+        $this->assertSame($first['end_date'], $first['completeness']['covered_end_date']);
         $this->assertSame(1, $first['rows_upserted']);
         $this->assertSame(0, $first['unmapped_rows']);
         $this->assertSame('success', $second['status']);

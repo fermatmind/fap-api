@@ -72,6 +72,21 @@ final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadServi
         ];
     }
 
+    /** Internal discovery only. The 5,000-row pool is never complete page evidence. */
+    public function planningDiscovery(): array
+    {
+        $rows = $this->gscRows();
+        $gate = $this->dataQualityGate->evaluate($rows);
+        $gsc = ($gate['opportunity_queue_eligible'] ?? false) ? $this->candidateRows($rows) : [];
+
+        return [
+            'rows_scanned' => count($rows),
+            'discovery_limited' => count($rows) >= 5000,
+            'gate' => $gate,
+            'candidates' => [...$this->persistedDetectorCandidates(), ...$gsc],
+        ];
+    }
+
     /** @return list<array<string, mixed>> */
     private function persistedDetectorCandidates(): array
     {
@@ -177,6 +192,7 @@ final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadServi
             ])
             ->where('seo_gsc_daily.source_engine', 'google')
             ->orderByDesc('seo_gsc_daily.report_date')
+            ->orderBy('seo_gsc_daily.id')
             ->limit(5000)
             ->get();
         $urlTruthByHash = $this->publicUrlTruthByHash(

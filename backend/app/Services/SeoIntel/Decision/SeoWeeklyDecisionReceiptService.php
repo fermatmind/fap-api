@@ -11,9 +11,9 @@ use RuntimeException;
 
 final class SeoWeeklyDecisionReceiptService
 {
-    public const CONTRACT_VERSION = 'seo.weekly_decision_receipt.v3';
+    public const CONTRACT_VERSION = 'seo.weekly_decision_receipt.v4';
 
-    public const SELECTION_CONTRACT_VERSION = 'seo.weekly_decision_selection_receipt.v2';
+    public const SELECTION_CONTRACT_VERSION = 'seo.weekly_decision_selection_receipt.v3';
 
     public const CAPABILITY_VERSION = 'seo.weekly_decision_natural.v3';
 
@@ -24,6 +24,8 @@ final class SeoWeeklyDecisionReceiptService
     public const CAPABILITY_EFFECTIVE_SLOT = '2026-09-10T13:45:00Z';
 
     public const TRANSACTION_DEADLINE_SECONDS = 50;
+
+    public const LOCK_KEY = 'seo-weekly-decisions:planning';
 
     public function __construct(
         private readonly SeoWeeklyDecisionSelector $selector,
@@ -63,115 +65,173 @@ final class SeoWeeklyDecisionReceiptService
                 'search_submission_allowed' => false,
             ];
         }
-        $selection = $this->selector->snapshot($slot);
-        $releaseSha = $this->releaseSha();
-        if ($selection['state'] === 'unavailable' || $releaseSha === null) {
-            throw new RuntimeException('Weekly decision authority or release SHA is unavailable.');
+        if (! app()->environment('testing') && $scheduledFor !== null) {
+            throw new RuntimeException('Natural time cannot be supplied by a caller.');
         }
-
+        if ($this->selector->connectionName() !== $this->connection) {
+            throw new RuntimeException('Natural planning must share one database connection.');
+        }
+        $releaseSha = $this->releaseSha();
+        if ($releaseSha === null) {
+            throw new RuntimeException('Weekly decision release SHA is unavailable.');
+        }
         $capabilityRevision = self::capabilityRevision();
-
         $deadline = hrtime(true) + (self::TRANSACTION_DEADLINE_SECONDS * 1_000_000_000);
-
-        return $this->db()->transaction(function () use ($selection, $slot, $releaseSha, $capabilityRevision, $deadline): array {
-            $this->assertWithinDeadline($deadline);
-            $existing = $this->db()->table('seo_weekly_decision_capability_receipts')
-                ->where('selection_revision', $selection['selection_revision'])
-                ->where('capability_revision', $capabilityRevision)
-                ->lockForUpdate()
-                ->first();
-            if ($existing !== null) {
+        // Reuse the scheduler's shared atomic cache-lock backend. This exists even
+        // with empty receipt/card tables, and its identity never includes a SHA or version.
+        $lock = \Illuminate\Support\Facades\Cache::lock(self::LOCK_KEY, 120);
+        if (! $lock->get()) {
+            throw new RuntimeException('Natural weekly planning is already locked.');
+        }
+        try {
+            return $this->db()->transaction(function () use ($slot, $releaseSha, $capabilityRevision, $deadline): array {
                 $this->assertWithinDeadline($deadline);
+                $week = $slot->format('o-\WW');
+                $existingRows = $this->db()->table('seo_weekly_decision_capability_receipts')
+                    ->where('iso_week', $week)->lockForUpdate()->get();
+                $selectionRows = $this->db()->table('seo_weekly_decision_receipts')
+                    ->where('iso_week', $week)->lockForUpdate()->get();
+                if ($existingRows->count() > 1 || $selectionRows->count() > 1
+                    || ($existingRows->isEmpty() !== $selectionRows->isEmpty())) {
+                    throw new RuntimeException('Natural window receipts conflict or are incomplete.');
+                }
+                if ($existingRows->isNotEmpty()) {
+                    $existing = $existingRows->first();
+                    $selectionRow = $selectionRows->first();
+                    $result = $this->presentCapability($existing, $selectionRow, ['iso_week' => $week], CarbonImmutable::parse($existing->scheduled_for, 'UTC'), true);
+                    $this->assertReferences($result, false);
+                    $this->assertWithinDeadline($deadline);
+
+                    return $result;
+                }
+                $summary = (new SeoOpportunityCardGenerator($this->connection))->generate(
+                    $slot, $releaseSha, fn () => $this->assertWithinDeadline($deadline),
+                );
+                $selection = $this->selector->snapshot($slot);
+                if ($selection['state'] === 'unavailable') {
+                    throw new RuntimeException('Weekly decision authority is unavailable.');
+                }
+                // Natural identity is independent of candidate order/content, release and generator.
+                $selection['selection_revision'] = 'seo_weekly_'.$week.'_'.substr(hash('sha256', 'natural-week|'.$week), 0, 16);
+                $selection['generation_summary'] = $summary;
 
                 $selectionRow = $this->db()->table('seo_weekly_decision_receipts')
                     ->where('selection_revision', $selection['selection_revision'])
+                    ->lockForUpdate()
                     ->first();
+                if ($selectionRow === null) {
+                    [$selectionPayload, $revisionIds, $createdRevisionCount] = $this->createSelectionReceipt(
+                        $selection,
+                        $slot,
+                        $releaseSha,
+                    );
+                } else {
+                    $selectionPayload = $this->decodeSelectionReceipt($selectionRow, $selection);
+                    $revisionIds = array_values($selectionPayload['decision_revision_ids']);
+                    $createdRevisionCount = 0;
+                }
+                $this->assertWithinDeadline($deadline);
 
-                return $this->presentCapability($existing, $selectionRow, $selection, $slot, true);
-            }
+                $payload = [
+                    'schema_version' => self::CONTRACT_VERSION,
+                    'receipt_hash_algorithm' => SeoWeeklyDecisionReceiptValidator::HASH_ALGORITHM,
+                    'status' => 'scheduled_completed',
+                    'trigger' => 'scheduled',
+                    'iso_week' => $selection['iso_week'],
+                    'selection_revision' => $selection['selection_revision'],
+                    'capability_version' => self::CAPABILITY_VERSION,
+                    'capability_revision' => $capabilityRevision,
+                    'release_sha' => $releaseSha,
+                    'scheduled_for' => $slot->format('Y-m-d\TH:i:s\Z'),
+                    'decision_count' => $selection['count'],
+                    'generation_summary' => $summary,
+                    'planning_records_write_allowed' => true,
+                    'business_execution_allowed' => false,
+                    'decision_card_ids' => array_values($selectionPayload['decision_card_ids']),
+                    'decision_revision_ids' => $revisionIds,
+                    'created_selection_revision_count' => $createdRevisionCount,
+                    'padded' => false,
+                    'manual_receipts_excluded' => true,
+                    'read_only_snapshot' => true,
+                    'l3_enabled' => false,
+                    'l4_enabled' => false,
+                    'search_submission_allowed' => false,
+                ];
+                $receiptJson = SeoWeeklyDecisionReceiptValidator::encode($payload);
+                $receiptHash = SeoWeeklyDecisionReceiptValidator::hash($payload);
+                $row = [
+                    'receipt_id' => $this->deterministicUuid((string) $selection['selection_revision'].'|'.$capabilityRevision),
+                    'selection_revision' => $selection['selection_revision'],
+                    'capability_revision' => $capabilityRevision,
+                    'iso_week' => $selection['iso_week'],
+                    'evidence_release_sha' => $releaseSha,
+                    'scheduled_for' => $slot,
+                    'decision_count' => $selection['count'],
+                    'decision_card_ids_json' => json_encode($payload['decision_card_ids'], JSON_THROW_ON_ERROR),
+                    'decision_revision_ids_json' => json_encode($revisionIds, JSON_THROW_ON_ERROR),
+                    'receipt_json' => $receiptJson,
+                    'receipt_hash' => $receiptHash,
+                    'created_at' => $slot,
+                ];
+                $this->db()->table('seo_weekly_decision_capability_receipts')->insert($row);
+                $this->assertWithinDeadline($deadline);
 
-            $selectionRow = $this->db()->table('seo_weekly_decision_receipts')
-                ->where('selection_revision', $selection['selection_revision'])
-                ->lockForUpdate()
-                ->first();
-            if ($selectionRow === null) {
-                [$selectionPayload, $revisionIds, $createdRevisionCount] = $this->createSelectionReceipt(
-                    $selection,
+                $storedCapability = $this->db()->table('seo_weekly_decision_capability_receipts')
+                    ->where('receipt_id', $row['receipt_id'])
+                    ->first();
+                $storedSelection = $this->db()->table('seo_weekly_decision_receipts')
+                    ->where('selection_revision', $selection['selection_revision'])
+                    ->first();
+                $validation = SeoWeeklyDecisionReceiptValidator::validatePair(
+                    $storedCapability,
+                    $storedSelection,
+                    $capabilityRevision,
+                    (string) $selection['iso_week'],
                     $slot,
-                    $releaseSha,
                 );
-            } else {
-                $selectionPayload = $this->decodeSelectionReceipt($selectionRow, $selection);
-                $revisionIds = array_values($selectionPayload['decision_revision_ids']);
-                $createdRevisionCount = 0;
+                if (! $validation['valid']) {
+                    throw new RuntimeException('Weekly decision receipt readback failed: '.implode(',', $validation['mismatch_codes']));
+                }
+
+                $this->assertReferences($payload, true);
+                $this->assertWithinDeadline($deadline);
+
+                return array_merge($payload, [
+                    'receipt_id' => $row['receipt_id'],
+                    'receipt_hash' => $receiptHash,
+                    'persisted' => true,
+                    'idempotent_replay' => false,
+                ]);
+            }, 1);
+        } finally {
+            $lock->release();
+        }
+    }
+
+    private function assertReferences(array $receipt, bool $currentRequired): void
+    {
+        foreach ($receipt['decision_revision_ids'] as $i => $id) {
+            $card = $this->db()->table('seo_decision_cards')->where('decision_revision_id', $id)->first();
+            if ($card === null || $card->decision_card_id !== ($receipt['decision_card_ids'][$i] ?? null)
+                || ! $this->db()->table('seo_change_ledgers')->where('ledger_id', $card->ledger_id)->exists()) {
+                throw new RuntimeException('Weekly decision reference readback failed.');
             }
-            $this->assertWithinDeadline($deadline);
-
-            $payload = [
-                'schema_version' => self::CONTRACT_VERSION,
-                'receipt_hash_algorithm' => SeoWeeklyDecisionReceiptValidator::HASH_ALGORITHM,
-                'status' => 'scheduled_completed',
-                'trigger' => 'scheduled',
-                'iso_week' => $selection['iso_week'],
-                'selection_revision' => $selection['selection_revision'],
-                'capability_version' => self::CAPABILITY_VERSION,
-                'capability_revision' => $capabilityRevision,
-                'release_sha' => $releaseSha,
-                'scheduled_for' => $slot->format('Y-m-d\TH:i:s\Z'),
-                'decision_count' => $selection['count'],
-                'decision_card_ids' => array_values($selectionPayload['decision_card_ids']),
-                'decision_revision_ids' => $revisionIds,
-                'created_selection_revision_count' => $createdRevisionCount,
-                'padded' => false,
-                'manual_receipts_excluded' => true,
-                'read_only_snapshot' => true,
-                'l3_enabled' => false,
-                'l4_enabled' => false,
-                'search_submission_allowed' => false,
-            ];
-            $receiptJson = SeoWeeklyDecisionReceiptValidator::encode($payload);
-            $receiptHash = SeoWeeklyDecisionReceiptValidator::hash($payload);
-            $row = [
-                'receipt_id' => $this->deterministicUuid((string) $selection['selection_revision'].'|'.$capabilityRevision),
-                'selection_revision' => $selection['selection_revision'],
-                'capability_revision' => $capabilityRevision,
-                'iso_week' => $selection['iso_week'],
-                'evidence_release_sha' => $releaseSha,
-                'scheduled_for' => $slot,
-                'decision_count' => $selection['count'],
-                'decision_card_ids_json' => json_encode($payload['decision_card_ids'], JSON_THROW_ON_ERROR),
-                'decision_revision_ids_json' => json_encode($revisionIds, JSON_THROW_ON_ERROR),
-                'receipt_json' => $receiptJson,
-                'receipt_hash' => $receiptHash,
-                'created_at' => $slot,
-            ];
-            $this->db()->table('seo_weekly_decision_capability_receipts')->insert($row);
-            $this->assertWithinDeadline($deadline);
-
-            $storedCapability = $this->db()->table('seo_weekly_decision_capability_receipts')
-                ->where('receipt_id', $row['receipt_id'])
-                ->first();
-            $storedSelection = $this->db()->table('seo_weekly_decision_receipts')
-                ->where('selection_revision', $selection['selection_revision'])
-                ->first();
-            $validation = SeoWeeklyDecisionReceiptValidator::validatePair(
-                $storedCapability,
-                $storedSelection,
-                $capabilityRevision,
-                (string) $selection['iso_week'],
-                $slot,
-            );
-            if (! $validation['valid']) {
-                throw new RuntimeException('Weekly decision receipt readback failed: '.implode(',', $validation['mismatch_codes']));
+            if ($currentRequired && ! $this->db()->table('seo_current_decision_cards')->where('cluster_uid', $card->cluster_uid)
+                ->where('decision_revision_id', $id)->where('decision_card_id', $card->decision_card_id)->exists()) {
+                throw new RuntimeException('Weekly decision pointer readback failed.');
             }
-
-            return array_merge($payload, [
-                'receipt_id' => $row['receipt_id'],
-                'receipt_hash' => $receiptHash,
-                'persisted' => true,
-                'idempotent_replay' => false,
-            ]);
-        }, 3);
+            (new SeoDecisionBrief($this->connection))->load($card);
+        }
+        if ($currentRequired) {
+            // Include generated-but-not-selected cards in transaction-wide integrity validation.
+            foreach ($this->db()->table('seo_current_decision_cards as p')->join('seo_decision_cards as c', 'c.decision_revision_id', '=', 'p.decision_revision_id')
+                ->where('c.detector', SeoOpportunityCardGenerator::ID)->select('c.*')->get() as $card) {
+                if (! $this->db()->table('seo_change_ledgers')->where('ledger_id', $card->ledger_id)->exists()
+                    || (new SeoDecisionBrief($this->connection))->load($card) === null) {
+                    throw new RuntimeException('Generated decision readback failed.');
+                }
+            }
+        }
     }
 
     private function assertWithinDeadline(int $deadline): void
@@ -246,6 +306,9 @@ final class SeoWeeklyDecisionReceiptService
             'release_sha' => $releaseSha,
             'scheduled_for' => $slot->format('Y-m-d\TH:i:s\Z'),
             'decision_count' => $selection['count'],
+            'generation_summary' => $selection['generation_summary'],
+            'planning_records_write_allowed' => true,
+            'business_execution_allowed' => false,
             'decision_card_ids' => array_column($selection['decisions'], 'decision_card_id'),
             'decision_revision_ids' => $revisionIds,
             'created_selection_revision_count' => $createdRevisionCount,
@@ -296,13 +359,15 @@ final class SeoWeeklyDecisionReceiptService
 
     private function releaseSha(): ?string
     {
-        foreach ([
-            trim((string) config('app.git_sha', '')),
-            is_file(dirname(base_path()).'/REVISION') ? trim((string) file_get_contents(dirname(base_path()).'/REVISION')) : '',
-        ] as $candidate) {
-            if (preg_match('/\A[a-f0-9]{40}\z/i', $candidate) === 1) {
-                return strtolower($candidate);
-            }
+        $configured = trim((string) config('app.git_sha', ''));
+        $file = dirname(base_path()).'/REVISION';
+        $active = is_file($file) ? trim((string) file_get_contents($file)) : '';
+        if ($active !== '' && $configured !== '' && ! hash_equals(strtolower($active), strtolower($configured))) {
+            throw new RuntimeException('Active release SHA differs from configured SHA.');
+        }
+        $candidate = $active !== '' ? $active : $configured;
+        if (preg_match('/\A[a-f0-9]{40}\z/i', $candidate) === 1) {
+            return strtolower($candidate);
         }
 
         return null;

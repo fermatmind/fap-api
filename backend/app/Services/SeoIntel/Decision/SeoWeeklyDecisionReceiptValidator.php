@@ -107,7 +107,7 @@ final class SeoWeeklyDecisionReceiptValidator
 
             self::appendUnless(
                 $codes,
-                ($capabilityReceipt['schema_version'] ?? null) === SeoWeeklyDecisionReceiptService::CONTRACT_VERSION,
+                in_array($capabilityReceipt['schema_version'] ?? null, [SeoWeeklyDecisionReceiptService::CONTRACT_VERSION, 'seo.weekly_decision_receipt.v3'], true),
                 'capability_schema_mismatch',
             );
             self::appendUnless(
@@ -184,7 +184,7 @@ final class SeoWeeklyDecisionReceiptValidator
         if ($selectionReceipt !== null) {
             self::appendUnless(
                 $codes,
-                ($selectionReceipt['schema_version'] ?? null) === SeoWeeklyDecisionReceiptService::SELECTION_CONTRACT_VERSION,
+                in_array($selectionReceipt['schema_version'] ?? null, [SeoWeeklyDecisionReceiptService::SELECTION_CONTRACT_VERSION, 'seo.weekly_decision_selection_receipt.v2'], true),
                 'selection_schema_mismatch',
             );
             self::appendUnless(
@@ -239,6 +239,15 @@ final class SeoWeeklyDecisionReceiptValidator
                     === array_values((array) ($capabilityReceipt['decision_revision_ids'] ?? [])),
                 'decision_revision_ids_mismatch',
             );
+            if (($capabilityReceipt['schema_version'] ?? '') === SeoWeeklyDecisionReceiptService::CONTRACT_VERSION) {
+                self::appendUnless($codes, self::validSummary($capabilityReceipt['generation_summary'] ?? null)
+                    && ($capabilityReceipt['generation_summary'] ?? null) === ($selectionReceipt['generation_summary'] ?? null), 'generation_summary_mismatch');
+            }
+            self::appendUnless($codes, ($selectionReceipt['release_sha'] ?? null) === ($capabilityReceipt['release_sha'] ?? null), 'selection_release_sha_mismatch');
+            self::appendUnless($codes, ($selectionReceipt['iso_week'] ?? null) === ($capabilityReceipt['iso_week'] ?? null), 'selection_week_mismatch');
+            self::appendUnless($codes, ($selectionReceipt['scheduled_for'] ?? null) === ($capabilityReceipt['scheduled_for'] ?? null), 'selection_slot_mismatch');
+            self::appendUnless($codes, count((array) ($capabilityReceipt['decision_revision_ids'] ?? [])) === (int) ($capabilityReceipt['decision_count'] ?? -1)
+                && count((array) ($capabilityReceipt['decision_card_ids'] ?? [])) === (int) ($capabilityReceipt['decision_count'] ?? -1), 'decision_reference_count_mismatch');
             $decisionCount = (int) ($capabilityReceipt['decision_count'] ?? -1);
             self::appendUnless(
                 $codes,
@@ -256,6 +265,23 @@ final class SeoWeeklyDecisionReceiptValidator
             'scheduled_for' => $scheduledFor,
             'mismatch_codes' => $codes,
         ];
+    }
+
+    private static function validSummary(mixed $summary): bool
+    {
+        if (! is_array($summary) || ! is_string($summary['generator_version'] ?? null)
+            || ! is_bool($summary['discovery_limited'] ?? null) || ! is_array($summary['hold_reasons'] ?? null)) {
+            return false;
+        }
+        foreach (['scan_rows', 'candidate_count', 'deduplicated_pages', 'evidence_checked_pages', 'qualified_pages', 'created', 'refreshed', 'unchanged', 'protected', 'cap_unprocessed_pages'] as $key) {
+            if (! is_int($summary[$key] ?? null) || $summary[$key] < 0) {
+                return false;
+            }
+        }
+
+        return $summary['created'] + $summary['refreshed'] <= 5
+            && $summary['qualified_pages'] <= $summary['evidence_checked_pages']
+            && $summary['evidence_checked_pages'] <= $summary['deduplicated_pages'];
     }
 
     /** @param list<string> $codes */

@@ -21,6 +21,7 @@ final readonly class Platform12DecisionExperimentReadService
         $experimentSource = $this->experiments->snapshot(page: 1, perPage: 20);
 
         return [
+            'selection_kind' => 'candidate_suggestions_not_weekly_receipt',
             'cards' => [
                 'state' => $this->sourceState((string) ($decisionSource['state'] ?? 'unavailable')),
                 'iso_week' => $decisionSource['iso_week'] ?? null,

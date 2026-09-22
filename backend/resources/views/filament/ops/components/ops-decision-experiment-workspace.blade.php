@@ -23,7 +23,7 @@
     </div>
 
     <div class="ops-decision-experiment__status" aria-label="{{ __($copy.'.status_label') }}">
-        <span><strong>{{ __($copy.'.cards.title') }}</strong> {{ $snapshot['cards']['state'] }}</span>
+        <span><strong>{{ app()->getLocale() === 'en' ? 'Candidate suggestions' : '候选建议' }}</strong> {{ $snapshot['cards']['state'] }}</span>
         <span><strong>{{ __($copy.'.experiments.title') }}</strong> {{ $snapshot['experiments']['state'] }}</span>
         <span><strong>{{ __($copy.'.cms_authority') }}</strong> {{ $snapshot['cms_authority'] }}</span>
     </div>
@@ -31,7 +31,7 @@
     <div class="ops-decision-experiment__grid">
         <section aria-labelledby="decision-cards-title">
             <span class="ops-shell-eyebrow">{{ $snapshot['cards']['iso_week'] ?? '—' }}</span>
-            <h3 id="decision-cards-title">{{ __($copy.'.cards.title') }}</h3>
+            <h3 id="decision-cards-title">{{ app()->getLocale() === 'en' ? 'Candidate suggestions' : '候选建议' }}</h3>
             <div class="ops-decision-experiment__rows">
                 @forelse ($snapshot['cards']['items'] as $card)
                     <article>
