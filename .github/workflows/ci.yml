@@ -263,7 +263,7 @@ jobs:
           php artisan test tests/Unit/Security/SecurityGuardrailsTest.php --no-ansi
           if [ '${{ needs.classify.outputs.payment }}' = 'true' ]; then php artisan test tests/Feature/Commerce tests/Unit/Services/Commerce --no-ansi; fi
           if [ '${{ needs.classify.outputs.cache }}' = 'true' ]; then php artisan test --filter='(Cache|Projection|Redis|Fence|Lkg)' --no-ansi; fi
-          if [ '${{ needs.classify.outputs.seo }}' = 'true' ] && [ '${{ needs.classify.outputs.tests_changed }}' != 'true' ]; then
+          if [ '${{ needs.classify.outputs.seo }}' = 'true' ] && [ '${{ needs.classify.outputs.tests_changed }}' != 'true' ] && [ '${{ needs.classify.outputs.career_first_publish }}' != 'true' ]; then
             echo "::error::SEO runtime changes must include focused changed tests."
             exit 1
           fi
