@@ -115,6 +115,32 @@ final class CareerColdCacheDiscoverabilityGateTest extends TestCase
     }
 
     #[Test]
+    public function locale_specific_discoverability_requires_the_exact_same_sitemap_rows(): void
+    {
+        $snapshot = $this->completePreSitemapSnapshot();
+        $projection = $this->projection();
+        $snapshot['discoverability'] = CareerColdCacheDiscoverabilityValidator::discoverabilitySnapshot(
+            $projection['items'],
+            static fn (string $slug, string $locale): bool => $slug === 'actuaries' && $locale === 'en',
+        );
+        $snapshot['sitemap'] = CareerColdCacheDiscoverabilityValidator::sitemapSnapshot([
+            'ok' => true,
+            'source' => 'backend_sitemap_generator',
+            'items' => [['loc' => 'https://fermatmind.com/en/career/jobs/actuaries']],
+        ]);
+
+        self::assertSame('pass', CareerColdCacheDiscoverabilityValidator::validate('post_sitemap', $snapshot)['status']);
+
+        $snapshot['sitemap'] = CareerColdCacheDiscoverabilityValidator::sitemapSnapshot([
+            'ok' => true,
+            'source' => 'backend_sitemap_generator',
+            'items' => [['loc' => 'https://fermatmind.com/zh/career/jobs/actuaries']],
+        ]);
+        $this->expectFailureCode('SITEMAP_DISCOVERABILITY_MISMATCH');
+        CareerColdCacheDiscoverabilityValidator::validate('post_sitemap', $snapshot);
+    }
+
+    #[Test]
     public function held_discoverability_permit_accepts_an_authoritative_sitemap_without_career_rows(): void
     {
         $snapshot = $this->completePreSitemapSnapshot(false);

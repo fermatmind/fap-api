@@ -317,17 +317,19 @@ final class CareerColdCacheDiscoverabilityValidator
             $slugSets[$locale] = $slugs;
         }
 
-        if ($slugSets['en'] !== $slugSets['zh-CN']) {
+        if (! $allowEmpty && $slugSets['en'] !== $slugSets['zh-CN']) {
             self::fail($safePrefix.'_BILINGUAL_SET_MISMATCH');
         }
 
+        $unionSlugs = array_values(array_unique(array_merge($slugSets['en'], $slugSets['zh-CN'])));
+        sort($unionSlugs, SORT_STRING);
         $rows = array_merge($localeRows['en'], $localeRows['zh-CN']);
         sort($rows, SORT_STRING);
 
         return [
-            'slug_count' => count($slugSets['en']),
+            'slug_count' => count($unionSlugs),
             'row_count' => count($rows),
-            'slug_set_sha256' => self::setHash($slugSets['en']),
+            'slug_set_sha256' => self::setHash($unionSlugs),
             'row_set_sha256' => self::setHash($rows),
             'locales' => [
                 'en' => [
