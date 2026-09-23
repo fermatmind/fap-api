@@ -115,29 +115,99 @@ final class CareerColdCacheDiscoverabilityGateTest extends TestCase
     }
 
     #[Test]
-    public function locale_specific_discoverability_requires_the_exact_same_sitemap_rows(): void
+    public function body_qualified_sitemap_allows_different_locale_sets_when_each_row_matches(): void
     {
-        $snapshot = $this->completePreSitemapSnapshot();
-        $projection = $this->projection();
-        $snapshot['discoverability'] = CareerColdCacheDiscoverabilityValidator::discoverabilitySnapshot(
-            $projection['items'],
-            static fn (string $slug, string $locale): bool => $slug === 'actuaries' && $locale === 'en',
+        $snapshot = $this->asymmetricBodyReleaseSnapshot();
+
+        $result = CareerColdCacheDiscoverabilityValidator::validate('post_sitemap', $snapshot);
+
+        self::assertSame('pass', $result['status']);
+        self::assertSame(2, $snapshot['sitemap']['slug_count']);
+        self::assertSame(3, $snapshot['sitemap']['row_count']);
+    }
+
+    #[Test]
+    public function body_qualified_sitemap_allows_a_locale_with_no_released_bodies(): void
+    {
+        $snapshot = $this->asymmetricBodyReleaseSnapshot();
+        $snapshot['discoverability'] = CareerColdCacheDiscoverabilityValidator::releasedDirectorySnapshot(
+            ['en' => [], 'zh-CN' => $this->qualifiedDirectoryItems()],
+            static fn (string $slug, string $locale): bool => true,
         );
         $snapshot['sitemap'] = CareerColdCacheDiscoverabilityValidator::sitemapSnapshot([
             'ok' => true,
             'source' => 'backend_sitemap_generator',
-            'items' => [['loc' => 'https://fermatmind.com/en/career/jobs/actuaries']],
+            'items' => [
+                ['loc' => 'https://fermatmind.com/zh/career/jobs/accountants-and-auditors'],
+                ['loc' => 'https://fermatmind.com/zh/career/jobs/actuaries'],
+            ],
         ]);
 
         self::assertSame('pass', CareerColdCacheDiscoverabilityValidator::validate('post_sitemap', $snapshot)['status']);
+        self::assertSame(0, $snapshot['sitemap']['locales']['en']['count']);
+    }
 
+    #[Test]
+    public function asymmetric_sitemap_still_rejects_a_missing_qualified_locale_row(): void
+    {
+        $snapshot = $this->asymmetricBodyReleaseSnapshot();
         $snapshot['sitemap'] = CareerColdCacheDiscoverabilityValidator::sitemapSnapshot([
             'ok' => true,
             'source' => 'backend_sitemap_generator',
-            'items' => [['loc' => 'https://fermatmind.com/zh/career/jobs/actuaries']],
+            'items' => [
+                ['loc' => 'https://fermatmind.com/en/career/jobs/accountants-and-auditors'],
+                ['loc' => 'https://fermatmind.com/zh/career/jobs/accountants-and-auditors'],
+            ],
         ]);
+
         $this->expectFailureCode('SITEMAP_DISCOVERABILITY_MISMATCH');
+
         CareerColdCacheDiscoverabilityValidator::validate('post_sitemap', $snapshot);
+    }
+
+    #[Test]
+    public function asymmetric_sitemap_still_rejects_a_locale_row_held_by_the_release_gate(): void
+    {
+        $snapshot = $this->asymmetricBodyReleaseSnapshot();
+        $snapshot['discoverability'] = CareerColdCacheDiscoverabilityValidator::releasedDirectorySnapshot(
+            [
+                'en' => [$this->qualifiedDirectoryItems()[0]],
+                'zh-CN' => $this->qualifiedDirectoryItems(),
+            ],
+            static fn (string $slug, string $locale): bool => $slug === 'accountants-and-auditors',
+        );
+
+        $this->expectFailureCode('SITEMAP_DISCOVERABILITY_MISMATCH');
+
+        CareerColdCacheDiscoverabilityValidator::validate('post_sitemap', $snapshot);
+    }
+
+    #[Test]
+    public function missing_directory_locale_cannot_be_treated_as_zero_qualified_bodies(): void
+    {
+        $this->expectFailureCode('DISCOVERABILITY_DIRECTORY_UNAVAILABLE');
+
+        CareerColdCacheDiscoverabilityValidator::releasedDirectorySnapshot(
+            ['zh-CN' => $this->qualifiedDirectoryItems()],
+            static fn (string $slug, string $locale): bool => true,
+        );
+    }
+
+    #[Test]
+    public function browse_authority_still_requires_bilingual_identity_sets(): void
+    {
+        $items = [];
+        foreach ($this->projection()['items'] as $item) {
+            $locale = $item['locale'] === 'zh' ? 'zh-CN' : 'en';
+            $items[$item['slug'].'|'.$locale] = $item;
+        }
+
+        unset($items['actuaries|en']);
+        $this->expectFailureCode('AUTHORITY_BILINGUAL_SET_MISMATCH');
+
+        $projection = $this->projection();
+        $projection['items'] = array_values($items);
+        CareerColdCacheDiscoverabilityValidator::authoritySnapshot($projection, str_repeat('a', 64));
     }
 
     #[Test]
@@ -234,6 +304,40 @@ final class CareerColdCacheDiscoverabilityGateTest extends TestCase
             'directory_en' => CareerColdCacheDiscoverabilityValidator::directorySnapshot(['items' => $directoryItems], 'en'),
             'directory_zh-CN' => CareerColdCacheDiscoverabilityValidator::directorySnapshot(['items' => $directoryItems], 'zh-CN'),
         ];
+    }
+
+    /** @return array<string, mixed> */
+    private function asymmetricBodyReleaseSnapshot(): array
+    {
+        $snapshot = $this->completePreSitemapSnapshot();
+        $snapshot['discoverability'] = CareerColdCacheDiscoverabilityValidator::releasedDirectorySnapshot(
+            [
+                'en' => [$this->qualifiedDirectoryItems()[0]],
+                'zh-CN' => $this->qualifiedDirectoryItems(),
+            ],
+            static fn (string $slug, string $locale): bool => true,
+        );
+        $snapshot['sitemap'] = CareerColdCacheDiscoverabilityValidator::sitemapSnapshot([
+            'ok' => true,
+            'source' => 'backend_sitemap_generator',
+            'items' => [
+                ['loc' => 'https://fermatmind.com/en/career/jobs/accountants-and-auditors'],
+                ['loc' => 'https://fermatmind.com/zh/career/jobs/accountants-and-auditors'],
+                ['loc' => 'https://fermatmind.com/zh/career/jobs/actuaries'],
+            ],
+        ]);
+
+        return $snapshot;
+    }
+
+    /** @return list<array<string, mixed>> */
+    private function qualifiedDirectoryItems(): array
+    {
+        return array_map(static fn (string $slug): array => [
+            'slug' => $slug,
+            'indexable' => true,
+            'detail_ready' => true,
+        ], $this->slugs());
     }
 
     /** @return array<string, mixed> */

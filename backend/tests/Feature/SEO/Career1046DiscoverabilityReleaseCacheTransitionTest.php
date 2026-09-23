@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SEO;
 
+use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Display\CareerCurrentIdentity;
 use App\Domain\Career\Publish\Career1046DiscoverabilityReleaseGate;
 use App\Domain\Career\Publish\CareerGenerationCanonicalJson;
@@ -35,6 +37,16 @@ final class Career1046DiscoverabilityReleaseCacheTransitionTest extends TestCase
             'app.frontend_url' => 'https://example.test',
             'services.seo.public_sitemap_authority' => 'backend',
         ]);
+        // This fixture exercises release/cache transitions with qualified bodies.
+        // The synthetic cohort has no installed content package of its own.
+        $content = new class(app(CareerContentV3AuthorityPackage::class)) extends CareerContentV3CanonicalReader
+        {
+            public function hasPublicBody(string $slug, string $locale, ?string $backendRoot = null): bool
+            {
+                return true;
+            }
+        };
+        app()->instance(CareerContentV3CanonicalReader::class, $content);
         Cache::flush();
     }
 
