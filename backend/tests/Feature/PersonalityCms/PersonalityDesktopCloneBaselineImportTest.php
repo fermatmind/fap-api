@@ -289,6 +289,29 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
             ->expectsOutputToContain('--production-content-write-authorized is required')
             ->assertExitCode(1);
 
+        $stagingArguments = [
+            ...$arguments,
+            '--staging-content-write-authorized' => true,
+            '--no-publication-change' => true,
+            '--no-indexability-change' => true,
+            '--no-sitemap' => true,
+            '--no-llms' => true,
+            '--no-search-release' => true,
+        ];
+        $this->artisan('personality:mbti-zh-result-content-release', $stagingArguments)
+            ->expectsOutputToContain('Staging content writes require only --staging-content-write-authorized in staging.')
+            ->assertExitCode(1);
+        $this->app->detectEnvironment(fn (): string => 'staging');
+        $this->artisan('personality:mbti-zh-result-content-release', $stagingArguments)
+            ->expectsOutputToContain('"stage": "draft_write"')
+            ->assertExitCode(0);
+        $this->artisan('personality:mbti-zh-result-content-release', [
+            ...$stagingArguments,
+            '--production-content-write-authorized' => true,
+        ])
+            ->expectsOutputToContain('Staging content writes require only --staging-content-write-authorized in staging.')
+            ->assertExitCode(1);
+
         $this->artisan('personality:mbti-zh-result-content-release', [
             ...$arguments,
             '--production-content-write-authorized' => true,

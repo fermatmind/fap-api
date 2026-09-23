@@ -63,6 +63,7 @@ jobs:
       career_package_base_sha: ${{ steps.career-package.outputs.base_sha }}
       career_package_tree_sha: ${{ steps.career-package.outputs.tree_sha }}
       mbti_zh_result_release: ${{ steps.receipt.outputs.mbti_zh_result_release }}
+      mbti_zh_result_staging_release: ${{ steps.receipt.outputs.mbti_zh_result_staging_release }}
       mbti_zh_result_package_hash: ${{ steps.mbti-zh-result.outputs.package_hash }}
       mbti_zh_result_actor: ${{ steps.mbti-zh-result.outputs.actor }}
       mbti_zh_result_operation_key: ${{ steps.mbti-zh-result.outputs.operation_key }}
@@ -380,6 +381,7 @@ jobs:
           career_current="$(jq -r '.publisher.required == true' "$receipt")"
           career_current_full_scan="$career_current"
           mbti_zh_result_release="$(jq -r '.classification.operations.mbti_zh_result_authority_release == true' "$receipt")"
+          mbti_zh_result_staging_release="$(jq -r '.classification.operations.mbti_zh_result_staging_release == true' "$receipt")"
           seo_platform_10_closeout="$(jq -r '.classification.operations.seo_platform_10_closeout == true' "$receipt")"
           seo_agent_evidence_boundary="$(jq -r '.classification.operations.seo_agent_evidence_boundary == true' "$receipt")"
           seo_agent_policy_gateway="$(jq -r '.classification.operations.seo_agent_policy_gateway == true' "$receipt")"
@@ -417,6 +419,7 @@ jobs:
             echo "career_parity_compiler_digest=$(jq -r '.publisher.parity.package.compiler_digest // ""' "$receipt")"
             echo "career_parity_codec_digest=$(jq -r '.publisher.parity.package.codec_digest // ""' "$receipt")"
             echo "mbti_zh_result_release=$mbti_zh_result_release"
+            echo "mbti_zh_result_staging_release=$mbti_zh_result_staging_release"
             echo "seo_platform_10_closeout=$seo_platform_10_closeout"
             echo "seo_agent_evidence_boundary=$seo_agent_evidence_boundary"
             echo "seo_agent_policy_gateway=$seo_agent_policy_gateway"
@@ -522,7 +525,7 @@ jobs:
           } >> "$GITHUB_OUTPUT"
       - id: mbti-zh-result
         name: Bind exact MBTI zh result authority operation
-        if: steps.receipt.outputs.mbti_zh_result_release == 'true'
+        if: steps.receipt.outputs.mbti_zh_result_release == 'true' || steps.receipt.outputs.mbti_zh_result_staging_release == 'true'
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
@@ -700,6 +703,34 @@ jobs:
             -o a08_gate_only='${{ needs.policy.outputs.a08_gate_only }}' \
             -o seo_competitive_evidence='${{ needs.policy.outputs.seo_competitive_evidence }}' \
             -o seo_council_closeout_deferred="$council_orchestration" "${package_args[@]}" --no-interaction
+      - name: Publish and read back exact staging MBTI zh result package
+        if: needs.policy.outputs.mbti_zh_result_staging_release == 'true'
+        env:
+          PACKAGE_HASH: ${{ needs.policy.outputs.mbti_zh_result_package_hash }}
+          ADMIN_ACTOR: ${{ needs.policy.outputs.mbti_zh_result_actor }}
+          OPERATION_KEY: ${{ needs.policy.outputs.mbti_zh_result_operation_key }}
+        run: bash backend/scripts/deploy/publish_mbti_zh_result_staging.sh
+      - name: Verify sanitized staging MBTI authority receipt
+        if: needs.policy.outputs.mbti_zh_result_staging_release == 'true'
+        env:
+          PACKAGE_HASH: ${{ needs.policy.outputs.mbti_zh_result_package_hash }}
+          OPERATION_KEY: ${{ needs.policy.outputs.mbti_zh_result_operation_key }}
+        run: |
+          jq -e --arg sha "$DEPLOY_SHA" --arg package "$PACKAGE_HASH" --arg operation "$OPERATION_KEY" '
+            .contract_version == "mbti.zh_result_staging_publish.v1"
+            and (.status == "PASS" or .status == "PASS_ALREADY_ACTIVE")
+            and .release_sha == $sha and .package_hash == $package and .operation_key == $operation
+            and .record_count == 32 and .disabled_slot_count == 224 and .public_api_readback_count == 32
+            and ([.negative_guarantees[]] | all(. == false))
+          ' artifacts/mbti-zh-result-staging-publish/receipt.json >/dev/null
+      - name: Upload staging MBTI authority receipt
+        if: always() && needs.policy.outputs.mbti_zh_result_staging_release == 'true'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: mbti-zh-result-staging-publish-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/mbti-zh-result-staging-publish/receipt.json
+          if-no-files-found: ignore
+          retention-days: 90
       - name: Materialize inactive staging measurement candidate
         if: needs.policy.outputs.seo_council_runtime_closeout == 'true'
         env:

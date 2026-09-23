@@ -26,6 +26,21 @@ final class MbtiZhResultAuthorityDeployContractTest extends TestCase
         $this->assertSame(1, $manifest['admin_actor_user_id']);
         $this->assertNotContains(true, $manifest['negative_guarantees']);
 
+        $staging = explode('  production:', explode('  staging:', $workflow, 2)[1], 2)[0];
+        $this->assertStringContainsString('Publish and read back exact staging MBTI zh result package', $staging);
+        $this->assertStringContainsString('bash backend/scripts/deploy/publish_mbti_zh_result_staging.sh', $staging);
+        $this->assertLessThan(
+            strpos($staging, 'Publish and read back exact staging MBTI zh result package'),
+            strpos($staging, 'Deploy staging and run repository smoke chain'),
+        );
+        $this->assertStringContainsString('Verify sanitized staging MBTI authority receipt', $staging);
+
+        $stagingScript = file_get_contents($root.'/backend/scripts/deploy/publish_mbti_zh_result_staging.sh');
+        $this->assertIsString($stagingScript);
+        foreach (['--staging-content-write-authorized', '--stage=dry-run', '--stage=draft', '--stage=promotion-dry-run', '--stage=promote', '--stage=readback', '--stage=rollback', 'staging-api.fermatmind.com', 'public-pre-state.jsonl', 'rollback-public-diff.txt'] as $required) {
+            $this->assertStringContainsString($required, $stagingScript);
+        }
+
         foreach ([
             'needs.production.result == \'success\'',
             'personality:mbti-zh-result-content-release',

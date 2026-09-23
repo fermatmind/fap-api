@@ -16,7 +16,8 @@ final class PersonalityMbtiZhResultContentRelease extends Command
         {--pre-state-hash=}
         {--revision-set-hash=}
         {--admin-user-id=}
-        {--production-content-write-authorized : Required for draft, promote, and rollback}
+        {--production-content-write-authorized : Required for production draft, promote, and rollback}
+        {--staging-content-write-authorized : Required for staging draft, promote, and rollback}
         {--no-publication-change : Confirms public SEO publication state remains unchanged}
         {--no-indexability-change : Confirms indexability remains unchanged}
         {--no-sitemap : Confirms sitemap state remains unchanged}
@@ -73,8 +74,14 @@ final class PersonalityMbtiZhResultContentRelease extends Command
 
     private function assertControlledWriteBoundary(): void
     {
+        if ((bool) $this->option('staging-content-write-authorized')) {
+            if ((bool) $this->option('production-content-write-authorized') || ! app()->environment('staging')) {
+                throw new RuntimeException('Staging content writes require only --staging-content-write-authorized in staging.');
+            }
+        } elseif (! (bool) $this->option('production-content-write-authorized')) {
+            throw new RuntimeException('--production-content-write-authorized is required for a controlled write stage.');
+        }
         foreach ([
-            'production-content-write-authorized',
             'no-publication-change',
             'no-indexability-change',
             'no-sitemap',
