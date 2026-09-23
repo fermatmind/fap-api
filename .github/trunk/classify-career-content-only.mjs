@@ -91,6 +91,7 @@ export function analyzeCareerContentOnly({ baseSha, headSha, paths, statuses, re
     }
     const uniquePaths = [...new Set(paths)].sort();
     const pagePaths = uniquePaths.filter((path) => PAGE_PATTERN.test(path));
+    const firstPublished = [];
     if (pagePaths.length > 0 && uniquePaths.includes(MANIFEST_PATH)) {
       const beforeManifest = readJson(baseSha, MANIFEST_PATH);
       const afterManifest = readJson(headSha, MANIFEST_PATH);
@@ -100,10 +101,16 @@ export function analyzeCareerContentOnly({ baseSha, headSha, paths, statuses, re
         if (beforeBody === null || afterBody === null) {
           return ineligible(baseSha, headSha, 'BODY_ELIGIBILITY_UNPROVEN');
         }
-        if (beforeBody !== afterBody) {
+        if (beforeBody === true && afterBody === false) {
           return ineligible(baseSha, headSha, 'BODY_ELIGIBILITY_CHANGED');
         }
+        if (beforeBody === false && afterBody === true) firstPublished.push(path);
       }
+    }
+    if (firstPublished.length > 0 && (uniquePaths.some((path) => path !== MANIFEST_PATH
+      && path !== INTENT_PATH && !PAGE_PATTERN.test(path))
+      || firstPublished.some((path) => path.includes('/software-developers/')))) {
+      return ineligible(baseSha, headSha, 'BODY_ELIGIBILITY_CHANGED');
     }
     if (pagePaths.length === 0 || !uniquePaths.includes(MANIFEST_PATH) || !uniquePaths.includes(INTENT_PATH)
       || uniquePaths.some((path) => path !== MANIFEST_PATH && path !== INTENT_PATH && !PAGE_PATTERN.test(path))) {
@@ -172,6 +179,11 @@ export function analyzeCareerContentOnly({ baseSha, headSha, paths, statuses, re
       base_sha: baseSha,
       head_sha: headSha,
       candidate_tree_sha: treeSha(headSha),
+      release_mode: firstPublished.length > 0 ? 'career_first_publish' : 'career_content_only',
+      first_published_pages: firstPublished.map((path) => {
+        const [, slug, locale] = path.match(PAGE_PATTERN);
+        return { slug, locale, url_path: `/${locale === 'zh-CN' ? 'zh' : 'en'}/career/jobs/${slug}` };
+      }),
       changed_page_count: changedPages.length,
       changed_slug_count: new Set(changedPages.map(({ slug }) => slug)).size,
       changed_page_set_sha256: setDigest(rows),
@@ -184,8 +196,8 @@ export function analyzeCareerContentOnly({ baseSha, headSha, paths, statuses, re
         aliases_unchanged: true,
         identity_scopes_unchanged: true,
         url_identity_unchanged: true,
-        sitemap_set_unchanged: true,
-        indexability_unchanged: true,
+        sitemap_set_unchanged: firstPublished.length === 0,
+        indexability_unchanged: firstPublished.length === 0,
         manual_hold_slugs: ['software-developers'],
         discoverability: false,
         search_submission: false,

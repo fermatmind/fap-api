@@ -36,7 +36,8 @@ export function preparePackage({ root, classificationPath, parityPath, output })
   const classification = readJson(classificationPath);
   const change = classification.career_content_change;
   const parity = readJson(parityPath);
-  assert(classification.operations?.career_content_only === true, 'PACKAGE_CLASSIFICATION_NOT_ELIGIBLE');
+  assert(classification.operations?.career_content_only === true
+    || classification.operations?.career_first_publish === true, 'PACKAGE_CLASSIFICATION_NOT_ELIGIBLE');
   assert(change?.contract_version === 'fermatmind.career-content-only-change.v1'
     && change.status === 'eligible', 'PACKAGE_CHANGE_RECEIPT_INVALID');
   assert(HEX40.test(change.base_sha) && HEX40.test(change.head_sha)
@@ -84,6 +85,14 @@ export function preparePackage({ root, classificationPath, parityPath, output })
     sha256: parity.full_scan.projection_index_sha256,
     pages: index,
   }), { mode: 0o600 });
+  const changedPages = change.changed_pages.map(({ slug, locale, after_sha256 }) => ({ slug, locale, after_sha256 }));
+  const changedPagesBytes = json({
+    schema_version: 'fermatmind.career-content-changed-pages.v1',
+    head_sha: change.head_sha,
+    changed_page_set_sha256: change.changed_page_set_sha256,
+    pages: changedPages,
+  });
+  writeFileSync(join(output, 'changed-pages.json'), changedPagesBytes, { mode: 0o600 });
   const binding = {
     schema_version: PACKAGE_SCHEMA,
     base_sha: change.base_sha,
@@ -96,6 +105,7 @@ export function preparePackage({ root, classificationPath, parityPath, output })
     ci_package_scan_receipt_digest: parity.receipt_digest,
     projection_index_sha256: parity.full_scan.projection_index_sha256,
     changed_page_set_sha256: change.changed_page_set_sha256,
+    changed_pages_file_sha256: hash(changedPagesBytes),
     changed_page_count: change.changed_page_count,
     payload_file_count: files.length,
     files,
@@ -171,7 +181,20 @@ export function verifyPackage({ archive, receipt, expected = {} }) {
     assert(index.schema_version === PACKAGE_SCHEMA && index.count === 2092
       && index.pages.length === 2092 && index.sha256 === binding.projection_index_sha256,
     'PACKAGE_PROJECTION_INDEX_INVALID');
-    const expectedFiles = ['binding.json', 'projection-index.json', ...binding.files.map(({ path }) => `payload/${path}`)].sort();
+    const changedPagesBytes = readFileSync(join(directory, 'changed-pages.json'));
+    assert(hash(changedPagesBytes) === binding.changed_pages_file_sha256,
+      'PACKAGE_CHANGED_PAGES_FILE_HASH_MISMATCH');
+    const changedPages = JSON.parse(changedPagesBytes);
+    assert(changedPages.schema_version === 'fermatmind.career-content-changed-pages.v1'
+      && changedPages.head_sha === binding.head_sha
+      && changedPages.changed_page_set_sha256 === binding.changed_page_set_sha256
+      && changedPages.pages.length === binding.changed_page_count
+      && JSON.stringify(changedPages.pages.map(({ slug, locale, after_sha256 }) =>
+        `backend/content_assets/career/current/careers/${slug}/${locale}.json|${after_sha256}`).sort())
+        === JSON.stringify(binding.files.filter(({ path }) => /\/careers\/[^/]+\/(en|zh-CN)\.json$/.test(path))
+          .map(({ path, after_sha256 }) => `${path}|${after_sha256}`).sort()),
+    'PACKAGE_CHANGED_PAGES_FILE_INVALID');
+    const expectedFiles = ['binding.json', 'projection-index.json', 'changed-pages.json', ...binding.files.map(({ path }) => `payload/${path}`)].sort();
     assert(JSON.stringify(walk(directory).sort()) === JSON.stringify(expectedFiles), 'PACKAGE_ARCHIVE_FILE_SET_MISMATCH');
     for (const file of binding.files) {
       assert(hash(readFileSync(join(directory, 'payload', file.path))) === file.after_sha256,

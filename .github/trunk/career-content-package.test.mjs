@@ -45,7 +45,7 @@ function fixture() {
     career_content_change: {
       contract_version: 'fermatmind.career-content-only-change.v1', status: 'eligible', base_sha: base,
       head_sha: head, candidate_tree_sha: tree, changed_page_count: 1,
-      changed_page_set_sha256: sha('a'), changed_pages: [changed],
+      changed_page_set_sha256: digest(`${changed.slug}\t${changed.locale}\t${changed.after_sha256}\n`), changed_pages: [changed],
     },
   };
   const pages = Array.from({ length: 2092 }, (_, index) => ({

@@ -67,9 +67,12 @@ test('a Current locale gaining body leaves the content-only lane and requires di
   const path = item.pages[0].path.replace(/^backend\/content_assets\/career\/current\//, '');
   item.values.get(`${baseSha}:${MANIFEST_PATH}`).files.find((entry) => entry.path === path).body_qualification.has_public_body = false;
   const receipt = analyzeCareerContentOnly(item.input);
-  assert.equal(receipt.reason, 'BODY_ELIGIBILITY_CHANGED');
+  assert.equal(receipt.status, 'eligible');
+  assert.equal(receipt.release_mode, 'career_first_publish');
+  assert.deepEqual(receipt.first_published_pages, [{ slug: 'career-0001', locale: 'en', url_path: '/en/career/jobs/career-0001' }]);
   const classification = applyCareerContentOnly(classifyPaths(item.paths), receipt);
   assert.equal(classification.operations.career_content_only, false);
+  assert.equal(classification.operations.career_first_publish, true);
   assert.equal(classification.flags.seo_discoverability, true);
   assert.equal(classification.categories.includes('seo_discoverability'), true);
 });
@@ -83,6 +86,63 @@ test('missing version-bound body qualification fails closed into discoverability
   const classification = applyCareerContentOnly(classifyPaths(item.paths), receipt);
   assert.equal(classification.flags.seo_discoverability, true);
   assert.equal(classification.operations.career_content_only, false);
+});
+
+test('mixed first publication and existing body refresh use the controlled mode', () => {
+  const item = fixture(2);
+  const path = item.pages[0].path.replace(/^backend\/content_assets\/career\/current\//, '');
+  item.values.get(`${baseSha}:${MANIFEST_PATH}`).files.find((entry) => entry.path === path).body_qualification.has_public_body = false;
+  const receipt = analyzeCareerContentOnly(item.input);
+  assert.equal(receipt.release_mode, 'career_first_publish');
+  assert.equal(receipt.changed_page_count, 2);
+  assert.equal(receipt.first_published_pages.length, 1);
+  const classification = applyCareerContentOnly(classifyPaths(item.paths), receipt);
+  assert.equal(classification.operations.career_first_publish, true);
+  assert.equal(classification.operations.career_content_only, false);
+  assert.equal(classification.flags.seo_discoverability, true);
+});
+
+test('both locales of one slug first publish in one controlled release', () => {
+  const item = fixture();
+  const zhPath = item.pages[0].path.replace('/en.json', '/zh-CN.json');
+  item.input.paths.push(zhPath);
+  item.input.paths.sort();
+  item.input.statuses.push({ status: 'M', path: zhPath });
+  for (const ref of [baseSha, headSha]) {
+    const page = structuredClone(item.values.get(`${ref}:${item.pages[0].path}`));
+    page.locale = 'zh-CN';
+    page.display.path = '/zh/career/jobs/career-0001';
+    item.values.set(`${ref}:${zhPath}`, page);
+  }
+  for (const locale of ['en', 'zh-CN']) {
+    item.values.get(`${baseSha}:${MANIFEST_PATH}`).files.find((entry) => entry.path === `careers/career-0001/${locale}.json`)
+      .body_qualification.has_public_body = false;
+  }
+  const receipt = analyzeCareerContentOnly(item.input);
+  assert.equal(receipt.release_mode, 'career_first_publish');
+  assert.equal(receipt.changed_page_count, 2);
+  assert.equal(receipt.changed_slug_count, 1);
+  assert.deepEqual(receipt.first_published_pages.map(({ locale }) => locale), ['en', 'zh-CN']);
+});
+
+test('manual hold cannot enter the dedicated first-publish mode', () => {
+  const item = fixture();
+  const oldPath = item.pages[0].path;
+  const path = oldPath.replace('career-0001', 'software-developers');
+  item.input.paths = [path, MANIFEST_PATH, INTENT_PATH].sort();
+  item.input.statuses = item.input.paths.map((value) => ({ status: 'M', path: value }));
+  for (const ref of [baseSha, headSha]) {
+    const page = item.values.get(`${ref}:${oldPath}`);
+    page.subject.canonical_slug = 'software-developers';
+    page.display.path = '/en/career/jobs/software-developers';
+    item.values.set(`${ref}:${path}`, page);
+    const entry = item.values.get(`${ref}:${MANIFEST_PATH}`).files.find((row) => row.path === 'careers/career-0001/en.json');
+    entry.path = 'careers/software-developers/en.json';
+    entry.canonical_slug = 'software-developers';
+  }
+  item.values.get(`${baseSha}:${MANIFEST_PATH}`).files.find((row) => row.path === 'careers/software-developers/en.json')
+    .body_qualification.has_public_body = false;
+  assert.equal(analyzeCareerContentOnly(item.input).status, 'ineligible');
 });
 
 test('a mixed runtime release still detects a Current body eligibility transition', () => {

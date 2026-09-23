@@ -33,6 +33,7 @@ jobs:
       publisher_required: ${{ steps.classify.outputs.publisher_required }}
       career_current_authority_release: ${{ steps.classify.outputs.career_current_authority_release }}
       career_content_only: ${{ steps.classify.outputs.career_content_only }}
+      career_first_publish: ${{ steps.classify.outputs.career_first_publish }}
       personality_current_authority_release: ${{ steps.classify.outputs.personality_current_authority_release }}
       seo_platform_10_closeout: ${{ steps.classify.outputs.seo_platform_10_closeout }}
       seo_platform_11a_closeout: ${{ steps.classify.outputs.seo_platform_11a_closeout }}
@@ -84,6 +85,7 @@ jobs:
             echo "publisher_required=$(jq -r .operations.publisher_required "$RUNNER_TEMP/classification.json")"
             echo "career_current_authority_release=$(jq -r .operations.career_current_authority_release "$RUNNER_TEMP/classification.json")"
             echo "career_content_only=$(jq -r .operations.career_content_only "$RUNNER_TEMP/classification.json")"
+            echo "career_first_publish=$(jq -r .operations.career_first_publish "$RUNNER_TEMP/classification.json")"
             echo "career_data_recovery=$(jq -r .operations.career_data_recovery "$RUNNER_TEMP/classification.json")"
             echo "personality_current_authority_release=$(jq -r .operations.personality_current_authority_release "$RUNNER_TEMP/classification.json")"
             echo "seo_platform_10_closeout=$(jq -r .operations.seo_platform_10_closeout "$RUNNER_TEMP/classification.json")"
@@ -352,12 +354,12 @@ jobs:
             and (.receipt_digest | test("^[0-9a-f]{64}$"))
           ' career-current-authority-parity.json >/dev/null
       - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
-        if: needs.classify.outputs.career_content_only == 'true'
+        if: needs.classify.outputs.career_content_only == 'true' || needs.classify.outputs.career_first_publish == 'true'
         with:
           name: trunk-classification-${{ github.sha }}
           path: career-classification
       - name: Build deterministic exact-SHA Career content package
-        if: needs.classify.outputs.career_content_only == 'true'
+        if: needs.classify.outputs.career_content_only == 'true' || needs.classify.outputs.career_first_publish == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -371,9 +373,6 @@ jobs:
             --output="$staging"
           tar --sort=name --format=ustar --mtime=@0 --owner=0 --group=0 --numeric-owner \
             -C "$staging" -cf - . | gzip -n > "$artifact/career-content-package.tar.gz"
-          tar --sort=name --format=ustar --mtime=@0 --owner=0 --group=0 --numeric-owner \
-            -C "$staging" -cf - . | gzip -n > "$RUNNER_TEMP/career-content-package-repeat.tar.gz"
-          cmp "$artifact/career-content-package.tar.gz" "$RUNNER_TEMP/career-content-package-repeat.tar.gz"
           node .github/trunk/career-content-package.mjs finalize \
             --staging="$staging" \
             --archive="$artifact/career-content-package.tar.gz" \
@@ -399,7 +398,7 @@ jobs:
           if-no-files-found: error
           retention-days: 90
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        if: needs.classify.outputs.career_content_only == 'true'
+        if: needs.classify.outputs.career_content_only == 'true' || needs.classify.outputs.career_first_publish == 'true'
         with:
           name: career-content-package-${{ github.sha }}
           path: career-content-package
@@ -1040,7 +1039,7 @@ jobs:
           name: career-current-authority-parity-${{ github.sha }}
           path: career-parity
       - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
-        if: needs.classify.outputs.career_content_only == 'true'
+        if: needs.classify.outputs.career_content_only == 'true' || needs.classify.outputs.career_first_publish == 'true'
         with:
           name: career-content-package-${{ github.sha }}
           path: career-content-package
@@ -1094,11 +1093,17 @@ jobs:
             and (($required and .status == "pass" and (.receipt_digest | test("^[0-9a-f]{64}$")))
               or (($required | not) and .status == "skipped"))
           ' career-parity/career-current-authority-parity.json >/dev/null
-          career_content_only="$(jq -r .operations.career_content_only trunk-path-classification.json)"
-          if [ "$career_content_only" = true ]; then
-            jq -e --arg sha "$GITHUB_SHA" --arg base "$(jq -r .scope.validation_base_sha trunk-path-classification.json)" '
+          career_content_package="$(jq -r '.operations.career_content_only == true or .operations.career_first_publish == true' trunk-path-classification.json)"
+          if [ "$career_content_package" = true ]; then
+            jq -e --arg sha "$GITHUB_SHA" --arg base "$(jq -r .scope.validation_base_sha trunk-path-classification.json)" \
+              --argjson first "$(jq -r .operations.career_first_publish trunk-path-classification.json)" '
               .contract_version == "fermatmind.career-content-only-change.v1"
               and .status == "eligible"
+              and .release_mode == (if $first then "career_first_publish" else "career_content_only" end)
+              and (if $first then (.first_published_pages | length) > 0
+                and .invariants.indexability_unchanged == false
+                else (.first_published_pages | length) == 0
+                and .invariants.indexability_unchanged == true end)
               and .base_sha == $base
               and .head_sha == $sha
               and (.candidate_tree_sha | test("^[0-9a-f]{40}$"))

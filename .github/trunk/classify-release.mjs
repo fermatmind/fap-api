@@ -54,10 +54,14 @@ export function classifyRelease({ pushBase, head, baseline, diffPaths, isAncesto
 }
 
 export function applyCareerContentOnly(classification, careerReceipt) {
-  const careerContentOnly = careerReceipt.status === 'eligible';
+  const careerContentOnly = careerReceipt.status === 'eligible'
+    && careerReceipt.release_mode === 'career_content_only';
+  const careerFirstPublish = careerReceipt.status === 'eligible'
+    && careerReceipt.release_mode === 'career_first_publish';
   classification.operations.career_content_only = careerContentOnly;
+  classification.operations.career_first_publish = careerFirstPublish;
   if (careerContentOnly) classification.operations.a08_scoped_checks = false;
-  if (['BODY_ELIGIBILITY_CHANGED', 'BODY_ELIGIBILITY_UNPROVEN'].includes(careerReceipt.reason)) {
+  if (careerFirstPublish || ['BODY_ELIGIBILITY_CHANGED', 'BODY_ELIGIBILITY_UNPROVEN'].includes(careerReceipt.reason)) {
     classification.flags.seo_discoverability = true;
     if (!classification.categories.includes('seo_discoverability')) {
       classification.categories.push('seo_discoverability');

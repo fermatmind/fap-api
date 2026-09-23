@@ -25,15 +25,25 @@ class ExtractCareerPackageTest(unittest.TestCase):
         self.root = Path(self.temp.name)
         self.stage = self.root / "stage"
         files = {path: (path + "\n").encode() for path in (PAGE, MANIFEST, INTENT)}
+        page_sha = hashlib.sha256(files[PAGE]).hexdigest()
+        set_sha = hashlib.sha256(f"actors\ten\t{page_sha}\n".encode()).hexdigest()
+        changed_bytes = json.dumps({
+            "schema_version": "fermatmind.career-content-changed-pages.v1",
+            "head_sha": HEAD, "changed_page_set_sha256": set_sha,
+            "pages": [{"after_sha256": page_sha, "locale": "en", "slug": "actors"}],
+        }).encode()
         binding = {
             "schema_version": "fermatmind.career-content-package.v1",
             "base_sha": BASE, "head_sha": HEAD, "candidate_tree_sha": TREE,
             "no_deletions": True, "payload_file_count": len(files),
+            "changed_page_count": 1, "changed_page_set_sha256": set_sha,
+            "changed_pages_file_sha256": hashlib.sha256(changed_bytes).hexdigest(),
             "files": [{"path": path, "after_sha256": hashlib.sha256(data).hexdigest(),
                        "bytes": len(data)} for path, data in files.items()],
         }
         contents = {"binding.json": json.dumps(binding).encode(),
-                    "projection-index.json": b"{}", **{"payload/" + path: data for path, data in files.items()}}
+                    "projection-index.json": b"{}", "changed-pages.json": changed_bytes,
+                    **{"payload/" + path: data for path, data in files.items()}}
         for path, data in contents.items():
             target = self.stage / path
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -94,9 +104,12 @@ class ExtractCareerPackageTest(unittest.TestCase):
     def test_reject_archive_tampering_and_binding_mismatch(self):
         with self.assertRaisesRegex(ValueError, "PACKAGE_ARCHIVE_HASH_MISMATCH"):
             extract(self.archive, self.root / "output", "0" * 64, BASE, HEAD, TREE)
-        with self.assertRaisesRegex(ValueError, "PACKAGE_BINDING_INVALID"):
-            extract(self.archive, self.root / "output", hashlib.sha256(self.archive.read_bytes()).hexdigest(),
-                    "0" * 40, HEAD, TREE)
+        for base, head, tree in [("0" * 40, HEAD, TREE), (BASE, "0" * 40, TREE),
+                                 (BASE, HEAD, "0" * 40)]:
+            with self.subTest(base=base, head=head, tree=tree):
+                with self.assertRaisesRegex(ValueError, "PACKAGE_BINDING_INVALID"):
+                    extract(self.archive, self.root / "output", hashlib.sha256(self.archive.read_bytes()).hexdigest(),
+                            base, head, tree)
 
 
 if __name__ == "__main__":

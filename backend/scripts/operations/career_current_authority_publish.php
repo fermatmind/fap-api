@@ -35,18 +35,43 @@ $productionParityReceiptDigest = $env('CAREER_CURRENT_PUBLISH_PRODUCTION_PARITY_
 $parityCompilerDigest = $env('CAREER_CURRENT_PUBLISH_PARITY_COMPILER_DIGEST');
 $parityCodecDigest = $env('CAREER_CURRENT_PUBLISH_PARITY_CODEC_DIGEST');
 $fullScan = $env('CAREER_CURRENT_PUBLISH_FULL_SCAN') === '1';
-$changedPagesBase64 = $env('CAREER_CURRENT_PUBLISH_CHANGED_PAGES_BASE64');
+$changedPagesFileSha256 = $env('CAREER_CURRENT_PUBLISH_CHANGED_PAGES_FILE_SHA256');
 $changedPageSetSha256 = $env('CAREER_CURRENT_PUBLISH_CHANGED_PAGE_SET_SHA256');
 $contentPackageSha256 = $env('CAREER_CURRENT_PUBLISH_CONTENT_PACKAGE_SHA256');
 $contentPackageReceiptDigest = $env('CAREER_CURRENT_PUBLISH_CONTENT_PACKAGE_RECEIPT_DIGEST');
 $changedPages = null;
 $changedPagesInvalid = false;
-if ($changedPagesBase64 !== '') {
-    $decodedChangedPages = base64_decode($changedPagesBase64, true);
-    $changedPages = is_string($decodedChangedPages)
-        ? json_decode($decodedChangedPages, true, 64)
-        : null;
-    $changedPagesInvalid = ! is_array($changedPages) || $changedPages === [];
+if ($changedPagesFileSha256 !== '') {
+    $changedPagesPath = dirname($backendRoot).'/.career-content-changed-pages.json';
+    $changedPagesInvalid = preg_match('/\A[0-9a-f]{64}\z/', $changedPagesFileSha256) !== 1
+        || ! is_file($changedPagesPath) || is_link($changedPagesPath)
+        || ! hash_equals($changedPagesFileSha256, hash_file('sha256', $changedPagesPath));
+    if (! $changedPagesInvalid) {
+        $changedManifest = json_decode((string) file_get_contents($changedPagesPath), true, 512);
+        $rows = $changedManifest['pages'] ?? null;
+        $changedPagesInvalid = ($changedManifest['schema_version'] ?? null) !== 'fermatmind.career-content-changed-pages.v1'
+            || ($changedManifest['head_sha'] ?? null) !== $releaseSha
+            || ($changedManifest['changed_page_set_sha256'] ?? null) !== $changedPageSetSha256
+            || ! is_array($rows) || ! array_is_list($rows) || $rows === [];
+        if (! $changedPagesInvalid) {
+            $setRows = [];
+            $changedPages = [];
+            foreach ($rows as $row) {
+                if (! is_array($row) || array_keys($row) !== ['after_sha256', 'locale', 'slug']
+                    || preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', (string) ($row['slug'] ?? '')) !== 1
+                    || ! in_array($row['locale'] ?? null, ['en', 'zh-CN'], true)
+                    || preg_match('/\A[0-9a-f]{64}\z/', (string) ($row['after_sha256'] ?? '')) !== 1) {
+                    $changedPagesInvalid = true;
+                    break;
+                }
+                $setRows[] = $row['slug']."\t".$row['locale']."\t".$row['after_sha256'];
+                $changedPages[] = ['slug' => $row['slug'], 'locale' => $row['locale']];
+            }
+            sort($setRows, SORT_STRING);
+            $changedPagesInvalid = $changedPagesInvalid || count(array_unique($setRows)) !== count($setRows)
+                || ! hash_equals($changedPageSetSha256, hash('sha256', implode("\n", $setRows)."\n"));
+        }
+    }
 }
 $resourceGuard = [
     'schema_version' => $env('CAREER_CURRENT_PUBLISH_RESOURCE_GUARD_SCHEMA'),

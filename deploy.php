@@ -321,7 +321,7 @@ function deployMode(): string
 {
     $mode = strtolower(trim((string) get('deploy_mode', 'standard')));
 
-    if (! in_array($mode, ['standard', 'code_only', 'candidate_only', 'schema_only', 'career_content_only'], true)) {
+    if (! in_array($mode, ['standard', 'code_only', 'candidate_only', 'schema_only', 'career_content_only', 'career_first_publish'], true)) {
         throw new \RuntimeException("unsupported deploy_mode [{$mode}]");
     }
 
@@ -341,6 +341,11 @@ function deployIsCandidateOnly(): bool
 function deployIsCareerContentOnly(): bool
 {
     return deployMode() === 'career_content_only';
+}
+
+function deployUsesCareerContentPackage(): bool
+{
+    return in_array(deployMode(), ['career_content_only', 'career_first_publish'], true);
 }
 
 function deployBooleanOption(string $name, bool $default): bool
@@ -420,7 +425,7 @@ function deployCareerDetailMinimumTargets(string $hostAlias): int
 function deploySkipsAuthorityMutations(): bool
 {
     return deployBooleanOption('a08_gate_only', false)
-        || in_array(deployMode(), ['code_only', 'candidate_only', 'schema_only', 'career_content_only'], true);
+        || in_array(deployMode(), ['code_only', 'candidate_only', 'schema_only', 'career_content_only', 'career_first_publish'], true);
 }
 
 function deploySchemaOnlyMigration(): string
@@ -867,7 +872,7 @@ before('deploy:symlink', 'guard:queue-reload-capability');
  * closed when the shared private authority artifact is missing or malformed.
  */
 task('guard:career-runtime-projection-authority', function () {
-    if (in_array(deployMode(), ['code_only', 'candidate_only', 'career_content_only'], true)) {
+    if (in_array(deployMode(), ['code_only', 'candidate_only', 'career_content_only', 'career_first_publish'], true)) {
         writeln('<comment>Skipping Career runtime projection gate for isolated code/candidate release.</comment>');
 
         return;
@@ -3228,7 +3233,7 @@ task('cache:prepare-public-projection', function () {
 });
 
 task('cache:accept-public-projection', function () {
-    if (deployIsCareerContentOnly()) {
+    if (deployUsesCareerContentPackage()) {
         return;
     }
     if (! test('test -f '.deployPlaceholderPathArg('{{release_path}}', 'backend/app/Support/PublicProjectionCache.php'))) {
@@ -3246,7 +3251,7 @@ task('cache:accept-public-projection', function () {
 });
 
 task('career:prune-public-cache-versions', function () {
-    if (deployIsCareerContentOnly()) {
+    if (deployUsesCareerContentPackage()) {
         return;
     }
     within('{{release_path}}/backend', function (): void {
@@ -3255,7 +3260,7 @@ task('career:prune-public-cache-versions', function () {
 });
 
 task('career:warm-public-authority-cache', function () {
-    if (deployBooleanOption('a08_gate_only', false) || deployIsCareerContentOnly()) {
+    if (deployBooleanOption('a08_gate_only', false) || deployUsesCareerContentPackage()) {
         writeln('<info>A08 gate-only delivery: no cache warm.</info>');
 
         return;
@@ -3417,12 +3422,8 @@ task('seo:sitemap-source-cache-rebuilt', function () {
     writeln('<info>Sitemap source cache rebuilt for a changed authority fingerprint.</info>');
 });
 
-task('seo:warm-sitemap-source-cache', function () {
-    if (deployBooleanOption('a08_gate_only', false) || deployIsCareerContentOnly()) {
-        writeln('<info>A08 gate-only delivery: no cache warm.</info>');
-
-        return;
-    }
+function deployWarmSitemapSourceCache(): void
+{
     $timeoutSeconds = (string) (getenv('DEPLOY_SEO_SITEMAP_SOURCE_WARM_TIMEOUT') ?: '180');
     $killAfterSeconds = (string) (getenv('DEPLOY_SEO_SITEMAP_SOURCE_WARM_KILL_AFTER') ?: '30');
     $strict = (string) (getenv('DEPLOY_SEO_SITEMAP_SOURCE_WARM_STRICT') ?: 'true');
@@ -3449,6 +3450,24 @@ BASH,
     if (preg_match('/sitemap_source_cache_warm_status=(verified_unchanged|rebuilt)/', $output, $match) === 1) {
         invoke('seo:sitemap-source-cache-'.$match[1]);
     }
+}
+
+task('seo:warm-sitemap-source-cache', function () {
+    if (deployBooleanOption('a08_gate_only', false) || deployUsesCareerContentPackage()) {
+        writeln('<info>Skipping preactivation sitemap warm for Career package release.</info>');
+
+        return;
+    }
+
+    deployWarmSitemapSourceCache();
+});
+
+task('seo:warm-sitemap-source-cache-first-publish', function () {
+    if (deployMode() !== 'career_first_publish') {
+        return;
+    }
+
+    deployWarmSitemapSourceCache();
 });
 
 task('guard:public-content-release', function () {
@@ -3485,6 +3504,12 @@ task('guard:code-only-mode', function () {
 task('guard:career-content-only-mode', function () {
     if (! deployIsCareerContentOnly()) {
         throw new \RuntimeException('deploy:career-content-only requires deploy_mode=career_content_only');
+    }
+});
+
+task('guard:career-first-publish-mode', function () {
+    if (deployMode() !== 'career_first_publish') {
+        throw new \RuntimeException('deploy:career-first-publish requires deploy_mode=career_first_publish');
     }
 });
 
@@ -3537,7 +3562,7 @@ task('guard:deploy-shell-config', function () {
 });
 
 task('guard:queue-reload-capability', function () {
-    if (deployIsCareerContentOnly()) {
+    if (deployUsesCareerContentPackage()) {
         writeln('<comment>Skip queue capability preflight for Career body-only release.</comment>');
 
         return;
@@ -3676,7 +3701,7 @@ task('reload:php-fpm', function () {
 });
 
 task('ensure:nginx-dns-resilience', function () {
-    if (deployIsCodeOnly() || deployIsCareerContentOnly()) {
+    if (deployIsCodeOnly() || deployUsesCareerContentPackage()) {
         return;
     }
     $script = deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/install_nginx_dns_resilience.py');
@@ -3684,7 +3709,7 @@ task('ensure:nginx-dns-resilience', function () {
 });
 
 task('reload:nginx', function () {
-    if (deployIsCodeOnly() || deployIsCareerContentOnly()) {
+    if (deployIsCodeOnly() || deployUsesCareerContentPackage()) {
         writeln('<comment>Skip nginx reload in isolated deploy mode</comment>');
 
         return;
@@ -3694,7 +3719,7 @@ task('reload:nginx', function () {
 });
 
 task('queue:reload-workers', function () {
-    if (deployIsCareerContentOnly()) {
+    if (deployUsesCareerContentPackage()) {
         writeln('<comment>Skip queue worker reload for Career body-only release.</comment>');
 
         return;
@@ -3843,7 +3868,7 @@ task('queue:reload-workers', function () {
 });
 
 task('scheduler:install-managed-cron', function () {
-    if (deployIsCareerContentOnly()) {
+    if (deployUsesCareerContentPackage()) {
         writeln('<comment>Skip scheduler installation for Career body-only release.</comment>');
 
         return;
@@ -3881,7 +3906,7 @@ task('scheduler:install-managed-cron', function () {
 });
 
 task('scheduler:wait-natural-heartbeat', function () {
-    if (deployIsCareerContentOnly()) {
+    if (deployUsesCareerContentPackage()) {
         writeln('<comment>Skip scheduler heartbeat wait for Career body-only release.</comment>');
 
         return;
@@ -4447,7 +4472,7 @@ task('healthcheck:public', function () {
 });
 
 task('healthcheck:career-content-only', function () {
-    if (! deployIsCareerContentOnly()) {
+    if (! deployUsesCareerContentPackage()) {
         return;
     }
 
@@ -4510,7 +4535,7 @@ task('healthcheck:career-data-recovery', function () {
 });
 
 task('healthcheck:public-dns', function () {
-    if (deployIsCareerContentOnly()) {
+    if (deployUsesCareerContentPackage()) {
         return;
     }
     runProductionPublicDnsBusinessEvidence('{{release_path}}');
@@ -4561,7 +4586,7 @@ task('healthcheck:auth-guest-contract', $authGuestContractHealthcheck);
 task('rollback:healthcheck:auth-guest-contract', $authGuestContractHealthcheck);
 
 $seoCouncilAnonymousHealthcheck = function () {
-    if (deployIsCareerContentOnly()) {
+    if (deployUsesCareerContentPackage()) {
         return;
     }
     $host = deploySafeHost((string) get('healthcheck_host'), 'healthcheck_host');
@@ -4577,7 +4602,7 @@ task('healthcheck:seo-council-anonymous', $seoCouncilAnonymousHealthcheck);
 task('rollback:healthcheck:seo-council-anonymous', $seoCouncilAnonymousHealthcheck);
 
 $publicStaticMediaAssetsHealthcheck = function () {
-    if (deployIsCareerContentOnly()) {
+    if (deployUsesCareerContentPackage()) {
         return;
     }
     $host = deploySafeHost((string) (get('static_media_healthcheck_host') ?: get('healthcheck_host')), 'static_media_healthcheck_host');
@@ -4607,7 +4632,7 @@ task('healthcheck:public-static-media-assets', $publicStaticMediaAssetsHealthche
 task('rollback:healthcheck:public-static-media-assets', $publicStaticMediaAssetsHealthcheck);
 
 task('healthcheck:scale-lookup', function () {
-    if (deployIsCareerContentOnly()) {
+    if (deployUsesCareerContentPackage()) {
         return;
     }
     $host = deploySafeHost((string) (get('scale_lookup_healthcheck_host') ?: get('healthcheck_host')), 'scale_lookup_healthcheck_host');
@@ -4644,7 +4669,7 @@ task('healthcheck:scale-lookup', function () {
 });
 
 $opsEntryContractHealthcheck = function () {
-    if (deployIsCareerContentOnly()) {
+    if (deployUsesCareerContentPackage()) {
         return;
     }
     $configuredHost = trim((string) get('ops_entry_host', ''));
@@ -4788,7 +4813,7 @@ BASH, timeout: 60);
 });
 
 task('healthcheck:queue-smoke', function () {
-    if (deployIsCareerContentOnly()) {
+    if (deployUsesCareerContentPackage()) {
         return;
     }
     within('{{current_path}}/backend', function () {
@@ -4799,7 +4824,7 @@ task('healthcheck:queue-smoke', function () {
 // This staging-only step publishes only the existing Chinese accountant and actor files.
 foreach (['publish', 'rollback'] as $accountantOperation) {
     task('career:staging-accountant-'.$accountantOperation, function () use ($accountantOperation): void {
-        if (deployIsCareerContentOnly()) {
+        if (deployUsesCareerContentPackage()) {
             return;
         }
         if (currentHost()->getAlias() !== 'staging') {
@@ -4822,7 +4847,7 @@ foreach (['publish', 'rollback'] as $accountantOperation) {
 }
 
 task('healthcheck:staging-big-five-report-delivery', function () {
-    if (deployIsCareerContentOnly()) {
+    if (deployUsesCareerContentPackage()) {
         return;
     }
     if (currentHost()->getAlias() !== 'staging') {
@@ -5121,7 +5146,7 @@ task('deploy:update_code', function () {
 
     deployRunGitRemoteUpdateWithBoundedRetry("$git remote update 2>&1", $environment);
 
-    if (deployIsCareerContentOnly()) {
+    if (deployUsesCareerContentPackage()) {
         $archive = (string) get('career_content_package_archive', '');
         $archiveSha256 = strtolower(trim((string) get('career_content_package_sha256', '')));
         $baseSha = strtolower(trim((string) get('career_content_package_base_sha', '')));
@@ -5207,6 +5232,10 @@ else
   {$git} archive {$targetWithDir} | tar -x -f - -C "\$release_path" 2>&1
   echo 'career_content_materialization=full_fallback'
 fi
+changed_pages="\$package_dir/changed-pages.json"
+test -f "\$changed_pages" && test ! -L "\$changed_pages"
+test "\$(sha256sum "\$changed_pages" | awk '{print \$1}')" = "\$(jq -r .changed_pages_file_sha256 "\$binding")"
+install -m 0644 "\$changed_pages" "\$release_path/.career-content-changed-pages.json"
 printf '%s\n' "\$expected_head_sha" > "\$release_path/REVISION"
 BASH);
     } elseif (get('update_code_strategy') === 'archive') {
@@ -5222,7 +5251,7 @@ BASH);
         );
     }
 
-    if (! deployIsCareerContentOnly()) {
+    if (! deployUsesCareerContentPackage()) {
         $revision = escapeshellarg(run("$git rev-list $target -1"));
         run("echo $revision > {{release_path}}/REVISION");
     }
@@ -5276,7 +5305,7 @@ task('career:current-authority-production-preactivation-parity', function () {
         throw new \RuntimeException('Career production preactivation parity requires the application runtime identity.');
     }
 
-    $verifyCacheBaseline = deployIsCareerContentOnly();
+    $verifyCacheBaseline = deployUsesCareerContentPackage();
     set('career_parity_active_backend_root', $verifyCacheBaseline ? '{{deploy_path}}/current/backend' : '');
 
     run(<<<'BASH'
@@ -5347,6 +5376,7 @@ before('reload:nginx', 'ensure:nginx-dns-resilience');
 after('deploy:symlink', 'queue:reload-workers');
 after('deploy:symlink', 'healthcheck:public');
 after('healthcheck:public', 'healthcheck:career-content-only');
+before('healthcheck:sitemap-source', 'seo:warm-sitemap-source-cache-first-publish');
 after('healthcheck:public', 'healthcheck:sitemap-source');
 after('healthcheck:sitemap-source', 'healthcheck:public-dns');
 after('healthcheck:public-dns', 'healthcheck:career-data-recovery');
@@ -5399,6 +5429,22 @@ task('deploy:career-content-only', [
     'guard:deploy-shell-config',
     'guard:forbid-destructive',
     'guard:career-content-only-mode',
+    'deploy:prepare',
+    'deploy:vendors',
+    'artisan:storage:link',
+    'artisan:config:cache',
+    'artisan:route:cache',
+    'artisan:view:cache',
+    'artisan:event:cache',
+    'guard:public-content-release',
+    'prepare:release-bootstrap-cache-access',
+    'deploy:publish',
+]);
+
+task('deploy:career-first-publish', [
+    'guard:deploy-shell-config',
+    'guard:forbid-destructive',
+    'guard:career-first-publish-mode',
     'deploy:prepare',
     'deploy:vendors',
     'artisan:storage:link',

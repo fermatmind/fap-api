@@ -17,9 +17,9 @@ test('content-only policy is receipt-bound and selects the dedicated deploy task
   assert.match(workflow, /deploy_task=deploy:career-content-only/);
   assert.match(workflow, /deploy_mode=career_content_only/);
   assert.match(workflow, /a08-evidence:[\s\S]*?needs\.policy\.outputs\.career_content_only != 'true'/);
-  assert.match(workflow, /CAREER_CURRENT_PUBLISH_CHANGED_PAGES_BASE64=/);
+  assert.match(workflow, /CAREER_CURRENT_PUBLISH_CHANGED_PAGES_FILE_SHA256=/);
   assert.match(workflow, /CAREER_CURRENT_PUBLISH_CHANGED_PAGE_SET_SHA256=/);
-  assert.match(workflow, /Download exact CI validation receipt for Career publisher\n\s+if: needs\.policy\.outputs\.career_content_only == 'true'/);
+  assert.match(workflow, /Download exact CI validation receipt for Career publisher\n\s+if: needs\.policy\.outputs\.career_package == 'true'/);
   assert.match(workflow, /run-id: \$\{\{ github\.event\.workflow_run\.id \}\}/);
   assert.match(workflow, /Expected one \$\{expected\} artifact/);
   assert.match(workflow, /career_package_artifact_id/);
@@ -34,7 +34,11 @@ test('dedicated mode preserves parity and atomic publish while excluding unrelat
   assert.match(deploy, /Skip scheduler installation for Career body-only release/);
   assert.match(deploy, /Skip URL Truth probe because the Career URL set is unchanged/);
   assert.match(deploy, /task\('healthcheck:career-content-only'/);
-  assert.match(workflow, /deploy_task=deploy\n/);
+  assert.match(workflow, /deploy_task=deploy:career-first-publish/);
+  assert.match(deploy, /task\('deploy:career-first-publish',[\s\S]*?'prepare:release-bootstrap-cache-access'[\s\S]*?'deploy:publish'/);
+  assert.match(deploy, /function deploySkipsAuthorityMutations\(\)[\s\S]*?'career_first_publish'/);
+  assert.match(deploy, /task\('career:staging-accountant-'\.\$accountantOperation,[\s\S]*?deployUsesCareerContentPackage\(\)/);
+  assert.match(deploy, /before\('healthcheck:sitemap-source', 'seo:warm-sitemap-source-cache-first-publish'\)/);
   assert.match(deploy, /career_content_materialization=incremental/);
   assert.match(deploy, /career_content_materialization=full_fallback/);
   assert.match(deploy, /\.before_sha256/);
@@ -44,7 +48,7 @@ test('dedicated mode preserves parity and atomic publish while excluding unrelat
 test('CI builds one deterministic SHA-bound package and deploy stages consume it', () => {
   assert.match(ci, /Build deterministic exact-SHA Career content package/);
   assert.match(ci, /tar --sort=name --format=ustar --mtime=@0 --owner=0 --group=0 --numeric-owner/);
-  assert.match(ci, /cmp "\$artifact\/career-content-package\.tar\.gz"/);
+  assert.doesNotMatch(ci, /career-content-package-repeat\.tar\.gz/);
   assert.match(ci, /career_content_package:\$career_package/);
   assert.match(workflow, /Download the bound Career content package/);
   assert.match(workflow, /Download the bound production Career content package/);

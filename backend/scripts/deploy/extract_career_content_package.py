@@ -52,7 +52,7 @@ def extract(archive, destination, archive_sha, base, head, tree):
                 continue
             require(path not in names, "PACKAGE_DUPLICATE_ENTRY")
             require(member.isdir() or member.isfile(), "PACKAGE_LINK_OR_TYPE_FORBIDDEN")
-            require(path in ("binding.json", "projection-index.json", "payload")
+            require(path in ("binding.json", "projection-index.json", "changed-pages.json", "payload")
                     or path.startswith("payload/"),
                     "PACKAGE_FILE_SET_INVALID")
             names[path] = member
@@ -67,7 +67,31 @@ def extract(archive, destination, archive_sha, base, head, tree):
         files = binding.get("files")
         require(isinstance(files, list) and len(files) == binding.get("payload_file_count")
                 and len(files) >= 3, "PACKAGE_BINDING_FILES_INVALID")
-        expected = {"binding.json", "projection-index.json"}
+        changed_member = names.get("changed-pages.json")
+        require(changed_member is not None and changed_member.isfile(), "PACKAGE_CHANGED_PAGES_MISSING")
+        changed_bytes = bundle.extractfile(changed_member).read()
+        require(HEX64.fullmatch(str(binding.get("changed_pages_file_sha256", "")))
+                and hashlib.sha256(changed_bytes).hexdigest() == binding["changed_pages_file_sha256"],
+                "PACKAGE_CHANGED_PAGES_HASH_MISMATCH")
+        changed = json.loads(changed_bytes)
+        pages = changed.get("pages")
+        require(changed.get("schema_version") == "fermatmind.career-content-changed-pages.v1"
+                and changed.get("head_sha") == head
+                and changed.get("changed_page_set_sha256") == binding.get("changed_page_set_sha256")
+                and isinstance(pages, list) and len(pages) == binding.get("changed_page_count"),
+                "PACKAGE_CHANGED_PAGES_INVALID")
+        rows = []
+        for page in pages:
+            require(isinstance(page, dict) and set(page) == {"slug", "locale", "after_sha256"}
+                    and isinstance(page["slug"], str)
+                    and re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", page["slug"])
+                    and page["locale"] in ("en", "zh-CN")
+                    and HEX64.fullmatch(str(page["after_sha256"])), "PACKAGE_CHANGED_PAGES_INVALID")
+            rows.append((page["slug"], page["locale"], page["after_sha256"]))
+        expected_set_sha = hashlib.sha256(("\n".join(sorted("\t".join(row) for row in rows)) + "\n").encode()).hexdigest()
+        require(expected_set_sha == binding.get("changed_page_set_sha256")
+                and len(set(rows)) == len(rows), "PACKAGE_CHANGED_PAGES_SET_MISMATCH")
+        expected = {"binding.json", "projection-index.json", "changed-pages.json"}
         for record in files:
             path = record.get("path") if isinstance(record, dict) else None
             require(isinstance(path, str) and normalized("./" + path) == path
@@ -77,11 +101,22 @@ def extract(archive, destination, archive_sha, base, head, tree):
                     "PACKAGE_PAYLOAD_RECORD_INVALID")
             expected.add("payload/" + path)
         actual = {path for path, member in names.items() if member.isfile()}
-        require(actual == expected and len(files) + 2 == len(expected), "PACKAGE_FILE_SET_MISMATCH")
+        page_records = {
+            (record["path"], record["after_sha256"])
+            for record in files if "/careers/" in record["path"]
+        }
+        require(page_records == {
+            (f"backend/content_assets/career/current/careers/{slug}/{locale}.json", sha)
+            for slug, locale, sha in rows
+        }, "PACKAGE_CHANGED_PAGES_SET_MISMATCH")
+        require(actual == expected and len(files) + 3 == len(expected), "PACKAGE_FILE_SET_MISMATCH")
         require(all(any(file.startswith(path + "/") for file in expected)
                     for path, member in names.items() if member.isdir()), "PACKAGE_DIRECTORY_SET_MISMATCH")
-        for record in files:
-            member = names["payload/" + record["path"]]
+        records_by_payload = {"payload/" + record["path"]: record for record in files}
+        for member in members:
+            record = records_by_payload.get(normalized(member.name))
+            if record is None:
+                continue
             data = bundle.extractfile(member).read()
             require(len(data) == record["bytes"]
                     and hashlib.sha256(data).hexdigest() == record["after_sha256"],
