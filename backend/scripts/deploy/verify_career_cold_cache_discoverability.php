@@ -130,6 +130,38 @@ final class CareerColdCacheDiscoverabilityValidator
     }
 
     /**
+     * @param  array<string, list<array<string, mixed>>>  $itemsByLocale
+     * @param  callable(string, string): bool  $allows
+     * @return array<string, mixed>
+     */
+    public static function releasedDirectorySnapshot(array $itemsByLocale, callable $allows): array
+    {
+        $releasedRows = [];
+        foreach (self::LOCALES as $locale) {
+            $items = $itemsByLocale[$locale] ?? null;
+            if (! is_array($items)) {
+                self::fail('DISCOVERABILITY_DIRECTORY_UNAVAILABLE');
+            }
+            foreach ($items as $item) {
+                if (! is_array($item)
+                    || ($item['indexable'] ?? false) !== true
+                    || ($item['detail_ready'] ?? false) !== true) {
+                    self::fail('DISCOVERABILITY_DIRECTORY_ITEM_INVALID');
+                }
+                $slug = self::slug($item);
+                if ($slug === '') {
+                    self::fail('DISCOVERABILITY_IDENTITY_INVALID');
+                }
+                if ($allows($slug, $locale)) {
+                    $releasedRows[$locale][$slug] = true;
+                }
+            }
+        }
+
+        return self::snapshotFromLocaleMaps($releasedRows, 'DISCOVERABILITY', true);
+    }
+
+    /**
      * @param  array<string, mixed>  $payload
      * @return array<string, mixed>
      */
@@ -196,6 +228,7 @@ final class CareerColdCacheDiscoverabilityValidator
             $map[$locale][$slug] = true;
         }
 
+        // Body-qualified locale versions can be released independently.
         return self::snapshotFromLocaleMaps($map, 'SITEMAP', true);
     }
 
@@ -475,8 +508,12 @@ final class CareerColdCacheDiscoverabilityRunner
 
             if ($phase === 'post_sitemap') {
                 $discoverabilityGate = $app->make('App\\Domain\\Career\\Publish\\Career1046DiscoverabilityReleaseGate');
-                $snapshot['discoverability'] = CareerColdCacheDiscoverabilityValidator::discoverabilitySnapshot(
-                    $runtimeItems,
+                $directory = $app->make('App\\Services\\Career\\CareerDirectoryAuthorityService');
+                $snapshot['discoverability'] = CareerColdCacheDiscoverabilityValidator::releasedDirectorySnapshot(
+                    [
+                        'en' => $directory->indexableItems('en', false),
+                        'zh-CN' => $directory->indexableItems('zh-CN', false),
+                    ],
                     static fn (string $slug, string $locale): bool => $discoverabilityGate->allows($slug, $locale),
                 );
                 // Read through the same public-projection router used by the

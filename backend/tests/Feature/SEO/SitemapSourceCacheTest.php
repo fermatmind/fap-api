@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tests\Feature\SEO;
 
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
+use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
@@ -195,6 +197,16 @@ class SitemapSourceCacheTest extends TestCase
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
         config(['app.url' => 'https://fermatmind.com']);
+        // Both synthetic identities represent body-qualified pages in this
+        // fingerprint transition test; installed Current pages are unrelated.
+        $content = new class(app(CareerContentV3AuthorityPackage::class)) extends CareerContentV3CanonicalReader
+        {
+            public function hasPublicBody(string $slug, string $locale, ?string $backendRoot = null): bool
+            {
+                return true;
+            }
+        };
+        app()->instance(CareerContentV3CanonicalReader::class, $content);
         $this->seedFingerprintAuthority('fingerprint-authority-baseline');
 
         $this->runRefreshIfChanged('rebuilt');
