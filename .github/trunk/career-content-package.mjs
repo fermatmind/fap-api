@@ -5,6 +5,7 @@ import { execFileSync } from 'node:child_process';
 import { mkdirSync, readFileSync, writeFileSync, copyFileSync, mkdtempSync, readdirSync, lstatSync, rmSync } from 'node:fs';
 import { dirname, join, relative, resolve, sep } from 'node:path';
 import { tmpdir } from 'node:os';
+import { fileURLToPath } from 'node:url';
 
 export const PACKAGE_SCHEMA = 'fermatmind.career-content-package.v1';
 const MANIFEST = 'backend/content_assets/career/current/manifest.json';
@@ -147,12 +148,16 @@ export function verifyPackage({ archive, receipt, expected = {} }) {
   for (const [key, value] of Object.entries(expected)) {
     if (value !== undefined && value !== '') assert(packageReceipt[key] === value, `PACKAGE_${key.toUpperCase()}_MISMATCH`);
   }
-  const entries = execFileSync('tar', ['-tzf', archive], { encoding: 'utf8' }).trim().split('\n')
-    .map((entry) => entry.replace(/^\.\//, '').replace(/\/$/, '')).filter(Boolean);
-  assert(entries.every(safePath), 'PACKAGE_ARCHIVE_PATH_INVALID');
-  const directory = mkdtempSync(join(tmpdir(), 'career-content-package-'));
+  const temporary = mkdtempSync(join(tmpdir(), 'career-content-package-'));
+  const directory = join(temporary, 'extracted');
   try {
-    execFileSync('tar', ['-xzf', archive, '-C', directory]);
+    execFileSync('python3', [
+      fileURLToPath(new URL('../../backend/scripts/deploy/extract_career_content_package.py', import.meta.url)),
+      '--archive', archive, '--destination', directory,
+      '--archive-sha', packageReceipt.archive_sha256,
+      '--base', packageReceipt.base_sha, '--head', packageReceipt.head_sha,
+      '--tree', packageReceipt.candidate_tree_sha,
+    ], { stdio: 'pipe' });
     const binding = readJson(join(directory, 'binding.json'));
     const bindingProjection = { ...binding };
     delete bindingProjection.binding_digest;
@@ -174,7 +179,7 @@ export function verifyPackage({ archive, receipt, expected = {} }) {
     }
     return { receipt: packageReceipt, binding };
   } finally {
-    rmSync(directory, { recursive: true, force: true });
+    rmSync(temporary, { recursive: true, force: true });
   }
 }
 

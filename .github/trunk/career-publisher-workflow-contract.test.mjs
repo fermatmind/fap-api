@@ -50,9 +50,8 @@ test("production publisher is bound to the preactivation receipt digest", () => 
   assert.match(deploy, /needs\.policy\.outputs\.career_current_release == 'true'/);
   assert.match(deploy, /CAREER_CURRENT_PUBLISH_PRODUCTION_PARITY_RECEIPT_DIGEST/);
   assert.doesNotMatch(deploy, /needs\.production\.outputs\.career_parity_digest/);
-  assert.match(deploy, /Download exact production Career parity receipt/);
-  assert.match(deploy, /trunk-production-\$\{\{ github\.event\.workflow_run\.head_sha \}\}/);
-  assert.match(deploy, /production_parity_receipt="artifacts\/career-current-production-parity\/career-current-authority-production-preactivation-parity\.json"/);
+  assert.match(deploy, /Read production preactivation Career parity receipt/);
+  assert.match(deploy, /production_parity_receipt="career-current-authority-production-preactivation-parity\.json"/);
   assert.match(deploy, /PRODUCTION_PARITY_RECEIPT_DIGEST="\$\(jq -r \.receipt_digest "\$production_parity_receipt"\)"/);
   assert.ok(deploy.includes("(.validation_scope.canonical_slugs | unique | length) == 1046"));
   assert.match(deploy, /\.validation_scope\.locale_page_count == 2092/);
@@ -66,17 +65,19 @@ test("production publisher is bound to the preactivation receipt digest", () => 
 });
 
 
-test("Career publisher respects the resolved publication decision for mixed cache/control releases", () => {
-  const expression = deploy.match(/career-current-publish:[\s\S]*?\n    if: ([^\n]+)/)?.[1];
+test("Career publisher is part of production success and respects the publication decision", () => {
+  const production = deploy.split("  production:")[1].split("  mbti-zh-result-publish:")[0];
+  const expression = production.match(/- id: career-publish\n[^\n]*\n\s+if: ([^\n]+)/)?.[1];
   assert.ok(expression);
-  for (const [production, boundary, authorized, expected] of [
-    ["success", "true", "false", false],
-    ["success", "true", "true", true],
-    ["failure", "true", "true", false],
-    ["success", "false", "true", false],
+  assert.match(production, /Restore exact LKG after Career publisher failure/);
+  for (const [skipped, boundary, authorized, expected] of [
+    ["false", "true", "false", false],
+    ["false", "true", "true", true],
+    ["true", "true", "true", false],
+    ["false", "false", "true", false],
   ]) {
     const resolved = expression
-      .replaceAll("needs.production.result", JSON.stringify(production))
+      .replaceAll("steps.baseline.outputs.skip", JSON.stringify(skipped))
       .replaceAll("needs.policy.outputs.career_current_release", JSON.stringify(boundary))
       .replaceAll("needs.policy.outputs.career_current", JSON.stringify(authorized));
     assert.equal(Function(`return (${resolved})`)(), expected);

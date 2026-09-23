@@ -12,6 +12,7 @@ $env = static fn (string $name, string $default = ''): string => is_string(geten
 $backendRoot = $env('CAREER_PARITY_BACKEND_ROOT', dirname(__DIR__, 2));
 $releaseSha = $env('CAREER_PARITY_RELEASE_SHA');
 $activeSha = $env('CAREER_PARITY_ACTIVE_SHA');
+$activeBackendRoot = $env('CAREER_PARITY_ACTIVE_BACKEND_ROOT');
 $mode = $env('CAREER_PARITY_MODE', 'package');
 $redisMode = $env('CAREER_PARITY_REDIS_MODE', 'none');
 $receiptPath = $env('CAREER_PARITY_RECEIPT_PATH');
@@ -63,7 +64,7 @@ try {
     $app->make(Kernel::class)->bootstrap();
     /** @var CareerCurrentAuthorityParity $parity */
     $parity = $app->make(CareerCurrentAuthorityParity::class);
-    $emit($parity->run($backendRoot, $mode, $redisMode, $releaseSha, $activeSha), $receiptPath);
+    $emit($parity->run($backendRoot, $mode, $redisMode, $releaseSha, $activeSha, $activeBackendRoot), $receiptPath);
 } catch (Throwable $throwable) {
     $code = preg_match('/\A[A-Z0-9_]+\z/', $throwable->getMessage()) === 1
         ? $throwable->getMessage()

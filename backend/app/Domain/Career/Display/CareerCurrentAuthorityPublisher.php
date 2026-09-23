@@ -30,7 +30,7 @@ final class CareerCurrentAuthorityPublisher
 
     /** Files activate atomically with the release. Cache entries are disposable, fingerprint-bound derivatives. */
     /** @param null|list<array{slug:string,locale:string}> $changedPages */
-    public function execute(string $backendRoot, bool $fullScan = false, ?array $changedPages = null): array
+    public function execute(string $backendRoot, bool $fullScan = false, ?array $changedPages = null, ?array $cacheSnapshot = null): array
     {
         $authority = $this->loader->indexForPublish($backendRoot);
         $writes = 0;
@@ -54,15 +54,22 @@ final class CareerCurrentAuthorityPublisher
                 $identities[] = ['slug' => $slug, 'locale' => $locale];
             }
         }
+        if ($cacheSnapshot !== null && ($allowedChanges === null
+            || ($cacheSnapshot['identity_count'] ?? null) !== count($identities)
+            || ($cacheSnapshot['changed'] ?? null) !== count($allowedChanges)
+            || ($cacheSnapshot['unchanged'] ?? null) !== count($identities) - count($allowedChanges)
+            || preg_match('/\A[a-f0-9]{64}\z/', (string) ($cacheSnapshot['sha256'] ?? '')) !== 1)) {
+            throw new CareerCurrentAuthorityPublisherFailure('CURRENT_CACHE_SNAPSHOT_INVALID', null, 'confirmed_zero_write');
+        }
         $mismatches = [];
-        foreach (array_chunk($identities, 64) as $identityChunk) {
+        $inspectionIdentities = $cacheSnapshot === null ? $identities : $changedPages;
+        foreach (array_chunk($inspectionIdentities, 64) as $identityChunk) {
             $candidates = $this->candidateChunk($authority, $identityChunk);
             $before = \App\Support\PublicProjectionCache::many(array_column($candidates, 'key'));
             $expiring = \App\Support\PublicProjectionCache::expiringCareerPageKeys(array_column($candidates, 'key'));
             foreach ($candidates as $identity => $candidate) {
                 $key = $candidate['key'];
                 $page = $candidate['page'];
-                $hashes[] = CareerCurrentAuthorityPackage::hashValue($page);
                 if (($before[$key] ?? null) !== $page || isset($expiring[$key])) {
                     if ($allowedChanges !== null && ! isset($allowedChanges[$identity])) {
                         throw new CareerCurrentAuthorityPublisherFailure('CURRENT_UNCHANGED_FILE_PAGE_DRIFT', null, 'confirmed_zero_write');
@@ -89,6 +96,7 @@ final class CareerCurrentAuthorityPublisher
                 if (($readback[$candidate['key']] ?? null) !== $candidate['page'] || isset($expiring[$candidate['key']])) {
                     throw new CareerCurrentAuthorityPublisherFailure('CURRENT_FILE_PAGE_CACHE_READBACK_FAILED');
                 }
+                $hashes[] = CareerCurrentAuthorityPackage::hashValue($candidate['page']);
             }
             unset($readback, $candidates);
             gc_collect_cycles();

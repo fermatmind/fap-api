@@ -1471,9 +1471,19 @@ jobs:
     needs: [policy, staging]
     if: needs.staging.result == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 120
     environment: production
     env:
+      ASSETS_SHA256: ${{ needs.policy.outputs.career_current_assets_sha256 }}
+      SOURCE_MERGE_SHA: ${{ needs.policy.outputs.career_current_source_merge_sha }}
+      MANIFEST_SHA256: ${{ needs.policy.outputs.career_current_manifest_sha256 }}
+      VERSIONLESS_PROJECTION_SHA256: ${{ needs.policy.outputs.career_current_projection_sha256 }}
+      OPERATION_KEY: ${{ needs.policy.outputs.career_current_operation_key }}
+      CI_PACKAGE_SCAN_RECEIPT_DIGEST: ${{ needs.policy.outputs.career_parity_receipt_digest }}
+      PARITY_COMPILER_DIGEST: ${{ needs.policy.outputs.career_parity_compiler_digest }}
+      PARITY_CODEC_DIGEST: ${{ needs.policy.outputs.career_parity_codec_digest }}
+      FULL_SCAN: ${{ needs.policy.outputs.career_current_full_scan == 'true' && '1' || '0' }}
+      CAREER_CONTENT_ONLY: ${{ needs.policy.outputs.career_content_only }}
       TARGET: production
       DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
       DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
@@ -1501,6 +1511,14 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
           fetch-depth: 0
+      - name: Download exact CI validation receipt for Career publisher
+        if: needs.policy.outputs.career_content_only == 'true'
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          name: trunk-validation-${{ github.event.workflow_run.head_sha }}
+          path: artifacts/trunk-validation
+          github-token: ${{ github.token }}
+          run-id: ${{ github.event.workflow_run.id }}
       - name: Download the bound production Career content package
         if: needs.policy.outputs.career_content_only == 'true'
         uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
@@ -2223,10 +2241,239 @@ jobs:
               and .full_scan.counts.locale_pages == 2092
               and .full_scan.counts.encoded == 2092
               and .full_scan.counts.decoded == 2092
+              and (if "${{ needs.policy.outputs.career_content_only }}" == "true" then
+                .full_scan.cache_snapshot.identity_count == 2092
+                and .full_scan.cache_snapshot.unchanged + .full_scan.cache_snapshot.changed == 2092
+                and (.full_scan.cache_snapshot.sha256 | test("^[a-f0-9]{64}$"))
+                else true end)
               and .redis.mode == "readonly"
               and ([.write_counts[]] | all(. == 0))
               and (.receipt_digest | test("^[0-9a-f]{64}$"))
             ' "$receipt" >/dev/null
+      - id: career-publish
+        name: Stream Career Current publisher and validate receipt
+        if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.career_current_release == 'true' && needs.policy.outputs.career_current == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir=artifacts/career-current-authority-publish
+          receipt="$dir/receipt.json"
+          remote_stderr="$RUNNER_TEMP/career-current-authority-publish.stderr"
+          production_parity_receipt="career-current-authority-production-preactivation-parity.json"
+          validation_receipt="artifacts/trunk-validation/trunk-validation.json"
+          package_archive="artifacts/career-content-package/career-content-package.tar.gz"
+          package_receipt="artifacts/career-content-package/package-receipt.json"
+          mkdir -p "$dir"
+          [[ "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$SOURCE_MERGE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$ASSETS_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$MANIFEST_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$VERSIONLESS_PROJECTION_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$OPERATION_KEY" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$CI_PACKAGE_SCAN_RECEIPT_DIGEST" =~ ^[0-9a-f]{64}$ ]]
+          test -f "$production_parity_receipt"
+          test ! -L "$production_parity_receipt"
+          jq -e --arg sha "$DEPLOY_SHA" --arg projection "$VERSIONLESS_PROJECTION_SHA256" \
+            --arg compiler "$PARITY_COMPILER_DIGEST" --arg codec "$PARITY_CODEC_DIGEST" '
+              .contract_version == "career.current_authority_parity.v2"
+              and .status == "pass"
+              and .mode == "production-preactivation"
+              and .release_sha == $sha
+              and .package.projection_digest == $projection
+              and .package.compiler_digest == $compiler
+              and .package.codec_digest == $codec
+              and (.validation_scope.canonical_slugs | length) == 1046
+              and (.validation_scope.canonical_slugs | unique | length) == 1046
+              and .validation_scope.slug_count == 1046
+              and .validation_scope.locales == ["en", "zh-CN"]
+              and .validation_scope.locale_page_count == 2092
+              and ([.write_counts[]] | all(. == 0))
+              and (.receipt_digest | test("^[0-9a-f]{64}$"))
+            ' "$production_parity_receipt" >/dev/null
+          PRODUCTION_PARITY_RECEIPT_DIGEST="$(jq -r .receipt_digest "$production_parity_receipt")"
+          export PRODUCTION_PARITY_RECEIPT_DIGEST
+          [[ "$PRODUCTION_PARITY_RECEIPT_DIGEST" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$PARITY_COMPILER_DIGEST" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$PARITY_CODEC_DIGEST" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$FULL_SCAN" =~ ^[01]$ ]]
+          changed_pages_base64=''
+          changed_page_set_sha256=''
+          content_package_sha256=''
+          content_package_receipt_digest=''
+          CHANGED_PAGE_COUNT=0
+          if [ "$CAREER_CONTENT_ONLY" = true ]; then
+            jq -e --arg sha "$DEPLOY_SHA" '
+              .sha == $sha
+              and .classification.operations.career_content_only == true
+              and .career_content_change.status == "eligible"
+              and .career_content_change.head_sha == $sha
+              and (.career_content_change.changed_pages | length) == .career_content_change.changed_page_count
+              and .career_content_change.changed_page_count > 0
+            ' "$validation_receipt" >/dev/null
+            test "$(sha256sum "$package_archive" | awk '{print $1}')" = '${{ needs.policy.outputs.career_package_archive_sha256 }}'
+            node .github/trunk/career-content-package.mjs verify \
+              --archive="$package_archive" --receipt="$package_receipt" --head="$DEPLOY_SHA" \
+              --base='${{ needs.policy.outputs.career_package_base_sha }}' \
+              --tree='${{ needs.policy.outputs.career_package_tree_sha }}' \
+              --compiler="$PARITY_COMPILER_DIGEST" --codec="$PARITY_CODEC_DIGEST"
+            tar -xOzf "$package_archive" ./binding.json > "$RUNNER_TEMP/career-content-package-binding.json"
+            jq -e --argjson change "$(jq -c .career_content_change "$validation_receipt")" '
+              .head_sha == $change.head_sha
+              and .base_sha == $change.base_sha
+              and .candidate_tree_sha == $change.candidate_tree_sha
+              and .changed_page_set_sha256 == $change.changed_page_set_sha256
+              and ([.files[].path | select(test("/careers/[^/]+/(en|zh-CN)\\.json$"))] | length) == $change.changed_page_count
+            ' "$RUNNER_TEMP/career-content-package-binding.json" >/dev/null
+            changed_pages_base64="$(jq -c '[.files[].path | select(test("/careers/[^/]+/(en|zh-CN)\\.json$")) | capture("/careers/(?<slug>[^/]+)/(?<locale>en|zh-CN)\\.json$")]' "$RUNNER_TEMP/career-content-package-binding.json" | base64 -w0)"
+            CHANGED_PAGE_COUNT="$(jq -r .changed_page_count "$RUNNER_TEMP/career-content-package-binding.json")"
+            changed_page_set_sha256="$(jq -r .changed_page_set_sha256 "$RUNNER_TEMP/career-content-package-binding.json")"
+            content_package_sha256="$(jq -r .archive_sha256 "$package_receipt")"
+            content_package_receipt_digest="$(jq -r .receipt_digest "$package_receipt")"
+            test -n "$changed_pages_base64"
+            [[ "$changed_page_set_sha256" =~ ^[0-9a-f]{64}$ ]]
+            [[ "$content_package_sha256" =~ ^[0-9a-f]{64}$ ]]
+            [[ "$content_package_receipt_digest" =~ ^[0-9a-f]{64}$ ]]
+          fi
+          export CHANGED_PAGE_COUNT changed_page_set_sha256 content_package_sha256 content_package_receipt_digest
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_release '%q' "$DEPLOY_SHA"
+          printf -v q_assets '%q' "$ASSETS_SHA256"
+          printf -v q_source '%q' "$SOURCE_MERGE_SHA"
+          printf -v q_manifest '%q' "$MANIFEST_SHA256"
+          printf -v q_projection '%q' "$VERSIONLESS_PROJECTION_SHA256"
+          printf -v q_operation '%q' "$OPERATION_KEY"
+          printf -v q_ci_package_scan '%q' "$CI_PACKAGE_SCAN_RECEIPT_DIGEST"
+          printf -v q_production_parity '%q' "$PRODUCTION_PARITY_RECEIPT_DIGEST"
+          printf -v q_compiler '%q' "$PARITY_COMPILER_DIGEST"
+          printf -v q_codec '%q' "$PARITY_CODEC_DIGEST"
+          printf -v q_full_scan '%q' "$FULL_SCAN"
+          printf -v q_changed_pages '%q' "$changed_pages_base64"
+          printf -v q_changed_page_set '%q' "$changed_page_set_sha256"
+          printf -v q_content_package '%q' "$content_package_sha256"
+          printf -v q_content_package_receipt '%q' "$content_package_receipt_digest"
+          printf -v q_run '%q' "$GITHUB_RUN_ID"
+          printf -v q_attempt '%q' "$GITHUB_RUN_ATTEMPT"
+          remote="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_release; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_CURRENT_PUBLISH_EXECUTE=1 CAREER_CURRENT_PUBLISH_BACKEND_ROOT=\"\$current/backend\" CAREER_CURRENT_PUBLISH_RELEASE_SHA=$q_release CAREER_CURRENT_PUBLISH_RELEASE_NAME=\"\$release_name\" CAREER_CURRENT_PUBLISH_SOURCE_MERGE_SHA=$q_source CAREER_CURRENT_PUBLISH_MANIFEST_SHA256=$q_manifest CAREER_CURRENT_PUBLISH_ASSETS_SHA256=$q_assets CAREER_CURRENT_PUBLISH_VERSIONLESS_PROJECTION_SHA256=$q_projection CAREER_CURRENT_PUBLISH_OPERATION_KEY=$q_operation CAREER_CURRENT_PUBLISH_CI_PACKAGE_SCAN_RECEIPT_DIGEST=$q_ci_package_scan CAREER_CURRENT_PUBLISH_PRODUCTION_PARITY_RECEIPT_DIGEST=$q_production_parity CAREER_CURRENT_PUBLISH_PARITY_COMPILER_DIGEST=$q_compiler CAREER_CURRENT_PUBLISH_PARITY_CODEC_DIGEST=$q_codec CAREER_CURRENT_PUBLISH_FULL_SCAN=$q_full_scan CAREER_CURRENT_PUBLISH_CHANGED_PAGES_BASE64=$q_changed_pages CAREER_CURRENT_PUBLISH_CHANGED_PAGE_SET_SHA256=$q_changed_page_set CAREER_CURRENT_PUBLISH_CONTENT_PACKAGE_SHA256=$q_content_package CAREER_CURRENT_PUBLISH_CONTENT_PACKAGE_RECEIPT_DIGEST=$q_content_package_receipt CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ID=$q_run CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ATTEMPT=$q_attempt \"\$current/backend/scripts/deploy/run_career_current_authority_publisher.sh\""
+          set +e
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ServerAliveInterval=15 -o ServerAliveCountMax=4 -p "$DEPLOY_PORT" \
+            "$DEPLOY_USER@$DEPLOY_HOST" "$remote" \
+            < backend/scripts/operations/career_current_authority_publish.php \
+            > "$receipt" 2> "$remote_stderr"
+          remote_status=$?
+          set -e
+          jq -e 'type == "object" and (.status | type == "string")' "$receipt" >/dev/null
+          test "$remote_status" = 0
+          jq -e --arg release "$DEPLOY_SHA" --arg source "$SOURCE_MERGE_SHA" --arg manifest "$MANIFEST_SHA256" \
+            --arg assets "$ASSETS_SHA256" --arg projection "$VERSIONLESS_PROJECTION_SHA256" \
+            --arg operation "$OPERATION_KEY" --argjson full_scan "$FULL_SCAN" '
+              .contract_version == "career.current_authority_publish.v1"
+              and .status == "PASS_CURRENT_AUTHORITY_PUBLISH"
+              and .release_sha == $release
+              and .source_merge_sha == $source
+              and .manifest_sha256 == $manifest
+              and .assets_sha256 == $assets
+              and .versionless_projection_sha256 == $projection
+              and .versionless_projection_sha256 == .package.versionless_projection_sha256
+              and .operation_key == $operation
+              and ((env.CAREER_CONTENT_ONLY == "true" and .authority.changed_locale_page_count == (env.CHANGED_PAGE_COUNT | tonumber))
+                or (env.CAREER_CONTENT_ONLY != "true" and .authority.changed_locale_page_count == 0))
+              and ((env.CAREER_CONTENT_ONLY == "true" and .changed_page_set_sha256 == env.changed_page_set_sha256)
+                or (env.CAREER_CONTENT_ONLY != "true" and .changed_page_set_sha256 == null))
+              and .parity.ci_package_scan_receipt_digest == env.CI_PACKAGE_SCAN_RECEIPT_DIGEST
+              and .parity.production_preactivation_receipt_digest == env.PRODUCTION_PARITY_RECEIPT_DIGEST
+              and .parity.compiler_digest == env.PARITY_COMPILER_DIGEST
+              and .parity.codec_digest == env.PARITY_CODEC_DIGEST
+              and ((env.CAREER_CONTENT_ONLY == "true"
+                  and .parity.content_package_sha256 == env.content_package_sha256
+                  and .parity.content_package_receipt_digest == env.content_package_receipt_digest)
+                or (env.CAREER_CONTENT_ONLY != "true"
+                  and .parity.content_package_sha256 == null
+                  and .parity.content_package_receipt_digest == null))
+              and .full_scan == ($full_scan == 1)
+              and .resource_guard == {
+                "schema_version": "career.current_authority_publish.resource_guard.v1",
+                "timeout_seconds": 900,
+                "nice_adjustment": 15,
+                "ionice_class": 2,
+                "ionice_priority": 7,
+                "memory_limit_mb": 1024
+              }
+              and .package.career_count == 1046
+              and .package.locale_page_count == 2092
+              and .package.file_count == 2092
+              and .authority.target_count == 1046
+              and .authority.unique_slug_count == 1046
+              and .authority.component_28_count == 1046
+              and .manual_hold_verified == true
+              and (.full_scan == false or .public_readback.verified_slug_count == 1046)
+              and (.full_scan == false or .public_readback.verified_locale_page_count == 2092)
+              and .write_counts.occupation_write_count == 0
+              and .write_counts.generation_write_count == 0
+              and .write_counts.discoverability_write_count == 0
+              and .write_counts.search_submission_count == 0
+              and .negative_guarantees.task_3a_through_7b_executed == false
+              and .negative_guarantees.search_channel_executed == false
+              and .automatic_retry_allowed == false
+            ' "$receipt" >/dev/null
+          if [ "$CAREER_CONTENT_ONLY" = true ]; then
+            smoke_slug="$(jq -r '.career_content_change.changed_pages[0].slug' "$validation_receipt")"
+            smoke_locale="$(jq -r '.career_content_change.changed_pages[0].locale' "$validation_receipt")"
+            [[ "$smoke_slug" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]]
+            [[ "$smoke_locale" =~ ^(en|zh-CN)$ ]]
+            curl -fsS --retry 2 --retry-delay 2 --max-time 15 -o /dev/null \
+              "https://api.fermatmind.com/api/v0.5/career/jobs/$smoke_slug?locale=$smoke_locale&projection_contract=career.detail.page.v1"
+            web_locale=en
+            if [ "$smoke_locale" = zh-CN ]; then web_locale=zh; fi
+            curl -fsS --retry 2 --retry-delay 2 --max-time 15 -o /dev/null \
+              "https://fermatmind.com/$web_locale/career/jobs/$smoke_slug"
+          fi
+      - name: Restore exact LKG after Career publisher failure
+        if: failure() && steps.career-publish.outcome == 'failure'
+        shell: bash
+        run: |
+          set -euo pipefail
+          candidate_sha="$DEPLOY_SHA"
+          lkg_sha='${{ steps.baseline.outputs.active }}'
+          [[ "$candidate_sha" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$lkg_sha" =~ ^[0-9a-f]{40}$ ]]
+          current="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'" || true)"
+          test "$current" = "$candidate_sha"
+          export DEPLOY_SHA="$lkg_sha" DEPLOY_REVISION="$lkg_sha" DEPLOY_MODE=code_only DEPLOY_INCIDENT_RECOVERY=true
+          set +e
+          php /tmp/dep.phar deploy:code-only production -f deploy.php --revision "$lkg_sha" \
+            -o release_name="lkg-${lkg_sha:0:12}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            -o deploy_mode=code_only --no-interaction
+          rollback_rc=$?
+          set -e
+          restored="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'" || true)"
+          rollback_ok=false
+          restored_ok=false
+          if [ "$rollback_rc" -eq 0 ]; then rollback_ok=true; fi
+          if [ "$restored" = "$lkg_sha" ]; then restored_ok=true; fi
+          jq -n --arg candidate "$candidate_sha" --arg lkg "$lkg_sha" \
+            --arg run "$GITHUB_RUN_ID" --arg attempt "$GITHUB_RUN_ATTEMPT" \
+            --argjson rollback_ok "$rollback_ok" --argjson restored_ok "$restored_ok" \
+            '{schema_version:"fermatmind.deploy_lkg_rollback.v1",
+              status:(if $rollback_ok and $restored_ok then "restored" else "restoration_failed" end),
+              workflow:{run_id:$run,run_attempt:$attempt},candidate_sha:$candidate,
+              lkg_sha:$lkg,restored_sha:(if $restored_ok then $lkg else null end),
+              rollback:{command_succeeded:$rollback_ok,healthchecks_succeeded:$rollback_ok,
+              restoration_completed:$restored_ok},
+              incident:{restoration_mismatch:($restored_ok | not)},sanitized:true}' > lkg-rollback-receipt.json
+          test "$rollback_ok" = true
+          test "$restored_ok" = true
+      - name: Upload Career Current publish receipt
+        if: always() && steps.career-publish.outcome != 'skipped'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: career-current-authority-publish-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/career-current-authority-publish
+          if-no-files-found: error
+          retention-days: 90
+
       - name: Check fixed production A08 sources without execution
         if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.career_content_only != 'true'
         run: bash backend/scripts/deploy/seo_a08_transport.sh sources a08-production-sources
@@ -2471,260 +2718,6 @@ jobs:
         with:
           name: mbti-zh-result-authority-publish-${{ github.run_id }}-${{ github.run_attempt }}
           path: artifacts/mbti-zh-result-authority-publish
-          if-no-files-found: error
-          retention-days: 90
-
-  career-current-publish:
-    name: Publish Career Current authority
-    needs: [policy, staging, production]
-    if: needs.production.result == 'success' && needs.policy.outputs.career_current_release == 'true' && needs.policy.outputs.career_current == 'true'
-    runs-on: ubuntu-latest
-    timeout-minutes: 120
-    environment: production
-    env:
-      DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
-      ASSETS_SHA256: ${{ needs.policy.outputs.career_current_assets_sha256 }}
-      SOURCE_MERGE_SHA: ${{ needs.policy.outputs.career_current_source_merge_sha }}
-      MANIFEST_SHA256: ${{ needs.policy.outputs.career_current_manifest_sha256 }}
-      VERSIONLESS_PROJECTION_SHA256: ${{ needs.policy.outputs.career_current_projection_sha256 }}
-      OPERATION_KEY: ${{ needs.policy.outputs.career_current_operation_key }}
-      CI_PACKAGE_SCAN_RECEIPT_DIGEST: ${{ needs.policy.outputs.career_parity_receipt_digest }}
-      PARITY_COMPILER_DIGEST: ${{ needs.policy.outputs.career_parity_compiler_digest }}
-      PARITY_CODEC_DIGEST: ${{ needs.policy.outputs.career_parity_codec_digest }}
-      FULL_SCAN: ${{ needs.policy.outputs.career_current_full_scan == 'true' && '1' || '0' }}
-      CAREER_CONTENT_ONLY: ${{ needs.policy.outputs.career_content_only }}
-      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
-      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
-      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
-      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
-      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
-    steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
-        with:
-          ref: ${{ github.event.workflow_run.head_sha }}
-          persist-credentials: false
-      - name: Download exact CI validation receipt
-        if: env.CAREER_CONTENT_ONLY == 'true'
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
-        with:
-          name: trunk-validation-${{ github.event.workflow_run.head_sha }}
-          path: artifacts/trunk-validation
-          github-token: ${{ github.token }}
-          run-id: ${{ github.event.workflow_run.id }}
-      - name: Download exact Career content package for publisher
-        if: env.CAREER_CONTENT_ONLY == 'true'
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
-        with:
-          artifact-ids: ${{ needs.policy.outputs.career_package_artifact_id }}
-          path: artifacts/career-content-package
-          merge-multiple: true
-          github-token: ${{ github.token }}
-          run-id: ${{ github.event.workflow_run.id }}
-      - name: Download exact production Career parity receipt
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
-        with:
-          name: trunk-production-${{ github.event.workflow_run.head_sha }}
-          path: artifacts/career-current-production-parity
-      - name: Start SSH agent without key metadata output
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
-          set -euo pipefail
-          eval "$(ssh-agent -s)" >/dev/null
-          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
-          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
-          printf '%s\n' "$SSH_PRIVATE_KEY" | ssh-add - >/dev/null 2>&1
-      - name: Install pinned known_hosts
-        env:
-          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
-        run: |
-          set -euo pipefail
-          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
-          install -d -m 700 ~/.ssh
-          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts
-      - name: Stream Career Current publisher and validate receipt
-        shell: bash
-        run: |
-          set -euo pipefail
-          dir=artifacts/career-current-authority-publish
-          receipt="$dir/receipt.json"
-          remote_stderr="$RUNNER_TEMP/career-current-authority-publish.stderr"
-          production_parity_receipt="artifacts/career-current-production-parity/career-current-authority-production-preactivation-parity.json"
-          validation_receipt="artifacts/trunk-validation/trunk-validation.json"
-          package_archive="artifacts/career-content-package/career-content-package.tar.gz"
-          package_receipt="artifacts/career-content-package/package-receipt.json"
-          mkdir -p "$dir"
-          [[ "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]
-          [[ "$SOURCE_MERGE_SHA" =~ ^[0-9a-f]{40}$ ]]
-          [[ "$ASSETS_SHA256" =~ ^[0-9a-f]{64}$ ]]
-          [[ "$MANIFEST_SHA256" =~ ^[0-9a-f]{64}$ ]]
-          [[ "$VERSIONLESS_PROJECTION_SHA256" =~ ^[0-9a-f]{64}$ ]]
-          [[ "$OPERATION_KEY" =~ ^[0-9a-f]{64}$ ]]
-          [[ "$CI_PACKAGE_SCAN_RECEIPT_DIGEST" =~ ^[0-9a-f]{64}$ ]]
-          test -f "$production_parity_receipt"
-          test ! -L "$production_parity_receipt"
-          jq -e --arg sha "$DEPLOY_SHA" --arg projection "$VERSIONLESS_PROJECTION_SHA256" \
-            --arg compiler "$PARITY_COMPILER_DIGEST" --arg codec "$PARITY_CODEC_DIGEST" '
-              .contract_version == "career.current_authority_parity.v2"
-              and .status == "pass"
-              and .mode == "production-preactivation"
-              and .release_sha == $sha
-              and .package.projection_digest == $projection
-              and .package.compiler_digest == $compiler
-              and .package.codec_digest == $codec
-              and (.validation_scope.canonical_slugs | length) == 1046
-              and (.validation_scope.canonical_slugs | unique | length) == 1046
-              and .validation_scope.slug_count == 1046
-              and .validation_scope.locales == ["en", "zh-CN"]
-              and .validation_scope.locale_page_count == 2092
-              and ([.write_counts[]] | all(. == 0))
-              and (.receipt_digest | test("^[0-9a-f]{64}$"))
-            ' "$production_parity_receipt" >/dev/null
-          PRODUCTION_PARITY_RECEIPT_DIGEST="$(jq -r .receipt_digest "$production_parity_receipt")"
-          export PRODUCTION_PARITY_RECEIPT_DIGEST
-          [[ "$PRODUCTION_PARITY_RECEIPT_DIGEST" =~ ^[0-9a-f]{64}$ ]]
-          [[ "$PARITY_COMPILER_DIGEST" =~ ^[0-9a-f]{64}$ ]]
-          [[ "$PARITY_CODEC_DIGEST" =~ ^[0-9a-f]{64}$ ]]
-          [[ "$FULL_SCAN" =~ ^[01]$ ]]
-          changed_pages_base64=''
-          changed_page_set_sha256=''
-          content_package_sha256=''
-          content_package_receipt_digest=''
-          CHANGED_PAGE_COUNT=0
-          if [ "$CAREER_CONTENT_ONLY" = true ]; then
-            jq -e --arg sha "$DEPLOY_SHA" '
-              .sha == $sha
-              and .classification.operations.career_content_only == true
-              and .career_content_change.status == "eligible"
-              and .career_content_change.head_sha == $sha
-              and (.career_content_change.changed_pages | length) == .career_content_change.changed_page_count
-              and .career_content_change.changed_page_count > 0
-            ' "$validation_receipt" >/dev/null
-            test "$(sha256sum "$package_archive" | awk '{print $1}')" = '${{ needs.policy.outputs.career_package_archive_sha256 }}'
-            node .github/trunk/career-content-package.mjs verify \
-              --archive="$package_archive" --receipt="$package_receipt" --head="$DEPLOY_SHA" \
-              --base='${{ needs.policy.outputs.career_package_base_sha }}' \
-              --tree='${{ needs.policy.outputs.career_package_tree_sha }}' \
-              --compiler="$PARITY_COMPILER_DIGEST" --codec="$PARITY_CODEC_DIGEST"
-            tar -xOzf "$package_archive" ./binding.json > "$RUNNER_TEMP/career-content-package-binding.json"
-            jq -e --argjson change "$(jq -c .career_content_change "$validation_receipt")" '
-              .head_sha == $change.head_sha
-              and .base_sha == $change.base_sha
-              and .candidate_tree_sha == $change.candidate_tree_sha
-              and .changed_page_set_sha256 == $change.changed_page_set_sha256
-              and ([.files[].path | select(test("/careers/[^/]+/(en|zh-CN)\\.json$"))] | length) == $change.changed_page_count
-            ' "$RUNNER_TEMP/career-content-package-binding.json" >/dev/null
-            changed_pages_base64="$(jq -c '[.files[].path | select(test("/careers/[^/]+/(en|zh-CN)\\.json$")) | capture("/careers/(?<slug>[^/]+)/(?<locale>en|zh-CN)\\.json$")]' "$RUNNER_TEMP/career-content-package-binding.json" | base64 -w0)"
-            CHANGED_PAGE_COUNT="$(jq -r .changed_page_count "$RUNNER_TEMP/career-content-package-binding.json")"
-            changed_page_set_sha256="$(jq -r .changed_page_set_sha256 "$RUNNER_TEMP/career-content-package-binding.json")"
-            content_package_sha256="$(jq -r .archive_sha256 "$package_receipt")"
-            content_package_receipt_digest="$(jq -r .receipt_digest "$package_receipt")"
-            test -n "$changed_pages_base64"
-            [[ "$changed_page_set_sha256" =~ ^[0-9a-f]{64}$ ]]
-            [[ "$content_package_sha256" =~ ^[0-9a-f]{64}$ ]]
-            [[ "$content_package_receipt_digest" =~ ^[0-9a-f]{64}$ ]]
-          fi
-          export CHANGED_PAGE_COUNT changed_page_set_sha256 content_package_sha256 content_package_receipt_digest
-          printf -v q_path '%q' "$DEPLOY_PATH"
-          printf -v q_release '%q' "$DEPLOY_SHA"
-          printf -v q_assets '%q' "$ASSETS_SHA256"
-          printf -v q_source '%q' "$SOURCE_MERGE_SHA"
-          printf -v q_manifest '%q' "$MANIFEST_SHA256"
-          printf -v q_projection '%q' "$VERSIONLESS_PROJECTION_SHA256"
-          printf -v q_operation '%q' "$OPERATION_KEY"
-          printf -v q_ci_package_scan '%q' "$CI_PACKAGE_SCAN_RECEIPT_DIGEST"
-          printf -v q_production_parity '%q' "$PRODUCTION_PARITY_RECEIPT_DIGEST"
-          printf -v q_compiler '%q' "$PARITY_COMPILER_DIGEST"
-          printf -v q_codec '%q' "$PARITY_CODEC_DIGEST"
-          printf -v q_full_scan '%q' "$FULL_SCAN"
-          printf -v q_changed_pages '%q' "$changed_pages_base64"
-          printf -v q_changed_page_set '%q' "$changed_page_set_sha256"
-          printf -v q_content_package '%q' "$content_package_sha256"
-          printf -v q_content_package_receipt '%q' "$content_package_receipt_digest"
-          printf -v q_run '%q' "$GITHUB_RUN_ID"
-          printf -v q_attempt '%q' "$GITHUB_RUN_ATTEMPT"
-          remote="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_release; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_CURRENT_PUBLISH_EXECUTE=1 CAREER_CURRENT_PUBLISH_BACKEND_ROOT=\"\$current/backend\" CAREER_CURRENT_PUBLISH_RELEASE_SHA=$q_release CAREER_CURRENT_PUBLISH_RELEASE_NAME=\"\$release_name\" CAREER_CURRENT_PUBLISH_SOURCE_MERGE_SHA=$q_source CAREER_CURRENT_PUBLISH_MANIFEST_SHA256=$q_manifest CAREER_CURRENT_PUBLISH_ASSETS_SHA256=$q_assets CAREER_CURRENT_PUBLISH_VERSIONLESS_PROJECTION_SHA256=$q_projection CAREER_CURRENT_PUBLISH_OPERATION_KEY=$q_operation CAREER_CURRENT_PUBLISH_CI_PACKAGE_SCAN_RECEIPT_DIGEST=$q_ci_package_scan CAREER_CURRENT_PUBLISH_PRODUCTION_PARITY_RECEIPT_DIGEST=$q_production_parity CAREER_CURRENT_PUBLISH_PARITY_COMPILER_DIGEST=$q_compiler CAREER_CURRENT_PUBLISH_PARITY_CODEC_DIGEST=$q_codec CAREER_CURRENT_PUBLISH_FULL_SCAN=$q_full_scan CAREER_CURRENT_PUBLISH_CHANGED_PAGES_BASE64=$q_changed_pages CAREER_CURRENT_PUBLISH_CHANGED_PAGE_SET_SHA256=$q_changed_page_set CAREER_CURRENT_PUBLISH_CONTENT_PACKAGE_SHA256=$q_content_package CAREER_CURRENT_PUBLISH_CONTENT_PACKAGE_RECEIPT_DIGEST=$q_content_package_receipt CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ID=$q_run CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ATTEMPT=$q_attempt \"\$current/backend/scripts/deploy/run_career_current_authority_publisher.sh\""
-          set +e
-          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-            -o ServerAliveInterval=15 -o ServerAliveCountMax=4 -p "$DEPLOY_PORT" \
-            "$DEPLOY_USER@$DEPLOY_HOST" "$remote" \
-            < backend/scripts/operations/career_current_authority_publish.php \
-            > "$receipt" 2> "$remote_stderr"
-          remote_status=$?
-          set -e
-          jq -e 'type == "object" and (.status | type == "string")' "$receipt" >/dev/null
-          test "$remote_status" = 0
-          jq -e --arg release "$DEPLOY_SHA" --arg source "$SOURCE_MERGE_SHA" --arg manifest "$MANIFEST_SHA256" \
-            --arg assets "$ASSETS_SHA256" --arg projection "$VERSIONLESS_PROJECTION_SHA256" \
-            --arg operation "$OPERATION_KEY" --argjson full_scan "$FULL_SCAN" '
-              .contract_version == "career.current_authority_publish.v1"
-              and .status == "PASS_CURRENT_AUTHORITY_PUBLISH"
-              and .release_sha == $release
-              and .source_merge_sha == $source
-              and .manifest_sha256 == $manifest
-              and .assets_sha256 == $assets
-              and .versionless_projection_sha256 == $projection
-              and .versionless_projection_sha256 == .package.versionless_projection_sha256
-              and .operation_key == $operation
-              and ((env.CAREER_CONTENT_ONLY == "true" and .authority.changed_locale_page_count == (env.CHANGED_PAGE_COUNT | tonumber))
-                or (env.CAREER_CONTENT_ONLY != "true" and .authority.changed_locale_page_count == 0))
-              and ((env.CAREER_CONTENT_ONLY == "true" and .changed_page_set_sha256 == env.changed_page_set_sha256)
-                or (env.CAREER_CONTENT_ONLY != "true" and .changed_page_set_sha256 == null))
-              and .parity.ci_package_scan_receipt_digest == env.CI_PACKAGE_SCAN_RECEIPT_DIGEST
-              and .parity.production_preactivation_receipt_digest == env.PRODUCTION_PARITY_RECEIPT_DIGEST
-              and .parity.compiler_digest == env.PARITY_COMPILER_DIGEST
-              and .parity.codec_digest == env.PARITY_CODEC_DIGEST
-              and ((env.CAREER_CONTENT_ONLY == "true"
-                  and .parity.content_package_sha256 == env.content_package_sha256
-                  and .parity.content_package_receipt_digest == env.content_package_receipt_digest)
-                or (env.CAREER_CONTENT_ONLY != "true"
-                  and .parity.content_package_sha256 == null
-                  and .parity.content_package_receipt_digest == null))
-              and .full_scan == ($full_scan == 1)
-              and .resource_guard == {
-                "schema_version": "career.current_authority_publish.resource_guard.v1",
-                "timeout_seconds": 900,
-                "nice_adjustment": 15,
-                "ionice_class": 2,
-                "ionice_priority": 7,
-                "memory_limit_mb": 1024
-              }
-              and .package.career_count == 1046
-              and .package.locale_page_count == 2092
-              and .package.file_count == 2092
-              and .authority.target_count == 1046
-              and .authority.unique_slug_count == 1046
-              and .authority.component_28_count == 1046
-              and .manual_hold_verified == true
-              and (.full_scan == false or .public_readback.verified_slug_count == 1046)
-              and (.full_scan == false or .public_readback.verified_locale_page_count == 2092)
-              and .write_counts.occupation_write_count == 0
-              and .write_counts.generation_write_count == 0
-              and .write_counts.discoverability_write_count == 0
-              and .write_counts.search_submission_count == 0
-              and .negative_guarantees.task_3a_through_7b_executed == false
-              and .negative_guarantees.search_channel_executed == false
-              and .automatic_retry_allowed == false
-            ' "$receipt" >/dev/null
-          if [ "$CAREER_CONTENT_ONLY" = true ]; then
-            smoke_slug="$(jq -r '.career_content_change.changed_pages[0].slug' "$validation_receipt")"
-            smoke_locale="$(jq -r '.career_content_change.changed_pages[0].locale' "$validation_receipt")"
-            [[ "$smoke_slug" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]]
-            [[ "$smoke_locale" =~ ^(en|zh-CN)$ ]]
-            curl -fsS --retry 2 --retry-delay 2 --max-time 15 -o /dev/null \
-              "https://api.fermatmind.com/api/v0.5/career/jobs/$smoke_slug?locale=$smoke_locale&projection_contract=career.detail.page.v1"
-            web_locale=en
-            if [ "$smoke_locale" = zh-CN ]; then web_locale=zh; fi
-            curl -fsS --retry 2 --retry-delay 2 --max-time 15 -o /dev/null \
-              "https://fermatmind.com/$web_locale/career/jobs/$smoke_slug"
-          fi
-      - name: Upload Career Current publish receipt
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        with:
-          name: career-current-authority-publish-${{ github.run_id }}-${{ github.run_attempt }}
-          path: artifacts/career-current-authority-publish
           if-no-files-found: error
           retention-days: 90
 

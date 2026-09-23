@@ -236,7 +236,8 @@ try {
 
     /** @var CareerCurrentAuthorityPublisher $publisher */
     $publisher = $app->make(CareerCurrentAuthorityPublisher::class);
-    $result = $publisher->execute($backendRoot, $fullScan, $changedPages);
+    $cacheSnapshot = $changedPages !== null ? data_get($productionParity, 'full_scan.cache_snapshot') : null;
+    $result = $publisher->execute($backendRoot, $fullScan, $changedPages, $cacheSnapshot);
     foreach (['package', 'authority', 'public_readback', 'manual_hold_verified', 'idempotent_noop', 'write_counts', 'state_sha256'] as $key) {
         $receipt[$key] = $result[$key];
     }

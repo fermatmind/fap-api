@@ -5141,9 +5141,12 @@ task('deploy:update_code', function () {
 
         $remoteArchive = parse('{{deploy_path}}/.dep/career-content-package-{{release_name}}.tar.gz');
         upload($resolvedArchive, $remoteArchive);
+        $remoteExtractor = parse('{{deploy_path}}/.dep/career-content-package-{{release_name}}-extract.py');
+        upload(__DIR__.'/backend/scripts/deploy/extract_career_content_package.py', $remoteExtractor);
         $releasePath = deployPlaceholderPathArg('{{release_path}}');
         $deployPath = deployPlaceholderPathArg('{{deploy_path}}');
         $remoteArchiveArg = escapeshellarg($remoteArchive);
+        $remoteExtractorArg = escapeshellarg($remoteExtractor);
         $archiveSha256Arg = escapeshellarg($archiveSha256);
         $baseShaArg = escapeshellarg($baseSha);
         $targetArg = escapeshellarg(trim(run("$git rev-list $target -1")));
@@ -5153,27 +5156,17 @@ set -euo pipefail
 release_path={$releasePath}
 deploy_path={$deployPath}
 archive={$remoteArchiveArg}
+extractor={$remoteExtractorArg}
 expected_archive_sha={$archiveSha256Arg}
 expected_base_sha={$baseShaArg}
 expected_head_sha={$targetArg}
 expected_tree_sha={$treeShaArg}
 package_dir="\$deploy_path/.dep/career-content-package-{{release_name}}"
-cleanup_package() { rm -f -- "\$archive"; rm -rf -- "\$package_dir"; }
+cleanup_package() { rm -f -- "\$archive" "\$extractor"; rm -rf -- "\$package_dir"; }
 trap cleanup_package EXIT
-test "\$(sha256sum "\$archive" | awk '{print \$1}')" = "\$expected_archive_sha"
-mkdir -p "\$package_dir"
-while IFS= read -r entry; do
-  normalized="\${entry#./}"
-  case "\$normalized" in
-    ''|*/|binding.json|projection-index.json|payload/*) ;;
-    *) echo "career content package path refused" >&2; exit 1 ;;
-  esac
-  path_for_check="\${normalized%/}"
-  if [ -n "\$path_for_check" ]; then
-    case "/\$path_for_check/" in *'/../'*|*'//'*) echo "career content package traversal refused" >&2; exit 1 ;; esac
-  fi
-done < <(tar -tzf "\$archive")
-tar -xzf "\$archive" -C "\$package_dir"
+python3 "\$extractor" --archive "\$archive" --destination "\$package_dir" \
+  --archive-sha "\$expected_archive_sha" --base "\$expected_base_sha" \
+  --head "\$expected_head_sha" --tree "\$expected_tree_sha"
 binding="\$package_dir/binding.json"
 jq -e --arg base "\$expected_base_sha" --arg head "\$expected_head_sha" --arg tree "\$expected_tree_sha" '
   .schema_version == "fermatmind.career-content-package.v1"
@@ -5283,6 +5276,9 @@ task('career:current-authority-production-preactivation-parity', function () {
         throw new \RuntimeException('Career production preactivation parity requires the application runtime identity.');
     }
 
+    $verifyCacheBaseline = deployIsCareerContentOnly();
+    set('career_parity_active_backend_root', $verifyCacheBaseline ? '{{deploy_path}}/current/backend' : '');
+
     run(<<<'BASH'
 set -euo pipefail
 candidate_sha="$(tr -d '\r\n' < '{{release_path}}/REVISION')"
@@ -5298,6 +5294,7 @@ if ! sudo -n -u www-data -- env \
   CAREER_PARITY_BACKEND_ROOT='{{release_path}}/backend' \
   CAREER_PARITY_RELEASE_SHA="$candidate_sha" \
   CAREER_PARITY_ACTIVE_SHA="$active_sha" \
+  CAREER_PARITY_ACTIVE_BACKEND_ROOT='{{career_parity_active_backend_root}}' \
   CAREER_PARITY_MODE=production-preactivation \
   CAREER_PARITY_REDIS_MODE=readonly \
   CAREER_PARITY_RECEIPT_PATH="$receipt_path" \

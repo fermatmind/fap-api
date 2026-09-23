@@ -44,6 +44,7 @@ final class CareerCurrentAuthorityParity
         string $redisMode = 'none',
         string $releaseSha = '',
         string $activeSha = '',
+        string $activeBackendRoot = '',
     ): array {
         if (preg_match('/\A[0-9a-f]{40}\z/', $releaseSha) !== 1) {
             throw new RuntimeException('CAREER_PARITY_RELEASE_SHA_INVALID');
@@ -77,8 +78,13 @@ final class CareerCurrentAuthorityParity
         $authority = $this->loader->indexForPublish($backendRoot);
         $slugs = $authority['slugs'];
         $this->assertAuthorityShape($authority);
+        $activeAuthority = $activeBackendRoot !== '' ? $this->loader->indexForPublish($activeBackendRoot) : null;
+        if ($activeAuthority !== null && ($mode !== self::MODE_PRODUCTION_PREACTIVATION
+            || $redisMode !== 'readonly' || $activeAuthority['slugs'] !== $slugs)) {
+            throw new RuntimeException('CAREER_PARITY_ACTIVE_AUTHORITY_INVALID');
+        }
         $redis = $this->redisContract($redisMode);
-        $full = $this->scanPages($authority, $slugs, true, $redisMode, $mode === self::MODE_PACKAGE);
+        $full = $this->scanPages($authority, $slugs, true, $redisMode, $mode === self::MODE_PACKAGE, $activeAuthority);
         if ($redisMode === 'readonly') {
             self::assertCapacityWithinBudget($full['bytes']['worst_state_amplification'] + $redis['used_memory_bytes'], 0, self::LOCKED_CAREER_BUDGET_BYTES);
         }
@@ -143,6 +149,7 @@ final class CareerCurrentAuthorityParity
         bool $includeCapacity,
         string $redisMode,
         bool $includeProjectionIndex = false,
+        ?array $activeAuthority = null,
     ): array {
         $hashes = array_fill_keys(['content_v3', 'codec_roundtrip'], []);
         $counts = [
@@ -163,7 +170,9 @@ final class CareerCurrentAuthorityParity
         ];
         $memoryUsageKeys = [];
         $projectionIndex = [];
+        $cacheSnapshot = ['unchanged' => 0, 'changed' => 0, 'present' => 0, 'identities' => []];
         foreach (array_chunk($slugs, 32) as $chunk) {
+            $cacheCandidates = [];
             foreach ($chunk as $slug) {
                 foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
                     $content = $this->loader->pageFromPublishIndex($authority, $slug, $locale);
@@ -182,6 +191,15 @@ final class CareerCurrentAuthorityParity
                     $projectionSha256 = CareerCurrentAuthorityPackage::hashValue($payload);
                     $codecSha256 = CareerCurrentAuthorityPackage::hashValue($stored);
                     $hashes['codec_roundtrip'][] = $projectionSha256;
+                    if ($activeAuthority !== null) {
+                        $cacheCandidates[] = [
+                            'identity' => $slug.'|'.$locale,
+                            'key' => \App\Services\Career\CareerFilePageReader::cacheKey($payload),
+                            'page' => $payload,
+                            'unchanged' => ($activeAuthority['entries'][$slug][$locale]['sha256'] ?? null)
+                                === ($authority['entries'][$slug][$locale]['sha256'] ?? null),
+                        ];
+                    }
                     if ($includeProjectionIndex) {
                         $entry = $authority['entries'][$slug][$locale] ?? null;
                         if (! is_array($entry)
@@ -223,6 +241,31 @@ final class CareerCurrentAuthorityParity
                     unset($content, $payload, $stored);
                 }
             }
+            if ($activeAuthority !== null) {
+                $keys = array_column($cacheCandidates, 'key');
+                $values = Cache::many($keys);
+                $expiring = Cache::expiringCareerPageKeys($keys);
+                foreach ($cacheCandidates as $candidate) {
+                    $value = $values[$candidate['key']] ?? null;
+                    if ($candidate['unchanged']) {
+                        if ($value !== $candidate['page'] || isset($expiring[$candidate['key']])) {
+                            throw new RuntimeException('CAREER_PARITY_UNCHANGED_CACHE_DRIFT');
+                        }
+                        $cacheSnapshot['unchanged']++;
+                    } else {
+                        if (($value !== null && $value !== $candidate['page'])
+                            || isset($expiring[$candidate['key']])) {
+                            throw new RuntimeException('CAREER_PARITY_CHANGED_CACHE_DRIFT');
+                        }
+                        $cacheSnapshot['changed']++;
+                    }
+                    $cacheSnapshot['present'] += (int) ($value !== null);
+                    $cacheSnapshot['identities'][] = [
+                        $candidate['identity'], $candidate['unchanged'],
+                        $value === null ? null : CareerCurrentAuthorityPackage::hashValue($value),
+                    ];
+                }
+            }
             gc_collect_cycles();
         }
         foreach ($this->memoryUsageBatch($memoryUsageKeys) as $usage) {
@@ -248,6 +291,15 @@ final class CareerCurrentAuthorityParity
         if ($includeProjectionIndex) {
             $result['projection_index'] = $projectionIndex;
             $result['projection_index_sha256'] = CareerCurrentAuthorityPackage::hashValue($projectionIndex);
+        }
+        if ($activeAuthority !== null) {
+            $result['cache_snapshot'] = [
+                'unchanged' => $cacheSnapshot['unchanged'],
+                'changed' => $cacheSnapshot['changed'],
+                'present' => $cacheSnapshot['present'],
+                'identity_count' => count($cacheSnapshot['identities']),
+                'sha256' => CareerCurrentAuthorityPackage::hashValue($cacheSnapshot['identities']),
+            ];
         }
 
         return $result;

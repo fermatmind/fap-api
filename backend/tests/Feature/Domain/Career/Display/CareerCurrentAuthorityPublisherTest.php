@@ -26,7 +26,12 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         $second = $publisher->execute(base_path(), false, [[
             'slug' => 'accountants-and-auditors',
             'locale' => 'en',
-        ]]);
+        ]], [
+            'identity_count' => 2092,
+            'unchanged' => 2091,
+            'changed' => 1,
+            'sha256' => str_repeat('a', 64),
+        ]);
         self::assertTrue($second['idempotent_noop']);
         self::assertSame(1, $second['authority']['changed_slug_count']);
         self::assertSame(1, $second['authority']['changed_locale_page_count']);

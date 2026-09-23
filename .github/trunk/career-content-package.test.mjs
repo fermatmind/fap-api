@@ -9,7 +9,9 @@ import { preparePackage, finalizePackage, verifyPackage } from './career-content
 
 const sha = (character) => character.repeat(64);
 const run = (cwd, command, args, encoding = 'utf8') => {
-  const result = execFileSync(command, args, { cwd, encoding });
+  const result = execFileSync(command, args, {
+    cwd, encoding, env: { ...process.env, COPYFILE_DISABLE: '1' },
+  });
   return typeof result === 'string' ? result.trim() : result;
 };
 

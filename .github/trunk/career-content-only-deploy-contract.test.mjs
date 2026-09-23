@@ -19,7 +19,7 @@ test('content-only policy is receipt-bound and selects the dedicated deploy task
   assert.match(workflow, /a08-evidence:[\s\S]*?needs\.policy\.outputs\.career_content_only != 'true'/);
   assert.match(workflow, /CAREER_CURRENT_PUBLISH_CHANGED_PAGES_BASE64=/);
   assert.match(workflow, /CAREER_CURRENT_PUBLISH_CHANGED_PAGE_SET_SHA256=/);
-  assert.match(workflow, /Download exact CI validation receipt\n\s+if: env\.CAREER_CONTENT_ONLY == 'true'/);
+  assert.match(workflow, /Download exact CI validation receipt for Career publisher\n\s+if: needs\.policy\.outputs\.career_content_only == 'true'/);
   assert.match(workflow, /run-id: \$\{\{ github\.event\.workflow_run\.id \}\}/);
   assert.match(workflow, /Expected one \$\{expected\} artifact/);
   assert.match(workflow, /career_package_artifact_id/);
@@ -48,15 +48,15 @@ test('CI builds one deterministic SHA-bound package and deploy stages consume it
   assert.match(ci, /career_content_package:\$career_package/);
   assert.match(workflow, /Download the bound Career content package/);
   assert.match(workflow, /Download the bound production Career content package/);
-  assert.match(workflow, /Download exact Career content package for publisher/);
+  assert.match(workflow, /Stream Career Current publisher and validate receipt/);
 });
 
-test('remote package traversal guard accepts tar directory entries without weakening rejection', () => {
-  const guard = deploy.match(/normalized="\\\$\{entry#\.\/\}"[\s\S]*?done < <\(tar -tzf "\\\$archive"\)/)?.[0] ?? '';
-  assert.match(guard, /path_for_check="\\\$\{normalized%\/\}"/);
-  assert.match(guard, /if \[ -n "\\\$path_for_check" \]; then/);
-  assert.ok(guard.includes('case "/\\$path_for_check/" in *\'/../\'*|*\'//\'*)'));
-  assert.ok(!guard.includes('case "/\\$normalized/" in *\'/../\'*|*\'//\'*)'));
+test('remote extraction runs the same executable tar validator against generated archives', () => {
+  assert.match(deploy, /upload\(__DIR__\.'\/backend\/scripts\/deploy\/extract_career_content_package.py'/);
+  assert.match(deploy, /python3 "\\\$extractor" --archive "\\\$archive" --destination "\\\$package_dir"/);
+  execFileSync('python3', [new URL('../../backend/scripts/deploy/test_extract_career_content_package.py', import.meta.url).pathname], {
+    env: { ...process.env, PYTHONDONTWRITEBYTECODE: '1' },
+  });
 });
 
 test('publisher batches full readback and fails closed on out-of-set drift', () => {
