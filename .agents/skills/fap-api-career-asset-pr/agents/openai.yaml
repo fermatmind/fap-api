@@ -1,5 +1,5 @@
 interface:
   display_name: "Career Asset PR"
-  short_description: "Import completed Career assets and open one scoped PR"
+  short_description: "Publish completed Career assets through a scoped PR"
   default_prompt: >-
-    使用 $fap-api-career-asset-pr，提交 <编号范围或 slug 集合> 的 <zh-CN / en / 双语> 已完成 Career 资产 PR。
+    使用 $fap-api-career-asset-pr，发布 <编号范围或 slug 集合> 的 <zh-CN / en / 双语> 已完成 Career 资产：创建 PR，预合并验证通过后自动合并，并完成 exact-SHA 上线验收。
