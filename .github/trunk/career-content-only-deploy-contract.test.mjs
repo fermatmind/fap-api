@@ -16,7 +16,7 @@ test('content-only policy is receipt-bound and selects the dedicated deploy task
   assert.match(workflow, /\.career_content_change\.base_sha == \.classification\.scope\.validation_base_sha/);
   assert.match(workflow, /deploy_task=deploy:career-content-only/);
   assert.match(workflow, /deploy_mode=career_content_only/);
-  assert.match(workflow, /a08-evidence:[\s\S]*?needs\.policy\.outputs\.career_content_only != 'true'/);
+  assert.match(workflow, /a08-evidence:[\s\S]*?needs\.policy\.outputs\.career_content_only != 'true' && needs\.policy\.outputs\.career_first_publish != 'true'/);
   assert.match(workflow, /CAREER_CURRENT_PUBLISH_CHANGED_PAGES_FILE_SHA256=/);
   assert.match(workflow, /CAREER_CURRENT_PUBLISH_CHANGED_PAGE_SET_SHA256=/);
   assert.match(workflow, /Download exact CI validation receipt for Career publisher\n\s+if: needs\.policy\.outputs\.career_package == 'true'/);

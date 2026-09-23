@@ -670,7 +670,7 @@ jobs:
           touch "$RUNNER_TEMP/seo-council.sqlite"
           php artisan migrate --database=seo_intel --path=database/migrations/seo_intel --force --no-interaction --ansi
           rm -f "$APP_CONFIG_CACHE"
-          php artisan test --compact --log-junit="$RUNNER_TEMP/a08-scoped-junit.xml" \
+          php -d memory_limit=4G artisan test --compact --log-junit="$RUNNER_TEMP/a08-scoped-junit.xml" \
             tests/Feature/SeoIntel/SeoPlatform11D*.php \
             tests/Feature/SeoIntel/SeoPlatform11E*.php \
             tests/Feature/SeoIntel/SeoPlatform11F*.php \

@@ -56,9 +56,17 @@ test('unknown, zero, and non-forward baselines fail closed', () => {
 test('skip receipts and failed or rerun workflows cannot become the production baseline', async () => {
   const baseline = await productionBaseline({
     listRuns: async () => [run(10, head), { ...run(9), conclusion: 'failure' }, { ...run(8), run_attempt: 2 }, run(7)],
-    listJobs: async (id) => { assert.ok([10, 7].includes(id)); return [job(id === 10 ? 'skipped' : 'success')]; },
+    listJobs: async (id) => { assert.ok([10, 9, 7].includes(id)); return [job(id === 7 ? 'success' : 'skipped')]; },
   });
   assert.deepEqual(baseline, { sha: prod, runId: 7 });
+});
+
+test('successful production activation remains the baseline after an independent post-production job fails', async () => {
+  const baseline = await productionBaseline({
+    listRuns: async () => [{ ...run(10, head), conclusion: 'failure' }, run(7)],
+    listJobs: async (id) => [job(id === 10 ? 'success' : 'skipped')],
+  });
+  assert.deepEqual(baseline, { sha: head, runId: 10 });
 });
 
 test('timing-only or incomplete activation evidence is rejected', async () => {

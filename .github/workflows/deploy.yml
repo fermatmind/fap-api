@@ -2756,7 +2756,7 @@ jobs:
   a08-evidence:
     name: Publish scoped A08 evidence and authorized daily acceptance
     needs: [policy, staging, production]
-    if: needs.production.result == 'success' && needs.production.outputs.skipped != 'true' && needs.policy.outputs.career_content_only != 'true'
+    if: needs.production.result == 'success' && needs.production.outputs.skipped != 'true' && needs.policy.outputs.career_content_only != 'true' && needs.policy.outputs.career_first_publish != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     environment: production

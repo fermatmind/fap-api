@@ -12,7 +12,9 @@ export async function productionBaseline({ listRuns, listJobs }) {
     const runs = await listRuns(page);
     if (!Array.isArray(runs)) throw new Error('Invalid deployment run response');
     for (const run of runs) {
-      if (run.status !== 'completed' || run.conclusion !== 'success'
+      // The production job commits the active release. A later, independent
+      // evidence job can fail without undoing that activation.
+      if (run.status !== 'completed' || !['success', 'failure'].includes(run.conclusion)
         || run.head_branch !== 'main' || run.event !== 'workflow_run' || run.run_attempt !== 1) continue;
       if (!Number.isSafeInteger(run.id) || !validSha(run.head_sha)) throw new Error('Invalid deployment identity');
       const jobs = await listJobs(run.id);
