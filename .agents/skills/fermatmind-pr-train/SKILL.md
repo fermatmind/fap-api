@@ -10,6 +10,8 @@ Run exactly one fap-api PR-train item with strict scope, dependency, verificatio
 - Use when the user names a PR-train item, manifest entry, train state update, or PR cleanup workflow for fap-api.
 - Use when Codex must decide whether a fap-api train item can proceed, is blocked, or needs a corrective commit.
 
+For a request to submit completed Career Current assets as a PR, use `fap-api-career-asset-pr` instead. Its batch does not require a historical PR-train manifest or ledger entry.
+
 ## When not to use
 - Do not use for broad feature work outside the declared train item.
 - Do not use to skip dependency, check, review, deployment, or ledger requirements.
