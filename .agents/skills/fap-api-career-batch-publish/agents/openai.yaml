@@ -1,0 +1,5 @@
+interface:
+  display_name: "Career Batch Publish"
+  short_description: "Publish completed Career Current assets by exact cohort"
+  default_prompt: >-
+    使用 $fap-api-career-batch-publish，发布 <编号范围或 slug 集合> 的 <zh-CN / en / 双语> 已完成 Career 资产，来源 <目录>；按正文资格自动选择发布路径，完成 exact-SHA 上线与验收，不逐页提交 GSC。

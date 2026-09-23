@@ -20,13 +20,11 @@ Keep fap-api as the authority for career content, release state, and public care
 - Do not modify unrelated files.
 - Do not stage unrelated dirty files.
 - Do not process Informational findings unless explicitly requested.
-- Do not expose exploit-ready details in public PR titles/bodies.
-- Do not merge unless required checks pass and scope is clean.
+- Keep release summaries and logs free of secrets or exploit-ready detail.
 - Do not close security findings unless source/test evidence proves fixed.
 - Stop if active Critical/High/Medium appears during Low/Informational work.
 - Do not weaken previously fixed security boundaries.
-- Required checks for fap-api are hygiene, verify-mbti-v2, and verify-mbti-legacy.
-- Deploy Application must remain green for deploy or runtime-impacting PRs.
+- Run the classifier-selected focused checks and follow exact-SHA CI and deployment evidence for runtime changes.
 - Career content and publication state must remain backend-authoritative.
 - A primary record, package PASS, successful import, route 200, or populated `working_revision_id` does not prove public eligibility.
 - Career readers may consume only the published/public projection. Never select `working_revision_id`, draft snapshots, generated packages, or local baselines as runtime authority.
@@ -45,9 +43,9 @@ Keep fap-api as the authority for career content, release state, and public care
 7. Validate routes, migrations, focused publication/revision behavior, and MBTI compatibility checks.
 8. Document repository rule impact when authority, revision selection, or publishing behavior changes.
 
-## Career Content candidate merger
+## Career Content candidate handoff
 
-- `scripts/merge_career_content_candidates.php` is the sole deterministic Current merger for a bound `career.content_agent.release_handoff.v1`.
+- `scripts/merge_career_content_candidates.php` handles bound `career.content_agent.release_handoff.v1` candidate handoffs. Completed uploaded Current page assets use `fap-api-career-batch-publish` and the bounded batch updater instead.
 - It is release-authority tooling, not part of the Career Content Agent profile or tool allowlist.
 - It must recheck receipt, row, and shard optimistic locks; update only authorized module shards; and update the manifest last and atomically.
 - Its receipt must keep DB, CMS, cache, publisher, deploy, sitemap, discoverability, and search writes at zero.
@@ -77,20 +75,16 @@ Keep fap-api as the authority for career content, release state, and public care
 - Keep RIASEC primary and Big Five supplementary under `claim_mode=explanation_only`; ranking, hiring/screening, outcome prediction, diagnosis, pSEO, and private assessment/user/order data must remain absent.
 - Treat PR12/13 as schema/auditor completion only. Do not report a public Big Five → Career reader as shipped unless a separate runtime consumer is implemented, validated, and explicitly released.
 
-## Acceptance commands
-```bash
-cd /Users/rainie/Desktop/GitHub/fap-api/backend && php artisan route:list --no-ansi
-cd /Users/rainie/Desktop/GitHub/fap-api/backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-skill.sqlite php artisan migrate --force
-cd /Users/rainie/Desktop/GitHub/fap-api && bash backend/scripts/ci_verify_mbti.sh
-cd /Users/rainie/Desktop/GitHub/fap-api && git diff --check
-```
+## Acceptance
+- Run focused tests and static checks for touched layers, plus `git diff --check`. Run route, migration, and complete MBTI checks only when that boundary changes or the task explicitly requires them.
+- Deliver ordinary changes through an isolated worktree, validated tree, direct `main` push, exact-SHA CI and applicable deploy acceptance, then local closeout.
 
 ## Output contract
-- Always report changed files, acceptance commands run, PR URL if a PR was created, CI status, Deploy Application or deploy/runtime status when relevant, merge commit if merged, branch cleanup status when cleanup is requested, revalidation status for security-related work, stop reason when blocked, and confirmation that no unrelated files were touched.
+- Report changed files, checks actually run, commit SHA, exact-SHA CI and applicable staging/production/online acceptance, cleanup, and any real blocker.
 - Report authority surface, API contract impact, migration impact, validation, and deferred content operations.
 - For personality-to-career work, also report revision source (`published` vs `working/draft`), Career projection eligibility, claim boundary, private-data boundary, and whether discoverability changed.
 
 ## Stop conditions
-- Stop if active Critical/High/Medium appears during Low/Informational work, required checks fail, Deploy Application or deploy/runtime status regresses where relevant, the worktree is dirty in a way that cannot be isolated, scope drift appears, product/runtime behavior is ambiguous, closure would lack source/test evidence, or production deploy/rollback is requested without explicit manual confirmation.
+- Stop if active Critical/High/Medium appears during Low/Informational work, user changes cannot be isolated, scope drifts, or closure lacks source/test evidence. Diagnose a failed exact-SHA check or deploy and publish an in-scope corrective commit; use the automatic LKG recovery boundary for post-activation failure.
 - Stop if the change moves authority to frontend files, weakens publication gates, lacks migration proof, or breaks MBTI compatibility checks.
 - Stop if a Career consumer would read a working/draft personality revision, infer publication from record existence or HTTP 200, rank occupations from Big Five alone, or expose private assessment data.
