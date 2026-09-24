@@ -78,6 +78,8 @@ Bing 查询、页面、曝光、点击、CTR、平均排名、国家/地区、�
 
 Bing Keyword Research 提供了**全网查询需求**线索（2026-06-24 至 2026-09-21，China 筛选）：`会计师`约 1.7K 关键词曝光，全球约 1.8K；`前端工程师`312，全球 341。中文 SERP 样本中，前者由百科、会计机构/考试站点及问答站占据前列，后者由百科、问答、招聘与岗位说明页竞争。`网页开发人员`精确词没有可用趋势量；更宽的 `网页开发`全球 437。上述数据不是 fermatmind.com 的站点曝光或点击，不足以直接把 `accountants-and-auditors`、`web-developers` 判为赢家；仅将其列入后续逐页试点候选，待 Bing Web 页面×查询数据、地域适用性和正文来源复核。
 
+同一窗口内，`数据科学家`的全网关键词曝光为中国 72、全球 93；公开职业目录中的 `data-scientists` 已有可索引中文页，故可纳入待核验候选，但尚无该站 Bing 曝光、点击或中文 SERP 竞争证据。继续查询其他职业词时 Bing Keyword Research 返回请求过多错误；未完整加载的地域数据不计为 0，也不据此扩充试点名单。
+
 ## 6. 每周复核与文章选题
 
 每周在同一完整 7 天窗口复核 Bing Web 点击、曝光、查询、已索引/抓取问题和 Bing 来源测评开始/完成，保留相同前一窗口作为比较；AI 引用单列。每日现有文章选题在同一候选池同时核对 Google 与 Bing 机会，不增加日更数量。Bing 搜索表现处理完成、漏斗入口页与会话口径补齐前，周报须标注缺失，不能以百度统计引荐数代替 Bing Web 点击。
@@ -86,4 +88,4 @@ Bing Keyword Research 提供了**全网查询需求**线索（2026-06-24 至 202
 
 证据：2026-09-24 已登录 Bing/百度统计/GA4 页面观察；线上公开 `robots.txt`、`sitemap.xml`、页面与验证文件 HTTP 只读请求；仓库 manifest、IndexNow 实现和当前 release 脚本。Bing 站点验证已成功；待报告生成后补齐两个完整 28 天的查询/页面导出、核心 URL Inspection 和抓取问题，再形成 Top 20 与职业 10–20 页试点。Bing 站长工具页面明确提示报告最多 48 小时处理。[Bing 官方验证说明](https://www2.bing.com/webmasters/help/add-and-verify-site-12184f8b)解释站点导入/验证；[IndexNow 官方说明](https://www.indexnow.org/faq)明确提交不保证收录。
 
-已在 Codex 现有任务建立每周一 09:00（Asia/Shanghai）的只读 Bing 复核 heartbeat；站点状态无实质变化时静默。
+已在 Codex 现有任务建立每周一 09:00（Asia/Shanghai）的只读 Bing 复核 heartbeat；首次搜索表现可用时先回填两组完整 28 天基线，之后按周复核；站点状态无实质变化时静默。
