@@ -83,6 +83,8 @@ Bing Keyword Research 提供了**全网查询需求**线索（2026-06-24 至 202
 
 公开 HTML 抽查 `accountants-and-auditors`、`data-scientists`、`web-developers` 三页：正确详情路径均为 `/zh/career/jobs/<slug>`，返回 HTTP 200、self canonical、`index, follow`，可见职责/适配、职业区别、AI、薪资及入行等章节。去掉本页锚点后，三页分别链接至 8、8、5 个其他职业详情路径。此检查仅证明公开渲染及部分出链，不证明全部正文主张来源、入链、Bing 抓取或已索引；旧 Bing `web-developers` noindex 快照仍待更新。
 
+三页的中文正文已在 Career Current manifest 对应文件中核实为 `enhanced`、各 13 个 blocks；fact register 分别有 20、11、6 项，均有 source refs。地域边界不同：会计师页含中国大陆与美国事实，数据科学家页含 1 条中国内地事实，其余为美国事实；网页开发页的量化事实全是美国口径，但其中国薪资模块以国家统计局来源说明缺少可安全使用的中国单职业工资分布，并明确不把美国数据替代中国数据。下一步仍需逐条核验来源质量、更新日期和竞品差距，不能仅凭 source refs 数量判定内容充分。
+
 ## 6. 每周复核与文章选题
 
 每周在同一完整 7 天窗口复核 Bing Web 点击、曝光、查询、已索引/抓取问题和 Bing 来源测评开始/完成，保留相同前一窗口作为比较；AI 引用单列。每日现有文章选题在同一候选池同时核对 Google 与 Bing 机会，不增加日更数量。Bing 搜索表现处理完成、漏斗入口页与会话口径补齐前，周报须标注缺失，不能以百度统计引荐数代替 Bing Web 点击。
