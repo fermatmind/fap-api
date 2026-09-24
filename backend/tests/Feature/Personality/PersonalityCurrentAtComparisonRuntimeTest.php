@@ -22,7 +22,7 @@ final class PersonalityCurrentAtComparisonRuntimeTest extends TestCase
 
         $response->assertOk()
             ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1')
-            ->assertHeader('X-Fermat-Content-Aggregate', 'e5583ba7976f7c8265315c3b7fe2349cbc7753f653417c037bc9ba9c78e4edc3')
+            ->assertHeader('X-Fermat-Content-Aggregate', '666f229421b18348133cf2be88d06d7d3044e00a2ca873204795656d37fe2df0')
             ->assertExactJson(['ok' => true, ...$expected['payload']]);
     }
 

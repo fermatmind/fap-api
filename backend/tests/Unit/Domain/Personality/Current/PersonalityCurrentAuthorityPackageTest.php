@@ -19,8 +19,8 @@ final class PersonalityCurrentAuthorityPackageTest extends TestCase
         $this->assertCount(364, $index['entries']);
         $this->assertSame(182, $index['manifest']['coverage']['pages_per_locale']);
         $this->assertSame(['big_five' => 104, 'enneagram' => 116, 'mbti' => 144], $index['manifest']['coverage']['by_framework']);
-        $this->assertSame(308, $index['manifest']['coverage']['baseline_locale_pages']);
-        $this->assertSame(56, $index['manifest']['coverage']['enhanced_locale_pages']);
+        $this->assertSame(307, $index['manifest']['coverage']['baseline_locale_pages']);
+        $this->assertSame(57, $index['manifest']['coverage']['enhanced_locale_pages']);
         $this->assertSame(
             count($index['entries']),
             $index['manifest']['coverage']['baseline_locale_pages']

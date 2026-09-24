@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class PersonalityCurrentRemainingRuntimeTest extends TestCase
 {
-    private const AGGREGATE = 'e5583ba7976f7c8265315c3b7fe2349cbc7753f653417c037bc9ba9c78e4edc3';
+    private const AGGREGATE = '666f229421b18348133cf2be88d06d7d3044e00a2ca873204795656d37fe2df0';
 
     #[DataProvider('detailCases')]
     public function test_public_detail_is_served_from_its_per_page_authority(string $url, string $file): void
@@ -33,6 +33,10 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
         yield 'MBTI profile' => [
             '/api/v0.5/personality/intj?locale=zh-CN&org_id=0&scale_code=MBTI',
             'content_assets/personality_public/current/pages/mbti/profile/intj/zh-CN.json',
+        ];
+        yield 'ISFP English profile' => [
+            '/api/v0.5/personality/isfp?locale=en&org_id=0&scale_code=MBTI',
+            'content_assets/personality_public/current/pages/mbti/profile/isfp/en.json',
         ];
         yield 'MBTI variant' => [
             '/api/v0.5/personality/intj-a?locale=en&org_id=0&scale_code=MBTI',
