@@ -58,9 +58,10 @@ Bing 查询、页面、曝光、点击、CTR、平均排名、国家/地区、�
 - 抽查带 `use_xbridge3` 的 MBTI 参数页与带 `utm_source` 的职业页：canonical 均指无参数 URL。MBTI `/take?form=...` 返回 `noindex, nofollow, noarchive, nocache` 且 canonical 指公开测试页。未见该样本的参数重复 canonical 缺陷。
 - Bing URL Inspection 对中文 MBTI、RIASEC 测评页和 `accountants-and-auditors` 中文职业页均显示 **Indexed successfully / URL can appear on Bing**，且未提示 SEO/GEO 问题。该职业页显示 2026-04-19 已发现、2026-09-22 最近抓取尝试、允许抓取、抓取成功、允许索引；检查详情中的 canonical URL 显示 `-`，不能据此判定全站 canonical 状态。
 - `graphic-designers` 中文职业页的 Bing Index 也显示 **Indexed successfully**，2026-04-19 发现、2026-08-23 最近抓取成功、允许索引；2026-09-24 的 Bing Live URL 测试显示当前页可被索引、无 SEO/GEO 问题。Bing 保存的旧 HTML 仍含英文泛化 description `Career overview and next steps for 平面设计师.` 和旧工资数字，而当日线上 HTML 已换成中文具体 description 与更新后的工资口径。这是**已索引但索引快照落后于当前正文**的单页证据，不说明 Bing 已看到本次更新，也不能由此推算全站陈旧页数。
-- 2026-09-24 新增 URL Inspection 抽查：中文 `infp-t` 人格页、`big-five-30-facets-explained-with-model-caveats` 文章页和 `actors` 职业页也显示 **Indexed successfully**。`infp-t` 的最近抓取为当日 02:15，允许抓取、抓取成功、允许索引。七个已索引样本仍不能外推为全站覆盖率。
+- 2026-09-24 对 `mechanical-engineers` 中文职业页新增 Bing URL Inspection：**Indexed successfully / URL can appear on Bing**，2026-04-19 发现、2026-08-24 23:21 最近抓取尝试，允许抓取、抓取成功、允许索引，未提示 SEO/GEO 问题。检查详情 canonical 字段仍为 `-`；线上 HTTP 的自指 canonical 已单独核验。此证据不含该页的 Bing Web 曝光或点击。
+- 2026-09-24 新增 URL Inspection 抽查：中文 `infp-t` 人格页、`big-five-30-facets-explained-with-model-caveats` 文章页和 `actors` 职业页也显示 **Indexed successfully**。`infp-t` 的最近抓取为当日 02:15，允许抓取、抓取成功、允许索引。八个已索引样本仍不能外推为全站覆盖率。
 - `web-developers` 与 `zoologists-and-wildlife-biologists` 两个中文职业页的 **Bing Index 快照**均为 **Not indexed due to NOINDEX directive**：分别在 2026-09-07 00:28 和 2026-09-02 05:44 最近抓取，允许抓取、抓取成功、当时不允许索引。与之相对，两页当日公开 HTTP 响应均为 200、无 `X-Robots-Tag`、meta robots `index, follow`、自指 canonical；Bing **Live URL** 当日测试均显示 **URL can be indexed by Bing**。因此已证实的是 Bing 旧快照与当前线上索引许可不一致；不能据此认定当前仍含 `noindex`，也不能把实时测试当成已收录。这两页列为优先观察下一次抓取及索引状态的样本。
-- 分层：sitemap 证明 **可发现候选**；七个受检 URL 可升至 **Bing 已索引**；上述两个职业页为 **当前可索引、Bing 快照未索引**；**有 Web 曝光、有 Web 点击**仍待 Search Performance 报告。Site Explorer 当前显示 `No data available`，Bingbot 的全站 4xx/5xx、robots 命中及抓取量尚不能汇总，样本不能外推至 579 页。
+- 分层：sitemap 证明 **可发现候选**；八个受检 URL 可升至 **Bing 已索引**；上述两个职业页为 **当前可索引、Bing 快照未索引**；**有 Web 曝光、有 Web 点击**仍待 Search Performance 报告。Site Explorer 当前显示 `No data available`，Bingbot 的全站 4xx/5xx、robots 命中及抓取量尚不能汇总，样本不能外推至 579 页。
 - 生产 `seo_crawler_log_daily_aggregates` 的只读汇总在完整 2026-08-27 至 09-23 窗口含 99 次 `bingbot` User-Agent 声称命中，验证状态均为 `ua_claim_only`；记录均为 HTTP 200，其中 94 次属于静态资源，5 次被隐私分类为 `blocked_private_path`，没有可用的公开 canonical path。后者是路径脱敏类别，**不是** Bingbot 收到 HTTP 403 或被 robots 阻止的证据。该后端日志聚合不能证明真实 Bingbot IP 身份，也不能代表全站公开 HTML 抓取或逐职业页抓取；仍需 Bing URL Inspection/站长工具抓取诊断及其报告。
 - 对 Site Scan 的 10 个公开样本（四个中文核心测评、`infp-t`、Big Five 文章、四个中文职业页）分别以普通浏览器和声明为 Bingbot 的 User-Agent 做线上只读 GET：20/20 响应均为 HTTP 200、meta robots `index, follow`、无 `X-Robots-Tag`，canonical 均自指同一无参数 URL。包括 `web-developers` 与 `zoologists-and-wildlife-biologists` 两个旧 Bing 快照为 noindex 的页面。此对照只排除这些样本按 User-Agent 显式返回 403/noindex/错误 canonical；声明 UA 不等于真实 Bingbot IP，不证明搜索引擎已抓取或解析到完整正文。
 - 已在 Bing Site Scan 建立 10 页 URL-list 扫描 `FermatMind Bing core and career audit 2026-09-24`，覆盖中文 MBTI、RIASEC、Big Five、九型测评、`infp-t`、Big Five 文章及四个上述职业页；当前状态为 `Queued`，错误和警告尚无结果。Site Scan 明示其 crawler 尚未使用 Bingbot IP；即使完成，也只能作为页面技术扫描，不能替代 Bingbot 抓取日志或 Web 收录证据。不要在队列中重复建立扫描。
@@ -84,7 +85,7 @@ Bing 查询、页面、曝光、点击、CTR、平均排名、国家/地区、�
 
 ## 5. 中文职业页试点
 
-当前可核实的公开可索引集合是 579 个有正文的中文职业详情 URL，已与公开目录全部 1,043 个成员和 sitemap 逐行交叉核对；`accountants-and-auditors`、`actors` 与 `graphic-designers` 三页由 Bing URL Inspection 证实已索引；`web-developers` 和 `zoologists-and-wildlife-biologists` 两页的旧索引快照仍为 `noindex`，实时测试已恢复可索引，需观察后续抓取。其余页面的 Bing 全量发现/索引/曝光状态仍未知。目前只有少量全网关键词需求和中文 SERP 样本，尚不足以指定 10–20 个站点试点页或扩量。试点逐页核对职责、入行、技能、薪资证据与适用地区、职业区别、内容来源和相关内链；不为 Bing 另建职业页。
+当前可核实的公开可索引集合是 579 个有正文的中文职业详情 URL，已与公开目录全部 1,043 个成员和 sitemap 逐行交叉核对；`accountants-and-auditors`、`actors`、`graphic-designers` 与 `mechanical-engineers` 四页由 Bing URL Inspection 证实已索引；`web-developers` 和 `zoologists-and-wildlife-biologists` 两页的旧索引快照仍为 `noindex`，实时测试已恢复可索引，需观察后续抓取。其余页面的 Bing 全量发现/索引/曝光状态仍未知。目前只有少量全网关键词需求和中文 SERP 样本，尚不足以指定 10–20 个站点试点页或扩量。试点逐页核对职责、入行、技能、薪资证据与适用地区、职业区别、内容来源和相关内链；不为 Bing 另建职业页。
 
 Bing Keyword Research 提供了**全网查询需求**线索（2026-06-24 至 2026-09-21，China 筛选）：`会计师`约 1.7K 关键词曝光，全球约 1.8K；`前端工程师`312，全球 341。中文 SERP 样本中，前者由百科、会计机构/考试站点及问答站占据前列，后者由百科、问答、招聘与岗位说明页竞争。`网页开发人员`精确词没有可用趋势量；更宽的 `网页开发`全球 437。上述数据不是 fermatmind.com 的站点曝光或点击，不足以直接把 `accountants-and-auditors`、`web-developers` 判为赢家；仅将其列入后续逐页试点候选，待 Bing Web 页面×查询数据、地域适用性和正文来源复核。
 
@@ -95,6 +96,8 @@ Bing Keyword Research 提供了**全网查询需求**线索（2026-06-24 至 202
 同一 Bing Keyword Research 窗口与中国筛选下，进一步抽样：`机械工程师`约 2.3K 次**全网关键词曝光**，SERP 前列同时有职业介绍、岗位职责、招聘与证书内容。公开 `mechanical-engineers` 中文页 HTTP 200、自指 canonical、`index, follow`，渲染页面有 5 个其他职业详情出链；Current manifest 标记有公开正文，正文为 `enhanced`、13 个 blocks、5 条事实。五条量化事实均为美国口径，中国薪资模块引用国家统计局并说明口径限制，不能把美国工资当作中国工资。因此列为**待逐页核验的候选**，仍需 Bing Web 站点页面×查询数据、中文入链和竞品内容差距；关键词量不是本站流量或收录证据。
 
 排除或暂缓样本：`护士`约 4.3K 次、`律师`约 7.7K 次中国全网关键词曝光，但 Current 通用 `registered-nurses` 中文页没有公开正文，而 `律师` SERP 前列主要是找律师、咨询及机构，和职业介绍意图不匹配；不能只按需求量纳入试点。`土木工程师`约 60 次且 SERP 混合职业与执业考试意图，优先级低。`建筑师`约 1.6K 次但 SERP 混合职业、注册资格及同名作品，需先拆清意图。`财务分析师`的中国趋势显示数据不足，不能记为零或据此估算需求。以上均为抽样查询，未形成 10–20 页正式试点名单。
+
+进一步抽样中，`电气工程师`中国约 6.9K 次全网关键词曝光，但前十结果大部分是注册/证书/考试内容，职业介绍页与主导意图不匹配，故暂不以通用职业页抢这个宽词。`人力资源专员`的中国分布仅显示 26 次且趋势数据不足，SERP 同时有岗位职责和招聘；`市场研究分析师`与`工业设计师`趋势均显示数据不足。三者均不能把缺失趋势记为零，也不足以仅凭 SERP 建立本站需求判断。
 
 公开 HTML 抽查 `accountants-and-auditors`、`data-scientists`、`web-developers` 三页：正确详情路径均为 `/zh/career/jobs/<slug>`，返回 HTTP 200、self canonical、`index, follow`，可见职责/适配、职业区别、AI、薪资及入行等章节。去掉本页锚点后，三页分别链接至 8、8、5 个其他职业详情路径。此检查仅证明公开渲染及部分出链，不证明全部正文主张来源、入链、Bing 抓取或已索引；旧 Bing `web-developers` noindex 快照仍待更新。
 
