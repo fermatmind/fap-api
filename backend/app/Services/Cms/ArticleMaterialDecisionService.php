@@ -40,9 +40,9 @@ final class ArticleMaterialDecisionService
             $evidenceRef ?? self::AUTHORITY_REVISION_KIND.':'.$revision->id,
         );
         $latest = $this->latestForUpdate($article);
-        $materialFingerprint = $this->fingerprint->fingerprint(
-            $this->materialPayload($article, $revision),
-        );
+        $materialPayload = $this->materialPayload($article, $revision);
+        $materialFingerprint = $this->fingerprint->fingerprint($materialPayload);
+        $searchSurfaceFingerprint = $this->fingerprint->searchSurfaceFingerprint($materialPayload);
 
         if ($latest instanceof ContentMaterialDecision
             && (string) $latest->publication_state === 'published'
@@ -77,6 +77,7 @@ final class ArticleMaterialDecisionService
             'authority_revision_kind' => self::AUTHORITY_REVISION_KIND,
             'authority_revision' => (string) $revision->id,
             'material_fingerprint' => $materialFingerprint,
+            'search_surface_fingerprint' => $searchSurfaceFingerprint,
             'previous_material_fingerprint' => $latest?->material_fingerprint,
             'publication_state' => 'published',
             'operation' => $operation,
@@ -122,6 +123,7 @@ final class ArticleMaterialDecisionService
             'authority_revision_kind' => self::AUTHORITY_REVISION_KIND,
             'authority_revision' => $authorityRevision,
             'material_fingerprint' => $knownFingerprint ? $latest->material_fingerprint : null,
+            'search_surface_fingerprint' => null,
             'previous_material_fingerprint' => $latest?->material_fingerprint,
             'publication_state' => 'unpublished',
             'operation' => 'unpublish',

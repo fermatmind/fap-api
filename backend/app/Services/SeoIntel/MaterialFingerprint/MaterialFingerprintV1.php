@@ -94,6 +94,30 @@ final class MaterialFingerprintV1
         return hash('sha256', $this->canonicalJson($input));
     }
 
+    /**
+     * Fingerprint only fields that can change the public URL or its search
+     * presentation. Body and claim edits remain material without becoming a
+     * search submission signal.
+     *
+     * @param  array<string, mixed>  $input
+     */
+    public function searchSurfaceFingerprint(array $input): string
+    {
+        $payload = $this->canonicalPayload($input);
+
+        return hash('sha256', json_encode([
+            'schema_version' => 'seo.search_surface_fingerprint.v1',
+            'family' => $payload['family'],
+            'locale' => $payload['locale'],
+            'public_identity' => $payload['public_identity'],
+            'visible_title' => $payload['visible_content']['title'] ?? null,
+            'visible_excerpt' => $payload['visible_content']['excerpt'] ?? null,
+            'search_surface' => $payload['search_surface'],
+            'locale_linkage' => $payload['locale_linkage'],
+            'public_structure' => $payload['public_structure'],
+        ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+    }
+
     private function normalize(mixed $value): mixed
     {
         if ($value instanceof stdClass) {

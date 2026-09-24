@@ -47,6 +47,7 @@ final class ArticleMaterialDecisionTest extends TestCase
         self::assertTrue((bool) $initial->material_changed);
         self::assertSame($firstPublishedAt->toISOString(), $initial->material_changed_at?->toISOString());
         self::assertMatchesRegularExpression('/\A[a-f0-9]{64}\z/', (string) $initial->material_fingerprint);
+        self::assertMatchesRegularExpression('/\A[a-f0-9]{64}\z/', (string) $initial->search_surface_fingerprint);
         self::assertSame((string) $firstRevision->id, (string) $initial->authority_revision);
         self::assertSame('/zh-CN/articles/material-article', $initial->public_identity);
 
@@ -73,6 +74,7 @@ final class ArticleMaterialDecisionTest extends TestCase
         self::assertSame('unchanged_republish', $unchanged->decision_code);
         self::assertFalse((bool) $unchanged->material_changed);
         self::assertSame((string) $initial->material_fingerprint, (string) $unchanged->material_fingerprint);
+        self::assertSame((string) $initial->search_surface_fingerprint, (string) $unchanged->search_surface_fingerprint);
         self::assertSame($firstPublishedAt->toISOString(), $unchanged->material_changed_at?->toISOString());
     }
 
@@ -110,9 +112,34 @@ final class ArticleMaterialDecisionTest extends TestCase
         self::assertSame('material_change', $changed->decision_code);
         self::assertTrue((bool) $changed->material_changed);
         self::assertNotSame((string) $initial->material_fingerprint, (string) $changed->material_fingerprint);
+        self::assertNotSame((string) $initial->search_surface_fingerprint, (string) $changed->search_surface_fingerprint);
         self::assertSame('2026-08-30T02:00:00.000000Z', $changed->material_changed_at?->toISOString());
         self::assertStringNotContainsString('must-never-be-stored', json_encode($changed->getAttributes(), JSON_THROW_ON_ERROR));
         self::assertArrayNotHasKey('payload', $changed->getAttributes());
+    }
+
+    public function test_body_only_change_does_not_change_search_surface_fingerprint(): void
+    {
+        $article = $this->draftArticle('zh-CN', 'body-only-article');
+        app(ArticlePublishService::class)->publishArticle((int) $article->id);
+        $initial = ContentMaterialDecision::query()->firstOrFail();
+        $currentRevisionId = (int) $article->fresh()->published_revision_id;
+
+        $revision = $this->approvedRevision($article->fresh(), 2, [
+            'content_md' => "## Stable body\n\nSubstantially revised content.",
+        ]);
+        $article->forceFill(['working_revision_id' => $revision->id])->saveQuietly();
+        app(ArticlePublishService::class)->promoteExistingWorkingRevision(
+            (int) $article->id,
+            (int) $revision->id,
+            $currentRevisionId,
+            dispatchFollowUp: false,
+        );
+
+        $changed = ContentMaterialDecision::query()->latest('id')->firstOrFail();
+        self::assertTrue((bool) $changed->material_changed);
+        self::assertNotSame((string) $initial->material_fingerprint, (string) $changed->material_fingerprint);
+        self::assertSame((string) $initial->search_surface_fingerprint, (string) $changed->search_surface_fingerprint);
     }
 
     public function test_unpublish_is_traceable_idempotent_and_unknown_legacy_hash_holds(): void
