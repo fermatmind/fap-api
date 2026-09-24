@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel\Decision;
 
+use App\Services\SeoIntel\OpsDashboard\SeoOpportunityQueueReadService;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Facades\DB;
@@ -84,7 +85,19 @@ final class SeoWeeklyDecisionReceiptService
             throw new RuntimeException('Natural weekly planning is already locked.');
         }
         try {
-            return $this->db()->transaction(function () use ($slot, $releaseSha, $capabilityRevision, $deadline): array {
+            // GSC discovery owns a consistent read-only snapshot on MySQL. It must
+            // finish before the natural writer transaction opens on this connection.
+            $discovery = null;
+            $week = $slot->format('o-\WW');
+            if (! $this->db()->table('seo_weekly_decision_capability_receipts')->where('iso_week', $week)->exists()) {
+                $sourceTables = ['seo_gsc_daily', 'seo_gsc_sync_runs', 'seo_urls', 'seo_url_entities'];
+                if (collect($sourceTables)->every(fn (string $table): bool => $this->db()->getSchemaBuilder()->hasTable($table))) {
+                    $discovery = (new SeoOpportunityQueueReadService($this->connection))->planningDiscovery();
+                }
+            }
+            $this->assertWithinDeadline($deadline);
+
+            return $this->db()->transaction(function () use ($slot, $releaseSha, $capabilityRevision, $deadline, $discovery): array {
                 $this->assertWithinDeadline($deadline);
                 $week = $slot->format('o-\WW');
                 $existingRows = $this->db()->table('seo_weekly_decision_capability_receipts')
@@ -105,7 +118,7 @@ final class SeoWeeklyDecisionReceiptService
                     return $result;
                 }
                 $summary = (new SeoOpportunityCardGenerator($this->connection))->generate(
-                    $slot, $releaseSha, fn () => $this->assertWithinDeadline($deadline),
+                    $slot, $releaseSha, fn () => $this->assertWithinDeadline($deadline), $discovery,
                 );
                 $selection = $this->selector->snapshot($slot);
                 if ($selection['state'] === 'unavailable') {

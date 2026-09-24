@@ -14,6 +14,7 @@ use App\Services\SeoIntel\Decision\SeoWeeklyDecisionSelector;
 use App\Services\SeoIntel\Decision\SeoWeeklyPlanningReadService;
 use App\Services\SeoIntel\OpsDashboard\SeoOpportunityQueueReadService;
 use Carbon\CarbonImmutable;
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -64,6 +65,27 @@ final class SeoOpportunityCardGeneratorTest extends TestCase
     public static function sizes(): array
     {
         return [[0, 0], [1, 1], [5, 5], [7, 5]];
+    }
+
+    public function test_natural_discovery_finishes_before_writer_transaction(): void
+    {
+        $this->seedPage(1);
+        $discoveryLevels = [];
+        DB::listen(function (QueryExecuted $event) use (&$discoveryLevels): void {
+            if ($event->connectionName === 'seo_intel' && str_contains($event->sql, 'seo_gsc_daily')
+                && preg_match('/limit 5000\\b/i', $event->sql) === 1) {
+                $discoveryLevels[] = $event->connection->transactionLevel();
+            }
+        });
+
+        $this->assertSame(1, $this->record()['generation_summary']['created']);
+        $this->assertNotEmpty($discoveryLevels);
+        // SQLite's GSC snapshot has its own transaction; it must not nest in
+        // the natural writer transaction (which would produce level 2).
+        $this->assertSame([1], array_values(array_unique($discoveryLevels)));
+        $discoveryCount = count($discoveryLevels);
+        $this->assertTrue($this->record()['idempotent_replay']);
+        $this->assertCount($discoveryCount, $discoveryLevels);
     }
 
     #[DataProvider('sizes')]
@@ -221,7 +243,8 @@ final class SeoOpportunityCardGeneratorTest extends TestCase
         $this->seedPage(1);
         $this->record();
         $before = $this->table('seo_decision_cards')->get()->toJson();
-        DB::connection('seo_intel')->transaction(fn () => (new SeoOpportunityCardGenerator)->generate(CarbonImmutable::now()->addMinute(), str_repeat('b', 40), fn () => null));
+        $discovery = (new SeoOpportunityQueueReadService)->planningDiscovery();
+        DB::connection('seo_intel')->transaction(fn () => (new SeoOpportunityCardGenerator)->generate(CarbonImmutable::now()->addMinute(), str_repeat('b', 40), fn () => null, $discovery));
         $this->assertSame($before, $this->table('seo_decision_cards')->get()->toJson());
         $old = (new SeoDecisionCardReadService)->snapshot()['items'][0];
         (new SeoDecisionLifecycleMaterializer)->materialize($old, 'in_progress', 'manual-progress', ['evidence_fresh' => true]);
@@ -272,11 +295,12 @@ final class SeoOpportunityCardGeneratorTest extends TestCase
         $this->seedPage(1);
         $calls = 0;
         try {
+            $discovery = (new SeoOpportunityQueueReadService)->planningDiscovery();
             DB::connection('seo_intel')->transaction(fn () => (new SeoOpportunityCardGenerator)->generate(CarbonImmutable::now(), str_repeat('a', 40), function () use (&$calls) {
                 if (++$calls > 12) {
                     throw new RuntimeException('deadline');
                 }
-            }));
+            }, $discovery));
             $this->fail('Expected deadline.');
         } catch (RuntimeException $e) {
             $this->assertSame('deadline', $e->getMessage());

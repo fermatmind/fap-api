@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel\Decision;
 
-use App\Services\SeoIntel\OpsDashboard\SeoOpportunityQueueReadService;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -18,8 +17,8 @@ final class SeoOpportunityCardGenerator
 
     public function __construct(private readonly string $connection = 'seo_intel') {}
 
-    /** Called only by the existing natural task, inside its outer transaction and mutex. */
-    public function generate(CarbonImmutable $now, string $releaseSha, callable $deadline): array
+    /** GSC discovery is snapshotted before the natural writer transaction opens. */
+    public function generate(CarbonImmutable $now, string $releaseSha, callable $deadline, ?array $discovery): array
     {
         $db = DB::connection($this->connection);
         if ($db->transactionLevel() < 1) {
@@ -41,7 +40,11 @@ final class SeoOpportunityCardGenerator
                 return $summary;
             }
         }
-        $discovery = (new SeoOpportunityQueueReadService($this->connection))->planningDiscovery();
+        if ($discovery === null) {
+            $summary['hold_reasons']['source_schema_unavailable'] = 1;
+
+            return $summary;
+        }
         $summary['scan_rows'] = $discovery['rows_scanned'];
         $summary['candidate_count'] = count($discovery['candidates']);
         $summary['discovery_limited'] = $discovery['discovery_limited'];
