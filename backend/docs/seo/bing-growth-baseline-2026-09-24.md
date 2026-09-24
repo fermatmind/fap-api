@@ -36,10 +36,12 @@ Bing 查询、页面、曝光、点击、CTR、平均排名、国家/地区、�
 
 - 线上 `sitemap.xml` 返回 200，包含 1,151 个 URL，其中中文测试路径 8、中文文章路径 89、中文人格路径 181、中文职业详情路径 579。`robots.txt` 返回 200，`User-Agent: *` 为 `Allow: /`，并指向该 sitemap。
 - 仓库 Career Current manifest 有 1,046 个中文身份，其中 579 个标记有公开正文、467 个无公开正文；线上 sitemap 中的 579 个中文职业详情 URL 与有正文数一致。不能把 1,046 个身份或旧的“约 400 页”当成已上线正文数。
-- 只读抽查 MBTI、RIASEC、Big Five 人格、文章，以及 `accountants-and-auditors`、`actors`、`zoologists-and-wildlife-biologists` 三个职业页：HTTP 200、自指 canonical、`index, follow`。这不是 579 页逐页验收。
+- 只读抽查 MBTI、RIASEC、Big Five 人格、文章，以及 `accountants-and-auditors`、`actors`、`web-developers`、`zoologists-and-wildlife-biologists` 四个职业页：HTTP 200、自指 canonical、`index, follow`。这不是 579 页逐页验收。
 - 抽查带 `use_xbridge3` 的 MBTI 参数页与带 `utm_source` 的职业页：canonical 均指无参数 URL。MBTI `/take?form=...` 返回 `noindex, nofollow, noarchive, nocache` 且 canonical 指公开测试页。未见该样本的参数重复 canonical 缺陷。
 - Bing URL Inspection 对中文 MBTI、RIASEC 测评页和 `accountants-and-auditors` 中文职业页均显示 **Indexed successfully / URL can appear on Bing**，且未提示 SEO/GEO 问题。该职业页显示 2026-04-19 已发现、2026-09-22 最近抓取尝试、允许抓取、抓取成功、允许索引；检查详情中的 canonical URL 显示 `-`，不能据此判定全站 canonical 状态。
-- 分层：sitemap 证明 **可发现候选**；三个受检 URL 可升至 **Bing 已索引**；**有 Web 曝光、有 Web 点击**仍待 Search Performance 报告。Site Explorer 当前显示 `No data available`，Bingbot 的全站 4xx/5xx、robots 命中及抓取量尚不能汇总，三个样本不能外推至 579 页。
+- 2026-09-24 新增 URL Inspection 抽查：中文 `infp-t` 人格页、`big-five-30-facets-explained-with-model-caveats` 文章页和 `actors` 职业页也显示 **Indexed successfully**。`infp-t` 的最近抓取为当日 02:15，允许抓取、抓取成功、允许索引。六个已索引样本仍不能外推为全站覆盖率。
+- `web-developers` 与 `zoologists-and-wildlife-biologists` 两个中文职业页的 **Bing Index 快照**均为 **Not indexed due to NOINDEX directive**：分别在 2026-09-07 00:28 和 2026-09-02 05:44 最近抓取，允许抓取、抓取成功、当时不允许索引。与之相对，两页当日公开 HTTP 响应均为 200、无 `X-Robots-Tag`、meta robots `index, follow`、自指 canonical；Bing **Live URL** 当日测试均显示 **URL can be indexed by Bing**。因此已证实的是 Bing 旧快照与当前线上索引许可不一致；不能据此认定当前仍含 `noindex`，也不能把实时测试当成已收录。这两页列为优先观察下一次抓取及索引状态的样本。
+- 分层：sitemap 证明 **可发现候选**；六个受检 URL 可升至 **Bing 已索引**；上述两个职业页为 **当前可索引、Bing 快照未索引**；**有 Web 曝光、有 Web 点击**仍待 Search Performance 报告。Site Explorer 当前显示 `No data available`，Bingbot 的全站 4xx/5xx、robots 命中及抓取量尚不能汇总，样本不能外推至 579 页。
 
 ## 3. IndexNow 链路
 
@@ -55,7 +57,7 @@ Bing 查询、页面、曝光、点击、CTR、平均排名、国家/地区、�
 
 ## 5. 中文职业页试点
 
-当前可核实的公开发现集合是 579 个有正文的中文职业详情 URL；其中 `accountants-and-auditors` 已由 Bing URL Inspection 证实收录，其余页面的全量发现/索引/曝光状态仍未知。没有 Bing 查询需求和中文地域 SERP 样本前，不指定“10–20 个有需求证据”的候选，也不扩量。试点逐页核对职责、入行、技能、薪资证据与适用地区、职业区别、内容来源和相关内链；不为 Bing 另建职业页。
+当前可核实的公开发现集合是 579 个有正文的中文职业详情 URL；`accountants-and-auditors` 和 `actors` 两页由 Bing URL Inspection 证实已索引；`web-developers` 和 `zoologists-and-wildlife-biologists` 两页的旧索引快照仍为 `noindex`，实时测试已恢复可索引，需观察后续抓取。其余页面的全量发现/索引/曝光状态仍未知。没有 Bing 查询需求和中文地域 SERP 样本前，不指定“10–20 个有需求证据”的候选，也不扩量。试点逐页核对职责、入行、技能、薪资证据与适用地区、职业区别、内容来源和相关内链；不为 Bing 另建职业页。
 
 ## 6. 每周复核与文章选题
 
