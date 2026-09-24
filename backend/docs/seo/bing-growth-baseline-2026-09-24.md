@@ -51,6 +51,7 @@ Bing 查询、页面、曝光、点击、CTR、平均排名、国家/地区、�
 - 线上 `sitemap.xml` 返回 200，包含 1,151 个 URL，其中中文测试路径 8、中文文章路径 89、中文人格路径 181、中文职业详情路径 579。`robots.txt` 返回 200，`User-Agent: *` 为 `Allow: /`，并指向该 sitemap。
 - 仓库 Career Current manifest 有 1,046 个中文身份，其中 579 个标记有公开正文、467 个无公开正文；线上 sitemap 中的 579 个中文职业详情 URL 与有正文数一致。不能把 1,046 个身份或旧的“约 400 页”当成已上线正文数。
 - 2026-09-24 对公开 `/api/v0.5/career/directory?locale=zh-CN&per_page=100` 的 11 页做全量只读遍历：目录报告 1,043 个成员（另 3 个身份排除），逐行结果为 579 个 `indexable`、464 个 `noindex`。579 个 `indexable` 的 canonical path 与当时 sitemap 中的 579 个中文职业详情路径双向差集均为 0。这证明当前公开目录权威与 sitemap 的**候选可索引集合**一致，不证明这 579 页已由 Bing 发现、抓取或收录；目录的 `detail_ready` 也不能替代逐页正文质量检查。
+- 对 Career Current manifest 中标记 `has_public_body=true` 的 579 个中文职业文件做全量只读正文结构检查：579/579 均为 `enhanced`，各有 13 个非空内容块、非空职业摘要及 SEO 标题；每页 fact register 至少 5 条事实（中位数 21 条）。未在这批仓库权威文件中发现空正文。此检查不证明线上逐页渲染、来源质量或 Bing 已抓取正文；那 467 个 `has_public_body=false` 身份仍不可作为已上线职业正文计数。
 - 只读抽查 MBTI、RIASEC、Big Five 人格、文章，以及 `accountants-and-auditors`、`actors`、`web-developers`、`zoologists-and-wildlife-biologists` 四个职业页：HTTP 200、自指 canonical、`index, follow`。这不是 579 页逐页验收。
 - 抽查带 `use_xbridge3` 的 MBTI 参数页与带 `utm_source` 的职业页：canonical 均指无参数 URL。MBTI `/take?form=...` 返回 `noindex, nofollow, noarchive, nocache` 且 canonical 指公开测试页。未见该样本的参数重复 canonical 缺陷。
 - Bing URL Inspection 对中文 MBTI、RIASEC 测评页和 `accountants-and-auditors` 中文职业页均显示 **Indexed successfully / URL can appear on Bing**，且未提示 SEO/GEO 问题。该职业页显示 2026-04-19 已发现、2026-09-22 最近抓取尝试、允许抓取、抓取成功、允许索引；检查详情中的 canonical URL 显示 `-`，不能据此判定全站 canonical 状态。
