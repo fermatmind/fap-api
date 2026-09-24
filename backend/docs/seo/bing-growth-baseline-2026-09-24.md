@@ -63,8 +63,9 @@ Bing 查询、页面、曝光、点击、CTR、平均排名、国家/地区、�
 
 - 本次通过 GSC 导入完成 Bing 站点验证，不再需要 XML 或 meta 作为当前验证前提。`https://fermatmind.com/BingSiteAuth.xml` 仍返回 404；它与 IndexNow key 文件是不同凭据，不能互相代替。
 - 前端仓库 `fap-web/public/` 中的现有 IndexNow key 静态文件已与同名线上根路径逐字节比对：线上返回 HTTP 200、`text/plain`，正文与文件名中的 key 一致。历史修复说明曾记录 keyLocation 指向该路径而线上文件 404 的问题；当前文件可访问证明这一验证文件缺口已修复。生产 `SEO_INTEL_INDEXNOW_KEY_LOCATION` 是否仍指向该文件、近期提交是否被接受，尚无生产配置或回执证据；不在报告中公开 key 值。
-- 后端有 Search Channel Queue、IndexNow bounded executor、发布后 `seo-agent:post-publish-indexnow-auto` 命令及历史接受回执。该命令及调用它的 priority scheduler 继承 `RetiredSeoAgentCommand`，在非单元测试环境 `isEnabled()` 为 false；不能把旧文档中的命令存在视为当前生产自动触发。`seo-agent:post-publish-search-submit` 同样继承此基类，且其执行模式仅入队、不向外部提交。当前文章 release closeout 明确要求 `indexnow_submission_count == 0`。
+- 后端有 Search Channel Queue、IndexNow bounded executor、发布后 `seo-agent:post-publish-indexnow-auto` 命令及历史接受回执。该命令及调用它的 priority scheduler 继承 `RetiredSeoAgentCommand`，在非单元测试环境 `isEnabled()` 为 false；不能把旧文档中的命令存在视为当前生产自动触发。`seo-agent:post-publish-search-submit` 同样继承此基类，且其执行模式仅入队、不向外部提交。`seo_13_article_release_closeout_production_ops.sh` 要求其执行路径 `indexnow_submission_count == 0`，而 Ops 页面使用的 `ArticleReleaseCloseoutService` 要求 IndexNow 与百度队列项已接受；这两个 closeout 契约目前不同，不能混为一个已闭合的提交流程。
 - CMS 文章发布可产生 `PublicAuthorityChanged` 和 `ContentReleaseFollowUp`；前者可触发 URL Truth 增量同步，后者发送缓存失效/广播。两条路径均未直接触发 IndexNow。仓库 `SEO_INTEL_INDEXNOW_ENABLED`、`SEO_INTEL_INDEXNOW_LIVE_API_ENABLED`、Search Channel Queue 写入和 live submission 默认关闭，生产环境实际开关值未取得。因此现有生产链路的缺口是：页面验收通过后的合格 URL 集合如何进入可执行 IndexNow 提交，以及相应接受/失败回执如何与发布证据绑定；不能仅凭命令和执行器存在认定闭环已生效。
+- 生产 Fermat Ops 中，已发布且公开可索引的中文文章 `holland-career-interest-test-can-and-cannot-tell-you`（2026-09-05 发布）在只读 SEO Release Status 显示 `BLOCKED_SEARCH_QUEUE_GAP`，IndexNow 与百度队列项均为 `missing`；内容、sitemap/llms 资格和 URL Truth 为成功。展开的 closeout issues 明确列出两条 `search_channel_queue_missing`。这是至少一篇真实已发布文章没有搜索队列项的生产证据；该页另外还有 schema/hreflang 与 HTML smoke 等独立缺口，不能把队列补齐等同于整篇 closeout 通过。现有 `seo-intel:search-channel-queue` 仅可入队且默认写入闸门关闭，`SearchChannelQueueWriteService` 创建 `dry_run` 批次，不产生外部提交。补齐时须在验收后的精确 URL/元数据变更范围内连接入队与 bounded executor，并记录 provider 接受/失败；不能单独启用已退役命令或重提交全站。
 - Bing IndexNow 页面当前显示 `Get Started` 入门页，未给出可核验的提交列表。当前生产 IndexNow key/keyLocation、具体新内容发布触发、最近提交及失败日志未取得；不能把页面入门状态等同于从未提交。历史 `accepted` 只表示 provider 收到更新信号，不是已抓取、已索引或排名改善。现阶段没有依据重提交全站 URL。
 - Bing Sitemaps 页面显示 `0 rows`；GSC 导入向导也显示 0 个可导入 sitemap。这只说明站长工具当前没有记录，线上公开 sitemap 仍正常返回。未在此扫描中提交 sitemap。
 
@@ -79,6 +80,8 @@ Bing 查询、页面、曝光、点击、CTR、平均排名、国家/地区、�
 Bing Keyword Research 提供了**全网查询需求**线索（2026-06-24 至 2026-09-21，China 筛选）：`会计师`约 1.7K 关键词曝光，全球约 1.8K；`前端工程师`312，全球 341。中文 SERP 样本中，前者由百科、会计机构/考试站点及问答站占据前列，后者由百科、问答、招聘与岗位说明页竞争。`网页开发人员`精确词没有可用趋势量；更宽的 `网页开发`全球 437。上述数据不是 fermatmind.com 的站点曝光或点击，不足以直接把 `accountants-and-auditors`、`web-developers` 判为赢家；仅将其列入后续逐页试点候选，待 Bing Web 页面×查询数据、地域适用性和正文来源复核。
 
 同一窗口内，`数据科学家`的全网关键词曝光为中国 72、全球 93；公开职业目录中的 `data-scientists` 已有可索引中文页，故可纳入待核验候选，但尚无该站 Bing 曝光、点击或中文 SERP 竞争证据。继续查询其他职业词时 Bing Keyword Research 返回请求过多错误；未完整加载的地域数据不计为 0，也不据此扩充试点名单。
+
+公开 HTML 抽查 `accountants-and-auditors`、`data-scientists`、`web-developers` 三页：正确详情路径均为 `/zh/career/jobs/<slug>`，返回 HTTP 200、self canonical、`index, follow`，可见职责/适配、职业区别、AI、薪资及入行等章节。去掉本页锚点后，三页分别链接至 8、8、5 个其他职业详情路径。此检查仅证明公开渲染及部分出链，不证明全部正文主张来源、入链、Bing 抓取或已索引；旧 Bing `web-developers` noindex 快照仍待更新。
 
 ## 6. 每周复核与文章选题
 
