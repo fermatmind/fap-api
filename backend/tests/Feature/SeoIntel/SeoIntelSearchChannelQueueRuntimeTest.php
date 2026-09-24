@@ -93,6 +93,87 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
     }
 
     #[Test]
+    public function published_career_projection_can_be_planned_but_manifest_identity_and_noindex_cannot(): void
+    {
+        $eligibleUrl = 'https://fermatmind.com/zh/career/jobs/graphic-designers';
+        $this->seedSeoUrl([
+            'canonical_url' => $eligibleUrl,
+            'locale' => 'zh-CN',
+            'page_entity_type' => 'career_job',
+            'entity_id_or_slug' => 'graphic-designers',
+            'cluster' => 'career',
+            'source_authority' => 'career_runtime_publish_projection',
+            'lastmod_source' => 'career_directory_authority_revision',
+            'metadata_json' => [
+                'claim_safe' => true,
+                'publication_state' => 'published',
+                'source_table' => 'career_directory_authority',
+            ],
+        ]);
+        $this->seedSeoUrl([
+            'canonical_url' => 'https://fermatmind.com/zh/career/jobs/manifest-only',
+            'locale' => 'zh-CN',
+            'page_entity_type' => 'career_job',
+            'entity_id_or_slug' => 'manifest-only',
+            'cluster' => 'career',
+            'source_authority' => 'career_current_manifest',
+            'lastmod_source' => 'career_current_manifest_revision',
+            'metadata_json' => [
+                'claim_safe' => true,
+                'publication_state' => 'current',
+                'source_table' => 'career_current_manifest',
+            ],
+        ]);
+        $this->seedSeoUrl([
+            'canonical_url' => 'https://fermatmind.com/zh/career/jobs/no-body',
+            'locale' => 'zh-CN',
+            'page_entity_type' => 'career_job',
+            'entity_id_or_slug' => 'no-body',
+            'cluster' => 'career',
+            'source_authority' => 'career_runtime_publish_projection',
+            'indexability_state' => 'noindex',
+            'metadata_json' => [
+                'claim_safe' => true,
+                'publication_state' => 'published',
+                'source_table' => 'career_directory_authority',
+            ],
+        ]);
+
+        $eligible = $this->runQueueCommand([
+            '--dry-run' => true,
+            '--no-write' => true,
+            '--json' => true,
+            '--canonical-url' => $eligibleUrl,
+            '--channel' => 'indexnow',
+            '--page-type' => 'career_job',
+            '--limit' => 1,
+        ]);
+
+        $this->assertSame('success', $eligible['status'] ?? null);
+        $this->assertSame(1, $eligible['planned_queue_count'] ?? null);
+        $this->assertSame(['indexnow' => 1], $eligible['channel_breakdown'] ?? null);
+        $this->assertFalse((bool) ($eligible['writes_attempted'] ?? true));
+        $this->assertFalse((bool) ($eligible['external_calls_attempted'] ?? true));
+
+        foreach (['manifest-only', 'no-body'] as $slug) {
+            $blocked = $this->runQueueCommand([
+                '--dry-run' => true,
+                '--no-write' => true,
+                '--json' => true,
+                '--canonical-url' => 'https://fermatmind.com/zh/career/jobs/'.$slug,
+                '--channel' => 'indexnow',
+                '--page-type' => 'career_job',
+                '--limit' => 1,
+            ], expectSuccess: false);
+
+            $this->assertSame('blocked', $blocked['status'] ?? null);
+            $this->assertSame(0, $blocked['planned_queue_count'] ?? null);
+        }
+
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+    }
+
+    #[Test]
     public function eligible_backend_cms_article_url_can_be_written_to_queue_without_live_submission(): void
     {
         config([

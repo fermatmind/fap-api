@@ -486,6 +486,7 @@ return [
             'article',
             'research_report',
             'content_page',
+            'career_job',
             'home',
             'test_hub',
             'test_detail',
@@ -510,6 +511,7 @@ return [
         'approved_source_authorities' => [
             'backend_cms',
             'backend_public_surface',
+            'career_runtime_publish_projection',
             'scale_catalog',
         ],
         'forbidden_source_authorities' => [
