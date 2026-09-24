@@ -18,7 +18,17 @@
 | GA4 事件报告，同期，来源/媒介**包含** `bing` | `session_start` 50 次/46 用户、`test_start` 33 次/13 用户、`test_complete` 15 次/13 用户 | 聚合口径仅用于检查归因漏记；不可与上面两个精确来源重复相加。 |
 | 百度统计转化、GA4 关键事件 | 百度统计显示 `--`；GA4 首页关键事件卡显示无可用数据 | 都不能解释成零测评开始或零测评完成。 |
 
-需补的同口径漏斗：`Bing 自然搜索 → canonical 入口页 → 开始测评 → 完成测评`。GA4 已确认开始/完成事件存在，但尚缺 Bing 来源的入口页维度和同一会话的事件顺序；还需用 Bing Webmaster Tools 的 Web 搜索页面/查询点击校验入口。百度统计概况页的 MBTI、RIASEC 全站入口排名不能当成 Bing 赢家。
+GA4 事件报告在同一 `cn.bing.com / referral` 会话来源/媒介筛选下，再按“着陆页 + 查询字符串”拆分（2026-08-27 至 2026-09-23）：
+
+| 着陆页族（合并测评页与 `/take` 参数） | `test_start` 次数 | `test_complete` 次数 | 边界 |
+| --- | ---: | ---: | --- |
+| 中文 RIASEC 测评 | 15 | 6 | 公开页 14 次开始，`/take?form=riasec_60` 1 次；完成分别为 4、2 次。 |
+| 中文 MBTI 测评 | 9 | 3 | 公开页 7 次开始，带人格页入口参数的 `/take` 2 次；完成分别为公开页 2 次、另一 `/take?form=mbti_93` 1 次。 |
+| 中文九型测评 | 5 | 3 | 开始均落在 forced-choice `/take`；完成分别落在 forced-choice 2 次和 Likert `/take` 1 次。 |
+| 中文 `infp-t` 人格页 | 4 | 1 | 着陆页维度是 GA4 会话维度，不能推断该页就是 Bing Web 点击页面。 |
+| 其他/未设置 | 0 | 2 | 一条结果页路径、一条 `(not set)`；不公开结果页私有 ID。 |
+
+上表事件次数各合计开始 33、完成 15，与精确来源筛选总数一致。不同事件的着陆页统计不能拼成同一用户的有序漏斗，`/take` 会话也不能当作可索引搜索入口。需补的同口径漏斗仍是 `Bing Web 自然搜索 → canonical 入口页 → 开始测评 → 完成测评`：用 Bing Webmaster Tools 的 Web 页面/查询点击校验入口，再用 GA4 同会话标识核对事件顺序。百度统计概况页的 MBTI、RIASEC 全站入口排名不能当成 Bing 赢家。
 
 Bing 查询、页面、曝光、点击、CTR、平均排名、国家/地区、设备和前后 28 天变化均为 **未取得**；不存在可审计的 Bing Top 20 排名名单。
 
@@ -34,7 +44,8 @@ Bing 查询、页面、曝光、点击、CTR、平均排名、国家/地区、�
 ## 3. IndexNow 链路
 
 - 本次通过 GSC 导入完成 Bing 站点验证，不再需要 XML 或 meta 作为当前验证前提。`https://fermatmind.com/BingSiteAuth.xml` 仍返回 404；它与 IndexNow key 文件是不同凭据，不能互相代替。
-- 后端有 Search Channel Queue、IndexNow bounded executor、发布后 `seo-agent:post-publish-indexnow-auto` 命令及历史接受回执。该命令及调用它的 priority scheduler 继承 `RetiredSeoAgentCommand`，在非单元测试环境 `isEnabled()` 为 false；不能把旧文档中的命令存在视为当前生产自动触发。当前文章 release closeout 明确要求 `indexnow_submission_count == 0`。
+- 后端有 Search Channel Queue、IndexNow bounded executor、发布后 `seo-agent:post-publish-indexnow-auto` 命令及历史接受回执。该命令及调用它的 priority scheduler 继承 `RetiredSeoAgentCommand`，在非单元测试环境 `isEnabled()` 为 false；不能把旧文档中的命令存在视为当前生产自动触发。`seo-agent:post-publish-search-submit` 同样继承此基类，且其执行模式仅入队、不向外部提交。当前文章 release closeout 明确要求 `indexnow_submission_count == 0`。
+- CMS 文章发布可产生 `PublicAuthorityChanged` 和 `ContentReleaseFollowUp`；前者可触发 URL Truth 增量同步，后者发送缓存失效/广播。两条路径均未直接触发 IndexNow。仓库 `SEO_INTEL_INDEXNOW_ENABLED`、`SEO_INTEL_INDEXNOW_LIVE_API_ENABLED`、Search Channel Queue 写入和 live submission 默认关闭，生产环境实际开关值未取得。因此现有生产链路的缺口是：页面验收通过后的合格 URL 集合如何进入可执行 IndexNow 提交，以及相应接受/失败回执如何与发布证据绑定；不能仅凭命令和执行器存在认定闭环已生效。
 - Bing IndexNow 页面当前显示 `Get Started` 入门页，未给出可核验的提交列表。当前生产 IndexNow key/keyLocation、具体新内容发布触发、最近提交及失败日志未取得；不能把页面入门状态等同于从未提交。历史 `accepted` 只表示 provider 收到更新信号，不是已抓取、已索引或排名改善。现阶段没有依据重提交全站 URL。
 - Bing Sitemaps 页面显示 `0 rows`；GSC 导入向导也显示 0 个可导入 sitemap。这只说明站长工具当前没有记录，线上公开 sitemap 仍正常返回。未在此扫描中提交 sitemap。
 
