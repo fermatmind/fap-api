@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Throwable;
 
+/**
+ * @review-surface search_submission_queue_approval
+ */
 final class SearchChannelQueueBoundedLiveExecutor
 {
     public const AGENT_INVOCABLE = false;
@@ -273,6 +276,37 @@ final class SearchChannelQueueBoundedLiveExecutor
     }
 
     /**
+     * The article release lane uses the same queue item validation, atomic claim,
+     * provider transport and audit log as bounded submissions. Its scope is fixed
+     * to one verified public article and cannot enable the generic live gates.
+     *
+     * @return array<string, mixed>
+     */
+    public function submitVerifiedArticle(int $queueItemId, int $articleId, string $canonicalUrl): array
+    {
+        if (! (bool) config('seo_intel.article_indexnow_auto_enabled', false)) {
+            return ['status' => 'blocked', 'issues' => ['article_indexnow_auto_disabled']];
+        }
+
+        $connection = DB::connection((string) config('seo_intel.connection', 'seo_intel'));
+        $item = $connection->table('seo_search_channel_queue_items')->where('id', $queueItemId)->first();
+        if ($item === null || (string) $item->channel !== 'indexnow'
+            || (string) $item->page_entity_type !== 'article'
+            || (string) $item->entity_id !== (string) $articleId
+            || (string) $item->canonical_url !== $canonicalUrl
+            || (string) $item->source_authority !== 'backend_cms') {
+            return ['status' => 'blocked', 'issues' => ['article_indexnow_scope_mismatch']];
+        }
+
+        $issues = $this->validateItem($item, ['indexnow']);
+        if ($issues !== []) {
+            return ['status' => 'blocked', 'issues' => $issues];
+        }
+
+        return $this->submitOne($item, 'article-indexnow-auto', hash('sha256', 'article-indexnow-auto:'.$queueItemId), 'verified_article');
+    }
+
+    /**
      * @param  list<int>  $queueItemIds
      * @param  list<string>  $channels
      */
@@ -458,7 +492,7 @@ final class SearchChannelQueueBoundedLiveExecutor
     /**
      * @return array<string, mixed>
      */
-    private function submitOne(object $item, string $actorId, string $approvalToken): array
+    private function submitOne(object $item, string $actorId, string $approvalToken, string $gateMode = 'global'): array
     {
         $connection = DB::connection((string) config('seo_intel.connection', 'seo_intel'));
         $now = now();
@@ -482,7 +516,8 @@ final class SearchChannelQueueBoundedLiveExecutor
             'channel' => (string) $item->channel,
             'url_hash' => (string) $item->url_hash,
             'approval_token_hash' => hash('sha256', $approvalToken),
-            'global_live_gates_required' => true,
+            'gate_mode' => $gateMode,
+            'global_live_gates_required' => $gateMode === 'global',
         ], 'operator', $actorId);
 
         $submission = $this->submitToChannel((string) $item->channel, (string) $item->canonical_url);

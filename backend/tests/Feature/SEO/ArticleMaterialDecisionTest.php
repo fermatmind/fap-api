@@ -12,7 +12,11 @@ use App\Services\Cms\ArticleMaterialDecisionService;
 use App\Services\Cms\ArticlePublishService;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Schema;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Tests\TestCase;
 
 final class ArticleMaterialDecisionTest extends TestCase
@@ -140,6 +144,199 @@ final class ArticleMaterialDecisionTest extends TestCase
         self::assertTrue((bool) $changed->material_changed);
         self::assertNotSame((string) $initial->material_fingerprint, (string) $changed->material_fingerprint);
         self::assertSame((string) $initial->search_surface_fingerprint, (string) $changed->search_surface_fingerprint);
+    }
+
+    public function test_indexnow_candidate_planning_uses_exact_public_url_and_skips_body_only_changes(): void
+    {
+        $article = $this->draftArticle('zh-CN', 'indexnow-candidate');
+        $article->seoMeta->forceFill(['canonical_url' => '/zh/articles/indexnow-candidate'])->saveQuietly();
+        app(ArticlePublishService::class)->publishArticle((int) $article->id);
+
+        config([
+            'database.connections.seo_intel' => [
+                'driver' => 'sqlite',
+                'database' => ':memory:',
+                'prefix' => '',
+                'foreign_key_constraints' => false,
+            ],
+            'seo_intel.connection' => 'seo_intel',
+        ]);
+        DB::purge('seo_intel');
+        Schema::connection('seo_intel')->create('seo_urls', static function ($table): void {
+            $table->id();
+            $table->char('canonical_url_hash', 64);
+            $table->text('canonical_url');
+            $table->string('locale', 16);
+            $table->string('page_entity_type', 64);
+            $table->string('entity_id_or_slug', 255)->nullable();
+            $table->string('cluster', 64)->nullable();
+            $table->string('source_authority', 64);
+            $table->string('indexability_state', 64);
+            $table->timestamp('lastmod_at')->nullable();
+            $table->string('lastmod_source', 64)->nullable();
+            $table->boolean('is_private_flow')->default(false);
+            $table->timestamp('first_seen_at')->nullable();
+            $table->timestamp('last_seen_at')->nullable();
+            $table->json('metadata_json')->nullable();
+            $table->timestamps();
+        });
+        $this->createIndexNowQueueTables();
+        $url = 'https://fermatmind.com/zh/articles/indexnow-candidate';
+        DB::connection('seo_intel')->table('seo_urls')->insert([
+            'canonical_url_hash' => hash('sha256', $url),
+            'canonical_url' => $url,
+            'locale' => 'zh-CN',
+            'page_entity_type' => 'article',
+            'entity_id_or_slug' => (string) $article->id,
+            'cluster' => 'article',
+            'source_authority' => 'backend_cms',
+            'indexability_state' => 'indexable',
+            'lastmod_at' => now(),
+            'lastmod_source' => 'articles.updated_at',
+            'is_private_flow' => false,
+            'first_seen_at' => now(),
+            'last_seen_at' => now(),
+            'metadata_json' => json_encode(['claim_safe' => true, 'publication_state' => 'published', 'source_table' => 'articles'], JSON_THROW_ON_ERROR),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $initial = $this->indexNowPlan((int) $article->id);
+        self::assertSame(1, $initial['candidate_count']);
+        self::assertSame('initial_publish', $initial['items'][0]['reason']);
+        self::assertSame(hash('sha256', $url), $initial['items'][0]['url_hash']);
+        self::assertFalse($initial['writes_attempted']);
+
+        $currentRevisionId = (int) $article->fresh()->published_revision_id;
+        $bodyRevision = $this->approvedRevision($article->fresh(), 2, ['content_md' => "## New body\n\nSubstantially revised content."]);
+        $article->forceFill(['working_revision_id' => $bodyRevision->id])->saveQuietly();
+        app(ArticlePublishService::class)->promoteExistingWorkingRevision(
+            (int) $article->id,
+            (int) $bodyRevision->id,
+            $currentRevisionId,
+            dispatchFollowUp: false,
+        );
+
+        $bodyOnly = $this->indexNowPlan((int) $article->id);
+        self::assertSame(0, $bodyOnly['candidate_count']);
+        self::assertSame('search_surface_unchanged', $bodyOnly['items'][0]['reason']);
+        self::assertFalse($bodyOnly['external_calls_attempted']);
+
+        $seoRevision = $this->approvedRevision($article->fresh(), 3, ['seo_title' => 'Changed search title']);
+        $article->forceFill(['working_revision_id' => $seoRevision->id])->saveQuietly();
+        app(ArticlePublishService::class)->promoteExistingWorkingRevision(
+            (int) $article->id,
+            (int) $seoRevision->id,
+            (int) $bodyRevision->id,
+            dispatchFollowUp: false,
+        );
+        $metadataChanged = $this->indexNowPlan((int) $article->id);
+        self::assertSame(1, $metadataChanged['candidate_count']);
+        self::assertSame('search_surface_changed', $metadataChanged['items'][0]['reason']);
+
+        DB::connection('seo_intel')->table('seo_urls')
+            ->where('canonical_url', $url)
+            ->update(['indexability_state' => 'noindex']);
+        $blocked = $this->indexNowPlan((int) $article->id);
+        self::assertSame(0, $blocked['candidate_count']);
+        self::assertContains('exact_url_truth_not_ready', $blocked['items'][0]['issues']);
+
+        DB::connection('seo_intel')->table('seo_urls')->where('canonical_url', $url)->update(['indexability_state' => 'indexable']);
+        config([
+            'seo_intel.article_indexnow_auto_enabled' => true,
+            'seo_intel.search_channel_queue.live_submission.indexnow.key' => 'fixture-indexnow-key',
+            'seo_intel.search_channel_queue.live_submission.indexnow.key_location' => 'https://fermatmind.com/fixture-indexnow-key.txt',
+        ]);
+        $seo = $article->fresh()->seoMeta;
+        $title = htmlspecialchars((string) $seo->seo_title, ENT_QUOTES | ENT_HTML5);
+        $description = htmlspecialchars((string) $seo->seo_description, ENT_QUOTES | ENT_HTML5);
+        Http::fake([
+            $url => Http::response('<html><head><title>'.$title.'</title><link rel="canonical" href="'.$url.'">'
+                .'<meta name="robots" content="index, follow"><meta name="description" content="'.$description.'">'
+                .'</head><body><main><h1>Article title</h1>'.str_repeat('Current public article body. ', 20).'</main></body></html>', 200),
+            'api.indexnow.org/*' => Http::response('', 202),
+        ]);
+        $submitted = $this->indexNowPlan((int) $article->id, true);
+        self::assertSame(1, $submitted['submitted_count']);
+        self::assertSame('provider_accepted', $submitted['items'][0]['state']);
+        self::assertSame('submitted', DB::connection('seo_intel')->table('seo_search_channel_queue_items')->value('execution_state'));
+        self::assertSame(1, DB::connection('seo_intel')->table('seo_search_channel_queue_events')->where('event_type', 'bounded_live_submission_response')->count());
+        Http::assertSentCount(2);
+
+        $secondPlan = app(\App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueuePlanner::class)->plan('indexnow', 'article', 1, $url);
+        self::assertSame(0, $secondPlan['planned_queue_count'], json_encode($secondPlan, JSON_THROW_ON_ERROR));
+
+        $repeated = $this->indexNowPlan((int) $article->id, true);
+        self::assertSame(0, $repeated['submitted_count'], json_encode($repeated, JSON_THROW_ON_ERROR));
+        Http::assertSentCount(2);
+    }
+
+    /** @return array<string, mixed> */
+    private function indexNowPlan(int $articleId, bool $execute = false): array
+    {
+        $output = new BufferedOutput;
+        $exitCode = Artisan::call('articles:indexnow-candidates', [
+            '--article-id' => $articleId,
+            '--execute' => $execute,
+        ], $output);
+        $raw = $output->fetch();
+        self::assertSame(0, $exitCode, $raw);
+        $result = json_decode(trim($raw), true);
+        self::assertIsArray($result, $raw);
+
+        return $result;
+    }
+
+    private function createIndexNowQueueTables(): void
+    {
+        Schema::connection('seo_intel')->create('seo_search_channel_queue_batches', static function ($table): void {
+            $table->id();
+            $table->string('channel', 64);
+            $table->string('status', 64);
+            $table->unsignedInteger('item_count');
+            $table->json('dry_run_report')->nullable();
+            $table->text('approval_note')->nullable();
+            $table->string('created_by', 128)->nullable();
+            $table->string('approved_by', 128)->nullable();
+            $table->timestamp('approved_at')->nullable();
+            $table->timestamps();
+        });
+        Schema::connection('seo_intel')->create('seo_search_channel_queue_items', static function ($table): void {
+            $table->id();
+            $table->unsignedBigInteger('batch_id')->nullable();
+            $table->text('canonical_url');
+            $table->string('locale', 16);
+            $table->string('page_entity_type', 64);
+            $table->string('entity_type', 64)->nullable();
+            $table->string('entity_id', 255)->nullable();
+            $table->string('source_authority', 64);
+            $table->string('source_table', 128)->nullable();
+            $table->string('channel', 64);
+            $table->string('eligibility_state', 64);
+            $table->string('approval_state', 64);
+            $table->string('execution_state', 64);
+            $table->string('indexability_state', 64);
+            $table->string('claim_boundary_state', 64);
+            $table->boolean('private_flow');
+            $table->json('reason_codes')->nullable();
+            $table->timestamp('lastmod')->nullable();
+            $table->char('content_hash', 64)->nullable();
+            $table->char('url_hash', 64);
+            $table->char('idempotency_key', 64)->unique();
+            $table->string('approved_by', 128)->nullable();
+            $table->timestamp('approved_at')->nullable();
+            $table->timestamps();
+        });
+        Schema::connection('seo_intel')->create('seo_search_channel_queue_events', static function ($table): void {
+            $table->id();
+            $table->unsignedBigInteger('queue_item_id')->nullable();
+            $table->unsignedBigInteger('batch_id')->nullable();
+            $table->string('event_type', 96);
+            $table->json('event_payload')->nullable();
+            $table->string('actor_type', 64);
+            $table->string('actor_id', 128)->nullable();
+            $table->timestamp('created_at');
+        });
     }
 
     public function test_unpublish_is_traceable_idempotent_and_unknown_legacy_hash_holds(): void

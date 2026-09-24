@@ -133,6 +133,35 @@ final class SeoIntelSearchChannelBoundedLiveExecutorTest extends TestCase
     }
 
     #[Test]
+    public function verified_article_lane_submits_one_exact_article_without_enabling_generic_live_gates(): void
+    {
+        config(['seo_intel.article_indexnow_auto_enabled' => true]);
+        Http::fake(['api.indexnow.test/*' => Http::response('', 202)]);
+        $url = 'https://fermatmind.com/zh/articles/indexnow-candidate';
+        $id = $this->seedQueueItem([
+            'canonical_url' => $url,
+            'locale' => 'zh-CN',
+            'entity_id' => '123',
+        ]);
+        $executor = app(SearchChannelQueueBoundedLiveExecutor::class);
+
+        $blocked = $executor->submitVerifiedArticle($id, 124, $url);
+        self::assertSame('blocked', $blocked['status']);
+        Http::assertNothingSent();
+
+        $accepted = $executor->submitVerifiedArticle($id, 123, $url);
+        self::assertSame('success', $accepted['status']);
+        self::assertSame(202, $accepted['http_status']);
+        self::assertSame('submitted', DB::connection('seo_intel')->table('seo_search_channel_queue_items')->where('id', $id)->value('execution_state'));
+        self::assertSame('accepted', data_get(json_decode((string) DB::connection('seo_intel')->table('seo_search_channel_queue_events')->where('event_type', 'bounded_live_submission_response')->value('event_payload'), true), 'submission_status'));
+        Http::assertSentCount(1);
+
+        $duplicate = $executor->submitVerifiedArticle($id, 123, $url);
+        self::assertSame('blocked', $duplicate['status']);
+        Http::assertSentCount(1);
+    }
+
+    #[Test]
     public function live_mode_submits_indexnow_and_baidu_only_with_all_live_gates_and_logs_sanitized_events(): void
     {
         config([
