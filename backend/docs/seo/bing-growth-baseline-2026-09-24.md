@@ -92,6 +92,10 @@ Bing Keyword Research 提供了**全网查询需求**线索（2026-06-24 至 202
 
 再次可用时，Bing Keyword Research 在同一 2026-06-24 至 09-21 窗口、中国筛选下显示 `平面设计师`约 316 次、`软件工程师`约 1.9K 次、`心理咨询师`约 8.1K 次**全网关键词曝光**。`平面设计师`的前列样本包括百科、证书/就业与职业介绍内容，公开 `graphic-designers` 中文页与职业介绍意图基本相符：HTTP 200、自指 canonical、`index, follow`，有 9 个其他职业页出链；Career Current 正文含 13 个 blocks、11 条 fact-register 事实，其中中国大陆两条均明确说明缺少精确职业工资分布，不以美国数字代填。故它进入**待 Bing Web 站点曝光/点击验证的单页候选**，不是已胜出的试点。`软件工程师`前列明显混入软考/证书意图，Current manifest 无 `software` slug；`心理咨询师`相关的 `psychologists` 与 `mental-health-counselors` 当前均无公开正文，均暂不进入现有职业页试点。随后 Keyword Research 再次限流，其他查询未完整加载的数字不计入证据。
 
+同一 Bing Keyword Research 窗口与中国筛选下，进一步抽样：`机械工程师`约 2.3K 次**全网关键词曝光**，SERP 前列同时有职业介绍、岗位职责、招聘与证书内容。公开 `mechanical-engineers` 中文页 HTTP 200、自指 canonical、`index, follow`，渲染页面有 5 个其他职业详情出链；Current manifest 标记有公开正文，正文为 `enhanced`、13 个 blocks、5 条事实。五条量化事实均为美国口径，中国薪资模块引用国家统计局并说明口径限制，不能把美国工资当作中国工资。因此列为**待逐页核验的候选**，仍需 Bing Web 站点页面×查询数据、中文入链和竞品内容差距；关键词量不是本站流量或收录证据。
+
+排除或暂缓样本：`护士`约 4.3K 次、`律师`约 7.7K 次中国全网关键词曝光，但 Current 通用 `registered-nurses` 中文页没有公开正文，而 `律师` SERP 前列主要是找律师、咨询及机构，和职业介绍意图不匹配；不能只按需求量纳入试点。`土木工程师`约 60 次且 SERP 混合职业与执业考试意图，优先级低。`建筑师`约 1.6K 次但 SERP 混合职业、注册资格及同名作品，需先拆清意图。`财务分析师`的中国趋势显示数据不足，不能记为零或据此估算需求。以上均为抽样查询，未形成 10–20 页正式试点名单。
+
 公开 HTML 抽查 `accountants-and-auditors`、`data-scientists`、`web-developers` 三页：正确详情路径均为 `/zh/career/jobs/<slug>`，返回 HTTP 200、self canonical、`index, follow`，可见职责/适配、职业区别、AI、薪资及入行等章节。去掉本页锚点后，三页分别链接至 8、8、5 个其他职业详情路径。此检查仅证明公开渲染及部分出链，不证明全部正文主张来源、入链、Bing 抓取或已索引；旧 Bing `web-developers` noindex 快照仍待更新。
 
 三页的中文正文已在 Career Current manifest 对应文件中核实为 `enhanced`、各 13 个 blocks；fact register 分别有 20、11、6 项，均有 source refs。地域边界不同：会计师页含中国大陆与美国事实，数据科学家页含 1 条中国内地事实，其余为美国事实；网页开发页的量化事实全是美国口径，但其中国薪资模块以国家统计局来源说明缺少可安全使用的中国单职业工资分布，并明确不把美国数据替代中国数据。下一步仍需逐条核验来源质量、更新日期和竞品差距，不能仅凭 source refs 数量判定内容充分。
