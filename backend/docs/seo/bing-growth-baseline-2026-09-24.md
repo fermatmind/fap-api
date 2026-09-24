@@ -44,6 +44,8 @@ GA4 事件报告在同一 `cn.bing.com / referral` 会话来源/媒介筛选下�
 
 表中只列有开始用户的入口和最大的缺失值，未列行及不同参数页仍包含在总计中。GA4 [漏斗探索说明](https://support.google.com/analytics/answer/9327974?hl=en)明确该视图按用户的首个合格序列计数；[会话细分说明](https://support.google.com/analytics/answer/9304353?hl=en)限定活动来自匹配会话，但同一用户可能有多个匹配会话。故 38→13→10 证明了**匹配会话集合中的用户事件顺序**，并未证明每一步在**同一会话**发生，更未证明每次 `referral` 都是 Bing Web 自然点击。`(not set)` 的 12 人还要求排查着陆页采集。完整验收仍需 Bing Web 页面点击与可按 `ga_session_id` 连结的逐会话事件证据；不得用 10/13 宣称自然搜索测评完成率。
 
+2026-09-24 20:25 CST 复查 GA4：探索“添加维度”搜索 `会话 ID`、`session`、`ga_session_id` 均无可用会话标识；媒体资源管理页的 BigQuery 关联显示“尚未建立任何关联”。因此现有 GA4 报告与导出路径均不能回溯构建上述逐会话连接，缺口需明确保留，不能把新增 BigQuery 关联当成补回历史原始事件的证据。
+
 Bing 查询、页面、曝光、点击、CTR、平均排名、国家/地区、设备和前后 28 天变化均为 **未取得**；不存在可审计的 Bing Top 20 排名名单。
 
 ## 2. 发现、抓取与收录
@@ -72,6 +74,7 @@ Bing 查询、页面、曝光、点击、CTR、平均排名、国家/地区、�
 - 生产 Fermat Ops 中，已发布且公开可索引的中文文章 `holland-career-interest-test-can-and-cannot-tell-you`（2026-09-05 发布）在只读 SEO Release Status 显示 `BLOCKED_SEARCH_QUEUE_GAP`，IndexNow 与百度队列项均为 `missing`；内容、sitemap/llms 资格和 URL Truth 为成功。展开的 closeout issues 明确列出两条 `search_channel_queue_missing`。这是至少一篇真实已发布文章没有搜索队列项的生产证据；该页另外还有 schema/hreflang 与 HTML smoke 等独立缺口，不能把队列补齐等同于整篇 closeout 通过。现有 `seo-intel:search-channel-queue` 仅可入队且默认写入闸门关闭，`SearchChannelQueueWriteService` 创建 `dry_run` 批次，不产生外部提交。补齐时须在验收后的精确 URL/元数据变更范围内连接入队与 bounded executor，并记录 provider 接受/失败；不能单独启用已退役命令或重提交全站。
 - Bing IndexNow 页面当前显示 `Get Started` 入门页，未给出可核验的提交列表；不能把页面入门状态等同于从未提交。生产 Search Channel Queue 只读聚合显示 IndexNow `submitted` 268 条、`dry_run_ready` 5 条；前者对应的 268 条 provider 响应均为 `accepted`（267 条 HTTP 200、1 条 HTTP 202），最近响应是 2026-07-12，后者最近更新于 2026-07-24。该队列没有近期失败响应，也没有 7 月 12 日后的提交；独立旧表 `seo_indexnow_submissions` 当前 0 行。上述是当前可查两条后端记录路径的范围，不声称覆盖任何仓库外部第三方提交。`accepted` 只表示 provider 收到更新信号，不是已抓取、已索引或排名改善；现阶段没有依据重提交全站 URL。
 - 按页面族聚合，268 条已提交项包括文章 39、ContentPage 2、首页 1、人格 comparison 32、人格 variant 76、Personality Current 116、测试详情 2；5 条待执行项均为文章，没有职业详情页队列项。这只界定现有 IndexNow 记录覆盖，不能据此判断职业页是否被 Bing 发现、抓取或收录。
+- `32903128b` 为 Search Channel Queue 加入 `career_job` 与 `career_runtime_publish_projection` 的资格配置；聚焦测试证实已发布、可索引职业页可对精确 URL 做 IndexNow **规划**，`noindex` 和仅有 Career Current manifest 身份的页面仍被拒绝。该变更没有开启生产写入或 live submission，也没有补齐发布后验收触发器；不能把“可规划”写成已通知或已收录。
 - 对上述中文 RIASEC 文章运行生产只读 `seo-intel:search-channel-queue --dry-run --no-write`，IndexNow planner 返回候选 1、合格 1、计划入队 1、无重复或问题，且写入与外部调用均未尝试。该 URL 的可入队性已有实证；生产缺的是验收后的自动入队与执行接线，以及关闭的 live gates，而不是该页被 planner 判为不合格。此次未创建队列项或调用 IndexNow。
 - Bing Sitemaps 页面显示 `0 rows`；GSC 导入向导也显示 0 个可导入 sitemap。这只说明站长工具当前没有记录，线上公开 sitemap 仍正常返回。未在此扫描中提交 sitemap。
 
