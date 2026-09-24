@@ -51,7 +51,7 @@ Use the highest available authority source. Lower layers can classify or context
 
 1. Backend/CMS/URL Truth: page identity, canonical URL, locale, indexability, publication state, public SEO fields, content ownership, private/public boundaries, search queue eligibility, and controlled CMS operation status.
 2. Backend business truth: current product posture, free test/free complete result availability, assessment families, funnel events, claim boundaries, and business priorities.
-3. `seo_intel` / GSC read model after data-quality gate: query/page metrics only when the relevant gate passes and the artifact is not fixture, mock, stale, incomplete, or unsafe.
+3. First-party search performance after source-specific data-quality checks: `seo_intel` / GSC read model for Google Web; verified Bing Webmaster Tools Search Performance **Web** export for Bing. Keep property, exact dates, search type, country, device, query/page dimensions, and export provenance attached. Bing AI citations and Keyword Research demand are separate signals, never site Web clicks or impressions. Reject fixture, mock, stale, incomplete, or unsafe artifacts.
 4. Opportunity Queue read-only artifacts: sanitized candidates from approved read-only opportunity workflows.
 5. CMS TDK/FAQ gap scanner artifacts: sanitized read-only scanner outputs for public published CMS surfaces.
 6. Runtime QA observations: public HTML, canonical, robots, H1, CTA, internal-link, schema, sitemap, llms, and response observations. These are observations, not authority.
@@ -66,6 +66,8 @@ Allowed input families:
 - `backend_url_truth`: CMS/public API URL identity, canonical state, locale, indexability, page family, publication state, private/public status, and owner resource.
 - `backend_business_truth`: assessment family, free complete result availability, funnel goal, claim scope, supported locale, and priority tier.
 - `gsc_read_model`: gated `seo_intel` rows or sanitized artifacts with impressions, clicks, CTR, average position, query/page aliases, locale, and date.
+- `bing_web_performance`: verified first-party Bing Webmaster Tools Search Performance Web export with property, complete date window, query/page, country/device, clicks, impressions, CTR, average position, and provenance. Mark unavailable fields and processing delays; do not infer them from analytics referrals.
+- `bing_keyword_research_notes`: dated Bing Keyword Research and Chinese SERP intent notes with market and device; these describe all-search demand and competition, not FermatMind Web performance.
 - `opportunity_queue`: sanitized read-only candidates from opportunity queue or opportunity aggregator outputs.
 - `cms_gap_scanners`: sanitized TDK/FAQ/schema/readiness gap artifacts.
 - `cms_inventory`: published articles, topics, test landings, content pages, personality profiles, career pages, and relevant SEO fields.
@@ -99,6 +101,7 @@ Forbidden inputs:
    - Lock locale, page family, assessment family, business goal, time window, allowed artifacts, and forbidden actions.
    - Verify every input family against the source authority hierarchy.
    - Require GSC data-quality gate pass before using GSC metrics as formal evidence.
+   - Require a complete, provenance-bound Bing Search Performance Web export before using Bing site query/page metrics as formal evidence. Keep AI Performance and Keyword Research outside the Web metric series.
    - Treat screenshots, browser observations, manually copied metrics, and LLM notes as context only.
    - Record missing authority in `BLOCKED_OR_UNVERIFIED_ASSUMPTIONS.md`.
 
@@ -110,7 +113,8 @@ Forbidden inputs:
    - Mark query families that require clinical, hiring, admission, salary, IQ-certification, official-affiliation, or guarantee claims as `needs_review` or `blocked`.
 
 3. Query universe construction
-   - Build query families from approved GSC read-model artifacts, CMS inventory, keyword/SERP notes, competitor structural notes, social/context notes when approved, and internal-link/entity gaps.
+   - Build query families from approved Google and Bing Web performance artifacts, CMS inventory, keyword/SERP notes, competitor structural notes, social/context notes when approved, and internal-link/entity gaps.
+   - For the existing daily article slot, compare Google and Bing opportunities in one candidate pool. Keep the current one-article-per-day ceiling; do not create a channel-specific second article. If Bing Web data is still processing, label its site metrics unavailable and use approved Bing keyword/SERP notes only as contextual demand evidence.
    - Classify each query family by locale, market, page family, assessment family, user job, lifecycle stage, and intent layer.
    - Default intent layers: `money`, `explainer`, `scenario`, `entity`, `comparison`, `trust`, and `result_interpretation`.
    - Keep Chinese and English intent separate when SERP shape or user language differs.
