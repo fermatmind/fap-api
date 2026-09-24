@@ -30,6 +30,20 @@ GA4 事件报告在同一 `cn.bing.com / referral` 会话来源/媒介筛选下�
 
 上表事件次数各合计开始 33、完成 15，与精确来源筛选总数一致。不同事件的着陆页统计不能拼成同一用户的有序漏斗，`/take` 会话也不能当作可索引搜索入口。需补的同口径漏斗仍是 `Bing Web 自然搜索 → canonical 入口页 → 开始测评 → 完成测评`：用 Bing Webmaster Tools 的 Web 页面/查询点击校验入口，再用 GA4 同会话标识核对事件顺序。百度统计概况页的 MBTI、RIASEC 全站入口排名不能当成 Bing 赢家。
 
+另在 GA4 探索建立闭合漏斗 `session_start → test_start → test_complete`，应用**会话细分**“带来会话的来源/媒介完全匹配 `cn.bing.com / referral`”，日期同为 2026-08-27 至 2026-09-23，并按“着陆页 + 查询字符串”拆分。漏斗按顺序计**用户**，总计依次为 **38 → 13 → 10**；它与上面的 47/33/15 **事件次数**及 43/13/13 **事件用户数**不是同一计数方法。GA4 探索已命名为 `Bing referral 测评顺序（28天）`。
+
+| GA4 着陆页（保留完整路径，略去参数） | 会话开始用户 | 随后开始用户 | 随后完成用户 |
+| --- | ---: | ---: | ---: |
+| `/zh/tests/holland-career-interest-test-riasec` | 6 | 6 | 4 |
+| `/zh/tests/mbti-personality-test-16-personality-types` | 5 | 3 | 2 |
+| `/zh/personality/infp-t` | 2 | 1 | 1 |
+| RIASEC `/take` 参数页 | 2 | 1 | 1 |
+| 九型 `/take` 参数页（一条序列） | 1 | 1 | 1 |
+| MBTI `/take` 参数页（一条序列） | 1 | 1 | 1 |
+| `(not set)` | 12 | 0 | 0 |
+
+表中只列有开始用户的入口和最大的缺失值，未列行及不同参数页仍包含在总计中。GA4 [漏斗探索说明](https://support.google.com/analytics/answer/9327974?hl=en)明确该视图按用户的首个合格序列计数；[会话细分说明](https://support.google.com/analytics/answer/9304353?hl=en)限定活动来自匹配会话，但同一用户可能有多个匹配会话。故 38→13→10 证明了**匹配会话集合中的用户事件顺序**，并未证明每一步在**同一会话**发生，更未证明每次 `referral` 都是 Bing Web 自然点击。`(not set)` 的 12 人还要求排查着陆页采集。完整验收仍需 Bing Web 页面点击与可按 `ga_session_id` 连结的逐会话事件证据；不得用 10/13 宣称自然搜索测评完成率。
+
 Bing 查询、页面、曝光、点击、CTR、平均排名、国家/地区、设备和前后 28 天变化均为 **未取得**；不存在可审计的 Bing Top 20 排名名单。
 
 ## 2. 发现、抓取与收录
