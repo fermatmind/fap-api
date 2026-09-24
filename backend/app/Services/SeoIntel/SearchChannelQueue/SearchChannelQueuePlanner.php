@@ -100,9 +100,23 @@ final class SearchChannelQueuePlanner
         }
 
         foreach ($rows as $row) {
-            $result = $this->eligibility->evaluate($row);
             $pageEntityType = (string) ($row['page_entity_type'] ?? 'unknown');
             $pageTypeBreakdown[$pageEntityType] = ($pageTypeBreakdown[$pageEntityType] ?? 0) + 1;
+            if ($pageEntityType === 'career_job'
+                && ($canonicalUrl === null || $channel !== 'indexnow' || (string) ($row['canonical_url'] ?? '') !== $canonicalUrl)) {
+                $blocked[] = [
+                    'canonical_url_hash' => hash('sha256', (string) ($row['canonical_url'] ?? '')),
+                    'locale' => (string) ($row['locale'] ?? ''),
+                    'page_entity_type' => $pageEntityType,
+                    'eligibility_state' => 'blocked',
+                    'reason_codes' => ['career_exact_indexnow_target_required'],
+                ];
+                $reasonCodeBreakdown['career_exact_indexnow_target_required'] = ($reasonCodeBreakdown['career_exact_indexnow_target_required'] ?? 0) + 1;
+
+                continue;
+            }
+
+            $result = $this->eligibility->evaluate($row);
             $matchedCandidates[] = $this->matchedCandidate($row, $result);
 
             if (! $result->eligible) {

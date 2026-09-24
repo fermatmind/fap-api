@@ -67,6 +67,10 @@ final class SeoIntelSearchChannelQueueCommand extends Command
             $issues[] = 'existing_active_queue_item';
         }
 
+        if ($pageType === 'career_job' && ($canonicalUrl === null || $channel !== 'indexnow')) {
+            $issues[] = 'career_exact_indexnow_target_required';
+        }
+
         $enqueueConflictBlocked = $enqueue && ($dryRun || $noWrite);
 
         if ($enqueueConflictBlocked) {
@@ -85,7 +89,7 @@ final class SeoIntelSearchChannelQueueCommand extends Command
             $issues[] = 'channel_not_allowed';
         }
 
-        if ($canonicalFilterBlocked || $enqueueConflictBlocked) {
+        if ($canonicalFilterBlocked || $enqueueConflictBlocked || in_array('career_exact_indexnow_target_required', $issues, true)) {
             $status = 'blocked';
         }
 

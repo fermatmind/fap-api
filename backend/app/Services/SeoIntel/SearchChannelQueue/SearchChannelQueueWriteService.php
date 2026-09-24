@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\SeoIntel\SearchChannelQueue;
 
 use Illuminate\Support\Facades\DB;
+use InvalidArgumentException;
 
 final class SearchChannelQueueWriteService
 {
@@ -16,6 +17,14 @@ final class SearchChannelQueueWriteService
      */
     public function write(array $plannedItems): array
     {
+        $careerItems = array_values(array_filter(
+            $plannedItems,
+            static fn (array $item): bool => ($item['page_entity_type'] ?? null) === 'career_job',
+        ));
+        if ($careerItems !== [] && (count($plannedItems) !== 1 || ($careerItems[0]['channel'] ?? null) !== 'indexnow')) {
+            throw new InvalidArgumentException('Career queue writes require one exact IndexNow URL.');
+        }
+
         $connection = DB::connection((string) config('seo_intel.connection', 'seo_intel'));
         $now = now();
         $batchIds = [];

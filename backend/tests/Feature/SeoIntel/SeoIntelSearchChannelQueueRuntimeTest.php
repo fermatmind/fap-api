@@ -174,6 +174,77 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
     }
 
     #[Test]
+    public function career_planning_requires_one_exact_url_and_indexnow_channel(): void
+    {
+        $canonicalUrl = 'https://fermatmind.com/zh/career/jobs/graphic-designers';
+        $this->seedSeoUrl([
+            'canonical_url' => $canonicalUrl,
+            'locale' => 'zh-CN',
+            'page_entity_type' => 'career_job',
+            'entity_id_or_slug' => 'graphic-designers',
+            'cluster' => 'career',
+            'source_authority' => 'career_runtime_publish_projection',
+            'metadata_json' => [
+                'claim_safe' => true,
+                'publication_state' => 'published',
+                'source_table' => 'career_directory_authority',
+            ],
+        ]);
+
+        foreach ([
+            ['--channel' => 'indexnow', '--page-type' => 'career_job'],
+            ['--channel' => 'google_sitemap', '--canonical-url' => $canonicalUrl],
+            ['--canonical-url' => $canonicalUrl],
+        ] as $filter) {
+            $output = $this->runQueueCommand([
+                '--dry-run' => true,
+                '--no-write' => true,
+                '--json' => true,
+                '--limit' => 1,
+                ...$filter,
+            ], expectSuccess: false);
+
+            $this->assertSame(0, $output['planned_queue_count'] ?? null);
+            $this->assertSame(1, data_get($output, 'reason_code_breakdown.career_exact_indexnow_target_required'));
+            $this->assertFalse((bool) ($output['writes_attempted'] ?? true));
+            $this->assertFalse((bool) ($output['external_calls_attempted'] ?? true));
+        }
+
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+    }
+
+    #[Test]
+    public function career_queue_writer_rejects_bulk_and_non_indexnow_items(): void
+    {
+        $writer = app(SearchChannelQueueWriteService::class);
+        $career = $this->plannedQueueItem([
+            'canonical_url' => 'https://fermatmind.com/zh/career/jobs/graphic-designers',
+            'page_entity_type' => 'career_job',
+            'entity_type' => 'career_job',
+            'source_authority' => 'career_runtime_publish_projection',
+        ]);
+
+        foreach ([
+            [$career, $this->plannedQueueItem()],
+            [[...$career, 'channel' => 'baidu_push']],
+        ] as $items) {
+            try {
+                $writer->write($items);
+                $this->fail('Career queue scope must be rejected before a write.');
+            } catch (\InvalidArgumentException $exception) {
+                $this->assertSame('Career queue writes require one exact IndexNow URL.', $exception->getMessage());
+            }
+        }
+
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_batches')->count());
+
+        $written = $writer->write([$career]);
+        $this->assertSame(1, $written['written_items'] ?? null);
+        $this->assertSame(1, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+    }
+
+    #[Test]
     public function eligible_backend_cms_article_url_can_be_written_to_queue_without_live_submission(): void
     {
         config([
