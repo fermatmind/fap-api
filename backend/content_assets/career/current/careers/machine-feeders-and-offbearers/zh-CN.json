@@ -2,19 +2,34 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:cn-gap": {
+      "fact:cn-mfg-nonprivate-wage": {
         "status": "pending_mapping"
       },
-      "fact:employment": {
+      "fact:cn-mfg-private-wage": {
         "status": "pending_mapping"
       },
-      "fact:identity": {
+      "fact:cn-national-nonprivate-wage": {
         "status": "pending_mapping"
       },
-      "fact:wage": {
+      "fact:cn-transport-nonprivate-wage": {
         "status": "pending_mapping"
       },
-      "fact:wage-boundary": {
+      "fact:cn-transport-private-wage": {
+        "status": "pending_mapping"
+      },
+      "fact:cn-wage-gap": {
+        "status": "pending_mapping"
+      },
+      "fact:us-employment-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:us-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:us-openings": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-median": {
         "status": "pending_mapping"
       },
       "item:machine-feeders-and-offbearers.ai-impact.ai-impact-table.1": {
@@ -134,22 +149,19 @@
       "item:machine-feeders-and-offbearers.path.career-path-block.8": {
         "status": "pending_mapping"
       },
-      "item:machine-feeders-and-offbearers.profile.career-quick-answers-block.1": {
+      "item:machine-feeders-and-offbearers.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
-      "item:machine-feeders-and-offbearers.profile.career-quick-answers-block.2": {
+      "item:machine-feeders-and-offbearers.profile.career-quick-answers-block.9": {
         "status": "pending_mapping"
       },
       "item:machine-feeders-and-offbearers.profile.definition-block.1": {
         "status": "pending_mapping"
       },
-      "item:machine-feeders-and-offbearers.profile.definition-block.2": {
+      "item:machine-feeders-and-offbearers.profile.definition-block.10": {
         "status": "pending_mapping"
       },
-      "item:machine-feeders-and-offbearers.profile.onet-structured-fields-block.1": {
-        "status": "pending_mapping"
-      },
-      "item:machine-feeders-and-offbearers.profile.responsibilities-block.1": {
+      "item:machine-feeders-and-offbearers.profile.onet-structured-fields-block.7": {
         "status": "pending_mapping"
       },
       "item:machine-feeders-and-offbearers.profile.responsibilities-block.2": {
@@ -158,10 +170,13 @@
       "item:machine-feeders-and-offbearers.profile.responsibilities-block.3": {
         "status": "pending_mapping"
       },
-      "item:machine-feeders-and-offbearers.profile.work-context-block.1": {
+      "item:machine-feeders-and-offbearers.profile.responsibilities-block.4": {
         "status": "pending_mapping"
       },
-      "item:machine-feeders-and-offbearers.profile.work-context-block.2": {
+      "item:machine-feeders-and-offbearers.profile.work-context-block.5": {
+        "status": "pending_mapping"
+      },
+      "item:machine-feeders-and-offbearers.profile.work-context-block.6": {
         "status": "pending_mapping"
       },
       "item:machine-feeders-and-offbearers.quick-decision.fermat-decision-card.1": {
@@ -7215,12 +7230,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "直接判断：机器送料工下料工把正确材料按工单送入设备，并把产出、缺陷和数量准确移出与记录。"
+              "以下判断针对机器送料工下料工的现场设备操作方式，不预测录用、资格、授权或合同结果。"
             ]
           },
           "id": "machine-feeders-and-offbearers.quick-decision.fermat-decision-card.1",
           "source_refs": [
-            "editorial"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7229,40 +7244,40 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "适合信号：能在重复节拍下持续核批次、规格、数量和设备状态。"
+              "机器送料工下料工的核心是按规程完成设备的上料与取料并保证数量、质量与安全：检查物料与产品缺陷、记录产量与运行数据、启停与调整设备、称重计量、标识物料、清洁维护设备与作业区，并用手工工具、搬运装置与工业车辆完成上料、转运、包装与堆码。"
             ]
           },
           "id": "machine-feeders-and-offbearers.quick-decision.fermat-decision-card.2",
           "source_refs": [
-            "editorial"
+            "onet-tasks"
           ],
           "type": "prose"
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "谨慎条件：若容易越过防护、带故障操作或为赶产量省略记录，应先做纸面分流练习。"
+              "完全虚构的任务包：给出一份虚构的产线送取料情境（含 1 份物料检查清单、1 组产量记录与 1 项设备异常），要求在 60 分钟内写出上料取料步骤、检查与记录要点、设备异常停止条件与上报路径；不使用真实企业、产品或人员数据。"
             ]
           },
           "id": "machine-feeders-and-offbearers.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "editorial"
+            "onet-tasks"
           ],
           "type": "prose"
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "安全试做只用四条虚构工单，不接近或操作真实设备。"
+              "样本输出与反思：检查是否先核对作业指导与安全条件、是否按规格检查并如实记录、是否在设备异常时先停止再上报；再问自己能否长时间重复操作仍保持专注与准确，以及是否愿意为产量记录与安全处置承担责任。"
             ]
           },
           "id": "machine-feeders-and-offbearers.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "editorial"
+            "onet-tasks"
           ],
           "type": "prose"
         }
@@ -7279,15 +7294,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "美国O*NET 2026年机器送料工下料工53-7063.00精确职业数据：本页覆盖为自动设备或他人看管的设备送料与下料。"
+              "本页机器送料工下料工指 O*NET 53-7063.00：将物料送入由其他工人操作的或自动化的机器与设备，或从中取出物料。工作包括检查物料与产品缺陷并对标规格、记录产量与运行数据、启停与调整设备、称重计量、按指令标识物料、清洁维护设备与作业区、用手工工具与搬运装置上料与取料、用工业车辆或手推车转运物料、固定包装与堆码，以及开闭输送带闸门和按工艺添加化学品或配料。工作以重复性体力操作、设备监控与团队协作在现场完成为主。本页不含输送机操作员与看护员、工业卡车操作员、包装工、生产辅助工与团队装配工等相邻岗位。"
             ]
           },
-          "fact_refs": [
-            "identity"
-          ],
           "id": "machine-feeders-and-offbearers.profile.definition-block.1",
           "source_refs": [
-            "onet"
+            "onet-details",
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7296,27 +7309,12 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "记录输入可包括批准工单、批次规格、材料与设备状态、容器、标签和交接要求。"
-            ]
-          },
-          "id": "machine-feeders-and-offbearers.profile.responsibilities-block.1",
-          "source_refs": [
-            "editorial"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "可把官方任务整理为检查缺陷、称量标记、送料下料、记录数量，并在授权范围内控制设备。"
+              "投入对象：待加工的物料与产品、由他人操作或自动化的机器与设备、作业指导与规格、计量与检查工具、手工工具与搬运装置（手推车、工业车辆）、输送带与闸门、包装与堆码材料、生产记录表单。"
             ]
           },
           "id": "machine-feeders-and-offbearers.profile.responsibilities-block.2",
           "source_refs": [
-            "editorial",
-            "onet"
+            "onet-tasks"
           ],
           "type": "list"
         },
@@ -7325,12 +7323,26 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "可复核产出包括批次供料、分类产出、数量与缺陷记录、停机和交接信息。"
+              "可检查产出：经检查的物料与产品、准确的产量与运行记录、按规格的计量与标识、上料取料与转运记录、设备清洁维护记录、包装堆码结果与异常上报记录。"
             ]
           },
           "id": "machine-feeders-and-offbearers.profile.responsibilities-block.3",
           "source_refs": [
-            "editorial"
+            "onet-tasks"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "完整工作流程：核对作业指导与安全条件 → 检查物料并准备工位 → 按规程上料与启停设备 → 监控运行并取样检查 → 取料、称重与标识 → 转运、包装与堆码 → 清洁维护并记录产量与异常。"
+            ]
+          },
+          "id": "machine-feeders-and-offbearers.profile.responsibilities-block.4",
+          "source_refs": [
+            "onet-tasks"
           ],
           "type": "list"
         },
@@ -7339,12 +7351,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "关键判断记录应区分材料匹配、设备可用、防护状态和停手升级点。"
+              "关键判断：物料或产品是否符合规格、设备运行是否正常、何时需要停机与上报、如何在保证安全前提下保持节拍，以及哪些异常必须停止作业而不是继续处理。"
             ]
           },
-          "id": "machine-feeders-and-offbearers.profile.work-context-block.1",
+          "id": "machine-feeders-and-offbearers.profile.work-context-block.5",
           "source_refs": [
-            "editorial"
+            "onet-context"
           ],
           "type": "prose"
         },
@@ -7353,26 +7365,28 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "流程可整理为：核工单与现场→确认材料和容器→送料或下料→检查记录→交接异常。"
+              "环境与节奏：以在制造或仓储现场进行重复性体力操作为主，需团队协作与设备监控；多数受访者报告每周工时约 40 小时、决策自由度有限、需经常弯腰或重复动作，并每天接触危险设备，须按安全规程作业。"
             ]
           },
-          "id": "machine-feeders-and-offbearers.profile.work-context-block.2",
+          "id": "machine-feeders-and-offbearers.profile.work-context-block.6",
           "source_refs": [
-            "editorial"
+            "onet-context"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "求职时建议核实雇主实际使用的搬运、称量、标签、容器、生产记录和现场控制装置。"
+              "研究输入：O*NET 53-7063.00 的职业身份、任务、工作活动、工作情境、技能与知识、兴趣代码、教育与 Job Zone 信息；该页工资、就业与行业数据为本职业口径，研究结论不据此推定中国大陆的资格、工资或就业口径。"
             ]
           },
-          "id": "machine-feeders-and-offbearers.profile.onet-structured-fields-block.1",
+          "id": "machine-feeders-and-offbearers.profile.onet-structured-fields-block.7",
           "source_refs": [
-            "editorial"
+            "onet-details",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -7381,12 +7395,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "交接记录可区分设备操作、班组、质量、维修、仓储和安全责任接口；实际边界按雇主流程核实。"
+              "先核对的内容：作业指导与规格、设备启停与安全规程、物料与产品检查标准、计量与记录要求、危险设备与防护要求，以及异常停止与上报路径。"
             ]
           },
-          "id": "machine-feeders-and-offbearers.profile.career-quick-answers-block.1",
+          "id": "machine-feeders-and-offbearers.profile.career-quick-answers-block.8",
           "source_refs": [
-            "editorial"
+            "onet-tasks"
           ],
           "type": "prose"
         },
@@ -7395,12 +7409,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "质量记录应使批次、规格、数量、缺陷、容器、标签、设备状态和交接可追溯。"
+              "工作闭环：从核对作业指导与检查物料开始，经过上料与设备启停、运行监控与取样、取料称重与标识、转运包装与堆码，到清洁维护与记录；任一安全条件或设备状态异常未确认前不继续作业。"
             ]
           },
-          "id": "machine-feeders-and-offbearers.profile.career-quick-answers-block.2",
+          "id": "machine-feeders-and-offbearers.profile.career-quick-answers-block.9",
           "source_refs": [
-            "editorial"
+            "onet-tasks"
           ],
           "type": "prose"
         },
@@ -7409,14 +7423,15 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "边界记录应明确不绕过护罩、不清堵、不解除隔离，也不在未授权时启动或调整设备。"
+              "相邻职责边界：本页只覆盖机器送料工下料工；输送机操作员与看护员负责输送系统运行、工业卡车操作员负责车辆搬运、包装工负责手工包装、生产辅助工负责现场辅助、团队装配工负责装配，设备操作与最终责任不得与本页互换。"
             ]
           },
-          "id": "machine-feeders-and-offbearers.profile.definition-block.2",
+          "id": "machine-feeders-and-offbearers.profile.definition-block.10",
           "source_refs": [
-            "editorial"
+            "onet-details"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         }
       ]
     },
@@ -7432,45 +7447,40 @@
           "data": {
             "entries": [
               {
-                "entity": "industrial-machinery-mechanics",
-                "id": "machine-feeders-and-offbearers.adjacent.1",
+                "entity": "conveyor-operators-and-tenders",
+                "id": "machine-feeders-and-offbearers.parity.adjacent.1",
                 "relation": "adjacent-career",
-                "url": "/zh/career/jobs/industrial-machinery-mechanics"
+                "url": "/zh/career/jobs/conveyor-operators-and-tenders"
               },
               {
-                "entity": "rolling-machine-setters-operators-and-tenders-metal-and-plastic",
-                "id": "machine-feeders-and-offbearers.adjacent.2",
+                "entity": "industrial-truck-and-tractor-operators",
+                "id": "machine-feeders-and-offbearers.parity.adjacent.2",
                 "relation": "adjacent-career",
-                "url": "/zh/career/jobs/rolling-machine-setters-operators-and-tenders-metal-and-plastic"
+                "url": "/zh/career/jobs/industrial-truck-and-tractor-operators"
               },
               {
-                "entity": "cutting-punching-and-press-machine-setters-operators-and-tenders-metal-and-plastic",
-                "id": "machine-feeders-and-offbearers.adjacent.3",
+                "entity": "packers-and-packagers-hand",
+                "id": "machine-feeders-and-offbearers.parity.adjacent.3",
                 "relation": "adjacent-career",
-                "url": "/zh/career/jobs/cutting-punching-and-press-machine-setters-operators-and-tenders-metal-and-plastic"
+                "url": "/zh/career/jobs/packers-and-packagers-hand"
               },
               {
-                "entity": "grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
-                "id": "machine-feeders-and-offbearers.adjacent.4",
+                "entity": "helpers-production-workers",
+                "id": "machine-feeders-and-offbearers.parity.adjacent.4",
                 "relation": "adjacent-career",
-                "url": "/zh/career/jobs/grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic"
+                "url": "/zh/career/jobs/helpers-production-workers"
               },
               {
-                "entity": "milling-and-planing-machine-setters-operators-and-tenders-metal-and-plastic",
-                "id": "machine-feeders-and-offbearers.adjacent.5",
+                "entity": "team-assemblers",
+                "id": "machine-feeders-and-offbearers.parity.adjacent.5",
                 "relation": "adjacent-career",
-                "url": "/zh/career/jobs/milling-and-planing-machine-setters-operators-and-tenders-metal-and-plastic"
+                "url": "/zh/career/jobs/team-assemblers"
               }
             ]
           },
           "id": "machine-feeders-and-offbearers.direction-comparison.adjacent-career-comparison-table.1",
           "source_refs": [
-            "adj-cut",
-            "adj-grind",
-            "adj-mech",
-            "adj-mill",
-            "adj-roll",
-            "onet"
+            "onet-summary"
           ],
           "type": "links"
         },
@@ -7479,17 +7489,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "机械维修工诊断并修理设备；送料下料工保持材料进出和记录。"
+              "输送机操作员与看护员负责输送系统的运行与看护；机器送料工下料工更聚焦单机或产线的上料、取料与物料处理，两者在产线常协作但职责不同。"
             ]
           },
           "id": "machine-feeders-and-offbearers.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "adj-cut",
-            "adj-grind",
-            "adj-mech",
-            "adj-mill",
-            "adj-roll",
-            "onet"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7498,17 +7503,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "轧制岗位设定或操作轧辊设备；送料下料工不负责特定成形工艺参数。"
+              "工业卡车操作员负责用车辆完成物料搬运与堆垛；机器送料工下料工以设备上料取料、检查与记录为核心，车辆操作只是其搬运环节之一。"
             ]
           },
           "id": "machine-feeders-and-offbearers.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "adj-cut",
-            "adj-grind",
-            "adj-mech",
-            "adj-mill",
-            "adj-roll",
-            "onet"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7517,17 +7517,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "切割冲压岗位设定或操作切割与压力设备；送料下料工的核心是材料转移。"
+              "包装工、手工以手工包装与封装为核心；机器送料工下料工以设备上料取料与物料处理为主，包装与堆码只是其产出环节之一。"
             ]
           },
           "id": "machine-feeders-and-offbearers.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "adj-cut",
-            "adj-grind",
-            "adj-mech",
-            "adj-mill",
-            "adj-roll",
-            "onet"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7536,17 +7531,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "磨削抛光岗位控制表面加工；送料下料工不自动承担砂轮和尺寸加工责任。"
+              "生产辅助工负责现场清理、搬运与辅助作业，团队装配工负责部件装配；机器送料工下料工以机器与设备的上料取料及运行监控为核心，职责与产出不同。"
             ]
           },
           "id": "machine-feeders-and-offbearers.direction-comparison.adjacent-career-comparison-table.5",
           "source_refs": [
-            "adj-cut",
-            "adj-grind",
-            "adj-mech",
-            "adj-mill",
-            "adj-roll",
-            "onet"
+            "onet-summary"
           ],
           "type": "prose"
         }
@@ -7563,12 +7553,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "AI可辅助核对工单、提示字段缺失和汇总产量。"
+              "机器送料工下料工的 AI 影响边界"
             ]
           },
           "id": "machine-feeders-and-offbearers.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "editorial"
+            "onet-details",
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -7577,12 +7568,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "采用前要限定设备数据、工单版本、访问权限、人工复核和停用流程。"
+              "视觉检测、计量与设备监控工具可辅助标记物料缺陷与设备异常，但上下料操作、设备启停、安全停止与质量处置仍由机器送料工下料工按规程负责。"
             ]
           },
           "id": "machine-feeders-and-offbearers.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "editorial"
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -7591,12 +7582,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "生产记录可能包含客户、批次和设备敏感信息，导出与保留范围必须明确。"
+              "职业来源说明该职业实际处理的任务与对象（物料与产品、机器与设备、计量与检查工具、搬运装置、生产记录与安全规程）；工具能力、组织采用与岗位结果分别记录，不用工资或就业数据替代 AI 证据。"
             ]
           },
           "id": "machine-feeders-and-offbearers.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "editorial"
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -7605,12 +7596,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "人类现场复核材料、护罩、急停、隔离、容器和通道。"
+              "不同环节受影响不同：检查、计量与记录汇总更易自动化，但上下料操作、设备处置与现场安全仍由人负责。"
             ]
           },
           "id": "machine-feeders-and-offbearers.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "editorial"
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -7619,12 +7610,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "设备启动、清堵、调整、隔离解除和异常处置由有权人员决定。"
+              "人的控制点是确认作业指导与安全条件、按规格检查与记录、在设备或物料异常时停止并上报，并对产量与安全记录承担责任。"
             ]
           },
           "id": "machine-feeders-and-offbearers.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "editorial"
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -7633,12 +7624,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "错误批次、遗漏缺陷或错误启动提示可能造成伤害、报废或混料。"
+              "先用完全虚构的产线情境做离线演练，记录检查、上料取料、设备异常与上报边界，不依赖未经核实的自动检测替代人工确认。"
             ]
           },
           "id": "machine-feeders-and-offbearers.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "editorial"
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -7647,12 +7638,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务辅助、设备自动化与净就业变化是不同问题，不能相互替代。"
+              "编辑建议：工具可辅助缺陷标记、计量与记录汇总；当前资料不证明制造与仓储企业普遍采用这些系统。"
             ]
           },
           "id": "machine-feeders-and-offbearers.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "editorial"
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -7661,12 +7652,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先用虚构工单测试提示与记录，不把生成结果连接真实设备。"
+              "以作业指导、安全规程与质量要求为准，保留人工确认与记录。"
             ]
           },
           "id": "machine-feeders-and-offbearers.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "editorial"
+            "internal-rubric"
           ],
           "type": "prose"
         }
@@ -7683,15 +7674,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆2025年行业代理资料边界：国家统计局材料提供行业或人员类别工资，本次未建立全国机器送料工下料工单职业工资分布。"
+              "中国大陆没有单列本职业的公开职业工资：国家统计局按行业门类发布城镇单位就业人员年平均工资，机器送料工下料工主要计入制造业与交通运输、仓储和邮政业等行业，行业平均不能替代本职业工资。"
             ]
           },
           "fact_refs": [
-            "cn-gap"
+            "cn-mfg-nonprivate-wage"
           ],
           "id": "machine-feeders-and-offbearers.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs"
+            "nbs-wages"
           ],
           "type": "prose"
         },
@@ -7700,12 +7691,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业代理资料不能当作该职业个人中位数。"
+              "口径说明：国家统计局 2025 年行业门类就业人员年平均工资，制造业城镇非私营单位为 {{fact:cn-mfg-nonprivate-wage}}、城镇私营单位为 {{fact:cn-mfg-private-wage}}；交通运输、仓储和邮政业城镇非私营单位为 {{fact:cn-transport-nonprivate-wage}}、城镇私营单位为 {{fact:cn-transport-private-wage}}；全国城镇非私营单位合计为 {{fact:cn-national-nonprivate-wage}}。均为行业口径，不等于本职业中位数或起薪。"
             ]
           },
+          "fact_refs": [
+            "cn-mfg-private-wage"
+          ],
           "id": "machine-feeders-and-offbearers.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "editorial"
+            "nbs-wages"
           ],
           "type": "prose"
         },
@@ -7714,12 +7708,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "因此中国精确职业工资暂无可安全使用的数据，不展示起薪、到手收入或分位数。"
+              "类别边界：人力资源社会保障部企业薪酬调查信息按职业/岗位分类发布，可用于查询相关生产与仓储岗位薪酬，但本页未取得与 O*NET 53-7063.00 精确对应的条目，不作为本职业全国中位数；具体以主管部门发布为准。"
             ]
           },
+          "fact_refs": [
+            "cn-transport-nonprivate-wage"
+          ],
           "id": "machine-feeders-and-offbearers.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "editorial"
+            "mohrss-wage"
           ],
           "type": "prose"
         },
@@ -7728,12 +7725,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "求职比较建议记录城市、行业、班次、工时、合同、津贴、统计期间和样本量。"
+              "证据不足：未取得中国大陆机器送料工下料工对应的全国职业工资中位数、统计期与口径；本页仅展示行业代理并标明其为行业口径，不使用代理数字或美国数字填补。"
             ]
           },
+          "fact_refs": [
+            "cn-transport-private-wage"
+          ],
           "id": "machine-feeders-and-offbearers.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "editorial"
+            "nbs-wages"
           ],
           "type": "prose"
         }
@@ -7750,15 +7750,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国2025年机器送料工下料工53-7063.00精确职业数据：年薪中位数41,220美元、时薪中位数19.82美元。"
+              "美国机器送料工下料工薪资与就业口径（本职业 53-7063.00）"
             ]
           },
           "fact_refs": [
-            "wage"
+            "us-wage-median"
           ],
           "id": "machine-feeders-and-offbearers.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "wage"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -7767,15 +7767,18 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "在同一2025年美国机器送料工下料工精确职业数据中，年薪和时薪表达同一中位数。"
+              "O*NET 该页显示 2025 年 BLS OEWS 年薪中位数为 41,220 美元（约 19.82 美元/小时）；就业方面 2024 年约 46,500 人、2024—2034 年预计下降（-1% 或更低）、期间职位空缺约 4,700 个。该页未展示分位工资。以上为美国全国口径且属本职业 53-7063.00，就业下降为统计预测，不等于个人就业结果。"
             ]
           },
           "fact_refs": [
-            "wage"
+            "us-wage-median",
+            "us-employment-2024",
+            "us-growth",
+            "us-openings"
           ],
           "id": "machine-feeders-and-offbearers.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "wage"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -7784,15 +7787,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "在同一2025年美国机器送料工下料工精确职业数据中，年薪第10分位32,220美元、第90分位58,160美元。"
+              "工资统计位置：以上为美国全国口径且属本职业 53-7063.00；中位数不代表起薪或个人到手收入，且未披露分位。"
             ]
           },
           "fact_refs": [
-            "wage-boundary"
+            "us-wage-median"
           ],
           "id": "machine-feeders-and-offbearers.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "wage"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -7801,30 +7804,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "这些数据不是中国工资、个人起薪、到手收入或录用报价。"
-            ]
-          },
-          "id": "machine-feeders-and-offbearers.us-salary.career-snapshot-secondary-locale.4",
-          "source_refs": [
-            "editorial"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "data": {
-            "paragraphs": [
-              "比较这组2025年美国精确职业数据时，应保持年薪或时薪口径一致。"
+              "怎样理解这些位置：O*NET 该页只展示中位数，不展示分位；中位数不是新手或资深等级。就业规模与下降预测是职业统计，须与个人机会分开解释，不据此推断个人失业。"
             ]
           },
           "fact_refs": [
-            "wage",
-            "wage-boundary"
+            "us-wage-median"
           ],
-          "id": "machine-feeders-and-offbearers.us-salary.career-snapshot-secondary-locale.5",
+          "id": "machine-feeders-and-offbearers.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "wage"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -7833,12 +7821,33 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "比较岗位时建议记录班次、加班、行业、地区、计量口径和总报酬构成。"
+              "行业分布与局限：该页 2024 年主要行业为 Manufacturing 与 Transportation and Warehousing；行业分布是雇主场景信号，不是需求预测。"
             ]
           },
+          "fact_refs": [
+            "us-employment-2024"
+          ],
+          "id": "machine-feeders-and-offbearers.us-salary.career-snapshot-secondary-locale.5",
+          "source_refs": [
+            "onet-industry"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "data": {
+            "paragraphs": [
+              "规模与口径提示：该职业 2024 年就业约 46,500 人且预计下降，引用时须标明年份、覆盖范围与本职业口径，且中位数与增长预测不能跨市场拼接。"
+            ]
+          },
+          "fact_refs": [
+            "us-employment-2024",
+            "us-growth"
+          ],
           "id": "machine-feeders-and-offbearers.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "editorial"
+            "onet-trends"
           ],
           "type": "prose"
         }
@@ -7855,12 +7864,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "能按工单核批次、规格和数量。"
+              "适配信号：先看可观察的工作行为"
             ]
           },
           "id": "machine-feeders-and-offbearers.fit.riasec-fit-block.1",
           "source_refs": [
-            "editorial"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7869,12 +7878,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "能识别缺陷并保持原始状态供复核。"
+              "判断是否适合，先看能否长时间重复操作仍保持专注与准确、能否按规程检查与记录、能否在设备异常时先停止再上报，以及是否愿意在现场按安全要求作业；RIASEC 等工具只能提出假设，不能替代真实任务体验。"
             ]
           },
           "id": "machine-feeders-and-offbearers.fit.riasec-fit-block.2",
           "source_refs": [
-            "editorial"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7883,12 +7892,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "能在重复动作中持续准确记录。"
+              "积极信号：能按标准核对物料与规格、能如实记录产量与异常、能配合团队并服从安全规程、能在重复工作中保持稳定产出。"
             ]
           },
           "id": "machine-feeders-and-offbearers.fit.riasec-fit-block.3",
           "source_refs": [
-            "editorial"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7897,12 +7906,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "能在防护、隔离或设备状态不清时停手。"
+              "谨慎条件：难以长时间重复操作、不愿核对规格与记录、倾向在设备异常时继续作业，或无法遵循安全规程与穿戴防护的人需谨慎。"
             ]
           },
           "id": "machine-feeders-and-offbearers.fit.riasec-fit-block.4",
           "source_refs": [
-            "editorial"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7911,12 +7920,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "若喜欢体力活动但厌恶检查，应先用样本验证。"
+              "试验动作：用完全虚构的产线情境，完成一次物料检查、上料取料步骤、产量记录、设备异常停止与上报演练，请他人按记录复核。"
             ]
           },
           "id": "machine-feeders-and-offbearers.fit.riasec-fit-block.5",
           "source_refs": [
-            "editorial"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7925,12 +7934,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "若为赶节拍容易越过设备边界，应比较风险更低的任务。"
+              "RIASEC 兴趣代码为 RC（现实型—常规型）：偏动手操作设备与按规程完成重复任务；相关标签只描述活动偏好，不能决定胜任或资格。"
             ]
           },
           "id": "machine-feeders-and-offbearers.fit.riasec-fit-block.6",
           "source_refs": [
-            "editorial"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7939,26 +7948,26 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "站立、搬运、噪声与重复动作需要真实体验和健康评估。"
+              "大五等通用人格量表不提供本职业的岗位证据，只能用于自我反思；应结合真实的上料取料、检查记录与安全体验继续核对。"
             ]
           },
           "id": "machine-feeders-and-offbearers.fit.riasec-fit-block.7",
           "source_refs": [
-            "editorial"
+            "onet-details"
           ],
           "type": "prose"
         },
         {
           "availability": "available",
-          "copy_key": "career.item.riasec-fit-block",
+          "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣量表只用于提问，最终看样本、训练与真实绩效。"
+              "MBTI、九型人格等类型工具不能决定胜任或资格，只能用于自我反思。"
             ]
           },
           "id": "machine-feeders-and-offbearers.fit.riasec-fit-block.8",
           "source_refs": [
-            "editorial"
+            "onet-details"
           ],
           "type": "prose"
         }
@@ -7975,12 +7984,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "护罩、急停、隔离或授权不清时，不接近危险区也不启动设备。"
+              "设备与机械伤害风险"
             ]
           },
           "id": "machine-feeders-and-offbearers.risk.career-risk-cards.1",
           "source_refs": [
-            "editorial"
+            "onet-tasks"
           ],
           "type": "prose"
         },
@@ -7989,12 +7998,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "材料批次、规格、容器或标签不一致时，暂停送料并隔离待确认物。"
+              "物料与产品混料风险"
             ]
           },
           "id": "machine-feeders-and-offbearers.risk.career-risk-cards.2",
           "source_refs": [
-            "editorial"
+            "onet-tasks"
           ],
           "type": "prose"
         },
@@ -8003,12 +8012,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "发现卡料、异常声响、泄漏、粉尘或通道受阻时，保持现场并升级。"
+              "记录与数量差异风险"
             ]
           },
           "id": "machine-feeders-and-offbearers.risk.career-risk-cards.3",
           "source_refs": [
-            "editorial"
+            "onet-tasks"
           ],
           "type": "prose"
         },
@@ -8017,12 +8026,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "不要用手、工具或身体进入危险区域清堵，也不替维修解除隔离。"
+              "重复性劳损风险"
             ]
           },
           "id": "machine-feeders-and-offbearers.risk.career-risk-cards.4",
           "source_refs": [
-            "editorial"
+            "onet-context"
           ],
           "type": "prose"
         },
@@ -8031,12 +8040,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "共同升级规则：记录设备、批次、时间、状态和人员位置，交给班组长、维修或安全责任人。"
+              "危险环境暴露风险"
             ]
           },
           "id": "machine-feeders-and-offbearers.risk.career-risk-cards.5",
           "source_refs": [
-            "editorial"
+            "onet-context"
           ],
           "type": "prose"
         }
@@ -8053,12 +8062,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入口可从物料核对、标记、受监督送料下料、记录与整理开始。"
+              "入行路径与能力阶段"
             ]
           },
           "id": "machine-feeders-and-offbearers.path.career-path-block.1",
           "source_refs": [
-            "editorial"
+            "onet-education",
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -8067,12 +8077,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "雇主证据应展示工单核对、缺陷分流、数量记录、停机边界和交接。"
+              "美国侧该职业属 Job Zone 1-2（很少到一些准备），通常需要高中文凭或同等学力（部分岗位不作要求），岗位培训从几天到一年不等；具体要求按雇主与行业核对。"
             ]
           },
           "id": "machine-feeders-and-offbearers.path.career-path-block.2",
           "source_refs": [
-            "editorial"
+            "onet-education"
           ],
           "type": "prose"
         },
@@ -8081,12 +8091,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "虚构工单：A批次规格均匹配且设备停机交付；B护罩状态未知；C标签与工单不一致；D记录缺材料重量。"
+              "美国：以现场岗位培训与在岗学习为主，安全培训与操作资格按雇主与设备要求确定。中国大陆：无与该 O*NET 精确对应的统一职业资格，岗位多按雇主与行业要求确定，须分别核对。"
             ]
           },
           "id": "machine-feeders-and-offbearers.path.career-path-block.3",
           "source_refs": [
-            "editorial"
+            "onet-education"
           ],
           "type": "prose"
         },
@@ -8095,12 +8105,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "规则：全部字段和安全交付状态齐全才进入纸面排程；护罩未知立即停；规格冲突隔离；记录缺失进入信息补齐队列。"
+              "培训证明、设备操作授权与安全资格是不同状态：内部培训不自动授予特种设备操作资格；须按雇主与法规要求取得相应授权并遵守防护规定。"
             ]
           },
           "id": "machine-feeders-and-offbearers.path.career-path-block.4",
           "source_refs": [
-            "editorial"
+            "onet-education"
           ],
           "type": "prose"
         },
@@ -8109,12 +8119,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立推演：A进入纸面排程，B停机升级，C隔离，D进入信息补齐队列；四条总数守恒。"
+              "入口阶段：在监督下练习物料检查、上料取料、计量记录与设备清洁维护，学习作业指导与安全规程并保留过程记录。"
             ]
           },
           "id": "machine-feeders-and-offbearers.path.career-path-block.5",
           "source_refs": [
-            "editorial"
+            "onet-education"
           ],
           "type": "prose"
         },
@@ -8123,12 +8133,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "可用同一虚构材料分步练习核对、分流、记录、交接与复盘；七日只是建议节奏，不是能力或录用保证。"
+              "展示证据：用一份可复核的作业记录说明（含检查、上料取料、产量与异常处置），展示按规程与安全要求稳定产出的能力。"
             ]
           },
           "id": "machine-feeders-and-offbearers.path.career-path-block.6",
           "source_refs": [
-            "editorial"
+            "onet-education"
           ],
           "type": "prose"
         },
@@ -8137,12 +8147,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "课程和岗位名称不授予启动、清堵、检修或解除隔离权限。"
+              "下一步：核对目标雇主的作业指导、设备操作授权与安全规程，并在受监督的真实产线中验证检查、记录与异常处置能力。"
             ]
           },
           "id": "machine-feeders-and-offbearers.path.career-path-block.7",
           "source_refs": [
-            "editorial"
+            "onet-education"
           ],
           "type": "prose"
         },
@@ -8151,12 +8161,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "成长从准确搬运与记录，推进到质量抽查和流程改善，不承诺固定晋升年限。"
+              "向更高责任过渡：积累经验后可负责多机台或产线协调、带教新人并参与设备与流程改进，或转向设备维护、质量检查与仓储管理方向。"
             ]
           },
           "id": "machine-feeders-and-offbearers.path.career-path-block.8",
           "source_refs": [
-            "editorial"
+            "onet-summary"
           ],
           "type": "prose"
         }
@@ -8173,15 +8183,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国2024—2034年机器送料工下料工53-7063.00精确职业数据：就业由46,500人预计降至40,400人，下降13%。"
+              "市场信号与转型方向"
             ]
           },
-          "fact_refs": [
-            "employment"
-          ],
           "id": "machine-feeders-and-offbearers.market-signals.market-signal-card.1",
           "source_refs": [
-            "trend"
+            "onet-trends"
           ],
           "type": "prose"
         },
@@ -8190,15 +8197,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "在同一2024—2034年美国机器送料工下料工精确职业数据中，年均空缺约4,700个，包含增长和替补需求。"
+              "O*NET 引用 BLS 数据显示，该职业 2024 年就业约 46,500 人，2024—2034 年预计下降（-1% 或更低），期间职位空缺约 4,700 个；这是职业统计，不是个人录用概率，也不同于招聘样本。"
             ]
           },
-          "fact_refs": [
-            "employment"
-          ],
           "id": "machine-feeders-and-offbearers.market-signals.market-signal-card.2",
           "source_refs": [
-            "trend"
+            "onet-trends"
           ],
           "type": "prose"
         },
@@ -8207,12 +8211,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "下降与年均空缺可同时存在，不能把空缺当净新增或个人录用概率。"
+              "该页 2024 年主要行业为 Manufacturing 与 Transportation and Warehousing；就业与空缺为统计预测，须与个人机会分开解释。"
             ]
           },
           "id": "machine-feeders-and-offbearers.market-signals.market-signal-card.3",
           "source_refs": [
-            "editorial"
+            "onet-industry"
           ],
           "type": "prose"
         },
@@ -8221,12 +8225,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "招聘样本只能说明日期、地区、行业、班次、设备与去重岗位组合。"
+              "可迁移能力：物料与产品检查、计量与记录、设备操作与安全处置、搬运与堆码、团队协作与异常上报。"
             ]
           },
           "id": "machine-feeders-and-offbearers.market-signals.market-signal-card.4",
           "source_refs": [
-            "editorial"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -8235,12 +8239,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向维修或特定机加工岗位时，应另核新设备、工艺、授权与作品证据。"
+              "需要补足：目标雇主的设备操作授权与安全培训、计量与质量知识，或转向设备维护、质量检查与仓储管理所需的经验与责任证据。"
             ]
           },
           "id": "machine-feeders-and-offbearers.market-signals.market-signal-card.5",
           "source_refs": [
-            "editorial"
+            "onet-details"
           ],
           "type": "prose"
         }
@@ -8258,134 +8262,118 @@
           "data": {
             "entries": [
               {
-                "answer": "核心工作包括检查缺陷与规格、记录产量、称量标记、送料下料、转运堆放，并在授权范围内启停或调整设备。",
+                "answer": "本页机器送料工下料工指 O*NET 53-7063.00：将物料送入由其他工人操作的或自动化的机器与设备，或从中取出物料；工作包括检查物料与产品缺陷、记录产量与运行数据、启停与调整设备、称重计量、标识物料、清洁维护设备与作业区、上料取料与转运、包装堆码以及开闭输送带闸门等。工作以重复性体力操作、设备监控与团队协作在现场完成为主，多数受访者每周工时约 40 小时、决策自由度有限。它不等同于输送机操作员、工业卡车操作员、包装工、生产辅助工或团队装配工。",
                 "id": "machine-feeders-and-offbearers.faq.1",
+                "question": "日常工作和工时如何？",
                 "question_key": "career.faq.machine-feeders-and-offbearers.daily-work",
                 "source_refs": [
-                  "onet"
+                  "onet-details",
+                  "onet-tasks"
                 ]
               },
               {
-                "answer": "送料下料工围绕材料进出与记录；机械维修工修理设备，轧制、切割冲压、磨削和铣削岗位分别设定或操作特定加工设备。",
+                "answer": "输送机操作员与看护员负责输送系统运行；工业卡车操作员负责车辆搬运与堆垛；包装工、手工负责手工包装；生产辅助工负责现场清理与辅助；团队装配工负责部件装配。机器送料工下料工以机器与设备的上料取料、检查与记录为核心，区分应比较设备、产出与安全责任。",
                 "id": "machine-feeders-and-offbearers.faq.2",
+                "question": "这个职业与相邻职业如何区分？",
                 "question_key": "career.faq.machine-feeders-and-offbearers.role-comparison",
                 "source_refs": [
-                  "adj-cut",
-                  "adj-grind",
-                  "adj-mech",
-                  "adj-mill",
-                  "adj-roll",
-                  "onet"
+                  "onet-summary",
+                  "onet-details"
                 ]
               },
               {
-                "answer": "适配证据来自能否在重复节拍下持续核规格、识别缺陷、正确记录，并在防护或设备状态不清时停手。",
+                "answer": "可观察信号：能按标准核对物料与规格、能如实记录产量与异常、能配合团队并服从安全规程、能在重复工作中保持稳定产出；O*NET 兴趣代码 RC 只描述活动偏好，不能决定胜任或资格。",
                 "id": "machine-feeders-and-offbearers.faq.3",
+                "question": "什么信号说明我可能适合？",
                 "question_key": "career.faq.machine-feeders-and-offbearers.fit",
                 "source_refs": [
-                  "editorial"
+                  "onet-details"
                 ]
               },
               {
-                "answer": "AI可辅助核对工单、提示批次字段和汇总产量，但不能确认现场防护、设备隔离、材料状态或启动许可。",
+                "answer": "视觉检测、计量与设备监控工具可辅助标记缺陷与异常，但上下料操作、设备启停、安全停止与质量处置仍由机器送料工下料工按规程负责；本页只把工具用途写成任务假设，不代表机构普遍采用。",
                 "id": "machine-feeders-and-offbearers.faq.4",
+                "question": "AI 会如何影响这个职业？",
                 "question_key": "career.faq.machine-feeders-and-offbearers.ai-impact",
                 "source_refs": [
-                  "editorial"
+                  "ilo-genai"
                 ]
               },
               {
-                "answer": "人员必须现场确认设备状态、护罩、急停、材料规格、交接与授权；工具不得远程替人启动或解除隔离。",
+                "answer": "必须由人负责的包括：确认作业指导与安全条件、按规格检查与计量、在设备或物料异常时停止并上报，以及如实记录产量与处置过程。",
                 "id": "machine-feeders-and-offbearers.faq.5",
+                "question": "哪些判断必须由人负责？",
                 "question_key": "career.faq.machine-feeders-and-offbearers.human-control",
                 "source_refs": [
-                  "editorial"
+                  "internal-rubric"
                 ]
               },
               {
-                "answer": "本次国家统计局行业和人员类别工资材料未建立与O*NET 53-7063.00一一对应的中国全国单职业工资分布。",
-                "fact_refs": [
-                  "cn-gap"
-                ],
+                "answer": "国家统计局按行业门类发布城镇单位就业人员年平均工资，未单列本职业，因此无法建立可安全映射的全国职业工资中位数；页面仅展示行业代理并标明其为行业口径：2025 年制造业城镇非私营单位为 113,594 元/年、城镇私营单位为 76,055 元/年，交通运输、仓储和邮政业城镇非私营单位为 133,981 元/年、城镇私营单位为 73,133 元/年，全国城镇非私营单位合计为 129,441 元/年，均不等于本职业中位数或起薪，并使用人力资源社会保障部企业薪酬调查信息作为查询入口。",
                 "id": "machine-feeders-and-offbearers.faq.6",
+                "question": "中国大陆薪资证据是什么？",
                 "question_key": "career.faq.machine-feeders-and-offbearers.china-pay",
                 "source_refs": [
-                  "editorial",
-                  "nbs"
+                  "nbs-wages",
+                  "mohrss-wage"
                 ]
               },
               {
-                "answer": "美国O*NET转引BLS 2025年数据：该职业年薪中位数41,220美元，时薪中位数19.82美元。 美国O*NET同一2025年全国数据还显示：该职业年薪第10分位为32,220美元，第90分位为58,160美元；这是分布边界，不是起薪、到手收入或个人报价，也不能换算为中国工资。",
-                "fact_refs": [
-                  "wage",
-                  "wage-boundary"
-                ],
+                "answer": "O*NET 该页显示 2025 年 BLS OEWS 年薪中位数 41,220 美元（约 19.82 美元/小时），为该职业 53-7063.00 口径；该页未展示分位工资。这是美国全国统计口径，不含个人到手收入或起薪。",
                 "id": "machine-feeders-and-offbearers.faq.7",
+                "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.machine-feeders-and-offbearers.us-pay",
                 "source_refs": [
-                  "editorial",
-                  "wage"
+                  "onet-wages"
                 ]
               },
               {
-                "answer": "入门证据应展示批次核对、缺陷分流、产量记录、停机升级和交接，不以观看教程替代现场培训与授权。",
+                "answer": "美国侧该职业属 Job Zone 1-2（很少到一些准备），通常需要高中文凭或同等学力（部分岗位不作要求），岗位培训从几天到一年不等；内部培训不等于特种设备操作资格。中国大陆：无与该 O*NET 精确对应的统一职业资格，岗位多按雇主与行业要求确定。",
                 "id": "machine-feeders-and-offbearers.faq.8",
+                "question": "入行和训练路径是什么？",
                 "question_key": "career.faq.machine-feeders-and-offbearers.education-path",
                 "source_refs": [
-                  "editorial"
+                  "onet-summary",
+                  "onet-education"
                 ]
               },
               {
-                "answer": "课程、工牌和岗位名称不自动授予设备启动、清堵、检修或隔离解除权限；以现场制度和授权为准。",
+                "answer": "主要风险包括设备与机械伤害、物料与产品混料、记录与数量差异、重复性劳损与危险环境暴露；控制方式是确认作业指导与安全条件、按规格检查与计量、穿戴防护并在异常时停止与上报；具体规则按雇主与适用法规核对。",
                 "id": "machine-feeders-and-offbearers.faq.9",
-                "question_key": "career.faq.machine-feeders-and-offbearers.credentials",
-                "source_refs": [
-                  "editorial"
-                ]
-              },
-              {
-                "answer": "护罩、急停、隔离、材料规格、通道或交接状态不明时不得上机；应保持距离、保留现场状态并交由指定负责人处理。",
-                "id": "machine-feeders-and-offbearers.faq.10",
+                "question": "主要风险和控制边界是什么？",
                 "question_key": "career.faq.machine-feeders-and-offbearers.risk-boundary",
                 "source_refs": [
-                  "editorial"
+                  "onet-details",
+                  "internal-rubric"
                 ]
               },
               {
-                "answer": "美国BLS预计该职业就业人数由2024年的46,500人降至2034年的40,400人，下降13%，同期年均空缺约4,700个。",
-                "fact_refs": [
-                  "employment"
-                ],
-                "id": "machine-feeders-and-offbearers.faq.11",
+                "answer": "O*NET 引用 BLS 数据显示，该职业 2024 年就业约 46,500 人，2024—2034 年预计下降（-1% 或更低），期间职位空缺约 4,700 个；这是职业统计，不等于个人录用或失业结果。",
+                "id": "machine-feeders-and-offbearers.faq.10",
+                "question": "市场信号应如何理解？",
                 "question_key": "career.faq.machine-feeders-and-offbearers.outlook-transition",
                 "source_refs": [
-                  "editorial",
-                  "trend"
+                  "onet-trends"
                 ]
               },
               {
-                "answer": "是否值得进入应由纸面工单中的规格核对、缺陷分流、停手边界和记录质量决定，而不是只看体力或职位名称。",
-                "id": "machine-feeders-and-offbearers.faq.12",
+                "answer": "若能长时间重复操作仍保持专注、按规程检查记录并在异常时停止上报，值得用一份完全虚构的产线情境做一次低成本的作业与安全演练；转向设备维护、质量检查或仓储管理需要补足对应的技术与责任证据。",
+                "id": "machine-feeders-and-offbearers.faq.11",
+                "question": "这个职业值得进一步试验吗？",
                 "question_key": "career.faq.machine-feeders-and-offbearers.career-worth",
                 "source_refs": [
-                  "editorial"
+                  "onet-summary"
                 ]
+              },
+              {
+                "answer": "中国、美国与具体机构口径的证据分别陈述：工资、就业、资格、安全与 AI 结论不得跨范围拼接。；机器送料工下料工页面提供职业判断与作业演练信息，不替代所在地法律、安全规程或其他专业意见。；任何「证据不足」只表示在有界检索后未建立安全对应的数据，不使用代理或记忆伪造数字。",
+                "id": "machine-feeders-and-offbearers.faq.boundary",
+                "question": "页面使用边界是什么？",
+                "question_key": "career.faq.machine-feeders-and-offbearers.boundary"
               }
             ]
           },
           "id": "machine-feeders-and-offbearers.sources.faq.1",
-          "source_refs": [
-            "adj-cut",
-            "adj-grind",
-            "adj-mech",
-            "adj-mill",
-            "adj-roll",
-            "editorial",
-            "nbs",
-            "onet",
-            "trend",
-            "wage"
-          ],
           "type": "faq"
         },
         {
@@ -8393,23 +8381,12 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "中国精确单职业工资未建立；美国工资与预测保留市场、期间和精确职业口径。",
-              "纸面练习不接近或操作真实设备，不替代现场培训、设备隔离和组织授权。"
+              "中国、美国与具体机构口径的证据分别陈述：工资、就业、资格、安全与 AI 结论不得跨范围拼接。",
+              "机器送料工下料工页面提供职业判断与作业演练信息，不替代所在地法律、安全规程或其他专业意见。",
+              "任何「证据不足」只表示在有界检索后未建立安全对应的数据，不使用代理或记忆伪造数字。"
             ]
           },
           "id": "machine-feeders-and-offbearers.sources.boundary.1",
-          "source_refs": [
-            "adj-cut",
-            "adj-grind",
-            "adj-mech",
-            "adj-mill",
-            "adj-roll",
-            "editorial",
-            "nbs",
-            "onet",
-            "trend",
-            "wage"
-          ],
           "type": "list"
         }
       ]
@@ -8429,7 +8406,7 @@
                 "entity": "机器送料工下料工",
                 "id": "machine-feeders-and-offbearers.navigation.1",
                 "relation": "career.section",
-                "url": "#career-content-quick-decision"
+                "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
                 "entity": "机器送料工下料工",
@@ -8510,164 +8487,212 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-09-25",
                 "details": [
-                  "支持切割冲压设备操作职责边界。",
-                  "仅适用于所列职业、市场、期间与范围。"
+                  "提供 53-7063.00 的职业身份、官方描述、兴趣代码、Job Zone、技能与知识。",
+                  "该页工资与就业数据为本职业（53-7063.00）口径。"
                 ],
-                "evidence_type": "official source",
-                "id": "adj-cut",
-                "limitation": "仅适用于所列职业、市场、期间与范围。",
+                "evidence_type": "official occupation summary",
+                "id": "onet-summary",
+                "limitation": "仅用于 53-7063.00 与美国市场；不建立中国映射。",
                 "market": "美国",
-                "name": "51-4031.00 - Cutting, Punching, and Press Machine Setters, Operators, and Tenders",
-                "period": "O*NET updated 2026; accessed 2026-09-06",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET 53-7063.00 机器送料工下料工（摘要）",
+                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/51-4031.00"
+                "url": "https://www.onetonline.org/link/summary/53-7063.00"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-09-25",
                 "details": [
-                  "支持磨削抛光设备操作职责边界。",
-                  "仅适用于所列职业、市场、期间与范围。"
+                  "提供 53-7063.00 的任务、工作活动、工作情境、技能与知识细节。",
+                  "任务与机构与雇主规程存在差异。"
                 ],
-                "evidence_type": "official source",
-                "id": "adj-grind",
-                "limitation": "仅适用于所列职业、市场、期间与范围。",
+                "evidence_type": "official occupation detail",
+                "id": "onet-details",
+                "limitation": "仅用于 53-7063.00 与美国市场；任务与雇主规程存在差异。",
                 "market": "美国",
-                "name": "51-4033.00 - Grinding, Lapping, Polishing, and Buffing Machine Tool Setters, Operators, and Tenders",
-                "period": "O*NET updated 2026; accessed 2026-09-06",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/51-4033.00"
-              },
-              {
-                "accessed_at": "2026-09-06",
-                "details": [
-                  "支持机械维修职责边界。",
-                  "仅适用于所列职业、市场、期间与范围。"
-                ],
-                "evidence_type": "official source",
-                "id": "adj-mech",
-                "limitation": "仅适用于所列职业、市场、期间与范围。",
-                "market": "美国",
-                "name": "49-9041.00 - Industrial Machinery Mechanics",
-                "period": "O*NET updated 2026; accessed 2026-09-06",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/49-9041.00"
-              },
-              {
-                "accessed_at": "2026-09-06",
-                "details": [
-                  "支持铣削刨削设备操作职责边界。",
-                  "仅适用于所列职业、市场、期间与范围。"
-                ],
-                "evidence_type": "official source",
-                "id": "adj-mill",
-                "limitation": "仅适用于所列职业、市场、期间与范围。",
-                "market": "美国",
-                "name": "51-4035.00 - Milling and Planing Machine Setters, Operators, and Tenders",
-                "period": "O*NET updated 2026; accessed 2026-09-06",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/51-4035.00"
-              },
-              {
-                "accessed_at": "2026-09-06",
-                "details": [
-                  "支持轧制设备操作职责边界。",
-                  "仅适用于所列职业、市场、期间与范围。"
-                ],
-                "evidence_type": "official source",
-                "id": "adj-roll",
-                "limitation": "仅适用于所列职业、市场、期间与范围。",
-                "market": "美国",
-                "name": "51-4023.00 - Rolling Machine Setters, Operators, and Tenders",
-                "period": "O*NET updated 2026; accessed 2026-09-06",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/51-4023.00"
-              },
-              {
-                "accessed_at": "2026-09-06",
-                "details": [
-                  "支持虚构材料、AI边界、风险和路径建议。",
-                  "不是外部事实、上机许可或安全培训。"
-                ],
-                "evidence_type": "official source",
-                "id": "editorial",
-                "limitation": "不是外部事实、上机许可或安全培训。",
-                "market": "编辑设计",
-                "name": "机器送料工下料工虚构工单练习",
-                "period": "2026-09-06",
-                "publisher": "FermatMind 编辑设计",
-                "scope": "editorial_synthesis",
-                "url": null
-              },
-              {
-                "accessed_at": "2026-09-06",
-                "details": [
-                  "支持中国公开工资资料为行业与人员类别口径。",
-                  "仅适用于所列职业、市场、期间与范围。"
-                ],
-                "evidence_type": "official source",
-                "id": "nbs",
-                "limitation": "仅适用于所列职业、市场、期间与范围。",
-                "market": "中国大陆",
-                "name": "2025年城镇单位就业人员年平均工资情况",
-                "period": "2025",
-                "publisher": "国家统计局",
-                "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
-              },
-              {
-                "accessed_at": "2026-09-07",
-                "details": [
-                  "2026-09-07实际打开完整O*NET详情页，共1315行；定位定义、任务、活动和工作情境。",
-                  "仅适用于所列职业、市场、期间与范围。"
-                ],
-                "evidence_type": "official source",
-                "id": "onet",
-                "limitation": "仅适用于所列职业、市场、期间与范围。",
-                "market": "美国",
-                "name": "53-7063.00 - Machine Feeders and Offbearers",
-                "period": "O*NET updated 2026; accessed 2026-09-06",
-                "publisher": "O*NET OnLine",
+                "name": "O*NET 53-7063.00（详细档案）",
+                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/53-7063.00"
               },
               {
-                "accessed_at": "2026-09-07",
+                "accessed_at": "2026-09-25",
                 "details": [
-                  "2026-09-07实际打开O*NET全国趋势全文；定位就业存量、预测、降幅和空缺。",
-                  "仅适用于所列职业、市场、期间与范围。"
+                  "提供检查物料与产品缺陷、记录生产数据、启停与调整设备、称重计量、标识物料、清洁维护设备、上料与取料、搬运、固定包装堆叠、开闭输送带闸门、添加化学品等任务清单。",
+                  "任务样本不代表每个岗位执行全部任务。"
                 ],
-                "evidence_type": "official source",
-                "id": "trend",
-                "limitation": "仅适用于所列职业、市场、期间与范围。",
+                "evidence_type": "official occupation task list",
+                "id": "onet-tasks",
+                "limitation": "任务样本不代表每个岗位执行全部任务；不建立中国映射。",
                 "market": "美国",
-                "name": "National Employment Trends: Machine Feeders and Offbearers",
-                "period": "2024-2034",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "name": "O*NET 53-7063.00 任务（Tasks）",
+                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-7063.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "描述重复性体力活动、危险设备暴露、团队协作、站立弯腰、每周工时与决策自由度等情境。",
+                  "美国工作情境不替代中国法律与雇主规程。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-context",
+                "limitation": "美国工作情境不替代中国法律与雇主规程。",
+                "market": "美国",
+                "name": "O*NET 53-7063.00 工作情境（Work Context）",
+                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-7063.00#WorkContext"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "2025 BLS OEWS 中位工资；该页为本职业（53-7063.00）口径。",
+                  "本页未展示分位工资；不以推断值替代。"
+                ],
+                "evidence_type": "O*NET display of BLS OEWS wage data",
+                "id": "onet-wages",
+                "limitation": "本页未展示分位工资；中位数不代表起薪或个人到手收入。",
+                "market": "美国",
+                "name": "O*NET 53-7063.00 全国工资（BLS OEWS 展示）",
+                "period": "2025 BLS OEWS 工资数据；查阅 2026-09-25",
+                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/53-7063.00"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "2024 年就业规模与 2024—2034 年增长与职位空缺预测。",
+                  "预测不是录用保证。"
+                ],
+                "evidence_type": "official employment data",
+                "id": "onet-trends",
+                "limitation": "预测不是录用保证；下降预测不等于个人失业。",
+                "market": "美国",
+                "name": "O*NET 53-7063.00 全国就业趋势",
+                "period": "2024—2034 预测；查阅 2026-09-25",
+                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/53-7063.00"
               },
               {
-                "accessed_at": "2026-09-07",
+                "accessed_at": "2026-09-25",
                 "details": [
-                  "2026-09-07实际打开O*NET全国工资全文；定位2025中位数与10/90边界。",
-                  "仅适用于所列职业、市场、期间与范围。"
+                  "该页 2024 年主要行业为 Manufacturing 与 Transportation and Warehousing。",
+                  "行业分布是雇主场景信号，不是增长或需求预测。"
                 ],
-                "evidence_type": "official source",
-                "id": "wage",
-                "limitation": "仅适用于所列职业、市场、期间与范围。",
+                "evidence_type": "official industry distribution",
+                "id": "onet-industry",
+                "limitation": "行业分布是雇主场景信号，不是增长或需求预测。",
                 "market": "美国",
-                "name": "National Wages: Machine Feeders and Offbearers",
-                "period": "2025",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "name": "Industries: 53-7063.00",
+                "period": "O*NET industry data current 2026; accessed 2026-09-25",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/53-7063.00"
+                "url": "https://www.onetonline.org/link/industry/53-7063.00"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "Job Zone 1-2（很少到一些准备）；通常需要高中文凭或同等学力，部分岗位不作要求。",
+                  "教育分布不等于每个雇主的硬性要求。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-education",
+                "limitation": "教育分布不等于每个雇主的硬性要求；不建立中国映射。",
+                "market": "美国",
+                "name": "O*NET 53-7063.00 教育与职业准备",
+                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/53-7063.00#Education"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "O*NET 提供的相关热门技术/工具信息。",
+                  "工具清单不等于岗位要求或机构采用率。"
+                ],
+                "evidence_type": "official technology list",
+                "id": "onet-hot-tech",
+                "limitation": "工具清单不等于岗位要求或机构采用率。",
+                "market": "美国",
+                "name": "Hot Technologies: 53-7063.00",
+                "period": "current page; accessed 2026-09-25",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/53-7063.00"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "按任务层面评估生成式 AI 的职业暴露，用于任务级讨论。",
+                  "暴露指数不等于采用率、岗位结果或录用概率。"
+                ],
+                "evidence_type": "official research report",
+                "id": "ilo-genai",
+                "limitation": "任务暴露不等于自动化落地、采用率或裁员；不推断个人结果。",
+                "market": "全球任务研究",
+                "name": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure (ILO Working Paper 140, 2025)",
+                "period": "ILO Working Paper 140, 2025; accessed 2026-09-25",
+                "publisher": "International Labour Organization",
+                "scope": "market_signal",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "提供城镇非私营与私营单位分行业门类年平均工资，用于核对中国工资公开口径。",
+                  "行业平均不是职业中位数，且不含个体工商户与自由职业者。"
+                ],
+                "evidence_type": "official industry wage statistics",
+                "id": "nbs-wages",
+                "limitation": "行业平均不是职业中位数，且不含个体工商户与自由职业者；未建立与精确职业对应的全国工资分布。",
+                "market": "中国大陆全国口径",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 年度工资；发布 2026-05-15；查阅 2026-09-25",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "人力资源和社会保障部企业薪酬调查信息，按职业/岗位分类的薪酬查询入口。",
+                  "覆盖城镇企业，不含机关事业单位；本页未取得与 53-7063.00 精确对应的条目。"
+                ],
+                "evidence_type": "official enterprise wage survey",
+                "id": "mohrss-wage",
+                "limitation": "覆盖城镇企业，不含机关事业单位；本页未取得与本职业精确对应的条目，不作为全国中位数。",
+                "market": "中国大陆城镇企业",
+                "name": "企业薪酬调查信息（2024年）",
+                "period": "2024 年度；发布 2025-06；查阅 2026-09-25",
+                "publisher": "人力资源和社会保障部",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "整理可辅助任务与人工控制点，用于任务级 AI 与适配讨论。",
+                  "编辑量表不等于采用率、裁员、法规或证照证据。"
+                ],
+                "evidence_type": "internal task rubric",
+                "id": "internal-rubric",
+                "limitation": "编辑量表不等于采用率、裁员、法规或证照证据。",
+                "market": "全球任务层面",
+                "name": "FermatMind 机器送料工下料工任务影响量表",
+                "period": "FermatMind task rubric v2026.09; reviewed 2026-09-25",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
               }
             ]
           },
@@ -8679,66 +8704,2533 @@
   ],
   "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "display": {
+    "component_order": [
+      "breadcrumb",
+      "hero",
+      "primary_cta",
+      "fermat_decision_card",
+      "fit_decision_checklist",
+      "definition_block",
+      "responsibilities_block",
+      "work_context_block",
+      "career_ai_description_block",
+      "career_quick_answers_block",
+      "onet_structured_fields_block",
+      "adjacent_career_comparison_table",
+      "ai_impact_table",
+      "career_snapshot_primary_locale",
+      "career_snapshot_secondary_locale",
+      "riasec_fit_block",
+      "personality_fit_block",
+      "career_risk_cards",
+      "career_path_block",
+      "market_signal_card",
+      "faq_block",
+      "source_card",
+      "boundary_notice"
+    ],
+    "components": {
+      "adjacent_career_comparison_table": {
+        "conclusion": "先用可复核的作业记录说明验证对象、方法与安全边界，再判断方向，不按收入或人格给唯一排名。",
+        "evidence_links": [
+          {
+            "href": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "label": "本职业来源"
+          }
+        ],
+        "evidence_note": "相邻关系只用于方向比较，不代表自动转岗或资格互认。",
+        "heading": "相邻职业比较",
+        "intro": "以下按真实工作对象、核心交付与责任边界比较机器送料工下料工及其相邻岗位，不按标题互换资格。",
+        "rows": [
+          {
+            "关键区别": "负责输送系统的运行与看护。",
+            "更适合什么选择": "偏好系统运行看护时比较。",
+            "核心工作与产出": {
+              "$item": "machine-feeders-and-offbearers.direction-comparison.adjacent-career-comparison-table.2",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "输送机操作员与看护员"
+          },
+          {
+            "关键区别": "负责车辆搬运与堆垛。",
+            "更适合什么选择": "偏好车辆操作时比较。",
+            "核心工作与产出": {
+              "$item": "machine-feeders-and-offbearers.direction-comparison.adjacent-career-comparison-table.3",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "工业卡车操作员"
+          },
+          {
+            "关键区别": "以手工包装与封装为核心。",
+            "更适合什么选择": "偏好手工包装时比较。",
+            "核心工作与产出": {
+              "$item": "machine-feeders-and-offbearers.direction-comparison.adjacent-career-comparison-table.4",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "包装工、手工"
+          },
+          {
+            "关键区别": "负责现场辅助或部件装配。",
+            "更适合什么选择": "偏好辅助作业或装配时比较。",
+            "核心工作与产出": {
+              "$item": "machine-feeders-and-offbearers.direction-comparison.adjacent-career-comparison-table.5",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "生产辅助工、团队装配工"
+          }
+        ],
+        "transition": "下一步把比较结果转成小规模、可停止的作业与安全演练。"
+      },
+      "ai_impact_table": {
+        "action_rows": [
+          {
+            "人群": "入行者",
+            "应对重点": "练习检查、记录与安全规程。"
+          },
+          {
+            "人群": "在岗者",
+            "应对重点": "保留产量与异常记录。"
+          },
+          {
+            "人群": "管理者",
+            "应对重点": "先定安全条件与上报路径。"
+          }
+        ],
+        "answer": {
+          "$item": "machine-feeders-and-offbearers.ai-impact.ai-impact-table.2",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "authority_links": [
+          {
+            "来源": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "本职业 53-7063.00 工资口径",
+            "链接": {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            }
+          }
+        ],
+        "difference_intro": {
+          "$item": "machine-feeders-and-offbearers.ai-impact.ai-impact-table.4",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "difference_rows": [
+          {
+            "AI主要改变": "缺陷标记与汇总",
+            "仍由人负责": "规格与安全核对",
+            "方向": "检查与计量"
+          },
+          {
+            "AI主要改变": "数据汇总",
+            "仍由人负责": "异常判断与上报",
+            "方向": "记录与异常"
+          }
+        ],
+        "evidence_intro": {
+          "$item": "machine-feeders-and-offbearers.ai-impact.ai-impact-table.3",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "evidence_rows": [
+          {
+            "使用限制": "为本职业美国口径；不含中国数据。",
+            "来源": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "研究对象": "53-7063.00 的身份与范围",
+            "结论": "支持身份与任务边界",
+            "链接": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "不替代所在地法律与雇主规程。",
+            "来源": {
+              "$source": "onet-context",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "研究对象": "53-7063.00 的任务与工作情境",
+            "结论": "支持任务拆分，不支持 AI 采用率",
+            "链接": {
+              "$source": "onet-context",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "预测不是个人录用概率。",
+            "来源": {
+              "$source": "onet-trends",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "研究对象": "53-7063.00 就业预测",
+            "结论": "支持规模与增长判断",
+            "链接": {
+              "$source": "onet-trends",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            }
+          }
+        ],
+        "heading": {
+          "$item": "machine-feeders-and-offbearers.ai-impact.ai-impact-table.1",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "method_cards": [
+          {
+            "含义": "只写工具能辅助的具体步骤，不把演示当成机构采用。",
+            "概念": "技术能力"
+          },
+          {
+            "含义": "核对数据来源、系统可靠性与复核责任；本页没有单职业采用率。",
+            "概念": "采用条件"
+          },
+          {
+            "含义": "没有职业级岗位结果研究就不推导裁员时间、编制变化或录用概率。",
+            "概念": "岗位结果"
+          }
+        ],
+        "questions": [
+          {
+            "回答": "任务暴露与采用、岗位结果是不同测量对象，不能据此推导裁撤日期。",
+            "来源": {
+              "$source": "onet-context",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "链接": {
+              "$source": "onet-context",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "问题": "AI 会取代机器送料工下料工吗？"
+          },
+          {
+            "回答": "目前只写到可辅助的缺陷标记、计量与记录汇总，上下料操作与安全处置仍由人承担。",
+            "来源": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "链接": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "问题": "自动化会先影响哪个环节？"
+          },
+          {
+            "回答": "没有职业级采用率来源，本页不提供这类数字。",
+            "来源": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "链接": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "问题": "本页有采用率数据吗？"
+          }
+        ],
+        "responsibility_intro": {
+          "$item": "machine-feeders-and-offbearers.ai-impact.ai-impact-table.5",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "responsibility_steps": [
+          {
+            "步骤": "核对输入",
+            "说明": "确认作业指导、规格与安全条件。"
+          },
+          {
+            "步骤": "限定任务",
+            "说明": "只在授权与规程范围内操作。"
+          },
+          {
+            "步骤": "人工复核",
+            "说明": "复核物料、计量与设备状态。"
+          },
+          {
+            "步骤": "记录升级",
+            "说明": "设备或物料异常立即停止并上报。"
+          }
+        ],
+        "risk_rows": [
+          {
+            "为什么重要": "可能造成人身伤害。",
+            "控制方式": "按规程启停并穿戴防护。",
+            "风险": "设备操作伤害"
+          },
+          {
+            "为什么重要": "可能导致质量事故与返工。",
+            "控制方式": "核对标识与规格后操作。",
+            "风险": "物料或产品混料"
+          },
+          {
+            "为什么重要": "可能扩大设备与安全问题。",
+            "控制方式": "异常即停止并按路径上报。",
+            "风险": "异常未停止"
+          }
+        ],
+        "task_rows": [
+          {
+            "人的控制点": "核对规格与安全条件。",
+            "任务": "检查物料并称重计量",
+            "工作方向": "检查与计量",
+            "当前变化": {
+              "$item": "machine-feeders-and-offbearers.ai-impact.ai-impact-table.7",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": {
+              "$item": "machine-feeders-and-offbearers.ai-impact.ai-impact-table.8",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "任务": "设备上料与取料",
+            "工作方向": "上料与取料",
+            "当前变化": "可能辅助设备监控"
+          },
+          {
+            "人的控制点": "按规程判断并上报。",
+            "任务": "记录产量与上报异常",
+            "工作方向": "记录与异常",
+            "当前变化": "不作自动决定"
+          },
+          {
+            "人的控制点": "由现场负责人确认。",
+            "任务": "清洁维护设备与作业区",
+            "工作方向": "清洁与维护",
+            "当前变化": "可能辅助排程"
+          }
+        ],
+        "transition": {
+          "$item": "machine-feeders-and-offbearers.ai-impact.ai-impact-table.6",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        }
+      },
+      "boundary_notice": [
+        {
+          "$join": [
+            {
+              "$item": "machine-feeders-and-offbearers.sources.boundary.1",
+              "block": "sources",
+              "copy_key": "career.item.boundary-notice",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$link": "machine-feeders-and-offbearers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "machine-feeders-and-offbearers.navigation.2",
+          "field": "url"
+        },
+        {
+          "$link": "machine-feeders-and-offbearers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "machine-feeders-and-offbearers.navigation.3",
+          "field": "url"
+        },
+        {
+          "$link": "machine-feeders-and-offbearers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "machine-feeders-and-offbearers.navigation.4",
+          "field": "url"
+        },
+        {
+          "$link": "machine-feeders-and-offbearers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "machine-feeders-and-offbearers.navigation.5",
+          "field": "url"
+        },
+        {
+          "$link": "machine-feeders-and-offbearers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "machine-feeders-and-offbearers.navigation.6",
+          "field": "url"
+        },
+        {
+          "$link": "machine-feeders-and-offbearers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "machine-feeders-and-offbearers.navigation.7",
+          "field": "url"
+        },
+        {
+          "$link": "machine-feeders-and-offbearers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "machine-feeders-and-offbearers.navigation.8",
+          "field": "url"
+        },
+        {
+          "$link": "machine-feeders-and-offbearers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "machine-feeders-and-offbearers.navigation.9",
+          "field": "url"
+        },
+        {
+          "$link": "machine-feeders-and-offbearers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "machine-feeders-and-offbearers.navigation.10",
+          "field": "url"
+        },
+        {
+          "$link": "machine-feeders-and-offbearers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "machine-feeders-and-offbearers.navigation.11",
+          "field": "url"
+        },
+        {
+          "$link": "machine-feeders-and-offbearers.direction-comparison.adjacent-career-comparison-table.1",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "entry": "machine-feeders-and-offbearers.parity.adjacent.1",
+          "field": "url"
+        },
+        {
+          "$link": "machine-feeders-and-offbearers.direction-comparison.adjacent-career-comparison-table.1",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "entry": "machine-feeders-and-offbearers.parity.adjacent.2",
+          "field": "url"
+        },
+        {
+          "$link": "machine-feeders-and-offbearers.direction-comparison.adjacent-career-comparison-table.1",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "entry": "machine-feeders-and-offbearers.parity.adjacent.3",
+          "field": "url"
+        },
+        {
+          "$link": "machine-feeders-and-offbearers.direction-comparison.adjacent-career-comparison-table.1",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "entry": "machine-feeders-and-offbearers.parity.adjacent.4",
+          "field": "url"
+        },
+        {
+          "$link": "machine-feeders-and-offbearers.direction-comparison.adjacent-career-comparison-table.1",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "entry": "machine-feeders-and-offbearers.parity.adjacent.5",
+          "field": "url"
+        }
+      ],
+      "breadcrumb": {
+        "label": {
+          "$subject": "name"
+        },
+        "slug": {
+          "$subject": "canonical_slug"
+        }
+      },
+      "career_ai_description_block": {
+        "body": [
+          "视觉检测、计量与设备监控工具可辅助标记物料缺陷与设备异常，但上下料操作、设备启停、安全停止与质量处置仍由机器送料工下料工按规程负责。"
+        ],
+        "heading": "机器送料工下料工的工作对象与 AI 边界"
+      },
+      "career_path_block": {
+        "boundary": "操作授权、安全资格与培训由具体法域、雇主与设备要求核验；内部培训不等于特种设备操作资格。",
+        "competence_ladder": [
+          {
+            "description": "确认作业指导、规格与安全条件。",
+            "stage": "核对输入"
+          },
+          {
+            "description": "按规程上料取料、检查记录并保留异常处置。",
+            "stage": "过程控制"
+          },
+          {
+            "description": "形成可复核的产量与安全记录。",
+            "stage": "结果复盘"
+          },
+          {
+            "description": "在授权范围内扩展多机台与班组职责。",
+            "stage": "责任扩展"
+          }
+        ],
+        "direct_answer": {
+          "$item": "machine-feeders-and-offbearers.path.career-path-block.2",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "heading": {
+          "$item": "machine-feeders-and-offbearers.path.career-path-block.1",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "locale_requirements": {
+          "credential_boundary": {
+            "$item": "machine-feeders-and-offbearers.path.career-path-block.4",
+            "block": "path",
+            "copy_key": "career.item.career-path-block",
+            "type": "prose"
+          },
+          "jurisdiction": "美国在岗培训与安全要求；中国大陆按雇主与法规要求核对",
+          "summary": {
+            "$item": "machine-feeders-and-offbearers.path.career-path-block.3",
+            "block": "path",
+            "copy_key": "career.item.career-path-block",
+            "type": "prose"
+          }
+        },
+        "schema_version": "career.career_progression.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "id": "machine-feeders-and-offbearers.display.source.onet-summary",
+            "label": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "scope": "身份与范围；工资就业为本职业口径。"
+          },
+          {
+            "href": {
+              "$source": "onet-education",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "id": "machine-feeders-and-offbearers.display.source.onet-education",
+            "label": {
+              "$source": "onet-education",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "scope": "教育与职业准备；不等于统一学历门槛。"
+          },
+          {
+            "href": {
+              "$source": "onet-trends",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "id": "machine-feeders-and-offbearers.display.source.onet-trends",
+            "label": {
+              "$source": "onet-trends",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "scope": "就业规模与预测；不含个人录用概率。"
+          },
+          {
+            "href": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "id": "machine-feeders-and-offbearers.display.source.onet-details",
+            "label": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "scope": "任务与工作情境；仅用于提出路径假设。"
+          },
+          {
+            "href": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "id": "machine-feeders-and-offbearers.display.source.nbs-wages",
+            "label": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "scope": "中国行业工资口径；不等于本职业精确工资。"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "track-0",
+            "stages": [
+              {
+                "credentials": "按在岗培训与安全要求核验。",
+                "next_moves": {
+                  "$item": "machine-feeders-and-offbearers.path.career-path-block.7",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "readiness_evidence": {
+                  "$item": "machine-feeders-and-offbearers.path.career-path-block.6",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "responsibility": {
+                  "$item": "machine-feeders-and-offbearers.path.career-path-block.5",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "操作工/受训者"
+              },
+              {
+                "credentials": "按岗位与设备要求核验。",
+                "next_moves": {
+                  "$item": "machine-feeders-and-offbearers.path.career-path-block.8",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "readiness_evidence": "保留作业与异常记录。",
+                "responsibility": "独立完成上料取料、检查与记录。",
+                "role": "机器送料工下料工"
+              },
+              {
+                "credentials": "按企业要求核验。",
+                "next_moves": "补足多机台与带教证据。",
+                "readiness_evidence": "保留协调与带教记录。",
+                "responsibility": "负责多机台协调与带教新人。",
+                "role": "多机台操作/带教"
+              },
+              {
+                "credentials": "按企业要求核验。",
+                "next_moves": "补足现场管理与改进证据。",
+                "readiness_evidence": "保留班组与改进记录。",
+                "responsibility": "负责班组安排与现场改进。",
+                "role": "班组/线长"
+              }
+            ],
+            "title": "产线送取料与设备操作"
+          },
+          {
+            "id": "track-1",
+            "stages": [
+              {
+                "credentials": "按雇主要求核验。",
+                "next_moves": "补足机械与电气基础。",
+                "readiness_evidence": "保留点检与维护记录。",
+                "responsibility": "在监督下参与清洁与点检。",
+                "role": "维护助理"
+              },
+              {
+                "credentials": "按岗位与设备要求核验。",
+                "next_moves": "补足故障诊断知识。",
+                "readiness_evidence": "保留保养与故障记录。",
+                "responsibility": "独立完成保养与常见故障处理。",
+                "role": "设备维护工"
+              },
+              {
+                "credentials": "按企业要求核验。",
+                "next_moves": "补足专项与项目管理知识。",
+                "readiness_evidence": "保留专项与改进记录。",
+                "responsibility": "负责专项维护与改进。",
+                "role": "维护骨干"
+              },
+              {
+                "credentials": "按企业要求核验。",
+                "next_moves": "补足管理责任证据。",
+                "readiness_evidence": "保留计划与团队记录。",
+                "responsibility": "负责维护计划与团队。",
+                "role": "维护主管"
+              }
+            ],
+            "title": "转向设备维护"
+          },
+          {
+            "id": "track-2",
+            "stages": [
+              {
+                "credentials": "按雇主要求核验。",
+                "next_moves": "补足质量与仓储知识。",
+                "readiness_evidence": "保留检查与收发记录。",
+                "responsibility": "在监督下参与检查与收发货。",
+                "role": "质检/仓储助理"
+              },
+              {
+                "credentials": "按岗位与雇主要求核验。",
+                "next_moves": "补足标准与系统知识。",
+                "readiness_evidence": "保留检查与管理记录。",
+                "responsibility": "独立开展检查或收发货管理。",
+                "role": "质量检查或仓储管理岗位"
+              },
+              {
+                "credentials": "按企业要求核验。",
+                "next_moves": "补足专项与协作知识。",
+                "readiness_evidence": "保留专项与管理记录。",
+                "responsibility": "负责专项检查或库区管理。",
+                "role": "专业骨干"
+              },
+              {
+                "credentials": "按企业要求核验。",
+                "next_moves": "补足管理责任证据。",
+                "readiness_evidence": "保留团队与治理记录。",
+                "responsibility": "负责团队与流程治理。",
+                "role": "主管"
+              }
+            ],
+            "title": "转向质量与仓储"
+          }
+        ]
+      },
+      "career_quick_answers_block": {
+        "availability": "published",
+        "heading": "职业速答",
+        "items": [
+          {
+            "answer": {
+              "$item": "machine-feeders-and-offbearers.profile.career-quick-answers-block.8",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa3",
+            "question": "这份工作先核对什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "对象",
+                  "secondary_value": null,
+                  "value": "物料、设备与产线"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "输入",
+                  "secondary_value": null,
+                  "value": "作业指导、规格与安全规程"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "交付",
+                  "secondary_value": null,
+                  "value": "可复核的产量与异常记录"
+                }
+              ]
+            }
+          },
+          {
+            "answer": {
+              "$item": "machine-feeders-and-offbearers.profile.career-quick-answers-block.9",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa2",
+            "question": "怎样判断工作闭环？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "闭环",
+                  "secondary_value": null,
+                  "value": "从核对指导到清洁记录"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤一",
+                  "secondary_value": null,
+                  "value": "核对作业指导并检查物料"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤二",
+                  "secondary_value": null,
+                  "value": "按规程上料与启停设备"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤三",
+                  "secondary_value": null,
+                  "value": "监控运行并取样检查"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤四",
+                  "secondary_value": null,
+                  "value": "取料、称重与标识"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤五",
+                  "secondary_value": null,
+                  "value": "转运、包装与堆码"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤六",
+                  "secondary_value": null,
+                  "value": "清洁维护并记录异常"
+                }
+              ]
+            }
+          },
+          {
+            "answer": "美国侧该职业属 Job Zone 1-2，通常需要高中文凭或同等学力（部分岗位不作要求）；内部培训不等于特种设备操作资格；本页不判断个人是否符合条件。",
+            "key": "qa1",
+            "question": "资格边界是什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "边界",
+                  "secondary_value": null,
+                  "value": "按岗位与安全规程核验"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "法域",
+                  "secondary_value": null,
+                  "value": "按所在国家或地区规定"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "机构",
+                  "secondary_value": null,
+                  "value": "按雇主与监管部门要求确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "训练",
+                  "secondary_value": null,
+                  "value": "按在岗培训与安全培训确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "责任",
+                  "secondary_value": null,
+                  "value": "由现场负责人确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "证据",
+                  "secondary_value": null,
+                  "value": "保留可复核记录"
+                }
+              ]
+            }
+          }
+        ],
+        "schema_version": "career.quick_answers.v1"
+      },
+      "career_risk_cards": {
+        "boundary": "最终安全与质量处置由雇主规程、设备要求与适用法规确定；本页不替代安全规程或专业意见。",
+        "context_links": [
+          {
+            "href": "#career-visual-group-risk",
+            "label": "查看风险模块"
+          }
+        ],
+        "direct_answer": "风险必须按触发、后果、控制和升级边界处理。",
+        "evidence_scope": "依据 O*NET 53-7063.00 的任务与工作情境，以及设备操作、物料检查、计量记录与安全规程中的具体要求；具体规则按雇主与适用法规核对，不跨范围外推。",
+        "heading": "机器送料工下料工的工作风险与边界",
+        "risks": [
+          {
+            "affected_roles": "设备操作岗位",
+            "consequence": "可能造成机械伤害。",
+            "evidence_refs": [
+              "onet-context"
+            ],
+            "id": "risk-1",
+            "mitigation": "按规程启停并穿戴防护。",
+            "scenario": "未按规程启停设备或未穿戴防护时。",
+            "title": {
+              "$item": "machine-feeders-and-offbearers.risk.career-risk-cards.1",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "上料与取料岗位",
+            "consequence": "可能造成混料与质量事故。",
+            "evidence_refs": [
+              "onet-tasks"
+            ],
+            "id": "risk-2",
+            "mitigation": "核对标识、规格与工单后再操作。",
+            "scenario": "未核对标识或规格即上料时。",
+            "title": {
+              "$item": "machine-feeders-and-offbearers.risk.career-risk-cards.2",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "检查与记录岗位",
+            "consequence": "可能导致数量差异与追溯困难。",
+            "evidence_refs": [
+              "onet-tasks"
+            ],
+            "id": "risk-3",
+            "mitigation": "按规程计量并如实记录。",
+            "scenario": "计量或记录不准确时。",
+            "title": {
+              "$item": "machine-feeders-and-offbearers.risk.career-risk-cards.3",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "现场作业岗位",
+            "consequence": "可能造成重复性劳损。",
+            "evidence_refs": [
+              "onet-context"
+            ],
+            "id": "risk-4",
+            "mitigation": "按人因要求轮换并保持正确姿势。",
+            "scenario": "长时间重复动作或姿势不良时。",
+            "title": {
+              "$item": "machine-feeders-and-offbearers.risk.career-risk-cards.4",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "现场作业岗位",
+            "consequence": "可能造成人身伤害。",
+            "evidence_refs": [
+              "onet-context"
+            ],
+            "id": "risk-5",
+            "mitigation": "遵守防护与作业许可要求。",
+            "scenario": "在危险设备或环境中未按防护作业时。",
+            "title": {
+              "$item": "machine-feeders-and-offbearers.risk.career-risk-cards.5",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "设备操作与检查岗位",
+            "consequence": "可能扩大设备与安全问题。",
+            "evidence_refs": [
+              "onet-tasks"
+            ],
+            "id": "risk-6",
+            "mitigation": "立即停止作业、隔离并按路径上报。",
+            "scenario": "发现设备报警或物料异常仍继续作业时。",
+            "title": "设备或物料异常未停止即处置"
+          }
+        ],
+        "schema_version": "career.work_risk.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "onet-tasks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "id": "machine-feeders-and-offbearers.display.source.onet-tasks",
+            "label": {
+              "$source": "onet-tasks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "scope": "任务清单；仅用于提出风险假设。"
+          },
+          {
+            "href": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "id": "machine-feeders-and-offbearers.display.source.onet-details",
+            "label": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "scope": "任务与工作情境；仅用于提出风险假设。"
+          },
+          {
+            "href": {
+              "$source": "onet-context",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "id": "machine-feeders-and-offbearers.display.source.onet-context",
+            "label": {
+              "$source": "onet-context",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "scope": "工作情境；仅用于提出风险假设。"
+          },
+          {
+            "href": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "id": "machine-feeders-and-offbearers.display.source.onet-summary",
+            "label": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "scope": "身份与范围；不替代安全规程。"
+          }
+        ]
+      },
+      "career_snapshot_primary_locale": {
+        "salary": {
+          "bls_table": [
+            {
+              "指标": "中国大陆职业工资",
+              "数值": "证据不足：未单列",
+              "说明": "国家统计局按行业门类发布，未单列本职业工资。"
+            },
+            {
+              "指标": "中国大陆行业代理",
+              "数值": "见行业表",
+              "说明": "制造业、交通运输仓储和邮政业为宽行业代理，不等于本职业工资。"
+            },
+            {
+              "指标": "美国职业统计",
+              "数值": "见美国工资表",
+              "说明": "为本职业 53-7063.00 口径，不能跨市场拼接。"
+            }
+          ],
+          "china_ai_row": {
+            "$item": "machine-feeders-and-offbearers.china-salary.career-snapshot-primary-locale.4",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_class_row": {
+            "$item": "machine-feeders-and-offbearers.china-salary.career-snapshot-primary-locale.3",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_edu_table": [
+            {
+              "学历段": "不单独统计",
+              "岗位方向": "按雇主与岗位聘任",
+              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+            },
+            {
+              "学历段": "不单独统计",
+              "岗位方向": "按雇主与岗位聘任",
+              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+            },
+            {
+              "学历段": "不单独统计",
+              "岗位方向": "按雇主与岗位聘任",
+              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+            },
+            {
+              "学历段": "不单独统计",
+              "岗位方向": "按雇主与岗位聘任",
+              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+            }
+          ],
+          "china_industry_table": [
+            {
+              "行业": "制造业（非私营）",
+              "需求": "113,594 元/年"
+            },
+            {
+              "行业": "制造业（私营）",
+              "需求": "76,055 元/年"
+            },
+            {
+              "行业": "交通运输、仓储和邮政业（非私营）",
+              "需求": "133,981 元/年"
+            }
+          ],
+          "china_intl": {
+            "$join": [
+              {
+                "$source": "mohrss-wage",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "machine-feeders-and-offbearers.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "mohrss-wage",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "machine-feeders-and-offbearers.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "china_name_row": {
+            "$item": "machine-feeders-and-offbearers.china-salary.career-snapshot-primary-locale.1",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_open": "中国大陆无本职业单列工资；下列为行业代理，不是起薪、中位数或到手收入。",
+          "china_ref": {
+            "$join": [
+              {
+                "$source": "nbs-wages",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "machine-feeders-and-offbearers.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "nbs-wages",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "machine-feeders-and-offbearers.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "china_salary_note": "中国大陆行业口径与美国职业统计分开，不能跨市场拼接。",
+          "china_salary_table": [
+            {
+              "城市/区间": "全国·制造业（非私营）",
+              "月薪参考": "仅发布年平均工资"
+            },
+            {
+              "城市/区间": "全国·交通运输仓储邮政业（非私营）",
+              "月薪参考": "仅发布年平均工资"
+            },
+            {
+              "城市/区间": "本职业精确工资",
+              "月薪参考": "证据不足：未单列"
+            }
+          ],
+          "china_soc_row": {
+            "$item": "machine-feeders-and-offbearers.china-salary.career-snapshot-primary-locale.2",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "sources_note": {
+            "$join": [
+              {
+                "$source": "nbs-wages",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "machine-feeders-and-offbearers.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "nbs-wages",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "machine-feeders-and-offbearers.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "ui": {
+            "ai_heading": "AI 与薪资判断边界",
+            "driver_heading": "影响因素",
+            "official_heading": "官方统计口径",
+            "scenario_caption": "本情景仅用于说明口径，不是个人报价。",
+            "scenario_heading": "情景化参考",
+            "scenario_interpretation_label": "解释",
+            "scenario_role_label": "岗位范围",
+            "scenario_value_label": "参考值"
+          },
+          "us_growth": "不适用本地口径",
+          "us_median": "不适用本地口径"
+        }
+      },
+      "career_snapshot_secondary_locale": {
+        "authority_sources": {
+          "$join": [
+            {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            }
+          ],
+          "separator": ""
+        },
+        "bls_table": [
+          {
+            "指标": "薪资 · 中位数",
+            "数值": "$41,220/年（2025）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "machine-feeders-and-offbearers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "machine-feeders-and-offbearers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "薪资 · 小时中位",
+            "数值": "$19.82/小时（2025）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "machine-feeders-and-offbearers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "machine-feeders-and-offbearers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "薪资 · 最低 10%",
+            "数值": "未披露",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "machine-feeders-and-offbearers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "machine-feeders-and-offbearers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "薪资 · 最高 90%",
+            "数值": "未披露",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "machine-feeders-and-offbearers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "machine-feeders-and-offbearers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "薪资 · 统计口径",
+            "数值": "Machine Feeders and Offbearers（53-7063.00）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "machine-feeders-and-offbearers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "machine-feeders-and-offbearers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "就业 · 规模",
+            "数值": "46,500 人（2024）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-trends",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "machine-feeders-and-offbearers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-trends",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "machine-feeders-and-offbearers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "就业 · 增长",
+            "数值": "下降（-1% 或更低，2024—2034）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-trends",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "machine-feeders-and-offbearers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-trends",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "machine-feeders-and-offbearers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "就业 · 空缺",
+            "数值": "约 4,700 个（2024—2034 期合计）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-trends",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "machine-feeders-and-offbearers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-trends",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "machine-feeders-and-offbearers.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          }
+        ],
+        "boundary": "美国全国口径：工资、就业与行业均为 O*NET 展示的本职业 53-7063.00 数据，工资为 2025 OEWS、就业展望为 2024—2034 预测；不含个人到手收入、起薪或录用结论。",
+        "direct_answer": {
+          "$item": "machine-feeders-and-offbearers.us-salary.career-snapshot-secondary-locale.2",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "factor_rows": [
+          {
+            "answer": "通常需要高中文凭或同等学力（部分岗位不作要求）；内部培训不等于特种设备操作资格。",
+            "factor": "资格"
+          },
+          {
+            "answer": "多以现场在岗培训进入；检查、计量与设备操作经验比证书名称更常被参考。",
+            "factor": "经验"
+          },
+          {
+            "answer": "受制造业与仓储物流分布影响大，不得跨地区外推。",
+            "factor": "地区"
+          }
+        ],
+        "factors_heading": {
+          "$item": "machine-feeders-and-offbearers.us-salary.career-snapshot-secondary-locale.6",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "growth": "下降（-1% 或更低，2024—2034）",
+        "heading": {
+          "$item": "machine-feeders-and-offbearers.us-salary.career-snapshot-secondary-locale.1",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_heading": {
+          "$item": "machine-feeders-and-offbearers.us-salary.career-snapshot-secondary-locale.5",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_period": "2024",
+        "industry_rows": [
+          {
+            "industry": "Manufacturing",
+            "median": "未单列",
+            "note": "本页未取得分行业工资分项；以整体中位数为准。"
+          },
+          {
+            "industry": "Transportation and Warehousing",
+            "median": "未单列",
+            "note": "本页未取得分行业工资分项；以整体中位数为准。"
+          },
+          {
+            "industry": "行业口径说明一",
+            "median": "见就业行",
+            "note": "工资、就业与行业均为本职业展示口径，不跨职业外推。"
+          },
+          {
+            "industry": "行业口径说明二",
+            "median": "见就业行",
+            "note": "地区差异大，不得跨地区外推。"
+          }
+        ],
+        "industry_value_label": "行业值",
+        "interpretation_heading": {
+          "$item": "machine-feeders-and-offbearers.us-salary.career-snapshot-secondary-locale.4",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "interpretation_rows": [
+          {
+            "answer": "美元/年；为 BLS 2025 OEWS 全国中位数（本职业 53-7063.00 口径），未展示分位，不含个人到手收入。",
+            "question": "工资"
+          },
+          {
+            "answer": "2024 年在岗人数，不是招聘职位数。",
+            "question": "就业"
+          },
+          {
+            "answer": "2024—2034 预测下降（-1% 或更低），是职业统计，不是个人失业或录用结果。",
+            "question": "展望"
+          },
+          {
+            "answer": "按 O*NET/BLS 行业口径列为制造业、交通运输与仓储业，不等于全部从业者收入。",
+            "question": "行业"
+          }
+        ],
+        "median": "$41,220/年（2025）",
+        "outlook_heading": "就业展望与职位空缺",
+        "outlook_period": "2024—2034",
+        "wage_column_labels": [
+          "分位",
+          "年度参考",
+          "小时等值",
+          "解释"
+        ],
+        "wage_heading": {
+          "$item": "machine-feeders-and-offbearers.us-salary.career-snapshot-secondary-locale.3",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "wage_tiers": [
+          {
+            "equivalent": "—",
+            "interpretation": "O*NET 该页未展示分位工资；不以推断值替代。",
+            "label": "最低 10%",
+            "value": "未披露"
+          },
+          {
+            "equivalent": "$19.82/小时",
+            "interpretation": "2025 美国全国年薪中位数（本职业 53-7063.00 口径）。",
+            "label": "中位数（50%）",
+            "value": "$41,220/年"
+          },
+          {
+            "equivalent": "—",
+            "interpretation": "O*NET 该页未展示分位工资；不以推断值替代。",
+            "label": "最高 90%",
+            "value": "未披露"
+          }
+        ]
+      },
+      "definition_block": {
+        "$item": "machine-feeders-and-offbearers.profile.definition-block.1",
+        "block": "profile",
+        "copy_key": "career.item.definition-block",
+        "type": "prose"
+      },
+      "faq_block": {
+        "items": {
+          "$item": "machine-feeders-and-offbearers.sources.faq.1",
+          "block": "sources",
+          "copy_key": "career.item.faq-block",
+          "type": "faq"
+        }
+      },
+      "fermat_decision_card": {
+        "caveat": {
+          "$item": "machine-feeders-and-offbearers.quick-decision.fermat-decision-card.1",
+          "block": "quick-decision",
+          "copy_key": "career.item.fermat-decision-card",
+          "type": "prose"
+        },
+        "summary": {
+          "$item": "machine-feeders-and-offbearers.quick-decision.fermat-decision-card.2",
+          "block": "quick-decision",
+          "copy_key": "career.item.fermat-decision-card",
+          "type": "prose"
+        },
+        "title": "机器送料工下料工适合什么样的人？"
+      },
+      "fit_decision_checklist": {
+        "boundary": "这是完全虚构的产线情境核对，不是人格诊断、录用结论或资格评估。",
+        "how": {
+          "$item": "machine-feeders-and-offbearers.quick-decision.fermat-decision-card.3",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "suit": {
+          "$item": "machine-feeders-and-offbearers.quick-decision.fermat-decision-card.4",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        }
+      },
+      "hero": {
+        "h1": {
+          "$subject": "name"
+        },
+        "quick_answer": {
+          "$subject": "summary"
+        },
+        "title": {
+          "$subject": "name"
+        }
+      },
+      "market_signal_card": {
+        "context_links": [
+          {
+            "href": "#career-visual-group-market-signals",
+            "label": "查看市场信号"
+          }
+        ],
+        "direct_answer": {
+          "$item": "machine-feeders-and-offbearers.market-signals.market-signal-card.2",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "heading": {
+          "$item": "machine-feeders-and-offbearers.market-signals.market-signal-card.1",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "outlook_evidence": [
+          {
+            "geography": "美国全国",
+            "horizon": "2024—2034",
+            "interpretation": "就业规模、增长率与职位空缺必须分别解释。",
+            "limitation": "为职业统计，不能作为个人就业保证。",
+            "metric": "就业规模与增长",
+            "occupation_scope": "展示口径：Machine Feeders and Offbearers（53-7063.00）",
+            "value": {
+              "$item": "machine-feeders-and-offbearers.market-signals.market-signal-card.3",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "geography": "美国全国",
+            "horizon": "2024—2034",
+            "interpretation": "为 2024—2034 年期间合计，含增长与替代需求，不等于在招岗位数。",
+            "limitation": "不能作为个人录用概率。",
+            "metric": "职位空缺（期合计）",
+            "occupation_scope": "展示口径：Machine Feeders and Offbearers（53-7063.00）",
+            "value": "约 4,700 个"
+          },
+          {
+            "geography": "美国全国",
+            "horizon": "2025",
+            "interpretation": "为 BLS 2025 OEWS 全国中位数，不代表起薪或到手收入。",
+            "limitation": "未披露分位；不含个人到手收入。",
+            "metric": "年薪中位数",
+            "occupation_scope": "展示口径：Machine Feeders and Offbearers（53-7063.00）",
+            "value": "$41,220/年"
+          }
+        ],
+        "schema_version": "career.outlook_transitions.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "onet-trends",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "id": "machine-feeders-and-offbearers.display.source.onet-trends",
+            "label": {
+              "$source": "onet-trends",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "scope": "就业规模与预测；不提供个人录用概率。"
+          },
+          {
+            "href": {
+              "$source": "onet-industry",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "id": "machine-feeders-and-offbearers.display.source.onet-industry",
+            "label": {
+              "$source": "onet-industry",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "scope": "行业分布；不等于需求预测。"
+          },
+          {
+            "href": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "id": "machine-feeders-and-offbearers.display.source.onet-summary",
+            "label": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "scope": "身份与范围；不提供个人录用概率。"
+          },
+          {
+            "href": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "id": "machine-feeders-and-offbearers.display.source.onet-details",
+            "label": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "scope": "任务与工作情境；仅用于提出转型假设。"
+          }
+        ],
+        "transitions": [
+          {
+            "capability_gaps": {
+              "$item": "machine-feeders-and-offbearers.market-signals.market-signal-card.5",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "machine-feeders-and-offbearers.market-signals.market-signal-card.4",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "target_href": "/zh/career/jobs/conveyor-operators-and-tenders",
+            "target_slug": "conveyor-operators-and-tenders",
+            "target_title": "输送机操作员与看护员",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需补足车辆操作授权与安全。",
+            "shared_capabilities": "物料搬运基础。",
+            "target_href": "/zh/career/jobs/industrial-truck-and-tractor-operators",
+            "target_slug": "industrial-truck-and-tractor-operators",
+            "target_title": "工业卡车操作员",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需补足包装标准与效率方法。",
+            "shared_capabilities": "包装与检验基础。",
+            "target_href": "/zh/career/jobs/packers-and-packagers-hand",
+            "target_slug": "packers-and-packagers-hand",
+            "target_title": "包装工、手工",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需补足设备与流程知识。",
+            "shared_capabilities": "现场辅助基础。",
+            "target_href": "/zh/career/jobs/helpers-production-workers",
+            "target_slug": "helpers-production-workers",
+            "target_title": "生产辅助工",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需补足装配标准与工艺知识。",
+            "shared_capabilities": "装配与协作基础。",
+            "target_href": "/zh/career/jobs/team-assemblers",
+            "target_slug": "team-assemblers",
+            "target_title": "团队装配工",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需补足机械与电气维护知识。",
+            "shared_capabilities": "清洁点检基础。",
+            "target_href": "/zh/career/jobs/maintenance-and-repair-workers-general",
+            "target_slug": "maintenance-and-repair-workers-general",
+            "target_title": "维护与修理工（通用）",
+            "transition_distance": "需补证据"
+          }
+        ]
+      },
+      "onet_structured_fields_block": {
+        "availability": "published",
+        "heading": "O*NET 结构化字段",
+        "rows": [
+          {
+            "alternate_value": null,
+            "label": "研究输入",
+            "secondary_value": null,
+            "value": {
+              "$item": "machine-feeders-and-offbearers.profile.onet-structured-fields-block.7",
+              "block": "profile",
+              "copy_key": "career.item.onet-structured-fields-block",
+              "type": "prose"
+            }
+          }
+        ],
+        "schema_version": "career.onet_structured_fields.v1"
+      },
+      "personality_fit_block": {
+        "assessments": [
+          {
+            "answer": {
+              "$item": "machine-feeders-and-offbearers.fit.riasec-fit-block.6",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "riasec",
+            "label": "RIASEC",
+            "question": "用工作样本核对，而不是用标签替代判断。",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          },
+          {
+            "answer": {
+              "$item": "machine-feeders-and-offbearers.fit.riasec-fit-block.7",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "big-five",
+            "label": "大五人格",
+            "question": "用工作样本核对，而不是用标签替代判断。",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          },
+          {
+            "answer": {
+              "$item": "machine-feeders-and-offbearers.fit.riasec-fit-block.8",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "mbti",
+            "label": "MBTI",
+            "question": "用工作样本核对，而不是用标签替代判断。",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          },
+          {
+            "answer": "需要结合真实任务、安全边界和可复核交付继续核对。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "enneagram",
+            "label": "九型人格",
+            "question": "用工作样本核对，而不是用标签替代判断。",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          },
+          {
+            "answer": "需要结合真实任务、安全边界和可复核交付继续核对。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "iq",
+            "label": "认知能力",
+            "question": "用工作样本核对，而不是用标签替代判断。",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          },
+          {
+            "answer": "需要结合真实任务、安全边界和可复核交付继续核对。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "eq",
+            "label": "情绪能力",
+            "question": "用工作样本核对，而不是用标签替代判断。",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          }
+        ],
+        "boundary": "RIASEC、人格和能力工具不能替代资格、安全规程或雇主判断。",
+        "direct_answer": {
+          "$item": "machine-feeders-and-offbearers.fit.riasec-fit-block.2",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        },
+        "directions": [
+          {
+            "direction": "设备上料",
+            "fit_signals": "能按规程稳定上料。",
+            "watchouts": "须核对安全条件与防护。"
+          },
+          {
+            "direction": "取料与转运",
+            "fit_signals": "能按节拍取料与搬运。",
+            "watchouts": "须核对标识与路径。"
+          },
+          {
+            "direction": "检查与计量",
+            "fit_signals": "能按规格检查与称重。",
+            "watchouts": "须如实记录与复核。"
+          },
+          {
+            "direction": "设备清洁维护",
+            "fit_signals": "能按计划清洁与点检。",
+            "watchouts": "须按规程停机作业。"
+          },
+          {
+            "direction": "包装与堆码",
+            "fit_signals": "能按规格包装与堆码。",
+            "watchouts": "须核对标签与数量。"
+          },
+          {
+            "direction": "异常上报",
+            "fit_signals": "能识别异常并立即上报。",
+            "watchouts": "不得带故障继续作业。"
+          }
+        ],
+        "heading": {
+          "$item": "machine-feeders-and-offbearers.fit.riasec-fit-block.1",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        },
+        "questions": [
+          {
+            "answer": "用本页工作样本核对重复作业中的专注与准确。",
+            "question": "你能长时间重复操作吗？"
+          },
+          {
+            "answer": "按岗位安全要求核对防护与操作。",
+            "question": "你能按规程穿戴防护吗？"
+          },
+          {
+            "answer": "先隔离并核对规格再上报。",
+            "question": "发现物料异常你如何反应？"
+          },
+          {
+            "answer": "先停止并按路径上报。",
+            "question": "设备报警会怎么做？"
+          },
+          {
+            "answer": "评估对现场作业与班次的适应度。",
+            "question": "你能接受现场与班次吗？"
+          },
+          {
+            "answer": "评估对产量与异常记录的接受度。",
+            "question": "你能承担记录责任吗？"
+          },
+          {
+            "answer": "用作业与异常记录让他人复核。",
+            "question": "你的工作如何被复核？"
+          },
+          {
+            "answer": "用完全虚构的产线情境完成一次作业与安全练习。",
+            "question": "下一步如何试验？"
+          }
+        ],
+        "schema_version": "career.fit_decision_center.v1",
+        "signals": [
+          {
+            "body": {
+              "$item": "machine-feeders-and-offbearers.fit.riasec-fit-block.3",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "fit",
+            "label": "积极信号",
+            "tone": "positive"
+          },
+          {
+            "body": {
+              "$item": "machine-feeders-and-offbearers.fit.riasec-fit-block.4",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "caution",
+            "label": "谨慎条件",
+            "tone": "caution"
+          },
+          {
+            "body": {
+              "$item": "machine-feeders-and-offbearers.fit.riasec-fit-block.5",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "experiment",
+            "label": "试验动作",
+            "tone": "action"
+          }
+        ],
+        "source_links": [
+          {
+            "href": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "usage": "身份与范围；工资就业为本职业口径。"
+          },
+          {
+            "href": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "usage": "任务与工作情境。"
+          },
+          {
+            "href": {
+              "$source": "onet-tasks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-tasks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "usage": "任务清单。"
+          },
+          {
+            "href": {
+              "$source": "onet-context",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-context",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "usage": "工作情境；仅用于提出适配假设。"
+          },
+          {
+            "href": {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "usage": "美国 2025 工资中位数。"
+          },
+          {
+            "href": {
+              "$source": "onet-trends",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-trends",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "usage": "就业规模与预测。"
+          },
+          {
+            "href": {
+              "$source": "onet-education",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-education",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "usage": "教育与职业准备。"
+          },
+          {
+            "href": {
+              "$source": "onet-industry",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-industry",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "usage": "行业分布；不等于需求预测。"
+          },
+          {
+            "href": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "label": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "usage": "中国行业工资口径。"
+          },
+          {
+            "href": {
+              "$source": "mohrss-wage",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "label": {
+              "$source": "mohrss-wage",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "machine-feeders-and-offbearers.source-register.published.1"
+            },
+            "usage": "中国岗位薪酬查询入口。"
+          }
+        ]
+      },
+      "primary_cta": {
+        "entry_surface": "career_job_detail",
+        "href": {
+          "$link": "machine-feeders-and-offbearers.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "machine-feeders-and-offbearers.navigation.1",
+          "field": "url"
+        },
+        "label": "测我的职业兴趣是否适合机器送料工下料工",
+        "source_page_type": "career_job_detail",
+        "subject_key": {
+          "$subject": "canonical_slug"
+        },
+        "subject_kind": "career_job",
+        "target_action": "start_riasec_test",
+        "test_slug": "holland-career-interest-test-riasec"
+      },
+      "responsibilities_block": [
+        {
+          "$join": [
+            {
+              "$item": "machine-feeders-and-offbearers.profile.responsibilities-block.2",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$join": [
+            {
+              "$item": "machine-feeders-and-offbearers.profile.responsibilities-block.3",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$join": [
+            {
+              "$item": "machine-feeders-and-offbearers.profile.responsibilities-block.4",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        }
+      ],
+      "riasec_fit_block": {
+        "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
+        "interest": "先观察真实上料取料、检查记录与安全作业中的兴趣、压力与体验。",
+        "riasec": "RC（现实型—常规型）",
+        "riasec_short": "不以单一代码决定职业。"
+      },
+      "source_card": {
+        "eeat_signals": {
+          "author": "FermatMind research workflow",
+          "source": {
+            "$source": "onet-wages",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "name",
+            "item": "machine-feeders-and-offbearers.source-register.published.1"
+          },
+          "updated_at": {
+            "$source": "onet-wages",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "period",
+            "item": "machine-feeders-and-offbearers.source-register.published.1"
+          }
+        },
+        "note": "来源范围、限制和统计时期按原始证据分别核对。来源使用说明：O*NET 53-7063.00 机器送料工下料工（摘要）：提供 53-7063.00 的职业身份、官方描述、兴趣代码、Job Zone、技能与知识。；该页工资与就业数据为本职业口径。；O*NET 53-7063.00（详细档案）：提供 53-7063.00 的任务、工作活动、工作情境、技能与知识细节。；任务与雇主规程存在差异。；O*NET 53-7063.00 任务（Tasks）：提供检查缺陷、记录产量、启停调整设备、称重计量、标识物料、清洁维护、上料取料、搬运、包装堆码、开闭输送带闸门、添加化学品等任务清单。；任务样本不代表每个岗位执行全部任务。；O*NET 53-7063.00 工作情境（Work Context）：描述重复性体力活动、危险设备暴露、团队协作、站立弯腰、每周工时与决策自由度等情境。；美国工作情境不替代中国法律与雇主规程。；O*NET 53-7063.00 全国工资（BLS OEWS 展示）：2025 BLS OEWS 中位工资；该页为本职业口径。；本页未展示分位工资。；O*NET 53-7063.00 全国就业趋势：2024 年就业规模与 2024—2034 年增长与职位空缺预测。；预测不是录用保证。；Industries: 53-7063.00：该页 2024 年主要行业为 Manufacturing 与 Transportation and Warehousing。；行业分布是雇主场景信号，不是增长或需求预测。；O*NET 53-7063.00 教育与职业准备：Job Zone 1-2（很少到一些准备）；通常需要高中文凭或同等学力，部分岗位不作要求。；教育分布不等于每个雇主的硬性要求。；Hot Technologies: 53-7063.00：O*NET 提供的相关热门技术/工具信息。；工具清单不等于岗位要求或机构采用率。；Generative AI and Jobs (ILO Working Paper 140, 2025)：按任务层面评估生成式 AI 的职业暴露。；暴露指数不等于采用率、岗位结果或录用概率。；2025年城镇单位就业人员年平均工资情况：提供城镇非私营与私营单位分行业门类年平均工资，用于核对中国工资公开口径。；行业平均不是职业中位数，且不含个体工商户与自由职业者。；企业薪酬调查信息（2024年）：人力资源和社会保障部企业薪酬调查信息，按职业/岗位分类的薪酬查询入口。；覆盖城镇企业，不含机关事业单位；本页未取得与 53-7063.00 精确对应的条目。；FermatMind 机器送料工下料工任务影响量表：整理可辅助任务与人工控制点，用于任务级 AI 与适配讨论。；编辑量表不等于采用率、裁员、法规或证照证据。；"
+      },
+      "work_context_block": {
+        "$item": "machine-feeders-and-offbearers.profile.work-context-block.5",
+        "block": "profile",
+        "copy_key": "career.item.work-context-block",
+        "type": "prose"
+      }
+    },
+    "contract_version": "career.detail.display.v1",
+    "interface": {
+      "interface.fit.directions_heading": "你更可能适合哪条机器送料工下料工方向？",
+      "interface.fit.interest_code_heading": "怎样理解 RC 兴趣代码"
+    },
+    "locale": "zh-CN",
+    "native_items": [
+      {
+        "block": "source-register",
+        "copy_key": "career.item.published-sources",
+        "id": "machine-feeders-and-offbearers.source-register.published.1",
+        "location": "sources",
+        "type": "sources"
+      }
+    ],
+    "path": "/zh/career/jobs/machine-feeders-and-offbearers",
+    "section_titles": {
+      "ai-impact": "AI 影响",
+      "china-salary": "中国大陆薪资",
+      "direction-comparison": "相邻职业比较",
+      "fit": "适配信号",
+      "market-signals": "市场信号",
+      "navigation": "页面导航",
+      "path": "入行路径",
+      "profile": "职业定义与职责",
+      "quick-decision": "快速判断",
+      "risk": "风险与边界",
+      "source-register": "来源注册表",
+      "sources": "常见问题与边界",
+      "us-salary": "美国薪资"
+    }
+  },
   "fact_register": {
     "facts": [
       {
         "derivation": null,
-        "display_value": "O*NET 53-7063.00（2026年访问，美国精确职业数据）",
-        "fact_id": "identity",
+        "display_value": "41,220 美元/年",
+        "fact_id": "us-wage-median",
         "market": "美国",
-        "measure": "official occupation code",
-        "occupation_scope": "精确职业数据：美国机器送料工下料工53-7063.00",
-        "period": "O*NET updated 2026; accessed 2026-09-06",
+        "measure": "2025 年年薪中位数（约 19.82 美元/小时）",
+        "occupation_scope": "O*NET 展示口径：Machine Feeders and Offbearers（53-7063.00）本职业",
+        "period": "2025 BLS OEWS；查阅 2026-09-25",
         "source_refs": [
-          "onet"
+          "onet-wages"
         ]
       },
       {
         "derivation": null,
-        "display_value": "41,220美元/年；19.82美元/小时（2025年，美国精确职业数据）",
-        "fact_id": "wage",
+        "display_value": "46,500 人",
+        "fact_id": "us-employment-2024",
         "market": "美国",
-        "measure": "median wage",
-        "occupation_scope": "精确职业数据：美国机器送料工下料工53-7063.00",
-        "period": "2025",
+        "measure": "2024 年在岗人数",
+        "occupation_scope": "O*NET 展示口径：Machine Feeders and Offbearers（53-7063.00）本职业",
+        "period": "2024；查阅 2026-09-25",
         "source_refs": [
-          "wage"
+          "onet-trends"
+        ]
+      },
+      {
+        "derivation": "O*NET 显示 Projected growth (2024-2034) 为 Decline (-1% or lower)；该数据展示口径为本职业 53-7063.00。",
+        "display_value": "下降（-1% 或更低，2024—2034）",
+        "fact_id": "us-growth",
+        "market": "美国",
+        "measure": "就业增长预测",
+        "occupation_scope": "O*NET 展示口径：Machine Feeders and Offbearers（53-7063.00）本职业",
+        "period": "2024—2034；查阅 2026-09-25",
+        "source_refs": [
+          "onet-trends"
+        ]
+      },
+      {
+        "derivation": "O*NET 显示 Projected job openings (2024-2034) 为 4,700；该数字为期间合计而非年均。",
+        "display_value": "约 4,700 个（2024—2034 合计）",
+        "fact_id": "us-openings",
+        "market": "美国",
+        "measure": "预计职位空缺（期间合计）",
+        "occupation_scope": "O*NET 展示口径：Machine Feeders and Offbearers（53-7063.00）本职业",
+        "period": "2024—2034；查阅 2026-09-25",
+        "source_refs": [
+          "onet-trends"
         ]
       },
       {
         "derivation": null,
-        "display_value": "全国分位数不是个人报价（2025年，美国精确职业数据）",
-        "fact_id": "wage-boundary",
-        "market": "美国",
-        "measure": "wage boundary",
-        "occupation_scope": "精确职业数据：美国机器送料工下料工53-7063.00",
-        "period": "2025",
+        "display_value": "113,594 元/年",
+        "fact_id": "cn-mfg-nonprivate-wage",
+        "market": "中国大陆全国城镇单位口径（行业门类，非本职业）",
+        "measure": "城镇非私营单位分行业门类就业人员年平均工资",
+        "occupation_scope": "制造业（行业口径，非本职业）",
+        "period": "2025 年度工资；发布 2026-05-15；查阅 2026-09-25",
         "source_refs": [
-          "wage"
+          "nbs-wages"
         ]
       },
       {
         "derivation": null,
-        "display_value": "2024年46,500人；2034年40,400人；下降13%；年均空缺4,700个（美国精确职业数据）",
-        "fact_id": "employment",
-        "market": "美国",
-        "measure": "employment projection",
-        "occupation_scope": "精确职业数据：美国机器送料工下料工53-7063.00",
-        "period": "2024-2034",
+        "display_value": "76,055 元/年",
+        "fact_id": "cn-mfg-private-wage",
+        "market": "中国大陆全国城镇单位口径（行业门类，非本职业）",
+        "measure": "城镇私营单位分行业门类就业人员年平均工资",
+        "occupation_scope": "制造业（行业口径，非本职业）",
+        "period": "2025 年度工资；发布 2026-05-15；查阅 2026-09-25",
         "source_refs": [
-          "trend"
+          "nbs-wages"
         ]
       },
       {
         "derivation": null,
-        "display_value": "暂无可安全使用的数据（2025年，中国大陆全国单职业口径）",
-        "fact_id": "cn-gap",
-        "market": "中国大陆",
+        "display_value": "133,981 元/年",
+        "fact_id": "cn-transport-nonprivate-wage",
+        "market": "中国大陆全国城镇单位口径（行业门类，非本职业）",
+        "measure": "城镇非私营单位分行业门类就业人员年平均工资",
+        "occupation_scope": "交通运输、仓储和邮政业（行业口径，非本职业）",
+        "period": "2025 年度工资；发布 2026-05-15；查阅 2026-09-25",
+        "source_refs": [
+          "nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "73,133 元/年",
+        "fact_id": "cn-transport-private-wage",
+        "market": "中国大陆全国城镇单位口径（行业门类，非本职业）",
+        "measure": "城镇私营单位分行业门类就业人员年平均工资",
+        "occupation_scope": "交通运输、仓储和邮政业（行业口径，非本职业）",
+        "period": "2025 年度工资；发布 2026-05-15；查阅 2026-09-25",
+        "source_refs": [
+          "nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "129,441 元/年",
+        "fact_id": "cn-national-nonprivate-wage",
+        "market": "中国大陆全国口径",
+        "measure": "城镇非私营单位就业人员年平均工资（全行业合计）",
+        "occupation_scope": "全国城镇非私营单位合计（非本职业）",
+        "period": "2025 年度工资；发布 2026-05-15；查阅 2026-09-25",
+        "source_refs": [
+          "nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：未取得中国大陆机器送料工下料工的全国职业工资中位数（2025 官方公开口径）",
+        "fact_id": "cn-wage-gap",
+        "market": "中国大陆全国口径",
         "measure": "occupation wage availability",
-        "occupation_scope": "行业代理数据边界：中国大陆2025年行业工资未建立机器送料工下料工53-7063.00单职业分布",
-        "period": "2025",
+        "occupation_scope": "no exact CN mapping for O*NET 53-7063.00",
+        "period": "2025 annual wage; published 2026-05-15; accessed 2026-09-25",
         "source_refs": [
-          "nbs"
+          "nbs-wages"
         ]
       }
     ]
@@ -8750,31 +11242,35 @@
       "key": "ai",
       "label": "AI 任务暴露"
     },
-    "badges": [],
+    "badges": [
+      "设备上料与取料",
+      "物料检查与记录",
+      "安全生产与维护"
+    ],
     "metrics": [
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-wage-median",
         "key": "us_pay",
         "label": "美国薪资参考"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国就业变化"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-employment-2024",
         "key": "us_employment",
         "label": "美国在岗人数"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国职位空缺（期合计）"
       },
       {
         "availability": "missing",
@@ -8788,17 +11284,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "机器送料工下料工把正确批次的材料安全送入设备，并把产出、缺陷与数量准确移出和记录。核心不是单纯搬运，而是持续核对工单、规格、防护和设备状态，在任何不一致或危险未知时停手并交接。"
+      "text": "本页机器送料工下料工指 O*NET 53-7063.00：将物料送入自动化或由他人看护的机器与设备，或从中取出物料；工作包括检查缺陷、记录产量、启停调整设备、称重计量、标识与搬运物料、清洁维护设备与作业区、开闭输送带闸门与按工艺配料。判断这条职业路径时，应同时验证工作闭环、安全生产边界、证据口径、风险控制和可观察的入门作品。"
     },
     "title": {
       "availability": "available",
-      "text": "机器送料工下料工"
+      "text": "机器送料工下料工职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "2361b64f5c7680ec4409bfe27b76f343bfad3fa68ca45fc894756c8a6d3982a2",
+  "source_content_sha256": "789856fe9539b415fde472edd8060dec19a7881876b010896259ab3b32e31a89",
   "subject": {
     "canonical_slug": "machine-feeders-and-offbearers",
     "name": "机器送料工下料工",
-    "summary": "机器送料工下料工把正确批次的材料安全送入设备，并把产出、缺陷与数量准确移出和记录。核心不是单纯搬运，而是持续核对工单、规格、防护和设备状态，在任何不一致或危险未知时停手并交接。"
+    "summary": "本页机器送料工下料工指 O*NET 53-7063.00：将物料送入自动化或由他人看护的机器与设备，或从中取出物料，并按规程检查、计量、记录与维护设备。"
   }
 }

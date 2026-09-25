@@ -2,25 +2,28 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:cn-migrant-transport-income": {
+      "fact:cn-national-nonprivate-wage": {
         "status": "pending_mapping"
       },
-      "fact:cn-retail-clerical-annual-wage": {
+      "fact:cn-transport-nonprivate-wage": {
         "status": "pending_mapping"
       },
-      "fact:cn-transport-clerical-annual-wage": {
+      "fact:cn-transport-private-wage": {
         "status": "pending_mapping"
       },
-      "fact:us-annual-openings": {
-        "status": "pending_mapping"
-      },
-      "fact:us-combined-employment-base": {
+      "fact:cn-wage-gap": {
         "status": "pending_mapping"
       },
       "fact:us-combined-median-wage": {
         "status": "mapped"
       },
-      "fact:us-outlook-decline": {
+      "fact:us-employment-2024": {
+        "status": "pending_mapping"
+      },
+      "fact:us-growth": {
+        "status": "pending_mapping"
+      },
+      "fact:us-openings": {
         "status": "pending_mapping"
       },
       "item:material-recording-clerks.ai-impact.ai-impact-table.1": {
@@ -140,25 +143,19 @@
       "item:material-recording-clerks.path.career-path-block.8": {
         "status": "pending_mapping"
       },
-      "item:material-recording-clerks.path.career-path-block.9": {
+      "item:material-recording-clerks.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
-      "item:material-recording-clerks.profile.career-quick-answers-block.1": {
-        "status": "pending_mapping"
-      },
-      "item:material-recording-clerks.profile.career-quick-answers-block.2": {
+      "item:material-recording-clerks.profile.career-quick-answers-block.9": {
         "status": "pending_mapping"
       },
       "item:material-recording-clerks.profile.definition-block.1": {
         "status": "pending_mapping"
       },
-      "item:material-recording-clerks.profile.definition-block.2": {
+      "item:material-recording-clerks.profile.definition-block.10": {
         "status": "pending_mapping"
       },
-      "item:material-recording-clerks.profile.onet-structured-fields-block.1": {
-        "status": "pending_mapping"
-      },
-      "item:material-recording-clerks.profile.responsibilities-block.1": {
+      "item:material-recording-clerks.profile.onet-structured-fields-block.7": {
         "status": "pending_mapping"
       },
       "item:material-recording-clerks.profile.responsibilities-block.2": {
@@ -167,10 +164,13 @@
       "item:material-recording-clerks.profile.responsibilities-block.3": {
         "status": "pending_mapping"
       },
-      "item:material-recording-clerks.profile.work-context-block.1": {
+      "item:material-recording-clerks.profile.responsibilities-block.4": {
         "status": "pending_mapping"
       },
-      "item:material-recording-clerks.profile.work-context-block.2": {
+      "item:material-recording-clerks.profile.work-context-block.5": {
+        "status": "pending_mapping"
+      },
+      "item:material-recording-clerks.profile.work-context-block.6": {
         "status": "pending_mapping"
       },
       "item:material-recording-clerks.quick-decision.fermat-decision-card.1": {
@@ -7254,12 +7254,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "先判断你是否愿意反复核订单、实物、数量、位置、状态和时间，而不是只做录入。"
+              "以下判断针对物料记录文员的记录与物流事务方式，不预测录用、资格、授权或收入结果。"
             ]
           },
           "id": "material-recording-clerks.quick-decision.fermat-decision-card.1",
           "source_refs": [
-            "editorial"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7268,40 +7268,40 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "正向信号：发现账实、单货或计划差异时会保留原记录并及时升级。"
+              "物料记录文员的核心是让进出货与库存记录准确可查：核对货物内容与提单、发票或订单等单据是否一致，申领并存放包装物料以维持库存，编制工单与提单等单据以便物料流转，打包、封装、贴标或贴邮资以准备发货，记录重量、费用、仓位、损坏与差异等数据用于报告与核算，与相关方沟通处理损坏、短缺或不符规格等问题，按线路用搬运车或分拣箱配送物料，联络承运商并确定运输方式、线路与费率，并核算仓位、运费或滞期等费用。"
             ]
           },
           "id": "material-recording-clerks.quick-decision.fermat-decision-card.2",
           "source_refs": [
-            "editorial"
+            "onet-tasks"
           ],
           "type": "prose"
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "谨慎信号：把系统显示当作实物已确认，或忽略损坏、短缺、错位和版本差异。"
+              "完全虚构的任务包：给出一份虚构的进出货单据与库存记录（含 1 份订单与装箱单、1 组库存与差异数据、1 个缺货或损坏待处理的场景），要求在 60 分钟内写出核对步骤、记录与差异处理方式、需上报或索赔的情形以及可留存的记录；不使用真实企业、客户或货物数据。"
             ]
           },
           "id": "material-recording-clerks.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "editorial"
+            "onet-tasks"
           ],
           "type": "prose"
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "练习审三张虚构库存卡的七字段：订单号、物料号、应有数量、实点数量、位置、状态、升级安排（触发+对象）。A：订单已给、物料已给、应有10、实点未知、位置已给、状态完好、任一未知交库存负责人，缺1；B：订单已给、物料已给、应有8、实点7、位置未知、状态未知、任一未知或差异交当班负责人，缺2；C：订单已给、物料已给、应有5、实点5、位置已给、状态完好、任一未知或差异交收发负责人，缺0。答案1、2、0。"
+              "样本输出与反思：检查是否先核对货物与单据、是否如实记录差异而非掩盖、是否说明上报与索赔路径、是否写清记录与交接要求；再问自己能否在重复性事务与时间压力下保持准确、能否与承运商和内部部门沟通处理问题，以及是否愿意为记录准确性负责。"
             ]
           },
           "id": "material-recording-clerks.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "editorial"
+            "onet-tasks"
           ],
           "type": "prose"
         }
@@ -7318,14 +7318,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页不是单一SOC职业，而是43-5061.00、43-5071.00和43-5111.00三类范围的透明组合。"
+              "本页物料记录文员指 O*NET 43-5071.00：验核并维护涉及库存的进出货记录，核验并记录进货物料或商品并安排运输，可能准备发货物品，含收货员、发货文员与订单履行专员等职称。工作包括核对货物与单据、申领与存放包装物料、编制工单与提单、打包封装贴标、记录重量费用与差异、沟通处理差错、按线路配送、联络承运商并确定运输方式与费率、核算费用。工作以仓库、货站与非受控室内环境为主。本页不含工业生产经理、运输仓储与配送经理、供应链经理、物流分析师等相邻岗位。"
             ]
           },
           "id": "material-recording-clerks.profile.definition-block.1",
           "source_refs": [
-            "onet-production",
-            "onet-shipping",
-            "onet-weighing"
+            "onet-summary",
+            "onet-tasks"
           ],
           "type": "prose"
         },
@@ -7334,32 +7333,12 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "生产计划与催办：协调工作与物料流，审计划并处理短缺或中断。",
-              "收发货与库存记录：核单货、做运输文件、记录费用损坏与差异。",
-              "称量计量检查记录：称重、计量、核验或抽样，记录数量、质量与发现的差异。"
-            ]
-          },
-          "id": "material-recording-clerks.profile.responsibilities-block.1",
-          "source_refs": [
-            "onet-production",
-            "onet-shipping",
-            "onet-weighing"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "共同输入是订单、货物、位置、数量和状态。",
-              "共同处理是核对、记录、移动或协调。",
-              "共同输出是可追溯记录、正确货流和异常升级。"
+              "投入对象：进出货单据与订单、货物与包装物料、库存与仓位信息、搬运与分拣设备、计费与费率资料、承运商与内部部门联系人、安全与合规要求。"
             ]
           },
           "id": "material-recording-clerks.profile.responsibilities-block.2",
           "source_refs": [
-            "editorial"
+            "onet-tasks"
           ],
           "type": "list"
         },
@@ -7368,14 +7347,26 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "先核职业组成，再核具体职位属于哪一类。",
-              "同一职位可能混合记录与实物任务。",
-              "设备操作只在培训和授权范围内。"
+              "可检查产出：核对一致的进出货记录、完整准确的单据、打包与贴标完成的货件、重量与费用等数据记录、差异与损坏的处理记录、承运与运费安排、库存与仓位更新。"
             ]
           },
           "id": "material-recording-clerks.profile.responsibilities-block.3",
           "source_refs": [
-            "editorial"
+            "onet-tasks"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "完整工作流程：接收并核对货物与单据 → 记录数据并识别差异 → 申领与准备包装物料 → 打包封装贴标 → 安排承运与运输方式 → 配送与交接 → 更新库存与归档记录的闭环。"
+            ]
+          },
+          "id": "material-recording-clerks.profile.responsibilities-block.4",
+          "source_refs": [
+            "onet-tasks"
           ],
           "type": "list"
         },
@@ -7384,12 +7375,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "BLS合并职业口径说明这些文员保持排程、记录和库存控制。"
+              "关键判断：货物与单据是否一致、差异或损坏如何记录与处理、运输方式与费率是否合理、安全与堆放是否合规，以及何时需要上报或向承运商索赔。"
             ]
           },
-          "id": "material-recording-clerks.profile.work-context-block.1",
+          "id": "material-recording-clerks.profile.work-context-block.5",
           "source_refs": [
-            "bls-duties"
+            "onet-context"
           ],
           "type": "prose"
         },
@@ -7398,27 +7389,28 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "许多岗位在仓库或制造厂办公室，也可能进入仓库或工厂地面。"
+              "环境与节奏：多在非受控室内，每天面对面沟通并使用邮件与电话；重复性任务多，时间压力常见，对他人安全负较高责任，作息多为规律固定，部分岗位一周工作超过 40 小时。"
             ]
           },
-          "id": "material-recording-clerks.profile.work-context-block.2",
+          "id": "material-recording-clerks.profile.work-context-block.6",
           "source_refs": [
-            "bls-environment"
+            "onet-context"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "43-5071强调进出货与库存记录，43-5111强调称量、计量、检查或抽样结果的记录。"
+              "研究输入：O*NET 43-5071.00 的职业身份、任务、工作活动、工作情境、技能与知识、兴趣代码、教育与 Job Zone；该页工资、就业与行业数据为本职业口径，研究结论不据此推定中国大陆的资格、工资或就业口径。"
             ]
           },
-          "id": "material-recording-clerks.profile.onet-structured-fields-block.1",
+          "id": "material-recording-clerks.profile.onet-structured-fields-block.7",
           "source_refs": [
-            "onet-shipping",
-            "onet-weighing"
+            "onet-summary",
+            "onet-trends"
           ],
           "type": "prose"
         },
@@ -7427,12 +7419,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "43-5061更接近生产计划与跨部门催办，但不是工业生产经理。"
+              "先核对的内容：单据与货物信息、库存与仓位口径、运输方式与费率依据、安全与堆放要求、承运与相关方联系人，以及差异与索赔的处理路径。"
             ]
           },
-          "id": "material-recording-clerks.profile.career-quick-answers-block.1",
+          "id": "material-recording-clerks.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet-production"
+            "onet-tasks"
           ],
           "type": "prose"
         },
@@ -7441,12 +7433,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "共同质量标准是记录能回到原订单、实物、位置、时间和责任人。"
+              "工作闭环：从接收并核对货物与单据开始，经过记录与识别差异、准备包装物料、打包贴标、安排承运与运输，到配送交接并更新归档；任一单据或货物不符未核实前不确认收货，任一安全或堆放条件不满足前不装运。"
             ]
           },
-          "id": "material-recording-clerks.profile.career-quick-answers-block.2",
+          "id": "material-recording-clerks.profile.career-quick-answers-block.9",
           "source_refs": [
-            "editorial"
+            "onet-tasks"
           ],
           "type": "prose"
         },
@@ -7455,16 +7447,15 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "阅读职位说明时必须确认它落在哪个组成范围，不能把组合中任一任务当作所有岗位都做。"
+              "相邻职责边界：本页只覆盖物料记录文员（收货、发货与库存文员）；工业生产经理负责生产管理、运输仓储与配送经理与供应链经理负责体系与团队、物流分析师负责规划与分析；各岗位的职责与授权不得与本页互换。"
             ]
           },
-          "id": "material-recording-clerks.profile.definition-block.2",
+          "id": "material-recording-clerks.profile.definition-block.10",
           "source_refs": [
-            "onet-production",
-            "onet-shipping",
-            "onet-weighing"
+            "onet-summary"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         }
       ]
     },
@@ -7513,9 +7504,7 @@
           },
           "id": "material-recording-clerks.direction-comparison.adjacent-career-comparison-table.1",
           "source_refs": [
-            "onet-production",
-            "onet-shipping",
-            "onet-weighing"
+            "onet-summary"
           ],
           "type": "links"
         },
@@ -7524,14 +7513,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "生产计划与催办文员协调计划、工作与物料流；收发货库存文员核进出货及运输记录。"
+              "工业生产经理负责生产计划、成本与团队管理；物料记录文员负责进出货与库存的记录与事务处理，职责与范围不同。"
             ]
           },
           "id": "material-recording-clerks.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "onet-production",
-            "onet-shipping",
-            "onet-weighing"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7540,14 +7527,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "称量计量检查记录员核实物料重量、尺寸、数量或质量，把结果与原始批次关联。"
+              "运输仓储与配送经理负责配送体系与团队；物料记录文员负责单据核对与记录事务，处于执行层。"
             ]
           },
           "id": "material-recording-clerks.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "onet-production",
-            "onet-shipping",
-            "onet-weighing"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7556,14 +7541,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "工业生产经理统筹更大范围的成本、质量、数量、人员与资源，不等于资深库存文员。"
+              "供应链经理负责供应链整体策略与协同；物料记录文员负责具体进出货记录与事务，不承担策略职责。"
             ]
           },
           "id": "material-recording-clerks.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "onet-production",
-            "onet-shipping",
-            "onet-weighing"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7572,14 +7555,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "比较岗位时核核心对象、是否搬运、是否改计划、是否管理人员及最终决定范围。"
+              "物流分析师负责数据建模与流程分析；物料记录文员负责日常记录与事务处理，分析方法与范围不同。"
             ]
           },
           "id": "material-recording-clerks.direction-comparison.adjacent-career-comparison-table.5",
           "source_refs": [
-            "onet-production",
-            "onet-shipping",
-            "onet-weighing"
+            "onet-summary"
           ],
           "type": "prose"
         }
@@ -7596,12 +7577,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "电脑、手持设备、传感器、标签和库存软件能减少手工计数或录入，但不等于AI替代率。"
+              "物料记录文员的 AI 影响边界"
             ]
           },
           "id": "material-recording-clerks.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "bls-duties"
+            "onet-summary",
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -7610,12 +7592,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助：扫描记录、字段校验、重复项和数量差异提示。"
+              "条码与扫描、库存与订单系统、单据自动生成、运费与费率查询、差异与异常提醒等工具可辅助录入、核对与生成记录；但实物核对、差异判断、与承运商及内部部门的沟通处理与记录责任仍由人负责，工具不能替代实物核验。"
             ]
           },
           "id": "material-recording-clerks.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "editorial"
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -7624,12 +7606,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可辅助：汇总延误、库存水平、装运状态和待处理异常。"
+              "职业来源说明该职业实际处理的任务与对象（单据与货物、库存与仓位、包装与运输、费用与差异）；工具能力、机构采用与岗位结果分别记录，不用工资或就业数据替代 AI 证据。"
             ]
           },
           "id": "material-recording-clerks.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "editorial"
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -7638,12 +7620,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不可替代：实点数量、货物损坏、位置与标签的现场核验。"
+              "不同环节受影响不同：单据生成、数据录入与费率查询更易被工具辅助，但实物核对、差异处理与沟通协调仍由人负责。"
             ]
           },
           "id": "material-recording-clerks.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "editorial"
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -7652,12 +7634,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不可替代：对短缺、损坏、错发、退货和计划变更的最终处置。"
+              "人的控制点：核对货物与单据、判断并如实记录差异、按口径核算费用、沟通处理问题并升级，对记录准确性与合规负责。"
             ]
           },
           "id": "material-recording-clerks.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "editorial"
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -7666,12 +7648,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "复核要回到订单、实物、时间戳、扫描记录和责任人。"
+              "先用完全虚构的进出货单据与库存记录做一次离线演练，写出核对、记录与差异处理边界，不依赖未经核实的自动核对替代实物确认。"
             ]
           },
           "id": "material-recording-clerks.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "editorial"
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -7680,12 +7662,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "指标应看错发、漏发、账实差异、返工与追溯时间，不只看录入速度。"
+              "编辑建议：单据生成、数据录入与费率查询可由工具辅助；当前资料不证明机构普遍采用这些系统。"
             ]
           },
           "id": "material-recording-clerks.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "editorial"
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -7694,12 +7676,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "43-5071招聘信息中的Excel、Office和SAP提及率只说明工具需求，不是采用率或失业概率。"
+              "以单据与实物一致、记录准确与合规为准，保留人工判断与记录。"
             ]
           },
           "id": "material-recording-clerks.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "onet-hot-tech"
+            "internal-rubric"
           ],
           "type": "prose"
         }
@@ -7716,9 +7698,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国公开工资资料没有本页三个美国职业代码的一一对应精确工资。"
+              "中国大陆没有单列本职业的公开职业工资：国家统计局按行业门类发布城镇单位就业人员年平均工资，物料记录文员主要计入交通运输、仓储和邮政业等行业，行业平均不能替代本职业工资。"
             ]
           },
+          "fact_refs": [
+            "cn-transport-nonprivate-wage"
+          ],
           "id": "material-recording-clerks.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
             "nbs-wages"
@@ -7730,9 +7715,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局行业和人员大类均值只能提供背景，不是个人岗位报价。"
+              "口径说明：国家统计局 2025 年交通运输、仓储和邮政业就业人员年平均工资，城镇非私营单位为 {{fact:cn-transport-nonprivate-wage}}、城镇私营单位为 {{fact:cn-transport-private-wage}}；全国城镇非私营单位合计为 {{fact:cn-national-nonprivate-wage}}。均为行业口径，不等于本职业中位数或起薪。"
             ]
           },
+          "fact_refs": [
+            "cn-transport-nonprivate-wage",
+            "cn-transport-private-wage",
+            "cn-national-nonprivate-wage"
+          ],
           "id": "material-recording-clerks.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
             "nbs-wages"
@@ -7744,12 +7734,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "求职比较应拆地区、行业、企业、班次、实物搬运、设备操作和岗位层级。"
+              "类别边界：人力资源社会保障部企业薪酬调查信息按职业/岗位分类发布，可用于查询仓储与物流文员相关岗位薪酬，但本页未取得与 O*NET 43-5071.00 精确对应的条目，不作为本职业全国中位数；具体以主管部门发布为准。"
             ]
           },
+          "fact_refs": [
+            "cn-wage-gap"
+          ],
           "id": "material-recording-clerks.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "nbs-wages"
+            "mohrss-wage"
           ],
           "type": "prose"
         },
@@ -7758,12 +7751,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "缺少精确职业分位时，保留数据范围说明并直接核真实招聘薪酬结构。"
+              "证据不足：未取得中国大陆物料记录文员对应的全国职业工资中位数、统计期与口径；本页仅展示行业代理并标明其为行业口径，不使用代理数字或美国数字填补。"
             ]
           },
+          "fact_refs": [
+            "cn-wage-gap"
+          ],
           "id": "material-recording-clerks.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "editorial"
+            "nbs-wages"
           ],
           "type": "prose"
         }
@@ -7780,12 +7776,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS合并职业口径2025年年薪中位数为47,600美元。"
+              "美国物料记录文员薪资与就业口径（本职业 43-5071.00）"
             ]
           },
+          "fact_refs": [
+            "us-combined-median-wage"
+          ],
           "id": "material-recording-clerks.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "bls-pay"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -7794,12 +7793,18 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "10%低于35,620美元，10%高于75,160美元。"
+              "O*NET 该页显示 2025 年 BLS OEWS 年薪中位数为 45,260 美元（约 21.76 美元/小时）；就业方面 2024 年约 862,200 人、2024—2034 年预计下降（Decline，-1% 或更低）、期间职位空缺约 69,300 个。该页未展示分位工资。以上为美国全国口径且属本职业 43-5071.00，「下降」为统计预测，不等于个人就业结果。"
             ]
           },
+          "fact_refs": [
+            "us-combined-median-wage",
+            "us-employment-2024",
+            "us-growth",
+            "us-openings"
+          ],
           "id": "material-recording-clerks.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "bls-pay"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -7808,12 +7813,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025年5月分职业年薪中位数：43-5061为59,650美元，43-5071为45,260美元，43-5111为46,380美元。"
+              "工资统计位置：以上为美国全国口径且属本职业 43-5071.00；中位数不代表起薪或个人到手收入，且未披露分位。"
             ]
           },
+          "fact_refs": [
+            "us-combined-median-wage"
+          ],
           "id": "material-recording-clerks.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "bls-pay"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -7822,12 +7830,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "上述为分职业中位数；本页合并职业中位数不能代替某一子职业工资，也不是个人起薪。"
+              "怎样理解这些位置：O*NET 该页只展示中位数，不展示分位；中位数不是新手或资深等级。就业规模与「下降」是职业统计，须与个人机会分开解释；整体下降不代表每个地区或雇主都没有岗位。"
             ]
           },
+          "fact_refs": [
+            "us-combined-median-wage"
+          ],
           "id": "material-recording-clerks.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "bls-pay"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -7836,12 +7847,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业、地点、班次、经验和任务组合都会影响报价。"
+              "行业分布与局限：该页 2024 年主要行业为 Manufacturing 与 Retail Trade；行业分布是雇主场景信号，不是需求预测。"
             ]
           },
+          "fact_refs": [
+            "us-employment-2024"
+          ],
           "id": "material-recording-clerks.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "editorial"
+            "onet-industry"
           ],
           "type": "prose"
         },
@@ -7850,12 +7864,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "比较时先确认职位属于生产计划、收发记录还是称量计量检查范围。"
+              "规模与口径提示：该职业 2024 年就业约 862,200 人、预计下降；引用时须标明年份、覆盖范围与本职业口径，且中位数与增长描述不能跨市场拼接。"
             ]
           },
+          "fact_refs": [
+            "us-employment-2024",
+            "us-growth"
+          ],
           "id": "material-recording-clerks.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "editorial"
+            "onet-trends"
           ],
           "type": "prose"
         }
@@ -7872,12 +7890,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "适配度看能否持续核对订单、实物、账目、位置和状态并保持一致。"
+              "适配信号：先看可观察的工作行为"
             ]
           },
           "id": "material-recording-clerks.fit.riasec-fit-block.1",
           "source_refs": [
-            "editorial"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7886,12 +7904,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "正向信号：喜欢依次比对订单号、物料号与数量，并保留原始记录。"
+              "判断是否适合，先看能否在重复性事务与时间压力下保持准确、能否耐心核对货物与单据并如实记录差异、能否与承运商和内部部门清楚沟通处理问题、能否按规程处理安全与堆放；RIASEC 等工具只能提出假设，不能替代真实任务体验。"
             ]
           },
           "id": "material-recording-clerks.fit.riasec-fit-block.2",
           "source_refs": [
-            "editorial"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7900,12 +7918,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "正向信号：能在库存差异出现时写出复核时间、责任人与升级对象。"
+              "积极信号：细致耐心、记录准确、能按流程核对与处理差异、沟通清楚、能在压力下保持秩序。"
             ]
           },
           "id": "material-recording-clerks.fit.riasec-fit-block.3",
           "source_refs": [
-            "editorial"
+            "onet-context"
           ],
           "type": "prose"
         },
@@ -7914,12 +7932,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "正向信号：愿意在办公室更新库存记录，并到仓库现场核验货物。"
+              "谨慎条件：难以在重复事务中保持专注、倾向掩盖差异或跳过核对、不愿与多方沟通协调，或对非受控环境与体力环节不适应的人需谨慎。"
             ]
           },
           "id": "material-recording-clerks.fit.riasec-fit-block.4",
           "source_refs": [
-            "editorial"
+            "onet-context"
           ],
           "type": "prose"
         },
@@ -7928,12 +7946,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：只信库存系统，不愿实点货物或检查损坏。"
+              "试验动作：用完全虚构的进出货单据与库存记录，完成一次核对、记录与差异处理的演练，请他人按记录复核。"
             ]
           },
           "id": "material-recording-clerks.fit.riasec-fit-block.5",
           "source_refs": [
-            "editorial"
+            "onet-tasks"
           ],
           "type": "prose"
         },
@@ -7942,12 +7960,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎信号：为了处理速度跳过订单号、物料号或库位核对。"
+              "O*NET 兴趣代码为 CRE（常规型—现实型—企业型）：偏按规程处理信息与数据、动手处理实物并协调事务；相关标签只描述活动偏好，不能决定胜任或资格。"
             ]
           },
           "id": "material-recording-clerks.fit.riasec-fit-block.6",
           "source_refs": [
-            "editorial"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -7956,26 +7974,26 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "BLS强调与供应商沟通、处理客户问题、检查细小缺陷和计算运费；这些是可观察工作要求。"
+              "大五等通用人格量表不提供本职业的岗位证据，只能用于自我反思；应结合真实的单据核对、记录处理与沟通协作体验继续核对。"
             ]
           },
           "id": "material-recording-clerks.fit.riasec-fit-block.7",
           "source_refs": [
-            "editorial"
+            "onet-summary"
           ],
           "type": "prose"
         },
         {
           "availability": "available",
-          "copy_key": "career.item.riasec-fit-block",
+          "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "一周内能否稳定找出库存卡缺项和账实差异，比性格标签更有用。"
+              "MBTI、九型人格等类型工具不能决定胜任或资格，只能用于自我反思。"
             ]
           },
           "id": "material-recording-clerks.fit.riasec-fit-block.8",
           "source_refs": [
-            "editorial"
+            "onet-summary"
           ],
           "type": "prose"
         }
@@ -7992,12 +8010,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "单货不符；每批收发时由经手人核订单号、物料、数量与时间，差异交当班负责人，不覆盖原记录。"
+              "单据与实物不符风险"
             ]
           },
           "id": "material-recording-clerks.risk.career-risk-cards.1",
           "source_refs": [
-            "editorial"
+            "onet-tasks"
           ],
           "type": "prose"
         },
@@ -8006,12 +8024,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "账实不符；盘点时保留系统数与实点数，注明复核时间和责任人，超过雇主阈值时升级库存负责人。"
+              "记录与差异瞒报风险"
             ]
           },
           "id": "material-recording-clerks.risk.career-risk-cards.2",
           "source_refs": [
-            "editorial"
+            "onet-tasks"
           ],
           "type": "prose"
         },
@@ -8020,12 +8038,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "损坏或标签异常；收发或检查时由经手人隔离标识并按雇主流程交质量或主管处理，不自行改为完好。"
+              "费用与费率核算风险"
             ]
           },
           "id": "material-recording-clerks.risk.career-risk-cards.3",
           "source_refs": [
-            "editorial"
+            "onet-context"
           ],
           "type": "prose"
         },
@@ -8034,12 +8052,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "位置未知；移动后及时记录原位和新位，未确认位置的物料不作为已可用，由库存负责人决定后续。"
+              "安全与堆放风险"
             ]
           },
           "id": "material-recording-clerks.risk.career-risk-cards.4",
           "source_refs": [
-            "editorial"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -8048,13 +8066,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "未授权设备操作；只由完成相应培训并获雇主授权者操作，工具提示或岗位名称不授予启动、停机或复工权限。"
+              "多方沟通与交接风险"
             ]
           },
           "id": "material-recording-clerks.risk.career-risk-cards.5",
           "source_refs": [
-            "bls-environment",
-            "editorial"
+            "onet-context"
           ],
           "type": "prose"
         }
@@ -8071,12 +8088,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS称典型入行教育为高中学历或同等学历，通常由有经验员工在岗培训。"
+              "入行路径与能力阶段"
             ]
           },
           "id": "material-recording-clerks.path.career-path-block.1",
           "source_refs": [
-            "bls-path"
+            "onet-education",
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -8085,12 +8103,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "多数岗位训练最长约1个月，生产计划与催办文员可能最长约6个月。"
+              "美国侧该职业属 Job Zone 1-2（所需准备很少至一些）：多数岗位要求高中文凭或 GED（约 75%），在职培训从数天到一年；具体学历与培训要求按雇主与行业核对。"
             ]
           },
           "id": "material-recording-clerks.path.career-path-block.2",
           "source_refs": [
-            "bls-path"
+            "onet-education"
           ],
           "type": "prose"
         },
@@ -8099,12 +8117,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入门先练订单、物料、数量、位置、状态和差异记录。"
+              "美国：以高中文凭加在职培训、仓储或物流系统操作经验为常见路径，部分岗位提供学徒机会。中国大陆：无与该 O*NET 精确对应的统一职业资格，仓储与物流文员岗位多按用人单位与行业要求确定，涉及叉车与场内机动车作业须按所在地安全与特种作业规定核对。"
             ]
           },
           "id": "material-recording-clerks.path.career-path-block.3",
           "source_refs": [
-            "editorial"
+            "onet-education"
           ],
           "type": "prose"
         },
@@ -8113,12 +8131,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "成长时再学习扫描设备、库存系统、运输文件和生产计划协调。"
+              "学历、培训与操作授权是不同状态：完成培训不自动授予设备操作资格；涉及叉车与场内机动车等作业的授权须按雇主与所在地规定核对，未获授权不得操作。"
             ]
           },
           "id": "material-recording-clerks.path.career-path-block.4",
           "source_refs": [
-            "editorial"
+            "onet-cert",
+            "onet-education"
           ],
           "type": "prose"
         },
@@ -8127,12 +8146,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "七日练习使用虚构计划卡、收货卡和称量卡：核字段、算差异并写升级记录。"
+              "入口阶段：在监督下练习单据核对、数据录入与记录、包装与贴标、库存与仓位更新，学习安全与合规要求并保留过程记录。"
             ]
           },
           "id": "material-recording-clerks.path.career-path-block.5",
           "source_refs": [
-            "editorial"
+            "onet-education"
           ],
           "type": "prose"
         },
@@ -8141,12 +8160,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "作品一是三类记录差异表；作品二是计划助理与计量记录员的岗位比较。"
+              "展示证据：用一份可复核的记录与差异处理说明（含单据核对、数据记录、差异处理与上报路径），展示准确记录并如实处理问题的能力。"
             ]
           },
           "id": "material-recording-clerks.path.career-path-block.6",
           "source_refs": [
-            "editorial"
+            "onet-education"
           ],
           "type": "prose"
         },
@@ -8155,12 +8174,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学历和软件熟悉度不自动授予动力设备、质量处置或计划变更权限。"
+              "下一步：核对目标雇主的系统与流程、单据与费率口径、安全与堆放规定，并在受监督的真实收发货中验证核对、记录与沟通能力。"
             ]
           },
           "id": "material-recording-clerks.path.career-path-block.7",
           "source_refs": [
-            "editorial"
+            "onet-education"
           ],
           "type": "prose"
         },
@@ -8169,26 +8188,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "求职时核具体组成范围、实物搬运比例、班次、设备培训、绩效指标和汇报线。"
+              "向更高责任过渡：积累经验后可负责复杂货件与承运协调、带教新人或负责库存与流程规范，或转向仓储主管、物流调度与供应链方向。"
             ]
           },
           "id": "material-recording-clerks.path.career-path-block.8",
           "source_refs": [
-            "editorial"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-path-block",
-          "data": {
-            "paragraphs": [
-              "七日桌面练习只用以下虚构材料，不操作设备。计划卡P：订单M01要求周三交100件，已完成70件；缺料到货日期未知。收货卡R：运单标10箱，实点9箱，库位A-02，1箱外包装破损。称量卡W：批次W01毛重12.4千克、皮重0.4千克，单据净重12.5千克；称量时间和复核人未知。练习规则：未知字段与任何数量差异都保留原值，分别交计划员、收货负责人、称量复核人；不自行改交期、放行或判废。第1天写三卡所属职业及待核字段；第2天算P尚欠30件；第3天算R短1箱且记录破损；第4天算W净重12.0千克、与单据差-0.5千克，不能推断原因；第5天做两个独立变体：A仅把W皮重改为0.9千克，净重11.5千克、差-1.0千克；B回到原始材料，仅把P已完成量改为85件，尚欠15件，交期仍待核；第6天比较两张虚构岗位卡：计划助理负责进度表和催办，计量记录员负责批次、单位、结果及复核签名，两岗工资与班次均未知；第7天提交三卡差异表和一页岗位比较，逐条核对“已知、未知、计算、待授权动作”。作品可用于探索，不作为真实交付或质量判定。"
-            ]
-          },
-          "id": "material-recording-clerks.path.career-path-block.9",
-          "source_refs": [
-            "editorial"
+            "onet-summary"
           ],
           "type": "prose"
         }
@@ -8205,12 +8210,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS合并职业口径2025年就业1,273,500人，覆盖本页三个组成职业；分项因四舍五入可能不等于合计。"
+              "市场信号与转型方向"
             ]
           },
           "id": "material-recording-clerks.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls-outlook"
+            "onet-trends"
           ],
           "type": "prose"
         },
@@ -8219,12 +8224,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS预计组合口径2025—2035下降6%，细分职业变化不同。"
+              "O*NET 引用 BLS 数据显示，该职业 2024 年就业约 862,200 人，2024—2034 年预计下降（-1% 或更低），期间职位空缺约 69,300 个；该职业规模大但整体收缩，空缺主要来自替代需求；这是职业统计，不是个人录用概率，也不同于招聘样本。"
             ]
           },
           "id": "material-recording-clerks.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls-outlook"
+            "onet-trends"
           ],
           "type": "prose"
         },
@@ -8233,12 +8238,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "尽管净下降，预计年均约98,600个替补空缺。"
+              "该页 2024 年主要行业为 Manufacturing 与 Retail Trade；就业与空缺为统计预测，须与个人机会分开解释。"
             ]
           },
           "id": "material-recording-clerks.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls-outlook"
+            "onet-industry"
           ],
           "type": "prose"
         },
@@ -8247,12 +8252,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS指出RFID、自动存取和协作机器人会提升效率并减少部分需求。"
+              "可迁移能力：单据与实物核对、数据记录与差异处理、仓储系统操作、包装与运输安排、费用核算、多方沟通与协调。"
             ]
           },
           "id": "material-recording-clerks.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls-duties"
+            "onet-tasks"
           ],
           "type": "prose"
         },
@@ -8261,12 +8266,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025—2035分职业就业预测：43-5061下降1%，43-5071下降8%，43-5111下降5%；不要把合并职业降幅套给每个岗位。"
+              "需要补足：目标雇主的系统与流程、物流与合规知识、叉车等设备授权，或转向仓储主管、物流调度与供应链方向所需的经验与责任证据。"
             ]
           },
           "id": "material-recording-clerks.market-signals.market-signal-card.5",
           "source_refs": [
-            "bls-outlook"
+            "onet-summary"
           ],
           "type": "prose"
         }
@@ -8284,112 +8289,119 @@
           "data": {
             "entries": [
               {
-                "answer": "本页是透明组合口径：生产计划与催办43-5061.00、收发货与库存记录43-5071.00、称量计量检查记录43-5111.00；三类职责不可互换。",
+                "answer": "本页物料记录文员指 O*NET 43-5071.00：验核并维护涉及库存的进出货记录，核验并记录进货物料或商品并安排运输，可能准备发货物品；工作包括核对货物与单据、申领与存放包装物料、编制工单与提单、打包封装贴标、记录重量费用与差异、沟通处理差错、联络承运商、确定运输方式与费率并核算费用。工作以仓库、货站与非受控室内环境为主。它不等同于工业生产经理、运输仓储与配送经理、供应链经理或物流分析师。",
                 "id": "material-recording-clerks.faq.1",
+                "question": "日常工作和工时如何？",
                 "question_key": "career.faq.material-recording-clerks.daily-work",
                 "source_refs": [
-                  "onet-production",
-                  "onet-shipping",
-                  "onet-weighing"
+                  "onet-summary",
+                  "onet-tasks"
                 ]
               },
               {
-                "answer": "组合内三类角色分别偏生产流协调、收发货记录、称量计量检查记录；工业生产经理则承担更高层的整体生产资源和结果责任。",
+                "answer": "工业生产经理负责生产管理；运输仓储与配送经理与供应链经理负责体系与团队；物流分析师负责规划与分析。物料记录文员处于执行层，负责进出货与库存的记录与事务处理，区分应比较职责范围与授权。",
                 "id": "material-recording-clerks.faq.2",
+                "question": "这个职业与相邻职业如何区分？",
                 "question_key": "career.faq.material-recording-clerks.role-comparison",
                 "source_refs": [
-                  "onet-production",
-                  "onet-shipping",
-                  "onet-weighing"
+                  "onet-summary",
+                  "onet-tasks"
                 ]
               },
               {
-                "answer": "适配观察聚焦单、货、账、位和状态的一致性，以及发现差异后保留记录、明确责任人与升级对象的习惯。",
+                "answer": "可观察信号：细致耐心、记录准确、能按流程核对与处理差异、沟通清楚、能在压力下保持秩序；O*NET 兴趣代码 CRE 只描述活动偏好，不能决定胜任或资格。",
                 "id": "material-recording-clerks.faq.3",
+                "question": "什么信号说明我可能适合？",
                 "question_key": "career.faq.material-recording-clerks.fit",
                 "source_refs": [
-                  "editorial"
+                  "onet-summary",
+                  "onet-context"
                 ]
               },
               {
-                "answer": "BLS说明电脑、手持设备、传感器和标签可自动更新库存；这些技术事实不等于AI采用率或岗位替代概率。",
+                "answer": "条码与扫描、库存与订单系统、单据自动生成、运费与费率查询、差异与异常提醒等工具可辅助录入、核对与生成记录，但实物核对、差异判断、与承运商及内部部门的沟通处理与记录责任仍由人负责，工具不能替代实物核验；本页只把工具用途写成任务假设，不代表机构普遍采用。",
                 "id": "material-recording-clerks.faq.4",
+                "question": "AI 会如何影响这个职业？",
                 "question_key": "career.faq.material-recording-clerks.ai-impact",
                 "source_refs": [
-                  "bls-duties"
+                  "ilo-genai"
                 ]
               },
               {
-                "answer": "数字工具可辅助录入、比对和缺项提示，但实物数量、损坏、标签、装运状态与最终异常处理须由明确责任人复核。",
+                "answer": "必须由人负责的包括：核对货物与单据、判断并如实记录差异、按口径核算费用、沟通处理问题并升级，以及对记录准确性与合规负责。",
                 "id": "material-recording-clerks.faq.5",
+                "question": "哪些判断必须由人负责？",
                 "question_key": "career.faq.material-recording-clerks.human-control",
                 "source_refs": [
-                  "editorial"
+                  "internal-rubric"
                 ]
               },
               {
-                "answer": "国家统计局工资资料按行业和人员大类聚合，不能映射为本页三个美国职业代码的中国精确工资。",
+                "answer": "国家统计局按行业门类发布城镇单位就业人员年平均工资，未单列本职业，因此无法建立可安全映射的全国职业工资中位数；页面仅展示行业代理并标明其为行业口径：2025 年交通运输、仓储和邮政业城镇非私营单位为 133,981 元/年、城镇私营单位为 73,133 元/年，全国城镇非私营单位合计为 129,441 元/年，均不等于本职业中位数或起薪，并使用人力资源和社会保障部企业薪酬调查信息作为查询入口。",
                 "id": "material-recording-clerks.faq.6",
+                "question": "中国大陆薪资证据是什么？",
                 "question_key": "career.faq.material-recording-clerks.china-pay",
                 "source_refs": [
-                  "nbs-wages"
+                  "nbs-wages",
+                  "mohrss-wage"
                 ]
               },
               {
-                "answer": "BLS合并职业口径2025年年薪中位数47,600美元；10%低于35,620美元，10%高于75,160美元。",
+                "answer": "O*NET 该页显示 2025 年 BLS OEWS 年薪中位数 45,260 美元（约 21.76 美元/小时），为该职业 43-5071.00 口径；该页未展示分位工资。这是美国全国统计口径，不含个人到手收入或起薪。",
                 "id": "material-recording-clerks.faq.7",
+                "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.material-recording-clerks.us-pay",
                 "source_refs": [
-                  "bls-pay"
+                  "onet-wages"
                 ]
               },
               {
-                "answer": "BLS称该组合职业通常需要高中学历或同等学历；部分雇主偏好生产计划与催办文员具大学学历。",
+                "answer": "美国侧该职业属 Job Zone 1-2，多数岗位要求高中文凭并在职培训。中国大陆：无与该 O*NET 精确对应的统一职业资格，仓储与物流文员岗位按用人单位与行业要求核对，涉及叉车与场内机动车作业须按所在地安全与特种作业规定核对。",
                 "id": "material-recording-clerks.faq.8",
+                "question": "入行和训练路径是什么？",
                 "question_key": "career.faq.material-recording-clerks.education-path",
                 "source_refs": [
-                  "bls-path"
+                  "onet-education",
+                  "onet-cert"
                 ]
               },
               {
-                "answer": "BLS指出部分岗位需搬重物和频繁弯腰，并可能在仓库或工厂地面接触包裹和自动设备；具体设备必须按雇主培训与授权操作。",
+                "answer": "主要风险包括单据与实物不符、记录与差异瞒报、费用与费率核算、安全与堆放以及多方沟通与交接；控制方式是核对实物、如实记录差异、按口径核算费用、遵守安全与堆放规定并做好交接与升级；具体规则按雇主与适用法规核对。",
                 "id": "material-recording-clerks.faq.9",
+                "question": "主要风险和控制边界是什么？",
                 "question_key": "career.faq.material-recording-clerks.risk-boundary",
                 "source_refs": [
-                  "bls-environment"
+                  "onet-tasks",
+                  "onet-context"
                 ]
               },
               {
-                "answer": "BLS预计组合口径2025—2035就业下降6%；三个细分的变化并不相同。",
+                "answer": "O*NET 引用 BLS 数据显示，该职业 2024 年就业约 862,200 人，2024—2034 年预计下降（-1% 或更低），期间职位空缺约 69,300 个；这是职业统计，不等于个人录用概率，整体下降也不代表每个地区或雇主都无机会。",
                 "id": "material-recording-clerks.faq.10",
+                "question": "市场信号应如何理解？",
                 "question_key": "career.faq.material-recording-clerks.outlook-transition",
                 "source_refs": [
-                  "bls-outlook"
+                  "onet-trends"
                 ]
               },
               {
-                "answer": "尽管净就业下降，BLS预计组合口径十年内年均约98,600个空缺，全部来自转岗或退出劳动力市场的替补需求。",
+                "answer": "若能在重复事务与压力下保持准确并如实记录差异，值得用一份完全虚构的进出货单据与库存记录做一次低成本演练；转向仓储主管、物流调度或供应链方向需要补足系统、流程与责任经验。",
                 "id": "material-recording-clerks.faq.11",
+                "question": "这个职业值得进一步试验吗？",
                 "question_key": "career.faq.material-recording-clerks.career-worth",
                 "source_refs": [
-                  "bls-outlook"
+                  "onet-summary"
                 ]
+              },
+              {
+                "answer": "中国、美国与具体机构口径的证据分别陈述：工资、就业、资格/授权、安全与 AI 结论不得跨范围拼接。；物料记录文员页面提供职业判断与记录演练信息，不替代所在地法律、职业安全规范或其他专业意见。；任何「证据不足」只表示在有界检索后未建立安全对应的数据，不使用代理或记忆伪造数字。",
+                "id": "material-recording-clerks.faq.boundary",
+                "question": "页面使用边界是什么？",
+                "question_key": "career.faq.material-recording-clerks.boundary"
               }
             ]
           },
           "id": "material-recording-clerks.sources.faq.1",
-          "source_refs": [
-            "bls-duties",
-            "bls-environment",
-            "bls-outlook",
-            "bls-path",
-            "bls-pay",
-            "editorial",
-            "nbs-wages",
-            "onet-production",
-            "onet-shipping",
-            "onet-weighing"
-          ],
           "type": "faq"
         },
         {
@@ -8397,25 +8409,12 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "本页与BLS物料记录文员职业组范围一致：43-5061、43-5071、43-5111；订单配货员53-7065不属于本组。",
-              "中国工资只有行业或人员大类背景，不冒充精确职业报价。",
-              "虚构练习不替代仓库现场程序、设备培训或雇主授权。"
+              "中国、美国与具体机构口径的证据分别陈述：工资、就业、资格/授权、安全与 AI 结论不得跨范围拼接。",
+              "物料记录文员页面提供职业判断与记录演练信息，不替代所在地法律、职业安全规范或其他专业意见。",
+              "任何「证据不足」只表示在有界检索后未建立安全对应的数据，不使用代理或记忆伪造数字。"
             ]
           },
           "id": "material-recording-clerks.sources.boundary.1",
-          "source_refs": [
-            "bls-duties",
-            "bls-environment",
-            "bls-outlook",
-            "bls-path",
-            "bls-pay",
-            "editorial",
-            "nbs-wages",
-            "onet-hot-tech",
-            "onet-production",
-            "onet-shipping",
-            "onet-weighing"
-          ],
           "type": "list"
         }
       ]
@@ -8435,7 +8434,7 @@
                 "entity": "物料记录文员",
                 "id": "material-recording-clerks.navigation.1",
                 "relation": "career.section",
-                "url": "#career-content-quick-decision"
+                "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
                 "entity": "物料记录文员",
@@ -8516,180 +8515,196 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-09",
+                "accessed_at": "2026-09-25",
                 "details": [
-                  "官方Material Recording Clerks页面：职业组成、工作环境、入行培训、2025年5月工资及2025—2035就业预测章节。",
-                  "只支持所列组合职业、时期和口径。"
+                  "提供 43-5071.00 的职业身份、官方描述、兴趣代码、Job Zone、技能与知识。",
+                  "该页工资与就业数据为本职业（43-5071.00）口径。"
                 ],
-                "evidence_type": "official combined occupation duties",
-                "id": "bls-duties",
-                "limitation": "只支持所列组合职业、时期和口径。",
+                "evidence_type": "official occupation summary",
+                "id": "onet-summary",
+                "limitation": "仅用于 43-5071.00 与美国市场；不建立中国映射。",
                 "market": "美国",
-                "name": "BLS Occupational Outlook Handbook — Material Recording Clerks duties",
-                "period": "current page; accessed 2026-09-09",
-                "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "combined_official",
-                "url": "https://www.bls.gov/ooh/office-and-administrative-support/material-recording-clerks.htm"
-              },
-              {
-                "accessed_at": "2026-09-09",
-                "details": [
-                  "官方Material Recording Clerks页面：职业组成、工作环境、入行培训、2025年5月工资及2025—2035就业预测章节。",
-                  "只支持所列组合职业、时期和口径。"
-                ],
-                "evidence_type": "official combined work environment",
-                "id": "bls-environment",
-                "limitation": "只支持所列组合职业、时期和口径。",
-                "market": "美国",
-                "name": "BLS Occupational Outlook Handbook — Material Recording Clerks environment",
-                "period": "current page; accessed 2026-09-09",
-                "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "combined_official",
-                "url": "https://www.bls.gov/ooh/office-and-administrative-support/material-recording-clerks.htm"
-              },
-              {
-                "accessed_at": "2026-09-09",
-                "details": [
-                  "官方Material Recording Clerks页面：职业组成、工作环境、入行培训、2025年5月工资及2025—2035就业预测章节。",
-                  "只支持所列组合职业、时期和口径。"
-                ],
-                "evidence_type": "official combined and component employment projections",
-                "id": "bls-outlook",
-                "limitation": "只支持所列组合职业、时期和口径。",
-                "market": "美国",
-                "name": "BLS Occupational Outlook Handbook — Material Recording Clerks outlook",
-                "period": "2025-2035 projections",
-                "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "combined_official",
-                "url": "https://www.bls.gov/ooh/office-and-administrative-support/material-recording-clerks.htm"
-              },
-              {
-                "accessed_at": "2026-09-09",
-                "details": [
-                  "官方Material Recording Clerks页面：职业组成、工作环境、入行培训、2025年5月工资及2025—2035就业预测章节。",
-                  "只支持所列组合职业、时期和口径。"
-                ],
-                "evidence_type": "official education, training and qualities",
-                "id": "bls-path",
-                "limitation": "只支持所列组合职业、时期和口径。",
-                "market": "美国",
-                "name": "BLS Occupational Outlook Handbook — Material Recording Clerks entry path",
-                "period": "current page; accessed 2026-09-09",
-                "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "combined_official",
-                "url": "https://www.bls.gov/ooh/office-and-administrative-support/material-recording-clerks.htm"
-              },
-              {
-                "accessed_at": "2026-09-09",
-                "details": [
-                  "官方Material Recording Clerks页面：职业组成、工作环境、入行培训、2025年5月工资及2025—2035就业预测章节。",
-                  "只支持所列组合职业、时期和口径。"
-                ],
-                "evidence_type": "official combined and component wage data",
-                "id": "bls-pay",
-                "limitation": "只支持所列组合职业、时期和口径。",
-                "market": "美国",
-                "name": "BLS Occupational Outlook Handbook — Material Recording Clerks pay",
-                "period": "May 2025 wages",
-                "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "combined_official",
-                "url": "https://www.bls.gov/ooh/office-and-administrative-support/material-recording-clerks.htm"
-              },
-              {
-                "accessed_at": "2026-09-06",
-                "details": [
-                  "用于读者职业探索与虚构桌面练习。",
-                  "只支持虚构库存记录审阅，不替代雇主程序、设备培训或现场授权。"
-                ],
-                "evidence_type": "editorial desktop exercise",
-                "id": "editorial",
-                "limitation": "只支持虚构库存记录审阅，不替代雇主程序、设备培训或现场授权。",
-                "market": "编辑设计",
-                "name": "FermatMind — 物料记录文员职业探索框架",
-                "period": "2026-09-06",
-                "publisher": "FermatMind",
-                "scope": "editorial_synthesis",
-                "url": null
-              },
-              {
-                "accessed_at": "2026-09-06",
-                "details": [
-                  "可通过本条所列来源链接查看原文。",
-                  "按行业和人员大类聚合，不是三个美国职业代码的中国精确工资。"
-                ],
-                "evidence_type": "official aggregate wage statistics",
-                "id": "nbs-wages",
-                "limitation": "按行业和人员大类聚合，不是三个美国职业代码的中国精确工资。",
-                "market": "中国大陆",
-                "name": "国家统计局 — 2025年城镇单位就业人员年平均工资情况",
-                "period": "2025 wage aggregates published 2026",
-                "publisher": "国家统计局",
-                "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfbhjd/202605/t20260515_1963707.html"
-              },
-              {
-                "accessed_at": "2026-09-06",
-                "details": [
-                  "可通过本条所列来源链接查看原文。",
-                  "只支持所列组合职业、时期和口径。"
-                ],
-                "evidence_type": "official job-posting software signals",
-                "id": "onet-hot-tech",
-                "limitation": "只支持所列组合职业、时期和口径。",
-                "market": "美国",
-                "name": "O*NET OnLine — Shipping, Receiving, and Inventory Clerks hot technologies",
-                "period": "2025 US job postings",
-                "publisher": "O*NET / Lightcast",
+                "name": "O*NET 43-5071.00 收货、发货与库存文员（摘要）",
+                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/hot_tech/43-5071.00"
-              },
-              {
-                "accessed_at": "2026-09-09",
-                "details": [
-                  "官方职业页面的定义和任务章节；本次重新核对三个子职业边界。",
-                  "只支持所列组合职业、时期和口径。"
-                ],
-                "evidence_type": "official component occupation profile",
-                "id": "onet-production",
-                "limitation": "只支持所列组合职业、时期和口径。",
-                "market": "美国",
-                "name": "O*NET OnLine — Production, Planning, and Expediting Clerks 43-5061.00",
-                "period": "current page; accessed 2026-09-09",
-                "publisher": "O*NET OnLine",
-                "scope": "combined_official",
-                "url": "https://www.onetonline.org/link/summary/43-5061.00"
-              },
-              {
-                "accessed_at": "2026-09-09",
-                "details": [
-                  "官方职业页面的定义和任务章节；本次重新核对三个子职业边界。",
-                  "只支持所列组合职业、时期和口径。"
-                ],
-                "evidence_type": "official component occupation profile",
-                "id": "onet-shipping",
-                "limitation": "只支持所列组合职业、时期和口径。",
-                "market": "美国",
-                "name": "O*NET OnLine — Shipping, Receiving, and Inventory Clerks 43-5071.00",
-                "period": "current page; accessed 2026-09-09",
-                "publisher": "O*NET OnLine",
-                "scope": "combined_official",
                 "url": "https://www.onetonline.org/link/summary/43-5071.00"
               },
               {
-                "accessed_at": "2026-09-09",
+                "accessed_at": "2026-09-25",
                 "details": [
-                  "官方职业页面的定义和任务章节；本次重新核对三个子职业边界。",
-                  "只支持所列组合职业、时期和口径。"
+                  "提供核对货物与单据、申领与存放包装物料、编制工单与提单、打包封装贴标、记录重量费用与差异、与相关方核对处理差错、按线路配送物料、联络承运商、确定运输方式与费率、核算费用等任务清单。",
+                  "任务样本不代表每个岗位执行全部任务。"
                 ],
-                "evidence_type": "official component occupation profile",
-                "id": "onet-weighing",
-                "limitation": "只支持所列组合职业、时期和口径。",
+                "evidence_type": "official occupation task list",
+                "id": "onet-tasks",
+                "limitation": "任务样本不代表每个岗位执行全部任务；不建立中国映射。",
                 "market": "美国",
-                "name": "O*NET OnLine — Weighers, Measurers, Checkers, and Samplers, Recordkeeping 43-5111.00",
-                "period": "current page; accessed 2026-09-09",
-                "publisher": "O*NET OnLine",
-                "scope": "combined_official",
-                "url": "https://www.onetonline.org/link/summary/43-5111.00"
+                "name": "O*NET 43-5071.00 任务（Tasks）",
+                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/43-5071.00#Tasks"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "描述每天面对面沟通与使用邮件电话、多在非受控室内、重复性任务多、时间压力常见、安全责任较高、作息规律等工作情境。",
+                  "美国工作情境不替代中国法律与雇主规程。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-context",
+                "limitation": "美国工作情境不替代中国法律与雇主规程。",
+                "market": "美国",
+                "name": "O*NET 43-5071.00 工作情境（Work Context）",
+                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/43-5071.00#WorkContext"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "2025 BLS OEWS 中位工资；该页为本职业（43-5071.00）口径。",
+                  "本页未展示分位工资；不以推断值替代。"
+                ],
+                "evidence_type": "O*NET display of BLS OEWS wage data",
+                "id": "onet-wages",
+                "limitation": "本页未展示分位工资；中位数不代表起薪或个人到手收入。",
+                "market": "美国",
+                "name": "O*NET 43-5071.00 全国工资（BLS OEWS 展示）",
+                "period": "2025 BLS OEWS 工资数据；查阅 2026-09-25",
+                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/43-5071.00"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "2024 年就业规模与 2024—2034 年增长与职位空缺预测。",
+                  "预测不是录用保证。"
+                ],
+                "evidence_type": "official employment data",
+                "id": "onet-trends",
+                "limitation": "预测不是录用保证；“下降”不等于个人机会必然减少。",
+                "market": "美国",
+                "name": "O*NET 43-5071.00 全国就业趋势",
+                "period": "2024—2034 预测；查阅 2026-09-25",
+                "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/43-5071.00"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "该页 2024 年主要行业为 Manufacturing 与 Retail Trade。",
+                  "行业分布是雇主场景信号，不是增长或需求预测。"
+                ],
+                "evidence_type": "official industry distribution",
+                "id": "onet-industry",
+                "limitation": "行业分布是雇主场景信号，不是增长或需求预测。",
+                "market": "美国",
+                "name": "Industries: 43-5071.00",
+                "period": "O*NET industry data current 2026; accessed 2026-09-25",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/43-5071.00"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "Job Zone 1-2（所需准备很少至一些）：多数岗位要求高中文凭或 GED（约 75%），部分要求两年制学位；在职培训从数天到一年。",
+                  "教育分布不等于每个雇主的硬性要求。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-education",
+                "limitation": "教育分布不等于每个雇主的硬性要求；不建立中国映射。",
+                "market": "美国",
+                "name": "O*NET 43-5071.00 教育与职业准备",
+                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/43-5071.00#Education"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "O*NET 提供的美国州执照与全国认证查询入口（如物流与仓储相关认证）。",
+                  "证书与培训不等于执业授权或雇主录用条件。"
+                ],
+                "evidence_type": "official license and certification directory",
+                "id": "onet-cert",
+                "limitation": "认证与培训不等于执业范围或雇主录用；按适用法域核对。",
+                "market": "美国",
+                "name": "Licenses & Certifications: 43-5071.00",
+                "period": "current page; accessed 2026-09-25",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localcert/43-5071.00"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "按任务层面评估生成式 AI 的职业暴露，用于任务级讨论。",
+                  "暴露指数不等于采用率、岗位结果或录用概率。"
+                ],
+                "evidence_type": "official research report",
+                "id": "ilo-genai",
+                "limitation": "任务暴露不等于自动化落地、采用率或裁员；不推断个人结果。",
+                "market": "全球任务研究",
+                "name": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure (ILO Working Paper 140, 2025)",
+                "period": "ILO Working Paper 140, 2025; accessed 2026-09-25",
+                "publisher": "International Labour Organization",
+                "scope": "market_signal",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "提供城镇非私营与私营单位分行业门类年平均工资（含交通运输、仓储和邮政业），用于核对中国工资公开口径。",
+                  "行业平均不是职业中位数，且不含个体工商户与自由职业者。"
+                ],
+                "evidence_type": "official industry wage statistics",
+                "id": "nbs-wages",
+                "limitation": "行业平均不是职业中位数，且不含个体工商户与自由职业者；未建立与精确职业对应的全国工资分布。",
+                "market": "中国大陆全国口径",
+                "name": "2025年城镇单位就业人员年平均工资情况",
+                "period": "2025 年度工资；发布 2026-05-15；查阅 2026-09-25",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "人力资源和社会保障部企业薪酬调查信息，按职业/岗位分类的薪酬查询入口。",
+                  "覆盖城镇企业，不含机关事业单位；本页未取得与 43-5071.00 精确对应的条目。"
+                ],
+                "evidence_type": "official enterprise wage survey",
+                "id": "mohrss-wage",
+                "limitation": "覆盖城镇企业，不含机关事业单位；本页未取得与本职业精确对应的条目，不作为全国中位数。",
+                "market": "中国大陆城镇企业",
+                "name": "企业薪酬调查信息（2024年）",
+                "period": "2024 年度；发布 2025-06；查阅 2026-09-25",
+                "publisher": "人力资源和社会保障部",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202506/t20250627_544623.html"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "整理可辅助任务与人工控制点，用于任务级 AI 与适配讨论。",
+                  "编辑量表不等于采用率、裁员、法规或证照证据。"
+                ],
+                "evidence_type": "internal task rubric",
+                "id": "internal-rubric",
+                "limitation": "编辑量表不等于采用率、裁员、法规或证照证据。",
+                "market": "全球任务层面",
+                "name": "FermatMind 物料记录文员任务影响量表",
+                "period": "FermatMind task rubric v2026.09; reviewed 2026-09-25",
+                "publisher": "FermatMind",
+                "scope": "editorial_synthesis",
+                "url": null
               }
             ]
           },
@@ -8701,90 +8716,2509 @@
   ],
   "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "display": {
+    "component_order": [
+      "breadcrumb",
+      "hero",
+      "primary_cta",
+      "fermat_decision_card",
+      "fit_decision_checklist",
+      "definition_block",
+      "responsibilities_block",
+      "work_context_block",
+      "career_ai_description_block",
+      "career_quick_answers_block",
+      "onet_structured_fields_block",
+      "adjacent_career_comparison_table",
+      "ai_impact_table",
+      "career_snapshot_primary_locale",
+      "career_snapshot_secondary_locale",
+      "riasec_fit_block",
+      "personality_fit_block",
+      "career_risk_cards",
+      "career_path_block",
+      "market_signal_card",
+      "faq_block",
+      "source_card",
+      "boundary_notice"
+    ],
+    "components": {
+      "adjacent_career_comparison_table": {
+        "conclusion": "先在监督下用可复核的记录与差异处理说明验证核对与记录边界，再判断方向，不按收入或人格给唯一排名。",
+        "evidence_links": [
+          {
+            "href": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "label": "本职业来源"
+          }
+        ],
+        "evidence_note": "相邻关系只用于方向比较，不代表自动转岗或资格互认。",
+        "heading": "相邻职业比较",
+        "intro": "以下按真实职责范围、核心交付与授权边界比较物料记录文员及其相邻岗位，不按标题互换资格。",
+        "rows": [
+          {
+            "关键区别": "负责生产计划、成本与团队管理。",
+            "更适合什么选择": "偏好生产管理时比较。",
+            "核心工作与产出": {
+              "$item": "material-recording-clerks.direction-comparison.adjacent-career-comparison-table.2",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "工业生产经理"
+          },
+          {
+            "关键区别": "负责配送体系与团队。",
+            "更适合什么选择": "偏好配送管理时比较。",
+            "核心工作与产出": {
+              "$item": "material-recording-clerks.direction-comparison.adjacent-career-comparison-table.3",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "运输仓储与配送经理"
+          },
+          {
+            "关键区别": "负责供应链策略与协同。",
+            "更适合什么选择": "偏好供应链策略时比较。",
+            "核心工作与产出": {
+              "$item": "material-recording-clerks.direction-comparison.adjacent-career-comparison-table.4",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "供应链经理"
+          },
+          {
+            "关键区别": "负责物流数据建模与流程分析。",
+            "更适合什么选择": "偏好数据分析时比较。",
+            "核心工作与产出": {
+              "$item": "material-recording-clerks.direction-comparison.adjacent-career-comparison-table.5",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "物流分析师"
+          }
+        ],
+        "transition": "下一步把比较结果转成小规模、可停止的记录演练。"
+      },
+      "ai_impact_table": {
+        "action_rows": [
+          {
+            "人群": "入行者",
+            "应对重点": "练习单据核对与记录。"
+          },
+          {
+            "人群": "在岗者",
+            "应对重点": "保留核对与差异记录。"
+          },
+          {
+            "人群": "管理者",
+            "应对重点": "先定口径、流程与安全规范。"
+          }
+        ],
+        "answer": {
+          "$item": "material-recording-clerks.ai-impact.ai-impact-table.2",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "authority_links": [
+          {
+            "来源": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "onet-tasks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "onet-tasks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "本职业 43-5071.00 工资口径",
+            "链接": {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            }
+          }
+        ],
+        "difference_intro": {
+          "$item": "material-recording-clerks.ai-impact.ai-impact-table.4",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "difference_rows": [
+          {
+            "AI主要改变": "录入与生成",
+            "仍由人负责": "实物核对",
+            "方向": "单据与录入"
+          },
+          {
+            "AI主要改变": "查询与汇总",
+            "仍由人负责": "口径与核算责任",
+            "方向": "费率和数据"
+          }
+        ],
+        "evidence_intro": {
+          "$item": "material-recording-clerks.ai-impact.ai-impact-table.3",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "evidence_rows": [
+          {
+            "使用限制": "为本职业美国口径；不含中国数据。",
+            "来源": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "研究对象": "43-5071.00 的身份与范围",
+            "结论": "支持身份与任务边界",
+            "链接": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "不替代所在地法律与雇主规程。",
+            "来源": {
+              "$source": "onet-tasks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "研究对象": "43-5071.00 的任务",
+            "结论": "支持任务拆分，不支持 AI 采用率",
+            "链接": {
+              "$source": "onet-tasks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "不替代安全与合规要求。",
+            "来源": {
+              "$source": "onet-context",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "研究对象": "43-5071.00 的工作情境",
+            "结论": "支持环境与节奏判断",
+            "链接": {
+              "$source": "onet-context",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            }
+          }
+        ],
+        "heading": {
+          "$item": "material-recording-clerks.ai-impact.ai-impact-table.1",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "method_cards": [
+          {
+            "含义": "只写工具能辅助的具体步骤，不把演示当成机构采用。",
+            "概念": "技术能力"
+          },
+          {
+            "含义": "核对数据来源、系统可靠性与复核责任；本页没有单职业采用率。",
+            "概念": "采用条件"
+          },
+          {
+            "含义": "没有职业级岗位结果研究就不推导裁员时间、编制变化或录用概率。",
+            "概念": "岗位结果"
+          }
+        ],
+        "questions": [
+          {
+            "回答": "任务暴露与采用、岗位结果是不同测量对象，不能据此推导裁撤日期。",
+            "来源": {
+              "$source": "onet-tasks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "链接": {
+              "$source": "onet-tasks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "问题": "AI 会取代物料记录文员吗？"
+          },
+          {
+            "回答": "目前只写到可辅助的单据生成、数据录入与费率查询，实物核对、差异处理与沟通协调仍由人承担。",
+            "来源": {
+              "$source": "onet-tasks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "链接": {
+              "$source": "onet-tasks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "问题": "自动化会先影响哪个环节？"
+          },
+          {
+            "回答": "没有职业级采用率来源，本页不提供这类数字。",
+            "来源": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "链接": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "问题": "本页有采用率数据吗？"
+          }
+        ],
+        "responsibility_intro": {
+          "$item": "material-recording-clerks.ai-impact.ai-impact-table.5",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "responsibility_steps": [
+          {
+            "步骤": "核对输入",
+            "说明": "确认单据、货物与安全要求。"
+          },
+          {
+            "步骤": "限定任务",
+            "说明": "只在授权与流程内处理。"
+          },
+          {
+            "步骤": "人工复核",
+            "说明": "复核记录、差异与费用。"
+          },
+          {
+            "步骤": "记录升级",
+            "说明": "差异与异常及时上报。"
+          }
+        ],
+        "risk_rows": [
+          {
+            "为什么重要": "可能造成错收错发。",
+            "控制方式": "核对实物与单据并记录差异。",
+            "风险": "单据与实物不符"
+          },
+          {
+            "为什么重要": "可能造成计费错误。",
+            "控制方式": "按口径核算并复核。",
+            "风险": "费用与费率核算"
+          },
+          {
+            "为什么重要": "可能影响时效与责任。",
+            "控制方式": "明确交接并留痕。",
+            "风险": "多方沟通与交接"
+          }
+        ],
+        "task_rows": [
+          {
+            "人的控制点": "核对实物与单据一致。",
+            "任务": "录入单据并更新库存",
+            "工作方向": "单据与录入",
+            "当前变化": {
+              "$item": "material-recording-clerks.ai-impact.ai-impact-table.7",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": {
+              "$item": "material-recording-clerks.ai-impact.ai-impact-table.8",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "任务": "查询费率并核算费用",
+            "工作方向": "费率和数据",
+            "当前变化": "可能辅助查询"
+          },
+          {
+            "人的控制点": "由文员与主管确认。",
+            "任务": "核对货物与差异处理",
+            "工作方向": "实物核对",
+            "当前变化": "不作自动决定"
+          },
+          {
+            "人的控制点": "由文员与负责人负责。",
+            "任务": "与承运商及部门沟通",
+            "工作方向": "沟通与交接",
+            "当前变化": "不可替代责任判断"
+          }
+        ],
+        "transition": {
+          "$item": "material-recording-clerks.ai-impact.ai-impact-table.6",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        }
+      },
+      "boundary_notice": [
+        {
+          "$join": [
+            {
+              "$item": "material-recording-clerks.sources.boundary.1",
+              "block": "sources",
+              "copy_key": "career.item.boundary-notice",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$link": "material-recording-clerks.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "material-recording-clerks.navigation.2",
+          "field": "url"
+        },
+        {
+          "$link": "material-recording-clerks.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "material-recording-clerks.navigation.3",
+          "field": "url"
+        },
+        {
+          "$link": "material-recording-clerks.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "material-recording-clerks.navigation.4",
+          "field": "url"
+        },
+        {
+          "$link": "material-recording-clerks.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "material-recording-clerks.navigation.5",
+          "field": "url"
+        },
+        {
+          "$link": "material-recording-clerks.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "material-recording-clerks.navigation.6",
+          "field": "url"
+        },
+        {
+          "$link": "material-recording-clerks.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "material-recording-clerks.navigation.7",
+          "field": "url"
+        },
+        {
+          "$link": "material-recording-clerks.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "material-recording-clerks.navigation.8",
+          "field": "url"
+        },
+        {
+          "$link": "material-recording-clerks.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "material-recording-clerks.navigation.9",
+          "field": "url"
+        },
+        {
+          "$link": "material-recording-clerks.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "material-recording-clerks.navigation.10",
+          "field": "url"
+        },
+        {
+          "$link": "material-recording-clerks.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "material-recording-clerks.navigation.11",
+          "field": "url"
+        },
+        {
+          "$link": "material-recording-clerks.direction-comparison.adjacent-career-comparison-table.1",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "entry": "material-recording-clerks.parity.adjacent.1",
+          "field": "url"
+        },
+        {
+          "$link": "material-recording-clerks.direction-comparison.adjacent-career-comparison-table.1",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "entry": "material-recording-clerks.parity.adjacent.2",
+          "field": "url"
+        },
+        {
+          "$link": "material-recording-clerks.direction-comparison.adjacent-career-comparison-table.1",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "entry": "material-recording-clerks.parity.adjacent.3",
+          "field": "url"
+        },
+        {
+          "$link": "material-recording-clerks.direction-comparison.adjacent-career-comparison-table.1",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "entry": "material-recording-clerks.parity.adjacent.4",
+          "field": "url"
+        },
+        {
+          "$link": "material-recording-clerks.direction-comparison.adjacent-career-comparison-table.1",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "entry": "material-recording-clerks.parity.adjacent.5",
+          "field": "url"
+        }
+      ],
+      "breadcrumb": {
+        "label": {
+          "$subject": "name"
+        },
+        "slug": {
+          "$subject": "canonical_slug"
+        }
+      },
+      "career_ai_description_block": {
+        "body": [
+          "条码与扫描、库存与订单系统、单据自动生成、运费与费率查询、差异与异常提醒等工具可辅助录入、核对与生成记录；但实物核对、差异判断、与承运商及内部部门的沟通处理与记录责任仍由人负责，工具不能替代实物核验。"
+        ],
+        "heading": "物料记录文员的工作对象与 AI 边界"
+      },
+      "career_path_block": {
+        "boundary": "设备授权与合规责任按具体法域、雇主与主管部门核验；培训不等于作业授权。",
+        "competence_ladder": [
+          {
+            "description": "确认单据、货物与安全要求。",
+            "stage": "核对输入"
+          },
+          {
+            "description": "按流程核对、记录与安排运输。",
+            "stage": "过程控制"
+          },
+          {
+            "description": "形成可复核的记录与差异处理。",
+            "stage": "结果复盘"
+          },
+          {
+            "description": "在授权范围内扩展货件与流程职责。",
+            "stage": "责任扩展"
+          }
+        ],
+        "direct_answer": {
+          "$item": "material-recording-clerks.path.career-path-block.2",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "heading": {
+          "$item": "material-recording-clerks.path.career-path-block.1",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "locale_requirements": {
+          "credential_boundary": {
+            "$item": "material-recording-clerks.path.career-path-block.4",
+            "block": "path",
+            "copy_key": "career.item.career-path-block",
+            "type": "prose"
+          },
+          "jurisdiction": "美国高中文凭与在职培训，设备操作按雇主与所在地授权；中国大陆按用人单位与行业要求核对",
+          "summary": {
+            "$item": "material-recording-clerks.path.career-path-block.3",
+            "block": "path",
+            "copy_key": "career.item.career-path-block",
+            "type": "prose"
+          }
+        },
+        "schema_version": "career.career_progression.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "id": "material-recording-clerks.display.source.onet-summary",
+            "label": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "scope": "身份与范围；工资就业为本职业口径。"
+          },
+          {
+            "href": {
+              "$source": "onet-education",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "id": "material-recording-clerks.display.source.onet-education",
+            "label": {
+              "$source": "onet-education",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "scope": "教育与职业准备；不等于统一学历门槛。"
+          },
+          {
+            "href": {
+              "$source": "onet-cert",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "id": "material-recording-clerks.display.source.onet-cert",
+            "label": {
+              "$source": "onet-cert",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "scope": "执照与认证入口；不等于作业授权。"
+          },
+          {
+            "href": {
+              "$source": "onet-trends",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "id": "material-recording-clerks.display.source.onet-trends",
+            "label": {
+              "$source": "onet-trends",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "scope": "就业规模与预测；不含个人录用概率。"
+          },
+          {
+            "href": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "id": "material-recording-clerks.display.source.nbs-wages",
+            "label": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "scope": "中国行业工资口径；不等于本职业精确工资。"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "track-0",
+            "stages": [
+              {
+                "credentials": "按培训与雇主要求核验。",
+                "next_moves": {
+                  "$item": "material-recording-clerks.path.career-path-block.7",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "readiness_evidence": {
+                  "$item": "material-recording-clerks.path.career-path-block.6",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "responsibility": {
+                  "$item": "material-recording-clerks.path.career-path-block.5",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "收发货助手"
+              },
+              {
+                "credentials": "按雇主要求核验。",
+                "next_moves": {
+                  "$item": "material-recording-clerks.path.career-path-block.8",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "readiness_evidence": "保留核对与差异记录。",
+                "responsibility": "独立完成核对与记录并接受复核。",
+                "role": "物料记录文员"
+              },
+              {
+                "credentials": "按雇主要求核验。",
+                "next_moves": "补足带教与流程记录。",
+                "readiness_evidence": "保留复杂货件与带教记录。",
+                "responsibility": "负责复杂货件与带教新人。",
+                "role": "资深文员/带教"
+              },
+              {
+                "credentials": "按雇主要求核验。",
+                "next_moves": "补足管理与安全证据。",
+                "readiness_evidence": "保留排班与安全记录。",
+                "responsibility": "负责排班、流程与安全。",
+                "role": "仓储主管"
+              }
+            ],
+            "title": "收发货与库存记录"
+          },
+          {
+            "id": "track-1",
+            "stages": [
+              {
+                "credentials": "按雇主要求核验。",
+                "next_moves": "补足调度与线路知识。",
+                "readiness_evidence": "保留调度记录。",
+                "responsibility": "在监督下参与运输与调度。",
+                "role": "调度助理"
+              },
+              {
+                "credentials": "按雇主要求核验。",
+                "next_moves": "补足承运与成本证据。",
+                "readiness_evidence": "保留协调与记录。",
+                "responsibility": "独立负责调度与承运协调。",
+                "role": "物流调度专员"
+              },
+              {
+                "credentials": "按雇主要求核验。",
+                "next_moves": "补足管理与谈判证据。",
+                "readiness_evidence": "保留团队与承运记录。",
+                "responsibility": "负责团队与承运管理。",
+                "role": "调度主管"
+              },
+              {
+                "credentials": "按雇主要求核验。",
+                "next_moves": "补足运营与治理证据。",
+                "readiness_evidence": "保留体系与预算记录。",
+                "responsibility": "负责物流体系与预算。",
+                "role": "物流经理"
+              }
+            ],
+            "title": "转向物流调度"
+          },
+          {
+            "id": "track-2",
+            "stages": [
+              {
+                "credentials": "按雇主要求核验。",
+                "next_moves": "补足系统与数据基础。",
+                "readiness_evidence": "保留数据与系统记录。",
+                "responsibility": "在监督下参与供应链数据与系统。",
+                "role": "供应链助理"
+              },
+              {
+                "credentials": "按雇主要求核验。",
+                "next_moves": "补足分析与流程证据。",
+                "readiness_evidence": "保留任务与记录。",
+                "responsibility": "独立负责数据与流程任务。",
+                "role": "供应链专员"
+              },
+              {
+                "credentials": "按雇主要求核验。",
+                "next_moves": "补足建模与业务证据。",
+                "readiness_evidence": "保留分析与优化记录。",
+                "responsibility": "负责数据建模与流程优化。",
+                "role": "供应链分析师"
+              },
+              {
+                "credentials": "按雇主要求核验。",
+                "next_moves": "补足治理与战略证据。",
+                "readiness_evidence": "保留体系与协同记录。",
+                "responsibility": "负责体系与跨部门协同。",
+                "role": "供应链经理"
+              }
+            ],
+            "title": "转向供应链与系统"
+          }
+        ]
+      },
+      "career_quick_answers_block": {
+        "availability": "published",
+        "heading": "职业速答",
+        "items": [
+          {
+            "answer": {
+              "$item": "material-recording-clerks.profile.career-quick-answers-block.8",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa3",
+            "question": "这份工作先核对什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "对象",
+                  "secondary_value": null,
+                  "value": "单据与货物、库存与仓位"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "输入",
+                  "secondary_value": null,
+                  "value": "单据、费率与安全要求"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "交付",
+                  "secondary_value": null,
+                  "value": "可复核的记录与单据"
+                }
+              ]
+            }
+          },
+          {
+            "answer": {
+              "$item": "material-recording-clerks.profile.career-quick-answers-block.9",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa2",
+            "question": "怎样判断工作闭环？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "闭环",
+                  "secondary_value": null,
+                  "value": "从核对货物到更新归档"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤一",
+                  "secondary_value": null,
+                  "value": "接收并核对货物与单据"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤二",
+                  "secondary_value": null,
+                  "value": "记录数据并识别差异"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤三",
+                  "secondary_value": null,
+                  "value": "准备包装物料"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤四",
+                  "secondary_value": null,
+                  "value": "打包封装贴标"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤五",
+                  "secondary_value": null,
+                  "value": "安排承运与运输"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤六",
+                  "secondary_value": null,
+                  "value": "配送交接并更新归档"
+                }
+              ]
+            }
+          },
+          {
+            "answer": "美国侧该职业属 Job Zone 1-2，多数岗位要求高中文凭并在职培训；涉及叉车与场内机动车等设备作业须按雇主与所在地规定获得授权；本页不判断个人是否符合条件。",
+            "key": "qa1",
+            "question": "资格边界是什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "边界",
+                  "secondary_value": null,
+                  "value": "按法域、雇主与安全规程核验"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "法域",
+                  "secondary_value": null,
+                  "value": "按所在国家或地区规定"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "机构",
+                  "secondary_value": null,
+                  "value": "按用人单位与监管部门要求确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "训练",
+                  "secondary_value": null,
+                  "value": "按在职培训与设备授权确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "责任",
+                  "secondary_value": null,
+                  "value": "由现场与物流负责人确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "证据",
+                  "secondary_value": null,
+                  "value": "保留可复核记录"
+                }
+              ]
+            }
+          }
+        ],
+        "schema_version": "career.quick_answers.v1"
+      },
+      "career_risk_cards": {
+        "boundary": "作业授权与安全责任的最终处置由雇主、现场负责人与主管部门按所在地规定承担；本页不替代安全规程或法律要求。",
+        "context_links": [
+          {
+            "href": "#career-visual-group-risk",
+            "label": "查看风险模块"
+          }
+        ],
+        "direct_answer": "风险必须按触发、后果、控制和升级边界处理。",
+        "evidence_scope": "依据 O*NET 43-5071.00 的任务与工作情境，以及单据核对、记录与差异、费用核算、安全堆放与沟通交接中的具体要求；具体规则按雇主与适用法规核对，不跨范围外推。",
+        "heading": "物料记录文员的工作风险与边界",
+        "risks": [
+          {
+            "affected_roles": "收发货岗位",
+            "consequence": "可能造成库存与账目错误。",
+            "evidence_refs": [
+              "onet-tasks"
+            ],
+            "id": "risk-1",
+            "mitigation": "核对实物与单据并记录差异。",
+            "scenario": "未核对单据与实物导致错收错发。",
+            "title": {
+              "$item": "material-recording-clerks.risk.career-risk-cards.1",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "记录与核对岗位",
+            "consequence": "可能影响追溯与索赔。",
+            "evidence_refs": [
+              "onet-tasks"
+            ],
+            "id": "risk-2",
+            "mitigation": "如实记录并按流程上报。",
+            "scenario": "发现差异或损坏未如实记录。",
+            "title": {
+              "$item": "material-recording-clerks.risk.career-risk-cards.2",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "计费与记录岗位",
+            "consequence": "可能造成多收少收。",
+            "evidence_refs": [
+              "onet-context"
+            ],
+            "id": "risk-3",
+            "mitigation": "按费率与口径核算并复核。",
+            "scenario": "运费或费用核算口径错误。",
+            "title": {
+              "$item": "material-recording-clerks.risk.career-risk-cards.3",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "仓储与搬运岗位",
+            "consequence": "可能造成伤害或货损。",
+            "evidence_refs": [
+              "onet-context"
+            ],
+            "id": "risk-4",
+            "mitigation": "按安全规定堆放与防护。",
+            "scenario": "堆放或搬运不符合安全要求。",
+            "title": {
+              "$item": "material-recording-clerks.risk.career-risk-cards.4",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "沟通与交接岗位",
+            "consequence": "可能造成延误或责任不明。",
+            "evidence_refs": [
+              "onet-summary"
+            ],
+            "id": "risk-5",
+            "mitigation": "明确交接内容并留痕。",
+            "scenario": "交接不清或沟通不到位。",
+            "title": {
+              "$item": "material-recording-clerks.risk.career-risk-cards.5",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "仓储与搬运岗位",
+            "consequence": "可能违反安全规定。",
+            "evidence_refs": [
+              "onet-cert"
+            ],
+            "id": "risk-6",
+            "mitigation": "仅在获得授权后操作设备。",
+            "scenario": "操作叉车等设备而未取得授权。",
+            "title": "设备操作未经授权"
+          }
+        ],
+        "schema_version": "career.work_risk.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "onet-tasks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "id": "material-recording-clerks.display.source.onet-tasks",
+            "label": {
+              "$source": "onet-tasks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "scope": "任务清单；仅用于提出风险假设。"
+          },
+          {
+            "href": {
+              "$source": "onet-context",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "id": "material-recording-clerks.display.source.onet-context",
+            "label": {
+              "$source": "onet-context",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "scope": "工作情境；仅用于提出风险假设。"
+          },
+          {
+            "href": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "id": "material-recording-clerks.display.source.onet-summary",
+            "label": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "scope": "身份与范围；不替代安全规范。"
+          },
+          {
+            "href": {
+              "$source": "onet-cert",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "id": "material-recording-clerks.display.source.onet-cert",
+            "label": {
+              "$source": "onet-cert",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "scope": "执照与认证入口；不替代作业授权。"
+          }
+        ]
+      },
+      "career_snapshot_primary_locale": {
+        "salary": {
+          "bls_table": [
+            {
+              "指标": "中国大陆职业工资",
+              "数值": "证据不足：未单列",
+              "说明": "国家统计局按行业门类发布，未单列本职业工资。"
+            },
+            {
+              "指标": "中国大陆行业代理",
+              "数值": "见行业表",
+              "说明": "交通运输、仓储和邮政业为宽行业代理，不等于本职业工资。"
+            },
+            {
+              "指标": "美国职业统计",
+              "数值": "见美国工资表",
+              "说明": "为本职业 43-5071.00 口径，不能跨市场拼接。"
+            }
+          ],
+          "china_ai_row": {
+            "$item": "material-recording-clerks.china-salary.career-snapshot-primary-locale.4",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_class_row": {
+            "$item": "material-recording-clerks.china-salary.career-snapshot-primary-locale.3",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_edu_table": [
+            {
+              "学历段": "不单独统计",
+              "岗位方向": "按雇主与岗位聘任",
+              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+            },
+            {
+              "学历段": "不单独统计",
+              "岗位方向": "按雇主与岗位聘任",
+              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+            },
+            {
+              "学历段": "不单独统计",
+              "岗位方向": "按雇主与岗位聘任",
+              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+            },
+            {
+              "学历段": "不单独统计",
+              "岗位方向": "按雇主与岗位聘任",
+              "说明": "国家统计局工资统计按行业与登记注册类型，不按本职业学历分档。"
+            }
+          ],
+          "china_industry_table": [
+            {
+              "行业": "交通运输、仓储和邮政业（非私营）",
+              "需求": "133,981 元/年"
+            },
+            {
+              "行业": "交通运输、仓储和邮政业（私营）",
+              "需求": "73,133 元/年"
+            },
+            {
+              "行业": "全国城镇非私营单位合计",
+              "需求": "129,441 元/年"
+            }
+          ],
+          "china_intl": {
+            "$join": [
+              {
+                "$source": "mohrss-wage",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "material-recording-clerks.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "mohrss-wage",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "material-recording-clerks.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "china_name_row": {
+            "$item": "material-recording-clerks.china-salary.career-snapshot-primary-locale.1",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_open": "中国大陆无本职业单列工资；下列为行业代理，不是起薪、中位数或到手收入。",
+          "china_ref": {
+            "$join": [
+              {
+                "$source": "nbs-wages",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "material-recording-clerks.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "nbs-wages",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "material-recording-clerks.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "china_salary_note": "中国大陆行业口径与美国职业统计分开，不能跨市场拼接。",
+          "china_salary_table": [
+            {
+              "城市/区间": "全国·交通运输、仓储和邮政业（非私营）",
+              "月薪参考": "仅发布年平均工资"
+            },
+            {
+              "城市/区间": "全国·交通运输、仓储和邮政业（私营）",
+              "月薪参考": "仅发布年平均工资"
+            },
+            {
+              "城市/区间": "本职业精确工资",
+              "月薪参考": "证据不足：未单列"
+            }
+          ],
+          "china_soc_row": {
+            "$item": "material-recording-clerks.china-salary.career-snapshot-primary-locale.2",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "sources_note": {
+            "$join": [
+              {
+                "$source": "nbs-wages",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "material-recording-clerks.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "nbs-wages",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "material-recording-clerks.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "ui": {
+            "ai_heading": "AI 与薪资判断边界",
+            "driver_heading": "影响因素",
+            "official_heading": "官方统计口径",
+            "scenario_caption": "本情景仅用于说明口径，不是个人报价。",
+            "scenario_heading": "情景化参考",
+            "scenario_interpretation_label": "解释",
+            "scenario_role_label": "岗位范围",
+            "scenario_value_label": "参考值"
+          },
+          "us_growth": "不适用本地口径",
+          "us_median": "不适用本地口径"
+        }
+      },
+      "career_snapshot_secondary_locale": {
+        "authority_sources": {
+          "$join": [
+            {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            }
+          ],
+          "separator": ""
+        },
+        "bls_table": [
+          {
+            "指标": "薪资 · 中位数",
+            "数值": "$45,260/年（2025）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "material-recording-clerks.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "material-recording-clerks.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "薪资 · 小时中位",
+            "数值": "$21.76/小时（2025）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "material-recording-clerks.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "material-recording-clerks.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "薪资 · 最低 10%",
+            "数值": "未披露",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "material-recording-clerks.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "material-recording-clerks.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "薪资 · 最高 90%",
+            "数值": "未披露",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "material-recording-clerks.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "material-recording-clerks.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "薪资 · 统计口径",
+            "数值": "Shipping, Receiving, and Inventory Clerks（43-5071.00）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "material-recording-clerks.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "material-recording-clerks.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "就业 · 规模",
+            "数值": "862,200 人（2024）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-trends",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "material-recording-clerks.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-trends",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "material-recording-clerks.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "就业 · 变化",
+            "数值": "下降（-1% 或更低，2024—2034）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-trends",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "material-recording-clerks.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-trends",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "material-recording-clerks.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "就业 · 空缺",
+            "数值": "约 69,300 个（2024—2034 期合计）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-trends",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "material-recording-clerks.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-trends",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "material-recording-clerks.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          }
+        ],
+        "boundary": "美国全国口径：工资、就业与行业均为 O*NET 展示的本职业 43-5071.00 数据，工资为 2025 OEWS、就业展望为 2024—2034 预测；不含个人到手收入、起薪或录用结论。",
+        "direct_answer": {
+          "$item": "material-recording-clerks.us-salary.career-snapshot-secondary-locale.2",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "factor_rows": [
+          {
+            "answer": "多数岗位要求高中文凭并在职培训；设备操作须按雇主与所在地规定获得授权。",
+            "factor": "资格"
+          },
+          {
+            "answer": "以单据核对、记录与系统操作经验为主；准确性与差异处理记录比证书名称更常被参考。",
+            "factor": "经验"
+          },
+          {
+            "answer": "受制造业与零售业分布影响大，不得跨地区外推。",
+            "factor": "地区"
+          }
+        ],
+        "factors_heading": {
+          "$item": "material-recording-clerks.us-salary.career-snapshot-secondary-locale.6",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "growth": "下降（2024—2034）",
+        "heading": {
+          "$item": "material-recording-clerks.us-salary.career-snapshot-secondary-locale.1",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_heading": {
+          "$item": "material-recording-clerks.us-salary.career-snapshot-secondary-locale.5",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_period": "2024",
+        "industry_rows": [
+          {
+            "industry": "Manufacturing",
+            "median": "未单列",
+            "note": "本页未取得分行业工资分项；以整体中位数为准。"
+          },
+          {
+            "industry": "Retail Trade",
+            "median": "见就业行",
+            "note": "行业口径为雇主场景信号，不跨职业外推。"
+          },
+          {
+            "industry": "行业口径说明二",
+            "median": "见就业行",
+            "note": "地区与行业差异大，不得跨地区外推。"
+          },
+          {
+            "industry": "行业口径说明三",
+            "median": "见就业行",
+            "note": "分位工资未披露，不以推断值替代。"
+          }
+        ],
+        "industry_value_label": "行业值",
+        "interpretation_heading": {
+          "$item": "material-recording-clerks.us-salary.career-snapshot-secondary-locale.4",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "interpretation_rows": [
+          {
+            "answer": "美元/年；为 BLS 2025 OEWS 全国中位数（本职业 43-5071.00 口径），未展示分位，不含个人到手收入。",
+            "question": "工资"
+          },
+          {
+            "answer": "2024 年在岗人数，不是招聘职位数。",
+            "question": "就业"
+          },
+          {
+            "answer": "2024—2034 预测下降（-1% 或更低），是职业统计，不是个人录用结果；整体下降不代表每个地区或雇主都无机会。",
+            "question": "展望"
+          },
+          {
+            "answer": "按 O*NET/BLS 行业口径列为制造业与零售业，不等于全部从业者收入。",
+            "question": "行业"
+          }
+        ],
+        "median": "$45,260/年（2025）",
+        "outlook_heading": "就业展望与职位空缺",
+        "outlook_period": "2024—2034",
+        "wage_column_labels": [
+          "分位",
+          "年度参考",
+          "小时等值",
+          "解释"
+        ],
+        "wage_heading": {
+          "$item": "material-recording-clerks.us-salary.career-snapshot-secondary-locale.3",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "wage_tiers": [
+          {
+            "equivalent": "—",
+            "interpretation": "O*NET 该页未展示分位工资；不以推断值替代。",
+            "label": "最低 10%",
+            "value": "未披露"
+          },
+          {
+            "equivalent": "$21.76/小时",
+            "interpretation": "2025 美国全国年薪中位数（本职业 43-5071.00 口径）。",
+            "label": "中位数（50%）",
+            "value": "$45,260/年"
+          },
+          {
+            "equivalent": "—",
+            "interpretation": "O*NET 该页未展示分位工资；不以推断值替代。",
+            "label": "最高 90%",
+            "value": "未披露"
+          }
+        ]
+      },
+      "definition_block": {
+        "$item": "material-recording-clerks.profile.definition-block.1",
+        "block": "profile",
+        "copy_key": "career.item.definition-block",
+        "type": "prose"
+      },
+      "faq_block": {
+        "items": {
+          "$item": "material-recording-clerks.sources.faq.1",
+          "block": "sources",
+          "copy_key": "career.item.faq-block",
+          "type": "faq"
+        }
+      },
+      "fermat_decision_card": {
+        "caveat": {
+          "$item": "material-recording-clerks.quick-decision.fermat-decision-card.1",
+          "block": "quick-decision",
+          "copy_key": "career.item.fermat-decision-card",
+          "type": "prose"
+        },
+        "summary": {
+          "$item": "material-recording-clerks.quick-decision.fermat-decision-card.2",
+          "block": "quick-decision",
+          "copy_key": "career.item.fermat-decision-card",
+          "type": "prose"
+        },
+        "title": "物料记录文员适合什么样的人？"
+      },
+      "fit_decision_checklist": {
+        "boundary": "这是完全虚构的收发货记录情境核对，不是人格诊断、录用结论或资格评估。",
+        "how": {
+          "$item": "material-recording-clerks.quick-decision.fermat-decision-card.3",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "suit": {
+          "$item": "material-recording-clerks.quick-decision.fermat-decision-card.4",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        }
+      },
+      "hero": {
+        "h1": {
+          "$subject": "name"
+        },
+        "quick_answer": {
+          "$subject": "summary"
+        },
+        "title": {
+          "$subject": "name"
+        }
+      },
+      "market_signal_card": {
+        "context_links": [
+          {
+            "href": "#career-visual-group-market-signals",
+            "label": "查看市场信号"
+          }
+        ],
+        "direct_answer": {
+          "$item": "material-recording-clerks.market-signals.market-signal-card.2",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "heading": {
+          "$item": "material-recording-clerks.market-signals.market-signal-card.1",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "outlook_evidence": [
+          {
+            "geography": "美国全国",
+            "horizon": "2024—2034",
+            "interpretation": "就业规模、变化与职位空缺必须分别解释。",
+            "limitation": "为职业统计，不能作为个人就业保证。",
+            "metric": "就业规模与变化",
+            "occupation_scope": "展示口径：Shipping, Receiving, and Inventory Clerks（43-5071.00）",
+            "value": {
+              "$item": "material-recording-clerks.market-signals.market-signal-card.3",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "geography": "美国全国",
+            "horizon": "2024—2034",
+            "interpretation": "为 2024—2034 年期间合计，含增长与替代需求，不等于在招岗位数。",
+            "limitation": "不能作为个人录用概率。",
+            "metric": "职位空缺（期合计）",
+            "occupation_scope": "展示口径：Shipping, Receiving, and Inventory Clerks（43-5071.00）",
+            "value": "约 69,300 个"
+          },
+          {
+            "geography": "美国全国",
+            "horizon": "2025",
+            "interpretation": "为 BLS 2025 OEWS 全国中位数，不代表起薪或到手收入。",
+            "limitation": "未披露分位；不含个人到手收入。",
+            "metric": "年薪中位数",
+            "occupation_scope": "展示口径：Shipping, Receiving, and Inventory Clerks（43-5071.00）",
+            "value": "$45,260/年"
+          }
+        ],
+        "schema_version": "career.outlook_transitions.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "onet-trends",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "id": "material-recording-clerks.display.source.onet-trends",
+            "label": {
+              "$source": "onet-trends",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "scope": "就业规模与预测；不提供个人录用概率。"
+          },
+          {
+            "href": {
+              "$source": "onet-industry",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "id": "material-recording-clerks.display.source.onet-industry",
+            "label": {
+              "$source": "onet-industry",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "scope": "行业分布；不等于需求预测。"
+          },
+          {
+            "href": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "id": "material-recording-clerks.display.source.onet-summary",
+            "label": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "scope": "身份与范围；不提供个人录用概率。"
+          },
+          {
+            "href": {
+              "$source": "onet-tasks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "id": "material-recording-clerks.display.source.onet-tasks",
+            "label": {
+              "$source": "onet-tasks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "scope": "任务与工作情境；仅用于提出转型假设。"
+          }
+        ],
+        "transitions": [
+          {
+            "capability_gaps": {
+              "$item": "material-recording-clerks.market-signals.market-signal-card.5",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "material-recording-clerks.market-signals.market-signal-card.4",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "target_href": "/zh/career/jobs/industrial-production-managers",
+            "target_slug": "industrial-production-managers",
+            "target_title": "工业生产经理",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需补足管理与预算经验。",
+            "shared_capabilities": "仓储与运输基础。",
+            "target_href": "/zh/career/jobs/transportation-storage-and-distribution-managers",
+            "target_slug": "transportation-storage-and-distribution-managers",
+            "target_title": "运输、仓储与配送经理",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需补足供应链策略经验。",
+            "shared_capabilities": "数据与流程基础。",
+            "target_href": "/zh/career/jobs/supply-chain-managers",
+            "target_slug": "supply-chain-managers",
+            "target_title": "供应链经理",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需补足建模与分析能力。",
+            "shared_capabilities": "数据与流程基础。",
+            "target_href": "/zh/career/jobs/logisticians",
+            "target_slug": "logisticians",
+            "target_title": "物流分析师",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需补足分析与优化能力。",
+            "shared_capabilities": "数据与流程基础。",
+            "target_href": "/zh/career/jobs/logistics-analysts",
+            "target_slug": "logistics-analysts",
+            "target_title": "物流分析师",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需补足流程与系统深度。",
+            "shared_capabilities": "收发货与记录基础。",
+            "target_href": "/zh/career/jobs/stockers-and-order-fillers",
+            "target_slug": "stockers-and-order-fillers",
+            "target_title": "补货与订单拣货员",
+            "transition_distance": "需补证据"
+          }
+        ]
+      },
+      "onet_structured_fields_block": {
+        "availability": "published",
+        "heading": "O*NET 结构化字段",
+        "rows": [
+          {
+            "alternate_value": null,
+            "label": "研究输入",
+            "secondary_value": null,
+            "value": {
+              "$item": "material-recording-clerks.profile.onet-structured-fields-block.7",
+              "block": "profile",
+              "copy_key": "career.item.onet-structured-fields-block",
+              "type": "prose"
+            }
+          }
+        ],
+        "schema_version": "career.onet_structured_fields.v1"
+      },
+      "personality_fit_block": {
+        "assessments": [
+          {
+            "answer": {
+              "$item": "material-recording-clerks.fit.riasec-fit-block.6",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "riasec",
+            "label": "RIASEC",
+            "question": "用工作样本核对，而不是用标签替代判断。",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          },
+          {
+            "answer": {
+              "$item": "material-recording-clerks.fit.riasec-fit-block.7",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "big-five",
+            "label": "大五人格",
+            "question": "用工作样本核对，而不是用标签替代判断。",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          },
+          {
+            "answer": {
+              "$item": "material-recording-clerks.fit.riasec-fit-block.8",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "mbti",
+            "label": "MBTI",
+            "question": "用工作样本核对，而不是用标签替代判断。",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          },
+          {
+            "answer": "需要结合真实任务、边界和可复核交付继续核对。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "enneagram",
+            "label": "九型人格",
+            "question": "用工作样本核对，而不是用标签替代判断。",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          },
+          {
+            "answer": "需要结合真实任务、边界和可复核交付继续核对。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "iq",
+            "label": "认知能力",
+            "question": "用工作样本核对，而不是用标签替代判断。",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          },
+          {
+            "answer": "需要结合真实任务、边界和可复核交付继续核对。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "eq",
+            "label": "情绪能力",
+            "question": "用工作样本核对，而不是用标签替代判断。",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          }
+        ],
+        "boundary": "RIASEC、人格和能力工具不能替代资格、设备授权或雇主判断。",
+        "direct_answer": {
+          "$item": "material-recording-clerks.fit.riasec-fit-block.2",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        },
+        "directions": [
+          {
+            "direction": "单据核对",
+            "fit_signals": "能核对单据与货物一致。",
+            "watchouts": "须核对实物与口径。"
+          },
+          {
+            "direction": "记录与录入",
+            "fit_signals": "能准确录入并维护记录。",
+            "watchouts": "须核对数据来源。"
+          },
+          {
+            "direction": "差异处理",
+            "fit_signals": "能如实记录并处理差异。",
+            "watchouts": "须核对上报路径。"
+          },
+          {
+            "direction": "运输安排",
+            "fit_signals": "能确定运输方式与费率。",
+            "watchouts": "须核对成本与时效。"
+          },
+          {
+            "direction": "安全与堆放",
+            "fit_signals": "能按规程堆放与防护。",
+            "watchouts": "须核对安全规定。"
+          },
+          {
+            "direction": "多方沟通",
+            "fit_signals": "能与承运商与部门协调。",
+            "watchouts": "须核对责任与交接。"
+          }
+        ],
+        "heading": {
+          "$item": "material-recording-clerks.fit.riasec-fit-block.1",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        },
+        "questions": [
+          {
+            "answer": "用本页工作样本核对细致与准确。",
+            "question": "你能在重复事务中保持准确吗？"
+          },
+          {
+            "answer": "按流程核对并记录差异。",
+            "question": "你能核对单据与实物一致吗？"
+          },
+          {
+            "answer": "如实记录并按流程上报。",
+            "question": "发现货物或单据不符你会怎么做？"
+          },
+          {
+            "answer": "评估核算与复核能力。",
+            "question": "你能按口径核算费用吗？"
+          },
+          {
+            "answer": "评估沟通与交接能力。",
+            "question": "你能与多方沟通协调吗？"
+          },
+          {
+            "answer": "评估安全与规范意识。",
+            "question": "你能遵守安全与堆放规定吗？"
+          },
+          {
+            "answer": "用核对与差异记录让他人复核。",
+            "question": "你的工作如何被复核？"
+          },
+          {
+            "answer": "用完全虚构的进出货单据与库存记录完成一次演练。",
+            "question": "下一步如何试验？"
+          }
+        ],
+        "schema_version": "career.fit_decision_center.v1",
+        "signals": [
+          {
+            "body": {
+              "$item": "material-recording-clerks.fit.riasec-fit-block.3",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "fit",
+            "label": "积极信号",
+            "tone": "positive"
+          },
+          {
+            "body": {
+              "$item": "material-recording-clerks.fit.riasec-fit-block.4",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "caution",
+            "label": "谨慎条件",
+            "tone": "caution"
+          },
+          {
+            "body": {
+              "$item": "material-recording-clerks.fit.riasec-fit-block.5",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "experiment",
+            "label": "试验动作",
+            "tone": "action"
+          }
+        ],
+        "source_links": [
+          {
+            "href": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "usage": "身份与范围；工资就业为本职业口径。"
+          },
+          {
+            "href": {
+              "$source": "onet-tasks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-tasks",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "usage": "任务清单。"
+          },
+          {
+            "href": {
+              "$source": "onet-context",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-context",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "usage": "工作情境；仅用于提出适配假设。"
+          },
+          {
+            "href": {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "usage": "美国 2025 工资中位数。"
+          },
+          {
+            "href": {
+              "$source": "onet-trends",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-trends",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "usage": "就业规模与预测。"
+          },
+          {
+            "href": {
+              "$source": "onet-education",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-education",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "usage": "教育与职业准备。"
+          },
+          {
+            "href": {
+              "$source": "onet-industry",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-industry",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "usage": "行业分布；不等于需求预测。"
+          },
+          {
+            "href": {
+              "$source": "onet-cert",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-cert",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "usage": "执照与认证查询入口；不等于作业授权。"
+          },
+          {
+            "href": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "label": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "usage": "中国行业工资口径。"
+          },
+          {
+            "href": {
+              "$source": "mohrss-wage",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "label": {
+              "$source": "mohrss-wage",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "material-recording-clerks.source-register.published.1"
+            },
+            "usage": "中国岗位薪酬查询入口。"
+          }
+        ]
+      },
+      "primary_cta": {
+        "entry_surface": "career_job_detail",
+        "href": {
+          "$link": "material-recording-clerks.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "material-recording-clerks.navigation.1",
+          "field": "url"
+        },
+        "label": "测我的职业兴趣是否适合库存文员与订单配货员",
+        "source_page_type": "career_job_detail",
+        "subject_key": {
+          "$subject": "canonical_slug"
+        },
+        "subject_kind": "career_job",
+        "target_action": "start_riasec_test",
+        "test_slug": "holland-career-interest-test-riasec"
+      },
+      "responsibilities_block": [
+        {
+          "$join": [
+            {
+              "$item": "material-recording-clerks.profile.responsibilities-block.2",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$join": [
+            {
+              "$item": "material-recording-clerks.profile.responsibilities-block.3",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$join": [
+            {
+              "$item": "material-recording-clerks.profile.responsibilities-block.4",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        }
+      ],
+      "riasec_fit_block": {
+        "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
+        "interest": "先观察真实的单据核对、记录处理与沟通协作中的兴趣、压力与体验。",
+        "riasec": "CRE（常规型—现实型—企业型）",
+        "riasec_short": "不以单一代码决定职业。"
+      },
+      "source_card": {
+        "eeat_signals": {
+          "author": "FermatMind research workflow",
+          "source": {
+            "$source": "onet-wages",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "name",
+            "item": "material-recording-clerks.source-register.published.1"
+          },
+          "updated_at": {
+            "$source": "onet-wages",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "period",
+            "item": "material-recording-clerks.source-register.published.1"
+          }
+        },
+        "note": "来源范围、限制和统计时期按原始证据分别核对。来源使用说明：O*NET 43-5071.00 收货、发货与库存文员（摘要）：提供 43-5071.00 的职业身份、官方描述、兴趣代码、Job Zone、技能与知识。；该页工资与就业数据为本职业口径。；O*NET 43-5071.00 任务（Tasks）：提供核对货物与单据、申领与存放包装物料、编制工单与提单、打包封装贴标、记录差异、联络承运商、确定运输方式与费率、核算费用等任务清单。；任务样本不代表每个岗位执行全部任务。；O*NET 43-5071.00 工作情境（Work Context）：描述每天面对面沟通与使用邮件电话、多在非受控室内、重复性任务多、时间压力常见等情境。；美国工作情境不替代中国法律与雇主规程。；O*NET 43-5071.00 全国工资（BLS OEWS 展示）：2025 BLS OEWS 中位工资；该页为本职业口径。；本页未展示分位工资。；O*NET 43-5071.00 全国就业趋势：2024 年就业规模与 2024—2034 年增长（下降 -1% 或更低）与职位空缺预测。；预测不是录用保证。；Industries: 43-5071.00：该页 2024 年主要行业为 Manufacturing 与 Retail Trade。；行业分布是雇主场景信号，不是增长或需求预测。；O*NET 43-5071.00 教育与职业准备：Job Zone 1-2：多数岗位要求高中文凭或 GED（约 75%），在职培训从数天到一年。；教育分布不等于每个雇主的硬性要求。；Licenses & Certifications: 43-5071.00：O*NET 提供的州执照与全国认证查询入口。；认证与培训不等于作业授权或雇主录用条件。；Generative AI and Jobs (ILO Working Paper 140, 2025)：按任务层面评估生成式 AI 的职业暴露。；暴露指数不等于采用率、岗位结果或录用概率。；2025年城镇单位就业人员年平均工资情况：提供城镇非私营与私营单位分行业门类年平均工资（含交通运输、仓储和邮政业）。；行业平均不是职业中位数，且不含个体工商户与自由职业者。；FermatMind 物料记录文员任务影响量表：整理可辅助任务与人工控制点，用于任务级 AI 与适配讨论。；编辑量表不等于采用率、裁员、法规或证照证据。；"
+      },
+      "work_context_block": {
+        "$item": "material-recording-clerks.profile.work-context-block.5",
+        "block": "profile",
+        "copy_key": "career.item.work-context-block",
+        "type": "prose"
+      }
+    },
+    "contract_version": "career.detail.display.v1",
+    "interface": {
+      "interface.fit.directions_heading": "你更可能适合哪条记录与物流方向？",
+      "interface.fit.interest_code_heading": "怎样理解 CRE 兴趣代码"
+    },
+    "locale": "zh-CN",
+    "native_items": [
+      {
+        "block": "source-register",
+        "copy_key": "career.item.published-sources",
+        "id": "material-recording-clerks.source-register.published.1",
+        "location": "sources",
+        "type": "sources"
+      }
+    ],
+    "path": "/zh/career/jobs/material-recording-clerks",
+    "section_titles": {
+      "ai-impact": "AI 影响",
+      "china-salary": "中国大陆薪资",
+      "direction-comparison": "相邻职业比较",
+      "fit": "适配信号",
+      "market-signals": "市场信号",
+      "navigation": "页面导航",
+      "path": "入行路径",
+      "profile": "职业定义与职责",
+      "quick-decision": "快速判断",
+      "risk": "风险与边界",
+      "source-register": "来源注册表",
+      "sources": "常见问题与边界",
+      "us-salary": "美国薪资"
+    }
+  },
   "fact_register": {
     "facts": [
       {
         "derivation": null,
-        "display_value": "中国行业聚合；未提供精确职业值",
-        "fact_id": "cn-migrant-transport-income",
-        "market": "中国大陆",
-        "measure": "交通运输、仓储和邮政业农民工月均收入",
-        "occupation_scope": "行业代理数据；no exact CN occupation mapping",
-        "period": "2025 wage aggregates published 2026",
-        "source_refs": [
-          "nbs-wages"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "中国行业聚合；未提供精确职业值",
-        "fact_id": "cn-retail-clerical-annual-wage",
-        "market": "中国大陆",
-        "measure": "规模以上批发和零售业办事人员年平均工资",
-        "occupation_scope": "行业代理数据；no exact CN occupation mapping",
-        "period": "2025 wage aggregates published 2026",
-        "source_refs": [
-          "nbs-wages"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "中国行业聚合；未提供精确职业值",
-        "fact_id": "cn-transport-clerical-annual-wage",
-        "market": "中国大陆",
-        "measure": "规模以上交通运输、仓储和邮政业办事人员年平均工资",
-        "occupation_scope": "行业代理数据；no exact CN occupation mapping",
-        "period": "2025 wage aggregates published 2026",
-        "source_refs": [
-          "nbs-wages"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "98,600个/年（组合口径）",
-        "fact_id": "us-annual-openings",
-        "market": "美国",
-        "measure": "年均开岗预测",
-        "occupation_scope": "合并职业口径：Material Recording Clerks，含43-5061、43-5071、43-5111",
-        "period": "2025-2035 projections",
-        "source_refs": [
-          "bls-outlook"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "1,273,500人（2025，组合口径）",
-        "fact_id": "us-combined-employment-base",
-        "market": "美国",
-        "measure": "2025 年就业人数",
-        "occupation_scope": "合并职业口径：Material Recording Clerks，含43-5061、43-5071、43-5111",
-        "period": "2025-2035 projections",
-        "source_refs": [
-          "bls-outlook"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "47,600美元/年（2025，组合口径）",
+        "display_value": "45,260 美元/年",
         "fact_id": "us-combined-median-wage",
         "market": "美国",
-        "measure": "年薪中位数",
-        "occupation_scope": "合并职业口径：Material Recording Clerks，含43-5061、43-5071、43-5111",
-        "period": "May 2025 wages",
+        "measure": "2025 年年薪中位数（约 21.76 美元/小时）",
+        "occupation_scope": "O*NET 展示口径：Shipping, Receiving, and Inventory Clerks（43-5071.00）本职业",
+        "period": "2025 BLS OEWS；查阅 2026-09-25",
         "source_refs": [
-          "bls-pay"
+          "onet-wages"
         ]
       },
       {
         "derivation": null,
-        "display_value": "-6%（2025—2035，组合口径）",
-        "fact_id": "us-outlook-decline",
+        "display_value": "862,200 人",
+        "fact_id": "us-employment-2024",
         "market": "美国",
-        "measure": "就业净变化率预测",
-        "occupation_scope": "合并职业口径：Material Recording Clerks，含43-5061、43-5071、43-5111",
-        "period": "2025-2035 projections",
+        "measure": "2024 年在岗人数",
+        "occupation_scope": "O*NET 展示口径：Shipping, Receiving, and Inventory Clerks（43-5071.00）本职业",
+        "period": "2024；查阅 2026-09-25",
         "source_refs": [
-          "bls-outlook"
+          "onet-trends"
+        ]
+      },
+      {
+        "derivation": "O*NET 显示 Projected growth (2024-2034) 为 Decline（-1% or lower）；该数据展示口径为本职业 43-5071.00。",
+        "display_value": "下降（-1% 或更低，2024—2034）",
+        "fact_id": "us-growth",
+        "market": "美国",
+        "measure": "就业增长预测",
+        "occupation_scope": "O*NET 展示口径：Shipping, Receiving, and Inventory Clerks（43-5071.00）本职业",
+        "period": "2024—2034；查阅 2026-09-25",
+        "source_refs": [
+          "onet-trends"
+        ]
+      },
+      {
+        "derivation": "O*NET 显示 Projected job openings (2024-2034) 为 69,300；该数字为期间合计而非年均。",
+        "display_value": "约 69,300 个（2024—2034 合计）",
+        "fact_id": "us-openings",
+        "market": "美国",
+        "measure": "预计职位空缺（期间合计）",
+        "occupation_scope": "O*NET 展示口径：Shipping, Receiving, and Inventory Clerks（43-5071.00）本职业",
+        "period": "2024—2034；查阅 2026-09-25",
+        "source_refs": [
+          "onet-trends"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "133,981 元/年",
+        "fact_id": "cn-transport-nonprivate-wage",
+        "market": "中国大陆全国城镇单位口径（行业门类 交通运输、仓储和邮政业，非本职业）",
+        "measure": "城镇非私营单位分行业门类就业人员年平均工资",
+        "occupation_scope": "交通运输、仓储和邮政业（行业口径，非本职业）",
+        "period": "2025 年度工资；发布 2026-05-15；查阅 2026-09-25",
+        "source_refs": [
+          "nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "73,133 元/年",
+        "fact_id": "cn-transport-private-wage",
+        "market": "中国大陆全国城镇单位口径（行业门类 交通运输、仓储和邮政业，非本职业）",
+        "measure": "城镇私营单位分行业门类就业人员年平均工资",
+        "occupation_scope": "交通运输、仓储和邮政业（行业口径，非本职业）",
+        "period": "2025 年度工资；发布 2026-05-15；查阅 2026-09-25",
+        "source_refs": [
+          "nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "129,441 元/年",
+        "fact_id": "cn-national-nonprivate-wage",
+        "market": "中国大陆全国口径",
+        "measure": "城镇非私营单位就业人员年平均工资（全行业合计）",
+        "occupation_scope": "全国城镇非私营单位合计（非本职业）",
+        "period": "2025 年度工资；发布 2026-05-15；查阅 2026-09-25",
+        "source_refs": [
+          "nbs-wages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：未取得中国大陆物料记录文员的全国职业工资中位数（2025 官方公开口径）",
+        "fact_id": "cn-wage-gap",
+        "market": "中国大陆全国口径",
+        "measure": "occupation wage availability",
+        "occupation_scope": "no exact CN mapping for O*NET 43-5071.00",
+        "period": "2025 annual wage; published 2026-05-15; accessed 2026-09-25",
+        "source_refs": [
+          "nbs-wages"
         ]
       }
     ]
@@ -8796,31 +11230,35 @@
       "key": "ai",
       "label": "AI 任务暴露"
     },
-    "badges": [],
+    "badges": [
+      "进出货记录",
+      "单据与核对",
+      "打包与运输安排"
+    ],
     "metrics": [
       {
         "availability": "available",
         "fact_ref": "us-combined-median-wage",
         "key": "us_pay",
-        "label": "美国年薪中位数"
+        "label": "美国薪资参考"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-growth",
         "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国就业变化"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-employment-2024",
         "key": "us_employment",
         "label": "美国在岗人数"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-openings",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国职位空缺（期合计）"
       },
       {
         "availability": "missing",
@@ -8834,17 +11272,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "透明组合职业：在生产流、收发货记录和称量计量检查记录三类范围内，保持数量、位置、状态、时间与差异可追溯。"
+      "text": "本页物料记录文员指 O*NET 43-5071.00：核对货物与单据、申领与存放包装物料、编制工单与提单、打包封装贴标、记录重量费用与差异、与相关方核对处理差错、联络承运商、确定运输方式与费率并核算费用。判断这条职业路径时，应同时验证工作闭环、记录与安全边界、证据口径、风险控制和可观察的入门作品。"
     },
     "title": {
       "availability": "available",
-      "text": "物料记录文员"
+      "text": "物料记录文员职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "79f95cedfec61242c30a364541e836ced80711cbdeb990cc0739d18e30fcd38b",
+  "source_content_sha256": "999d1a27175660c7e8ef99a9d8ad9e1b5102e503068ace5451cbe337f8954de7",
   "subject": {
     "canonical_slug": "material-recording-clerks",
     "name": "物料记录文员",
-    "summary": "透明组合职业：在生产流、收发货记录和称量计量检查记录三类范围内，保持数量、位置、状态、时间与差异可追溯。"
+    "summary": "本页物料记录文员指 O*NET 43-5071.00：验核并维护涉及库存的进出货记录，核验并记录进货物料或商品并安排运输，可能准备发货物品，含收货员、发货文员与订单履行专员等职称。"
   }
 }

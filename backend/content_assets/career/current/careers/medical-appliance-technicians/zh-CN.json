@@ -2,19 +2,28 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:content-china-salary-1": {
+      "fact:market-employment-2025": {
         "status": "pending_mapping"
       },
-      "fact:content-path-1": {
+      "fact:market-employment-2035": {
         "status": "pending_mapping"
       },
-      "fact:content-profile-1": {
+      "fact:market-growth-count": {
         "status": "pending_mapping"
       },
-      "fact:content-risk-1": {
+      "fact:market-growth-rate": {
         "status": "pending_mapping"
       },
-      "fact:content-us-salary-1": {
+      "fact:us-wage-high": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-hourly": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-low": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-median": {
         "status": "pending_mapping"
       },
       "item:medical-appliance-technicians.ai-impact.ai-impact-table.1": {
@@ -134,22 +143,19 @@
       "item:medical-appliance-technicians.path.career-path-block.8": {
         "status": "pending_mapping"
       },
-      "item:medical-appliance-technicians.profile.career-quick-answers-block.1": {
+      "item:medical-appliance-technicians.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
-      "item:medical-appliance-technicians.profile.career-quick-answers-block.2": {
+      "item:medical-appliance-technicians.profile.career-quick-answers-block.9": {
         "status": "pending_mapping"
       },
       "item:medical-appliance-technicians.profile.definition-block.1": {
         "status": "pending_mapping"
       },
-      "item:medical-appliance-technicians.profile.definition-block.2": {
+      "item:medical-appliance-technicians.profile.definition-block.10": {
         "status": "pending_mapping"
       },
-      "item:medical-appliance-technicians.profile.onet-structured-fields-block.1": {
-        "status": "pending_mapping"
-      },
-      "item:medical-appliance-technicians.profile.responsibilities-block.1": {
+      "item:medical-appliance-technicians.profile.onet-structured-fields-block.7": {
         "status": "pending_mapping"
       },
       "item:medical-appliance-technicians.profile.responsibilities-block.2": {
@@ -158,10 +164,13 @@
       "item:medical-appliance-technicians.profile.responsibilities-block.3": {
         "status": "pending_mapping"
       },
-      "item:medical-appliance-technicians.profile.work-context-block.1": {
+      "item:medical-appliance-technicians.profile.responsibilities-block.4": {
         "status": "pending_mapping"
       },
-      "item:medical-appliance-technicians.profile.work-context-block.2": {
+      "item:medical-appliance-technicians.profile.work-context-block.5": {
+        "status": "pending_mapping"
+      },
+      "item:medical-appliance-technicians.profile.work-context-block.6": {
         "status": "pending_mapping"
       },
       "item:medical-appliance-technicians.quick-decision.fermat-decision-card.1": {
@@ -174,9 +183,6 @@
         "status": "pending_mapping"
       },
       "item:medical-appliance-technicians.quick-decision.fermat-decision-card.4": {
-        "status": "pending_mapping"
-      },
-      "item:medical-appliance-technicians.quick-decision.fermat-decision-card.5": {
         "status": "pending_mapping"
       },
       "item:medical-appliance-technicians.risk.career-risk-cards.1": {
@@ -7218,10 +7224,41 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "O*NET 51-9082.00 是医疗器具制作技术员，构造、维护或维修支具、矫形器、假肢、关节、足弓支撑等支持性器具。"
+              "以下判断针对医疗器具制作技术员按处方制作、修理与适配矫形、假肢等医疗辅助器具的日常工作；不预测录用、执业资格、独立临床评估或最终适配责任。"
             ]
           },
           "id": "medical-appliance-technicians.quick-decision.fermat-decision-card.1",
+          "source_refs": [
+            "onet-details",
+            "source-pack-onet-summary"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fermat-decision-card",
+          "data": {
+            "paragraphs": [
+              "医疗器具制作技术员的核心是把处方与测量转成可追溯的器具：解读处方与规格，测量并制作模型或图纸，加工、装配与打磨器具，测试对位与稳定性，为对象适配调整并说明使用，记录并处理返修。工作以环境受控的室内车间为主，需要高度精确、手工操作并接触粉尘、噪声或化学材料。"
+            ]
+          },
+          "id": "medical-appliance-technicians.quick-decision.fermat-decision-card.2",
+          "source_refs": [
+            "source-pack-onet-summary",
+            "onet-details",
+            "source-pack-onet-custom"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.fit-decision-checklist",
+          "data": {
+            "paragraphs": [
+              "完全虚构的任务包：给出一份虚构的矫形器具制作工单（含 1 份虚构处方规格、1 组虚构测量与模型数据、1 项待确认的材料与工艺要求），要求在 60 分钟内写出加工与装配步骤、关键尺寸与检验点、偏差处理与升级路径，以及需向有权限者确认的情形；不使用真实患者信息或真实处方。"
+            ]
+          },
+          "id": "medical-appliance-technicians.quick-decision.fermat-decision-card.3",
           "source_refs": [
             "onet-details"
           ],
@@ -7229,57 +7266,16 @@
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适合继续探索的信号：能精确读取尺寸与规格；喜欢手工制作并愿意返修；能记录材料批次；对边缘和连接缺陷敏感。"
-            ]
-          },
-          "id": "medical-appliance-technicians.quick-decision.fermat-decision-card.2",
-          "source_refs": [
-            "editorial-safe-exercise-v2"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
-          "data": {
-            "paragraphs": [
-              "虚构规格：工单 M-08 要求长度 120±1 mm、孔距 40±0.5 mm、边缘状态‘光滑’，材料批次必须填写。虚构记录：成品 A 为 120.6 mm、39.8 mm、光滑、批次 P3；成品 B 为 118.7 mm、40.2 mm、边缘粗糙、批次空白。"
-            ]
-          },
-          "id": "medical-appliance-technicians.quick-decision.fermat-decision-card.3",
-          "source_refs": [
-            "editorial-safe-exercise-v2"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
-          "data": {
-            "paragraphs": [
-              "任务：只按练习规则写符合项和差异单；不得为真人设计、试配或批准器具。参考结果：A 四项均在规则内；B 长度越界、边缘不合格且批次缺失，应停止交付并交授权人员确认。"
+              "样本输出与反思：检查是否先解读处方与规格，是否按工艺与检具复核关键尺寸，是否区分尺寸偏差、材料工艺与适配三类问题；再问自己能否在工时与质量要求下稳定制作、能否在偏差时停下并升级，以及是否愿意对加工与检验记录负责。"
             ]
           },
           "id": "medical-appliance-technicians.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "editorial-safe-exercise-v2"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
-          "data": {
-            "paragraphs": [
-              "如果你喜欢把处方或规格转成可检验的实体器具，并能耐心修整、记录和协作复核，这个职业值得探索；尺寸错误会影响使用，设备与质量体系要求因雇主而异。先做规格核对练习，再访谈目标实验室。"
-            ]
-          },
-          "id": "medical-appliance-technicians.quick-decision.fermat-decision-card.5",
-          "source_refs": [
-            "editorial-safe-exercise-v2"
+            "onet-details",
+            "source-pack-onet-custom"
           ],
           "type": "prose"
         }
@@ -7296,11 +7292,12 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "O*NET 51-9082.00 是医疗器具制作技术员，构造、维护或维修支具、矫形器、假肢、关节、足弓支撑等支持性器具。"
+              "本页覆盖 O*NET 51-9082.00「医疗器具制作技术员（Medical Appliance Technicians）」，页面正文简称医疗技术员：制作、维护或修理矫形器、假肢装置、支架等医疗辅助器具；常见报告岗位名包括矫形技师、足部矫形技师、假肢技师、助听器维修技师、实验室技师、骨科技师与假肢实验室技师。本页不含独立诊断、签字或法定授权角色，也不含职责不同的管理、设计或维修角色，不含牙科、眼科实验技术员与校准技术员等相邻岗位。"
             ]
           },
           "id": "medical-appliance-technicians.profile.definition-block.1",
           "source_refs": [
+            "source-pack-onet-summary",
             "onet-details"
           ],
           "type": "prose"
@@ -7310,21 +7307,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "输入包括有权专业人员提供的处方/规格、模型或测量记录、材料批次、工单和质量要求。"
-            ]
-          },
-          "id": "medical-appliance-technicians.profile.responsibilities-block.1",
-          "source_refs": [
-            "onet-details"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "交付是按规格制作或维修的器具、尺寸与材料记录、检查结果和待确认差异单。"
+              "投入对象：处方与规格、身体或肢体测量与石膏模型、热塑与热固材料、金属合金与皮革、手工与电动工具，以及检具与测试装置。"
             ]
           },
           "id": "medical-appliance-technicians.profile.responsibilities-block.2",
@@ -7338,7 +7321,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "读取规格→核对模型/尺寸→选材与加工→装配/修整→检查对线与稳定性→记录→交授权人员复核。"
+              "可检查产出：加工与装配完成的器具、关键尺寸与检验记录、对位与稳定性测试记录、适配调整与使用说明记录，以及返修与更换记录。"
             ]
           },
           "id": "medical-appliance-technicians.profile.responsibilities-block.3",
@@ -7349,15 +7332,30 @@
         },
         {
           "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "完整工作流程：解读处方与规格 → 测量并制作模型 → 加工与装配 → 测试对位与稳定性 → 适配调整与说明 → 记录与返修处理的闭环。"
+            ]
+          },
+          "id": "medical-appliance-technicians.profile.responsibilities-block.4",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "技术员判断材料和加工是否符合工单、公差与机构程序；处方变更、临床适配和最终批准必须升级。"
+              "关键判断：处方与规格是否明确；关键尺寸与公差是否满足；材料与工艺是否符合要求；对位与稳定性是否合格；偏差是否需要返修或升级；以及必须由有权限者确认的适配结论与交付。"
             ]
           },
-          "id": "medical-appliance-technicians.profile.work-context-block.1",
+          "id": "medical-appliance-technicians.profile.work-context-block.5",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "source-pack-onet-custom"
           ],
           "type": "prose"
         },
@@ -7366,24 +7364,40 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "制作间存在持续手工操作、站立、粉尘/污染物、噪声、割伤和设备风险，需要局部防护与设备程序。"
+              "环境与节奏：O*NET 工作情境显示环境受控的室内工作（5.00）、面对面讨论（4.96）与精确或高度准确（4.66）最为突出；与他人接触（4.62）、接触污染物（4.60）、手工操作（4.48）、时间压力（4.29）、久站（4.28）与噪声（3.99）也较高。"
             ]
           },
-          "id": "medical-appliance-technicians.profile.work-context-block.2",
+          "id": "medical-appliance-technicians.profile.work-context-block.6",
           "source_refs": [
-            "onet-details"
+            "source-pack-onet-custom"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "手工工具、成形/打磨设备、测量工具和可能的 CAD/CAM 服务于制作；任何数字模型仍须按规格检验。"
+              "研究输入：O*NET 51-9082.00 的官方描述、任务、技能、兴趣代码、工作活动与工作情境，以及 BLS 2025 年工资数据与 2024—2034 年就业预测（本职业口径）；研究结论不据此推定中国大陆的资格、工资或就业口径。"
             ]
           },
-          "id": "medical-appliance-technicians.profile.onet-structured-fields-block.1",
+          "id": "medical-appliance-technicians.profile.onet-structured-fields-block.7",
+          "source_refs": [
+            "onet-details",
+            "onet-wages"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-quick-answers-block",
+          "data": {
+            "paragraphs": [
+              "先核对的内容：处方与规格、测量与模型数据、材料与工艺要求、关键尺寸与公差、防护与通风条件，以及需要授权者确认的适配结论与交付判断。"
+            ]
+          },
+          "id": "medical-appliance-technicians.profile.career-quick-answers-block.8",
           "source_refs": [
             "onet-details"
           ],
@@ -7394,24 +7408,10 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "与处方或临床授权人员、质检、采购和维修同事协作；制作技术员不替代临床诊断与适配批准。"
+              "工作闭环：从解读处方与规格开始，经过测量建模、加工装配、对位测试与适配调整，到记录与返修；关键尺寸未复核前不放行，材料或工艺不符时先停下，任一适配或安全疑问未确认前不交付。"
             ]
           },
-          "id": "medical-appliance-technicians.profile.career-quick-answers-block.1",
-          "source_refs": [
-            "onet-details"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-quick-answers-block",
-          "data": {
-            "paragraphs": [
-              "质量看尺寸与规格一致、材料和工序可追溯、边缘/连接/稳定性符合机构规则、差异及时升级。"
-            ]
-          },
-          "id": "medical-appliance-technicians.profile.career-quick-answers-block.2",
+          "id": "medical-appliance-technicians.profile.career-quick-answers-block.9",
           "source_refs": [
             "onet-details"
           ],
@@ -7422,14 +7422,15 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "本页特指 O*NET 51-9082.00 医疗器具制作技术员，不泛指其他医疗技术岗位；中国器械生产规则是行业边界，不自动等同个体执业许可。"
+              "相邻职责边界：本页只覆盖 51-9082.00 的器具制作、修理与适配检查；矫形师与假肢师负责独立临床评估、处方设计与最终适配责任，牙科与眼科实验技术员面向其他器具，校准技术员面向仪器校准；各岗位的对象、资格与责任不得互换。"
             ]
           },
-          "id": "medical-appliance-technicians.profile.definition-block.2",
+          "id": "medical-appliance-technicians.profile.definition-block.10",
           "source_refs": [
-            "onet-details"
+            "source-pack-onet-summary"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         }
       ]
     },
@@ -7445,38 +7446,34 @@
           "data": {
             "entries": [
               {
-                "entity": "牙科、眼科实验室及医疗器具技术人员",
-                "id": "adjacent-1",
-                "relation": "adjacent-role",
+                "entity": "dental-and-ophthalmic-laboratory-technicians-and-medical-appliance-technicians",
+                "id": "medical-appliance-technicians.parity.adjacent.1",
+                "relation": "adjacent-career",
                 "url": "/zh/career/jobs/dental-and-ophthalmic-laboratory-technicians-and-medical-appliance-technicians"
               },
               {
-                "entity": "牙科实验室技术员",
-                "id": "adjacent-2",
-                "relation": "adjacent-role",
+                "entity": "dental-laboratory-technicians",
+                "id": "medical-appliance-technicians.parity.adjacent.2",
+                "relation": "adjacent-career",
                 "url": "/zh/career/jobs/dental-laboratory-technicians"
               },
               {
-                "entity": "眼科实验室技术员",
-                "id": "adjacent-3",
-                "relation": "adjacent-role",
+                "entity": "ophthalmic-laboratory-technicians",
+                "id": "medical-appliance-technicians.parity.adjacent.3",
+                "relation": "adjacent-career",
                 "url": "/zh/career/jobs/ophthalmic-laboratory-technicians"
               },
               {
-                "entity": "校准技术人员",
-                "id": "adjacent-4",
-                "relation": "adjacent-role",
+                "entity": "calibration-technologists-and-technicians",
+                "id": "medical-appliance-technicians.parity.adjacent.4",
+                "relation": "adjacent-career",
                 "url": "/zh/career/jobs/calibration-technologists-and-technicians"
               }
             ]
           },
           "id": "medical-appliance-technicians.direction-comparison.adjacent-career-comparison-table.1",
           "source_refs": [
-            "adjacent-onet-17-3028-00",
-            "adjacent-onet-51-9081-00",
-            "adjacent-onet-51-9083-00",
-            "editorial-safe-exercise-v2",
-            "onet-details"
+            "source-pack-onet-summary"
           ],
           "type": "links"
         },
@@ -7485,14 +7482,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "牙科实验室技术员制作和修复义齿等牙科器具；本职业制作支具、矫形器或假肢等支持性器具，转向需补口腔模型、牙科材料与对应质量要求。"
+              "与牙科与眼科实验技术员及医疗器具技术员区别：同属实验室制作；本职业面向矫形、假肢等医疗辅助器具的加工与适配检查。"
             ]
           },
           "id": "medical-appliance-technicians.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "adjacent-onet-51-9081-00",
-            "editorial-safe-exercise-v2",
-            "onet-details"
+            "source-pack-onet-summary"
           ],
           "type": "prose"
         },
@@ -7501,14 +7496,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "牙科实验室技术员的对象和验收标准集中在牙科修复体；本职业依据处方或规格处理身体支持性器具，即使同属实验室制造，临床协作链也不同。"
+              "与牙科实验技术员区别：牙科实验技术员面向牙科修复体制作；本职业面向肢体与躯干支撑器具，对象与适用标准不同。"
             ]
           },
           "id": "medical-appliance-technicians.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "adjacent-onet-51-9081-00",
-            "editorial-safe-exercise-v2",
-            "onet-details"
+            "source-pack-onet-summary"
           ],
           "type": "prose"
         },
@@ -7517,14 +7510,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "眼科实验室技术员切磨和装配镜片等光学元件；本职业加工矫形或假肢器具，转向需补光学测量、镜片加工和眼科订单规范。"
+              "与眼科实验技术员区别：眼科实验技术员面向镜片与眼科器具；本职业面向矫形与假肢装置，比较时应以器类别与责任为准。"
             ]
           },
           "id": "medical-appliance-technicians.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "adjacent-onet-51-9083-00",
-            "editorial-safe-exercise-v2",
-            "onet-details"
+            "source-pack-onet-summary"
           ],
           "type": "prose"
         },
@@ -7533,14 +7524,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "校准技术人员校准测量设备并判断标准适用性；本职业制作和检验具体医疗器具，转向需补计量溯源、校准方法与设备维护。"
+              "与校准技术员区别：校准技术员面向仪器校准与计量；本职业面向医疗器具的制造、修理与适配检查，测量仅为手段。"
             ]
           },
           "id": "medical-appliance-technicians.direction-comparison.adjacent-career-comparison-table.5",
           "source_refs": [
-            "adjacent-onet-17-3028-00",
-            "editorial-safe-exercise-v2",
-            "onet-details"
+            "source-pack-onet-summary"
           ],
           "type": "prose"
         }
@@ -7557,12 +7546,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以下为基于职业任务的有限编辑推演，并非该职业的实际部署证据：CAD/CAM 可辅助模型转换、加工路径和尺寸记录。"
+              "任务与 AI：医疗器具制作技术员的 AI 任务暴露不等于岗位替代，关键尺寸复核与偏差放行仍需人负责。"
             ]
           },
           "id": "medical-appliance-technicians.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "onet-details",
+            "source-pack-onet-hot_tech"
           ],
           "type": "prose"
         },
@@ -7571,12 +7561,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "采用取决于设备、数字模型质量、验证程序和人员训练。"
+              "直接回答：CAD/CAM 与 AI 可辅助尺寸整理、建模、工艺规划与缺陷提示；处方解读、关键尺寸复核、偏差放行与适配判断仍由有权限的人负责。"
             ]
           },
           "id": "medical-appliance-technicians.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -7585,12 +7575,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "自动生成模型必须对照原处方/规格和实体测量复核。"
+              "证据方法：任务能力、组织采用与岗位结果是三类不同证据，需分别核对。"
             ]
           },
           "id": "medical-appliance-technicians.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "source-pack-onet-hot_tech"
           ],
           "type": "prose"
         },
@@ -7599,12 +7589,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "系统不能自行批准处方变更或临床适配。"
+              "方向差异：加工装配、测量建模、适配修理与质量的 AI 变化与剩余责任并不相同。"
             ]
           },
           "id": "medical-appliance-technicians.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -7613,12 +7603,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "患者相关模型与尺寸记录需要受控访问。"
+              "责任流程：从核对输入、限定任务，到人工复核与记录升级。"
             ]
           },
           "id": "medical-appliance-technicians.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "source-pack-onet-hot_tech"
           ],
           "type": "prose"
         },
@@ -7627,12 +7617,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "设备或软件版本变化可能改变加工误差，应重新验证。"
+              "使用边界：工具输出必须能追回到原始处方、测量数据、材料与工艺要求。"
             ]
           },
           "id": "medical-appliance-technicians.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -7641,12 +7631,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "最终质量与临床批准由相应授权链承担。"
+              "辅助尺寸整理、建模、工艺规划与缺陷提示。"
             ]
           },
           "id": "medical-appliance-technicians.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "source-pack-onet-hot_tech"
           ],
           "type": "prose"
         },
@@ -7655,12 +7645,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "通用医疗 AI 伦理材料不证明本职业采用率或就业因果；目前没有本页细分职业的采用率、裁员率或因果就业证据，必须以具体机构与岗位验证。"
+              "由有权限者复核关键尺寸、偏差与适配判断。"
             ]
           },
           "id": "medical-appliance-technicians.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         }
@@ -7677,7 +7667,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "暂无可安全使用的数据：未取得与 51-9082.00 完全同口径的中国全国职业工资分布；制造业或卫生行业平均都不能当个体工资。"
+              "中国大陆没有单列本职业的公开职业工资：本轮以国家统计局公开口径有界检索，未取得与 O*NET 51-9082.00 精确对应的全国职业工资分布，因此不生成中国精确中位数、分位数或稳定月薪。"
             ]
           },
           "id": "medical-appliance-technicians.china-salary.career-snapshot-primary-locale.1",
@@ -7691,7 +7681,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "阅读工资时须保留地区、期间、币种、税前/税后、统计量和职业范围。"
+              "口径说明：国家统计局公开工资资料为行业或人员大类聚合口径，制造业平均工资不能替代本职业工资；在建立精确映射前不使用代理数字。"
             ]
           },
           "id": "medical-appliance-technicians.china-salary.career-snapshot-primary-locale.2",
@@ -7705,7 +7695,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业平均只描述行业就业人员，不能等同目标职业中位数或个人报价。"
+              "类别边界：zh-CN 只是页面语言，不是本职业在中国大陆存在精确等价职业的证明；不得用行业均值或美国工资跨法域外推起薪、中位数或个人收入。"
             ]
           },
           "id": "medical-appliance-technicians.china-salary.career-snapshot-primary-locale.3",
@@ -7719,7 +7709,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "没有同口径职业数据时保留缺口，比跨法域或用招聘片段推算更可靠。"
+              "证据不足：未取得中国大陆医疗器具制作技术员的全国职业工资（本轮公开口径）；本页明确标注缺失，不使用行业代理或美国数字填补。"
             ]
           },
           "id": "medical-appliance-technicians.china-salary.career-snapshot-primary-locale.4",
@@ -7741,12 +7731,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 当前 2025–2035 表：就业约 11,300→11,700，增长 3.5%，年均 岗位空缺 1,300；2025 中位年薪 48,030 美元。"
+              "美国医疗器具制作技术员薪资与就业口径（BLS 2025 年工资数据与 2024—2034 年预测；O*NET 51-9082.00 本职业口径）"
             ]
           },
+          "fact_refs": [
+            "us-wage-high"
+          ],
           "id": "medical-appliance-technicians.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "bls-current-2025-2035"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -7755,12 +7748,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位数是分布中点，不是新手工资、到手收入或个人报价。"
+              "BLS 2025 年工资数据：中位年薪 48,030 美元（约 23.09 美元/小时）；10 分位 36,510 美元（17.55 美元/小时）、25 分位 42,210 美元（20.29 美元/小时）、75 分位 60,580 美元（29.12 美元/小时）、90 分位 75,740 美元（36.41 美元/小时）。以上为本职业口径；分位是统计位置，不含个人到手收入。"
             ]
           },
+          "fact_refs": [
+            "us-wage-hourly"
+          ],
           "id": "medical-appliance-technicians.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "bls-current-2025-2035"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -7769,12 +7765,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "employment 是就业存量，change 是净变化，岗位空缺 同时包含增长与替补。"
+              "工资统计位置：以上为美国统计分布；分位不代表资历或经验等级，也不能解释为入门工资或保证收入。"
             ]
           },
+          "fact_refs": [
+            "us-wage-low"
+          ],
           "id": "medical-appliance-technicians.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "bls-current-2025-2035"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -7783,12 +7782,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "典型入门教育和训练是全国职业表口径，具体岗位仍以雇主与法域要求为准。"
+              "行业分布与局限：该职业 2024 年行业分布为制造业（约 59%）、医疗保健与社会援助（约 15%）、批发业（约 10%）与其他行业（约 16%，含零售）；行业分布是雇主场景信号，不是需求预测。"
             ]
           },
+          "fact_refs": [
+            "us-wage-median"
+          ],
           "id": "medical-appliance-technicians.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "bls-current-2025-2035"
+            "source-pack-onet-industry"
           ],
           "type": "prose"
         },
@@ -7797,12 +7799,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不同地区、行业、工时和经验会改变工资，不能从全国数直接推算本地收入。"
+              "就业规模与口径提示：2024 年就业约 12,000 人，2034 年预计约 12,400 人，2024—2034 年预计平均（约 4%），年均职位空缺约 1,500 个（含替换需求）；引用时须标明年份与统计口径。"
             ]
           },
+          "fact_refs": [
+            "us-wage-high"
+          ],
           "id": "medical-appliance-technicians.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "bls-current-2025-2035"
+            "bls-projections"
           ],
           "type": "prose"
         },
@@ -7811,12 +7816,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本页只使用明确标注的 exact、combined 或 parent 范围，不把代理写成精确子职业数据。"
+              "怎样理解这些数字：就业规模、增长率、净变化与年度空缺必须分别解释，不能合并成个人就业保证；行业与地区差异较大，不得跨地区外推。"
             ]
           },
+          "fact_refs": [
+            "us-wage-hourly"
+          ],
           "id": "medical-appliance-technicians.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "bls-current-2025-2035"
+            "bls-projections"
           ],
           "type": "prose"
         }
@@ -7833,12 +7841,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "可观察信号 1：能精确读取尺寸与规格。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+              "适配信号：医疗器具制作技术员的适配看可观察行为，不用人格标签代替任务、资格与责任判断。"
             ]
           },
           "id": "medical-appliance-technicians.fit.riasec-fit-block.1",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7847,12 +7855,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "可观察信号 2：喜欢手工制作并愿意返修。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+              "直接回答：若能在工时与质量要求下稳定完成加工、检验与适配判断，值得进一步试验；否则优先比较相邻方向。"
             ]
           },
           "id": "medical-appliance-technicians.fit.riasec-fit-block.2",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7861,12 +7869,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "可观察信号 3：能记录材料批次。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+              "积极信号：愿意反复核对尺寸与工艺、动手加工并对质量与记录负责。"
             ]
           },
           "id": "medical-appliance-technicians.fit.riasec-fit-block.3",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7875,12 +7883,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "可观察信号 4：对边缘和连接缺陷敏感。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+              "谨慎条件：若对粉尘、噪声、化学材料或长时间站立明显不适，可优先比较相邻方向或非制作岗位。"
             ]
           },
           "id": "medical-appliance-technicians.fit.riasec-fit-block.4",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7889,12 +7897,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "可观察信号 5：遵守粉尘噪声防护。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+              "试验动作：用完全虚构的工单完成一次加工与检验演练，再决定是否继续。"
             ]
           },
           "id": "medical-appliance-technicians.fit.riasec-fit-block.5",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7903,12 +7911,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "可观察信号 6：接受质量复核。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+              "RIASEC（RIC）：兴趣代码描述操作工具与实物（现实型）、分析与推理（研究型）与按规程处理数据（常规型）的偏好；只用于提出假设，不能据此推导录用或胜任。"
             ]
           },
           "id": "medical-appliance-technicians.fit.riasec-fit-block.6",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7917,26 +7925,26 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "可观察信号 7：不擅自改处方。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+              "大五人格：工具只描述倾向，不能替代真实任务、标准与雇主判断；用工作样本核对精确性与耐性。"
             ]
           },
           "id": "medical-appliance-technicians.fit.riasec-fit-block.7",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "onet-details"
           ],
           "type": "prose"
         },
         {
           "availability": "available",
-          "copy_key": "career.item.riasec-fit-block",
+          "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可观察信号 8：能在重复加工中保持尺寸一致。用一次小任务或岗位访谈验证，不用人格标签下结论。"
+              "MBTI 等标签：不能判断是否胜任；先核对真实任务、标准与责任边界，再判断是否继续。"
             ]
           },
           "id": "medical-appliance-technicians.fit.riasec-fit-block.8",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "onet-details"
           ],
           "type": "prose"
         }
@@ -7953,10 +7961,24 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "在适用美国医疗器械制造质量体系的场景，成品应按已批准规格和质量流程控制；具体差异处置按机构程序。"
+              "关键尺寸或对位偏差：加工与装配时，触发条件为未按图纸与检具复核；可能影响适配与使用安全；控制为按图纸与检具复核关键尺寸并留痕。"
             ]
           },
           "id": "medical-appliance-technicians.risk.career-risk-cards.1",
+          "source_refs": [
+            "onet-details"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.career-risk-cards",
+          "data": {
+            "paragraphs": [
+              "材料或工艺不符规格：制作时，触发条件为未按工艺与材料要求核对；可能影响强度与耐久；控制为按规格核对并记录。"
+            ]
+          },
+          "id": "medical-appliance-technicians.risk.career-risk-cards.2",
           "source_refs": [
             "fda-qmsr"
           ],
@@ -7967,26 +7989,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "材料批次缺失：追溯中断；隔离材料并补记录。"
-            ]
-          },
-          "id": "medical-appliance-technicians.risk.career-risk-cards.2",
-          "source_refs": [
-            "editorial-safe-exercise-v2"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.career-risk-cards",
-          "data": {
-            "paragraphs": [
-              "边缘或连接检查失败：可能造成器具缺陷；标记不合格并返修/升级。"
+              "粉尘、噪声或化学暴露防护不足：加工与表面处理时，触发条件为未按防护与通风规程作业；可能造成职业健康风险；控制为按规程穿戴防护并使用通风。"
             ]
           },
           "id": "medical-appliance-technicians.risk.career-risk-cards.3",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7995,12 +8003,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "粉尘、噪声或设备防护不到位：停止相关工序并按工作场所程序处理。"
+              "质量记录不完整：检验与交付时，触发条件为记录缺失或不可追溯；可能影响合规与召回处理；控制为按质量体系记录并留痕。"
             ]
           },
           "id": "medical-appliance-technicians.risk.career-risk-cards.4",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "fda-qmsr"
           ],
           "type": "prose"
         },
@@ -8009,12 +8017,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "共同边界：不确定时停止、保留原记录并交有权角色；本页不替代单位程序、执业规范或安全培训。"
+              "共同升级规则：一旦尺寸、材料、适配或安全出现疑问，先停止或隔离相关工序，把事实、影响和待决问题交有权限者确认后再继续。"
             ]
           },
           "id": "medical-appliance-technicians.risk.career-risk-cards.5",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "onet-details"
           ],
           "type": "prose"
         }
@@ -8031,12 +8039,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "当前 BLS 表列典型入门为高中同等学历、无需相关经验、需中期在岗训练；临床职责另需相应授权。"
+              "现实入口：医疗器具制作技术员入门样本只用公开或虚构数据，展示加工、测量与检验判断；先确认岗位的第一年任务与监督方式。"
             ]
           },
           "id": "medical-appliance-technicians.path.career-path-block.1",
           "source_refs": [
-            "bls-current-2025-2035"
+            "onet-details",
+            "source-pack-onet-localtraining"
           ],
           "type": "prose"
         },
@@ -8045,12 +8054,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "入门证据应展示能按规则处理真实岗位材料的能力，而不是只列软件名称。"
+              "雇主证据：用教育、培训、经验与雇主要求分别核对；美国 Job Zone 1-2 通常要求高中文凭并在职训练，并设有注册学徒机会，执业与监督边界按法域核验。"
             ]
           },
           "id": "medical-appliance-technicians.path.career-path-block.2",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "source-pack-onet-localcert"
           ],
           "type": "prose"
         },
@@ -8059,12 +8068,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "虚构规格：工单 M-08 要求长度 120±1 mm、孔距 40±0.5 mm、边缘状态‘光滑’，材料批次必须填写。"
+              "作品与经验：可从加工、装配或实验室助理岗位逐步积累，保留可复核的加工、检验与适配记录作为能力证据。"
             ]
           },
           "id": "medical-appliance-technicians.path.career-path-block.3",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "source-pack-onet-localcert"
           ],
           "type": "prose"
         },
@@ -8073,12 +8082,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "虚构记录：成品 A 为 120.6 mm、39.8 mm、光滑、批次 P3；成品 B 为 118.7 mm、40.2 mm、边缘粗糙、批次空白。任务：只按练习规则写符合项和差异单；不得为真人设计、试配或批准器具。"
+              "面试与试用：展示如何解读处方与规格、如何复核关键尺寸、如何处理偏差与返修，以及如何在授权范围内交付。"
             ]
           },
           "id": "medical-appliance-technicians.path.career-path-block.4",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "source-pack-onet-localcert"
           ],
           "type": "prose"
         },
@@ -8087,12 +8096,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参考结果：A 四项均在规则内；B 长度越界、边缘不合格且批次缺失，应停止交付并交授权人员确认。"
+              "七天试验：前两天理解处方、材料与工艺要求，中间三天完成一次虚构工单的加工与检验演练，第六天请他人挑战尺寸与工艺判断，第七天写继续/停止/换方向的证据。"
             ]
           },
           "id": "medical-appliance-technicians.path.career-path-block.5",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "source-pack-onet-localcert"
           ],
           "type": "prose"
         },
@@ -8101,12 +8110,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "七日体验：第1天：阅读同一套虚构材料和边界，圈出未知项；输出问题清单。 第2天：按纸面规则完成第一版；输出逐项判断与依据。 第3天：对照参考思路找出遗漏；输出更正记录。 第4天：把结论改写成可交接格式；输出一页交接稿。 第5天：请他人仅凭材料复核；输出歧义和反馈。 第6天：修订并记录精力、耐心和错误类型；输出第二版。 第7天：比较两版，判断自己是否愿意继续训练；输出继续/谨慎/停止及理由。"
+              "资格决策：O*NET 的认证与培训目录及学徒机会用于发现可能的证书与训练路径，但认证不等于执照、雇主任命或签字权；证书、录用与授权是不同状态。"
             ]
           },
           "id": "medical-appliance-technicians.path.career-path-block.6",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "source-pack-onet-localcert"
           ],
           "type": "prose"
         },
@@ -8115,12 +8124,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格与证书只在具体法域、雇主和授权范围内成立，先查当前原文。"
+              "能力阶梯：进入医疗器具制作技术员前应核对官方职业范围、真实雇主要求、教育或训练、所在地执业与监督规则以及受监督任务，不能从相邻职业条件直接推断；晋级依据是可复核的加工与检验记录，不是保证年限。"
             ]
           },
           "id": "medical-appliance-technicians.path.career-path-block.7",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "source-pack-onet-localcert"
           ],
           "type": "prose"
         },
@@ -8129,12 +8138,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "进阶可从基础制作走向复杂维修、数字化设计制造、质量体系或临床团队协作；每条方向需用工艺能力、检验记录、设备/软件验证和明确授权边界证明。"
+              "转型路径：转型前列出可迁移能力（加工制作、测量与检验、适配与修理、质量记录）与必须补足的临床评估、处方与法规知识，并按相邻岗位的资格与责任逐项核对。"
             ]
           },
           "id": "medical-appliance-technicians.path.career-path-block.8",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "source-pack-onet-localcert"
           ],
           "type": "prose"
         }
@@ -8151,12 +8160,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "当前预测为小幅增长；规模和 岗位空缺 都较小，不能据此保证当地岗位。"
+              "官方与行业信号：美国 51-9082.00 本职业口径 2024 年就业约 12,000 人，2034 年预计约 12,400 人，2024—2034 年预计平均（约 4%），年均职位空缺约 1,500 个（含替换需求）。"
             ]
           },
           "id": "medical-appliance-technicians.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls-current-2025-2035"
+            "bls-projections",
+            "who-ai-health"
           ],
           "type": "prose"
         },
@@ -8165,12 +8175,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 当前精确职业数据可说明全国规模与变化，但不能说明某类支具、假肢或维修订单在本地的需求。"
+              "就业人数、增长率、净变化和年度空缺必须分别解释，不能合并成个人就业保证。"
             ]
           },
           "id": "medical-appliance-technicians.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls-current-2025-2035"
+            "bls-projections"
           ],
           "type": "prose"
         },
@@ -8179,12 +8189,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本页没有招聘样本；应核对目标雇主使用的材料、设备、数字模型流程、质量体系和授权边界。"
+              "招聘样本只能说明采样时间、地区和岗位组合中的需求，不是全国需求率。"
             ]
           },
           "id": "medical-appliance-technicians.market-signals.market-signal-card.3",
           "source_refs": [
-            "editorial-safe-exercise-v2"
+            "bls-projections"
           ],
           "type": "prose"
         },
@@ -8193,13 +8203,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向眼科实验室技术岗位，需要补光学测量、镜片加工和订单规范，并用对应成品检验记录证明。"
+              "AI 或技术研究说明任务可被辅助的范围，不等同于组织采用、更不等同于净岗位变化。"
             ]
           },
           "id": "medical-appliance-technicians.market-signals.market-signal-card.4",
           "source_refs": [
-            "adjacent-onet-51-9083-00",
-            "editorial-safe-exercise-v2"
+            "bls-projections"
           ],
           "type": "prose"
         },
@@ -8208,13 +8217,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "转向校准技术岗位，需要补计量溯源、标准适用性和设备校准，器具制作经验只部分可迁移。"
+              "相邻转型：从医疗器具制作技术员向牙科或眼科实验技术员、校准技术员或矫形师与假肢师转型，需逐项核对工具、资格与责任差异；每条路径都要补齐与新输出相对应的证据。"
             ]
           },
           "id": "medical-appliance-technicians.market-signals.market-signal-card.5",
           "source_refs": [
-            "adjacent-onet-17-3028-00",
-            "editorial-safe-exercise-v2"
+            "bls-projections"
           ],
           "type": "prose"
         }
@@ -8232,114 +8240,113 @@
           "data": {
             "entries": [
               {
-                "answer": "O*NET 51-9082.00 是医疗器具制作技术员，构造、维护或维修支具、矫形器、假肢、关节、足弓支撑等支持性器具。 输入包括有权专业人员提供的处方/规格、模型或测量记录、材料批次、工单和质量要求。 交付是按规格制作或维修的器具、尺寸与材料记录、检查结果和待确认差异单。 读取规格→核对模型/尺寸→选材与加工→装配/修整→检查对线与稳定性→记录→交授权人员复核。",
+                "answer": "以环境受控的室内车间为主，面对面讨论（4.96）、精确或高度准确（4.66）与手工操作（4.48）最为突出；接触污染物（4.60）、时间压力（4.29）、久站（4.28）与噪声（3.99）也较高，可能需按工单节奏调整。",
                 "id": "medical-appliance-technicians.faq.1",
+                "question": "日常工作和工时如何？",
                 "question_key": "career.faq.medical-appliance-technicians.daily-work",
                 "source_refs": [
-                  "onet-details"
+                  "source-pack-onet-custom"
                 ]
               },
               {
-                "answer": "牙科实验室技术员制作和修复义齿等牙科器具。 本职业制作支具、矫形器或假肢等支持性器具。 转向需补口腔模型、牙科材料与对应质量要求。 牙科实验室技术员的对象和验收标准集中在牙科修复体。 本职业依据处方或规格处理身体支持性器具，即使同属实验室制造，临床协作链也不同。 牙科实验室技术员的对象和验收标准集中在牙科修复体；本职业依据处方或规格处理身体支持性器具，即使同属实验室制造，临床协作链也不同。 眼科实验室技术员切磨和装配镜片等光学元件。 本职业加工矫形或假肢器具。 转向需补光学测量、镜片加工和眼科订单规范。 校准技术人员校准测量设备并判断标准适用性。 本职业制作和检验具体医疗器具。 转向需补计量溯源、校准方法与设备维护。",
+                "answer": "牙科与眼科实验技术员面向其他器具；校准技术员面向仪器校准；矫形师与假肢师负责独立临床评估、处方设计与最终适配；医疗器具制作技术员负责器具的制作、修理与适配检查。",
                 "id": "medical-appliance-technicians.faq.2",
+                "question": "这个职业与相邻职业如何区分？",
                 "question_key": "career.faq.medical-appliance-technicians.role-comparison",
                 "source_refs": [
-                  "adjacent-onet-17-3028-00",
-                  "adjacent-onet-51-9081-00",
-                  "adjacent-onet-51-9083-00",
-                  "editorial-safe-exercise-v2",
+                  "source-pack-onet-summary"
+                ]
+              },
+              {
+                "answer": "看可观察行为：能否按处方与图纸稳定加工、能否复核关键尺寸与工艺、能否在偏差时先停下并升级、能否保留可追溯记录；RIC 兴趣代码只描述活动偏好，不能决定胜任或资格。",
+                "id": "medical-appliance-technicians.faq.3",
+                "question": "什么信号说明我可能适合？",
+                "question_key": "career.faq.medical-appliance-technicians.fit",
+                "source_refs": [
                   "onet-details"
                 ]
               },
               {
-                "answer": "可观察信号 1：能精确读取尺寸与规格。用一次小任务或岗位访谈验证，不用人格标签下结论。 可观察信号 2：喜欢手工制作并愿意返修。用一次小任务或岗位访谈验证，不用人格标签下结论。 可观察信号 3：能记录材料批次。用一次小任务或岗位访谈验证，不用人格标签下结论。 可观察信号 4：对边缘和连接缺陷敏感。用一次小任务或岗位访谈验证，不用人格标签下结论。",
-                "id": "medical-appliance-technicians.faq.3",
-                "question_key": "career.faq.medical-appliance-technicians.fit",
-                "source_refs": [
-                  "editorial-safe-exercise-v2"
-                ]
-              },
-              {
-                "answer": "以下为基于职业任务的有限编辑推演，并非该职业的实际部署证据：CAD/CAM 可辅助模型转换、加工路径和尺寸记录。 采用取决于设备、数字模型质量、验证程序和人员训练。 自动生成模型必须对照原处方/规格和实体测量复核。 通用医疗 AI 伦理材料不证明本职业采用率或就业因果；目前没有本页细分职业的采用率、裁员率或因果就业证据，必须以具体机构与岗位验证。",
+                "answer": "尺寸整理、建模、工艺规划与缺陷提示更易被软件辅助；关键尺寸复核、偏差放行与适配判断仍以人工为主，现有资料不证明机构普遍以自动化替代这些判断。",
                 "id": "medical-appliance-technicians.faq.4",
+                "question": "AI 会如何影响这个职业？",
                 "question_key": "career.faq.medical-appliance-technicians.ai-impact",
                 "source_refs": [
-                  "editorial-safe-exercise-v2"
+                  "source-pack-onet-hot_tech"
                 ]
               },
               {
-                "answer": "在适用美国医疗器械制造质量体系的场景，成品应按已批准规格和质量流程控制；具体差异处置按机构程序。 材料批次缺失：追溯中断；隔离材料并补记录。 边缘或连接检查失败：可能造成器具缺陷；标记不合格并返修/升级。 粉尘、噪声或设备防护不到位：停止相关工序并按工作场所程序处理。",
+                "answer": "处方解读、关键尺寸与材料工艺复核、偏差放行、适配检查与交付，必须由有权限的人按职责负责；独立临床评估与处方设计超出本职业范围。",
                 "id": "medical-appliance-technicians.faq.5",
+                "question": "哪些判断必须由人负责？",
                 "question_key": "career.faq.medical-appliance-technicians.human-control",
                 "source_refs": [
-                  "editorial-safe-exercise-v2",
-                  "fda-qmsr"
+                  "onet-details"
                 ]
               },
               {
-                "answer": "暂无可安全使用的数据：未取得与 51-9082.00 完全同口径的中国全国职业工资分布；制造业或卫生行业平均都不能当个体工资。 阅读工资时须保留地区、期间、币种、税前/税后、统计量和职业范围。",
+                "answer": "本轮以国家统计局公开口径有界检索，未取得与 O*NET 51-9082.00 精确对应的中国大陆全国职业工资分布，因此本页标注缺失，不使用行业均值或美国数字填补。",
                 "id": "medical-appliance-technicians.faq.6",
+                "question": "中国大陆薪资证据是什么？",
                 "question_key": "career.faq.medical-appliance-technicians.china-pay",
                 "source_refs": [
                   "nbs-wages-2025"
                 ]
               },
               {
-                "answer": "BLS 当前 2025–2035 表：就业约 11,300→11,700，增长 3.5%，年均 岗位空缺 1,300；2025 中位年薪 48,030 美元。 中位数是分布中点，不是新手工资、到手收入或个人报价。",
+                "answer": "BLS 2025 年工资数据：中位 48,030 美元/年（23.09 美元/小时），10 分位 36,510、25 分位 42,210、75 分位 60,580、90 分位 75,740 美元/年；为 51-9082.00 本职业口径，分位不含个人到手收入。",
                 "id": "medical-appliance-technicians.faq.7",
+                "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.medical-appliance-technicians.us-pay",
                 "source_refs": [
-                  "bls-current-2025-2035"
+                  "onet-wages"
                 ]
               },
               {
-                "answer": "当前 BLS 表列典型入门为高中同等学历、无需相关经验、需中期在岗训练；临床职责另需相应授权。 虚构规格：工单 M-08 要求长度 120±1 mm、孔距 40±0.5 mm、边缘状态‘光滑’，材料批次必须填写。 虚构记录：成品 A 为 120.6 mm、39.8 mm、光滑、批次 P3；成品 B 为 118.7 mm、40.2 mm、边缘粗糙、批次空白。任务：只按练习规则写符合项和差异单；不得为真人设计、试配或批准器具。 参考结果：A 四项均在规则内；B 长度越界、边缘不合格且批次缺失，应停止交付并交授权人员确认。 七日体验：第1天：阅读同一套虚构材料和边界，圈出未知项；输出问题清单。 第2天：按纸面规则完成第一版；输出逐项判断与依据。 第3天：对照参考思路找出遗漏；输出更正记录。 第4天：把结论改写成可交接格式；输出一页交接稿。 第5天：请他人仅凭材料复核；输出歧义和反馈。 第6天：修订并记录精力、耐心和错误类型；输出第二版。 第7天：比较两版，判断自己是否愿意继续训练；输出继续/谨慎/停止及理由。",
+                "answer": "美国 Job Zone 1-2：通常要求高中文凭与在职训练，并设有注册学徒机会；中国大陆按用人单位、执业与监督规则确定。",
                 "id": "medical-appliance-technicians.faq.8",
+                "question": "入行和训练路径是什么？",
                 "question_key": "career.faq.medical-appliance-technicians.education-path",
                 "source_refs": [
-                  "bls-current-2025-2035",
-                  "editorial-safe-exercise-v2"
+                  "onet-details"
                 ]
               },
               {
-                "answer": "在适用美国医疗器械制造质量体系的场景，成品应按已批准规格和质量流程控制；具体差异处置按机构程序。 材料批次缺失：追溯中断；隔离材料并补记录。 边缘或连接检查失败：可能造成器具缺陷；标记不合格并返修/升级。 粉尘、噪声或设备防护不到位：停止相关工序并按工作场所程序处理。 共同边界：不确定时停止、保留原记录并交有权角色；本页不替代单位程序、执业规范或安全培训。",
+                "answer": "主要风险为关键尺寸或对位偏差、材料工艺不符、粉尘噪声化学暴露、记录不可追溯、越权作出临床或适配结论；应对为按图纸与检具复核、按规格核对、按防护规程作业、按体系记录、按授权链确认。",
                 "id": "medical-appliance-technicians.faq.9",
+                "question": "主要风险和控制边界是什么？",
                 "question_key": "career.faq.medical-appliance-technicians.risk-boundary",
                 "source_refs": [
-                  "editorial-safe-exercise-v2",
-                  "fda-qmsr"
+                  "onet-details"
                 ]
               },
               {
-                "answer": "当前预测为小幅增长；规模和 岗位空缺 都较小，不能据此保证当地岗位。 BLS 当前精确职业数据可说明全国规模与变化，但不能说明某类支具、假肢或维修订单在本地的需求。 本页没有招聘样本；应核对目标雇主使用的材料、设备、数字模型流程、质量体系和授权边界。 转向眼科实验室技术岗位，需要补光学测量、镜片加工和订单规范，并用对应成品检验记录证明。 转向校准技术岗位，需要补计量溯源、标准适用性和设备校准，器具制作经验只部分可迁移。",
+                "answer": "美国 51-9082.00 本职业口径 2024 年就业约 12,000 人，2034 年预计约 12,400 人，2024—2034 年预计平均（约 4%），年均职位空缺约 1,500 个（含替换需求）；不等于个人录用概率。",
                 "id": "medical-appliance-technicians.faq.10",
+                "question": "市场信号应如何理解？",
                 "question_key": "career.faq.medical-appliance-technicians.outlook-transition",
                 "source_refs": [
-                  "bls-current-2025-2035",
-                  "editorial-safe-exercise-v2"
+                  "bls-projections"
                 ]
               },
               {
-                "answer": "如果你喜欢把处方或规格转成可检验的实体器具，并能耐心修整、记录和协作复核，这个职业值得探索；尺寸错误会影响使用，设备与质量体系要求因雇主而异。先做规格核对练习，再访谈目标实验室。",
+                "answer": "若能用完全虚构的工单完成一次加工、检验与适配演练，并能按图纸与工艺核对、在偏差时先停下并升级，值得进一步试验；具体岗位与执业要求以雇主与主管部门为准。",
                 "id": "medical-appliance-technicians.faq.11",
+                "question": "这个职业值得进一步试验吗？",
                 "question_key": "career.faq.medical-appliance-technicians.career-worth",
                 "source_refs": [
-                  "editorial-safe-exercise-v2"
+                  "source-pack-onet-summary"
                 ]
+              },
+              {
+                "answer": "中国、美国与具体机构口径的证据分别陈述：工资、就业、资格、医疗与 AI 结论不得跨范围拼接；本页美国统计为 51-9082.00 本职业口径。；医疗器具制作涉及质量体系、材料安全与执业边界，本页提供职业判断与研究演练信息，不替代所在地法律、工艺标准、医疗要求或其他专业意见。；任何「证据不足」只表示在有界检索后未建立安全对应的数据，不使用代理或记忆伪造数字。",
+                "id": "medical-appliance-technicians.faq.12",
+                "question": "页面使用边界是什么？",
+                "question_key": "career.faq.medical-appliance-technicians.boundary"
               }
             ]
           },
           "id": "medical-appliance-technicians.sources.faq.1",
-          "source_refs": [
-            "adjacent-onet-17-3028-00",
-            "adjacent-onet-51-9081-00",
-            "adjacent-onet-51-9083-00",
-            "bls-current-2025-2035",
-            "editorial-safe-exercise-v2",
-            "fda-qmsr",
-            "nbs-wages-2025",
-            "onet-details"
-          ],
           "type": "faq"
         },
         {
@@ -8347,21 +8354,12 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "尺寸与缺陷记录为虚构练习，不用于真实患者器具制作或临床适配。",
-              "处方变更、最终放行和临床批准由相应授权人员承担。"
+              "中国、美国与具体机构口径的证据分别陈述：工资、就业、资格、医疗与 AI 结论不得跨范围拼接；本页美国统计为 51-9082.00 本职业口径。",
+              "医疗器具制作涉及质量体系、材料安全与执业边界，本页提供职业判断与研究演练信息，不替代所在地法律、工艺标准、医疗要求或其他专业意见。",
+              "任何「证据不足」只表示在有界检索后未建立安全对应的数据，不使用代理或记忆伪造数字。"
             ]
           },
           "id": "medical-appliance-technicians.sources.boundary.1",
-          "source_refs": [
-            "adjacent-onet-17-3028-00",
-            "adjacent-onet-51-9081-00",
-            "adjacent-onet-51-9083-00",
-            "bls-current-2025-2035",
-            "editorial-safe-exercise-v2",
-            "fda-qmsr",
-            "nbs-wages-2025",
-            "onet-details"
-          ],
           "type": "list"
         }
       ]
@@ -8378,67 +8376,67 @@
           "data": {
             "entries": [
               {
-                "entity": "医疗器具制作技术员",
+                "entity": "医疗技术员",
                 "id": "medical-appliance-technicians.navigation.1",
                 "relation": "career.section",
-                "url": "#career-content-quick-decision"
+                "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "医疗器具制作技术员",
+                "entity": "医疗技术员",
                 "id": "medical-appliance-technicians.navigation.2",
                 "relation": "career.section",
                 "url": "#career-content-profile"
               },
               {
-                "entity": "医疗器具制作技术员",
+                "entity": "医疗技术员",
                 "id": "medical-appliance-technicians.navigation.3",
                 "relation": "career.section",
                 "url": "#career-content-direction-comparison"
               },
               {
-                "entity": "医疗器具制作技术员",
+                "entity": "医疗技术员",
                 "id": "medical-appliance-technicians.navigation.4",
                 "relation": "career.section",
                 "url": "#career-content-ai-impact"
               },
               {
-                "entity": "医疗器具制作技术员",
+                "entity": "医疗技术员",
                 "id": "medical-appliance-technicians.navigation.5",
                 "relation": "career.section",
                 "url": "#career-content-china-salary"
               },
               {
-                "entity": "医疗器具制作技术员",
+                "entity": "医疗技术员",
                 "id": "medical-appliance-technicians.navigation.6",
                 "relation": "career.section",
                 "url": "#career-content-us-salary"
               },
               {
-                "entity": "医疗器具制作技术员",
+                "entity": "医疗技术员",
                 "id": "medical-appliance-technicians.navigation.7",
                 "relation": "career.section",
                 "url": "#career-content-fit"
               },
               {
-                "entity": "医疗器具制作技术员",
+                "entity": "医疗技术员",
                 "id": "medical-appliance-technicians.navigation.8",
                 "relation": "career.section",
                 "url": "#career-content-risk"
               },
               {
-                "entity": "医疗器具制作技术员",
+                "entity": "医疗技术员",
                 "id": "medical-appliance-technicians.navigation.9",
                 "relation": "career.section",
                 "url": "#career-content-path"
               },
               {
-                "entity": "医疗器具制作技术员",
+                "entity": "医疗技术员",
                 "id": "medical-appliance-technicians.navigation.10",
                 "relation": "career.section",
                 "url": "#career-content-market-signals"
               },
               {
-                "entity": "医疗器具制作技术员",
+                "entity": "医疗技术员",
                 "id": "medical-appliance-technicians.navigation.11",
                 "relation": "career.section",
                 "url": "#career-content-sources"
@@ -8462,132 +8460,260 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-09-25",
                 "details": [
-                  "O*NET 将 Calibration Technologists And Technicians 定义为：Execute or adapt procedures and techniques for calibrating measurement devices, by applying knowledge of measurement science, mathematics, physics, chemistry, and electronics, sometimes under the direction of engineering staff. Determine measurement standard suitability for calibrating measurement devices. May perform preventive maintenance on equipment. May perform corrective actions to address identified calibration problems.",
-                  "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。"
+                  "职业职责、入行与工作条件概览。",
+                  "为美国职业口径。"
                 ],
-                "evidence_type": "official_guidance",
-                "id": "adjacent-onet-17-3028-00",
-                "limitation": "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。",
+                "evidence_type": "official occupation overview",
+                "id": "bls-ooh",
+                "limitation": "为美国职业口径。",
                 "market": "美国",
-                "name": "17-3028.00 - Calibration Technologists And Technicians",
-                "period": "O*NET current occupation summary; accessed 2026-09-06",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/17-3028.00"
-              },
-              {
-                "accessed_at": "2026-09-06",
-                "details": [
-                  "O*NET 将 Dental Laboratory Technicians 定义为：Construct and repair full or partial dentures or dental appliances.",
-                  "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。"
-                ],
-                "evidence_type": "official_guidance",
-                "id": "adjacent-onet-51-9081-00",
-                "limitation": "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。",
-                "market": "美国",
-                "name": "51-9081.00 - Dental Laboratory Technicians",
-                "period": "O*NET current occupation summary; accessed 2026-09-06",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/51-9081.00"
-              },
-              {
-                "accessed_at": "2026-09-06",
-                "details": [
-                  "O*NET 将 Ophthalmic Laboratory Technicians 定义为：Cut, grind, and polish eyeglasses, contact lenses, or other precision optical elements. Assemble and mount lenses into frames or process other optical elements. Includes precision lens polishers or grinders, centerer-edgers, and lens mounters.",
-                  "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。"
-                ],
-                "evidence_type": "official_guidance",
-                "id": "adjacent-onet-51-9083-00",
-                "limitation": "仅支持该美国 O*NET 职业的身份与职责；不建立中国映射、工资或执业授权。",
-                "market": "美国",
-                "name": "51-9083.00 - Ophthalmic Laboratory Technicians",
-                "period": "O*NET current occupation summary; accessed 2026-09-06",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/51-9083.00"
-              },
-              {
-                "accessed_at": "2026-09-06",
-                "details": [
-                  "BLS 2025–2035：就业 11.3 千增至 11.7 千，增长 3.5%，年均 openings 1.3 千，2025 中位年薪 48,030 美元。",
-                  "openings 同时含增长和替补；combined/parent 口径不得拆成目标子职业精确统计。"
-                ],
-                "evidence_type": "official employment projections and wage table",
-                "id": "bls-current-2025-2035",
-                "limitation": "openings 同时含增长和替补；combined/parent 口径不得拆成目标子职业精确统计。",
-                "market": "美国",
-                "name": "BLS Occupational projections and worker characteristics, 2025–2035",
-                "period": "2025 employment/wage and 2025-2035 projections",
+                "name": "BLS Occupational Outlook Handbook（Medical Appliance Technicians）",
+                "period": "O*NET/BLS 2026；查阅 2026-09-25",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+                "url": "https://www.bls.gov/ooh/"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-09-25",
                 "details": [
-                  "为本职业提供虚构、可复核且不触发真实危险或专业授权行为的纸面练习。",
-                  "编辑设计不是外部职业事实、资格、法规、工资、采用率或就业证据。"
+                  "2024 年就业约 12,000 人、2034 年预计约 12,400 人、2024—2034 年预计平均（约 4%）、年均空缺约 1,500 个。",
+                  "含替换需求。"
                 ],
-                "evidence_type": "editorial exercise design",
-                "id": "editorial-safe-exercise-v2",
-                "limitation": "编辑设计不是外部职业事实、资格、法规、工资、采用率或就业证据。",
-                "market": "全球编辑设计",
-                "name": "FermatMind 安全纸面体验与边界设计",
-                "period": "2026-09-06 content repair",
-                "publisher": "FermatMind",
-                "scope": "editorial_synthesis",
-                "url": null
-              },
-              {
-                "accessed_at": "2026-08-30",
-                "details": [
-                  "FDA QMSR 规定成品医疗器械制造商的质量管理体系要求，用于限定制造记录、过程控制和不合格处理。",
-                  "代理或组合口径，不能冒充精确职业事实。"
-                ],
-                "evidence_type": "official source",
-                "id": "fda-qmsr",
-                "limitation": "代理或组合口径，不能冒充精确职业事实。",
+                "evidence_type": "official employment projection",
+                "id": "bls-projections",
+                "limitation": "含替换需求；不等于个人录用概率。",
                 "market": "美国",
-                "name": "FDA Quality Management System Regulation",
-                "period": "effective 2026-02-02; accessed 2026-08-30",
-                "publisher": "U.S. Food and Drug Administration",
-                "scope": "industry_proxy",
-                "url": "https://www.fda.gov/medical-devices/postmarket-requirements-devices/quality-system-qs-regulationmedical-device-good-manufacturing-practices"
+                "name": "BLS 就业预测（Medical Appliance Technicians，2024—2034）",
+                "period": "O*NET/BLS 2026；查阅 2026-09-25",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/"
               },
               {
-                "accessed_at": "2026-08-30",
+                "accessed_at": "2026-09-25",
                 "details": [
-                  "职业事实、统计或监管边界。",
-                  "代理或组合口径，不能冒充精确职业事实。"
+                  "医疗器械质量体系监管要求概览。",
+                  "为美国监管口径，不替代所在地法规。"
                 ],
-                "evidence_type": "official source",
+                "evidence_type": "official regulatory overview",
+                "id": "fda-qmsr",
+                "limitation": "为美国监管口径，不替代所在地法规。",
+                "market": "美国",
+                "name": "FDA Quality Management System Regulation (QMSR)",
+                "period": "O*NET/BLS 2026；查阅 2026-09-25",
+                "publisher": "U.S. Food and Drug Administration",
+                "scope": "exact",
+                "url": "https://www.fda.gov/medical-devices/quality-management-system-regulation-qmsr"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "按行业门类发布城镇单位就业人员年平均工资。",
+                  "行业均值不是职业中位数，且不含个体工商户与自由职业者。"
+                ],
+                "evidence_type": "official industry wage statistics",
                 "id": "nbs-wages-2025",
-                "limitation": "代理或组合口径，不能冒充精确职业事实。",
-                "market": "中国大陆",
-                "name": "2025年城镇单位就业人员年平均工资",
-                "period": "2025 annual wages; published 2026; accessed 2026-08-30",
+                "limitation": "行业均值不是职业中位数；未取得本职业精确条目。",
+                "market": "中国大陆全国口径",
+                "name": "国家统计局：城镇单位就业人员年平均工资（2025）",
+                "period": "O*NET/BLS 2026；查阅 2026-09-25",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
-                "accessed_at": "2026-08-30",
+                "accessed_at": "2026-09-25",
                 "details": [
-                  "O*NET 将 Medical Appliance Technicians 的核心职责定义为：Construct, maintain, or repair medical supportive devices such as braces, orthotics and prosthetic devices, joints, arch supports, and other surgical and medical appliances.",
-                  "限所列市场和职业口径。"
+                  "任务、技能、工作活动与工作情境清单。",
+                  "不等于统一录用或考核标准。"
                 ],
-                "evidence_type": "official source",
+                "evidence_type": "official occupation profile",
                 "id": "onet-details",
-                "limitation": "限所列市场和职业口径。",
+                "limitation": "为美国职业口径，不推定中国大陆对应关系。",
                 "market": "美国",
-                "name": "O*NET 51-9082.00 Medical Appliance Technicians",
-                "period": "O*NET 2026 update; accessed 2026-08-30",
+                "name": "O*NET 51-9082.00 详细档案（任务、技能与情境）",
+                "period": "O*NET/BLS 2026；查阅 2026-09-25",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/51-9082.00"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "BLS 2025 年工资数据 10/25/中位/75/90 分位及小时值。",
+                  "为本职业口径。"
+                ],
+                "evidence_type": "official wage data",
+                "id": "onet-wages",
+                "limitation": "分位不含个人到手收入。",
+                "market": "美国",
+                "name": "O*NET 51-9082.00 全国工资（BLS 2025 年工资数据）",
+                "period": "O*NET/BLS 2026；查阅 2026-09-25",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/51-9082.00"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "医疗器械监管与合规入口。",
+                  "仅作监管入口，不推定职业对应。"
+                ],
+                "evidence_type": "official regulatory entry",
+                "id": "samr-device",
+                "limitation": "仅作监管入口，不推定职业对应。",
+                "market": "中国大陆全国口径",
+                "name": "国家药品监督管理局：医疗器械监管",
+                "period": "O*NET/BLS 2026；查阅 2026-09-25",
+                "publisher": "国家市场监督管理总局",
+                "scope": "exact",
+                "url": "https://www.nmpa.gov.cn/"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "工作情境与工作要求的比例分布。",
+                  "美国工作情境不替代中国法律与雇主要求。"
+                ],
+                "evidence_type": "official custom occupation profile",
+                "id": "source-pack-onet-custom",
+                "limitation": "美国工作情境不替代中国法律与雇主要求。",
+                "market": "美国",
+                "name": "O*NET 51-9082.00 定制档案（工作情境）",
+                "period": "O*NET/BLS 2026；查阅 2026-09-25",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/custom/51-9082.00"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "任务与技能清单。",
+                  "不等于统一录用或考核标准。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "source-pack-onet-details",
+                "limitation": "为美国职业口径。",
+                "market": "美国",
+                "name": "O*NET 51-9082.00 详细档案（同源副本）",
+                "period": "O*NET/BLS 2026；查阅 2026-09-25",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/details/51-9082.00"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "技术工具线索，用于讨论任务层面的技术辅助。",
+                  "工具出现不等于生成式 AI 已被普遍采用。"
+                ],
+                "evidence_type": "official technology profile",
+                "id": "source-pack-onet-hot_tech",
+                "limitation": "工具出现不等于采用率、失业概率或替代日期。",
+                "market": "美国",
+                "name": "O*NET 51-9082.00 热门技术（Hot Technologies）",
+                "period": "O*NET/BLS 2026；查阅 2026-09-25",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/51-9082.00"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "行业分布：制造业约 59%、医疗保健与社会援助约 15%、批发业约 10%、其他约 16%（含零售）。",
+                  "行业分布是雇主场景信号，不是需求预测。"
+                ],
+                "evidence_type": "official industry distribution",
+                "id": "source-pack-onet-industry",
+                "limitation": "行业分布是雇主场景信号，不是需求预测。",
+                "market": "美国",
+                "name": "O*NET 51-9082.00 行业分布（Industries）",
+                "period": "O*NET/BLS 2026；查阅 2026-09-25",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/51-9082.00"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "认证发现路径，用于讨论入行与资格边界。",
+                  "认证不等于执照、雇主任命或签字权。"
+                ],
+                "evidence_type": "official certification discovery",
+                "id": "source-pack-onet-localcert",
+                "limitation": "认证不等于执照、雇主任命或签字权。",
+                "market": "美国",
+                "name": "O*NET 51-9082.00 全国认证发现（National Certifications）",
+                "period": "O*NET/BLS 2026；查阅 2026-09-25",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localcert/51-9082.00"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "培训与学徒发现路径与教育入口。",
+                  "准备程度不是统一录用门槛。"
+                ],
+                "evidence_type": "official local training discovery",
+                "id": "source-pack-onet-localtraining",
+                "limitation": "准备程度不是统一录用门槛。",
+                "market": "美国",
+                "name": "O*NET 51-9082.00 全国培训发现（National Training）",
+                "period": "O*NET/BLS 2026；查阅 2026-09-25",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtraining/51-9082.00"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "BLS 2025 年工资数据。",
+                  "为本职业口径。"
+                ],
+                "evidence_type": "official wage data",
+                "id": "source-pack-onet-localwages",
+                "limitation": "分位不含个人到手收入。",
+                "market": "美国",
+                "name": "O*NET 51-9082.00 全国工资（同源副本）",
+                "period": "O*NET/BLS 2026；查阅 2026-09-25",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/51-9082.00"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "官方职业描述、报告岗位名称、兴趣代码与 Job Zone。",
+                  "不等于统一录用或考核标准。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "source-pack-onet-summary",
+                "limitation": "任务与情境样本随雇主与车间而变。",
+                "market": "美国",
+                "name": "O*NET 51-9082.00 摘要（职业身份与描述）",
+                "period": "O*NET/BLS 2026；查阅 2026-09-25",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-9082.00"
+              },
+              {
+                "accessed_at": "2026-09-25",
+                "details": [
+                  "医疗卫生领域 AI 应用与治理原则。",
+                  "为国际组织口径，不替代所在地法规。"
+                ],
+                "evidence_type": "official guidance",
+                "id": "who-ai-health",
+                "limitation": "为国际组织口径，不替代所在地法规。",
+                "market": "全球",
+                "name": "WHO：医疗卫生中的人工智能",
+                "period": "O*NET/BLS 2026；查阅 2026-09-25",
+                "publisher": "World Health Organization",
+                "scope": "exact",
+                "url": "https://www.who.int/publications/i/item/9789240029200"
               }
             ]
           },
@@ -8599,66 +8725,2598 @@
   ],
   "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "display": {
+    "component_order": [
+      "breadcrumb",
+      "hero",
+      "primary_cta",
+      "fermat_decision_card",
+      "fit_decision_checklist",
+      "definition_block",
+      "responsibilities_block",
+      "work_context_block",
+      "career_ai_description_block",
+      "career_quick_answers_block",
+      "onet_structured_fields_block",
+      "adjacent_career_comparison_table",
+      "ai_impact_table",
+      "career_snapshot_primary_locale",
+      "career_snapshot_secondary_locale",
+      "riasec_fit_block",
+      "personality_fit_block",
+      "career_risk_cards",
+      "career_path_block",
+      "market_signal_card",
+      "faq_block",
+      "source_card",
+      "boundary_notice"
+    ],
+    "components": {
+      "adjacent_career_comparison_table": {
+        "conclusion": "相邻职业需分别补足工具、资格与责任证据。",
+        "evidence_links": [
+          {
+            "href": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "label": "本职业来源"
+          }
+        ],
+        "evidence_note": "相邻关系只用于方向比较，不代表自动转岗或资格互认。",
+        "heading": "相邻职业比较",
+        "intro": "比较核心对象、交付责任、资格要求与工作模式，不按职位名称互换。",
+        "rows": [
+          {
+            "关键区别": "同一广泛组内的实验室制作；本职业面向矫形、假肢等医疗辅助器具的加工与适配。",
+            "更适合什么选择": "按器类别与责任比较。",
+            "核心工作与产出": {
+              "$item": "medical-appliance-technicians.direction-comparison.adjacent-career-comparison-table.2",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "牙科与眼科实验技术员及医疗器具技术员"
+          },
+          {
+            "关键区别": "面向牙科修复体制作；本职业面向肢体与躯干支撑器具。",
+            "更适合什么选择": "按对象与标准比较。",
+            "核心工作与产出": {
+              "$item": "medical-appliance-technicians.direction-comparison.adjacent-career-comparison-table.3",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "牙科实验技术员"
+          },
+          {
+            "关键区别": "面向镜片与眼科器具；本职业面向矫形与假肢装置。",
+            "更适合什么选择": "按器件类别比较。",
+            "核心工作与产出": {
+              "$item": "medical-appliance-technicians.direction-comparison.adjacent-career-comparison-table.4",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "眼科实验技术员"
+          },
+          {
+            "关键区别": "面向仪器校准与计量；本职业面向医疗器具的制造、修理与适配检查。",
+            "更适合什么选择": "按任务与产出比较。",
+            "核心工作与产出": {
+              "$item": "medical-appliance-technicians.direction-comparison.adjacent-career-comparison-table.5",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "校准技术员"
+          }
+        ],
+        "transition": "下一步用可观察交付验证方向。"
+      },
+      "ai_impact_table": {
+        "action_rows": [
+          {
+            "人群": "入行者",
+            "应对重点": "练习可复核的加工与测量样本。"
+          },
+          {
+            "人群": "在岗者",
+            "应对重点": "保留加工、检验与适配记录。"
+          },
+          {
+            "人群": "管理者",
+            "应对重点": "先定质量、安全与授权边界。"
+          }
+        ],
+        "answer": {
+          "$item": "medical-appliance-technicians.ai-impact.ai-impact-table.2",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "authority_links": [
+          {
+            "来源": {
+              "$source": "source-pack-onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "类型": "官方职业来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "source-pack-onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "source-pack-onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "类型": "官方职业来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "source-pack-onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "source-pack-onet-hot_tech",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "类型": "官方职业来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "source-pack-onet-hot_tech",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            }
+          }
+        ],
+        "difference_intro": {
+          "$item": "medical-appliance-technicians.ai-impact.ai-impact-table.4",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "difference_rows": [
+          {
+            "AI主要改变": "建模与工艺规划",
+            "仍由人负责": "关键尺寸与偏差放行",
+            "方向": "加工与装配"
+          },
+          {
+            "AI主要改变": "记录与提示",
+            "仍由人负责": "适配与交付判断",
+            "方向": "适配与修理"
+          }
+        ],
+        "evidence_intro": {
+          "$item": "medical-appliance-technicians.ai-impact.ai-impact-table.3",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "evidence_rows": [
+          {
+            "使用限制": "不等于生成式 AI 已被普遍采用或替代已有工艺。",
+            "来源": {
+              "$source": "source-pack-onet-hot_tech",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "研究对象": "技术工具线索（O*NET Hot Technologies）",
+            "结论": "技术工具出现说明任务可能被软件辅助",
+            "链接": {
+              "$source": "source-pack-onet-hot_tech",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "工作情境为调查结果；不替代雇主与地方法规。",
+            "来源": {
+              "$source": "source-pack-onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "研究对象": "任务与工作情境（O*NET 51-9082.00）",
+            "结论": "加工、装配、适配与修理为任务特征",
+            "链接": {
+              "$source": "source-pack-onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "为美国职业口径，不推定中国大陆对应关系。",
+            "来源": {
+              "$source": "source-pack-onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "研究对象": "职业身份与职责范围（O*NET 51-9082.00）",
+            "结论": "职责为制造、维护与修理医疗辅助器具",
+            "链接": {
+              "$source": "source-pack-onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            }
+          }
+        ],
+        "heading": {
+          "$item": "medical-appliance-technicians.ai-impact.ai-impact-table.1",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "method_cards": [
+          {
+            "含义": "尺寸整理、建模、工艺规划与缺陷提示可被软件辅助；处方解读、关键尺寸复核与偏差放行仍由人负责。",
+            "概念": "任务能力"
+          },
+          {
+            "含义": "工具出现或厂商演示不等于已采用；需核对数据、权限、版本与质量体系要求。",
+            "概念": "采用条件"
+          },
+          {
+            "含义": "任务暴露不等于采用率、失业概率或替代日期。",
+            "概念": "岗位结果"
+          }
+        ],
+        "questions": [
+          {
+            "回答": "现有资料只支持任务层面的辅助判断，不能推导岗位裁撤时间表。",
+            "来源": {
+              "$source": "source-pack-onet-hot_tech",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "链接": {
+              "$source": "source-pack-onet-hot_tech",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "问题": "AI 会取代医疗器具制作技术员吗？"
+          },
+          {
+            "回答": "关键尺寸复核、偏差放行与适配判断仍由有权限的人负责。",
+            "来源": {
+              "$source": "source-pack-onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "链接": {
+              "$source": "source-pack-onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "问题": "加工与适配能自动完成吗？"
+          },
+          {
+            "回答": "需区分任务能力、组织采用与岗位结果三类证据。",
+            "来源": {
+              "$source": "source-pack-onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "链接": {
+              "$source": "source-pack-onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "问题": "该用哪些证据判断影响？"
+          }
+        ],
+        "responsibility_intro": {
+          "$item": "medical-appliance-technicians.ai-impact.ai-impact-table.5",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "responsibility_steps": [
+          {
+            "步骤": "核对输入",
+            "说明": "确认处方、规格、测量与材料。"
+          },
+          {
+            "步骤": "限定任务",
+            "说明": "只在已验证的工艺与规程内辅助。"
+          },
+          {
+            "步骤": "人工复核",
+            "说明": "由有权限者复核关键尺寸与适配判断。"
+          },
+          {
+            "步骤": "记录升级",
+            "说明": "偏差与质量异常立即记录并按流程升级。"
+          }
+        ],
+        "risk_rows": [
+          {
+            "为什么重要": "可能影响适配与使用安全。",
+            "控制方式": "按图纸与检具复核关键尺寸。",
+            "风险": "关键尺寸或对位偏差"
+          },
+          {
+            "为什么重要": "可能影响强度与耐久。",
+            "控制方式": "按工艺与材料要求核对。",
+            "风险": "材料或工艺不符规格"
+          },
+          {
+            "为什么重要": "可能改变医疗与法律责任。",
+            "控制方式": "交有权限者按授权链确认。",
+            "风险": "越权作出临床或适配结论"
+          }
+        ],
+        "task_rows": [
+          {
+            "人的控制点": "复核关键尺寸、材料与工艺要求。",
+            "任务": "按处方加工并装配器具",
+            "工作方向": "加工与装配",
+            "当前变化": {
+              "$item": "medical-appliance-technicians.ai-impact.ai-impact-table.7",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": {
+              "$item": "medical-appliance-technicians.ai-impact.ai-impact-table.8",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "任务": "测量并制作模型与图纸",
+            "工作方向": "测量与建模",
+            "当前变化": "辅助建模与尺寸整理"
+          },
+          {
+            "人的控制点": "由有权限者确认适配与交付。",
+            "任务": "适配调整并修理器具",
+            "工作方向": "适配与修理",
+            "当前变化": "辅助记录与提示"
+          },
+          {
+            "人的控制点": "由责任人确认放行与纠正。",
+            "任务": "检验并记录质量与合规",
+            "工作方向": "质量与合规",
+            "当前变化": "辅助检查与留痕"
+          }
+        ],
+        "transition": {
+          "$item": "medical-appliance-technicians.ai-impact.ai-impact-table.6",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        }
+      },
+      "boundary_notice": [
+        {
+          "$join": [
+            {
+              "$item": "medical-appliance-technicians.sources.boundary.1",
+              "block": "sources",
+              "copy_key": "career.item.boundary-notice",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$link": "medical-appliance-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "medical-appliance-technicians.navigation.2",
+          "field": "url"
+        },
+        {
+          "$link": "medical-appliance-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "medical-appliance-technicians.navigation.3",
+          "field": "url"
+        },
+        {
+          "$link": "medical-appliance-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "medical-appliance-technicians.navigation.4",
+          "field": "url"
+        },
+        {
+          "$link": "medical-appliance-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "medical-appliance-technicians.navigation.5",
+          "field": "url"
+        },
+        {
+          "$link": "medical-appliance-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "medical-appliance-technicians.navigation.6",
+          "field": "url"
+        },
+        {
+          "$link": "medical-appliance-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "medical-appliance-technicians.navigation.7",
+          "field": "url"
+        },
+        {
+          "$link": "medical-appliance-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "medical-appliance-technicians.navigation.8",
+          "field": "url"
+        },
+        {
+          "$link": "medical-appliance-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "medical-appliance-technicians.navigation.9",
+          "field": "url"
+        },
+        {
+          "$link": "medical-appliance-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "medical-appliance-technicians.navigation.10",
+          "field": "url"
+        },
+        {
+          "$link": "medical-appliance-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "medical-appliance-technicians.navigation.11",
+          "field": "url"
+        },
+        {
+          "$link": "medical-appliance-technicians.direction-comparison.adjacent-career-comparison-table.1",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "entry": "medical-appliance-technicians.parity.adjacent.1",
+          "field": "url"
+        },
+        {
+          "$link": "medical-appliance-technicians.direction-comparison.adjacent-career-comparison-table.1",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "entry": "medical-appliance-technicians.parity.adjacent.2",
+          "field": "url"
+        },
+        {
+          "$link": "medical-appliance-technicians.direction-comparison.adjacent-career-comparison-table.1",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "entry": "medical-appliance-technicians.parity.adjacent.3",
+          "field": "url"
+        },
+        {
+          "$link": "medical-appliance-technicians.direction-comparison.adjacent-career-comparison-table.1",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "entry": "medical-appliance-technicians.parity.adjacent.4",
+          "field": "url"
+        }
+      ],
+      "breadcrumb": {
+        "label": {
+          "$subject": "name"
+        },
+        "slug": {
+          "$subject": "canonical_slug"
+        }
+      },
+      "career_ai_description_block": {
+        "body": [
+          "CAD/CAM 与 AI 可辅助尺寸整理、建模、工艺规划与缺陷提示；但处方解读、关键尺寸复核、偏差放行、适配检查与最终交付仍由有权限的人负责，不替代已验证的安全、适配或合规结论。"
+        ],
+        "heading": "医疗器具制作技术员的工作对象与 AI 边界"
+      },
+      "career_path_block": {
+        "boundary": "入口要求、执业与监督边界由具体法域、机构或雇主核验；证书与学位不等于执照、签字权或最终责任。",
+        "competence_ladder": [
+          {
+            "description": "确认处方、规格、测量与材料。",
+            "stage": "核对输入"
+          },
+          {
+            "description": "按工艺完成加工、装配与适配。",
+            "stage": "加工与适配"
+          },
+          {
+            "description": "形成可复核的加工、检验与适配记录。",
+            "stage": "结果复核"
+          },
+          {
+            "description": "在授权范围内扩展复核、带教与质量职责。",
+            "stage": "责任扩展"
+          }
+        ],
+        "direct_answer": {
+          "$item": "medical-appliance-technicians.path.career-path-block.2",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "heading": {
+          "$item": "medical-appliance-technicians.path.career-path-block.1",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "locale_requirements": {
+          "credential_boundary": {
+            "$item": "medical-appliance-technicians.path.career-path-block.4",
+            "block": "path",
+            "copy_key": "career.item.career-path-block",
+            "type": "prose"
+          },
+          "jurisdiction": "美国 Job Zone 1-2：通常要求高中文凭与在职训练（数天到一年），并设有注册学徒；中国大陆按用人单位、执业与监督规则核验",
+          "summary": {
+            "$item": "medical-appliance-technicians.path.career-path-block.3",
+            "block": "path",
+            "copy_key": "career.item.career-path-block",
+            "type": "prose"
+          }
+        },
+        "schema_version": "career.career_progression.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "id": "medical-appliance-technicians.display.source.0",
+            "label": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "scope": "代理或组合口径，不能冒充精确职业事实。"
+          },
+          {
+            "href": {
+              "$source": "bls-projections",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "id": "medical-appliance-technicians.display.source.1",
+            "label": {
+              "$source": "bls-projections",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "scope": "限所列市场和职业口径。"
+          },
+          {
+            "href": {
+              "$source": "nbs-wages-2025",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "id": "medical-appliance-technicians.display.source.2",
+            "label": {
+              "$source": "nbs-wages-2025",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "scope": "代理或组合口径，不能冒充精确职业事实。"
+          },
+          {
+            "href": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "id": "medical-appliance-technicians.display.source.3",
+            "label": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "scope": "限所列市场和职业口径。"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "track-0",
+            "stages": [
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": {
+                  "$item": "medical-appliance-technicians.path.career-path-block.7",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "readiness_evidence": {
+                  "$item": "medical-appliance-technicians.path.career-path-block.6",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "responsibility": {
+                  "$item": "medical-appliance-technicians.path.career-path-block.5",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "制作学习"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": {
+                  "$item": "medical-appliance-technicians.path.career-path-block.8",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "readiness_evidence": "出示加工与检验记录。",
+                "responsibility": "独立完成矫形或假肢器具的制作。",
+                "role": "独立制作"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "扩展到工艺改进。",
+                "readiness_evidence": "出示复杂器具与检验记录。",
+                "responsibility": "负责复杂或定制器具的加工与装配。",
+                "role": "复杂器具"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "按雇主与规则扩展授权。",
+                "readiness_evidence": "出示带教与复核记录。",
+                "responsibility": "在授权范围内带教并复核制作。",
+                "role": "制作带教"
+              }
+            ],
+            "title": "加工制作"
+          },
+          {
+            "id": "track-1",
+            "stages": [
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "扩展到独立适配。",
+                "readiness_evidence": "保留适配练习记录。",
+                "responsibility": "学习适配检查、调整与修理流程。",
+                "role": "适配学习"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "扩展到复杂案例协调。",
+                "readiness_evidence": "出示适配与调整记录。",
+                "responsibility": "独立完成适配检查与调整。",
+                "role": "独立适配"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "扩展到质量改进。",
+                "readiness_evidence": "出示修理与维护记录。",
+                "responsibility": "负责器具修理与设备维护。",
+                "role": "修理与维护"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "按雇主与规则扩展授权。",
+                "readiness_evidence": "出示改进前后对比记录。",
+                "responsibility": "在授权范围内改进适配与修理流程。",
+                "role": "方法改进"
+              }
+            ],
+            "title": "适配与修理"
+          },
+          {
+            "id": "track-2",
+            "stages": [
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "扩展到独立检验。",
+                "readiness_evidence": "保留检验与记录练习。",
+                "responsibility": "学习检验、记录与质量体系要求。",
+                "role": "质量学习"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "扩展到体系评审准备。",
+                "readiness_evidence": "出示检验与偏差记录。",
+                "responsibility": "独立完成关键尺寸与成品检验。",
+                "role": "独立检验"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "扩展到体系管理。",
+                "readiness_evidence": "出示改进与协作记录。",
+                "responsibility": "参与质量改进与供应商协作。",
+                "role": "质量协作"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "按雇主与规则取得授权。",
+                "readiness_evidence": "出示质量与交付记录。",
+                "responsibility": "在授权范围内支持质量与交付职责。",
+                "role": "责任扩展"
+              }
+            ],
+            "title": "质量与协作"
+          }
+        ]
+      },
+      "career_quick_answers_block": {
+        "availability": "published",
+        "heading": "职业速答",
+        "items": [
+          {
+            "answer": {
+              "$item": "medical-appliance-technicians.profile.career-quick-answers-block.8",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa3",
+            "question": "这个职业先核对什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "对象",
+                  "secondary_value": null,
+                  "value": "矫形与假肢等医疗辅助器具"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "输入",
+                  "secondary_value": null,
+                  "value": "处方规格、测量与模型"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "交付",
+                  "secondary_value": null,
+                  "value": "可追溯的器具与适配记录"
+                }
+              ]
+            }
+          },
+          {
+            "answer": {
+              "$item": "medical-appliance-technicians.profile.career-quick-answers-block.9",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa2",
+            "question": "怎样判断工作闭环？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "闭环",
+                  "secondary_value": null,
+                  "value": "读单、加工、装配、适配与返修"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤一",
+                  "secondary_value": null,
+                  "value": "解读处方与规格"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤二",
+                  "secondary_value": null,
+                  "value": "测量并制作模型"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤三",
+                  "secondary_value": null,
+                  "value": "加工与装配器具"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤四",
+                  "secondary_value": null,
+                  "value": "测试对位与稳定性"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤五",
+                  "secondary_value": null,
+                  "value": "适配调整与说明"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤六",
+                  "secondary_value": null,
+                  "value": "记录与返修处理"
+                }
+              ]
+            }
+          },
+          {
+            "answer": "美国 O*NET 将本职业列为 Job Zone 1-2：通常要求高中文凭，相关在职训练从数天到一年不等，并设有注册学徒机会；本职业制造与修理器具，不等于矫形师或假肢师的独立临床评估、处方设计与最终适配责任。中国大陆的学历、执业与监督边界由用人单位与主管部门按所在地规则核验，学位与证书不等于授权。",
+            "key": "qa1",
+            "question": "资格边界是什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "边界",
+                  "secondary_value": null,
+                  "value": "需独立核验"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "法域",
+                  "secondary_value": null,
+                  "value": "按适用规则确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "机构",
+                  "secondary_value": null,
+                  "value": "按授权链确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "训练",
+                  "secondary_value": null,
+                  "value": "高中加在职训练"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "责任",
+                  "secondary_value": null,
+                  "value": "由有权限者承担"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "证据",
+                  "secondary_value": null,
+                  "value": "加工与适配记录"
+                }
+              ]
+            }
+          }
+        ],
+        "schema_version": "career.quick_answers.v1"
+      },
+      "career_risk_cards": {
+        "boundary": "质量体系、材料与执业边界的最终结论由雇主与主管部门按适用规则承担；本页不替代工艺标准或法律意见。",
+        "context_links": [
+          {
+            "href": "#career-visual-group-risk",
+            "label": "查看风险模块"
+          }
+        ],
+        "direct_answer": "风险必须按触发、后果、控制和升级边界处理，不以编辑归纳代替工艺标准与质量体系要求。",
+        "evidence_scope": "依据 O*NET 51-9082.00 的任务与工作情境；质量体系、材料与执业边界按雇主与适用规则核对，不跨范围外推。",
+        "heading": "医疗器具制作技术员的工作风险与边界",
+        "risks": [
+          {
+            "affected_roles": "加工与装配岗位",
+            "consequence": "可能影响适配与使用安全。",
+            "evidence_refs": [
+              "onet-details"
+            ],
+            "id": "risk-1",
+            "mitigation": "按图纸与检具复核关键尺寸。",
+            "scenario": "关键尺寸或对位偏差。",
+            "title": {
+              "$item": "medical-appliance-technicians.risk.career-risk-cards.1",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "加工岗位",
+            "consequence": "可能影响强度与耐久。",
+            "evidence_refs": [
+              "fda-qmsr"
+            ],
+            "id": "risk-2",
+            "mitigation": "按工艺与材料要求核对。",
+            "scenario": "材料或工艺不符规格。",
+            "title": {
+              "$item": "medical-appliance-technicians.risk.career-risk-cards.2",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "加工与表面处理岗位",
+            "consequence": "可能造成职业健康风险。",
+            "evidence_refs": [
+              "source-pack-onet-custom"
+            ],
+            "id": "risk-3",
+            "mitigation": "按防护与通风规程作业。",
+            "scenario": "粉尘、噪声或化学暴露防护不足。",
+            "title": {
+              "$item": "medical-appliance-technicians.risk.career-risk-cards.3",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "质量与记录岗位",
+            "consequence": "可能影响合规与召回处理。",
+            "evidence_refs": [
+              "fda-qmsr"
+            ],
+            "id": "risk-4",
+            "mitigation": "按质量体系记录并留痕。",
+            "scenario": "质量记录不完整导致追溯困难。",
+            "title": {
+              "$item": "medical-appliance-technicians.risk.career-risk-cards.4",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "适配与交付岗位",
+            "consequence": "可能改变医疗与法律责任。",
+            "evidence_refs": [
+              "source-pack-onet-summary"
+            ],
+            "id": "risk-5",
+            "mitigation": "交有权限者按授权链确认。",
+            "scenario": "在授权范围外作出临床或适配结论。",
+            "title": {
+              "$item": "medical-appliance-technicians.risk.career-risk-cards.5",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "制作与技术岗位",
+            "consequence": "可能导致资格与责任错配。",
+            "evidence_refs": [
+              "source-pack-onet-summary"
+            ],
+            "id": "risk-6",
+            "mitigation": "按 O*NET 51-9082.00 的范围区分相邻岗位。",
+            "scenario": "把本职业与牙科或眼科实验技术员、校准技术员或矫形师／假肢师混为一谈。",
+            "title": "相邻职业名称混用"
+          }
+        ],
+        "schema_version": "career.work_risk.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "id": "medical-appliance-technicians.display.source.0",
+            "label": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "scope": "不提供该职业采用率、失业概率或替代日期。"
+          },
+          {
+            "href": {
+              "$source": "bls-projections",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "id": "medical-appliance-technicians.display.source.1",
+            "label": {
+              "$source": "bls-projections",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "scope": "未建立与该 O*NET 精确职业一一对应的中国全国工资分布。"
+          },
+          {
+            "href": {
+              "$source": "nbs-wages-2025",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "id": "medical-appliance-technicians.display.source.2",
+            "label": {
+              "$source": "nbs-wages-2025",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "scope": "美国数据为 Medical Appliance Technicians（51-9082.00）本职业口径。"
+          },
+          {
+            "href": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "id": "medical-appliance-technicians.display.source.3",
+            "label": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "scope": "工作情境与行业分布为调查结果，不替代雇主与地方法规。"
+          }
+        ]
+      },
+      "career_snapshot_primary_locale": {
+        "salary": {
+          "bls_table": [
+            {
+              "指标": "中国大陆职业工资",
+              "数值": "未取得安全数值",
+              "说明": "有界检索未建立与 51-9082.00 精确对应的全国职业工资。"
+            },
+            {
+              "指标": "计发口径",
+              "数值": "不适用",
+              "说明": "公开口径为行业或人员大类聚合，未建立统一职业月薪。"
+            },
+            {
+              "指标": "代理风险",
+              "数值": "不使用代理数字",
+              "说明": "不以制造业均值或美国数字替代本职业中国工资。"
+            }
+          ],
+          "china_ai_row": {
+            "$item": "medical-appliance-technicians.china-salary.career-snapshot-primary-locale.4",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_class_row": {
+            "$item": "medical-appliance-technicians.china-salary.career-snapshot-primary-locale.3",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_edu_table": [
+            {
+              "学历段": "高中文凭",
+              "岗位方向": "器具加工与修理",
+              "说明": "美国 Job Zone 1-2 常见准备方式。"
+            },
+            {
+              "学历段": "在职训练",
+              "岗位方向": "加工、装配与适配",
+              "说明": "从数天到一年不等。"
+            },
+            {
+              "学历段": "注册学徒",
+              "岗位方向": "矫形与假肢技术",
+              "说明": "美国设有注册学徒机会，按雇主核验。"
+            },
+            {
+              "学历段": "认证或培训",
+              "岗位方向": "按岗位要求",
+              "说明": "认证不等于执照或授权，按雇主核验。"
+            }
+          ],
+          "china_industry_table": [
+            {
+              "行业": "制造业",
+              "需求": "器具与器械生产为主要雇主场景"
+            },
+            {
+              "行业": "卫生和社会工作",
+              "需求": "医疗机构与康复场景"
+            },
+            {
+              "行业": "批发与零售",
+              "需求": "器具分销与服务"
+            }
+          ],
+          "china_intl": {
+            "$join": [
+              {
+                "$source": "nbs-wages-2025",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "medical-appliance-technicians.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "nbs-wages-2025",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "medical-appliance-technicians.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "china_name_row": {
+            "$item": "medical-appliance-technicians.china-salary.career-snapshot-primary-locale.1",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_open": "未取得本职业全国职业工资；本项不是起薪、到手收入或个人报价。",
+          "china_ref": {
+            "$join": [
+              {
+                "$source": "onet-wages",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "medical-appliance-technicians.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "onet-wages",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "medical-appliance-technicians.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "china_salary_note": "中国大陆口径与美国、全球及具体单位分开，不能跨市场拼接。",
+          "china_salary_table": [
+            {
+              "城市/区间": "全国职业口径",
+              "月薪参考": "未取得本职业数据"
+            },
+            {
+              "城市/区间": "地区差异",
+              "月薪参考": "未取得本职业数据"
+            },
+            {
+              "城市/区间": "岗位差异",
+              "月薪参考": "未取得本职业数据"
+            }
+          ],
+          "china_soc_row": {
+            "$item": "medical-appliance-technicians.china-salary.career-snapshot-primary-locale.2",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "sources_note": {
+            "$join": [
+              {
+                "$source": "onet-wages",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "medical-appliance-technicians.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "onet-wages",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "medical-appliance-technicians.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "ui": {
+            "ai_heading": "AI 与薪资判断边界",
+            "driver_heading": "影响因素",
+            "official_heading": "官方统计口径",
+            "scenario_caption": "本情景仅用于说明口径，不是个人报价。",
+            "scenario_heading": "情景化参考",
+            "scenario_interpretation_label": "解释",
+            "scenario_role_label": "岗位范围",
+            "scenario_value_label": "参考值"
+          },
+          "us_growth": "不适用本地口径",
+          "us_median": "不适用本地口径"
+        }
+      },
+      "career_snapshot_secondary_locale": {
+        "authority_sources": {
+          "$join": [
+            {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "；",
+            {
+              "$source": "bls-projections",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "bls-projections",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            }
+          ],
+          "separator": ""
+        },
+        "bls_table": [
+          {
+            "指标": "薪资 · 10 分位",
+            "数值": "36,510 美元/年",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "medical-appliance-technicians.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "medical-appliance-technicians.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "薪资 · 25 分位",
+            "数值": "42,210 美元/年",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "medical-appliance-technicians.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "medical-appliance-technicians.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "薪资 · 中位数",
+            "数值": "48,030 美元/年",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "medical-appliance-technicians.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "medical-appliance-technicians.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "薪资 · 75 分位",
+            "数值": "60,580 美元/年",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "medical-appliance-technicians.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "medical-appliance-technicians.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "薪资 · 90 分位",
+            "数值": "75,740 美元/年",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "medical-appliance-technicians.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "medical-appliance-technicians.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "就业 · 规模",
+            "数值": "12,000 人（2024）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "bls-projections",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "medical-appliance-technicians.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "bls-projections",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "medical-appliance-technicians.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "就业 · 增长",
+            "数值": "平均（约 4%）",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "bls-projections",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "medical-appliance-technicians.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "bls-projections",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "medical-appliance-technicians.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "就业 · 空缺",
+            "数值": "约 1,500 个/年",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "bls-projections",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "medical-appliance-technicians.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "bls-projections",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "medical-appliance-technicians.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          }
+        ],
+        "boundary": "美国数据为 O*NET 展示的 Medical Appliance Technicians（51-9082.00）本职业口径；分位为统计位置，不等于个人到手收入。",
+        "direct_answer": {
+          "$item": "medical-appliance-technicians.us-salary.career-snapshot-secondary-locale.2",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "factor_rows": [
+          {
+            "answer": "美国 Job Zone 1-2：高中文凭与在职训练；按法域核验执业与监督边界。",
+            "factor": "资格"
+          },
+          {
+            "answer": "训练从数天到一年，并设有注册学徒机会。",
+            "factor": "经验"
+          },
+          {
+            "answer": "行业与地区差异较大，不得跨地区外推。",
+            "factor": "地区"
+          }
+        ],
+        "factors_heading": {
+          "$item": "medical-appliance-technicians.us-salary.career-snapshot-secondary-locale.6",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "growth": "平均（约 4%，2024—2034）",
+        "heading": {
+          "$item": "medical-appliance-technicians.us-salary.career-snapshot-secondary-locale.1",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_heading": {
+          "$item": "medical-appliance-technicians.us-salary.career-snapshot-secondary-locale.5",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_period": "当前页面；查阅 2026-09-25",
+        "industry_rows": [
+          {
+            "industry": "制造业（约 59%）",
+            "median": "见分位",
+            "note": "器具与器械生产为主要雇主场景。"
+          },
+          {
+            "industry": "医疗保健与社会援助（约 15%）",
+            "median": "见分位",
+            "note": "医疗机构与康复场景。"
+          },
+          {
+            "industry": "批发业（约 10%）",
+            "median": "见分位",
+            "note": "器具分销与服务。"
+          },
+          {
+            "industry": "其他行业（约 16%）",
+            "median": "见分位",
+            "note": "含零售等场景。"
+          }
+        ],
+        "industry_value_label": "行业值",
+        "interpretation_heading": {
+          "$item": "medical-appliance-technicians.us-salary.career-snapshot-secondary-locale.4",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "interpretation_rows": [
+          {
+            "answer": "不是，分位为统计位置。",
+            "question": "这是不是个人报价？"
+          },
+          {
+            "answer": "为 Medical Appliance Technicians（51-9082.00）本职业口径。",
+            "question": "这是否覆盖精确职业？"
+          },
+          {
+            "answer": "2025 年工资数据；2024—2034 年预测。",
+            "question": "时期是什么？"
+          },
+          {
+            "answer": "不能直接拼接。",
+            "question": "能否跨市场比较？"
+          }
+        ],
+        "median": "48,030 美元/年",
+        "outlook_heading": "就业展望与职位空缺",
+        "outlook_period": "2024—2034；查阅 2026-09-25",
+        "wage_column_labels": [
+          "分位",
+          "年度参考",
+          "月度等值",
+          "解释"
+        ],
+        "wage_heading": {
+          "$item": "medical-appliance-technicians.us-salary.career-snapshot-secondary-locale.3",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "wage_tiers": [
+          {
+            "equivalent": "约 17.55 美元/小时",
+            "interpretation": "为 10 分位统计位置。",
+            "label": "低分位",
+            "value": "36,510 美元/年"
+          },
+          {
+            "equivalent": "约 23.09 美元/小时",
+            "interpretation": "为 2025 年工资数据中位数。",
+            "label": "中位数",
+            "value": "48,030 美元/年"
+          },
+          {
+            "equivalent": "约 36.41 美元/小时",
+            "interpretation": "为 90 分位统计位置。",
+            "label": "高分位",
+            "value": "75,740 美元/年"
+          }
+        ]
+      },
+      "definition_block": {
+        "$item": "medical-appliance-technicians.profile.definition-block.1",
+        "block": "profile",
+        "copy_key": "career.item.definition-block",
+        "type": "prose"
+      },
+      "faq_block": {
+        "items": {
+          "$item": "medical-appliance-technicians.sources.faq.1",
+          "block": "sources",
+          "copy_key": "career.item.faq-block",
+          "type": "faq"
+        }
+      },
+      "fermat_decision_card": {
+        "caveat": {
+          "$item": "medical-appliance-technicians.quick-decision.fermat-decision-card.1",
+          "block": "quick-decision",
+          "copy_key": "career.item.fermat-decision-card",
+          "type": "prose"
+        },
+        "summary": {
+          "$item": "medical-appliance-technicians.quick-decision.fermat-decision-card.2",
+          "block": "quick-decision",
+          "copy_key": "career.item.fermat-decision-card",
+          "type": "prose"
+        },
+        "title": "医疗器具制作技术员适合什么样的人？"
+      },
+      "fit_decision_checklist": {
+        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "how": {
+          "$item": "medical-appliance-technicians.quick-decision.fermat-decision-card.3",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "suit": {
+          "$item": "medical-appliance-technicians.quick-decision.fermat-decision-card.4",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        }
+      },
+      "hero": {
+        "h1": {
+          "$subject": "name"
+        },
+        "quick_answer": {
+          "$subject": "summary"
+        },
+        "title": {
+          "$subject": "name"
+        }
+      },
+      "market_signal_card": {
+        "context_links": [
+          {
+            "href": "#career-visual-group-market-signals",
+            "label": "查看市场信号"
+          }
+        ],
+        "direct_answer": {
+          "$item": "medical-appliance-technicians.market-signals.market-signal-card.2",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "heading": {
+          "$item": "medical-appliance-technicians.market-signals.market-signal-card.1",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "outlook_evidence": [
+          {
+            "geography": "来源覆盖范围",
+            "horizon": "2024—2034",
+            "interpretation": "就业规模、变化与职位空缺必须分别解释。",
+            "limitation": "为统计预测，不能当作单列本职业就业保证。",
+            "metric": "就业规模与变化",
+            "occupation_scope": "展示口径：Medical Appliance Technicians（O*NET 51-9082.00）",
+            "value": {
+              "$item": "medical-appliance-technicians.market-signals.market-signal-card.3",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "geography": "来源覆盖范围",
+            "horizon": "2024—2034",
+            "interpretation": "为 2024—2034 年十年平均，含增长与替换需求，不等于在招岗位数。",
+            "limitation": "不能作为个人录用概率。",
+            "metric": "职位空缺（年均）",
+            "occupation_scope": "展示口径：51-9082.00",
+            "value": "约 1,500 个/年"
+          },
+          {
+            "geography": "来源覆盖范围",
+            "horizon": "2025",
+            "interpretation": "为 BLS 2025 年工资数据中位数，不代表起薪或到手收入。",
+            "limitation": "分位为统计位置。",
+            "metric": "年薪中位数",
+            "occupation_scope": "展示口径：51-9082.00",
+            "value": "48,030 美元/年"
+          }
+        ],
+        "schema_version": "career.outlook_transitions.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "id": "medical-appliance-technicians.display.source.0",
+            "label": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "scope": "不提供该职业采用率、失业概率或替代日期。"
+          },
+          {
+            "href": {
+              "$source": "bls-projections",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "id": "medical-appliance-technicians.display.source.1",
+            "label": {
+              "$source": "bls-projections",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "scope": "未建立与该 O*NET 精确职业一一对应的中国全国工资分布。"
+          },
+          {
+            "href": {
+              "$source": "nbs-wages-2025",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "id": "medical-appliance-technicians.display.source.2",
+            "label": {
+              "$source": "nbs-wages-2025",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "scope": "美国数据为 Medical Appliance Technicians（51-9082.00）本职业口径。"
+          },
+          {
+            "href": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "id": "medical-appliance-technicians.display.source.3",
+            "label": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "scope": "工作情境与行业分布为调查结果，不替代雇主与地方法规。"
+          }
+        ],
+        "transitions": [
+          {
+            "capability_gaps": {
+              "$item": "medical-appliance-technicians.market-signals.market-signal-card.5",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "medical-appliance-technicians.market-signals.market-signal-card.4",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "target_href": "/zh/career/jobs/dental-and-ophthalmic-laboratory-technicians-and-medical-appliance-technicians",
+            "target_slug": "dental-and-ophthalmic-laboratory-technicians-and-medical-appliance-technicians",
+            "target_title": "牙科与眼科实验技术员及医疗器具技术员",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需补齐对象与适用标准差异。",
+            "shared_capabilities": "精密制作与检验技能。",
+            "target_href": "/zh/career/jobs/dental-laboratory-technicians",
+            "target_slug": "dental-laboratory-technicians",
+            "target_title": "牙科实验技术员",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需补齐矫形与假肢器具知识。",
+            "shared_capabilities": "精密加工与测量经验。",
+            "target_href": "/zh/career/jobs/ophthalmic-laboratory-technicians",
+            "target_slug": "ophthalmic-laboratory-technicians",
+            "target_title": "眼科实验技术员",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需补齐医疗器具制作与适配责任。",
+            "shared_capabilities": "测量与检具使用经验。",
+            "target_href": "/zh/career/jobs/calibration-technologists-and-technicians",
+            "target_slug": "calibration-technologists-and-technicians",
+            "target_title": "校准技术员",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需补齐独立临床评估与处方责任。",
+            "shared_capabilities": "器具与适配流程理解。",
+            "target_href": "/zh/career/jobs/orthotists-and-prosthetists",
+            "target_slug": "orthotists-and-prosthetists",
+            "target_title": "矫形师与假肢师",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "需补齐器具制作与材料工艺。",
+            "shared_capabilities": "设备维护与修理经验。",
+            "target_href": "/zh/career/jobs/medical-equipment-repairers",
+            "target_slug": "medical-equipment-repairers",
+            "target_title": "医疗设备维修人员",
+            "transition_distance": "需补证据"
+          }
+        ]
+      },
+      "onet_structured_fields_block": {
+        "availability": "published",
+        "heading": "O*NET 结构化字段",
+        "rows": [
+          {
+            "alternate_value": null,
+            "label": "研究输入",
+            "secondary_value": null,
+            "value": {
+              "$item": "medical-appliance-technicians.profile.onet-structured-fields-block.7",
+              "block": "profile",
+              "copy_key": "career.item.onet-structured-fields-block",
+              "type": "prose"
+            }
+          }
+        ],
+        "schema_version": "career.onet_structured_fields.v1"
+      },
+      "personality_fit_block": {
+        "assessments": [
+          {
+            "answer": {
+              "$item": "medical-appliance-technicians.fit.riasec-fit-block.6",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "riasec",
+            "label": "RIASEC",
+            "question": "RIC 兴趣代码对应哪些可观察行为？",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          },
+          {
+            "answer": {
+              "$item": "medical-appliance-technicians.fit.riasec-fit-block.7",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "big-five",
+            "label": "大五人格",
+            "question": "注重尺寸与工艺在哪些任务上体现？",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          },
+          {
+            "answer": {
+              "$item": "medical-appliance-technicians.fit.riasec-fit-block.8",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "mbti",
+            "label": "MBTI",
+            "question": "人格标签能否判断制作岗位适配？",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          },
+          {
+            "answer": "先核对真实任务、标准与责任边界，再判断是否继续。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "enneagram",
+            "label": "九型人格",
+            "question": "用工作样本核对，而不是用标签替代判断。",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          },
+          {
+            "answer": "先核对真实任务、标准与责任边界，再判断是否继续。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "iq",
+            "label": "认知能力",
+            "question": "用工作样本核对，而不是用标签替代判断。",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          },
+          {
+            "answer": "先核对真实任务、标准与责任边界，再判断是否继续。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "eq",
+            "label": "情绪能力",
+            "question": "用工作样本核对，而不是用标签替代判断。",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          }
+        ],
+        "boundary": "RIASEC、人格和能力工具不能替代工艺标准、质量体系、执业要求或雇主判断。",
+        "direct_answer": {
+          "$item": "medical-appliance-technicians.fit.riasec-fit-block.2",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        },
+        "directions": [
+          {
+            "direction": "加工与成型",
+            "fit_signals": "能按处方与图纸加工、弯曲并成型材料。",
+            "watchouts": "须复核关键尺寸与材料。"
+          },
+          {
+            "direction": "装配与连接",
+            "fit_signals": "能钻孔、粘接、焊接或铆接部件。",
+            "watchouts": "须按工艺要求核对强度。"
+          },
+          {
+            "direction": "测量与建模",
+            "fit_signals": "能测量并在模型或图纸上放样。",
+            "watchouts": "须核对测量基准与公差。"
+          },
+          {
+            "direction": "适配与调整",
+            "fit_signals": "能为对象适配器具并做必要调整。",
+            "watchouts": "适配结论须在授权范围内。"
+          },
+          {
+            "direction": "修理与维护",
+            "fit_signals": "能修理、改造并维护器具与设备。",
+            "watchouts": "须记录更换与修理内容。"
+          },
+          {
+            "direction": "表面与外观",
+            "fit_signals": "能打磨、抛光并按配方配色。",
+            "watchouts": "须符合规格与安全要求。"
+          }
+        ],
+        "heading": {
+          "$item": "medical-appliance-technicians.fit.riasec-fit-block.1",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        },
+        "questions": [
+          {
+            "answer": "用本页工作样本体验核对。",
+            "question": "你愿意反复核对尺寸与工艺吗？"
+          },
+          {
+            "answer": "用虚构工单核对。",
+            "question": "你能按处方的规格加工与装配吗？"
+          },
+          {
+            "answer": "用虚构工序核对。",
+            "question": "你能在保证质量的同时控制工时吗？"
+          },
+          {
+            "answer": "先停止或隔离、记录并升级。",
+            "question": "遇到偏差或质量问题你会怎么处理？"
+          },
+          {
+            "answer": "按格式与可追溯要求核对。",
+            "question": "你能保留可复核的加工与检验记录吗？"
+          },
+          {
+            "answer": "按监督与授权规则复核。",
+            "question": "你如何把握适配结论的授权边界？"
+          },
+          {
+            "answer": "由有权限者按流程确认。",
+            "question": "你的判断如何被复核与放行？"
+          },
+          {
+            "answer": "用完全虚构的工单完成一次加工与检验演练。",
+            "question": "下一步如何试验？"
+          }
+        ],
+        "schema_version": "career.fit_decision_center.v1",
+        "signals": [
+          {
+            "body": {
+              "$item": "medical-appliance-technicians.fit.riasec-fit-block.3",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "fit",
+            "label": "积极信号",
+            "tone": "positive"
+          },
+          {
+            "body": {
+              "$item": "medical-appliance-technicians.fit.riasec-fit-block.4",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "caution",
+            "label": "谨慎条件",
+            "tone": "caution"
+          },
+          {
+            "body": {
+              "$item": "medical-appliance-technicians.fit.riasec-fit-block.5",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "experiment",
+            "label": "试验动作",
+            "tone": "action"
+          }
+        ],
+        "source_links": [
+          {
+            "href": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "label": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "bls-projections",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "label": {
+              "$source": "bls-projections",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "fda-qmsr",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "label": {
+              "$source": "fda-qmsr",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "nbs-wages-2025",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "label": {
+              "$source": "nbs-wages-2025",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "samr-device",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "label": {
+              "$source": "samr-device",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "source-pack-onet-custom",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "label": {
+              "$source": "source-pack-onet-custom",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "source-pack-onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "label": {
+              "$source": "source-pack-onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "source-pack-onet-hot_tech",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "label": {
+              "$source": "source-pack-onet-hot_tech",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "source-pack-onet-industry",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "label": {
+              "$source": "source-pack-onet-industry",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "source-pack-onet-localcert",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "label": {
+              "$source": "source-pack-onet-localcert",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "source-pack-onet-localtraining",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "label": {
+              "$source": "source-pack-onet-localtraining",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "source-pack-onet-localwages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "label": {
+              "$source": "source-pack-onet-localwages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "source-pack-onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "label": {
+              "$source": "source-pack-onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "who-ai-health",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "label": {
+              "$source": "who-ai-health",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-appliance-technicians.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          }
+        ]
+      },
+      "primary_cta": {
+        "entry_surface": "career_job_detail",
+        "href": {
+          "$link": "medical-appliance-technicians.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "medical-appliance-technicians.navigation.1",
+          "field": "url"
+        },
+        "label": "测我的职业兴趣是否适合医疗器具制作技术员",
+        "source_page_type": "career_job_detail",
+        "subject_key": {
+          "$subject": "canonical_slug"
+        },
+        "subject_kind": "career_job",
+        "target_action": "start_riasec_test",
+        "test_slug": "holland-career-interest-test-riasec"
+      },
+      "responsibilities_block": [
+        {
+          "$join": [
+            {
+              "$item": "medical-appliance-technicians.profile.responsibilities-block.2",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$join": [
+            {
+              "$item": "medical-appliance-technicians.profile.responsibilities-block.3",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$join": [
+            {
+              "$item": "medical-appliance-technicians.profile.responsibilities-block.4",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        }
+      ],
+      "riasec_fit_block": {
+        "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
+        "interest": "先观察真实任务中的兴趣、压力与协作体验。",
+        "riasec": "RIC（现实型 + 研究型 + 常规型）",
+        "riasec_short": "RIC 只描述活动偏好，不能决定资格。"
+      },
+      "source_card": {
+        "eeat_signals": {
+          "author": "FermatMind research workflow",
+          "source": {
+            "$source": "onet-details",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "name",
+            "item": "medical-appliance-technicians.source-register.published.1"
+          },
+          "updated_at": {
+            "$source": "onet-details",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "period",
+            "item": "medical-appliance-technicians.source-register.published.1"
+          }
+        },
+        "note": "来源范围、限制和统计时期按原始证据分别核对。来源使用说明：BLS combined occupation OOH：职业事实、统计或监管边界。；代理或组合口径，不能冒充精确职业事实。；BLS Occupational Projections and Characteristics：职业事实、统计或监管边界。；限所列市场和职业口径。；FDA Quality Management System Regulation：职业事实、统计或监管边界。；代理或组合口径，不能冒充精确职业事实。；2025年城镇单位就业人员年平均工资：职业事实、统计或监管边界。；代理或组合口径，不能冒充精确职业事实。；O*NET 51-9082.00 Medical Appliance Technicians：职业事实、统计或监管边界。；限所列市场和职业口径。；O*NET National Wages 51-9082.00：职业事实、统计或监管边界。；限所列市场和职业口径。；医疗器械生产监督管理办法：职业事实、统计或监管边界。；代理或组合口径，不能冒充精确职业事实。；51-9082.00 - Medical Appliance Technicians：Candidate only; Worker must reopen and bind reviewed claims for: tasks, skills, work context.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；51-9082.00 - Medical Appliance Technicians：Candidate only; Worker must reopen and bind reviewed claims for: identity, workflow, work context, fit, risk.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；Hot Technologies: 51-9082.00 - Medical Appliance Technicians：Candidate only; Worker must reopen and bind reviewed claims for: technology and AI task change.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；Industries: 51-9082.00 - Medical Appliance Technicians：Candidate only; Worker must reopen and bind reviewed claims for: work setting, market scope.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；National Certifications: 51-9082.00 - Medical Appliance Technicians：Candidate only; Worker must reopen and bind reviewed claims for: credential boundary.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；National Training: 51-9082.00 - Medical Appliance Technicians：Candidate only; Worker must reopen and bind reviewed claims for: entry education.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；National Wages: 51-9082.00 - Medical Appliance Technicians：Candidate only; Worker must reopen and bind reviewed claims for: US wage distribution.；O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.；51-9082.00 - Medical Appliance Technicians：Candidate only; Worker must reopen and bind reviewed claims for: identity, entry, outlook.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；WHO Ethics and Governance of AI for Health：职业事实、统计或监管边界。；代理或组合口径，不能冒充精确职业事实。"
+      },
+      "work_context_block": {
+        "$item": "medical-appliance-technicians.profile.work-context-block.5",
+        "block": "profile",
+        "copy_key": "career.item.work-context-block",
+        "type": "prose"
+      }
+    },
+    "contract_version": "career.detail.display.v1",
+    "locale": "zh-CN",
+    "native_items": [
+      {
+        "block": "source-register",
+        "copy_key": "career.item.published-sources",
+        "id": "medical-appliance-technicians.source-register.published.1",
+        "location": "sources",
+        "type": "sources"
+      }
+    ],
+    "path": "/zh/career/jobs/medical-appliance-technicians",
+    "section_titles": {
+      "ai-impact": "AI 影响",
+      "china-salary": "中国大陆薪资",
+      "direction-comparison": "相邻职业比较",
+      "fit": "适配信号",
+      "market-signals": "市场信号",
+      "navigation": "页面导航",
+      "path": "入行路径",
+      "profile": "职业定义与职责",
+      "quick-decision": "快速判断",
+      "risk": "风险与边界",
+      "source-register": "来源注册表",
+      "sources": "常见问题与边界",
+      "us-salary": "美国薪资"
+    }
+  },
   "fact_register": {
     "facts": [
       {
-        "derivation": "正文可见条目直接引用，未进行跨口径计算。",
-        "display_value": "O*NET 51-9082.00 是医疗器具制作技术员，构造、维护或维修支具、矫形器、假肢、关节、足弓支撑等支持性器具。",
-        "fact_id": "content-profile-1",
+        "derivation": null,
+        "display_value": "12,000 人（2024）",
+        "fact_id": "market-employment-2025",
         "market": "美国",
-        "measure": "职业身份与职责",
-        "occupation_scope": "精确职业数据（O*NET 51-9082.00 Medical Appliance Technicians）：限所列市场和职业口径。",
-        "period": "O*NET 2026 update; accessed 2026-08-30",
+        "measure": "2024 年就业规模",
+        "occupation_scope": "O*NET 51-9082.00 本职业口径",
+        "period": "2024；查阅 2026-09-25",
         "source_refs": [
-          "onet-details"
+          "bls-projections"
         ]
       },
       {
-        "derivation": "正文可见条目直接引用，未进行跨口径计算。",
-        "display_value": "暂无可安全使用的数据：未取得与 51-9082.00 完全同口径的中国全国职业工资分布；制造业或卫生行业平均都不能当个体工资。",
-        "fact_id": "content-china-salary-1",
-        "market": "中国大陆",
-        "measure": "中国数据边界",
-        "occupation_scope": "行业代理数据（2025年城镇单位就业人员年平均工资）：代理或组合口径，不能冒充精确职业事实。",
-        "period": "2025 annual wages; published 2026; accessed 2026-08-30",
+        "derivation": null,
+        "display_value": "12,400 人（2034 预计）",
+        "fact_id": "market-employment-2035",
+        "market": "美国",
+        "measure": "2034 年预计就业规模",
+        "occupation_scope": "O*NET 51-9082.00 本职业口径",
+        "period": "2034 预测；查阅 2026-09-25",
         "source_refs": [
-          "nbs-wages-2025"
+          "bls-projections"
         ]
       },
       {
-        "derivation": "正文可见条目直接引用，未进行跨口径计算。",
-        "display_value": "BLS 当前 2025–2035 表：就业约 11,300→11,700，增长 3.5%，年均 岗位空缺 1,300；2025 中位年薪 48,030 美元。",
-        "fact_id": "content-us-salary-1",
+        "derivation": "含替换需求。",
+        "display_value": "约 1,500 个/年（2024—2034）",
+        "fact_id": "market-growth-count",
         "market": "美国",
-        "measure": "美国工资与预测口径",
-        "occupation_scope": "精确职业数据（BLS Occupational projections and worker characteristics, 2025–2035）：openings 同时含增长和替补；combined/parent 口径不得拆成目标子职业精确统计。",
-        "period": "2025 employment/wage and 2025-2035 projections",
+        "measure": "预计职位空缺（年均）",
+        "occupation_scope": "O*NET 51-9082.00 本职业口径",
+        "period": "2024—2034；查阅 2026-09-25",
         "source_refs": [
-          "bls-current-2025-2035"
+          "bls-projections"
         ]
       },
       {
-        "derivation": "正文可见条目直接引用，未进行跨口径计算。",
-        "display_value": "当前 BLS 表列典型入门为高中同等学历、无需相关经验、需中期在岗训练；临床职责另需相应授权。",
-        "fact_id": "content-path-1",
+        "derivation": "BLS 预测：2024—2034 年预计平均（约 4%）。",
+        "display_value": "平均（约 4%，2024—2034）",
+        "fact_id": "market-growth-rate",
         "market": "美国",
-        "measure": "典型入口或路径边界",
-        "occupation_scope": "精确职业数据（BLS Occupational projections and worker characteristics, 2025–2035）：openings 同时含增长和替补；combined/parent 口径不得拆成目标子职业精确统计。",
-        "period": "2025 employment/wage and 2025-2035 projections",
+        "measure": "就业增长预测",
+        "occupation_scope": "O*NET 51-9082.00 本职业口径",
+        "period": "2024—2034；查阅 2026-09-25",
         "source_refs": [
-          "bls-current-2025-2035"
+          "bls-projections"
         ]
       },
       {
-        "derivation": "正文可见条目直接引用，未进行跨口径计算。",
-        "display_value": "在适用美国医疗器械制造质量体系的场景，成品应按已批准规格和质量流程控制；具体差异处置按机构程序。",
-        "fact_id": "content-risk-1",
+        "derivation": "O*NET 全国工资页 90 分位。",
+        "display_value": "75,740 美元/年（约 36.41 美元/小时）",
+        "fact_id": "us-wage-high",
         "market": "美国",
-        "measure": "核心风险与控制边界",
-        "occupation_scope": "行业代理数据（FDA Quality Management System Regulation）：代理或组合口径，不能冒充精确职业事实。",
-        "period": "effective 2026-02-02; accessed 2026-08-30",
+        "measure": "90 分位年薪",
+        "occupation_scope": "O*NET 51-9082.00 本职业口径",
+        "period": "2025 年工资数据；查阅 2026-09-25",
         "source_refs": [
-          "fda-qmsr"
+          "onet-wages"
+        ]
+      },
+      {
+        "derivation": "O*NET 全国工资页小时中位值。",
+        "display_value": "23.09 美元/小时",
+        "fact_id": "us-wage-hourly",
+        "market": "美国",
+        "measure": "中位小时工资",
+        "occupation_scope": "O*NET 51-9082.00 本职业口径",
+        "period": "2025 年工资数据；查阅 2026-09-25",
+        "source_refs": [
+          "onet-wages"
+        ]
+      },
+      {
+        "derivation": "O*NET 全国工资页 10 分位。",
+        "display_value": "36,510 美元/年（约 17.55 美元/小时）",
+        "fact_id": "us-wage-low",
+        "market": "美国",
+        "measure": "10 分位年薪",
+        "occupation_scope": "O*NET 51-9082.00 本职业口径",
+        "period": "2025 年工资数据；查阅 2026-09-25",
+        "source_refs": [
+          "onet-wages"
+        ]
+      },
+      {
+        "derivation": "O*NET 全国工资页展示的 BLS 2025 年工资数据中位数。",
+        "display_value": "48,030 美元/年（约 23.09 美元/小时）",
+        "fact_id": "us-wage-median",
+        "market": "美国（Medical Appliance Technicians 51-9082.00）",
+        "measure": "2025 年年薪中位数",
+        "occupation_scope": "Medical Appliance Technicians（O*NET 51-9082.00，本职业口径）",
+        "period": "2025 年工资数据；查阅 2026-09-25",
+        "source_refs": [
+          "onet-wages"
         ]
       }
     ]
@@ -8670,29 +11328,33 @@
       "key": "ai",
       "label": "AI 任务暴露"
     },
-    "badges": [],
+    "badges": [
+      "处方解读与加工装配",
+      "关键尺寸与检验",
+      "适配调整与返修"
+    ],
     "metrics": [
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-wage-median",
         "key": "us_pay",
         "label": "美国薪资参考"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "market-growth-rate",
         "key": "us_growth",
         "label": "美国就业增长"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "market-employment-2025",
         "key": "us_employment",
         "label": "美国在岗人数"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "market-growth-count",
         "key": "us_openings",
         "label": "美国年均职位空缺"
       },
@@ -8708,17 +11370,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "本页实际讨论医疗支持性器具制作技术员：按处方或规格制作、维护和维修支具、矫形器、假肢等器具，记录尺寸与工序并完成质量检查；不承担独立临床评估或批准。"
+      "text": "医疗器具制作技术员（O*NET 51-9082.00）按处方制作、修理与适配矫形器、假肢等医疗辅助器具，负责加工装配、尺寸检验与适配记录。美国 BLS 2025 年中位年薪 48,030 美元；2024 年就业约 12,000 人。含工作情境、风险与入行路径。"
     },
     "title": {
       "availability": "available",
-      "text": "医疗器具制作技术员"
+      "text": "医疗器具制作技术员：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "7c79abb4365e8031674cc42064367d453daffc6513143647c1a1e491b9ff8eb5",
+  "source_content_sha256": "08fc8661213ac6c728e84feb954fca798930896e4d0843c0286b5e48843e10de",
   "subject": {
     "canonical_slug": "medical-appliance-technicians",
     "name": "医疗器具制作技术员",
-    "summary": "本页实际讨论医疗支持性器具制作技术员：按处方或规格制作、维护和维修支具、矫形器、假肢等器具，记录尺寸与工序并完成质量检查；不承担独立临床评估或批准。"
+    "summary": "医疗器具制作技术员（O*NET 51-9082.00）按处方制作、修理并适配矫形器与假肢等医疗辅助器具，负责加工装配、关键尺寸检验、适配检查与返修记录。"
   }
 }

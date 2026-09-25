@@ -192,6 +192,17 @@ test('falls back when manifest identity, page identity, or release authority cha
   }
 });
 
+test('a Career identity change uses the controlled SEO lane instead of a content fast path', () => {
+  const item = fixture();
+  item.values.get(`${headSha}:${MANIFEST_PATH}`).identity_aliases = {};
+  const receipt = analyzeCareerContentOnly(item.input);
+  assert.equal(receipt.reason, 'MANIFEST_IDENTITY_CHANGED');
+  const classification = applyCareerContentOnly(classifyPaths(item.paths), receipt);
+  assert.equal(classification.operations.career_content_only, false);
+  assert.equal(classification.operations.career_first_publish, false);
+  assert.equal(classification.flags.seo_discoverability, true);
+});
+
 test('resolves referenced display paths while retaining manifest-derived legacy paths', () => {
   const item = fixture();
   const pagePath = item.pages[0].path;

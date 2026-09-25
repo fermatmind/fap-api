@@ -34,10 +34,10 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
 
     public function test_current_aliases_resolve_detail_and_search_but_are_not_directory_members(): void
     {
-        $target = 'librarians';
-        $alias = 'librarians-and-media-collections-specialists';
-        $this->createDirectoryOccupation($target, 'Librarians', '图书馆员', 'education', 'Education');
-        $this->createDirectoryOccupation($alias, 'Librarians and Media Collections Specialists', '图书管理员及媒体资料专员', 'education', 'Education');
+        $target = 'preschool-teachers-except-special-education';
+        $alias = 'preschool-teachers';
+        $this->createDirectoryOccupation($target, 'Preschool Teachers, Except Special Education', '学前教师', 'education', 'Education');
+        $this->createDirectoryOccupation($alias, 'Preschool Teachers', '学前教师', 'education', 'Education');
         $this->publishRuntimeProjection([$target, $alias]);
         $this->warmDirectoryAuthority();
         foreach (['en', 'zh-CN'] as $locale) {
@@ -47,14 +47,34 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
                 ->assertOk()->assertJsonPath('pagination.total', 1)
                 ->assertJsonPath('items.0.slug', $target);
         }
-        $this->getJson('/api/v0.5/career/directory?locale=en&q='.urlencode('图书管理员及媒体资料专员'))
-            ->assertOk()->assertJsonPath('pagination.total', 1)
-            ->assertJsonPath('items.0.slug', $target);
+    }
+
+    public function test_fermatmind_career_slugs_keep_distinct_detail_and_directory_identity(): void
+    {
+        $careers = [
+            'insulation-workers' => ['Insulation Workers', '机械保温隔热工', 'construction', 'Construction'],
+            'insulation-workers-mechanical' => ['Insulation Workers, Mechanical', '机械绝缘工', 'construction', 'Construction'],
+            'librarians' => ['Librarians', '图书馆员与媒体馆藏专员', 'education', 'Education'],
+            'librarians-and-media-collections-specialists' => ['Librarians and Media Collections Specialists', '图书管理员及媒体资料专员', 'education', 'Education'],
+        ];
+        foreach ($careers as $slug => [$english, $chinese, $family, $familyName]) {
+            $this->createDirectoryOccupation($slug, $english, $chinese, $family, $familyName);
+        }
+        $this->publishRuntimeProjection(array_keys($careers));
+        $this->warmDirectoryAuthority();
+        foreach (array_keys($careers) as $slug) {
+            $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
+                ->assertOk()->assertJsonPath('identity.canonical_slug', $slug)
+                ->assertJsonPath('career_page.subject.canonical_slug', $slug);
+        }
+        $items = $this->getJson('/api/v0.5/career/directory?locale=zh-CN')
+            ->assertOk()->assertJsonPath('pagination.total', 4)->json('items');
+        self::assertEqualsCanonicalizing(array_keys($careers), array_column($items, 'slug'));
     }
 
     public function test_alias_never_serves_its_placeholder_when_target_is_not_published(): void
     {
-        $alias = 'librarians-and-media-collections-specialists';
+        $alias = 'preschool-teachers';
         $this->createDirectoryOccupation($alias, 'Old librarian', '旧图书馆员', 'education', 'Education');
         $this->publishRuntimeProjection([$alias]);
         $this->getJson('/api/v0.5/career/jobs/'.$alias.'?locale=zh-CN')->assertNotFound();

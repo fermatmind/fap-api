@@ -2,22 +2,25 @@
   "authoring_structure": {
     "contract_version": "career.authoring_structure.v1",
     "inventory": {
-      "fact:employment": {
-        "status": "mapped"
-      },
-      "fact:growth": {
+      "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
-      "fact:openings": {
+      "fact:us-growth-2024-2034": {
         "status": "pending_mapping"
       },
-      "fact:wage-annual": {
+      "fact:us-openings-annual-2024-2034": {
         "status": "pending_mapping"
       },
-      "fact:wage-hourly": {
+      "fact:us-projected-employment-2034": {
         "status": "pending_mapping"
       },
-      "fact:wage-range": {
+      "fact:us-wage-median-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-p10-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-p90-2025": {
         "status": "pending_mapping"
       },
       "item:interpreters-and-translators.ai-impact.ai-impact-table.1": {
@@ -137,22 +140,19 @@
       "item:interpreters-and-translators.path.career-path-block.8": {
         "status": "pending_mapping"
       },
-      "item:interpreters-and-translators.profile.career-quick-answers-block.1": {
+      "item:interpreters-and-translators.profile.career-quick-answers-block.8": {
         "status": "pending_mapping"
       },
-      "item:interpreters-and-translators.profile.career-quick-answers-block.2": {
+      "item:interpreters-and-translators.profile.career-quick-answers-block.9": {
         "status": "pending_mapping"
       },
       "item:interpreters-and-translators.profile.definition-block.1": {
         "status": "pending_mapping"
       },
-      "item:interpreters-and-translators.profile.definition-block.2": {
+      "item:interpreters-and-translators.profile.definition-block.10": {
         "status": "pending_mapping"
       },
-      "item:interpreters-and-translators.profile.onet-structured-fields-block.1": {
-        "status": "pending_mapping"
-      },
-      "item:interpreters-and-translators.profile.responsibilities-block.1": {
+      "item:interpreters-and-translators.profile.onet-structured-fields-block.7": {
         "status": "pending_mapping"
       },
       "item:interpreters-and-translators.profile.responsibilities-block.2": {
@@ -161,10 +161,13 @@
       "item:interpreters-and-translators.profile.responsibilities-block.3": {
         "status": "pending_mapping"
       },
-      "item:interpreters-and-translators.profile.work-context-block.1": {
+      "item:interpreters-and-translators.profile.responsibilities-block.4": {
         "status": "pending_mapping"
       },
-      "item:interpreters-and-translators.profile.work-context-block.2": {
+      "item:interpreters-and-translators.profile.work-context-block.5": {
+        "status": "pending_mapping"
+      },
+      "item:interpreters-and-translators.profile.work-context-block.6": {
         "status": "pending_mapping"
       },
       "item:interpreters-and-translators.quick-decision.fermat-decision-card.1": {
@@ -4495,14 +4498,8 @@
         "status": "unfilled"
       },
       "hero.us_employment.display_value": {
-        "ref": {
-          "id": "employment",
-          "path": [
-            "display_value"
-          ],
-          "source": "fact"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "hero.us_employment.label": {
         "ref": {
@@ -4517,44 +4514,20 @@
         "status": "mapped"
       },
       "hero.us_employment.market": {
-        "ref": {
-          "id": "employment",
-          "path": [
-            "market"
-          ],
-          "source": "fact"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "hero.us_employment.measure": {
-        "ref": {
-          "id": "employment",
-          "path": [
-            "measure"
-          ],
-          "source": "fact"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "hero.us_employment.occupation_scope": {
-        "ref": {
-          "id": "employment",
-          "path": [
-            "occupation_scope"
-          ],
-          "source": "fact"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "hero.us_employment.period": {
-        "ref": {
-          "id": "employment",
-          "path": [
-            "period"
-          ],
-          "source": "fact"
-        },
-        "status": "mapped"
+        "ref": null,
+        "status": "unfilled"
       },
       "hero.us_growth.derivation": {
         "ref": null,
@@ -7248,14 +7221,12 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "适合继续了解：你愿意反复核对含义、数字、专名、术语和版本，能追问歧义并保护资料；若只追求逐词替换而排斥研究、审校和责任边界，这条路径可能不合适。"
+              "谨慎信号｜本页对应 O*NET-SOC 27-3091.00「Interpreters and Translators」。官方范围为：口译口语或手语，或将书面文本从一种语言翻译成另一种语言。核心交付是准确、可用且合乎语境与用途的语言转换，而不是「逐字对应」。风险来自含义与语境偏差、术语不统一、越权提供法律或医疗意见、以及客户与当事人信息的保密要求。美国工资与就业为 O*NET/BLS 精确职业口径（中位年薪 60,170 美元；2024 年就业约 75,300 人、2024—2034 增长 2%、年均空缺约 6,900 个）。中国大陆精确职业工资未取得，按可见缺口登记。若你难以承受高度专注、时间压力与责任压力，应把这些作为需要认真权衡的现实成本。"
             ]
           },
           "id": "interpreters-and-translators.quick-decision.fermat-decision-card.1",
           "source_refs": [
-            "editorial",
-            "onet-details",
-            "onet-summary"
+            "bls-ooh"
           ],
           "type": "prose"
         },
@@ -7264,41 +7235,40 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "核心价值是让口语、手语或书面信息跨语言转换后仍尽量保持内容、语境和用途，并让问题与版本可追溯。"
+              "承担判断｜真正的适配来自能不能在同一项工作中同时完成三件事：把语言转换做实（确认语言对与领域、准备术语与背景资料、准确转换内容与语境与语体、审校与统一术语、按用途交付，产出可复核的译文或口译记录）；把规范与职业伦理管住（保密与信息处理、角色与权限边界、不越权提供法律医疗等专业意见、必要时声明无法准确传达，按行业准则与合同执行）；并承担可界定的岗位责任（对本人译文与口译质量负责，对法律效力、专业结论与对外发布按流程请示或转交）。建议用一次可核验的体验（用完全虚构的文本与术语表完成一份译文与审校说明）来检验，而不是仅依据兴趣问卷的结论。"
             ]
           },
           "id": "interpreters-and-translators.quick-decision.fermat-decision-card.2",
           "source_refs": [
-            "onet-details",
-            "onet-summary"
+            "bls-ooh"
           ],
           "type": "prose"
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "安全试做材料（完全虚构）：T-01为S2/T2/术语已复核/审校完成；T-02为源版本空白/T1/已复核/完成；T-03为S3/目标版本空白/已复核/完成；T-04为S4/T4/术语复核空白/完成。任务：按四字段共16格计算完整率，列缺失项和每条纸面状态。"
+              "判断是否适合口译与笔译人员，先用公开或模拟材料做一次可核验的演练：设定一个完全虚构的翻译任务，写出从确认语言对与用途、收集背景与术语、完成初稿或口译、自我审校与术语一致性检查、到按用途交付与保密处理的流程，标注每一步的核对点与可能出现的问题（含义或语境偏差、术语不统一、语体与受众不匹配、越权提供专业意见、客户与当事人信息保密不到位）。完成后核对：是否把语言对与用途、术语一致性、保密与角色边界作为不可省略项；是否把超出个人权限的专业结论或对外发布写成请示或转交；是否把过程留成可复核记录。全部材料须为完全虚构的文本与情境。"
             ]
           },
           "id": "interpreters-and-translators.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "editorial"
+            "bls-ooh"
           ],
           "type": "prose"
         },
         {
           "availability": "available",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "参考复核：16格中13格有值，完整率81.25%；缺失为T-02源版本、T-03目标版本、T-04术语复核。T-01仅标“题面字段齐全”，不代表译文准确、获准交付或适用于任何真实场景；T-02—04分别暂停本条纸面审查。"
+              "适配信号｜O*NET 27-3091.00 的工作活动以为他人解读信息含义、建立并维护人际关系、与主管同事沟通、更新并使用相关知识、识别信息为主。若你愿意围绕语言、语境与术语持续钻研，能在高度专注与时间压力下保持准确，并遵守保密与角色边界，这些日常要求与你的工作方式更接近；兴趣与人格工具只用于设计试验，不能判断录用资格或表现。"
             ]
           },
           "id": "interpreters-and-translators.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "editorial"
+            "bls-ooh"
           ],
           "type": "prose"
         }
@@ -7315,12 +7285,19 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "精确职业数据：O*NET 27-3091.00把口语或手语、或书面文本从一种语言转换为另一种语言。"
+              "口译与笔译人员对应 O*NET-SOC 27-3091.00「Interpreters and Translators」。官方范围为：口译口语或手语，或将书面文本从一种语言翻译成另一种语言。典型工作闭环是确认语言对与用途、收集背景与术语、转换与初稿、审校与术语统一、按用途交付并遵守保密要求。本页美国工资与就业采用 O*NET/BLS 27-3091.00 精确职业口径（2025 年中位年薪 60,170 美元；2024 年就业约 75,300 人、2024—2034 增长 2%、年均空缺约 6,900 个）；中国大陆精确职业工资未取得，按可见缺口登记。"
             ]
           },
           "id": "interpreters-and-translators.profile.definition-block.1",
           "source_refs": [
-            "onet-summary"
+            "onet-details",
+            "source-pack-onet-custom",
+            "source-pack-onet-details",
+            "source-pack-onet-hot_tech",
+            "source-pack-onet-industry",
+            "source-pack-onet-localcert",
+            "source-pack-onet-localwages",
+            "source-pack-onet-summary"
           ],
           "type": "prose"
         },
@@ -7329,28 +7306,12 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "投入可包括源内容、语言对、受众、用途、上下文、术语、参考资料、格式、版本和机密要求。"
-            ]
-          },
-          "id": "interpreters-and-translators.profile.responsibilities-block.1",
-          "source_refs": [
-            "onet-details",
-            "onet-summary"
-          ],
-          "type": "list"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.responsibilities-block",
-          "data": {
-            "entries": [
-              "产出可包括口译传递、译文、术语表、查询项、修订记录、版本与交付说明。"
+              "投入对象｜以源语言与目标语言、领域与专业术语、原文或发言与其语境与语体、客户与受众要求为对象，在职业伦理与合同边界内执行语言转换。"
             ]
           },
           "id": "interpreters-and-translators.profile.responsibilities-block.2",
           "source_refs": [
-            "onet-details",
-            "onet-summary"
+            "onet-details"
           ],
           "type": "list"
         },
@@ -7359,14 +7320,26 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "常见流程是确认语言与用途→收集上下文术语→完成口译准备或译文→核对含义数字专名术语→处理歧义→修订交付并保护资料。"
+              "可检查产出｜可复核的译文或口译记录、术语表与一致性说明、审校与修订记录、背景与用途说明、保密与授权记录；结果须可追溯到原文、术语版本与服务范围。"
             ]
           },
           "id": "interpreters-and-translators.profile.responsibilities-block.3",
           "source_refs": [
-            "editorial",
-            "onet-details",
-            "onet-summary"
+            "onet-details"
+          ],
+          "type": "list"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.responsibilities-block",
+          "data": {
+            "entries": [
+              "完整工作流程｜确认语言对与用途→收集背景与术语→转换内容与语境语体→审校与术语统一→按用途交付并遵守保密要求。"
+            ]
+          },
+          "id": "interpreters-and-translators.profile.responsibilities-block.4",
+          "source_refs": [
+            "onet-details"
           ],
           "type": "list"
         },
@@ -7375,13 +7348,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "关键判断围绕含义、语境、术语一致、遗漏或增译、版本、受众与何时必须追问。"
+              "关键判断｜O*NET 工作情境显示：精确或准确 92% 极其重要、与他人共同工作 88% 极其重要、面对面讨论 80% 每天、与他人持续接触 71%、时间压力 72% 每天、错误的后果 51% 极其严重。判断依据是原文与语境、术语一致性、以及保密与角色权限的伦理与合同要求。"
             ]
           },
-          "id": "interpreters-and-translators.profile.work-context-block.1",
+          "id": "interpreters-and-translators.profile.work-context-block.5",
           "source_refs": [
-            "onet-details",
-            "onet-summary"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7390,26 +7362,27 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "O*NET调查显示精确极其重要、时间压力常见，且难纠正错误的后果可能严重。"
+              "环境与节奏｜工作以现场口译与案头笔译并存：室内受控环境 72% 每天、电子邮件 74% 每天、决策频率 64% 每天、久坐 39% 持续或几乎持续、决策自由 56% 有一定自由、竞争 35% 竞争极其激烈；电话交谈 33% 每天、应对不愉快或愤怒的人 32% 每年一次以上。"
             ]
           },
-          "id": "interpreters-and-translators.profile.work-context-block.2",
+          "id": "interpreters-and-translators.profile.work-context-block.6",
           "source_refs": [
-            "onet-summary"
+            "onet-details"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         },
         {
           "availability": "available",
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "工具可包括电子词典、外语软件、办公、项目管理和文字处理软件；具体组合由语言对、场景和机构决定。"
+              "研究输入｜O*NET 27-3091.00 提供精确职业身份、任务、工作活动与工作情境；兴趣代码为 CAS（常规型—艺术型—社会型），Job Zone 第四级（55% 回答学士学位、28% 回答硕士学位、8% 回答高中文凭），未标注 Bright Outlook；主要行业为专业、科学与技术服务以及教育服务。可用美国数据为 O*NET/BLS 精确职业口径：2025 年中位时薪 28.93 美元、中位年薪 60,170 美元、第 10/90 分位 37,070 / 103,660 美元；2024 年就业约 75,300 人、2034 年预计约 76,600 人、2024—2034 增长 2%、年均空缺约 6,900 个。O*NET 摘要页未列 25/75 分位；中国大陆精确职业工资未取得；未打开或未发布的字段不能从职业身份推导。"
             ]
           },
-          "id": "interpreters-and-translators.profile.onet-structured-fields-block.1",
+          "id": "interpreters-and-translators.profile.onet-structured-fields-block.7",
           "source_refs": [
-            "onet-summary"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7418,13 +7391,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "协作对象可包括发言者、作者、客户、项目管理、审校、术语、技术、合规与信息安全人员。"
+              "这份工作先核对的是：对象（语言对与领域术语、原文或发言与语境、受众与用途）、输入（源文本或发言、术语表与参考版本、服务范围与保密要求）、交付（译文或口译记录、术语一致性与审校说明、交付与保密记录）。任何一项未核实都应按待核查处理，不能用机器初稿或经验感觉替代术语与保密要求。"
             ]
           },
-          "id": "interpreters-and-translators.profile.career-quick-answers-block.1",
+          "id": "interpreters-and-translators.profile.career-quick-answers-block.8",
           "source_refs": [
-            "onet-details",
-            "onet-summary"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7433,14 +7405,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "质量看含义、数字、专名、术语、遗漏、增译、语体、版本和查询是否可复核。"
+              "判断工作闭环看四步：输入核对（确认语言对、用途、术语与保密边界）→任务限定（只在约定范围内转换，不越权提供专业意见）→执行并记录（按标准完成转换与审校并留痕）→复核与升级（含义歧义、术语冲突、无法准确传达立即说明并请示）。闭环成立的前提是原文、术语与范围可核验，而不是只看输出是否通顺。"
             ]
           },
-          "id": "interpreters-and-translators.profile.career-quick-answers-block.2",
+          "id": "interpreters-and-translators.profile.career-quick-answers-block.9",
           "source_refs": [
-            "editorial",
-            "onet-details",
-            "onet-summary"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7449,19 +7419,15 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "目标职业做跨语言转换，不与研究支持或小学、中学、高等教育语言文学教学岗位合并。"
+              "相邻职责边界｜本页只覆盖 O*NET-SOC 27-3091.00「Interpreters and Translators」这一精确职业。社会科学研究助理、高校英语语言文学教师、高校外语文学教师、小学教师、初中教师等相邻职业在工作对象、授权范围与责任边界上不同，不能只按职位名称互换，也不能用代理口径替代机构授权、执业资格与最终责任。"
             ]
           },
-          "id": "interpreters-and-translators.profile.definition-block.2",
+          "id": "interpreters-and-translators.profile.definition-block.10",
           "source_refs": [
-            "adj-elementary",
-            "adj-english",
-            "adj-foreign",
-            "adj-middle",
-            "adj-social",
-            "onet-summary"
+            "onet-details"
           ],
-          "type": "prose"
+          "type": "prose",
+          "visibility": "internal"
         }
       ]
     },
@@ -7477,32 +7443,32 @@
           "data": {
             "entries": [
               {
-                "entity": "social-science-research-assistants",
-                "id": "it.adj.1",
+                "entity": "社会科学研究助理",
+                "id": "interpreters-and-translators.parity.adjacent.1",
                 "relation": "adjacent-career",
                 "url": "/zh/career/jobs/social-science-research-assistants"
               },
               {
-                "entity": "english-language-and-literature-teachers-postsecondary",
-                "id": "it.adj.2",
+                "entity": "高校英语语言文学教师",
+                "id": "interpreters-and-translators.parity.adjacent.2",
                 "relation": "adjacent-career",
                 "url": "/zh/career/jobs/english-language-and-literature-teachers-postsecondary"
               },
               {
-                "entity": "foreign-language-and-literature-teachers-postsecondary",
-                "id": "it.adj.3",
+                "entity": "高校外语文学教师",
+                "id": "interpreters-and-translators.parity.adjacent.3",
                 "relation": "adjacent-career",
                 "url": "/zh/career/jobs/foreign-language-and-literature-teachers-postsecondary"
               },
               {
-                "entity": "elementary-school-teachers-except-special-education",
-                "id": "it.adj.4",
+                "entity": "小学教师",
+                "id": "interpreters-and-translators.parity.adjacent.4",
                 "relation": "adjacent-career",
                 "url": "/zh/career/jobs/elementary-school-teachers-except-special-education"
               },
               {
-                "entity": "middle-school-teachers-except-special-and-career-technical-education",
-                "id": "it.adj.5",
+                "entity": "初中教师",
+                "id": "interpreters-and-translators.parity.adjacent.5",
                 "relation": "adjacent-career",
                 "url": "/zh/career/jobs/middle-school-teachers-except-special-and-career-technical-education"
               }
@@ -7510,12 +7476,7 @@
           },
           "id": "interpreters-and-translators.direction-comparison.adjacent-career-comparison-table.1",
           "source_refs": [
-            "adj-elementary",
-            "adj-english",
-            "adj-foreign",
-            "adj-middle",
-            "adj-social",
-            "onet-summary"
+            "onet-details"
           ],
           "type": "links"
         },
@@ -7524,13 +7485,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "社会科学研究助理支持调查、实验和数据管理；目标职业转换语言信息。"
+              "社会科学研究助理方向｜核心产出是研究数据收集、整理与分析支持。本职业以语言转换为交付；研究对象与结论责任不同，共享语言能力不等于责任相同。"
             ]
           },
           "id": "interpreters-and-translators.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "adj-social",
-            "onet-summary"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7539,13 +7499,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "高等教育英语语言文学教师教授英语、语言学或文学；目标职业不以课程教学为核心。"
+              "高校英语语言文学教师方向｜核心产出是教学与学术研究。本职业以语言转换服务为主；教学与科研职责、任职资格不同，不能只按职位名称互换。"
             ]
           },
           "id": "interpreters-and-translators.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "adj-english",
-            "onet-summary"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7554,13 +7513,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "高等教育外国语言文学教师教授非英语语言与文学；会教语言不等于承担口译笔译交付。"
+              "高校外语文学教师方向｜核心产出是外语教学与文学研究。本职业以口译与笔译交付为主；学术评价与任职要求不同，须分别核对。"
             ]
           },
           "id": "interpreters-and-translators.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "adj-foreign",
-            "onet-summary"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7569,14 +7527,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "小学和中学教师分别教授对应学段的学术、社会技能或学科内容；目标职业不承担课程与学生评价。"
+              "小学教师方向｜核心产出是课程教学与学生发展。本职业以语言转换为主；教学场景、执照与照护责任不同，不能相互套用。"
             ]
           },
           "id": "interpreters-and-translators.direction-comparison.adjacent-career-comparison-table.5",
           "source_refs": [
-            "adj-elementary",
-            "adj-middle",
-            "onet-summary"
+            "onet-details"
           ],
           "type": "prose"
         }
@@ -7593,13 +7549,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可核技术事实：O*NET列出电子词典、外语、办公与文字处理软件，但没有给出生成式AI采用率。"
+              "口译与笔译人员的工作对象与 AI 边界：哪些环节可能被辅助、哪些判断必须由人承担。"
             ]
           },
           "id": "interpreters-and-translators.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "onet-details",
-            "onet-summary"
+            "hhs-language-access",
+            "ilo-genai",
+            "iso-17100"
           ],
           "type": "prose"
         },
@@ -7608,12 +7565,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "较低风险的工具用途只限完全虚构记录的查空值、格式检查或术语查询草稿。"
+              "直接回答｜机器翻译与语音识别可辅助初稿与字幕草稿、术语抽取与一致性检查、参考资料检索与效率提示，但含义与语境判断、语体与受众适配、术语裁决、专业领域准确性与保密与角色边界仍由人员承担。任务暴露不等于岗位替代，也不等于已普遍采用；正式使用需要授权、人工复核与留痕。本页不给出替代概率或时间表。"
             ]
           },
           "id": "interpreters-and-translators.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "editorial"
+            "hhs-language-access"
           ],
           "type": "prose"
         },
@@ -7622,12 +7579,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "人的控制点包括真实源内容、用途、语言对、术语、含义、数字、专名、版本、机密级别和交付决定。"
+              "证据说明｜本表只使用来源原始口径：O*NET 27-3091.00 提供精确职业身份、任务、工作活动与工作情境；美国工资与就业为 O*NET/BLS 精确职业口径；语言服务标准与伦理准则只提供质量与保密框架，不替代语言判断；中国汉语水平考试与翻译专业资格相关口径只说明资格路径，不提供工资数值。"
             ]
           },
           "id": "interpreters-and-translators.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "editorial"
+            "hhs-language-access"
           ],
           "type": "prose"
         },
@@ -7636,12 +7593,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工具输出不能自动证明译文准确、替代场景资格、解除保密义务或批准交付。"
+              "差异说明｜同一职业内不同环节受影响不同：越可文本化、且结果可事后核对的部分（初稿、字幕草稿、术语抽取、一致性检查）越容易被工具加速；越涉及语境与语体判断、术语裁决、专业领域准确性与保密与临场口译的部分越必须由人承担。"
             ]
           },
           "id": "interpreters-and-translators.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "editorial"
+            "hhs-language-access"
           ],
           "type": "prose"
         },
@@ -7650,12 +7607,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "若工具补造含义、数字、专名、术语或版本，应停止使用并回到受控源资料。"
+              "责任链｜从任务与范围确认、工具处理、人工复核与审校、交付签署到保密与记录留痕，每一步都要明确由谁负责，并保留可追溯证据；法律与医疗等专业内容的准确性判断不得仅依赖模型。"
             ]
           },
           "id": "interpreters-and-translators.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "editorial"
+            "hhs-language-access"
           ],
           "type": "prose"
         },
@@ -7664,13 +7621,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "软件清单、生成式AI采用、翻译质量、生产率和就业影响是不同测量对象，不能互推。"
+              "转折｜工具改变的是初稿与检索效率，不改变含义与语境判断、术语裁决、专业准确性与保密边界的归属；务实的做法是先把语言与领域能力练扎实，再在可复核、可追溯的低风险环节引入工具。"
             ]
           },
           "id": "interpreters-and-translators.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "onet-details",
-            "onet-summary"
+            "hhs-language-access"
           ],
           "type": "prose"
         },
@@ -7679,12 +7635,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "真实资料能否进入外部工具取决于机构的数据、保密、知识产权、权限和审计要求。"
+              "可能被辅助：机器翻译初稿、语音识别与字幕草稿、术语抽取与一致性检查、参考资料检索；这些环节结果可事后核对，但仍须回看原文、术语版本与领域语境。"
             ]
           },
           "id": "interpreters-and-translators.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "editorial"
+            "hhs-language-access"
           ],
           "type": "prose"
         },
@@ -7693,13 +7649,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "暂无可安全使用的数据：所核页面没有采用率、翻译质量准确率、生产率因果或净就业影响，不量化替代概率。"
+              "人的控制点：必须回看原文与语境并复核关键判断，并对含义与语体、术语一致性、专业准确性与保密与角色边界承担责任。"
             ]
           },
           "id": "interpreters-and-translators.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "onet-details",
-            "onet-summary"
+            "hhs-language-access"
           ],
           "type": "prose"
         }
@@ -7716,12 +7671,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "暂无可安全使用的数据：所核中国官方工资发布没有与O*NET 27-3091.00精确对应的中国大陆全国中位数或分位数。"
+              "职业名称对照｜口译与笔译人员（美国 O*NET-SOC 27-3091.00 Interpreters and Translators）。中国公开统计没有与该精确职业对应的单职业工资；行业平均工资不能冒充中位数，中文页面语言也不构成中国等价职业或工资映射。"
             ]
           },
           "id": "interpreters-and-translators.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs-wage"
+            "nbs-wages"
           ],
           "type": "prose"
         },
@@ -7730,12 +7685,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "行业代理数据或宽岗位大类不能当作口译与笔译人员的精确职业工资或项目费率。"
+              "职业范围｜本页的中国侧结论只限中国大陆市场与当前统计口径；翻译专业资格与汉语水平考试等口径只说明评价与资格路径，不提供职业工资数值。"
             ]
           },
           "id": "interpreters-and-translators.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs-wage"
+            "nbs-wages"
           ],
           "type": "prose"
         },
@@ -7744,13 +7699,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "zh-CN只是内容语言；美国职业身份、进入要求与工资不能代表中国资格、就业或收入。"
+              "证据不足：未建立中国大陆口译与笔译人员全国单职业工资中位数或分位数；信息传输、文化或专业服务行业平均工资不能替代语言对、领域、雇佣或项目制与个人报价的差异，本页不提供中国工资数值。"
             ]
           },
           "id": "interpreters-and-translators.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "editorial",
-            "nbs-wage"
+            "nbs-wages"
           ],
           "type": "prose"
         },
@@ -7759,13 +7713,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "比较具体岗位时记录地区、语言对、专业领域、口译或笔译、雇佣或项目制、合同、计费单位和福利。"
+              "AI 与薪资判断边界｜机器翻译可能辅助初稿与检索，但不改变该职业薪酬由语言对、领域、雇佣形态与项目要求决定这一事实；本页不对该职业的 AI 暴露评分，也不据此推断薪资。"
             ]
           },
           "id": "interpreters-and-translators.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "editorial",
-            "nbs-wage"
+            "nbs-wages"
           ],
           "type": "prose"
         }
@@ -7782,15 +7735,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "精确职业数据：2025年美国年薪中位数为{{fact:wage-annual}}。"
+              "美国薪资参考｜取 O*NET/BLS 数据（2025 年），为 27-3091.00 精确职业口径。"
             ]
           },
           "fact_refs": [
-            "wage-annual"
+            "us-wage-median-2025"
           ],
           "id": "interpreters-and-translators.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "onet-wage"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7799,15 +7752,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "精确职业数据：2025年美国小时工资中位数为{{fact:wage-hourly}}。"
+              "直接回答｜按 O*NET/BLS 口径：2025 年中位时薪 28.93 美元、中位年薪 60,170 美元，第 10 分位 37,070 美元、第 90 分位 103,660 美元；2024 年就业约 75,300 人、2034 年预计约 76,600 人、2024—2034 增长 2%、年均空缺约 6,900 个；主要行业为专业、科学与技术服务以及教育服务。O*NET 摘要页未列出 25/75 分位，本页不发布这些分位。"
             ]
           },
           "fact_refs": [
-            "wage-hourly"
+            "us-wage-p10-2025"
           ],
           "id": "interpreters-and-translators.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "onet-wage"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7816,15 +7769,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "精确职业数据：2025年美国年薪第10至第90百分位为{{fact:wage-range}}。"
+              "薪资口径｜数据为 BLS OEWS 2025 年与 2024—2034 就业预测，经 O*NET 呈现为 27-3091.00 精确职业口径；OEWS 为雇主报告的工资、不含福利与奖金；分位是统计位置，不等于起薪或个人实发收入；项目制与自由职业收入可能与受雇工资统计不同。"
             ]
           },
           "fact_refs": [
-            "wage-range"
+            "us-wage-p90-2025"
           ],
           "id": "interpreters-and-translators.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "onet-wage"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7833,12 +7786,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全国分布不是起薪、语言对报价、项目费率或个人保证。"
+              "解读说明｜该口径可用于理解本职业工资量级与需求方向，不能作为个人报价，也不能与中国大陆或任何其他市场直接比较；不同语言对与领域的市场差异较大，统计中位数不代表具体语言对。"
             ]
           },
+          "fact_refs": [
+            "us-wage-median-2025"
+          ],
           "id": "interpreters-and-translators.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "onet-wage"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7847,13 +7803,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国精确职业工资与中国行业代理数据不可换算或拼接。"
+              "行业口径｜O*NET 行业页显示该职业在美国的主要行业为专业、科学与技术服务（Professional, Scientific, and Technical Services）与教育服务（Educational Services）；行业分布、招聘需求与年度空缺是不同指标，不能混写为单一增长率。"
             ]
           },
+          "fact_refs": [
+            "us-wage-p10-2025"
+          ],
           "id": "interpreters-and-translators.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "nbs-wage",
-            "onet-wage"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7862,13 +7820,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "比较岗位须另核地区、语言对、专业场景、雇佣方式、工时、合同、计费单位和福利。"
+              "影响因素｜雇佣形态（受雇、自由职业、项目制）、语言对稀有度、专业领域（法律、医疗、会议、本地化）、地区与资质会影响实际收入水平与波动；本页分位是统计位置，不对应具体经验年限或语言对。"
             ]
           },
+          "fact_refs": [
+            "us-wage-p90-2025"
+          ],
           "id": "interpreters-and-translators.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "editorial",
-            "onet-wage"
+            "onet-details"
           ],
           "type": "prose"
         }
@@ -7885,12 +7845,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "含义信号：愿意回看上下文，不只做逐词替换。"
+              "做口译与笔译人员，哪些兴趣、能力与工作方式更重要？本页只用工作样本与责任边界讨论适配，不用人格标签替代资格与表现判断。"
             ]
           },
           "id": "interpreters-and-translators.fit.riasec-fit-block.1",
           "source_refs": [
-            "editorial"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7899,12 +7859,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "核对信号：会逐项检查数字、否定、专名、术语和版本。"
+              "直接回答｜适配信号是能在高度专注与时间压力下保持准确、能围绕语言与术语持续钻研、能自行审校并在无法准确传达时说明，而不是人格标签。兴趣与人格工具只能帮助设计试验，不能判断录用资格、授权或表现。"
             ]
           },
           "id": "interpreters-and-translators.fit.riasec-fit-block.2",
           "source_refs": [
-            "editorial"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7913,14 +7873,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "研究信号：遇到陌生术语会查证并记录查询。"
+              "积极信号｜能按流程完成术语准备、转换与审校、术语一致性检查；能识别含义与语体问题、必要时向客户说明限制；能把过程留成可复核记录并遵守保密与角色边界。"
             ]
           },
           "id": "interpreters-and-translators.fit.riasec-fit-block.3",
           "source_refs": [
-            "editorial",
-            "onet-details",
-            "onet-summary"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7929,12 +7887,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "边界信号：源文、用途、机密级别或责任不清时会暂停并追问。"
+              "谨慎条件｜风险信号包括用机器初稿直接交付、术语不统一、语体与受众不匹配、越权提供法律或医疗意见、客户与当事人信息保密不到位；若难以承受高度专注、时间压力与责任压力，应把这些作为需要认真权衡的现实成本。"
             ]
           },
           "id": "interpreters-and-translators.fit.riasec-fit-block.4",
           "source_refs": [
-            "editorial"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7943,13 +7901,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "压力信号：能在时间压力下保持清楚交接，不用猜测填补缺口。"
+              "试验动作｜用完全虚构的文本与术语表做一次演练：完成初稿或口译、自我审校与术语一致性检查、写出对含义与语体的处理说明；用可观察交付检验，而不是只凭兴趣问卷。"
             ]
           },
           "id": "interpreters-and-translators.fit.riasec-fit-block.5",
           "source_refs": [
-            "editorial",
-            "onet-summary"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7958,14 +7915,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "协作信号：愿意与作者、客户、审校和项目角色处理歧义。"
+              "结论｜活动偏好更接近规程遵循、语言艺术与社会服务的组合（O*NET 兴趣代码 CAS）；但兴趣代码只能帮助设计试验，不能判断录用资格或表现。"
             ]
           },
           "id": "interpreters-and-translators.fit.riasec-fit-block.6",
           "source_refs": [
-            "editorial",
-            "onet-details",
-            "onet-summary"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7974,26 +7929,26 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎条件：若排斥细致审校、版本控制或保密责任，先比较其他语言相关路径。"
+              "结论｜人格特质不能预测该职业的工作表现；应结合真实任务、责任边界与可复核交付继续核对，而不是依据单一标签下结论。"
             ]
           },
           "id": "interpreters-and-translators.fit.riasec-fit-block.7",
           "source_refs": [
-            "editorial"
+            "onet-details"
           ],
           "type": "prose"
         },
         {
           "availability": "available",
-          "copy_key": "career.item.riasec-fit-block",
+          "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本页练习只观察字段核对行为，不是语言能力、翻译质量、录用、资格或交付授权测试。"
+              "结论｜RIASEC 或人格框架只能帮助提出问题，不能替代该职业的工作样本、学习能力、资格和实际绩效证据；任何工具结论都不构成录用、授权或任命判断。"
             ]
           },
           "id": "interpreters-and-translators.fit.riasec-fit-block.8",
           "source_refs": [
-            "editorial"
+            "onet-details"
           ],
           "type": "prose"
         }
@@ -8010,12 +7965,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "准确性：O*NET调查显示精确性极其重要，难纠正错误的后果可能严重。"
+              "含义与语境风险｜触发：只做字面对应而丢失含义、语境或语体。后果：可能造成误解与沟通事故。控制：核对原文与背景资料、必要时向发言人或作者澄清、保留修订记录。边界：涉及法律效果的内容须按机构与专业要求处理。"
             ]
           },
           "id": "interpreters-and-translators.risk.career-risk-cards.1",
           "source_refs": [
-            "onet-summary"
+            "onet-details",
+            "us-courts",
+            "hhs-language-access"
           ],
           "type": "prose"
         },
@@ -8024,13 +7981,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "机密：任务包括遵循保护信息机密的伦理规范；真实材料只能按机构允许的访问、存储和工具规则处理。"
+              "术语不一致风险｜触发：术语表缺失、版本不一或多译者并行未统一。后果：可能造成质量缺陷与返工。控制：建立术语表并统一版本、交付前做一致性检查。边界：术语裁决按客户与行业规范确定。"
             ]
           },
           "id": "interpreters-and-translators.risk.career-risk-cards.2",
           "source_refs": [
-            "editorial",
-            "onet-summary"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -8039,12 +7995,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "内容与版本：源版本、目标版本、术语或审校状态冲突时，暂停相关纸面推进，保留原记录并追问。"
+              "越权专业意见风险｜触发：在口译或笔译中替代专业人士作出法律、医疗或其他专业结论。后果：可能造成当事人权益受损与责任风险。控制：严格限定在语言转换角色、必要时声明无法准确传达并建议咨询专业人士。边界：专业结论由具备资质的专业人士负责。"
             ]
           },
           "id": "interpreters-and-translators.risk.career-risk-cards.3",
           "source_refs": [
-            "editorial"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -8053,13 +8009,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "角色：口译笔译人员转换语言信息；本页不授权法律、医疗、教育或其他专业判断，也不替客户批准交付。"
+              "保密与信息安全风险｜触发：客户或当事人信息、受保护材料在未授权范围内处理、存储或外发。后果：可能造成合规风险与权益受损。控制：按最小必要与授权范围处理、按要求加密或销毁、留存处理记录。边界：保密要求按行业准则、法规与合同确定。"
             ]
           },
           "id": "interpreters-and-translators.risk.career-risk-cards.4",
           "source_refs": [
-            "editorial",
-            "onet-summary"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -8068,12 +8023,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "共同边界：源内容、用途、语言对、版本、责任、保密或批准不清时，不开始或继续相关活动，记录并升级。"
+              "共同升级规则｜一旦含义歧义、术语冲突或授权条件不足，先停止并说明限制，把事实、影响与待决问题以可复核记录交接给有权限的责任人；不得越过专业边界、行业准则或合同授权，也不得用模型输出替代语言判断与专业结论。"
             ]
           },
           "id": "interpreters-and-translators.risk.career-risk-cards.5",
           "source_refs": [
-            "editorial"
+            "onet-details"
           ],
           "type": "prose"
         }
@@ -8090,12 +8045,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS称通常至少需要学士学位，并须熟练掌握英语和至少一种其他语言以及拟提供的口译或笔译服务。"
+              "怎样成为口译与笔译人员：入行准备、训练与责任路径。入门准备应从语言与领域能力、术语与参考工具、审校与质量控制、职业伦理与保密开始；培训或证书不自动授予法律效力或专业结论权限。"
             ]
           },
           "id": "interpreters-and-translators.path.career-path-block.1",
           "source_refs": [
-            "bls-ooh"
+            "mohrss-exam",
+            "bls-ooh",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -8104,14 +8061,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "先核岗位的语言对、口译或笔译、专业领域、受众、资料级别、审校链和第一阶段允许承担的工作。"
+              "直接回答｜现实入口通常为四年制学士学位，部分岗位要求硕士（Job Zone 第四级；55% 回答学士学位、28% 回答硕士学位、8% 回答高中文凭），先确认岗位第一年的任务与监督方式，再核对语言对与领域技能要求，并准备可验证的译文与审校作品；具体要求取决于美国岗位与适用规则，学历、证书、资格认证、岗位录用、机构授权与相关专业权限必须分别核对。"
             ]
           },
           "id": "interpreters-and-translators.path.career-path-block.2",
           "source_refs": [
-            "editorial",
-            "onet-details",
-            "onet-summary"
+            "mohrss-exam"
           ],
           "type": "prose"
         },
@@ -8120,12 +8075,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "无经验作品只用本页四条合成记录，算完整率、列缺失项、写查询并标记每条纸面状态。"
+              "特定法域要求｜美国侧以 O*NET 准备信息代表典型路径并结合岗位实践（法庭口译等场景另有专门资格要求）；中国大陆的翻译专业资格与语言测试等口径说明评价路径，须分别核对，不能互相套用。"
             ]
           },
           "id": "interpreters-and-translators.path.career-path-block.3",
           "source_refs": [
-            "editorial"
+            "mohrss-exam"
           ],
           "type": "prose"
         },
@@ -8134,12 +8089,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "作品必须注明81.25%只表示题面字段完整率，T-01字段齐全也不代表译文准确、获准交付或适用于真实场景。"
+              "资格边界｜课程、证书或考试不自动授予法庭口译、医疗口译或对外发布的法定权限；学历、证书、资格认证、岗位录用、机构授权与专业权限是不同状态，具体要求取决于法域与场景。"
             ]
           },
           "id": "interpreters-and-translators.path.career-path-block.4",
           "source_refs": [
-            "editorial"
+            "mohrss-exam"
           ],
           "type": "prose"
         },
@@ -8148,12 +8103,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "七日试做：第1天读范围；第2天抄16格；第3天找3个空值；第4天算13/16；第5天写查询；第6天对答案；第7天记录继续、暂停或比较相邻方向。"
+              "阶段责任｜入口与试验阶段在审校与监督下完成转换与交付；后续阶段按授权独立完成译文或口译并对准确性、术语与保密负责。"
             ]
           },
           "id": "interpreters-and-translators.path.career-path-block.5",
           "source_refs": [
-            "editorial"
+            "mohrss-exam"
           ],
           "type": "prose"
         },
@@ -8162,13 +8117,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "语言能力、学历、训练、证书、选用、特定场景准入、保密许可和交付授权须分别核验。"
+              "可复核证据｜用完全虚构的文本与术语表展示能力：译文或口译记录、术语表与一致性说明、审校与修订记录、对含义与语体的处理说明；不使用真实客户、当事人或受保护材料，注明依据与假设。"
             ]
           },
           "id": "interpreters-and-translators.path.career-path-block.6",
           "source_refs": [
-            "bls-ooh",
-            "editorial"
+            "mohrss-exam"
           ],
           "type": "prose"
         },
@@ -8177,14 +8131,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "成长看能否处理更复杂的上下文、术语、歧义、版本和审校交接，不承诺统一年限或自动获得场景准入。"
+              "下一步动作｜完成一次虚构翻译任务包与审校说明，请有经验者挑战你的含义判断、术语裁决与保密与角色边界，并据此判断是否继续投入该方向；用可观察交付而不是课程名称证明能力。"
             ]
           },
           "id": "interpreters-and-translators.path.career-path-block.7",
           "source_refs": [
-            "editorial",
-            "onet-details",
-            "onet-summary"
+            "mohrss-exam"
           ],
           "type": "prose"
         },
@@ -8193,18 +8145,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "转向研究支持或各学段教学前，重新核核心产出、教育训练、资格和最终责任。"
+              "迁移路径｜转型前先列出可迁移能力（语言与领域能力、术语与质量控制、审校与一致性、跨文化沟通、保密与合规），再明确必须补齐的新岗位工具、资格与责任证据；转向研究助理、语言教学或技术写作等方向，须补足各自的研究、教学或写作证据。"
             ]
           },
           "id": "interpreters-and-translators.path.career-path-block.8",
           "source_refs": [
-            "adj-elementary",
-            "adj-english",
-            "adj-foreign",
-            "adj-middle",
-            "adj-social",
-            "editorial",
-            "onet-summary"
+            "mohrss-exam"
           ],
           "type": "prose"
         }
@@ -8221,15 +8167,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "精确职业数据：2025年美国就业人数约{{fact:employment}}。"
+              "口译与笔译人员的市场信号与相关方向：本页只陈述来源覆盖范围内的观察。"
             ]
           },
-          "fact_refs": [
-            "employment"
-          ],
           "id": "interpreters-and-translators.market-signals.market-signal-card.1",
           "source_refs": [
-            "bls-ooh"
+            "ilo-genai",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -8238,15 +8182,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "精确职业数据：2025—2035年美国就业预计{{fact:growth}}。"
+              "直接回答｜美国侧按 O*NET/BLS 精确职业口径：2024 年就业约 75,300 人、2034 年预计约 76,600 人、2024—2034 增长 2%、年均空缺约 6,900 个；需求受语言服务、跨境业务、公共语言可及性与本地化活动影响，机器翻译可能改变初稿环节但复杂语境与专业领域仍需人工。上述数值为本职业精确职业口径，但不能转换为个人录用概率；中国大陆侧公开统计未按本职业单列，本页登记缺口。"
             ]
           },
-          "fact_refs": [
-            "growth"
-          ],
           "id": "interpreters-and-translators.market-signals.market-signal-card.2",
           "source_refs": [
-            "bls-ooh"
+            "ilo-genai"
           ],
           "type": "prose"
         },
@@ -8255,15 +8196,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "精确职业数据：2025—2035年美国预计年均{{fact:openings}}空缺。"
+              "就业展望（O*NET/BLS 口径，2024—2034）：增长 2%、年均空缺约 6,900 个；空缺含增长与替换需求，不等于净新增岗位，也不构成个人就业保证。"
             ]
           },
-          "fact_refs": [
-            "openings"
-          ],
           "id": "interpreters-and-translators.market-signals.market-signal-card.3",
           "source_refs": [
-            "bls-ooh"
+            "ilo-genai"
           ],
           "type": "prose"
         },
@@ -8272,12 +8210,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "多数年均空缺预计来自转职或退出劳动力市场的替补需要，不是净增岗位或个人录用概率。"
+              "可迁移能力｜相邻方向共享的基础包括：语言与跨文化理解、术语与质量控制、审校与一致性、跨方沟通、保密与合规；但每条路径都要补齐与新输出和责任相对应的工具、资格与责任证据。"
             ]
           },
           "id": "interpreters-and-translators.market-signals.market-signal-card.4",
           "source_refs": [
-            "bls-ooh"
+            "ilo-genai"
           ],
           "type": "prose"
         },
@@ -8286,12 +8224,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "全国预测不能直接代表地区、语言对、专业场景、雇佣方式或个人机会。"
+              "能力缺口｜转向社会科学研究助理、高校语言文学教师、中小学教师或技术写作等相邻方向，须补足各自的研究方法、教学资质、课程与评估或信息设计证据；相邻关系只用于方向比较，不代表自动转岗或资格互认。"
             ]
           },
           "id": "interpreters-and-translators.market-signals.market-signal-card.5",
           "source_refs": [
-            "bls-ooh"
+            "ilo-genai"
           ],
           "type": "prose"
         }
@@ -8309,127 +8247,128 @@
           "data": {
             "entries": [
               {
-                "answer": "日常可包括确认内容与受众、准备术语和参考、完成口译或译文、核对含义与术语、修订并保护资料；具体岗位只覆盖其中一部分。",
+                "answer": "O*NET 27-3091.00 的工作以现场口译与案头笔译并存：精确或准确 92% 极其重要、与他人共同工作 88% 极其重要、面对面讨论 80% 每天、与他人持续接触 71%、时间压力 72% 每天、错误的后果 51% 极其严重；室内受控环境 72% 每天、久坐 39% 持续或几乎持续、竞争 35% 竞争极其激烈。",
                 "id": "interpreters-and-translators.faq.1",
+                "question": "日常工作和工时如何？",
                 "question_key": "career.faq.interpreters-and-translators.daily-work",
                 "source_refs": [
                   "onet-details",
-                  "onet-summary"
+                  "source-pack-onet-details"
                 ]
               },
               {
-                "answer": "目标职业做跨语言转换，不等同社会科学研究支持或小学、中学、高等教育语言文学教学。",
+                "answer": "本职业把口头、手语或书面信息从一种语言转换为另一种语言，交付可审校文本或口译记录。社会科学研究助理做研究数据收集与分析，高校语言文学教师做教学与学术研究，中小学教师做课程教学与学生发展，技术写作做信息设计。应按核心产出、任职资格与责任边界判断，不能只按职位名称互换。",
                 "id": "interpreters-and-translators.faq.2",
+                "question": "这个职业与相邻职业如何区分？",
                 "question_key": "career.faq.interpreters-and-translators.role-comparison",
                 "source_refs": [
-                  "adj-elementary",
-                  "adj-english",
-                  "adj-foreign",
-                  "adj-middle",
-                  "adj-social",
-                  "onet-summary"
-                ]
-              },
-              {
-                "answer": "观察自己能否持续核对含义、数字、专名、术语和版本，并在歧义或保密不清时暂停追问；这不是适任诊断。",
-                "id": "interpreters-and-translators.faq.3",
-                "question_key": "career.faq.interpreters-and-translators.fit",
-                "source_refs": [
-                  "editorial"
-                ]
-              },
-              {
-                "answer": "所核职业页没有生成式AI采用率、翻译质量准确率、生产率因果或净就业影响，不能量化替代概率。",
-                "id": "interpreters-and-translators.faq.4",
-                "question_key": "career.faq.interpreters-and-translators.ai-impact",
-                "source_refs": [
                   "onet-details",
-                  "onet-summary"
-                ]
-              },
-              {
-                "answer": "真实源内容、用途、语言对、术语、含义、数字、专名、版本、机密级别和交付决定必须回到受控资料与责任人。",
-                "id": "interpreters-and-translators.faq.5",
-                "question_key": "career.faq.interpreters-and-translators.human-control",
-                "source_refs": [
-                  "editorial"
-                ]
-              },
-              {
-                "answer": "暂无可安全使用的数据：所核中国官方工资发布没有与O*NET 27-3091.00精确对应的全国中位数或分位数。",
-                "id": "interpreters-and-translators.faq.6",
-                "question_key": "career.faq.interpreters-and-translators.china-pay",
-                "source_refs": [
-                  "nbs-wage"
-                ]
-              },
-              {
-                "answer": "精确职业数据：2025年美国年薪中位数60,170美元、时薪28.93美元，年薪第10至第90百分位为37,070—103,660美元。",
-                "fact_refs": [
-                  "wage-annual",
-                  "wage-hourly",
-                  "wage-range"
-                ],
-                "id": "interpreters-and-translators.faq.7",
-                "question_key": "career.faq.interpreters-and-translators.us-pay",
-                "source_refs": [
-                  "onet-wage"
-                ]
-              },
-              {
-                "answer": "BLS称通常至少需要学士学位和相应语言及服务能力；学历不自动等于证书、场景准入或交付授权。",
-                "id": "interpreters-and-translators.faq.8",
-                "question_key": "career.faq.interpreters-and-translators.education-path",
-                "source_refs": [
-                  "bls-ooh",
-                  "editorial"
-                ]
-              },
-              {
-                "answer": "精确、时间压力、错误后果和机密保护都重要；本页不提供专业解释或真实交付步骤。",
-                "id": "interpreters-and-translators.faq.9",
-                "question_key": "career.faq.interpreters-and-translators.risk-boundary",
-                "source_refs": [
-                  "editorial",
-                  "onet-summary"
-                ]
-              },
-              {
-                "answer": "精确职业数据：2025—2035年美国预计增长2%、年均6,000个空缺；多数空缺来自替补需要。",
-                "fact_refs": [
-                  "growth",
-                  "openings"
-                ],
-                "id": "interpreters-and-translators.faq.10",
-                "question_key": "career.faq.interpreters-and-translators.outlook-transition",
-                "source_refs": [
                   "bls-ooh"
                 ]
               },
               {
-                "answer": "若你愿意核对含义术语、追问歧义并守住保密与责任边界，可继续用低风险字段练习观察；这不是录用保证。",
+                "answer": "适配信号是能在高度专注与时间压力下保持准确、能围绕语言与术语持续钻研、能自行审校并在无法准确传达时说明，而不是人格标签。兴趣与人格工具只能帮助设计试验，不能判断录用资格或表现。",
+                "id": "interpreters-and-translators.faq.3",
+                "question": "什么信号说明我可能适合？",
+                "question_key": "career.faq.interpreters-and-translators.fit",
+                "source_refs": [
+                  "onet-details",
+                  "source-pack-onet-summary"
+                ]
+              },
+              {
+                "answer": "机器翻译与语音识别可辅助初稿与字幕草稿、术语抽取与一致性检查、参考资料检索；但含义与语境判断、语体与受众适配、术语裁决、专业领域准确性与保密与角色边界仍由人员承担。任务暴露不等于岗位替代，也不等于已普遍采用，本页不给出替代概率或时间表。",
+                "id": "interpreters-and-translators.faq.4",
+                "question": "AI 会如何影响这个职业？",
+                "question_key": "career.faq.interpreters-and-translators.ai-impact",
+                "source_refs": [
+                  "ilo-genai",
+                  "source-pack-onet-hot_tech"
+                ]
+              },
+              {
+                "answer": "工具输出不能替代语言判断与专业边界。人类必须回看原文与语境并复核关键判断，并对含义与语体、术语一致性、专业准确性与保密与角色边界承担责任；法律与医疗等专业结论由具备资质的专业人士负责。",
+                "id": "interpreters-and-translators.faq.5",
+                "question": "哪些判断必须由人负责？",
+                "question_key": "career.faq.interpreters-and-translators.human-control",
+                "source_refs": [
+                  "hhs-language-access",
+                  "iso-17100"
+                ]
+              },
+              {
+                "answer": "证据不足：未建立中国大陆口译与笔译人员全国单职业工资中位数或分位数；信息传输、文化或专业服务行业平均工资不能替代语言对、领域、雇佣或项目制与个人报价的差异，本页展示缺失而不使用行业均值或美国数据代填。",
+                "id": "interpreters-and-translators.faq.6",
+                "question": "中国大陆薪资证据是什么？",
+                "question_key": "career.faq.interpreters-and-translators.china-pay",
+                "source_refs": [
+                  "nbs-wages",
+                  "mohrss-exam"
+                ]
+              },
+              {
+                "answer": "按 O*NET/BLS 2025 年数据（27-3091.00 精确职业）：中位时薪 28.93 美元、中位年薪 60,170 美元，第 10 分位 37,070 美元、第 90 分位 103,660 美元。O*NET 摘要页未列 25/75 分位，本页不发布；OEWS 为雇主报告的工资、不含福利与奖金，分位不等于起薪或个人实发收入。",
+                "id": "interpreters-and-translators.faq.7",
+                "question": "美国薪资证据是什么？",
+                "question_key": "career.faq.interpreters-and-translators.us-pay",
+                "source_refs": [
+                  "source-pack-onet-localwages",
+                  "bls-ooh"
+                ]
+              },
+              {
+                "answer": "O*NET 准备信息显示该职业 Job Zone 第四级：多数要求四年制学士学位，部分岗位要求硕士（55% 回答学士学位、28% 回答硕士学位、8% 回答高中文凭），并有注册学徒路径。进入该职业应结合语言与领域训练与可验证作品；学历、证书、资格认证、岗位录用、机构授权与专业权限必须分别核对。",
+                "id": "interpreters-and-translators.faq.8",
+                "question": "入行和训练路径是什么？",
+                "question_key": "career.faq.interpreters-and-translators.education-path",
+                "source_refs": [
+                  "source-pack-onet-localcert",
+                  "mohrss-exam"
+                ]
+              },
+              {
+                "answer": "主要风险包括含义与语境、术语不一致、越权专业意见、保密与信息安全四类。控制重点是把原文与背景资料、术语表与版本一致性、角色与专业边界，以及客户与当事人信息的保密与处理要求写清，并在含义歧义、术语冲突或授权不足时立即说明并上报。",
+                "id": "interpreters-and-translators.faq.9",
+                "question": "主要风险和控制边界是什么？",
+                "question_key": "career.faq.interpreters-and-translators.risk-boundary",
+                "source_refs": [
+                  "iso-17100",
+                  "hhs-language-access"
+                ]
+              },
+              {
+                "answer": "美国侧按 O*NET/BLS 精确职业口径：2024 年就业约 75,300 人、2034 年预计约 76,600 人、2024—2034 增长 2%、年均空缺约 6,900 个；空缺含增长与替换需求，不等于净新增岗位，也不能直接转换为招聘规模或个人录用概率。",
+                "id": "interpreters-and-translators.faq.10",
+                "question": "市场信号应如何理解？",
+                "question_key": "career.faq.interpreters-and-translators.outlook-transition",
+                "source_refs": [
+                  "bls-ooh",
+                  "onet-details"
+                ]
+              },
+              {
+                "answer": "本页不给出就业或录用结论，而是提供可核验的试验路径：用完全虚构的文本与术语表完成译文或口译记录、术语一致性说明与审校记录；用可观察交付判断是否继续，而不是只凭兴趣问卷或宣传。",
                 "id": "interpreters-and-translators.faq.11",
+                "question": "这个职业值得进一步试验吗？",
                 "question_key": "career.faq.interpreters-and-translators.career-worth",
                 "source_refs": [
-                  "editorial"
+                  "onet-details",
+                  "source-pack-onet-details"
+                ]
+              },
+              {
+                "answer": "中国、美国、全球与具体法域证据分别陈述；工资、就业、资格、安全和 AI 结论不得跨范围拼接。；口译与笔译人员页面提供职业决策与安全试验信息，不替代所在地法律、医疗、金融、安全、执业或其他专业意见。；任何「证据不足」都只表示有界检索后未建立安全数据，不允许用代理或模型记忆伪造数字。本页只覆盖 O*NET/SOC 27-3091.00「Interpreters and Translators」这一精确职业。",
+                "id": "interpreters-and-translators.faq.boundary",
+                "question": "页面使用边界是什么？",
+                "question_key": "career.faq.interpreters-and-translators.boundary",
+                "source_refs": [
+                  "onet-details",
+                  "nbs-wages"
                 ]
               }
             ]
           },
           "id": "interpreters-and-translators.sources.faq.1",
-          "source_refs": [
-            "adj-elementary",
-            "adj-english",
-            "adj-foreign",
-            "adj-middle",
-            "adj-social",
-            "bls-ooh",
-            "editorial",
-            "nbs-wage",
-            "onet-details",
-            "onet-summary",
-            "onet-wage"
-          ],
           "type": "faq"
         },
         {
@@ -8437,27 +8376,12 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "精确身份为O*NET 27-3091.00 Interpreters and Translators；口译与笔译同属该官方职业，但具体岗位可只覆盖一类。",
-              "五个冻结相邻职业分别依据正确O*NET页面比较；小学教师25-2021.00，中学教师25-2022.00。",
-              "中国工资只展示精确职业数据缺口，不用行业代理数据或美国工资替代。",
-              "练习共16格、13格有值、3格缺失；81.25%只表示题面字段完整率。",
-              "本页不认证翻译质量，不提供法律、医疗、教育或其他专业解释，也不授予场景准入、保密许可或交付权。"
+              "中国、美国、全球与具体法域证据分别陈述；工资、就业、资格、安全和 AI 结论不得跨范围拼接。",
+              "口译与笔译人员页面提供职业决策与安全试验信息，不替代所在地法律、医疗、金融、安全、执业或其他专业意见。",
+              "任何「证据不足」都只表示有界检索后未建立安全数据，不允许用代理或模型记忆伪造数字。"
             ]
           },
           "id": "interpreters-and-translators.sources.boundary.1",
-          "source_refs": [
-            "adj-elementary",
-            "adj-english",
-            "adj-foreign",
-            "adj-middle",
-            "adj-social",
-            "bls-ooh",
-            "editorial",
-            "nbs-wage",
-            "onet-details",
-            "onet-summary",
-            "onet-wage"
-          ],
           "type": "list"
         }
       ]
@@ -8477,7 +8401,7 @@
                 "entity": "口译与笔译人员",
                 "id": "interpreters-and-translators.navigation.1",
                 "relation": "career.section",
-                "url": "#career-content-quick-decision"
+                "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
                 "entity": "口译与笔译人员",
@@ -8558,180 +8482,244 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-08-30",
                 "details": [
-                  "小学阶段学术和社会技能教学边界。",
-                  "仅用于相邻比较。"
+                  "职责、工作环境、教育与自雇边界。",
+                  "美国合并职业；OEWS不含自雇。"
                 ],
-                "evidence_type": "official source",
-                "id": "adj-elementary",
-                "limitation": "仅用于相邻比较。",
-                "market": "美国",
-                "name": "O*NET 25-2021.00小学教师",
-                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/25-2021.00"
-              },
-              {
-                "accessed_at": "2026-09-06",
-                "details": [
-                  "高等教育英语语言文学教学边界。",
-                  "仅用于相邻比较。"
-                ],
-                "evidence_type": "official source",
-                "id": "adj-english",
-                "limitation": "仅用于相邻比较。",
-                "market": "美国",
-                "name": "O*NET 25-1123.00高等教育英语语言文学教师",
-                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/25-1123.00"
-              },
-              {
-                "accessed_at": "2026-09-06",
-                "details": [
-                  "高等教育外语与文学教学边界。",
-                  "仅用于相邻比较。"
-                ],
-                "evidence_type": "official source",
-                "id": "adj-foreign",
-                "limitation": "仅用于相邻比较。",
-                "market": "美国",
-                "name": "O*NET 25-1124.00高等教育外国语言文学教师",
-                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/25-1124.00"
-              },
-              {
-                "accessed_at": "2026-09-06",
-                "details": [
-                  "中学阶段学科教学边界。",
-                  "仅用于相邻比较。"
-                ],
-                "evidence_type": "official source",
-                "id": "adj-middle",
-                "limitation": "仅用于相邻比较。",
-                "market": "美国",
-                "name": "O*NET 25-2022.00中学教师",
-                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/25-2022.00"
-              },
-              {
-                "accessed_at": "2026-09-06",
-                "details": [
-                  "社会科学研究支持职业边界。",
-                  "仅用于相邻比较。"
-                ],
-                "evidence_type": "official source",
-                "id": "adj-social",
-                "limitation": "仅用于相邻比较。",
-                "market": "美国",
-                "name": "O*NET 19-4061.00社会科学研究助理",
-                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/19-4061.00"
-              },
-              {
-                "accessed_at": "2026-09-06",
-                "details": [
-                  "目标职业典型进入要求、工作场景与2025—2035展望。",
-                  "美国全国统计不代表具体语言对、场景、地区或个人结果。"
-                ],
-                "evidence_type": "official source",
+                "evidence_type": "official occupational outlook",
                 "id": "bls-ooh",
-                "limitation": "美国全国统计不代表具体语言对、场景、地区或个人结果。",
-                "market": "美国",
-                "name": "BLS口译与笔译人员职业展望",
-                "period": "BLS OOH 2025 employment and 2025-2035 projections; accessed 2026-09-06",
+                "limitation": "美国合并职业；OEWS不含自雇。",
+                "market": "US",
+                "name": "Interpreters and Translators Occupational Outlook Handbook",
+                "period": "current; accessed 2026-08-30",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "exact",
+                "scope": "combined_official",
                 "url": "https://www.bls.gov/ooh/media-and-communication/interpreters-and-translators.htm"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-08-30",
                 "details": [
-                  "合成记录练习、适配、AI、保密与责任边界。",
-                  "不是翻译质量认证、法律或医疗解释、教育评价、资格认定或交付授权。"
+                  "医疗语言服务与关键机器译文的合格人工复核要求。",
+                  "仅适用于Section 1557覆盖实体和规定情形。"
                 ],
-                "evidence_type": "editorial exercise and guidance",
-                "id": "editorial",
-                "limitation": "不是翻译质量认证、法律或医疗解释、教育评价、资格认定或交付授权。",
-                "market": "编辑设计",
-                "name": "口译与笔译人员职业探索编辑说明",
-                "period": "editorial review 2026-09-06",
-                "publisher": "FermatMind editorial",
-                "scope": "editorial_synthesis",
-                "url": null
+                "evidence_type": "official regulatory guidance",
+                "id": "hhs-language-access",
+                "limitation": "仅适用于Section 1557覆盖实体和规定情形。",
+                "market": "US",
+                "name": "Language Access Provisions of the Section 1557 Final Rule",
+                "period": "2024 rule guidance",
+                "publisher": "U.S. Department of Health and Human Services",
+                "scope": "exact",
+                "url": "https://www.hhs.gov/sites/default/files/ocr-dcl-section-1557-language-access.pdf"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-08-30",
                 "details": [
-                  "中国大陆行业和宽岗位工资口径。",
-                  "行业代理数据没有与O*NET 27-3091.00精确对应的全国职业工资。"
+                  "GenAI任务暴露方法及非就业预测边界。",
+                  "不是该职业采用率、质量或失业预测。"
                 ],
-                "evidence_type": "official source",
-                "id": "nbs-wage",
-                "limitation": "行业代理数据没有与O*NET 27-3091.00精确对应的全国职业工资。",
-                "market": "中国大陆",
-                "name": "国家统计局：2025年城镇单位就业人员年平均工资情况",
-                "period": "2025 annual wage release; published 2026-05-15; reused 2026-09-06",
+                "evidence_type": "institutional task exposure research",
+                "id": "ilo-genai",
+                "limitation": "不是该职业采用率、质量或失业预测。",
+                "market": "global",
+                "name": "Generative AI and Jobs: A Refined Global Index",
+                "period": "2025",
+                "publisher": "International Labour Organization",
+                "scope": "market_signal",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-08-30",
+                "details": [
+                  "翻译服务核心流程、资源与适用规范；不覆盖口译。",
+                  "公开摘要；不适用于口译，原始机器译文后编辑不在该版范围。"
+                ],
+                "evidence_type": "international standard abstract",
+                "id": "iso-17100",
+                "limitation": "公开摘要；不适用于口译，原始机器译文后编辑不在该版范围。",
+                "market": "global",
+                "name": "ISO 17100:2015 Translation services",
+                "period": "2015; current status accessed 2026",
+                "publisher": "International Organization for Standardization",
+                "scope": "exact",
+                "url": "https://www.iso.org/standard/59149.html"
+              },
+              {
+                "accessed_at": "2026-08-30",
+                "details": [
+                  "翻译专业资格一二三级在专业技术人员考试计划中。",
+                  "考试计划不说明所有岗位授权或雇主要求。"
+                ],
+                "evidence_type": "official qualification exam plan",
+                "id": "mohrss-exam",
+                "limitation": "考试计划不说明所有岗位授权或雇主要求。",
+                "market": "CN",
+                "name": "2025年度专业技术人员职业资格考试工作计划",
+                "period": "2025",
+                "publisher": "人力资源和社会保障部",
+                "scope": "exact",
+                "url": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/qt/gztz/202501/P020250110398567121569.pdf"
+              },
+              {
+                "accessed_at": "2026-08-30",
+                "details": [
+                  "确认行业工资不可建立单职业工资。",
+                  "行业平均工资不是口笔译职业或项目费率。"
+                ],
+                "evidence_type": "official wage statistics",
+                "id": "nbs-wages",
+                "limitation": "行业平均工资不是口笔译职业或项目费率。",
+                "market": "CN",
+                "name": "2024年城镇单位就业人员年平均工资情况",
+                "period": "2024 data released 2025",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202505/t20250516_1959826.html"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-08-30",
                 "details": [
-                  "精确职业任务、活动与工作情境。",
-                  "不提供具体场景的法律、医疗、教育或机构程序。"
+                  "身份、任务、情境、工资与预测。",
+                  "美国合并口译与笔译职业口径。"
                 ],
-                "evidence_type": "official source",
+                "evidence_type": "official occupation profile",
                 "id": "onet-details",
-                "limitation": "不提供具体场景的法律、医疗、教育或机构程序。",
+                "limitation": "美国合并口译与笔译职业口径。",
+                "market": "US",
+                "name": "27-3091.00 Interpreters and Translators",
+                "period": "updated 2026; wage 2025; projection 2024-2034",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "combined_official",
+                "url": "https://www.onetonline.org/link/details/27-3091.00"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "用于核对 O*NET 27-3091.00 的职业范围、任务、技能与工作情境。",
+                  "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或法律授权。"
+                ],
+                "evidence_type": "official custom occupation profile",
+                "id": "source-pack-onet-custom",
+                "limitation": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或法律授权。",
                 "market": "美国",
-                "name": "O*NET 27-3091.00详细页",
-                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "name": "27-3091.00 - Interpreters and Translators",
+                "period": "current page; accessed 2026-09-01",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/custom/27-3091.00"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "用于核对职业身份、任务、工作活动与工作情境。",
+                  "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或法律授权。"
+                ],
+                "evidence_type": "official occupation details",
+                "id": "source-pack-onet-details",
+                "limitation": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或法律授权。",
+                "market": "美国",
+                "name": "27-3091.00 - Interpreters and Translators",
+                "period": "current page; accessed 2026-09-01",
+                "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/27-3091.00"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-08-31",
                 "details": [
-                  "精确职业身份、任务、情境、软件与教育调查。",
-                  "任务全集不表示每个岗位承担全部活动；不建立中国职业映射。"
+                  "用于核对与本职业相关的热门技术与软件清单。",
+                  "技术提及不等同于能力、采用或自动化程度。"
                 ],
-                "evidence_type": "official source",
-                "id": "onet-summary",
-                "limitation": "任务全集不表示每个岗位承担全部活动；不建立中国职业映射。",
+                "evidence_type": "official technology profile",
+                "id": "source-pack-onet-hot_tech",
+                "limitation": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或法律授权。",
                 "market": "美国",
-                "name": "O*NET 27-3091.00摘要",
-                "period": "O*NET 31.0 profile; updated 2026; accessed 2026-09-06",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "name": "Hot Technologies: 27-3091.00 - Interpreters and Translators",
+                "period": "current page; accessed 2026-09-01",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/hot_tech/27-3091.00"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "用于核对本职业的主要行业分布（专业科学与技术服务、教育服务）。",
+                  "行业分布不建立中国映射。"
+                ],
+                "evidence_type": "official industry distribution",
+                "id": "source-pack-onet-industry",
+                "limitation": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或法律授权。",
+                "market": "美国",
+                "name": "Industries: 27-3091.00 - Interpreters and Translators",
+                "period": "current page; accessed 2026-09-01",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/industry/27-3091.00"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "用于核对与本职业相关的国家证书检索入口。",
+                  "证书或训练不等同于专业场景权限。"
+                ],
+                "evidence_type": "official certification discovery",
+                "id": "source-pack-onet-localcert",
+                "limitation": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或法律授权。",
+                "market": "美国",
+                "name": "National Certifications: 27-3091.00 - Interpreters and Translators",
+                "period": "current page; accessed 2026-09-01",
+                "publisher": "O*NET OnLine",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localcert/27-3091.00"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "用于核对本页美国工资口径：27-3091.00 精确职业，2025 年中位时薪 28.93 美元、中位年薪 60,170 美元、第 10/90 分位 37,070 / 103,660 美元。",
+                  "保留所显示的期间、就业人群、地域与计量单位；直接访问 BLS 失败不影响已打开的 O*NET 页面。"
+                ],
+                "evidence_type": "O*NET display of BLS OEWS wage data",
+                "id": "source-pack-onet-localwages",
+                "limitation": "O*NET OnLine 呈现的 BLS OEWS 工资数据；保留期间、就业人群、地域与计量单位。",
+                "market": "美国",
+                "name": "National Wages: 27-3091.00 - Interpreters and Translators",
+                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localwages/27-3091.00"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "用于核对职业身份、入门与就业展望入口（就业与展望为 27-3091.00 精确职业口径）。",
+                  "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或法律授权。"
+                ],
+                "evidence_type": "official occupation summary",
+                "id": "source-pack-onet-summary",
+                "limitation": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或法律授权。",
+                "market": "美国",
+                "name": "27-3091.00 - Interpreters and Translators",
+                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/27-3091.00"
               },
               {
-                "accessed_at": "2026-09-06",
+                "accessed_at": "2026-08-30",
                 "details": [
-                  "2025美国全国工资中位数与第10、第90百分位。",
-                  "全国分布不是语言对、地区、项目费率或个人收入保证。"
+                  "联邦法院口译资格、准确、中立、保密和角色边界。",
+                  "只适用美国联邦法院，不替代其他法域规则。"
                 ],
-                "evidence_type": "official source",
-                "id": "onet-wage",
-                "limitation": "全国分布不是语言对、地区、项目费率或个人收入保证。",
-                "market": "美国",
-                "name": "O*NET 27-3091.00美国工资",
-                "period": "2025 BLS OEWS data displayed by O*NET; accessed 2026-09-06",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "evidence_type": "official court interpreting guidance",
+                "id": "us-courts",
+                "limitation": "只适用美国联邦法院，不替代其他法域规则。",
+                "market": "US",
+                "name": "Federal Court Interpreters",
+                "period": "current",
+                "publisher": "Administrative Office of the U.S. Courts",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/localwages/27-3091.00"
+                "url": "https://www.uscourts.gov/court-programs/federal-court-interpreters"
               }
             ]
           },
@@ -8743,78 +8731,2503 @@
   ],
   "content_state": "enhanced",
   "contract_version": "career.detail.content.v3",
+  "display": {
+    "component_order": [
+      "breadcrumb",
+      "hero",
+      "primary_cta",
+      "fermat_decision_card",
+      "fit_decision_checklist",
+      "definition_block",
+      "responsibilities_block",
+      "work_context_block",
+      "career_ai_description_block",
+      "career_quick_answers_block",
+      "onet_structured_fields_block",
+      "adjacent_career_comparison_table",
+      "ai_impact_table",
+      "career_snapshot_primary_locale",
+      "career_snapshot_secondary_locale",
+      "riasec_fit_block",
+      "personality_fit_block",
+      "career_risk_cards",
+      "career_path_block",
+      "market_signal_card",
+      "faq_block",
+      "source_card",
+      "boundary_notice"
+    ],
+    "components": {
+      "adjacent_career_comparison_table": {
+        "conclusion": "相邻职业需要分别补足工具、资格和责任证据。",
+        "evidence_links": [
+          {
+            "href": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "label": "本职业来源"
+          }
+        ],
+        "evidence_note": "相邻关系只用于方向比较，不代表自动转岗或资格互认。",
+        "heading": "相邻职业比较",
+        "intro": "比较核心产出、责任边界和工作模式，不按名称互换。",
+        "rows": [
+          {
+            "关键区别": "核心产出是研究数据收集、整理与分析支持。",
+            "更适合什么选择": "愿意做研究支持时比较。",
+            "核心工作与产出": {
+              "$item": "interpreters-and-translators.direction-comparison.adjacent-career-comparison-table.2",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "社会科学研究助理"
+          },
+          {
+            "关键区别": "核心产出是高校教学与学术研究。",
+            "更适合什么选择": "愿意从事高校教学与科研时比较。",
+            "核心工作与产出": {
+              "$item": "interpreters-and-translators.direction-comparison.adjacent-career-comparison-table.3",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "高校英语语言文学教师"
+          },
+          {
+            "关键区别": "核心产出是外语教学与文学研究。",
+            "更适合什么选择": "愿意从事外语教学与研究时比较。",
+            "核心工作与产出": {
+              "$item": "interpreters-and-translators.direction-comparison.adjacent-career-comparison-table.4",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "高校外语文学教师"
+          },
+          {
+            "关键区别": "核心产出是课程教学与学生发展。",
+            "更适合什么选择": "愿意承担教学与照护责任时比较。",
+            "核心工作与产出": {
+              "$item": "interpreters-and-translators.direction-comparison.adjacent-career-comparison-table.5",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            "职业方向": "小学教师"
+          }
+        ],
+        "transition": "下一步用可观察交付验证方向。"
+      },
+      "ai_impact_table": {
+        "action_rows": [
+          {
+            "人群": "入行者",
+            "应对重点": "练习可复核工作样本。"
+          },
+          {
+            "人群": "在岗者",
+            "应对重点": "保留过程与失败记录。"
+          },
+          {
+            "人群": "管理者",
+            "应对重点": "先定权限和停止条件。"
+          }
+        ],
+        "answer": {
+          "$item": "interpreters-and-translators.ai-impact.ai-impact-table.2",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "authority_links": [
+          {
+            "来源": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "ilo-genai",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "ilo-genai",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "类型": "官方或研究来源",
+            "适用范围": "仅按来源原始口径使用",
+            "链接": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            }
+          }
+        ],
+        "difference_intro": {
+          "$item": "interpreters-and-translators.ai-impact.ai-impact-table.4",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "difference_rows": [
+          {
+            "AI主要改变": "信息整理",
+            "仍由人负责": "责任与授权",
+            "方向": "初稿与检索"
+          },
+          {
+            "AI主要改变": "检索与复盘",
+            "仍由人负责": "原始记录核对",
+            "方向": "审校与专业判断"
+          }
+        ],
+        "evidence_intro": {
+          "$item": "interpreters-and-translators.ai-impact.ai-impact-table.3",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "evidence_rows": [
+          {
+            "使用限制": "美国合并职业；OEWS不含自雇。",
+            "来源": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "研究对象": "来源覆盖范围",
+            "结论": "仅支持有界判断",
+            "链接": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "不是该职业采用率、质量或失业预测。",
+            "来源": {
+              "$source": "ilo-genai",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "研究对象": "来源覆盖范围",
+            "结论": "仅支持有界判断",
+            "链接": {
+              "$source": "ilo-genai",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "美国合并口译与笔译职业口径。",
+            "来源": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "研究对象": "来源覆盖范围",
+            "结论": "仅支持有界判断",
+            "链接": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            }
+          }
+        ],
+        "heading": {
+          "$item": "interpreters-and-translators.ai-impact.ai-impact-table.1",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "method_cards": [
+          {
+            "含义": "先区分可辅助任务与最终责任。",
+            "概念": "任务能力"
+          },
+          {
+            "含义": "技术演示不等于组织采用。",
+            "概念": "采用条件"
+          },
+          {
+            "含义": "不能从任务暴露推导裁撤时间。",
+            "概念": "岗位结果"
+          }
+        ],
+        "questions": [
+          {
+            "回答": "不能从任务暴露推导岗位裁撤日期；本页不给出替代概率或时间表。",
+            "来源": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "链接": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "问题": "AI 会取代口译与笔译人员岗位吗？"
+          },
+          {
+            "回答": "不能。任务暴露、组织采用、生产率变化与岗位数量是四个不同测量对象，不能互相推导。",
+            "来源": {
+              "$source": "ilo-genai",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "链接": {
+              "$source": "ilo-genai",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "问题": "任务暴露能推导裁撤时间吗？"
+          },
+          {
+            "回答": "不能。含义与语体判断、术语裁决、专业准确性与保密边界必须由人负责。",
+            "来源": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "链接": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "问题": "机器翻译能替代语言与专业判断吗？"
+          }
+        ],
+        "responsibility_intro": {
+          "$item": "interpreters-and-translators.ai-impact.ai-impact-table.5",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        },
+        "responsibility_steps": [
+          {
+            "步骤": "核对输入",
+            "说明": "确认来源、权限和版本。"
+          },
+          {
+            "步骤": "限定任务",
+            "说明": "只在已知范围内辅助。"
+          },
+          {
+            "步骤": "人工复核",
+            "说明": "责任人复核输出。"
+          },
+          {
+            "步骤": "记录升级",
+            "说明": "异常立即停止并上报。"
+          }
+        ],
+        "risk_rows": [
+          {
+            "为什么重要": "会放大错误结论。",
+            "控制方式": "核对原始材料。",
+            "风险": "错误输入"
+          },
+          {
+            "为什么重要": "会改变责任边界。",
+            "控制方式": "按授权链处理。",
+            "风险": "权限越界"
+          },
+          {
+            "为什么重要": "可能遗漏例外。",
+            "控制方式": "保留人工判断。",
+            "风险": "自动化误读"
+          }
+        ],
+        "task_rows": [
+          {
+            "人的控制点": "核对原始记录与失败模式。",
+            "任务": "整理记录",
+            "工作方向": "初稿与检索",
+            "当前变化": {
+              "$item": "interpreters-and-translators.ai-impact.ai-impact-table.7",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            }
+          },
+          {
+            "人的控制点": {
+              "$item": "interpreters-and-translators.ai-impact.ai-impact-table.8",
+              "block": "ai-impact",
+              "copy_key": "career.item.ai-impact-table",
+              "type": "prose"
+            },
+            "任务": "执行核心任务",
+            "工作方向": "术语与一致性",
+            "当前变化": "辅助信息汇总"
+          },
+          {
+            "人的控制点": "按法定授权和指挥链升级。",
+            "任务": "关键判断",
+            "工作方向": "审校与交付",
+            "当前变化": "不作自动授权"
+          },
+          {
+            "人的控制点": "由责任人确认结论。",
+            "任务": "形成复盘记录",
+            "工作方向": "伦理与保密",
+            "当前变化": "可能辅助整理"
+          }
+        ],
+        "transition": {
+          "$item": "interpreters-and-translators.ai-impact.ai-impact-table.6",
+          "block": "ai-impact",
+          "copy_key": "career.item.ai-impact-table",
+          "type": "prose"
+        }
+      },
+      "boundary_notice": [
+        {
+          "$join": [
+            {
+              "$item": "interpreters-and-translators.sources.boundary.1",
+              "block": "sources",
+              "copy_key": "career.item.boundary-notice",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$link": "interpreters-and-translators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "interpreters-and-translators.navigation.2",
+          "field": "url"
+        },
+        {
+          "$link": "interpreters-and-translators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "interpreters-and-translators.navigation.3",
+          "field": "url"
+        },
+        {
+          "$link": "interpreters-and-translators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "interpreters-and-translators.navigation.4",
+          "field": "url"
+        },
+        {
+          "$link": "interpreters-and-translators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "interpreters-and-translators.navigation.5",
+          "field": "url"
+        },
+        {
+          "$link": "interpreters-and-translators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "interpreters-and-translators.navigation.6",
+          "field": "url"
+        },
+        {
+          "$link": "interpreters-and-translators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "interpreters-and-translators.navigation.7",
+          "field": "url"
+        },
+        {
+          "$link": "interpreters-and-translators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "interpreters-and-translators.navigation.8",
+          "field": "url"
+        },
+        {
+          "$link": "interpreters-and-translators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "interpreters-and-translators.navigation.9",
+          "field": "url"
+        },
+        {
+          "$link": "interpreters-and-translators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "interpreters-and-translators.navigation.10",
+          "field": "url"
+        },
+        {
+          "$link": "interpreters-and-translators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "interpreters-and-translators.navigation.11",
+          "field": "url"
+        },
+        {
+          "$link": "interpreters-and-translators.direction-comparison.adjacent-career-comparison-table.1",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "entry": "interpreters-and-translators.parity.adjacent.1",
+          "field": "url"
+        },
+        {
+          "$link": "interpreters-and-translators.direction-comparison.adjacent-career-comparison-table.1",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "entry": "interpreters-and-translators.parity.adjacent.2",
+          "field": "url"
+        },
+        {
+          "$link": "interpreters-and-translators.direction-comparison.adjacent-career-comparison-table.1",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "entry": "interpreters-and-translators.parity.adjacent.3",
+          "field": "url"
+        },
+        {
+          "$link": "interpreters-and-translators.direction-comparison.adjacent-career-comparison-table.1",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "entry": "interpreters-and-translators.parity.adjacent.4",
+          "field": "url"
+        },
+        {
+          "$link": "interpreters-and-translators.direction-comparison.adjacent-career-comparison-table.1",
+          "block": "direction-comparison",
+          "copy_key": "career.item.adjacent-career-comparison-table",
+          "entry": "interpreters-and-translators.parity.adjacent.5",
+          "field": "url"
+        }
+      ],
+      "breadcrumb": {
+        "label": {
+          "$subject": "name"
+        },
+        "slug": {
+          "$subject": "canonical_slug"
+        }
+      },
+      "career_ai_description_block": {
+        "body": [
+          "AI 可辅助记录整理与信息汇总，但不能替代授权判断和最终责任。"
+        ],
+        "heading": "口译与笔译人员的工作对象与 AI 边界"
+      },
+      "career_path_block": {
+        "boundary": "入口要求、执照、训练和最终责任由具体法域、机构或雇主核验。",
+        "competence_ladder": [
+          {
+            "description": "确认来源、权限和版本。",
+            "stage": "输入核对"
+          },
+          {
+            "description": "遵守停止和升级条件。",
+            "stage": "过程控制"
+          },
+          {
+            "description": "形成可复核记录。",
+            "stage": "结果复盘"
+          },
+          {
+            "description": "在授权范围内扩展。",
+            "stage": "责任扩展"
+          }
+        ],
+        "direct_answer": {
+          "$item": "interpreters-and-translators.path.career-path-block.2",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "heading": {
+          "$item": "interpreters-and-translators.path.career-path-block.1",
+          "block": "path",
+          "copy_key": "career.item.career-path-block",
+          "type": "prose"
+        },
+        "locale_requirements": {
+          "credential_boundary": {
+            "$item": "interpreters-and-translators.path.career-path-block.4",
+            "block": "path",
+            "copy_key": "career.item.career-path-block",
+            "type": "prose"
+          },
+          "jurisdiction": "中国大陆 / 美国",
+          "summary": {
+            "$item": "interpreters-and-translators.path.career-path-block.3",
+            "block": "path",
+            "copy_key": "career.item.career-path-block",
+            "type": "prose"
+          }
+        },
+        "schema_version": "career.career_progression.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "id": "interpreters-and-translators.display.source.0",
+            "label": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "scope": "O*NET/BLS 27-3091.00 精确职业就业与展望，不设定中国资格。"
+          },
+          {
+            "href": {
+              "$source": "ilo-genai",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "id": "interpreters-and-translators.display.source.1",
+            "label": {
+              "$source": "ilo-genai",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "scope": "生成式 AI 任务暴露与转型边界，不是自动化率或企业部署证据。"
+          },
+          {
+            "href": {
+              "$source": "mohrss-exam",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "id": "interpreters-and-translators.display.source.2",
+            "label": {
+              "$source": "mohrss-exam",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "scope": "中国翻译专业资格与语言测试口径，说明评价路径而不提供工资数值。"
+          },
+          {
+            "href": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "id": "interpreters-and-translators.display.source.3",
+            "label": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "scope": "中国行业门类平均工资，不能替代本职业全国单职业工资分布。"
+          }
+        ],
+        "tracks": [
+          {
+            "id": "entry-and-trial",
+            "stages": [
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": {
+                  "$item": "interpreters-and-translators.path.career-path-block.7",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "readiness_evidence": {
+                  "$item": "interpreters-and-translators.path.career-path-block.6",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "responsibility": {
+                  "$item": "interpreters-and-translators.path.career-path-block.5",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "role": "入口与试验阶段 1"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": {
+                  "$item": "interpreters-and-translators.path.career-path-block.8",
+                  "block": "path",
+                  "copy_key": "career.item.career-path-block",
+                  "type": "prose"
+                },
+                "readiness_evidence": "保留可复核交付。",
+                "responsibility": "按岗位授权完成职责。",
+                "role": "入口与试验阶段 2"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "补足工具、资格和责任证据。",
+                "readiness_evidence": "保留可复核交付。",
+                "responsibility": "按岗位授权完成职责。",
+                "role": "入口与试验阶段 3"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "补足工具、资格和责任证据。",
+                "readiness_evidence": "保留可复核交付。",
+                "responsibility": "按岗位授权完成职责。",
+                "role": "入口与试验阶段 4"
+              }
+            ],
+            "title": "入口与试验"
+          },
+          {
+            "id": "independent-delivery",
+            "stages": [
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "补足工具、资格和责任证据。",
+                "readiness_evidence": "保留可复核交付。",
+                "responsibility": "按岗位授权完成职责。",
+                "role": "独立交付阶段 1"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "补足工具、资格和责任证据。",
+                "readiness_evidence": "保留可复核交付。",
+                "responsibility": "按岗位授权完成职责。",
+                "role": "独立交付阶段 2"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "补足工具、资格和责任证据。",
+                "readiness_evidence": "保留可复核交付。",
+                "responsibility": "按岗位授权完成职责。",
+                "role": "独立交付阶段 3"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "补足工具、资格和责任证据。",
+                "readiness_evidence": "保留可复核交付。",
+                "responsibility": "按岗位授权完成职责。",
+                "role": "独立交付阶段 4"
+              }
+            ],
+            "title": "独立交付"
+          },
+          {
+            "id": "expanded-responsibility",
+            "stages": [
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "补足工具、资格和责任证据。",
+                "readiness_evidence": "保留可复核交付。",
+                "responsibility": "按岗位授权完成职责。",
+                "role": "扩大责任阶段 1"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "补足工具、资格和责任证据。",
+                "readiness_evidence": "保留可复核交付。",
+                "responsibility": "按岗位授权完成职责。",
+                "role": "扩大责任阶段 2"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "补足工具、资格和责任证据。",
+                "readiness_evidence": "保留可复核交付。",
+                "responsibility": "按岗位授权完成职责。",
+                "role": "扩大责任阶段 3"
+              },
+              {
+                "credentials": "按具体法域和雇主规则核验。",
+                "next_moves": "补足工具、资格和责任证据。",
+                "readiness_evidence": "保留可复核交付。",
+                "responsibility": "按岗位授权完成职责。",
+                "role": "扩大责任阶段 4"
+              }
+            ],
+            "title": "扩大责任"
+          }
+        ]
+      },
+      "career_quick_answers_block": {
+        "availability": "published",
+        "heading": "职业速答",
+        "items": [
+          {
+            "answer": {
+              "$item": "interpreters-and-translators.profile.career-quick-answers-block.8",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa3",
+            "question": "这份工作先核对什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "对象",
+                  "secondary_value": null,
+                  "value": "语言对与领域术语、原文或发言与语境"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "输入",
+                  "secondary_value": null,
+                  "value": "源文本或发言、术语表与参考版本、服务与保密要求"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "交付",
+                  "secondary_value": null,
+                  "value": "译文或口译记录、术语一致性、审校与保密记录"
+                }
+              ]
+            }
+          },
+          {
+            "answer": {
+              "$item": "interpreters-and-translators.profile.career-quick-answers-block.9",
+              "block": "profile",
+              "copy_key": "career.item.career-quick-answers-block",
+              "type": "prose"
+            },
+            "key": "qa2",
+            "question": "怎样判断工作闭环？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "闭环",
+                  "secondary_value": null,
+                  "value": "范围、术语、转换与审校"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤一",
+                  "secondary_value": null,
+                  "value": "确认语言对与用途"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤二",
+                  "secondary_value": null,
+                  "value": "收集背景与术语"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤三",
+                  "secondary_value": null,
+                  "value": "转换内容与语境语体"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤四",
+                  "secondary_value": null,
+                  "value": "审校与术语统一"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤五",
+                  "secondary_value": null,
+                  "value": "按用途交付"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "步骤六",
+                  "secondary_value": null,
+                  "value": "保密与复盘"
+                }
+              ]
+            }
+          },
+          {
+            "answer": "资格、认证与专业场景权限仍由具体法域、机构或雇主核验；培训或证书不自动授予法庭或医疗口译等专业权限。",
+            "key": "qa1",
+            "question": "资格边界是什么？",
+            "table": {
+              "rows": [
+                {
+                  "alternate_value": null,
+                  "label": "边界",
+                  "secondary_value": null,
+                  "value": "需独立核验"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "法域",
+                  "secondary_value": null,
+                  "value": "按适用规则确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "机构",
+                  "secondary_value": null,
+                  "value": "按授权链确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "训练",
+                  "secondary_value": null,
+                  "value": "按岗位要求确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "责任",
+                  "secondary_value": null,
+                  "value": "由责任人确认"
+                },
+                {
+                  "alternate_value": null,
+                  "label": "证据",
+                  "secondary_value": null,
+                  "value": "保留可复核记录"
+                }
+              ]
+            }
+          }
+        ],
+        "schema_version": "career.quick_answers.v1"
+      },
+      "career_risk_cards": {
+        "boundary": "最终处置由适用法域、机构授权链和责任人确定。",
+        "context_links": [
+          {
+            "href": "#career-visual-group-risk",
+            "label": "查看风险模块"
+          }
+        ],
+        "direct_answer": "风险必须按触发、后果、控制和升级边界处理。",
+        "evidence_scope": "依据本职业研究输入和来源注册表，不能跨法域外推。",
+        "heading": "口译与笔译人员的工作风险与边界",
+        "risks": [
+          {
+            "affected_roles": "口译与笔译人员",
+            "consequence": "可能造成误解与沟通事故。",
+            "evidence_refs": [
+              "bls-ooh"
+            ],
+            "id": "risk-1",
+            "mitigation": "核对原文与背景资料、必要时向发言人或作者澄清、保留修订记录。",
+            "scenario": "只做字面对应而丢失含义、语境或语体。",
+            "title": {
+              "$item": "interpreters-and-translators.risk.career-risk-cards.1",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "口译与笔译人员",
+            "consequence": "可能造成质量缺陷与返工。",
+            "evidence_refs": [
+              "ilo-genai"
+            ],
+            "id": "risk-2",
+            "mitigation": "建立术语表并统一版本、交付前做一致性检查。",
+            "scenario": "术语表缺失、版本不一或多译者并行未统一。",
+            "title": {
+              "$item": "interpreters-and-translators.risk.career-risk-cards.2",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "口译与笔译人员",
+            "consequence": "可能造成当事人权益受损与责任风险。",
+            "evidence_refs": [
+              "mohrss-exam"
+            ],
+            "id": "risk-3",
+            "mitigation": "严格限定在语言转换角色、必要时声明无法准确传达并建议咨询专业人士。",
+            "scenario": "在口译或笔译中替代专业人士作出法律、医疗或其他专业结论。",
+            "title": {
+              "$item": "interpreters-and-translators.risk.career-risk-cards.3",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "口译与笔译人员",
+            "consequence": "可能造成合规风险与权益受损。",
+            "evidence_refs": [
+              "nbs-wages"
+            ],
+            "id": "risk-4",
+            "mitigation": "按最小必要与授权范围处理、按要求加密或销毁、留存处理记录。",
+            "scenario": "客户或当事人信息、受保护材料在未授权范围内处理、存储或外发。",
+            "title": {
+              "$item": "interpreters-and-translators.risk.career-risk-cards.4",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "口译与笔译人员",
+            "consequence": "可能造成质量缺陷与返工。",
+            "evidence_refs": [
+              "onet-details"
+            ],
+            "id": "risk-5",
+            "mitigation": "按流程完成自查与审校并保留记录。",
+            "scenario": "交期压力下跳过自查或审校。",
+            "title": {
+              "$item": "interpreters-and-translators.risk.career-risk-cards.5",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          },
+          {
+            "affected_roles": "口译与笔译人员",
+            "consequence": "可能越过专业边界、行业准则或合同授权。",
+            "evidence_refs": [
+              "source-pack-onet-custom"
+            ],
+            "id": "risk-6",
+            "mitigation": "先停止并说明限制，把事实、影响与待决问题交接给有权限的责任人。",
+            "scenario": "含义歧义、术语冲突或授权条件不足时仍继续推进。",
+            "title": "授权与记录风险"
+          }
+        ],
+        "schema_version": "career.work_risk.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "id": "interpreters-and-translators.display.source.0",
+            "label": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "scope": "O*NET/BLS 27-3091.00 精确职业就业与展望，不设定中国资格。"
+          },
+          {
+            "href": {
+              "$source": "ilo-genai",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "id": "interpreters-and-translators.display.source.1",
+            "label": {
+              "$source": "ilo-genai",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "scope": "生成式 AI 任务暴露与转型边界，不是自动化率或企业部署证据。"
+          },
+          {
+            "href": {
+              "$source": "mohrss-exam",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "id": "interpreters-and-translators.display.source.2",
+            "label": {
+              "$source": "mohrss-exam",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "scope": "中国翻译专业资格与语言测试口径，说明评价路径而不提供工资数值。"
+          },
+          {
+            "href": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "id": "interpreters-and-translators.display.source.3",
+            "label": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "scope": "中国行业门类平均工资，不能替代本职业全国单职业工资分布。"
+          }
+        ]
+      },
+      "career_snapshot_primary_locale": {
+        "salary": {
+          "bls_table": [
+            {
+              "指标": "中国大陆薪资口径",
+              "数值": "暂无安全数值",
+              "说明": "有界检索未建立安全映射。"
+            },
+            {
+              "指标": "中国大陆薪资口径",
+              "数值": "暂无安全数值",
+              "说明": "有界检索未建立安全映射。"
+            },
+            {
+              "指标": "中国大陆薪资口径",
+              "数值": "暂无安全数值",
+              "说明": "有界检索未建立安全映射。"
+            }
+          ],
+          "china_ai_row": {
+            "$item": "interpreters-and-translators.china-salary.career-snapshot-primary-locale.4",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_class_row": {
+            "$item": "interpreters-and-translators.china-salary.career-snapshot-primary-locale.3",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_edu_table": [
+            {
+              "学历段": "证据不足：未建立安全映射（高中/中专）",
+              "岗位方向": "按机构公告核验",
+              "说明": "不使用代理数字。"
+            },
+            {
+              "学历段": "证据不足：未建立安全映射（大专）",
+              "岗位方向": "按机构公告核验",
+              "说明": "不使用代理数字。"
+            },
+            {
+              "学历段": "证据不足：未建立安全映射（本科）",
+              "岗位方向": "按机构公告核验",
+              "说明": "不使用代理数字。"
+            },
+            {
+              "学历段": "证据不足：未建立安全映射（其他）",
+              "岗位方向": "按具体法域核验",
+              "说明": "不使用代理数字。"
+            }
+          ],
+          "china_industry_table": [
+            {
+              "行业": "信息传输、软件和信息技术服务业（行业门类）",
+              "需求": "暂无安全数值"
+            },
+            {
+              "行业": "教育（行业门类）",
+              "需求": "暂无安全数值"
+            },
+            {
+              "行业": "文化、体育和娱乐业（行业门类）",
+              "需求": "暂无安全数值"
+            }
+          ],
+          "china_intl": {
+            "$join": [
+              {
+                "$source": "ilo-genai",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "interpreters-and-translators.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "ilo-genai",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "interpreters-and-translators.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "china_name_row": {
+            "$item": "interpreters-and-translators.china-salary.career-snapshot-primary-locale.1",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "china_open": "有界检索未建立安全数值；本项不是起薪、到手收入或个人报价。",
+          "china_ref": {
+            "$join": [
+              {
+                "$source": "bls-ooh",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "interpreters-and-translators.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "bls-ooh",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "interpreters-and-translators.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "china_salary_note": "中国大陆口径与美国、全球及具体单位分开，不能跨市场拼接。",
+          "china_salary_table": [
+            {
+              "城市/区间": "证据不足：未建立安全映射",
+              "月薪参考": "暂无安全数值"
+            },
+            {
+              "城市/区间": "证据不足：未建立安全映射",
+              "月薪参考": "暂无安全数值"
+            },
+            {
+              "城市/区间": "证据不足：未建立安全映射",
+              "月薪参考": "暂无安全数值"
+            }
+          ],
+          "china_soc_row": {
+            "$item": "interpreters-and-translators.china-salary.career-snapshot-primary-locale.2",
+            "block": "china-salary",
+            "copy_key": "career.item.career-snapshot-primary-locale",
+            "type": "prose"
+          },
+          "sources_note": {
+            "$join": [
+              {
+                "$source": "bls-ooh",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "interpreters-and-translators.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "bls-ooh",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "interpreters-and-translators.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "ui": {
+            "ai_heading": "AI 与薪资判断边界",
+            "driver_heading": "影响因素",
+            "official_heading": "官方统计口径",
+            "scenario_caption": "本情景仅用于说明口径，不是个人报价。",
+            "scenario_heading": "情景化参考",
+            "scenario_interpretation_label": "解释",
+            "scenario_role_label": "岗位范围",
+            "scenario_value_label": "参考值"
+          },
+          "us_growth": "不适用本地口径",
+          "us_median": "不适用本地口径"
+        }
+      },
+      "career_snapshot_secondary_locale": {
+        "authority_sources": {
+          "$join": [
+            {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            }
+          ],
+          "separator": ""
+        },
+        "bls_table": [
+          {
+            "指标": "薪资 · 10 分位",
+            "数值": "37,070 美元/年",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "bls-ooh",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "interpreters-and-translators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "bls-ooh",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "interpreters-and-translators.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "薪资 · 25 分位",
+            "数值": "暂无安全数值",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "ilo-genai",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "interpreters-and-translators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "ilo-genai",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "interpreters-and-translators.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "薪资 · 中位数",
+            "数值": "60,170 美元/年",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "bls-ooh",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "interpreters-and-translators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "bls-ooh",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "interpreters-and-translators.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "薪资 · 75 分位",
+            "数值": "暂无安全数值",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "ilo-genai",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "interpreters-and-translators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "ilo-genai",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "interpreters-and-translators.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "薪资 · 90 分位",
+            "数值": "103,660 美元/年",
+            "说明": {
+              "$join": [
+                {
+                  "$source": "bls-ooh",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "interpreters-and-translators.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "bls-ooh",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "interpreters-and-translators.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
+          },
+          {
+            "指标": "就业 · 规模",
+            "数值": "约 75,300 人（2024 年）",
+            "说明": "不能从军种宽口径外推。"
+          },
+          {
+            "指标": "就业 · 增长",
+            "数值": "2%（2024—2034）",
+            "说明": "不能从军种宽口径外推。"
+          },
+          {
+            "指标": "就业 · 空缺",
+            "数值": "约 6,900 个/年（2024—2034）",
+            "说明": "不能从军种宽口径外推。"
+          }
+        ],
+        "boundary": "美国精确职业与更宽组口径必须分开；具体统计范围以来源标注为准，未取得的分位不等于零。",
+        "direct_answer": {
+          "$item": "interpreters-and-translators.us-salary.career-snapshot-secondary-locale.2",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "factor_rows": [
+          {
+            "answer": "按具体法域核验。",
+            "factor": "资格"
+          },
+          {
+            "answer": "按岗位责任核验。",
+            "factor": "经验"
+          },
+          {
+            "answer": "不得跨地区外推。",
+            "factor": "地区"
+          }
+        ],
+        "factors_heading": {
+          "$item": "interpreters-and-translators.us-salary.career-snapshot-secondary-locale.6",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "growth": "2%（2024—2034）",
+        "heading": {
+          "$item": "interpreters-and-translators.us-salary.career-snapshot-secondary-locale.1",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_heading": {
+          "$item": "interpreters-and-translators.us-salary.career-snapshot-secondary-locale.5",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "industry_period": "accessed 2026-08-30",
+        "industry_rows": [
+          {
+            "industry": "职业大类",
+            "median": "暂无安全数值",
+            "note": "范围需单独核验。"
+          },
+          {
+            "industry": "职业大类",
+            "median": "暂无安全数值",
+            "note": "范围需单独核验。"
+          },
+          {
+            "industry": "职业大类",
+            "median": "暂无安全数值",
+            "note": "范围需单独核验。"
+          },
+          {
+            "industry": "职业大类",
+            "median": "暂无安全数值",
+            "note": "范围需单独核验。"
+          }
+        ],
+        "industry_value_label": "行业值",
+        "interpretation_heading": {
+          "$item": "interpreters-and-translators.us-salary.career-snapshot-secondary-locale.4",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "interpretation_rows": [
+          {
+            "answer": "不是。",
+            "question": "这是不是个人报价？"
+          },
+          {
+            "answer": "需核对覆盖范围。",
+            "question": "这是否覆盖精确职业？"
+          },
+          {
+            "answer": "以来源时期为准。",
+            "question": "时期是什么？"
+          },
+          {
+            "answer": "不能直接拼接。",
+            "question": "能否跨市场比较？"
+          }
+        ],
+        "median": "28.93 美元/小时；60,170 美元/年（2025 年，精确职业口径）",
+        "outlook_heading": "就业展望与职位空缺",
+        "outlook_period": "accessed 2026-08-30",
+        "wage_column_labels": [
+          "分位",
+          "年度参考",
+          "月度等值",
+          "解释"
+        ],
+        "wage_heading": {
+          "$item": "interpreters-and-translators.us-salary.career-snapshot-secondary-locale.3",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
+        },
+        "wage_tiers": [
+          {
+            "equivalent": "—",
+            "interpretation": "不作个人报价。",
+            "label": "低分位",
+            "value": "37,070 美元/年"
+          },
+          {
+            "equivalent": "—",
+            "interpretation": "不作个人报价。",
+            "label": "中位数",
+            "value": "60,170 美元/年"
+          },
+          {
+            "equivalent": "—",
+            "interpretation": "不作个人报价。",
+            "label": "高分位",
+            "value": "103,660 美元/年"
+          }
+        ]
+      },
+      "definition_block": {
+        "$item": "interpreters-and-translators.profile.definition-block.1",
+        "block": "profile",
+        "copy_key": "career.item.definition-block",
+        "type": "prose"
+      },
+      "faq_block": {
+        "items": {
+          "$item": "interpreters-and-translators.sources.faq.1",
+          "block": "sources",
+          "copy_key": "career.item.faq-block",
+          "type": "faq"
+        }
+      },
+      "fermat_decision_card": {
+        "caveat": {
+          "$item": "interpreters-and-translators.quick-decision.fermat-decision-card.1",
+          "block": "quick-decision",
+          "copy_key": "career.item.fermat-decision-card",
+          "type": "prose"
+        },
+        "summary": {
+          "$item": "interpreters-and-translators.quick-decision.fermat-decision-card.2",
+          "block": "quick-decision",
+          "copy_key": "career.item.fermat-decision-card",
+          "type": "prose"
+        },
+        "title": "口译与笔译人员适合什么样的人？"
+      },
+      "fit_decision_checklist": {
+        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "how": {
+          "$item": "interpreters-and-translators.quick-decision.fermat-decision-card.3",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        },
+        "suit": {
+          "$item": "interpreters-and-translators.quick-decision.fermat-decision-card.4",
+          "block": "quick-decision",
+          "copy_key": "career.item.fit-decision-checklist",
+          "type": "prose"
+        }
+      },
+      "hero": {
+        "h1": {
+          "$subject": "name"
+        },
+        "quick_answer": {
+          "$subject": "summary"
+        },
+        "title": {
+          "$subject": "name"
+        }
+      },
+      "market_signal_card": {
+        "context_links": [
+          {
+            "href": "#career-visual-group-market-signals",
+            "label": "查看市场信号"
+          }
+        ],
+        "direct_answer": {
+          "$item": "interpreters-and-translators.market-signals.market-signal-card.2",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "heading": {
+          "$item": "interpreters-and-translators.market-signals.market-signal-card.1",
+          "block": "market-signals",
+          "copy_key": "career.item.market-signal-card",
+          "type": "prose"
+        },
+        "outlook_evidence": [
+          {
+            "geography": "来源覆盖范围",
+            "horizon": "当前来源时期",
+            "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "市场信号",
+            "occupation_scope": "口译与笔译人员",
+            "value": {
+              "$item": "interpreters-and-translators.market-signals.market-signal-card.3",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          },
+          {
+            "geography": "来源覆盖范围",
+            "horizon": "当前来源时期",
+            "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "市场信号",
+            "occupation_scope": "口译与笔译人员",
+            "value": "暂无安全数值"
+          },
+          {
+            "geography": "来源覆盖范围",
+            "horizon": "当前来源时期",
+            "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
+            "limitation": "不能作为个人就业保证。",
+            "metric": "市场信号",
+            "occupation_scope": "口译与笔译人员",
+            "value": "暂无安全数值"
+          }
+        ],
+        "schema_version": "career.outlook_transitions.v1",
+        "source_links": [
+          {
+            "href": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "id": "interpreters-and-translators.display.source.0",
+            "label": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "scope": "O*NET/BLS 27-3091.00 精确职业就业与展望，不设定中国资格。"
+          },
+          {
+            "href": {
+              "$source": "ilo-genai",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "id": "interpreters-and-translators.display.source.1",
+            "label": {
+              "$source": "ilo-genai",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "scope": "生成式 AI 任务暴露与转型边界，不是自动化率或企业部署证据。"
+          },
+          {
+            "href": {
+              "$source": "mohrss-exam",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "id": "interpreters-and-translators.display.source.2",
+            "label": {
+              "$source": "mohrss-exam",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "scope": "中国翻译专业资格与语言测试口径，说明评价路径而不提供工资数值。"
+          },
+          {
+            "href": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "id": "interpreters-and-translators.display.source.3",
+            "label": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "scope": "中国行业门类平均工资，不能替代本职业全国单职业工资分布。"
+          }
+        ],
+        "transitions": [
+          {
+            "capability_gaps": {
+              "$item": "interpreters-and-translators.market-signals.market-signal-card.5",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "shared_capabilities": {
+              "$item": "interpreters-and-translators.market-signals.market-signal-card.4",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            "target_href": "/zh/career/jobs/social-science-research-assistants",
+            "target_slug": "social-science-research-assistants",
+            "target_title": "社会科学研究助理",
+            "transition_distance": "需补证据"
+          },
+          {
+            "capability_gaps": "教学与学术研究训练",
+            "shared_capabilities": "语言与文本分析能力",
+            "target_href": "/zh/career/jobs/english-language-and-literature-teachers-postsecondary",
+            "target_slug": "english-language-and-literature-teachers-postsecondary",
+            "target_title": "高校英语语言文学教师",
+            "transition_distance": "中等，需补教学科研证据"
+          },
+          {
+            "capability_gaps": "高校教学与科研评价要求",
+            "shared_capabilities": "外语能力与文学素养",
+            "target_href": "/zh/career/jobs/foreign-language-and-literature-teachers-postsecondary",
+            "target_slug": "foreign-language-and-literature-teachers-postsecondary",
+            "target_title": "高校外语文学教师",
+            "transition_distance": "较远，需补学位与科研证据"
+          },
+          {
+            "capability_gaps": "教师资格与课堂管理",
+            "shared_capabilities": "语言与文化理解",
+            "target_href": "/zh/career/jobs/elementary-school-teachers-except-special-education",
+            "target_slug": "elementary-school-teachers-except-special-education",
+            "target_title": "小学教师",
+            "transition_distance": "较远，需补教师资格证据"
+          },
+          {
+            "capability_gaps": "学科教学与学生发展评估",
+            "shared_capabilities": "语言与课程内容理解",
+            "target_href": "/zh/career/jobs/middle-school-teachers-except-special-and-career-technical-education",
+            "target_slug": "middle-school-teachers-except-special-and-career-technical-education",
+            "target_title": "初中教师",
+            "transition_distance": "较远，需补教学资格证据"
+          },
+          {
+            "capability_gaps": "研究方法与数据收集分析",
+            "shared_capabilities": "研究阅读与资料整理",
+            "target_href": "/zh/career/jobs/social-science-research-assistants",
+            "target_slug": "social-science-research-assistants",
+            "target_title": "社会科学研究助理",
+            "transition_distance": "中等，需补研究方法证据"
+          }
+        ]
+      },
+      "onet_structured_fields_block": {
+        "availability": "published",
+        "heading": "O*NET 结构化字段",
+        "rows": [
+          {
+            "alternate_value": null,
+            "label": "研究输入",
+            "secondary_value": null,
+            "value": {
+              "$item": "interpreters-and-translators.profile.onet-structured-fields-block.7",
+              "block": "profile",
+              "copy_key": "career.item.onet-structured-fields-block",
+              "type": "prose"
+            }
+          }
+        ],
+        "schema_version": "career.onet_structured_fields.v1"
+      },
+      "personality_fit_block": {
+        "assessments": [
+          {
+            "answer": {
+              "$item": "interpreters-and-translators.fit.riasec-fit-block.6",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "riasec",
+            "label": "RIASEC",
+            "question": "用工作样本核对，而不是用标签替代判断。",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          },
+          {
+            "answer": {
+              "$item": "interpreters-and-translators.fit.riasec-fit-block.7",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "big-five",
+            "label": "大五人格",
+            "question": "用工作样本核对，而不是用标签替代判断。",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          },
+          {
+            "answer": {
+              "$item": "interpreters-and-translators.fit.riasec-fit-block.8",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "mbti",
+            "label": "MBTI",
+            "question": "用工作样本核对，而不是用标签替代判断。",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          },
+          {
+            "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "enneagram",
+            "label": "九型人格",
+            "question": "用工作样本核对，而不是用标签替代判断。",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          },
+          {
+            "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "iq",
+            "label": "认知能力",
+            "question": "用工作样本核对，而不是用标签替代判断。",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          },
+          {
+            "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "开始职业兴趣试验",
+            "evidence_level": "工作样本",
+            "id": "eq",
+            "label": "情绪能力",
+            "question": "用工作样本核对，而不是用标签替代判断。",
+            "signals": [
+              "可观察任务",
+              "过程记录"
+            ],
+            "watchout": "不能据此推导录用、资格或表现。"
+          }
+        ],
+        "boundary": "RIASEC、人格和能力工具不能替代资格、医疗、安全或雇主判断。",
+        "direct_answer": {
+          "$item": "interpreters-and-translators.fit.riasec-fit-block.2",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        },
+        "directions": [
+          {
+            "direction": "笔译与审校",
+            "fit_signals": "喜欢反复打磨译文并统一术语。",
+            "watchouts": "机器初稿不能直接交付。"
+          },
+          {
+            "direction": "现场口译",
+            "fit_signals": "能在压力下保持准确与临场应变。",
+            "watchouts": "需要声明无法准确传达的情形。"
+          },
+          {
+            "direction": "术语与质量管理",
+            "fit_signals": "愿意建立术语表并做一致性检查。",
+            "watchouts": "术语裁决按客户与行业规范。"
+          },
+          {
+            "direction": "跨文化与语境适配",
+            "fit_signals": "擅长处理语体、受众与文化差异。",
+            "watchouts": "不得替代专业结论。"
+          },
+          {
+            "direction": "本地化与技术支持",
+            "fit_signals": "愿意适配软件与文档的语言与文化。",
+            "watchouts": "需核对技术文档准确性。"
+          },
+          {
+            "direction": "保密与职业伦理",
+            "fit_signals": "愿意按准则保护客户与当事人信息。",
+            "watchouts": "保密要求按准则、法规与合同。"
+          }
+        ],
+        "heading": {
+          "$item": "interpreters-and-translators.fit.riasec-fit-block.1",
+          "block": "fit",
+          "copy_key": "career.item.riasec-fit-block",
+          "type": "prose"
+        },
+        "questions": [
+          {
+            "answer": "用安全工作样本和责任边界继续核对。",
+            "question": "喜欢哪些任务？"
+          },
+          {
+            "answer": "用安全工作样本和责任边界继续核对。",
+            "question": "能否承受工作节奏？"
+          },
+          {
+            "answer": "用安全工作样本和责任边界继续核对。",
+            "question": "是否愿意记录过程？"
+          },
+          {
+            "answer": "用安全工作样本和责任边界继续核对。",
+            "question": "能否在不确定时升级？"
+          },
+          {
+            "answer": "用安全工作样本和责任边界继续核对。",
+            "question": "是否理解授权边界？"
+          },
+          {
+            "answer": "用安全工作样本和责任边界继续核对。",
+            "question": "能否复盘失败？"
+          },
+          {
+            "answer": "用安全工作样本和责任边界继续核对。",
+            "question": "是否有可观察交付？"
+          },
+          {
+            "answer": "用安全工作样本和责任边界继续核对。",
+            "question": "下一步试验是什么？"
+          }
+        ],
+        "schema_version": "career.fit_decision_center.v1",
+        "signals": [
+          {
+            "body": {
+              "$item": "interpreters-and-translators.fit.riasec-fit-block.3",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "fit",
+            "label": "积极信号",
+            "tone": "positive"
+          },
+          {
+            "body": {
+              "$item": "interpreters-and-translators.fit.riasec-fit-block.4",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "caution",
+            "label": "谨慎条件",
+            "tone": "caution"
+          },
+          {
+            "body": {
+              "$item": "interpreters-and-translators.fit.riasec-fit-block.5",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "prose"
+            },
+            "id": "experiment",
+            "label": "试验动作",
+            "tone": "action"
+          }
+        ],
+        "source_links": [
+          {
+            "href": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "label": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "hhs-language-access",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "label": {
+              "$source": "hhs-language-access",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "ilo-genai",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "label": {
+              "$source": "ilo-genai",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "iso-17100",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "label": {
+              "$source": "iso-17100",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "mohrss-exam",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "label": {
+              "$source": "mohrss-exam",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "label": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "label": {
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "source-pack-onet-custom",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "label": {
+              "$source": "source-pack-onet-custom",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "source-pack-onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "label": {
+              "$source": "source-pack-onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "source-pack-onet-hot_tech",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "label": {
+              "$source": "source-pack-onet-hot_tech",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "source-pack-onet-industry",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "label": {
+              "$source": "source-pack-onet-industry",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "source-pack-onet-localcert",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "label": {
+              "$source": "source-pack-onet-localcert",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "source-pack-onet-localwages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "label": {
+              "$source": "source-pack-onet-localwages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "source-pack-onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "label": {
+              "$source": "source-pack-onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          },
+          {
+            "href": {
+              "$source": "us-courts",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "label": {
+              "$source": "us-courts",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "interpreters-and-translators.source-register.published.1"
+            },
+            "usage": "来源范围与限制"
+          }
+        ]
+      },
+      "primary_cta": {
+        "entry_surface": "career_job_detail",
+        "href": {
+          "$link": "interpreters-and-translators.navigation.links.1",
+          "block": "navigation",
+          "copy_key": "career.item.navigation-links",
+          "entry": "interpreters-and-translators.navigation.1",
+          "field": "url"
+        },
+        "label": "测我的职业兴趣是否适合口译与笔译人员",
+        "source_page_type": "career_job_detail",
+        "subject_key": {
+          "$subject": "canonical_slug"
+        },
+        "subject_kind": "career_job",
+        "target_action": "start_riasec_test",
+        "test_slug": "holland-career-interest-test-riasec"
+      },
+      "responsibilities_block": [
+        {
+          "$join": [
+            {
+              "$item": "interpreters-and-translators.profile.responsibilities-block.2",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$join": [
+            {
+              "$item": "interpreters-and-translators.profile.responsibilities-block.3",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        },
+        {
+          "$join": [
+            {
+              "$item": "interpreters-and-translators.profile.responsibilities-block.4",
+              "block": "profile",
+              "copy_key": "career.item.responsibilities-block",
+              "type": "list"
+            }
+          ],
+          "separator": "；"
+        }
+      ],
+      "riasec_fit_block": {
+        "fit_interest": "活动偏好只能帮助设计试验，不能判断资格或表现。",
+        "interest": "先观察真实任务中的兴趣、压力与协作体验。",
+        "riasec": "CAS（常规型—艺术型—社会型，O*NET 27-3091.00）",
+        "riasec_short": "不以单一代码决定职业。"
+      },
+      "source_card": {
+        "eeat_signals": {
+          "author": "FermatMind research workflow",
+          "source": {
+            "$source": "bls-ooh",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "name",
+            "item": "interpreters-and-translators.source-register.published.1"
+          },
+          "updated_at": {
+            "$source": "bls-ooh",
+            "block": "source-register",
+            "copy_key": "career.item.published-sources",
+            "field": "period",
+            "item": "interpreters-and-translators.source-register.published.1"
+          }
+        },
+        "note": "来源说明｜本页按来源原始范围与限制分别核对：O*NET 27-3091.00 提供精确职业身份、任务、工作活动与工作情境（兴趣代码 CAS、Job Zone 第四级，主要行业专业科学与技术服务以及教育服务）；美国工资与就业为 O*NET/BLS 精确职业口径（2025 年中位时薪 28.93 美元、中位年薪 60,170 美元、第 10/90 分位 37,070 / 103,660 美元；2024 年就业约 75,300 人、2034 年预计约 76,600 人、2024—2034 增长 2%、年均空缺约 6,900 个）；O*NET 摘要页未列 25/75 分位，本页不发布；语言服务标准与语言可及性要求只提供质量与保密框架，不替代语言判断；法庭口译等场景另有专门资格要求，本页只作边界说明；中国翻译专业资格与语言测试口径说明评价路径，不提供工资数值；中国大陆未建立与该精确职业对应的全国工资分布，本页不提供中国工资数值。所有来源均不建立中国映射、中国工资或法律授权。"
+      },
+      "work_context_block": {
+        "$item": "interpreters-and-translators.profile.work-context-block.5",
+        "block": "profile",
+        "copy_key": "career.item.work-context-block",
+        "type": "prose"
+      }
+    },
+    "contract_version": "career.detail.display.v1",
+    "locale": "zh-CN",
+    "native_items": [
+      {
+        "block": "source-register",
+        "copy_key": "career.item.published-sources",
+        "id": "interpreters-and-translators.source-register.published.1",
+        "location": "sources",
+        "type": "sources"
+      }
+    ],
+    "path": "/zh/career/jobs/interpreters-and-translators",
+    "section_titles": {
+      "ai-impact": "AI 影响",
+      "china-salary": "中国大陆薪资",
+      "direction-comparison": "相邻职业比较",
+      "fit": "适配信号",
+      "market-signals": "市场信号",
+      "navigation": "页面导航",
+      "path": "入行路径",
+      "profile": "职业定义与职责",
+      "quick-decision": "快速判断",
+      "risk": "风险与边界",
+      "source-register": "来源注册表",
+      "sources": "常见问题与边界",
+      "us-salary": "美国薪资"
+    }
+  },
   "fact_register": {
     "facts": [
       {
         "derivation": null,
-        "display_value": "60,170美元/年",
-        "fact_id": "wage-annual",
-        "market": "美国",
-        "measure": "年薪中位数",
-        "occupation_scope": "精确职业数据：Interpreters and Translators（O*NET 27-3091.00）",
-        "period": "2025 BLS OEWS data displayed by O*NET; accessed 2026-09-06",
-        "source_refs": [
-          "onet-wage"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "28.93美元/小时",
-        "fact_id": "wage-hourly",
-        "market": "美国",
-        "measure": "小时工资中位数",
-        "occupation_scope": "精确职业数据：Interpreters and Translators（O*NET 27-3091.00）",
-        "period": "2025 BLS OEWS data displayed by O*NET; accessed 2026-09-06",
-        "source_refs": [
-          "onet-wage"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "37,070—103,660美元/年",
-        "fact_id": "wage-range",
-        "market": "美国",
-        "measure": "年薪第10至第90百分位",
-        "occupation_scope": "精确职业数据：Interpreters and Translators（O*NET 27-3091.00）",
-        "period": "2025 BLS OEWS data displayed by O*NET; accessed 2026-09-06",
-        "source_refs": [
-          "onet-wage"
-        ]
-      },
-      {
-        "derivation": null,
-        "display_value": "73,900人",
-        "fact_id": "employment",
-        "market": "美国",
+        "display_value": "就业 约 75,300 人（2024 年，BLS 就业预测基期，27-3091.00 精确职业）",
+        "fact_id": "us-employment-2024",
+        "market": "US",
         "measure": "就业人数",
-        "occupation_scope": "精确职业数据：Interpreters and Translators（O*NET 27-3091.00）",
-        "period": "BLS OOH 2025 employment and 2025-2035 projections; accessed 2026-09-06",
+        "occupation_scope": "SOC 27-3091",
+        "period": "updated 2026; wage 2025; projection 2024-2034",
         "source_refs": [
           "bls-ooh"
         ]
       },
       {
         "derivation": null,
-        "display_value": "增长2%（2025—2035）",
-        "fact_id": "growth",
-        "market": "美国",
-        "measure": "预计就业变化",
-        "occupation_scope": "精确职业数据：Interpreters and Translators（O*NET 27-3091.00）",
-        "period": "BLS OOH 2025 employment and 2025-2035 projections; accessed 2026-09-06",
+        "display_value": "增长 2%（2024—2034，BLS 就业预测，27-3091.00 精确职业）",
+        "fact_id": "us-growth-2024-2034",
+        "market": "US",
+        "measure": "就业预测变化",
+        "occupation_scope": "SOC 27-3091",
+        "period": "updated 2026; wage 2025; projection 2024-2034",
         "source_refs": [
           "bls-ooh"
         ]
       },
       {
         "derivation": null,
-        "display_value": "6,000个/年",
-        "fact_id": "openings",
-        "market": "美国",
-        "measure": "预计年均空缺",
-        "occupation_scope": "精确职业数据：Interpreters and Translators（O*NET 27-3091.00）",
-        "period": "BLS OOH 2025 employment and 2025-2035 projections; accessed 2026-09-06",
+        "display_value": "预计年均岗位空缺 约 6,900 个（2024—2034，BLS 就业预测，27-3091.00 精确职业，含增长与替补）",
+        "fact_id": "us-openings-annual-2024-2034",
+        "market": "US",
+        "measure": "年均职位空缺",
+        "occupation_scope": "SOC 27-3091",
+        "period": "updated 2026; wage 2025; projection 2024-2034",
         "source_refs": [
           "bls-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "2034 年预计就业 约 76,600 人（BLS 就业预测，27-3091.00 精确职业）",
+        "fact_id": "us-projected-employment-2034",
+        "market": "US",
+        "measure": "预测就业人数",
+        "occupation_scope": "SOC 27-3091",
+        "period": "updated 2026; wage 2025; projection 2024-2034",
+        "source_refs": [
+          "bls-ooh"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "中位时薪 28.93 美元、中位年薪 60,170 美元（2025 年，BLS OEWS，27-3091.00 精确职业）",
+        "fact_id": "us-wage-median-2025",
+        "market": "US",
+        "measure": "年薪中位数",
+        "occupation_scope": "SOC 27-3091",
+        "period": "updated 2026; wage 2025; projection 2024-2034",
+        "source_refs": [
+          "source-pack-onet-localwages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "第 10 分位年薪 37,070 美元（2025 年，BLS OEWS，27-3091.00 精确职业）",
+        "fact_id": "us-wage-p10-2025",
+        "market": "US",
+        "measure": "年薪第10分位阈值",
+        "occupation_scope": "SOC 27-3091",
+        "period": "updated 2026; wage 2025; projection 2024-2034",
+        "source_refs": [
+          "source-pack-onet-localwages"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "第 90 分位年薪 103,660 美元（2025 年，BLS OEWS，27-3091.00 精确职业）",
+        "fact_id": "us-wage-p90-2025",
+        "market": "US",
+        "measure": "年薪第90分位阈值",
+        "occupation_scope": "SOC 27-3091",
+        "period": "updated 2026; wage 2025; projection 2024-2034",
+        "source_refs": [
+          "source-pack-onet-localwages"
         ]
       }
     ]
@@ -8824,39 +11237,43 @@
       "availability": "missing",
       "fact_ref": null,
       "key": "ai",
-      "label": "AI 任务暴露"
+      "label": "AI 任务暴露（本页不评分）"
     },
-    "badges": [],
+    "badges": [
+      "口译与笔译人员 · 准确性、术语与保密边界",
+      "来源范围 · 统计口径 · 人工复核",
+      "中国大陆精确职业工资缺口按证据保留"
+    ],
     "metrics": [
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-wage-median-2025",
         "key": "us_pay",
-        "label": "美国薪资参考"
-      },
-      {
-        "availability": "missing",
-        "fact_ref": null,
-        "key": "us_growth",
-        "label": "美国就业增长"
+        "label": "美国年薪中位数（2025，精确职业口径）"
       },
       {
         "availability": "available",
-        "fact_ref": "employment",
-        "key": "us_employment",
-        "label": "美国在岗人数"
+        "fact_ref": "us-growth-2024-2034",
+        "key": "us_growth",
+        "label": "美国就业增长（2024—2034，2%）"
       },
       {
-        "availability": "missing",
-        "fact_ref": null,
+        "availability": "available",
+        "fact_ref": "us-employment-2024",
+        "key": "us_employment",
+        "label": "美国在岗人数（2024）"
+      },
+      {
+        "availability": "available",
+        "fact_ref": "us-openings-annual-2024-2034",
         "key": "us_openings",
-        "label": "美国年均职位空缺"
+        "label": "美国年均职位空缺（2024—2034）"
       },
       {
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "中国大陆薪资参考"
+        "label": "中国大陆精确职业工资（未取得）"
       }
     ]
   },
@@ -8864,17 +11281,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "口译与笔译人员对应O*NET 27-3091.00：把口语、手语或书面文本从一种语言转换为另一种语言，并围绕受众、术语、含义、数字、专名、版本与机密要求完成复核和交付。"
+      "text": "口译与笔译人员做什么、如何入行与训练、有哪些伦理与保密边界，以及 AI 会改变哪些任务。本页对应 O*NET-SOC 27-3091.00，兴趣代码 CAS、Job Zone 第四级；美国工资与就业为 O*NET/BLS 精确职业口径，中国大陆工资缺口按证据登记。"
     },
     "title": {
       "availability": "available",
-      "text": "口译与笔译人员"
+      "text": "口译与笔译人员职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "5ae4825cffae65982ccf0004a95fe9f4a11cb17c03ee834e134d7e9873818226",
+  "source_content_sha256": "d26485f1fb9fa614319e027c58b2e4120eb2caeaddce84728029fa1c62049190",
   "subject": {
     "canonical_slug": "interpreters-and-translators",
     "name": "口译与笔译人员",
-    "summary": "口译与笔译人员对应O*NET 27-3091.00：把口语、手语或书面文本从一种语言转换为另一种语言，并围绕受众、术语、含义、数字、专名、版本与机密要求完成复核和交付。"
+    "summary": "口译与笔译人员把口头、手语或书面信息从一种语言转换为另一种语言，尽量保留内容、语境、语体和用途；口译是实时或近实时传递，笔译交付可审校文本。工作包括确认语言对与用途、收集背景与术语、转换与初稿、审校与术语统一、按用途交付并遵守保密要求。美国工资与就业采用 O*NET/BLS 27-3091.00 精确职业口径（2025 年中位年薪 60,170 美元；2024 年就业约 75,300 人、2024—2034 增长 2%、年均空缺约 6,900 个）；中国大陆精确职业工资未取得，按可见缺口登记。"
   }
 }

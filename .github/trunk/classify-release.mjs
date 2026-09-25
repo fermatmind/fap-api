@@ -63,7 +63,7 @@ export function applyCareerContentOnly(classification, careerReceipt) {
   classification.operations.career_content_only = careerContentOnly;
   classification.operations.career_first_publish = careerFirstPublish;
   if (careerContentOnly || careerFirstPublish) classification.operations.a08_scoped_checks = false;
-  if (careerFirstPublish || ['BODY_ELIGIBILITY_CHANGED', 'BODY_ELIGIBILITY_UNPROVEN'].includes(careerReceipt.reason)) {
+  if (careerFirstPublish || ['BODY_ELIGIBILITY_CHANGED', 'BODY_ELIGIBILITY_UNPROVEN', 'MANIFEST_IDENTITY_CHANGED'].includes(careerReceipt.reason)) {
     classification.flags.seo_discoverability = true;
     if (!classification.categories.includes('seo_discoverability')) {
       classification.categories.push('seo_discoverability');

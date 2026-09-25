@@ -52,6 +52,17 @@ final class CareerCurrentIdentityTest extends TestCase
         self::assertSame('unmatched query', $identity->canonicalQuery('unmatched query'));
     }
 
+    public function test_distinct_fermatmind_careers_keep_their_own_public_identity(): void
+    {
+        $identity = app(CareerCurrentIdentity::class);
+        $reader = app(\App\Domain\Career\Display\CareerContentV3CanonicalReader::class);
+        foreach (['insulation-workers', 'insulation-workers-mechanical', 'librarians', 'librarians-and-media-collections-specialists'] as $slug) {
+            self::assertFalse($identity->isAlias($slug));
+            self::assertSame($slug, $identity->canonicalSlug($slug));
+            self::assertSame($slug, $reader->page($slug, 'zh-CN')['subject']['canonical_slug']);
+        }
+    }
+
     public function test_public_scope_overrides_stale_names_codes_and_statistics_without_mutating_input(): void
     {
         $slug = 'drywall-and-ceiling-tile-installers-and-tapers';
@@ -136,7 +147,7 @@ final class CareerCurrentIdentityTest extends TestCase
             [$slug => array_replace($valid, ['occupations' => [$valid['occupations'][0], $valid['occupations'][0]]])],
             [$slug => array_replace($valid, ['source_route_sha256' => 'invalid'])],
             ['missing-target' => $valid],
-            ['insulation-workers' => $valid],
+            ['preschool-teachers' => $valid],
         ] as $scopes) {
             try {
                 $package->validateIdentityScopes(array_replace($manifest, ['identity_scopes' => $scopes]));
