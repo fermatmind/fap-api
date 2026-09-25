@@ -69,6 +69,14 @@ test('successful production activation remains the baseline after an independent
   assert.deepEqual(baseline, { sha: head, runId: 10 });
 });
 
+test('failed production activation retains the older accepted baseline', async () => {
+  const baseline = await productionBaseline({
+    listRuns: async () => [{ ...run(10, head), conclusion: 'failure' }, run(7)],
+    listJobs: async (id) => [job(id === 10 ? 'failure' : 'success')],
+  });
+  assert.deepEqual(baseline, { sha: prod, runId: 7 });
+});
+
 test('timing-only or incomplete activation evidence is rejected', async () => {
   for (const jobs of [[], [job(), job()], [{ ...job(), steps: [{ name: 'Persist push-to-production timing receipt', conclusion: 'success' }] }]]) {
     await assert.rejects(productionBaseline({ listRuns: async () => [run(7)], listJobs: async () => jobs }));

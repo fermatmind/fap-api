@@ -24,6 +24,9 @@ export async function productionBaseline({ listRuns, listJobs }) {
       const job = production[0];
       // Successful docs-only workflows have a skipped production job.
       if (job.conclusion === 'skipped') continue;
+      // A failed preactivation or publisher release did not become the active
+      // production baseline. Keep the older accepted runtime in the diff.
+      if (run.conclusion === 'failure' && job.status === 'completed' && job.conclusion === 'failure') continue;
       if (job.status !== 'completed' || job.conclusion !== 'success'
         || job.steps?.filter((step) => step.name === activationStep && step.conclusion === 'success').length !== 1) {
         throw new Error('Successful workflow lacks production activation evidence');
