@@ -10,7 +10,8 @@ use Throwable;
 
 final class CareerColdCacheDiscoverabilityFailure extends RuntimeException
 {
-    public function __construct(public readonly string $safeCode)
+    /** @param array<string, mixed> $details */
+    public function __construct(public readonly string $safeCode, public readonly array $details = [])
     {
         parent::__construct($safeCode);
     }
@@ -275,11 +276,16 @@ final class CareerColdCacheDiscoverabilityValidator
         }
 
         if ($phase === 'post_sitemap') {
-            self::assertSameSnapshot(
-                self::requiredSnapshot($snapshot, 'discoverability'),
-                self::requiredSnapshot($snapshot, 'sitemap'),
-                'SITEMAP_DISCOVERABILITY_MISMATCH',
-            );
+            $discoverability = self::requiredSnapshot($snapshot, 'discoverability');
+            $sitemap = self::requiredSnapshot($snapshot, 'sitemap');
+            if (! self::sameSnapshot($discoverability, $sitemap)) {
+                throw new CareerColdCacheDiscoverabilityFailure('SITEMAP_DISCOVERABILITY_MISMATCH', [
+                    'discoverability_rows' => (int) ($discoverability['row_count'] ?? 0),
+                    'sitemap_rows' => (int) ($sitemap['row_count'] ?? 0),
+                    'missing_rows' => array_slice(array_values(array_diff($discoverability['rows'] ?? [], $sitemap['rows'] ?? [])), 0, 10),
+                    'extra_rows' => array_slice(array_values(array_diff($sitemap['rows'] ?? [], $discoverability['rows'] ?? [])), 0, 10),
+                ]);
+            }
         }
 
         return [
@@ -364,6 +370,7 @@ final class CareerColdCacheDiscoverabilityValidator
             'row_count' => count($rows),
             'slug_set_sha256' => self::setHash($unionSlugs),
             'row_set_sha256' => self::setHash($rows),
+            'rows' => $rows,
             'locales' => [
                 'en' => [
                     'count' => count($slugSets['en']),
@@ -419,12 +426,18 @@ final class CareerColdCacheDiscoverabilityValidator
     /** @param array<string, mixed> $expected @param array<string, mixed> $actual */
     private static function assertSameSnapshot(array $expected, array $actual, string $failure): void
     {
-        if ((int) ($expected['slug_count'] ?? -1) !== (int) ($actual['slug_count'] ?? -2)
-            || (int) ($expected['row_count'] ?? -1) !== (int) ($actual['row_count'] ?? -2)
-            || ! hash_equals((string) ($expected['slug_set_sha256'] ?? ''), (string) ($actual['slug_set_sha256'] ?? 'x'))
-            || ! hash_equals((string) ($expected['row_set_sha256'] ?? ''), (string) ($actual['row_set_sha256'] ?? 'x'))) {
+        if (! self::sameSnapshot($expected, $actual)) {
             self::fail($failure);
         }
+    }
+
+    /** @param array<string, mixed> $expected @param array<string, mixed> $actual */
+    private static function sameSnapshot(array $expected, array $actual): bool
+    {
+        return (int) ($expected['slug_count'] ?? -1) === (int) ($actual['slug_count'] ?? -2)
+            && (int) ($expected['row_count'] ?? -1) === (int) ($actual['row_count'] ?? -2)
+            && hash_equals((string) ($expected['slug_set_sha256'] ?? ''), (string) ($actual['slug_set_sha256'] ?? 'x'))
+            && hash_equals((string) ($expected['row_set_sha256'] ?? ''), (string) ($actual['row_set_sha256'] ?? 'x'));
     }
 
     /** @param array<string, mixed> $expected @param array<string, mixed> $actual */
@@ -531,7 +544,7 @@ final class CareerColdCacheDiscoverabilityRunner
 
             return 0;
         } catch (CareerColdCacheDiscoverabilityFailure $failure) {
-            self::emit(self::failureReceipt($phase, $failure->safeCode));
+            self::emit(self::failureReceipt($phase, $failure->safeCode, $failure->details));
 
             return 1;
         } catch (Throwable) {
@@ -575,14 +588,15 @@ final class CareerColdCacheDiscoverabilityRunner
         return $app;
     }
 
-    /** @return array<string, string> */
-    private static function failureReceipt(string $phase, string $safeCode): array
+    /** @param array<string, mixed> $details @return array<string, mixed> */
+    private static function failureReceipt(string $phase, string $safeCode, array $details = []): array
     {
         return [
             'contract_version' => CareerColdCacheDiscoverabilityValidator::CONTRACT_VERSION,
             'status' => 'failed',
             'phase' => in_array($phase, ['authority', 'pre_sitemap', 'post_sitemap'], true) ? $phase : 'invalid',
             'error_code' => $safeCode,
+            ...($details === [] ? [] : ['difference' => $details]),
         ];
     }
 

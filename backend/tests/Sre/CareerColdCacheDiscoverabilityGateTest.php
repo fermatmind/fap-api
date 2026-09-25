@@ -88,6 +88,27 @@ final class CareerColdCacheDiscoverabilityGateTest extends TestCase
     }
 
     #[Test]
+    public function sitemap_mismatch_reports_bounded_public_row_difference(): void
+    {
+        $snapshot = $this->completePreSitemapSnapshot();
+        $snapshot['sitemap'] = CareerColdCacheDiscoverabilityValidator::sitemapSnapshot([
+            'ok' => true,
+            'source' => 'backend_sitemap_generator',
+            'items' => [['loc' => 'https://fermatmind.com/en/career/jobs/actuaries']],
+        ]);
+
+        try {
+            CareerColdCacheDiscoverabilityValidator::validate('post_sitemap', $snapshot);
+            self::fail('Expected sitemap mismatch.');
+        } catch (CareerColdCacheDiscoverabilityFailure $failure) {
+            self::assertSame('SITEMAP_DISCOVERABILITY_MISMATCH', $failure->safeCode);
+            self::assertSame($snapshot['discoverability']['row_count'], $failure->details['discoverability_rows']);
+            self::assertSame(1, $failure->details['sitemap_rows']);
+            self::assertContains('accountants-and-auditors|en', $failure->details['missing_rows']);
+        }
+    }
+
+    #[Test]
     public function aligned_dynamic_cohort_passes_without_a_hardcoded_slug_or_total_url_count(): void
     {
         $snapshot = $this->completePreSitemapSnapshot();
