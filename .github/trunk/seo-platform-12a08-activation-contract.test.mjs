@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {mkdtempSync,writeFileSync,readFileSync,rmSync,mkdirSync} from 'node:fs';
+import {mkdtempSync,writeFileSync,readFileSync,rmSync,mkdirSync,chmodSync} from 'node:fs';
 import {tmpdir} from 'node:os';
-import {execFileSync} from 'node:child_process';
+import {execFileSync,spawnSync} from 'node:child_process';
 import {fingerprint,scopeFor,mayCarry,MISSIONS,scopedReceipt,CHECKS,digest} from './seo-platform-12a08-activation.mjs';
 import {verifyState} from './seo-platform-12a08-release.mjs';
 import {classifyPaths} from './classify-paths.mjs';
@@ -88,6 +88,44 @@ test('existing workflows publish completed scoped evidence without runtime opera
  assert.match(evidence,/actions\/jobs\/\$\{fullJob\.id\}\/logs/);
  assert.match(evidence,/\['api','--allow-escape-sequences',`repos\/\$\{repo\}\/actions\/jobs/);
  assert.doesNotMatch(evidence,/--log-failed/);
+});
+test('A08 activation gate skips only unavailable evidence and fails closed otherwise',()=>{
+ const deploy=readFileSync(new URL('../workflows/deploy.yml',import.meta.url),'utf8');
+ const a08=deploy.split('  a08-evidence:\n')[1].split('\n  docs-only:')[0];
+ const block=a08.match(/      - name: Build scoped activation v2 with pending real source acceptance\n        id: a08_activation\n        run: \|\n((?: {10}.*\n)+)/)?.[1];
+ assert.ok(block,'activation build step must expose a guarded run block');
+ const script=block.split('\n').filter(Boolean).map(line=>line.slice(10)).join('\n');
+ for(const name of ['Start existing production transport','Publish validated data-only evidence and verify unchanged runtime',
+  'Prepare authorized M1 controlled transition','Prepare authorized M2 controlled transition','Prepare authorized M3 controlled transition']) {
+  const step=a08.split(`      - name: ${name}\n`)[1]?.split('\n      - ')[0];
+  assert.match(step ?? '',/if: steps\.a08_activation\.outputs\.ready == 'true'/,`${name} must share the activation gate`);
+ }
+ for(const index of [1,2,3]) {
+  const gate=`if: steps.a08_activation.outputs.ready == 'true' && steps.a08_m${index}.outputs.ready == 'true'`;
+  assert.equal(a08.split(gate).length-1,3,`M${index} execute, artifact and bind must share the activation gate`);
+ }
+ assert.match(a08,/if: steps\.a08_activation\.outputs\.ready == 'true'\n        with:\n          name: seo-council-a08-activation-/);
+ assert.doesNotMatch(a08,/hashFiles\('activation.json'\)/);
+ const dir=mkdtempSync(`${tmpdir()}/a08-build-gate-`);
+ const stub=`#!/usr/bin/env bash\ncase "$MOCK_A08_CASE" in\n  unavailable) echo A08_EVIDENCE_UNAVAILABLE_NO_AUTHORIZATION;;\n  inconsistent) printf 'unexpected' > activation.json; echo A08_EVIDENCE_UNAVAILABLE_NO_AUTHORIZATION;;\n  ready) printf '{"schema_version":"test"}' > activation.json; printf 'digest' > activation.json.sha256;;\n  partial) printf '{"schema_version":"test"}' > activation.json;;\n  unexpected) echo UNEXPECTED_OUTPUT;;\n  error) exit 17;;\nesac\n`;
+ try {
+  writeFileSync(`${dir}/node`,stub);chmodSync(`${dir}/node`,0o755);
+  const run=kind=>{
+   const root=mkdtempSync(`${dir}/${kind}-`), output=`${root}/output`, summary=`${root}/summary`;
+   writeFileSync(output,'');
+   const result=spawnSync('bash',['-c',script],{cwd:root,encoding:'utf8',env:{...process.env,
+    PATH:`${dir}:${process.env.PATH}`,MOCK_A08_CASE:kind,DEPLOY_SHA:'a'.repeat(40),GITHUB_OUTPUT:output,GITHUB_STEP_SUMMARY:summary}});
+   return {result,output:readFileSync(output,'utf8'),summary:kind==='unavailable'?readFileSync(summary,'utf8'):null};
+  };
+  const unavailable=run('unavailable');
+  assert.equal(unavailable.result.status,0);assert.equal(unavailable.output,'ready=false\n');
+  assert.match(unavailable.result.stdout,/::notice title=A08 skipped::/);
+  assert.match(unavailable.summary,/SKIPPED_NO_AUTHORIZED_ACTIVATION/);
+  const ready=run('ready');assert.equal(ready.result.status,0);assert.equal(ready.output,'ready=true\n');
+  for(const kind of ['partial','empty','inconsistent','unexpected','error']) {
+   const failed=run(kind);assert.notEqual(failed.result.status,0,`${kind} must fail closed`);assert.equal(failed.output,'');
+  }
+ } finally {rmSync(dir,{recursive:true,force:true});}
 });
 test('Nightly evidence accepts both Pest paths, deduplicates, and stays fail-closed',async()=>{
  const {assessNightly,completedNightlyFullJob,parseLegacyNightlyFailures,parseJUnitNightlyFailures,selectNightlyArtifact}=await import('./seo-platform-12a08-release.mjs');
