@@ -123,7 +123,7 @@ final class Platform12RuntimeControl
                 return $this->status();
             }
             $store = $this->store();
-            $changed = $store->lock(self::CACHE_KEY.':lock', 5)->get(function () use ($store, $pause, $missions, $expectedGeneration): bool {
+            $transition = function () use ($store, $pause, $missions, $expectedGeneration): bool {
                 $old = $store->get(self::CACHE_KEY);
                 if (! $pause && $this->prerequisite() !== 'READY') {
                     return false;
@@ -159,7 +159,12 @@ final class Platform12RuntimeControl
                     'query_key_version' => $pause ? ($old['query_key_version'] ?? null) : config('seo_agent_evidence.query_hmac_key_version'),
                     'generation' => bin2hex(random_bytes(16)),
                 ]);
-            });
+            };
+            // A scheduled tick may briefly hold this lock during an A08 CAS
+            // transition. Only the generation-bound path waits; all paths
+            // still validate the expected generation after acquiring it.
+            $lock = $store->lock(self::CACHE_KEY.':lock', $expectedGeneration === null ? 5 : 60);
+            $changed = $expectedGeneration === null ? $lock->get($transition) : $lock->block(5, $transition);
 
             return $changed === true ? $this->status()
                 : ['state' => 'CONTROL_WRITE_HOLD', 'computation_enabled' => false, 'business_write_enabled' => false];

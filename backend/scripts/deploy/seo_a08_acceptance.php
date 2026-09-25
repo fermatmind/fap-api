@@ -53,7 +53,15 @@ try {
     }
     $state = $control->change(false, $selection, $expected);
     if (($state['state'] ?? null) !== 'ACTIVE_READ_ONLY') {
-        throw new RuntimeException('A08_CONCURRENT_CONTROL_CHANGE');
+        if (($state['state'] ?? null) === 'CONTROL_WRITE_HOLD'
+            && $control->status()['generation'] !== $expected) {
+            throw new RuntimeException('A08_CONCURRENT_CONTROL_CHANGE');
+        }
+        throw new RuntimeException(match ($state['state'] ?? null) {
+            'CONTROL_WRITE_HOLD' => 'A08_CONTROL_WRITE_HOLD',
+            'SHARED_CACHE_HOLD' => 'A08_SHARED_CACHE_HOLD',
+            default => 'A08_CONTROL_TRANSITION_HOLD',
+        });
     }
     if ($mode === 'enable') {
         if (array_diff($required, $state['effective_mission_ids']) !== []

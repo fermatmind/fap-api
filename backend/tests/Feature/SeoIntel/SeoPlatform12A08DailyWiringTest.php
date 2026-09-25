@@ -285,6 +285,33 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
         $this->assertSame([], $runtime->status()['effective_mission_ids']);
     }
 
+    public function test_contended_control_lock_fails_closed_and_stale_generation_cannot_rebind(): void
+    {
+        $this->startAtSlot();
+        $this->fixtureReader();
+        $runtime = app(Platform12RuntimeControl::class);
+        $before = $runtime->change(false, [Platform12DailyMissionSet::IDS[0]]);
+        $generation = $before['generation'];
+        CarbonImmutable::setTestNow();
+        \Carbon\Carbon::setTestNow();
+        $lock = Cache::store('array')->lock(Platform12RuntimeControl::CACHE_KEY.':lock', 60);
+        $this->assertTrue($lock->get());
+        try {
+            $this->assertSame('SHARED_CACHE_HOLD', $runtime->change(false,
+                [Platform12DailyMissionSet::IDS[0], Platform12DailyMissionSet::IDS[1]], $generation)['state']);
+            $this->assertSame($generation, $runtime->status()['generation']);
+        } finally {
+            $lock->release();
+        }
+        $this->assertSame('CONTROL_WRITE_HOLD', $runtime->change(false,
+            [Platform12DailyMissionSet::IDS[0], Platform12DailyMissionSet::IDS[1]], str_repeat('0', 32))['state']);
+        $this->assertSame($generation, $runtime->status()['generation']);
+        $after = $runtime->change(false,
+            [Platform12DailyMissionSet::IDS[0], Platform12DailyMissionSet::IDS[1]], $generation);
+        $this->assertSame('ACTIVE_READ_ONLY', $after['state']);
+        $this->assertNotSame($generation, $after['generation']);
+    }
+
     public function test_later_enabled_mission_uses_own_first_time_and_cursor_without_pre_enable_misses(): void
     {
         $this->startAtSlot();
