@@ -2804,6 +2804,7 @@ if ((int) getenv("SEO_INTEL_STATUS") === 42) {
         && ($live["requested_count"] ?? 0) <= 10
         && ($live["concurrency"] ?? 0) <= 4
         && ($live["timeout_seconds"] ?? 0) <= 10
+        && ($live["sitemap_timeout_seconds"] ?? null) === 120
         && ($live["max_retries"] ?? 0) <= 1
         && ($live["raw_url_emitted"] ?? null) === false
         && ($live["response_body_emitted"] ?? null) === false;
