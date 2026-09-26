@@ -227,6 +227,9 @@ final class NormalizeTranslationSourceStatus extends Command
         if (! hash_equals($expectedHash, (string) $record->source_version_hash)) {
             $errors[] = 'source_hash_drift';
         }
+        if ($type === 'article' && ! hash_equals((string) $record->source_version_hash, $record->computeSourceVersionHash())) {
+            $errors[] = 'source_row_hash_drift';
+        }
         if (! $after && (string) $record->updated_at?->toDateTimeString() !== trim((string) $this->option('expected-updated-at'))) {
             $errors[] = 'source_updated_at_drift';
         }
@@ -252,6 +255,11 @@ final class NormalizeTranslationSourceStatus extends Command
             || ! in_array((string) $revision->revision_status, ['approved', 'published'], true)
             || ! in_array((int) ($type === 'article' ? $revision->source_article_id : $revision->source_content_id), [0, $id], true)) {
             $errors[] = 'source_revision_identity_drift';
+        } elseif (! hash_equals($expectedHash, (string) $revision->source_version_hash)) {
+            $errors[] = 'source_revision_hash_drift';
+        } elseif (filled($revision->translated_from_version_hash)
+            && ! hash_equals($expectedHash, (string) $revision->translated_from_version_hash)) {
+            $errors[] = 'source_revision_provenance_drift';
         }
 
         return [

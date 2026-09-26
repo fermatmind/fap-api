@@ -174,6 +174,48 @@ final class NormalizeTranslationSourceStatusCommandTest extends TestCase
         $this->assertSame('published', $source->fresh()->translation_status);
     }
 
+    public function test_revision_hash_or_provenance_drift_refuses_normalization(): void
+    {
+        foreach (['article', 'content_page'] as $contentType) {
+            [$source, $revision] = $this->seedLegacySource($contentType);
+            $revision->forceFill(['source_version_hash' => str_repeat('a', 64)])->saveQuietly();
+            [$hashExit, $hashResult] = $this->runCommand($this->commandOptions($contentType, $source, $revision, [
+                '--dry-run' => true,
+            ]));
+            $this->assertSame(1, $hashExit);
+            $this->assertContains('source_revision_hash_drift', $hashResult['errors']);
+
+            $revision->forceFill([
+                'source_version_hash' => $source->source_version_hash,
+                'translated_from_version_hash' => str_repeat('b', 64),
+            ])->saveQuietly();
+            [$provenanceExit, $provenanceResult] = $this->runCommand($this->commandOptions($contentType, $source, $revision, [
+                '--execute' => true,
+                '--confirm' => "Normalize {$contentType} source {$source->id} in group {$source->translation_group_id}.",
+            ]));
+            $this->assertSame(1, $provenanceExit);
+            $this->assertContains('source_revision_provenance_drift', $provenanceResult['errors']);
+            $this->assertSame('published', $source->fresh()->translation_status);
+        }
+        $this->assertDatabaseMissing('audit_logs', ['action' => 'translation_source_status_normalized']);
+    }
+
+    public function test_article_row_hash_must_match_its_current_content(): void
+    {
+        [$source, $revision] = $this->seedLegacySource('article');
+        DB::table('articles')->where('id', $source->id)->update(['content_md' => 'Changed without a new source version']);
+
+        [$exit, $result] = $this->runCommand($this->commandOptions('article', $source, $revision, [
+            '--execute' => true,
+            '--confirm' => "Normalize article source {$source->id} in group {$source->translation_group_id}.",
+        ]));
+
+        $this->assertSame(1, $exit);
+        $this->assertContains('source_row_hash_drift', $result['errors']);
+        $this->assertSame('published', $source->fresh()->translation_status);
+        $this->assertDatabaseMissing('audit_logs', ['action' => 'translation_source_status_normalized']);
+    }
+
     /** @return array{Article|ContentPage,ArticleTranslationRevision|CmsTranslationRevision} */
     private function seedLegacySource(string $contentType): array
     {
