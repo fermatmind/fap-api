@@ -13,6 +13,7 @@ use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use RuntimeException;
 use Throwable;
 
@@ -114,8 +115,11 @@ final class LinkContentPageTranslationSource extends Command
                 });
                 try {
                     Cache::forget('content_page:v1:0:'.$after['target']['slug'].':en');
-                } catch (Throwable) {
-                    // A cache failure cannot reverse a committed identity repair.
+                } catch (Throwable $exception) {
+                    Log::warning('translation_content_page_source_link_cache_invalidation_failed', [
+                        'target_id' => (int) ($after['target']['id'] ?? 0),
+                        'exception_type' => $exception::class,
+                    ]);
                 }
             } catch (Throwable) {
                 $errors[] = 'execute_or_readback_failed';

@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 /**
@@ -124,8 +125,11 @@ final class NormalizeTranslationSourceStatus extends Command
                 if ((string) $this->option('content-type') === 'content_page') {
                     try {
                         Cache::forget('content_page:v1:0:'.$after['record']['slug'].':'.$after['record']['locale']);
-                    } catch (Throwable) {
-                        // A cache failure cannot reverse a committed status repair; live readback still applies.
+                    } catch (Throwable $exception) {
+                        Log::warning('translation_source_status_cache_invalidation_failed', [
+                            'source_id' => (int) ($after['record']['id'] ?? 0),
+                            'exception_type' => $exception::class,
+                        ]);
                     }
                 }
             } catch (Throwable $exception) {
