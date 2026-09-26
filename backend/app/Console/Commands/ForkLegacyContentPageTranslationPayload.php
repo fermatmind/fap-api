@@ -229,11 +229,18 @@ final class ForkLegacyContentPageTranslationPayload extends Command
             || (string) $target->getRawOriginal('updated_at') !== (string) $this->option('target-updated-at')) {
             $errors[] = 'row_lock_mismatch';
         }
+        $revisionGroup = (string) $revision->translation_group_id;
+        $currentGroup = (string) $target->translation_group_id;
+        $legacyGroup = 'content_page-'.$sourceId;
+        $revisionGroupMatches = $revisionGroup === $currentGroup
+            || ($revisionGroup === $legacyGroup
+                && (int) $revision->source_content_id === $sourceId
+                && (string) $revision->source_locale === 'zh-CN');
         if ((int) $target->working_revision_id !== $revisionId
             || (int) $target->published_revision_id !== $revisionId
             || (int) $revision->org_id !== 0 || (string) $revision->content_type !== 'content_page'
             || (int) $revision->content_id !== $targetId
-            || (string) $revision->translation_group_id !== (string) $target->translation_group_id
+            || ! $revisionGroupMatches
             || (string) $revision->locale !== 'en'
             || (string) $revision->revision_status !== CmsTranslationRevision::STATUS_PUBLISHED
             || (string) $revision->getRawOriginal('updated_at') !== (string) $this->option('revision-updated-at')) {

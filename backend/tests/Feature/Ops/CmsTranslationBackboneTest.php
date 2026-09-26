@@ -181,7 +181,11 @@ final class CmsTranslationBackboneTest extends TestCase
         $oldPayload = $revision->payload_json;
         unset($oldPayload['body_md'], $oldPayload['seo_description']);
         $oldPayload['seo_title'] = 'Old published SEO title';
-        $revision->forceFill(['payload_json' => $oldPayload])->saveQuietly();
+        $legacyGroup = 'content_page-'.$source->id;
+        $revision->forceFill([
+            'payload_json' => $oldPayload,
+            'translation_group_id' => $legacyGroup,
+        ])->saveQuietly();
         $revision->refresh();
         $target->refresh();
         $adapter = app(SiblingTranslationWorkflowService::class)->adapter('content_page');
@@ -204,6 +208,20 @@ final class CmsTranslationBackboneTest extends TestCase
             '--row-payload-hash' => $hash($rowPayload),
             '--json' => true,
         ];
+
+        $revision->forceFill(['translation_group_id' => 'unrelated-group'])->saveQuietly();
+        $options['--revision-updated-at'] = (string) $revision->fresh()->getRawOriginal('updated_at');
+        $this->assertSame(1, Artisan::call('translation:fork-content-page-payload', $options + ['--dry-run' => true]));
+        $this->assertContains('revision_lock_or_identity_mismatch', json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR)['errors']);
+
+        $revision->forceFill(['translation_group_id' => $legacyGroup, 'source_content_id' => null])->saveQuietly();
+        $options['--revision-updated-at'] = (string) $revision->fresh()->getRawOriginal('updated_at');
+        $this->assertSame(1, Artisan::call('translation:fork-content-page-payload', $options + ['--dry-run' => true]));
+        $this->assertContains('revision_lock_or_identity_mismatch', json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR)['errors']);
+
+        $revision->forceFill(['source_content_id' => (int) $source->id])->saveQuietly();
+        $revision->refresh();
+        $options['--revision-updated-at'] = (string) $revision->getRawOriginal('updated_at');
 
         DB::connection()->enableQueryLog();
         DB::connection()->flushQueryLog();
