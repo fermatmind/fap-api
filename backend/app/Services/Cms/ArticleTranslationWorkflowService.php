@@ -387,6 +387,10 @@ final class ArticleTranslationWorkflowService
             $blockers[] = 'source canonical invalid';
         } else {
             $blockers = array_merge($blockers, $this->translationScopeBlockers($target, $source));
+            if ($workingRevision instanceof ArticleTranslationRevision
+                && (! filled($source->source_version_hash) || ! filled($workingRevision->translated_from_version_hash))) {
+                $blockers[] = 'translation provenance unknown';
+            }
             if ((int) $target->source_article_id !== (int) $source->id) {
                 $blockers[] = 'source_article_id mismatch';
             }

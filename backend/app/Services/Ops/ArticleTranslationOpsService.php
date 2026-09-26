@@ -154,16 +154,20 @@ final class ArticleTranslationOpsService
         $workingRevision = $article->workingRevision;
         $publishedRevision = $article->publishedRevision;
         $status = (string) ($workingRevision?->revision_status ?? $article->translation_status ?? Article::TRANSLATION_STATUS_SOURCE);
-        $translatedFromHash = $workingRevision?->translated_from_version_hash ?: $article->translated_from_version_hash;
+        $translatedFromHash = $workingRevision?->translated_from_version_hash;
         $isSource = $article->isSourceArticle()
             || ($source instanceof Article && (int) $article->id === (int) $source->id);
+        $isWorkingKnown = $isSource || ($workingRevision instanceof ArticleTranslationRevision
+            && filled($sourceHash) && filled($translatedFromHash));
         $isWorkingStale = ! $isSource
             && filled($sourceHash)
             && filled($translatedFromHash)
             && ! hash_equals((string) $sourceHash, (string) $translatedFromHash);
         $isArticlePublishedPublic = (string) $article->status === 'published' && (bool) $article->is_public;
         $isPublished = $isArticlePublishedPublic && $publishedRevision instanceof ArticleTranslationRevision;
-        $publishedHash = $publishedRevision?->translated_from_version_hash ?: $article->translated_from_version_hash;
+        $publishedHash = $publishedRevision?->translated_from_version_hash;
+        $isPublishedKnown = $isSource || (filled($publishedSourceHash) && filled($publishedHash));
+        $isFreshnessKnown = $isWorkingKnown && (! $isPublished || $isPublishedKnown);
         $isPublishedStale = ! $isSource && $isPublished && filled($publishedSourceHash) && filled($publishedHash)
             && ! hash_equals((string) $publishedSourceHash, (string) $publishedHash);
         $hasSeparateWorkingRevision = $workingRevision instanceof ArticleTranslationRevision
@@ -207,6 +211,7 @@ final class ArticleTranslationOpsService
             'is_article_published_public' => $isArticlePublishedPublic,
             'is_published' => $isPublished,
             'is_stale' => $isStale,
+            'is_freshness_known' => $isFreshnessKnown,
             'is_published_stale' => $isPublishedStale,
             'is_draft_stale' => $isDraftStale,
             'published_at' => $article->published_at?->toIso8601String(),
@@ -221,7 +226,7 @@ final class ArticleTranslationOpsService
             'ownership_issues' => $ownershipIssues,
             'edit_url' => ArticleResource::getUrl('edit', ['record' => $article]),
             'revision_history' => $this->revisionHistory($articleRevisions),
-            'compare_summary' => $this->compareSummary($article, $source, $workingRevision, $publishedRevision, $sourceHash, $isWorkingStale, $isPublishedStale),
+            'compare_summary' => $this->compareSummary($article, $source, $workingRevision, $publishedRevision, $sourceHash, $isWorkingStale, $isPublishedStale, $isWorkingKnown),
             'preflight' => $this->localizedPreflight($preflight),
             'has_non_stale_blockers' => $hasNonStaleBlockers,
             'actions' => $this->localeActions($article, $status, $isWorkingStale, $isSource),
@@ -550,14 +555,17 @@ final class ArticleTranslationOpsService
         ?ArticleTranslationRevision $publishedRevision,
         ?string $sourceHash,
         bool $isWorkingStale,
-        bool $isPublishedStale
+        bool $isPublishedStale,
+        bool $isWorkingKnown
     ): array {
         $summary = [];
         $summary[] = __('ops.translation_ops.compare.source_hash', ['hash' => $this->shortHash($sourceHash) ?? __('ops.status.missing')]);
         $summary[] = __('ops.translation_ops.compare.translated_from', ['hash' => $this->shortHash($workingRevision?->translated_from_version_hash) ?? __('ops.status.missing')]);
         $summary[] = $isWorkingStale
             ? __('ops.translation_ops.compare.source_changed_after_target_revision')
-            : __('ops.translation_ops.compare.source_target_hash_current');
+            : ($isWorkingKnown
+                ? __('ops.translation_ops.compare.source_target_hash_current')
+                : __('ops.translation_ops.compare.source_hash_unverified'));
         if ($isPublishedStale) {
             $summary[] = __('ops.translation_ops.compare.published_revision_stale');
         }
@@ -633,7 +641,9 @@ final class ArticleTranslationOpsService
             if ($stale === 'stale' && (int) $group['stale_locales_count'] === 0) {
                 return false;
             }
-            if ($stale === 'current' && (int) $group['stale_locales_count'] > 0) {
+            if ($stale === 'current' && ((int) $group['stale_locales_count'] > 0
+                || $locales->contains(static fn (array $locale): bool => ! (bool) ($locale['is_source'] ?? false)
+                    && ! (bool) ($locale['is_freshness_known'] ?? false)))) {
                 return false;
             }
             $publicationLocales = $targetLocale === 'all'

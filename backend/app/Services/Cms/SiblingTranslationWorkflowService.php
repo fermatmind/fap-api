@@ -316,6 +316,10 @@ final class SiblingTranslationWorkflowService
             $blockers[] = 'source linkage invalid';
         } else {
             $blockers = array_merge($blockers, $this->sourceDisclosureBlockers($adapter, $source));
+            if ($working instanceof CmsTranslationRevision
+                && (! filled($source->source_version_hash) || ! filled($working->translated_from_version_hash))) {
+                $blockers[] = 'translation provenance unknown';
+            }
             if ((int) $target->source_content_id !== (int) $source->id) {
                 $blockers[] = 'source_content_id mismatch';
             }
