@@ -403,6 +403,13 @@ final class ContentPage extends Model
             }
         }
 
+        return $this->freshSourceVersionHash();
+    }
+
+    public function freshSourceVersionHash(): string
+    {
+        $payload = \App\Domain\GreenfieldBaseline\GreenfieldBaselineJson::normalize($this->sourceVersionPayload());
+
         return hash('sha256', json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     }
 

@@ -9,6 +9,7 @@ use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
 use App\Services\Audit\AuditLogger;
 use App\Services\Cms\ContentPageTranslationAdapter;
+use App\Support\CanonicalTranslationPayloadHash;
 use App\Support\SchemaBaseline;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
@@ -229,11 +230,18 @@ final class ForkLegacyContentPageTranslationPayload extends Command
             || (string) $target->getRawOriginal('updated_at') !== (string) $this->option('target-updated-at')) {
             $errors[] = 'row_lock_mismatch';
         }
+        $revisionGroup = (string) $revision->translation_group_id;
+        $currentGroup = (string) $target->translation_group_id;
+        $legacyGroup = 'content_page-'.$sourceId;
+        $revisionGroupMatches = $revisionGroup === $currentGroup
+            || ($revisionGroup === $legacyGroup
+                && (int) $revision->source_content_id === $sourceId
+                && (string) $revision->source_locale === 'zh-CN');
         if ((int) $target->working_revision_id !== $revisionId
             || (int) $target->published_revision_id !== $revisionId
             || (int) $revision->org_id !== 0 || (string) $revision->content_type !== 'content_page'
             || (int) $revision->content_id !== $targetId
-            || (string) $revision->translation_group_id !== (string) $target->translation_group_id
+            || ! $revisionGroupMatches
             || (string) $revision->locale !== 'en'
             || (string) $revision->revision_status !== CmsTranslationRevision::STATUS_PUBLISHED
             || (string) $revision->getRawOriginal('updated_at') !== (string) $this->option('revision-updated-at')) {
@@ -299,7 +307,7 @@ final class ForkLegacyContentPageTranslationPayload extends Command
 
     private function payloadHash(mixed $payload): string
     {
-        return hash('sha256', json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        return CanonicalTranslationPayloadHash::hash($payload);
     }
 
     /** @param array<string, mixed> $snapshot
