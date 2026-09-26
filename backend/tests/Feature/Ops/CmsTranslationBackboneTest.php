@@ -153,6 +153,37 @@ final class CmsTranslationBackboneTest extends TestCase
         $this->assertSame((int) $revision->id, (int) $target->fresh()->working_revision_id);
     }
 
+    public function test_missing_provenance_is_unverified_and_blocks_publication_for_article_and_page(): void
+    {
+        $this->createPublishedArticleGroup('unknown-provenance-article');
+        $article = Article::query()->where('slug', 'unknown-provenance-article')->where('locale', 'en')->firstOrFail();
+        $article->publishedRevision->forceFill(['translated_from_version_hash' => null])->saveQuietly();
+
+        $source = $this->createSourceContentPage('unknown-provenance-page', '/unknown-provenance-page');
+        $page = $this->createTargetTranslation('content_page', $source, 'en');
+        $revision = app(RowBackedRevisionWorkspace::class)->ensureInitialRevision('content_page', $page);
+        $revision->forceFill(['translated_from_version_hash' => null])->saveQuietly();
+
+        foreach ([['article', 'unknown-provenance-article'], ['content_page', 'unknown-provenance-page']] as [$type, $slug]) {
+            $dashboard = app(CmsTranslationOpsService::class)->dashboard(['content_type' => $type, 'slug' => $slug]);
+            $group = $dashboard['groups'][0];
+            $target = collect($group['locales'])->firstWhere('locale', 'en');
+            $cell = $dashboard['coverage_matrix'][0]['cells']['en'];
+
+            $this->assertFalse($target['is_freshness_known']);
+            $this->assertFalse($target['is_stale']);
+            $this->assertFalse($target['preflight']['ok']);
+            $this->assertContains('translation provenance unknown', $target['preflight']['blockers']);
+            $this->assertSame('Unverified', $cell['freshness_label']);
+            $this->assertSame('warning', $cell['freshness_state']);
+            $this->assertContains('source hash cannot be verified', $target['compare_summary']);
+            $this->assertSame(0, $dashboard['metrics']['stale_translation_count']);
+            $this->assertSame([], app(CmsTranslationOpsService::class)->dashboard([
+                'content_type' => $type, 'slug' => $slug, 'stale' => 'current',
+            ])['groups']);
+        }
+    }
+
     public function test_source_locale_is_not_counted_as_a_translation_target(): void
     {
         $source = $this->createSourceContentPage('english-source', '/english-source');
