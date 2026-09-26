@@ -64,7 +64,6 @@ final class ArticleTranslationRevisionWorkspace
                 $revisionChanged,
                 $locked,
             );
-            $sourceHash = $this->sourceVersionHashFor($locked);
             $now = now();
 
             $revisionPayload = [
@@ -79,14 +78,14 @@ final class ArticleTranslationRevisionWorkspace
                     'title' => $payload['title'] ?? $revision->title,
                     'excerpt' => $payload['excerpt'] ?? $revision->excerpt,
                     'content_md' => $payload['content_md'] ?? $revision->content_md,
-                ]) : $sourceHash,
+                ]) : $revision->source_version_hash,
                 'translated_from_version_hash' => $locked->isSourceArticle()
                     ? $this->hashForRevision($locked, [
                         'title' => $payload['title'] ?? $revision->title,
                         'excerpt' => $payload['excerpt'] ?? $revision->excerpt,
                         'content_md' => $payload['content_md'] ?? $revision->content_md,
                     ])
-                    : ($revision->translated_from_version_hash ?: $locked->translated_from_version_hash ?: $sourceHash),
+                    : $revision->translated_from_version_hash,
                 'title' => (string) ($payload['title'] ?? $revision->title),
                 'excerpt' => $payload['excerpt'] ?? $revision->excerpt,
                 'content_md' => (string) ($payload['content_md'] ?? $revision->content_md),
@@ -233,7 +232,6 @@ final class ArticleTranslationRevisionWorkspace
     private function canonicalRevisionPayload(Article $article, int $revisionNumber): array
     {
         $seoMeta = $article->seoMeta instanceof ArticleSeoMeta ? $article->seoMeta : null;
-        $sourceHash = $this->sourceVersionHashFor($article) ?: $article->source_version_hash;
         $ownHash = $this->hashForRevision($article, [
             'title' => $article->title,
             'excerpt' => $article->excerpt,
@@ -249,10 +247,10 @@ final class ArticleTranslationRevisionWorkspace
             'source_locale' => (string) ($article->source_locale ?: $article->locale),
             'revision_number' => $revisionNumber,
             'revision_status' => $this->normalizeStatus($article->translation_status),
-            'source_version_hash' => $article->isSourceArticle() ? $ownHash : $sourceHash,
+            'source_version_hash' => $article->isSourceArticle() ? $ownHash : $article->translated_from_version_hash,
             'translated_from_version_hash' => $article->isSourceArticle()
                 ? $ownHash
-                : ($article->translated_from_version_hash ?: $sourceHash),
+                : $article->translated_from_version_hash,
             'supersedes_revision_id' => null,
             'title' => (string) $article->title,
             'excerpt' => $article->excerpt,
