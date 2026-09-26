@@ -399,6 +399,7 @@ final class CmsTranslationBackboneTest extends TestCase
         $this->assertSame(1, Artisan::call('translation:reconcile-content-page-source-version', $options + ['--dry-run' => true]));
 
         $newRevision = CmsTranslationRevision::query()->findOrFail((int) $source->published_revision_id);
+        $this->assertSame('source', $newRevision->revision_status);
         $restoreOptions = [
             '--source-id' => (int) $source->id,
             '--target-id' => (int) $target->id,

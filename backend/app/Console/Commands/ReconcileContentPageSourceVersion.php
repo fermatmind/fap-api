@@ -95,7 +95,7 @@ final class ReconcileContentPageSourceVersion extends Command
                         'locale' => 'zh-CN',
                         'source_locale' => 'zh-CN',
                         'revision_number' => $nextNumber,
-                        'revision_status' => CmsTranslationRevision::STATUS_PUBLISHED,
+                        'revision_status' => CmsTranslationRevision::STATUS_SOURCE,
                         'source_version_hash' => $locked['fresh_hash'],
                         'translated_from_version_hash' => null,
                         'payload_json' => $locked['row_payload'],
@@ -130,6 +130,7 @@ final class ReconcileContentPageSourceVersion extends Command
                         || ! hash_equals($locked['fresh_hash'], $sourceAfter->freshSourceVersionHash())
                         || ! hash_equals($locked['row_payload_hash'], $this->payloadHash($newAfter->payload_json))
                         || (int) $newAfter->supersedes_revision_id !== (int) $oldRevision->id
+                        || (string) $newAfter->revision_status !== CmsTranslationRevision::STATUS_SOURCE
                         || ! $sourceAfter->passesPublicReadinessGate()) {
                         throw new RuntimeException('readback_mismatch');
                     }

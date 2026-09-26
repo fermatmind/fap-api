@@ -251,12 +251,13 @@ final class RestoreContentPageSourceVersion extends Command
                 || (int) $revision->content_id !== $sourceId
                 || (string) $revision->translation_group_id !== $groupId
                 || (string) $revision->locale !== 'zh-CN' || (string) $revision->source_locale !== 'zh-CN'
-                || $revision->source_content_id !== null
-                || (string) $revision->revision_status !== CmsTranslationRevision::STATUS_PUBLISHED) {
+                || $revision->source_content_id !== null) {
                 $errors[] = 'source_revision_identity_invalid';
             }
         }
-        if ((int) $new->supersedes_revision_id !== $oldId
+        if ((string) $old->revision_status !== CmsTranslationRevision::STATUS_PUBLISHED
+            || (string) $new->revision_status !== CmsTranslationRevision::STATUS_SOURCE
+            || (int) $new->supersedes_revision_id !== $oldId
             || (string) $audit->action !== 'content_page_source_version_reconciled'
             || (int) $audit->org_id !== 0 || (string) $audit->target_type !== 'content_page'
             || (string) $audit->target_id !== (string) $sourceId
