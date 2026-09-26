@@ -111,6 +111,7 @@ use App\Console\Commands\FapResolvePack;
 use App\Console\Commands\FapSelfCheck;
 use App\Console\Commands\FapValidateReport;
 use App\Console\Commands\FapWeeklyReport;
+use App\Console\Commands\ForkLegacyContentPageTranslationPayload;
 use App\Console\Commands\GreenfieldBaselineImport;
 use App\Console\Commands\GreenfieldBaselinePackageStream;
 use App\Console\Commands\GreenfieldBaselineRenderSource;
@@ -188,6 +189,7 @@ use App\Console\Commands\PersonalityTdkRuntimePromotionSearchGateReadinessComman
 use App\Console\Commands\PersonalityWarmPublicReadModels;
 use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\RefreshCareerAttributionDailyCommand;
+use App\Console\Commands\RestoreLegacyContentPagePayloadFork;
 use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\SeedScaleRegistry;
 use App\Console\Commands\SeoIntelSearchChannelQueueCommand;
@@ -402,6 +404,8 @@ class Kernel extends ConsoleKernel
         ArticleRepairTranslationLineage::class,
         NormalizeTranslationSourceStatus::class,
         LinkContentPageTranslationSource::class,
+        ForkLegacyContentPageTranslationPayload::class,
+        RestoreLegacyContentPagePayloadFork::class,
         ArticleReleaseCloseout::class,
         ArticleSeoGateRollout::class,
         ArticleTaxonomyHygiene::class,

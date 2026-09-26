@@ -9,6 +9,8 @@ use App\Models\AdminUser;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Models\AuditLog;
+use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
 use App\Models\InterpretationGuide;
 use App\Models\Organization;
@@ -24,6 +26,7 @@ use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
 use Filament\PanelRegistry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Livewire\Livewire;
@@ -150,6 +153,162 @@ final class CmsTranslationBackboneTest extends TestCase
         $this->assertContains('seo description missing', $preflight['blockers']);
         $this->assertSame($preflight['ok'], $preflight['blockers'] === []);
         $this->assertSame((int) $revision->id, (int) $target->fresh()->working_revision_id);
+    }
+
+    public function test_legacy_content_page_payload_fork_keeps_published_revision_immutable(): void
+    {
+        $source = $this->createSourceContentPage('legacy-payload-fork', '/legacy-payload-fork');
+        $target = $this->createTargetTranslation('content_page', $source, 'en');
+        $target->forceFill([
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'translation_status' => ContentPage::TRANSLATION_STATUS_PUBLISHED,
+            'review_state' => 'approved',
+            'is_public' => true,
+            'legal_review_required' => false,
+            'science_review_required' => false,
+            'headings_json' => [],
+            'faq_items' => [],
+            'forbidden_claims' => [],
+            'schema_enabled' => false,
+            'publish_allowed' => false,
+            'operator_approval_required' => false,
+            'faq_schema_eligible' => false,
+            'claim_gate_status' => 'not_reviewed',
+            'published_at' => now(),
+        ])->saveQuietly();
+        $target->refresh();
+        $revision = app(RowBackedRevisionWorkspace::class)->ensureInitialRevision('content_page', $target);
+        $oldPayload = $revision->payload_json;
+        unset($oldPayload['body_md'], $oldPayload['seo_description']);
+        $oldPayload['seo_title'] = 'Old published SEO title';
+        $revision->forceFill(['payload_json' => $oldPayload])->saveQuietly();
+        $revision->refresh();
+        $target->refresh();
+        $adapter = app(SiblingTranslationWorkflowService::class)->adapter('content_page');
+        $rowPayload = $adapter->snapshotPayload($target);
+        $rowPayload['body_html'] = $target->getRawOriginal('content_html');
+        $hash = static fn (mixed $payload): string => hash('sha256', json_encode(
+            $payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+        ));
+        $options = [
+            '--source-id' => (int) $source->id,
+            '--target-id' => (int) $target->id,
+            '--group-id' => (string) $source->translation_group_id,
+            '--source-hash' => (string) $source->source_version_hash,
+            '--target-hash' => (string) $target->source_version_hash,
+            '--source-updated-at' => (string) $source->getRawOriginal('updated_at'),
+            '--target-updated-at' => (string) $target->getRawOriginal('updated_at'),
+            '--revision-id' => (int) $revision->id,
+            '--revision-updated-at' => (string) $revision->getRawOriginal('updated_at'),
+            '--revision-payload-hash' => $hash($oldPayload),
+            '--row-payload-hash' => $hash($rowPayload),
+            '--json' => true,
+        ];
+
+        DB::connection()->enableQueryLog();
+        DB::connection()->flushQueryLog();
+        $this->assertSame(0, Artisan::call('translation:fork-content-page-payload', $options + ['--dry-run' => true]));
+        $writes = collect(DB::connection()->getQueryLog())->pluck('query')->filter(
+            static fn (string $sql): bool => preg_match('/^\s*(?:insert|update|delete|replace|create|alter|drop)\b/i', $sql) === 1
+        )->values()->all();
+        DB::connection()->disableQueryLog();
+        $this->assertSame([], $writes);
+        $this->assertSame((int) $revision->id, (int) $target->fresh()->working_revision_id);
+        $this->assertDatabaseCount('cms_translation_revisions', 1);
+
+        $this->assertSame(0, Artisan::call('translation:fork-content-page-payload', $options + [
+            '--execute' => true,
+            '--confirm' => sprintf('Fork content page target %d payload in group %s.', $target->id, $source->translation_group_id),
+        ]));
+        $result = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertTrue($result['ok']);
+        $this->assertSame((int) $revision->id, (int) $result['after']['published_revision_id']);
+        $this->assertNotSame((int) $revision->id, (int) $result['after']['working_revision_id']);
+        $this->assertSame('draft', $result['after']['working_status']);
+        $this->assertContains('seo_title', $result['after']['row_vs_published_payload_conflict_keys']);
+        $this->assertSame($oldPayload, $revision->fresh()->payload_json);
+        $this->assertSame('published', $revision->fresh()->revision_status);
+        $this->assertSame('EN body', $target->fresh()->content_md);
+        $this->assertSame('published', $target->fresh()->status);
+        $this->assertDatabaseCount('cms_translation_revisions', 2);
+        $this->assertSame(1, AuditLog::query()->withoutGlobalScopes()->where('action', 'content_page_payload_draft_forked')->count());
+
+        $this->assertSame(1, Artisan::call('translation:fork-content-page-payload', $options + ['--dry-run' => true]));
+        $this->assertDatabaseCount('cms_translation_revisions', 2);
+
+        $target->refresh();
+        $draft = CmsTranslationRevision::query()->findOrFail((int) $target->working_revision_id);
+        $restoreOptions = [
+            '--target-id' => (int) $target->id,
+            '--group-id' => (string) $target->translation_group_id,
+            '--source-id' => (int) $source->id,
+            '--source-hash' => (string) $source->source_version_hash,
+            '--target-hash' => (string) $target->source_version_hash,
+            '--source-updated-at' => (string) $source->getRawOriginal('updated_at'),
+            '--target-updated-at' => (string) $target->getRawOriginal('updated_at'),
+            '--published-revision-id' => (int) $revision->id,
+            '--published-revision-updated-at' => (string) $revision->getRawOriginal('updated_at'),
+            '--published-payload-hash' => $hash($oldPayload),
+            '--draft-revision-id' => (int) $draft->id,
+            '--draft-revision-updated-at' => (string) $draft->getRawOriginal('updated_at'),
+            '--draft-payload-hash' => $hash($draft->payload_json),
+            '--fork-audit-id' => (int) $result['after']['audit_id'],
+            '--json' => true,
+        ];
+        $this->assertSame(1, Artisan::call('translation:restore-content-page-payload-fork', array_replace(
+            $restoreOptions,
+            ['--draft-payload-hash' => 'wrong', '--dry-run' => true]
+        )));
+        $this->assertSame((int) $draft->id, (int) $target->fresh()->working_revision_id);
+        $this->assertSame(0, Artisan::call('translation:restore-content-page-payload-fork', $restoreOptions + ['--dry-run' => true]));
+        $this->assertSame(0, Artisan::call('translation:restore-content-page-payload-fork', $restoreOptions + [
+            '--execute' => true,
+            '--confirm' => sprintf('Restore content page target %d payload fork %d.', $target->id, $draft->id),
+        ]));
+        $this->assertSame((int) $revision->id, (int) $target->fresh()->working_revision_id);
+        $this->assertSame((int) $revision->id, (int) $target->fresh()->published_revision_id);
+        $this->assertSame('archived', $draft->fresh()->revision_status);
+        $this->assertSame($oldPayload, $revision->fresh()->payload_json);
+        $this->assertSame('published', $target->fresh()->status);
+        $this->assertSame(1, AuditLog::query()->withoutGlobalScopes()->where('action', 'content_page_payload_draft_fork_restored')->count());
+        $this->assertDatabaseCount('cms_translation_revisions', 2);
+    }
+
+    public function test_legacy_payload_fork_rejects_null_raw_arrays(): void
+    {
+        $source = $this->createSourceContentPage('legacy-null-payload', '/legacy-null-payload');
+        $target = $this->createTargetTranslation('content_page', $source, 'en');
+        $target->forceFill([
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'translation_status' => ContentPage::TRANSLATION_STATUS_PUBLISHED,
+            'is_public' => true,
+            'published_at' => now(),
+        ])->saveQuietly();
+        $target->refresh();
+        $revision = app(RowBackedRevisionWorkspace::class)->ensureInitialRevision('content_page', $target);
+        $revision->forceFill(['payload_json' => ['title' => 'EN page']])->saveQuietly();
+        $target->refresh();
+
+        $exit = Artisan::call('translation:fork-content-page-payload', [
+            '--source-id' => (int) $source->id,
+            '--target-id' => (int) $target->id,
+            '--group-id' => (string) $source->translation_group_id,
+            '--source-hash' => (string) $source->source_version_hash,
+            '--target-hash' => (string) $target->source_version_hash,
+            '--source-updated-at' => (string) $source->getRawOriginal('updated_at'),
+            '--target-updated-at' => (string) $target->getRawOriginal('updated_at'),
+            '--revision-id' => (int) $revision->id,
+            '--revision-updated-at' => (string) $revision->getRawOriginal('updated_at'),
+            '--revision-payload-hash' => hash('sha256', json_encode($revision->fresh()->payload_json, JSON_THROW_ON_ERROR)),
+            '--row-payload-hash' => 'wrong',
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+        $this->assertSame(1, $exit);
+        $result = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertContains('row_field_missing:faq_items', $result['errors']);
+        $this->assertContains('row_field_missing:forbidden_claims', $result['errors']);
+        $this->assertDatabaseCount('cms_translation_revisions', 1);
     }
 
     public function test_missing_provenance_is_unverified_and_blocks_publication_for_article_and_page(): void
