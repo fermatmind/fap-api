@@ -22,6 +22,7 @@ use App\Services\Cms\DisabledCmsMachineTranslationProvider;
 use App\Services\Cms\RowBackedRevisionWorkspace;
 use App\Services\Cms\SiblingTranslationWorkflowService;
 use App\Services\Ops\CmsTranslationOpsService;
+use App\Support\CanonicalTranslationPayloadHash;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
 use Filament\PanelRegistry;
@@ -41,6 +42,17 @@ final class CmsTranslationBackboneTest extends TestCase
         parent::setUp();
 
         Filament::setCurrentPanel(app(PanelRegistry::class)->get('ops'));
+    }
+
+    public function test_translation_payload_hash_survives_database_json_object_key_reordering(): void
+    {
+        $beforeStorage = ['body_md' => 'text', 'nested' => ['z' => true, 'a' => ['y' => 2, 'x' => 1]]];
+        $afterStorage = ['nested' => ['a' => ['x' => 1, 'y' => 2], 'z' => true], 'body_md' => 'text'];
+
+        $this->assertSame(CanonicalTranslationPayloadHash::hash($beforeStorage), CanonicalTranslationPayloadHash::hash($afterStorage));
+        $this->assertNotSame(CanonicalTranslationPayloadHash::hash($beforeStorage), CanonicalTranslationPayloadHash::hash([
+            'body_md' => 'text', 'nested' => ['z' => true, 'a' => ['y' => '2', 'x' => 1]],
+        ]));
     }
 
     public function test_unified_translation_ops_page_lists_multiple_content_types(): void
@@ -191,9 +203,7 @@ final class CmsTranslationBackboneTest extends TestCase
         $adapter = app(SiblingTranslationWorkflowService::class)->adapter('content_page');
         $rowPayload = $adapter->snapshotPayload($target);
         $rowPayload['body_html'] = $target->getRawOriginal('content_html');
-        $hash = static fn (mixed $payload): string => hash('sha256', json_encode(
-            $payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
-        ));
+        $hash = CanonicalTranslationPayloadHash::hash(...);
         $options = [
             '--source-id' => (int) $source->id,
             '--target-id' => (int) $target->id,
@@ -317,7 +327,7 @@ final class CmsTranslationBackboneTest extends TestCase
             '--target-updated-at' => (string) $target->getRawOriginal('updated_at'),
             '--revision-id' => (int) $revision->id,
             '--revision-updated-at' => (string) $revision->getRawOriginal('updated_at'),
-            '--revision-payload-hash' => hash('sha256', json_encode($revision->fresh()->payload_json, JSON_THROW_ON_ERROR)),
+            '--revision-payload-hash' => CanonicalTranslationPayloadHash::hash($revision->fresh()->payload_json),
             '--row-payload-hash' => 'wrong',
             '--dry-run' => true,
             '--json' => true,
@@ -366,9 +376,7 @@ final class CmsTranslationBackboneTest extends TestCase
         $adapter = app(SiblingTranslationWorkflowService::class)->adapter('content_page');
         $payload = $adapter->snapshotPayload($source);
         $payload['body_html'] = $source->getRawOriginal('content_html');
-        $hash = static fn (mixed $value): string => hash('sha256', json_encode(
-            $value, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
-        ));
+        $hash = CanonicalTranslationPayloadHash::hash(...);
         $options = [
             '--source-id' => (int) $source->id,
             '--target-id' => (int) $target->id,

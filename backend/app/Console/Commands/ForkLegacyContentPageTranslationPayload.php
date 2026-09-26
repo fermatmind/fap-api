@@ -9,6 +9,7 @@ use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
 use App\Services\Audit\AuditLogger;
 use App\Services\Cms\ContentPageTranslationAdapter;
+use App\Support\CanonicalTranslationPayloadHash;
 use App\Support\SchemaBaseline;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
@@ -306,7 +307,7 @@ final class ForkLegacyContentPageTranslationPayload extends Command
 
     private function payloadHash(mixed $payload): string
     {
-        return hash('sha256', json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        return CanonicalTranslationPayloadHash::hash($payload);
     }
 
     /** @param array<string, mixed> $snapshot
