@@ -6,6 +6,7 @@ namespace App\Filament\Ops\Resources\ContentPageResource\Pages;
 
 use App\Filament\Ops\Resources\ContentPageResource;
 use App\Filament\Ops\Support\ContentReleaseAudit;
+use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
 use App\Services\Cms\CmsEditorialReviewTransitionService;
 use App\Services\Cms\ContentPagePublishGate;
@@ -96,6 +97,11 @@ class EditContentPage extends EditRecord
             'faq_schema_eligible' => (bool) $editor->faq_schema_eligible,
             'schema_eligibility_reviewed_at' => $editor->schema_eligibility_reviewed_at,
             'source_doc' => $editor->source_doc,
+            'support_contact' => $editor->support_contact,
+            'policy_version' => $editor->policy_version,
+            'reviewer' => $editor->reviewer,
+            'faq_items' => is_array($editor->faq_items) ? $editor->faq_items : [],
+            'schema_enabled' => (bool) $editor->schema_enabled,
             'content_md' => (string) ($editor->content_md ?? ''),
             'content_html' => (string) ($editor->content_html ?? ''),
             'seo_title' => $editor->seo_title,
@@ -113,6 +119,82 @@ class EditContentPage extends EditRecord
             && (bool) $record->is_public;
         $status = (string) $data['status'];
         $reviewState = (string) $data['review_state'];
+        $payload = [
+            'title' => trim((string) $data['title']),
+            'summary' => $data['summary'] ?? null,
+            'body_md' => (string) ($data['content_md'] ?? ''),
+            'body_html' => (string) ($data['content_html'] ?? ''),
+            'seo_title' => $data['seo_title'] ?? null,
+            'seo_description' => $data['seo_description'] ?? null,
+            'path' => (string) $data['path'],
+            'kind' => (string) $data['kind'],
+            'page_type' => (string) $data['page_type'],
+            'kicker' => $data['kicker'] ?? null,
+            'template' => (string) $data['template'],
+            'animation_profile' => (string) $data['animation_profile'],
+            'owner' => $data['owner'] ?? null,
+            'legal_review_required' => (bool) ($data['legal_review_required'] ?? false),
+            'science_review_required' => (bool) ($data['science_review_required'] ?? false),
+            'source_doc' => $data['source_doc'] ?? null,
+            'headings_json' => [],
+            'meta_description' => $data['meta_description'] ?? null,
+            'canonical_path' => $data['canonical_path'] ?? null,
+            'is_public' => (bool) ($data['is_public'] ?? false),
+            'is_indexable' => (bool) ($data['is_indexable'] ?? false),
+            'support_contact' => $data['support_contact'] ?? null,
+            'policy_version' => $data['policy_version'] ?? null,
+            'reviewer' => $data['reviewer'] ?? null,
+            'faq_items' => array_values((array) ($data['faq_items'] ?? [])),
+            'schema_enabled' => (bool) ($data['schema_enabled'] ?? false),
+            'publish_allowed' => (bool) ($data['publish_allowed'] ?? false),
+            'operator_approval_required' => (bool) ($data['operator_approval_required'] ?? true),
+            'operator_approved_at' => $data['operator_approved_at'] ?? null,
+            'claim_gate_status' => (string) ($data['claim_gate_status'] ?? 'not_reviewed'),
+            'forbidden_claims' => array_values((array) ($data['forbidden_claims'] ?? [])),
+            'faq_schema_eligible' => (bool) ($data['faq_schema_eligible'] ?? false),
+            'schema_eligibility_reviewed_at' => $data['schema_eligibility_reviewed_at'] ?? null,
+        ];
+
+        $working = $record->workingRevision;
+        $hasUnpublishedTranslationRevision = ! $record->isSourceContent()
+            && $wasPublished
+            && $record->published_revision_id !== null
+            && $record->working_revision_id !== null
+            && (int) $record->working_revision_id !== (int) $record->published_revision_id;
+
+        if ($hasUnpublishedTranslationRevision) {
+            if (! $working instanceof CmsTranslationRevision
+                || (string) $working->revision_status !== CmsTranslationRevision::STATUS_DRAFT
+                || (string) $working->content_type !== 'content_page'
+                || (int) $working->content_id !== (int) $record->id
+                || (string) $working->locale !== (string) $record->locale
+                || (string) $working->translation_group_id !== (string) $record->translation_group_id
+                || ! $record->source_content_id
+                || (int) $working->source_content_id !== (int) $record->source_content_id
+                || $status !== (string) $record->status
+                || $reviewState !== (string) $record->review_state
+                || (bool) ($data['is_public'] ?? false) !== (bool) $record->is_public
+                || (string) ($data['slug'] ?? '') !== (string) $record->slug
+                || (string) ($data['locale'] ?? '') !== (string) $record->locale) {
+                throw ValidationException::withMessages([
+                    'status' => 'Only an exact draft revision can be saved here without changing identity, publication, or review state.',
+                ]);
+            }
+
+            return app(CmsEditorialReviewTransitionService::class)->saveRevisionedResource(
+                contentType: 'content_page',
+                surfaceId: 'content_page',
+                record: $record,
+                payload: $payload,
+                revisionStatus: CmsTranslationRevision::STATUS_DRAFT,
+                recordAttributes: [],
+                reviewApproved: false,
+                releaseRequested: false,
+                publishNow: false,
+                actorAdminUserId: (int) auth((string) config('admin.guard', 'admin'))->id(),
+            );
+        }
+
         $this->validatePublishSafety($record, $data, $status, $reviewState);
 
         $revisionStatus = $record->isSourceContent()
@@ -129,41 +211,7 @@ class EditContentPage extends EditRecord
             contentType: 'content_page',
             surfaceId: 'content_page',
             record: $record,
-            payload: [
-                'title' => trim((string) $data['title']),
-                'summary' => $data['summary'] ?? null,
-                'body_md' => (string) ($data['content_md'] ?? ''),
-                'body_html' => (string) ($data['content_html'] ?? ''),
-                'seo_title' => $data['seo_title'] ?? null,
-                'seo_description' => $data['seo_description'] ?? null,
-                'path' => (string) $data['path'],
-                'kind' => (string) $data['kind'],
-                'page_type' => (string) $data['page_type'],
-                'kicker' => $data['kicker'] ?? null,
-                'template' => (string) $data['template'],
-                'animation_profile' => (string) $data['animation_profile'],
-                'owner' => $data['owner'] ?? null,
-                'legal_review_required' => (bool) ($data['legal_review_required'] ?? false),
-                'science_review_required' => (bool) ($data['science_review_required'] ?? false),
-                'source_doc' => $data['source_doc'] ?? null,
-                'headings_json' => [],
-                'meta_description' => $data['meta_description'] ?? null,
-                'canonical_path' => $data['canonical_path'] ?? null,
-                'is_public' => (bool) ($data['is_public'] ?? false),
-                'is_indexable' => (bool) ($data['is_indexable'] ?? false),
-                'support_contact' => $data['support_contact'] ?? null,
-                'policy_version' => $data['policy_version'] ?? null,
-                'reviewer' => $data['reviewer'] ?? null,
-                'faq_items' => array_values((array) ($data['faq_items'] ?? [])),
-                'schema_enabled' => (bool) ($data['schema_enabled'] ?? false),
-                'publish_allowed' => (bool) ($data['publish_allowed'] ?? false),
-                'operator_approval_required' => (bool) ($data['operator_approval_required'] ?? true),
-                'operator_approved_at' => $data['operator_approved_at'] ?? null,
-                'claim_gate_status' => (string) ($data['claim_gate_status'] ?? 'not_reviewed'),
-                'forbidden_claims' => array_values((array) ($data['forbidden_claims'] ?? [])),
-                'faq_schema_eligible' => (bool) ($data['faq_schema_eligible'] ?? false),
-                'schema_eligibility_reviewed_at' => $data['schema_eligibility_reviewed_at'] ?? null,
-            ],
+            payload: $payload,
             revisionStatus: $revisionStatus,
             recordAttributes: [
                 'status' => $status,

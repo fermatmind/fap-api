@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Ops;
 
 use App\Filament\Ops\Pages\ArticleTranslationOpsPage;
+use App\Filament\Ops\Resources\ContentPageResource\Pages\EditContentPage;
 use App\Models\AdminUser;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
@@ -337,6 +338,94 @@ final class CmsTranslationBackboneTest extends TestCase
         $this->assertContains('row_field_missing:faq_items', $result['errors']);
         $this->assertContains('row_field_missing:forbidden_claims', $result['errors']);
         $this->assertDatabaseCount('cms_translation_revisions', 1);
+    }
+
+    public function test_editing_an_unpublished_translation_draft_preserves_the_published_content_page(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);
+        $organization = $this->createOrganization($admin);
+        $source = $this->createSourceContentPage('published-target-draft-edit', '/published-target-draft-edit');
+        $target = $this->createTargetTranslation('content_page', $source, 'en');
+        $target->forceFill([
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'translation_status' => ContentPage::TRANSLATION_STATUS_PUBLISHED,
+            'review_state' => 'approved',
+            'is_public' => true,
+            'headings_json' => [],
+            'faq_items' => [],
+            'forbidden_claims' => [],
+            'schema_enabled' => false,
+            'publish_allowed' => false,
+            'operator_approval_required' => false,
+            'faq_schema_eligible' => false,
+            'legal_review_required' => false,
+            'science_review_required' => false,
+            'claim_gate_status' => 'not_reviewed',
+            'published_at' => now(),
+        ])->saveQuietly();
+        $target->refresh();
+        $published = app(RowBackedRevisionWorkspace::class)->ensureInitialRevision('content_page', $target);
+        $target->refresh();
+        $adapter = app(SiblingTranslationWorkflowService::class)->adapter('content_page');
+        $payload = $adapter->snapshotPayload($target);
+        $payload['body_html'] = $target->getRawOriginal('content_html');
+        $payload['support_contact'] = 'draft@example.com';
+        $payload['policy_version'] = 'draft-policy';
+        $payload['reviewer'] = 'Draft Reviewer';
+        $payload['faq_items'] = [['question' => 'Draft question?', 'answer' => 'Draft answer.']];
+        $payload['schema_enabled'] = true;
+        $drafted = app(RowBackedRevisionWorkspace::class)->saveWorkingDraft(
+            'content_page', $target, $payload, CmsTranslationRevision::STATUS_DRAFT
+        );
+        $draftId = (int) $drafted->working_revision_id;
+        $this->assertNotSame((int) $published->id, $draftId);
+
+        $this->withSession($this->opsSession($admin, $organization))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'));
+        Livewire::test(EditContentPage::class, ['record' => $target->id])
+            ->fillForm(['content_md' => 'Updated English working draft'])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $after = $target->fresh();
+        $this->assertSame(ContentPage::STATUS_PUBLISHED, $after->status);
+        $this->assertTrue((bool) $after->is_public);
+        $this->assertSame('EN body', $after->content_md);
+        $public = ContentPage::query()->withoutGlobalScopes()->publiclyReadable()->findOrFail($target->id);
+        $this->assertSame('EN body', $public->content_md);
+        $this->assertSame((int) $published->id, (int) $after->published_revision_id);
+        $this->assertSame($draftId, (int) $after->working_revision_id);
+        $savedPayload = CmsTranslationRevision::query()->findOrFail($draftId)->payload_json;
+        $this->assertSame('Updated English working draft', $savedPayload['body_md']);
+        $this->assertSame('draft@example.com', $savedPayload['support_contact']);
+        $this->assertSame('draft-policy', $savedPayload['policy_version']);
+        $this->assertSame('Draft Reviewer', $savedPayload['reviewer']);
+        $this->assertSame([['question' => 'Draft question?', 'answer' => 'Draft answer.']], $savedPayload['faq_items']);
+        $this->assertTrue($savedPayload['schema_enabled']);
+        $this->assertNull($after->support_contact);
+        $this->assertFalse((bool) $after->schema_enabled);
+        $this->assertSame(CmsTranslationRevision::STATUS_PUBLISHED, $published->fresh()->revision_status);
+        $this->assertDatabaseMissing('audit_logs', [
+            'action' => 'content_release_publish',
+            'target_type' => 'content_page',
+            'target_id' => (string) $target->id,
+        ]);
+
+        Livewire::test(EditContentPage::class, ['record' => $target->id])
+            ->fillForm(['status' => ContentPage::STATUS_DRAFT])
+            ->call('save')
+            ->assertHasErrors(['status']);
+        $this->assertSame(ContentPage::STATUS_PUBLISHED, $target->fresh()->status);
+        $this->assertSame($savedPayload, CmsTranslationRevision::query()->findOrFail($draftId)->payload_json);
+
+        CmsTranslationRevision::query()->findOrFail($draftId)
+            ->forceFill(['translation_group_id' => 'unrelated-group'])
+            ->saveQuietly();
+        Livewire::test(EditContentPage::class, ['record' => $target->id])
+            ->fillForm(['content_md' => 'Should not save'])
+            ->call('save')
+            ->assertHasErrors(['status']);
+        $this->assertSame($savedPayload, CmsTranslationRevision::query()->findOrFail($draftId)->payload_json);
     }
 
     public function test_reviewed_public_content_page_source_can_be_reconciled_without_changing_target_or_old_revision(): void
