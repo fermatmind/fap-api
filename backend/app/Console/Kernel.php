@@ -188,7 +188,9 @@ use App\Console\Commands\PersonalityTdkNextBatchApprovalDraftGateCommand;
 use App\Console\Commands\PersonalityTdkRuntimePromotionSearchGateReadinessCommand;
 use App\Console\Commands\PersonalityWarmPublicReadModels;
 use App\Console\Commands\QualityDailySummary;
+use App\Console\Commands\ReconcileContentPageSourceVersion;
 use App\Console\Commands\RefreshCareerAttributionDailyCommand;
+use App\Console\Commands\RestoreContentPageSourceVersion;
 use App\Console\Commands\RestoreLegacyContentPagePayloadFork;
 use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\SeedScaleRegistry;
@@ -403,6 +405,8 @@ class Kernel extends ConsoleKernel
         ArticleReplaceInlineImageUrl::class,
         ArticleRepairTranslationLineage::class,
         NormalizeTranslationSourceStatus::class,
+        ReconcileContentPageSourceVersion::class,
+        RestoreContentPageSourceVersion::class,
         LinkContentPageTranslationSource::class,
         ForkLegacyContentPageTranslationPayload::class,
         RestoreLegacyContentPagePayloadFork::class,

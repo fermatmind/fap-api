@@ -311,6 +311,134 @@ final class CmsTranslationBackboneTest extends TestCase
         $this->assertDatabaseCount('cms_translation_revisions', 1);
     }
 
+    public function test_reviewed_public_content_page_source_can_be_reconciled_without_changing_target_or_old_revision(): void
+    {
+        $source = $this->createSourceContentPage('legacy-source-reconcile', '/legacy-source-reconcile');
+        $source->forceFill([
+            'translation_status' => ContentPage::TRANSLATION_STATUS_PUBLISHED,
+            'template' => 'company',
+            'animation_profile' => 'none',
+            'claim_gate_status' => 'not_reviewed',
+            'headings_json' => [],
+            'faq_items' => [],
+            'forbidden_claims' => [],
+            'schema_enabled' => false,
+            'publish_allowed' => false,
+            'operator_approval_required' => false,
+            'faq_schema_eligible' => false,
+            'legal_review_required' => false,
+            'science_review_required' => false,
+        ])->saveQuietly();
+        $source->refresh();
+        $oldRevision = app(RowBackedRevisionWorkspace::class)->ensureInitialRevision('content_page', $source);
+        $source->forceFill(['source_version_hash' => str_repeat('a', 64)])->saveQuietly();
+        $oldRevision->forceFill(['source_version_hash' => str_repeat('a', 64)])->saveQuietly();
+        $source->refresh();
+        $oldRevision->refresh();
+
+        $target = $this->createTargetTranslation('content_page', $source, 'en');
+        $target->forceFill([
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'translation_status' => ContentPage::TRANSLATION_STATUS_PUBLISHED,
+            'is_public' => true,
+            'published_at' => now(),
+        ])->saveQuietly();
+        $source->refresh();
+        $target->refresh();
+        $adapter = app(SiblingTranslationWorkflowService::class)->adapter('content_page');
+        $payload = $adapter->snapshotPayload($source);
+        $payload['body_html'] = $source->getRawOriginal('content_html');
+        $hash = static fn (mixed $value): string => hash('sha256', json_encode(
+            $value, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+        ));
+        $options = [
+            '--source-id' => (int) $source->id,
+            '--target-id' => (int) $target->id,
+            '--group-id' => (string) $source->translation_group_id,
+            '--slug' => (string) $source->slug,
+            '--source-hash' => (string) $source->source_version_hash,
+            '--target-hash' => (string) $target->source_version_hash,
+            '--fresh-source-hash' => $source->freshSourceVersionHash(),
+            '--revision-id' => (int) $oldRevision->id,
+            '--revision-hash' => (string) $oldRevision->source_version_hash,
+            '--revision-payload-hash' => $hash($oldRevision->payload_json),
+            '--row-payload-hash' => $hash($payload),
+            '--source-updated-at' => (string) $source->getRawOriginal('updated_at'),
+            '--target-updated-at' => (string) $target->getRawOriginal('updated_at'),
+            '--revision-updated-at' => (string) $oldRevision->getRawOriginal('updated_at'),
+            '--json' => true,
+        ];
+        $targetBefore = $target->getAttributes();
+        $oldBefore = $oldRevision->getAttributes();
+
+        DB::connection()->enableQueryLog();
+        DB::connection()->flushQueryLog();
+        $this->assertSame(0, Artisan::call('translation:reconcile-content-page-source-version', $options + ['--dry-run' => true]));
+        $writes = collect(DB::connection()->getQueryLog())->pluck('query')->filter(
+            static fn (string $sql): bool => preg_match('/^\s*(?:insert|update|delete|replace|create|alter|drop)\b/i', $sql) === 1
+        )->values()->all();
+        DB::connection()->disableQueryLog();
+        $this->assertSame([], $writes);
+
+        $this->assertSame(0, Artisan::call('translation:reconcile-content-page-source-version', $options + [
+            '--execute' => true,
+            '--confirm' => sprintf('Reconcile content page source %d for target %d in group %s.',
+                $source->id, $target->id, $source->translation_group_id),
+        ]));
+        $result = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertTrue($result['ok']);
+        $source->refresh();
+        $this->assertSame('source', $source->translation_status);
+        $this->assertSame($source->freshSourceVersionHash(), $source->source_version_hash);
+        $this->assertSame((int) $source->published_revision_id, (int) $source->working_revision_id);
+        $this->assertNotSame((int) $oldRevision->id, (int) $source->published_revision_id);
+        $this->assertSame($targetBefore, $target->fresh()->getAttributes());
+        $this->assertSame($oldBefore, $oldRevision->fresh()->getAttributes());
+        $this->assertDatabaseCount('cms_translation_revisions', 2);
+        $this->assertSame(1, AuditLog::query()->withoutGlobalScopes()->where('action', 'content_page_source_version_reconciled')->count());
+        $this->assertSame(1, Artisan::call('translation:reconcile-content-page-source-version', $options + ['--dry-run' => true]));
+
+        $newRevision = CmsTranslationRevision::query()->findOrFail((int) $source->published_revision_id);
+        $restoreOptions = [
+            '--source-id' => (int) $source->id,
+            '--target-id' => (int) $target->id,
+            '--group-id' => (string) $source->translation_group_id,
+            '--slug' => (string) $source->slug,
+            '--source-hash' => (string) $source->source_version_hash,
+            '--target-hash' => (string) $target->source_version_hash,
+            '--source-updated-at' => (string) $source->getRawOriginal('updated_at'),
+            '--target-updated-at' => (string) $target->getRawOriginal('updated_at'),
+            '--old-revision-id' => (int) $oldRevision->id,
+            '--new-revision-id' => (int) $newRevision->id,
+            '--new-revision-updated-at' => (string) $newRevision->getRawOriginal('updated_at'),
+            '--audit-id' => (int) $result['after']['audit_id'],
+            '--json' => true,
+        ];
+        $this->assertSame(1, Artisan::call('translation:restore-content-page-source-version', array_replace(
+            $restoreOptions, ['--target-hash' => 'wrong', '--dry-run' => true]
+        )));
+        DB::connection()->enableQueryLog();
+        DB::connection()->flushQueryLog();
+        $this->assertSame(0, Artisan::call('translation:restore-content-page-source-version', $restoreOptions + ['--dry-run' => true]));
+        $writes = collect(DB::connection()->getQueryLog())->pluck('query')->filter(
+            static fn (string $sql): bool => preg_match('/^\s*(?:insert|update|delete|replace|create|alter|drop)\b/i', $sql) === 1
+        )->values()->all();
+        DB::connection()->disableQueryLog();
+        $this->assertSame([], $writes);
+        $this->assertSame(0, Artisan::call('translation:restore-content-page-source-version', $restoreOptions + [
+            '--execute' => true,
+            '--confirm' => sprintf('Restore content page source %d revision %d.', $source->id, $newRevision->id),
+        ]));
+        $source->refresh();
+        $this->assertSame('published', $source->translation_status);
+        $this->assertSame(str_repeat('a', 64), $source->source_version_hash);
+        $this->assertSame((int) $oldRevision->id, (int) $source->published_revision_id);
+        $this->assertSame('archived', $newRevision->fresh()->revision_status);
+        $this->assertSame($targetBefore, $target->fresh()->getAttributes());
+        $this->assertSame($oldBefore, $oldRevision->fresh()->getAttributes());
+        $this->assertSame(1, AuditLog::query()->withoutGlobalScopes()->where('action', 'content_page_source_version_reconciliation_restored')->count());
+    }
+
     public function test_missing_provenance_is_unverified_and_blocks_publication_for_article_and_page(): void
     {
         $this->createPublishedArticleGroup('unknown-provenance-article');
