@@ -88,6 +88,7 @@ final class CmsTranslationShadowRevisionTest extends TestCase
 
         $publishedRevisionId = (int) $target->published_revision_id;
         $publishedBody = (string) $target->body_md;
+        $publishedRevisionBefore = $target->publishedRevision->getAttributes();
 
         $source->forceFill([
             'title' => 'Updated zh source',
@@ -100,6 +101,7 @@ final class CmsTranslationShadowRevisionTest extends TestCase
         $this->assertSame($publishedRevisionId, (int) $resynced->published_revision_id);
         $this->assertNotSame($publishedRevisionId, (int) $resynced->working_revision_id);
         $this->assertSame($publishedBody, (string) $resynced->body_md);
+        $this->assertSame($publishedRevisionBefore, $resynced->publishedRevision->getAttributes());
         $this->assertDatabaseHas('support_articles', [
             'id' => (int) $resynced->id,
             'body_md' => $publishedBody,
@@ -122,6 +124,24 @@ final class CmsTranslationShadowRevisionTest extends TestCase
             ->assertOk()
             ->assertJsonPath('article.body_md', 'Resynced machine draft body')
             ->assertJsonPath('article.title', 'Resynced machine draft title');
+    }
+
+    public function test_published_revision_cannot_be_transitioned_in_place(): void
+    {
+        $workspace = app(RowBackedRevisionWorkspace::class);
+        $source = $this->createSourceSupportArticle();
+        $target = $this->createPublishedTargetTranslation($source);
+        $published = $workspace->ensureInitialRevision('support_article', $target);
+
+        try {
+            $workspace->updateWorkingRevisionStatus('support_article', $target->fresh(), 'human_review');
+            $this->fail('Expected published revision transition to be refused.');
+        } catch (CmsTranslationWorkflowException $exception) {
+            $this->assertSame('Published revision status cannot be changed through a working revision transition.', $exception->getMessage());
+        }
+
+        $this->assertSame('published', $published->fresh()->revision_status);
+        $this->assertSame((int) $published->id, (int) $target->fresh()->published_revision_id);
     }
 
     public function test_publish_promotes_working_revision_to_public_row(): void

@@ -509,6 +509,49 @@ final class ArticleTranslationRevisionContractTest extends TestCase
         $this->assertSame(ArticleTranslationRevision::STATUS_HUMAN_REVIEW, $revision?->revision_status);
     }
 
+    public function test_editing_published_translation_forks_revision_and_keeps_old_provenance(): void
+    {
+        $source = $this->createArticle(0, 'zh-CN', 'Published source', [
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $target = $this->createArticle(0, 'en', 'Published translation', [
+            'translation_group_id' => $source->translation_group_id,
+            'source_locale' => 'zh-CN',
+            'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED,
+            'translated_from_article_id' => $source->id,
+            'translated_from_version_hash' => $source->source_version_hash,
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $this->runRevisionBackfill();
+        $target->refresh();
+        $published = $target->publishedRevision;
+        $this->assertInstanceOf(ArticleTranslationRevision::class, $published);
+        $original = $published->getAttributes();
+        $source->forceFill(['source_version_hash' => str_repeat('a', 64)])->saveQuietly();
+
+        $working = app(ArticleTranslationRevisionWorkspace::class)->saveWorkingRevision($target, [
+            'title' => 'Revised English translation',
+            'excerpt' => 'Revised excerpt',
+            'content_md' => 'Revised body for human review',
+            'working_revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
+        ]);
+
+        $target->refresh();
+        $this->assertNotSame((int) $published->id, (int) $working->id);
+        $this->assertSame((int) $published->id, (int) $target->published_revision_id);
+        $this->assertSame((int) $working->id, (int) $target->working_revision_id);
+        $this->assertSame($original, $published->fresh()->getAttributes());
+        $this->assertSame((int) $published->id, (int) $working->supersedes_revision_id);
+        $this->assertSame(ArticleTranslationRevision::STATUS_HUMAN_REVIEW, $working->revision_status);
+        $this->assertSame($original['translated_from_version_hash'], $working->translated_from_version_hash);
+        $this->assertNull($working->reviewed_at);
+        $this->assertNull($working->approved_at);
+    }
+
     public function test_runtime_resolver_does_not_overwrite_working_revision_after_canonical_metadata_changes(): void
     {
         $article = $this->createArticle(1, 'en', 'Canonical title');

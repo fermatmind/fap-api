@@ -12,6 +12,7 @@ use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Models\AuditLog;
+use App\Models\ContentPage;
 use App\Models\EditorialReview;
 use App\Models\Organization;
 use App\Models\Permission;
@@ -19,6 +20,7 @@ use App\Models\Role;
 use App\Services\Cms\ArticleTranslationWorkflowException;
 use App\Services\Cms\ArticleTranslationWorkflowService;
 use App\Services\Ops\ArticleTranslationOpsService;
+use App\Services\Ops\CmsTranslationOpsService;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
 use Filament\PanelRegistry;
@@ -111,6 +113,64 @@ final class ArticleTranslationOpsPageTest extends TestCase
         Livewire::test(ArticleTranslationOpsPage::class)
             ->call('resyncFromSource', 'article', $sourceId, 'en')
             ->assertForbidden();
+    }
+
+    public function test_summary_and_inspector_follow_the_same_filtered_groups_as_matrix(): void
+    {
+        $this->createPublishedTranslationGroup('filtered-article-fixture');
+        ContentPage::query()->create([
+            'org_id' => 0,
+            'slug' => 'other-content-page-fixture',
+            'path' => '/other-content-page-fixture',
+            'kind' => ContentPage::KIND_COMPANY,
+            'page_type' => 'company',
+            'title' => 'Other content page',
+            'template' => 'company',
+            'animation_profile' => 'none',
+            'locale' => 'zh-CN',
+            'translation_group_id' => 'content-page-other-content-page-fixture',
+            'source_locale' => 'zh-CN',
+            'translation_status' => ContentPage::TRANSLATION_STATUS_SOURCE,
+            'content_md' => 'Source body',
+            'seo_title' => 'Source SEO title',
+            'seo_description' => 'Source SEO description',
+            'canonical_path' => '/other-content-page-fixture',
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'review_state' => 'approved',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now(),
+        ]);
+
+        $dashboard = app(CmsTranslationOpsService::class)->dashboard(
+            ['slug' => 'filtered-article-fixture'],
+            'content_page:content-page-other-content-page-fixture',
+        );
+
+        $this->assertCount(1, $dashboard['groups']);
+        $this->assertCount(1, $dashboard['coverage_matrix']);
+        $this->assertSame(1, $dashboard['metrics']['translation_groups']);
+        $this->assertSame(1, $dashboard['metrics']['target_slot_count']);
+        $this->assertSame(1, $dashboard['metrics']['published_target_locale_count']);
+        $this->assertSame(0, $dashboard['metrics']['missing_translation_count']);
+        $this->assertNull($dashboard['selected_group']);
+        $this->assertSame('100%', $dashboard['summary_cards'][0]['value']);
+
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $selectedOrg = $this->createOrganization();
+        $this->withSession($this->opsSession($admin, $selectedOrg))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        Livewire::test(ArticleTranslationOpsPage::class)
+            ->assertSet('metrics.translation_groups', 2)
+            ->call('inspectGroup', 'content_page:content-page-other-content-page-fixture')
+            ->assertNotSet('selectedGroup', null)
+            ->set('slugSearch', 'filtered-article-fixture')
+            ->assertSet('metrics.translation_groups', 1)
+            ->assertSet('metrics.target_slot_count', 1)
+            ->assertSet('metrics.published_target_locale_count', 1)
+            ->assertSet('summaryCards.0.value', '100%')
+            ->assertSet('selectedGroup', null);
     }
 
     public function test_translation_ops_page_localizes_visible_chinese_console_copy(): void
@@ -781,6 +841,62 @@ final class ArticleTranslationOpsPageTest extends TestCase
         $this->assertSame(['en', 'ja'], $group['coverage']['target_locales']);
         $this->assertSame(['ja'], $group['coverage']['missing_target_locales']);
         $this->assertContains('missing ja locale', collect($group['alerts'])->pluck('label')->all());
+    }
+
+    public function test_source_row_and_published_revision_hash_conflict_blocks_claim_of_current_translation(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        $created = $this->createPublishedTranslationGroup('source-revision-hash-conflict-fixture');
+        $source = $created['source'];
+        $oldRevisionHash = (string) $created['sourceRevision']->source_version_hash;
+        $revisionCount = ArticleTranslationRevision::query()->withoutGlobalScopes()->count();
+        $source->forceFill(['cover_image_alt' => 'Newly published cover description'])->save();
+
+        $this->assertNotSame($oldRevisionHash, (string) $source->fresh()->source_version_hash);
+
+        $dashboard = app(ArticleTranslationOpsService::class)->dashboard([
+            'slug' => 'source-revision-hash-conflict-fixture',
+        ]);
+        $group = $dashboard['groups'][0];
+        $target = collect($group['locales'])->firstWhere('locale', 'en');
+
+        $this->assertFalse($group['canonical_ok']);
+        $this->assertContains('source row and published revision hashes differ', $group['canonical_issues']);
+        $this->assertFalse($target['is_freshness_known']);
+        $this->assertFalse($target['preflight']['ok']);
+        $this->assertContains('source row and published revision hashes differ', $target['preflight']['blockers']);
+        $this->assertContains('source hash cannot be verified', $target['compare_summary']);
+        $this->assertSame($revisionCount, ArticleTranslationRevision::query()->withoutGlobalScopes()->count());
+        $this->assertSame($oldRevisionHash, (string) $created['sourceRevision']->fresh()->source_version_hash);
+    }
+
+    public function test_source_row_stored_hash_conflict_blocks_claim_of_current_translation(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        $created = $this->createPublishedTranslationGroup('source-row-hash-conflict-fixture');
+        $source = $created['source'];
+        $oldRowHash = (string) $source->source_version_hash;
+        $revisionCount = ArticleTranslationRevision::query()->withoutGlobalScopes()->count();
+        $source->forceFill(['cover_image_alt' => 'Untracked cover description'])->saveQuietly();
+
+        $this->assertSame($oldRowHash, (string) $source->fresh()->source_version_hash);
+
+        $dashboard = app(ArticleTranslationOpsService::class)->dashboard([
+            'slug' => 'source-row-hash-conflict-fixture',
+        ]);
+        $group = $dashboard['groups'][0];
+        $target = collect($group['locales'])->firstWhere('locale', 'en');
+
+        $this->assertFalse($group['canonical_ok']);
+        $this->assertContains('source row stored hash differs from current content', $group['canonical_issues']);
+        $this->assertFalse($target['is_freshness_known']);
+        $this->assertFalse($target['preflight']['ok']);
+        $this->assertContains('source row stored hash differs from current content', $target['preflight']['blockers']);
+        $this->assertSame($revisionCount, ArticleTranslationRevision::query()->withoutGlobalScopes()->count());
     }
 
     /**

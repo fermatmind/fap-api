@@ -117,12 +117,6 @@ final class RowBackedRevisionWorkspace
         $shouldFork = $publishedRevisionId !== null && (int) $currentWorking->id === $publishedRevisionId;
 
         if ($shouldFork) {
-            $currentWorking->forceFill([
-                'revision_status' => $currentWorking->revision_status === CmsTranslationRevision::STATUS_PUBLISHED
-                    ? CmsTranslationRevision::STATUS_STALE
-                    : $currentWorking->revision_status,
-            ])->save();
-
             $working = CmsTranslationRevision::query()->create([
                 'org_id' => (int) $record->org_id,
                 'content_type' => $contentType,
@@ -176,6 +170,10 @@ final class RowBackedRevisionWorkspace
     public function updateWorkingRevisionStatus(string $contentType, Model $record, string $revisionStatus): Model
     {
         $working = $this->workingRevision($contentType, $record);
+        if ((int) $working->id === (int) $record->published_revision_id
+            && $revisionStatus !== (string) $working->revision_status) {
+            throw new CmsTranslationWorkflowException('Published revision status cannot be changed through a working revision transition.');
+        }
         $working->forceFill([
             'revision_status' => $revisionStatus,
             'reviewed_at' => $revisionStatus === CmsTranslationRevision::STATUS_HUMAN_REVIEW ? now() : $working->reviewed_at,
