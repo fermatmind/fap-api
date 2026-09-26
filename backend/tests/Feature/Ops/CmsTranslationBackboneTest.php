@@ -391,6 +391,8 @@ final class CmsTranslationBackboneTest extends TestCase
         $this->assertSame(ContentPage::STATUS_PUBLISHED, $after->status);
         $this->assertTrue((bool) $after->is_public);
         $this->assertSame('EN body', $after->content_md);
+        $public = ContentPage::query()->withoutGlobalScopes()->publiclyReadable()->findOrFail($target->id);
+        $this->assertSame('EN body', $public->content_md);
         $this->assertSame((int) $published->id, (int) $after->published_revision_id);
         $this->assertSame($draftId, (int) $after->working_revision_id);
         $savedPayload = CmsTranslationRevision::query()->findOrFail($draftId)->payload_json;
@@ -403,6 +405,11 @@ final class CmsTranslationBackboneTest extends TestCase
         $this->assertNull($after->support_contact);
         $this->assertFalse((bool) $after->schema_enabled);
         $this->assertSame(CmsTranslationRevision::STATUS_PUBLISHED, $published->fresh()->revision_status);
+        $this->assertDatabaseMissing('audit_logs', [
+            'action' => 'content_release_publish',
+            'target_type' => 'content_page',
+            'target_id' => (string) $target->id,
+        ]);
 
         Livewire::test(EditContentPage::class, ['record' => $target->id])
             ->fillForm(['status' => ContentPage::STATUS_DRAFT])
