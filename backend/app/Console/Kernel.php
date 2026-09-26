@@ -121,6 +121,7 @@ use App\Console\Commands\MediaAssetsImportSeoImageBundle;
 use App\Console\Commands\MediaAssetsSeoReleaseCleanup;
 use App\Console\Commands\MediaAssetsSeoReleasePreflight;
 use App\Console\Commands\MetricsWeeklyValidity;
+use App\Console\Commands\NormalizeTranslationSourceStatus;
 use App\Console\Commands\NormsBig5BootstrapBuild;
 use App\Console\Commands\NormsBig5DriftCheck;
 use App\Console\Commands\NormsBig5MonthlyDriftCheck;
@@ -398,6 +399,7 @@ class Kernel extends ConsoleKernel
         ArticlePublishControlled::class,
         ArticleReplaceInlineImageUrl::class,
         ArticleRepairTranslationLineage::class,
+        NormalizeTranslationSourceStatus::class,
         ArticleReleaseCloseout::class,
         ArticleSeoGateRollout::class,
         ArticleTaxonomyHygiene::class,
