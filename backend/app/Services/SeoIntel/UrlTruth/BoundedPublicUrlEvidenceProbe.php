@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Http;
 
 final class BoundedPublicUrlEvidenceProbe
 {
+    // The public sitemap is substantially larger than a page canary. Keep its
+    // complete-snapshot timeout separate from the short page/API probe bound.
+    public const SITEMAP_TIMEOUT_SECONDS = 120;
+
     /**
      * @param  list<UrlTruthInventoryRecord>  $records
      * @return array{consumer_urls:array<string,list<string>|null>,live_http:array<string,mixed>}
@@ -101,6 +105,7 @@ final class BoundedPublicUrlEvidenceProbe
                 'issue_type_counts' => $issues,
                 'concurrency' => $concurrency,
                 'timeout_seconds' => $timeoutSeconds,
+                'sitemap_timeout_seconds' => self::SITEMAP_TIMEOUT_SECONDS,
                 'max_retries' => $maxRetries,
                 'resume_cursor_supplied' => $resumeCursor !== null,
                 'next_resume_cursor' => $nextCursor,
@@ -125,11 +130,12 @@ final class BoundedPublicUrlEvidenceProbe
             foreach (array_chunk($pending, $concurrency, true) as $chunk) {
                 $batch = Http::pool(function (Pool $pool) use ($chunk, $timeoutSeconds, $accept): void {
                     foreach ($chunk as $key => $url) {
+                        $requestTimeout = $key === 'sitemap' ? self::SITEMAP_TIMEOUT_SECONDS : $timeoutSeconds;
                         $pool->as((string) $key)
                             ->accept($accept)
                             ->withUserAgent('FermatMind-SEO-URL-Truth-Reconcile/1.0')
-                            ->connectTimeout(min(5, $timeoutSeconds))
-                            ->timeout($timeoutSeconds)
+                            ->connectTimeout(min(5, $requestTimeout))
+                            ->timeout($requestTimeout)
                             ->withOptions(['allow_redirects' => false])
                             ->get($url);
                     }

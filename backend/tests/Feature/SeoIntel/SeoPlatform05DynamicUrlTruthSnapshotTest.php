@@ -164,6 +164,7 @@ final class SeoPlatform05DynamicUrlTruthSnapshotTest extends TestCase
         $this->assertSame(1, data_get($probe, 'live_http.requested_count'));
         $this->assertSame(4, data_get($probe, 'live_http.concurrency'));
         $this->assertSame(15, data_get($probe, 'live_http.timeout_seconds'));
+        $this->assertSame(120, data_get($probe, 'live_http.sitemap_timeout_seconds'));
         $this->assertSame(2, data_get($probe, 'live_http.max_retries'));
         $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', (string) data_get($probe, 'live_http.next_resume_cursor'));
         $this->assertFalse((bool) data_get($probe, 'live_http.raw_url_emitted', true));
