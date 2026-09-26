@@ -430,6 +430,16 @@ final class CmsTranslationBackboneTest extends TestCase
 
     public function test_reviewed_public_content_page_source_can_be_reconciled_without_changing_target_or_old_revision(): void
     {
+        $this->assertReviewedPublicContentPageSourceCanBeReconciled(CmsTranslationRevision::STATUS_PUBLISHED);
+    }
+
+    public function test_reviewed_public_content_page_source_with_legacy_approved_published_revision_can_be_reconciled_and_restored(): void
+    {
+        $this->assertReviewedPublicContentPageSourceCanBeReconciled(CmsTranslationRevision::STATUS_APPROVED);
+    }
+
+    private function assertReviewedPublicContentPageSourceCanBeReconciled(string $oldRevisionStatus): void
+    {
         $source = $this->createSourceContentPage('legacy-source-reconcile', '/legacy-source-reconcile');
         $source->forceFill([
             'translation_status' => ContentPage::TRANSLATION_STATUS_PUBLISHED,
@@ -449,7 +459,11 @@ final class CmsTranslationBackboneTest extends TestCase
         $source->refresh();
         $oldRevision = app(RowBackedRevisionWorkspace::class)->ensureInitialRevision('content_page', $source);
         $source->forceFill(['source_version_hash' => str_repeat('a', 64)])->saveQuietly();
-        $oldRevision->forceFill(['source_version_hash' => str_repeat('a', 64)])->saveQuietly();
+        $oldRevision->forceFill([
+            'source_version_hash' => str_repeat('a', 64),
+            'revision_status' => $oldRevisionStatus,
+            'published_at' => now(),
+        ])->saveQuietly();
         $source->refresh();
         $oldRevision->refresh();
 
@@ -462,6 +476,22 @@ final class CmsTranslationBackboneTest extends TestCase
         ])->saveQuietly();
         $source->refresh();
         $target->refresh();
+        if ($oldRevisionStatus === CmsTranslationRevision::STATUS_APPROVED) {
+            $oldRevision->forceFill(['published_at' => null])->saveQuietly();
+            $this->assertSame(1, Artisan::call('translation:reconcile-content-page-source-version', [
+                '--source-id' => (int) $source->id,
+                '--target-id' => (int) $target->id,
+                '--group-id' => (string) $source->translation_group_id,
+                '--slug' => (string) $source->slug,
+                '--revision-id' => (int) $oldRevision->id,
+                '--dry-run' => true,
+                '--json' => true,
+            ]));
+            $this->assertContains('old_source_revision_identity_invalid',
+                json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR)['errors']);
+            $oldRevision->forceFill(['published_at' => now()])->saveQuietly();
+            $oldRevision->refresh();
+        }
         $adapter = app(SiblingTranslationWorkflowService::class)->adapter('content_page');
         $payload = $adapter->snapshotPayload($source);
         $payload['body_html'] = $source->getRawOriginal('content_html');
@@ -489,6 +519,8 @@ final class CmsTranslationBackboneTest extends TestCase
         DB::connection()->enableQueryLog();
         DB::connection()->flushQueryLog();
         $this->assertSame(0, Artisan::call('translation:reconcile-content-page-source-version', $options + ['--dry-run' => true]));
+        $this->assertSame($oldRevisionStatus,
+            json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR)['before']['old_revision_status']);
         $writes = collect(DB::connection()->getQueryLog())->pluck('query')->filter(
             static fn (string $sql): bool => preg_match('/^\s*(?:insert|update|delete|replace|create|alter|drop)\b/i', $sql) === 1
         )->values()->all();
@@ -502,6 +534,9 @@ final class CmsTranslationBackboneTest extends TestCase
         ]));
         $result = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
         $this->assertTrue($result['ok']);
+        $audit = AuditLog::query()->withoutGlobalScopes()
+            ->where('action', 'content_page_source_version_reconciled')->firstOrFail();
+        $this->assertSame($oldRevisionStatus, $audit->meta_json['old_revision_status']);
         $source->refresh();
         $this->assertSame('source', $source->translation_status);
         $this->assertSame($source->freshSourceVersionHash(), $source->source_version_hash);
@@ -530,6 +565,13 @@ final class CmsTranslationBackboneTest extends TestCase
             '--audit-id' => (int) $result['after']['audit_id'],
             '--json' => true,
         ];
+        if ($oldRevisionStatus === CmsTranslationRevision::STATUS_APPROVED) {
+            $meta = $audit->meta_json;
+            $audit->forceFill(['meta_json' => array_replace($meta, ['old_revision_status' => 'published'])])->saveQuietly();
+            $this->assertSame(1, Artisan::call('translation:restore-content-page-source-version',
+                $restoreOptions + ['--dry-run' => true]));
+            $audit->forceFill(['meta_json' => $meta])->saveQuietly();
+        }
         $this->assertSame(1, Artisan::call('translation:restore-content-page-source-version', array_replace(
             $restoreOptions, ['--target-hash' => 'wrong', '--dry-run' => true]
         )));
@@ -553,6 +595,7 @@ final class CmsTranslationBackboneTest extends TestCase
         $this->assertSame($targetBefore, $target->fresh()->getAttributes());
         $this->assertSame($oldBefore, $oldRevision->fresh()->getAttributes());
         $this->assertSame(1, AuditLog::query()->withoutGlobalScopes()->where('action', 'content_page_source_version_reconciliation_restored')->count());
+        $this->assertSame($oldRevisionStatus, $oldRevision->fresh()->revision_status);
     }
 
     public function test_missing_provenance_is_unverified_and_blocks_publication_for_article_and_page(): void

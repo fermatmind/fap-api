@@ -256,7 +256,11 @@ final class RestoreContentPageSourceVersion extends Command
                 $errors[] = 'source_revision_identity_invalid';
             }
         }
-        if ((string) $old->revision_status !== CmsTranslationRevision::STATUS_PUBLISHED
+        $legacyApprovedRevision = (string) $old->revision_status === CmsTranslationRevision::STATUS_APPROVED
+            && $old->getRawOriginal('published_at') !== null
+            && (string) ($meta['old_revision_status'] ?? '') === CmsTranslationRevision::STATUS_APPROVED
+            && (string) ($meta['old_revision_published_at'] ?? '') === (string) $old->getRawOriginal('published_at');
+        if (! $legacyApprovedRevision && (string) $old->revision_status !== CmsTranslationRevision::STATUS_PUBLISHED
             || (string) $new->revision_status !== CmsTranslationRevision::STATUS_SOURCE
             || (int) $new->supersedes_revision_id !== $oldId
             || (string) $audit->action !== 'content_page_source_version_reconciled'
