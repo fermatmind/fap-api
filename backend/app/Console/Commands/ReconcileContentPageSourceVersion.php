@@ -154,6 +154,8 @@ final class ReconcileContentPageSourceVersion extends Command
                             'target_hash' => (string) $target->source_version_hash,
                             'target_updated_at' => (string) $target->getRawOriginal('updated_at'),
                             'old_revision_id' => (int) $oldRevision->id,
+                            'old_revision_status' => (string) $oldRevision->revision_status,
+                            'old_revision_published_at' => (string) $oldRevision->getRawOriginal('published_at'),
                             'new_revision_id' => (int) $newAfter->id,
                             'old_revision_hash' => (string) $oldRevision->source_version_hash,
                             'old_revision_updated_at' => (string) $oldRevision->getRawOriginal('updated_at'),
@@ -263,7 +265,9 @@ final class ReconcileContentPageSourceVersion extends Command
             || (string) $revision->translation_group_id !== $groupId
             || (string) $revision->locale !== 'zh-CN' || (string) $revision->source_locale !== 'zh-CN'
             || $revision->source_content_id !== null
-            || (string) $revision->revision_status !== CmsTranslationRevision::STATUS_PUBLISHED) {
+            || ! ((string) $revision->revision_status === CmsTranslationRevision::STATUS_PUBLISHED
+                || ((string) $revision->revision_status === CmsTranslationRevision::STATUS_APPROVED
+                    && $revision->getRawOriginal('published_at') !== null))) {
             $errors[] = 'old_source_revision_identity_invalid';
         }
         $rowPayload = $adapter->snapshotPayload($source);
@@ -333,6 +337,7 @@ final class ReconcileContentPageSourceVersion extends Command
             'source_id' => ($snapshot['source'] ?? null)?->id,
             'target_id' => ($snapshot['target'] ?? null)?->id,
             'revision_id' => ($snapshot['revision'] ?? null)?->id,
+            'old_revision_status' => ($snapshot['revision'] ?? null)?->revision_status,
             'before_status' => $snapshot['before_status'] ?? null,
             'old_source_hash' => $snapshot['source_hash'] ?? null,
             'fresh_source_hash' => $snapshot['fresh_hash'] ?? null,
