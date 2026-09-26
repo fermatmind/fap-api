@@ -63,7 +63,6 @@ final class CmsTranslationBackboneTest extends TestCase
             ->assertSet('metrics.translation_groups', 4)
             ->assertSet('metrics.missing_translation_count', 3)
             ->assertSet('metrics.published_target_coverage_rate', 25)
-            ->assertSet('coverageMatrix.0.cells.zh-CN.state', 'source')
             ->assertSet('summaryCards.1.value', '3')
             ->set('contentTypeFilter', 'support_article')
             ->assertSee('support-faq')

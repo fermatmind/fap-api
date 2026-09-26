@@ -54,13 +54,12 @@ final class CmsTranslationOpsService
         $filtered = $this->applyFilters($groups, $filters)->values();
 
         return [
-            'metrics' => $this->metrics($groups),
-            'summary_cards' => $this->summaryCards($groups),
+            'metrics' => $this->metrics($filtered),
+            'summary_cards' => $this->summaryCards($filtered),
             'locale_columns' => $this->localeColumns($filtered),
             'coverage_matrix' => $this->coverageMatrix($filtered),
             'groups' => $filtered->all(),
-            'selected_group' => $filtered->firstWhere('group_key', $selectedGroupKey)
-                ?? $groups->firstWhere('group_key', $selectedGroupKey),
+            'selected_group' => $filtered->firstWhere('group_key', $selectedGroupKey),
             'filter_options' => $this->filterOptions($groups),
         ];
     }
