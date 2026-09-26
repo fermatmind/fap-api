@@ -9,6 +9,7 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Tests\TestCase;
 
 final class ArticleRepairTranslationLineageCommandTest extends TestCase
@@ -31,7 +32,7 @@ final class ArticleRepairTranslationLineageCommandTest extends TestCase
         ));
 
         $payload = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
-        $this->assertSame(0, $exit);
+        $this->assertSame(0, $exit, Artisan::output());
         $this->assertTrue($payload['ok']);
         $this->assertTrue(data_get($payload, 'plan.would_write'));
         $this->assertSame((int) $source->id, (int) data_get($payload, 'plan.source_article_id'));
@@ -52,8 +53,12 @@ final class ArticleRepairTranslationLineageCommandTest extends TestCase
             '--json' => true,
         ]);
 
-        $this->assertSame(0, Artisan::call('articles:repair-translation-lineage', $options));
-        $payload = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+        $output = new BufferedOutput;
+        $exit = Artisan::call('articles:repair-translation-lineage', $options, $output);
+        $rawOutput = $output->fetch();
+        $this->assertSame(0, $exit, $rawOutput);
+        $this->assertJson($rawOutput);
+        $payload = json_decode($rawOutput, true, 512, JSON_THROW_ON_ERROR);
         $this->assertSame('translation_lineage_repaired', $payload['action']);
         $this->assertFalse(data_get($payload, 'plan.would_write'));
 
@@ -98,6 +103,24 @@ final class ArticleRepairTranslationLineageCommandTest extends TestCase
         $this->assertFalse($payload['ok']);
         $this->assertContains('body_hash_mismatch', array_column($payload['errors'], 'code'));
         $this->assertTrue($target->fresh()->isSourceArticle());
+    }
+
+    public function test_stale_target_provenance_cannot_be_rewritten_to_current_source_hash(): void
+    {
+        [$source, $target, $sourceRevision, $publishedRevision, $workingRevision] = $this->seedSplitSourceGroup();
+        $publishedRevision->forceFill(['translated_from_version_hash' => hash('sha256', 'older-source')])->saveQuietly();
+
+        $options = $this->commandOptions($source, $target, $sourceRevision, $publishedRevision, $workingRevision, [
+            '--execute' => true,
+            '--confirm' => "I explicitly approve article translation lineage repair from source {$source->id} to target {$target->id}.",
+            '--json' => true,
+        ]);
+
+        $this->assertSame(1, Artisan::call('articles:repair-translation-lineage', $options));
+        $payload = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertContains('translation_provenance_unverified', array_column($payload['errors'], 'code'));
+        $this->assertTrue($target->fresh()->isSourceArticle());
+        $this->assertSame(hash('sha256', 'older-source'), (string) $publishedRevision->fresh()->translated_from_version_hash);
     }
 
     /** @return array{Article,Article,ArticleTranslationRevision,ArticleTranslationRevision,ArticleTranslationRevision} */
@@ -145,7 +168,14 @@ final class ArticleRepairTranslationLineageCommandTest extends TestCase
         $target->forceFill([
             'working_revision_id' => (int) $workingRevision->id,
             'published_revision_id' => (int) $publishedRevision->id,
-        ])->save();
+            'translated_from_version_hash' => (string) $sourceRevision->source_version_hash,
+        ])->saveQuietly();
+        foreach ([$publishedRevision, $workingRevision] as $revision) {
+            $revision->forceFill([
+                'source_version_hash' => (string) $sourceRevision->source_version_hash,
+                'translated_from_version_hash' => (string) $sourceRevision->source_version_hash,
+            ])->saveQuietly();
+        }
 
         $this->seo($source, '/zh/articles/source-article');
         $this->seo($target, '/en/articles/target-article');

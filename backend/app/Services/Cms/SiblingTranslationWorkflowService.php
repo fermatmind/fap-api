@@ -300,9 +300,14 @@ final class SiblingTranslationWorkflowService
             $blockers[] = 'target locale missing';
         }
 
-        $working = $this->workspace->workingRevision($contentType, $target);
-        $payload = $working->payload_json ?? [];
-        if ($payload === []) {
+        $working = $target->workingRevision;
+        if (! $working instanceof CmsTranslationRevision) {
+            $blockers[] = 'working revision missing';
+        }
+        $payload = $working instanceof CmsTranslationRevision
+            ? ($working->payload_json ?? [])
+            : $adapter->snapshotPayload($target);
+        if ($working instanceof CmsTranslationRevision && $payload === []) {
             $blockers[] = 'working revision missing payload';
         }
 
@@ -325,9 +330,11 @@ final class SiblingTranslationWorkflowService
             }
         }
 
+        $blockers = array_values(array_unique(array_merge($blockers, $adapter->requiredPayloadBlockers($payload))));
+
         return [
             'ok' => $blockers === [],
-            'blockers' => array_values(array_unique(array_merge($blockers, $adapter->requiredPayloadBlockers($payload)))),
+            'blockers' => $blockers,
         ];
     }
 
