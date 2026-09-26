@@ -153,12 +153,14 @@ final class ArticleTranslationOpsService
     ): array {
         $workingRevision = $article->workingRevision;
         $publishedRevision = $article->publishedRevision;
+        $sourceVersionIssues = $source instanceof Article ? $this->sourceVersionIssues($source) : [];
+        $sourceVersionConflict = $sourceVersionIssues !== [];
         $status = (string) ($workingRevision?->revision_status ?? $article->translation_status ?? Article::TRANSLATION_STATUS_SOURCE);
         $translatedFromHash = $workingRevision?->translated_from_version_hash;
         $isSource = $article->isSourceArticle()
             || ($source instanceof Article && (int) $article->id === (int) $source->id);
-        $isWorkingKnown = $isSource || ($workingRevision instanceof ArticleTranslationRevision
-            && filled($sourceHash) && filled($translatedFromHash));
+        $isWorkingKnown = ! $sourceVersionConflict && ($isSource || ($workingRevision instanceof ArticleTranslationRevision
+            && filled($sourceHash) && filled($translatedFromHash)));
         $isWorkingStale = ! $isSource
             && filled($sourceHash)
             && filled($translatedFromHash)
@@ -166,7 +168,7 @@ final class ArticleTranslationOpsService
         $isArticlePublishedPublic = (string) $article->status === 'published' && (bool) $article->is_public;
         $isPublished = $isArticlePublishedPublic && $publishedRevision instanceof ArticleTranslationRevision;
         $publishedHash = $publishedRevision?->translated_from_version_hash;
-        $isPublishedKnown = $isSource || (filled($publishedSourceHash) && filled($publishedHash));
+        $isPublishedKnown = ! $sourceVersionConflict && ($isSource || (filled($publishedSourceHash) && filled($publishedHash)));
         $isFreshnessKnown = $isWorkingKnown && (! $isPublished || $isPublishedKnown);
         $isPublishedStale = ! $isSource && $isPublished && filled($publishedSourceHash) && filled($publishedHash)
             && ! hash_equals((string) $publishedSourceHash, (string) $publishedHash);
@@ -190,6 +192,11 @@ final class ArticleTranslationOpsService
                 ? ['ok' => true, 'blockers' => []]
                 : ['ok' => false, 'blockers' => ['source article status is not source']])
             : app(ArticleTranslationWorkflowService::class)->preflight($article);
+
+        if ($sourceVersionConflict) {
+            $preflight['blockers'] = array_merge($preflight['blockers'], $sourceVersionIssues);
+            $preflight['ok'] = false;
+        }
 
         if ($isArticlePublishedPublic && ! $publishedRevision instanceof ArticleTranslationRevision) {
             $preflight['blockers'][] = 'missing published revision';
@@ -318,6 +325,12 @@ final class ArticleTranslationOpsService
             return $issues;
         }
 
+        foreach ($this->sourceVersionIssues($source) as $sourceVersionIssue) {
+            $issues[] = $sourceVersionIssue === 'source row hash differs from current content'
+                ? __('ops.translation_ops.ownership_issues.source_row_hash_mismatch')
+                : __('ops.translation_ops.ownership_issues.source_published_revision_hash_mismatch');
+        }
+
         foreach ($articles as $article) {
             if ((int) $article->id === (int) $source->id) {
                 continue;
@@ -332,6 +345,32 @@ final class ArticleTranslationOpsService
         }
 
         return array_values(array_unique($issues));
+    }
+
+    /** @return list<string> */
+    private function sourceVersionIssues(Article $source): array
+    {
+        $working = $source->workingRevision;
+        $published = $source->publishedRevision;
+
+        if (! $working instanceof ArticleTranslationRevision
+            || ! $published instanceof ArticleTranslationRevision
+            || (int) $working->id !== (int) $published->id) {
+            return [];
+        }
+
+        $issues = [];
+        if (! filled($source->source_version_hash)
+            || ! hash_equals((string) $source->source_version_hash, $source->computeSourceVersionHash())) {
+            $issues[] = 'source row hash differs from current content';
+        }
+        if (! filled($source->source_version_hash)
+            || ! filled($published->source_version_hash)
+            || ! hash_equals((string) $source->source_version_hash, (string) $published->source_version_hash)) {
+            $issues[] = 'source row and published revision hashes differ';
+        }
+
+        return $issues;
     }
 
     /**

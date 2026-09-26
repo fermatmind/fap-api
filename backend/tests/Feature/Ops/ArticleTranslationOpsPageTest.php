@@ -783,6 +783,62 @@ final class ArticleTranslationOpsPageTest extends TestCase
         $this->assertContains('missing ja locale', collect($group['alerts'])->pluck('label')->all());
     }
 
+    public function test_source_row_and_published_revision_hash_conflict_blocks_claim_of_current_translation(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        $created = $this->createPublishedTranslationGroup('source-revision-hash-conflict-fixture');
+        $source = $created['source'];
+        $oldRevisionHash = (string) $created['sourceRevision']->source_version_hash;
+        $revisionCount = ArticleTranslationRevision::query()->withoutGlobalScopes()->count();
+        $source->forceFill(['cover_image_alt' => 'Newly published cover description'])->save();
+
+        $this->assertNotSame($oldRevisionHash, (string) $source->fresh()->source_version_hash);
+
+        $dashboard = app(ArticleTranslationOpsService::class)->dashboard([
+            'slug' => 'source-revision-hash-conflict-fixture',
+        ]);
+        $group = $dashboard['groups'][0];
+        $target = collect($group['locales'])->firstWhere('locale', 'en');
+
+        $this->assertFalse($group['canonical_ok']);
+        $this->assertContains('source row and published revision hashes differ', $group['canonical_issues']);
+        $this->assertFalse($target['is_freshness_known']);
+        $this->assertFalse($target['preflight']['ok']);
+        $this->assertContains('source row and published revision hashes differ', $target['preflight']['blockers']);
+        $this->assertContains('source hash cannot be verified', $target['compare_summary']);
+        $this->assertSame($revisionCount, ArticleTranslationRevision::query()->withoutGlobalScopes()->count());
+        $this->assertSame($oldRevisionHash, (string) $created['sourceRevision']->fresh()->source_version_hash);
+    }
+
+    public function test_source_row_stored_hash_conflict_blocks_claim_of_current_translation(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        $created = $this->createPublishedTranslationGroup('source-row-hash-conflict-fixture');
+        $source = $created['source'];
+        $oldRowHash = (string) $source->source_version_hash;
+        $revisionCount = ArticleTranslationRevision::query()->withoutGlobalScopes()->count();
+        $source->forceFill(['cover_image_alt' => 'Untracked cover description'])->saveQuietly();
+
+        $this->assertSame($oldRowHash, (string) $source->fresh()->source_version_hash);
+
+        $dashboard = app(ArticleTranslationOpsService::class)->dashboard([
+            'slug' => 'source-row-hash-conflict-fixture',
+        ]);
+        $group = $dashboard['groups'][0];
+        $target = collect($group['locales'])->firstWhere('locale', 'en');
+
+        $this->assertFalse($group['canonical_ok']);
+        $this->assertContains('source row stored hash differs from current content', $group['canonical_issues']);
+        $this->assertFalse($target['is_freshness_known']);
+        $this->assertFalse($target['preflight']['ok']);
+        $this->assertContains('source row stored hash differs from current content', $target['preflight']['blockers']);
+        $this->assertSame($revisionCount, ArticleTranslationRevision::query()->withoutGlobalScopes()->count());
+    }
+
     /**
      * @return array{source:Article,translation:Article,sourceRevision:ArticleTranslationRevision,translationRevision:ArticleTranslationRevision}
      */
