@@ -15,6 +15,7 @@ use App\Models\Organization;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
+use App\Services\Cms\ArticleTranslationWorkflowService;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
@@ -550,6 +551,70 @@ final class ArticleTranslationRevisionContractTest extends TestCase
         $this->assertSame($original['translated_from_version_hash'], $working->translated_from_version_hash);
         $this->assertNull($working->reviewed_at);
         $this->assertNull($working->approved_at);
+    }
+
+    public function test_editing_translation_with_unknown_provenance_does_not_claim_current_source(): void
+    {
+        $source = $this->createArticle(0, 'zh-CN', 'Published source', [
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $target = $this->createArticle(0, 'en', 'Published translation', [
+            'translation_group_id' => $source->translation_group_id,
+            'source_locale' => 'zh-CN',
+            'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED,
+            'translated_from_article_id' => $source->id,
+            'translated_from_version_hash' => null,
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $this->runRevisionBackfill();
+        $target->refresh();
+        $published = $target->publishedRevision;
+        $this->assertInstanceOf(ArticleTranslationRevision::class, $published);
+        $target->forceFill(['translated_from_version_hash' => 'legacy-row-claim'])->saveQuietly();
+        $published->forceFill([
+            'source_version_hash' => null,
+            'translated_from_version_hash' => null,
+        ])->saveQuietly();
+
+        $working = app(ArticleTranslationRevisionWorkspace::class)->saveWorkingRevision($target->fresh(), [
+            'title' => 'Revised English draft',
+            'content_md' => 'A revised draft still awaiting source comparison.',
+            'working_revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
+        ]);
+
+        $target->refresh();
+        $this->assertNotSame((int) $published->id, (int) $working->id);
+        $this->assertNull($working->source_version_hash);
+        $this->assertNull($working->translated_from_version_hash);
+        $this->assertSame('legacy-row-claim', $target->translated_from_version_hash);
+        $this->assertSame((int) $published->id, (int) $target->published_revision_id);
+        $this->assertSame('Published translation', $target->title);
+        $this->assertContains('translation provenance unknown', app(ArticleTranslationWorkflowService::class)
+            ->preflight($target->fresh(['workingRevision', 'sourceCanonical.workingRevision']))['blockers']);
+    }
+
+    public function test_creating_editor_working_revision_preserves_unknown_translation_provenance(): void
+    {
+        $source = $this->createArticle(0, 'zh-CN', 'Current source');
+        $target = $this->createArticle(0, 'en', 'Unverified English draft', [
+            'translation_group_id' => $source->translation_group_id,
+            'source_locale' => 'zh-CN',
+            'translation_status' => Article::TRANSLATION_STATUS_HUMAN_REVIEW,
+            'translated_from_article_id' => $source->id,
+            'translated_from_version_hash' => null,
+        ]);
+        $workspace = app(ArticleTranslationRevisionWorkspace::class);
+        $this->assertNotNull($workspace->sourceVersionHashFor($target));
+
+        $working = $workspace->resolveWorkingRevision($target);
+
+        $this->assertNull($working->source_version_hash);
+        $this->assertNull($working->translated_from_version_hash);
+        $this->assertNull($target->fresh()->translated_from_version_hash);
     }
 
     public function test_runtime_resolver_does_not_overwrite_working_revision_after_canonical_metadata_changes(): void
