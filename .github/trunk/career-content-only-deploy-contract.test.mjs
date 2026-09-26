@@ -9,6 +9,7 @@ const publisher = readFileSync(new URL('../../backend/app/Domain/Career/Display/
 const parity = readFileSync(new URL('../../backend/app/Domain/Career/Display/CareerCurrentAuthorityParity.php', import.meta.url), 'utf8');
 const responseCache = readFileSync(new URL('../../backend/app/Services/Career/PublicCareerAuthorityResponseCache.php', import.meta.url), 'utf8');
 const ci = readFileSync(new URL('../workflows/ci.yml', import.meta.url), 'utf8');
+const recovery = readFileSync(new URL('../workflows/recovery.yml', import.meta.url), 'utf8');
 
 test('content-only policy is receipt-bound and selects the dedicated deploy task', () => {
   assert.match(workflow, /career_content_only: \$\{\{ steps\.receipt\.outputs\.career_content_only \}\}/);
@@ -43,6 +44,13 @@ test('dedicated mode preserves parity and atomic publish while excluding unrelat
   assert.match(deploy, /career_content_materialization=full_fallback/);
   assert.match(deploy, /\.before_sha256/);
   assert.match(deploy, /cp -a "\\\$current\/\."/);
+});
+
+test('Career smoke uses browser compression and committed rollback releases its own lock', () => {
+  const smoke = deploy.slice(deploy.indexOf("task('healthcheck:career-content-only'"), deploy.indexOf("task('healthcheck:sitemap-source'"));
+  assert.match(smoke, /curl -fsS --compressed --max-time 30 -o \/dev\/null/);
+  assert.match(workflow, /if \[ "\$current" = "\$DEPLOY_SHA" \]; then[\s\S]*?fap:deploy-unlock-owned production[\s\S]*?deploy:code-only production/);
+  assert.match(recovery, /lkg\)[\s\S]*?export DEPLOY_SHA="\$active" DEPLOY_MODE=code_only[\s\S]*?rollback production/);
 });
 
 test('CI builds one deterministic SHA-bound package and deploy stages consume it', () => {

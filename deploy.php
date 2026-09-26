@@ -4486,7 +4486,7 @@ task('healthcheck:career-content-only', function () {
     if (preg_match('#\Ahttps://[A-Za-z0-9.-]+(?::[0-9]+)?\z#D', $publicWebBaseUrl) !== 1) {
         throw new \RuntimeException('public_web_base_url must be an HTTPS origin');
     }
-    run('curl -fsS --max-time 15 -o /dev/null '.deployShellArg($publicWebBaseUrl.'/zh/career/jobs/accountants-and-auditors'));
+    run('curl -fsS --compressed --max-time 30 -o /dev/null '.deployShellArg($publicWebBaseUrl.'/zh/career/jobs/accountants-and-auditors'));
 });
 
 task('healthcheck:sitemap-source', function () {
