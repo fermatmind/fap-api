@@ -105,6 +105,7 @@ final class CmsTranslationOpsService
                     'is_public' => (bool) $locale['is_public'],
                     'is_published' => (bool) $locale['is_published'],
                     'is_stale' => (bool) $locale['is_stale'],
+                    'is_freshness_known' => (bool) ($locale['is_freshness_known'] ?? false),
                     'is_published_stale' => (bool) ($locale['is_published_stale'] ?? false),
                     'is_draft_stale' => (bool) ($locale['is_draft_stale'] ?? false),
                     'published_at' => $locale['published_at'],
@@ -229,7 +230,14 @@ final class CmsTranslationOpsService
         $isWorkingStale = ! $isSource && $this->siblingWorkflow->isStale($adapter, $record);
         $publishedRevision = $record->publishedRevision;
         $sourceHash = $source?->source_version_hash;
-        $publishedHash = $publishedRevision?->translated_from_version_hash ?: $record->translated_from_version_hash;
+        $workingRevision = $record->workingRevision;
+        $workingHash = $workingRevision?->translated_from_version_hash;
+        $publishedHash = $publishedRevision?->translated_from_version_hash;
+        $isWorkingKnown = $isSource || ($workingRevision instanceof CmsTranslationRevision
+            && filled($sourceHash) && filled($workingHash));
+        $isPublishedKnown = $isSource || ($publishedRevision instanceof CmsTranslationRevision
+            && filled($sourceHash) && filled($publishedHash));
+        $isFreshnessKnown = $isWorkingKnown && (! $isPublished || $isPublishedKnown);
         $isPublishedStale = ! $isSource && $isPublished && filled($sourceHash) && filled($publishedHash)
             && ! hash_equals((string) $sourceHash, (string) $publishedHash);
         $hasSeparateWorkingRevision = filled($record->working_revision_id)
@@ -272,6 +280,7 @@ final class CmsTranslationOpsService
             'is_public' => (bool) data_get($record, 'is_public', false),
             'is_published' => $isPublished,
             'is_stale' => $isStale,
+            'is_freshness_known' => $isFreshnessKnown,
             'is_published_stale' => $isPublishedStale,
             'is_draft_stale' => $isDraftStale,
             'published_at' => optional($record->published_at)?->toISOString(),
@@ -292,7 +301,9 @@ final class CmsTranslationOpsService
                     : __('ops.translation_ops.compare.working_revision_missing'),
                 $isWorkingStale
                     ? __('ops.translation_ops.compare.source_hash_drift_detected')
-                    : __('ops.translation_ops.compare.source_hash_aligned'),
+                    : ($isWorkingKnown
+                        ? __('ops.translation_ops.compare.source_hash_aligned')
+                        : __('ops.translation_ops.compare.source_hash_unverified')),
                 ...($isPublishedStale ? [__('ops.translation_ops.compare.published_revision_stale')] : []),
             ],
             'workflow_kind' => 'shadow_revision',
@@ -351,7 +362,11 @@ final class CmsTranslationOpsService
                 if ($stale === 'stale' && (int) $group['stale_locales_count'] < 1) {
                     return false;
                 }
-                if ($stale === 'current' && (int) $group['stale_locales_count'] > 0) {
+                if ($stale === 'current' && ((int) $group['stale_locales_count'] > 0
+                    || collect($group['locales'] ?? [])->contains(
+                        static fn (array $locale): bool => ! (bool) ($locale['is_source'] ?? false)
+                            && ! (bool) ($locale['is_freshness_known'] ?? false)
+                    ))) {
                     return false;
                 }
 
@@ -535,8 +550,12 @@ final class CmsTranslationOpsService
                 'status_label' => $this->localeCellStatusLabel($localeRow, $state),
                 'freshness_label' => (bool) ($localeRow['is_stale'] ?? false)
                     ? __('ops.translation_ops.matrix.stale')
-                    : __('ops.translation_ops.matrix.current'),
-                'freshness_state' => (bool) ($localeRow['is_stale'] ?? false) ? 'failed' : 'success',
+                    : ((bool) ($localeRow['is_freshness_known'] ?? false)
+                        ? __('ops.translation_ops.matrix.current')
+                        : __('ops.translation_ops.matrix.unknown')),
+                'freshness_state' => (bool) ($localeRow['is_stale'] ?? false)
+                    ? 'failed'
+                    : ((bool) ($localeRow['is_freshness_known'] ?? false) ? 'success' : 'warning'),
                 'publish_label' => (bool) ($localeRow['is_published'] ?? false)
                     ? __('ops.translation_ops.matrix.published')
                     : __('ops.translation_ops.matrix.not_published'),
