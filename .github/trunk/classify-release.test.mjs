@@ -32,6 +32,15 @@ test('docs-only changes after an accepted runtime release still skip deployment'
   assert.equal(result.scope.validation_base_sha, before);
 });
 
+test('a new Career publish ignores an earlier deploy-skipped documentation change', () => {
+  const page = 'backend/content_assets/career/current/careers/example/zh-CN.json';
+  const result = scope([page], ['backend/docs/seo/council-operations.md']);
+  assert.deepEqual(result.paths, [page]);
+  assert.equal(result.scope.validation_base_sha, before);
+  assert.equal(result.flags.docs_rules_tests_only, false);
+  assert.equal(result.operations.publisher_required, true);
+});
+
 test('pending migrations and payments keep the union of required checks', () => {
   const result = scope(['backend/tests/Feature/FixTest.php'], [
     'backend/database/migrations/2026_09_06_000000_expand_orders.php', 'backend/app/Services/Payments/PaymentService.php',

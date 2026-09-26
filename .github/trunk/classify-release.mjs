@@ -44,7 +44,7 @@ export function classifyRelease({ pushBase, head, baseline, diffPaths, isAncesto
   }
   const pushPaths = diffPaths(pushBase, head);
   const push = classifyPaths(pushPaths);
-  const pendingPaths = diffPaths(baseline.sha, head);
+  const pendingPaths = diffPaths(baseline.sha, pushBase);
   const pendingRuntime = pendingPaths.length > 0 && classifyPaths(pendingPaths).deploy;
   const classification = pendingRuntime ? classifyPaths([...pushPaths, ...pendingPaths]) : push;
   return {
