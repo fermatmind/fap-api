@@ -372,6 +372,7 @@ final class CmsTranslationBackboneTest extends TestCase
         $payload['support_contact'] = 'draft@example.com';
         $payload['policy_version'] = 'draft-policy';
         $payload['reviewer'] = 'Draft Reviewer';
+        $payload['headings_json'] = [['level' => 2, 'text' => 'Draft heading']];
         $payload['faq_items'] = [['question' => 'Draft question?', 'answer' => 'Draft answer.']];
         $payload['schema_enabled'] = true;
         $drafted = app(RowBackedRevisionWorkspace::class)->saveWorkingDraft(
@@ -400,6 +401,7 @@ final class CmsTranslationBackboneTest extends TestCase
         $this->assertSame('draft@example.com', $savedPayload['support_contact']);
         $this->assertSame('draft-policy', $savedPayload['policy_version']);
         $this->assertSame('Draft Reviewer', $savedPayload['reviewer']);
+        $this->assertSame([['level' => 2, 'text' => 'Draft heading']], $savedPayload['headings_json']);
         $this->assertSame([['question' => 'Draft question?', 'answer' => 'Draft answer.']], $savedPayload['faq_items']);
         $this->assertTrue($savedPayload['schema_enabled']);
         $this->assertNull($after->support_contact);

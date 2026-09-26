@@ -171,6 +171,8 @@ class EditContentPage extends EditRecord
                 || (string) $working->translation_group_id !== (string) $record->translation_group_id
                 || ! $record->source_content_id
                 || (int) $working->source_content_id !== (int) $record->source_content_id
+                || ! is_array($working->payload_json)
+                || ! is_array($working->payload_json['headings_json'] ?? null)
                 || $status !== (string) $record->status
                 || $reviewState !== (string) $record->review_state
                 || (bool) ($data['is_public'] ?? false) !== (bool) $record->is_public
@@ -180,6 +182,8 @@ class EditContentPage extends EditRecord
                     'status' => 'Only an exact draft revision can be saved here without changing identity, publication, or review state.',
                 ]);
             }
+
+            $payload['headings_json'] = $working->payload_json['headings_json'];
 
             return app(CmsEditorialReviewTransitionService::class)->saveRevisionedResource(
                 contentType: 'content_page',
