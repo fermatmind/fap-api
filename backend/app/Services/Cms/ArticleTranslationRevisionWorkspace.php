@@ -110,8 +110,24 @@ final class ArticleTranslationRevisionWorkspace
             }
 
             $statusChanged = $revisionStatus !== (string) $revision->revision_status;
+            $forkPublished = ($revisionChanged || $statusChanged)
+                && (int) $locked->published_revision_id === (int) $revision->id;
+            if ($forkPublished) {
+                $publishedRevision = $revision;
+                $revision = $publishedRevision->replicate();
+                $revisionPayload['revision_number'] = ((int) $locked->translationRevisions()->max('revision_number')) + 1;
+                $revisionPayload['supersedes_revision_id'] = (int) $publishedRevision->id;
+                $revisionPayload['created_by'] = $adminUserId;
+                $revisionPayload['reviewed_by'] = null;
+                $revisionPayload['reviewed_at'] = null;
+                $revisionPayload['approved_at'] = null;
+                $revisionPayload['published_at'] = null;
+            }
 
             $revision->forceFill($revisionPayload)->save();
+            if ($forkPublished) {
+                $locked->forceFill(['working_revision_id' => (int) $revision->id])->saveQuietly();
+            }
 
             if ($revisionChanged || $statusChanged) {
                 DB::table('articles')
