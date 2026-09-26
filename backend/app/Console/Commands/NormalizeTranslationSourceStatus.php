@@ -108,13 +108,15 @@ final class NormalizeTranslationSourceStatus extends Command
                         reason: $this->isRestore() ? 'controlled_translation_source_status_restore' : 'controlled_translation_source_identity_repair',
                         result: 'success',
                     );
-                    if (! AuditLog::query()->withoutGlobalScopes()->where('id', '>', $lastAuditId)
+                    $audit = AuditLog::query()->withoutGlobalScopes()->where('id', '>', $lastAuditId)
                         ->where('action', $this->isRestore() ? 'translation_source_status_restored' : 'translation_source_status_normalized')
                         ->where('target_type', (string) $this->option('content-type'))
                         ->where('target_id', (string) $record->id)
-                        ->exists()) {
+                        ->orderByDesc('id')->first();
+                    if (! $audit instanceof AuditLog) {
                         throw new \RuntimeException('audit_readback_failed');
                     }
+                    $readback['audit_id'] = (int) $audit->id;
 
                     return $readback;
                 });
@@ -289,6 +291,7 @@ final class NormalizeTranslationSourceStatus extends Command
             'published_revision_id' => (int) $record->published_revision_id,
             'revisions' => $snapshot['revisions'],
             'errors' => $snapshot['errors'],
+            'audit_id' => $snapshot['audit_id'] ?? null,
         ];
     }
 

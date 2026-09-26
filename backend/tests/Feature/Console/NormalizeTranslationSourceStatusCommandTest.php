@@ -54,6 +54,7 @@ final class NormalizeTranslationSourceStatusCommandTest extends TestCase
         $this->assertSame('source_status_normalized', $result['action']);
         $this->assertSame('published', $result['before']['translation_status']);
         $this->assertSame('source', $result['after']['translation_status']);
+        $this->assertGreaterThan(0, $result['after']['audit_id']);
         $this->assertSame('source', $source->fresh()->translation_status);
         $this->assertSame($before['source_version_hash'], $source->fresh()->source_version_hash);
         $this->assertSame($before['working_revision_id'], $source->fresh()->working_revision_id);
@@ -116,6 +117,7 @@ final class NormalizeTranslationSourceStatusCommandTest extends TestCase
         [$restoreExit, $restoreResult] = $this->runCommand($options);
         $this->assertSame(0, $restoreExit);
         $this->assertSame('source_status_restored', $restoreResult['action']);
+        $this->assertGreaterThan((int) $audit->id, $restoreResult['after']['audit_id']);
         $this->assertSame('published', $source->fresh()->translation_status);
         $this->assertDatabaseHas('audit_logs', [
             'action' => 'translation_source_status_restored',
