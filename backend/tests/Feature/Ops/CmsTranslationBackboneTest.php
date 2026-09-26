@@ -17,12 +17,14 @@ use App\Models\Role;
 use App\Models\SupportArticle;
 use App\Services\Cms\CmsTranslationWorkflowException;
 use App\Services\Cms\DisabledCmsMachineTranslationProvider;
+use App\Services\Cms\RowBackedRevisionWorkspace;
 use App\Services\Cms\SiblingTranslationWorkflowService;
 use App\Services\Ops\CmsTranslationOpsService;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
 use Filament\PanelRegistry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -68,6 +70,296 @@ final class CmsTranslationBackboneTest extends TestCase
             ->assertDontSee('ops-article')
             ->call('createTranslationDraft', 'support_article', (int) $sourceSupport->id, 'en')
             ->assertForbidden();
+    }
+
+    public function test_dashboard_and_page_reads_do_not_create_shadow_revisions_or_change_pointers(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $organization = $this->createOrganization($admin);
+        $this->createPublishedArticleGroup('readonly-article');
+        $sources = [
+            'content_page' => $this->createSourceContentPage('readonly-source', '/readonly-source'),
+            'support_article' => $this->createSourceSupportArticle('readonly-support'),
+            'interpretation_guide' => $this->createSourceInterpretationGuide('readonly-guide'),
+        ];
+        $targets = [];
+        foreach ($sources as $contentType => $source) {
+            $targets[$contentType] = $this->createTargetTranslation($contentType, $source, 'en');
+        }
+
+        $this->assertDatabaseCount('cms_translation_revisions', 0);
+        $articleRevisionCount = ArticleTranslationRevision::query()->count();
+        foreach ($targets as $target) {
+            $this->assertNull($target->working_revision_id);
+            $this->assertNull($target->published_revision_id);
+        }
+
+        $this->withSession($this->opsSession($admin, $organization))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        DB::connection()->enableQueryLog();
+        DB::connection()->flushQueryLog();
+        $first = app(CmsTranslationOpsService::class)->dashboard();
+        $second = app(CmsTranslationOpsService::class)->dashboard();
+        Livewire::test(ArticleTranslationOpsPage::class)
+            ->assertOk()
+            ->set('contentTypeFilter', 'content_page')
+            ->set('slugSearch', 'readonly-source')
+            ->call('inspectGroup', (string) $sources['content_page']->translation_group_id)
+            ->call('resetFilters');
+        foreach ($targets as $contentType => $target) {
+            app(SiblingTranslationWorkflowService::class)->preflight($contentType, $target);
+            app(SiblingTranslationWorkflowService::class)->adapter($contentType)->snapshotPayload($target);
+        }
+        $writes = collect(DB::connection()->getQueryLog())->pluck('query')->filter(
+            static fn (string $sql): bool => preg_match('/^\s*(?:insert|update|delete|replace|create|alter|drop)\b/i', $sql) === 1
+        )->values()->all();
+        DB::connection()->disableQueryLog();
+
+        $this->assertSame([], $writes);
+        $this->assertSame($first['coverage_matrix'], $second['coverage_matrix']);
+        $this->assertDatabaseCount('cms_translation_revisions', 0);
+        $this->assertSame($articleRevisionCount, ArticleTranslationRevision::query()->count());
+        foreach ($sources as $source) {
+            $this->assertNull($source->fresh()->working_revision_id);
+        }
+        foreach ($targets as $target) {
+            $this->assertNull($target->fresh()->working_revision_id);
+            $this->assertNull($target->fresh()->published_revision_id);
+        }
+
+        foreach (['content_page', 'support_article', 'interpretation_guide'] as $contentType) {
+            $group = collect($first['groups'])->firstWhere('content_type', $contentType);
+            $targetLocale = collect($group['locales'])->firstWhere('locale', 'en');
+            $this->assertFalse($targetLocale['preflight']['ok']);
+            $this->assertContains('working revision missing', $targetLocale['preflight']['blockers']);
+        }
+    }
+
+    public function test_preflight_ok_matches_payload_blockers(): void
+    {
+        $source = $this->createSourceContentPage('payload-blocker', '/payload-blocker');
+        $target = $this->createTargetTranslation('content_page', $source, 'en');
+        $revision = app(RowBackedRevisionWorkspace::class)->ensureInitialRevision('content_page', $target);
+        $payload = $revision->payload_json;
+        unset($payload['seo_description']);
+        $revision->forceFill(['payload_json' => $payload])->save();
+
+        $preflight = app(SiblingTranslationWorkflowService::class)->preflight('content_page', $target->fresh());
+
+        $this->assertFalse($preflight['ok']);
+        $this->assertContains('seo description missing', $preflight['blockers']);
+        $this->assertSame($preflight['ok'], $preflight['blockers'] === []);
+        $this->assertSame((int) $revision->id, (int) $target->fresh()->working_revision_id);
+    }
+
+    public function test_source_locale_is_not_counted_as_a_translation_target(): void
+    {
+        $source = $this->createSourceContentPage('english-source', '/english-source');
+        $source->forceFill(['locale' => 'en', 'source_locale' => 'en'])->saveQuietly();
+
+        $dashboard = app(CmsTranslationOpsService::class)->dashboard(['content_type' => 'content_page']);
+
+        $this->assertSame(0, $dashboard['metrics']['target_slot_count']);
+        $this->assertSame(0, $dashboard['metrics']['missing_translation_count']);
+        $this->assertSame(0, $dashboard['metrics']['published_target_locale_count']);
+        $this->assertSame([], $dashboard['groups'][0]['coverage']['target_locales']);
+        $this->assertSame('source', $dashboard['coverage_matrix'][0]['cells']['en']['state']);
+    }
+
+    public function test_duplicate_source_rows_are_not_counted_as_published_targets(): void
+    {
+        $source = $this->createSourceContentPage('duplicate-source', '/duplicate-source');
+        $secondSource = $this->createTargetTranslation('content_page', $source, 'en');
+        $secondSource->forceFill([
+            'source_locale' => 'en',
+            'source_content_id' => null,
+            'translation_status' => ContentPage::TRANSLATION_STATUS_SOURCE,
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'is_public' => true,
+            'published_at' => now(),
+        ])->saveQuietly();
+
+        $dashboard = app(CmsTranslationOpsService::class)->dashboard(['content_type' => 'content_page']);
+
+        $this->assertSame(1, $dashboard['metrics']['target_slot_count']);
+        $this->assertSame(0, $dashboard['metrics']['published_target_locale_count']);
+        $this->assertSame(0, $dashboard['metrics']['missing_translation_count']);
+        $this->assertSame('failed', $dashboard['coverage_matrix'][0]['health_state']);
+        $this->assertSame('source', $dashboard['coverage_matrix'][0]['cells']['en']['state']);
+    }
+
+    public function test_english_source_article_does_not_create_a_false_missing_translation(): void
+    {
+        $this->createPublishedArticleGroup('chinese-group');
+        Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'english-source',
+            'locale' => 'en',
+            'source_locale' => 'en',
+            'translation_group_id' => 'article-english-source',
+            'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
+            'title' => 'English source',
+            'content_md' => 'English content',
+            'status' => 'published',
+            'is_public' => true,
+        ]);
+
+        $dashboard = app(CmsTranslationOpsService::class)->dashboard(['content_type' => 'article']);
+        $english = collect($dashboard['coverage_matrix'])->firstWhere('translation_group_id', 'article-english-source');
+
+        $this->assertSame(1, $dashboard['metrics']['target_slot_count']);
+        $this->assertSame(0, $dashboard['metrics']['missing_translation_count']);
+        $this->assertSame('not_applicable', $english['cells']['zh-CN']['state']);
+        $this->assertSame('blocked', $english['cells']['en']['state']);
+    }
+
+    public function test_fresh_working_revisions_do_not_hide_stale_published_versions(): void
+    {
+        $articleSlug = 'published-stale-working-fresh';
+        $this->createPublishedArticleGroup($articleSlug);
+        $articleSource = Article::query()->where('slug', $articleSlug)->where('locale', 'zh-CN')->firstOrFail();
+        $articleTarget = Article::query()->where('slug', $articleSlug)->where('locale', 'en')->firstOrFail();
+        $articleSource->workingRevision->forceFill(['source_version_hash' => 'article-source-v2'])->saveQuietly();
+        $articleDraft = $articleTarget->publishedRevision->replicate();
+        $articleDraft->forceFill([
+            'revision_number' => 2,
+            'revision_status' => ArticleTranslationRevision::STATUS_MACHINE_DRAFT,
+            'source_version_hash' => 'article-source-v2',
+            'translated_from_version_hash' => 'article-source-v2',
+            'published_at' => null,
+        ])->save();
+        $articleTarget->forceFill(['working_revision_id' => (int) $articleDraft->id])->saveQuietly();
+
+        $pageSource = $this->createSourceContentPage('published-stale-page', '/published-stale-page');
+        $pageTarget = $this->createTargetTranslation('content_page', $pageSource, 'en');
+        $pageTarget->forceFill([
+            'translation_status' => ContentPage::TRANSLATION_STATUS_PUBLISHED,
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'review_state' => 'approved',
+            'is_public' => true,
+            'published_at' => now(),
+        ])->saveQuietly();
+        $pagePublished = app(RowBackedRevisionWorkspace::class)->ensureInitialRevision('content_page', $pageTarget);
+        $pageSource->forceFill(['source_version_hash' => 'page-source-v2'])->saveQuietly();
+        $pageDraft = $pagePublished->replicate();
+        $pageDraft->forceFill([
+            'revision_number' => 2,
+            'revision_status' => 'machine_draft',
+            'source_version_hash' => 'page-source-v2',
+            'translated_from_version_hash' => 'page-source-v2',
+            'published_at' => null,
+        ])->save();
+        $pageTarget->forceFill(['working_revision_id' => (int) $pageDraft->id])->saveQuietly();
+
+        $dashboard = app(CmsTranslationOpsService::class)->dashboard();
+
+        $this->assertSame(2, $dashboard['metrics']['stale_published_count']);
+        $this->assertSame(0, $dashboard['metrics']['stale_draft_count']);
+        $this->assertSame(2, $dashboard['metrics']['stale_translation_count']);
+        $this->assertSame(2, $dashboard['metrics']['stale_groups']);
+    }
+
+    public function test_unpublished_source_working_revision_does_not_age_published_translation(): void
+    {
+        $slug = 'unpublished-source-working';
+        $this->createPublishedArticleGroup($slug);
+        $source = Article::query()->where('slug', $slug)->where('locale', 'zh-CN')->firstOrFail();
+        $sourceDraft = $source->publishedRevision->replicate();
+        $sourceDraft->forceFill([
+            'revision_number' => 2,
+            'revision_status' => ArticleTranslationRevision::STATUS_SOURCE,
+            'source_version_hash' => 'unpublished-source-v2',
+            'published_at' => null,
+        ])->saveQuietly();
+        $source->forceFill(['working_revision_id' => (int) $sourceDraft->id])->saveQuietly();
+
+        $dashboard = app(CmsTranslationOpsService::class)->dashboard(['content_type' => 'article']);
+        $english = collect($dashboard['groups'][0]['locales'])->firstWhere('locale', 'en');
+
+        $this->assertFalse($english['is_published_stale']);
+        $this->assertSame(0, $dashboard['metrics']['stale_published_count']);
+    }
+
+    public function test_article_with_source_status_and_target_lineage_is_not_treated_as_a_source(): void
+    {
+        $this->createPublishedArticleGroup('invalid-source-status');
+        $target = Article::query()->where('slug', 'invalid-source-status')->where('locale', 'en')->firstOrFail();
+        $target->forceFill(['translation_status' => Article::TRANSLATION_STATUS_SOURCE])->saveQuietly();
+
+        $dashboard = app(CmsTranslationOpsService::class)->dashboard(['content_type' => 'article']);
+        $group = $dashboard['groups'][0];
+        $english = collect($group['locales'])->firstWhere('locale', 'en');
+
+        $this->assertFalse($english['is_source']);
+        $this->assertFalse($english['preflight']['ok']);
+        $this->assertContains('target source status conflicts with lineage', $english['preflight']['blockers']);
+        $this->assertSame(1, $dashboard['metrics']['target_slot_count']);
+        $this->assertSame(1, $dashboard['metrics']['published_target_locale_count']);
+        $this->assertSame('failed', $dashboard['coverage_matrix'][0]['health_state']);
+    }
+
+    public function test_legacy_article_root_is_diagnostic_source_but_remains_blocked_and_exposes_stale_target(): void
+    {
+        $slug = 'legacy-source-status';
+        $this->createPublishedArticleGroup($slug);
+        $source = Article::query()->where('slug', $slug)->where('locale', 'zh-CN')->firstOrFail();
+        $source->forceFill(['translation_status' => Article::TRANSLATION_STATUS_APPROVED])->saveQuietly();
+        $source->workingRevision->forceFill(['source_version_hash' => 'new-source-hash'])->saveQuietly();
+
+        $dashboard = app(CmsTranslationOpsService::class)->dashboard(['content_type' => 'article']);
+        $group = $dashboard['groups'][0];
+        $sourceLocale = collect($group['locales'])->firstWhere('locale', 'zh-CN');
+        $targetLocale = collect($group['locales'])->firstWhere('locale', 'en');
+
+        $this->assertSame((int) $source->id, $group['source_record_id']);
+        $this->assertFalse($group['canonical_ok']);
+        $this->assertTrue($sourceLocale['is_source']);
+        $this->assertFalse($sourceLocale['preflight']['ok']);
+        $this->assertSame('blocked', $dashboard['coverage_matrix'][0]['cells']['zh-CN']['state']);
+        $this->assertTrue($targetLocale['is_published_stale']);
+        $this->assertSame(1, $dashboard['metrics']['stale_published_count']);
+        $this->assertFalse($group['group_actions'][1]['enabled']);
+    }
+
+    public function test_legacy_content_page_root_is_diagnostic_source_without_becoming_a_translation_target(): void
+    {
+        $source = $this->createSourceContentPage('legacy-page-source', '/legacy-page-source');
+        $target = $this->createTargetTranslation('content_page', $source, 'en');
+        $source->forceFill(['translation_status' => ContentPage::TRANSLATION_STATUS_PUBLISHED])->saveQuietly();
+        $target->forceFill([
+            'translation_status' => ContentPage::TRANSLATION_STATUS_PUBLISHED,
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'is_public' => true,
+            'published_at' => now(),
+        ])->saveQuietly();
+
+        $dashboard = app(CmsTranslationOpsService::class)->dashboard(['content_type' => 'content_page']);
+        $group = $dashboard['groups'][0];
+        $sourceLocale = collect($group['locales'])->firstWhere('locale', 'zh-CN');
+
+        $this->assertSame((int) $source->id, $group['source_record_id']);
+        $this->assertFalse($group['canonical_ok']);
+        $this->assertTrue($sourceLocale['is_source']);
+        $this->assertFalse($sourceLocale['preflight']['ok']);
+        $this->assertSame('blocked', $dashboard['coverage_matrix'][0]['cells']['zh-CN']['state']);
+        $this->assertSame(1, $dashboard['metrics']['target_slot_count']);
+        $this->assertSame(1, $dashboard['metrics']['published_target_locale_count']);
+    }
+
+    public function test_unified_matrix_uses_article_target_locale_configuration(): void
+    {
+        config()->set('services.article_translation.target_locales', ['en', 'ja']);
+        config()->set('services.cms_translation.target_locales', ['en']);
+        $this->createPublishedArticleGroup('article-ja-target');
+
+        $dashboard = app(CmsTranslationOpsService::class)->dashboard(['content_type' => 'article']);
+
+        $this->assertContains('ja', $dashboard['locale_columns']);
+        $this->assertContains('ja', $dashboard['filter_options']['locales']);
+        $this->assertSame('missing', $dashboard['coverage_matrix'][0]['cells']['ja']['state']);
+        $this->assertSame(2, $dashboard['metrics']['target_slot_count']);
+        $this->assertSame(1, $dashboard['metrics']['missing_translation_count']);
     }
 
     public function test_row_backed_translation_workflow_publishes_with_invalidation_signals(): void
@@ -230,6 +522,7 @@ final class CmsTranslationBackboneTest extends TestCase
         ]);
 
         $this->assertSame(0, $dashboard['metrics']['ownership_mismatch_groups']);
+        $this->assertSame('failed', $dashboard['coverage_matrix'][0]['health_state']);
 
         $cell = data_get($dashboard, 'coverage_matrix.0.cells.en');
         $this->assertIsArray($cell);

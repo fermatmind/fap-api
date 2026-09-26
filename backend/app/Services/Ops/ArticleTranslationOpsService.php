@@ -87,8 +87,12 @@ final class ArticleTranslationOpsService
     private function summarizeGroup(string $groupId, Collection $articles, Collection $revisions): array
     {
         $sourceArticles = $articles->filter(fn (Article $article): bool => $this->isSource($article));
-        $source = $this->selectSourceArticle($sourceArticles, $articles);
+        $sourceCandidates = $articles->filter(fn (Article $article): bool => $this->isSourceCandidate($article));
+        $source = $sourceArticles->isNotEmpty()
+            ? $this->selectSourceArticle($sourceArticles, $articles)
+            : ($sourceCandidates->count() === 1 ? $sourceCandidates->first() : null);
         $sourceHash = $this->sourceHash($source);
+        $publishedSourceHash = $source?->publishedRevision?->source_version_hash;
         $articleIds = $articles->pluck('id')->map(fn (mixed $id): int => (int) $id)->all();
         $orphanRevisions = $revisions->filter(
             fn (ArticleTranslationRevision $revision): bool => ! in_array((int) $revision->article_id, $articleIds, true)
@@ -96,9 +100,9 @@ final class ArticleTranslationOpsService
 
         $locales = $articles
             ->sortBy(fn (Article $article): string => ($this->isSource($article) ? '0-' : '1-').(string) $article->locale)
-            ->map(fn (Article $article): array => $this->summarizeLocale($article, $source, $sourceHash, $revisions))
+            ->map(fn (Article $article): array => $this->summarizeLocale($article, $source, $sourceHash, $publishedSourceHash, $revisions))
             ->values();
-        $coverage = $this->coverage($locales, $this->targetLocales());
+        $coverage = $this->coverage($locales, $this->targetLocales(), (string) ($source?->locale ?? ''));
 
         $staleLocales = $locales->filter(fn (array $locale): bool => (bool) $locale['is_stale']);
         $publishedLocales = $locales->filter(fn (array $locale): bool => (bool) $locale['is_published']);
@@ -107,8 +111,8 @@ final class ArticleTranslationOpsService
             ->merge($orphanRevisions->isNotEmpty() ? ['orphan revision'] : [])
             ->values()
             ->all();
-        $canonicalIssues = $this->canonicalIssues($sourceArticles, $articles, $source);
-        $alerts = $this->alerts($locales, $canonicalIssues, $ownershipIssues);
+        $canonicalIssues = $this->canonicalIssues($sourceArticles, $sourceCandidates, $articles, $source);
+        $alerts = $this->alerts($locales, $coverage['missing_target_locales'], $canonicalIssues, $ownershipIssues);
 
         return [
             'translation_group_id' => $groupId,
@@ -132,7 +136,7 @@ final class ArticleTranslationOpsService
             'orphan_revision_count' => $orphanRevisions->count(),
             'alerts' => $alerts,
             'revision_history' => $this->revisionHistory($revisions),
-            'actions' => $this->groupActions($source, $coverage['missing_target_locales']),
+            'actions' => $this->groupActions($source, $coverage['missing_target_locales'], empty($canonicalIssues)),
         ];
     }
 
@@ -140,31 +144,57 @@ final class ArticleTranslationOpsService
      * @param  Collection<int, ArticleTranslationRevision>  $revisions
      * @return array<string, mixed>
      */
-    private function summarizeLocale(Article $article, ?Article $source, ?string $sourceHash, Collection $revisions): array
-    {
+    private function summarizeLocale(
+        Article $article,
+        ?Article $source,
+        ?string $sourceHash,
+        ?string $publishedSourceHash,
+        Collection $revisions
+    ): array {
         $workingRevision = $article->workingRevision;
         $publishedRevision = $article->publishedRevision;
         $status = (string) ($workingRevision?->revision_status ?? $article->translation_status ?? Article::TRANSLATION_STATUS_SOURCE);
         $translatedFromHash = $workingRevision?->translated_from_version_hash ?: $article->translated_from_version_hash;
-        $isSource = $source instanceof Article && (int) $article->id === (int) $source->id;
-        $isStale = ! $isSource
+        $isSource = $article->isSourceArticle()
+            || ($source instanceof Article && (int) $article->id === (int) $source->id);
+        $isWorkingStale = ! $isSource
             && filled($sourceHash)
             && filled($translatedFromHash)
             && ! hash_equals((string) $sourceHash, (string) $translatedFromHash);
         $isArticlePublishedPublic = (string) $article->status === 'published' && (bool) $article->is_public;
         $isPublished = $isArticlePublishedPublic && $publishedRevision instanceof ArticleTranslationRevision;
+        $publishedHash = $publishedRevision?->translated_from_version_hash ?: $article->translated_from_version_hash;
+        $isPublishedStale = ! $isSource && $isPublished && filled($publishedSourceHash) && filled($publishedHash)
+            && ! hash_equals((string) $publishedSourceHash, (string) $publishedHash);
+        $hasSeparateWorkingRevision = $workingRevision instanceof ArticleTranslationRevision
+            && (! $publishedRevision instanceof ArticleTranslationRevision || (int) $workingRevision->id !== (int) $publishedRevision->id);
+        $isDraftStale = ! $isSource && $isWorkingStale && (! $isPublished || $hasSeparateWorkingRevision);
+        if (! $isSource && $status === Article::TRANSLATION_STATUS_STALE) {
+            if ($isPublished) {
+                $isPublishedStale = true;
+            } else {
+                $isDraftStale = true;
+            }
+        }
+        $isStale = $isPublishedStale || $isDraftStale;
         $ownershipIssues = $this->ownershipIssues($article);
         $articleRevisions = $revisions
             ->filter(fn (ArticleTranslationRevision $revision): bool => (int) $revision->article_id === (int) $article->id)
             ->take(3);
         $preflight = $isSource
-            ? ['ok' => true, 'blockers' => []]
+            ? ($article->isSourceArticle()
+                ? ['ok' => true, 'blockers' => []]
+                : ['ok' => false, 'blockers' => ['source article status is not source']])
             : app(ArticleTranslationWorkflowService::class)->preflight($article);
 
         if ($isArticlePublishedPublic && ! $publishedRevision instanceof ArticleTranslationRevision) {
             $preflight['blockers'][] = 'missing published revision';
             $preflight['ok'] = false;
         }
+
+        $hasNonStaleBlockers = collect($preflight['blockers'] ?? [])->contains(
+            static fn (string $blocker): bool => $blocker !== 'working revision is stale'
+        );
 
         return [
             'article_id' => (int) $article->id,
@@ -176,7 +206,9 @@ final class ArticleTranslationOpsService
             'is_public' => (bool) $article->is_public,
             'is_article_published_public' => $isArticlePublishedPublic,
             'is_published' => $isPublished,
-            'is_stale' => $isStale || $status === Article::TRANSLATION_STATUS_STALE,
+            'is_stale' => $isStale,
+            'is_published_stale' => $isPublishedStale,
+            'is_draft_stale' => $isDraftStale,
             'published_at' => $article->published_at?->toIso8601String(),
             'source_article_id' => $article->source_article_id ? (int) $article->source_article_id : null,
             'working_revision_id' => $article->working_revision_id ? (int) $article->working_revision_id : null,
@@ -189,9 +221,10 @@ final class ArticleTranslationOpsService
             'ownership_issues' => $ownershipIssues,
             'edit_url' => ArticleResource::getUrl('edit', ['record' => $article]),
             'revision_history' => $this->revisionHistory($articleRevisions),
-            'compare_summary' => $this->compareSummary($article, $source, $workingRevision, $publishedRevision, $sourceHash, $isStale),
+            'compare_summary' => $this->compareSummary($article, $source, $workingRevision, $publishedRevision, $sourceHash, $isWorkingStale, $isPublishedStale),
             'preflight' => $this->localizedPreflight($preflight),
-            'actions' => $this->localeActions($article, $status, $isStale, $isSource),
+            'has_non_stale_blockers' => $hasNonStaleBlockers,
+            'actions' => $this->localeActions($article, $status, $isWorkingStale, $isSource),
         ];
     }
 
@@ -261,15 +294,19 @@ final class ArticleTranslationOpsService
 
     /**
      * @param  Collection<int, Article>  $sourceArticles
+     * @param  Collection<int, Article>  $sourceCandidates
      * @param  Collection<int, Article>  $articles
      * @return list<string>
      */
-    private function canonicalIssues(Collection $sourceArticles, Collection $articles, ?Article $source): array
+    private function canonicalIssues(Collection $sourceArticles, Collection $sourceCandidates, Collection $articles, ?Article $source): array
     {
         $issues = [];
 
         if ($sourceArticles->count() !== 1) {
             $issues[] = __('ops.translation_ops.ownership_issues.source_article_count', ['count' => $sourceArticles->count()]);
+        }
+        if ($sourceArticles->isEmpty() && $sourceCandidates->count() > 1) {
+            $issues[] = __('ops.translation_ops.ownership_issues.source_candidate_count', ['count' => $sourceCandidates->count()]);
         }
 
         if (! $source instanceof Article) {
@@ -298,11 +335,11 @@ final class ArticleTranslationOpsService
      * @param  list<string>  $ownershipIssues
      * @return list<array{label:string,state:string}>
      */
-    private function alerts(Collection $locales, array $canonicalIssues, array $ownershipIssues): array
+    private function alerts(Collection $locales, array $missingTargetLocales, array $canonicalIssues, array $ownershipIssues): array
     {
         $alerts = [];
 
-        if ($locales->contains(fn (array $locale): bool => (bool) $locale['is_stale'] && (bool) $locale['is_published'])) {
+        if ($locales->contains(fn (array $locale): bool => (bool) $locale['is_published_stale'])) {
             $alerts[] = ['label' => __('ops.translation_ops.alerts.stale_published_translation'), 'state' => 'failed'];
         }
         if ($locales->contains(fn (array $locale): bool => (bool) $locale['is_stale'])) {
@@ -313,7 +350,6 @@ final class ArticleTranslationOpsService
         )) {
             $alerts[] = ['label' => __('ops.translation_ops.alerts.missing_published_revision'), 'state' => 'failed'];
         }
-        $missingTargetLocales = array_values(array_diff($this->targetLocales(), $locales->pluck('locale')->all()));
         foreach ($missingTargetLocales as $missingLocale) {
             $alerts[] = ['label' => __('ops.translation_ops.alerts.missing_locale', ['locale' => $missingLocale]), 'state' => 'warning'];
         }
@@ -353,13 +389,15 @@ final class ArticleTranslationOpsService
      * @param  list<string>  $missingTargetLocales
      * @return list<array<string, mixed>>
      */
-    private function groupActions(?Article $source, array $missingTargetLocales): array
+    private function groupActions(?Article $source, array $missingTargetLocales, bool $canonicalOk): array
     {
         $workflow = app(ArticleTranslationWorkflowService::class);
         $defaultTargetLocale = in_array(self::DEFAULT_TARGET_LOCALE, $missingTargetLocales, true)
             ? self::DEFAULT_TARGET_LOCALE
             : ($missingTargetLocales[0] ?? self::DEFAULT_TARGET_LOCALE);
         $canCreate = $source instanceof Article
+            && $source->isSourceArticle()
+            && $canonicalOk
             && ContentAccess::canWrite()
             && in_array($defaultTargetLocale, $missingTargetLocales, true)
             && $workflow->canGenerateMachineDraft();
@@ -479,17 +517,22 @@ final class ArticleTranslationOpsService
      * @param  Collection<int, array<string, mixed>>  $locales
      * @return array<string, mixed>
      */
-    private function coverage(Collection $locales, array $targetLocales): array
+    private function coverage(Collection $locales, array $targetLocales, string $sourceLocale): array
     {
         $localeCodes = $locales->pluck('locale')->all();
+        $targetLocales = array_values(array_diff($targetLocales, [$sourceLocale]));
+        $targetRows = $locales->filter(fn (array $locale): bool => ! (bool) $locale['is_source']);
         $missingTargetLocales = array_values(array_diff($targetLocales, $localeCodes));
-        $sourceLocale = $locales->first(fn (array $locale): bool => (bool) $locale['is_source']);
 
         return [
-            'source_locale' => (string) ($sourceLocale['locale'] ?? ''),
+            'source_locale' => $sourceLocale,
             'target_locales' => $targetLocales,
             'existing_locales' => $localeCodes,
             'published_locales' => $locales->filter(fn (array $locale): bool => (bool) $locale['is_published'])->pluck('locale')->all(),
+            'published_target_locales' => array_values(array_unique(array_intersect(
+                $targetLocales,
+                $targetRows->filter(fn (array $locale): bool => (bool) $locale['is_published'])->pluck('locale')->all()
+            ))),
             'machine_draft_locales' => $locales->filter(fn (array $locale): bool => $locale['translation_status'] === Article::TRANSLATION_STATUS_MACHINE_DRAFT)->pluck('locale')->all(),
             'human_review_locales' => $locales->filter(fn (array $locale): bool => $locale['translation_status'] === Article::TRANSLATION_STATUS_HUMAN_REVIEW)->pluck('locale')->all(),
             'stale_locales' => $locales->filter(fn (array $locale): bool => (bool) $locale['is_stale'])->pluck('locale')->all(),
@@ -506,14 +549,18 @@ final class ArticleTranslationOpsService
         ?ArticleTranslationRevision $workingRevision,
         ?ArticleTranslationRevision $publishedRevision,
         ?string $sourceHash,
-        bool $isStale
+        bool $isWorkingStale,
+        bool $isPublishedStale
     ): array {
         $summary = [];
         $summary[] = __('ops.translation_ops.compare.source_hash', ['hash' => $this->shortHash($sourceHash) ?? __('ops.status.missing')]);
         $summary[] = __('ops.translation_ops.compare.translated_from', ['hash' => $this->shortHash($workingRevision?->translated_from_version_hash) ?? __('ops.status.missing')]);
-        $summary[] = $isStale
+        $summary[] = $isWorkingStale
             ? __('ops.translation_ops.compare.source_changed_after_target_revision')
             : __('ops.translation_ops.compare.source_target_hash_current');
+        if ($isPublishedStale) {
+            $summary[] = __('ops.translation_ops.compare.published_revision_stale');
+        }
 
         if ($workingRevision instanceof ArticleTranslationRevision && $publishedRevision instanceof ArticleTranslationRevision) {
             $summary[] = (int) $workingRevision->id === (int) $publishedRevision->id
@@ -674,9 +721,14 @@ final class ArticleTranslationOpsService
 
     private function isSource(Article $article): bool
     {
-        return $article->isSourceArticle()
-            || $article->translation_status === Article::TRANSLATION_STATUS_SOURCE
-            || ((string) $article->locale === (string) $article->source_locale && $article->source_article_id === null);
+        return $article->isSourceArticle();
+    }
+
+    private function isSourceCandidate(Article $article): bool
+    {
+        return $article->source_article_id === null
+            && $article->translated_from_article_id === null
+            && (string) $article->locale === (string) $article->source_locale;
     }
 
     /**
@@ -808,6 +860,8 @@ final class ArticleTranslationOpsService
     {
         return [
             'target article is source',
+            'source article status is not source',
+            'target source status conflicts with lineage',
             'target article org mismatch',
             'target locale missing',
             'working revision missing',

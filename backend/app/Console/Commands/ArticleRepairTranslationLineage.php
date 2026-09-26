@@ -284,6 +284,18 @@ final class ArticleRepairTranslationLineage extends Command
         $sourceHash = trim((string) $sourceRevision->source_version_hash);
         if ($sourceHash === '') {
             $errors[] = $this->issue('source_version_hash', 'source_version_hash_missing', 'Source revision version hash is required.');
+        } else {
+            foreach ([
+                'target_article' => (string) $target->translated_from_version_hash,
+                'target_published_revision_source' => (string) $targetPublishedRevision->source_version_hash,
+                'target_published_revision' => (string) $targetPublishedRevision->translated_from_version_hash,
+                'target_working_revision_source' => (string) $targetWorkingRevision->source_version_hash,
+                'target_working_revision' => (string) $targetWorkingRevision->translated_from_version_hash,
+            ] as $field => $translatedFromHash) {
+                if ($translatedFromHash === '' || ! hash_equals($sourceHash, $translatedFromHash)) {
+                    $errors[] = $this->issue($field, 'translation_provenance_unverified', 'Target translation must already be bound to the exact current source hash before lineage repair.');
+                }
+            }
         }
 
         $sourceDesired = (string) $source->source_locale === $sourceLocale
@@ -431,7 +443,7 @@ final class ArticleRepairTranslationLineage extends Command
     private function emit(array $summary): void
     {
         if ((bool) $this->option('json')) {
-            $this->line((string) json_encode($summary, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+            $this->line(json_encode($summary, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
 
             return;
         }

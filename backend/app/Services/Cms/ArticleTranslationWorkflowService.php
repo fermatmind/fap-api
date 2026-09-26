@@ -355,6 +355,8 @@ final class ArticleTranslationWorkflowService
 
         if ($target->isSourceArticle()) {
             $blockers[] = 'target article is source';
+        } elseif ($target->translation_status === Article::TRANSLATION_STATUS_SOURCE) {
+            $blockers[] = 'target source status conflicts with lineage';
         }
         if ((int) $target->org_id !== self::PUBLIC_EDITORIAL_ORG_ID) {
             $blockers[] = 'target article org mismatch';
