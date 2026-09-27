@@ -1,0 +1,307 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Console\Commands;
+
+use App\Models\Article;
+use App\Models\ArticleSeoMeta;
+use App\Models\ArticleTranslationRevision;
+use App\Models\AuditLog;
+use App\Services\Audit\AuditLogger;
+use App\Support\SchemaBaseline;
+use Illuminate\Console\Command;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use RuntimeException;
+use Throwable;
+
+/** @review-surface article_translation_revision */
+final class ReconcileArticleSourceVersion extends Command
+{
+    protected $signature = 'articles:reconcile-source-version
+        {--file= : Metadata-only JSON package with exact source and published-revision locks}
+        {--sha256= : SHA-256 of the package bytes}
+        {--dry-run : Read and validate only}
+        {--execute : Create one source snapshot without changing public copy}
+        {--confirm= : Exact execute confirmation}
+        {--json : Emit metadata-only JSON}';
+
+    protected $description = 'Reconcile one already-public legacy Article source into an immutable current source revision.';
+
+    public function handle(AuditLogger $auditLogger): int
+    {
+        $execute = (bool) $this->option('execute');
+        $errors = [];
+        if ($execute === (bool) $this->option('dry-run')) {
+            $errors[] = 'exactly_one_mode_required';
+        }
+        if ($execute && ! SchemaBaseline::hasTable('audit_logs')) {
+            $errors[] = 'audit_log_unavailable';
+        }
+        try {
+            $package = $this->readPackage();
+            if ($execute && ! hash_equals($this->confirmation($package), trim((string) $this->option('confirm')))) {
+                $errors[] = 'confirmation_mismatch';
+            }
+            $before = $this->snapshot($package, false);
+            $errors = array_values(array_unique([...$errors, ...$before['errors']]));
+        } catch (Throwable) {
+            $package = [];
+            $before = ['errors' => ['package_or_snapshot_invalid']];
+            $errors[] = 'package_or_snapshot_invalid';
+        }
+
+        $after = null;
+        if ($execute && $errors === []) {
+            try {
+                $after = DB::transaction(function () use ($package, $auditLogger): array {
+                    $locked = $this->snapshot($package, true);
+                    if ($locked['errors'] !== []) {
+                        throw new RuntimeException(implode(',', $locked['errors']));
+                    }
+                    /** @var Article $source */
+                    $source = $locked['source'];
+                    /** @var ArticleTranslationRevision $old */
+                    $old = $locked['revision'];
+                    /** @var ArticleSeoMeta $seo */
+                    $seo = $locked['seo'];
+                    $sourceBefore = $source->getAttributes();
+                    $oldBefore = $old->getAttributes();
+                    $seoBefore = $seo->getAttributes();
+                    $number = ((int) ArticleTranslationRevision::query()->withoutGlobalScopes()
+                        ->where('article_id', $source->id)->lockForUpdate()->max('revision_number')) + 1;
+                    $revision = ArticleTranslationRevision::query()->create([
+                        'org_id' => 0,
+                        'article_id' => (int) $source->id,
+                        'source_article_id' => (int) $source->id,
+                        'translation_group_id' => (string) $source->translation_group_id,
+                        'locale' => 'zh-CN',
+                        'source_locale' => 'zh-CN',
+                        'revision_number' => $number,
+                        'revision_status' => ArticleTranslationRevision::STATUS_SOURCE,
+                        'source_version_hash' => (string) $source->source_version_hash,
+                        'translated_from_version_hash' => (string) $source->source_version_hash,
+                        'supersedes_revision_id' => (int) $old->id,
+                        'title' => (string) $source->title,
+                        'excerpt' => $source->excerpt,
+                        'content_md' => (string) $source->content_md,
+                        // The public API projects SEO from the published revision, not
+                        // ArticleSeoMeta. Preserve the exact already-public SEO copy.
+                        'seo_title' => $old->seo_title,
+                        'seo_description' => $old->seo_description,
+                        'published_at' => now(),
+                    ]);
+                    $source->forceFill([
+                        'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
+                        'working_revision_id' => (int) $revision->id,
+                        'published_revision_id' => (int) $revision->id,
+                    ])->saveQuietly();
+                    $sourceAfter = $source->fresh();
+                    $newAfter = $revision->fresh();
+                    $oldAfter = $old->fresh();
+                    $seoAfter = $seo->fresh();
+                    if (! $sourceAfter instanceof Article || ! $newAfter instanceof ArticleTranslationRevision
+                        || ! $oldAfter instanceof ArticleTranslationRevision || ! $seoAfter instanceof ArticleSeoMeta) {
+                        throw new RuntimeException('readback_missing');
+                    }
+                    $sourceAttributes = $sourceAfter->getAttributes();
+                    foreach (['translation_status', 'working_revision_id', 'published_revision_id', 'updated_at'] as $field) {
+                        unset($sourceBefore[$field], $sourceAttributes[$field]);
+                    }
+                    if ($sourceBefore !== $sourceAttributes || $oldBefore !== $oldAfter->getAttributes()
+                        || $seoBefore !== $seoAfter->getAttributes()
+                        || ! $sourceAfter->isSourceArticle()
+                        || (int) $sourceAfter->working_revision_id !== (int) $newAfter->id
+                        || (int) $sourceAfter->published_revision_id !== (int) $newAfter->id
+                        || (int) $newAfter->supersedes_revision_id !== (int) $old->id
+                        || (string) $newAfter->revision_status !== ArticleTranslationRevision::STATUS_SOURCE
+                        || ! hash_equals((string) $sourceAfter->source_version_hash, (string) $newAfter->source_version_hash)
+                        || ! hash_equals((string) $sourceAfter->source_version_hash, $sourceAfter->computeSourceVersionHash())
+                        || (string) $newAfter->content_md !== (string) $sourceAfter->content_md
+                        || (string) $newAfter->title !== (string) $sourceAfter->title
+                        || (string) $newAfter->excerpt !== (string) $sourceAfter->excerpt
+                        || (string) $newAfter->seo_title !== (string) $oldAfter->seo_title
+                        || (string) $newAfter->seo_description !== (string) $oldAfter->seo_description) {
+                        throw new RuntimeException('readback_mismatch');
+                    }
+                    $lastAuditId = (int) AuditLog::query()->withoutGlobalScopes()->max('id');
+                    $auditLogger->log(
+                        Request::create('/ops/article-translation/reconcile-source-version', 'POST'),
+                        'article_source_version_reconciled', 'article', (string) $source->id,
+                        [
+                            'source_id' => (int) $source->id,
+                            'group_id' => (string) $source->translation_group_id,
+                            'old_revision_id' => (int) $old->id,
+                            'new_revision_id' => (int) $newAfter->id,
+                            'source_version_hash' => (string) $source->source_version_hash,
+                            'old_revision_hash' => (string) $old->source_version_hash,
+                            'old_revision_body_sha256' => hash('sha256', (string) $old->content_md),
+                            'old_revision_updated_at' => (string) $old->getRawOriginal('updated_at'),
+                            'package_sha256' => (string) $this->option('sha256'),
+                            'public_body_seo_changed' => false,
+                            'public_revision_metadata_changed' => true,
+                        ],
+                        reason: 'controlled_article_source_version_reconciliation', result: 'success',
+                    );
+                    $audit = AuditLog::query()->withoutGlobalScopes()->where('id', '>', $lastAuditId)
+                        ->where('action', 'article_source_version_reconciled')
+                        ->where('target_type', 'article')->where('target_id', (string) $source->id)
+                        ->orderByDesc('id')->first();
+                    if (! $audit instanceof AuditLog) {
+                        throw new RuntimeException('audit_readback_failed');
+                    }
+
+                    return ['source_id' => (int) $source->id, 'old_revision_id' => (int) $old->id,
+                        'new_revision_id' => (int) $newAfter->id, 'audit_id' => (int) $audit->id];
+                });
+            } catch (Throwable) {
+                $errors[] = 'execute_or_readback_failed';
+            }
+        }
+        $result = ['ok' => $errors === [], 'mode' => $execute ? 'execute' : 'dry_run',
+            'source_id' => (int) ($package['source_id'] ?? 0), 'before' => $this->publicSnapshot($before),
+            'after' => $after, 'errors' => array_values(array_unique($errors))];
+        $this->line(json_encode($result, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
+
+        return $result['ok'] ? self::SUCCESS : self::FAILURE;
+    }
+
+    /** @return array<string, mixed> */
+    private function readPackage(): array
+    {
+        $path = trim((string) $this->option('file'));
+        $sha = strtolower(trim((string) $this->option('sha256')));
+        if ($path === '' || ! preg_match('/^[0-9a-f]{64}$/', $sha) || ! is_file($path) || is_link($path)) {
+            throw new RuntimeException('invalid_package');
+        }
+        $bytes = file_get_contents($path);
+        if (! is_string($bytes) || ! hash_equals($sha, hash('sha256', $bytes))) {
+            throw new RuntimeException('package_hash_mismatch');
+        }
+        $package = json_decode($bytes, true, 16, JSON_THROW_ON_ERROR);
+        if (! is_array($package) || array_keys($package) !== [
+            'schema', 'source_id', 'group_id', 'slug', 'source_hash', 'source_body_sha256',
+            'source_updated_at', 'revision_id', 'revision_hash', 'revision_body_sha256',
+            'revision_updated_at', 'seo_meta_id', 'seo_meta_content_sha256', 'seo_meta_updated_at',
+        ] || $package['schema'] !== 'fermat_article_source_reconcile_v1'
+            || ! is_int($package['source_id']) || $package['source_id'] <= 0
+            || ! is_int($package['revision_id']) || $package['revision_id'] <= 0
+            || ! is_int($package['seo_meta_id']) || $package['seo_meta_id'] <= 0) {
+            throw new RuntimeException('package_schema_invalid');
+        }
+        foreach (['source_hash', 'source_body_sha256', 'revision_hash', 'revision_body_sha256', 'seo_meta_content_sha256'] as $field) {
+            if (! is_string($package[$field]) || ! preg_match('/^[0-9a-f]{64}$/', $package[$field])) {
+                throw new RuntimeException('package_hash_invalid');
+            }
+        }
+        foreach (['group_id', 'slug', 'source_updated_at', 'revision_updated_at', 'seo_meta_updated_at'] as $field) {
+            if (! is_string($package[$field]) || trim($package[$field]) === '') {
+                throw new RuntimeException('package_identity_invalid');
+            }
+        }
+
+        return $package;
+    }
+
+    /** @param array<string, mixed> $p
+     * @return array<string, mixed>
+     */
+    private function snapshot(array $p, bool $lock): array
+    {
+        $query = Article::query()->withoutGlobalScopes()->whereKey($p['source_id']);
+        if ($lock) {
+            $query->lockForUpdate();
+        }
+        $source = $query->first();
+        if (! $source instanceof Article) {
+            return ['errors' => ['source_missing']];
+        }
+        $revisionQuery = ArticleTranslationRevision::query()->withoutGlobalScopes()->whereKey($p['revision_id']);
+        $seoQuery = ArticleSeoMeta::query()->withoutGlobalScopes()->whereKey($p['seo_meta_id']);
+        if ($lock) {
+            $revisionQuery->lockForUpdate();
+            $seoQuery->lockForUpdate();
+        }
+        $revision = $revisionQuery->first();
+        $seo = $seoQuery->first();
+        $errors = [];
+        if ((int) $source->org_id !== 0 || (string) $source->locale !== 'zh-CN'
+            || (string) $source->source_locale !== 'zh-CN'
+            || (string) $source->translation_status !== Article::TRANSLATION_STATUS_APPROVED
+            || $source->source_article_id !== null || $source->translated_from_article_id !== null
+            || (string) $source->status !== 'published' || ! (bool) $source->is_public
+            || (int) $source->working_revision_id !== (int) $source->published_revision_id) {
+            $errors[] = 'legacy_source_identity_mismatch';
+        }
+        if ((string) $source->translation_group_id !== $p['group_id'] || (string) $source->slug !== $p['slug']
+            || ! hash_equals($p['source_hash'], (string) $source->source_version_hash)
+            || ! hash_equals((string) $source->source_version_hash, $source->computeSourceVersionHash())
+            || ! hash_equals($p['source_body_sha256'], hash('sha256', (string) $source->content_md))
+            || (string) $source->getRawOriginal('updated_at') !== $p['source_updated_at']) {
+            $errors[] = 'source_lock_mismatch';
+        }
+        if (! $revision instanceof ArticleTranslationRevision
+            || (int) $source->published_revision_id !== (int) $revision->id
+            || (int) $revision->article_id !== (int) $source->id
+            || (int) $revision->source_article_id !== (int) $source->id
+            || (string) $revision->translation_group_id !== (string) $source->translation_group_id
+            || (string) $revision->locale !== 'zh-CN'
+            || (string) $revision->revision_status !== ArticleTranslationRevision::STATUS_PUBLISHED
+            || ! hash_equals($p['revision_hash'], (string) $revision->source_version_hash)
+            || hash_equals((string) $revision->source_version_hash, (string) $source->source_version_hash)
+            || ! hash_equals($p['revision_body_sha256'], hash('sha256', (string) $revision->content_md))
+            || (string) $revision->title !== (string) $source->title
+            || (string) $revision->excerpt !== (string) $source->excerpt
+            || (string) $revision->content_md !== (string) $source->content_md
+            || (string) $revision->getRawOriginal('updated_at') !== $p['revision_updated_at']) {
+            $errors[] = 'published_revision_mismatch';
+        }
+        if (! $seo instanceof ArticleSeoMeta || (int) $seo->article_id !== (int) $source->id
+            || (int) $seo->org_id !== 0 || (string) $seo->locale !== 'zh-CN'
+            || ! hash_equals($p['seo_meta_content_sha256'], $this->seoHash($seo))
+            || (string) $seo->getRawOriginal('updated_at') !== $p['seo_meta_updated_at']) {
+            $errors[] = 'seo_meta_mismatch';
+        }
+        $collision = Article::query()->withoutGlobalScopes()->withTrashed()
+            ->where('org_id', 0)->where('locale', 'en')
+            ->where(function ($query) use ($source): void {
+                $query->where('translation_group_id', (string) $source->translation_group_id)
+                    ->orWhere('slug', (string) $source->slug);
+            });
+        if ($lock) {
+            $collision->lockForUpdate();
+        }
+        if ($collision->exists()) {
+            $errors[] = 'english_identity_collision';
+        }
+
+        return ['errors' => $errors, 'source' => $source, 'revision' => $revision, 'seo' => $seo,
+            'source_hash' => (string) $source->source_version_hash,
+            'revision_id' => (int) $source->published_revision_id];
+    }
+
+    /** @param array<string, mixed> $snapshot
+     * @return array<string, mixed>
+     */
+    private function publicSnapshot(array $snapshot): array
+    {
+        return ['source_hash' => $snapshot['source_hash'] ?? null,
+            'revision_id' => $snapshot['revision_id'] ?? null];
+    }
+
+    /** @param array<string, mixed> $package */
+    private function confirmation(array $package): string
+    {
+        return sprintf('Reconcile Article source %d in group %s with package %s.',
+            $package['source_id'], $package['group_id'], (string) $this->option('sha256'));
+    }
+
+    private function seoHash(ArticleSeoMeta $seo): string
+    {
+        return hash('sha256', json_encode([
+            'seo_title' => $seo->seo_title,
+            'seo_description' => $seo->seo_description,
+        ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    }
+}
