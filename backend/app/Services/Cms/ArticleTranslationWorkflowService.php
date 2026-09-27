@@ -293,7 +293,9 @@ final class ArticleTranslationWorkflowService
                 'approved_at' => $revision->approved_at ?? $now,
             ])->save();
             $locked->forceFill([
-                'translation_status' => Article::TRANSLATION_STATUS_APPROVED,
+                'translation_status' => $locked->isSourceArticle()
+                    ? Article::TRANSLATION_STATUS_SOURCE
+                    : Article::TRANSLATION_STATUS_APPROVED,
             ])->saveQuietly();
 
             if ($markEditorialApproved) {
