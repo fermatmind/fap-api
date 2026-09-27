@@ -93,6 +93,46 @@ final class ArticleTranslationRevisionContractTest extends TestCase
         $this->assertFalse($translationRevision->isStale($source));
     }
 
+    public function test_editorial_approval_keeps_source_identity_and_published_pointer(): void
+    {
+        $source = $this->createArticle(0, 'zh-CN', 'Source awaiting editorial approval', [
+            'source_locale' => 'zh-CN',
+            'translation_group_id' => 'source-editorial-identity',
+            'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subDay(),
+        ]);
+        $published = $this->createTranslationRevision($source, [
+            'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_SOURCE,
+            'published_at' => now()->subDay(),
+        ]);
+        $working = $this->createTranslationRevision($source, [
+            'revision_number' => 2,
+            'revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
+            'supersedes_revision_id' => (int) $published->id,
+        ]);
+        $source->forceFill([
+            'working_revision_id' => (int) $working->id,
+            'published_revision_id' => (int) $published->id,
+        ])->saveQuietly();
+
+        app(ArticleTranslationWorkflowService::class)->approveEditorialWorkingRevision(
+            $source,
+            adminUserId: 1,
+            bindAttestation: false,
+        );
+
+        $source->refresh();
+        $this->assertTrue($source->isSourceArticle());
+        $this->assertSame(Article::TRANSLATION_STATUS_SOURCE, $source->translation_status);
+        $this->assertSame((int) $published->id, (int) $source->published_revision_id);
+        $this->assertSame((int) $working->id, (int) $source->working_revision_id);
+        $this->assertSame(ArticleTranslationRevision::STATUS_SOURCE, $published->fresh()->revision_status);
+        $this->assertSame(ArticleTranslationRevision::STATUS_APPROVED, $working->fresh()->revision_status);
+    }
+
     public function test_published_articles_backfill_published_revision_pointer(): void
     {
         $published = $this->createArticle(1, 'en', 'Published source', [
