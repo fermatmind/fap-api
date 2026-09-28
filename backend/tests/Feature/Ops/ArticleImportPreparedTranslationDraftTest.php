@@ -119,6 +119,51 @@ final class ArticleImportPreparedTranslationDraftTest extends TestCase
         }
     }
 
+    public function test_overlong_persisted_fields_fail_before_draft_import(): void
+    {
+        $source = $this->source('prepared-translation-field-limits');
+        $before = [Article::withoutGlobalScopes()->count(), ArticleTranslationRevision::withoutGlobalScopes()->count(), AuditLog::withoutGlobalScopes()->count()];
+
+        foreach (['title' => 255, 'seo_title' => 60, 'seo_description' => 160] as $field => $limit) {
+            [$path] = $this->package($source);
+            try {
+                $package = json_decode(file_get_contents($path), true, 32, JSON_THROW_ON_ERROR);
+                $package['translation'][$field] = str_repeat('é', $limit + 1);
+                file_put_contents($path, json_encode($package, JSON_THROW_ON_ERROR));
+                $sha = hash_file('sha256', $path);
+                foreach (['--dry-run', '--execute'] as $mode) {
+                    $this->assertSame(1, Artisan::call('articles:import-prepared-translation-draft', [
+                        '--file' => $path, '--sha256' => $sha, $mode => true, '--json' => true,
+                        '--confirm' => sprintf('Import private English draft for source %d in group %s with package %s.', $source->id, $source->translation_group_id, $sha),
+                    ]));
+                    $this->assertContains('package_or_snapshot_invalid', json_decode(Artisan::output(), true)['errors']);
+                    $this->assertSame($before, [Article::withoutGlobalScopes()->count(), ArticleTranslationRevision::withoutGlobalScopes()->count(), AuditLog::withoutGlobalScopes()->count()]);
+                }
+            } finally {
+                unlink($path);
+            }
+        }
+    }
+
+    public function test_character_limits_accept_exact_multibyte_boundaries(): void
+    {
+        $source = $this->source('prepared-translation-exact-limits');
+        [$path] = $this->package($source);
+        try {
+            $package = json_decode(file_get_contents($path), true, 32, JSON_THROW_ON_ERROR);
+            foreach (['title' => 255, 'seo_title' => 60, 'seo_description' => 160] as $field => $limit) {
+                $package['translation'][$field] = str_repeat('é', $limit);
+            }
+            file_put_contents($path, json_encode($package, JSON_THROW_ON_ERROR));
+            $this->assertSame(0, Artisan::call('articles:import-prepared-translation-draft', [
+                '--file' => $path, '--sha256' => hash_file('sha256', $path), '--dry-run' => true, '--json' => true,
+            ]));
+            $this->assertTrue(json_decode(Artisan::output(), true)['ok']);
+        } finally {
+            unlink($path);
+        }
+    }
+
     private function source(string $slug): Article
     {
         $source = Article::query()->create([
