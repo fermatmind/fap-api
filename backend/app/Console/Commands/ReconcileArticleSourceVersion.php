@@ -9,6 +9,7 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Models\AuditLog;
 use App\Services\Audit\AuditLogger;
+use App\Support\ArticleSourceTargetSnapshot;
 use App\Support\SchemaBaseline;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
@@ -122,7 +123,8 @@ final class ReconcileArticleSourceVersion extends Command
                         || (string) $newAfter->title !== (string) $sourceAfter->title
                         || (string) $newAfter->excerpt !== (string) $sourceAfter->excerpt
                         || (string) $newAfter->seo_title !== (string) $oldAfter->seo_title
-                        || (string) $newAfter->seo_description !== (string) $oldAfter->seo_description) {
+                        || (string) $newAfter->seo_description !== (string) $oldAfter->seo_description
+                        || ArticleSourceTargetSnapshot::capture($sourceAfter, true) !== $locked['target_snapshot']) {
                         throw new RuntimeException('readback_mismatch');
                     }
                     $lastAuditId = (int) AuditLog::query()->withoutGlobalScopes()->max('id');
@@ -139,6 +141,7 @@ final class ReconcileArticleSourceVersion extends Command
                             'old_revision_body_sha256' => hash('sha256', (string) $old->content_md),
                             'old_revision_updated_at' => (string) $old->getRawOriginal('updated_at'),
                             'package_sha256' => (string) $this->option('sha256'),
+                            'existing_english_targets' => $locked['target_snapshot'],
                             'public_body_seo_changed' => false,
                             'public_revision_metadata_changed' => true,
                         ],
@@ -180,15 +183,30 @@ final class ReconcileArticleSourceVersion extends Command
             throw new RuntimeException('package_hash_mismatch');
         }
         $package = json_decode($bytes, true, 16, JSON_THROW_ON_ERROR);
-        if (! is_array($package) || array_keys($package) !== [
+        $v2 = is_array($package) && ($package['schema'] ?? null) === 'fermat_article_source_reconcile_v2';
+        $keys = [
             'schema', 'source_id', 'group_id', 'slug', 'source_hash', 'source_body_sha256',
             'source_updated_at', 'revision_id', 'revision_hash', 'revision_body_sha256',
             'revision_updated_at', 'seo_meta_id', 'seo_meta_content_sha256', 'seo_meta_updated_at',
-        ] || $package['schema'] !== 'fermat_article_source_reconcile_v1'
+        ];
+        if ($v2) {
+            $keys[] = 'existing_english_targets';
+        }
+        if (! is_array($package) || array_keys($package) !== $keys
+            || ! in_array($package['schema'], ['fermat_article_source_reconcile_v1', 'fermat_article_source_reconcile_v2'], true)
             || ! is_int($package['source_id']) || $package['source_id'] <= 0
             || ! is_int($package['revision_id']) || $package['revision_id'] <= 0
             || ! is_int($package['seo_meta_id']) || $package['seo_meta_id'] <= 0) {
             throw new RuntimeException('package_schema_invalid');
+        }
+        if ($v2) {
+            $targets = $package['existing_english_targets'];
+            if (! is_array($targets) || ! array_is_list($targets) || count($targets) !== 1
+                || ! is_array($targets[0]) || array_keys($targets[0]) !== ['article_id', 'sha256']
+                || ! is_int($targets[0]['article_id']) || $targets[0]['article_id'] <= 0
+                || ! is_string($targets[0]['sha256']) || ! preg_match('/^[0-9a-f]{64}$/', $targets[0]['sha256'])) {
+                throw new RuntimeException('target_snapshot_invalid');
+            }
         }
         foreach (['source_hash', 'source_body_sha256', 'revision_body_sha256', 'seo_meta_content_sha256'] as $field) {
             if (! is_string($package[$field]) || ! preg_match('/^[0-9a-f]{64}$/', $package[$field])) {
@@ -269,22 +287,31 @@ final class ReconcileArticleSourceVersion extends Command
             || (string) $seo->getRawOriginal('updated_at') !== $p['seo_meta_updated_at']) {
             $errors[] = 'seo_meta_mismatch';
         }
-        $collision = Article::query()->withoutGlobalScopes()->withTrashed()
-            ->where('org_id', 0)->where('locale', 'en')
-            ->where(function ($query) use ($source): void {
-                $query->where('translation_group_id', (string) $source->translation_group_id)
-                    ->orWhere('slug', (string) $source->slug);
-            });
+        $active = ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $source->id)
+            ->where('id', '<>', $source->published_revision_id)->whereNull('published_at')
+            ->whereIn('revision_status', ['draft',
+                ArticleTranslationRevision::STATUS_MACHINE_DRAFT, ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
+                ArticleTranslationRevision::STATUS_APPROVED]);
         if ($lock) {
-            $collision->lockForUpdate();
+            $active->lockForUpdate();
         }
-        if ($collision->exists()) {
+        if ($active->exists()) {
+            $errors[] = 'active_source_revision_conflict';
+        }
+
+        try {
+            $targetSnapshot = ArticleSourceTargetSnapshot::capture($source, $lock);
+            if ($targetSnapshot !== ($p['existing_english_targets'] ?? [])) {
+                $errors[] = 'english_identity_collision';
+            }
+        } catch (RuntimeException) {
+            $targetSnapshot = [];
             $errors[] = 'english_identity_collision';
         }
 
         return ['errors' => $errors, 'source' => $source, 'revision' => $revision, 'seo' => $seo,
             'source_hash' => (string) $source->source_version_hash,
-            'revision_id' => (int) $source->published_revision_id];
+            'revision_id' => (int) $source->published_revision_id, 'target_snapshot' => $targetSnapshot];
     }
 
     /** @param array<string, mixed> $snapshot
