@@ -165,7 +165,10 @@ final class RestoreArticleSourceVersion extends Command
             || (int) $source->published_revision_id !== $newId
             || (string) $source->getRawOriginal('updated_at') !== (string) $this->option('source-updated-at')
             || (string) $new->getRawOriginal('updated_at') !== (string) $this->option('revision-updated-at')
-            || (string) $new->revision_status !== ArticleTranslationRevision::STATUS_SOURCE
+            || ! in_array((string) $new->revision_status, [
+                ArticleTranslationRevision::STATUS_SOURCE,
+                ArticleTranslationRevision::STATUS_PUBLISHED,
+            ], true)
             || (int) $new->article_id !== $sourceId || (int) $new->source_article_id !== $sourceId
             || (int) $new->supersedes_revision_id !== $oldId
             || (string) $new->translation_group_id !== (string) $source->translation_group_id

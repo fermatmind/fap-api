@@ -79,7 +79,7 @@ final class ReconcileArticleSourceVersion extends Command
                         'locale' => 'zh-CN',
                         'source_locale' => 'zh-CN',
                         'revision_number' => $number,
-                        'revision_status' => ArticleTranslationRevision::STATUS_SOURCE,
+                        'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
                         'source_version_hash' => (string) $source->source_version_hash,
                         'translated_from_version_hash' => (string) $source->source_version_hash,
                         'supersedes_revision_id' => (int) $old->id,
@@ -90,7 +90,7 @@ final class ReconcileArticleSourceVersion extends Command
                         // ArticleSeoMeta. Preserve the exact already-public SEO copy.
                         'seo_title' => $old->seo_title,
                         'seo_description' => $old->seo_description,
-                        'published_at' => now(),
+                        'published_at' => $old->published_at ?? $source->published_at,
                     ]);
                     $source->forceFill([
                         'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
@@ -115,7 +115,7 @@ final class ReconcileArticleSourceVersion extends Command
                         || (int) $sourceAfter->working_revision_id !== (int) $newAfter->id
                         || (int) $sourceAfter->published_revision_id !== (int) $newAfter->id
                         || (int) $newAfter->supersedes_revision_id !== (int) $old->id
-                        || (string) $newAfter->revision_status !== ArticleTranslationRevision::STATUS_SOURCE
+                        || (string) $newAfter->revision_status !== ArticleTranslationRevision::STATUS_PUBLISHED
                         || ! hash_equals((string) $sourceAfter->source_version_hash, (string) $newAfter->source_version_hash)
                         || ! hash_equals((string) $sourceAfter->source_version_hash, $sourceAfter->computeSourceVersionHash())
                         || (string) $newAfter->content_md !== (string) $sourceAfter->content_md
