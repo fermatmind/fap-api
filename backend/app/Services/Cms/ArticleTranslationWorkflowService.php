@@ -743,7 +743,14 @@ final class ArticleTranslationWorkflowService
         }
 
         $blockers = array_merge($blockers, $this->revisionOwnershipBlockers($source, $publishedRevision, 'source published revision'));
-        if ($publishedRevision->revision_status !== ArticleTranslationRevision::STATUS_SOURCE) {
+        // Publication changes lifecycle status; canonical source identity remains in the lineage.
+        if (! $source->isSourceArticle()
+            || ! in_array($publishedRevision->revision_status, [
+                ArticleTranslationRevision::STATUS_SOURCE,
+                ArticleTranslationRevision::STATUS_PUBLISHED,
+            ], true)
+            || (int) $publishedRevision->source_article_id !== (int) $source->id
+            || (string) $publishedRevision->source_locale !== (string) $source->locale) {
             $blockers[] = 'source published revision is not source';
         }
 

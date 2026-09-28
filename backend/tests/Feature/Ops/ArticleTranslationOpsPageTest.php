@@ -740,6 +740,57 @@ final class ArticleTranslationOpsPageTest extends TestCase
         $this->assertNull($translation->published_revision_id);
     }
 
+    public function test_translation_preflight_accepts_published_source_lifecycle_without_writing(): void
+    {
+        $group = $this->createPublishedTranslationGroup('published-source-lifecycle');
+        $group['sourceRevision']->forceFill([
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+        ])->saveQuietly();
+        $sourceBefore = $group['source']->fresh()->getAttributes();
+        $revisionBefore = $group['sourceRevision']->fresh()->getAttributes();
+        $revisionCount = ArticleTranslationRevision::query()->count();
+        $workflow = app(ArticleTranslationWorkflowService::class);
+
+        $first = $workflow->preflight($group['translation']->fresh());
+        $second = $workflow->preflight($group['translation']->fresh());
+
+        $this->assertTrue($first['ok'], implode('; ', $first['blockers']));
+        $this->assertSame([], $first['blockers']);
+        $this->assertSame($first, $second);
+        $this->assertSame($sourceBefore, $group['source']->fresh()->getAttributes());
+        $this->assertSame($revisionBefore, $group['sourceRevision']->fresh()->getAttributes());
+        $this->assertSame($revisionCount, ArticleTranslationRevision::query()->count());
+    }
+
+    public function test_published_source_lifecycle_still_requires_source_lineage_and_review(): void
+    {
+        $group = $this->createPublishedTranslationGroup('published-source-lineage');
+        $revision = $group['sourceRevision'];
+        $revision->forceFill([
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+        ])->saveQuietly();
+        $workflow = app(ArticleTranslationWorkflowService::class);
+
+        foreach ([
+            ['source_article_id' => (int) $group['translation']->id],
+            ['source_locale' => 'en'],
+            ['revision_status' => ArticleTranslationRevision::STATUS_APPROVED],
+        ] as $invalid) {
+            $original = $revision->fresh()->getAttributes();
+            $revision->forceFill($invalid)->saveQuietly();
+            $preflight = $workflow->preflight($group['translation']->fresh());
+            $this->assertFalse($preflight['ok']);
+            $this->assertContains('source published revision is not source', $preflight['blockers']);
+            $revision->forceFill($original)->saveQuietly();
+        }
+
+        $this->setArticleReviewState($group['source'], EditorialReviewAudit::STATE_CHANGES_REQUESTED);
+        $preflight = $workflow->preflight($group['translation']->fresh());
+        $this->assertFalse($preflight['ok']);
+        $this->assertContains('source article editorial approval missing', $preflight['blockers']);
+        $this->assertNotContains('source published revision is not source', $preflight['blockers']);
+    }
+
     public function test_translation_preflight_blocks_target_when_source_approval_is_not_current(): void
     {
         $admin = $this->createAdminWithPermissions([
