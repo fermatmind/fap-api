@@ -8,6 +8,7 @@ use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Models\AuditLog;
+use App\Support\ArticleSourceTargetSnapshot;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
@@ -239,6 +240,140 @@ final class ReconcileArticleSourceVersionTest extends TestCase
         } finally {
             unlink($path);
         }
+    }
+
+    public function test_existing_target_is_locked_preserved_and_does_not_prevent_safe_restore(): void
+    {
+        [$source, $old, $seo] = $this->legacySource();
+        $target = $this->existingTarget($source);
+        [$path, $sha, $confirm] = $this->packageWithTarget($source, $old, $seo);
+        try {
+            $before = ArticleSourceTargetSnapshot::capture($source);
+            $this->assertSame(0, Artisan::call('articles:reconcile-source-version', [
+                '--file' => $path, '--sha256' => $sha, '--dry-run' => true,
+            ]));
+            $this->assertSame((int) $old->id, (int) $source->fresh()->published_revision_id);
+            $this->assertSame($before, ArticleSourceTargetSnapshot::capture($source));
+            $this->assertSame(0, Artisan::call('articles:reconcile-source-version', [
+                '--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm,
+            ]));
+            $this->assertSame($before, ArticleSourceTargetSnapshot::capture($source->fresh()));
+            $this->assertSame(str_repeat('c', 64), $target->fresh()->translated_from_version_hash);
+            $source = $source->fresh();
+            $new = $source->publishedRevision;
+            $audit = AuditLog::withoutGlobalScopes()->where('action', 'article_source_version_reconciled')->firstOrFail();
+            $this->assertSame($before, $audit->meta_json['existing_english_targets']);
+            $restore = ['--source-id' => (int) $source->id, '--audit-id' => (int) $audit->id,
+                '--new-revision-id' => (int) $new->id,
+                '--source-updated-at' => (string) $source->getRawOriginal('updated_at'),
+                '--revision-updated-at' => (string) $new->getRawOriginal('updated_at')];
+            $target->forceFill(['excerpt' => 'Changed after source reconciliation'])->saveQuietly();
+            $this->assertSame(1, Artisan::call('articles:restore-source-version', [...$restore, '--dry-run' => true]));
+            // Restore the exact locked target bytes, including its original timestamp.
+            $target->forceFill($this->targetBefore)->saveQuietly();
+            $this->assertSame($before, ArticleSourceTargetSnapshot::capture($source));
+            $this->assertSame(0, Artisan::call('articles:restore-source-version', [...$restore,
+                '--execute' => true, '--confirm' => sprintf('Restore Article source %d from reconciliation audit %d and revision %d.',
+                    $source->id, $audit->id, $new->id)]));
+            $this->assertSame((int) $old->id, (int) $source->fresh()->published_revision_id);
+            $this->assertSame($before, ArticleSourceTargetSnapshot::capture($source->fresh()));
+        } finally {
+            unlink($path);
+        }
+    }
+
+    public function test_existing_target_package_rejects_content_and_identity_drift_without_writes(): void
+    {
+        [$source, $old, $seo] = $this->legacySource();
+        $target = $this->existingTarget($source);
+        [$path, $sha, $confirm] = $this->packageWithTarget($source, $old, $seo);
+        try {
+            $target->forceFill(['content_md' => 'New English copy'])->saveQuietly();
+            $this->assertSame(1, Artisan::call('articles:reconcile-source-version', [
+                '--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm,
+            ]));
+            $this->assertContains('english_identity_collision', json_decode(Artisan::output(), true)['errors']);
+            $this->assertSame((int) $old->id, (int) $source->fresh()->published_revision_id);
+            $this->assertSame(0, AuditLog::withoutGlobalScopes()->where('action', 'article_source_version_reconciled')->count());
+            $target->forceFill($this->targetBefore)->saveQuietly();
+            $target->publishedRevision->forceFill(['translated_from_version_hash' => str_repeat('d', 64)])->saveQuietly();
+            $this->assertSame(1, Artisan::call('articles:reconcile-source-version', [
+                '--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm,
+            ]));
+            $this->assertSame((int) $old->id, (int) $source->fresh()->published_revision_id);
+            $target->forceFill(['source_article_id' => null])->saveQuietly();
+            $this->assertSame(1, Artisan::call('articles:reconcile-source-version', [
+                '--file' => $path, '--sha256' => $sha, '--dry-run' => true,
+            ]));
+        } finally {
+            unlink($path);
+        }
+    }
+
+    public function test_unpublished_approved_source_revision_is_preserved_and_blocks_reconciliation(): void
+    {
+        [$source, $old, $seo] = $this->legacySource();
+        $this->existingTarget($source);
+        [$path, $sha, $confirm] = $this->packageWithTarget($source, $old, $seo);
+        try {
+            $pending = $old->replicate();
+            $pending->forceFill(['revision_number' => 2, 'revision_status' => ArticleTranslationRevision::STATUS_APPROVED,
+                'content_md' => 'An independently approved source correction', 'published_at' => null])->save();
+            $before = $pending->fresh()->getAttributes();
+            $this->assertSame(1, Artisan::call('articles:reconcile-source-version', [
+                '--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm,
+            ]));
+            $this->assertContains('active_source_revision_conflict', json_decode(Artisan::output(), true)['errors']);
+            $this->assertSame($before, $pending->fresh()->getAttributes());
+            $this->assertSame((int) $old->id, (int) $source->fresh()->published_revision_id);
+            $this->assertSame(0, AuditLog::withoutGlobalScopes()->where('action', 'article_source_version_reconciled')->count());
+        } finally {
+            unlink($path);
+        }
+    }
+
+    private array $targetBefore = [];
+
+    private function existingTarget(Article $source): Article
+    {
+        $target = Article::query()->create([
+            'org_id' => 0, 'slug' => (string) $source->slug, 'locale' => 'en',
+            'translation_group_id' => (string) $source->translation_group_id, 'source_locale' => 'zh-CN',
+            'source_article_id' => (int) $source->id, 'translated_from_article_id' => (int) $source->id,
+            'translated_from_version_hash' => str_repeat('c', 64),
+            'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED,
+            'title' => 'Existing English copy', 'content_md' => 'Existing target remains stale.',
+            'status' => 'published', 'is_public' => true,
+        ])->fresh();
+        $revision = ArticleTranslationRevision::query()->create([
+            'org_id' => 0, 'article_id' => (int) $target->id, 'source_article_id' => (int) $source->id,
+            'translation_group_id' => (string) $source->translation_group_id,
+            'locale' => 'en', 'source_locale' => 'zh-CN', 'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+            'source_version_hash' => str_repeat('c', 64), 'translated_from_version_hash' => str_repeat('c', 64),
+            'title' => $target->title, 'content_md' => $target->content_md,
+            'seo_title' => 'Existing English SEO', 'seo_description' => 'Existing description',
+        ]);
+        $target->forceFill(['working_revision_id' => (int) $revision->id,
+            'published_revision_id' => (int) $revision->id])->saveQuietly();
+        $target = $target->fresh();
+        $this->targetBefore = $target->getAttributes();
+
+        return $target;
+    }
+
+    private function packageWithTarget(Article $source, ArticleTranslationRevision $old, ArticleSeoMeta $seo): array
+    {
+        [$path] = $this->package($source, $old, $seo);
+        $p = json_decode(file_get_contents($path), true);
+        $p['schema'] = 'fermat_article_source_reconcile_v2';
+        $p['existing_english_targets'] = ArticleSourceTargetSnapshot::capture($source);
+        $bytes = json_encode($p, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
+        file_put_contents($path, $bytes);
+        $sha = hash('sha256', $bytes);
+
+        return [$path, $sha, sprintf('Reconcile Article source %d in group %s with package %s.',
+            $source->id, $source->translation_group_id, $sha)];
     }
 
     public function test_english_identity_collision_blocks_reconciliation(): void

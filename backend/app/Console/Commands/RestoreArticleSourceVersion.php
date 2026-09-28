@@ -8,6 +8,7 @@ use App\Models\Article;
 use App\Models\ArticleTranslationRevision;
 use App\Models\AuditLog;
 use App\Services\Audit\AuditLogger;
+use App\Support\ArticleSourceTargetSnapshot;
 use App\Support\SchemaBaseline;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
@@ -192,13 +193,12 @@ final class RestoreArticleSourceVersion extends Command
             || (string) ($meta['source_version_hash'] ?? '') !== (string) $source->source_version_hash) {
             $errors[] = 'reconciliation_lock_mismatch';
         }
-        if (Article::query()->withoutGlobalScopes()->withTrashed()->where('org_id', 0)
-            ->where('locale', 'en')
-            ->where(function ($query) use ($source, $sourceId): void {
-                $query->where('source_article_id', $sourceId)
-                    ->orWhere('translation_group_id', (string) $source->translation_group_id)
-                    ->orWhere('slug', (string) $source->slug);
-            })->exists()
+        try {
+            $targetChanged = ArticleSourceTargetSnapshot::capture($source, $lock) !== ($meta['existing_english_targets'] ?? []);
+        } catch (RuntimeException) {
+            $targetChanged = true;
+        }
+        if ($targetChanged
             || ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $sourceId)
                 ->where('id', '>', $newId)->exists()
             || AuditLog::query()->withoutGlobalScopes()->where('id', '>', $auditId)
