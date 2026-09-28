@@ -71,6 +71,7 @@ final class RestoreArticleSourceVersion extends Command
                     $new->forceFill(['revision_status' => ArticleTranslationRevision::STATUS_ARCHIVED])->saveQuietly();
                     $source->forceFill([
                         'translation_status' => Article::TRANSLATION_STATUS_APPROVED,
+                        'source_version_hash' => (string) ($locked['old_source_hash']),
                         'working_revision_id' => (int) $old->id,
                         'published_revision_id' => (int) $old->id,
                     ])->saveQuietly();
@@ -82,10 +83,11 @@ final class RestoreArticleSourceVersion extends Command
                         throw new RuntimeException('readback_missing');
                     }
                     $sourceAttributes = $sourceAfter->getAttributes();
-                    foreach (['translation_status', 'working_revision_id', 'published_revision_id', 'updated_at'] as $field) {
+                    foreach (['translation_status', 'source_version_hash', 'working_revision_id', 'published_revision_id', 'updated_at'] as $field) {
                         unset($sourceBefore[$field], $sourceAttributes[$field]);
                     }
                     if ($sourceBefore !== $sourceAttributes || $oldBefore !== $oldAfter->getAttributes()
+                        || ! hash_equals($locked['old_source_hash'], (string) $sourceAfter->source_version_hash)
                         || (string) $sourceAfter->translation_status !== Article::TRANSLATION_STATUS_APPROVED
                         || (int) $sourceAfter->working_revision_id !== (int) $old->id
                         || (int) $sourceAfter->published_revision_id !== (int) $old->id
@@ -158,8 +160,10 @@ final class RestoreArticleSourceVersion extends Command
             $oldQuery->lockForUpdate();
         }
         $old = $oldQuery->first();
+        $old_source_hash = $meta['old_source_hash'] ?? ($meta['source_version_hash'] ?? '');
         $errors = [];
-        if (! $old instanceof ArticleTranslationRevision
+        if (! is_string($old_source_hash) || ! preg_match('/^[0-9a-f]{64}$/', $old_source_hash)
+            || ! $old instanceof ArticleTranslationRevision
             || (int) $source->org_id !== 0 || ! $source->isSourceArticle()
             || (string) $source->status !== 'published' || ! (bool) $source->is_public
             || (int) $source->working_revision_id !== $newId
@@ -206,7 +210,7 @@ final class RestoreArticleSourceVersion extends Command
             $errors[] = 'intervening_dependency_or_change';
         }
 
-        return compact('errors', 'source', 'old', 'new');
+        return compact('errors', 'source', 'old', 'new', 'old_source_hash');
     }
 
     private function confirmation(): string
