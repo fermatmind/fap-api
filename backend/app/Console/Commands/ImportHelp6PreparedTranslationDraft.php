@@ -24,6 +24,7 @@ final class ImportHelp6PreparedTranslationDraft extends Command
     private const SLUGS = ['help-about', 'help-contact', 'help-faq', 'help-for-business-and-research', 'help-team', 'help-used-and-mentioned'];
 
     protected $signature = 'translation:import-help6-prepared-draft
+        {--cohort=help6 : help6 or core3 (about/privacy/terms)}
         {--file= : One English copy package with exact source and target snapshots}
         {--sha256= : Exact SHA256 of package bytes}
         {--restore-audit-id= : Restore only the untouched draft created by this exact import audit}
@@ -39,6 +40,9 @@ final class ImportHelp6PreparedTranslationDraft extends Command
         $execute = (bool) $this->option('execute');
         $restoreId = (int) $this->option('restore-audit-id');
         $errors = [];
+        if (! in_array($this->option('cohort'), ['help6', 'core3'], true)) {
+            $errors[] = 'cohort_invalid';
+        }
         $after = null;
         if ($execute === (bool) $this->option('dry-run')) {
             $errors[] = 'exactly_one_mode_required';
@@ -51,8 +55,8 @@ final class ImportHelp6PreparedTranslationDraft extends Command
         }
         try {
             $package = $this->readPackage();
-            $confirmation = sprintf('%s Help6 target %d with package %s%s.',
-                $restoreId > 0 ? 'Restore' : 'Import', $package['target']['id'], $this->option('sha256'),
+            $confirmation = sprintf('%s %s target %d with package %s%s.',
+                $restoreId > 0 ? 'Restore' : 'Import', $this->cohortLabel(), $package['target']['id'], $this->option('sha256'),
                 $restoreId > 0 ? ' and audit '.$restoreId : '');
             if ($execute && ! hash_equals($confirmation, (string) $this->option('confirm'))) {
                 $errors[] = 'confirmation_mismatch';
@@ -121,9 +125,9 @@ final class ImportHelp6PreparedTranslationDraft extends Command
                             throw new RuntimeException('archived_draft_content_changed');
                         }
                     }
-                    $action = $restoreId > 0 ? 'help6_prepared_translation_draft_restored' : 'help6_prepared_translation_draft_imported';
+                    $action = $this->option('cohort').($restoreId > 0 ? '_prepared_translation_draft_restored' : '_prepared_translation_draft_imported');
                     $lastAuditId = (int) AuditLog::query()->withoutGlobalScopes()->max('id');
-                    $logger->log(Request::create('/ops/translation/help6-prepared-draft', 'POST'), $action, 'content_page', (string) $target->id, [
+                    $logger->log(Request::create('/ops/translation/'.$this->option('cohort').'-prepared-draft', 'POST'), $action, 'content_page', (string) $target->id, [
                         'package_sha256' => (string) $this->option('sha256'), 'source_id' => (int) $source->id,
                         'source_snapshot_hash' => $package['source']['snapshot_hash'],
                         'target_snapshot_hash_after' => ContentPageSourceTargetSnapshot::hash($target),
@@ -165,7 +169,7 @@ final class ImportHelp6PreparedTranslationDraft extends Command
         }
         $package = json_decode($bytes, true, 32, JSON_THROW_ON_ERROR);
         if (! is_array($package) || ! $this->keys($package, ['schema', 'source', 'target', 'copy'])
-            || $package['schema'] !== 'fermat_help6_translation_draft_v1'
+            || $package['schema'] !== 'fermat_'.$this->option('cohort').'_translation_draft_v1'
             || ! is_array($package['source']) || ! $this->keys($package['source'], ['id', 'revision_id', 'snapshot_hash'])
             || ! is_array($package['target']) || ! $this->keys($package['target'], ['id', 'working_revision_id', 'published_revision_id', 'snapshot_hash'])
             || ! is_array($package['copy']) || ! $this->keys($package['copy'], ['title', 'summary', 'content_md', 'seo_title', 'seo_description'])) {
@@ -202,7 +206,7 @@ final class ImportHelp6PreparedTranslationDraft extends Command
         $errors = [];
         $group = ContentPage::query()->withoutGlobalScopes()->where('translation_group_id', $source->translation_group_id)->orderBy('id');
         $groupRows = ($lock ? $group->lockForUpdate() : $group)->get();
-        if (! in_array($source->slug, self::SLUGS, true) || $source->slug !== $target->slug || $source->locale !== 'zh-CN'
+        if (! in_array($source->slug, $this->option('cohort') === 'core3' ? ['about', 'privacy', 'terms'] : self::SLUGS, true) || $source->slug !== $target->slug || $source->locale !== 'zh-CN'
             || $source->source_locale !== 'zh-CN' || $source->source_content_id !== null || $source->translation_status !== ContentPage::TRANSLATION_STATUS_SOURCE
             || $source->review_state !== 'approved' || ! $source->passesPublicReadinessGate()
             || $target->locale !== 'en' || $target->source_locale !== 'zh-CN' || (int) $target->source_content_id !== (int) $source->id
@@ -236,7 +240,7 @@ final class ImportHelp6PreparedTranslationDraft extends Command
         $expectedSnapshot = $package['target']['snapshot_hash'];
         if ($restoreId > 0) {
             $meta = $audit?->meta_json;
-            if (! $audit instanceof AuditLog || $audit->action !== 'help6_prepared_translation_draft_imported' || $audit->result !== 'success'
+            if (! $audit instanceof AuditLog || $audit->action !== $this->option('cohort').'_prepared_translation_draft_imported' || $audit->result !== 'success'
                 || $audit->target_type !== 'content_page' || $audit->target_id !== (string) $target->id || ! is_array($meta)
                 || ($meta['package_sha256'] ?? null) !== $this->option('sha256') || ($meta['old_working_revision_id'] ?? null) !== $expectedWorking
                 || ($meta['source_snapshot_hash'] ?? null) !== $package['source']['snapshot_hash'] || ($meta['published_revision_id'] ?? null) !== $package['target']['published_revision_id']
@@ -269,6 +273,11 @@ final class ImportHelp6PreparedTranslationDraft extends Command
         return ['source' => $source, 'target' => $target, 'working' => $working, 'published' => $published, 'audit' => $audit,
             'errors' => $errors, 'payload' => $payload, 'payload_hash' => CanonicalTranslationPayloadHash::hash($payload),
             'max_revision_number' => (int) $revisions->max('revision_number'), 'old_translation_status' => $target->translation_status];
+    }
+
+    private function cohortLabel(): string
+    {
+        return $this->option('cohort') === 'core3' ? 'Core3' : 'Help6';
     }
 
     private function keys(array $value, array $expected): bool

@@ -13,6 +13,7 @@ use App\Services\Cms\RowBackedRevisionWorkspace;
 use App\Support\ContentPageSourceTargetSnapshot;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\DataProvider;
 use RuntimeException;
 use Tests\TestCase;
 
@@ -205,6 +206,51 @@ final class ImportHelp6PreparedTranslationDraftTest extends TestCase
         }
     }
 
+    public static function coreSlugs(): array
+    {
+        return [['about'], ['privacy'], ['terms']];
+    }
+
+    #[DataProvider('coreSlugs')]
+    public function test_core_pages_require_separate_schema_and_preserve_public_and_legal_fields(string $slug): void
+    {
+        [$source, $target, $published, $working] = $this->pair($slug);
+        $payload = $working->payload_json;
+        $payload['legal_review_required'] = true;
+        $working->forceFill(['payload_json' => $payload])->saveQuietly();
+        [$file, $sha, $confirm] = $this->package($source, $target, 'core3');
+        try {
+            $before = ContentPageSourceTargetSnapshot::hash($target);
+            $sourceBefore = ContentPageSourceTargetSnapshot::hash($source);
+            $publicBefore = $published->getAttributes();
+            $oldBefore = $working->getAttributes();
+            $this->assertSame(1, $this->runCommand($file, $sha));
+            $this->assertSame(1, $this->runCommand($file, $sha, ['--cohort' => 'arbitrary']));
+            $this->assertSame(0, $this->runCommand($file, $sha, ['--cohort' => 'core3']));
+            $this->assertSame($before, ContentPageSourceTargetSnapshot::hash($target->fresh()));
+            $this->assertSame(0, $this->runCommand($file, $sha, ['--cohort' => 'core3', '--execute' => true, '--confirm' => $confirm]));
+            $result = json_decode(Artisan::output(), true);
+            $new = CmsTranslationRevision::findOrFail($result['after']['new_revision_id']);
+            $auditId = $result['after']['audit_id'];
+            $this->assertSame('core3_prepared_translation_draft_imported', AuditLog::findOrFail($auditId)->action);
+            $this->assertFalse(AuditLog::findOrFail($auditId)->meta_json['human_review_completed']);
+            $this->assertTrue($new->payload_json['legal_review_required']);
+            $this->assertNull($new->reviewed_at);
+            $this->assertNull($new->approved_at);
+            $this->assertNull($new->published_at);
+            $this->assertSame($publicBefore, $published->fresh()->getAttributes());
+            $this->assertSame($oldBefore, $working->fresh()->getAttributes());
+            $this->assertSame($sourceBefore, ContentPageSourceTargetSnapshot::hash($source->fresh()));
+            $this->assertSame(1, $this->runCommand($file, $sha, ['--restore-audit-id' => $auditId]));
+            $this->assertSame(0, $this->runCommand($file, $sha, ['--cohort' => 'core3', '--restore-audit-id' => $auditId, '--execute' => true,
+                '--confirm' => sprintf('Restore Core3 target %d with package %s and audit %d.', $target->id, $sha, $auditId)]));
+            $this->assertSame((int) $working->id, (int) $target->fresh()->working_revision_id);
+            $this->assertSame('archived', $new->fresh()->revision_status);
+        } finally {
+            unlink($file);
+        }
+    }
+
     private function runCommand(string $file, string $sha, array $options = []): int
     {
         $args = ['--file' => $file, '--sha256' => $sha, '--json' => true] + $options;
@@ -215,9 +261,9 @@ final class ImportHelp6PreparedTranslationDraftTest extends TestCase
         return Artisan::call('translation:import-help6-prepared-draft', $args);
     }
 
-    private function package(ContentPage $source, ContentPage $target): array
+    private function package(ContentPage $source, ContentPage $target, string $cohort = 'help6'): array
     {
-        $package = ['schema' => 'fermat_help6_translation_draft_v1',
+        $package = ['schema' => 'fermat_'.$cohort.'_translation_draft_v1',
             'source' => ['id' => (int) $source->id, 'revision_id' => (int) $source->published_revision_id, 'snapshot_hash' => ContentPageSourceTargetSnapshot::hash($source)],
             'target' => ['id' => (int) $target->id, 'working_revision_id' => (int) $target->working_revision_id,
                 'published_revision_id' => (int) $target->published_revision_id, 'snapshot_hash' => ContentPageSourceTargetSnapshot::hash($target)],
@@ -227,16 +273,16 @@ final class ImportHelp6PreparedTranslationDraftTest extends TestCase
         file_put_contents($file, json_encode($package, JSON_THROW_ON_ERROR));
         $sha = hash_file('sha256', $file);
 
-        return [$file, $sha, sprintf('Import Help6 target %d with package %s.', $target->id, $sha)];
+        return [$file, $sha, sprintf('Import %s target %d with package %s.', $cohort === 'core3' ? 'Core3' : 'Help6', $target->id, $sha)];
     }
 
-    private function pair(): array
+    private function pair(string $slug = 'help-about'): array
     {
         $source = ContentPage::create([
-            'org_id' => 0, 'slug' => 'help-about', 'path' => '/help/about', 'kind' => 'help', 'page_type' => 'support_static',
+            'org_id' => 0, 'slug' => $slug, 'path' => '/help/about', 'kind' => 'help', 'page_type' => 'support_static',
             'title' => '中文帮助', 'summary' => '中文摘要', 'content_md' => '## 关于', 'content_html' => '<p>中文</p>',
             'template' => 'help', 'animation_profile' => 'none', 'locale' => 'zh-CN', 'source_locale' => 'zh-CN',
-            'translation_group_id' => 'content-page-help-about', 'translation_status' => 'source',
+            'translation_group_id' => 'content-page-'.$slug, 'translation_status' => 'source',
             'seo_title' => '中文标题', 'seo_description' => '中文描述', 'status' => 'published', 'review_state' => 'approved',
             'is_public' => true, 'is_indexable' => false, 'published_at' => now(), 'headings_json' => ['关于'],
             'faq_items' => [], 'forbidden_claims' => [], 'schema_enabled' => false, 'publish_allowed' => true,
