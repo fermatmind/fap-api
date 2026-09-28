@@ -244,7 +244,7 @@ final class ReconcileContentPageSourceVersion extends Command
             || (string) $source->locale !== 'zh-CN' || (string) $source->source_locale !== 'zh-CN'
             || $source->source_content_id !== null || (string) $target->locale !== 'en'
             || (string) $target->source_locale !== 'zh-CN' || (int) $target->source_content_id !== $sourceId
-            || ! in_array((string) $source->translation_status, ['approved', 'published'], true)
+            || ! in_array((string) $source->translation_status, ['source', 'approved', 'published'], true)
             || (string) $source->status !== ContentPage::STATUS_PUBLISHED
             || ! (bool) $source->is_public || (string) $source->review_state !== 'approved'
             || ! $source->passesPublicReadinessGate()
