@@ -40,7 +40,8 @@ final class ReconcileArticleSourceVersionTest extends TestCase
             $this->assertTrue($sourceAfter->isSourceArticle());
             $this->assertSame((int) $new->id, (int) $sourceAfter->working_revision_id);
             $this->assertSame((int) $old->id, (int) $new->supersedes_revision_id);
-            $this->assertSame(ArticleTranslationRevision::STATUS_SOURCE, $new->revision_status);
+            $this->assertSame(ArticleTranslationRevision::STATUS_PUBLISHED, $new->revision_status);
+            $this->assertSame($old->published_at->toISOString(), $new->published_at->toISOString());
             $this->assertSame((string) $sourceAfter->source_version_hash, (string) $new->source_version_hash);
             $this->assertSame((string) $sourceAfter->content_md, (string) $new->content_md);
             $this->assertSame((string) $old->seo_description, (string) $new->seo_description);
@@ -80,6 +81,76 @@ final class ReconcileArticleSourceVersionTest extends TestCase
             $this->assertSame((int) $old->id, (int) $source->fresh()->published_revision_id);
             $this->assertSame(ArticleTranslationRevision::STATUS_ARCHIVED, $new->fresh()->revision_status);
             $this->assertSame(1, AuditLog::withoutGlobalScopes()->where('action', 'article_source_version_reconciliation_restored')->count());
+        } finally {
+            unlink($path);
+        }
+    }
+
+    public function test_reconciled_source_remains_in_public_list_and_preserves_public_copy_and_seo(): void
+    {
+        [$source, $old, $seo] = $this->legacySource();
+        [$path, $sha, $confirm] = $this->package($source, $old, $seo);
+        try {
+            $url = '/api/v0.5/articles/'.$source->slug.'?locale=zh-CN';
+            $before = $this->getJson($url)->assertOk()->json();
+            $this->getJson('/api/v0.5/articles?locale=zh-CN&page=1')->assertOk()
+                ->assertJsonPath('pagination.total', 1)
+                ->assertJsonPath('items.0.id', (int) $source->id);
+
+            $this->assertSame(0, Artisan::call('articles:reconcile-source-version', [
+                '--file' => $path, '--sha256' => $sha, '--execute' => true,
+                '--confirm' => $confirm, '--json' => true,
+            ]));
+
+            \Illuminate\Support\Facades\Cache::flush();
+            $after = $this->getJson($url)->assertOk()->json();
+            $this->getJson('/api/v0.5/articles?locale=zh-CN&page=1')->assertOk()
+                ->assertJsonPath('pagination.total', 1)
+                ->assertJsonPath('items.0.id', (int) $source->id);
+            foreach (['title', 'excerpt', 'content_md', 'content_html', 'status', 'is_indexable', 'published_at'] as $field) {
+                $this->assertSame($before['article'][$field] ?? null, $after['article'][$field] ?? null);
+            }
+            foreach (['title', 'description', 'canonical_url', 'robots_policy', 'alternates', 'sitemap_state'] as $field) {
+                $this->assertSame($before['seo_surface_v1'][$field] ?? null, $after['seo_surface_v1'][$field] ?? null);
+            }
+            $this->assertSame(ArticleTranslationRevision::STATUS_PUBLISHED, $source->fresh()->publishedRevision->revision_status);
+            $this->assertNull($source->fresh()->publishedRevision->approved_at);
+        } finally {
+            unlink($path);
+        }
+    }
+
+    public function test_restore_accepts_legacy_source_lifecycle_but_rejects_unpublished_review_state(): void
+    {
+        [$source, $old, $seo] = $this->legacySource();
+        [$path, $sha, $confirm] = $this->package($source, $old, $seo);
+        try {
+            $this->assertSame(0, Artisan::call('articles:reconcile-source-version', [
+                '--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm,
+            ]));
+            $source = $source->fresh();
+            $new = $source->publishedRevision;
+            $audit = AuditLog::withoutGlobalScopes()->where('action', 'article_source_version_reconciled')->firstOrFail();
+            foreach ([ArticleTranslationRevision::STATUS_APPROVED, ArticleTranslationRevision::STATUS_SOURCE] as $status) {
+                $new->forceFill(['revision_status' => $status])->saveQuietly();
+                $restore = [
+                    '--source-id' => (int) $source->id, '--audit-id' => (int) $audit->id,
+                    '--new-revision-id' => (int) $new->id,
+                    '--source-updated-at' => (string) $source->getRawOriginal('updated_at'),
+                    '--revision-updated-at' => (string) $new->getRawOriginal('updated_at'),
+                    '--dry-run' => true,
+                ];
+                $this->assertSame($status === ArticleTranslationRevision::STATUS_SOURCE ? 0 : 1,
+                    Artisan::call('articles:restore-source-version', $restore));
+                $this->assertSame((int) $new->id, (int) $source->fresh()->published_revision_id);
+            }
+            unset($restore['--dry-run']);
+            $this->assertSame(0, Artisan::call('articles:restore-source-version', [
+                ...$restore, '--execute' => true,
+                '--confirm' => sprintf('Restore Article source %d from reconciliation audit %d and revision %d.',
+                    $source->id, $audit->id, $new->id),
+            ]));
+            $this->assertSame((int) $old->id, (int) $source->fresh()->published_revision_id);
         } finally {
             unlink($path);
         }
@@ -181,7 +252,7 @@ final class ReconcileArticleSourceVersionTest extends TestCase
             'source_version_hash' => str_repeat('a', 64), 'translated_from_version_hash' => str_repeat('a', 64),
             'title' => (string) $source->title, 'excerpt' => (string) $source->excerpt,
             'content_md' => (string) $source->content_md,
-            'seo_title' => '旧 SEO 标题', 'seo_description' => '旧 SEO 描述', 'published_at' => now(),
+            'seo_title' => '旧 SEO 标题', 'seo_description' => '旧 SEO 描述', 'published_at' => now()->subDay(),
         ]);
         $source->forceFill(['working_revision_id' => (int) $old->id,
             'published_revision_id' => (int) $old->id])->saveQuietly();
