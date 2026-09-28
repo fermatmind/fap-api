@@ -11,6 +11,24 @@ use RuntimeException;
 
 final class ArticleSourceTargetSnapshot
 {
+    /** @param list<int> $excludedIds
+     * @return list<array{revision_id:int,sha256:string}>
+     */
+    public static function sourceRevisions(Article $source, array $excludedIds = [], bool $lock = false): array
+    {
+        $query = ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $source->id)
+            ->whereNotIn('id', $excludedIds)->orderBy('id');
+        $revisions = ($lock ? $query->lockForUpdate() : $query)->get();
+        if ($revisions->contains(fn ($revision): bool => (int) $revision->org_id !== 0)) {
+            throw new RuntimeException('source_revision_tenant_mismatch');
+        }
+
+        return $revisions->map(fn ($revision): array => [
+            'revision_id' => (int) $revision->id,
+            'sha256' => hash('sha256', json_encode(self::attributes($revision->getAttributes()), JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)),
+        ])->all();
+    }
+
     /** @return list<array{article_id:int,sha256:string}> */
     public static function capture(Article $source, bool $lock = false): array
     {

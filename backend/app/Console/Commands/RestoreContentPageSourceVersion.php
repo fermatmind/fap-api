@@ -9,6 +9,7 @@ use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
 use App\Services\Audit\AuditLogger;
 use App\Support\CanonicalTranslationPayloadHash;
+use App\Support\ContentPageSourceTargetSnapshot;
 use App\Support\SchemaBaseline;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
@@ -30,7 +31,8 @@ final class RestoreContentPageSourceVersion extends Command
         {--target-hash= : Current target row hash lock}
         {--source-updated-at= : Current source row timestamp lock}
         {--target-updated-at= : Current target row timestamp lock}
-        {--old-revision-id= : Original published source revision ID}
+        {--old-revision-id= : Original published source revision ID; 0 only with restore-initial-source-revision}
+        {--restore-initial-source-revision : Restore audited NULL source pointers; old-revision-id must be 0}
         {--new-revision-id= : Reconciled source revision ID}
         {--new-revision-updated-at= : Reconciled revision timestamp lock}
         {--audit-id= : Exact successful reconciliation audit ID}
@@ -74,21 +76,22 @@ final class RestoreContentPageSourceVersion extends Command
                     $source = $locked['source'];
                     /** @var ContentPage $target */
                     $target = $locked['target'];
-                    /** @var CmsTranslationRevision $old */
+                    /** @var CmsTranslationRevision|null $old */
                     $old = $locked['old'];
                     /** @var CmsTranslationRevision $new */
                     $new = $locked['new'];
                     $sourceBefore = $source->getAttributes();
                     $targetBefore = $target->getAttributes();
-                    $oldBefore = $old->getAttributes();
+                    $oldBefore = $old?->getAttributes();
+                    $targetSnapshotHash = ContentPageSourceTargetSnapshot::hash($target, true);
                     $newBefore = $new->getAttributes();
                     $meta = (array) $locked['audit']->meta_json;
 
                     $source->forceFill([
                         'translation_status' => (string) $meta['before_status'],
                         'source_version_hash' => (string) $meta['before_hash'],
-                        'working_revision_id' => (int) $old->id,
-                        'published_revision_id' => (int) $old->id,
+                        'working_revision_id' => $old?->id,
+                        'published_revision_id' => $old?->id,
                     ])->saveQuietly();
                     $new->forceFill([
                         'revision_status' => CmsTranslationRevision::STATUS_ARCHIVED,
@@ -97,10 +100,10 @@ final class RestoreContentPageSourceVersion extends Command
 
                     $sourceAfter = $source->fresh();
                     $targetAfter = $target->fresh();
-                    $oldAfter = $old->fresh();
+                    $oldAfter = $old?->fresh();
                     $newAfter = $new->fresh();
                     if (! $sourceAfter instanceof ContentPage || ! $targetAfter instanceof ContentPage
-                        || ! $oldAfter instanceof CmsTranslationRevision || ! $newAfter instanceof CmsTranslationRevision) {
+                        || ($old !== null && ! $oldAfter instanceof CmsTranslationRevision) || ! $newAfter instanceof CmsTranslationRevision) {
                         throw new RuntimeException('readback_missing');
                     }
                     $sourceReadback = $sourceAfter->getAttributes();
@@ -112,9 +115,10 @@ final class RestoreContentPageSourceVersion extends Command
                         unset($newBefore[$field], $newReadback[$field]);
                     }
                     if ($sourceBefore !== $sourceReadback || $newBefore !== $newReadback
-                        || $targetBefore !== $targetAfter->getAttributes() || $oldBefore !== $oldAfter->getAttributes()
-                        || (int) $sourceAfter->working_revision_id !== (int) $old->id
-                        || (int) $sourceAfter->published_revision_id !== (int) $old->id
+                        || $targetBefore !== $targetAfter->getAttributes() || $oldBefore !== $oldAfter?->getAttributes()
+                        || ContentPageSourceTargetSnapshot::hash($targetAfter) !== $targetSnapshotHash
+                        || $sourceAfter->working_revision_id !== $old?->id
+                        || $sourceAfter->published_revision_id !== $old?->id
                         || (string) $sourceAfter->translation_status !== (string) $meta['before_status']
                         || ! hash_equals((string) $meta['before_hash'], (string) $sourceAfter->source_version_hash)
                         || (string) $newAfter->revision_status !== CmsTranslationRevision::STATUS_ARCHIVED) {
@@ -132,7 +136,7 @@ final class RestoreContentPageSourceVersion extends Command
                             'target_id' => (int) $target->id,
                             'group_id' => (string) $source->translation_group_id,
                             'reconcile_audit_id' => (int) $locked['audit']->id,
-                            'restored_revision_id' => (int) $old->id,
+                            'restored_revision_id' => $old?->id,
                             'archived_revision_id' => (int) $new->id,
                             'target_provenance_changed' => false,
                         ],
@@ -149,7 +153,7 @@ final class RestoreContentPageSourceVersion extends Command
 
                     return [
                         'source_id' => (int) $sourceAfter->id,
-                        'restored_revision_id' => (int) $oldAfter->id,
+                        'restored_revision_id' => $oldAfter?->id,
                         'archived_revision_id' => (int) $newAfter->id,
                         'audit_id' => (int) $audit->id,
                     ];
@@ -200,7 +204,8 @@ final class RestoreContentPageSourceVersion extends Command
         $auditId = (int) $this->option('audit-id');
         $groupId = trim((string) $this->option('group-id'));
         $slug = trim((string) $this->option('slug'));
-        if ($sourceId < 1 || $targetId < 1 || $oldId < 1 || $newId < 1 || $auditId < 1
+        $initial = (bool) $this->option('restore-initial-source-revision');
+        if ($sourceId < 1 || $targetId < 1 || ($initial ? (string) $this->option('old-revision-id') !== '0' : $oldId < 1) || $newId < 1 || $auditId < 1
             || $sourceId === $targetId || $oldId === $newId || $groupId === '' || $slug === '') {
             return ['errors' => ['invalid_exact_identity']];
         }
@@ -222,7 +227,7 @@ final class RestoreContentPageSourceVersion extends Command
         $new = $revisions->get($newId);
         $audit = $auditQuery->first();
         if ($group->count() !== 2 || ! $source instanceof ContentPage || ! $target instanceof ContentPage
-            || ! $old instanceof CmsTranslationRevision || ! $new instanceof CmsTranslationRevision
+            || (! $initial && ! $old instanceof CmsTranslationRevision) || ! $new instanceof CmsTranslationRevision
             || ! $audit instanceof AuditLog) {
             return ['errors' => ['identity_revision_or_audit_missing']];
         }
@@ -247,7 +252,7 @@ final class RestoreContentPageSourceVersion extends Command
             || (string) $new->getRawOriginal('updated_at') !== (string) $this->option('new-revision-updated-at')) {
             $errors[] = 'row_or_revision_lock_mismatch';
         }
-        foreach ([$old, $new] as $revision) {
+        foreach (array_filter([$old, $new]) as $revision) {
             if ((int) $revision->org_id !== 0 || (string) $revision->content_type !== 'content_page'
                 || (int) $revision->content_id !== $sourceId
                 || (string) $revision->translation_group_id !== $groupId
@@ -256,13 +261,13 @@ final class RestoreContentPageSourceVersion extends Command
                 $errors[] = 'source_revision_identity_invalid';
             }
         }
-        $legacyApprovedRevision = (string) $old->revision_status === CmsTranslationRevision::STATUS_APPROVED
-            && $old->getRawOriginal('published_at') !== null
+        $legacyApprovedRevision = (string) $old?->revision_status === CmsTranslationRevision::STATUS_APPROVED
+            && $old?->getRawOriginal('published_at') !== null
             && (string) ($meta['old_revision_status'] ?? '') === CmsTranslationRevision::STATUS_APPROVED
-            && (string) ($meta['old_revision_published_at'] ?? '') === (string) $old->getRawOriginal('published_at');
-        if (! $legacyApprovedRevision && (string) $old->revision_status !== CmsTranslationRevision::STATUS_PUBLISHED
+            && (string) ($meta['old_revision_published_at'] ?? '') === (string) $old?->getRawOriginal('published_at');
+        if ((! $initial && ! $legacyApprovedRevision && (string) $old?->revision_status !== CmsTranslationRevision::STATUS_PUBLISHED)
             || (string) $new->revision_status !== CmsTranslationRevision::STATUS_SOURCE
-            || (int) $new->supersedes_revision_id !== $oldId
+            || $new->supersedes_revision_id !== $old?->id
             || (string) $audit->action !== 'content_page_source_version_reconciled'
             || (int) $audit->org_id !== 0 || (string) $audit->target_type !== 'content_page'
             || (string) $audit->target_id !== (string) $sourceId
@@ -275,14 +280,37 @@ final class RestoreContentPageSourceVersion extends Command
             || (string) ($meta['after_hash'] ?? '') !== (string) $source->source_version_hash
             || (string) ($meta['target_hash'] ?? '') !== (string) $target->source_version_hash
             || (string) ($meta['target_updated_at'] ?? '') !== (string) $target->getRawOriginal('updated_at')
-            || (string) ($meta['old_revision_hash'] ?? '') !== (string) $old->source_version_hash
-            || (string) ($meta['old_revision_updated_at'] ?? '') !== (string) $old->getRawOriginal('updated_at')
-            || (string) ($meta['old_revision_payload_hash'] ?? '') !== $this->payloadHash($old->payload_json)
+            || (string) ($meta['old_revision_hash'] ?? '') !== (string) $old?->source_version_hash
+            || (string) ($meta['old_revision_updated_at'] ?? '') !== (string) $old?->getRawOriginal('updated_at')
+            || (string) ($meta['old_revision_payload_hash'] ?? '') !== $this->payloadHash($old?->payload_json)
             || (string) ($meta['new_revision_payload_hash'] ?? '') !== $this->payloadHash($new->payload_json)
             || (string) $new->source_version_hash !== (string) $source->source_version_hash
             || ! hash_equals((string) $source->source_version_hash, $source->freshSourceVersionHash())
-            || (string) $target->translated_from_version_hash === (string) $source->source_version_hash) {
+            || (! $initial && (string) $target->translated_from_version_hash === (string) $source->source_version_hash)) {
             $errors[] = 'reconciliation_audit_or_provenance_mismatch';
+        }
+        if ($initial) {
+            if (! in_array($meta['before_status'] ?? null, ['source', 'approved', 'published'], true)
+                || preg_match('/^[0-9a-f]{64}$/', (string) ($meta['before_hash'] ?? '')) !== 1) {
+                $errors[] = 'initial_source_audit_mismatch';
+            }
+            foreach (['old_revision_id', 'old_working_revision_id', 'old_published_revision_id', 'old_revision_hash', 'old_revision_status', 'old_revision_updated_at', 'old_revision_published_at'] as $field) {
+                if (! array_key_exists($field, $meta) || $meta[$field] !== null) {
+                    $errors[] = 'initial_source_audit_mismatch';
+                }
+            }
+            if (($meta['initialized_source_revision'] ?? null) !== true
+                || preg_match('/^[0-9a-f]{64}$/', (string) ($meta['target_snapshot_hash'] ?? '')) !== 1
+                || CmsTranslationRevision::query()->withoutGlobalScopes()->where('content_type', 'content_page')
+                    ->where('content_id', $sourceId)->where('id', '!=', $newId)->exists()) {
+                $errors[] = 'initial_source_audit_or_revision_conflict';
+            }
+        } elseif (($meta['initialized_source_revision'] ?? false) === true) {
+            $errors[] = 'initial_source_restore_mode_required';
+        }
+        if (array_key_exists('target_snapshot_hash', $meta)
+            && $meta['target_snapshot_hash'] !== ContentPageSourceTargetSnapshot::hash($target, $lock)) {
+            $errors[] = 'target_revision_snapshot_drift';
         }
         if (AuditLog::query()->withoutGlobalScopes()->where('id', '>', $auditId)
             ->where('target_type', 'content_page')->whereIn('target_id', [(string) $sourceId, (string) $targetId])->exists()

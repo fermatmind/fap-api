@@ -209,6 +209,16 @@ final class RestoreArticleSourceVersion extends Command
                 ->where('target_type', 'article')->where('target_id', (string) $sourceId)->exists()) {
             $errors[] = 'intervening_dependency_or_change';
         }
+        if (($meta['source_package_schema'] ?? null) === 'fermat_article_source_reconcile_v4') {
+            try {
+                $history = ArticleSourceTargetSnapshot::sourceRevisions($source, [$newId], $lock);
+                if (! is_array($meta['preserved_source_revisions'] ?? null) || $history !== $meta['preserved_source_revisions']) {
+                    $errors[] = 'preserved_source_revision_changed';
+                }
+            } catch (RuntimeException) {
+                $errors[] = 'preserved_source_revision_changed';
+            }
+        }
 
         return compact('errors', 'source', 'old', 'new', 'old_source_hash');
     }
