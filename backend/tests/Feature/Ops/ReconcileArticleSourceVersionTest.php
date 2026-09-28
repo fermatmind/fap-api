@@ -86,6 +86,73 @@ final class ReconcileArticleSourceVersionTest extends TestCase
         }
     }
 
+    public function test_null_old_hash_is_locked_preserved_and_restorable(): void
+    {
+        [$source, $old, $seo] = $this->legacySource();
+        $old->forceFill(['source_version_hash' => null])->saveQuietly();
+        [$path, $sha, $confirm] = $this->package($source, $old->fresh(), $seo);
+        try {
+            $count = ArticleTranslationRevision::withoutGlobalScopes()->count();
+            $this->assertSame(0, Artisan::call('articles:reconcile-source-version', [
+                '--file' => $path, '--sha256' => $sha, '--dry-run' => true,
+            ]));
+            $this->assertSame($count, ArticleTranslationRevision::withoutGlobalScopes()->count());
+            $this->assertNull($old->fresh()->getRawOriginal('source_version_hash'));
+            $this->assertSame(0, Artisan::call('articles:reconcile-source-version', [
+                '--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm,
+            ]));
+            $after = $source->fresh();
+            $new = $after->publishedRevision;
+            $audit = AuditLog::withoutGlobalScopes()->where('action', 'article_source_version_reconciled')->firstOrFail();
+            $this->assertArrayHasKey('old_revision_hash', $audit->meta_json);
+            $this->assertNull($audit->meta_json['old_revision_hash']);
+            $this->assertNull($old->fresh()->getRawOriginal('source_version_hash'));
+            $restore = [
+                '--source-id' => (int) $source->id, '--audit-id' => (int) $audit->id,
+                '--new-revision-id' => (int) $new->id,
+                '--source-updated-at' => (string) $after->getRawOriginal('updated_at'),
+                '--revision-updated-at' => (string) $new->getRawOriginal('updated_at'),
+            ];
+            $auditMeta = $audit->meta_json;
+            $missingHashMeta = $auditMeta;
+            unset($missingHashMeta['old_revision_hash']);
+            $audit->forceFill(['meta_json' => $missingHashMeta])->saveQuietly();
+            $this->assertSame(1, Artisan::call('articles:restore-source-version', [
+                ...$restore, '--dry-run' => true,
+            ]));
+            $audit->forceFill(['meta_json' => $auditMeta])->saveQuietly();
+            $this->assertSame(0, Artisan::call('articles:restore-source-version', [
+                ...$restore, '--execute' => true,
+                '--confirm' => sprintf('Restore Article source %d from reconciliation audit %d and revision %d.',
+                    $source->id, $audit->id, $new->id),
+            ]));
+            $this->assertSame((int) $old->id, (int) $source->fresh()->published_revision_id);
+            $this->assertNull($old->fresh()->getRawOriginal('source_version_hash'));
+        } finally {
+            unlink($path);
+        }
+    }
+
+    public function test_null_hash_package_rejects_hash_drift_before_execute(): void
+    {
+        [$source, $old, $seo] = $this->legacySource();
+        $old->forceFill(['source_version_hash' => null])->saveQuietly();
+        [$path, $sha, $confirm] = $this->package($source, $old->fresh(), $seo);
+        try {
+            $old->forceFill(['source_version_hash' => str_repeat('b', 64)])->saveQuietly();
+            $count = ArticleTranslationRevision::withoutGlobalScopes()->count();
+            $this->assertSame(1, Artisan::call('articles:reconcile-source-version', [
+                '--file' => $path, '--sha256' => $sha, '--execute' => true,
+                '--confirm' => $confirm, '--json' => true,
+            ]));
+            $this->assertContains('published_revision_mismatch', json_decode(Artisan::output(), true)['errors']);
+            $this->assertSame($count, ArticleTranslationRevision::withoutGlobalScopes()->count());
+            $this->assertSame((int) $old->id, (int) $source->fresh()->published_revision_id);
+        } finally {
+            unlink($path);
+        }
+    }
+
     public function test_reconciled_source_remains_in_public_list_and_preserves_public_copy_and_seo(): void
     {
         [$source, $old, $seo] = $this->legacySource();
@@ -272,7 +339,7 @@ final class ReconcileArticleSourceVersionTest extends TestCase
             'source_body_sha256' => hash('sha256', (string) $source->content_md),
             'source_updated_at' => (string) $source->getRawOriginal('updated_at'),
             'revision_id' => (int) $revision->id,
-            'revision_hash' => (string) $revision->source_version_hash,
+            'revision_hash' => $revision->getRawOriginal('source_version_hash'),
             'revision_body_sha256' => hash('sha256', (string) $revision->content_md),
             'revision_updated_at' => (string) $revision->getRawOriginal('updated_at'),
             'seo_meta_id' => (int) $seo->id,
