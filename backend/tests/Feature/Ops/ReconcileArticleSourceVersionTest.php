@@ -332,6 +332,91 @@ final class ReconcileArticleSourceVersionTest extends TestCase
         }
     }
 
+    public function test_row_hash_rebuild_preserves_public_copy_target_provenance_and_restores_exact_old_hash(): void
+    {
+        [$source, $old, $seo] = $this->legacySource();
+        $source->forceFill(['source_version_hash' => (string) $old->source_version_hash])->saveQuietly();
+        $source = $source->fresh();
+        $this->existingTarget($source);
+        [$path, $sha, $confirm] = $this->packageWithRowHash($source, $old, $seo);
+        try {
+            $oldHash = (string) $source->source_version_hash;
+            $currentHash = $source->computeSourceVersionHash();
+            $this->assertNotSame($oldHash, $currentHash);
+            $before = $source->getAttributes();
+            $oldBefore = $old->fresh()->getAttributes();
+            $targetBefore = ArticleSourceTargetSnapshot::capture($source);
+            $public = $this->getJson('/api/v0.5/articles/'.$source->slug.'?locale=zh-CN')->assertOk()->json();
+            $this->assertSame(0, Artisan::call('articles:reconcile-source-version', [
+                '--file' => $path, '--sha256' => $sha, '--dry-run' => true,
+            ]));
+            $this->assertSame($before, $source->fresh()->getAttributes());
+            $this->assertSame(0, Artisan::call('articles:reconcile-source-version', [
+                '--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm,
+            ]));
+            $source = $source->fresh();
+            $new = $source->publishedRevision;
+            $this->assertSame($currentHash, $source->source_version_hash);
+            $this->assertSame($currentHash, $new->source_version_hash);
+            $this->assertSame($oldBefore, $old->fresh()->getAttributes());
+            $this->assertSame($targetBefore, ArticleSourceTargetSnapshot::capture($source));
+            $after = $this->getJson('/api/v0.5/articles/'.$source->slug.'?locale=zh-CN')->assertOk()->json();
+            foreach (['title', 'excerpt', 'content_md'] as $field) {
+                $this->assertSame($public['article'][$field], $after['article'][$field]);
+            }
+            $this->assertSame($public['seo_surface_v1'], $after['seo_surface_v1']);
+            $audit = AuditLog::withoutGlobalScopes()->where('action', 'article_source_version_reconciled')->firstOrFail();
+            $this->assertSame($oldHash, $audit->meta_json['old_source_hash']);
+            $this->assertSame(0, Artisan::call('articles:restore-source-version', [
+                '--source-id' => (int) $source->id, '--audit-id' => (int) $audit->id,
+                '--new-revision-id' => (int) $new->id,
+                '--source-updated-at' => (string) $source->getRawOriginal('updated_at'),
+                '--revision-updated-at' => (string) $new->getRawOriginal('updated_at'),
+                '--execute' => true, '--confirm' => sprintf('Restore Article source %d from reconciliation audit %d and revision %d.',
+                    $source->id, $audit->id, $new->id),
+            ]));
+            $this->assertSame($oldHash, $source->fresh()->source_version_hash);
+            $this->assertSame((int) $old->id, (int) $source->fresh()->published_revision_id);
+            $this->assertSame($targetBefore, ArticleSourceTargetSnapshot::capture($source->fresh()));
+        } finally {
+            unlink($path);
+        }
+    }
+
+    public function test_row_hash_rebuild_rejects_metadata_drift_that_leaves_body_unchanged(): void
+    {
+        [$source, $old, $seo] = $this->legacySource();
+        $source->forceFill(['source_version_hash' => (string) $old->source_version_hash])->saveQuietly();
+        $source = $source->fresh();
+        $this->existingTarget($source);
+        [$path, $sha, $confirm] = $this->packageWithRowHash($source, $old, $seo);
+        try {
+            $source->forceFill(['cover_image_alt' => 'Changed metadata only'])->saveQuietly();
+            $this->assertSame(1, Artisan::call('articles:reconcile-source-version', [
+                '--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm,
+            ]));
+            $this->assertContains('source_lock_mismatch', json_decode(Artisan::output(), true)['errors']);
+            $this->assertSame((int) $old->id, (int) $source->fresh()->published_revision_id);
+            $this->assertSame(0, AuditLog::withoutGlobalScopes()->where('action', 'article_source_version_reconciled')->count());
+        } finally {
+            unlink($path);
+        }
+    }
+
+    private function packageWithRowHash(Article $source, ArticleTranslationRevision $old, ArticleSeoMeta $seo): array
+    {
+        [$path] = $this->packageWithTarget($source, $old, $seo);
+        $p = json_decode(file_get_contents($path), true);
+        $p['schema'] = 'fermat_article_source_reconcile_v3';
+        $p['computed_source_hash'] = $source->computeSourceVersionHash();
+        $bytes = json_encode($p, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
+        file_put_contents($path, $bytes);
+        $sha = hash('sha256', $bytes);
+
+        return [$path, $sha, sprintf('Reconcile Article source %d in group %s with package %s.',
+            $source->id, $source->translation_group_id, $sha)];
+    }
+
     private array $targetBefore = [];
 
     private function existingTarget(Article $source): Article
