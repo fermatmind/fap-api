@@ -135,7 +135,7 @@ final class ReconcileArticleSourceVersion extends Command
                             'old_revision_id' => (int) $old->id,
                             'new_revision_id' => (int) $newAfter->id,
                             'source_version_hash' => (string) $source->source_version_hash,
-                            'old_revision_hash' => (string) $old->source_version_hash,
+                            'old_revision_hash' => $old->getRawOriginal('source_version_hash'),
                             'old_revision_body_sha256' => hash('sha256', (string) $old->content_md),
                             'old_revision_updated_at' => (string) $old->getRawOriginal('updated_at'),
                             'package_sha256' => (string) $this->option('sha256'),
@@ -190,10 +190,14 @@ final class ReconcileArticleSourceVersion extends Command
             || ! is_int($package['seo_meta_id']) || $package['seo_meta_id'] <= 0) {
             throw new RuntimeException('package_schema_invalid');
         }
-        foreach (['source_hash', 'source_body_sha256', 'revision_hash', 'revision_body_sha256', 'seo_meta_content_sha256'] as $field) {
+        foreach (['source_hash', 'source_body_sha256', 'revision_body_sha256', 'seo_meta_content_sha256'] as $field) {
             if (! is_string($package[$field]) || ! preg_match('/^[0-9a-f]{64}$/', $package[$field])) {
                 throw new RuntimeException('package_hash_invalid');
             }
+        }
+        if ($package['revision_hash'] !== null
+            && (! is_string($package['revision_hash']) || ! preg_match('/^[0-9a-f]{64}$/', $package['revision_hash']))) {
+            throw new RuntimeException('package_hash_invalid');
         }
         foreach (['group_id', 'slug', 'source_updated_at', 'revision_updated_at', 'seo_meta_updated_at'] as $field) {
             if (! is_string($package[$field]) || trim($package[$field]) === '') {
@@ -248,7 +252,9 @@ final class ReconcileArticleSourceVersion extends Command
             || (string) $revision->translation_group_id !== (string) $source->translation_group_id
             || (string) $revision->locale !== 'zh-CN'
             || (string) $revision->revision_status !== ArticleTranslationRevision::STATUS_PUBLISHED
-            || ! hash_equals($p['revision_hash'], (string) $revision->source_version_hash)
+            || ($p['revision_hash'] === null
+                ? $revision->getRawOriginal('source_version_hash') !== null
+                : ! hash_equals($p['revision_hash'], (string) $revision->source_version_hash))
             || hash_equals((string) $revision->source_version_hash, (string) $source->source_version_hash)
             || ! hash_equals($p['revision_body_sha256'], hash('sha256', (string) $revision->content_md))
             || (string) $revision->title !== (string) $source->title
