@@ -240,6 +240,14 @@ final class ArticleImportPreparedTranslationDraft extends Command
             }
         }
 
+        // Enforce the narrowest persisted column before the dry-run can pass.
+        // SQLite does not enforce these MySQL varchar limits.
+        foreach (['title' => 255, 'seo_title' => 60, 'seo_description' => 160] as $field => $limit) {
+            if (mb_strlen($copy[$field], 'UTF-8') > $limit) {
+                throw new RuntimeException('translation_field_too_long');
+            }
+        }
+
         return $package;
     }
 
