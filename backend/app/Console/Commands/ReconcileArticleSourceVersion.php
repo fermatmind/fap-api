@@ -129,6 +129,10 @@ final class ReconcileArticleSourceVersion extends Command
                         || ArticleSourceTargetSnapshot::capture($sourceAfter, true) !== $locked['target_snapshot']) {
                         throw new RuntimeException('readback_mismatch');
                     }
+                    if ($locked['source_history_snapshot'] !== null
+                        && ArticleSourceTargetSnapshot::sourceRevisions($sourceAfter, [(int) $newAfter->id]) !== $locked['source_history_snapshot']) {
+                        throw new RuntimeException('source_history_readback_mismatch');
+                    }
                     $lastAuditId = (int) AuditLog::query()->withoutGlobalScopes()->max('id');
                     $auditLogger->log(
                         Request::create('/ops/article-translation/reconcile-source-version', 'POST'),
@@ -145,6 +149,10 @@ final class ReconcileArticleSourceVersion extends Command
                             'old_revision_updated_at' => (string) $old->getRawOriginal('updated_at'),
                             'package_sha256' => (string) $this->option('sha256'),
                             'existing_english_targets' => $locked['target_snapshot'],
+                            ...($locked['source_history_snapshot'] !== null ? [
+                                'source_package_schema' => $package['schema'],
+                                'preserved_source_revisions' => $locked['source_history_snapshot'],
+                            ] : []),
                             'public_body_seo_changed' => false,
                             'public_revision_metadata_changed' => true,
                         ],
@@ -187,7 +195,8 @@ final class ReconcileArticleSourceVersion extends Command
         }
         $package = json_decode($bytes, true, 16, JSON_THROW_ON_ERROR);
         $v3 = is_array($package) && ($package['schema'] ?? null) === 'fermat_article_source_reconcile_v3';
-        $v2 = $v3 || (is_array($package) && ($package['schema'] ?? null) === 'fermat_article_source_reconcile_v2');
+        $v4 = is_array($package) && ($package['schema'] ?? null) === 'fermat_article_source_reconcile_v4';
+        $v2 = $v4 || $v3 || (is_array($package) && ($package['schema'] ?? null) === 'fermat_article_source_reconcile_v2');
         $keys = [
             'schema', 'source_id', 'group_id', 'slug', 'source_hash', 'source_body_sha256',
             'source_updated_at', 'revision_id', 'revision_hash', 'revision_body_sha256',
@@ -199,8 +208,11 @@ final class ReconcileArticleSourceVersion extends Command
         if ($v3) {
             $keys[] = 'computed_source_hash';
         }
+        if ($v4) {
+            $keys[] = 'preserved_source_revisions';
+        }
         if (! is_array($package) || array_keys($package) !== $keys
-            || ! in_array($package['schema'], ['fermat_article_source_reconcile_v1', 'fermat_article_source_reconcile_v2', 'fermat_article_source_reconcile_v3'], true)
+            || ! in_array($package['schema'], ['fermat_article_source_reconcile_v1', 'fermat_article_source_reconcile_v2', 'fermat_article_source_reconcile_v3', 'fermat_article_source_reconcile_v4'], true)
             || ! is_int($package['source_id']) || $package['source_id'] <= 0
             || ! is_int($package['revision_id']) || $package['revision_id'] <= 0
             || ! is_int($package['seo_meta_id']) || $package['seo_meta_id'] <= 0) {
@@ -213,6 +225,21 @@ final class ReconcileArticleSourceVersion extends Command
                 || ! is_int($targets[0]['article_id']) || $targets[0]['article_id'] <= 0
                 || ! is_string($targets[0]['sha256']) || ! preg_match('/^[0-9a-f]{64}$/', $targets[0]['sha256'])) {
                 throw new RuntimeException('target_snapshot_invalid');
+            }
+        }
+        if ($v4) {
+            $history = $package['preserved_source_revisions'];
+            if (! is_array($history) || ! array_is_list($history) || count($history) < 2 || count($history) > 1000) {
+                throw new RuntimeException('source_history_snapshot_invalid');
+            }
+            $lastId = 0;
+            foreach ($history as $item) {
+                if (! is_array($item) || array_keys($item) !== ['revision_id', 'sha256']
+                    || ! is_int($item['revision_id']) || $item['revision_id'] <= $lastId
+                    || ! is_string($item['sha256']) || ! preg_match('/^[0-9a-f]{64}$/', $item['sha256'])) {
+                    throw new RuntimeException('source_history_snapshot_invalid');
+                }
+                $lastId = $item['revision_id'];
             }
         }
         if ($v3 && (! is_string($package['computed_source_hash'])
@@ -307,7 +334,13 @@ final class ReconcileArticleSourceVersion extends Command
         if ($lock) {
             $active->lockForUpdate();
         }
-        if ($active->exists()) {
+        $sourceHistorySnapshot = null;
+        if (isset($p['preserved_source_revisions'])) {
+            $sourceHistorySnapshot = ArticleSourceTargetSnapshot::sourceRevisions($source, [], $lock);
+            if ($sourceHistorySnapshot !== $p['preserved_source_revisions']) {
+                $errors[] = 'source_history_lock_mismatch';
+            }
+        } elseif ($active->exists()) {
             $errors[] = 'active_source_revision_conflict';
         }
 
@@ -323,7 +356,8 @@ final class ReconcileArticleSourceVersion extends Command
 
         return ['errors' => $errors, 'source' => $source, 'revision' => $revision, 'seo' => $seo,
             'source_hash' => (string) $source->source_version_hash,
-            'revision_id' => (int) $source->published_revision_id, 'target_snapshot' => $targetSnapshot];
+            'revision_id' => (int) $source->published_revision_id, 'target_snapshot' => $targetSnapshot,
+            'source_history_snapshot' => $sourceHistorySnapshot];
     }
 
     /** @param array<string, mixed> $snapshot

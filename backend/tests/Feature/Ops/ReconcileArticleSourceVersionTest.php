@@ -383,6 +383,121 @@ final class ReconcileArticleSourceVersionTest extends TestCase
         }
     }
 
+    public function test_explicit_full_history_lock_preserves_unpointed_approved_draft_and_supports_restore(): void
+    {
+        [$source, $old, $seo] = $this->legacySource();
+        $this->existingTarget($source);
+        $pending = $old->replicate();
+        $pending->forceFill(['revision_number' => 2, 'revision_status' => ArticleTranslationRevision::STATUS_APPROVED,
+            'title' => 'A different reviewed title', 'content_md' => 'An independently approved source correction',
+            'reviewed_at' => now()->subHour(), 'approved_at' => now()->subHour(), 'published_at' => null])->save();
+        $pendingBefore = $pending->fresh()->getAttributes();
+        $history = ArticleSourceTargetSnapshot::sourceRevisions($source);
+        $targets = ArticleSourceTargetSnapshot::capture($source);
+        [$path, $sha, $confirm] = $this->packageWithHistory($source, $old, $seo);
+        try {
+            $count = ArticleTranslationRevision::count();
+            for ($i = 0; $i < 2; $i++) {
+                $this->assertSame(0, Artisan::call('articles:reconcile-source-version', ['--file' => $path, '--sha256' => $sha, '--dry-run' => true]));
+            }
+            $this->assertSame($count, ArticleTranslationRevision::count());
+            $this->assertSame($history, ArticleSourceTargetSnapshot::sourceRevisions($source));
+            $this->assertSame(0, AuditLog::count());
+            $this->assertSame(0, Artisan::call('articles:reconcile-source-version', ['--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm]));
+            $source = $source->fresh();
+            $new = $source->publishedRevision;
+            $this->assertSame($history, ArticleSourceTargetSnapshot::sourceRevisions($source, [(int) $new->id]));
+            $this->assertSame($pendingBefore, $pending->fresh()->getAttributes());
+            $this->assertSame($old->content_md, $new->content_md);
+            $this->assertNotSame($pending->content_md, $new->content_md);
+            $this->assertNull($new->reviewed_at);
+            $this->assertNull($new->approved_at);
+            $this->assertSame($targets, ArticleSourceTargetSnapshot::capture($source));
+            $audit = AuditLog::where('action', 'article_source_version_reconciled')->firstOrFail();
+            $this->assertSame($history, $audit->meta_json['preserved_source_revisions']);
+            $restore = ['--source-id' => (int) $source->id, '--audit-id' => (int) $audit->id, '--new-revision-id' => (int) $new->id,
+                '--source-updated-at' => (string) $source->getRawOriginal('updated_at'), '--revision-updated-at' => (string) $new->getRawOriginal('updated_at')];
+            $this->assertSame(0, Artisan::call('articles:restore-source-version', $restore + ['--dry-run' => true]));
+            $this->assertSame(0, Artisan::call('articles:restore-source-version', $restore + ['--execute' => true,
+                '--confirm' => sprintf('Restore Article source %d from reconciliation audit %d and revision %d.', $source->id, $audit->id, $new->id)]));
+            $this->assertSame((int) $old->id, (int) $source->fresh()->working_revision_id);
+            $this->assertSame($pendingBefore, $pending->fresh()->getAttributes());
+            $this->assertSame($targets, ArticleSourceTargetSnapshot::capture($source->fresh()));
+        } finally {
+            unlink($path);
+        }
+    }
+
+    public function test_full_history_drift_and_real_private_working_pointer_remain_conflicts(): void
+    {
+        [$source, $old, $seo] = $this->legacySource();
+        $this->existingTarget($source);
+        $pending = $old->replicate();
+        $pending->forceFill(['revision_number' => 2, 'revision_status' => ArticleTranslationRevision::STATUS_APPROVED,
+            'content_md' => 'A private correction', 'published_at' => null])->save();
+        [$path, $sha, $confirm] = $this->packageWithHistory($source, $old, $seo);
+        try {
+            $pending->forceFill(['content_md' => 'Changed after snapshot'])->saveQuietly();
+            $before = $pending->fresh()->getAttributes();
+            $this->assertSame(1, Artisan::call('articles:reconcile-source-version', ['--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm]));
+            $this->assertContains('source_history_lock_mismatch', json_decode(Artisan::output(), true)['errors']);
+            $this->assertSame($before, $pending->fresh()->getAttributes());
+            $this->assertSame(0, AuditLog::count());
+            $source->forceFill(['working_revision_id' => $pending->id])->saveQuietly();
+            unlink($path);
+            [$path, $sha] = $this->packageWithHistory($source->fresh(), $old, $seo);
+            $this->assertSame(1, Artisan::call('articles:reconcile-source-version', ['--file' => $path, '--sha256' => $sha, '--dry-run' => true]));
+            $this->assertContains('legacy_source_identity_mismatch', json_decode(Artisan::output(), true)['errors']);
+            $this->assertSame((int) $pending->id, (int) $source->fresh()->working_revision_id);
+        } finally {
+            unlink($path);
+        }
+    }
+
+    public function test_preserved_approved_draft_change_or_missing_audit_snapshot_blocks_restore(): void
+    {
+        [$source, $old, $seo] = $this->legacySource();
+        $this->existingTarget($source);
+        $pending = $old->replicate();
+        $pending->forceFill(['revision_number' => 2, 'revision_status' => ArticleTranslationRevision::STATUS_APPROVED,
+            'content_md' => 'A private correction', 'published_at' => null])->save();
+        [$path, $sha, $confirm] = $this->packageWithHistory($source, $old, $seo);
+        try {
+            $this->assertSame(0, Artisan::call('articles:reconcile-source-version', ['--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm]));
+            $source = $source->fresh();
+            $new = $source->publishedRevision;
+            $audit = AuditLog::where('action', 'article_source_version_reconciled')->firstOrFail();
+            $restore = ['--source-id' => (int) $source->id, '--audit-id' => (int) $audit->id, '--new-revision-id' => (int) $new->id,
+                '--source-updated-at' => (string) $source->getRawOriginal('updated_at'), '--revision-updated-at' => (string) $new->getRawOriginal('updated_at'), '--dry-run' => true];
+            $pendingBefore = $pending->getAttributes();
+            $pending->forceFill(['approved_at' => now()->subDay()])->saveQuietly();
+            $this->assertSame(1, Artisan::call('articles:restore-source-version', $restore));
+            $this->assertContains('preserved_source_revision_changed', json_decode(Artisan::output(), true)['errors']);
+            $pending->forceFill($pendingBefore)->saveQuietly();
+            $meta = $audit->meta_json;
+            unset($meta['preserved_source_revisions']);
+            $audit->forceFill(['meta_json' => $meta])->saveQuietly();
+            $this->assertSame(1, Artisan::call('articles:restore-source-version', $restore));
+            $this->assertContains('preserved_source_revision_changed', json_decode(Artisan::output(), true)['errors']);
+            $this->assertSame((int) $new->id, (int) $source->fresh()->published_revision_id);
+        } finally {
+            unlink($path);
+        }
+    }
+
+    private function packageWithHistory(Article $source, ArticleTranslationRevision $old, ArticleSeoMeta $seo): array
+    {
+        [$path] = $this->packageWithTarget($source, $old, $seo);
+        $package = json_decode(file_get_contents($path), true);
+        $package['schema'] = 'fermat_article_source_reconcile_v4';
+        $package['preserved_source_revisions'] = ArticleSourceTargetSnapshot::sourceRevisions($source);
+        $bytes = json_encode($package, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
+        file_put_contents($path, $bytes);
+        $sha = hash('sha256', $bytes);
+
+        return [$path, $sha, sprintf('Reconcile Article source %d in group %s with package %s.', $source->id, $source->translation_group_id, $sha)];
+    }
+
     public function test_row_hash_rebuild_rejects_metadata_drift_that_leaves_body_unchanged(): void
     {
         [$source, $old, $seo] = $this->legacySource();
