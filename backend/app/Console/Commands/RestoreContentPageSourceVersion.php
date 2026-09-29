@@ -11,6 +11,7 @@ use App\Services\Audit\AuditLogger;
 use App\Support\CanonicalTranslationPayloadHash;
 use App\Support\ContentPageSourceTargetSnapshot;
 use App\Support\SchemaBaseline;
+use App\Support\UnlinkedPolicyContentPagePair;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -23,6 +24,7 @@ use Throwable;
 final class RestoreContentPageSourceVersion extends Command
 {
     protected $signature = 'translation:restore-content-page-source-version
+        {--unlinked-policy-source : Reconcile/restore only ZH55/EN53 or ZH56/EN54 while preserving the unlinked zero-history EN placeholder}
         {--source-id= : Exact source row ID}
         {--target-id= : Exact unchanged en target row ID}
         {--group-id= : Exact translation group ID}
@@ -234,12 +236,18 @@ final class RestoreContentPageSourceVersion extends Command
 
         $errors = [];
         $meta = (array) $audit->meta_json;
+        $unlinkedPolicy = (bool) $this->option('unlinked-policy-source');
+        $targetIdentityValid = $unlinkedPolicy
+            ? ! $initial && UnlinkedPolicyContentPagePair::matches($source, $target, $lock)
+            : (string) $target->source_locale === 'zh-CN' && (int) $target->source_content_id === $sourceId;
+        if ($unlinkedPolicy !== ($meta['unlinked_policy_source'] ?? false)) {
+            $errors[] = 'source_pair_restore_mode_mismatch';
+        }
         if ((int) $source->org_id !== 0 || (int) $target->org_id !== 0
             || (string) $source->slug !== $slug || (string) $target->slug !== $slug
             || (string) $source->locale !== 'zh-CN' || (string) $source->source_locale !== 'zh-CN'
             || $source->source_content_id !== null || (string) $source->translation_status !== ContentPage::TRANSLATION_STATUS_SOURCE
-            || (string) $target->locale !== 'en' || (string) $target->source_locale !== 'zh-CN'
-            || (int) $target->source_content_id !== $sourceId
+            || (string) $target->locale !== 'en' || ! $targetIdentityValid
             || (int) $source->working_revision_id !== $newId || (int) $source->published_revision_id !== $newId
             || (string) $source->status !== ContentPage::STATUS_PUBLISHED || ! $source->passesPublicReadinessGate()
             || (string) $target->status !== ContentPage::STATUS_PUBLISHED || ! (bool) $target->is_public) {

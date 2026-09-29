@@ -450,9 +450,21 @@ final class CmsTranslationBackboneTest extends TestCase
         $this->assertReviewedPublicContentPageSourceCanBeReconciled(CmsTranslationRevision::STATUS_APPROVED, ContentPage::TRANSLATION_STATUS_SOURCE);
     }
 
+    public function test_unlinked_policy_source_snapshot_reconciles_and_restores_without_target_writes(): void
+    {
+        $this->assertReviewedPublicContentPageSourceCanBeReconciled(CmsTranslationRevision::STATUS_PUBLISHED, ContentPage::TRANSLATION_STATUS_SOURCE, true);
+    }
+
+    public function test_unlinked_policy_second_source_snapshot_reconciles_and_restores_without_target_writes(): void
+    {
+        $this->assertReviewedPublicContentPageSourceCanBeReconciled(CmsTranslationRevision::STATUS_PUBLISHED, ContentPage::TRANSLATION_STATUS_SOURCE, true, 56);
+    }
+
     private function assertReviewedPublicContentPageSourceCanBeReconciled(
         string $oldRevisionStatus,
         string $sourceStatus = ContentPage::TRANSLATION_STATUS_PUBLISHED,
+        bool $unlinkedPolicy = false,
+        int $policySourceId = 55,
     ): void {
         $source = $this->createSourceContentPage('legacy-source-reconcile', '/legacy-source-reconcile');
         $source->forceFill([
@@ -470,6 +482,12 @@ final class CmsTranslationBackboneTest extends TestCase
             'legal_review_required' => false,
             'science_review_required' => false,
         ])->saveQuietly();
+        if ($unlinkedPolicy) {
+            $slug = $policySourceId === 55 ? 'methodology' : 'source-review-policy';
+            $group = $policySourceId === 55 ? 'big5-v2-e34761eea2865c6ce6a0cc7d09897877215e4fd6' : 'big5-v2-795d661fc1241f4311c1f6ce4f5ba082f74a5dac';
+            DB::table('content_pages')->where('id', $source->id)->update(['id' => $policySourceId, 'slug' => $slug, 'translation_group_id' => $group]);
+            $source = ContentPage::findOrFail($policySourceId);
+        }
         $source->refresh();
         $oldRevision = app(RowBackedRevisionWorkspace::class)->ensureInitialRevision('content_page', $source);
         $source->forceFill(['source_version_hash' => str_repeat('a', 64)])->saveQuietly();
@@ -488,6 +506,10 @@ final class CmsTranslationBackboneTest extends TestCase
             'is_public' => true,
             'published_at' => now(),
         ])->saveQuietly();
+        if ($unlinkedPolicy) {
+            DB::table('content_pages')->where('id', $target->id)->update(['id' => $policySourceId - 2, 'source_locale' => 'en', 'source_content_id' => null, 'translated_from_version_hash' => null, 'translation_status' => 'source', 'content_md' => 'Draft candidate', 'is_indexable' => false]);
+            $target = ContentPage::findOrFail($policySourceId - 2);
+        }
         $source->refresh();
         $target->refresh();
         if ($oldRevisionStatus === CmsTranslationRevision::STATUS_APPROVED) {
@@ -527,6 +549,24 @@ final class CmsTranslationBackboneTest extends TestCase
             '--revision-updated-at' => (string) $oldRevision->getRawOriginal('updated_at'),
             '--json' => true,
         ];
+        if ($unlinkedPolicy) {
+            $options['--unlinked-policy-source'] = true;
+            $options['--source-snapshot-hash'] = \App\Support\ContentPageSourceTargetSnapshot::hash($source);
+            $options['--target-snapshot-hash'] = \App\Support\ContentPageSourceTargetSnapshot::hash($target);
+            $this->assertSame(1, Artisan::call('translation:reconcile-content-page-source-version', array_diff_key($options, ['--unlinked-policy-source' => true]) + ['--dry-run' => true]));
+            $this->assertSame(1, Artisan::call('translation:reconcile-content-page-source-version', array_replace($options, ['--source-snapshot-hash' => str_repeat('0', 64), '--dry-run' => true])));
+            $this->assertSame(1, Artisan::call('translation:reconcile-content-page-source-version', array_diff_key($options, ['--target-snapshot-hash' => true]) + ['--dry-run' => true]));
+            $conflict = CmsTranslationRevision::create(['org_id' => 0, 'content_type' => 'content_page', 'content_id' => $target->id, 'locale' => 'en', 'source_locale' => 'en', 'translation_group_id' => $target->translation_group_id, 'revision_number' => 1, 'revision_status' => 'draft', 'payload_json' => []]);
+            $this->assertSame(1, Artisan::call('translation:reconcile-content-page-source-version', $options + ['--dry-run' => true]));
+            $this->assertSame(0, AuditLog::count());
+            $conflict->delete();
+            $target->forceFill(['is_indexable' => true])->saveQuietly();
+            $this->assertFalse(\App\Support\UnlinkedPolicyContentPagePair::matches($source, $target, false));
+            $target->forceFill(['is_indexable' => false])->saveQuietly();
+            $target->refresh();
+            $options['--target-updated-at'] = (string) $target->getRawOriginal('updated_at');
+            $options['--target-snapshot-hash'] = \App\Support\ContentPageSourceTargetSnapshot::hash($target);
+        }
         $targetBefore = $target->getAttributes();
         $oldBefore = $oldRevision->getAttributes();
 
@@ -588,6 +628,11 @@ final class CmsTranslationBackboneTest extends TestCase
             '--audit-id' => (int) $result['after']['audit_id'],
             '--json' => true,
         ];
+        if ($unlinkedPolicy) {
+            $restoreOptions['--unlinked-policy-source'] = true;
+            $this->assertTrue($audit->meta_json['unlinked_policy_source']);
+            $this->assertSame(1, Artisan::call('translation:restore-content-page-source-version', array_diff_key($restoreOptions, ['--unlinked-policy-source' => true]) + ['--dry-run' => true]));
+        }
         if ($oldRevisionStatus === CmsTranslationRevision::STATUS_APPROVED) {
             $meta = $audit->meta_json;
             $audit->forceFill(['meta_json' => array_replace($meta, ['old_revision_status' => 'published'])])->saveQuietly();

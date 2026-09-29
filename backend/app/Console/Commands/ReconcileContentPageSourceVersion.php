@@ -12,6 +12,7 @@ use App\Services\Cms\ContentPageTranslationAdapter;
 use App\Support\CanonicalTranslationPayloadHash;
 use App\Support\ContentPageSourceTargetSnapshot;
 use App\Support\SchemaBaseline;
+use App\Support\UnlinkedPolicyContentPagePair;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -24,10 +25,12 @@ use Throwable;
 final class ReconcileContentPageSourceVersion extends Command
 {
     protected $signature = 'translation:reconcile-content-page-source-version
+        {--unlinked-policy-source : Reconcile/restore only ZH55/EN53 or ZH56/EN54 while preserving the unlinked zero-history EN placeholder}
         {--source-id= : Exact public zh-CN source row ID}
         {--target-id= : Exact linked en row ID}
         {--group-id= : Exact translation group ID}
         {--slug= : Exact shared slug}
+        {--source-snapshot-hash= : Exact full source row/history hash; required for unlinked-policy-source}
         {--source-hash= : Existing source row hash lock}
         {--target-hash= : Existing target row hash lock}
         {--fresh-source-hash= : Recomputed source payload hash lock}
@@ -162,6 +165,7 @@ final class ReconcileContentPageSourceVersion extends Command
                             'target_hash' => (string) $target->source_version_hash,
                             'target_updated_at' => (string) $target->getRawOriginal('updated_at'),
                             'initialized_source_revision' => (bool) $locked['initialize'],
+                            'unlinked_policy_source' => (bool) $this->option('unlinked-policy-source'),
                             'target_snapshot_hash' => $locked['target_snapshot_hash'],
                             'old_working_revision_id' => $oldWorkingId,
                             'old_published_revision_id' => $oldPublishedId,
@@ -254,10 +258,14 @@ final class ReconcileContentPageSourceVersion extends Command
             return ['errors' => ['group_pair_ambiguous']];
         }
         $errors = [];
+        $unlinkedPolicy = (bool) $this->option('unlinked-policy-source');
+        $targetIdentityValid = $unlinkedPolicy
+            ? ! $initialize && UnlinkedPolicyContentPagePair::matches($source, $target, $lock)
+            : (string) $target->source_locale === 'zh-CN' && (int) $target->source_content_id === $sourceId;
         if ((string) $source->slug !== $slug || (string) $target->slug !== $slug
             || (string) $source->locale !== 'zh-CN' || (string) $source->source_locale !== 'zh-CN'
             || $source->source_content_id !== null || (string) $target->locale !== 'en'
-            || (string) $target->source_locale !== 'zh-CN' || (int) $target->source_content_id !== $sourceId
+            || ! $targetIdentityValid
             || ! in_array((string) $source->translation_status, ['source', 'approved', 'published'], true)
             || (string) $source->status !== ContentPage::STATUS_PUBLISHED
             || ! (bool) $source->is_public || (string) $source->review_state !== 'approved'
@@ -335,7 +343,13 @@ final class ReconcileContentPageSourceVersion extends Command
             'revision-updated-at' => (string) ($revision?->getRawOriginal('updated_at') ?? ''),
         ];
         $targetSnapshotHash = ContentPageSourceTargetSnapshot::hash($target, $lock);
-        if ($initialize || $this->option('target-snapshot-hash') !== null) {
+        if ($unlinkedPolicy) {
+            $locks['source-snapshot-hash'] = ContentPageSourceTargetSnapshot::hash($source, $lock);
+            if (preg_match('/^[0-9a-f]{64}$/', (string) $this->option('source-snapshot-hash')) !== 1) {
+                $errors[] = 'source_snapshot_lock_required';
+            }
+        }
+        if ($initialize || $unlinkedPolicy || $this->option('target-snapshot-hash') !== null) {
             $locks['target-snapshot-hash'] = $targetSnapshotHash;
             if (preg_match('/^[0-9a-f]{64}$/', (string) $this->option('target-snapshot-hash')) !== 1) {
                 $errors[] = 'target_snapshot_lock_required';
