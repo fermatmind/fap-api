@@ -126,7 +126,7 @@ final class ReconcileArticleSourceVersion extends Command
                         || (string) $newAfter->excerpt !== (string) $sourceAfter->excerpt
                         || (string) $newAfter->seo_title !== (string) $oldAfter->seo_title
                         || (string) $newAfter->seo_description !== (string) $oldAfter->seo_description
-                        || ArticleSourceTargetSnapshot::capture($sourceAfter, true) !== $locked['target_snapshot']) {
+                        || self::targetSnapshot($sourceAfter, true) !== $locked['target_snapshot']) {
                         throw new RuntimeException('readback_mismatch');
                     }
                     if ($locked['source_history_snapshot'] !== null
@@ -144,6 +144,7 @@ final class ReconcileArticleSourceVersion extends Command
                             'new_revision_id' => (int) $newAfter->id,
                             'source_version_hash' => $newSourceHash,
                             'old_source_hash' => $package['source_hash'],
+                            'old_translation_status' => $locked['original_translation_status'],
                             'old_revision_hash' => $old->getRawOriginal('source_version_hash'),
                             'old_revision_body_sha256' => hash('sha256', (string) $old->content_md),
                             'old_revision_updated_at' => (string) $old->getRawOriginal('updated_at'),
@@ -289,7 +290,7 @@ final class ReconcileArticleSourceVersion extends Command
         $errors = [];
         if ((int) $source->org_id !== 0 || (string) $source->locale !== 'zh-CN'
             || (string) $source->source_locale !== 'zh-CN'
-            || (string) $source->translation_status !== Article::TRANSLATION_STATUS_APPROVED
+            || ! self::allowsOriginalStatus((int) $source->id, (string) $source->translation_status)
             || $source->source_article_id !== null || $source->translated_from_article_id !== null
             || (string) $source->status !== 'published' || ! (bool) $source->is_public
             || (int) $source->working_revision_id !== (int) $source->published_revision_id) {
@@ -345,7 +346,7 @@ final class ReconcileArticleSourceVersion extends Command
         }
 
         try {
-            $targetSnapshot = ArticleSourceTargetSnapshot::capture($source, $lock);
+            $targetSnapshot = self::targetSnapshot($source, $lock);
             if ($targetSnapshot !== ($p['existing_english_targets'] ?? [])) {
                 $errors[] = 'english_identity_collision';
             }
@@ -357,7 +358,47 @@ final class ReconcileArticleSourceVersion extends Command
         return ['errors' => $errors, 'source' => $source, 'revision' => $revision, 'seo' => $seo,
             'source_hash' => (string) $source->source_version_hash,
             'revision_id' => (int) $source->published_revision_id, 'target_snapshot' => $targetSnapshot,
+            'original_translation_status' => (string) $source->translation_status,
             'source_history_snapshot' => $sourceHistorySnapshot];
+    }
+
+    public static function allowsOriginalStatus(int $sourceId, string $status): bool
+    {
+        return $status === Article::TRANSLATION_STATUS_APPROVED
+            || ($sourceId === 40 && $status === Article::TRANSLATION_STATUS_PUBLISHED)
+            || ($sourceId === 74 && $status === Article::TRANSLATION_STATUS_SOURCE);
+    }
+
+    /** @return list<array{article_id:int,sha256:string}> */
+    public static function targetSnapshot(Article $source, bool $lock = false): array
+    {
+        try {
+            return ArticleSourceTargetSnapshot::capture($source, $lock);
+        } catch (RuntimeException $exception) {
+            // Source foundations must precede relinking these two proven legacy pairs.
+            // Preserve the entire unlinked target rather than repairing its provenance here.
+            $targetId = [40 => 41, 74 => 75][(int) $source->id] ?? null;
+            if ($targetId === null) {
+                throw $exception;
+            }
+            $q = Article::withoutGlobalScopes()->withTrashed()->where('org_id', 0)->where('locale', 'en')
+                ->where(function ($q) use ($source, $targetId): void {
+                    $q->whereKey($targetId)->orWhere('translation_group_id', $source->translation_group_id)
+                        ->orWhere('source_article_id', $source->id)->orWhere('translated_from_article_id', $source->id)
+                        ->orWhere('slug', $source->slug);
+                })->orderBy('id');
+            $targets = ($lock ? $q->lockForUpdate() : $q)->get();
+            $target = $targets->first();
+            if ($targets->count() !== 1 || ! $target instanceof Article || (int) $target->id !== $targetId
+                || $target->trashed() || $target->translation_group_id !== $source->translation_group_id
+                || $target->source_article_id !== null || $target->translated_from_article_id !== null
+                || $target->source_locale !== 'en' || $target->status !== 'published' || ! $target->is_public
+                || ! $target->published_revision_id || (int) $target->working_revision_id !== (int) $target->published_revision_id) {
+                throw $exception;
+            }
+
+            return [['article_id' => $targetId, 'sha256' => ArticleForkPrivateTranslationLinks::sourceHash($target, $lock)]];
+        }
     }
 
     /** @param array<string, mixed> $snapshot
