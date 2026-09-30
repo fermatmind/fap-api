@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
 use App\Services\Career\Bundles\CareerJobListBundleBuilder;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
@@ -109,6 +110,7 @@ final class ReleaseVerifyPublicContent extends Command
     {
         $baselineRows = $this->loadContentPageBaselineRows();
         $failures = [];
+        $heldCount = 0;
 
         if ($baselineRows === []) {
             $failures[] = 'content_page_baseline_empty';
@@ -126,6 +128,11 @@ final class ReleaseVerifyPublicContent extends Command
                 ->exists();
 
             if (! $exists) {
+                if ($this->isHeldPolicyTranslation($row)) {
+                    $heldCount++;
+
+                    continue;
+                }
                 $failures[] = sprintf('missing_content_page:%s:%s', $row['locale'], $row['slug']);
             }
         }
@@ -141,9 +148,43 @@ final class ReleaseVerifyPublicContent extends Command
             'metrics' => [
                 'baseline_count' => count($baselineRows),
                 'published_public_count' => $publishedPublicCount,
+                'held_policy_translation_count' => $heldCount,
             ],
             'failures' => $failures,
         ];
+    }
+
+    /** @param array{slug: string, locale: string, kind: string, path: string} $row */
+    private function isHeldPolicyTranslation(array $row): bool
+    {
+        // These two former placeholders are intentionally private pending editorial review.
+        // This is not permission to omit a missing row or hide any other baseline page.
+        $pairs = ['methodology' => [55, 53], 'source-review-policy' => [56, 54]];
+        $pair = $pairs[$row['slug']] ?? null;
+        if ($pair === null || $row['locale'] !== 'en') {
+            return false;
+        }
+        $target = ContentPage::query()->withoutGlobalScopes()->whereKey($pair[1])
+            ->where('org_id', 0)->where('slug', $row['slug'])->where('locale', 'en')
+            ->where('kind', $row['kind'])->where('path', $row['path'])
+            ->where('status', 'draft')->where('is_public', false)->where('is_indexable', false)
+            ->where('review_state', 'draft')->where('source_locale', 'zh-CN')
+            ->where('source_content_id', $pair[0])->first();
+        $source = ContentPage::query()->withoutGlobalScopes()->whereKey($pair[0])
+            ->where('org_id', 0)->where('slug', $row['slug'])->where('locale', 'zh-CN')
+            ->where('translation_status', 'source')->publiclyReadable()->first();
+        if (! $target || ! $source || $target->translation_group_id !== $source->translation_group_id) {
+            return false;
+        }
+
+        return CmsTranslationRevision::query()->withoutGlobalScopes()
+            ->whereKey($target->working_revision_id)->where('org_id', 0)
+            ->where('content_type', 'content_page')->where('content_id', $target->id)
+            ->where('source_content_id', $source->id)->where('locale', 'en')
+            ->where('source_locale', 'zh-CN')->where('translation_group_id', $source->translation_group_id)
+            ->whereIn('revision_status', ['draft', 'machine_draft', 'human_review'])
+            ->where('translated_from_version_hash', $source->freshSourceVersionHash())
+            ->whereNull('approved_at')->whereNull('published_at')->exists();
     }
 
     /**

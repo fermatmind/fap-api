@@ -90,6 +90,7 @@ final class ImportPolicy2PreparedTranslationDraftTest extends TestCase
             $this->assertSame($targetBefore['content_md'], $target->getRawOriginal('content_md'));
             $this->assertSame($sourceBefore, ContentPageSourceTargetSnapshot::hash($source->fresh()));
             $this->assertFalse(AuditLog::findOrFail($after['audit_id'])->meta_json['human_review_completed']);
+            $this->verifyReleaseReadinessHold($source, $target, $draft);
             $this->assertSame(1, $this->runCommand($file, $sha));
             $restore = ['--restore-audit-id' => $after['audit_id']];
             $this->assertSame(0, $this->runCommand($file, $sha, $restore));
@@ -110,6 +111,55 @@ final class ImportPolicy2PreparedTranslationDraftTest extends TestCase
             $this->assertSame(1, $this->runCommand($file, $sha));
         } finally {
             unlink($file);
+        }
+    }
+
+    private function verifyReleaseReadinessHold(ContentPage $source, ContentPage $target, CmsTranslationRevision $draft): void
+    {
+        $this->app->instance(\App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility::class,
+            new \Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture);
+        $dir = sys_get_temp_dir().'/policy-release-'.bin2hex(random_bytes(8));
+        mkdir($dir);
+        $baseline = ['slug' => $target->slug, 'locale' => 'en', 'kind' => $target->kind, 'path' => $target->path];
+        file_put_contents($dir.'/pages.json', json_encode([$baseline], JSON_THROW_ON_ERROR));
+        $output = '';
+        $check = function () use ($dir, &$output): int {
+            $buffer = new \Symfony\Component\Console\Output\BufferedOutput;
+            $exit = Artisan::call('release:verify-public-content', ['--content-source-dir' => $dir], $buffer);
+            $output = $buffer->fetch();
+
+            return $exit;
+        };
+        try {
+            $before = ContentPageSourceTargetSnapshot::hash($source);
+            DB::connection()->enableQueryLog();
+            DB::connection()->flushQueryLog();
+            $this->assertSame(0, $check(), $output);
+            $first = $output;
+            $this->assertStringContainsString('held_policy_translation_count', $first);
+            $this->assertSame(0, $check(), $output);
+            $this->assertSame($first, $output);
+            $writes = collect(DB::connection()->getQueryLog())->pluck('query')->filter(fn (string $q): bool => preg_match('/^\s*(?:insert|update|delete|replace|create|alter|drop)\b/i', $q) === 1)->all();
+            DB::connection()->disableQueryLog();
+            $this->assertSame([], array_values($writes));
+            $this->assertSame($before, ContentPageSourceTargetSnapshot::hash($source->fresh()));
+
+            foreach (['is_public' => true, 'is_indexable' => true, 'source_content_id' => null] as $key => $value) {
+                $original = $target->getAttribute($key);
+                DB::table('content_pages')->where('id', $target->id)->update([$key => $value]);
+                $this->assertSame(1, $check(), $output);
+                DB::table('content_pages')->where('id', $target->id)->update([$key => $original]);
+            }
+            $hash = $draft->translated_from_version_hash;
+            DB::table('cms_translation_revisions')->where('id', $draft->id)->update(['translated_from_version_hash' => str_repeat('0', 64)]);
+            $this->assertSame(1, $check(), $output);
+            DB::table('cms_translation_revisions')->where('id', $draft->id)->update(['translated_from_version_hash' => $hash]);
+            file_put_contents($dir.'/pages.json', json_encode([array_replace($baseline, ['slug' => 'missing-other-page'])], JSON_THROW_ON_ERROR));
+            $this->assertSame(1, $check(), $output);
+        } finally {
+            DB::connection()->disableQueryLog();
+            unlink($dir.'/pages.json');
+            rmdir($dir);
         }
     }
 
