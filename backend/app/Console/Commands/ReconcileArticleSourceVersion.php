@@ -309,7 +309,7 @@ final class ReconcileArticleSourceVersion extends Command
             || (int) $revision->source_article_id !== (int) $source->id
             || (string) $revision->translation_group_id !== (string) $source->translation_group_id
             || (string) $revision->locale !== 'zh-CN'
-            || (string) $revision->revision_status !== ArticleTranslationRevision::STATUS_PUBLISHED
+            || ! self::allowsOriginalRevisionStatus((int) $source->id, (string) $revision->revision_status)
             || ($p['revision_hash'] === null
                 ? $revision->getRawOriginal('source_version_hash') !== null
                 : ! hash_equals($p['revision_hash'], (string) $revision->source_version_hash))
@@ -366,7 +366,13 @@ final class ReconcileArticleSourceVersion extends Command
     {
         return $status === Article::TRANSLATION_STATUS_APPROVED
             || ($sourceId === 40 && $status === Article::TRANSLATION_STATUS_PUBLISHED)
-            || ($sourceId === 74 && $status === Article::TRANSLATION_STATUS_SOURCE);
+            || (in_array($sourceId, [8, 46, 48, 58, 74], true) && $status === Article::TRANSLATION_STATUS_SOURCE);
+    }
+
+    public static function allowsOriginalRevisionStatus(int $sourceId, string $status): bool
+    {
+        return $status === ArticleTranslationRevision::STATUS_PUBLISHED
+            || (in_array($sourceId, [46, 48], true) && $status === ArticleTranslationRevision::STATUS_SOURCE);
     }
 
     /** @return list<array{article_id:int,sha256:string}> */
