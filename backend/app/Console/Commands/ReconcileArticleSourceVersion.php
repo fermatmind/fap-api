@@ -92,6 +92,10 @@ final class ReconcileArticleSourceVersion extends Command
                         // ArticleSeoMeta. Preserve the exact already-public SEO copy.
                         'seo_title' => $old->seo_title,
                         'seo_description' => $old->seo_description,
+                        // Identical public copy retains its existing editorial evidence;
+                        // this technical snapshot does not record a new review.
+                        'reviewed_at' => $old->reviewed_at,
+                        'approved_at' => $old->approved_at,
                         'published_at' => $old->published_at ?? $source->published_at,
                     ]);
                     $source->forceFill([
