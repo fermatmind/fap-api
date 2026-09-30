@@ -18,7 +18,7 @@ use Throwable;
 /** @review-surface article_translation_revision */
 final class ArticleForkLegacyLineageDraft extends Command
 {
-    private const PAIRS = [37 => 39, 40 => 41, 68 => 69, 64 => 65, 72 => 73, 84 => 85, 60 => 61, 74 => 75, 70 => 71];
+    private const PAIRS = [37 => 39, 40 => 41, 68 => 69, 64 => 65, 72 => 73, 84 => 85, 74 => 75, 70 => 71];
 
     private const SOURCE_FIELDS = ['source_locale', 'translation_status'];
 

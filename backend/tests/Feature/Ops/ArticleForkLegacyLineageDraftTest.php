@@ -24,7 +24,7 @@ final class ArticleForkLegacyLineageDraftTest extends TestCase
 
     public static function pairs(): array
     {
-        return [[37, 39], [40, 41], [68, 69], [64, 65], [72, 73], [84, 85], [60, 61], [74, 75], [70, 71]];
+        return [[37, 39], [40, 41], [68, 69], [64, 65], [72, 73], [84, 85], [74, 75], [70, 71]];
     }
 
     #[DataProvider('pairs')]
@@ -116,6 +116,22 @@ final class ArticleForkLegacyLineageDraftTest extends TestCase
             $this->assertSame(1, $this->callCommand($file, $sha, $this->execute($sha, $tid, (int) $audit->id)));
         } finally {
             DB::connection()->disableQueryLog();
+            unlink($file);
+        }
+    }
+
+    public function test_independent_english_source61_is_outside_repair_scope(): void
+    {
+        [$s, $t] = $this->pair(60, 61);
+        [$file, $sha] = $this->package($s, $t);
+        try {
+            $before = [Locks::sourceHash($s), Locks::sourceHash($t)];
+            $this->assertSame(1, $this->callCommand($file, $sha));
+            $this->assertSame(1, $this->callCommand($file, $sha, $this->execute($sha, 61)));
+            $this->assertSame($before, [Locks::sourceHash($s->fresh()), Locks::sourceHash($t->fresh())]);
+            $this->assertSame(2, ArticleTranslationRevision::count());
+            $this->assertSame(0, AuditLog::count());
+        } finally {
             unlink($file);
         }
     }
