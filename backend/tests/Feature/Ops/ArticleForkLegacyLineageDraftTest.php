@@ -96,6 +96,10 @@ final class ArticleForkLegacyLineageDraftTest extends TestCase
             $this->assertSame($forkSource, Locks::sourceHash($s->fresh()));
             $this->assertSame($forkTarget, Locks::sourceHash($t->fresh()));
             $originalAudit = $audit->meta_json;
+            foreach (['source_identity_before', 'target_identity_before'] as $field) {
+                ksort($originalAudit[$field]);
+            }
+            $audit->forceFill(['meta_json' => $originalAudit])->saveQuietly();
             $tampered = $originalAudit;
             $tampered['source_identity_before']['content_md'] = 'Invalid recovery override';
             $audit->forceFill(['meta_json' => $tampered])->saveQuietly();

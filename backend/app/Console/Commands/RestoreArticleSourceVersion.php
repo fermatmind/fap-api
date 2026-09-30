@@ -201,7 +201,7 @@ final class RestoreArticleSourceVersion extends Command
             $errors[] = 'reconciliation_lock_mismatch';
         }
         try {
-            $targetChanged = ReconcileArticleSourceVersion::targetSnapshot($source, $lock) !== ($meta['existing_english_targets'] ?? []);
+            $targetChanged = ! $this->sameFingerprints(ReconcileArticleSourceVersion::targetSnapshot($source, $lock), $meta['existing_english_targets'] ?? []);
         } catch (RuntimeException) {
             $targetChanged = true;
         }
@@ -215,7 +215,7 @@ final class RestoreArticleSourceVersion extends Command
         if (($meta['source_package_schema'] ?? null) === 'fermat_article_source_reconcile_v4') {
             try {
                 $history = ArticleSourceTargetSnapshot::sourceRevisions($source, [$newId], $lock);
-                if (! is_array($meta['preserved_source_revisions'] ?? null) || $history !== $meta['preserved_source_revisions']) {
+                if (! $this->sameFingerprints($history, $meta['preserved_source_revisions'] ?? null)) {
                     $errors[] = 'preserved_source_revision_changed';
                 }
             } catch (RuntimeException) {
@@ -224,6 +224,27 @@ final class RestoreArticleSourceVersion extends Command
         }
 
         return compact('errors', 'source', 'old', 'new', 'old_source_hash', 'old_translation_status');
+    }
+
+    /** JSON object key order is not identity; list order and all value types are. */
+    private function sameFingerprints(array $actual, mixed $expected): bool
+    {
+        if (! is_array($expected) || ! array_is_list($expected) || count($actual) !== count($expected)) {
+            return false;
+        }
+        foreach ($actual as $index => $row) {
+            if (! is_array($expected[$index])) {
+                return false;
+            }
+            $saved = $expected[$index];
+            ksort($row);
+            ksort($saved);
+            if ($row !== $saved) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private function confirmation(): string

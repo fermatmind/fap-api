@@ -41,11 +41,14 @@ final class ReconcileArticleSourceVersionTest extends TestCase
             'source_version_hash' => str_repeat('c', 64), 'translated_from_version_hash' => str_repeat('c', 64), 'published_at' => now()]);
         $target->forceFill(['working_revision_id' => $tr->id, 'published_revision_id' => $tr->id])->saveQuietly();
         $targetHash = ArticleForkPrivateTranslationLinks::sourceHash($target->fresh());
+        $prior = $old->replicate();
+        $prior->forceFill(['revision_number' => 2, 'revision_status' => 'archived'])->save();
         $history = ArticleSourceTargetSnapshot::sourceRevisions($source);
         [$path] = $this->package($source, $old, $seo);
         $p = json_decode(file_get_contents($path), true);
-        $p['schema'] = 'fermat_article_source_reconcile_v2';
+        $p['schema'] = 'fermat_article_source_reconcile_v4';
         $p['existing_english_targets'] = [['article_id' => $tid, 'sha256' => $targetHash]];
+        $p['preserved_source_revisions'] = $history;
         $bytes = json_encode($p, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
         file_put_contents($path, $bytes);
         $sha = hash('sha256', $bytes);
@@ -68,7 +71,7 @@ final class ReconcileArticleSourceVersionTest extends TestCase
             $writes = collect(DB::connection()->getQueryLog())->pluck('query')->filter(fn (string $q): bool => preg_match('/^\s*(?:insert|update|delete|replace|create|alter|drop)\b/i', $q) === 1)->all();
             DB::connection()->disableQueryLog();
             $this->assertSame([], array_values($writes));
-            $this->assertSame(2, ArticleTranslationRevision::withoutGlobalScopes()->count());
+            $this->assertSame(3, ArticleTranslationRevision::withoutGlobalScopes()->count());
             $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
             $this->assertSame(0, Artisan::call('articles:reconcile-source-version', ['--file' => $path, '--sha256' => $sha, '--execute' => true,
                 '--confirm' => sprintf('Reconcile Article source %d in group %s with package %s.', $sid, $source->translation_group_id, $sha)]), Artisan::output());
@@ -90,6 +93,35 @@ final class ReconcileArticleSourceVersionTest extends TestCase
             $audit = AuditLog::withoutGlobalScopes()->where('action', 'article_source_version_reconciled')->firstOrFail();
             $args = ['--source-id' => $sid, '--audit-id' => (int) $audit->id, '--new-revision-id' => (int) $new->id,
                 '--source-updated-at' => (string) $source->getRawOriginal('updated_at'), '--revision-updated-at' => (string) $new->getRawOriginal('updated_at')];
+            $meta = $audit->meta_json;
+            foreach (['existing_english_targets', 'preserved_source_revisions'] as $field) {
+                $meta[$field] = array_map(fn (array $row): array => array_reverse($row, true), $meta[$field]);
+            }
+            $audit->forceFill(['meta_json' => $meta])->saveQuietly();
+            foreach (['existing_english_targets' => 'article_id', 'preserved_source_revisions' => 'revision_id'] as $field => $idKey) {
+                foreach (['id_type', 'hash', 'extra_field', 'extra_row', 'list_order'] as $change) {
+                    if ($change === 'list_order' && count($meta[$field]) < 2) {
+                        continue;
+                    }
+                    $tampered = $meta;
+                    if ($change === 'id_type') {
+                        $tampered[$field][0][$idKey] = (string) $tampered[$field][0][$idKey];
+                    } elseif ($change === 'hash') {
+                        $tampered[$field][0]['sha256'] = str_repeat('0', 64);
+                    } elseif ($change === 'extra_field') {
+                        $tampered[$field][0]['unexpected'] = true;
+                    } elseif ($change === 'list_order') {
+                        $tampered[$field] = array_reverse($tampered[$field]);
+                    } else {
+                        $tampered[$field][] = $tampered[$field][0];
+                    }
+                    $audit->forceFill(['meta_json' => $tampered])->saveQuietly();
+                    $this->assertSame(1, Artisan::call('articles:restore-source-version', $args + ['--dry-run' => true]));
+                    $this->assertSame($new->id, $source->fresh()->published_revision_id);
+                    $this->assertSame($targetHash, ArticleForkPrivateTranslationLinks::sourceHash($target->fresh()));
+                }
+            }
+            $audit->forceFill(['meta_json' => $meta])->saveQuietly();
             $this->assertSame(0, Artisan::call('articles:restore-source-version', $args + ['--dry-run' => true]), Artisan::output());
             $this->assertSame(0, Artisan::call('articles:restore-source-version', $args + ['--execute' => true,
                 '--confirm' => sprintf('Restore Article source %d from reconciliation audit %d and revision %d.', $sid, $audit->id, $new->id)]), Artisan::output());
