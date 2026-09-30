@@ -20,6 +20,8 @@ final class ArticleForkExistingTranslationDraft extends Command
 {
     private const PAIRS = [3 => 188, 4 => 191, 5 => 195, 6 => 196, 7 => 198, 9 => 201, 10 => 202, 11 => 26, 12 => 27, 13 => 29, 14 => 28, 15 => 24, 16 => 25, 50 => 197, 51 => 190, 52 => 189];
 
+    private const REBASE_PAIRS = [10 => 202, 40 => 41];
+
     private const LEGACY_SOURCE_PAIRS = [12 => 27, 13 => 29, 14 => 28, 15 => 24, 16 => 25];
 
     protected $signature = 'articles:fork-existing-translation-draft
@@ -155,9 +157,8 @@ final class ArticleForkExistingTranslationDraft extends Command
         }
         sort($expected);
         if ($keys !== $expected || (! $rebase && $p['schema'] !== 'fermat_existing_article_translation_draft_v1')
-            || ($rebase && ($p['source_id'] !== 10 || $p['target_id'] !== 202))
             || ! is_int($p['source_id']) || ! is_int($p['target_id'])
-            || (self::PAIRS[$p['source_id']] ?? null) !== $p['target_id']) {
+            || (($rebase ? self::REBASE_PAIRS : self::PAIRS)[$p['source_id']] ?? null) !== $p['target_id']) {
             throw new RuntimeException('package_invalid');
         }
         foreach ($rebase ? ['working_revision_id', 'source_published_revision_id', 'target_published_revision_id'] : ['working_revision_id', 'source_published_revision_id'] as $key) {
@@ -220,10 +221,15 @@ final class ArticleForkExistingTranslationDraft extends Command
                 throw new RuntimeException('source_fields_mismatch');
             }
         }
+        $slugMatches = $t instanceof Article && $t->slug === $s->slug;
+        if ($p['source_id'] === 40 && $p['target_id'] === 41) {
+            $slugMatches = $s->slug === 'riasec-holland-career-interest-test-explained'
+                && $t?->slug === 'what-is-riasec-holland-code-career-interest-test';
+        }
         if (! $t instanceof Article || $t->trashed() || $t->locale !== 'en' || $t->isSourceArticle()
             || $t->status !== 'published' || ! $t->is_public || ! $t->published_revision_id
             || (int) $t->source_article_id !== (int) $s->id || (int) $t->translated_from_article_id !== (int) $s->id
-            || $t->translation_group_id !== $s->translation_group_id || $t->slug !== $s->slug || $t->source_locale !== 'zh-CN') {
+            || $t->translation_group_id !== $s->translation_group_id || ! $slugMatches || $t->source_locale !== 'zh-CN') {
             throw new RuntimeException('target_identity_invalid');
         }
         $hash = ArticleForkPrivateTranslationLinks::targetHash($s, $lock);
