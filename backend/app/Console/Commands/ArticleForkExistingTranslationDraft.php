@@ -18,7 +18,9 @@ use Throwable;
 /** @review-surface article_translation_revision */
 final class ArticleForkExistingTranslationDraft extends Command
 {
-    private const PAIRS = [4 => 191, 5 => 195, 6 => 196, 7 => 198, 9 => 201, 10 => 202, 50 => 197, 51 => 190, 52 => 189];
+    private const PAIRS = [4 => 191, 5 => 195, 6 => 196, 7 => 198, 9 => 201, 10 => 202, 12 => 27, 13 => 29, 14 => 28, 15 => 24, 16 => 25, 50 => 197, 51 => 190, 52 => 189];
+
+    private const LEGACY_SOURCE_PAIRS = [12 => 27, 13 => 29, 14 => 28, 15 => 24, 16 => 25];
 
     protected $signature = 'articles:fork-existing-translation-draft
         {--file= : Complete English candidate with exact source and published-target locks}
@@ -29,7 +31,7 @@ final class ArticleForkExistingTranslationDraft extends Command
         {--confirm= : Exact execute confirmation}
         {--json : Metadata only}';
 
-    protected $description = 'Fork a complete pending English candidate for nine existing targets; preserve public projections and all prior versions.';
+    protected $description = 'Fork a complete pending English candidate for explicitly scoped existing targets; preserve public projections and all prior versions.';
 
     public function handle(AuditLogger $logger): int
     {
@@ -73,6 +75,9 @@ final class ArticleForkExistingTranslationDraft extends Command
                                 'package_sha256' => (string) $this->option('sha256'),
                                 'source_published_revision_id' => $p['source_published_revision_id'],
                                 'source_fields_sha256' => $p['source_fields_sha256'],
+                                'source_snapshot_hash' => $p['source_snapshot_hash'],
+                                'source_published_version_hash' => $source->publishedRevision->source_version_hash,
+                                'source_published_hash_matches_current' => hash_equals((string) $source->source_version_hash, (string) $source->publishedRevision->source_version_hash),
                             ],
                         ]);
                         $target->forceFill(['working_revision_id' => $new->id])->saveQuietly();
@@ -190,7 +195,6 @@ final class ArticleForkExistingTranslationDraft extends Command
         $t = $rows->get($p['target_id']);
         if (! $s instanceof Article || $s->trashed() || $s->locale !== 'zh-CN' || ! $s->isSourceArticle()
             || $s->status !== 'published' || ! $s->is_public || (int) $s->published_revision_id !== $p['source_published_revision_id']
-            || $s->working_revision_id !== $s->published_revision_id
             || ! hash_equals($p['source_snapshot_hash'], ArticleForkPrivateTranslationLinks::sourceHash($s, $lock))) {
             throw new RuntimeException('source_identity_or_lock_invalid');
         }
@@ -199,7 +203,8 @@ final class ArticleForkExistingTranslationDraft extends Command
             || (int) $r->source_article_id !== (int) $s->id || $r->locale !== 'zh-CN'
             || ! in_array($r->revision_status, ['source', 'published'], true)
             || $r->translation_group_id !== $s->translation_group_id || $r->source_locale !== 'zh-CN'
-            || ! hash_equals((string) $s->source_version_hash, (string) $r->source_version_hash)
+            || (! hash_equals((string) $s->source_version_hash, (string) $r->source_version_hash)
+                && (self::LEGACY_SOURCE_PAIRS[(int) $s->id] ?? null) !== (int) $t?->id)
             || $r->title !== $s->title || $r->excerpt !== $s->excerpt || $r->content_md !== $s->content_md
             || ! hash_equals((string) $s->source_version_hash, $s->computeSourceVersionHash())) {
             throw new RuntimeException('source_revision_invalid');
