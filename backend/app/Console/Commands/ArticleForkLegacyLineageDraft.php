@@ -115,9 +115,17 @@ final class ArticleForkLegacyLineageDraft extends Command
                         if (! $s->isSourceArticle() || (int) $t->source_article_id !== (int) $s->id || $t->isSourceArticle()) {
                             throw new RuntimeException('identity_readback_failed');
                         }
-                    } elseif ($s->only(self::SOURCE_FIELDS) !== $meta['source_identity_before']
-                        || $t->only(self::TARGET_FIELDS) !== $meta['target_identity_before'] || $new->revision_status !== 'archived') {
-                        throw new RuntimeException('restore_readback_failed');
+                    } else {
+                        foreach ([[$s, self::SOURCE_FIELDS, $meta['source_identity_before']], [$t, self::TARGET_FIELDS, $meta['target_identity_before']]] as [$row, $fields, $identity]) {
+                            foreach ($fields as $field) {
+                                if ($row->getAttribute($field) !== $identity[$field]) {
+                                    throw new RuntimeException('restore_readback_failed');
+                                }
+                            }
+                        }
+                        if ($new->revision_status !== 'archived') {
+                            throw new RuntimeException('restore_readback_failed');
+                        }
                     }
                     $action = $restore ? 'article_legacy_lineage_draft_restored' : 'article_legacy_lineage_draft_forked';
                     $last = (int) AuditLog::withoutGlobalScopes()->max('id');
