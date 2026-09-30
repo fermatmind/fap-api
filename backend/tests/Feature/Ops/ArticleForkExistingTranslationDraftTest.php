@@ -13,6 +13,7 @@ use App\Services\Audit\AuditLogger;
 use App\Support\ArticleSourceTargetSnapshot;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use PHPUnit\Framework\Attributes\DataProvider;
 use RuntimeException;
 use Tests\TestCase;
 
@@ -20,9 +21,24 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_read_fork_restore_preserve_public_projection_and_history(): void
+    public static function existingAndStalePairs(): array
     {
-        [$s,$t,$old] = $this->pair();
+        return [[4, 191, false], [4, 191, true], [12, 27, true], [13, 29, true], [14, 28, true], [15, 24, true], [16, 25, true]];
+    }
+
+    #[DataProvider('existingAndStalePairs')]
+    public function test_read_fork_restore_preserve_public_projection_and_history(int $sourceId, int $targetId, bool $privateSourceDraft): void
+    {
+        [$s,$t,$old] = $this->pair($sourceId, $targetId);
+        if ($privateSourceDraft) {
+            $draft = $s->publishedRevision->replicate();
+            $draft->forceFill(['revision_number' => 2, 'revision_status' => 'draft', 'content_md' => 'Unpublished source edit.'])->save();
+            $s->forceFill(['working_revision_id' => $draft->id])->saveQuietly();
+        }
+        if ($sourceId >= 12 && $sourceId <= 16) {
+            $s->publishedRevision->forceFill(['source_version_hash' => str_repeat('e', 64)])->saveQuietly();
+        }
+        $initialCount = ArticleTranslationRevision::count();
         [$file,$sha] = $this->package($s, $t);
         try {
             $source = Locks::sourceHash($s);
@@ -33,12 +49,12 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
             $this->assertSame(0, $this->callCommand($file, $sha));
             $this->assertSame(0, $this->callCommand($file, $sha));
             $this->assertSame($target, Locks::targetHash($s));
-            $this->assertSame(2, ArticleTranslationRevision::count());
+            $this->assertSame($initialCount, ArticleTranslationRevision::count());
             $this->assertSame(0, AuditLog::count());
-            $this->assertSame(0, $this->callCommand($file, $sha, $this->execute($sha)));
+            $this->assertSame(0, $this->callCommand($file, $sha, $this->execute($sha, 0, $targetId)));
             $result = json_decode(Artisan::output(), true);
             $new = ArticleTranslationRevision::findOrFail($result['after']['new_revision_id']);
-            $this->assertSame(3, ArticleTranslationRevision::count());
+            $this->assertSame($initialCount + 1, ArticleTranslationRevision::count());
             $this->assertSame($history, ArticleSourceTargetSnapshot::sourceRevisions($t, [(int) $new->id]));
             $this->assertSame($source, Locks::sourceHash($s->fresh()));
             $this->assertSame($seo, $t->fresh()->seoMeta->getAttributes());
@@ -51,6 +67,9 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
             $this->assertSame($s->source_version_hash, $new->translated_from_version_hash);
             $this->assertNotSame($old->translated_from_version_hash, $new->translated_from_version_hash);
             $this->assertSame('Fresh complete candidate.', $new->content_md);
+            $this->assertSame($source, $new->authority_metadata_json['source_snapshot_hash']);
+            $this->assertSame($s->publishedRevision->source_version_hash, $new->authority_metadata_json['source_published_version_hash']);
+            $this->assertSame($sourceId < 12, $new->authority_metadata_json['source_published_hash_matches_current']);
             foreach (['reviewed_by', 'reviewed_at', 'approved_at', 'published_at', 'authority_source_hash', 'authority_package_sha256'] as $key) {
                 $this->assertNull($new->$key, $key);
             }
@@ -60,12 +79,29 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
             $fork = Locks::targetHash($s);
             $this->assertSame(0, $this->callCommand($file, $sha, ['--restore-audit-id' => $audit]));
             $this->assertSame($fork, Locks::targetHash($s));
-            $this->assertSame(0, $this->callCommand($file, $sha, $this->execute($sha, $audit)));
+            $this->assertSame(0, $this->callCommand($file, $sha, $this->execute($sha, $audit, $targetId)));
             $this->assertSame((int) $old->id, (int) $t->fresh()->working_revision_id);
             $this->assertSame((int) $old->id, (int) $t->fresh()->published_revision_id);
             $this->assertSame('archived', $new->fresh()->revision_status);
             $this->assertSame($history, ArticleSourceTargetSnapshot::sourceRevisions($t, [(int) $new->id]));
             $this->assertSame(2, AuditLog::count());
+            $this->assertSame($source, Locks::sourceHash($s->fresh()));
+        } finally {
+            unlink($file);
+        }
+    }
+
+    public function test_unscoped_legacy_source_hash_is_rejected_without_writes(): void
+    {
+        [$s,$t] = $this->pair();
+        $s->publishedRevision->forceFill(['source_version_hash' => str_repeat('e', 64)])->saveQuietly();
+        [$file,$sha] = $this->package($s, $t);
+        try {
+            $before = Locks::targetHash($s);
+            $this->assertSame(1, $this->callCommand($file, $sha));
+            $this->assertSame($before, Locks::targetHash($s));
+            $this->assertSame(2, ArticleTranslationRevision::count());
+            $this->assertSame(0, AuditLog::count());
         } finally {
             unlink($file);
         }
@@ -169,13 +205,13 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
         }
     }
 
-    private function pair(): array
+    private function pair(int $sourceId = 4, int $targetId = 191): array
     {
-        $s = Article::forceCreate(['id' => 4, 'org_id' => 0, 'slug' => 'existing-test', 'locale' => 'zh-CN', 'translation_group_id' => 'existing-test', 'source_locale' => 'zh-CN', 'translation_status' => 'source', 'title' => 'Source title', 'excerpt' => 'Source summary', 'content_md' => 'Current source body', 'status' => 'published', 'is_public' => true]);
+        $s = Article::forceCreate(['id' => $sourceId, 'org_id' => 0, 'slug' => 'existing-test-'.$sourceId, 'locale' => 'zh-CN', 'translation_group_id' => 'existing-test-'.$sourceId, 'source_locale' => 'zh-CN', 'translation_status' => 'source', 'title' => 'Source title', 'excerpt' => 'Source summary', 'content_md' => 'Current source body', 'status' => 'published', 'is_public' => true]);
         $sr = ArticleTranslationRevision::create(['org_id' => 0, 'article_id' => $s->id, 'source_article_id' => $s->id, 'translation_group_id' => $s->translation_group_id, 'locale' => 'zh-CN', 'source_locale' => 'zh-CN', 'revision_number' => 1, 'revision_status' => 'source', 'source_version_hash' => $s->source_version_hash, 'title' => $s->title, 'excerpt' => $s->excerpt, 'content_md' => $s->content_md]);
         $s->forceFill(['working_revision_id' => $sr->id, 'published_revision_id' => $sr->id])->saveQuietly();
         ArticleSeoMeta::create(['org_id' => 0, 'article_id' => $s->id, 'locale' => 'zh-CN', 'seo_title' => 'Source SEO', 'seo_description' => 'Source SEO description']);
-        $t = Article::forceCreate(['id' => 191, 'org_id' => 0, 'slug' => $s->slug, 'locale' => 'en', 'translation_group_id' => $s->translation_group_id, 'source_locale' => 'zh-CN', 'translation_status' => 'published', 'source_article_id' => $s->id, 'translated_from_article_id' => $s->id, 'translated_from_version_hash' => str_repeat('a', 64), 'title' => 'Old title', 'excerpt' => 'Old summary', 'content_md' => 'Old public body', 'status' => 'published', 'is_public' => true, 'is_indexable' => true, 'sitemap_eligible' => true, 'llms_eligible' => true, 'published_at' => now()]);
+        $t = Article::forceCreate(['id' => $targetId, 'org_id' => 0, 'slug' => $s->slug, 'locale' => 'en', 'translation_group_id' => $s->translation_group_id, 'source_locale' => 'zh-CN', 'translation_status' => 'published', 'source_article_id' => $s->id, 'translated_from_article_id' => $s->id, 'translated_from_version_hash' => str_repeat('a', 64), 'title' => 'Old title', 'excerpt' => 'Old summary', 'content_md' => 'Old public body', 'status' => 'published', 'is_public' => true, 'is_indexable' => true, 'sitemap_eligible' => true, 'llms_eligible' => true, 'published_at' => now()]);
         $old = ArticleTranslationRevision::create(['org_id' => 0, 'article_id' => $t->id, 'source_article_id' => $s->id, 'translation_group_id' => $s->translation_group_id, 'locale' => 'en', 'source_locale' => 'zh-CN', 'revision_number' => 1, 'revision_status' => 'published', 'title' => $t->title, 'excerpt' => $t->excerpt, 'content_md' => $t->content_md, 'translated_from_version_hash' => str_repeat('a', 64), 'reviewed_by' => 1, 'reviewed_at' => now(), 'approved_at' => now(), 'published_at' => now(), 'authority_source_hash' => str_repeat('b', 64), 'authority_package_sha256' => str_repeat('c', 64)]);
         $t->forceFill(['working_revision_id' => $old->id, 'published_revision_id' => $old->id])->saveQuietly();
         ArticleSeoMeta::create(['org_id' => 0, 'article_id' => $t->id, 'locale' => 'en', 'seo_title' => 'Public SEO', 'seo_description' => 'Public description', 'is_indexable' => true]);
@@ -196,9 +232,9 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
         return [$file, hash_file('sha256', $file)];
     }
 
-    private function execute(string $sha, int $audit = 0): array
+    private function execute(string $sha, int $audit = 0, int $targetId = 191): array
     {
-        return ['--execute' => true, '--confirm' => sprintf('%s existing Article translation draft for target 191 with package %s%s.', $audit ? 'Restore' : 'Fork', $sha, $audit ? ' and audit '.$audit : ''), ...$audit ? ['--restore-audit-id' => $audit] : []];
+        return ['--execute' => true, '--confirm' => sprintf('%s existing Article translation draft for target %d with package %s%s.', $audit ? 'Restore' : 'Fork', $targetId, $sha, $audit ? ' and audit '.$audit : ''), ...$audit ? ['--restore-audit-id' => $audit] : []];
     }
 
     private function callCommand(string $file, string $sha, array $args = []): int
