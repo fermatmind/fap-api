@@ -620,12 +620,12 @@ final class SeoContentPackageExistingArticleUpdater
     {
         $contents = $this->normalizeLineEndings((string) file_get_contents($path));
         if (preg_match('/\A---\n(.*?)\n---\n(.*)\z/s', $contents, $matches) !== 1) {
-            return ['frontmatter' => [], 'body' => trim($contents)];
+            return ['frontmatter' => [], 'body' => $contents];
         }
 
         return [
             'frontmatter' => $this->parseSimpleFrontmatter((string) $matches[1]),
-            'body' => trim((string) $matches[2]),
+            'body' => (string) $matches[2],
         ];
     }
 

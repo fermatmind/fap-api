@@ -12,6 +12,7 @@ use App\Models\ArticleTranslationRevision;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 final class ArticleUpdateExistingSeoContentPackageCommandTest extends TestCase
@@ -110,6 +111,58 @@ final class ArticleUpdateExistingSeoContentPackageCommandTest extends TestCase
         $this->assertSame(self::CANONICAL, (string) data_get($import->exactness_json, 'canonical_url'));
         $this->assertTrue((bool) data_get($import->validation_summary_json, 'schema_hreflang_search_hold'));
         $this->assertSame(0, (int) $import->references_count);
+    }
+
+    #[DataProvider('markdownBodyFormats')]
+    public function test_execute_preserves_complete_body_bytes_without_changing_public_revision(bool $frontmatter, string $lineEnding): void
+    {
+        $article = $this->createExistingPublishedArticle40();
+        $publishedRevision = $article->publishedRevision->getAttributes();
+        $seo = $article->seoMeta->getAttributes();
+        $body = "\n## 读取六维分数\n\n正文末尾换行与空白属于导入内容。  \n\n";
+        $page = ($frontmatter ? "---\nlocale: zh-CN\nschema_hold: true\n---\n" : '').$body;
+        $package = $this->writeExistingUpdatePackage(static function (array &$files) use ($page, $lineEnding): void {
+            $files['pages/zh-CN-riasec-holland-career-interest-test-explained.md'] = str_replace("\n", $lineEnding, $page);
+        });
+
+        try {
+            $exitCode = Artisan::call('articles:update-existing-seo-content-package', $this->commandOptions($package, [
+                '--execute' => true,
+                '--json' => true,
+            ]));
+            $payload = $this->jsonOutput();
+            $this->assertSame(0, $exitCode);
+            $this->assertTrue($payload['ok']);
+            $article->refresh()->load(['publishedRevision', 'workingRevision', 'seoMeta']);
+            $this->assertNotSame((int) $article->published_revision_id, (int) $article->working_revision_id);
+            $this->assertSame($body, $article->workingRevision->content_md);
+            $this->assertSame(hash('sha256', $body), hash('sha256', $article->workingRevision->content_md));
+            $this->assertSame($publishedRevision, $article->publishedRevision->getAttributes());
+            $this->assertSame($seo, $article->seoMeta->getAttributes());
+            $this->assertSame(ArticleTranslationRevision::STATUS_HUMAN_REVIEW, $article->workingRevision->revision_status);
+            $this->assertNull($article->workingRevision->approved_at);
+            // Existing package metadata uses a normalized hash; raw revision bytes are checked separately.
+            $this->assertSame(hash('sha256', trim($body)), data_get($payload, 'articles.0.body_hash'));
+        } finally {
+            foreach (['pages', 'cms', 'contracts', 'review'] as $directory) {
+                foreach (glob($package.'/'.$directory.'/*') ?: [] as $path) {
+                    unlink($path);
+                }
+                rmdir($package.'/'.$directory);
+            }
+            unlink($package.'/manifest.json');
+            rmdir($package);
+        }
+    }
+
+    public static function markdownBodyFormats(): array
+    {
+        return [
+            'plain LF' => [false, "\n"],
+            'frontmatter LF' => [true, "\n"],
+            'plain CRLF' => [false, "\r\n"],
+            'frontmatter CRLF' => [true, "\r\n"],
+        ];
     }
 
     public function test_execute_preserves_zh_utf8_frontmatter_meta_draft_fallback_without_corruption(): void
