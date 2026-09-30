@@ -70,7 +70,7 @@ final class RestoreArticleSourceVersion extends Command
                     $sourceBefore = $source->getAttributes();
                     $new->forceFill(['revision_status' => ArticleTranslationRevision::STATUS_ARCHIVED])->saveQuietly();
                     $source->forceFill([
-                        'translation_status' => Article::TRANSLATION_STATUS_APPROVED,
+                        'translation_status' => $locked['old_translation_status'],
                         'source_version_hash' => (string) ($locked['old_source_hash']),
                         'working_revision_id' => (int) $old->id,
                         'published_revision_id' => (int) $old->id,
@@ -88,7 +88,7 @@ final class RestoreArticleSourceVersion extends Command
                     }
                     if ($sourceBefore !== $sourceAttributes || $oldBefore !== $oldAfter->getAttributes()
                         || ! hash_equals($locked['old_source_hash'], (string) $sourceAfter->source_version_hash)
-                        || (string) $sourceAfter->translation_status !== Article::TRANSLATION_STATUS_APPROVED
+                        || (string) $sourceAfter->translation_status !== $locked['old_translation_status']
                         || (int) $sourceAfter->working_revision_id !== (int) $old->id
                         || (int) $sourceAfter->published_revision_id !== (int) $old->id
                         || (string) $newAfter->revision_status !== ArticleTranslationRevision::STATUS_ARCHIVED
@@ -161,8 +161,11 @@ final class RestoreArticleSourceVersion extends Command
         }
         $old = $oldQuery->first();
         $old_source_hash = $meta['old_source_hash'] ?? ($meta['source_version_hash'] ?? '');
+        $old_translation_status = $meta['old_translation_status'] ?? Article::TRANSLATION_STATUS_APPROVED;
         $errors = [];
-        if (! is_string($old_source_hash) || ! preg_match('/^[0-9a-f]{64}$/', $old_source_hash)
+        if (! is_string($old_translation_status)
+            || ! ReconcileArticleSourceVersion::allowsOriginalStatus($sourceId, $old_translation_status)
+            || ! is_string($old_source_hash) || ! preg_match('/^[0-9a-f]{64}$/', $old_source_hash)
             || ! $old instanceof ArticleTranslationRevision
             || (int) $source->org_id !== 0 || ! $source->isSourceArticle()
             || (string) $source->status !== 'published' || ! (bool) $source->is_public
@@ -198,7 +201,7 @@ final class RestoreArticleSourceVersion extends Command
             $errors[] = 'reconciliation_lock_mismatch';
         }
         try {
-            $targetChanged = ArticleSourceTargetSnapshot::capture($source, $lock) !== ($meta['existing_english_targets'] ?? []);
+            $targetChanged = ReconcileArticleSourceVersion::targetSnapshot($source, $lock) !== ($meta['existing_english_targets'] ?? []);
         } catch (RuntimeException) {
             $targetChanged = true;
         }
@@ -220,7 +223,7 @@ final class RestoreArticleSourceVersion extends Command
             }
         }
 
-        return compact('errors', 'source', 'old', 'new', 'old_source_hash');
+        return compact('errors', 'source', 'old', 'new', 'old_source_hash', 'old_translation_status');
     }
 
     private function confirmation(): string

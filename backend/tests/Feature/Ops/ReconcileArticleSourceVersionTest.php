@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Ops;
 
+use App\Console\Commands\ArticleForkPrivateTranslationLinks;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
@@ -11,11 +12,96 @@ use App\Models\AuditLog;
 use App\Support\ArticleSourceTargetSnapshot;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 final class ReconcileArticleSourceVersionTest extends TestCase
 {
     use RefreshDatabase;
+
+    public static function legacyUnlinkedPairs(): array
+    {
+        return [[40, 41], [74, 75]];
+    }
+
+    #[DataProvider('legacyUnlinkedPairs')]
+    public function test_exact_unlinked_target_is_preserved_during_source_foundation_and_restore(int $sid, int $tid): void
+    {
+        [$source, $old, $seo] = $this->legacySource($sid);
+        $originalStatus = $sid === 40 ? Article::TRANSLATION_STATUS_PUBLISHED : Article::TRANSLATION_STATUS_SOURCE;
+        $source->forceFill(['translation_status' => $originalStatus])->saveQuietly();
+        $target = Article::forceCreate(['id' => $tid, 'org_id' => 0, 'locale' => 'en',
+            'slug' => $sid === 40 ? 'different-english-slug' : $source->slug, 'translation_group_id' => $source->translation_group_id,
+            'source_locale' => 'en', 'translation_status' => 'source', 'translated_from_version_hash' => str_repeat('c', 64),
+            'title' => 'Existing English', 'content_md' => 'Existing English body', 'status' => 'published', 'is_public' => true]);
+        $tr = ArticleTranslationRevision::create(['org_id' => 0, 'article_id' => $tid, 'source_article_id' => $tid,
+            'translation_group_id' => $source->translation_group_id, 'locale' => 'en', 'source_locale' => 'en',
+            'revision_number' => 1, 'revision_status' => 'published', 'title' => $target->title, 'content_md' => $target->content_md,
+            'source_version_hash' => str_repeat('c', 64), 'translated_from_version_hash' => str_repeat('c', 64), 'published_at' => now()]);
+        $target->forceFill(['working_revision_id' => $tr->id, 'published_revision_id' => $tr->id])->saveQuietly();
+        $targetHash = ArticleForkPrivateTranslationLinks::sourceHash($target->fresh());
+        $history = ArticleSourceTargetSnapshot::sourceRevisions($source);
+        [$path] = $this->package($source, $old, $seo);
+        $p = json_decode(file_get_contents($path), true);
+        $p['schema'] = 'fermat_article_source_reconcile_v2';
+        $p['existing_english_targets'] = [['article_id' => $tid, 'sha256' => $targetHash]];
+        $bytes = json_encode($p, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
+        file_put_contents($path, $bytes);
+        $sha = hash('sha256', $bytes);
+        try {
+            $publicBefore = $this->getJson('/api/v0.5/articles/'.$source->slug.'?locale=zh-CN')->assertOk()->json();
+            $collision = Article::forceCreate(['org_id' => 0, 'locale' => 'en', 'slug' => 'duplicate-group-candidate',
+                'translation_group_id' => $source->translation_group_id, 'source_locale' => 'en', 'translation_status' => 'source',
+                'title' => 'Collision', 'content_md' => 'Collision body', 'status' => 'published', 'is_public' => true]);
+            $this->assertSame(1, Artisan::call('articles:reconcile-source-version', ['--file' => $path, '--sha256' => $sha, '--dry-run' => true]));
+            $this->assertContains('english_identity_collision', json_decode(Artisan::output(), true)['errors']);
+            $this->assertSame($targetHash, ArticleForkPrivateTranslationLinks::sourceHash($target->fresh()));
+            $this->assertSame($old->id, $source->fresh()->published_revision_id);
+            $collision->forceDelete();
+
+            DB::connection()->enableQueryLog();
+            DB::connection()->flushQueryLog();
+            for ($i = 0; $i < 2; $i++) {
+                $this->assertSame(0, Artisan::call('articles:reconcile-source-version', ['--file' => $path, '--sha256' => $sha, '--dry-run' => true]), Artisan::output());
+            }
+            $writes = collect(DB::connection()->getQueryLog())->pluck('query')->filter(fn (string $q): bool => preg_match('/^\s*(?:insert|update|delete|replace|create|alter|drop)\b/i', $q) === 1)->all();
+            DB::connection()->disableQueryLog();
+            $this->assertSame([], array_values($writes));
+            $this->assertSame(2, ArticleTranslationRevision::withoutGlobalScopes()->count());
+            $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
+            $this->assertSame(0, Artisan::call('articles:reconcile-source-version', ['--file' => $path, '--sha256' => $sha, '--execute' => true,
+                '--confirm' => sprintf('Reconcile Article source %d in group %s with package %s.', $sid, $source->translation_group_id, $sha)]), Artisan::output());
+            $source->refresh();
+            $new = $source->publishedRevision;
+            $this->assertSame($source->computeSourceVersionHash(), $new->source_version_hash);
+            $this->assertNotSame($old->source_version_hash, $new->source_version_hash);
+            $this->assertSame($history, ArticleSourceTargetSnapshot::sourceRevisions($source, [(int) $new->id]));
+            $this->assertSame($targetHash, ArticleForkPrivateTranslationLinks::sourceHash($target->fresh()));
+            $this->assertNull($target->fresh()->source_article_id);
+            $this->assertNull($target->fresh()->translated_from_article_id);
+            $this->assertNull($new->approved_at);
+            $this->assertNull($new->reviewed_at);
+            $publicAfter = $this->getJson('/api/v0.5/articles/'.$source->slug.'?locale=zh-CN')->assertOk()->json();
+            foreach (['title', 'excerpt', 'content_md'] as $field) {
+                $this->assertSame($publicBefore['article'][$field], $publicAfter['article'][$field]);
+            }
+            $this->assertSame($publicBefore['seo_surface_v1'], $publicAfter['seo_surface_v1']);
+            $audit = AuditLog::withoutGlobalScopes()->where('action', 'article_source_version_reconciled')->firstOrFail();
+            $args = ['--source-id' => $sid, '--audit-id' => (int) $audit->id, '--new-revision-id' => (int) $new->id,
+                '--source-updated-at' => (string) $source->getRawOriginal('updated_at'), '--revision-updated-at' => (string) $new->getRawOriginal('updated_at')];
+            $this->assertSame(0, Artisan::call('articles:restore-source-version', $args + ['--dry-run' => true]), Artisan::output());
+            $this->assertSame(0, Artisan::call('articles:restore-source-version', $args + ['--execute' => true,
+                '--confirm' => sprintf('Restore Article source %d from reconciliation audit %d and revision %d.', $sid, $audit->id, $new->id)]), Artisan::output());
+            $this->assertSame($old->id, $source->fresh()->published_revision_id);
+            $this->assertSame($originalStatus, $source->fresh()->translation_status);
+            $this->assertSame('archived', $new->fresh()->revision_status);
+            $this->assertSame($targetHash, ArticleForkPrivateTranslationLinks::sourceHash($target->fresh()));
+        } finally {
+            DB::connection()->disableQueryLog();
+            unlink($path);
+        }
+    }
 
     public function test_dry_run_is_read_only_and_execute_only_reconciles_source_metadata(): void
     {
@@ -632,9 +718,10 @@ final class ReconcileArticleSourceVersionTest extends TestCase
     }
 
     /** @return array{Article,ArticleTranslationRevision,ArticleSeoMeta} */
-    private function legacySource(): array
+    private function legacySource(int $sourceId = 0): array
     {
-        $source = Article::query()->create([
+        $source = Article::forceCreate([
+            ...($sourceId ? ['id' => $sourceId] : []),
             'org_id' => 0, 'slug' => 'legacy-source-reconcile-test', 'locale' => 'zh-CN',
             'translation_group_id' => 'legacy-source-reconcile-test', 'source_locale' => 'zh-CN',
             'translation_status' => Article::TRANSLATION_STATUS_APPROVED,
