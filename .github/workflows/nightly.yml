@@ -237,13 +237,38 @@ jobs:
         id: full-tests
         continue-on-error: true
         working-directory: backend
-        run: php artisan test --no-ansi --log-junit="$RUNNER_TEMP/nightly-full-phpunit.xml"
+        run: |
+          set -o pipefail
+          php artisan test --no-ansi --log-junit="$RUNNER_TEMP/nightly-full-phpunit.xml" 2>&1 | tee "$RUNNER_TEMP/nightly-full-phpunit.log"
+      - name: Validate full PHPUnit JUnit completeness
+        if: always()
+        working-directory: backend
+        run: |
+          php <<'PHP'
+          <?php
+          $path = getenv('RUNNER_TEMP').'/nightly-full-phpunit.xml';
+          libxml_use_internal_errors(true);
+          $document = new DOMDocument;
+          $valid = is_file($path) && filesize($path) > 0 && $document->load($path, LIBXML_NONET)
+              && in_array($document->documentElement->tagName, ['testsuites', 'testsuite'], true)
+              && $document->getElementsByTagName('testcase')->length > 0;
+          if (! $valid) {
+              if (is_file($path)) {
+                  rename($path, $path.'.invalid');
+              }
+              file_put_contents('php://stderr', "NIGHTLY_ARTIFACT_INCOMPLETE\n");
+              exit(1);
+          }
+          PHP
       - name: Upload full PHPUnit evidence
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: nightly-full-phpunit-${{ github.sha }}-${{ github.run_id }}
-          path: ${{ runner.temp }}/nightly-full-phpunit.xml
+          path: |
+            ${{ runner.temp }}/nightly-full-phpunit.xml
+            ${{ runner.temp }}/nightly-full-phpunit.xml.invalid
+            ${{ runner.temp }}/nightly-full-phpunit.log
           if-no-files-found: error
           retention-days: 90
       - name: Preserve full PHPUnit failure state

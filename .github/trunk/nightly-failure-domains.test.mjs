@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
@@ -149,5 +149,38 @@ test('full PHPUnit has parent revision history and an empty test environment fil
   const fullPhpunit = jobSection('full-phpunit', 'codeql');
   assert.match(fullPhpunit, /persist-credentials: false\s+fetch-depth: 2/);
   assert.match(fullPhpunit, /working-directory: backend\s+run: touch \.env/);
-  assert.ok(fullPhpunit.indexOf('run: touch .env') < fullPhpunit.indexOf('run: php artisan test'));
+  assert.ok(fullPhpunit.indexOf('run: touch .env') < fullPhpunit.indexOf('php artisan test --no-ansi'));
+});
+
+
+test('full PHPUnit rejects empty or malformed JUnit and retains original diagnostics', () => {
+  const section = jobSection('full-phpunit', 'codeql');
+  assert.match(section, /set -o pipefail/);
+  assert.match(section, /2>&1 \| tee "\$RUNNER_TEMP\/nightly-full-phpunit\.log"/);
+  const marker = "          php <<'PHP'\n";
+  const start = section.indexOf(marker);
+  assert.notEqual(start, -1);
+  const source = section.slice(start + marker.length).split('          PHP')[0]
+    .split('\n').map(line => line.slice(10)).join('\n');
+  for (const [xml, valid] of [
+    ['', false],
+    ['<testsuites><testcase>', false],
+    ['<testsuites></testsuites>', false],
+    ['<not-junit><testcase/></not-junit>', false],
+    ['<testsuites><testsuite tests="1"><testcase name="ok"/></testsuite></testsuites>', true],
+    ['<testsuites><testsuite tests="1"><testcase name="bad"><failure>failed</failure></testcase></testsuite></testsuites>', true],
+  ]) {
+    const root = mkdtempSync(join(tmpdir(), 'nightly-junit-'));
+    try {
+      const path = join(root, 'nightly-full-phpunit.xml');
+      writeFileSync(path, xml);
+      const run = spawnSync('php', [], { input: source, encoding: 'utf8', env: { ...process.env, RUNNER_TEMP: root } });
+      assert.equal(run.status, valid ? 0 : 1, run.stderr);
+      assert.equal(existsSync(path), valid);
+      if (!valid) assert.equal(readFileSync(`${path}.invalid`, 'utf8'), xml);
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
+  }
+  assert.match(section, /steps\.full-tests\.outcome != 'success'/);
 });

@@ -53,15 +53,49 @@ final class CareerContentV3ContractTest extends TestCase
 
     public function test_projection_is_stable_across_mysql_json_object_key_order(): void
     {
-        ini_set('memory_limit', '2048M');
         $package = app(CareerContentV3AuthorityPackage::class);
         $first = $package->load(base_path());
+        $summary = $first['summary'];
+        $page = $first['pages']['accountants-and-auditors']['zh-CN'];
+        unset($first);
         $second = $package->load(base_path());
 
-        self::assertSame($first['summary'], $second['summary']);
+        self::assertSame($summary, $second['summary']);
         self::assertSame(
-            $first['pages']['accountants-and-auditors']['zh-CN'],
+            $page,
             $second['pages']['accountants-and-auditors']['zh-CN'],
+        );
+    }
+
+    public function test_projection_preserves_values_and_list_order_when_object_keys_are_reversed(): void
+    {
+        $reverseKeys = static function (mixed $value) use (&$reverseKeys): mixed {
+            if (! is_array($value)) {
+                return $value;
+            }
+            $value = array_map($reverseKeys, $value);
+
+            return array_is_list($value) ? $value : array_reverse($value, true);
+        };
+        $page = [
+            'hero' => ['h1' => 'Actors', 'quick_answer' => 'A concise factual summary.'],
+            'overview' => ['body' => ['First paragraph.', 'Second paragraph.']],
+            'faq_block' => ['items' => [[
+                'question' => 'What do actors do?',
+                'answer' => 'They portray characters for audiences.',
+            ]]],
+        ];
+        $sources = [['name' => 'O*NET', 'url' => 'https://www.onetonline.org/']];
+        $projector = app(CareerContentV3Projector::class);
+        $first = $projector->project('actors', 'en', $page, null, $sources);
+        $second = $projector->project('actors', 'en', $reverseKeys($page), null, $reverseKeys($sources));
+
+        self::assertNotSame($page, $reverseKeys($page));
+        self::assertSame($page['overview']['body'], $reverseKeys($page)['overview']['body']);
+        self::assertSame($first, $second);
+        self::assertSame(
+            CareerCurrentAuthorityPackage::encodePrettyCanonical($first),
+            CareerCurrentAuthorityPackage::encodePrettyCanonical($second),
         );
     }
 
