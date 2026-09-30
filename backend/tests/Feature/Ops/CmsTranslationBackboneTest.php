@@ -577,6 +577,9 @@ final class CmsTranslationBackboneTest extends TestCase
                 json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR)['errors']);
             $source->forceFill(['translation_status' => $sourceStatus])->saveQuietly();
             $options['--source-updated-at'] = (string) $source->getRawOriginal('updated_at');
+            if ($unlinkedPolicy) {
+                $options['--source-snapshot-hash'] = \App\Support\ContentPageSourceTargetSnapshot::hash($source);
+            }
         }
 
         DB::connection()->enableQueryLog();
