@@ -31,6 +31,9 @@ final class ReconcileArticleSourceVersionTest extends TestCase
         [$source, $old, $seo] = $this->legacySource($sid);
         $source->forceFill(['translation_status' => Article::TRANSLATION_STATUS_SOURCE])->saveQuietly();
         $old->forceFill(['revision_status' => $oldStatus])->saveQuietly();
+        if (in_array($sid, [46, 48], true)) {
+            $old->forceFill(['reviewed_at' => now()->subDays(5), 'approved_at' => now()->subDays(4)])->saveQuietly();
+        }
         $target = $this->existingTarget($source);
         if ($historyPackage) {
             $prior = $old->replicate();
@@ -65,13 +68,15 @@ final class ReconcileArticleSourceVersionTest extends TestCase
             $this->assertSame($history, ArticleSourceTargetSnapshot::sourceRevisions($source, [(int) $new->id]));
             $this->assertSame($oldAttributes, $old->fresh()->getAttributes());
             $this->assertSame($targetHash, ArticleForkPrivateTranslationLinks::sourceHash($target->fresh()));
-            $this->assertNull($new->reviewed_at);
-            $this->assertNull($new->approved_at);
+            $this->assertSame($old->reviewed_at?->toISOString(), $new->reviewed_at?->toISOString());
+            $this->assertSame($old->approved_at?->toISOString(), $new->approved_at?->toISOString());
             $publicAfter = $this->getJson('/api/v0.5/articles/'.$source->slug.'?locale=zh-CN')->assertOk()->json();
             foreach (['title', 'excerpt', 'content_md'] as $field) {
                 $this->assertSame($publicBefore['article'][$field], $publicAfter['article'][$field]);
             }
             $this->assertSame($publicBefore['seo_surface_v1'], $publicAfter['seo_surface_v1']);
+            $this->assertSame($publicBefore['article']['last_reviewed_at'], $publicAfter['article']['last_reviewed_at']);
+            $this->assertSame($publicBefore['article']['review_state'], $publicAfter['article']['review_state']);
             $audit = AuditLog::withoutGlobalScopes()->where('action', 'article_source_version_reconciled')->firstOrFail();
             $args = ['--source-id' => $sid, '--audit-id' => (int) $audit->id, '--new-revision-id' => (int) $new->id,
                 '--source-updated-at' => (string) $source->getRawOriginal('updated_at'), '--revision-updated-at' => (string) $new->getRawOriginal('updated_at')];
