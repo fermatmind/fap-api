@@ -18,9 +18,15 @@ use Throwable;
 /** @review-surface article_translation_revision */
 final class ArticleForkExistingTranslationDraft extends Command
 {
-    private const PAIRS = [3 => 188, 4 => 191, 5 => 195, 6 => 196, 7 => 198, 9 => 201, 10 => 202, 11 => 26, 12 => 27, 13 => 29, 14 => 28, 15 => 24, 16 => 25, 50 => 197, 51 => 190, 52 => 189];
+    private const PAIRS = [3 => 188, 4 => 191, 5 => 195, 6 => 196, 7 => 198, 8 => 200, 9 => 201, 10 => 202, 11 => 26, 12 => 27, 13 => 29, 14 => 28, 15 => 24, 16 => 25, 46 => 47, 48 => 49, 50 => 197, 51 => 190, 52 => 189, 58 => 192];
 
     private const REBASE_PAIRS = [10 => 202, 40 => 41];
+
+    private const LOCALIZED_SLUGS = [
+        40 => ['riasec-holland-career-interest-test-explained', 'what-is-riasec-holland-code-career-interest-test'],
+        46 => ['career-interest-vs-personality-test-differences', 'career-interest-test-vs-personality-test'],
+        48 => ['career-confusion-test-map', 'choose-career-using-personality-tests'],
+    ];
 
     private const LEGACY_SOURCE_PAIRS = [12 => 27, 13 => 29, 14 => 28, 15 => 24, 16 => 25];
 
@@ -222,9 +228,9 @@ final class ArticleForkExistingTranslationDraft extends Command
             }
         }
         $slugMatches = $t instanceof Article && $t->slug === $s->slug;
-        if ($p['source_id'] === 40 && $p['target_id'] === 41) {
-            $slugMatches = $s->slug === 'riasec-holland-career-interest-test-explained'
-                && $t?->slug === 'what-is-riasec-holland-code-career-interest-test';
+        if (isset(self::LOCALIZED_SLUGS[$p['source_id']])) {
+            [$sourceSlug, $targetSlug] = self::LOCALIZED_SLUGS[$p['source_id']];
+            $slugMatches = $s->slug === $sourceSlug && $t?->slug === $targetSlug;
         }
         if (! $t instanceof Article || $t->trashed() || $t->locale !== 'en' || $t->isSourceArticle()
             || $t->status !== 'published' || ! $t->is_public || ! $t->published_revision_id

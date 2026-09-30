@@ -23,7 +23,7 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
 
     public static function existingAndStalePairs(): array
     {
-        return [[3, 188, false], [11, 26, false], [4, 191, false], [4, 191, true], [12, 27, true], [13, 29, true], [14, 28, true], [15, 24, true], [16, 25, true], [10, 202, false, true], [40, 41, false, true]];
+        return [[3, 188, false], [11, 26, false], [4, 191, false], [4, 191, true], [12, 27, true], [13, 29, true], [14, 28, true], [15, 24, true], [16, 25, true], [10, 202, false, true], [40, 41, false, true], [8, 200, false], [46, 47, false], [48, 49, false], [58, 192, false]];
     }
 
     #[DataProvider('existingAndStalePairs')]
@@ -266,10 +266,18 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
         return $draft;
     }
 
-    public function test_localized_rebase_rejects_unknown_source_or_target_slug_without_writes(): void
+    public static function localizedPairs(): array
     {
-        [$s, $t, $public] = $this->pair(40, 41);
-        $this->privateWorkingDraft($t, $public);
+        return [[40, 41, true], [46, 47, false], [48, 49, false]];
+    }
+
+    #[DataProvider('localizedPairs')]
+    public function test_localized_pair_rejects_unknown_source_or_target_slug_without_writes(int $sourceId, int $targetId, bool $privateTargetDraft): void
+    {
+        [$s, $t, $public] = $this->pair($sourceId, $targetId);
+        if ($privateTargetDraft) {
+            $this->privateWorkingDraft($t, $public);
+        }
         foreach ([$s, $t] as $row) {
             $slug = $row->slug;
             $row->forceFill(['slug' => 'unknown-localized-slug'])->saveQuietly();
@@ -277,10 +285,13 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
             try {
                 $source = Locks::sourceHash($s->fresh());
                 $target = Locks::targetHash($s->fresh());
-                $this->assertSame(1, $this->callCommand($file, $sha, $this->execute($sha, 0, 41)));
+                $count = ArticleTranslationRevision::count();
+                $this->assertSame(1, $this->callCommand($file, $sha));
+                $this->assertSame(1, $this->callCommand($file, $sha, $this->execute($sha, 0, $targetId)));
                 $this->assertContains('target_identity_invalid', json_decode(Artisan::output(), true)['errors']);
                 $this->assertSame($source, Locks::sourceHash($s->fresh()));
                 $this->assertSame($target, Locks::targetHash($s->fresh()));
+                $this->assertSame($count, ArticleTranslationRevision::count());
                 $this->assertSame(0, AuditLog::count());
             } finally {
                 unlink($file);
@@ -300,9 +311,14 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
         $t->forceFill(['working_revision_id' => $old->id, 'published_revision_id' => $old->id])->saveQuietly();
         ArticleSeoMeta::create(['org_id' => 0, 'article_id' => $t->id, 'locale' => 'en', 'seo_title' => 'Public SEO', 'seo_description' => 'Public description', 'is_indexable' => true]);
 
-        if ($sourceId === 40 && $targetId === 41) {
-            $s->forceFill(['slug' => 'riasec-holland-career-interest-test-explained'])->saveQuietly();
-            $t->forceFill(['slug' => 'what-is-riasec-holland-code-career-interest-test'])->saveQuietly();
+        $localized = [
+            40 => ['riasec-holland-career-interest-test-explained', 'what-is-riasec-holland-code-career-interest-test'],
+            46 => ['career-interest-vs-personality-test-differences', 'career-interest-test-vs-personality-test'],
+            48 => ['career-confusion-test-map', 'choose-career-using-personality-tests'],
+        ];
+        if (isset($localized[$sourceId])) {
+            $s->forceFill(['slug' => $localized[$sourceId][0]])->saveQuietly();
+            $t->forceFill(['slug' => $localized[$sourceId][1]])->saveQuietly();
         }
 
         return [$s->fresh(), $t->fresh(), $old->fresh()];
