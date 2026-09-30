@@ -23,11 +23,11 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
 
     public static function existingAndStalePairs(): array
     {
-        return [[4, 191, false], [4, 191, true], [12, 27, true], [13, 29, true], [14, 28, true], [15, 24, true], [16, 25, true]];
+        return [[4, 191, false], [4, 191, true], [12, 27, true], [13, 29, true], [14, 28, true], [15, 24, true], [16, 25, true], [10, 202, false, true]];
     }
 
     #[DataProvider('existingAndStalePairs')]
-    public function test_read_fork_restore_preserve_public_projection_and_history(int $sourceId, int $targetId, bool $privateSourceDraft): void
+    public function test_read_fork_restore_preserve_public_projection_and_history(int $sourceId, int $targetId, bool $privateSourceDraft, bool $privateTargetDraft = false): void
     {
         [$s,$t,$old] = $this->pair($sourceId, $targetId);
         if ($privateSourceDraft) {
@@ -37,6 +37,10 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
         }
         if ($sourceId >= 12 && $sourceId <= 16) {
             $s->publishedRevision->forceFill(['source_version_hash' => str_repeat('e', 64)])->saveQuietly();
+        }
+        $publishedId = (int) $old->id;
+        if ($privateTargetDraft) {
+            $old = $this->privateWorkingDraft($t, $old);
         }
         $initialCount = ArticleTranslationRevision::count();
         [$file,$sha] = $this->package($s, $t);
@@ -81,7 +85,7 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
             $this->assertSame($fork, Locks::targetHash($s));
             $this->assertSame(0, $this->callCommand($file, $sha, $this->execute($sha, $audit, $targetId)));
             $this->assertSame((int) $old->id, (int) $t->fresh()->working_revision_id);
-            $this->assertSame((int) $old->id, (int) $t->fresh()->published_revision_id);
+            $this->assertSame($publishedId, (int) $t->fresh()->published_revision_id);
             $this->assertSame('archived', $new->fresh()->revision_status);
             $this->assertSame($history, ArticleSourceTargetSnapshot::sourceRevisions($t, [(int) $new->id]));
             $this->assertSame(2, AuditLog::count());
@@ -205,6 +209,57 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
         }
     }
 
+    public function test_private_rebase_refuses_reviewed_current_or_unscoped_drafts_without_writes(): void
+    {
+        [$s, $t, $public] = $this->pair(10, 202);
+        $old = $this->privateWorkingDraft($t, $public);
+        foreach ([['reviewed_at' => now()], ['revision_status' => 'human_review'], ['translated_from_version_hash' => $s->source_version_hash]] as $change) {
+            $original = $old->getAttributes();
+            $old->forceFill($change)->saveQuietly();
+            [$file, $sha] = $this->package($s, $t);
+            try {
+                $before = Locks::targetHash($s);
+                $this->assertSame(1, $this->callCommand($file, $sha, $this->execute($sha, 0, 202)));
+                $this->assertSame($before, Locks::targetHash($s));
+                $this->assertSame(0, AuditLog::count());
+            } finally {
+                unlink($file);
+                $old->forceFill($original)->saveQuietly();
+            }
+        }
+        [$file, $sha] = $this->package($s, $t);
+        try {
+            $p = json_decode(file_get_contents($file), true);
+            $outside = $p;
+            $outside['source_id'] = 4;
+            $outside['target_id'] = 191;
+            file_put_contents($file, json_encode($outside));
+            $this->assertSame(1, $this->callCommand($file, hash_file('sha256', $file)));
+            $this->assertContains('package_invalid', json_decode(Artisan::output(), true)['errors']);
+            $p['schema'] = 'fermat_existing_article_translation_draft_v1';
+            unset($p['target_published_revision_id']);
+            file_put_contents($file, json_encode($p));
+            $this->assertSame(1, $this->callCommand($file, hash_file('sha256', $file)));
+            $this->assertSame($old->id, $t->fresh()->working_revision_id);
+            $this->assertSame($public->id, $t->fresh()->published_revision_id);
+        } finally {
+            unlink($file);
+        }
+    }
+
+    private function privateWorkingDraft(Article $target, ArticleTranslationRevision $public): ArticleTranslationRevision
+    {
+        $draft = $public->replicate();
+        $draft->forceFill(['revision_number' => 2, 'revision_status' => 'machine_draft',
+            'source_version_hash' => $public->translated_from_version_hash, 'reviewed_by' => null,
+            'reviewed_at' => null, 'approved_at' => null, 'published_at' => null,
+            'authority_source_hash' => null, 'authority_package_sha256' => null,
+            'authority_metadata_json' => ['editorial_review_state' => 'pending']])->save();
+        $target->forceFill(['working_revision_id' => $draft->id])->saveQuietly();
+
+        return $draft;
+    }
+
     private function pair(int $sourceId = 4, int $targetId = 191): array
     {
         $s = Article::forceCreate(['id' => $sourceId, 'org_id' => 0, 'slug' => 'existing-test-'.$sourceId, 'locale' => 'zh-CN', 'translation_group_id' => 'existing-test-'.$sourceId, 'source_locale' => 'zh-CN', 'translation_status' => 'source', 'title' => 'Source title', 'excerpt' => 'Source summary', 'content_md' => 'Current source body', 'status' => 'published', 'is_public' => true]);
@@ -226,6 +281,10 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
             $fields[$k] = hash('sha256', (string) (in_array($k, ['seo_title', 'seo_description'], true) ? $s->seoMeta?->$k : $s->$k));
         }
         $p = ['schema' => 'fermat_existing_article_translation_draft_v1', 'source_id' => (int) $s->id, 'target_id' => (int) $t->id, 'working_revision_id' => (int) $t->working_revision_id, 'source_published_revision_id' => (int) $s->published_revision_id, 'source_snapshot_hash' => Locks::sourceHash($s), 'target_snapshot_hash' => Locks::targetHash($s), 'source_fields_sha256' => $fields, 'translation' => ['title' => 'Fresh English title', 'excerpt' => 'Fresh summary', 'content_md' => 'Fresh complete candidate.', 'seo_title' => 'Fresh SEO', 'seo_description' => 'Fresh SEO description']];
+        if ((int) $t->working_revision_id !== (int) $t->published_revision_id) {
+            $p['schema'] = 'fermat_existing_article_translation_rebase_v2';
+            $p['target_published_revision_id'] = (int) $t->published_revision_id;
+        }
         $file = tempnam(sys_get_temp_dir(), 'existing-draft-');
         file_put_contents($file, json_encode($p));
 

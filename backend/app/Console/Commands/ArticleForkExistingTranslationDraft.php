@@ -149,13 +149,18 @@ final class ArticleForkExistingTranslationDraft extends Command
         sort($keys);
         $expected = ['schema', 'source_id', 'target_id', 'working_revision_id', 'source_published_revision_id',
             'source_snapshot_hash', 'target_snapshot_hash', 'source_fields_sha256', 'translation'];
+        $rebase = ($p['schema'] ?? null) === 'fermat_existing_article_translation_rebase_v2';
+        if ($rebase) {
+            $expected[] = 'target_published_revision_id';
+        }
         sort($expected);
-        if ($keys !== $expected || $p['schema'] !== 'fermat_existing_article_translation_draft_v1'
+        if ($keys !== $expected || (! $rebase && $p['schema'] !== 'fermat_existing_article_translation_draft_v1')
+            || ($rebase && ($p['source_id'] !== 10 || $p['target_id'] !== 202))
             || ! is_int($p['source_id']) || ! is_int($p['target_id'])
             || (self::PAIRS[$p['source_id']] ?? null) !== $p['target_id']) {
             throw new RuntimeException('package_invalid');
         }
-        foreach (['working_revision_id', 'source_published_revision_id'] as $key) {
+        foreach ($rebase ? ['working_revision_id', 'source_published_revision_id', 'target_published_revision_id'] : ['working_revision_id', 'source_published_revision_id'] as $key) {
             if (! is_int($p[$key]) || $p[$key] < 1) {
                 throw new RuntimeException('package_invalid');
             }
@@ -243,12 +248,29 @@ final class ArticleForkExistingTranslationDraft extends Command
                 || ($m['package_sha256'] ?? null) !== $this->option('sha256') || ($m['source_id'] ?? null) !== (int) $s->id
                 || ($m['source_snapshot_hash'] ?? null) !== $p['source_snapshot_hash'] || ($m['target_snapshot_hash_after'] ?? null) !== $hash
                 || ($m['new_revision_id'] ?? null) !== (int) $w->id || ($m['old_working_revision_id'] ?? null) !== $p['working_revision_id']
-                || (int) $t->published_revision_id !== $p['working_revision_id']) {
+                || (int) $t->published_revision_id !== ($p['target_published_revision_id'] ?? $p['working_revision_id'])) {
                 throw new RuntimeException('restore_drift');
             }
         } elseif (! $w instanceof ArticleTranslationRevision || (int) $w->id !== $p['working_revision_id']
-            || (int) $t->published_revision_id !== $p['working_revision_id'] || ! hash_equals($p['target_snapshot_hash'], $hash)) {
+            || (int) $t->published_revision_id !== ($p['target_published_revision_id'] ?? $p['working_revision_id']) || ! hash_equals($p['target_snapshot_hash'], $hash)) {
             throw new RuntimeException('published_target_lock_invalid');
+        }
+        if (isset($p['target_published_revision_id'])) {
+            $previous = $revisions->firstWhere('id', $p['working_revision_id']);
+            if (! $previous instanceof ArticleTranslationRevision
+                || (int) $previous->id === (int) $public->id
+                || (int) $previous->org_id !== 0 || (int) $previous->source_article_id !== (int) $s->id
+                || $previous->locale !== 'en' || $previous->source_locale !== 'zh-CN'
+                || $previous->translation_group_id !== $s->translation_group_id
+                || $previous->revision_status !== 'machine_draft'
+                || (int) $s->working_revision_id !== (int) $s->published_revision_id
+                || $previous->reviewed_by !== null || $previous->reviewed_at !== null
+                || $previous->approved_at !== null || $previous->published_at !== null
+                || ($previous->authority_metadata_json['editorial_review_state'] ?? null) !== 'pending'
+                || ! filled($previous->translated_from_version_hash)
+                || hash_equals((string) $previous->translated_from_version_hash, (string) $s->source_version_hash)) {
+                throw new RuntimeException('draft_invalid');
+            }
         }
 
         return [$s, $t, $w, $revisions];
