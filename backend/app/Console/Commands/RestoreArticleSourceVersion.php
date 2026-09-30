@@ -187,7 +187,7 @@ final class RestoreArticleSourceVersion extends Command
             || ! hash_equals((string) $new->source_version_hash, (string) $source->source_version_hash)
             || ! hash_equals((string) $source->source_version_hash, $source->computeSourceVersionHash())
             || (int) $old->article_id !== $sourceId
-            || (string) $old->revision_status !== ArticleTranslationRevision::STATUS_PUBLISHED
+            || ! ReconcileArticleSourceVersion::allowsOriginalRevisionStatus($sourceId, (string) $old->revision_status)
             || ! array_key_exists('old_revision_hash', $meta)
             || $meta['old_revision_hash'] !== $old->getRawOriginal('source_version_hash')
             || (string) ($meta['old_revision_body_sha256'] ?? '') !== hash('sha256', (string) $old->content_md)

@@ -20,6 +20,94 @@ final class ReconcileArticleSourceVersionTest extends TestCase
 {
     use RefreshDatabase;
 
+    public static function currentSourceSnapshots(): array
+    {
+        return [[8, 'published', true], [46, 'source', false], [48, 'source', false], [58, 'published', true]];
+    }
+
+    #[DataProvider('currentSourceSnapshots')]
+    public function test_current_source_snapshot_preserves_copy_target_history_and_restore(int $sid, string $oldStatus, bool $historyPackage): void
+    {
+        [$source, $old, $seo] = $this->legacySource($sid);
+        $source->forceFill(['translation_status' => Article::TRANSLATION_STATUS_SOURCE])->saveQuietly();
+        $old->forceFill(['revision_status' => $oldStatus])->saveQuietly();
+        $target = $this->existingTarget($source);
+        if ($historyPackage) {
+            $prior = $old->replicate();
+            $prior->forceFill(['revision_number' => 2, 'revision_status' => 'archived'])->save();
+        }
+        $source = $source->fresh();
+        $history = ArticleSourceTargetSnapshot::sourceRevisions($source);
+        $targetHash = ArticleForkPrivateTranslationLinks::sourceHash($target);
+        $oldAttributes = $old->fresh()->getAttributes();
+        [$path, $sha, $confirm] = $historyPackage
+            ? $this->packageWithHistory($source, $old, $seo)
+            : $this->packageWithTarget($source, $old, $seo);
+        try {
+            $publicBefore = $this->getJson('/api/v0.5/articles/'.$source->slug.'?locale=zh-CN')->assertOk()->json();
+            DB::connection()->enableQueryLog();
+            DB::connection()->flushQueryLog();
+            $results = [];
+            for ($i = 0; $i < 2; $i++) {
+                $this->assertSame(0, Artisan::call('articles:reconcile-source-version', ['--file' => $path, '--sha256' => $sha, '--dry-run' => true]), Artisan::output());
+                $results[] = json_decode(Artisan::output(), true);
+            }
+            $writes = collect(DB::connection()->getQueryLog())->pluck('query')->filter(fn (string $q): bool => preg_match('/^\s*(?:insert|update|delete|replace|create|alter|drop)\b/i', $q) === 1)->values()->all();
+            DB::connection()->disableQueryLog();
+            $this->assertSame([], $writes);
+            $this->assertSame($results[0], $results[1]);
+            $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
+            $this->assertSame($history, ArticleSourceTargetSnapshot::sourceRevisions($source));
+            $this->assertSame(0, Artisan::call('articles:reconcile-source-version', ['--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm]), Artisan::output());
+            $source->refresh();
+            $new = $source->publishedRevision;
+            $this->assertSame($source->computeSourceVersionHash(), $new->source_version_hash);
+            $this->assertSame($history, ArticleSourceTargetSnapshot::sourceRevisions($source, [(int) $new->id]));
+            $this->assertSame($oldAttributes, $old->fresh()->getAttributes());
+            $this->assertSame($targetHash, ArticleForkPrivateTranslationLinks::sourceHash($target->fresh()));
+            $this->assertNull($new->reviewed_at);
+            $this->assertNull($new->approved_at);
+            $publicAfter = $this->getJson('/api/v0.5/articles/'.$source->slug.'?locale=zh-CN')->assertOk()->json();
+            foreach (['title', 'excerpt', 'content_md'] as $field) {
+                $this->assertSame($publicBefore['article'][$field], $publicAfter['article'][$field]);
+            }
+            $this->assertSame($publicBefore['seo_surface_v1'], $publicAfter['seo_surface_v1']);
+            $audit = AuditLog::withoutGlobalScopes()->where('action', 'article_source_version_reconciled')->firstOrFail();
+            $args = ['--source-id' => $sid, '--audit-id' => (int) $audit->id, '--new-revision-id' => (int) $new->id,
+                '--source-updated-at' => (string) $source->getRawOriginal('updated_at'), '--revision-updated-at' => (string) $new->getRawOriginal('updated_at')];
+            $this->assertSame(0, Artisan::call('articles:restore-source-version', $args + ['--dry-run' => true]), Artisan::output());
+            $this->assertSame(0, Artisan::call('articles:restore-source-version', $args + ['--execute' => true,
+                '--confirm' => sprintf('Restore Article source %d from reconciliation audit %d and revision %d.', $sid, $audit->id, $new->id)]), Artisan::output());
+            $this->assertSame($old->id, $source->fresh()->published_revision_id);
+            $this->assertSame('source', $source->fresh()->translation_status);
+            $this->assertSame($oldAttributes, $old->fresh()->getAttributes());
+            $this->assertSame('archived', $new->fresh()->revision_status);
+            $this->assertSame($targetHash, ArticleForkPrivateTranslationLinks::sourceHash($target->fresh()));
+        } finally {
+            DB::connection()->disableQueryLog();
+            unlink($path);
+        }
+    }
+
+    public function test_source_status_compatibility_is_bounded_and_wrong_revision_owner_is_rejected(): void
+    {
+        $this->assertFalse(\App\Console\Commands\ReconcileArticleSourceVersion::allowsOriginalStatus(55, 'source'));
+        $this->assertFalse(\App\Console\Commands\ReconcileArticleSourceVersion::allowsOriginalRevisionStatus(8, 'source'));
+        [$source, $old, $seo] = $this->legacySource(46);
+        $source->forceFill(['translation_status' => 'source'])->saveQuietly();
+        $old->forceFill(['revision_status' => 'source', 'source_article_id' => 48])->saveQuietly();
+        $this->existingTarget($source);
+        [$path, $sha, $confirm] = $this->packageWithTarget($source, $old, $seo);
+        try {
+            $this->assertSame(1, Artisan::call('articles:reconcile-source-version', ['--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm]));
+            $this->assertContains('published_revision_mismatch', json_decode(Artisan::output(), true)['errors']);
+            $this->assertSame($old->id, $source->fresh()->published_revision_id);
+            $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
+        } finally {
+            unlink($path);
+        }
+    }
+
     public static function legacyUnlinkedPairs(): array
     {
         return [[40, 41], [74, 75]];
@@ -388,7 +476,7 @@ final class ReconcileArticleSourceVersionTest extends TestCase
             $target->forceFill(['excerpt' => 'Changed after source reconciliation'])->saveQuietly();
             $this->assertSame(1, Artisan::call('articles:restore-source-version', [...$restore, '--dry-run' => true]));
             // Restore the exact locked target bytes, including its original timestamp.
-            $target->forceFill($this->targetBefore)->saveQuietly();
+            Article::withoutTimestamps(fn () => $target->forceFill($this->targetBefore)->saveQuietly());
             $this->assertSame($before, ArticleSourceTargetSnapshot::capture($source));
             $this->assertSame(0, Artisan::call('articles:restore-source-version', [...$restore,
                 '--execute' => true, '--confirm' => sprintf('Restore Article source %d from reconciliation audit %d and revision %d.',
@@ -413,7 +501,7 @@ final class ReconcileArticleSourceVersionTest extends TestCase
             $this->assertContains('english_identity_collision', json_decode(Artisan::output(), true)['errors']);
             $this->assertSame((int) $old->id, (int) $source->fresh()->published_revision_id);
             $this->assertSame(0, AuditLog::withoutGlobalScopes()->where('action', 'article_source_version_reconciled')->count());
-            $target->forceFill($this->targetBefore)->saveQuietly();
+            Article::withoutTimestamps(fn () => $target->forceFill($this->targetBefore)->saveQuietly());
             $target->publishedRevision->forceFill(['translated_from_version_hash' => str_repeat('d', 64)])->saveQuietly();
             $this->assertSame(1, Artisan::call('articles:reconcile-source-version', [
                 '--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm,
