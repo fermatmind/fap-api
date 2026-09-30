@@ -18,7 +18,7 @@ use Throwable;
 /** @review-surface article_translation_revision */
 final class ArticleForkExistingTranslationDraft extends Command
 {
-    private const PAIRS = [4 => 191, 5 => 195, 6 => 196, 7 => 198, 9 => 201, 10 => 202, 12 => 27, 13 => 29, 14 => 28, 15 => 24, 16 => 25, 50 => 197, 51 => 190, 52 => 189];
+    private const PAIRS = [3 => 188, 4 => 191, 5 => 195, 6 => 196, 7 => 198, 9 => 201, 10 => 202, 11 => 26, 12 => 27, 13 => 29, 14 => 28, 15 => 24, 16 => 25, 50 => 197, 51 => 190, 52 => 189];
 
     private const LEGACY_SOURCE_PAIRS = [12 => 27, 13 => 29, 14 => 28, 15 => 24, 16 => 25];
 
