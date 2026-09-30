@@ -23,7 +23,7 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
 
     public static function existingAndStalePairs(): array
     {
-        return [[3, 188, false], [11, 26, false], [4, 191, false], [4, 191, true], [12, 27, true], [13, 29, true], [14, 28, true], [15, 24, true], [16, 25, true], [10, 202, false, true]];
+        return [[3, 188, false], [11, 26, false], [4, 191, false], [4, 191, true], [12, 27, true], [13, 29, true], [14, 28, true], [15, 24, true], [16, 25, true], [10, 202, false, true], [40, 41, false, true]];
     }
 
     #[DataProvider('existingAndStalePairs')]
@@ -73,7 +73,7 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
             $this->assertSame('Fresh complete candidate.', $new->content_md);
             $this->assertSame($source, $new->authority_metadata_json['source_snapshot_hash']);
             $this->assertSame($s->publishedRevision->source_version_hash, $new->authority_metadata_json['source_published_version_hash']);
-            $this->assertSame($sourceId < 12, $new->authority_metadata_json['source_published_hash_matches_current']);
+            $this->assertSame(! in_array($sourceId, [12, 13, 14, 15, 16], true), $new->authority_metadata_json['source_published_hash_matches_current']);
             foreach (['reviewed_by', 'reviewed_at', 'approved_at', 'published_at', 'authority_source_hash', 'authority_package_sha256'] as $key) {
                 $this->assertNull($new->$key, $key);
             }
@@ -209,9 +209,15 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
         }
     }
 
-    public function test_private_rebase_refuses_reviewed_current_or_unscoped_drafts_without_writes(): void
+    public static function privateRebasePairs(): array
     {
-        [$s, $t, $public] = $this->pair(10, 202);
+        return [[10, 202], [40, 41]];
+    }
+
+    #[DataProvider('privateRebasePairs')]
+    public function test_private_rebase_refuses_reviewed_current_or_unscoped_drafts_without_writes(int $sourceId, int $targetId): void
+    {
+        [$s, $t, $public] = $this->pair($sourceId, $targetId);
         $old = $this->privateWorkingDraft($t, $public);
         foreach ([['reviewed_at' => now()], ['revision_status' => 'human_review'], ['translated_from_version_hash' => $s->source_version_hash]] as $change) {
             $original = $old->getAttributes();
@@ -219,7 +225,7 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
             [$file, $sha] = $this->package($s, $t);
             try {
                 $before = Locks::targetHash($s);
-                $this->assertSame(1, $this->callCommand($file, $sha, $this->execute($sha, 0, 202)));
+                $this->assertSame(1, $this->callCommand($file, $sha, $this->execute($sha, 0, $targetId)));
                 $this->assertSame($before, Locks::targetHash($s));
                 $this->assertSame(0, AuditLog::count());
             } finally {
@@ -260,6 +266,29 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
         return $draft;
     }
 
+    public function test_localized_rebase_rejects_unknown_source_or_target_slug_without_writes(): void
+    {
+        [$s, $t, $public] = $this->pair(40, 41);
+        $this->privateWorkingDraft($t, $public);
+        foreach ([$s, $t] as $row) {
+            $slug = $row->slug;
+            $row->forceFill(['slug' => 'unknown-localized-slug'])->saveQuietly();
+            [$file, $sha] = $this->package($s->fresh(), $t->fresh());
+            try {
+                $source = Locks::sourceHash($s->fresh());
+                $target = Locks::targetHash($s->fresh());
+                $this->assertSame(1, $this->callCommand($file, $sha, $this->execute($sha, 0, 41)));
+                $this->assertContains('target_identity_invalid', json_decode(Artisan::output(), true)['errors']);
+                $this->assertSame($source, Locks::sourceHash($s->fresh()));
+                $this->assertSame($target, Locks::targetHash($s->fresh()));
+                $this->assertSame(0, AuditLog::count());
+            } finally {
+                unlink($file);
+                $row->forceFill(['slug' => $slug])->saveQuietly();
+            }
+        }
+    }
+
     private function pair(int $sourceId = 4, int $targetId = 191): array
     {
         $s = Article::forceCreate(['id' => $sourceId, 'org_id' => 0, 'slug' => 'existing-test-'.$sourceId, 'locale' => 'zh-CN', 'translation_group_id' => 'existing-test-'.$sourceId, 'source_locale' => 'zh-CN', 'translation_status' => 'source', 'title' => 'Source title', 'excerpt' => 'Source summary', 'content_md' => 'Current source body', 'status' => 'published', 'is_public' => true]);
@@ -270,6 +299,11 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
         $old = ArticleTranslationRevision::create(['org_id' => 0, 'article_id' => $t->id, 'source_article_id' => $s->id, 'translation_group_id' => $s->translation_group_id, 'locale' => 'en', 'source_locale' => 'zh-CN', 'revision_number' => 1, 'revision_status' => 'published', 'title' => $t->title, 'excerpt' => $t->excerpt, 'content_md' => $t->content_md, 'translated_from_version_hash' => str_repeat('a', 64), 'reviewed_by' => 1, 'reviewed_at' => now(), 'approved_at' => now(), 'published_at' => now(), 'authority_source_hash' => str_repeat('b', 64), 'authority_package_sha256' => str_repeat('c', 64)]);
         $t->forceFill(['working_revision_id' => $old->id, 'published_revision_id' => $old->id])->saveQuietly();
         ArticleSeoMeta::create(['org_id' => 0, 'article_id' => $t->id, 'locale' => 'en', 'seo_title' => 'Public SEO', 'seo_description' => 'Public description', 'is_indexable' => true]);
+
+        if ($sourceId === 40 && $targetId === 41) {
+            $s->forceFill(['slug' => 'riasec-holland-career-interest-test-explained'])->saveQuietly();
+            $t->forceFill(['slug' => 'what-is-riasec-holland-code-career-interest-test'])->saveQuietly();
+        }
 
         return [$s->fresh(), $t->fresh(), $old->fresh()];
     }
