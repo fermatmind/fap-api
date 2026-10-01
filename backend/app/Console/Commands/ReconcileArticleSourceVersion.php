@@ -78,8 +78,8 @@ final class ReconcileArticleSourceVersion extends Command
                         'article_id' => (int) $source->id,
                         'source_article_id' => (int) $source->id,
                         'translation_group_id' => (string) $source->translation_group_id,
-                        'locale' => 'zh-CN',
-                        'source_locale' => 'zh-CN',
+                        'locale' => (string) $source->locale,
+                        'source_locale' => (string) $source->source_locale,
                         'revision_number' => $number,
                         'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
                         'source_version_hash' => $newSourceHash,
@@ -225,10 +225,11 @@ final class ReconcileArticleSourceVersion extends Command
         }
         if ($v2) {
             $targets = $package['existing_english_targets'];
-            if (! is_array($targets) || ! array_is_list($targets) || count($targets) !== 1
+            $independentEnglishSource = $targets === [] && in_array($package['source_id'], [35, 81], true);
+            if (! $independentEnglishSource && (! is_array($targets) || ! array_is_list($targets) || count($targets) !== 1
                 || ! is_array($targets[0]) || array_keys($targets[0]) !== ['article_id', 'sha256']
                 || ! is_int($targets[0]['article_id']) || $targets[0]['article_id'] <= 0
-                || ! is_string($targets[0]['sha256']) || ! preg_match('/^[0-9a-f]{64}$/', $targets[0]['sha256'])) {
+                || ! is_string($targets[0]['sha256']) || ! preg_match('/^[0-9a-f]{64}$/', $targets[0]['sha256']))) {
                 throw new RuntimeException('target_snapshot_invalid');
             }
         }
@@ -292,8 +293,8 @@ final class ReconcileArticleSourceVersion extends Command
         $revision = $revisionQuery->first();
         $seo = $seoQuery->first();
         $errors = [];
-        if ((int) $source->org_id !== 0 || (string) $source->locale !== 'zh-CN'
-            || (string) $source->source_locale !== 'zh-CN'
+        if ((int) $source->org_id !== 0 || ! self::supportsSourceLocale($source)
+            || (string) $source->source_locale !== (string) $source->locale
             || ! self::allowsOriginalStatus((int) $source->id, (string) $source->translation_status)
             || $source->source_article_id !== null || $source->translated_from_article_id !== null
             || (string) $source->status !== 'published' || ! (bool) $source->is_public
@@ -312,7 +313,9 @@ final class ReconcileArticleSourceVersion extends Command
             || (int) $revision->article_id !== (int) $source->id
             || (int) $revision->source_article_id !== (int) $source->id
             || (string) $revision->translation_group_id !== (string) $source->translation_group_id
-            || (string) $revision->locale !== 'zh-CN'
+            || (string) $revision->locale !== (string) $source->locale
+            || (string) $revision->source_locale !== (string) $source->source_locale
+            || ((string) $source->locale === 'en' && ($revision->reviewed_at === null || $revision->approved_at === null))
             || ! self::allowsOriginalRevisionStatus((int) $source->id, (string) $revision->revision_status)
             || ($p['revision_hash'] === null
                 ? $revision->getRawOriginal('source_version_hash') !== null
@@ -326,7 +329,7 @@ final class ReconcileArticleSourceVersion extends Command
             $errors[] = 'published_revision_mismatch';
         }
         if (! $seo instanceof ArticleSeoMeta || (int) $seo->article_id !== (int) $source->id
-            || (int) $seo->org_id !== 0 || (string) $seo->locale !== 'zh-CN'
+            || (int) $seo->org_id !== 0 || (string) $seo->locale !== (string) $source->locale
             || ! hash_equals($p['seo_meta_content_sha256'], $this->seoHash($seo))
             || (string) $seo->getRawOriginal('updated_at') !== $p['seo_meta_updated_at']) {
             $errors[] = 'seo_meta_mismatch';
@@ -366,11 +369,17 @@ final class ReconcileArticleSourceVersion extends Command
             'source_history_snapshot' => $sourceHistorySnapshot];
     }
 
+    public static function supportsSourceLocale(Article $source): bool
+    {
+        return (string) $source->locale === 'zh-CN'
+            || ((string) $source->locale === 'en' && in_array((int) $source->id, [35, 81], true));
+    }
+
     public static function allowsOriginalStatus(int $sourceId, string $status): bool
     {
         return $status === Article::TRANSLATION_STATUS_APPROVED
             || ($sourceId === 40 && $status === Article::TRANSLATION_STATUS_PUBLISHED)
-            || (in_array($sourceId, [8, 46, 48, 58, 74], true) && $status === Article::TRANSLATION_STATUS_SOURCE);
+            || (in_array($sourceId, [8, 46, 48, 58, 74, 81], true) && $status === Article::TRANSLATION_STATUS_SOURCE);
     }
 
     public static function allowsOriginalRevisionStatus(int $sourceId, string $status): bool
@@ -382,6 +391,22 @@ final class ReconcileArticleSourceVersion extends Command
     /** @return list<array{article_id:int,sha256:string}> */
     public static function targetSnapshot(Article $source, bool $lock = false): array
     {
+        if ((string) $source->locale === 'en') {
+            if (! self::supportsSourceLocale($source)) {
+                throw new RuntimeException('unsupported_source_locale');
+            }
+            $query = Article::withoutGlobalScopes()->withTrashed()->where('org_id', 0)
+                ->where('id', '<>', $source->id)->where(function ($q) use ($source): void {
+                    $q->where('translation_group_id', $source->translation_group_id)
+                        ->orWhere('source_article_id', $source->id)
+                        ->orWhere('translated_from_article_id', $source->id);
+                });
+            if (($lock ? $query->lockForUpdate() : $query)->exists()) {
+                throw new RuntimeException('english_identity_collision');
+            }
+
+            return [];
+        }
         try {
             return ArticleSourceTargetSnapshot::capture($source, $lock);
         } catch (RuntimeException $exception) {

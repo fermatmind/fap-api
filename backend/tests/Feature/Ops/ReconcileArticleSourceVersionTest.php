@@ -843,6 +843,77 @@ final class ReconcileArticleSourceVersionTest extends TestCase
     }
 
     /** @return array{Article,ArticleTranslationRevision,ArticleSeoMeta} */
+    public static function independentEnglishSources(): array
+    {
+        return [[35, 'approved', true], [81, 'source', false]];
+    }
+
+    #[DataProvider('independentEnglishSources')]
+    public function test_independent_english_source_reconciliation_preserves_public_copy_and_restore(int $id, string $status, bool $rowDrift): void
+    {
+        [$source, $old, $seo] = $this->legacySource($id);
+        $source->forceFill(['locale' => 'en', 'source_locale' => 'en', 'translation_status' => $status])->saveQuietly();
+        $source->forceFill(['source_version_hash' => $rowDrift ? str_repeat('b', 64) : $source->computeSourceVersionHash()])->saveQuietly();
+        $old->forceFill(['locale' => 'en', 'source_locale' => 'en', 'reviewed_at' => now()->subDays(3), 'approved_at' => now()->subDays(2)])->saveQuietly();
+        $seo->forceFill(['locale' => 'en'])->saveQuietly();
+        $source = $source->fresh();
+        [$path, $sha, $confirm] = $this->package($source, $old->fresh(), $seo->fresh());
+        if ($rowDrift) {
+            $p = json_decode(file_get_contents($path), true);
+            $p['schema'] = 'fermat_article_source_reconcile_v3';
+            $p['existing_english_targets'] = [];
+            $p['computed_source_hash'] = $source->computeSourceVersionHash();
+            $bytes = json_encode($p, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
+            file_put_contents($path, $bytes);
+            $sha = hash('sha256', $bytes);
+            $confirm = sprintf('Reconcile Article source %d in group %s with package %s.', $id, $source->translation_group_id, $sha);
+        }
+        $oldAttributes = $old->fresh()->getAttributes();
+        $rowAttributes = $source->getAttributes();
+        $url = '/api/v0.5/articles/'.$source->slug.'?locale=en';
+        try {
+            $before = $this->getJson($url)->assertOk()->json();
+            for ($i = 0; $i < 2; $i++) {
+                $this->assertSame(0, Artisan::call('articles:reconcile-source-version', ['--file' => $path, '--sha256' => $sha, '--dry-run' => true]), Artisan::output());
+            }
+            $this->assertSame($rowAttributes, $source->fresh()->getAttributes());
+            $this->assertSame(1, ArticleTranslationRevision::withoutGlobalScopes()->count());
+            $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
+            $old->forceFill(['approved_at' => null])->saveQuietly();
+            $this->assertSame(1, Artisan::call('articles:reconcile-source-version', ['--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm]));
+            $this->assertContains('published_revision_mismatch', json_decode(Artisan::output(), true)['errors']);
+            DB::table('article_translation_revisions')->where('id', $old->id)->update($oldAttributes);
+            $collision = Article::forceCreate(['org_id' => 0, 'locale' => 'zh-CN', 'slug' => 'unexpected-dependent', 'title' => 'Dependency', 'content_md' => 'Dependency body', 'translation_group_id' => $source->translation_group_id]);
+            $this->assertSame(1, Artisan::call('articles:reconcile-source-version', ['--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm]));
+            $this->assertContains('english_identity_collision', json_decode(Artisan::output(), true)['errors']);
+            $collision->forceDelete();
+            $this->assertSame(0, Artisan::call('articles:reconcile-source-version', ['--file' => $path, '--sha256' => $sha, '--execute' => true, '--confirm' => $confirm]), Artisan::output());
+            $source = $source->fresh();
+            $new = $source->publishedRevision;
+            $this->assertTrue($source->isSourceArticle());
+            $this->assertSame('en', $new->locale);
+            $this->assertSame('en', $new->source_locale);
+            $this->assertSame($source->computeSourceVersionHash(), $new->source_version_hash);
+            $this->assertSame($oldAttributes, $old->fresh()->getAttributes());
+            $after = $this->getJson($url)->assertOk()->json();
+            foreach (['title', 'excerpt', 'content_md', 'content_html', 'published_at', 'last_reviewed_at', 'review_state'] as $field) {
+                $this->assertSame($before['article'][$field] ?? null, $after['article'][$field] ?? null);
+            }
+            $this->assertSame($before['seo_surface_v1'], $after['seo_surface_v1']);
+            $audit = AuditLog::withoutGlobalScopes()->where('action', 'article_source_version_reconciled')->firstOrFail();
+            $args = ['--source-id' => $id, '--audit-id' => $audit->id, '--new-revision-id' => $new->id,
+                '--source-updated-at' => (string) $source->getRawOriginal('updated_at'), '--revision-updated-at' => (string) $new->getRawOriginal('updated_at')];
+            $this->assertSame(0, Artisan::call('articles:restore-source-version', $args + ['--dry-run' => true]), Artisan::output());
+            $this->assertSame(0, Artisan::call('articles:restore-source-version', $args + ['--execute' => true,
+                '--confirm' => sprintf('Restore Article source %d from reconciliation audit %d and revision %d.', $id, $audit->id, $new->id)]), Artisan::output());
+            $this->assertSame($status, $source->fresh()->translation_status);
+            $this->assertSame($old->id, $source->fresh()->published_revision_id);
+            $this->assertSame($rowAttributes['source_version_hash'], $source->fresh()->source_version_hash);
+        } finally {
+            unlink($path);
+        }
+    }
+
     private function legacySource(int $sourceId = 0): array
     {
         $source = Article::forceCreate([

@@ -180,7 +180,9 @@ final class RestoreArticleSourceVersion extends Command
             || (int) $new->article_id !== $sourceId || (int) $new->source_article_id !== $sourceId
             || (int) $new->supersedes_revision_id !== $oldId
             || (string) $new->translation_group_id !== (string) $source->translation_group_id
-            || (string) $new->locale !== 'zh-CN'
+            || ! ReconcileArticleSourceVersion::supportsSourceLocale($source)
+            || (string) $new->locale !== (string) $source->locale
+            || (string) $new->source_locale !== (string) $source->source_locale
             || (string) $new->content_md !== (string) $source->content_md
             || (string) $new->title !== (string) $source->title
             || (string) $new->excerpt !== (string) $source->excerpt
