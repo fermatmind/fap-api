@@ -60,6 +60,15 @@ final class ArticleStageSourceCorrectionTest extends TestCase
             $auditId = $out['after']['audit_id'];
             $this->assertFalse(AuditLog::withoutGlobalScopes()->findOrFail($auditId)->meta_json['human_review_completed']);
             $this->assertSame(1, $this->callCommand($file, $sha, true));
+            // MySQL JSON objects reorder keys; recovery must compare exact values and types, not key order.
+            $audit = AuditLog::withoutGlobalScopes()->findOrFail($auditId);
+            $metadata = $audit->meta_json;
+            ksort($metadata['restore_fields']);
+            $goodMetadata = $metadata;
+            $metadata['restore_fields']['working_revision_id'] = (string) $metadata['restore_fields']['working_revision_id'];
+            $audit->forceFill(['meta_json' => $metadata])->saveQuietly();
+            $this->assertSame(1, $this->callCommand($file, $sha, false, $auditId));
+            $audit->forceFill(['meta_json' => $goodMetadata])->saveQuietly();
             $this->assertSame(0, $this->callCommand($file, $sha, false, $auditId));
             $this->assertSame(0, $this->callCommand($file, $sha, true, $auditId));
             $this->assertSame($initial, $s->fresh()->getAttributes());
