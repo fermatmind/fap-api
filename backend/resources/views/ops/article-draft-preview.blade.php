@@ -36,7 +36,8 @@
         .notice { padding: 18px 20px; }
         .notice strong { color: var(--danger); }
         .grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 22px; margin-top: 22px; }
-        .card { padding: 28px; }
+        .card { min-width: 0; padding: 28px; overflow-wrap: anywhere; }
+        .card img { display: block; max-width: 100%; height: auto; }
         .rail { align-self: start; position: sticky; top: 20px; }
         .eyebrow {
             display: inline-flex;
@@ -54,6 +55,7 @@
         .meta, .summary { color: var(--muted); }
         .body { font-size: 18px; }
         .body img { max-width: 100%; border-radius: 18px; }
+        .body table { display: block; max-width: 100%; overflow-x: auto; }
         .media-preview {
             margin: 22px 0;
         }
@@ -82,7 +84,7 @@
         .field span { display: block; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
         .flag-list { margin: 0; padding-left: 18px; color: var(--muted); font: 14px/1.6 ui-sans-serif, system-ui, sans-serif; }
         @media (max-width: 840px) {
-            .grid { grid-template-columns: 1fr; }
+            .grid { grid-template-columns: minmax(0, 1fr); }
             .rail { position: static; }
         }
     </style>
