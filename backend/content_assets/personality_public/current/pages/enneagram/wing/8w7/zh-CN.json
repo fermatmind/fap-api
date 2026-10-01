@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/wings/8w7",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-8",
-          "label": "core_type:type-8",
+          "label": "九型人格8号核心型",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-8"
         },
         {
           "href": "/zh/personality/enneagram/type-7",
-          "label": "core_type:type-7",
+          "label": "九型人格7号核心型",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-7"
         },
         {
           "href": "/zh/personality/enneagram/wings/8w9",
-          "label": "wing:8w9",
+          "label": "8w9翼型",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:8w9"
         }
@@ -186,7 +186,7 @@
         {
           "body_md": "面对相同限制，8w7 可能打开新路线并提高速度，8w9 可能稳住领地等待持久杠杆。比较前必须让授权、时限与风险承担尽量接近。",
           "key": "sibling_core_comparison",
-          "title": "在同一资源上限比较 8w7 与 8w9"
+          "title": "8w7和8w9有什么区别？"
         },
         {
           "body_md": "8w7 不能预测商业成功、体力、勇气或风险承受。翼型研究支持有限，法律、财务、同意与安全约束始终高于类型解释。",
@@ -214,13 +214,13 @@
       ],
       "seo": {
         "description": "8w7 是证据有限的翼型假设：第八型自主与行动动量仍以直接影响为主，第七型可能增加选项、欲求与扩张行动。高速增长或精力旺盛不能证明 8w7；创业激励、危机节奏与销售目标、资源充足、市场波动和岗位授权都可能形成相同表现。",
-        "title": "8w7：以第八型为主、关注动量、选项与扩张行动的翼型假设"
+        "title": "8w7 九型人格：八号核心、七号翼与常见误判"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/8w7",
       "source_hash": "1b0cb25f9f1a69cbc7bd5af1bf417fa905673c8f67d1cf945650447f202ebdba",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "8w7 是证据有限的翼型假设：第八型自主与行动动量仍以直接影响为主，第七型可能增加选项、欲求与扩张行动。高速增长或精力旺盛不能证明 8w7；创业激励、危机节奏与销售目标、资源充足、市场波动和岗位授权都可能形成相同表现。",
+      "summary": "8w7 指以8号为核心、7号为相邻翼影响的传统九型人格描述假设。8w7 是证据有限的翼型假设：第八型自主与行动动量仍以直接影响为主，第七型可能增加选项、欲求与扩张行动。高速增长或精力旺盛不能证明 8w7；创业激励、危机节奏与销售目标、资源充足、市场波动和岗位授权都可能形成相同表现。",
       "title": "8w7：以第八型为主、关注动量、选项与扩张行动的翼型假设"
     },
     "personality_public_content_asset_v2": {
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "b5683a010c34816d795cd2a9d5c9a03809c39767980d61b7a6ae13f588b0341b"
+  "source_content_sha256": "aa8079730bd4516153b09b7c4d7bcdca76f0177efaad351524487500690b7979"
 }

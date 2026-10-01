@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/wings/7w8",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-7",
-          "label": "core_type:type-7",
+          "label": "九型人格7号核心型",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-7"
         },
         {
           "href": "/zh/personality/enneagram/type-8",
-          "label": "core_type:type-8",
+          "label": "九型人格8号核心型",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-8"
         },
         {
           "href": "/zh/personality/enneagram/wings/7w6",
-          "label": "wing:7w6",
+          "label": "7w6翼型",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:7w6"
         }
@@ -186,7 +186,7 @@
         {
           "body_md": "相同障碍下，7w8 可能争取资源控制并迅速推进，7w6 可能召集同伴并保留预案。若两人承担的处罚和权限不同，就不能把差异归因于翼型。",
           "key": "sibling_core_comparison",
-          "title": "在权力相等时比较 7w8 与 7w6"
+          "title": "7w8和7w6有什么区别？"
         },
         {
           "body_md": "7w8 不能证明勇气、能力、攻击性、伦理或领导潜力。翼型支持研究有限，真实同意、制度约束与可追责后果始终高于类型解释。",
@@ -214,13 +214,13 @@
       ],
       "seo": {
         "description": "7w8 是证据有限的翼型假设：第七型可能性与直接推进仍以开放路线为主，第八型可能增加杠杆、自主与果断行动。速度或强势不能证明 7w8；领导职责与所有权、危机授权、谈判训练、资源优势与权力差异都可能形成相似表现。",
-        "title": "7w8：以第七型为主、关注杠杆、自主与直接推进的翼型假设"
+        "title": "7w8 九型人格：七号核心、八号翼与常见误判"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/7w8",
       "source_hash": "dbf70da9f929d26949fdcde8cd81eebfeae9789777809325c22646caf32ff96a",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "7w8 是证据有限的翼型假设：第七型可能性与直接推进仍以开放路线为主，第八型可能增加杠杆、自主与果断行动。速度或强势不能证明 7w8；领导职责与所有权、危机授权、谈判训练、资源优势与权力差异都可能形成相似表现。",
+      "summary": "7w8 指以7号为核心、8号为相邻翼影响的传统九型人格描述假设。7w8 是证据有限的翼型假设：第七型可能性与直接推进仍以开放路线为主，第八型可能增加杠杆、自主与果断行动。速度或强势不能证明 7w8；领导职责与所有权、危机授权、谈判训练、资源优势与权力差异都可能形成相似表现。",
       "title": "7w8：以第七型为主、关注杠杆、自主与直接推进的翼型假设"
     },
     "personality_public_content_asset_v2": {
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "629f6fbc8b6ed6380bd6d835dfa741a9587312f563f8d7b6b3d802a6b1cc64cd"
+  "source_content_sha256": "52e08a7accff334fad9fc85f0fe82752fefde588f085cc7c57f7843b7b537cea"
 }
