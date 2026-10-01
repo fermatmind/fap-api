@@ -391,7 +391,7 @@ final class ArticleSeoService
             'image' => PublicMediaUrlGuard::sanitizeNullableUrl(
                 $seo?->og_image_url ?? $this->resolveArticleImageUrl($article)
             ),
-            'date_published' => $revision?->published_at?->toAtomString() ?? $article->published_at?->toAtomString(),
+            'date_published' => $article->published_at?->toAtomString() ?? $revision?->published_at?->toAtomString(),
             'date_modified' => $revision?->updated_at?->toAtomString() ?? $article->updated_at?->toAtomString(),
             'article_section' => $this->normalizeString($article->category?->name),
             'author_name' => $this->normalizeString($article->author_name),

@@ -23,11 +23,11 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
 
     public static function existingAndStalePairs(): array
     {
-        return [[3, 188, false], [11, 26, false], [4, 191, false], [4, 191, true], [12, 27, true], [13, 29, true], [14, 28, true], [15, 24, true], [16, 25, true], [10, 202, false, true], [40, 41, false, true], [8, 200, false], [46, 47, false], [48, 49, false], [58, 192, false]];
+        return [[3, 188, false], [11, 26, false], [4, 191, false], [4, 191, true], [12, 27, true], [13, 29, true], [14, 28, true], [15, 24, true], [16, 25, true], [10, 202, false, true], [40, 41, false, true], [40, 41, false, true, true], [8, 200, false], [46, 47, false], [48, 49, false], [58, 192, false]];
     }
 
     #[DataProvider('existingAndStalePairs')]
-    public function test_read_fork_restore_preserve_public_projection_and_history(int $sourceId, int $targetId, bool $privateSourceDraft, bool $privateTargetDraft = false): void
+    public function test_read_fork_restore_preserve_public_projection_and_history(int $sourceId, int $targetId, bool $privateSourceDraft, bool $privateTargetDraft = false, bool $independent = false): void
     {
         [$s,$t,$old] = $this->pair($sourceId, $targetId);
         if ($privateSourceDraft) {
@@ -42,8 +42,11 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
         if ($privateTargetDraft) {
             $old = $this->privateWorkingDraft($t, $old);
         }
+        if ($independent) {
+            $old->forceFill(['source_version_hash' => $s->source_version_hash, 'translated_from_version_hash' => $s->source_version_hash])->saveQuietly();
+        }
         $initialCount = ArticleTranslationRevision::count();
-        [$file,$sha] = $this->package($s, $t);
+        [$file,$sha] = $this->package($s, $t, $independent);
         try {
             $source = Locks::sourceHash($s);
             $target = Locks::targetHash($s);
@@ -69,7 +72,14 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
             $this->assertSame((int) $old->id, $new->supersedes_revision_id);
             $this->assertSame('machine_draft', $new->revision_status);
             $this->assertSame($s->source_version_hash, $new->translated_from_version_hash);
-            $this->assertNotSame($old->translated_from_version_hash, $new->translated_from_version_hash);
+            if ($independent) {
+                $this->assertSame($old->translated_from_version_hash, $new->translated_from_version_hash);
+                $this->assertSame('published_english_editorial_adaptation', $new->authority_metadata_json['draft_origin']);
+                $this->assertSame($publishedId, $new->authority_metadata_json['adapted_from_revision_id']);
+                $this->assertSame('pending', $new->authority_metadata_json['source_fidelity_review_state']);
+            } else {
+                $this->assertNotSame($old->translated_from_version_hash, $new->translated_from_version_hash);
+            }
             $this->assertSame('Fresh complete candidate.', $new->content_md);
             $this->assertSame($source, $new->authority_metadata_json['source_snapshot_hash']);
             $this->assertSame($s->publishedRevision->source_version_hash, $new->authority_metadata_json['source_published_version_hash']);
@@ -253,6 +263,60 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
         }
     }
 
+    public function test_independent_candidate_rejects_tag_drift_without_writes(): void
+    {
+        [$source, $target, $public] = $this->pair(40, 41);
+        $old = $this->privateWorkingDraft($target, $public);
+        $old->forceFill(['source_version_hash' => $source->source_version_hash, 'translated_from_version_hash' => $source->source_version_hash])->saveQuietly();
+        foreach ([11, 27, 70, 71, 72] as $tagId) {
+            \Illuminate\Support\Facades\DB::table('article_tag_map')->insert(['org_id' => 0, 'article_id' => 41, 'tag_id' => $tagId]);
+        }
+        [$file, $sha] = $this->package($source, $target, true);
+        try {
+            $this->assertSame(0, $this->callCommand($file, $sha));
+            \Illuminate\Support\Facades\DB::table('article_tag_map')->where('article_id', 41)->where('tag_id', 72)->delete();
+            $before = Locks::targetHash($source);
+            $count = ArticleTranslationRevision::count();
+            $this->assertSame(1, $this->callCommand($file, $sha, $this->execute($sha, 0, 41)));
+            $this->assertContains('published_target_lock_invalid', json_decode(Artisan::output(), true)['errors']);
+            $this->assertSame($before, Locks::targetHash($source));
+            $this->assertSame($count, ArticleTranslationRevision::count());
+            $this->assertSame(0, AuditLog::count());
+        } finally {
+            unlink($file);
+        }
+    }
+
+    public function test_independent_current_source_candidate_refuses_public_title_changes(): void
+    {
+        [$source, $target, $public] = $this->pair(40, 41);
+        $old = $this->privateWorkingDraft($target, $public);
+        $old->forceFill(['source_version_hash' => $source->source_version_hash, 'translated_from_version_hash' => $source->source_version_hash])->saveQuietly();
+        [$file, $sha] = $this->package($source, $target, true);
+        try {
+            $package = json_decode(file_get_contents($file), true);
+            $valid = $package;
+            $package['target_tags_sha256'] = str_repeat('a', 64);
+            file_put_contents($file, json_encode($package));
+            $this->assertSame(1, $this->callCommand($file, hash_file('sha256', $file)));
+            $this->assertContains('published_target_lock_invalid', json_decode(Artisan::output(), true)['errors']);
+            $package = $valid;
+            $package['translation']['title'] = 'Unauthorized changed title';
+            file_put_contents($file, json_encode($package));
+            $before = Locks::targetHash($source);
+            $this->assertSame(1, $this->callCommand($file, hash_file('sha256', $file)));
+            $this->assertSame($before, Locks::targetHash($source));
+            $this->assertSame(0, AuditLog::count());
+            $package['source_id'] = 10;
+            $package['target_id'] = 202;
+            file_put_contents($file, json_encode($package));
+            $this->assertSame(1, $this->callCommand($file, hash_file('sha256', $file)));
+            $this->assertContains('package_invalid', json_decode(Artisan::output(), true)['errors']);
+        } finally {
+            unlink($file);
+        }
+    }
+
     private function privateWorkingDraft(Article $target, ArticleTranslationRevision $public): ArticleTranslationRevision
     {
         $draft = $public->replicate();
@@ -324,7 +388,7 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
         return [$s->fresh(), $t->fresh(), $old->fresh()];
     }
 
-    private function package(Article $s, Article $t): array
+    private function package(Article $s, Article $t, bool $independent = false): array
     {
         $fields = [];
         foreach (['title', 'excerpt', 'content_md', 'seo_title', 'seo_description'] as $k) {
@@ -334,6 +398,14 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
         if ((int) $t->working_revision_id !== (int) $t->published_revision_id) {
             $p['schema'] = 'fermat_existing_article_translation_rebase_v2';
             $p['target_published_revision_id'] = (int) $t->published_revision_id;
+        }
+        if ($independent) {
+            $p['schema'] = 'fermat_existing_article_translation_independent_v3';
+            $p['target_tags_sha256'] = \App\Console\Commands\ArticleForkExistingTranslationDraft::targetTagsHash($t);
+            foreach (['title', 'excerpt', 'seo_title', 'seo_description'] as $field) {
+                $p['translation'][$field] = (string) (in_array($field, ['seo_title', 'seo_description'], true)
+                    ? ($t->publishedRevision->$field ?? $t->seoMeta?->$field) : $t->publishedRevision->$field);
+            }
         }
         $file = tempnam(sys_get_temp_dir(), 'existing-draft-');
         file_put_contents($file, json_encode($p));

@@ -233,7 +233,7 @@ final class ArticlePublishService
                 'content_html' => null,
                 'status' => 'published',
                 'is_public' => true,
-                'published_at' => $publishedAt,
+                'published_at' => $article->published_at ?? $publishedAt,
                 'published_revision_id' => $workingRevisionId,
             ])->save();
 
