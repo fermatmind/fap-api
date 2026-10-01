@@ -23,8 +23,10 @@ final class ImportHelp6PreparedTranslationDraft extends Command
 {
     private const SLUGS = ['help-about', 'help-contact', 'help-faq', 'help-for-business-and-research', 'help-team', 'help-used-and-mentioned'];
 
+    private const SERVICE_SLUGS = ['help-unlock-failure', 'help-payment-refund', 'help-result-recovery', 'help-privacy-data', 'help-use-boundaries', 'help-data-deletion'];
+
     protected $signature = 'translation:import-help6-prepared-draft
-        {--cohort=help6 : help6 or core3 (about/privacy/terms)}
+        {--cohort=help6 : help6, core3 (about/privacy/terms), or help-service}
         {--file= : One English copy package with exact source and target snapshots}
         {--sha256= : Exact SHA256 of package bytes}
         {--restore-audit-id= : Restore only the untouched draft created by this exact import audit}
@@ -40,7 +42,7 @@ final class ImportHelp6PreparedTranslationDraft extends Command
         $execute = (bool) $this->option('execute');
         $restoreId = (int) $this->option('restore-audit-id');
         $errors = [];
-        if (! in_array($this->option('cohort'), ['help6', 'core3'], true)) {
+        if (! in_array($this->option('cohort'), ['help6', 'core3', 'help-service'], true)) {
             $errors[] = 'cohort_invalid';
         }
         $after = null;
@@ -206,7 +208,12 @@ final class ImportHelp6PreparedTranslationDraft extends Command
         $errors = [];
         $group = ContentPage::query()->withoutGlobalScopes()->where('translation_group_id', $source->translation_group_id)->orderBy('id');
         $groupRows = ($lock ? $group->lockForUpdate() : $group)->get();
-        if (! in_array($source->slug, $this->option('cohort') === 'core3' ? ['about', 'privacy', 'terms'] : self::SLUGS, true) || $source->slug !== $target->slug || $source->locale !== 'zh-CN'
+        $allowedSlugs = match ($this->option('cohort')) {
+            'core3' => ['about', 'privacy', 'terms'],
+            'help-service' => self::SERVICE_SLUGS,
+            default => self::SLUGS,
+        };
+        if (! in_array($source->slug, $allowedSlugs, true) || $source->slug !== $target->slug || $source->locale !== 'zh-CN'
             || $source->source_locale !== 'zh-CN' || $source->source_content_id !== null || $source->translation_status !== ContentPage::TRANSLATION_STATUS_SOURCE
             || $source->review_state !== 'approved' || ! $source->passesPublicReadinessGate()
             || $target->locale !== 'en' || $target->source_locale !== 'zh-CN' || (int) $target->source_content_id !== (int) $source->id
@@ -240,22 +247,34 @@ final class ImportHelp6PreparedTranslationDraft extends Command
         $expectedSnapshot = $package['target']['snapshot_hash'];
         if ($restoreId > 0) {
             $meta = $audit?->meta_json;
+            $oldPublishedWorkspace = $this->option('cohort') === 'help-service'
+                && ($meta['old_translation_status'] ?? null) === ContentPage::TRANSLATION_STATUS_PUBLISHED
+                && $expectedWorking === $package['target']['published_revision_id'];
             if (! $audit instanceof AuditLog || $audit->action !== $this->option('cohort').'_prepared_translation_draft_imported' || $audit->result !== 'success'
                 || $audit->target_type !== 'content_page' || $audit->target_id !== (string) $target->id || ! is_array($meta)
                 || ($meta['package_sha256'] ?? null) !== $this->option('sha256') || ($meta['old_working_revision_id'] ?? null) !== $expectedWorking
                 || ($meta['source_snapshot_hash'] ?? null) !== $package['source']['snapshot_hash'] || ($meta['published_revision_id'] ?? null) !== $package['target']['published_revision_id']
-                || ($meta['old_translation_status'] ?? null) !== ContentPage::TRANSLATION_STATUS_DRAFT
+                || (($meta['old_translation_status'] ?? null) !== ContentPage::TRANSLATION_STATUS_DRAFT && ! $oldPublishedWorkspace)
                 || ! $revisions->get($expectedWorking) instanceof CmsTranslationRevision) {
                 throw new RuntimeException('restore_audit_invalid');
             }
             $expectedWorking = (int) $meta['new_revision_id'];
             $expectedSnapshot = (string) $meta['target_snapshot_hash_after'];
         }
+        $privateDraft = $working instanceof CmsTranslationRevision && $published instanceof CmsTranslationRevision
+            && $target->translation_status === ContentPage::TRANSLATION_STATUS_DRAFT
+            && $working->id !== $published->id && $working->revision_status === CmsTranslationRevision::STATUS_DRAFT
+            && $working->published_at === null && $working->reviewed_at === null && $working->approved_at === null;
+        // A reviewed legacy service page may have no private workspace yet.
+        // Fork it; retain its published revision and row provenance unchanged.
+        $sharedPublished = $this->option('cohort') === 'help-service' && $restoreId === 0
+            && $working instanceof CmsTranslationRevision && $published instanceof CmsTranslationRevision
+            && $working->id === $published->id && $target->translation_status === ContentPage::TRANSLATION_STATUS_PUBLISHED
+            && $working->revision_status === CmsTranslationRevision::STATUS_PUBLISHED && $working->published_at !== null;
         if (! hash_equals($expectedSnapshot, ContentPageSourceTargetSnapshot::hash($target, $lock))
             || (int) $target->working_revision_id !== $expectedWorking || (int) $target->published_revision_id !== $package['target']['published_revision_id']
-            || $target->translation_status !== ContentPage::TRANSLATION_STATUS_DRAFT
-            || ! $working instanceof CmsTranslationRevision || ! $published instanceof CmsTranslationRevision || $working->id === $published->id
-            || $working->revision_status !== CmsTranslationRevision::STATUS_DRAFT || $working->published_at !== null || $working->reviewed_at !== null || $working->approved_at !== null
+            || (! $privateDraft && ! $sharedPublished)
+            || ! $working instanceof CmsTranslationRevision || ! $published instanceof CmsTranslationRevision
             || $working->locale !== 'en' || (int) $working->source_content_id !== (int) $source->id || $working->translation_group_id !== $source->translation_group_id
             || $published->locale !== 'en' || $published->revision_status !== CmsTranslationRevision::STATUS_PUBLISHED || $published->published_at === null) {
             $errors[] = 'target_revision_lock_mismatch';
@@ -277,7 +296,11 @@ final class ImportHelp6PreparedTranslationDraft extends Command
 
     private function cohortLabel(): string
     {
-        return $this->option('cohort') === 'core3' ? 'Core3' : 'Help6';
+        return match ($this->option('cohort')) {
+            'core3' => 'Core3',
+            'help-service' => 'HelpService',
+            default => 'Help6',
+        };
     }
 
     private function keys(array $value, array $expected): bool

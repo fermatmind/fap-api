@@ -251,6 +251,99 @@ final class ImportHelp6PreparedTranslationDraftTest extends TestCase
         }
     }
 
+    public static function serviceSlugs(): array
+    {
+        return array_map(fn (string $slug): array => [$slug], [
+            'help-unlock-failure', 'help-payment-refund', 'help-result-recovery',
+            'help-privacy-data', 'help-use-boundaries', 'help-data-deletion',
+        ]);
+    }
+
+    #[DataProvider('serviceSlugs')]
+    public function test_service_shared_published_revision_forks_privately_and_restores(string $slug): void
+    {
+        [$source, $target, $published] = $this->pair($slug);
+        $target->forceFill(['working_revision_id' => $published->id, 'translation_status' => 'published'])->saveQuietly();
+        [$file, $sha, $confirm] = $this->package($source, $target, 'help-service');
+        try {
+            $rowBefore = $target->getAttributes();
+            $sourceBefore = ContentPageSourceTargetSnapshot::hash($source);
+            $publishedBefore = $published->getAttributes();
+            $count = CmsTranslationRevision::count();
+            $this->assertSame(1, $this->runCommand($file, $sha));
+            $this->assertSame(0, $this->runCommand($file, $sha, ['--cohort' => 'help-service']));
+            $this->assertSame(0, $this->runCommand($file, $sha, ['--cohort' => 'help-service']));
+            $this->assertSame($count, CmsTranslationRevision::count());
+            $this->assertSame(0, AuditLog::count());
+            $this->assertSame(0, $this->runCommand($file, $sha, ['--cohort' => 'help-service', '--execute' => true, '--confirm' => $confirm]));
+            $result = json_decode(Artisan::output(), true);
+            $new = CmsTranslationRevision::findOrFail($result['after']['new_revision_id']);
+            $auditId = $result['after']['audit_id'];
+            $this->assertSame($count + 1, CmsTranslationRevision::count());
+            $this->assertSame((int) $published->id, (int) $new->supersedes_revision_id);
+            $this->assertSame($source->source_version_hash, $new->translated_from_version_hash);
+            $this->assertSame('draft', $new->revision_status);
+            $this->assertNull($new->reviewed_at);
+            $this->assertNull($new->approved_at);
+            $this->assertNull($new->published_at);
+            $this->assertFalse(AuditLog::findOrFail($auditId)->meta_json['human_review_completed']);
+            $rowAfter = $target->fresh()->getAttributes();
+            foreach (['working_revision_id', 'translation_status', 'updated_at'] as $key) {
+                unset($rowBefore[$key], $rowAfter[$key]);
+            }
+            $this->assertSame($rowBefore, $rowAfter);
+            $this->assertSame($publishedBefore, $published->fresh()->getAttributes());
+            $this->assertSame($sourceBefore, ContentPageSourceTargetSnapshot::hash($source->fresh()));
+            $this->assertSame(1, $this->runCommand($file, $sha, ['--cohort' => 'help-service', '--execute' => true, '--confirm' => $confirm]));
+            $this->assertSame($count + 1, CmsTranslationRevision::count());
+            $this->assertSame(0, $this->runCommand($file, $sha, ['--cohort' => 'help-service', '--restore-audit-id' => $auditId,
+                '--execute' => true, '--confirm' => sprintf('Restore HelpService target %d with package %s and audit %d.', $target->id, $sha, $auditId)]));
+            $this->assertSame((int) $published->id, (int) $target->fresh()->working_revision_id);
+            $this->assertSame('published', $target->fresh()->translation_status);
+            $this->assertSame('archived', $new->fresh()->revision_status);
+            $this->assertSame($publishedBefore, $published->fresh()->getAttributes());
+            $this->assertSame($sourceBefore, ContentPageSourceTargetSnapshot::hash($source->fresh()));
+        } finally {
+            unlink($file);
+        }
+    }
+
+    public function test_service_shared_pointer_still_rejects_unsafe_source(): void
+    {
+        [$source, $target, $published] = $this->pair('help-use-boundaries');
+        $target->forceFill(['working_revision_id' => $published->id, 'translation_status' => 'published'])->saveQuietly();
+        $source->forceFill(['page_type' => 'boundary', 'publish_allowed' => false])->saveQuietly();
+        [$file, $sha, $confirm] = $this->package($source, $target, 'help-service');
+        try {
+            $before = ContentPageSourceTargetSnapshot::hash($target);
+            $count = CmsTranslationRevision::count();
+            $this->assertSame(1, $this->runCommand($file, $sha, ['--cohort' => 'help-service', '--execute' => true, '--confirm' => $confirm]));
+            $this->assertContains('identity_or_publication_invalid', json_decode(Artisan::output(), true)['errors']);
+            $this->assertSame($before, ContentPageSourceTargetSnapshot::hash($target->fresh()));
+            $this->assertSame($count, CmsTranslationRevision::count());
+            $this->assertSame(0, AuditLog::count());
+        } finally {
+            unlink($file);
+        }
+    }
+
+    public function test_service_cohort_rejects_an_otherwise_valid_non_service_pair(): void
+    {
+        [$source, $target] = $this->pair('help-about');
+        [$file, $sha] = $this->package($source, $target, 'help-service');
+        try {
+            $before = ContentPageSourceTargetSnapshot::hash($target);
+            $count = CmsTranslationRevision::count();
+            $this->assertSame(1, $this->runCommand($file, $sha, ['--cohort' => 'help-service']));
+            $this->assertSame(['identity_or_publication_invalid'], json_decode(Artisan::output(), true)['errors']);
+            $this->assertSame($before, ContentPageSourceTargetSnapshot::hash($target->fresh()));
+            $this->assertSame($count, CmsTranslationRevision::count());
+            $this->assertSame(0, AuditLog::count());
+        } finally {
+            unlink($file);
+        }
+    }
+
     private function runCommand(string $file, string $sha, array $options = []): int
     {
         $args = ['--file' => $file, '--sha256' => $sha, '--json' => true] + $options;
@@ -273,7 +366,11 @@ final class ImportHelp6PreparedTranslationDraftTest extends TestCase
         file_put_contents($file, json_encode($package, JSON_THROW_ON_ERROR));
         $sha = hash_file('sha256', $file);
 
-        return [$file, $sha, sprintf('Import %s target %d with package %s.', $cohort === 'core3' ? 'Core3' : 'Help6', $target->id, $sha)];
+        $label = match ($cohort) {
+            'core3' => 'Core3', 'help-service' => 'HelpService', default => 'Help6'
+        };
+
+        return [$file, $sha, sprintf('Import %s target %d with package %s.', $label, $target->id, $sha)];
     }
 
     private function pair(string $slug = 'help-about'): array
