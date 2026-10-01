@@ -82,6 +82,13 @@ final class ArticleForkExistingTranslationDraft extends Command
                                 'draft_origin' => 'operator_supplied_ai_draft', 'editorial_review_state' => 'pending',
                                 'package_sha256' => (string) $this->option('sha256'),
                                 'source_published_revision_id' => $p['source_published_revision_id'],
+                                ...$p['schema'] === 'fermat_existing_article_translation_independent_v3' ? [
+                                    'draft_origin' => 'published_english_editorial_adaptation',
+                                    'adapted_from_revision_id' => $p['target_published_revision_id'],
+                                    'adapted_from_content_sha256' => hash('sha256', (string) $target->publishedRevision->content_md),
+                                    'target_tags_sha256' => $p['target_tags_sha256'],
+                                    'source_fidelity_review_state' => 'pending',
+                                ] : [],
                                 'source_fields_sha256' => $p['source_fields_sha256'],
                                 'source_snapshot_hash' => $p['source_snapshot_hash'],
                                 'source_published_version_hash' => $source->publishedRevision->source_version_hash,
@@ -89,6 +96,9 @@ final class ArticleForkExistingTranslationDraft extends Command
                             ],
                         ]);
                         $target->forceFill(['working_revision_id' => $new->id])->saveQuietly();
+                    }
+                    if (isset($p['target_tags_sha256']) && ! hash_equals($p['target_tags_sha256'], self::targetTagsHash($target, true))) {
+                        throw new RuntimeException('published_target_lock_invalid');
                     }
                     $target->refresh();
                     $new->refresh();
@@ -157,14 +167,19 @@ final class ArticleForkExistingTranslationDraft extends Command
         sort($keys);
         $expected = ['schema', 'source_id', 'target_id', 'working_revision_id', 'source_published_revision_id',
             'source_snapshot_hash', 'target_snapshot_hash', 'source_fields_sha256', 'translation'];
-        $rebase = ($p['schema'] ?? null) === 'fermat_existing_article_translation_rebase_v2';
+        $independent = ($p['schema'] ?? null) === 'fermat_existing_article_translation_independent_v3';
+        $rebase = ($p['schema'] ?? null) === 'fermat_existing_article_translation_rebase_v2' || $independent;
+        if ($independent) {
+            $expected[] = 'target_tags_sha256';
+        }
         if ($rebase) {
             $expected[] = 'target_published_revision_id';
         }
         sort($expected);
         if ($keys !== $expected || (! $rebase && $p['schema'] !== 'fermat_existing_article_translation_draft_v1')
             || ! is_int($p['source_id']) || ! is_int($p['target_id'])
-            || (($rebase ? self::REBASE_PAIRS : self::PAIRS)[$p['source_id']] ?? null) !== $p['target_id']) {
+            || (($rebase ? self::REBASE_PAIRS : self::PAIRS)[$p['source_id']] ?? null) !== $p['target_id']
+            || ($independent && ($p['source_id'] !== 40 || $p['target_id'] !== 41))) {
             throw new RuntimeException('package_invalid');
         }
         foreach ($rebase ? ['working_revision_id', 'source_published_revision_id', 'target_published_revision_id'] : ['working_revision_id', 'source_published_revision_id'] as $key) {
@@ -172,7 +187,7 @@ final class ArticleForkExistingTranslationDraft extends Command
                 throw new RuntimeException('package_invalid');
             }
         }
-        foreach (['source_snapshot_hash', 'target_snapshot_hash'] as $key) {
+        foreach ($independent ? ['source_snapshot_hash', 'target_snapshot_hash', 'target_tags_sha256'] : ['source_snapshot_hash', 'target_snapshot_hash'] as $key) {
             if (! is_string($p[$key]) || ! preg_match('/^[a-f0-9]{64}$/', $p[$key])) {
                 throw new RuntimeException('package_invalid');
             }
@@ -197,6 +212,19 @@ final class ArticleForkExistingTranslationDraft extends Command
         }
 
         return $p;
+    }
+
+    public static function targetTagsHash(Article $target, bool $lock = false): string
+    {
+        $query = DB::table('article_tag_map')->where('article_id', $target->id)->orderBy('org_id')->orderBy('tag_id');
+        $rows = ($lock ? $query->lockForUpdate() : $query)->get()->map(function ($row): array {
+            $attributes = (array) $row;
+            ksort($attributes);
+
+            return $attributes;
+        })->all();
+
+        return hash('sha256', json_encode($rows, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     }
 
     private function snapshot(array $p, int $restore, bool $lock): array
@@ -280,8 +308,24 @@ final class ArticleForkExistingTranslationDraft extends Command
                 || $previous->approved_at !== null || $previous->published_at !== null
                 || ($previous->authority_metadata_json['editorial_review_state'] ?? null) !== 'pending'
                 || ! filled($previous->translated_from_version_hash)
-                || hash_equals((string) $previous->translated_from_version_hash, (string) $s->source_version_hash)) {
+                || (($p['schema'] === 'fermat_existing_article_translation_independent_v3')
+                    ? (! hash_equals((string) $previous->translated_from_version_hash, (string) $s->source_version_hash)
+                        || ! hash_equals((string) $previous->source_version_hash, (string) $s->source_version_hash))
+                    : hash_equals((string) $previous->translated_from_version_hash, (string) $s->source_version_hash))) {
                 throw new RuntimeException('draft_invalid');
+            }
+        }
+
+        if ($p['schema'] === 'fermat_existing_article_translation_independent_v3') {
+            if (! hash_equals($p['target_tags_sha256'], self::targetTagsHash($t, $lock))) {
+                throw new RuntimeException('published_target_lock_invalid');
+            }
+            foreach (['title', 'excerpt', 'seo_title', 'seo_description'] as $field) {
+                $value = in_array($field, ['seo_title', 'seo_description'], true)
+                    ? ($public->$field ?? $t->seoMeta?->$field) : $public->$field;
+                if ($p['translation'][$field] !== (string) $value) {
+                    throw new RuntimeException('published_target_lock_invalid');
+                }
             }
         }
 

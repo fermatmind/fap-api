@@ -128,6 +128,7 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
         Http::fake();
 
         $article = $this->createExistingArticleWithWorkingRevision();
+        $firstPublishedAt = $article->published_at->toISOString();
         $previousPublishedRevisionId = (int) $article->published_revision_id;
         $workingRevisionId = (int) $article->working_revision_id;
 
@@ -154,6 +155,15 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
             ->with(['workingRevision', 'publishedRevision', 'seoMeta'])
             ->findOrFail((int) $article->id);
 
+        $this->assertSame($firstPublishedAt, $article->published_at->toISOString());
+        $this->assertNotSame($firstPublishedAt, $article->publishedRevision->published_at->toISOString());
+        $jsonLd = app(\App\Services\Cms\ArticleSeoService::class)->generateJsonLd($article, $article->publishedRevision);
+        $this->assertSame($article->published_at->toAtomString(), $jsonLd['datePublished']);
+        $this->assertSame($article->publishedRevision->updated_at->toAtomString(), $jsonLd['dateModified']);
+        $this->getJson('/api/v0.5/articles/'.self::SLUG.'?org_id=0&locale=zh-CN')
+            ->assertOk()->assertJsonPath('article.published_at', $firstPublishedAt);
+        $this->getJson('/api/v0.5/articles?org_id=0&locale=zh-CN')
+            ->assertOk()->assertJsonPath('items.0.published_at', $firstPublishedAt);
         $this->assertSame(self::SLUG, (string) $article->slug);
         $this->assertSame(self::TRANSLATION_GROUP_ID, (string) $article->translation_group_id);
         $this->assertSame('published', (string) $article->status);
