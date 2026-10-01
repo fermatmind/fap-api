@@ -203,12 +203,18 @@ final class ArticleStageSourceCorrection extends Command
             $query = AuditLog::withoutGlobalScopes()->whereKey($restore);
             $audit = ($lock ? $query->lockForUpdate() : $query)->first();
             $m = $audit?->meta_json ?? [];
+            $restoreFields = $m['restore_fields'] ?? null;
+            $expectedRestoreFields = ['working_revision_id' => $p['published_revision_id'],
+                'source_version_hash' => $p['original_source_version_hash'], 'updated_at' => $p['source_updated_at']];
+            if (is_array($restoreFields)) {
+                ksort($restoreFields);
+            }
+            ksort($expectedRestoreFields);
             if (! $audit instanceof AuditLog || (int) $audit->org_id !== 0 || $audit->action !== 'article_source_correction_staged' || $audit->result !== 'success'
                 || $audit->target_type !== 'article' || (string) $audit->target_id !== (string) $s->id
                 || ($m['package_sha256'] ?? null) !== $this->option('sha256') || ($m['source_hash_after'] ?? null) !== $hash
                 || ($m['target_hash'] ?? null) !== $p['target_snapshot_hash'] || ($m['new_revision_id'] ?? null) !== (int) $s->working_revision_id
-                || ($m['restore_fields'] ?? null) !== ['working_revision_id' => $p['published_revision_id'],
-                    'source_version_hash' => $p['original_source_version_hash'], 'updated_at' => $p['source_updated_at']]) {
+                || $restoreFields !== $expectedRestoreFields) {
                 throw new RuntimeException('restore_drift');
             }
             $this->assertDraft($s->workingRevision, $p);
