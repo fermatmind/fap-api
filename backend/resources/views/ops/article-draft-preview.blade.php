@@ -56,6 +56,7 @@
         .body { font-size: 18px; }
         .body img { max-width: 100%; border-radius: 18px; }
         .body table { display: block; max-width: 100%; overflow-x: auto; }
+        .body table tbody { display: table; width: 100%; min-width: 640px; }
         .media-preview {
             margin: 22px 0;
         }
