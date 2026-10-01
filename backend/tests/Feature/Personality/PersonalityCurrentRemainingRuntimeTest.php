@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class PersonalityCurrentRemainingRuntimeTest extends TestCase
 {
-    private const AGGREGATE = '96b511e953dc57f49a1c4d172df98fc09af947ca76721d9a8b14eedf1a1aee6b';
+    private const AGGREGATE = '9b3f606faeab41bd95ede3a53f8ba085020cbe4b312bf9cb80d91130914b0a76';
 
     #[DataProvider('detailCases')]
     public function test_public_detail_is_served_from_its_per_page_authority(string $url, string $file): void
@@ -37,6 +37,20 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
         yield 'ISFP English profile' => [
             '/api/v0.5/personality/isfp?locale=en&org_id=0&scale_code=MBTI',
             'content_assets/personality_public/current/pages/mbti/profile/isfp/en.json',
+        ];
+        foreach (['isfp', 'esfp'] as $type) {
+            yield "{$type} Chinese profile" => [
+                "/api/v0.5/personality/{$type}?locale=zh-CN&org_id=0&scale_code=MBTI",
+                "content_assets/personality_public/current/pages/mbti/profile/{$type}/zh-CN.json",
+            ];
+        }
+        yield 'INFJ English A/T comparison' => [
+            '/api/v0.5/personality/comparisons/infj-a-vs-infj-t?locale=en&org_id=0&scale_code=MBTI',
+            'content_assets/personality_public/current/pages/mbti/comparison-at/infj-a-vs-infj-t/en.json',
+        ];
+        yield 'Enneagram Type 1 English' => [
+            '/api/v0.5/personality-content-assets/enneagram/core_type/type-1?locale=en&org_id=0',
+            'content_assets/personality_public/current/pages/enneagram/core-type/type-1/en.json',
         ];
         yield 'MBTI variant' => [
             '/api/v0.5/personality/intj-a?locale=en&org_id=0&scale_code=MBTI',

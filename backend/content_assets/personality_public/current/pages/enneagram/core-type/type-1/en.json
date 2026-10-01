@@ -53,6 +53,13 @@
               "riso_hudson_1999_wisdom",
               "hook_2021_systematic_review"
             ]
+          },
+          {
+            "claim_id": "claim.nickname.practitioner_label",
+            "limitation": "Practitioner naming only; not independent psychometric validation or an MBTI identity.",
+            "source_ids": [
+              "enneagram_institute_type_one"
+            ]
           }
         ],
         "limitations": [
@@ -103,6 +110,20 @@
             "source_type": "peer_reviewed_research",
             "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
             "year": 2013
+          },
+          {
+            "accessed_at": "2026-10-02",
+            "author_or_organization": "The Enneagram Institute",
+            "claim_ids": [
+              "claim.nickname.practitioner_label"
+            ],
+            "doi": null,
+            "id": "enneagram_institute_type_one",
+            "limitation": "Practitioner naming only; not independent psychometric validation or an MBTI identity.",
+            "public_url": "https://www.enneagraminstitute.com/type-1/",
+            "source_type": "other_public_source",
+            "title": "Enneagram Type 1: The Reformer",
+            "year": 2026
           }
         ]
       },
@@ -210,7 +231,7 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "A Type One motivation hypothesis asks whether attention repeatedly returns to what should be corrected, made consistent, or completed responsibly. The visible behavior alone cannot reveal motive: the same careful edit may reflect fear of penalties, professional training, kindness to a reader, or a temporary deadline.",
+          "body_md": "A Type One motivation hypothesis asks whether attention repeatedly returns to what should be corrected, made consistent, or completed responsibly. The visible behavior alone cannot reveal motive: the same careful edit may reflect fear of penalties, professional training, kindness to a reader, or a temporary deadline.\n\nIn Enneagram writing, Type 1 is often called “The Reformer”. This is an Enneagram nickname, not an MBTI type. See [Enneagram Institute Type One](https://www.enneagraminstitute.com/type-1/) for this practitioner nickname.",
           "key": "motivation_attention",
           "title": "Track attention before inferring motive"
         },
@@ -265,13 +286,13 @@
       ],
       "seo": {
         "description": "Enneagram Type One is a traditional, evidence-limited hypothesis about attention returning to standards, discrepancies, and responsible correction. Compare what a person notices and actually revises across different roles; conscientious behavior alone does not confirm a fixed type.",
-        "title": "Enneagram Type 1: Standards, Responsibility, and Correction"
+        "title": "Enneagram Type 1 (The Reformer): Standards and Responsibility"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/type-1",
       "source_hash": "0a1117425efe7ae94c36ab2ca81a160d754a7d1b095012b6a16361e02e1162e1",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Enneagram Type One is a traditional, evidence-limited hypothesis about attention returning to standards, discrepancies, and responsible correction. Compare what a person notices and actually revises across different roles; conscientious behavior alone does not confirm a fixed type.",
+      "summary": "Enneagram Type One is a traditional, evidence-limited hypothesis about attention returning to standards, discrepancies, and responsible correction. Compare what a person notices and actually revises across different roles; conscientious behavior alone does not confirm a fixed type. In Enneagram writing, Type 1 is often called “The Reformer”. This is an Enneagram nickname, not an MBTI type.",
       "title": "Enneagram Type 1: Standards, Responsibility, and Correction"
     },
     "personality_public_content_asset_v2": {
@@ -369,5 +390,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "a44571aef3276e8aa1547730f9bcb77c1c9ba201ea4d8ca09cca35087beb5601"
+  "source_content_sha256": "074720ff3542df17563f3492785547929422e5f86f8f947649342c09b26118ea"
 }

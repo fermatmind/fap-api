@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 final class PersonalityCurrentSeoRuntimeTest extends TestCase
 {
-    private const AGGREGATE = '96b511e953dc57f49a1c4d172df98fc09af947ca76721d9a8b14eedf1a1aee6b';
+    private const AGGREGATE = '9b3f606faeab41bd95ede3a53f8ba085020cbe4b312bf9cb80d91130914b0a76';
 
     #[DataProvider('mbtiIdentityProvider')]
     public function test_all_mbti_seo_endpoints_project_their_per_page_authority(

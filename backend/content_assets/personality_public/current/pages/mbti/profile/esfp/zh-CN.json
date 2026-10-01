@@ -25,7 +25,7 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "fcb1a680d567387126c31f0cf8ed8aa80d43592e",
+      "answer_fingerprint": "34a6ea7ef9a1338cf30b7f7b3722f556a83b39ba",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
@@ -233,7 +233,7 @@
           "title": "人格概览"
         },
         {
-          "body_md": "ESFP 往往在需要现场感、快速反馈、人际互动和灵活执行的任务中更易投入。职业匹配仍取决于技能、经验、行业条件与具体岗位，建议先用真实项目验证。",
+          "body_md": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据ESFP类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
           "is_enabled": true,
           "key": "career.summary",
           "payload": [],
@@ -243,49 +243,11 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "career.preferred_roles",
           "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "brand-manager",
-                "title": "品牌经理"
-              },
-              {
-                "slug": "nurse",
-                "title": "护士"
-              },
-              {
-                "slug": "supply-chain-manager",
-                "title": "供应链经理"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "cloud-architect",
-                "title": "活动运营"
-              },
-              {
-                "slug": "hr-business-partner",
-                "title": "客户体验"
-              },
-              {
-                "slug": "management-consultant",
-                "title": "现场协调"
-              },
-              {
-                "slug": "business-analyst",
-                "title": "商业分析师"
-              },
-              {
-                "slug": "brand-manager",
-                "title": "品牌经理"
-              },
-              {
-                "slug": "nurse",
-                "title": "护士"
-              }
-            ],
+            "avoid_jobs": [],
+            "recommended_jobs": [],
             "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
           },
           "render": "preferred_role_list",
@@ -303,23 +265,10 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "growth.strengths",
           "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "战略性模式识别"
-              },
-              {
-                "body": null,
-                "title": "在约束下保持执行稳定"
-              },
-              {
-                "body": null,
-                "title": "对关键目标具备持续投入能力"
-              }
-            ]
+            "items": []
           },
           "render": "bullets",
           "source": "base",
@@ -371,7 +320,7 @@
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "ESFP 通常偏好从现实体验和即时互动中获取信息，以个人价值判断影响，并保留灵活调整空间。它描述的是偏好组合，不代表能力、职业或人生结果。",
+        "summary": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据ESFP类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
         "tagline": "表演者",
         "title": "ESFP - 表演者"
       },
@@ -424,7 +373,7 @@
           "title": "人格概览"
         },
         {
-          "body_md": "ESFP 往往在需要现场感、快速反馈、人际互动和灵活执行的任务中更易投入。职业匹配仍取决于技能、经验、行业条件与具体岗位，建议先用真实项目验证。",
+          "body_md": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据ESFP类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
           "is_enabled": true,
           "key": "career.summary",
           "payload": [],
@@ -434,49 +383,11 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "career.preferred_roles",
           "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "brand-manager",
-                "title": "品牌经理"
-              },
-              {
-                "slug": "nurse",
-                "title": "护士"
-              },
-              {
-                "slug": "supply-chain-manager",
-                "title": "供应链经理"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "cloud-architect",
-                "title": "活动运营"
-              },
-              {
-                "slug": "hr-business-partner",
-                "title": "客户体验"
-              },
-              {
-                "slug": "management-consultant",
-                "title": "现场协调"
-              },
-              {
-                "slug": "business-analyst",
-                "title": "商业分析师"
-              },
-              {
-                "slug": "brand-manager",
-                "title": "品牌经理"
-              },
-              {
-                "slug": "nurse",
-                "title": "护士"
-              }
-            ],
+            "avoid_jobs": [],
+            "recommended_jobs": [],
             "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
           },
           "render": "preferred_role_list",
@@ -494,23 +405,10 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "growth.strengths",
           "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "战略性模式识别"
-              },
-              {
-                "body": null,
-                "title": "在约束下保持执行稳定"
-              },
-              {
-                "body": null,
-                "title": "对关键目标具备持续投入能力"
-              }
-            ]
+            "items": []
           },
           "render": "bullets",
           "source": "base",
@@ -562,7 +460,7 @@
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "ESFP 通常偏好从现实体验和即时互动中获取信息，以个人价值判断影响，并保留灵活调整空间。它描述的是偏好组合，不代表能力、职业或人生结果。",
+        "summary": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据ESFP类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
         "tagline": "表演者",
         "title": "ESFP - 表演者"
       },
@@ -603,7 +501,7 @@
       },
       {
         "body_html": null,
-        "body_md": "ESFP 往往在需要现场感、快速反馈、人际互动和灵活执行的任务中更易投入。职业匹配仍取决于技能、经验、行业条件与具体岗位，建议先用真实项目验证。",
+        "body_md": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据ESFP类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
@@ -614,48 +512,10 @@
       {
         "body_html": null,
         "body_md": null,
-        "is_enabled": true,
+        "is_enabled": false,
         "payload_json": {
-          "avoid_jobs": [
-            {
-              "slug": "brand-manager",
-              "title": "品牌经理"
-            },
-            {
-              "slug": "nurse",
-              "title": "护士"
-            },
-            {
-              "slug": "supply-chain-manager",
-              "title": "供应链经理"
-            }
-          ],
-          "recommended_jobs": [
-            {
-              "slug": "cloud-architect",
-              "title": "活动运营"
-            },
-            {
-              "slug": "hr-business-partner",
-              "title": "客户体验"
-            },
-            {
-              "slug": "management-consultant",
-              "title": "现场协调"
-            },
-            {
-              "slug": "business-analyst",
-              "title": "商业分析师"
-            },
-            {
-              "slug": "brand-manager",
-              "title": "品牌经理"
-            },
-            {
-              "slug": "nurse",
-              "title": "护士"
-            }
-          ],
+          "avoid_jobs": [],
+          "recommended_jobs": [],
           "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
         },
         "render_variant": "preferred_role_list",
@@ -676,22 +536,9 @@
       {
         "body_html": null,
         "body_md": null,
-        "is_enabled": true,
+        "is_enabled": false,
         "payload_json": {
-          "items": [
-            {
-              "body": null,
-              "title": "战略性模式识别"
-            },
-            {
-              "body": null,
-              "title": "在约束下保持执行稳定"
-            },
-            {
-              "body": null,
-              "title": "对关键目标具备持续投入能力"
-            }
-          ]
+          "items": []
         },
         "render_variant": "bullets",
         "section_key": "growth.strengths",
@@ -984,5 +831,5 @@
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "6bb0930eacb3717306abaf6a1064f6d3c34da63c0440bbd21aca1e672369f6cd"
+  "source_content_sha256": "0d4321621dd6be39ca155f3ee8a31fd1fe740f618f57221a1fb2fec628bd5158"
 }
