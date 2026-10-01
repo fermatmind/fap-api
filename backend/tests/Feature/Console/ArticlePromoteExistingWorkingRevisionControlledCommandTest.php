@@ -121,6 +121,37 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
         }
     }
 
+    public function test_independent_promotion_rejects_tag_drift_and_rolls_back_transaction(): void
+    {
+        $article = $this->createExistingArticleWithWorkingRevision();
+        $tagsHash = \App\Support\ArticleSourceTargetSnapshot::tagsHash($article);
+        $revision = $article->workingRevision;
+        $revision->forceFill(['authority_metadata_json' => [
+            ...($revision->authority_metadata_json ?? []),
+            'draft_origin' => 'published_english_editorial_adaptation',
+            'target_tags_sha256' => $tagsHash,
+        ]])->saveQuietly();
+        $before = $article->getAttributes();
+        try {
+            app(ArticlePublishService::class)->promoteExistingWorkingRevision(
+                (int) $article->id, (int) $revision->id, (int) $article->published_revision_id,
+                dispatchFollowUp: false,
+                transactionGuard: function (Article $lockedArticle): void {
+                    \Illuminate\Support\Facades\DB::table('article_tag_map')->where('article_id', $lockedArticle->id)->delete();
+                },
+            );
+            $this->fail('tag drift must reject promotion');
+        } catch (RuntimeException $exception) {
+            $this->assertSame('independent_candidate_tags_drift', $exception->getMessage());
+        }
+        $this->assertSame($before, $article->fresh()->getAttributes());
+        $this->assertSame($tagsHash, \App\Support\ArticleSourceTargetSnapshot::tagsHash($article));
+        $this->assertSame('approved', $revision->fresh()->revision_status);
+        $revision->forceFill(['authority_metadata_json' => [...($revision->authority_metadata_json ?? []), 'target_tags_sha256' => str_repeat('a', 64)]])->saveQuietly();
+        $this->assertSame(1, Artisan::call('articles:promote-existing-working-revision', $this->commandOptions($article, ['--dry-run' => true, '--json' => true])));
+        $this->assertErrorCode($this->jsonOutput(), 'independent_candidate_tags_drift');
+    }
+
     public function test_execute_promotes_existing_article_working_revision_and_preserves_route_state(): void
     {
         config()->set('ops.content_release_observability.cache_invalidation_urls', ['https://cache.example.test/revalidate']);

@@ -7,10 +7,24 @@ namespace App\Support;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
 final class ArticleSourceTargetSnapshot
 {
+    public static function tagsHash(Article $target, bool $lock = false): string
+    {
+        $query = DB::table('article_tag_map')->where('article_id', $target->id)->orderBy('org_id')->orderBy('tag_id');
+        $rows = ($lock ? $query->lockForUpdate() : $query)->get()->map(function ($row): array {
+            $attributes = (array) $row;
+            ksort($attributes);
+
+            return $attributes;
+        })->all();
+
+        return hash('sha256', json_encode($rows, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    }
+
     /** @param list<int> $excludedIds
      * @return list<array{revision_id:int,sha256:string}>
      */

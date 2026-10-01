@@ -1283,6 +1283,12 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
             }
         }
 
+        try {
+            app(ArticlePublishService::class)->assertIndependentCandidateTags($article, $workingRevision);
+        } catch (RuntimeException $exception) {
+            $errors[] = $this->issue('tags', 'independent_candidate_tags_drift', $exception->getMessage());
+        }
+
         $editorialCompleteness = $this->editorialCompleteness($article, $workingRevision);
         foreach ((array) $editorialCompleteness['issues'] as $issue) {
             if (is_array($issue)) {
