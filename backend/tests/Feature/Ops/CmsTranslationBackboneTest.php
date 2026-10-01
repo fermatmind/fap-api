@@ -1064,6 +1064,17 @@ final class CmsTranslationBackboneTest extends TestCase
 
             $this->assertSame('published', (string) $published->translation_status);
             $this->assertSame((int) $source->id, (int) $published->source_content_id);
+            $revisionCount = CmsTranslationRevision::query()->count();
+            $auditCount = AuditLog::query()->count();
+            $dashboard = app(CmsTranslationOpsService::class)->dashboard(['content_type' => $contentType]);
+            $this->assertSame($dashboard, app(CmsTranslationOpsService::class)->dashboard(['content_type' => $contentType]));
+            $locale = collect($dashboard['groups'][0]['locales'])->firstWhere('locale', 'en');
+            $this->assertTrue($locale['is_freshness_known']);
+            $this->assertFalse($locale['is_stale']);
+            $this->assertTrue($locale['preflight']['ok']);
+            $this->assertSame('success', $dashboard['coverage_matrix'][0]['cells']['en']['freshness_state']);
+            $this->assertSame($revisionCount, CmsTranslationRevision::query()->count());
+            $this->assertSame($auditCount, AuditLog::query()->count());
             $this->assertDatabaseHas('audit_logs', [
                 'action' => 'content_release_publish',
                 'target_type' => $contentType,

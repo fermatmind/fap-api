@@ -6,6 +6,7 @@ namespace App\Services\Ops;
 
 use App\Contracts\Cms\SiblingTranslationAdapter;
 use App\Filament\Ops\Support\StatusBadge;
+use App\Models\CmsTranslationRevision;
 use App\Services\Cms\ArticleTranslationWorkflowService;
 use App\Services\Cms\SiblingTranslationWorkflowService;
 use Illuminate\Database\Eloquent\Model;
