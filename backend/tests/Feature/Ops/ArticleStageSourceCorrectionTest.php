@@ -27,6 +27,7 @@ final class ArticleStageSourceCorrectionTest extends TestCase
     #[DataProvider('correctionPairs')]
     public function test_dry_run_stage_and_restore_preserve_public_versions_and_english(int $sourceId, int $targetId): void
     {
+        $this->freezeTime();
         [$s, $old] = $this->pair($sourceId, $targetId);
         [$file, $sha] = $this->package($s);
         try {
@@ -69,6 +70,7 @@ final class ArticleStageSourceCorrectionTest extends TestCase
             $audit->forceFill(['meta_json' => $metadata])->saveQuietly();
             $this->assertSame(1, $this->callCommand($file, $sha, false, $auditId));
             $audit->forceFill(['meta_json' => $goodMetadata])->saveQuietly();
+            $this->travel(1)->seconds();
             $this->assertSame(0, $this->callCommand($file, $sha, false, $auditId));
             $this->assertSame(0, $this->callCommand($file, $sha, true, $auditId));
             $this->assertSame($initial, $s->fresh()->getAttributes());

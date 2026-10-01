@@ -57,6 +57,8 @@ final class ArticleStageSourceCorrection extends Command
                     $english = ArticleForkPrivateTranslationLinks::targetHash($s, true);
                     if ($restore) {
                         $new = $s->workingRevision;
+                        // Restore the audited raw timestamp even when it was unchanged by staging.
+                        $s->timestamps = false;
                         $s->forceFill($audit->meta_json['restore_fields'])->saveQuietly();
                         $new->forceFill(['revision_status' => 'archived'])->saveQuietly();
                     } else {
