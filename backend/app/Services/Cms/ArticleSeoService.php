@@ -721,17 +721,23 @@ final class ArticleSeoService
                 ->all();
         }
 
-        $legacySameSlugVariants = Article::query()
-            ->withoutGlobalScopes()
-            ->where('org_id', (int) $article->org_id)
-            ->where('slug', (string) $article->slug)
-            ->publiclyIndexable()
-            ->whereIn('locale', self::SUPPORTED_LOCALES)
-            ->get(['slug', 'locale'])
-            ->all();
+        // Explicit translation groups are authoritative; a shared slug is not pairing evidence.
+        if ($translationGroupId === '') {
+            $variants = Article::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', (int) $article->org_id)
+                ->where('slug', (string) $article->slug)
+                ->where(function ($query): void {
+                    $query->whereNull('translation_group_id')->orWhere('translation_group_id', '');
+                })
+                ->publiclyIndexable()
+                ->whereIn('locale', self::SUPPORTED_LOCALES)
+                ->get(['slug', 'locale'])
+                ->all();
+        }
 
         $availableLocales = [];
-        foreach (array_merge($variants, $legacySameSlugVariants) as $variant) {
+        foreach ($variants as $variant) {
             if (! $variant instanceof Article) {
                 continue;
             }

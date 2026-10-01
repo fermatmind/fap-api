@@ -320,12 +320,14 @@ final class ArticlePublicApiTest extends TestCase
 
         $articleEn = $this->createArticle([
             'slug' => 'mbti-basics',
+            'translation_group_id' => 'mbti-basics-bilingual',
             'locale' => 'en',
             'title' => 'MBTI Basics',
             'excerpt' => 'Learn the core concepts behind MBTI.',
         ]);
         $this->createArticle([
             'slug' => 'mbti-basics',
+            'translation_group_id' => 'mbti-basics-bilingual',
             'locale' => 'zh-CN',
             'title' => 'MBTI 基础',
             'excerpt' => '了解 MBTI 的核心概念。',
@@ -407,6 +409,50 @@ final class ArticlePublicApiTest extends TestCase
             ->assertJsonPath('meta.article_authority_v1.alternate_eligibility.alternates.zh-CN', 'https://staging.fermatmind.com/zh/articles/mbti-vs-holland-career-choice');
 
         $this->assertNull(data_get($response->json(), 'meta.alternates.x-default'));
+    }
+
+    public function test_same_slug_in_other_group_cannot_replace_a_verified_locale_sibling(): void
+    {
+        config(['app.frontend_url' => 'https://staging.fermatmind.com']);
+        $this->createArticle(['slug' => 'paired-en', 'locale' => 'en', 'translation_group_id' => 'verified-pair']);
+        $this->createArticle(['slug' => 'paired-zh', 'locale' => 'zh-CN', 'translation_group_id' => 'verified-pair']);
+        $this->createArticle(['slug' => 'paired-en', 'locale' => 'zh-CN', 'translation_group_id' => 'independent-root']);
+
+        $this->getJson('/api/v0.5/articles/paired-en/seo?locale=en')
+            ->assertOk()
+            ->assertJsonPath('meta.alternates.zh-CN', 'https://staging.fermatmind.com/zh/articles/paired-zh');
+    }
+
+    public function test_independent_same_slug_roots_do_not_become_bilingual_alternates(): void
+    {
+        config(['app.frontend_url' => 'https://staging.fermatmind.com']);
+        $this->createArticle(['slug' => 'independent-copy', 'locale' => 'en', 'translation_group_id' => 'independent-en']);
+        $this->createArticle(['slug' => 'independent-copy', 'locale' => 'zh-CN', 'translation_group_id' => 'independent-zh']);
+
+        foreach (['en', 'zh-CN'] as $locale) {
+            $this->getJson('/api/v0.5/articles/independent-copy/seo?locale='.$locale)
+                ->assertOk()
+                ->assertJsonPath('meta.article_authority_v1.alternate_eligibility.eligible_locales', [$locale]);
+        }
+    }
+
+    public function test_legacy_ungrouped_same_slug_pair_does_not_include_a_grouped_root(): void
+    {
+        config(['app.frontend_url' => 'https://staging.fermatmind.com']);
+        foreach (['en', 'zh-CN'] as $locale) {
+            $article = $this->createArticle(['slug' => 'legacy-pair', 'locale' => $locale]);
+            $article->forceFill(['translation_group_id' => ''])->saveQuietly();
+        }
+        $this->createArticle(['slug' => 'legacy-independent', 'locale' => 'en', 'translation_group_id' => 'independent-root']);
+        $ungrouped = $this->createArticle(['slug' => 'legacy-independent', 'locale' => 'zh-CN']);
+        $ungrouped->forceFill(['translation_group_id' => ''])->saveQuietly();
+
+        $this->getJson('/api/v0.5/articles/legacy-pair/seo?locale=en')
+            ->assertOk()
+            ->assertJsonPath('meta.article_authority_v1.alternate_eligibility.eligible_locales', ['en', 'zh-CN']);
+        $this->getJson('/api/v0.5/articles/legacy-independent/seo?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('meta.article_authority_v1.alternate_eligibility.eligible_locales', ['zh-CN']);
     }
 
     public function test_source_revision_is_public_and_restores_bilingual_alternates(): void
