@@ -27,6 +27,9 @@ final class ArticleDraftPreviewRouteTest extends TestCase
         $org = $this->createOrganization();
         $article = $this->createDraftArticle();
         $revision = $this->createWorkingRevision($article);
+        $revision->update([
+            'content_md' => $revision->content_md."\n\n| Question | RIASEC | MBTI | Big Five |\n| --- | --- | --- | --- |\n| Purpose | Interests | Preferences | Traits |\n",
+        ]);
         ArticleSeoMeta::query()->create([
             'org_id' => 0,
             'article_id' => (int) $article->id,
@@ -71,6 +74,12 @@ final class ArticleDraftPreviewRouteTest extends TestCase
             ->assertDontSee('rel=\"alternate\"', false);
         $this->assertStringContainsString('no-store', (string) $response->headers->get('Cache-Control'));
         $this->assertStringContainsString('private', (string) $response->headers->get('Cache-Control'));
+
+        $document = new \DOMDocument;
+        @$document->loadHTML($response->getContent());
+        $xpath = new \DOMXPath($document);
+        $this->assertSame(1, $xpath->query('//div[@class="table-scroll"]/table/thead/tr[count(th)=4]')->length);
+        $this->assertSame(1, $xpath->query('//div[@class="table-scroll"]/table/tbody/tr[count(td)=4]')->length);
 
         $article->refresh();
         $this->assertSame('draft', $article->status);

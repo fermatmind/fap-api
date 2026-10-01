@@ -55,8 +55,8 @@
         .meta, .summary { color: var(--muted); }
         .body { font-size: 18px; }
         .body img { max-width: 100%; border-radius: 18px; }
-        .body table { display: block; max-width: 100%; overflow-x: auto; }
-        .body table tbody { display: table; width: 100%; min-width: 640px; }
+        .body .table-scroll { max-width: 100%; overflow-x: auto; }
+        .body table { width: 100%; min-width: 640px; }
         .media-preview {
             margin: 22px 0;
         }
@@ -118,7 +118,7 @@
                 @endif
 
                 <section class="body">
-                    {!! $bodyHtml !!}
+                    {!! str_replace(['<table>', '</table>'], ['<div class="table-scroll"><table>', '</table></div>'], $bodyHtml) !!}
                 </section>
             </article>
 
