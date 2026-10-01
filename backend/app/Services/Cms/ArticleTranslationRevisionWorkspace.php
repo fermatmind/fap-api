@@ -121,6 +121,10 @@ final class ArticleTranslationRevisionWorkspace
                 $revisionPayload['reviewed_at'] = null;
                 $revisionPayload['approved_at'] = null;
                 $revisionPayload['published_at'] = null;
+                // A fork is a new editorial candidate, not another copy of the immutable package asset.
+                foreach (['authority_asset_key', 'authority_source_package', 'authority_source_hash', 'authority_package_sha256', 'authority_metadata_json'] as $field) {
+                    $revisionPayload[$field] = null;
+                }
             }
 
             $revision->forceFill($revisionPayload)->save();

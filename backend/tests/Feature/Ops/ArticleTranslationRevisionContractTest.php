@@ -571,7 +571,14 @@ final class ArticleTranslationRevisionContractTest extends TestCase
         $target->refresh();
         $published = $target->publishedRevision;
         $this->assertInstanceOf(ArticleTranslationRevision::class, $published);
-        $original = $published->getAttributes();
+        $published->forceFill([
+            'authority_asset_key' => 'published-english-asset',
+            'authority_source_package' => 'published-package',
+            'authority_source_hash' => str_repeat('b', 64),
+            'authority_package_sha256' => str_repeat('c', 64),
+            'authority_metadata_json' => ['editorial_review_state' => 'approved'],
+        ])->saveQuietly();
+        $original = $published->fresh()->getAttributes();
         $source->forceFill(['source_version_hash' => str_repeat('a', 64)])->saveQuietly();
 
         $working = app(ArticleTranslationRevisionWorkspace::class)->saveWorkingRevision($target, [
@@ -591,6 +598,9 @@ final class ArticleTranslationRevisionContractTest extends TestCase
         $this->assertSame($original['translated_from_version_hash'], $working->translated_from_version_hash);
         $this->assertNull($working->reviewed_at);
         $this->assertNull($working->approved_at);
+        foreach (['authority_asset_key', 'authority_source_package', 'authority_source_hash', 'authority_package_sha256', 'authority_metadata_json'] as $field) {
+            $this->assertNull($working->$field);
+        }
     }
 
     public function test_editing_translation_with_unknown_provenance_does_not_claim_current_source(): void
