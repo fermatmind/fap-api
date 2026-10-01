@@ -23,6 +23,9 @@ final class ArticlePublishControlled extends Command
 {
     protected $signature = 'articles:publish-controlled
         {--article=* : Article id to publish}
+        {--translation-locks= : Exact reviewed translation publication package}
+        {--translation-sha256= : Exact translation package digest}
+        {--preview-approved : Authenticated preview passed for the locked translation revision}
         {--confirm= : Exact user confirmation phrase}
         {--ack-claim-warning=* : Article id whose boundary-context claim warnings are acknowledged}
         {--make-indexable : Mark the article and SEO meta indexable during publish}
@@ -39,6 +42,39 @@ final class ArticlePublishControlled extends Command
 
     public function handle(ArticlePublishService $publisher, AuditLogger $auditLogger): int
     {
+        if ($this->option('translation-locks') !== null) {
+            try {
+                $file = (string) $this->option('translation-locks');
+                if (! is_file($file) || filesize($file) > 32768) {
+                    throw new RuntimeException('translation_package_unavailable');
+                }
+                $bytes = file_get_contents($file);
+                if (! hash_equals(hash('sha256', $bytes), (string) $this->option('translation-sha256'))) {
+                    throw new RuntimeException('translation_package_digest_mismatch');
+                }
+                $package = json_decode($bytes, true, 16, JSON_THROW_ON_ERROR);
+                if ($this->articleIds() !== [(int) ($package['target_id'] ?? 0)]) {
+                    throw new RuntimeException('translation_article_lock_mismatch');
+                }
+                $summary = app(\App\Services\Cms\ReviewedTranslationPublication::class)->run(
+                    $package, ! (bool) $this->option('dry-run'), (bool) $this->option('preview-approved'),
+                    (string) $this->option('confirm'), (bool) $this->option('make-indexable'),
+                );
+            } catch (\Throwable $exception) {
+                $summary = ['ok' => false, 'dry_run' => (bool) $this->option('dry-run'), 'published_article_ids' => [],
+                    'errors' => [$this->issue('translation', 'translation_publication_rejected', $exception instanceof RuntimeException
+                        ? $exception->getMessage() : 'native_translation_publication_failed')]];
+            }
+            $this->line(json_encode($summary, JSON_THROW_ON_ERROR));
+
+            return $summary['ok'] ? self::SUCCESS : self::FAILURE;
+        }
+        if ($this->option('translation-sha256') !== null || $this->option('preview-approved')) {
+            $this->line(json_encode(['ok' => false, 'errors' => ['translation_package_required']], JSON_THROW_ON_ERROR));
+
+            return self::FAILURE;
+        }
+
         $articleIds = $this->articleIds();
         $acknowledgedWarnings = $this->acknowledgedWarningIds();
         $dryRun = (bool) $this->option('dry-run');
