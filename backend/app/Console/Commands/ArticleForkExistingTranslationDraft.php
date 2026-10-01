@@ -216,15 +216,7 @@ final class ArticleForkExistingTranslationDraft extends Command
 
     public static function targetTagsHash(Article $target, bool $lock = false): string
     {
-        $query = DB::table('article_tag_map')->where('article_id', $target->id)->orderBy('org_id')->orderBy('tag_id');
-        $rows = ($lock ? $query->lockForUpdate() : $query)->get()->map(function ($row): array {
-            $attributes = (array) $row;
-            ksort($attributes);
-
-            return $attributes;
-        })->all();
-
-        return hash('sha256', json_encode($rows, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        return ArticleSourceTargetSnapshot::tagsHash($target, $lock);
     }
 
     private function snapshot(array $p, int $restore, bool $lock): array

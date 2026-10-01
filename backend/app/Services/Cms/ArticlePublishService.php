@@ -11,6 +11,7 @@ use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Services\SEO\SeoDiscoverabilityCacheInvalidator;
+use App\Support\ArticleSourceTargetSnapshot;
 use Closure;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
@@ -222,6 +223,8 @@ final class ArticlePublishService
                 $transactionGuard($article, $workingRevision);
             }
 
+            $this->assertIndependentCandidateTags($article, $workingRevision, true);
+
             $this->articleBodyHeadingGuard->assertNoBodyH1((string) $workingRevision->content_md);
 
             $publishedAt = now();
@@ -263,6 +266,8 @@ final class ArticlePublishService
                     ->update($seoUpdates);
             }
 
+            $this->assertIndependentCandidateTags($article, $workingRevision, true);
+
             $this->materialDecisions->recordPublished(
                 $article,
                 $workingRevision,
@@ -282,6 +287,19 @@ final class ArticlePublishService
         $this->dispatchUrlTruthChange($article, 'authority_revision');
 
         return $article;
+    }
+
+    public function assertIndependentCandidateTags(Article $article, ArticleTranslationRevision $revision, bool $lock = false): void
+    {
+        $metadata = $revision->authority_metadata_json ?? [];
+        if (($metadata['draft_origin'] ?? null) !== 'published_english_editorial_adaptation') {
+            return;
+        }
+        $expected = $metadata['target_tags_sha256'] ?? null;
+        if (! is_string($expected) || ! preg_match('/^[a-f0-9]{64}$/', $expected)
+            || ! hash_equals($expected, ArticleSourceTargetSnapshot::tagsHash($article, $lock))) {
+            throw new RuntimeException('independent_candidate_tags_drift');
+        }
     }
 
     /**
