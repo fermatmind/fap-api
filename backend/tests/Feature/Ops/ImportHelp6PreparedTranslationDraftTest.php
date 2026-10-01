@@ -253,16 +253,25 @@ final class ImportHelp6PreparedTranslationDraftTest extends TestCase
 
     public static function serviceSlugs(): array
     {
-        return array_map(fn (string $slug): array => [$slug], [
+        $cases = [];
+        foreach ([
             'help-unlock-failure', 'help-payment-refund', 'help-result-recovery',
             'help-privacy-data', 'help-use-boundaries', 'help-data-deletion',
-        ]);
+        ] as $slug) {
+            $cases[$slug.' linked'] = [$slug, false];
+            $cases[$slug.' legacy unlinked'] = [$slug, true];
+        }
+
+        return $cases;
     }
 
     #[DataProvider('serviceSlugs')]
-    public function test_service_shared_published_revision_forks_privately_and_restores(string $slug): void
+    public function test_service_shared_published_revision_forks_privately_and_restores(string $slug, bool $legacyUnlinked): void
     {
         [$source, $target, $published] = $this->pair($slug);
+        if ($legacyUnlinked) {
+            $published->forceFill(['source_content_id' => null, 'translated_from_version_hash' => null])->saveQuietly();
+        }
         $target->forceFill(['working_revision_id' => $published->id, 'translation_status' => 'published'])->saveQuietly();
         [$file, $sha, $confirm] = $this->package($source, $target, 'help-service');
         try {
@@ -281,6 +290,7 @@ final class ImportHelp6PreparedTranslationDraftTest extends TestCase
             $auditId = $result['after']['audit_id'];
             $this->assertSame($count + 1, CmsTranslationRevision::count());
             $this->assertSame((int) $published->id, (int) $new->supersedes_revision_id);
+            $this->assertSame((int) $source->id, (int) $new->source_content_id);
             $this->assertSame($source->source_version_hash, $new->translated_from_version_hash);
             $this->assertSame('draft', $new->revision_status);
             $this->assertNull($new->reviewed_at);
@@ -303,6 +313,25 @@ final class ImportHelp6PreparedTranslationDraftTest extends TestCase
             $this->assertSame('archived', $new->fresh()->revision_status);
             $this->assertSame($publishedBefore, $published->fresh()->getAttributes());
             $this->assertSame($sourceBefore, ContentPageSourceTargetSnapshot::hash($source->fresh()));
+        } finally {
+            unlink($file);
+        }
+    }
+
+    public function test_service_shared_published_revision_rejects_a_foreign_source_link(): void
+    {
+        [$source, $target, $published] = $this->pair('help-result-recovery');
+        $published->forceFill(['source_content_id' => $target->id])->saveQuietly();
+        $target->forceFill(['working_revision_id' => $published->id, 'translation_status' => 'published'])->saveQuietly();
+        [$file, $sha, $confirm] = $this->package($source, $target, 'help-service');
+        try {
+            $before = ContentPageSourceTargetSnapshot::hash($target);
+            $count = CmsTranslationRevision::count();
+            $this->assertSame(1, $this->runCommand($file, $sha, ['--cohort' => 'help-service', '--execute' => true, '--confirm' => $confirm]));
+            $this->assertContains('target_revision_lock_mismatch', json_decode(Artisan::output(), true)['errors']);
+            $this->assertSame($before, ContentPageSourceTargetSnapshot::hash($target->fresh()));
+            $this->assertSame($count, CmsTranslationRevision::count());
+            $this->assertSame(0, AuditLog::count());
         } finally {
             unlink($file);
         }

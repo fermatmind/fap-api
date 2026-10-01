@@ -275,7 +275,10 @@ final class ImportHelp6PreparedTranslationDraft extends Command
             || (int) $target->working_revision_id !== $expectedWorking || (int) $target->published_revision_id !== $package['target']['published_revision_id']
             || (! $privateDraft && ! $sharedPublished)
             || ! $working instanceof CmsTranslationRevision || ! $published instanceof CmsTranslationRevision
-            || $working->locale !== 'en' || (int) $working->source_content_id !== (int) $source->id || $working->translation_group_id !== $source->translation_group_id
+            || $working->locale !== 'en'
+            || ((int) $working->source_content_id !== (int) $source->id
+                && ! ($sharedPublished && $working->source_content_id === null && $working->source_locale === 'zh-CN'))
+            || $working->translation_group_id !== $source->translation_group_id
             || $published->locale !== 'en' || $published->revision_status !== CmsTranslationRevision::STATUS_PUBLISHED || $published->published_at === null) {
             $errors[] = 'target_revision_lock_mismatch';
         }
