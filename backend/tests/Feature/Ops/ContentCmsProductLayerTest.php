@@ -1047,7 +1047,11 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->assertSame((int) $reviewer->id, (int) $revision->reviewed_by);
         $this->assertNotNull($revision->reviewed_at);
         $this->assertNotNull($revision->approved_at);
-        $this->assertSame(Article::TRANSLATION_STATUS_APPROVED, (string) $article->translation_status);
+        $this->assertSame(Article::TRANSLATION_STATUS_SOURCE, (string) $article->translation_status);
+        $this->assertTrue($article->isSourceArticle());
+        $this->assertSame((int) $article->id, (int) $revision->source_article_id);
+        $this->assertNull($article->published_revision_id);
+        $this->assertFalse((bool) $article->is_public);
 
         $workflow = EditorialReview::withoutGlobalScopes()
             ->where('content_type', 'article')
