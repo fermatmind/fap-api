@@ -26,7 +26,7 @@ final class ImportHelp6PreparedTranslationDraft extends Command
     private const SERVICE_SLUGS = ['help-unlock-failure', 'help-payment-refund', 'help-result-recovery', 'help-privacy-data', 'help-use-boundaries', 'help-data-deletion'];
 
     protected $signature = 'translation:import-help6-prepared-draft
-        {--cohort=help6 : help6, core3 (about/privacy/terms), or help-service}
+        {--cohort=help6 : help6, core3, help-service, company5, or science6}
         {--file= : One English copy package with exact source and target snapshots}
         {--sha256= : Exact SHA256 of package bytes}
         {--restore-audit-id= : Restore only the untouched draft created by this exact import audit}
@@ -42,7 +42,7 @@ final class ImportHelp6PreparedTranslationDraft extends Command
         $execute = (bool) $this->option('execute');
         $restoreId = (int) $this->option('restore-audit-id');
         $errors = [];
-        if (! in_array($this->option('cohort'), ['help6', 'core3', 'help-service'], true)) {
+        if (! in_array($this->option('cohort'), ['help6', 'core3', 'help-service', 'company5', 'science6'], true)) {
             $errors[] = 'cohort_invalid';
         }
         $after = null;
@@ -171,10 +171,12 @@ final class ImportHelp6PreparedTranslationDraft extends Command
         }
         $package = json_decode($bytes, true, 32, JSON_THROW_ON_ERROR);
         if (! is_array($package) || ! $this->keys($package, ['schema', 'source', 'target', 'copy'])
-            || $package['schema'] !== 'fermat_'.$this->option('cohort').'_translation_draft_v1'
+            || ! in_array($package['schema'], ['fermat_'.$this->option('cohort').'_translation_draft_v1', 'fermat_'.$this->option('cohort').'_translation_draft_v2'], true)
             || ! is_array($package['source']) || ! $this->keys($package['source'], ['id', 'revision_id', 'snapshot_hash'])
             || ! is_array($package['target']) || ! $this->keys($package['target'], ['id', 'working_revision_id', 'published_revision_id', 'snapshot_hash'])
-            || ! is_array($package['copy']) || ! $this->keys($package['copy'], ['title', 'summary', 'content_md', 'seo_title', 'seo_description'])) {
+            || ! is_array($package['copy']) || ! $this->keys($package['copy'], str_ends_with($package['schema'], '_v2')
+                ? ['title', 'summary', 'content_md', 'seo_title', 'seo_description', 'faq_items']
+                : ['title', 'summary', 'content_md', 'seo_title', 'seo_description'])) {
             throw new RuntimeException('package_schema_invalid');
         }
         foreach (['source', 'target'] as $section) {
@@ -184,9 +186,29 @@ final class ImportHelp6PreparedTranslationDraft extends Command
                 }
             }
         }
-        foreach ($package['copy'] as $value) {
-            if (! is_string($value) || trim($value) === '' || preg_match('/\p{Han}/u', $value) !== 0) {
+        foreach ($package['copy'] as $key => $value) {
+            if (str_ends_with($package['schema'], '_v2') && ($key === 'faq_items' || ($key === 'summary' && $value === null))) {
+                continue;
+            }
+            $english = $this->option('cohort') === 'company5' && $key === 'content_md'
+                ? str_replace('费马测试', '', (string) $value) : $value;
+            if (! is_string($value) || trim($value) === '' || preg_match('/\p{Han}/u', $english) !== 0) {
                 throw new RuntimeException('english_copy_invalid');
+            }
+        }
+        if (str_ends_with($package['schema'], '_v2')) {
+            if (! is_array($package['copy']['faq_items']) || ! array_is_list($package['copy']['faq_items'])) {
+                throw new RuntimeException('faq_copy_invalid');
+            }
+            foreach ($package['copy']['faq_items'] as $faq) {
+                if (! is_array($faq) || ! $this->keys($faq, ['question', 'answer'])
+                    || ! is_string($faq['question']) || trim($faq['question']) === ''
+                    || ! is_string($faq['answer']) || trim($faq['answer']) === ''
+                    || preg_match('/\p{Han}/u', $faq['question'].$faq['answer']) !== 0
+                    || ! str_contains($package['copy']['content_md'], '### '.$faq['question'])
+                    || ! str_contains($package['copy']['content_md'], $faq['answer'])) {
+                    throw new RuntimeException('faq_visible_parity_invalid');
+                }
             }
         }
         if (mb_strlen($package['copy']['title']) > 255 || mb_strlen($package['copy']['seo_title']) > 255 || mb_strlen($package['copy']['seo_description']) > 2000) {
@@ -211,6 +233,8 @@ final class ImportHelp6PreparedTranslationDraft extends Command
         $allowedSlugs = match ($this->option('cohort')) {
             'core3' => ['about', 'privacy', 'terms'],
             'help-service' => self::SERVICE_SLUGS,
+            'company5' => ['brand', 'charter', 'foundation', 'careers', 'policies'],
+            'science6' => ['science', 'method-boundaries', 'item-design-notes', 'reliability-validity', 'data-privacy', 'common-misconceptions'],
             default => self::SLUGS,
         };
         if (! in_array($source->slug, $allowedSlugs, true) || $source->slug !== $target->slug || $source->locale !== 'zh-CN'
@@ -247,7 +271,7 @@ final class ImportHelp6PreparedTranslationDraft extends Command
         $expectedSnapshot = $package['target']['snapshot_hash'];
         if ($restoreId > 0) {
             $meta = $audit?->meta_json;
-            $oldPublishedWorkspace = $this->option('cohort') === 'help-service'
+            $oldPublishedWorkspace = in_array($this->option('cohort'), ['help-service', 'company5', 'science6'], true)
                 && ($meta['old_translation_status'] ?? null) === ContentPage::TRANSLATION_STATUS_PUBLISHED
                 && $expectedWorking === $package['target']['published_revision_id'];
             if (! $audit instanceof AuditLog || $audit->action !== $this->option('cohort').'_prepared_translation_draft_imported' || $audit->result !== 'success'
@@ -267,7 +291,7 @@ final class ImportHelp6PreparedTranslationDraft extends Command
             && $working->published_at === null && $working->reviewed_at === null && $working->approved_at === null;
         // A reviewed legacy service page may have no private workspace yet.
         // Fork it; retain its published revision and row provenance unchanged.
-        $sharedPublished = $this->option('cohort') === 'help-service' && $restoreId === 0
+        $sharedPublished = in_array($this->option('cohort'), ['help-service', 'company5', 'science6'], true) && $restoreId === 0
             && $working instanceof CmsTranslationRevision && $published instanceof CmsTranslationRevision
             && $working->id === $published->id && $target->translation_status === ContentPage::TRANSLATION_STATUS_PUBLISHED
             && $working->revision_status === CmsTranslationRevision::STATUS_PUBLISHED && $working->published_at !== null;
@@ -291,6 +315,10 @@ final class ImportHelp6PreparedTranslationDraft extends Command
             'body_html' => '', 'seo_title' => $copy['seo_title'], 'seo_description' => $copy['seo_description']]);
         preg_match_all('/^#{2,3}\s+(.+)$/m', $copy['content_md'], $matches);
         $payload['headings_json'] = array_values(array_map('trim', $matches[1] ?? []));
+        if (str_ends_with($package['schema'], '_v2')) {
+            $payload['faq_items'] = $copy['faq_items'];
+            $payload['meta_description'] = $copy['seo_description'];
+        }
 
         return ['source' => $source, 'target' => $target, 'working' => $working, 'published' => $published, 'audit' => $audit,
             'errors' => $errors, 'payload' => $payload, 'payload_hash' => CanonicalTranslationPayloadHash::hash($payload),
@@ -301,6 +329,8 @@ final class ImportHelp6PreparedTranslationDraft extends Command
     {
         return match ($this->option('cohort')) {
             'core3' => 'Core3',
+            'company5' => 'Company5',
+            'science6' => 'Science6',
             'help-service' => 'HelpService',
             default => 'Help6',
         };

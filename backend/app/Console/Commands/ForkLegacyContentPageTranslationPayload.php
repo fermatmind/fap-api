@@ -268,7 +268,17 @@ final class ForkLegacyContentPageTranslationPayload extends Command
             }
         }
         foreach (['headings_json', 'faq_items', 'forbidden_claims'] as $field) {
-            if ($target->getRawOriginal($field) === null || ! is_array($target->{$field})) {
+            // These two legacy company pages predate nullable FAQ/claim arrays.
+            // Only complete an unapproved private payload when both the source
+            // and the existing row's safety flags prove the empty-array shape.
+            $legacyEmptyArray = in_array((string) $target->slug, ['brand', 'charter'], true)
+                && in_array($field, ['faq_items', 'forbidden_claims'], true)
+                && $target->getRawOriginal($field) === null
+                && is_array($source->{$field}) && $source->{$field} === []
+                && ! (bool) $target->schema_enabled && ! (bool) $target->publish_allowed
+                && (bool) $target->operator_approval_required && ! (bool) $target->faq_schema_eligible
+                && (string) $target->claim_gate_status === 'not_reviewed';
+            if (! $legacyEmptyArray && ($target->getRawOriginal($field) === null || ! is_array($target->{$field}))) {
                 $errors[] = 'row_field_missing:'.$field;
             }
         }

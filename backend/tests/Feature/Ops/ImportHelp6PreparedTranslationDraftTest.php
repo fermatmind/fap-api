@@ -373,6 +373,109 @@ final class ImportHelp6PreparedTranslationDraftTest extends TestCase
         }
     }
 
+    public static function additionalCohorts(): array
+    {
+        $cases = [];
+        foreach (['company5' => ['brand', 'charter', 'foundation', 'careers', 'policies'],
+            'science6' => ['science', 'method-boundaries', 'item-design-notes', 'reliability-validity', 'data-privacy', 'common-misconceptions']] as $cohort => $slugs) {
+            foreach ($slugs as $slug) {
+                $cases[$slug] = [$cohort, $slug];
+            }
+        }
+
+        return $cases;
+    }
+
+    #[DataProvider('additionalCohorts')]
+    public function test_additional_cohorts_import_private_copy_and_restore_without_changing_public_authority(string $cohort, string $slug): void
+    {
+        [$source, $target, $published] = $this->pair($slug);
+        $target->forceFill(['working_revision_id' => $published->id, 'translation_status' => 'published'])->saveQuietly();
+        [$file] = $this->package($source, $target, $cohort);
+        try {
+            $package = json_decode(file_get_contents($file), true);
+            $package['schema'] = 'fermat_'.$cohort.'_translation_draft_v2';
+            $package['copy']['summary'] = null;
+            $package['copy']['faq_items'] = [['question' => 'Contact', 'answer' => 'Read the guide.']];
+            file_put_contents($file, json_encode($package, JSON_THROW_ON_ERROR));
+            $sha = hash_file('sha256', $file);
+            $label = $cohort === 'company5' ? 'Company5' : 'Science6';
+            $options = ['--cohort' => $cohort];
+            $sourceBefore = ContentPageSourceTargetSnapshot::hash($source);
+            $publicBefore = $published->getAttributes();
+            $rowBefore = $target->getAttributes();
+            $this->assertSame(0, $this->runCommand($file, $sha, $options));
+            $this->assertSame($rowBefore, $target->fresh()->getAttributes());
+            $this->assertSame(0, AuditLog::count());
+            $this->assertSame(0, $this->runCommand($file, $sha, $options + ['--execute' => true,
+                '--confirm' => sprintf('Import %s target %d with package %s.', $label, $target->id, $sha)]));
+            $result = json_decode(Artisan::output(), true);
+            $draft = CmsTranslationRevision::findOrFail($result['after']['new_revision_id']);
+            $this->assertSame($package['copy']['faq_items'], $draft->payload_json['faq_items']);
+            $this->assertSame($package['copy']['seo_description'], $draft->payload_json['meta_description']);
+            $this->assertNull($draft->payload_json['summary']);
+            $this->assertFalse($draft->payload_json['is_indexable']);
+            $this->assertNull($draft->reviewed_at);
+            $this->assertNull($draft->approved_at);
+            $this->assertNull($draft->published_at);
+            $this->assertSame($publicBefore, $published->fresh()->getAttributes());
+            $this->assertSame($sourceBefore, ContentPageSourceTargetSnapshot::hash($source->fresh()));
+            $audit = $result['after']['audit_id'];
+            $this->assertSame(0, $this->runCommand($file, $sha, $options + ['--restore-audit-id' => $audit,
+                '--execute' => true, '--confirm' => sprintf('Restore %s target %d with package %s and audit %d.', $label, $target->id, $sha, $audit)]));
+            $this->assertSame($published->id, $target->fresh()->working_revision_id);
+            $this->assertSame('archived', $draft->fresh()->revision_status);
+            $this->assertSame($publicBefore, $published->fresh()->getAttributes());
+        } finally {
+            unlink($file);
+        }
+    }
+
+    public function test_v2_faq_copy_and_science_readiness_still_fail_closed(): void
+    {
+        [$source, $target] = $this->pair('science');
+        [$file] = $this->package($source, $target, 'science6');
+        try {
+            $package = json_decode(file_get_contents($file), true);
+            $package['schema'] = 'fermat_science6_translation_draft_v2';
+            $package['copy']['faq_items'] = [['question' => 'Invisible question', 'answer' => 'Read the guide.']];
+            file_put_contents($file, json_encode($package, JSON_THROW_ON_ERROR));
+            $before = ContentPageSourceTargetSnapshot::hash($target);
+            $this->assertSame(1, $this->runCommand($file, hash_file('sha256', $file), ['--cohort' => 'science6']));
+            $this->assertSame(['package_snapshot_or_transaction_failed'], json_decode(Artisan::output(), true)['errors']);
+            $package['copy']['faq_items'] = [];
+            $source->forceFill(['publish_allowed' => false])->saveQuietly();
+            $package['source']['snapshot_hash'] = ContentPageSourceTargetSnapshot::hash($source->fresh());
+            file_put_contents($file, json_encode($package, JSON_THROW_ON_ERROR));
+            $this->assertSame(1, $this->runCommand($file, hash_file('sha256', $file), ['--cohort' => 'science6']));
+            $this->assertContains('identity_or_publication_invalid', json_decode(Artisan::output(), true)['errors']);
+            $this->assertSame($before, ContentPageSourceTargetSnapshot::hash($target->fresh()));
+            $this->assertSame(0, AuditLog::count());
+        } finally {
+            unlink($file);
+        }
+    }
+
+    public function test_source_publication_binds_changed_content_hash_to_new_revision_and_retains_old_version(): void
+    {
+        [$source] = $this->pair('brand');
+        $workspace = app(RowBackedRevisionWorkspace::class);
+        $old = CmsTranslationRevision::findOrFail($source->published_revision_id);
+        $oldBefore = $old->getAttributes();
+        $oldHash = $source->source_version_hash;
+        $payload = app(ContentPageTranslationAdapter::class)->snapshotPayload($source);
+        $payload['body_md'] = 'Changed Chinese source content.';
+        $drafted = $workspace->saveWorkingDraft('content_page', $source, $payload, CmsTranslationRevision::STATUS_DRAFT);
+        $published = $workspace->publishWorkingRevision('content_page', $drafted);
+        $revision = CmsTranslationRevision::findOrFail($published->published_revision_id);
+        $this->assertNotSame($old->id, $revision->id);
+        $this->assertNotSame($oldHash, $published->source_version_hash);
+        $this->assertSame($published->freshSourceVersionHash(), $published->source_version_hash);
+        $this->assertSame($published->source_version_hash, $revision->source_version_hash);
+        $this->assertSame($oldBefore, $old->fresh()->getAttributes());
+        $this->assertSame($payload['body_md'], $published->content_md);
+    }
+
     private function runCommand(string $file, string $sha, array $options = []): int
     {
         $args = ['--file' => $file, '--sha256' => $sha, '--json' => true] + $options;
@@ -413,7 +516,7 @@ final class ImportHelp6PreparedTranslationDraftTest extends TestCase
             'is_public' => true, 'is_indexable' => false, 'published_at' => now(), 'headings_json' => ['关于'],
             'faq_items' => [], 'forbidden_claims' => [], 'schema_enabled' => false, 'publish_allowed' => true,
             'operator_approval_required' => true, 'faq_schema_eligible' => false, 'legal_review_required' => false,
-            'science_review_required' => false, 'claim_gate_status' => 'not_applicable',
+            'science_review_required' => false, 'claim_gate_status' => 'passed', 'operator_approved_at' => now(),
         ]);
         $sourceRevision = app(RowBackedRevisionWorkspace::class)->ensureInitialRevision('content_page', $source);
         $sourceRevision->forceFill(['revision_status' => 'source'])->saveQuietly();

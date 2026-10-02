@@ -251,6 +251,14 @@ final class RowBackedRevisionWorkspace
             'published_revision_id' => (int) $working->id,
         ])->save();
 
+        // A ContentPage source edit gets a new row hash when its payload is applied.
+        // Bind the newly published source revision to that same hash; translations
+        // retain their separately locked source provenance.
+        if ($contentType === 'content_page' && $record->source_content_id === null
+            && (string) ($record->source_locale ?: $record->locale) === (string) $record->locale) {
+            $working->source_version_hash = $record->source_version_hash;
+        }
+
         $working->forceFill([
             'revision_status' => CmsTranslationRevision::STATUS_PUBLISHED,
             'published_at' => $record->published_at ?? now(),
