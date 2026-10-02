@@ -122,7 +122,6 @@ final class RowBackedRevisionWorkspace
         $privatePublishedSourceDraft = $contentType === 'content_page'
             && $adapter->isSource($record)
             && filled($record->published_revision_id)
-            && $revisionStatus === CmsTranslationRevision::STATUS_DRAFT
             && $recordAttributes === [];
         $publishedRevisionId = $record->published_revision_id ? (int) $record->published_revision_id : null;
         $shouldFork = $publishedRevisionId !== null && (int) $currentWorking->id === $publishedRevisionId;
@@ -254,10 +253,14 @@ final class RowBackedRevisionWorkspace
             throw new CmsTranslationWorkflowException('Working revision cannot be published: '.implode('; ', $validationErrors).'.');
         }
 
+        $contentPageSource = $contentType === 'content_page'
+            && $record->source_content_id === null
+            && (string) ($record->source_locale ?: $record->locale) === (string) $record->locale;
+
         $adapter->applyRevisionPayload($record, $working->payload_json ?? []);
         $adapter->markPublished($record);
         $record->forceFill([
-            'translation_status' => CmsTranslationRevision::STATUS_PUBLISHED,
+            'translation_status' => $contentPageSource ? CmsTranslationRevision::STATUS_SOURCE : CmsTranslationRevision::STATUS_PUBLISHED,
             'working_revision_id' => (int) $working->id,
             'published_revision_id' => (int) $working->id,
         ])->save();

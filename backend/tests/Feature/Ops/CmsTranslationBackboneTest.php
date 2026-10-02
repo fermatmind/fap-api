@@ -1074,6 +1074,48 @@ final class CmsTranslationBackboneTest extends TestCase
         $this->assertSame(1, $dashboard['metrics']['missing_translation_count']);
     }
 
+    public function test_content_page_source_review_and_publication_preserve_source_identity(): void
+    {
+        $owner = $this->createAdminWithPermissions([PermissionNames::ADMIN_APPROVAL_REVIEW]);
+        config()->set('review_governance.solo_owner_admin_user_id', (int) $owner->id);
+        $workspace = app(RowBackedRevisionWorkspace::class);
+        $transition = app(\App\Services\Cms\CmsEditorialReviewTransitionService::class);
+        $adapter = app(\App\Services\Cms\ContentPageTranslationAdapter::class);
+        $source = $this->createSourceContentPage('reviewed-source-identity', '/reviewed-source-identity');
+        $workspace->ensureInitialRevision('content_page', $source);
+        $source = $source->fresh();
+        $publishedId = $source->published_revision_id;
+        $oldBody = $source->content_md;
+        $payload = $adapter->snapshotPayload($source);
+        $payload['body_md'] = 'Reviewed replacement source body';
+        $payload['body_html'] = '<p>Reviewed replacement source body</p>';
+        $source = $transition->saveRevisionedResource('content_page', 'content_page', $source, $payload,
+            CmsTranslationRevision::STATUS_APPROVED, [], true, false, false, (int) $owner->id);
+        $this->assertSame($publishedId, $source->published_revision_id);
+        $this->assertSame($oldBody, $source->content_md);
+        $this->assertTrue($adapter->isSource($source));
+        $workingId = $source->working_revision_id;
+        $source = $transition->saveRevisionedResource('content_page', 'content_page', $source, $payload,
+            CmsTranslationRevision::STATUS_APPROVED, [], false, true, true, (int) $owner->id);
+        $this->assertSame($workingId, $source->published_revision_id);
+        $this->assertSame($payload['body_md'], $source->content_md);
+        $this->assertTrue($adapter->isSource($source));
+        $this->assertSame('published', $workspace->workingRevision('content_page', $source)->revision_status);
+        // A native republish corrects legacy workflow state without a new version.
+        $source->forceFill(['translation_status' => CmsTranslationRevision::STATUS_PUBLISHED])->saveQuietly();
+        $revisionCount = CmsTranslationRevision::query()->count();
+        $source = $workspace->publishWorkingRevision('content_page', $source, (int) $workingId,
+            $workspace->revisionPayloadHash($workspace->workingRevision('content_page', $source)));
+        $this->assertTrue($adapter->isSource($source));
+        $this->assertSame($revisionCount, CmsTranslationRevision::query()->count());
+        $this->assertSame($workingId, $source->published_revision_id);
+        $target = $this->createTargetTranslation('content_page', $source, 'en');
+        $workspace->ensureInitialRevision('content_page', $target);
+        $this->assertSame(['ok' => true, 'blockers' => []],
+            app(SiblingTranslationWorkflowService::class)->preflight('content_page', $target->fresh(['workingRevision'])));
+        $this->assertFalse($adapter->isSource($target));
+    }
+
     public function test_row_backed_translation_workflow_publishes_with_invalidation_signals(): void
     {
         $owner = $this->createAdminWithPermissions([PermissionNames::ADMIN_APPROVAL_REVIEW]);
