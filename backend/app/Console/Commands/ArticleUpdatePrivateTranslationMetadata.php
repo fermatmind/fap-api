@@ -6,6 +6,7 @@ namespace App\Console\Commands;
 
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTag;
 use App\Models\AuditLog;
@@ -222,7 +223,7 @@ final class ArticleUpdatePrivateTranslationMetadata extends Command
         if ($w === null || (int) $w->org_id !== 0 || (int) $w->source_article_id !== (int) $s->id
             || ! in_array($w->revision_status, ['machine_draft', 'human_review'], true) || $w->reviewed_by !== null || $w->reviewed_at !== null
             || $w->approved_at !== null || $w->published_at !== null
-            || ($w->authority_metadata_json['draft_origin'] ?? null) !== 'operator_supplied_ai_draft') {
+            || ! $this->hasPrivateDraftProvenance($t, $lock)) {
             throw new RuntimeException('unreviewed_ai_draft_required');
         }
         $q = ArticleSeoMeta::withoutGlobalScopes()->where('article_id', $t->id);
@@ -237,6 +238,26 @@ final class ArticleUpdatePrivateTranslationMetadata extends Command
         }
 
         return [$s, $t, $seo, $deps];
+    }
+
+    private function hasPrivateDraftProvenance(Article $target, bool $lock): bool
+    {
+        $revision = $target->workingRevision;
+        if (($revision->authority_metadata_json['draft_origin'] ?? null) === 'operator_supplied_ai_draft') {
+            return true;
+        }
+        // The native content-package updater stages an unreviewed revision and
+        // records its exact body in the import table rather than AI metadata.
+        if ($revision->revision_status !== 'human_review' || $revision->authority_metadata_json !== null) {
+            return false;
+        }
+        $query = ArticleEditorialPackageImport::withoutGlobalScopes()
+            ->where('org_id', $target->org_id)->where('article_id', $target->id)
+            ->where('locale', $target->locale)->where('slug', $target->slug)
+            ->where('status', ArticleEditorialPackageImport::STATUS_IMPORTED)
+            ->where('body_hash', hash('sha256', (string) $revision->content_md));
+
+        return ($lock ? $query->lockForUpdate() : $query)->first() !== null;
     }
 
     public static function dependencies(array $p, bool $lock = false): array

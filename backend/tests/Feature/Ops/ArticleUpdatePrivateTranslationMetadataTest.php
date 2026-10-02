@@ -8,6 +8,7 @@ use App\Console\Commands\ArticleForkPrivateTranslationLinks;
 use App\Console\Commands\ArticleUpdatePrivateTranslationMetadata as Metadata;
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTag;
 use App\Models\ArticleTranslationRevision;
@@ -139,6 +140,33 @@ final class ArticleUpdatePrivateTranslationMetadataTest extends TestCase
                 \Illuminate\Support\Facades\DB::rollBack();
             }
         }
+    }
+
+    public function test_native_package_queued_revision_requires_exact_import_identity_and_body(): void
+    {
+        [$s, $t, $p] = $this->fixture();
+        $t->workingRevision->forceFill(['revision_status' => 'human_review', 'authority_metadata_json' => null])->saveQuietly();
+        $t->forceFill(['translation_status' => Article::TRANSLATION_STATUS_HUMAN_REVIEW])->saveQuietly();
+        $p['target_snapshot_hash'] = ArticleForkPrivateTranslationLinks::targetHash($s->fresh());
+        $this->assertSame(1, $this->runCommand($p, true));
+        $import = ArticleEditorialPackageImport::create(['org_id' => 0, 'article_id' => $t->id,
+            'locale' => 'en', 'slug' => $t->slug, 'title' => $t->title, 'content_track' => 'editorial',
+            'status' => ArticleEditorialPackageImport::STATUS_IMPORTED, 'body_hash' => hash('sha256', $t->workingRevision->content_md)]);
+        foreach (['org_id' => 9, 'article_id' => $s->id, 'locale' => 'zh-CN', 'slug' => 'wrong-slug',
+            'status' => ArticleEditorialPackageImport::STATUS_DRY_RUN_PASSED, 'body_hash' => str_repeat('b', 64)] as $field => $bad) {
+            $original = $import->{$field};
+            $import->forceFill([$field => $bad])->saveQuietly();
+            $this->assertSame(1, $this->runCommand($p, true), $field);
+            $this->assertSame(0, AuditLog::count());
+            $import->forceFill([$field => $original])->saveQuietly();
+        }
+        $history = ArticleSourceTargetSnapshot::sourceRevisions($t->fresh());
+        $this->assertSame(0, $this->runCommand($p), Artisan::output());
+        $this->assertSame(0, $this->runCommand($p, true), Artisan::output());
+        $this->assertSame($history, ArticleSourceTargetSnapshot::sourceRevisions($t->fresh()));
+        $this->assertNull($t->fresh()->published_revision_id);
+        $this->assertNull($t->fresh()->workingRevision->reviewed_at);
+        $this->assertFalse(AuditLog::firstOrFail()->meta_json['human_review_completed']);
     }
 
     public function test_audit_failure_rolls_back_all_metadata_and_tags(): void
