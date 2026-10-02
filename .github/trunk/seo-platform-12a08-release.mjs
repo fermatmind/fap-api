@@ -1,4 +1,5 @@
 import { readFileSync, writeFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { MISSIONS, digest, fingerprint, mayCarry } from './seo-platform-12a08-activation.mjs';
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
 export function verifyState(before, after, sha) {
@@ -134,16 +135,27 @@ export function parseLegacyNightlyFailures(log) {
   return [...found.values()];
 }
 export function parseJUnitNightlyFailures(xml) {
-  const normalized = typeof xml === 'string' ? xml.trim() : '';
-  const root = /<(testsuites?)\b/.exec(normalized)?.[1];
-  if (!normalized || !root || !new RegExp(`</${root}>\\s*$`).test(normalized)) throw new Error('NIGHTLY_ARTIFACT_INCOMPLETE');
+  // Parse the actual XML, including nested suites and escaped failure text. A
+  // closing-tag regex cannot prove completeness or exclude an empty test run.
+  let cases;
+  try {
+    cases = JSON.parse(execFileSync('python3', ['-c', `
+import json, sys, xml.etree.ElementTree as ET
+root = ET.fromstring(sys.stdin.read())
+cases = list(root.iter('testcase'))
+if root.tag not in ('testsuites', 'testsuite') or not cases:
+    raise ValueError('incomplete JUnit')
+print(json.dumps([{'file': case.get('file', ''),
+    'body': ''.join(''.join(child.itertext()) for child in case if child.tag in ('failure', 'error')),
+    'failed': any(child.tag in ('failure', 'error') for child in case)} for case in cases]))
+`], {input:typeof xml === 'string' ? xml : '', encoding:'utf8', maxBuffer:64*1024*1024, stdio:['pipe','pipe','pipe']}));
+  } catch { throw new Error('NIGHTLY_ARTIFACT_INCOMPLETE'); }
   const found = new Map();
-  for (const match of normalized.matchAll(/<testcase\b([^>]*)>([\s\S]*?)<\/testcase>/g)) {
-    const [, attributes, body] = match;
-    if (!/<(?:failure|error)\b/.test(body)) continue;
-    const path = /\bfile=["'](tests\/[A-Za-z0-9_./-]+\.php)["']/.exec(attributes)?.[1] ?? nightlyPath(body);
-    if (!path) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
-    found.set(path, {failed_test:path, focused_test:focusedClass(path, body)});
+  for (const item of cases) {
+    if (!item.failed) continue;
+    const path = /(?:^|\/backend\/)(tests\/[A-Za-z0-9_./-]+\.php)$/.exec(item.file)?.[1] ?? nightlyPath(item.body);
+    if (!path || path.split('/').includes('..')) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+    found.set(path, {failed_test:path, focused_test:focusedClass(path, item.body)});
   }
   return [...found.values()];
 }
@@ -165,17 +177,18 @@ export function assessNightly(run, jobs, evidence, checks) {
   const source = structured.junit !== undefined ? 'junit' : 'legacy_pest_log';
   if (source === 'junit' && !/^sha256:[a-f0-9]{64}$/.test(structured.artifact_digest ?? '')) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
   const junitFailures = source === 'junit' ? parseJUnitNightlyFailures(structured.junit) : null;
+  const checkScope = run.event === 'push' ? 'full_evidence_repair' : 'weekly_full_checks';
   const binding = structured.artifact_digest ? {artifact_digest:structured.artifact_digest} : {};
   if (!failed.length) {
     if (junitFailures?.length) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
-    return {run_id:run.id,sha:run.head_sha,check_scope:'weekly_full_checks',status:'pass',disposition:'INDEPENDENT_HEALTH_CHECK',evidence_source:source,...binding};
+    return {run_id:run.id,sha:run.head_sha,check_scope:checkScope,status:'pass',disposition:'INDEPENDENT_HEALTH_CHECK',evidence_source:source,...binding};
   }
   if (failed.some(job=>job.name !== 'Full PHPUnit regression and performance contracts')) throw new Error('NIGHTLY_HIGH_RISK_FOCUSED_REVALIDATION_REQUIRED');
   const revalidated = junitFailures ?? parseLegacyNightlyFailures(structured.log);
   if (!revalidated.length) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
   const covered = checks?.covered_classes ?? [];
   if (!revalidated.every(item=>covered.some(name=>name.endsWith(item.focused_test)))) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
-  return {run_id:run.id,sha:run.head_sha,check_scope:'weekly_full_checks',status:'failure',
+  return {run_id:run.id,sha:run.head_sha,check_scope:checkScope,status:'failure',
     disposition:'CURRENT_CANDIDATE_FOCUSED_REVALIDATION',candidate_sha:checks.sha,evidence_source:source,...binding,revalidated};
 }
 

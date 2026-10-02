@@ -88,6 +88,7 @@ test('existing workflows publish completed scoped evidence without runtime opera
  assert.match(evidence,/actions\/jobs\/\$\{fullJob\.id\}\/logs/);
  assert.match(evidence,/\['api','--allow-escape-sequences',`repos\/\$\{repo\}\/actions\/jobs/);
  assert.doesNotMatch(evidence,/--log-failed/);
+ assert.match(evidence,/nightly\.yml\/runs\?status=completed&per_page=100/);
 });
 test('A08 activation gate skips only unavailable evidence and fails closed otherwise',()=>{
  const deploy=readFileSync(new URL('../workflows/deploy.yml',import.meta.url),'utf8');
@@ -165,13 +166,21 @@ test('Nightly evidence accepts both Pest paths, deduplicates, and stays fail-clo
   {failed_test:'tests/Feature/PermissionTest.php',focused_test:'PermissionTest'},
   {failed_test:'tests/Unit/PolicyTest.php',focused_test:'PolicyTest'},
  ]);
+ const absoluteJUnit=junit.replaceAll('file="tests/', 'file="/home/runner/work/fap-api/fap-api/backend/tests/');
+ assert.deepEqual(parseJUnitNightlyFailures(absoluteJUnit),parseJUnitNightlyFailures(junit));
+ assert.throws(()=>parseJUnitNightlyFailures('<testsuite><testcase file="/other/tests/Feature/PermissionTest.php"><failure>failed</failure></testcase></testsuite>'),/UNKNOWN/);
+ assert.throws(()=>parseJUnitNightlyFailures('<testsuite><testcase file="tests/../PermissionTest.php"><failure>failed</failure></testcase></testsuite>'),/UNKNOWN/);
  const structured=assessNightly(run,full,{junit,artifact_digest:`sha256:${'c'.repeat(64)}`},checks);
  assert.equal(structured.evidence_source,'junit');
  assert.equal(structured.artifact_digest,`sha256:${'c'.repeat(64)}`);
  const successJUnit='<testsuites><testsuite><testcase name="ok"/></testsuite></testsuites>';
  assert.deepEqual(parseJUnitNightlyFailures(successJUnit),[]);
  assert.equal(assessNightly(run,[],{junit:successJUnit,artifact_digest:`sha256:${'c'.repeat(64)}`},checks).status,'pass');
- for (const incomplete of ['', '<testsuites><testcase>', '<testsuite></testsuites>', '<not-junit/>']) {
+ assert.equal(assessNightly({...run,event:'push'},[],{junit:successJUnit,artifact_digest:`sha256:${'c'.repeat(64)}`},checks).check_scope,'full_evidence_repair');
+ assert.deepEqual(parseJUnitNightlyFailures('<testsuite><testcase file="tests/Feature/PermissionTest.php"><failure><![CDATA[one > two & unknown]]></failure></testcase></testsuite>'),[
+  {failed_test:'tests/Feature/PermissionTest.php',focused_test:'PermissionTest'},
+ ]);
+ for (const incomplete of ['', '<testsuites><testcase>', '<testsuite></testsuites>', '<not-junit/>', '<testsuites></testsuites>', '<testsuites><testsuite><testcase name="x"/></testsuites>', '<testsuites><testcase/></testsuites><testsuite/>']) {
   assert.throws(()=>assessNightly(run,full,{junit:incomplete,artifact_digest:`sha256:${'c'.repeat(64)}`},checks),/NIGHTLY_ARTIFACT_INCOMPLETE/);
   assert.throws(()=>assessNightly(run,[{name:full[0].name,conclusion:'success'}],{junit:incomplete,artifact_digest:`sha256:${'c'.repeat(64)}`},checks),/NIGHTLY_ARTIFACT_INCOMPLETE/);
  }

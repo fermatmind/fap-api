@@ -61,7 +61,7 @@ const dailyResults = ['SCHEDULER_RESULT', 'GSC_RESULT'];
 
 test('daily operations and weekly complete checks have independent schedules and concurrency', () => {
   assert.deepEqual([...workflow.matchAll(/- cron: "([^"]+)"/g)].map((match) => match[1]), [dailySchedule, weeklySchedule]);
-  assert.match(workflow, /group: nightly-\$\{\{ github\.repository \}\}-\$\{\{ github\.event\.schedule \}\}/);
+  assert.match(workflow, /group: nightly-\$\{\{ github\.repository \}\}-\$\{\{ github\.event_name \}\}-\$\{\{ github\.event\.schedule \}\}/);
   for (const [job, next] of [
     ['dependency-audit', 'workflow-contracts'],
     ['workflow-contracts', 'authority-contract'],
@@ -69,12 +69,12 @@ test('daily operations and weekly complete checks have independent schedules and
     ['full-phpunit', 'codeql'],
     ['codeql', 'gsc-read-model-sync'],
   ]) {
-    assert.ok(jobSection(job, next).includes(`if: github.event_name == 'schedule' && github.event.schedule == '${weeklySchedule}'`));
+    assert.ok(jobSection(job, next).includes(`if: github.event_name == 'push' || (github.event_name == 'schedule' && github.event.schedule == '${weeklySchedule}')`));
   }
   for (const [job, next] of [['scheduler-evidence-monitor', 'dependency-audit'], ['gsc-read-model-sync', 'nightly-summary']]) {
     assert.ok(jobSection(job, next).includes(`if: github.event_name == 'schedule' && github.event.schedule == '${dailySchedule}'`));
   }
-  assert.ok(jobSection('nightly-summary').includes(`if: always() && github.event_name == 'schedule' && (github.event.schedule == '${dailySchedule}' || github.event.schedule == '${weeklySchedule}')`));
+  assert.ok(jobSection('nightly-summary').includes(`if: always() && (github.event_name == 'push' || (github.event_name == 'schedule' && (github.event.schedule == '${dailySchedule}' || github.event.schedule == '${weeklySchedule}')))`));
   assert.doesNotMatch(workflow, /workflow_dispatch:/);
   assert.equal((workflow.match(/continue-on-error: true/g) ?? []).length, 1);
   assert.match(jobSection('full-phpunit', 'codeql'), /id: full-tests[\s\S]*continue-on-error: true[\s\S]*steps\.full-tests\.outcome != 'success'/);
@@ -97,7 +97,7 @@ function runSummary(schedule, overrides = {}) {
     const run = spawnSync('bash', ['-c', lines.join('\n')], {
       cwd: root,
       encoding: 'utf8',
-      env: { ...process.env, GITHUB_SHA: 'a'.repeat(40), SCHEDULE: schedule, ...results, ...overrides },
+      env: { ...process.env, GITHUB_SHA: 'a'.repeat(40), SCHEDULE: schedule, EVENT_NAME: 'schedule', ...results, ...overrides },
     });
     assert.equal(run.status, 0, run.stderr);
     const receipt = JSON.parse(readFileSync(join(root, 'artifacts/nightly-summary/receipt.json'), 'utf8'));
@@ -183,4 +183,24 @@ test('full PHPUnit rejects empty or malformed JUnit and retains original diagnos
     }
   }
   assert.match(section, /steps\.full-tests\.outcome != 'success'/);
+});
+
+
+test('only complete-evidence implementation changes trigger an automatic repair run', () => {
+  const push = workflow.split('  push:\n')[1].split('  schedule:')[0];
+  assert.match(push, /branches: \[main\]/);
+  assert.deepEqual([...push.matchAll(/- '([^']+)'/g)].map(match => match[1]), [
+    '.github/workflows/nightly.yml',
+    '.github/trunk/seo-platform-12a08-evidence-download.mjs',
+    '.github/trunk/seo-platform-12a08-release.mjs',
+  ]);
+  const receipt = runSummary('', { EVENT_NAME: 'push' });
+  assert.equal(receipt.status, 'pass');
+  assert.equal(receipt.check_scope, 'full_evidence_repair');
+  assert.equal(receipt.event, 'push');
+  assert.equal(Object.values(receipt.domains).filter(domain => domain.required).length, 5);
+  assert.equal(receipt.domains.scheduler_evidence.required, false);
+  for (const key of weeklyResults) {
+    assert.equal(runSummary('', { EVENT_NAME: 'push', [key]: 'skipped' }).status, 'fail');
+  }
 });

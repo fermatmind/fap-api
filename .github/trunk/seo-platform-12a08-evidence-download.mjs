@@ -33,7 +33,7 @@ const ciArtifact = api(`actions/runs/${ci.id}/artifacts?per_page=100`).artifacts
 if (!ciArtifact || !/^sha256:[a-f0-9]{64}$/.test(ciArtifact.digest)) throw new Error('CI_ARTIFACT_HOLD');
 artifactDigests.ci = ciArtifact.digest;
 const checks = artifactDigests.checks ? read('checks/a08-scoped-checks.json') : null;
-const nightlyRuns = api('actions/workflows/nightly.yml/runs?status=completed&per_page=10').workflow_runs;
+const nightlyRuns = api('actions/workflows/nightly.yml/runs?status=completed&per_page=100').workflow_runs;
 let nightly = null;
 for (const run of nightlyRuns) {
   const nightlyJobs = api(`actions/runs/${run.id}/jobs?per_page=100`).jobs;

@@ -1,7 +1,14 @@
 name: Nightly
-run-name: "${{ github.event.schedule == '17 18 * * *' && 'Daily operations' || 'Weekly full checks' }} · ${{ github.sha }}"
+run-name: "${{ github.event_name == 'push' && 'Full evidence repair' || github.event.schedule == '17 18 * * *' && 'Daily operations' || 'Weekly full checks' }} · ${{ github.sha }}"
 
 on:
+  # Refresh complete evidence only when its producer/consumer changes, never for ordinary content.
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/nightly.yml'
+      - '.github/trunk/seo-platform-12a08-evidence-download.mjs'
+      - '.github/trunk/seo-platform-12a08-release.mjs'
   schedule:
     # Daily operations: 02:17 Asia/Shanghai.
     - cron: "17 18 * * *"
@@ -14,7 +21,7 @@ permissions:
   security-events: write
 
 concurrency:
-  group: nightly-${{ github.repository }}-${{ github.event.schedule }}
+  group: nightly-${{ github.repository }}-${{ github.event_name }}-${{ github.event.schedule }}
   cancel-in-progress: true
 
 jobs:
@@ -113,7 +120,7 @@ jobs:
 
   dependency-audit:
     name: Dependency contract and vulnerability audit
-    if: github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0'
+    if: github.event_name == 'push' || (github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -132,7 +139,7 @@ jobs:
 
   workflow-contracts:
     name: Workflow, classifier, and secret contracts
-    if: github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0'
+    if: github.event_name == 'push' || (github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0')
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -147,7 +154,7 @@ jobs:
 
   authority-contract:
     name: MBTI, Personality, and Sitemap authority contract
-    if: github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0'
+    if: github.event_name == 'push' || (github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0')
     runs-on: ubuntu-latest
     timeout-minutes: 45
     services:
@@ -190,7 +197,7 @@ jobs:
 
   full-phpunit:
     name: Full PHPUnit regression and performance contracts
-    if: github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0'
+    if: github.event_name == 'push' || (github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0')
     runs-on: ubuntu-latest
     timeout-minutes: 90
     services:
@@ -277,7 +284,7 @@ jobs:
 
   codeql:
     name: CodeQL and Semgrep security scan
-    if: github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0'
+    if: github.event_name == 'push' || (github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0')
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -515,11 +522,12 @@ jobs:
       - codeql
       - scheduler-evidence-monitor
       - gsc-read-model-sync
-    if: always() && github.event_name == 'schedule' && (github.event.schedule == '17 18 * * *' || github.event.schedule == '37 18 * * 0')
+    if: always() && (github.event_name == 'push' || (github.event_name == 'schedule' && (github.event.schedule == '17 18 * * *' || github.event.schedule == '37 18 * * 0')))
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
       SCHEDULE: ${{ github.event.schedule }}
+      EVENT_NAME: ${{ github.event_name }}
       AUTHORITY_RESULT: ${{ needs.authority-contract.result }}
       FULL_PHPUNIT_RESULT: ${{ needs.full-phpunit.result }}
       DEPENDENCY_RESULT: ${{ needs.dependency-audit.result }}
@@ -536,6 +544,7 @@ jobs:
           jq -n \
             --arg sha "$GITHUB_SHA" \
             --arg schedule "$SCHEDULE" \
+            --arg event "$EVENT_NAME" \
             --arg authority "$AUTHORITY_RESULT" \
             --arg full_phpunit "$FULL_PHPUNIT_RESULT" \
             --arg dependency "$DEPENDENCY_RESULT" \
@@ -544,12 +553,13 @@ jobs:
             --arg scheduler "$SCHEDULER_RESULT" \
             --arg gsc "$GSC_RESULT" '
             ($schedule == "17 18 * * *") as $daily |
-            ($schedule == "37 18 * * 0") as $weekly |
+            ($schedule == "37 18 * * 0" or $event == "push") as $weekly |
             {
               schema_version: "nightly-failure-domain-summary.v2",
               workflow_sha: $sha,
               schedule: $schedule,
-              check_scope: (if $daily then "daily_operations" elif $weekly then "weekly_full_checks" else "unknown" end),
+              event: $event,
+              check_scope: (if $daily then "daily_operations" elif $event == "push" then "full_evidence_repair" elif $weekly then "weekly_full_checks" else "unknown" end),
               production_rollback_requested: false,
               domains: {
                 authority_contract: {result: $authority, required: $weekly},
