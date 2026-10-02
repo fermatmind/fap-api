@@ -20,9 +20,10 @@ final class ArticleForkExistingTranslationDraft extends Command
 {
     private const PAIRS = [3 => 188, 4 => 191, 5 => 195, 6 => 196, 7 => 198, 8 => 200, 9 => 201, 10 => 202, 11 => 26, 12 => 27, 13 => 29, 14 => 28, 15 => 24, 16 => 25, 46 => 47, 48 => 49, 50 => 197, 51 => 190, 52 => 189, 58 => 192];
 
-    private const REBASE_PAIRS = [10 => 202, 40 => 41];
+    private const REBASE_PAIRS = [3 => 188, 4 => 191, 5 => 195, 6 => 196, 7 => 198, 8 => 200, 9 => 201, 10 => 202, 11 => 26, 12 => 27, 13 => 29, 14 => 28, 15 => 24, 16 => 25, 37 => 39, 40 => 41, 46 => 47, 48 => 49, 50 => 197, 51 => 190, 52 => 189, 58 => 192, 64 => 65, 68 => 69, 70 => 71, 72 => 73, 74 => 75, 84 => 85];
 
     private const LOCALIZED_SLUGS = [
+        37 => ['mbti-vs-holland-career-choice', 'mbti-vs-holland-code-career-choice'],
         40 => ['riasec-holland-career-interest-test-explained', 'what-is-riasec-holland-code-career-interest-test'],
         46 => ['career-interest-vs-personality-test-differences', 'career-interest-test-vs-personality-test'],
         48 => ['career-confusion-test-map', 'choose-career-using-personality-tests'],

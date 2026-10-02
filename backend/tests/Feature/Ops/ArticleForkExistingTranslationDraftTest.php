@@ -23,7 +23,7 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
 
     public static function existingAndStalePairs(): array
     {
-        return [[3, 188, false], [11, 26, false], [4, 191, false], [4, 191, true], [12, 27, true], [13, 29, true], [14, 28, true], [15, 24, true], [16, 25, true], [10, 202, false, true], [40, 41, false, true], [40, 41, false, true, true], [8, 200, false], [46, 47, false], [48, 49, false], [58, 192, false]];
+        return [...array_map(static fn (array $pair): array => [...$pair, false, true], self::cms5RebasePairs()), ...array_map(static fn (array $pair): array => [...$pair, false, true], self::cms2RebasePairs()), [3, 188, false], [11, 26, false], [4, 191, false], [4, 191, true], [12, 27, true], [13, 29, true], [14, 28, true], [15, 24, true], [16, 25, true], [10, 202, false, true], [40, 41, false, true], [40, 41, false, true, true], [8, 200, false], [46, 47, false], [48, 49, false], [58, 192, false]];
     }
 
     #[DataProvider('existingAndStalePairs')]
@@ -219,9 +219,19 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
         }
     }
 
+    public static function cms2RebasePairs(): array
+    {
+        return [[84, 85], [15, 24], [16, 25], [12, 27], [14, 28], [13, 29], [11, 26], [46, 47], [48, 49], [58, 192], [8, 200], [37, 39], [64, 65], [68, 69], [70, 71], [72, 73], [74, 75], [3, 188], [52, 189], [51, 190], [4, 191]];
+    }
+
+    public static function cms5RebasePairs(): array
+    {
+        return ['cms5 source5' => [5, 195], 'cms5 source6' => [6, 196], 'cms5 source7' => [7, 198], 'cms5 source9' => [9, 201], 'cms5 source50' => [50, 197]];
+    }
+
     public static function privateRebasePairs(): array
     {
-        return [[10, 202], [40, 41]];
+        return [[10, 202], [40, 41], ...self::cms2RebasePairs(), ...self::cms5RebasePairs()];
     }
 
     #[DataProvider('privateRebasePairs')]
@@ -247,8 +257,8 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
         try {
             $p = json_decode(file_get_contents($file), true);
             $outside = $p;
-            $outside['source_id'] = 4;
-            $outside['target_id'] = 191;
+            $outside['source_id'] = 9;
+            $outside['target_id'] = 197;
             file_put_contents($file, json_encode($outside));
             $this->assertSame(1, $this->callCommand($file, hash_file('sha256', $file)));
             $this->assertContains('package_invalid', json_decode(Artisan::output(), true)['errors']);
@@ -332,7 +342,7 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
 
     public static function localizedPairs(): array
     {
-        return [[40, 41, true], [46, 47, false], [48, 49, false]];
+        return [[37, 39, true], [40, 41, true], [46, 47, false], [48, 49, false]];
     }
 
     #[DataProvider('localizedPairs')]
@@ -375,7 +385,7 @@ final class ArticleForkExistingTranslationDraftTest extends TestCase
         $t->forceFill(['working_revision_id' => $old->id, 'published_revision_id' => $old->id])->saveQuietly();
         ArticleSeoMeta::create(['org_id' => 0, 'article_id' => $t->id, 'locale' => 'en', 'seo_title' => 'Public SEO', 'seo_description' => 'Public description', 'is_indexable' => true]);
 
-        $localized = [
+        $localized = [37 => ['mbti-vs-holland-career-choice', 'mbti-vs-holland-code-career-choice'],
             40 => ['riasec-holland-career-interest-test-explained', 'what-is-riasec-holland-code-career-interest-test'],
             46 => ['career-interest-vs-personality-test-differences', 'career-interest-test-vs-personality-test'],
             48 => ['career-confusion-test-map', 'choose-career-using-personality-tests'],
