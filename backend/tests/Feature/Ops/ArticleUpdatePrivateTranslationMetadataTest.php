@@ -95,6 +95,7 @@ final class ArticleUpdatePrivateTranslationMetadataTest extends TestCase
     {
         [$s, $t, $p] = $this->fixture();
         $t->workingRevision->forceFill(['revision_status' => 'human_review'])->saveQuietly();
+        $t->forceFill(['translation_status' => Article::TRANSLATION_STATUS_HUMAN_REVIEW])->saveQuietly();
         $p['target_snapshot_hash'] = ArticleForkPrivateTranslationLinks::targetHash($s->fresh());
         $history = ArticleSourceTargetSnapshot::sourceRevisions($t->fresh());
         $source = ArticleForkPrivateTranslationLinks::sourceHash($s);
@@ -105,6 +106,7 @@ final class ArticleUpdatePrivateTranslationMetadataTest extends TestCase
         $this->assertSame($history, ArticleSourceTargetSnapshot::sourceRevisions($t->fresh()));
         $this->assertSame($source, ArticleForkPrivateTranslationLinks::sourceHash($s->fresh()));
         $this->assertSame('human_review', $t->fresh()->workingRevision->revision_status);
+        $this->assertSame(Article::TRANSLATION_STATUS_HUMAN_REVIEW, $t->fresh()->translation_status);
         $this->assertNull($t->fresh()->workingRevision->reviewed_at);
         $this->assertNull($t->fresh()->published_revision_id);
         $this->assertFalse(AuditLog::firstOrFail()->meta_json['human_review_completed']);
@@ -115,6 +117,7 @@ final class ArticleUpdatePrivateTranslationMetadataTest extends TestCase
         [$s, $t, $p] = $this->fixture();
         $mutations = [
             fn () => $t->forceFill(['is_public' => true])->saveQuietly(),
+            fn () => $t->forceFill(['translation_status' => Article::TRANSLATION_STATUS_APPROVED])->saveQuietly(),
             fn () => $t->workingRevision->forceFill(['reviewed_at' => now()])->saveQuietly(),
             fn () => $t->workingRevision->forceFill(['revision_status' => 'approved'])->saveQuietly(),
             fn () => $t->workingRevision->forceFill(['revision_status' => 'published'])->saveQuietly(),

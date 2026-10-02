@@ -209,7 +209,7 @@ final class ArticleUpdatePrivateTranslationMetadata extends Command
             || $t->locale !== 'en' || $t->status !== 'draft' || $t->is_public || $t->is_indexable
             || $t->sitemap_eligible || $t->llms_eligible || $t->published_revision_id !== null || $t->published_at !== null
             || ! preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', (string) $t->slug)
-            || $t->translation_status !== Article::TRANSLATION_STATUS_MACHINE_DRAFT
+            || ! in_array($t->translation_status, [Article::TRANSLATION_STATUS_MACHINE_DRAFT, Article::TRANSLATION_STATUS_HUMAN_REVIEW], true)
             || (int) $t->working_revision_id !== $p['working_revision_id']) {
             throw new RuntimeException('private_translation_required');
         }
