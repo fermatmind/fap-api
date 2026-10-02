@@ -263,7 +263,7 @@ class ArticleResource extends Resource
                             ->schema([
                                 Forms\Components\Placeholder::make('locale_scope_marker')
                                     ->label(__('ops.locale_scope.editor_marker_label'))
-                                    ->content(fn (Forms\Get $get, ?Article $record): string => OpsContentLocaleScope::editorMarker((string) ($get('locale') ?? $record?->locale ?? OpsContentLocaleScope::currentContentLocale())))
+                                    ->content(fn (Forms\Get $get, ?Article $record): string => OpsContentLocaleScope::editorMarker((string) ($get('locale') ?? $record?->locale ?? OpsContentLocaleScope::currentContentLocale()), $record))
                                     ->columnSpanFull(),
                                 Forms\Components\TextInput::make('locale')
                                     ->label(__('ops.resources.articles.fields.locale'))

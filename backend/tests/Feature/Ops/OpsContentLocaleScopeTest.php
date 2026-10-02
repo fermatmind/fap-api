@@ -19,6 +19,7 @@ use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
 use Filament\PanelRegistry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -197,6 +198,34 @@ final class OpsContentLocaleScopeTest extends TestCase
             'Try adjusting the current search or filters to widen the result set.',
             OpsContentLocaleScope::emptyStateDescription($searchedLivewire, 'Article', true)
         );
+    }
+
+    public function test_editor_marker_uses_authoritative_lineage_for_all_supported_content_models_without_queries(): void
+    {
+        app()->setLocale('en');
+        $queries = [];
+        DB::listen(function ($query) use (&$queries): void {
+            $queries[] = $query->sql;
+        });
+
+        foreach ([Article::class, ContentPage::class, SupportArticle::class, InterpretationGuide::class] as $model) {
+            $source = new $model(['locale' => 'en', 'source_locale' => 'en', 'translation_status' => 'source']);
+            $translation = new $model(['locale' => 'en', 'source_locale' => 'zh-CN', 'translation_status' => 'approved']);
+            $brokenSource = new $model(['locale' => 'en', 'source_locale' => 'zh-CN', 'translation_status' => 'source']);
+            $before = $translation->getAttributes();
+
+            $this->assertSame('Content language: en · Source locale: en · Role: Source content', OpsContentLocaleScope::editorMarker('en', $source));
+            $expected = 'Content language: en · Source locale: zh-CN · Role: Target translation';
+            $this->assertSame($expected, OpsContentLocaleScope::editorMarker('en', $translation));
+            $this->assertSame($expected, OpsContentLocaleScope::editorMarker('en', $translation));
+            $this->assertSame($before, $translation->getAttributes());
+            $this->assertSame('Content language: en · Source locale: zh-CN · Role: Unresolved lineage', OpsContentLocaleScope::editorMarker('en', $brokenSource));
+            $translation->source_locale = null;
+            $this->assertSame('Content language: en · Source locale: Not configured · Role: Unresolved lineage', OpsContentLocaleScope::editorMarker('en', $translation));
+        }
+
+        $this->assertSame([], $queries);
+        $this->assertSame('Content language: en · Source locale: en · Role: Source content', OpsContentLocaleScope::editorMarker('en'));
     }
 
     /**

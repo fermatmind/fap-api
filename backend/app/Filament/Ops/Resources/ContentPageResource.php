@@ -91,7 +91,7 @@ class ContentPageResource extends Resource
                                                     ->default('en'),
                                                 Forms\Components\Placeholder::make('locale_scope_marker')
                                                     ->label(__('ops.locale_scope.editor_marker_label'))
-                                                    ->content(fn (Forms\Get $get, ?ContentPage $record): string => OpsContentLocaleScope::editorMarker((string) ($get('locale') ?? $record?->locale ?? OpsContentLocaleScope::currentContentLocale())))
+                                                    ->content(fn (Forms\Get $get, ?ContentPage $record): string => OpsContentLocaleScope::editorMarker((string) ($get('locale') ?? $record?->locale ?? OpsContentLocaleScope::currentContentLocale()), $record))
                                                     ->columnSpanFull(),
                                                 Forms\Components\TextInput::make('kicker')->maxLength(96),
                                                 Forms\Components\Textarea::make('summary')->rows(3)->maxLength(2000)->columnSpanFull(),

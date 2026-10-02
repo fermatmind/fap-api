@@ -863,6 +863,9 @@ return [
         'editor_marker_label' => 'Locale scope',
         'editor_marker' => 'Content language: :locale · Source locale: :source_locale · Role: :role',
         'source_role' => 'Source content',
+        'translation_role' => 'Target translation',
+        'unknown_role' => 'Unresolved lineage',
+        'unknown_locale' => 'Not configured',
         'empty_description' => 'No content available in this language yet',
     ],
 

@@ -863,6 +863,9 @@ return [
         'editor_marker_label' => '语言范围',
         'editor_marker' => '当前内容语言：:locale · 源语言：:source_locale · 类型：:role',
         'source_role' => '源文',
+        'translation_role' => '目标译文',
+        'unknown_role' => '血缘待核实',
+        'unknown_locale' => '未配置',
         'empty_description' => '暂无该语言内容',
     ],
 

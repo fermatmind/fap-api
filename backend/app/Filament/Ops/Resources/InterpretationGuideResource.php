@@ -100,7 +100,7 @@ class InterpretationGuideResource extends Resource
                                                     ->default('en'),
                                                 Forms\Components\Placeholder::make('locale_scope_marker')
                                                     ->label(__('ops.locale_scope.editor_marker_label'))
-                                                    ->content(fn (Forms\Get $get, ?InterpretationGuide $record): string => OpsContentLocaleScope::editorMarker((string) ($get('locale') ?? $record?->locale ?? OpsContentLocaleScope::currentContentLocale())))
+                                                    ->content(fn (Forms\Get $get, ?InterpretationGuide $record): string => OpsContentLocaleScope::editorMarker((string) ($get('locale') ?? $record?->locale ?? OpsContentLocaleScope::currentContentLocale()), $record))
                                                     ->columnSpanFull(),
                                                 Forms\Components\Textarea::make('summary')->rows(3)->maxLength(2000)->columnSpanFull(),
                                                 Forms\Components\MarkdownEditor::make('body_md')->columnSpanFull()->extraFieldWrapperAttributes(['class' => 'ops-edit-workspace-field--editor']),

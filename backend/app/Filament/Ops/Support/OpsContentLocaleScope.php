@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Support;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 final class OpsContentLocaleScope
 {
@@ -91,14 +92,25 @@ final class OpsContentLocaleScope
         return self::normalizeContentLocale($locale) ?? self::currentContentLocale();
     }
 
-    public static function editorMarker(?string $locale): string
+    public static function editorMarker(?string $locale, ?Model $record = null): string
     {
         $contentLocale = self::normalizeContentLocale($locale) ?? self::currentContentLocale();
 
+        $sourceLocale = $record === null
+            ? $contentLocale
+            : self::normalizeContentLocale($record->getAttribute('source_locale'));
+        $isSource = $record === null || (method_exists($record, 'isSourceArticle')
+            ? $record->isSourceArticle()
+            : (method_exists($record, 'isSourceContent') && $record->isSourceContent()));
+        $role = $isSource ? 'source_role' : 'translation_role';
+        if ($record !== null && ($sourceLocale === null || $record->getAttribute('translation_status') === 'source') && ! $isSource) {
+            $role = 'unknown_role';
+        }
+
         return __('ops.locale_scope.editor_marker', [
             'locale' => $contentLocale,
-            'source_locale' => self::sourceLocale($contentLocale),
-            'role' => __('ops.locale_scope.source_role'),
+            'source_locale' => $sourceLocale ?? __('ops.locale_scope.unknown_locale'),
+            'role' => __('ops.locale_scope.'.$role),
         ]);
     }
 
