@@ -126,25 +126,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-1",
-          "label": "core_type:type-1",
+          "label": "第1型核心类型",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-1"
         },
         {
           "href": "/zh/personality/enneagram/type-1/instincts/social",
-          "label": "instinctual_subtype:type-1/social",
+          "label": "第1型社群副型",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-1/social"
         },
         {
           "href": "/zh/personality/enneagram/type-1/instincts/one-to-one",
-          "label": "instinctual_subtype:type-1/one-to-one",
+          "label": "第1型一对一副型",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-1/one-to-one"
         }
@@ -214,7 +214,7 @@
           "title": "让轻松临场处理成为反证"
         },
         {
-          "body_md": "现有证据依赖具体工具和样本，不能证明普遍副型本体或跨文化等价。本页只提供观察问题，不作健康、人格或结果结论；所有既定审核、草稿与可发现性状态保持不变。",
+          "body_md": "现有证据依赖具体工具和样本，不能证明普遍副型本体或跨文化等价。本页只提供观察问题，不作健康、人格或结果结论。",
           "key": "evidence_boundary",
           "title": "收紧副型证据范围"
         },
@@ -331,5 +331,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "9171e55c47939d7e0872afea3037992f12ea40056d11fdc9fffb4501788e71f3"
+  "source_content_sha256": "f36e3a07e6fc38a10eb2df3ede056a867b65215d24b43ca12e3007119d757d5e"
 }

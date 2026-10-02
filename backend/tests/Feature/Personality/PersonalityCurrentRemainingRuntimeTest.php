@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class PersonalityCurrentRemainingRuntimeTest extends TestCase
 {
-    private const AGGREGATE = '7553298ec773f6e47f4ce5198ddec08927604f12af6ab6271a314f4c77696493';
+    private const AGGREGATE = 'fb942e289f8f7b59e868fa23324fd2873a3a8d42d352422efd73ac117fe19bbc';
 
     #[DataProvider('detailCases')]
     public function test_public_detail_is_served_from_its_per_page_authority(string $url, string $file): void

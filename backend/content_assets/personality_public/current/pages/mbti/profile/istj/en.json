@@ -25,13 +25,13 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "02e12c1c922064362bc11971cf406d18763672ae",
+      "answer_fingerprint": "a1d2f5e3a042b56807281744cd43611a5c788311",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
         "2642daa2715afb73374420cfe0e91a856d068f6f",
-        "83fd6bea0ee719a8b6996f6a0fe02f090dbedb67",
+        "1c3191d242ccd3de4f7ecd34d9ae7e45094f42ed",
         "personality_public_projection_v1",
         "mbti_public_projection_v1",
         "personality_sections",
@@ -39,7 +39,7 @@
       ],
       "faq_blocks": [],
       "indexability_state": "indexable",
-      "landing_surface_ref": "83fd6bea0ee719a8b6996f6a0fe02f090dbedb67",
+      "landing_surface_ref": "1c3191d242ccd3de4f7ecd34d9ae7e45094f42ed",
       "next_step_blocks": [
         {
           "body": null,
@@ -74,35 +74,35 @@
       "runtime_artifact_ref": null,
       "scene_summary_blocks": [
         {
-          "body": "Review career recommendations first, then validate from the type page.",
+          "body": "Compare actual job tasks and requirements; a type description is an optional prompt.",
           "href": "/en/career/recommendations",
           "key": "career_direction",
           "kind": "scene_entry",
           "title": "Career direction"
         },
         {
-          "body": "Use the MBTI topic hub as the decision frame before choosing a major path.",
+          "body": "Compare course content, entry requirements and your own experience before choosing a major.",
           "href": "/en/topics/mbti",
           "key": "major_selection",
           "kind": "scene_entry",
           "title": "Major selection"
         },
         {
-          "body": "Keep this type page as reference when comparing collaboration patterns.",
+          "body": "Discuss a concrete collaboration event and check whether the description matches your experience.",
           "href": "/en/personality/istj",
           "key": "team_collaboration",
           "kind": "scene_entry",
           "title": "Team collaboration"
         },
         {
-          "body": "Jump from type detail back to topic context for relationship cues.",
+          "body": "Use a specific conversation to examine needs and misunderstandings rather than ranking compatible types.",
           "href": "/en/topics/mbti",
           "key": "relationship_patterns",
           "kind": "scene_entry",
           "title": "Relationship patterns"
         },
         {
-          "body": "Start the test directly to generate structured growth suggestions.",
+          "body": "Use the questionnaire as a reflection prompt, then examine one behavior in context.",
           "href": "/en/tests/mbti-personality-test-16-personality-types",
           "key": "growth_planning",
           "kind": "scene_entry",
@@ -112,7 +112,7 @@
       "seo_surface_ref": "2642daa2715afb73374420cfe0e91a856d068f6f",
       "summary_blocks": [
         {
-          "body": "Role recommendations and work-environment guidance for ISTJ profiles.",
+          "body": "Explore the ISTJ preference description through records, examples and decisions. A label does not establish job skills or relationship outcomes.",
           "href": null,
           "key": "type_summary",
           "kind": "answer_first",
@@ -162,7 +162,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "83fd6bea0ee719a8b6996f6a0fe02f090dbedb67",
+      "landing_fingerprint": "1c3191d242ccd3de4f7ecd34d9ae7e45094f42ed",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "ISTJ",
       "public_surface_ref": null,
@@ -177,7 +177,7 @@
       "start_test_target": "/en/tests/mbti-personality-test-16-personality-types",
       "summary_blocks": [
         {
-          "body": "Role recommendations and work-environment guidance for ISTJ profiles.",
+          "body": "Explore the ISTJ preference description through records, examples and decisions. A label does not establish job skills or relationship outcomes.",
           "key": "hero",
           "kind": "answer_first",
           "title": "ISTJ - Logistician"
@@ -198,7 +198,7 @@
       "display_type": "ISTJ",
       "offer_set": [],
       "profile": {
-        "hero_summary": "Role recommendations and work-environment guidance for ISTJ profiles.",
+        "hero_summary": "Explore the ISTJ preference description through records, examples and decisions. A label does not establish job skills or relationship outcomes.",
         "keywords": [],
         "nickname": "Logistician",
         "rarity": null,
@@ -207,7 +207,7 @@
       "runtime_type_code": null,
       "sections": [
         {
-          "body_md": "Role recommendations and work-environment guidance for ISTJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
+          "body_md": "In the four-letter framework, ISTJ refers to introversion, sensing, thinking and judging preferences. You can use these terms to ask whether you prefer time to reflect, concrete information, explicit reasons and an organized plan. Preferences do not demonstrate reliability, technical ability or the behavior of every person with this label.",
           "is_enabled": true,
           "key": "overview",
           "payload": [],
@@ -216,7 +216,7 @@
           "title": "Overview"
         },
         {
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Teacher, Machine Learning Engineer, Backend Engineer.",
+          "body_md": "A type label cannot tell you to prioritize teaching or software engineering, or exclude operations and sales. For any listed role, examine actual tasks, qualifications, skills and conditions. Try a fictional task: compare two versions of a schedule, explain which facts changed and identify what needs confirmation. Do not treat the role lists as validated suitability rankings.",
           "is_enabled": true,
           "key": "career.summary",
           "payload": [],
@@ -269,14 +269,14 @@
                 "title": "Sales Manager"
               }
             ],
-            "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
+            "work_env": "Use two fictional schedule versions to observe your attention to concrete facts, reasoning and organization. Record the changed assumptions and explain when a plan should be revised. A preference for a clear plan does not prove execution quality or make revision a weakness."
           },
           "render": "preferred_role_list",
           "source": "base",
           "title": "Preferred roles"
         },
         {
-          "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "body_md": "Use two fictional schedule versions to observe your attention to concrete facts, reasoning and organization. Record the changed assumptions and explain when a plan should be revised. A preference for a clear plan does not prove execution quality or make revision a weakness.",
           "is_enabled": true,
           "key": "growth.summary",
           "payload": [],
@@ -292,15 +292,15 @@
             "items": [
               {
                 "body": null,
-                "title": "Strategic pattern recognition"
+                "title": "Can you show the record behind a conclusion?"
               },
               {
                 "body": null,
-                "title": "Stable execution under constraints"
+                "title": "Can you compare two versions without losing changed assumptions?"
               },
               {
                 "body": null,
-                "title": "Strong ownership on meaningful goals"
+                "title": "Can you explain an agreed next step and its limits?"
               }
             ]
           },
@@ -316,11 +316,11 @@
             "items": [
               {
                 "body": null,
-                "title": "Over-specialization without cross-functional exposure"
+                "title": "When does a changed condition require revising your plan?"
               },
               {
                 "body": null,
-                "title": "Delayed feedback loops causing slower iteration"
+                "title": "Have you asked how another person experienced the agreement?"
               }
             ]
           },
@@ -329,7 +329,7 @@
           "title": "Growth weaknesses"
         },
         {
-          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
+          "body_md": "If you prefer time to reflect and a clear agreement, explain that need rather than assuming others share it. Describe the event, its effect on you and the next step you propose; ask which part the other person sees differently. A structured conversation can leave room for emotions and change. This is a practice suggestion, not a prediction of trust or compatibility.",
           "is_enabled": true,
           "key": "relationships.summary",
           "payload": [],
@@ -354,7 +354,7 @@
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "Role recommendations and work-environment guidance for ISTJ profiles.",
+        "summary": "Explore the ISTJ preference description through records, examples and decisions. A label does not establish job skills or relationship outcomes.",
         "tagline": "Logistician",
         "title": "ISTJ - Logistician"
       },
@@ -372,7 +372,7 @@
       "display_type": "ISTJ",
       "offer_set": [],
       "profile": {
-        "hero_summary": "Role recommendations and work-environment guidance for ISTJ profiles.",
+        "hero_summary": "Explore the ISTJ preference description through records, examples and decisions. A label does not establish job skills or relationship outcomes.",
         "keywords": [],
         "nickname": "Logistician",
         "rarity": null,
@@ -381,7 +381,7 @@
       "runtime_type_code": null,
       "sections": [
         {
-          "body_md": "Role recommendations and work-environment guidance for ISTJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
+          "body_md": "In the four-letter framework, ISTJ refers to introversion, sensing, thinking and judging preferences. You can use these terms to ask whether you prefer time to reflect, concrete information, explicit reasons and an organized plan. Preferences do not demonstrate reliability, technical ability or the behavior of every person with this label.",
           "is_enabled": true,
           "key": "overview",
           "payload": [],
@@ -390,7 +390,7 @@
           "title": "Overview"
         },
         {
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Teacher, Machine Learning Engineer, Backend Engineer.",
+          "body_md": "A type label cannot tell you to prioritize teaching or software engineering, or exclude operations and sales. For any listed role, examine actual tasks, qualifications, skills and conditions. Try a fictional task: compare two versions of a schedule, explain which facts changed and identify what needs confirmation. Do not treat the role lists as validated suitability rankings.",
           "is_enabled": true,
           "key": "career.summary",
           "payload": [],
@@ -443,14 +443,14 @@
                 "title": "Sales Manager"
               }
             ],
-            "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
+            "work_env": "Use two fictional schedule versions to observe your attention to concrete facts, reasoning and organization. Record the changed assumptions and explain when a plan should be revised. A preference for a clear plan does not prove execution quality or make revision a weakness."
           },
           "render": "preferred_role_list",
           "source": "base",
           "title": "Preferred roles"
         },
         {
-          "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "body_md": "Use two fictional schedule versions to observe your attention to concrete facts, reasoning and organization. Record the changed assumptions and explain when a plan should be revised. A preference for a clear plan does not prove execution quality or make revision a weakness.",
           "is_enabled": true,
           "key": "growth.summary",
           "payload": [],
@@ -466,15 +466,15 @@
             "items": [
               {
                 "body": null,
-                "title": "Strategic pattern recognition"
+                "title": "Can you show the record behind a conclusion?"
               },
               {
                 "body": null,
-                "title": "Stable execution under constraints"
+                "title": "Can you compare two versions without losing changed assumptions?"
               },
               {
                 "body": null,
-                "title": "Strong ownership on meaningful goals"
+                "title": "Can you explain an agreed next step and its limits?"
               }
             ]
           },
@@ -490,11 +490,11 @@
             "items": [
               {
                 "body": null,
-                "title": "Over-specialization without cross-functional exposure"
+                "title": "When does a changed condition require revising your plan?"
               },
               {
                 "body": null,
-                "title": "Delayed feedback loops causing slower iteration"
+                "title": "Have you asked how another person experienced the agreement?"
               }
             ]
           },
@@ -503,7 +503,7 @@
           "title": "Growth weaknesses"
         },
         {
-          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
+          "body_md": "If you prefer time to reflect and a clear agreement, explain that need rather than assuming others share it. Describe the event, its effect on you and the next step you propose; ask which part the other person sees differently. A structured conversation can leave room for emotions and change. This is a practice suggestion, not a prediction of trust or compatibility.",
           "is_enabled": true,
           "key": "relationships.summary",
           "payload": [],
@@ -528,7 +528,7 @@
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "Role recommendations and work-environment guidance for ISTJ profiles.",
+        "summary": "Explore the ISTJ preference description through records, examples and decisions. A label does not establish job skills or relationship outcomes.",
         "tagline": "Logistician",
         "title": "ISTJ - Logistician"
       },
@@ -536,11 +536,11 @@
     },
     "profile": {
       "canonical_type_code": "ISTJ",
-      "excerpt": "Role recommendations and work-environment guidance for ISTJ profiles.",
+      "excerpt": "Explore the ISTJ preference description through records, examples and decisions. A label does not establish job skills or relationship outcomes.",
       "hero_image_url": null,
       "hero_kicker": "Logistician",
       "hero_quote": null,
-      "hero_summary": "Role recommendations and work-environment guidance for ISTJ profiles.",
+      "hero_summary": "Explore the ISTJ preference description through records, examples and decisions. A label does not establish job skills or relationship outcomes.",
       "is_indexable": true,
       "is_public": true,
       "keywords": [],
@@ -559,7 +559,7 @@
     "sections": [
       {
         "body_html": null,
-        "body_md": "Role recommendations and work-environment guidance for ISTJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
+        "body_md": "In the four-letter framework, ISTJ refers to introversion, sensing, thinking and judging preferences. You can use these terms to ask whether you prefer time to reflect, concrete information, explicit reasons and an organized plan. Preferences do not demonstrate reliability, technical ability or the behavior of every person with this label.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
@@ -569,7 +569,7 @@
       },
       {
         "body_html": null,
-        "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Teacher, Machine Learning Engineer, Backend Engineer.",
+        "body_md": "A type label cannot tell you to prioritize teaching or software engineering, or exclude operations and sales. For any listed role, examine actual tasks, qualifications, skills and conditions. Try a fictional task: compare two versions of a schedule, explain which facts changed and identify what needs confirmation. Do not treat the role lists as validated suitability rankings.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
@@ -622,7 +622,7 @@
               "title": "Sales Manager"
             }
           ],
-          "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
+          "work_env": "Use two fictional schedule versions to observe your attention to concrete facts, reasoning and organization. Record the changed assumptions and explain when a plan should be revised. A preference for a clear plan does not prove execution quality or make revision a weakness."
         },
         "render_variant": "preferred_role_list",
         "section_key": "career.preferred_roles",
@@ -631,7 +631,7 @@
       },
       {
         "body_html": null,
-        "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+        "body_md": "Use two fictional schedule versions to observe your attention to concrete facts, reasoning and organization. Record the changed assumptions and explain when a plan should be revised. A preference for a clear plan does not prove execution quality or make revision a weakness.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
@@ -647,15 +647,15 @@
           "items": [
             {
               "body": null,
-              "title": "Strategic pattern recognition"
+              "title": "Can you show the record behind a conclusion?"
             },
             {
               "body": null,
-              "title": "Stable execution under constraints"
+              "title": "Can you compare two versions without losing changed assumptions?"
             },
             {
               "body": null,
-              "title": "Strong ownership on meaningful goals"
+              "title": "Can you explain an agreed next step and its limits?"
             }
           ]
         },
@@ -672,11 +672,11 @@
           "items": [
             {
               "body": null,
-              "title": "Over-specialization without cross-functional exposure"
+              "title": "When does a changed condition require revising your plan?"
             },
             {
               "body": null,
-              "title": "Delayed feedback loops causing slower iteration"
+              "title": "Have you asked how another person experienced the agreement?"
             }
           ]
         },
@@ -687,7 +687,7 @@
       },
       {
         "body_html": null,
-        "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
+        "body_md": "If you prefer time to reflect and a clear agreement, explain that need rather than assuming others share it. Describe the event, its effect on you and the next step you propose; ask which part the other person sees differently. A structured conversation can leave room for emotions and change. This is a practice suggestion, not a prediction of trust or compatibility.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
@@ -1021,5 +1021,5 @@
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "6b8493a03fc2518815d8a0a141b468c7d5e732836df1551d2c88660b1195ea53"
+  "source_content_sha256": "25fc339e549c5b96602d746e30f7cfed4e9ae5cfe7c08993943b41fb11b36cd2"
 }
