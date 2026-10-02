@@ -693,6 +693,77 @@ final class ArticleTranslationRevisionContractTest extends TestCase
         $this->assertSame('Protected revision body', $revision->content_md);
     }
 
+    public function test_filament_cover_variants_roundtrip_nested_json_without_revision_or_body_changes(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);
+        $org = $this->createOrganization();
+        app(OrgContext::class)->set((int) $org->id, (int) $admin->id, 'admin');
+        $source = $this->createArticle(0, 'zh-CN', 'Cover source title');
+        $article = $this->createArticle(0, 'en', 'Cover editor title', [
+            'translation_group_id' => $source->translation_group_id,
+            'source_locale' => 'zh-CN',
+            'translation_status' => Article::TRANSLATION_STATUS_HUMAN_REVIEW,
+            'translated_from_article_id' => $source->id,
+            'translated_from_version_hash' => $source->source_version_hash,
+        ]);
+        $this->runRevisionBackfill();
+        $article->refresh();
+        $article->workingRevision->forceFill(['created_by' => $admin->id])->saveQuietly();
+        $variants = [
+            'hero' => ['url' => 'https://assets.fermatmind.com/storage/media-library/hero.jpg', 'width' => 1600, 'height' => 900],
+            'editorial_package_v1' => ['answer_surface_v1' => ['faq_items' => [['question' => 'Existing question?', 'answer' => 'Existing answer.']]]],
+        ];
+        $article->forceFill(['cover_image_variants' => $variants])->saveQuietly();
+        $before = $article->fresh();
+        $revision = $before->workingRevision->getAttributes();
+        session($this->opsSession($admin, $org));
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        $editor = Livewire::test(EditArticle::class, ['record' => $article->getKey()]);
+        $this->assertIsString($editor->get('data.cover_image_variants'));
+        $this->assertSame($variants, json_decode($editor->get('data.cover_image_variants'), true));
+        $variants['hero']['width'] = 1200;
+        $editor->fillForm(['cover_image_variants' => json_encode($variants, JSON_THROW_ON_ERROR)])
+            ->call('save')->assertHasNoFormErrors();
+        $after = $article->fresh();
+        $this->assertSame($variants, $after->cover_image_variants);
+        $this->assertSame($before->content_md, $after->content_md);
+        $this->assertSame($before->working_revision_id, $after->working_revision_id);
+        $this->assertSame($before->published_revision_id, $after->published_revision_id);
+        $this->assertSame($revision, $after->workingRevision->getAttributes());
+
+        $asset = \App\Models\MediaAsset::create([
+            'org_id' => 0, 'asset_key' => 'cover-editor-test', 'disk' => 'public', 'path' => 'cover.jpg',
+            'url' => 'https://assets.fermatmind.com/storage/media-library/cover.jpg',
+            'status' => 'published', 'is_public' => true, 'cdn_status' => 'verified',
+            'width' => 1600, 'height' => 900, 'alt' => 'Existing Media Library cover',
+        ]);
+        foreach (\App\Services\Cms\MediaVariantGenerator::variantKeys() as $key) {
+            \App\Models\MediaVariant::create([
+                'media_asset_id' => $asset->id, 'variant_key' => $key,
+                'url' => 'https://assets.fermatmind.com/storage/media-library/'.$key.'.jpg',
+                'width' => 1600, 'height' => 900, 'mime_type' => 'image/jpeg', 'cdn_status' => 'verified',
+            ]);
+        }
+        $editor = Livewire::test(EditArticle::class, ['record' => $article->getKey()]);
+        $editor->set('data.cover_media_asset_id', $asset->id);
+        $selected = json_decode($editor->get('data.cover_image_variants'), true, 64, JSON_THROW_ON_ERROR);
+        $this->assertSame($variants['editorial_package_v1'], $selected['editorial_package_v1']);
+        $this->assertSame('https://assets.fermatmind.com/storage/media-library/hero.jpg', $selected['hero']['url']);
+        $editor->call('save')->assertHasNoFormErrors();
+        $variants = $selected;
+        $this->assertSame($variants, $article->fresh()->cover_image_variants);
+        $this->assertSame($revision, $article->fresh()->workingRevision->getAttributes());
+
+        foreach (['{broken', '"[object Object]"', '[{"url":"wrong list"}]'] as $invalid) {
+            Livewire::test(EditArticle::class, ['record' => $article->getKey()])
+                ->fillForm(['cover_image_variants' => $invalid])
+                ->call('save')->assertHasFormErrors(['cover_image_variants']);
+            $this->assertSame($variants, $article->fresh()->cover_image_variants);
+            $this->assertSame($revision, $article->fresh()->workingRevision->getAttributes());
+        }
+    }
+
     public function test_filament_article_editor_saves_working_revision_not_canonical_body(): void
     {
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);

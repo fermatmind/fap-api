@@ -153,7 +153,7 @@ class ArticleResource extends Resource
                                     ->getSearchResultsUsing(fn (string $search): array => self::mediaAssetOptions($search))
                                     ->getOptionLabelUsing(fn (mixed $value): ?string => self::mediaAssetLabel($value))
                                     ->live()
-                                    ->afterStateUpdated(function (mixed $state, Forms\Set $set): void {
+                                    ->afterStateUpdated(function (mixed $state, Forms\Set $set, Forms\Get $get): void {
                                         $asset = self::resolveMediaAsset($state);
                                         if (! $asset instanceof MediaAsset) {
                                             return;
@@ -176,7 +176,9 @@ class ArticleResource extends Resource
                                         $set('cover_image_alt', $payload['cover_image_alt']);
                                         $set('cover_image_width', $payload['cover_image_width']);
                                         $set('cover_image_height', $payload['cover_image_height']);
-                                        $set('cover_image_variants', $payload['cover_image_variants']);
+                                        // Preserve non-media editorial metadata when changing the cover.
+                                        $existing = self::coverVariantsFromEdit($get('cover_image_variants'));
+                                        $set('cover_image_variants', self::coverVariantsForEdit(array_replace($existing, $payload['cover_image_variants'])));
                                     })
                                     ->columnSpanFull(),
                                 Forms\Components\TextInput::make('cover_image_url')
@@ -197,7 +199,17 @@ class ArticleResource extends Resource
                                     ->numeric()
                                     ->minValue(1)
                                     ->helperText(__('ops.resources.articles.helpers.cover_image_height')),
-                                Forms\Components\KeyValue::make('cover_image_variants')
+                                Forms\Components\Textarea::make('cover_image_variants')
+                                    ->formatStateUsing(fn (mixed $state): string => self::coverVariantsForEdit($state))
+                                    ->dehydrateStateUsing(fn (mixed $state): array => self::coverVariantsFromEdit($state))
+                                    ->rules([static fn (): \Closure => static function (string $attribute, mixed $value, \Closure $fail): void {
+                                        try {
+                                            self::coverVariantsFromEdit($value);
+                                        } catch (\JsonException|\InvalidArgumentException) {
+                                            $fail('Cover variants must be a valid JSON object.');
+                                        }
+                                    }])
+                                    ->rows(10)
                                     ->label(__('ops.resources.articles.fields.cover_image_variants'))
                                     ->columnSpanFull()
                                     ->helperText(__('ops.resources.articles.helpers.cover_image_variants')),
@@ -834,13 +846,39 @@ class ArticleResource extends Resource
         ];
     }
 
+    private static function coverVariantsForEdit(mixed $state): string
+    {
+        return json_encode($state ?: new \stdClass, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+    }
+
+    /** @return array<string, mixed> */
+    private static function coverVariantsFromEdit(mixed $state): array
+    {
+        if ($state === null || $state === '' || $state === []) {
+            return [];
+        }
+        if (is_array($state)) {
+            if (array_is_list($state)) {
+                throw new \InvalidArgumentException('Cover variants must be an object.');
+            }
+
+            return $state;
+        }
+        $decoded = json_decode((string) $state, false, 64, JSON_THROW_ON_ERROR);
+        if (! $decoded instanceof \stdClass && $decoded !== []) {
+            throw new \InvalidArgumentException('Cover variants must be an object.');
+        }
+
+        return json_decode((string) $state, true, 64, JSON_THROW_ON_ERROR);
+    }
+
     private static function clearArticleCoverFields(Forms\Set $set): void
     {
         $set('cover_image_url', null);
         $set('cover_image_alt', null);
         $set('cover_image_width', null);
         $set('cover_image_height', null);
-        $set('cover_image_variants', []);
+        $set('cover_image_variants', '{}');
     }
 
     private static function isArticleCoverReady(MediaAsset $asset): bool
