@@ -517,7 +517,14 @@ class ArticleController extends Controller
             ? $seoMeta->schema_json['editorial_package_v1']
             : [];
 
-        return array_replace_recursive($variantMetadata, $schemaMetadata);
+        $metadata = array_replace_recursive($variantMetadata, $schemaMetadata);
+        // FAQ is an ordered editorial list, not an object to merge by numeric index.
+        $schemaAnswer = $schemaMetadata['answer_surface_v1'] ?? null;
+        if (is_array($schemaAnswer) && array_key_exists('faq_items', $schemaAnswer)) {
+            $metadata['answer_surface_v1']['faq_items'] = $schemaAnswer['faq_items'];
+        }
+
+        return $metadata;
     }
 
     /**
