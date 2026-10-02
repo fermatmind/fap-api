@@ -16,6 +16,55 @@ final class ArticleSeoMetaTenantTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_ops_selected_tenant_does_not_hide_existing_public_article_seo(): void
+    {
+        $article = Article::withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'slug' => 'public-article-seo-edit',
+            'locale' => 'en',
+            'title' => 'Public article',
+            'content_md' => '# Approved body',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => false,
+        ]);
+        $seo = ArticleSeoMeta::withoutGlobalScopes()->create([
+            'article_id' => $article->id,
+            'seo_title' => 'Before edit',
+            'robots' => 'noindex,nofollow',
+        ]);
+        $other = Article::withoutGlobalScopes()->create([
+            'org_id' => 1,
+            'slug' => 'public-article-seo-edit',
+            'locale' => 'en',
+            'title' => 'Tenant article',
+            'content_md' => '# Tenant body',
+            'status' => 'draft',
+        ]);
+        $otherSeo = ArticleSeoMeta::withoutGlobalScopes()->create([
+            'article_id' => $other->id,
+            'seo_title' => 'Unchanged tenant SEO',
+        ]);
+
+        app()->instance('request', Request::create('/ops/articles/'.$article->id.'/edit', 'POST'));
+        app(OrgContext::class)->set(1, 9001, 'admin');
+
+        $workspace = app(ArticleSeoMetaWorkspace::class);
+        $workspace->save($article, ['seo_title' => 'Updated public SEO']);
+        $workspace->save($article, ['seo_title' => 'Updated public SEO']);
+
+        $this->assertSame(2, ArticleSeoMeta::withoutGlobalScopes()->count());
+        $updated = ArticleSeoMeta::withoutGlobalScopes()->findOrFail($seo->id);
+        $this->assertSame(0, $updated->org_id);
+        $this->assertSame('en', $updated->locale);
+        $this->assertSame('Updated public SEO', $updated->seo_title);
+        $this->assertSame('noindex,nofollow', $updated->robots);
+        $this->assertFalse($updated->is_indexable);
+        $this->assertSame('Unchanged tenant SEO', ArticleSeoMeta::withoutGlobalScopes()->findOrFail($otherSeo->id)->seo_title);
+        $this->assertSame('# Approved body', $article->fresh()->content_md);
+        $this->assertNull($article->published_revision_id);
+    }
+
     public function test_article_seo_meta_inherits_article_org_and_locale_when_saved_from_ops_form(): void
     {
         $request = Request::create('/ops/articles/22/edit', 'POST');

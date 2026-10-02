@@ -21,7 +21,9 @@ final class ArticleSeoMetaWorkspace
             return;
         }
 
-        ArticleSeoMeta::query()->updateOrCreate(
+        // Ops resolves the editable article independently of the selected tenant.
+        // Keep the SEO lookup bound to that article's exact ownership and locale.
+        ArticleSeoMeta::query()->withoutGlobalScopes()->updateOrCreate(
             [
                 'org_id' => (int) $article->org_id,
                 'article_id' => (int) $article->id,
