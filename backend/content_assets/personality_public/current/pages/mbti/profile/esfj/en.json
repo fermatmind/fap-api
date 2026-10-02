@@ -25,13 +25,13 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "c6722c23c5e5c19e6a57144c1fc0d2d2efab4e0f",
+      "answer_fingerprint": "d3a8a6133a86bc3e5212ed729e3a647b59f4a86c",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
         "297580475cfc2b767910f273e687f5e7e4296d30",
-        "3560fa1b24405393a86b2a1431f79a8de90f2cd4",
+        "46128bbf005ea1a2d6d79d96e76f30228eee7fa1",
         "personality_public_projection_v1",
         "mbti_public_projection_v1",
         "personality_sections",
@@ -39,7 +39,7 @@
       ],
       "faq_blocks": [],
       "indexability_state": "indexable",
-      "landing_surface_ref": "3560fa1b24405393a86b2a1431f79a8de90f2cd4",
+      "landing_surface_ref": "46128bbf005ea1a2d6d79d96e76f30228eee7fa1",
       "next_step_blocks": [
         {
           "body": null,
@@ -112,7 +112,7 @@
       "seo_surface_ref": "297580475cfc2b767910f273e687f5e7e4296d30",
       "summary_blocks": [
         {
-          "body": "Role recommendations and work-environment guidance for ESFJ profiles.",
+          "body": "A guide to ESFJ preferences: Extraversion, Sensing, Feeling, and Judging.",
           "href": null,
           "key": "type_summary",
           "kind": "answer_first",
@@ -162,7 +162,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "3560fa1b24405393a86b2a1431f79a8de90f2cd4",
+      "landing_fingerprint": "46128bbf005ea1a2d6d79d96e76f30228eee7fa1",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "ESFJ",
       "public_surface_ref": null,
@@ -177,7 +177,7 @@
       "start_test_target": "/en/tests/mbti-personality-test-16-personality-types",
       "summary_blocks": [
         {
-          "body": "Role recommendations and work-environment guidance for ESFJ profiles.",
+          "body": "A guide to ESFJ preferences: Extraversion, Sensing, Feeling, and Judging.",
           "key": "hero",
           "kind": "answer_first",
           "title": "ESFJ - Consul"
@@ -198,7 +198,7 @@
       "display_type": "ESFJ",
       "offer_set": [],
       "profile": {
-        "hero_summary": "Role recommendations and work-environment guidance for ESFJ profiles.",
+        "hero_summary": "A guide to ESFJ preferences: Extraversion, Sensing, Feeling, and Judging.",
         "keywords": [],
         "nickname": "Consul",
         "rarity": null,
@@ -207,7 +207,7 @@
       "runtime_type_code": null,
       "sections": [
         {
-          "body_md": "Role recommendations and work-environment guidance for ESFJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
+          "body_md": "ESFJ combines preferences for Extraversion, Sensing, Feeling, and Judging. Compare your use of concrete information, consideration of people and values, and preference for organizing next steps. These are reflection questions, not evidence that you are skilled at a task or suited to a particular occupation. Read the [preference definitions](https://www.myersbriggs.org/my-mbti-personality-type/the-mbti-preferences/) and compare them with examples from your own experience.",
           "is_enabled": true,
           "key": "overview",
           "payload": [],
@@ -216,7 +216,7 @@
           "title": "Overview"
         },
         {
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Frontend Engineer, Fullstack Engineer, Cloud Architect.",
+          "body_md": "Career choices need evidence about your interests, demonstrated skills, experience, values, and the conditions of a specific job. This page does not recommend or rule out jobs based on ESFJ. Use a course, project, or appropriately supervised task to check your own fit.",
           "is_enabled": true,
           "key": "career.summary",
           "payload": [],
@@ -226,49 +226,11 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "career.preferred_roles",
           "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "management-consultant",
-                "title": "Management Consultant"
-              },
-              {
-                "slug": "business-analyst",
-                "title": "Business Analyst"
-              },
-              {
-                "slug": "brand-manager",
-                "title": "Brand Manager"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "frontend-engineer",
-                "title": "Frontend Engineer"
-              },
-              {
-                "slug": "fullstack-engineer",
-                "title": "Fullstack Engineer"
-              },
-              {
-                "slug": "cloud-architect",
-                "title": "Cloud Architect"
-              },
-              {
-                "slug": "hr-business-partner",
-                "title": "HR Business Partner"
-              },
-              {
-                "slug": "management-consultant",
-                "title": "Management Consultant"
-              },
-              {
-                "slug": "business-analyst",
-                "title": "Business Analyst"
-              }
-            ],
+            "avoid_jobs": [],
+            "recommended_jobs": [],
             "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
           },
           "render": "preferred_role_list",
@@ -286,23 +248,10 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "growth.strengths",
           "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "Strategic pattern recognition"
-              },
-              {
-                "body": null,
-                "title": "Stable execution under constraints"
-              },
-              {
-                "body": null,
-                "title": "Strong ownership on meaningful goals"
-              }
-            ]
+            "items": []
           },
           "render": "bullets",
           "source": "base",
@@ -354,7 +303,7 @@
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "Role recommendations and work-environment guidance for ESFJ profiles.",
+        "summary": "Career choices need evidence about your interests, demonstrated skills, experience, values, and the conditions of a specific job. This page does not recommend or rule out jobs based on ESFJ. Use a course, project, or appropriately supervised task to check your own fit.",
         "tagline": "Consul",
         "title": "ESFJ - Consul"
       },
@@ -372,7 +321,7 @@
       "display_type": "ESFJ",
       "offer_set": [],
       "profile": {
-        "hero_summary": "Role recommendations and work-environment guidance for ESFJ profiles.",
+        "hero_summary": "A guide to ESFJ preferences: Extraversion, Sensing, Feeling, and Judging.",
         "keywords": [],
         "nickname": "Consul",
         "rarity": null,
@@ -381,7 +330,7 @@
       "runtime_type_code": null,
       "sections": [
         {
-          "body_md": "Role recommendations and work-environment guidance for ESFJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
+          "body_md": "ESFJ combines preferences for Extraversion, Sensing, Feeling, and Judging. Compare your use of concrete information, consideration of people and values, and preference for organizing next steps. These are reflection questions, not evidence that you are skilled at a task or suited to a particular occupation. Read the [preference definitions](https://www.myersbriggs.org/my-mbti-personality-type/the-mbti-preferences/) and compare them with examples from your own experience.",
           "is_enabled": true,
           "key": "overview",
           "payload": [],
@@ -390,7 +339,7 @@
           "title": "Overview"
         },
         {
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Frontend Engineer, Fullstack Engineer, Cloud Architect.",
+          "body_md": "Career choices need evidence about your interests, demonstrated skills, experience, values, and the conditions of a specific job. This page does not recommend or rule out jobs based on ESFJ. Use a course, project, or appropriately supervised task to check your own fit.",
           "is_enabled": true,
           "key": "career.summary",
           "payload": [],
@@ -400,49 +349,11 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "career.preferred_roles",
           "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "management-consultant",
-                "title": "Management Consultant"
-              },
-              {
-                "slug": "business-analyst",
-                "title": "Business Analyst"
-              },
-              {
-                "slug": "brand-manager",
-                "title": "Brand Manager"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "frontend-engineer",
-                "title": "Frontend Engineer"
-              },
-              {
-                "slug": "fullstack-engineer",
-                "title": "Fullstack Engineer"
-              },
-              {
-                "slug": "cloud-architect",
-                "title": "Cloud Architect"
-              },
-              {
-                "slug": "hr-business-partner",
-                "title": "HR Business Partner"
-              },
-              {
-                "slug": "management-consultant",
-                "title": "Management Consultant"
-              },
-              {
-                "slug": "business-analyst",
-                "title": "Business Analyst"
-              }
-            ],
+            "avoid_jobs": [],
+            "recommended_jobs": [],
             "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
           },
           "render": "preferred_role_list",
@@ -460,23 +371,10 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "growth.strengths",
           "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "Strategic pattern recognition"
-              },
-              {
-                "body": null,
-                "title": "Stable execution under constraints"
-              },
-              {
-                "body": null,
-                "title": "Strong ownership on meaningful goals"
-              }
-            ]
+            "items": []
           },
           "render": "bullets",
           "source": "base",
@@ -528,7 +426,7 @@
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "Role recommendations and work-environment guidance for ESFJ profiles.",
+        "summary": "Career choices need evidence about your interests, demonstrated skills, experience, values, and the conditions of a specific job. This page does not recommend or rule out jobs based on ESFJ. Use a course, project, or appropriately supervised task to check your own fit.",
         "tagline": "Consul",
         "title": "ESFJ - Consul"
       },
@@ -536,11 +434,11 @@
     },
     "profile": {
       "canonical_type_code": "ESFJ",
-      "excerpt": "Role recommendations and work-environment guidance for ESFJ profiles.",
+      "excerpt": "A guide to ESFJ preferences: Extraversion, Sensing, Feeling, and Judging.",
       "hero_image_url": null,
       "hero_kicker": "Consul",
       "hero_quote": null,
-      "hero_summary": "Role recommendations and work-environment guidance for ESFJ profiles.",
+      "hero_summary": "A guide to ESFJ preferences: Extraversion, Sensing, Feeling, and Judging.",
       "is_indexable": true,
       "is_public": true,
       "keywords": [],
@@ -559,7 +457,7 @@
     "sections": [
       {
         "body_html": null,
-        "body_md": "Role recommendations and work-environment guidance for ESFJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
+        "body_md": "ESFJ combines preferences for Extraversion, Sensing, Feeling, and Judging. Compare your use of concrete information, consideration of people and values, and preference for organizing next steps. These are reflection questions, not evidence that you are skilled at a task or suited to a particular occupation. Read the [preference definitions](https://www.myersbriggs.org/my-mbti-personality-type/the-mbti-preferences/) and compare them with examples from your own experience.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
@@ -569,7 +467,7 @@
       },
       {
         "body_html": null,
-        "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Frontend Engineer, Fullstack Engineer, Cloud Architect.",
+        "body_md": "Career choices need evidence about your interests, demonstrated skills, experience, values, and the conditions of a specific job. This page does not recommend or rule out jobs based on ESFJ. Use a course, project, or appropriately supervised task to check your own fit.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
@@ -580,48 +478,10 @@
       {
         "body_html": null,
         "body_md": null,
-        "is_enabled": true,
+        "is_enabled": false,
         "payload_json": {
-          "avoid_jobs": [
-            {
-              "slug": "management-consultant",
-              "title": "Management Consultant"
-            },
-            {
-              "slug": "business-analyst",
-              "title": "Business Analyst"
-            },
-            {
-              "slug": "brand-manager",
-              "title": "Brand Manager"
-            }
-          ],
-          "recommended_jobs": [
-            {
-              "slug": "frontend-engineer",
-              "title": "Frontend Engineer"
-            },
-            {
-              "slug": "fullstack-engineer",
-              "title": "Fullstack Engineer"
-            },
-            {
-              "slug": "cloud-architect",
-              "title": "Cloud Architect"
-            },
-            {
-              "slug": "hr-business-partner",
-              "title": "HR Business Partner"
-            },
-            {
-              "slug": "management-consultant",
-              "title": "Management Consultant"
-            },
-            {
-              "slug": "business-analyst",
-              "title": "Business Analyst"
-            }
-          ],
+          "avoid_jobs": [],
+          "recommended_jobs": [],
           "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
         },
         "render_variant": "preferred_role_list",
@@ -642,22 +502,9 @@
       {
         "body_html": null,
         "body_md": null,
-        "is_enabled": true,
+        "is_enabled": false,
         "payload_json": {
-          "items": [
-            {
-              "body": null,
-              "title": "Strategic pattern recognition"
-            },
-            {
-              "body": null,
-              "title": "Stable execution under constraints"
-            },
-            {
-              "body": null,
-              "title": "Strong ownership on meaningful goals"
-            }
-          ]
+          "items": []
         },
         "render_variant": "bullets",
         "section_key": "growth.strengths",
@@ -1021,5 +868,5 @@
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "dce634645ee09c61c4335ce3a04e7c1e81e9bb2675c0235b83ffa2f4253670a7"
+  "source_content_sha256": "a924daf00a803960d11b38c789f72ed965762b66e74fa15869e429c173e2dbf8"
 }

@@ -25,13 +25,13 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "5b3914f5ebcde22d911ab57a22d46d3d8a6f820c",
+      "answer_fingerprint": "4964d6c7ea6b96927950b82edf475818953d8939",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
         "09b25d0423b30ad0c476d20e9276ebcce0c923ad",
-        "942daac36c48639f24703f359419c73a90be33f6",
+        "9671b3962c4d73e6965b870ebbebfcdf6728ceab",
         "personality_public_projection_v1",
         "mbti_public_projection_v1",
         "personality_sections",
@@ -39,7 +39,7 @@
       ],
       "faq_blocks": [],
       "indexability_state": "indexable",
-      "landing_surface_ref": "942daac36c48639f24703f359419c73a90be33f6",
+      "landing_surface_ref": "9671b3962c4d73e6965b870ebbebfcdf6728ceab",
       "next_step_blocks": [
         {
           "body": null,
@@ -112,7 +112,7 @@
       "seo_surface_ref": "09b25d0423b30ad0c476d20e9276ebcce0c923ad",
       "summary_blocks": [
         {
-          "body": "Role recommendations and work-environment guidance for ESTJ profiles.",
+          "body": "A guide to ESTJ preferences: Extraversion, Sensing, Thinking, and Judging.",
           "href": null,
           "key": "type_summary",
           "kind": "answer_first",
@@ -162,7 +162,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "942daac36c48639f24703f359419c73a90be33f6",
+      "landing_fingerprint": "9671b3962c4d73e6965b870ebbebfcdf6728ceab",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "ESTJ",
       "public_surface_ref": null,
@@ -177,7 +177,7 @@
       "start_test_target": "/en/tests/mbti-personality-test-16-personality-types",
       "summary_blocks": [
         {
-          "body": "Role recommendations and work-environment guidance for ESTJ profiles.",
+          "body": "A guide to ESTJ preferences: Extraversion, Sensing, Thinking, and Judging.",
           "key": "hero",
           "kind": "answer_first",
           "title": "ESTJ - Executive"
@@ -198,7 +198,7 @@
       "display_type": "ESTJ",
       "offer_set": [],
       "profile": {
-        "hero_summary": "Role recommendations and work-environment guidance for ESTJ profiles.",
+        "hero_summary": "A guide to ESTJ preferences: Extraversion, Sensing, Thinking, and Judging.",
         "keywords": [],
         "nickname": "Executive",
         "rarity": null,
@@ -207,7 +207,7 @@
       "runtime_type_code": null,
       "sections": [
         {
-          "body_md": "Role recommendations and work-environment guidance for ESTJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
+          "body_md": "ESTJ combines preferences for Extraversion, Sensing, Thinking, and Judging. Compare your use of concrete information, consistency in decision criteria, and preference for organizing next steps. These are reflection questions, not evidence that you are skilled at a task or suited to a particular occupation. Read the [preference definitions](https://www.myersbriggs.org/my-mbti-personality-type/the-mbti-preferences/) and compare them with examples from your own experience.",
           "is_enabled": true,
           "key": "overview",
           "payload": [],
@@ -216,7 +216,7 @@
           "title": "Overview"
         },
         {
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Machine Learning Engineer, Backend Engineer, Cybersecurity Analyst.",
+          "body_md": "Career choices need evidence about your interests, demonstrated skills, experience, values, and the conditions of a specific job. This page does not recommend or rule out jobs based on ESTJ. Use a course, project, or appropriately supervised task to check your own fit.",
           "is_enabled": true,
           "key": "career.summary",
           "payload": [],
@@ -226,49 +226,11 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "career.preferred_roles",
           "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "sales-manager",
-                "title": "Sales Manager"
-              },
-              {
-                "slug": "financial-planner",
-                "title": "Financial Planner"
-              },
-              {
-                "slug": "content-strategist",
-                "title": "Content Strategist"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "machine-learning-engineer",
-                "title": "Machine Learning Engineer"
-              },
-              {
-                "slug": "backend-engineer",
-                "title": "Backend Engineer"
-              },
-              {
-                "slug": "cybersecurity-analyst",
-                "title": "Cybersecurity Analyst"
-              },
-              {
-                "slug": "operations-manager",
-                "title": "Operations Manager"
-              },
-              {
-                "slug": "sales-manager",
-                "title": "Sales Manager"
-              },
-              {
-                "slug": "financial-planner",
-                "title": "Financial Planner"
-              }
-            ],
+            "avoid_jobs": [],
+            "recommended_jobs": [],
             "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
           },
           "render": "preferred_role_list",
@@ -286,23 +248,10 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "growth.strengths",
           "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "Strategic pattern recognition"
-              },
-              {
-                "body": null,
-                "title": "Stable execution under constraints"
-              },
-              {
-                "body": null,
-                "title": "Strong ownership on meaningful goals"
-              }
-            ]
+            "items": []
           },
           "render": "bullets",
           "source": "base",
@@ -354,7 +303,7 @@
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "Role recommendations and work-environment guidance for ESTJ profiles.",
+        "summary": "Career choices need evidence about your interests, demonstrated skills, experience, values, and the conditions of a specific job. This page does not recommend or rule out jobs based on ESTJ. Use a course, project, or appropriately supervised task to check your own fit.",
         "tagline": "Executive",
         "title": "ESTJ - Executive"
       },
@@ -372,7 +321,7 @@
       "display_type": "ESTJ",
       "offer_set": [],
       "profile": {
-        "hero_summary": "Role recommendations and work-environment guidance for ESTJ profiles.",
+        "hero_summary": "A guide to ESTJ preferences: Extraversion, Sensing, Thinking, and Judging.",
         "keywords": [],
         "nickname": "Executive",
         "rarity": null,
@@ -381,7 +330,7 @@
       "runtime_type_code": null,
       "sections": [
         {
-          "body_md": "Role recommendations and work-environment guidance for ESTJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
+          "body_md": "ESTJ combines preferences for Extraversion, Sensing, Thinking, and Judging. Compare your use of concrete information, consistency in decision criteria, and preference for organizing next steps. These are reflection questions, not evidence that you are skilled at a task or suited to a particular occupation. Read the [preference definitions](https://www.myersbriggs.org/my-mbti-personality-type/the-mbti-preferences/) and compare them with examples from your own experience.",
           "is_enabled": true,
           "key": "overview",
           "payload": [],
@@ -390,7 +339,7 @@
           "title": "Overview"
         },
         {
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Machine Learning Engineer, Backend Engineer, Cybersecurity Analyst.",
+          "body_md": "Career choices need evidence about your interests, demonstrated skills, experience, values, and the conditions of a specific job. This page does not recommend or rule out jobs based on ESTJ. Use a course, project, or appropriately supervised task to check your own fit.",
           "is_enabled": true,
           "key": "career.summary",
           "payload": [],
@@ -400,49 +349,11 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "career.preferred_roles",
           "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "sales-manager",
-                "title": "Sales Manager"
-              },
-              {
-                "slug": "financial-planner",
-                "title": "Financial Planner"
-              },
-              {
-                "slug": "content-strategist",
-                "title": "Content Strategist"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "machine-learning-engineer",
-                "title": "Machine Learning Engineer"
-              },
-              {
-                "slug": "backend-engineer",
-                "title": "Backend Engineer"
-              },
-              {
-                "slug": "cybersecurity-analyst",
-                "title": "Cybersecurity Analyst"
-              },
-              {
-                "slug": "operations-manager",
-                "title": "Operations Manager"
-              },
-              {
-                "slug": "sales-manager",
-                "title": "Sales Manager"
-              },
-              {
-                "slug": "financial-planner",
-                "title": "Financial Planner"
-              }
-            ],
+            "avoid_jobs": [],
+            "recommended_jobs": [],
             "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
           },
           "render": "preferred_role_list",
@@ -460,23 +371,10 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "growth.strengths",
           "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "Strategic pattern recognition"
-              },
-              {
-                "body": null,
-                "title": "Stable execution under constraints"
-              },
-              {
-                "body": null,
-                "title": "Strong ownership on meaningful goals"
-              }
-            ]
+            "items": []
           },
           "render": "bullets",
           "source": "base",
@@ -528,7 +426,7 @@
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "Role recommendations and work-environment guidance for ESTJ profiles.",
+        "summary": "Career choices need evidence about your interests, demonstrated skills, experience, values, and the conditions of a specific job. This page does not recommend or rule out jobs based on ESTJ. Use a course, project, or appropriately supervised task to check your own fit.",
         "tagline": "Executive",
         "title": "ESTJ - Executive"
       },
@@ -536,11 +434,11 @@
     },
     "profile": {
       "canonical_type_code": "ESTJ",
-      "excerpt": "Role recommendations and work-environment guidance for ESTJ profiles.",
+      "excerpt": "A guide to ESTJ preferences: Extraversion, Sensing, Thinking, and Judging.",
       "hero_image_url": null,
       "hero_kicker": "Executive",
       "hero_quote": null,
-      "hero_summary": "Role recommendations and work-environment guidance for ESTJ profiles.",
+      "hero_summary": "A guide to ESTJ preferences: Extraversion, Sensing, Thinking, and Judging.",
       "is_indexable": true,
       "is_public": true,
       "keywords": [],
@@ -559,7 +457,7 @@
     "sections": [
       {
         "body_html": null,
-        "body_md": "Role recommendations and work-environment guidance for ESTJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
+        "body_md": "ESTJ combines preferences for Extraversion, Sensing, Thinking, and Judging. Compare your use of concrete information, consistency in decision criteria, and preference for organizing next steps. These are reflection questions, not evidence that you are skilled at a task or suited to a particular occupation. Read the [preference definitions](https://www.myersbriggs.org/my-mbti-personality-type/the-mbti-preferences/) and compare them with examples from your own experience.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
@@ -569,7 +467,7 @@
       },
       {
         "body_html": null,
-        "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Machine Learning Engineer, Backend Engineer, Cybersecurity Analyst.",
+        "body_md": "Career choices need evidence about your interests, demonstrated skills, experience, values, and the conditions of a specific job. This page does not recommend or rule out jobs based on ESTJ. Use a course, project, or appropriately supervised task to check your own fit.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
@@ -580,48 +478,10 @@
       {
         "body_html": null,
         "body_md": null,
-        "is_enabled": true,
+        "is_enabled": false,
         "payload_json": {
-          "avoid_jobs": [
-            {
-              "slug": "sales-manager",
-              "title": "Sales Manager"
-            },
-            {
-              "slug": "financial-planner",
-              "title": "Financial Planner"
-            },
-            {
-              "slug": "content-strategist",
-              "title": "Content Strategist"
-            }
-          ],
-          "recommended_jobs": [
-            {
-              "slug": "machine-learning-engineer",
-              "title": "Machine Learning Engineer"
-            },
-            {
-              "slug": "backend-engineer",
-              "title": "Backend Engineer"
-            },
-            {
-              "slug": "cybersecurity-analyst",
-              "title": "Cybersecurity Analyst"
-            },
-            {
-              "slug": "operations-manager",
-              "title": "Operations Manager"
-            },
-            {
-              "slug": "sales-manager",
-              "title": "Sales Manager"
-            },
-            {
-              "slug": "financial-planner",
-              "title": "Financial Planner"
-            }
-          ],
+          "avoid_jobs": [],
+          "recommended_jobs": [],
           "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
         },
         "render_variant": "preferred_role_list",
@@ -642,22 +502,9 @@
       {
         "body_html": null,
         "body_md": null,
-        "is_enabled": true,
+        "is_enabled": false,
         "payload_json": {
-          "items": [
-            {
-              "body": null,
-              "title": "Strategic pattern recognition"
-            },
-            {
-              "body": null,
-              "title": "Stable execution under constraints"
-            },
-            {
-              "body": null,
-              "title": "Strong ownership on meaningful goals"
-            }
-          ]
+          "items": []
         },
         "render_variant": "bullets",
         "section_key": "growth.strengths",
@@ -1021,5 +868,5 @@
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "4ff16a83e620c6bc613746f59d78f59a486f209b3d0801d15d98b0a9db626711"
+  "source_content_sha256": "5125ef18f1e5e0c9ed34d07eecf3a5515385bab2857c1cc5f80d8ce4ab4774e1"
 }
