@@ -126,25 +126,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-7",
-          "label": "core_type:type-7",
+          "label": "Enneagram Type 7",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-7"
         },
         {
           "href": "/en/personality/enneagram/type-7/instincts/self-preservation",
-          "label": "instinctual_subtype:type-7/self-preservation",
+          "label": "Type 7: self-preservation instinct",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-7/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-7/instincts/social",
-          "label": "instinctual_subtype:type-7/social",
+          "label": "Type 7: social instinct",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-7/social"
         }
@@ -331,5 +331,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "4c7286010bb799bd39ebec7d33ec35aa8051859aa95b3c46805c466b4ecd920a"
+  "source_content_sha256": "e70a08d20924235860c482ebd413a7705a32e2b844b46e47e417f5e9d220c57b"
 }

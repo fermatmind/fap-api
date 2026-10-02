@@ -126,25 +126,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-7",
-          "label": "core_type:type-7",
+          "label": "九型人格7号",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-7"
         },
         {
           "href": "/zh/personality/enneagram/type-7/instincts/self-preservation",
-          "label": "instinctual_subtype:type-7/self-preservation",
+          "label": "7号：自保本能",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-7/self-preservation"
         },
         {
           "href": "/zh/personality/enneagram/type-7/instincts/one-to-one",
-          "label": "instinctual_subtype:type-7/one-to-one",
+          "label": "7号：一对一本能",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-7/one-to-one"
         }
@@ -331,5 +331,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "999f8185dabbe094901e9ce9cf1d85b91c7cfcb40865eb310903f20348ef45b8"
+  "source_content_sha256": "2596c504db88a099c7fa6571e34c1454e1c0b40716c0d6407395b9d410ab3023"
 }

@@ -126,25 +126,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-8",
-          "label": "core_type:type-8",
+          "label": "Enneagram Type 8",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-8"
         },
         {
           "href": "/en/personality/enneagram/type-8/instincts/self-preservation",
-          "label": "instinctual_subtype:type-8/self-preservation",
+          "label": "Type 8: self-preservation instinct",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-8/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-8/instincts/one-to-one",
-          "label": "instinctual_subtype:type-8/one-to-one",
+          "label": "Type 8: one-to-one instinct",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-8/one-to-one"
         }
@@ -331,5 +331,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "9c279ba1c365a61138b5670ad1184757cfcaf04777c395341988f146707fc07b"
+  "source_content_sha256": "95b1f4d028ef2abab2a16a8ea745225e630bc7f15cbdc4a3ae45c3e76efda58f"
 }
