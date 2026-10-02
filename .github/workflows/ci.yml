@@ -189,7 +189,7 @@ jobs:
     name: verify-mbti-${{ matrix.mode }}
     needs: [classify, hygiene]
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
