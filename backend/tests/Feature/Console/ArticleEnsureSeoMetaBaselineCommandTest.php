@@ -4,10 +4,19 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
+use App\Console\Commands\ArticleEnsureSeoMetaBaseline as Baseline;
+use App\Models\AdminUser;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
+use App\Models\AuditLog;
+use App\Models\Permission;
+use App\Models\Role;
+use App\Services\Audit\AuditLogger;
+use App\Support\CanonicalTranslationPayloadHash as Hash;
+use App\Support\Rbac\PermissionNames;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use RuntimeException;
 use Tests\TestCase;
 
 final class ArticleEnsureSeoMetaBaselineCommandTest extends TestCase
@@ -63,6 +72,7 @@ final class ArticleEnsureSeoMetaBaselineCommandTest extends TestCase
             '--translation-group-id' => 'article-8',
             '--expected-slug' => 'mbti-basics',
             '--expected-canonical' => '/zh/articles/mbti-basics',
+            ...$this->executeAuthority($article),
             '--execute' => true,
             '--json' => true,
             '--no-publish' => true,
@@ -100,6 +110,7 @@ final class ArticleEnsureSeoMetaBaselineCommandTest extends TestCase
             '--translation-group-id' => 'article-8',
             '--expected-slug' => 'mbti-basics',
             '--expected-canonical' => '/zh/articles/mbti-basics',
+            ...$this->executeAuthority($article),
             '--execute' => true,
             '--json' => true,
             '--no-publish' => true,
@@ -139,6 +150,7 @@ final class ArticleEnsureSeoMetaBaselineCommandTest extends TestCase
             '--translation-group-id' => 'article-8',
             '--expected-slug' => 'mbti-basics',
             '--expected-canonical' => '/zh/articles/mbti-basics',
+            ...$this->executeAuthority($article),
             '--execute' => true,
             '--json' => true,
             '--no-publish' => true,
@@ -172,6 +184,61 @@ final class ArticleEnsureSeoMetaBaselineCommandTest extends TestCase
         $this->assertSame(1, $exitCode);
         $this->assertErrorCode($payload, 'translation_group_id_mismatch');
         $this->assertSame(0, ArticleSeoMeta::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_drift_and_failed_audit_leave_native_state_unchanged(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $article = $this->createArticle();
+        $args = $this->executeArgs($article);
+        Article::withoutGlobalScopes()->whereKey($article->id)->update(['excerpt' => 'Changed after preview']);
+        $this->assertSame(1, Artisan::call('articles:ensure-seo-meta-baseline', $args));
+        $this->assertSame(0, ArticleSeoMeta::withoutGlobalScopes()->count());
+        $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
+        $article = $article->fresh();
+        $before = Baseline::nativeState($article);
+        $this->mock(AuditLogger::class)->shouldReceive('log')->once()->andThrow(new RuntimeException('audit_failed'));
+        $this->assertSame(1, Artisan::call('articles:ensure-seo-meta-baseline', $this->executeArgs($article)));
+        $this->assertSame($before, Baseline::nativeState($article->fresh()));
+        $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
+    }
+
+    public function test_existing_editorial_copy_and_seo_noindex_override_are_preserved(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $article = $this->createArticle();
+        $seo = ArticleSeoMeta::withoutGlobalScopes()->create(['org_id' => 0, 'article_id' => $article->id,
+            'locale' => 'zh-CN', 'seo_title' => 'Exact reviewed title', 'seo_description' => 'Reviewed description',
+            'canonical_url' => 'https://fermatmind.com/zh/articles/mbti-basics', 'is_indexable' => false,
+            'robots' => '', 'schema_json' => null]);
+        $this->assertSame(0, Artisan::call('articles:ensure-seo-meta-baseline', $this->executeArgs($article->fresh())));
+        $this->assertSame('Exact reviewed title', $seo->fresh()->seo_title);
+        $this->assertSame('Reviewed description', $seo->fresh()->seo_description);
+        $this->assertFalse($seo->fresh()->is_indexable);
+        $this->assertSame('noindex,nofollow', $seo->fresh()->robots);
+        $this->assertNull($seo->fresh()->schema_json);
+        $this->assertSame(1, AuditLog::withoutGlobalScopes()->count());
+    }
+
+    private function executeAuthority(Article $article): array
+    {
+        $actor = AdminUser::create(['name' => 'Local operator', 'email' => uniqid().'@example.test', 'password' => 'test-secret', 'is_active' => 1]);
+        $role = Role::create(['name' => uniqid('baseline-')]);
+        $permission = Permission::firstOrCreate(['name' => PermissionNames::ADMIN_CONTENT_PUBLISH]);
+        $role->permissions()->attach($permission);
+        $actor->roles()->attach($role);
+        $hash = Hash::hash(Baseline::nativeState($article->fresh()));
+
+        return ['--admin-user-id' => $actor->id, '--expected-state-sha256' => $hash, '--confirm' => $hash];
+    }
+
+    private function executeArgs(Article $article): array
+    {
+        return [...$this->executeAuthority($article), '--article-id' => $article->id,
+            '--translation-group-id' => $article->translation_group_id, '--expected-slug' => $article->slug,
+            '--expected-canonical' => '/zh/articles/'.$article->slug, '--execute' => true, '--json' => true,
+            '--no-publish' => true, '--no-schema' => true, '--no-hreflang' => true,
+            '--no-search' => true, '--no-sitemap-llms-change' => true];
     }
 
     private function createArticle(): Article

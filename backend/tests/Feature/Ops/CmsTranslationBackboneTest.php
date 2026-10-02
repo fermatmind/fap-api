@@ -340,6 +340,49 @@ final class CmsTranslationBackboneTest extends TestCase
         $this->assertDatabaseCount('cms_translation_revisions', 1);
     }
 
+    public function test_private_published_source_draft_preserves_identity_live_payload_and_old_revision(): void
+    {
+        $source = $this->createSourceContentPage('private-source-reader-edit', '/private-source-reader-edit');
+        $workspace = app(RowBackedRevisionWorkspace::class);
+        $published = $workspace->ensureInitialRevision('content_page', $source);
+        $source = $source->fresh();
+        $before = $source->getAttributes();
+        $oldRevision = $published->fresh()->getAttributes();
+        $payload = $workspace->adapter('content_page')->snapshotPayload($source);
+        $payload['body_md'] = 'Private corrected source body';
+        $payload['body_html'] = '';
+        $payload['seo_title'] = 'Private corrected SEO';
+        $payload['faq_items'] = [['question' => 'Private question?', 'answer' => 'Private answer.']];
+        $first = null;
+        foreach ([1, 2] as $iteration) {
+            $saved = $workspace->saveWorkingDraft('content_page', $source->fresh(), $payload, CmsTranslationRevision::STATUS_DRAFT);
+            $this->assertTrue($saved->isSourceContent());
+            $this->assertSame($before['source_version_hash'], $saved->source_version_hash);
+            $this->assertSame((int) $published->id, (int) $saved->published_revision_id);
+            $this->assertNotSame((int) $published->id, (int) $saved->working_revision_id);
+            $current = $saved->getAttributes();
+            $expected = $before;
+            unset($current['working_revision_id'], $current['updated_at'], $expected['working_revision_id'], $expected['updated_at']);
+            $this->assertSame($expected, $current);
+            $working = $saved->workingRevision;
+            $this->assertSame($payload, $working->payload_json);
+            $this->assertSame('draft', $working->revision_status);
+            $this->assertNull($working->approved_at);
+            $this->assertNull($working->reviewed_at);
+            $this->assertNull($working->published_at);
+            $this->assertSame($oldRevision, $published->fresh()->getAttributes());
+            if ($first !== null) {
+                $this->assertSame($first, (int) $working->id);
+            }
+            $first = (int) $working->id;
+        }
+        $this->assertDatabaseCount('cms_translation_revisions', 2);
+        $public = ContentPage::withoutGlobalScopes()->publiclyReadable()->findOrFail($source->id);
+        $this->assertSame($before['content_md'], $public->content_md);
+        $this->assertSame($before['seo_title'], $public->seo_title);
+        $this->assertDatabaseCount('audit_logs', 0);
+    }
+
     public function test_editing_an_unpublished_translation_draft_preserves_the_published_content_page(): void
     {
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);

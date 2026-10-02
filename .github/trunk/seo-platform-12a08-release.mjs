@@ -46,7 +46,11 @@ export function bindControlled(manifest, report, artifact) {
   proof.end_to_end_acceptance={...report,status:'pass',stage:'controlled_mission_terminal_and_ui',bound_sha:report.sha,artifact_digest:artifact};
   return manifest;
 }
+export function hasActivationEvidence(checks, production) {
+  return Boolean(checks || production?.activation?.schema_version === 'seo.platform12_a08_activation.v2');
+}
 export function build({checks, sha, ci, jobs, staging, production, artifactDigests, nightly, sources, stagingSafety}) {
+  if (!hasActivationEvidence(checks, production)) return null;
   const previous = production.activation;
   if (!checks && previous?.schema_version === 'seo.platform12_a08_activation.v2') {
     if (!MISSIONS.every(id => mayCarry(previous,{production_sha:sha,version_vector:production.version_vector},id))) throw new Error('A08_FOCUSED_REVALIDATION_REQUIRED');

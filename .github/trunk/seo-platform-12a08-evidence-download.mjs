@@ -1,7 +1,7 @@
 import { execFileSync } from 'node:child_process';
 import { writeFileSync, readFileSync, mkdirSync, existsSync } from 'node:fs';
 import { digest, mayCarry, MISSIONS } from './seo-platform-12a08-activation.mjs';
-import { verifyState, assessNightly, completedNightlyFullJob, selectNightlyArtifact } from './seo-platform-12a08-release.mjs';
+import { verifyState, hasActivationEvidence, assessNightly, completedNightlyFullJob, selectNightlyArtifact } from './seo-platform-12a08-release.mjs';
 const repo = process.env.GITHUB_REPOSITORY;
 if (repo !== 'fermatmind/fap-api') throw new Error('REPOSITORY_HOLD');
 const sha = process.env.DEPLOY_SHA;
@@ -33,7 +33,8 @@ const ciArtifact = api(`actions/runs/${ci.id}/artifacts?per_page=100`).artifacts
 if (!ciArtifact || !/^sha256:[a-f0-9]{64}$/.test(ciArtifact.digest)) throw new Error('CI_ARTIFACT_HOLD');
 artifactDigests.ci = ciArtifact.digest;
 const checks = artifactDigests.checks ? read('checks/a08-scoped-checks.json') : null;
-const nightlyRuns = api('actions/workflows/nightly.yml/runs?status=completed&per_page=100').workflow_runs;
+const activationEvidence = hasActivationEvidence(checks, production);
+const nightlyRuns = activationEvidence ? api('actions/workflows/nightly.yml/runs?status=completed&per_page=100').workflow_runs : [];
 let nightly = null;
 for (const run of nightlyRuns) {
   const nightlyJobs = api(`actions/runs/${run.id}/jobs?per_page=100`).jobs;
@@ -60,6 +61,6 @@ for (const run of nightlyRuns) {
   } else { nightly = assessNightly(run,nightlyJobs,evidence,checks); }
   break;
 }
-if (!nightly) nightly = {status:'unavailable',disposition:'CURRENT_CANDIDATE_SCOPED_CHECKS_ONLY',candidate_sha:sha};
+if (!nightly && activationEvidence) nightly = {status:'unavailable',disposition:'CURRENT_CANDIDATE_SCOPED_CHECKS_ONLY',candidate_sha:sha};
 const sources = Object.fromEntries(MISSIONS.map((id,index)=>[id,existsSync(`production/a08-production-sources/source-${index}.json`) ? read(`production/a08-production-sources/source-${index}.json`) : null]));
 writeFileSync('a08-release-input.json',JSON.stringify({stagingSafety:safety,sources,nightly,checks:artifactDigests.checks ? read('checks/a08-scoped-checks.json') : null,sha,ci,jobs,staging,production,artifactDigests}));

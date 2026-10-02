@@ -8,6 +8,10 @@ use App\Contracts\Cms\SiblingTranslationAdapter;
 use App\Models\CmsTranslationRevision;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @review-surface cms_translation_revision
+ * @review-surface content_page
+ */
 final class RowBackedRevisionWorkspace
 {
     /**
@@ -113,6 +117,13 @@ final class RowBackedRevisionWorkspace
     ): Model {
         $adapter = $this->adapter($contentType);
         $currentWorking = $this->workingRevision($contentType, $record);
+        // An isolated source draft must retain the live source identity and row payload.
+        // Explicit resource/review/publication transitions keep their existing attributes path.
+        $privatePublishedSourceDraft = $contentType === 'content_page'
+            && $adapter->isSource($record)
+            && filled($record->published_revision_id)
+            && $revisionStatus === CmsTranslationRevision::STATUS_DRAFT
+            && $recordAttributes === [];
         $publishedRevisionId = $record->published_revision_id ? (int) $record->published_revision_id : null;
         $shouldFork = $publishedRevisionId !== null && (int) $currentWorking->id === $publishedRevisionId;
 
@@ -155,10 +166,10 @@ final class RowBackedRevisionWorkspace
 
         $record->forceFill([
             'working_revision_id' => (int) $working->id,
-            'translation_status' => $revisionStatus,
+            'translation_status' => $privatePublishedSourceDraft ? $record->translation_status : $revisionStatus,
         ] + $recordAttributes);
 
-        if ($adapter->isSource($record) || ! filled($record->published_revision_id)) {
+        if (! $privatePublishedSourceDraft && ($adapter->isSource($record) || ! filled($record->published_revision_id))) {
             $adapter->applyRevisionPayload($record, $payload);
         }
 

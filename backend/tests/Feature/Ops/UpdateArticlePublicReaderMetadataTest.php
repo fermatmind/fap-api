@@ -120,7 +120,9 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
             '--json' => true];
         $this->assertSame(0, Artisan::call('articles:ensure-seo-meta-baseline', $locks), Artisan::output());
         $this->assertSame(0, ArticleSeoMeta::withoutGlobalScopes()->count());
+        $baselineHash = Hash::hash(\App\Console\Commands\ArticleEnsureSeoMetaBaseline::nativeState($article->fresh()));
         $this->assertSame(0, Artisan::call('articles:ensure-seo-meta-baseline', [...$locks, '--execute' => true,
+            '--admin-user-id' => $this->actor()->id, '--expected-state-sha256' => $baselineHash, '--confirm' => $baselineHash,
             '--no-publish' => true, '--no-schema' => true, '--no-hreflang' => true,
             '--no-search' => true, '--no-sitemap-llms-change' => true]), Artisan::output());
         $article = $article->fresh();

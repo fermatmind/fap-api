@@ -4,10 +4,17 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Models\AdminUser;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
+use App\Services\Audit\AuditLogger;
 use App\Services\Cms\ArticleSeoService;
+use App\Support\ArticleSourceTargetSnapshot;
+use App\Support\CanonicalTranslationPayloadHash as Hash;
+use App\Support\Rbac\PermissionNames;
+use App\Support\SchemaBaseline;
 use Illuminate\Console\Command;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 use Throwable;
@@ -21,6 +28,10 @@ final class ArticleEnsureSeoMetaBaseline extends Command
         {--expected-canonical= : Expected canonical route or absolute canonical URL}
         {--dry-run : Validate and plan without writing DB rows}
         {--execute : Apply the missing SEO meta baseline; omitted by default for dry-run safety}
+        {--expected-state-sha256= : Exact native article, SEO and history hash from dry-run}
+        {--admin-user-id= : Active operator with content publish permission}
+        {--deployed-sha= : Exact active production release}
+        {--confirm= : Exact expected native state hash for execute}
         {--json : Emit a JSON summary}
         {--no-publish : Required execute-mode hold: do not publish}
         {--no-schema : Required execute-mode hold: do not modify schema gates}
@@ -30,14 +41,14 @@ final class ArticleEnsureSeoMetaBaseline extends Command
 
     protected $description = 'Safely create or complete a locked article SEO meta baseline without publishing or enabling schema/search surfaces.';
 
-    public function handle(ArticleSeoService $articleSeoService): int
+    public function handle(ArticleSeoService $articleSeoService, AuditLogger $logger): int
     {
         try {
-            $summary = $this->buildSummary($articleSeoService);
+            $summary = $this->buildSummary($articleSeoService, $logger);
         } catch (RuntimeException $exception) {
             $summary = $this->failureSummary('runtime_error', $exception->getMessage());
         } catch (Throwable $exception) {
-            $summary = $this->failureSummary('unexpected_error', $exception->getMessage());
+            $summary = $this->failureSummary('unexpected_error', 'native_baseline_operation_failed');
         }
 
         $this->emitSummary($summary);
@@ -48,7 +59,7 @@ final class ArticleEnsureSeoMetaBaseline extends Command
     /**
      * @return array<string,mixed>
      */
-    private function buildSummary(ArticleSeoService $articleSeoService): array
+    private function buildSummary(ArticleSeoService $articleSeoService, AuditLogger $logger): array
     {
         $execute = (bool) $this->option('execute');
         $dryRun = ! $execute;
@@ -65,6 +76,24 @@ final class ArticleEnsureSeoMetaBaseline extends Command
             foreach (['no-publish', 'no-schema', 'no-hreflang', 'no-search', 'no-sitemap-llms-change'] as $flag) {
                 if ((bool) $this->option($flag) !== true) {
                     $errors[] = $this->issue($flag, 'required_safety_flag_missing', 'All no-side-effect safety flags are required for execute mode.');
+                }
+            }
+            $stateHash = (string) $this->option('expected-state-sha256');
+            if (preg_match('/\A[a-f0-9]{64}\z/', $stateHash) !== 1 || ! hash_equals($stateHash, (string) $this->option('confirm'))
+                || ! SchemaBaseline::hasTable('audit_logs')) {
+                $errors[] = $this->issue('native_state', 'native_state_confirmation_required', 'Execute requires an exact dry-run state hash and audit storage.');
+            }
+            $actor = AdminUser::query()->find((int) $this->option('admin-user-id'));
+            if (! $actor instanceof AdminUser || (int) $actor->is_active !== 1 || $actor->locked_until?->isFuture()
+                || ! ($actor->hasPermission(PermissionNames::ADMIN_OWNER) || $actor->hasPermission(PermissionNames::ADMIN_CONTENT_PUBLISH))) {
+                $errors[] = $this->issue('operator', 'operator_permission_required', 'An active publish-authorized operator is required.');
+            }
+            if (app()->environment('production')) {
+                $release = dirname(base_path()).'/REVISION';
+                $sha = (string) $this->option('deployed-sha');
+                if (preg_match('/\A[a-f0-9]{40}\z/', $sha) !== 1 || ! is_file($release)
+                    || ! hash_equals($sha, trim((string) file_get_contents($release)))) {
+                    $errors[] = $this->issue('release', 'production_release_drift', 'Execute requires the exact active production release.');
                 }
             }
         }
@@ -90,6 +119,7 @@ final class ArticleEnsureSeoMetaBaseline extends Command
         }
 
         $before = $this->snapshot($article, $article->seoMeta);
+        $nativeBeforeHash = Hash::hash(self::nativeState($article));
         $expectedAbsoluteCanonical = $articleSeoService->buildCanonicalUrl((string) $article->slug, (string) $article->locale);
         $this->validateLocks($article, $translationGroupId, $expectedSlug, $expectedCanonical, $expectedAbsoluteCanonical, $errors);
         $planned = $this->plannedSeoMeta($article, $expectedAbsoluteCanonical);
@@ -100,11 +130,58 @@ final class ArticleEnsureSeoMetaBaseline extends Command
         }
 
         if ($dryRun) {
-            return $this->summary(true, true, 'would_ensure_seo_meta_baseline', $articleId, $translationGroupId, $before, $after, [], []);
+            return $this->summary(true, true, 'would_ensure_seo_meta_baseline', $articleId, $translationGroupId, $before, $after, [], [])
+                + ['native_before_sha256' => $nativeBeforeHash];
         }
 
-        DB::transaction(function () use ($articleSeoService, $articleId): void {
-            $articleSeoService->generateSeoMeta($articleId);
+        DB::transaction(function () use ($articleSeoService, $articleId, $translationGroupId, $expectedSlug, $expectedCanonical, $logger): void {
+            $locked = Article::withoutGlobalScopes()->whereKey($articleId)->lockForUpdate()->firstOrFail();
+            if ((int) $locked->org_id !== 0) {
+                throw new RuntimeException('global_article_required');
+            }
+            $state = self::nativeState($locked, true);
+            if (! hash_equals(Hash::hash($state), (string) $this->option('expected-state-sha256'))) {
+                throw new RuntimeException('native_state_drift');
+            }
+            $locked->setRelation('seoMeta', ArticleSeoMeta::withoutGlobalScopes()->where('article_id', $articleId)->first());
+            $lockErrors = [];
+            $this->validateLocks($locked, $translationGroupId, $expectedSlug, $expectedCanonical,
+                $articleSeoService->buildCanonicalUrl((string) $locked->slug, (string) $locked->locale), $lockErrors);
+            if ($lockErrors !== []) {
+                throw new RuntimeException('identity_or_canonical_drift');
+            }
+            if (! $locked->seoMeta instanceof ArticleSeoMeta) {
+                $articleSeoService->generateSeoMeta($articleId);
+            } else {
+                // Existing editorial values and eligibility outrank generated baseline copy.
+                $values = $this->plannedSeoMeta($locked, $articleSeoService->buildCanonicalUrl((string) $locked->slug, (string) $locked->locale));
+                $seo = $locked->seoMeta;
+                foreach (['seo_title', 'seo_description', 'canonical_url', 'og_title', 'og_description', 'robots'] as $field) {
+                    if (! filled($seo->getAttribute($field))) {
+                        $seo->setAttribute($field, $values[$field]);
+                    }
+                }
+                if ($seo->isDirty()) {
+                    $seo->save();
+                }
+            }
+            $locked->refresh();
+            $result = self::nativeState($locked, true);
+            if ($state['article'] !== $result['article'] || $state['history'] !== $result['history'] || count($result['seo']) !== 1) {
+                throw new RuntimeException('native_baseline_readback_failed');
+            }
+            if ($state['seo'] !== []) {
+                foreach ($state['seo'][0] as $key => $value) {
+                    if ($key !== 'updated_at' && (! in_array($key, ['seo_title', 'seo_description', 'canonical_url', 'og_title', 'og_description', 'robots'], true) || filled($value)) && $result['seo'][0][$key] !== $value) {
+                        throw new RuntimeException('existing_seo_value_changed');
+                    }
+                }
+            }
+            $logger->log(Request::create('/console/articles/ensure-seo-meta-baseline', 'POST'), 'article_seo_meta_baseline_ensured',
+                'article', (string) $articleId, ['before_sha256' => Hash::hash($state), 'before_seo' => $state['seo'],
+                    'after_sha256' => Hash::hash($result), 'actor' => 'delegated_cli',
+                    'authorized_operator_id' => (int) $this->option('admin-user-id'), 'editorial_attestation_created' => false],
+                'Operator-authorized locked native SEO baseline');
         });
 
         $fresh = $this->article($articleId);
@@ -120,6 +197,19 @@ final class ArticleEnsureSeoMetaBaseline extends Command
             [],
             [],
         );
+    }
+
+    /** @return array<string,mixed> */
+    public static function nativeState(Article $article, bool $lock = false): array
+    {
+        $query = ArticleSeoMeta::withoutGlobalScopes()->where('article_id', $article->id)->orderBy('id');
+        $seo = ($lock ? $query->lockForUpdate() : $query)->get();
+        if ($seo->count() > 1 || ($seo->count() === 1 && ((int) $seo[0]->org_id !== (int) $article->org_id || $seo[0]->locale !== $article->locale))) {
+            throw new RuntimeException('native_seo_identity_invalid');
+        }
+
+        return ['article' => $article->getAttributes(), 'seo' => $seo->map(fn ($row) => $row->getAttributes())->all(),
+            'history' => ArticleSourceTargetSnapshot::sourceRevisions($article, [], $lock)];
     }
 
     private function article(int $articleId): ?Article
@@ -194,8 +284,8 @@ final class ArticleEnsureSeoMetaBaseline extends Command
             'og_image_url' => $existing instanceof ArticleSeoMeta ? $existing->og_image_url : null,
             'robots' => $existing instanceof ArticleSeoMeta && trim((string) $existing->robots) !== ''
                 ? (string) $existing->robots
-                : ((bool) $article->is_indexable ? 'index,follow' : 'noindex,nofollow'),
-            'is_indexable' => (bool) $article->is_indexable,
+                : (($existing instanceof ArticleSeoMeta ? (bool) $existing->is_indexable : (bool) $article->is_indexable) ? 'index,follow' : 'noindex,nofollow'),
+            'is_indexable' => $existing instanceof ArticleSeoMeta ? (bool) $existing->is_indexable : (bool) $article->is_indexable,
             'schema_json' => $existing instanceof ArticleSeoMeta ? $existing->schema_json : null,
         ];
     }

@@ -4,8 +4,22 @@ import {mkdtempSync,writeFileSync,readFileSync,rmSync,mkdirSync,chmodSync} from 
 import {tmpdir} from 'node:os';
 import {execFileSync,spawnSync} from 'node:child_process';
 import {fingerprint,scopeFor,mayCarry,MISSIONS,scopedReceipt,CHECKS,digest} from './seo-platform-12a08-activation.mjs';
-import {verifyState} from './seo-platform-12a08-release.mjs';
+import {verifyState,hasActivationEvidence,build} from './seo-platform-12a08-release.mjs';
 import {classifyPaths} from './classify-paths.mjs';
+test('A08 unavailable activation evidence skips before candidate checks; existing evidence stays fail closed',()=>{
+ for (const activation of [null,{schema_version:'seo.platform12_a08_activation.v1'}]) {
+  const production={activation};
+  assert.equal(hasActivationEvidence(null,production),false);
+  assert.equal(build({checks:null,production}),null);
+ }
+ assert.equal(hasActivationEvidence({}, {activation:null}),true);
+ assert.throws(()=>build({checks:{},production:{activation:null},sha:'candidate',ci:{}}),/A08_CI_BINDING_HOLD/);
+ assert.equal(hasActivationEvidence(null,{activation:{schema_version:'seo.platform12_a08_activation.v2'}}),true);
+ assert.throws(()=>build({checks:null,production:{activation:{schema_version:'seo.platform12_a08_activation.v2'}},sha:'candidate'}),/A08_FOCUSED_REVALIDATION_REQUIRED/);
+ const downloader=readFileSync(new URL('./seo-platform-12a08-evidence-download.mjs',import.meta.url),'utf8');
+ assert.match(downloader,/const nightlyRuns = activationEvidence \? api\(/);
+ assert.match(downloader,/if \(!nightly && activationEvidence\)/);
+});
 test('explicit shared versus mission dependencies exclude ordinary copy, retain identities and authority',()=>{
  for(const path of ['backend/routes/api.php','backend/composer.lock','backend/app/Http/Middleware/Auth.php','backend/content_assets/personality_public/current/manifest.json']) assert.deepEqual(scopeFor(path),['public']);
  assert.deepEqual(scopeFor('backend/docs/example.md'),[]);
