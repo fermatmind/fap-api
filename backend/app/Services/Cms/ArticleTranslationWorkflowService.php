@@ -447,6 +447,9 @@ final class ArticleTranslationWorkflowService
                 'published_at' => $revision->published_at ?? now(),
             ])->save();
             $locked->forceFill([
+                'title' => $revision->title,
+                'excerpt' => $revision->excerpt,
+                'content_md' => $revision->content_md,
                 'status' => 'published',
                 'is_public' => true,
                 'published_at' => $locked->published_at ?? now(),

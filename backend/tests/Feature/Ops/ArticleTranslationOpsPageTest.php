@@ -847,6 +847,46 @@ final class ArticleTranslationOpsPageTest extends TestCase
         $this->assertTrue(AuditLog::query()->where('action', 'article_translation_published')->exists());
     }
 
+    public function test_translation_publish_projects_approved_working_copy_without_rewriting_source_or_history(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_WRITE,
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+        config(['review_governance.mode' => 'solo_owner', 'review_governance.solo_owner_admin_user_id' => (int) $admin->id]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $this->app->instance(ArticleMachineTranslationProvider::class, new FakeArticleMachineTranslationProvider);
+
+        $source = $this->createSourceOnlyGroup('publish-approved-projection-fixture');
+        $sourceBefore = $source->fresh()->getAttributes();
+        $sourceRevisionBefore = $source->fresh()->publishedRevision->getAttributes();
+        $workflow = app(ArticleTranslationWorkflowService::class);
+        $draft = $workflow->createMachineDraft($source, 'en', (int) $admin->id)['article'];
+        $approvedCopy = $draft->fresh()->workingRevision->only(['title', 'excerpt', 'content_md']);
+        $draft->forceFill([
+            'title' => 'Previous private title',
+            'excerpt' => 'Previous private excerpt',
+            'content_md' => 'Previous private body',
+        ])->saveQuietly();
+        $workflow->promoteToHumanReview($draft);
+        $workflow->approveTranslation($draft);
+        $historyCount = ArticleTranslationRevision::query()->count();
+
+        $published = $workflow->publishTranslation($draft);
+        $target = $draft->fresh();
+
+        $this->assertSame($approvedCopy, $target->only(['title', 'excerpt', 'content_md']));
+        $this->assertSame($approvedCopy, $published->only(['title', 'excerpt', 'content_md']));
+        $this->assertSame((int) $published->id, (int) $target->published_revision_id);
+        $this->assertSame((int) $published->id, (int) $target->working_revision_id);
+        $this->assertTrue((bool) $target->is_public);
+        $this->assertSame($historyCount, ArticleTranslationRevision::query()->count());
+        $this->assertSame($sourceBefore, $source->fresh()->getAttributes());
+        $this->assertSame($sourceRevisionBefore, $source->fresh()->publishedRevision->getAttributes());
+    }
+
     public function test_translation_ops_console_exposes_coverage_compare_and_preflight_summary(): void
     {
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
