@@ -67,11 +67,13 @@ final class CareerContentV3PageUpdaterTest extends TestCase
             self::assertSame($originalManifest['coverage']['enhanced_locale_pages'] - 1, $package['manifest']['coverage']['enhanced_locale_pages']);
             self::assertSame($package['summary']['enhanced_locale_page_count'], $package['manifest']['coverage']['enhanced_locale_pages']);
             self::assertSame($package['summary']['legacy_locale_page_count'], $package['manifest']['coverage']['legacy_locale_pages']);
+            unset($package);
 
             file_put_contents($paths[0], $originalPage);
             $updater->update($root, 'actors', 'zh-CN', true);
             $restored = (new CareerContentV3AuthorityPackage)->load($root);
             self::assertSame($originalManifest, $restored['manifest']);
+            unset($restored);
             $before = array_map('file_get_contents', $paths);
             self::assertFalse($updater->update($root, 'actors', 'zh-CN', true)['changed']);
             self::assertSame($before, array_map('file_get_contents', $paths));

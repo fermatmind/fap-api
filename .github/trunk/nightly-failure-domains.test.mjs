@@ -194,6 +194,7 @@ test('only complete-evidence implementation and producer repair changes trigger 
     '.github/trunk/seo-platform-12a08-evidence-download.mjs',
     '.github/trunk/seo-platform-12a08-release.mjs',
     'backend/tests/Unit/Domain/Career/Compilation/CareerShardedCurrentAssemblerTest.php',
+    'backend/tests/Unit/Domain/Career/Display/CareerContentV3PageUpdaterTest.php',
   ]);
   const receipt = runSummary('', { EVENT_NAME: 'push' });
   assert.equal(receipt.status, 'pass');

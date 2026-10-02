@@ -10,6 +10,7 @@ on:
       - '.github/trunk/seo-platform-12a08-evidence-download.mjs'
       - '.github/trunk/seo-platform-12a08-release.mjs'
       - 'backend/tests/Unit/Domain/Career/Compilation/CareerShardedCurrentAssemblerTest.php'
+      - 'backend/tests/Unit/Domain/Career/Display/CareerContentV3PageUpdaterTest.php'
   schedule:
     # Daily operations: 02:17 Asia/Shanghai.
     - cron: "17 18 * * *"
