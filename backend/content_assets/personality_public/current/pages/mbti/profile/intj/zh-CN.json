@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/intj",
@@ -25,7 +25,7 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "75d30f74962cc71ccb40e7ae0823acea3ce59129",
+      "answer_fingerprint": "de19c186ac4d71543a778f15b23a5820fdd64f9d",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
@@ -233,7 +233,7 @@
           "title": "人格概览"
         },
         {
-          "body_md": "你通常更适合在高自主度、目标清晰、反馈节奏稳定的工作环境中发挥优势。优先探索这些方向：产品经理, UI/UX 设计师, 数字营销经理。",
+          "body_md": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据INTJ类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
           "is_enabled": true,
           "key": "career.summary",
           "payload": [],
@@ -243,49 +243,11 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "career.preferred_roles",
           "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "teacher",
-                "title": "教师"
-              },
-              {
-                "slug": "machine-learning-engineer",
-                "title": "机器学习工程师"
-              },
-              {
-                "slug": "backend-engineer",
-                "title": "后端工程师"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "product-manager",
-                "title": "产品经理"
-              },
-              {
-                "slug": "ui-ux-designer",
-                "title": "UI/UX 设计师"
-              },
-              {
-                "slug": "digital-marketing-manager",
-                "title": "数字营销经理"
-              },
-              {
-                "slug": "lawyer",
-                "title": "律师"
-              },
-              {
-                "slug": "teacher",
-                "title": "教师"
-              },
-              {
-                "slug": "machine-learning-engineer",
-                "title": "机器学习工程师"
-              }
-            ],
+            "avoid_jobs": [],
+            "recommended_jobs": [],
             "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
           },
           "render": "preferred_role_list",
@@ -303,23 +265,10 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "growth.strengths",
           "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "战略性模式识别"
-              },
-              {
-                "body": null,
-                "title": "在约束下保持执行稳定"
-              },
-              {
-                "body": null,
-                "title": "对关键目标具备持续投入能力"
-              }
-            ]
+            "items": []
           },
           "render": "bullets",
           "source": "base",
@@ -371,7 +320,7 @@
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "基于 INTJ 人格画像的职业建议与工作环境匹配策略。",
+        "summary": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据INTJ类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
         "tagline": "建筑师",
         "title": "INTJ - 建筑师"
       },
@@ -424,7 +373,7 @@
           "title": "人格概览"
         },
         {
-          "body_md": "你通常更适合在高自主度、目标清晰、反馈节奏稳定的工作环境中发挥优势。优先探索这些方向：产品经理, UI/UX 设计师, 数字营销经理。",
+          "body_md": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据INTJ类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
           "is_enabled": true,
           "key": "career.summary",
           "payload": [],
@@ -434,49 +383,11 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "career.preferred_roles",
           "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "teacher",
-                "title": "教师"
-              },
-              {
-                "slug": "machine-learning-engineer",
-                "title": "机器学习工程师"
-              },
-              {
-                "slug": "backend-engineer",
-                "title": "后端工程师"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "product-manager",
-                "title": "产品经理"
-              },
-              {
-                "slug": "ui-ux-designer",
-                "title": "UI/UX 设计师"
-              },
-              {
-                "slug": "digital-marketing-manager",
-                "title": "数字营销经理"
-              },
-              {
-                "slug": "lawyer",
-                "title": "律师"
-              },
-              {
-                "slug": "teacher",
-                "title": "教师"
-              },
-              {
-                "slug": "machine-learning-engineer",
-                "title": "机器学习工程师"
-              }
-            ],
+            "avoid_jobs": [],
+            "recommended_jobs": [],
             "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
           },
           "render": "preferred_role_list",
@@ -494,23 +405,10 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "growth.strengths",
           "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "战略性模式识别"
-              },
-              {
-                "body": null,
-                "title": "在约束下保持执行稳定"
-              },
-              {
-                "body": null,
-                "title": "对关键目标具备持续投入能力"
-              }
-            ]
+            "items": []
           },
           "render": "bullets",
           "source": "base",
@@ -562,7 +460,7 @@
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "基于 INTJ 人格画像的职业建议与工作环境匹配策略。",
+        "summary": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据INTJ类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
         "tagline": "建筑师",
         "title": "INTJ - 建筑师"
       },
@@ -603,7 +501,7 @@
       },
       {
         "body_html": null,
-        "body_md": "你通常更适合在高自主度、目标清晰、反馈节奏稳定的工作环境中发挥优势。优先探索这些方向：产品经理, UI/UX 设计师, 数字营销经理。",
+        "body_md": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据INTJ类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
@@ -614,48 +512,10 @@
       {
         "body_html": null,
         "body_md": null,
-        "is_enabled": true,
+        "is_enabled": false,
         "payload_json": {
-          "avoid_jobs": [
-            {
-              "slug": "teacher",
-              "title": "教师"
-            },
-            {
-              "slug": "machine-learning-engineer",
-              "title": "机器学习工程师"
-            },
-            {
-              "slug": "backend-engineer",
-              "title": "后端工程师"
-            }
-          ],
-          "recommended_jobs": [
-            {
-              "slug": "product-manager",
-              "title": "产品经理"
-            },
-            {
-              "slug": "ui-ux-designer",
-              "title": "UI/UX 设计师"
-            },
-            {
-              "slug": "digital-marketing-manager",
-              "title": "数字营销经理"
-            },
-            {
-              "slug": "lawyer",
-              "title": "律师"
-            },
-            {
-              "slug": "teacher",
-              "title": "教师"
-            },
-            {
-              "slug": "machine-learning-engineer",
-              "title": "机器学习工程师"
-            }
-          ],
+          "avoid_jobs": [],
+          "recommended_jobs": [],
           "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
         },
         "render_variant": "preferred_role_list",
@@ -676,22 +536,9 @@
       {
         "body_html": null,
         "body_md": null,
-        "is_enabled": true,
+        "is_enabled": false,
         "payload_json": {
-          "items": [
-            {
-              "body": null,
-              "title": "战略性模式识别"
-            },
-            {
-              "body": null,
-              "title": "在约束下保持执行稳定"
-            },
-            {
-              "body": null,
-              "title": "对关键目标具备持续投入能力"
-            }
-          ]
+          "items": []
         },
         "render_variant": "bullets",
         "section_key": "growth.strengths",
@@ -984,5 +831,5 @@
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "428259c4c66587971f46b2e4bc2e6186f3c4743946e3e81ac0f1809c0985bb63"
+  "source_content_sha256": "0ec791b2fe629a74614a7b007bd8e226d3aad63cbc6dc47c4c2c03dfdb7940b5"
 }

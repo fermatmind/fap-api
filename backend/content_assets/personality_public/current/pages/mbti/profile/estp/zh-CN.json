@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/estp",
@@ -25,7 +25,7 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "55e216393aecf192809049afa0355f54321c33d7",
+      "answer_fingerprint": "611e08c3d5d7611ac8722651f744ce60a5c49579",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
@@ -233,7 +233,7 @@
           "title": "人格概览"
         },
         {
-          "body_md": "你通常更适合在高自主度、目标清晰、反馈节奏稳定的工作环境中发挥优势。优先探索这些方向：网络安全分析师, 运营经理, 销售经理。",
+          "body_md": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据ESTP类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
           "is_enabled": true,
           "key": "career.summary",
           "payload": [],
@@ -243,49 +243,11 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "career.preferred_roles",
           "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "content-strategist",
-                "title": "内容策略师"
-              },
-              {
-                "slug": "researcher",
-                "title": "研究员"
-              },
-              {
-                "slug": "pharmacist",
-                "title": "药师"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "cybersecurity-analyst",
-                "title": "网络安全分析师"
-              },
-              {
-                "slug": "operations-manager",
-                "title": "运营经理"
-              },
-              {
-                "slug": "sales-manager",
-                "title": "销售经理"
-              },
-              {
-                "slug": "financial-planner",
-                "title": "财务规划师"
-              },
-              {
-                "slug": "content-strategist",
-                "title": "内容策略师"
-              },
-              {
-                "slug": "researcher",
-                "title": "研究员"
-              }
-            ],
+            "avoid_jobs": [],
+            "recommended_jobs": [],
             "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
           },
           "render": "preferred_role_list",
@@ -303,23 +265,10 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "growth.strengths",
           "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "战略性模式识别"
-              },
-              {
-                "body": null,
-                "title": "在约束下保持执行稳定"
-              },
-              {
-                "body": null,
-                "title": "对关键目标具备持续投入能力"
-              }
-            ]
+            "items": []
           },
           "render": "bullets",
           "source": "base",
@@ -371,7 +320,7 @@
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "基于 ESTP 人格画像的职业建议与工作环境匹配策略。",
+        "summary": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据ESTP类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
         "tagline": "企业家",
         "title": "ESTP - 企业家"
       },
@@ -424,7 +373,7 @@
           "title": "人格概览"
         },
         {
-          "body_md": "你通常更适合在高自主度、目标清晰、反馈节奏稳定的工作环境中发挥优势。优先探索这些方向：网络安全分析师, 运营经理, 销售经理。",
+          "body_md": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据ESTP类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
           "is_enabled": true,
           "key": "career.summary",
           "payload": [],
@@ -434,49 +383,11 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "career.preferred_roles",
           "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "content-strategist",
-                "title": "内容策略师"
-              },
-              {
-                "slug": "researcher",
-                "title": "研究员"
-              },
-              {
-                "slug": "pharmacist",
-                "title": "药师"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "cybersecurity-analyst",
-                "title": "网络安全分析师"
-              },
-              {
-                "slug": "operations-manager",
-                "title": "运营经理"
-              },
-              {
-                "slug": "sales-manager",
-                "title": "销售经理"
-              },
-              {
-                "slug": "financial-planner",
-                "title": "财务规划师"
-              },
-              {
-                "slug": "content-strategist",
-                "title": "内容策略师"
-              },
-              {
-                "slug": "researcher",
-                "title": "研究员"
-              }
-            ],
+            "avoid_jobs": [],
+            "recommended_jobs": [],
             "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
           },
           "render": "preferred_role_list",
@@ -494,23 +405,10 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "growth.strengths",
           "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "战略性模式识别"
-              },
-              {
-                "body": null,
-                "title": "在约束下保持执行稳定"
-              },
-              {
-                "body": null,
-                "title": "对关键目标具备持续投入能力"
-              }
-            ]
+            "items": []
           },
           "render": "bullets",
           "source": "base",
@@ -562,7 +460,7 @@
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "基于 ESTP 人格画像的职业建议与工作环境匹配策略。",
+        "summary": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据ESTP类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
         "tagline": "企业家",
         "title": "ESTP - 企业家"
       },
@@ -603,7 +501,7 @@
       },
       {
         "body_html": null,
-        "body_md": "你通常更适合在高自主度、目标清晰、反馈节奏稳定的工作环境中发挥优势。优先探索这些方向：网络安全分析师, 运营经理, 销售经理。",
+        "body_md": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据ESTP类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
@@ -614,48 +512,10 @@
       {
         "body_html": null,
         "body_md": null,
-        "is_enabled": true,
+        "is_enabled": false,
         "payload_json": {
-          "avoid_jobs": [
-            {
-              "slug": "content-strategist",
-              "title": "内容策略师"
-            },
-            {
-              "slug": "researcher",
-              "title": "研究员"
-            },
-            {
-              "slug": "pharmacist",
-              "title": "药师"
-            }
-          ],
-          "recommended_jobs": [
-            {
-              "slug": "cybersecurity-analyst",
-              "title": "网络安全分析师"
-            },
-            {
-              "slug": "operations-manager",
-              "title": "运营经理"
-            },
-            {
-              "slug": "sales-manager",
-              "title": "销售经理"
-            },
-            {
-              "slug": "financial-planner",
-              "title": "财务规划师"
-            },
-            {
-              "slug": "content-strategist",
-              "title": "内容策略师"
-            },
-            {
-              "slug": "researcher",
-              "title": "研究员"
-            }
-          ],
+          "avoid_jobs": [],
+          "recommended_jobs": [],
           "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
         },
         "render_variant": "preferred_role_list",
@@ -676,22 +536,9 @@
       {
         "body_html": null,
         "body_md": null,
-        "is_enabled": true,
+        "is_enabled": false,
         "payload_json": {
-          "items": [
-            {
-              "body": null,
-              "title": "战略性模式识别"
-            },
-            {
-              "body": null,
-              "title": "在约束下保持执行稳定"
-            },
-            {
-              "body": null,
-              "title": "对关键目标具备持续投入能力"
-            }
-          ]
+          "items": []
         },
         "render_variant": "bullets",
         "section_key": "growth.strengths",
@@ -984,5 +831,5 @@
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "71e1c07142fb5cd57d3b32c131546ddd1b86ce896576bcc4ab75d348aa1a6397"
+  "source_content_sha256": "0052a1018c4a90ffbb6a65257ce4682485268800a3503698f0c255d3e57b1d47"
 }

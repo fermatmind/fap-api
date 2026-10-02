@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/infp",
@@ -25,7 +25,7 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "77ca37646b4c51fbbaf8229ed9cda6a557fb7050",
+      "answer_fingerprint": "e765c7125f9b752a2e42b08f3f8d41413066c56f",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
@@ -233,7 +233,7 @@
           "title": "人格概览"
         },
         {
-          "body_md": "你通常更适合在高自主度、目标清晰、反馈节奏稳定的工作环境中发挥优势。优先探索这些方向：投资分析师, 医生, 数据科学家。",
+          "body_md": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据INFP类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
           "is_enabled": true,
           "key": "career.summary",
           "payload": [],
@@ -243,49 +243,11 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "career.preferred_roles",
           "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "fullstack-engineer",
-                "title": "全栈工程师"
-              },
-              {
-                "slug": "cloud-architect",
-                "title": "云架构师"
-              },
-              {
-                "slug": "hr-business-partner",
-                "title": "HRBP"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "investment-analyst",
-                "title": "投资分析师"
-              },
-              {
-                "slug": "physician",
-                "title": "医生"
-              },
-              {
-                "slug": "data-scientist",
-                "title": "数据科学家"
-              },
-              {
-                "slug": "frontend-engineer",
-                "title": "前端工程师"
-              },
-              {
-                "slug": "fullstack-engineer",
-                "title": "全栈工程师"
-              },
-              {
-                "slug": "cloud-architect",
-                "title": "云架构师"
-              }
-            ],
+            "avoid_jobs": [],
+            "recommended_jobs": [],
             "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
           },
           "render": "preferred_role_list",
@@ -303,23 +265,10 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "growth.strengths",
           "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "战略性模式识别"
-              },
-              {
-                "body": null,
-                "title": "在约束下保持执行稳定"
-              },
-              {
-                "body": null,
-                "title": "对关键目标具备持续投入能力"
-              }
-            ]
+            "items": []
           },
           "render": "bullets",
           "source": "base",
@@ -371,7 +320,7 @@
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "基于 INFP 人格画像的职业建议与工作环境匹配策略。",
+        "summary": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据INFP类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
         "tagline": "调停者",
         "title": "INFP - 调停者"
       },
@@ -424,7 +373,7 @@
           "title": "人格概览"
         },
         {
-          "body_md": "你通常更适合在高自主度、目标清晰、反馈节奏稳定的工作环境中发挥优势。优先探索这些方向：投资分析师, 医生, 数据科学家。",
+          "body_md": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据INFP类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
           "is_enabled": true,
           "key": "career.summary",
           "payload": [],
@@ -434,49 +383,11 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "career.preferred_roles",
           "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "fullstack-engineer",
-                "title": "全栈工程师"
-              },
-              {
-                "slug": "cloud-architect",
-                "title": "云架构师"
-              },
-              {
-                "slug": "hr-business-partner",
-                "title": "HRBP"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "investment-analyst",
-                "title": "投资分析师"
-              },
-              {
-                "slug": "physician",
-                "title": "医生"
-              },
-              {
-                "slug": "data-scientist",
-                "title": "数据科学家"
-              },
-              {
-                "slug": "frontend-engineer",
-                "title": "前端工程师"
-              },
-              {
-                "slug": "fullstack-engineer",
-                "title": "全栈工程师"
-              },
-              {
-                "slug": "cloud-architect",
-                "title": "云架构师"
-              }
-            ],
+            "avoid_jobs": [],
+            "recommended_jobs": [],
             "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
           },
           "render": "preferred_role_list",
@@ -494,23 +405,10 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "growth.strengths",
           "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "战略性模式识别"
-              },
-              {
-                "body": null,
-                "title": "在约束下保持执行稳定"
-              },
-              {
-                "body": null,
-                "title": "对关键目标具备持续投入能力"
-              }
-            ]
+            "items": []
           },
           "render": "bullets",
           "source": "base",
@@ -562,7 +460,7 @@
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "基于 INFP 人格画像的职业建议与工作环境匹配策略。",
+        "summary": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据INFP类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
         "tagline": "调停者",
         "title": "INFP - 调停者"
       },
@@ -603,7 +501,7 @@
       },
       {
         "body_html": null,
-        "body_md": "你通常更适合在高自主度、目标清晰、反馈节奏稳定的工作环境中发挥优势。优先探索这些方向：投资分析师, 医生, 数据科学家。",
+        "body_md": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据INFP类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
@@ -614,48 +512,10 @@
       {
         "body_html": null,
         "body_md": null,
-        "is_enabled": true,
+        "is_enabled": false,
         "payload_json": {
-          "avoid_jobs": [
-            {
-              "slug": "fullstack-engineer",
-              "title": "全栈工程师"
-            },
-            {
-              "slug": "cloud-architect",
-              "title": "云架构师"
-            },
-            {
-              "slug": "hr-business-partner",
-              "title": "HRBP"
-            }
-          ],
-          "recommended_jobs": [
-            {
-              "slug": "investment-analyst",
-              "title": "投资分析师"
-            },
-            {
-              "slug": "physician",
-              "title": "医生"
-            },
-            {
-              "slug": "data-scientist",
-              "title": "数据科学家"
-            },
-            {
-              "slug": "frontend-engineer",
-              "title": "前端工程师"
-            },
-            {
-              "slug": "fullstack-engineer",
-              "title": "全栈工程师"
-            },
-            {
-              "slug": "cloud-architect",
-              "title": "云架构师"
-            }
-          ],
+          "avoid_jobs": [],
+          "recommended_jobs": [],
           "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
         },
         "render_variant": "preferred_role_list",
@@ -676,22 +536,9 @@
       {
         "body_html": null,
         "body_md": null,
-        "is_enabled": true,
+        "is_enabled": false,
         "payload_json": {
-          "items": [
-            {
-              "body": null,
-              "title": "战略性模式识别"
-            },
-            {
-              "body": null,
-              "title": "在约束下保持执行稳定"
-            },
-            {
-              "body": null,
-              "title": "对关键目标具备持续投入能力"
-            }
-          ]
+          "items": []
         },
         "render_variant": "bullets",
         "section_key": "growth.strengths",
@@ -984,5 +831,5 @@
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "54b3acbeb04eaaffaf25a9b0e0b16b4731f01f4f0d7553c579009c0d8de35824"
+  "source_content_sha256": "4bbbf7b9bdb32f44cbca44c028974b83773f2fee3943f6348f4a1f41e0fba17b"
 }

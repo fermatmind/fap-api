@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class PersonalityCurrentRemainingRuntimeTest extends TestCase
 {
-    private const AGGREGATE = '4b0f817da4295a2324101120bd1a535b1ecd83f9d4beeded03f7586f70dd5d2c';
+    private const AGGREGATE = '19531e3fce89b04d30028f65a7439298277fe678c95bd6ab141c25e32c6d521b';
 
     #[DataProvider('detailCases')]
     public function test_public_detail_is_served_from_its_per_page_authority(string $url, string $file): void
@@ -38,7 +38,7 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
             '/api/v0.5/personality/isfp?locale=en&org_id=0&scale_code=MBTI',
             'content_assets/personality_public/current/pages/mbti/profile/isfp/en.json',
         ];
-        foreach (['isfp', 'esfp'] as $type) {
+        foreach (['isfp', 'esfp', 'estj', 'intj', 'estp', 'intp', 'esfj', 'entp', 'infj', 'enfp', 'istp', 'infp'] as $type) {
             yield "{$type} Chinese profile" => [
                 "/api/v0.5/personality/{$type}?locale=zh-CN&org_id=0&scale_code=MBTI",
                 "content_assets/personality_public/current/pages/mbti/profile/{$type}/zh-CN.json",
@@ -69,6 +69,31 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
                 "/api/v0.5/personality-content-assets/enneagram/wing/{$wing}?locale=zh-CN&org_id=0",
                 "content_assets/personality_public/current/pages/enneagram/wing/{$wing}/zh-CN.json",
             ];
+        }
+    }
+
+    #[DataProvider('neutralCareerCases')]
+    public function test_chinese_profiles_do_not_publish_unsupported_job_or_strength_claims(string $type): void
+    {
+        $response = $this->getJson("/api/v0.5/personality/{$type}?locale=zh-CN&org_id=0&scale_code=MBTI");
+        $response->assertOk()->assertJsonPath('profile.slug', $type);
+
+        foreach (['mbti_public_projection_v1', 'personality_public_projection_v1'] as $projection) {
+            $sections = array_column($response->json("{$projection}.sections"), null, 'key');
+            $this->assertStringContainsString('本页不据'.strtoupper($type).'类型', $sections['career.summary']['body_md']);
+            $this->assertFalse($sections['career.preferred_roles']['is_enabled']);
+            $this->assertSame([], $sections['career.preferred_roles']['payload']['recommended_jobs']);
+            $this->assertSame([], $sections['career.preferred_roles']['payload']['avoid_jobs']);
+            $this->assertFalse($sections['growth.strengths']['is_enabled']);
+            $this->assertSame([], $sections['growth.strengths']['payload']['items']);
+        }
+    }
+
+    /** @return iterable<string,array{string}> */
+    public static function neutralCareerCases(): iterable
+    {
+        foreach (['isfp', 'esfp', 'estj', 'intj', 'estp', 'intp', 'esfj', 'entp', 'infj', 'enfp', 'istp', 'infp'] as $type) {
+            yield $type => [$type];
         }
     }
 

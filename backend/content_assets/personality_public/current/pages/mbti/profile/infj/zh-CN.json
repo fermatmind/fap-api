@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/infj",
@@ -25,7 +25,7 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "fadf838cb70a12473dced3916027e79538126d46",
+      "answer_fingerprint": "2501e030665e2b3d1ed2bd95e1053c42b799d5a7",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
@@ -233,7 +233,7 @@
           "title": "人格概览"
         },
         {
-          "body_md": "你通常更适合在高自主度、目标清晰、反馈节奏稳定的工作环境中发挥优势。优先探索这些方向：数字营销经理, 律师, 教师。",
+          "body_md": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据INFJ类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
           "is_enabled": true,
           "key": "career.summary",
           "payload": [],
@@ -243,49 +243,11 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "career.preferred_roles",
           "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "backend-engineer",
-                "title": "后端工程师"
-              },
-              {
-                "slug": "cybersecurity-analyst",
-                "title": "网络安全分析师"
-              },
-              {
-                "slug": "operations-manager",
-                "title": "运营经理"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "digital-marketing-manager",
-                "title": "数字营销经理"
-              },
-              {
-                "slug": "lawyer",
-                "title": "律师"
-              },
-              {
-                "slug": "teacher",
-                "title": "教师"
-              },
-              {
-                "slug": "machine-learning-engineer",
-                "title": "机器学习工程师"
-              },
-              {
-                "slug": "backend-engineer",
-                "title": "后端工程师"
-              },
-              {
-                "slug": "cybersecurity-analyst",
-                "title": "网络安全分析师"
-              }
-            ],
+            "avoid_jobs": [],
+            "recommended_jobs": [],
             "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
           },
           "render": "preferred_role_list",
@@ -303,23 +265,10 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "growth.strengths",
           "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "战略性模式识别"
-              },
-              {
-                "body": null,
-                "title": "在约束下保持执行稳定"
-              },
-              {
-                "body": null,
-                "title": "对关键目标具备持续投入能力"
-              }
-            ]
+            "items": []
           },
           "render": "bullets",
           "source": "base",
@@ -371,7 +320,7 @@
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "基于 INFJ 人格画像的职业建议与工作环境匹配策略。",
+        "summary": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据INFJ类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
         "tagline": "提倡者",
         "title": "INFJ - 提倡者"
       },
@@ -424,7 +373,7 @@
           "title": "人格概览"
         },
         {
-          "body_md": "你通常更适合在高自主度、目标清晰、反馈节奏稳定的工作环境中发挥优势。优先探索这些方向：数字营销经理, 律师, 教师。",
+          "body_md": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据INFJ类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
           "is_enabled": true,
           "key": "career.summary",
           "payload": [],
@@ -434,49 +383,11 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "career.preferred_roles",
           "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "backend-engineer",
-                "title": "后端工程师"
-              },
-              {
-                "slug": "cybersecurity-analyst",
-                "title": "网络安全分析师"
-              },
-              {
-                "slug": "operations-manager",
-                "title": "运营经理"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "digital-marketing-manager",
-                "title": "数字营销经理"
-              },
-              {
-                "slug": "lawyer",
-                "title": "律师"
-              },
-              {
-                "slug": "teacher",
-                "title": "教师"
-              },
-              {
-                "slug": "machine-learning-engineer",
-                "title": "机器学习工程师"
-              },
-              {
-                "slug": "backend-engineer",
-                "title": "后端工程师"
-              },
-              {
-                "slug": "cybersecurity-analyst",
-                "title": "网络安全分析师"
-              }
-            ],
+            "avoid_jobs": [],
+            "recommended_jobs": [],
             "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
           },
           "render": "preferred_role_list",
@@ -494,23 +405,10 @@
         },
         {
           "body_md": null,
-          "is_enabled": true,
+          "is_enabled": false,
           "key": "growth.strengths",
           "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "战略性模式识别"
-              },
-              {
-                "body": null,
-                "title": "在约束下保持执行稳定"
-              },
-              {
-                "body": null,
-                "title": "对关键目标具备持续投入能力"
-              }
-            ]
+            "items": []
           },
           "render": "bullets",
           "source": "base",
@@ -562,7 +460,7 @@
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "基于 INFJ 人格画像的职业建议与工作环境匹配策略。",
+        "summary": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据INFJ类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
         "tagline": "提倡者",
         "title": "INFJ - 提倡者"
       },
@@ -603,7 +501,7 @@
       },
       {
         "body_html": null,
-        "body_md": "你通常更适合在高自主度、目标清晰、反馈节奏稳定的工作环境中发挥优势。优先探索这些方向：数字营销经理, 律师, 教师。",
+        "body_md": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据INFJ类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
@@ -614,48 +512,10 @@
       {
         "body_html": null,
         "body_md": null,
-        "is_enabled": true,
+        "is_enabled": false,
         "payload_json": {
-          "avoid_jobs": [
-            {
-              "slug": "backend-engineer",
-              "title": "后端工程师"
-            },
-            {
-              "slug": "cybersecurity-analyst",
-              "title": "网络安全分析师"
-            },
-            {
-              "slug": "operations-manager",
-              "title": "运营经理"
-            }
-          ],
-          "recommended_jobs": [
-            {
-              "slug": "digital-marketing-manager",
-              "title": "数字营销经理"
-            },
-            {
-              "slug": "lawyer",
-              "title": "律师"
-            },
-            {
-              "slug": "teacher",
-              "title": "教师"
-            },
-            {
-              "slug": "machine-learning-engineer",
-              "title": "机器学习工程师"
-            },
-            {
-              "slug": "backend-engineer",
-              "title": "后端工程师"
-            },
-            {
-              "slug": "cybersecurity-analyst",
-              "title": "网络安全分析师"
-            }
-          ],
+          "avoid_jobs": [],
+          "recommended_jobs": [],
           "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
         },
         "render_variant": "preferred_role_list",
@@ -676,22 +536,9 @@
       {
         "body_html": null,
         "body_md": null,
-        "is_enabled": true,
+        "is_enabled": false,
         "payload_json": {
-          "items": [
-            {
-              "body": null,
-              "title": "战略性模式识别"
-            },
-            {
-              "body": null,
-              "title": "在约束下保持执行稳定"
-            },
-            {
-              "body": null,
-              "title": "对关键目标具备持续投入能力"
-            }
-          ]
+          "items": []
         },
         "render_variant": "bullets",
         "section_key": "growth.strengths",
@@ -984,5 +831,5 @@
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "314ebc82e33d664f69cb19cc63252b9ef2bbb57d9be150dfd1338ec8ac5ea329"
+  "source_content_sha256": "fae42e159b4c6b92b6bed5aca15e72658bdf9a1a2aab532c21bfdb9fc8ae4467"
 }
