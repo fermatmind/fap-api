@@ -887,6 +887,95 @@ final class ArticleTranslationOpsPageTest extends TestCase
         $this->assertSame($sourceRevisionBefore, $source->fresh()->publishedRevision->getAttributes());
     }
 
+    public function test_translation_publish_clears_previous_private_excerpt_when_approved_excerpt_is_null(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_WRITE,
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+        config(['review_governance.mode' => 'solo_owner', 'review_governance.solo_owner_admin_user_id' => (int) $admin->id]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $this->app->instance(ArticleMachineTranslationProvider::class, new FakeArticleMachineTranslationProvider);
+
+        $source = $this->createSourceOnlyGroup('publish-null-excerpt-fixture');
+        $sourceBefore = $source->fresh()->getAttributes();
+        $sourceRevisionBefore = $source->fresh()->publishedRevision->getAttributes();
+        $workflow = app(ArticleTranslationWorkflowService::class);
+        $draft = $workflow->createMachineDraft($source, 'en', (int) $admin->id)['article'];
+        $draft->fresh()->workingRevision->forceFill(['excerpt' => null])->save();
+        $approvedCopy = $draft->fresh()->workingRevision->only(['title', 'excerpt', 'content_md']);
+        $draft->forceFill([
+            'title' => 'Previous private title',
+            'excerpt' => 'Previous private excerpt',
+            'content_md' => 'Previous private body',
+        ])->saveQuietly();
+        $workflow->promoteToHumanReview($draft);
+        $workflow->approveTranslation($draft);
+        $historyCount = ArticleTranslationRevision::query()->count();
+
+        $published = $workflow->publishTranslation($draft);
+        $target = $draft->fresh();
+
+        $this->assertNull($target->excerpt);
+        $this->assertFalse((bool) $target->is_indexable);
+        $this->assertSame($approvedCopy, $target->only(['title', 'excerpt', 'content_md']));
+        $this->assertSame($approvedCopy, $published->only(['title', 'excerpt', 'content_md']));
+        $this->assertSame((int) $published->id, (int) $target->published_revision_id);
+        $this->assertSame((int) $published->id, (int) $target->working_revision_id);
+        $this->assertTrue((bool) $target->is_public);
+        $this->assertSame($historyCount, ArticleTranslationRevision::query()->count());
+        $this->assertSame($sourceBefore, $source->fresh()->getAttributes());
+        $this->assertSame($sourceRevisionBefore, $source->fresh()->publishedRevision->getAttributes());
+    }
+
+    public function test_rejected_translation_publish_preserves_private_copy_and_all_revision_pointers(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_WRITE,
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+        config(['review_governance.mode' => 'solo_owner', 'review_governance.solo_owner_admin_user_id' => (int) $admin->id]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $this->app->instance(ArticleMachineTranslationProvider::class, new FakeArticleMachineTranslationProvider);
+
+        $source = $this->createSourceOnlyGroup('publish-rejected-projection-fixture');
+        $sourceBefore = $source->fresh()->getAttributes();
+        $sourceRevisionBefore = $source->fresh()->publishedRevision->getAttributes();
+        $workflow = app(ArticleTranslationWorkflowService::class);
+        $draft = $workflow->createMachineDraft($source, 'en', (int) $admin->id)['article'];
+        $draft->forceFill([
+            'title' => 'Previous private title',
+            'excerpt' => 'Previous private excerpt',
+            'content_md' => 'Previous private body',
+        ])->saveQuietly();
+        $workflow->promoteToHumanReview($draft);
+        $workflow->approveTranslation($draft);
+        $historyCount = ArticleTranslationRevision::query()->count();
+
+        $draft->fresh()->workingRevision->forceFill(['content_md' => "# Unreviewed body heading\n\nBody"])->save();
+        $targetBefore = $draft->fresh()->getAttributes();
+        $revisionBefore = $draft->fresh()->workingRevision->getAttributes();
+        $auditCount = AuditLog::query()->count();
+
+        try {
+            $workflow->publishTranslation($draft);
+            $this->fail('Unreviewed invalid body must not be published.');
+        } catch (ArticleTranslationWorkflowException $exception) {
+            $this->assertNotEmpty($exception->getMessage());
+        }
+
+        $this->assertSame($targetBefore, $draft->fresh()->getAttributes());
+        $this->assertSame($revisionBefore, $draft->fresh()->workingRevision->getAttributes());
+        $this->assertSame($historyCount, ArticleTranslationRevision::query()->count());
+        $this->assertSame($auditCount, AuditLog::query()->count());
+        $this->assertSame($sourceBefore, $source->fresh()->getAttributes());
+        $this->assertSame($sourceRevisionBefore, $source->fresh()->publishedRevision->getAttributes());
+    }
+
     public function test_translation_ops_console_exposes_coverage_compare_and_preflight_summary(): void
     {
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
