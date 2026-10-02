@@ -169,6 +169,29 @@ final class ArticleUpdatePrivateTranslationMetadataTest extends TestCase
         $this->assertFalse(AuditLog::firstOrFail()->meta_json['human_review_completed']);
     }
 
+    public function test_native_import_normalized_body_hash_preserves_approved_revision_bytes(): void
+    {
+        [$s, $t, $p] = $this->fixture();
+        $normalized = trim((string) $t->workingRevision->content_md);
+        $raw = "\r\n".$normalized."\r\n";
+        $t->workingRevision->forceFill(['content_md' => $raw, 'revision_status' => 'human_review', 'authority_metadata_json' => null])->saveQuietly();
+        $t->forceFill(['translation_status' => Article::TRANSLATION_STATUS_HUMAN_REVIEW])->saveQuietly();
+        ArticleEditorialPackageImport::create(['org_id' => 0, 'article_id' => $t->id,
+            'locale' => 'en', 'slug' => $t->slug, 'title' => $t->title, 'content_track' => 'editorial',
+            'status' => ArticleEditorialPackageImport::STATUS_IMPORTED, 'body_hash' => hash('sha256', $normalized)]);
+        $p['target_snapshot_hash'] = ArticleForkPrivateTranslationLinks::targetHash($s->fresh());
+        $history = ArticleSourceTargetSnapshot::sourceRevisions($t->fresh());
+
+        $this->assertNotSame(hash('sha256', $normalized), hash('sha256', $raw));
+        $this->assertSame(0, $this->runCommand($p), Artisan::output());
+        $this->assertSame(0, AuditLog::count());
+        $this->assertSame(0, $this->runCommand($p, true), Artisan::output());
+        $this->assertSame($raw, $t->fresh()->workingRevision->content_md);
+        $this->assertSame($history, ArticleSourceTargetSnapshot::sourceRevisions($t->fresh()));
+        $this->assertNull($t->fresh()->workingRevision->reviewed_at);
+        $this->assertNull($t->fresh()->published_revision_id);
+    }
+
     public function test_audit_failure_rolls_back_all_metadata_and_tags(): void
     {
         [$s, $t, $p] = $this->fixture();

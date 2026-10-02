@@ -255,7 +255,9 @@ final class ArticleUpdatePrivateTranslationMetadata extends Command
             ->where('org_id', $target->org_id)->where('article_id', $target->id)
             ->where('locale', $target->locale)->where('slug', $target->slug)
             ->where('status', ArticleEditorialPackageImport::STATUS_IMPORTED)
-            ->where('body_hash', hash('sha256', (string) $revision->content_md));
+            // Match the native updater's bodyHash normalization; snapshot locks
+            // above still bind the approved revision's exact original bytes.
+            ->where('body_hash', hash('sha256', preg_replace("/\r\n?/", "\n", trim((string) $revision->content_md)) ?: trim((string) $revision->content_md)));
 
         return ($lock ? $query->lockForUpdate() : $query)->first() !== null;
     }
