@@ -18,9 +18,12 @@ final class CareerShardedCurrentAssemblerTest extends TestCase
 
     private string $manifestPath;
 
+    private string $originalMemoryLimit;
+
     protected function setUp(): void
     {
         parent::setUp();
+        $this->originalMemoryLimit = (string) ini_get('memory_limit');
         $sourceRepository = dirname(__DIR__, 6);
         require_once $sourceRepository.'/.agents/skills/fap-api-career-canonical-builder/scripts/assemble_sharded_current.php';
         $this->repoRoot = CareerLegacyCodecFixture::createRepository($sourceRepository);
@@ -30,8 +33,12 @@ final class CareerShardedCurrentAssemblerTest extends TestCase
 
     protected function tearDown(): void
     {
-        $this->deleteTemporaryDirectory($this->repoRoot);
-        parent::tearDown();
+        try {
+            $this->deleteTemporaryDirectory($this->repoRoot);
+            parent::tearDown();
+        } finally {
+            ini_set('memory_limit', $this->originalMemoryLimit);
+        }
     }
 
     public function test_it_assembles_all_candidate_shards_deterministically_and_proves_every_projection_equivalent(): void

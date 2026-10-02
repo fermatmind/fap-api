@@ -186,13 +186,14 @@ test('full PHPUnit rejects empty or malformed JUnit and retains original diagnos
 });
 
 
-test('only complete-evidence implementation changes trigger an automatic repair run', () => {
+test('only complete-evidence implementation and producer repair changes trigger an automatic repair run', () => {
   const push = workflow.split('  push:\n')[1].split('  schedule:')[0];
   assert.match(push, /branches: \[main\]/);
   assert.deepEqual([...push.matchAll(/- '([^']+)'/g)].map(match => match[1]), [
     '.github/workflows/nightly.yml',
     '.github/trunk/seo-platform-12a08-evidence-download.mjs',
     '.github/trunk/seo-platform-12a08-release.mjs',
+    'backend/tests/Unit/Domain/Career/Compilation/CareerShardedCurrentAssemblerTest.php',
   ]);
   const receipt = runSummary('', { EVENT_NAME: 'push' });
   assert.equal(receipt.status, 'pass');
