@@ -336,7 +336,7 @@ final class TopicController extends Controller
                 'key' => 'career_direction',
                 'title' => $locale === 'zh-CN' ? '职业方向' : 'Career direction',
                 'body' => $locale === 'zh-CN'
-                    ? '先看职业推荐入口，快速判断高匹配岗位。'
+                    ? '把职业推荐内容作为待检验线索，结合岗位任务、兴趣、能力证据与现实条件讨论，不据类型确定适配。'
                     : 'Start from career recommendations to identify higher-fit roles quickly.',
                 'href' => '/'.$segment.'/career/recommendations',
                 'kind' => 'scene_entry',
@@ -345,7 +345,7 @@ final class TopicController extends Controller
                 'key' => 'major_selection',
                 'title' => $locale === 'zh-CN' ? '专业选择' : 'Major selection',
                 'body' => $locale === 'zh-CN'
-                    ? '先建立 MBTI 框架，再把专业方向放进同一判断路径。'
+                    ? '先核对课程任务、学习兴趣与能力证据；类型描述只能提示讨论问题，不能决定专业方向。'
                     : 'Build an MBTI frame first, then evaluate majors against the same path.',
                 'href' => '/'.$segment.'/topics/mbti',
                 'kind' => 'scene_entry',
@@ -372,7 +372,7 @@ final class TopicController extends Controller
                 'key' => 'growth_planning',
                 'title' => $locale === 'zh-CN' ? '成长建议' : 'Growth planning',
                 'body' => $locale === 'zh-CN'
-                    ? '直接开始测试，获取个性化成长线索。'
+                    ? '先了解测试与使用边界；结果可用于提出自我观察问题，不能保证成长、职业适配或未来表现。'
                     : 'Start the test directly to unlock personalized growth cues.',
                 'href' => $startTestPath,
                 'kind' => 'scene_entry',
