@@ -26,7 +26,8 @@ final class CareerMaterialRecordingScopeTest extends TestCase
         self::assertSame('enhanced', $zh['content_state']);
         $facts = json_encode($zh['fact_register'], JSON_THROW_ON_ERROR);
         self::assertStringNotContainsString('53-7065', $facts);
-        self::assertStringContainsString('43-5111', $facts);
+        self::assertStringContainsString('43-5071.00', $facts);
+        self::assertStringNotContainsString('43-5111', $facts);
         $public = $identity->projectPayload([
             'slug' => $slug, 'title' => 'Stock Clerks And Order Fillers',
             'ontology' => ['crosswalks' => [['source_code' => '53-7065.00']]],

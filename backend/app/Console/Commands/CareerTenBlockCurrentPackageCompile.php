@@ -8,6 +8,7 @@ use App\Domain\Career\Compilation\CareerPresentationV1Compiler;
 use App\Domain\Career\Compilation\CareerPresentationV2Compiler;
 use App\Domain\Career\Compilation\CareerTenBlockCompileFailure;
 use App\Domain\Career\Compilation\CareerTenBlockCurrentPackageCompiler;
+use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
 use App\Domain\Career\Display\CareerShardedCurrentAuthorityPackage;
@@ -35,9 +36,19 @@ final class CareerTenBlockCurrentPackageCompile extends Command
         CareerPresentationV2Compiler $presentationV2Compiler,
         CareerCurrentAuthorityPackage $package,
     ): int {
-        ini_set('memory_limit', '1024M');
+        $previousMemoryLimit = ini_get('memory_limit');
         $scratch = null;
         try {
+            $installedManifest = json_decode(
+                (string) file_get_contents(base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH.'/manifest.json')),
+                true,
+                512,
+                JSON_THROW_ON_ERROR,
+            );
+            if (($installedManifest['contract_version'] ?? null) === CareerContentV3AuthorityPackage::CONTRACT_VERSION) {
+                throw new CareerTenBlockCompileFailure('TEN_BLOCK_PER_PAGE_CURRENT_COMPILE_FORBIDDEN');
+            }
+            ini_set('memory_limit', '1024M');
             $sourceRoot = trim((string) $this->option('source-root'));
             $lookup = trim((string) $this->option('lookup'));
             $evidenceRoot = trim((string) $this->option('evidence-root'));
@@ -151,6 +162,7 @@ final class CareerTenBlockCurrentPackageCompile extends Command
 
             return self::FAILURE;
         } finally {
+            ini_set('memory_limit', $previousMemoryLimit);
             if (is_string($scratch)) {
                 $this->removeScratch($scratch);
             }

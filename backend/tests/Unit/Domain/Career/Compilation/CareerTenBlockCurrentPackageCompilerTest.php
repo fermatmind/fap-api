@@ -17,6 +17,7 @@ final class CareerTenBlockCurrentPackageCompilerTest extends TestCase
         self::assertTrue(mkdir($output, 0700));
         $manifest = base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH.'/manifest.json');
         $before = hash_file('sha256', $manifest);
+        $memoryLimit = ini_get('memory_limit');
         try {
             foreach ([false, true] as $writeCurrent) {
                 $this->artisan('career:ten-block-current-package-compile', [
@@ -25,6 +26,7 @@ final class CareerTenBlockCurrentPackageCompilerTest extends TestCase
                     '--write-current' => $writeCurrent,
                 ])->expectsOutputToContain('FAIL_TEN_BLOCK_CURRENT_PACKAGE_COMPILE')->assertFailed();
                 self::assertSame($before, hash_file('sha256', $manifest));
+                self::assertSame($memoryLimit, ini_get('memory_limit'));
                 self::assertSame([], glob($output.'/*'));
             }
         } finally {

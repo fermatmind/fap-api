@@ -37,6 +37,7 @@ final class CareerAuthoringMigration
             $originalHashes[CareerCurrentAuthorityPackage::RELATIVE_PATH.'/'.$entry['path']] = $entry['sha256'];
         }
         $counts = ['zh_pages' => 0, 'enhanced' => 0, 'legacy' => 0, 'mapped_slots' => 0, 'unfilled_slots' => 0, 'pending_mapping' => 0];
+        $originalStates = ['enhanced' => 0, 'legacy' => 0];
         $projector = new CareerPageProjector(new CareerContentV3CanonicalReader($package, $backendRoot), $package, new CareerContentV3FactResolver);
         try {
             foreach ($manifest['files'] as &$entry) {
@@ -60,6 +61,10 @@ final class CareerAuthoringMigration
                     continue;
                 }
                 $page = $layout->migrate($original, $baseline);
+                $originalStates[$original['content_state']]++;
+                if ($page['content_state'] !== $original['content_state']) {
+                    throw new CareerCurrentAuthorityPackageFailure('CAREER_AUTHORING_MIGRATION_COHORT_DRIFT');
+                }
                 $before = CareerAuthoringStructure::publicContent($original);
                 $after = CareerAuthoringStructure::publicContent($page);
                 if ($before !== $after || $projector->project($original) !== $projector->project($page)) {
@@ -85,7 +90,9 @@ final class CareerAuthoringMigration
                 $counts['pending_mapping'] += count(array_filter($page['authoring_structure']['inventory'], static fn (array $item): bool => $item['status'] === 'pending_mapping'));
             }
             unset($entry);
-            if ($counts['zh_pages'] !== 1046 || $counts['enhanced'] !== 144 || $counts['legacy'] !== 902) {
+            if ($counts['zh_pages'] !== 1046
+                || $counts['enhanced'] !== $originalStates['enhanced']
+                || $counts['legacy'] !== $originalStates['legacy']) {
                 throw new CareerCurrentAuthorityPackageFailure('CAREER_AUTHORING_MIGRATION_COHORT_DRIFT');
             }
             $manifest['source_registry_sha256'] = CareerCurrentAuthorityPackage::hashValue($registries);

@@ -26,6 +26,13 @@ final class CareerAuthoringMigrationTest extends TestCase
         $files->copy($source.'/'.CareerCurrentAuthorityReleaseIntent::RELATIVE_PATH, $root.'/'.CareerCurrentAuthorityReleaseIntent::RELATIVE_PATH);
         try {
             $before = $this->hashes($root);
+            $expectedStates = ['enhanced' => 0, 'legacy' => 0];
+            foreach (glob($current.'/careers/*/zh-CN.json') as $path) {
+                $page = json_decode(file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
+                $expectedStates[$page['content_state']]++;
+            }
+            unset($page);
+            self::assertSame(1046, array_sum($expectedStates));
             $migration = new CareerAuthoringMigration;
             $dryRun = $migration->run($root);
             self::assertFalse($dryRun['written']);
@@ -33,8 +40,8 @@ final class CareerAuthoringMigrationTest extends TestCase
             $result = $migration->run($root, true);
             self::assertSame('PASS', $result['status']);
             self::assertSame(1046, $result['zh_pages']);
-            self::assertSame(144, $result['enhanced']);
-            self::assertSame(902, $result['legacy']);
+            self::assertSame($expectedStates['enhanced'], $result['enhanced']);
+            self::assertSame($expectedStates['legacy'], $result['legacy']);
             $after = $this->hashes($root);
             foreach ($before as $path => $hash) {
                 if (str_ends_with($path, '/en.json')) {

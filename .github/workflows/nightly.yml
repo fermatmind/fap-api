@@ -201,7 +201,9 @@ jobs:
     name: Full PHPUnit regression and performance contracts
     if: github.event_name == 'push' || (github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0')
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    # The measured full suite exceeded 90 minutes before completing all cases.
+    # Retain the complete suite and its JUnit verdict instead of truncating evidence.
+    timeout-minutes: 180
     services:
       mysql:
         image: mysql:8.0

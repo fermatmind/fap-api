@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
+use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
@@ -27,6 +29,13 @@ final class CareerDirectory10kOpsWarmValidateCommandTest extends TestCase
     {
         parent::setUp();
         $this->installCareerDetailCacheFixture();
+        $bodyReader = app(CareerContentV3CanonicalReader::class);
+        $fixture = \Mockery::mock(CareerContentV3CanonicalReader::class, [app(CareerContentV3AuthorityPackage::class)])->makePartial();
+        $fixture->shouldReceive('hydrate')->andReturnUsing($bodyReader->hydrate(...));
+        $fixture->shouldReceive('hasPublicBody')->andReturnUsing(
+            static fn (string $slug): bool => in_array($slug, ['accountants-and-auditors', 'actors', 'actuaries'], true),
+        );
+        $this->app->instance(CareerContentV3CanonicalReader::class, $fixture);
 
         Cache::flush();
         config(['app.frontend_url' => 'https://fermatmind.com']);
@@ -48,8 +57,9 @@ final class CareerDirectory10kOpsWarmValidateCommandTest extends TestCase
             '--json' => true,
         ]);
 
-        $this->assertSame(0, $exitCode);
-        $report = json_decode((string) Artisan::output(), true);
+        $output = (string) Artisan::output();
+        $this->assertSame(0, $exitCode, $output);
+        $report = json_decode($output, true);
 
         $this->assertSame('CAREER-DIRECTORY-10K-OPS-WARM-VALIDATE-01', $report['task']);
         $this->assertSame('passed', $report['status']);
