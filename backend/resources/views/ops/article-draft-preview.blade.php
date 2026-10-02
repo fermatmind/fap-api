@@ -57,6 +57,7 @@
         .body img { max-width: 100%; border-radius: 18px; }
         .body .table-scroll { max-width: 100%; overflow-x: auto; }
         .body table { width: 100%; min-width: 640px; }
+        .body pre { max-width: 100%; overflow-x: auto; }
         .media-preview {
             margin: 22px 0;
         }
