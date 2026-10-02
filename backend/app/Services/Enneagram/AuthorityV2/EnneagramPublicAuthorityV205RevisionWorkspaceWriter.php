@@ -422,7 +422,7 @@ final class EnneagramPublicAuthorityV205RevisionWorkspaceWriter
         $labels = $locale === 'zh-CN'
             ? ['context' => '情境', 'observable_signal' => '可观察信号', 'page_specific_signal' => '本页特定信号', 'alternative_explanation' => '替代解释', 'reflection_prompt' => '复盘问题']
             : ['context' => 'Context', 'observable_signal' => 'Observable signal', 'page_specific_signal' => 'Page-specific signal', 'alternative_explanation' => 'Alternative explanation', 'reflection_prompt' => 'Reflection prompt'];
-        $lines = [($locale === 'zh-CN' ? '持续天数' : 'Duration').': '.(int) ($exercise['duration_days'] ?? 0)];
+        $lines = [($locale === 'zh-CN' ? '持续天数' : 'Duration (days)').': '.(int) ($exercise['duration_days'] ?? 0)];
         foreach ($labels as $field => $label) {
             $lines[] = $label.': '.trim((string) ($exercise[$field] ?? ''));
         }

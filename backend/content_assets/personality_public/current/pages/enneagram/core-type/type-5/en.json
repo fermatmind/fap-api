@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-5",
@@ -53,6 +53,13 @@
               "riso_hudson_1999_wisdom",
               "hook_2021_systematic_review"
             ]
+          },
+          {
+            "claim_id": "claim.nickname.practitioner_label",
+            "limitation": "Practitioner naming only; not independent psychometric validation, a diagnosis, or an MBTI identity.",
+            "source_ids": [
+              "enneagram_institute_type_five"
+            ]
           }
         ],
         "limitations": [
@@ -103,6 +110,20 @@
             "source_type": "peer_reviewed_research",
             "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
             "year": 2013
+          },
+          {
+            "accessed_at": "2026-10-02",
+            "author_or_organization": "The Enneagram Institute",
+            "claim_ids": [
+              "claim.nickname.practitioner_label"
+            ],
+            "doi": null,
+            "id": "enneagram_institute_type_five",
+            "limitation": "Practitioner naming only; not independent psychometric validation, a diagnosis, or an MBTI identity.",
+            "public_url": "https://www.enneagraminstitute.com/type-5/",
+            "source_type": "other_public_source",
+            "title": "Enneagram Type 5: The Investigator",
+            "year": null
           }
         ]
       },
@@ -133,43 +154,43 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/centers/head",
-          "label": "center:head",
+          "label": "Head center",
           "relationship": "center_membership",
           "target_identity_key": "center:head"
         },
         {
           "href": "/en/personality/enneagram/wings/5w4",
-          "label": "wing:5w4",
+          "label": "5w4 wing",
           "relationship": "wing_variant",
           "target_identity_key": "wing:5w4"
         },
         {
           "href": "/en/personality/enneagram/wings/5w6",
-          "label": "wing:5w6",
+          "label": "5w6 wing",
           "relationship": "wing_variant",
           "target_identity_key": "wing:5w6"
         },
         {
           "href": "/en/personality/enneagram/type-5/instincts/self-preservation",
-          "label": "instinctual_subtype:type-5/self-preservation",
+          "label": "Type 5 self preservation subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-5/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-5/instincts/social",
-          "label": "instinctual_subtype:type-5/social",
+          "label": "Type 5 social subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-5/social"
         },
         {
           "href": "/en/personality/enneagram/type-5/instincts/one-to-one",
-          "label": "instinctual_subtype:type-5/one-to-one",
+          "label": "Type 5 one to one subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-5/one-to-one"
         }
@@ -210,7 +231,7 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "Track when more information is requested, what threshold makes participation feel sufficiently prepared, and how time, privacy, or energy is budgeted. Treat these as situational observations rather than proof of an inner type.",
+          "body_md": "Track when more information is requested, what threshold makes participation feel sufficiently prepared, and how time, privacy, or energy is budgeted. Treat these as situational observations rather than proof of an inner type.\n\nIn Enneagram writing, Type 5 is often called “The Investigator”. This is a practitioner nickname, not a diagnosis, an MBTI type, or validation of a personal result. See [Enneagram Institute Type 5](https://www.enneagraminstitute.com/type-5/) for this naming convention.",
           "key": "motivation_attention",
           "title": "Observe preparation and capacity without declaring an essence"
         },
@@ -265,14 +286,14 @@
       ],
       "seo": {
         "description": "Type Five is a traditional Enneagram hypothesis about attention returning to knowledge, competence, preparation, privacy, and available capacity. Research, quiet work, or limited disclosure cannot establish motive because expertise, workload, disability access, confidentiality, remote work, culture, and safety may produce the same behavior.",
-        "title": "Type Five: knowledge, capacity, and a revisable preparation hypothesis"
+        "title": "Enneagram Type 5 (The Investigator): Understanding and Distance"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/type-5",
       "source_hash": "22222cd12cf832456e6336c41800de70c8d3458f8adad3dbaf59f36ca18595e0",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Type Five is a traditional Enneagram hypothesis about attention returning to knowledge, competence, preparation, privacy, and available capacity. Research, quiet work, or limited disclosure cannot establish motive because expertise, workload, disability access, confidentiality, remote work, culture, and safety may produce the same behavior.",
-      "title": "Type Five: knowledge, capacity, and a revisable preparation hypothesis"
+      "summary": "Type Five is a traditional Enneagram hypothesis about attention returning to knowledge, competence, preparation, privacy, and available capacity. Research, quiet work, or limited disclosure cannot establish motive because expertise, workload, disability access, confidentiality, remote work, culture, and safety may produce the same behavior. In Enneagram writing, Type 5 is often called “The Investigator”. This is a practitioner nickname, not a diagnosis, an MBTI type, or validation of a personal result.",
+      "title": "Enneagram Type 5: knowledge, capacity, and a revisable preparation hypothesis"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -369,5 +390,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "37dccd93ba384d8b127a4c9c1af0f75f2d383a5ef107eb1d7ae6825a912f46ea"
+  "source_content_sha256": "3bdadbf95b972f25cbcdbf2b14e88a289bfd799097ae4348c20af329c20224ce"
 }

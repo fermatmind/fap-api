@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-3",
@@ -53,6 +53,13 @@
               "riso_hudson_1999_wisdom",
               "hook_2021_systematic_review"
             ]
+          },
+          {
+            "claim_id": "claim.nickname.practitioner_label",
+            "limitation": "Practitioner naming only; not independent psychometric validation, a diagnosis, or an MBTI identity.",
+            "source_ids": [
+              "enneagram_institute_type_three"
+            ]
           }
         ],
         "limitations": [
@@ -103,6 +110,20 @@
             "source_type": "peer_reviewed_research",
             "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
             "year": 2013
+          },
+          {
+            "accessed_at": "2026-10-02",
+            "author_or_organization": "The Enneagram Institute",
+            "claim_ids": [
+              "claim.nickname.practitioner_label"
+            ],
+            "doi": null,
+            "id": "enneagram_institute_type_three",
+            "limitation": "Practitioner naming only; not independent psychometric validation, a diagnosis, or an MBTI identity.",
+            "public_url": "https://www.enneagraminstitute.com/type-3/",
+            "source_type": "other_public_source",
+            "title": "Enneagram Type 3: The Achiever",
+            "year": null
           }
         ]
       },
@@ -133,43 +154,43 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/centers/heart",
-          "label": "center:heart",
+          "label": "Heart center",
           "relationship": "center_membership",
           "target_identity_key": "center:heart"
         },
         {
           "href": "/en/personality/enneagram/wings/3w2",
-          "label": "wing:3w2",
+          "label": "3w2 wing",
           "relationship": "wing_variant",
           "target_identity_key": "wing:3w2"
         },
         {
           "href": "/en/personality/enneagram/wings/3w4",
-          "label": "wing:3w4",
+          "label": "3w4 wing",
           "relationship": "wing_variant",
           "target_identity_key": "wing:3w4"
         },
         {
           "href": "/en/personality/enneagram/type-3/instincts/self-preservation",
-          "label": "instinctual_subtype:type-3/self-preservation",
+          "label": "Type 3 self preservation subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-3/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-3/instincts/social",
-          "label": "instinctual_subtype:type-3/social",
+          "label": "Type 3 social subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-3/social"
         },
         {
           "href": "/en/personality/enneagram/type-3/instincts/one-to-one",
-          "label": "instinctual_subtype:type-3/one-to-one",
+          "label": "Type 3 one to one subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-3/one-to-one"
         }
@@ -210,7 +231,7 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "A Type Three hypothesis asks whether attention repeatedly moves toward the result, image, or standard that appears valuable in the current setting. Record who defines success and what changes when the audience changes; do not infer motive from speed, polish, ambition, or a job title alone.",
+          "body_md": "A Type Three hypothesis asks whether attention repeatedly moves toward the result, image, or standard that appears valuable in the current setting. Record who defines success and what changes when the audience changes; do not infer motive from speed, polish, ambition, or a job title alone.\n\nIn Enneagram writing, Type 3 is often called “The Achiever”. This is a practitioner nickname, not a diagnosis, an MBTI type, or validation of a personal result. See [Enneagram Institute Type 3](https://www.enneagraminstitute.com/type-3/) for this naming convention.",
           "key": "motivation_attention",
           "title": "Observe what counts as a valued result"
         },
@@ -265,14 +286,14 @@
       ],
       "seo": {
         "description": "Type Three is a traditional Enneagram hypothesis about attention returning to valued results, credible performance, and adapting presentation to what a setting rewards. Visible achievement cannot establish motive: targets, livelihood, competition, training, and assigned accountability can produce the same behavior.",
-        "title": "Type Three: achievement, value, and a revisable adaptation hypothesis"
+        "title": "Enneagram Type 3 (The Achiever): Goals and Recognition"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/type-3",
       "source_hash": "7b3b15aa6de600f6794d69e9989edc06604f5812abb511c8246061ac58e5fa8d",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Type Three is a traditional Enneagram hypothesis about attention returning to valued results, credible performance, and adapting presentation to what a setting rewards. Visible achievement cannot establish motive: targets, livelihood, competition, training, and assigned accountability can produce the same behavior.",
-      "title": "Type Three: achievement, value, and a revisable adaptation hypothesis"
+      "summary": "Type Three is a traditional Enneagram hypothesis about attention returning to valued results, credible performance, and adapting presentation to what a setting rewards. Visible achievement cannot establish motive: targets, livelihood, competition, training, and assigned accountability can produce the same behavior. In Enneagram writing, Type 3 is often called “The Achiever”. This is a practitioner nickname, not a diagnosis, an MBTI type, or validation of a personal result.",
+      "title": "Enneagram Type 3: achievement, value, and a revisable adaptation hypothesis"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -369,5 +390,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "4bfd9353d3d86a864dce254837f2d7a437039dd7224d37e3212d3acd808bd36a"
+  "source_content_sha256": "2e9757d61e1f844099db5b7cd8345f133d24fbd2dd1f19a93419466aca003b03"
 }

@@ -105,6 +105,18 @@ final class EnneagramPublicAuthorityV205RevisionWorkspaceTest extends TestCase
         $this->assertSame('pending_manual_review', $typeFourSocial->snapshot_json['review_state']);
         $this->assertNull($typeFourSocial->snapshot_json['authority_json']['reviewer']);
         $this->assertSame('observation_exercise', collect($typeFourSocial->snapshot_json['content_sections_json'])->last()['key']);
+
+        foreach (['1w2', '3w4', '6w5', '8w9'] as $wing) {
+            $revision = PersonalityPublicContentAssetRevision::query()
+                ->where('authority_asset_key', 'enneagram:wing:'.$wing.':en')
+                ->firstOrFail();
+            $section = collect($revision->snapshot_json['content_sections_json'])
+                ->firstWhere('key', 'observation_exercise');
+            $this->assertStringStartsWith(
+                'Duration (days): '.$section['observation_exercise']['duration_days']."\n",
+                $section['body_md'],
+            );
+        }
     }
 
     public function test_foreign_working_revision_collision_fails_before_any_package_write(): void

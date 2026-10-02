@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-2",
@@ -53,6 +53,13 @@
               "riso_hudson_1999_wisdom",
               "hook_2021_systematic_review"
             ]
+          },
+          {
+            "claim_id": "claim.nickname.practitioner_label",
+            "limitation": "Practitioner naming only; not independent psychometric validation, a diagnosis, or an MBTI identity.",
+            "source_ids": [
+              "enneagram_institute_type_two"
+            ]
           }
         ],
         "limitations": [
@@ -103,6 +110,20 @@
             "source_type": "peer_reviewed_research",
             "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
             "year": 2013
+          },
+          {
+            "accessed_at": "2026-10-02",
+            "author_or_organization": "The Enneagram Institute",
+            "claim_ids": [
+              "claim.nickname.practitioner_label"
+            ],
+            "doi": null,
+            "id": "enneagram_institute_type_two",
+            "limitation": "Practitioner naming only; not independent psychometric validation, a diagnosis, or an MBTI identity.",
+            "public_url": "https://www.enneagraminstitute.com/type-2/",
+            "source_type": "other_public_source",
+            "title": "Enneagram Type 2: The Helper",
+            "year": null
           }
         ]
       },
@@ -133,43 +154,43 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/centers/heart",
-          "label": "center:heart",
+          "label": "Heart center",
           "relationship": "center_membership",
           "target_identity_key": "center:heart"
         },
         {
           "href": "/en/personality/enneagram/wings/2w1",
-          "label": "wing:2w1",
+          "label": "2w1 wing",
           "relationship": "wing_variant",
           "target_identity_key": "wing:2w1"
         },
         {
           "href": "/en/personality/enneagram/wings/2w3",
-          "label": "wing:2w3",
+          "label": "2w3 wing",
           "relationship": "wing_variant",
           "target_identity_key": "wing:2w3"
         },
         {
           "href": "/en/personality/enneagram/type-2/instincts/self-preservation",
-          "label": "instinctual_subtype:type-2/self-preservation",
+          "label": "Type 2 self preservation subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-2/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-2/instincts/social",
-          "label": "instinctual_subtype:type-2/social",
+          "label": "Type 2 social subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-2/social"
         },
         {
           "href": "/en/personality/enneagram/type-2/instincts/one-to-one",
-          "label": "instinctual_subtype:type-2/one-to-one",
+          "label": "Type 2 one to one subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-2/one-to-one"
         }
@@ -210,7 +231,7 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "A Type Two motivation hypothesis asks whether attention repeatedly scans for needs, connection, and a useful role. The same meal, introduction, reminder, or emotional check-in may instead reflect friendship, paid duty, family custom, crisis response, or a clearly stated request.",
+          "body_md": "A Type Two motivation hypothesis asks whether attention repeatedly scans for needs, connection, and a useful role. The same meal, introduction, reminder, or emotional check-in may instead reflect friendship, paid duty, family custom, crisis response, or a clearly stated request.\n\nIn Enneagram writing, Type 2 is often called “The Helper”. This is a practitioner nickname, not a diagnosis, an MBTI type, or validation of a personal result. See [Enneagram Institute Type 2](https://www.enneagraminstitute.com/type-2/) for this naming convention.",
           "key": "motivation_attention",
           "title": "Observe needs before inferring motive"
         },
@@ -265,14 +286,14 @@
       ],
       "seo": {
         "description": "Type Two is a traditional Enneagram hypothesis about attention returning to other people's needs, connection, and opportunities to be useful. Type Two needs attention appears in what is noticed, offered, and expected in return; helpful behavior alone cannot establish motive or a fixed identity.",
-        "title": "Type Two: needs, connection, and a revisable helping hypothesis"
+        "title": "Enneagram Type 2 (The Helper): Needs and Connection"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/type-2",
       "source_hash": "471d1f736f7f6cc39244f654e8c707e71f2e026bd12f2195900c7aba91063e8f",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Type Two is a traditional Enneagram hypothesis about attention returning to other people's needs, connection, and opportunities to be useful. Type Two needs attention appears in what is noticed, offered, and expected in return; helpful behavior alone cannot establish motive or a fixed identity.",
-      "title": "Type Two: needs, connection, and a revisable helping hypothesis"
+      "summary": "Type Two is a traditional Enneagram hypothesis about attention returning to other people's needs, connection, and opportunities to be useful. Type Two needs attention appears in what is noticed, offered, and expected in return; helpful behavior alone cannot establish motive or a fixed identity. In Enneagram writing, Type 2 is often called “The Helper”. This is a practitioner nickname, not a diagnosis, an MBTI type, or validation of a personal result.",
+      "title": "Enneagram Type 2: needs, connection, and a revisable helping hypothesis"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -369,5 +390,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "90bef303e35d38facaa3d2a04b8253dab500fae92cacefaa6e9f810bdb77ab89"
+  "source_content_sha256": "84d2b5cba3a59218efec4a533a14c8f1a0c5b0fff5291e9e5232239de567000b"
 }

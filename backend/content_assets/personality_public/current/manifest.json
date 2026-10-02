@@ -1,10 +1,10 @@
 {
-  "aggregate_sha256": "19531e3fce89b04d30028f65a7439298277fe678c95bd6ab141c25e32c6d521b",
+  "aggregate_sha256": "94310267d74c07109f13904dfc98a9af4437651d3a6cbdadd79771839c137f4c",
   "authority_path": "backend/content_assets/personality_public/current",
   "compiler_version": "personality.page.per_page.compiler.v1",
   "contract_version": "personality.page.content.current.manifest.v1",
   "coverage": {
-    "baseline_locale_pages": 293,
+    "baseline_locale_pages": 279,
     "by_framework": {
       "big_five": 104,
       "enneagram": 116,
@@ -25,7 +25,7 @@
       "variant": 64,
       "wing": 36
     },
-    "enhanced_locale_pages": 71,
+    "enhanced_locale_pages": 85,
     "files": 364,
     "locale_pages": 364,
     "locales": 2,
@@ -1729,9 +1729,9 @@
       "source_content_sha256": "4913214d489c280842f52b8dd799bff515df4ad291739655eab50db7c8f04b32"
     },
     {
-      "bytes": 15718,
+      "bytes": 15723,
       "canonical_path": "/en/personality/enneagram/centers/head",
-      "compatibility_projection_sha256": "576dfd23e530b9a52bf4a414f86dfab807af1f305e6be460d1126cd7b59ad73c",
+      "compatibility_projection_sha256": "904fdb8f5b70852811a0172e3e22751b7703e072a1bd9049ff68fde378a206a8",
       "content_state": "baseline",
       "entity_key": "head",
       "entity_type": "center",
@@ -1740,9 +1740,9 @@
       "locale": "en",
       "page_kind": "center",
       "path": "pages/enneagram/center/head/en.json",
-      "sha256": "9f71caaefe9b84c8a1ab7701fa2d2b7aa1e7a856c25f0718418f6a4e7439213e",
+      "sha256": "cf66b5302b7c45ce26150e32a52440244f76ac7fba79a3a1f53031ad63806b99",
       "slug": "enneagram/centers/head",
-      "source_content_sha256": "576dfd23e530b9a52bf4a414f86dfab807af1f305e6be460d1126cd7b59ad73c"
+      "source_content_sha256": "904fdb8f5b70852811a0172e3e22751b7703e072a1bd9049ff68fde378a206a8"
     },
     {
       "bytes": 15285,
@@ -1809,10 +1809,10 @@
       "source_content_sha256": "4f3d20de9260ee76bb7ef1aab7b189c1894b04460a46e84f8583d82ec8399f30"
     },
     {
-      "bytes": 20533,
+      "bytes": 20608,
       "canonical_path": "/zh/personality/enneagram/type-1",
-      "compatibility_projection_sha256": "e7961913045ccf9e0dc94426f92eb2c66c74a6bbb31b9498ffb5c9e1591bcb6f",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "420de8cc659ca4f6ab03f3d64cdfe0e6337251069574888df9781d087ed97b31",
+      "content_state": "enhanced",
       "entity_key": "type-1",
       "entity_type": "core_type",
       "framework": "enneagram",
@@ -1820,15 +1820,15 @@
       "locale": "zh-CN",
       "page_kind": "core_type",
       "path": "pages/enneagram/core-type/type-1/zh-CN.json",
-      "sha256": "6ffd0685162b282676d357c2bfbdcef31dd057aa5a905e9667bfe165b9a54caa",
+      "sha256": "b5a44ceb3b2fb0d4e9679161a464b21d0d0c4d8595d8281a6d90858011a88041",
       "slug": "enneagram/type-1",
-      "source_content_sha256": "e7961913045ccf9e0dc94426f92eb2c66c74a6bbb31b9498ffb5c9e1591bcb6f"
+      "source_content_sha256": "420de8cc659ca4f6ab03f3d64cdfe0e6337251069574888df9781d087ed97b31"
     },
     {
-      "bytes": 20893,
+      "bytes": 22223,
       "canonical_path": "/en/personality/enneagram/type-2",
-      "compatibility_projection_sha256": "90bef303e35d38facaa3d2a04b8253dab500fae92cacefaa6e9f810bdb77ab89",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "84d2b5cba3a59218efec4a533a14c8f1a0c5b0fff5291e9e5232239de567000b",
+      "content_state": "enhanced",
       "entity_key": "type-2",
       "entity_type": "core_type",
       "framework": "enneagram",
@@ -1836,9 +1836,9 @@
       "locale": "en",
       "page_kind": "core_type",
       "path": "pages/enneagram/core-type/type-2/en.json",
-      "sha256": "84be091e3aaa946d66e816330ed8b3cc175c5272797ee43fef30b37b18950ca0",
+      "sha256": "0780030c22f032ef6a1e49f0254e9e7a73c40ff0d4f546fac1656504b3a68975",
       "slug": "enneagram/type-2",
-      "source_content_sha256": "90bef303e35d38facaa3d2a04b8253dab500fae92cacefaa6e9f810bdb77ab89"
+      "source_content_sha256": "84d2b5cba3a59218efec4a533a14c8f1a0c5b0fff5291e9e5232239de567000b"
     },
     {
       "bytes": 20221,
@@ -1857,10 +1857,10 @@
       "source_content_sha256": "317d959210625895ee8774a16c03f1d2cbf60fa2623bd5a29f3d041a8e694631"
     },
     {
-      "bytes": 20474,
+      "bytes": 21809,
       "canonical_path": "/en/personality/enneagram/type-3",
-      "compatibility_projection_sha256": "4bfd9353d3d86a864dce254837f2d7a437039dd7224d37e3212d3acd808bd36a",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "2e9757d61e1f844099db5b7cd8345f133d24fbd2dd1f19a93419466aca003b03",
+      "content_state": "enhanced",
       "entity_key": "type-3",
       "entity_type": "core_type",
       "framework": "enneagram",
@@ -1868,15 +1868,15 @@
       "locale": "en",
       "page_kind": "core_type",
       "path": "pages/enneagram/core-type/type-3/en.json",
-      "sha256": "3dcf5696a80d98f6d12d1d4fe40b7ecceb68dd5decffa0c13551db58c2e514c1",
+      "sha256": "8f3be2069e435364c458d355a2626c3a0fc80545cc6eb8aaa7bbc7dd27eb1276",
       "slug": "enneagram/type-3",
-      "source_content_sha256": "4bfd9353d3d86a864dce254837f2d7a437039dd7224d37e3212d3acd808bd36a"
+      "source_content_sha256": "2e9757d61e1f844099db5b7cd8345f133d24fbd2dd1f19a93419466aca003b03"
     },
     {
-      "bytes": 21007,
+      "bytes": 21093,
       "canonical_path": "/zh/personality/enneagram/type-3",
-      "compatibility_projection_sha256": "c7f8b5b39810d592832eb4e9a8421ed07439fc878a16da49e6b72e945daaeb92",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "56ed56e8db85de4dc7c69828c4a5ce967a05c34bbe7bbb2b0c2a0353378b0c74",
+      "content_state": "enhanced",
       "entity_key": "type-3",
       "entity_type": "core_type",
       "framework": "enneagram",
@@ -1884,15 +1884,15 @@
       "locale": "zh-CN",
       "page_kind": "core_type",
       "path": "pages/enneagram/core-type/type-3/zh-CN.json",
-      "sha256": "8e71539b836a93df2b33e887c7ac5d6e319bdcd8b310e2885ddaf1bb4de682f9",
+      "sha256": "5ce98098687b5674ecbf1c0a57bf00ed959bed56b86c2f9e2d95721e797028ba",
       "slug": "enneagram/type-3",
-      "source_content_sha256": "c7f8b5b39810d592832eb4e9a8421ed07439fc878a16da49e6b72e945daaeb92"
+      "source_content_sha256": "56ed56e8db85de4dc7c69828c4a5ce967a05c34bbe7bbb2b0c2a0353378b0c74"
     },
     {
-      "bytes": 20174,
+      "bytes": 21529,
       "canonical_path": "/en/personality/enneagram/type-4",
-      "compatibility_projection_sha256": "2bf0d46221774f8df6339a40512c6cf208e8b865da9667608b20e2e896c706ca",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "50fe4d3dfa919b4e4e1676b4ba3d0e5626c53850203107e6249a1b6e00c95a22",
+      "content_state": "enhanced",
       "entity_key": "type-4",
       "entity_type": "core_type",
       "framework": "enneagram",
@@ -1900,15 +1900,15 @@
       "locale": "en",
       "page_kind": "core_type",
       "path": "pages/enneagram/core-type/type-4/en.json",
-      "sha256": "05ff95c3bcb31be3c744efad1baec10920d4ed69e84e733e191c1cb4c310e5a9",
+      "sha256": "ab9ca261e83004347217856b3ec7ae685c1cad41cc87bbd4f1717743821a9f81",
       "slug": "enneagram/type-4",
-      "source_content_sha256": "2bf0d46221774f8df6339a40512c6cf208e8b865da9667608b20e2e896c706ca"
+      "source_content_sha256": "50fe4d3dfa919b4e4e1676b4ba3d0e5626c53850203107e6249a1b6e00c95a22"
     },
     {
-      "bytes": 19996,
+      "bytes": 20060,
       "canonical_path": "/zh/personality/enneagram/type-4",
-      "compatibility_projection_sha256": "9ce9335bb40e202e3b2e841d6f27c4d71ee4e92ff2a0ec5a0f15fb943ed5df88",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "b1b88611da5481783a4e03c22e91a18e8ff0b82dcf7df3b59961a96b8d2b5631",
+      "content_state": "enhanced",
       "entity_key": "type-4",
       "entity_type": "core_type",
       "framework": "enneagram",
@@ -1916,15 +1916,15 @@
       "locale": "zh-CN",
       "page_kind": "core_type",
       "path": "pages/enneagram/core-type/type-4/zh-CN.json",
-      "sha256": "ac8230bca4531827d120b269c0ff2cac4340cec77d221fef2c29a74c1b651af6",
+      "sha256": "42f88a9477a17b76a6f33a786fe0125e3d86bf47f8e1510faf9f577d7a162f2a",
       "slug": "enneagram/type-4",
-      "source_content_sha256": "9ce9335bb40e202e3b2e841d6f27c4d71ee4e92ff2a0ec5a0f15fb943ed5df88"
+      "source_content_sha256": "b1b88611da5481783a4e03c22e91a18e8ff0b82dcf7df3b59961a96b8d2b5631"
     },
     {
-      "bytes": 20442,
+      "bytes": 21796,
       "canonical_path": "/en/personality/enneagram/type-5",
-      "compatibility_projection_sha256": "37dccd93ba384d8b127a4c9c1af0f75f2d383a5ef107eb1d7ae6825a912f46ea",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "3bdadbf95b972f25cbcdbf2b14e88a289bfd799097ae4348c20af329c20224ce",
+      "content_state": "enhanced",
       "entity_key": "type-5",
       "entity_type": "core_type",
       "framework": "enneagram",
@@ -1932,9 +1932,9 @@
       "locale": "en",
       "page_kind": "core_type",
       "path": "pages/enneagram/core-type/type-5/en.json",
-      "sha256": "f1bb302bf729ab3b5c8d8986bf25c2737c968e1ba781537d4f4fd70b106a8e83",
+      "sha256": "a2e236e5bc555b67d5b6ad300ce8a837340fe3fe9b4eecfd133d9ec07b57d604",
       "slug": "enneagram/type-5",
-      "source_content_sha256": "37dccd93ba384d8b127a4c9c1af0f75f2d383a5ef107eb1d7ae6825a912f46ea"
+      "source_content_sha256": "3bdadbf95b972f25cbcdbf2b14e88a289bfd799097ae4348c20af329c20224ce"
     },
     {
       "bytes": 20257,
@@ -1953,10 +1953,10 @@
       "source_content_sha256": "086b0f7d39a42be0b5c618a685ba2b647ff94a6bdaf0a4a22da923cb54ef0762"
     },
     {
-      "bytes": 20248,
+      "bytes": 21586,
       "canonical_path": "/en/personality/enneagram/type-6",
-      "compatibility_projection_sha256": "1010dcb181b5470688a10c168b46569bc231f48212df0c5753a7daa25305c17a",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "f14c643143bf62fa0b590e715ff82b900a01ddee5ec7890cd27811202d929a6b",
+      "content_state": "enhanced",
       "entity_key": "type-6",
       "entity_type": "core_type",
       "framework": "enneagram",
@@ -1964,9 +1964,9 @@
       "locale": "en",
       "page_kind": "core_type",
       "path": "pages/enneagram/core-type/type-6/en.json",
-      "sha256": "8178e39567b91ee3d48f8c9df2f701a21b0a3b37d774229db0b7a76dab00fb59",
+      "sha256": "a740ab3ae448652f7f1b574af270ba4ef283b9890b0048354c4cf13f0d04bef9",
       "slug": "enneagram/type-6",
-      "source_content_sha256": "1010dcb181b5470688a10c168b46569bc231f48212df0c5753a7daa25305c17a"
+      "source_content_sha256": "f14c643143bf62fa0b590e715ff82b900a01ddee5ec7890cd27811202d929a6b"
     },
     {
       "bytes": 19888,
@@ -1985,10 +1985,10 @@
       "source_content_sha256": "9f099301a51339dfb16dadf5cd7f3a119dd34f65e88e516d7fdfca6880bf512a"
     },
     {
-      "bytes": 20667,
+      "bytes": 22008,
       "canonical_path": "/en/personality/enneagram/type-7",
-      "compatibility_projection_sha256": "402732ca219752b504491b1b0a7185a395bfe80e121bdde11ada8a0e34ef3a14",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "9e9b5691d1fac0a3af7e24df46bfc091a9741df851bcfe5c4127ca33809e253c",
+      "content_state": "enhanced",
       "entity_key": "type-7",
       "entity_type": "core_type",
       "framework": "enneagram",
@@ -1996,15 +1996,15 @@
       "locale": "en",
       "page_kind": "core_type",
       "path": "pages/enneagram/core-type/type-7/en.json",
-      "sha256": "066c2abebd860263bbd7bb413611ae5ae0cc8520c6d5292eab833cf10d318984",
+      "sha256": "3a572c6905fe1ff390a333fa2a993956e57b1b559795856cfe1ee69899258745",
       "slug": "enneagram/type-7",
-      "source_content_sha256": "402732ca219752b504491b1b0a7185a395bfe80e121bdde11ada8a0e34ef3a14"
+      "source_content_sha256": "9e9b5691d1fac0a3af7e24df46bfc091a9741df851bcfe5c4127ca33809e253c"
     },
     {
-      "bytes": 20104,
+      "bytes": 20169,
       "canonical_path": "/zh/personality/enneagram/type-7",
-      "compatibility_projection_sha256": "ef8f4649eae4734b4e0729e6c939dc07019f984df0c744b0d1e68e089ae1886d",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "9c963b7f490d3f2dc6d81eb0759ecdc28c58f507f7781119ed0233751c53838d",
+      "content_state": "enhanced",
       "entity_key": "type-7",
       "entity_type": "core_type",
       "framework": "enneagram",
@@ -2012,15 +2012,15 @@
       "locale": "zh-CN",
       "page_kind": "core_type",
       "path": "pages/enneagram/core-type/type-7/zh-CN.json",
-      "sha256": "3bf570110fcb9eef4cbafb13ef7dbb5c34b0a4597c6eb4eb54f5921b6136001e",
+      "sha256": "5d5909f87b540711c872d1f437e306c85b469e192220cce73761e3e65ad62ca3",
       "slug": "enneagram/type-7",
-      "source_content_sha256": "ef8f4649eae4734b4e0729e6c939dc07019f984df0c744b0d1e68e089ae1886d"
+      "source_content_sha256": "9c963b7f490d3f2dc6d81eb0759ecdc28c58f507f7781119ed0233751c53838d"
     },
     {
-      "bytes": 20452,
+      "bytes": 21792,
       "canonical_path": "/en/personality/enneagram/type-8",
-      "compatibility_projection_sha256": "2564ab07a7ae7cacd0777fe6e786fa51502130f718ad665802adaa28c1469b3b",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "6424e34b66d07929654cb0d6353b9b7abd51aba2e0ef2fe2c002cfbdd0d659f2",
+      "content_state": "enhanced",
       "entity_key": "type-8",
       "entity_type": "core_type",
       "framework": "enneagram",
@@ -2028,9 +2028,9 @@
       "locale": "en",
       "page_kind": "core_type",
       "path": "pages/enneagram/core-type/type-8/en.json",
-      "sha256": "8f217fb0cdcc590bf2409ac71fc5113f7b4ba9d7b19cb7e8ac1f28a2ee6cbf83",
+      "sha256": "260fb3a39b7bc5e044ab90b839d8e4ce2f914f55ba1b5a84adcfad2832ab1127",
       "slug": "enneagram/type-8",
-      "source_content_sha256": "2564ab07a7ae7cacd0777fe6e786fa51502130f718ad665802adaa28c1469b3b"
+      "source_content_sha256": "6424e34b66d07929654cb0d6353b9b7abd51aba2e0ef2fe2c002cfbdd0d659f2"
     },
     {
       "bytes": 19849,
@@ -2049,10 +2049,10 @@
       "source_content_sha256": "0a3bc0f33e78cb2e3b71526450ee5184314c5f90e41a352e4547dfd63faf39f9"
     },
     {
-      "bytes": 20495,
+      "bytes": 21834,
       "canonical_path": "/en/personality/enneagram/type-9",
-      "compatibility_projection_sha256": "fc052657301212433f7989cf06973f0069b45a2e321b38ab5f546c79799ec022",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "970ca8876845ed28f59b607071b79fbecd2ba6498990c0a577b9b3de2074c5b7",
+      "content_state": "enhanced",
       "entity_key": "type-9",
       "entity_type": "core_type",
       "framework": "enneagram",
@@ -2060,9 +2060,9 @@
       "locale": "en",
       "page_kind": "core_type",
       "path": "pages/enneagram/core-type/type-9/en.json",
-      "sha256": "3720d6e126f1c7188c3673cc2ba9ecad10c66ecdcd2574bf7d74712fcee6fc8e",
+      "sha256": "1ecc0dfc8e76abc7ed41abf1c513630312e5f994777d19a7216b42629b886d90",
       "slug": "enneagram/type-9",
-      "source_content_sha256": "fc052657301212433f7989cf06973f0069b45a2e321b38ab5f546c79799ec022"
+      "source_content_sha256": "970ca8876845ed28f59b607071b79fbecd2ba6498990c0a577b9b3de2074c5b7"
     },
     {
       "bytes": 19673,
@@ -2097,9 +2097,9 @@
       "source_content_sha256": "02312d657a890061935ede7a3dcdf1c7cb13fa34881df7d370935ad45addddf1"
     },
     {
-      "bytes": 19572,
+      "bytes": 19692,
       "canonical_path": "/zh/personality/enneagram",
-      "compatibility_projection_sha256": "7652d0f939c9474db2e5a33efbdba5f57f234c58ef40156e2fc9c827ec6ba3aa",
+      "compatibility_projection_sha256": "217984d29a75feaaa5508ba683b8cf8cf4387aec6143f205b6d6eb7d1c4cf7fb",
       "content_state": "baseline",
       "entity_key": "enneagram",
       "entity_type": "hub",
@@ -2108,9 +2108,9 @@
       "locale": "zh-CN",
       "page_kind": "hub",
       "path": "pages/enneagram/hub/enneagram/zh-CN.json",
-      "sha256": "4aa9627e12bf5dbb1e9f02a9fe43d569c240798a99191031a89eac65a96f1695",
+      "sha256": "917c4f2fa21694408fc5a39c1152d0f1eb92da7cc426d7798e52fe84198d4872",
       "slug": "enneagram",
-      "source_content_sha256": "7652d0f939c9474db2e5a33efbdba5f57f234c58ef40156e2fc9c827ec6ba3aa"
+      "source_content_sha256": "217984d29a75feaaa5508ba683b8cf8cf4387aec6143f205b6d6eb7d1c4cf7fb"
     },
     {
       "bytes": 19542,
@@ -2449,9 +2449,9 @@
       "source_content_sha256": "35848fa74b1bfc6579f10ba4b975b62e4604e1e432cc0642d590e45dc6a80b25"
     },
     {
-      "bytes": 18213,
+      "bytes": 18216,
       "canonical_path": "/zh/personality/enneagram/type-4/instincts/self-preservation",
-      "compatibility_projection_sha256": "6dc3d52bbd90f790e17bd0d6f15c0ae7e5285e136c824b11b4fa56149473e64b",
+      "compatibility_projection_sha256": "5c7344c603f5f23ae28b8af91637f581a3c8d54b75a96d8a08d5d2ffbbc3d3b1",
       "content_state": "baseline",
       "entity_key": "type-4/self-preservation",
       "entity_type": "instinctual_subtype",
@@ -2460,9 +2460,9 @@
       "locale": "zh-CN",
       "page_kind": "instinctual_subtype",
       "path": "pages/enneagram/instinctual-subtype/type-4--self-preservation/zh-CN.json",
-      "sha256": "75e2c06576b5816c7edabdc5026ee598e714d7eb57e90a4d26e52d51fe65ca8b",
+      "sha256": "a0ca5471ea0ffa9e94a562335c5b1f296860cc4409a3f11989825f59c40096da",
       "slug": "enneagram/type-4/instincts/self-preservation",
-      "source_content_sha256": "6dc3d52bbd90f790e17bd0d6f15c0ae7e5285e136c824b11b4fa56149473e64b"
+      "source_content_sha256": "5c7344c603f5f23ae28b8af91637f581a3c8d54b75a96d8a08d5d2ffbbc3d3b1"
     },
     {
       "bytes": 18449,
@@ -2673,9 +2673,9 @@
       "source_content_sha256": "94fcfaa4d804b28a16882fb73a41aa99c768d29c2788dcbbda0e5e7104b5374b"
     },
     {
-      "bytes": 18726,
+      "bytes": 18724,
       "canonical_path": "/zh/personality/enneagram/type-6/instincts/social",
-      "compatibility_projection_sha256": "61909e6d2c6825de85c2f7c601fa830d828ebc355727e3ff62a52ba6bbf0a800",
+      "compatibility_projection_sha256": "c32318df8284ffe49aa61b917e9f2372348bba25f62cbff7fcaf81ac8d274a90",
       "content_state": "baseline",
       "entity_key": "type-6/social",
       "entity_type": "instinctual_subtype",
@@ -2684,9 +2684,9 @@
       "locale": "zh-CN",
       "page_kind": "instinctual_subtype",
       "path": "pages/enneagram/instinctual-subtype/type-6--social/zh-CN.json",
-      "sha256": "b5a2178cb8e107277a86e5c10207dc39730f265a6b71b6e9875bc0c04c409c9a",
+      "sha256": "5c92e7cad7b33f70675622f1fd4dd333d33bb5f8d5d3af04a420941b7ec35c66",
       "slug": "enneagram/type-6/instincts/social",
-      "source_content_sha256": "61909e6d2c6825de85c2f7c601fa830d828ebc355727e3ff62a52ba6bbf0a800"
+      "source_content_sha256": "c32318df8284ffe49aa61b917e9f2372348bba25f62cbff7fcaf81ac8d274a90"
     },
     {
       "bytes": 19262,
@@ -2833,9 +2833,9 @@
       "source_content_sha256": "26166ac72e4e8b4a96b2c007e2ebb4db8d74209db9f0cfb47e82e31a0c7e36fa"
     },
     {
-      "bytes": 18435,
+      "bytes": 18438,
       "canonical_path": "/zh/personality/enneagram/type-8/instincts/self-preservation",
-      "compatibility_projection_sha256": "cd6938be82d43778e3c5cab03ea0ab80036d2e4243090327d8fb61eada37bc84",
+      "compatibility_projection_sha256": "cb904928c0e41779a698a97f835832cf18e53fea6c206fe0ce9ec236d02b07e3",
       "content_state": "baseline",
       "entity_key": "type-8/self-preservation",
       "entity_type": "instinctual_subtype",
@@ -2844,9 +2844,9 @@
       "locale": "zh-CN",
       "page_kind": "instinctual_subtype",
       "path": "pages/enneagram/instinctual-subtype/type-8--self-preservation/zh-CN.json",
-      "sha256": "f379e64601380868f8485dacc1d69fff62ec949f9bcafbdde2f66bfd3e81af78",
+      "sha256": "7eb401e12caef1f4c2e4216e47d4ece1d00b1dd13bd841bdb76e3c18c297348f",
       "slug": "enneagram/type-8/instincts/self-preservation",
-      "source_content_sha256": "cd6938be82d43778e3c5cab03ea0ab80036d2e4243090327d8fb61eada37bc84"
+      "source_content_sha256": "cb904928c0e41779a698a97f835832cf18e53fea6c206fe0ce9ec236d02b07e3"
     },
     {
       "bytes": 18963,
@@ -2913,9 +2913,9 @@
       "source_content_sha256": "51a65de22418cbc9f00116841abf851efd97173b9ebde58cc1d20ed68ca21f54"
     },
     {
-      "bytes": 19281,
+      "bytes": 19286,
       "canonical_path": "/en/personality/enneagram/type-9/instincts/self-preservation",
-      "compatibility_projection_sha256": "1b88064b56df8f6c23853ea84ae153aa57aa70444f47cae669888fc4ff2007e3",
+      "compatibility_projection_sha256": "ed894f06e430b79fd58adbaf991274009ec0fbd611867d4d00c1fdddd13166ae",
       "content_state": "baseline",
       "entity_key": "type-9/self-preservation",
       "entity_type": "instinctual_subtype",
@@ -2924,9 +2924,9 @@
       "locale": "en",
       "page_kind": "instinctual_subtype",
       "path": "pages/enneagram/instinctual-subtype/type-9--self-preservation/en.json",
-      "sha256": "5c27254cb229caee580df9e91216e0f82a7916a2a8c4c1ab9560b18fae6d856c",
+      "sha256": "2ca0cf31865103028bd7a7148ce879013f78b494d16268015afc22c2682e6c03",
       "slug": "enneagram/type-9/instincts/self-preservation",
-      "source_content_sha256": "1b88064b56df8f6c23853ea84ae153aa57aa70444f47cae669888fc4ff2007e3"
+      "source_content_sha256": "ed894f06e430b79fd58adbaf991274009ec0fbd611867d4d00c1fdddd13166ae"
     },
     {
       "bytes": 18330,
@@ -2977,9 +2977,9 @@
       "source_content_sha256": "4749f1c1c0efb869fa95f595c5bb1f5f7e8a85243e858f7bc9c44b1d57687622"
     },
     {
-      "bytes": 17240,
+      "bytes": 17247,
       "canonical_path": "/en/personality/enneagram/wings/1w2",
-      "compatibility_projection_sha256": "521fbe5247b03203c6f98eebcd1afa7be4ef48fd59a5f7c0de21c8c2f8c5782e",
+      "compatibility_projection_sha256": "9682eccc2f28ebc72b7976ab7633b711f81db5e09f6cbf7e2c5e45ff09d690c5",
       "content_state": "enhanced",
       "entity_key": "1w2",
       "entity_type": "wing",
@@ -2988,14 +2988,14 @@
       "locale": "en",
       "page_kind": "wing",
       "path": "pages/enneagram/wing/1w2/en.json",
-      "sha256": "ae2a6db8282db0d95d0edfd1aaff9f4515ee08805dc78672a5ff187f72f066cd",
+      "sha256": "646dbcdca2c0b8455fb0400596bf8bdcb0187b225c3561471c0ed6901c971ff9",
       "slug": "enneagram/wings/1w2",
-      "source_content_sha256": "521fbe5247b03203c6f98eebcd1afa7be4ef48fd59a5f7c0de21c8c2f8c5782e"
+      "source_content_sha256": "9682eccc2f28ebc72b7976ab7633b711f81db5e09f6cbf7e2c5e45ff09d690c5"
     },
     {
-      "bytes": 16628,
+      "bytes": 16650,
       "canonical_path": "/zh/personality/enneagram/wings/1w2",
-      "compatibility_projection_sha256": "b43723a15409f2841ab282802a784a0dfa77af856804b87d44d700dae46d9472",
+      "compatibility_projection_sha256": "09b225b1cfac445a588d0da841c29e60d3542ece6b676240e6c7bc8ffee32dbe",
       "content_state": "enhanced",
       "entity_key": "1w2",
       "entity_type": "wing",
@@ -3004,9 +3004,9 @@
       "locale": "zh-CN",
       "page_kind": "wing",
       "path": "pages/enneagram/wing/1w2/zh-CN.json",
-      "sha256": "5553323d8a76b8f471f4dc4d2e563529127456b0ed4ca1a033aed3cffcf94274",
+      "sha256": "2e0af3ce59d2a349daf1df714b868c343446bce85d327d7a4f58eb9d390d3aa5",
       "slug": "enneagram/wings/1w2",
-      "source_content_sha256": "b43723a15409f2841ab282802a784a0dfa77af856804b87d44d700dae46d9472"
+      "source_content_sha256": "09b225b1cfac445a588d0da841c29e60d3542ece6b676240e6c7bc8ffee32dbe"
     },
     {
       "bytes": 17263,
@@ -3025,9 +3025,9 @@
       "source_content_sha256": "e65d143a4a789147d8cf0b86ed219509acd0c06d90ffbefbd2bea0dc116bb8e4"
     },
     {
-      "bytes": 16585,
+      "bytes": 16610,
       "canonical_path": "/zh/personality/enneagram/wings/1w9",
-      "compatibility_projection_sha256": "fcb71643d4d5ca599770fffacf6afa12402fc1c03489fd511c18eef1dee4e7dd",
+      "compatibility_projection_sha256": "5c4ac8316da078bfce92b5df4a947b05dcf0c0ee2abc9545f77f1c89dde0d84e",
       "content_state": "enhanced",
       "entity_key": "1w9",
       "entity_type": "wing",
@@ -3036,9 +3036,9 @@
       "locale": "zh-CN",
       "page_kind": "wing",
       "path": "pages/enneagram/wing/1w9/zh-CN.json",
-      "sha256": "fd5a42242fa037bfb9fd14a784831021723d899b0d1e3b75ded4abd245720e4f",
+      "sha256": "cb7eccbbf9f8fcccedd236741d85b09a28a9bb301df3fa835e23484a9bfd6e96",
       "slug": "enneagram/wings/1w9",
-      "source_content_sha256": "fcb71643d4d5ca599770fffacf6afa12402fc1c03489fd511c18eef1dee4e7dd"
+      "source_content_sha256": "5c4ac8316da078bfce92b5df4a947b05dcf0c0ee2abc9545f77f1c89dde0d84e"
     },
     {
       "bytes": 16749,
@@ -3057,9 +3057,9 @@
       "source_content_sha256": "77f11fbccd66c0b7d67411609663bec72f54430a44c14db5977ac28e884bd7d2"
     },
     {
-      "bytes": 16092,
+      "bytes": 16117,
       "canonical_path": "/zh/personality/enneagram/wings/2w1",
-      "compatibility_projection_sha256": "76d80b992f75806f3ea8b52e8bc789334aa0ebae126092db5cf3edb11880fa91",
+      "compatibility_projection_sha256": "2bfb0d28a41bd9a1c8256be3715f670a65f9be60909c06430e05cb1800621638",
       "content_state": "enhanced",
       "entity_key": "2w1",
       "entity_type": "wing",
@@ -3068,14 +3068,14 @@
       "locale": "zh-CN",
       "page_kind": "wing",
       "path": "pages/enneagram/wing/2w1/zh-CN.json",
-      "sha256": "a158fa281c5cc6fe92e94e6a2ffa05e0777ea0dd56ffd02e39787661abdfc2cd",
+      "sha256": "85c60565800660ae3f920cdfb31518a07af751c680f1905ce594c377b894a361",
       "slug": "enneagram/wings/2w1",
-      "source_content_sha256": "76d80b992f75806f3ea8b52e8bc789334aa0ebae126092db5cf3edb11880fa91"
+      "source_content_sha256": "2bfb0d28a41bd9a1c8256be3715f670a65f9be60909c06430e05cb1800621638"
     },
     {
-      "bytes": 16679,
+      "bytes": 16684,
       "canonical_path": "/en/personality/enneagram/wings/2w3",
-      "compatibility_projection_sha256": "c8386fddd4a9b24ca949444f8e7a082d0dc1fcde44b51384ec7a373a53600811",
+      "compatibility_projection_sha256": "42b61063727b62b158710411adfa862629b8d6e560906124d51d4d8d2916f60a",
       "content_state": "baseline",
       "entity_key": "2w3",
       "entity_type": "wing",
@@ -3084,15 +3084,15 @@
       "locale": "en",
       "page_kind": "wing",
       "path": "pages/enneagram/wing/2w3/en.json",
-      "sha256": "80abfa0019b69f81760edf81230bc24982f6ce5a63ea271f7610471301f38987",
+      "sha256": "712ba568d4fd7efd0662ea0bc829342b4b67522d979904a9235fe7531dcdd21a",
       "slug": "enneagram/wings/2w3",
-      "source_content_sha256": "c8386fddd4a9b24ca949444f8e7a082d0dc1fcde44b51384ec7a373a53600811"
+      "source_content_sha256": "42b61063727b62b158710411adfa862629b8d6e560906124d51d4d8d2916f60a"
     },
     {
-      "bytes": 16097,
+      "bytes": 16146,
       "canonical_path": "/zh/personality/enneagram/wings/2w3",
-      "compatibility_projection_sha256": "7ebb61e699aea97ab51ffe1ea066533abf8aebf7f62a22532cab08434622dca6",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "872de72579da26b87eb61bc359a338b31060198f27d23a936dd467978303fb34",
+      "content_state": "enhanced",
       "entity_key": "2w3",
       "entity_type": "wing",
       "framework": "enneagram",
@@ -3100,9 +3100,9 @@
       "locale": "zh-CN",
       "page_kind": "wing",
       "path": "pages/enneagram/wing/2w3/zh-CN.json",
-      "sha256": "4ebc33d4e75bfbc5f1474138e441d6c5a18a1e876190eb79dd847ff7d1ef923f",
+      "sha256": "61e906619910fd5a270876a8a90ae03999b4f05fe8d6d18436ca2c15fe98de33",
       "slug": "enneagram/wings/2w3",
-      "source_content_sha256": "7ebb61e699aea97ab51ffe1ea066533abf8aebf7f62a22532cab08434622dca6"
+      "source_content_sha256": "872de72579da26b87eb61bc359a338b31060198f27d23a936dd467978303fb34"
     },
     {
       "bytes": 16235,
@@ -3121,10 +3121,10 @@
       "source_content_sha256": "802c88b4848702ab1c410a76f4655a9be6c630b7d00df9bb647d5c97dfef05a7"
     },
     {
-      "bytes": 17047,
+      "bytes": 16845,
       "canonical_path": "/zh/personality/enneagram/wings/3w2",
-      "compatibility_projection_sha256": "5bb99dbad60fb1add9268d3df830f7db13b120cdc910ce458c8101ed880464b3",
-      "content_state": "baseline",
+      "compatibility_projection_sha256": "4162aa490ef13b65d17b91ac349b6f9ef54c711b8fc4f741f92739faf66f6c60",
+      "content_state": "enhanced",
       "entity_key": "3w2",
       "entity_type": "wing",
       "framework": "enneagram",
@@ -3132,14 +3132,14 @@
       "locale": "zh-CN",
       "page_kind": "wing",
       "path": "pages/enneagram/wing/3w2/zh-CN.json",
-      "sha256": "5003b9de322f41ec4a4912d8337c9a3d425a8c2158b92e938d37116e0e39847e",
+      "sha256": "5592224564e5d2f379990f92f75c75f1d84864a9526ffe19b33fd5de06d034d9",
       "slug": "enneagram/wings/3w2",
-      "source_content_sha256": "5bb99dbad60fb1add9268d3df830f7db13b120cdc910ce458c8101ed880464b3"
+      "source_content_sha256": "4162aa490ef13b65d17b91ac349b6f9ef54c711b8fc4f741f92739faf66f6c60"
     },
     {
-      "bytes": 16293,
+      "bytes": 16300,
       "canonical_path": "/en/personality/enneagram/wings/3w4",
-      "compatibility_projection_sha256": "1d6d9e7620fa329c87883e3d4da8d3b67c4b65fe5bb49d51d79092e09a743c5a",
+      "compatibility_projection_sha256": "f67988defb6abb7728fc017d1172b4f047a74f00cb0da35904c48463889ee47f",
       "content_state": "baseline",
       "entity_key": "3w4",
       "entity_type": "wing",
@@ -3148,9 +3148,9 @@
       "locale": "en",
       "page_kind": "wing",
       "path": "pages/enneagram/wing/3w4/en.json",
-      "sha256": "ca9947b89e9305bb525dcfc0152bfa76b776b647d9d9dbd863955d4c2ee7bb19",
+      "sha256": "7262c330cf41b0fd409a46ed6b5da49d175c75de5460729c28710cea132af58d",
       "slug": "enneagram/wings/3w4",
-      "source_content_sha256": "1d6d9e7620fa329c87883e3d4da8d3b67c4b65fe5bb49d51d79092e09a743c5a"
+      "source_content_sha256": "f67988defb6abb7728fc017d1172b4f047a74f00cb0da35904c48463889ee47f"
     },
     {
       "bytes": 16729,
@@ -3297,9 +3297,9 @@
       "source_content_sha256": "f9ba67587e93a26c18625cff96e7b0d662828f67eb98d1181728735159666a14"
     },
     {
-      "bytes": 17063,
+      "bytes": 17070,
       "canonical_path": "/en/personality/enneagram/wings/6w5",
-      "compatibility_projection_sha256": "4eaaa829008815f385a02aba0268d0999002e930cc63104f1a8e87a625d5bb8d",
+      "compatibility_projection_sha256": "d448d1041e5810cd6f5d13f49d549ed3f4230c04af18e8487192ae6cfa3986f9",
       "content_state": "enhanced",
       "entity_key": "6w5",
       "entity_type": "wing",
@@ -3308,9 +3308,9 @@
       "locale": "en",
       "page_kind": "wing",
       "path": "pages/enneagram/wing/6w5/en.json",
-      "sha256": "73875190d5df3e245170121bb07082907b5f718ae02bf2c7240c0d433d7e7bdf",
+      "sha256": "900dfd90e3d23d7e84f7d2de342ad73a4533a8d58748f9447150cbeadd25446c",
       "slug": "enneagram/wings/6w5",
-      "source_content_sha256": "4eaaa829008815f385a02aba0268d0999002e930cc63104f1a8e87a625d5bb8d"
+      "source_content_sha256": "d448d1041e5810cd6f5d13f49d549ed3f4230c04af18e8487192ae6cfa3986f9"
     },
     {
       "bytes": 16337,
@@ -3345,9 +3345,9 @@
       "source_content_sha256": "1e4d2a91077da2c29cc459a1a2cfc928bbc479e9162d9200e35ec25115094d30"
     },
     {
-      "bytes": 16252,
+      "bytes": 16267,
       "canonical_path": "/zh/personality/enneagram/wings/6w7",
-      "compatibility_projection_sha256": "bd9c99b4872923aba00c0588dd48f822ca5c9e79f1aa28da41d19d5e8e4ed394",
+      "compatibility_projection_sha256": "122d5f0bdbb77a4ed72ec2c935ebac455ed1d3e744e528ad5491384fbfcb04c2",
       "content_state": "enhanced",
       "entity_key": "6w7",
       "entity_type": "wing",
@@ -3356,9 +3356,9 @@
       "locale": "zh-CN",
       "page_kind": "wing",
       "path": "pages/enneagram/wing/6w7/zh-CN.json",
-      "sha256": "23f5bf2083e1061a1e28fbeec824e4b8e7ecf5c3868cbea29b2a91ab12d7b3fd",
+      "sha256": "4d5d1e4fb6eccab451f2cd55a09d885fcda3b9cb4318eb19aadd949a438363d3",
       "slug": "enneagram/wings/6w7",
-      "source_content_sha256": "bd9c99b4872923aba00c0588dd48f822ca5c9e79f1aa28da41d19d5e8e4ed394"
+      "source_content_sha256": "122d5f0bdbb77a4ed72ec2c935ebac455ed1d3e744e528ad5491384fbfcb04c2"
     },
     {
       "bytes": 16580,
@@ -3377,9 +3377,9 @@
       "source_content_sha256": "388018ad631cf43470d20f3a202058c9d1f397ddb84a9f6acb0697caab9af240"
     },
     {
-      "bytes": 16274,
+      "bytes": 16286,
       "canonical_path": "/zh/personality/enneagram/wings/7w6",
-      "compatibility_projection_sha256": "4979fd81b8951ab5f782fc72098894fec6af0a52a45ecf4d035244f0d9d32f54",
+      "compatibility_projection_sha256": "cad0e882fda317bde7890f5b3b089ed94a785b9d5ffcdffe9d5f8b3edba2561d",
       "content_state": "enhanced",
       "entity_key": "7w6",
       "entity_type": "wing",
@@ -3388,9 +3388,9 @@
       "locale": "zh-CN",
       "page_kind": "wing",
       "path": "pages/enneagram/wing/7w6/zh-CN.json",
-      "sha256": "1f6b0fd6f867fa8b8b5f1d128951f9f6f5cb25c3e420951705c129dd9fe11df6",
+      "sha256": "6f59d9a8b3e0a8adb25d475f6c410c5231c84f3b1311831f9f996e5c9bd6b43b",
       "slug": "enneagram/wings/7w6",
-      "source_content_sha256": "4979fd81b8951ab5f782fc72098894fec6af0a52a45ecf4d035244f0d9d32f54"
+      "source_content_sha256": "cad0e882fda317bde7890f5b3b089ed94a785b9d5ffcdffe9d5f8b3edba2561d"
     },
     {
       "bytes": 16552,
@@ -3457,9 +3457,9 @@
       "source_content_sha256": "aa8079730bd4516153b09b7c4d7bcdca76f0177efaad351524487500690b7979"
     },
     {
-      "bytes": 16400,
+      "bytes": 16407,
       "canonical_path": "/en/personality/enneagram/wings/8w9",
-      "compatibility_projection_sha256": "18da423053165b8857912a856ef04fdc2ff53f172353e19cf10c317c7ffe156c",
+      "compatibility_projection_sha256": "405317764cd0c42a888ef74bf0378651f55f624d2ed83c4e7e50fe846bbca166",
       "content_state": "enhanced",
       "entity_key": "8w9",
       "entity_type": "wing",
@@ -3468,9 +3468,9 @@
       "locale": "en",
       "page_kind": "wing",
       "path": "pages/enneagram/wing/8w9/en.json",
-      "sha256": "723eee0eca4fe8fb8f0cbd6c762f747237b5e11173253e17245993a4c8a10fae",
+      "sha256": "69e1ee12fb5fd166487a208d1565c50dac0de4856ca781d8bbf3ab5bfd894983",
       "slug": "enneagram/wings/8w9",
-      "source_content_sha256": "18da423053165b8857912a856ef04fdc2ff53f172353e19cf10c317c7ffe156c"
+      "source_content_sha256": "405317764cd0c42a888ef74bf0378651f55f624d2ed83c4e7e50fe846bbca166"
     },
     {
       "bytes": 16047,
@@ -5863,9 +5863,9 @@
   ],
   "schema_version": "personality.page.content.v1",
   "set_hashes": {
-    "compatibility_projection_aggregate_sha256": "41280baa19e9c6ec409ca63a4f188c36ee31c034a9546fa6141a2eae10594001",
+    "compatibility_projection_aggregate_sha256": "d6aaade3749f53fe9ff0db8655cd6cd5bc49b5fab92777237372bcd6067b47f2",
     "locale_page_identity_set_sha256": "8227ad2bf9e0a4689d810b41dc8250e0fd802218a84d6a7c21cfcdfc338bd23f",
     "route_set_sha256": "59ad54623c9a1392c2446dc67767179180e6feeaa0fedd3b537f664c9611f9ca",
-    "source_semantic_aggregate_sha256": "41280baa19e9c6ec409ca63a4f188c36ee31c034a9546fa6141a2eae10594001"
+    "source_semantic_aggregate_sha256": "d6aaade3749f53fe9ff0db8655cd6cd5bc49b5fab92777237372bcd6067b47f2"
   }
 }

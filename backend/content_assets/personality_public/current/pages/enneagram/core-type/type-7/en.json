@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-7",
@@ -53,6 +53,13 @@
               "riso_hudson_1999_wisdom",
               "hook_2021_systematic_review"
             ]
+          },
+          {
+            "claim_id": "claim.nickname.practitioner_label",
+            "limitation": "Practitioner naming only; not independent psychometric validation, a diagnosis, or an MBTI identity.",
+            "source_ids": [
+              "enneagram_institute_type_seven"
+            ]
           }
         ],
         "limitations": [
@@ -103,6 +110,20 @@
             "source_type": "peer_reviewed_research",
             "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
             "year": 2013
+          },
+          {
+            "accessed_at": "2026-10-02",
+            "author_or_organization": "The Enneagram Institute",
+            "claim_ids": [
+              "claim.nickname.practitioner_label"
+            ],
+            "doi": null,
+            "id": "enneagram_institute_type_seven",
+            "limitation": "Practitioner naming only; not independent psychometric validation, a diagnosis, or an MBTI identity.",
+            "public_url": "https://www.enneagraminstitute.com/type-7/",
+            "source_type": "other_public_source",
+            "title": "Enneagram Type 7: The Enthusiast",
+            "year": null
           }
         ]
       },
@@ -133,43 +154,43 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/centers/head",
-          "label": "center:head",
+          "label": "Head center",
           "relationship": "center_membership",
           "target_identity_key": "center:head"
         },
         {
           "href": "/en/personality/enneagram/wings/7w6",
-          "label": "wing:7w6",
+          "label": "7w6 wing",
           "relationship": "wing_variant",
           "target_identity_key": "wing:7w6"
         },
         {
           "href": "/en/personality/enneagram/wings/7w8",
-          "label": "wing:7w8",
+          "label": "7w8 wing",
           "relationship": "wing_variant",
           "target_identity_key": "wing:7w8"
         },
         {
           "href": "/en/personality/enneagram/type-7/instincts/self-preservation",
-          "label": "instinctual_subtype:type-7/self-preservation",
+          "label": "Type 7 self preservation subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-7/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-7/instincts/social",
-          "label": "instinctual_subtype:type-7/social",
+          "label": "Type 7 social subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-7/social"
         },
         {
           "href": "/en/personality/enneagram/type-7/instincts/one-to-one",
-          "label": "instinctual_subtype:type-7/one-to-one",
+          "label": "Type 7 one to one subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-7/one-to-one"
         }
@@ -210,7 +231,7 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "Track when new routes are generated, which limitation becomes hardest to hold, and whether planning creates useful choice or distance from the present task. Record the sequence before inferring a stable motive.",
+          "body_md": "Track when new routes are generated, which limitation becomes hardest to hold, and whether planning creates useful choice or distance from the present task. Record the sequence before inferring a stable motive.\n\nIn Enneagram writing, Type 7 is often called “The Enthusiast”. This is a practitioner nickname, not a diagnosis, an MBTI type, or validation of a personal result. See [Enneagram Institute Type 7](https://www.enneagraminstitute.com/type-7/) for this naming convention.",
           "key": "motivation_attention",
           "title": "Observe where possibility enters attention"
         },
@@ -265,14 +286,14 @@
       ],
       "seo": {
         "description": "Type Seven is a traditional Enneagram hypothesis about attention returning to possibility, freedom, and open options, sometimes through reframing discomfort and future planning. Rapid ideas, travel, optimism, or varied interests do not establish motive because creativity, attention differences, entrepreneurship, migration, workload, privilege, and real constraints can produce similar behavior.",
-        "title": "Type Seven: possibility, freedom, and a revisable option-keeping hypothesis"
+        "title": "Enneagram Type 7 (The Enthusiast): Possibilities and Options"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/type-7",
       "source_hash": "47455832e72ff49418f9229300756337b95ce72959885596a1468968994cc5b4",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Type Seven is a traditional Enneagram hypothesis about attention returning to possibility, freedom, and open options, sometimes through reframing discomfort and future planning. Rapid ideas, travel, optimism, or varied interests do not establish motive because creativity, attention differences, entrepreneurship, migration, workload, privilege, and real constraints can produce similar behavior.",
-      "title": "Type Seven: possibility, freedom, and a revisable option-keeping hypothesis"
+      "summary": "Type Seven is a traditional Enneagram hypothesis about attention returning to possibility, freedom, and open options, sometimes through reframing discomfort and future planning. Rapid ideas, travel, optimism, or varied interests do not establish motive because creativity, attention differences, entrepreneurship, migration, workload, privilege, and real constraints can produce similar behavior. In Enneagram writing, Type 7 is often called “The Enthusiast”. This is a practitioner nickname, not a diagnosis, an MBTI type, or validation of a personal result.",
+      "title": "Enneagram Type 7: possibility, freedom, and a revisable option-keeping hypothesis"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -369,5 +390,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "402732ca219752b504491b1b0a7185a395bfe80e121bdde11ada8a0e34ef3a14"
+  "source_content_sha256": "9e9b5691d1fac0a3af7e24df46bfc091a9741df851bcfe5c4127ca33809e253c"
 }

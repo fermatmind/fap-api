@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-6",
@@ -53,6 +53,13 @@
               "riso_hudson_1999_wisdom",
               "hook_2021_systematic_review"
             ]
+          },
+          {
+            "claim_id": "claim.nickname.practitioner_label",
+            "limitation": "Practitioner naming only; not independent psychometric validation, a diagnosis, or an MBTI identity.",
+            "source_ids": [
+              "enneagram_institute_type_six"
+            ]
           }
         ],
         "limitations": [
@@ -103,6 +110,20 @@
             "source_type": "peer_reviewed_research",
             "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
             "year": 2013
+          },
+          {
+            "accessed_at": "2026-10-02",
+            "author_or_organization": "The Enneagram Institute",
+            "claim_ids": [
+              "claim.nickname.practitioner_label"
+            ],
+            "doi": null,
+            "id": "enneagram_institute_type_six",
+            "limitation": "Practitioner naming only; not independent psychometric validation, a diagnosis, or an MBTI identity.",
+            "public_url": "https://www.enneagraminstitute.com/type-6/",
+            "source_type": "other_public_source",
+            "title": "Enneagram Type 6: The Loyalist",
+            "year": null
           }
         ]
       },
@@ -133,43 +154,43 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/centers/head",
-          "label": "center:head",
+          "label": "Head center",
           "relationship": "center_membership",
           "target_identity_key": "center:head"
         },
         {
           "href": "/en/personality/enneagram/wings/6w5",
-          "label": "wing:6w5",
+          "label": "6w5 wing",
           "relationship": "wing_variant",
           "target_identity_key": "wing:6w5"
         },
         {
           "href": "/en/personality/enneagram/wings/6w7",
-          "label": "wing:6w7",
+          "label": "6w7 wing",
           "relationship": "wing_variant",
           "target_identity_key": "wing:6w7"
         },
         {
           "href": "/en/personality/enneagram/type-6/instincts/self-preservation",
-          "label": "instinctual_subtype:type-6/self-preservation",
+          "label": "Type 6 self preservation subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-6/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-6/instincts/social",
-          "label": "instinctual_subtype:type-6/social",
+          "label": "Type 6 social subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-6/social"
         },
         {
           "href": "/en/personality/enneagram/type-6/instincts/one-to-one",
-          "label": "instinctual_subtype:type-6/one-to-one",
+          "label": "Type 6 one to one subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-6/one-to-one"
         }
@@ -210,7 +231,7 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "Track which unknown receives attention, what evidence permits action, whose support is consulted, and whether a contingency plan closes the question. Record changes across stakes rather than assuming a permanent vigilance style.",
+          "body_md": "Track which unknown receives attention, what evidence permits action, whose support is consulted, and whether a contingency plan closes the question. Record changes across stakes rather than assuming a permanent vigilance style.\n\nIn Enneagram writing, Type 6 is often called “The Loyalist”. This is a practitioner nickname, not a diagnosis, an MBTI type, or validation of a personal result. See [Enneagram Institute Type 6](https://www.enneagraminstitute.com/type-6/) for this naming convention.",
           "key": "motivation_attention",
           "title": "Observe uncertainty without turning caution into identity"
         },
@@ -265,14 +286,14 @@
       ],
       "seo": {
         "description": "Type Six is a traditional Enneagram hypothesis about attention returning to uncertainty, trusted support, possible problems, and workable contingency plans. Questions, caution, loyalty, or doubt cannot establish motive because real risk, governance duties, discrimination, trauma-related safety, resource precarity, and recent failures can create the same behavior.",
-        "title": "Type Six: uncertainty, support, and a revisable trust hypothesis"
+        "title": "Enneagram Type 6 (The Loyalist): Uncertainty and Trust"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/type-6",
       "source_hash": "e9b6ab25780022b4a5638784374e79d71f1f82f3d7f5e3f762313bebee67abfb",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Type Six is a traditional Enneagram hypothesis about attention returning to uncertainty, trusted support, possible problems, and workable contingency plans. Questions, caution, loyalty, or doubt cannot establish motive because real risk, governance duties, discrimination, trauma-related safety, resource precarity, and recent failures can create the same behavior.",
-      "title": "Type Six: uncertainty, support, and a revisable trust hypothesis"
+      "summary": "Type Six is a traditional Enneagram hypothesis about attention returning to uncertainty, trusted support, possible problems, and workable contingency plans. Questions, caution, loyalty, or doubt cannot establish motive because real risk, governance duties, discrimination, trauma-related safety, resource precarity, and recent failures can create the same behavior. In Enneagram writing, Type 6 is often called “The Loyalist”. This is a practitioner nickname, not a diagnosis, an MBTI type, or validation of a personal result.",
+      "title": "Enneagram Type 6: uncertainty, support, and a revisable trust hypothesis"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -369,5 +390,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "1010dcb181b5470688a10c168b46569bc231f48212df0c5753a7daa25305c17a"
+  "source_content_sha256": "f14c643143bf62fa0b590e715ff82b900a01ddee5ec7890cd27811202d929a6b"
 }

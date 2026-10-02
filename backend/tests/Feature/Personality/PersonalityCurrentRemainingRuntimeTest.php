@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class PersonalityCurrentRemainingRuntimeTest extends TestCase
 {
-    private const AGGREGATE = '19531e3fce89b04d30028f65a7439298277fe678c95bd6ab141c25e32c6d521b';
+    private const AGGREGATE = '94310267d74c07109f13904dfc98a9af4437651d3a6cbdadd79771839c137f4c';
 
     #[DataProvider('detailCases')]
     public function test_public_detail_is_served_from_its_per_page_authority(string $url, string $file): void
@@ -52,6 +52,24 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
             '/api/v0.5/personality-content-assets/enneagram/core_type/type-1?locale=en&org_id=0',
             'content_assets/personality_public/current/pages/enneagram/core-type/type-1/en.json',
         ];
+        foreach (range(2, 9) as $number) {
+            yield "Enneagram Type {$number} English" => [
+                "/api/v0.5/personality-content-assets/enneagram/core_type/type-{$number}?locale=en&org_id=0",
+                "content_assets/personality_public/current/pages/enneagram/core-type/type-{$number}/en.json",
+            ];
+        }
+        foreach ([1, 3, 4, 7] as $number) {
+            yield "Enneagram Type {$number} Chinese" => [
+                "/api/v0.5/personality-content-assets/enneagram/core_type/type-{$number}?locale=zh-CN&org_id=0",
+                "content_assets/personality_public/current/pages/enneagram/core-type/type-{$number}/zh-CN.json",
+            ];
+        }
+        foreach (['1w2', '1w9', '2w1', '2w3', '3w2', '6w7', '7w6'] as $wing) {
+            yield "Enneagram remaining {$wing} Chinese" => [
+                "/api/v0.5/personality-content-assets/enneagram/wing/{$wing}?locale=zh-CN&org_id=0",
+                "content_assets/personality_public/current/pages/enneagram/wing/{$wing}/zh-CN.json",
+            ];
+        }
         yield 'MBTI variant' => [
             '/api/v0.5/personality/intj-a?locale=en&org_id=0&scale_code=MBTI',
             'content_assets/personality_public/current/pages/mbti/variant/intj-a/en.json',

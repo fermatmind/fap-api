@@ -126,25 +126,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-8",
-          "label": "core_type:type-8",
+          "label": "九型人格8号核心型",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-8"
         },
         {
           "href": "/zh/personality/enneagram/type-8/instincts/social",
-          "label": "instinctual_subtype:type-8/social",
+          "label": "九型人格8号社会本能",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-8/social"
         },
         {
           "href": "/zh/personality/enneagram/type-8/instincts/one-to-one",
-          "label": "instinctual_subtype:type-8/one-to-one",
+          "label": "九型人格8号一对一本能",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-8/one-to-one"
         }
@@ -331,5 +331,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "cd6938be82d43778e3c5cab03ea0ab80036d2e4243090327d8fb61eada37bc84"
+  "source_content_sha256": "cb904928c0e41779a698a97f835832cf18e53fea6c206fe0ce9ec236d02b07e3"
 }

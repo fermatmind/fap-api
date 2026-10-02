@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-4",
@@ -53,6 +53,13 @@
               "riso_hudson_1999_wisdom",
               "hook_2021_systematic_review"
             ]
+          },
+          {
+            "claim_id": "claim.nickname.practitioner_label",
+            "limitation": "Practitioner naming only; not independent psychometric validation, a diagnosis, or an MBTI identity.",
+            "source_ids": [
+              "enneagram_institute_type_four"
+            ]
           }
         ],
         "limitations": [
@@ -103,6 +110,20 @@
             "source_type": "peer_reviewed_research",
             "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
             "year": 2013
+          },
+          {
+            "accessed_at": "2026-10-02",
+            "author_or_organization": "The Enneagram Institute",
+            "claim_ids": [
+              "claim.nickname.practitioner_label"
+            ],
+            "doi": null,
+            "id": "enneagram_institute_type_four",
+            "limitation": "Practitioner naming only; not independent psychometric validation, a diagnosis, or an MBTI identity.",
+            "public_url": "https://www.enneagraminstitute.com/type-4/",
+            "source_type": "other_public_source",
+            "title": "Enneagram Type 4: The Individualist",
+            "year": null
           }
         ]
       },
@@ -133,43 +154,43 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/centers/heart",
-          "label": "center:heart",
+          "label": "Heart center",
           "relationship": "center_membership",
           "target_identity_key": "center:heart"
         },
         {
           "href": "/en/personality/enneagram/wings/4w3",
-          "label": "wing:4w3",
+          "label": "4w3 wing",
           "relationship": "wing_variant",
           "target_identity_key": "wing:4w3"
         },
         {
           "href": "/en/personality/enneagram/wings/4w5",
-          "label": "wing:4w5",
+          "label": "4w5 wing",
           "relationship": "wing_variant",
           "target_identity_key": "wing:4w5"
         },
         {
           "href": "/en/personality/enneagram/type-4/instincts/self-preservation",
-          "label": "instinctual_subtype:type-4/self-preservation",
+          "label": "Type 4 self preservation subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-4/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-4/instincts/social",
-          "label": "instinctual_subtype:type-4/social",
+          "label": "Type 4 social subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-4/social"
         },
         {
           "href": "/en/personality/enneagram/type-4/instincts/one-to-one",
-          "label": "instinctual_subtype:type-4/one-to-one",
+          "label": "Type 4 one to one subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-4/one-to-one"
         }
@@ -210,7 +231,7 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "Track what becomes personally meaningful, which comparison creates a sense of difference, and whether an absent quality receives more attention than what is present. Treat identity as changing context, not a hidden essence inferred from style.",
+          "body_md": "Track what becomes personally meaningful, which comparison creates a sense of difference, and whether an absent quality receives more attention than what is present. Treat identity as changing context, not a hidden essence inferred from style.\n\nIn Enneagram writing, Type 4 is often called “The Individualist”. This is a practitioner nickname, not a diagnosis, an MBTI type, or validation of a personal result. See [Enneagram Institute Type 4](https://www.enneagraminstitute.com/type-4/) for this naming convention.",
           "key": "motivation_attention",
           "title": "Observe identity and meaning without fixing either"
         },
@@ -265,14 +286,14 @@
       ],
       "seo": {
         "description": "Type Four is a traditional Enneagram hypothesis about attention returning to identity, personal meaning, perceived difference, and what seems absent or longed for. Creative expression, sadness, unusual taste, or emotional language cannot establish motive because culture, craft, grief, exclusion, and current circumstances can look similar.",
-        "title": "Type Four: identity, meaning, and a revisable difference hypothesis"
+        "title": "Enneagram Type 4 (The Individualist): Identity and Meaning"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/type-4",
       "source_hash": "3a39fcac2cf2487a8ef6fcc41e8d74cf77728539732631b853a2d7ee371ffc8f",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Type Four is a traditional Enneagram hypothesis about attention returning to identity, personal meaning, perceived difference, and what seems absent or longed for. Creative expression, sadness, unusual taste, or emotional language cannot establish motive because culture, craft, grief, exclusion, and current circumstances can look similar.",
-      "title": "Type Four: identity, meaning, and a revisable difference hypothesis"
+      "summary": "Type Four is a traditional Enneagram hypothesis about attention returning to identity, personal meaning, perceived difference, and what seems absent or longed for. Creative expression, sadness, unusual taste, or emotional language cannot establish motive because culture, craft, grief, exclusion, and current circumstances can look similar. In Enneagram writing, Type 4 is often called “The Individualist”. This is a practitioner nickname, not a diagnosis, an MBTI type, or validation of a personal result.",
+      "title": "Enneagram Type 4: identity, meaning, and a revisable difference hypothesis"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -369,5 +390,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "2bf0d46221774f8df6339a40512c6cf208e8b865da9667608b20e2e896c706ca"
+  "source_content_sha256": "50fe4d3dfa919b4e4e1676b4ba3d0e5626c53850203107e6249a1b6e00c95a22"
 }

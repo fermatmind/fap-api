@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-9",
@@ -53,6 +53,13 @@
               "riso_hudson_1999_wisdom",
               "hook_2021_systematic_review"
             ]
+          },
+          {
+            "claim_id": "claim.nickname.practitioner_label",
+            "limitation": "Practitioner naming only; not independent psychometric validation, a diagnosis, or an MBTI identity.",
+            "source_ids": [
+              "enneagram_institute_type_nine"
+            ]
           }
         ],
         "limitations": [
@@ -103,6 +110,20 @@
             "source_type": "peer_reviewed_research",
             "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
             "year": 2013
+          },
+          {
+            "accessed_at": "2026-10-02",
+            "author_or_organization": "The Enneagram Institute",
+            "claim_ids": [
+              "claim.nickname.practitioner_label"
+            ],
+            "doi": null,
+            "id": "enneagram_institute_type_nine",
+            "limitation": "Practitioner naming only; not independent psychometric validation, a diagnosis, or an MBTI identity.",
+            "public_url": "https://www.enneagraminstitute.com/type-9/",
+            "source_type": "other_public_source",
+            "title": "Enneagram Type 9: The Peacemaker",
+            "year": null
           }
         ]
       },
@@ -133,43 +154,43 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/centers/gut",
-          "label": "center:gut",
+          "label": "Gut center",
           "relationship": "center_membership",
           "target_identity_key": "center:gut"
         },
         {
           "href": "/en/personality/enneagram/wings/9w8",
-          "label": "wing:9w8",
+          "label": "9w8 wing",
           "relationship": "wing_variant",
           "target_identity_key": "wing:9w8"
         },
         {
           "href": "/en/personality/enneagram/wings/9w1",
-          "label": "wing:9w1",
+          "label": "9w1 wing",
           "relationship": "wing_variant",
           "target_identity_key": "wing:9w1"
         },
         {
           "href": "/en/personality/enneagram/type-9/instincts/self-preservation",
-          "label": "instinctual_subtype:type-9/self-preservation",
+          "label": "Type 9 self preservation subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-9/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-9/instincts/social",
-          "label": "instinctual_subtype:type-9/social",
+          "label": "Type 9 social subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-9/social"
         },
         {
           "href": "/en/personality/enneagram/type-9/instincts/one-to-one",
-          "label": "instinctual_subtype:type-9/one-to-one",
+          "label": "Type 9 one to one subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-9/one-to-one"
         }
@@ -210,7 +231,7 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "When a request arrives, record the person’s first preference, the competing agenda that becomes louder, and the moment their own priority is postponed. The sequence matters more than a peaceful tone.",
+          "body_md": "When a request arrives, record the person’s first preference, the competing agenda that becomes louder, and the moment their own priority is postponed. The sequence matters more than a peaceful tone.\n\nIn Enneagram writing, Type 9 is often called “The Peacemaker”. This is a practitioner nickname, not a diagnosis, an MBTI type, or validation of a personal result. See [Enneagram Institute Type 9](https://www.enneagraminstitute.com/type-9/) for this naming convention.",
           "key": "motivation_attention",
           "title": "Locate the priority before interpreting calm"
         },
@@ -265,14 +286,14 @@
       ],
       "seo": {
         "description": "Type Nine is a traditional Enneagram hypothesis about attention returning to stability, connection, competing priorities, conflict delay, and the cost of losing contact with one’s own agenda. Calm behavior alone does not establish motive: mediation duty, low authority, cultural restraint, fatigue, disability, trauma safety, or actual danger can produce similar choices, so alternative explanations need explicit checking.",
-        "title": "Type Nine: stability, priority, and a revisable conflict-delay hypothesis"
+        "title": "Enneagram Type 9 (The Peacemaker): Harmony and Priorities"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/type-9",
       "source_hash": "d4ee4d233e05220154208cb1b414490c756d1dd82796b169a949461ae8d35591",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Type Nine is a traditional Enneagram hypothesis about attention returning to stability, connection, competing priorities, conflict delay, and the cost of losing contact with one’s own agenda. Calm behavior alone does not establish motive: mediation duty, low authority, cultural restraint, fatigue, disability, trauma safety, or actual danger can produce similar choices, so alternative explanations need explicit checking.",
-      "title": "Type Nine: stability, priority, and a revisable conflict-delay hypothesis"
+      "summary": "Type Nine is a traditional Enneagram hypothesis about attention returning to stability, connection, competing priorities, conflict delay, and the cost of losing contact with one’s own agenda. Calm behavior alone does not establish motive: mediation duty, low authority, cultural restraint, fatigue, disability, trauma safety, or actual danger can produce similar choices, so alternative explanations need explicit checking. In Enneagram writing, Type 9 is often called “The Peacemaker”. This is a practitioner nickname, not a diagnosis, an MBTI type, or validation of a personal result.",
+      "title": "Enneagram Type 9: stability, priority, and a revisable conflict-delay hypothesis"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -369,5 +390,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "fc052657301212433f7989cf06973f0069b45a2e321b38ab5f546c79799ec022"
+  "source_content_sha256": "970ca8876845ed28f59b607071b79fbecd2ba6498990c0a577b9b3de2074c5b7"
 }

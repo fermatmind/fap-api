@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/wings/2w3",
@@ -111,25 +111,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-2",
-          "label": "core_type:type-2",
+          "label": "九型人格2号核心型",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-2"
         },
         {
           "href": "/zh/personality/enneagram/type-3",
-          "label": "core_type:type-3",
+          "label": "九型人格3号核心型",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-3"
         },
         {
           "href": "/zh/personality/enneagram/wings/2w1",
-          "label": "wing:2w1",
+          "label": "2w1翼型",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:2w1"
         }
@@ -186,7 +186,7 @@
         {
           "body_md": "比较2w3与2w1时，前者可能强调适应表达和可见成效，后者可能强调原则与克制服务。与三号相比，2w3 假设仍把他人需要和关系回应置于核心，而不是只追求成就或形象。",
           "key": "sibling_core_comparison",
-          "title": "对照 2w3、2w1 与三号"
+          "title": "2w3和2w1有什么区别？"
         },
         {
           "body_md": "检验2w3可见成效反例，可以寻找没有受众仍同样投入、表达不随回应改变，或行动完全由绩效目标解释而没有连接关注的事件。这些材料会削弱翼型修饰解释。",
@@ -214,14 +214,14 @@
       ],
       "seo": {
         "description": "2w3 是以二号需要与连接关注为核心、用三号相邻特征解释适应表达、呈现和可见成效的传统次级假设。观察2w3可见成效，要比较公开与私下帮助、没有署名时的投入，以及回应变化后如何调整。",
-        "title": "2w3 观察页：可见成效、适应表达与连接"
+        "title": "九型人格2w3 观察页：可见成效、适应表达与连接"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/wings/2w3",
       "source_hash": "5d9f79281d68b8249e147490a727c1e941c69214f37fbdc4133f45fddf2f7ae0",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
       "summary": "2w3 是以二号需要与连接关注为核心、用三号相邻特征解释适应表达、呈现和可见成效的传统次级假设。观察2w3可见成效，要比较公开与私下帮助、没有署名时的投入，以及回应变化后如何调整。",
-      "title": "2w3 观察页：可见成效、适应表达与连接"
+      "title": "九型人格2w3 观察页：可见成效、适应表达与连接"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -296,5 +296,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "7ebb61e699aea97ab51ffe1ea066533abf8aebf7f62a22532cab08434622dca6"
+  "source_content_sha256": "872de72579da26b87eb61bc359a338b31060198f27d23a936dd467978303fb34"
 }

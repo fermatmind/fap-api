@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/type-1",
@@ -133,43 +133,43 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/centers/gut",
-          "label": "center:gut",
+          "label": "本能中心",
           "relationship": "center_membership",
           "target_identity_key": "center:gut"
         },
         {
           "href": "/zh/personality/enneagram/wings/1w9",
-          "label": "wing:1w9",
+          "label": "1w9翼型",
           "relationship": "wing_variant",
           "target_identity_key": "wing:1w9"
         },
         {
           "href": "/zh/personality/enneagram/wings/1w2",
-          "label": "wing:1w2",
+          "label": "1w2翼型",
           "relationship": "wing_variant",
           "target_identity_key": "wing:1w2"
         },
         {
           "href": "/zh/personality/enneagram/type-1/instincts/self-preservation",
-          "label": "instinctual_subtype:type-1/self-preservation",
+          "label": "九型人格1号自保本能亚型",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-1/self-preservation"
         },
         {
           "href": "/zh/personality/enneagram/type-1/instincts/social",
-          "label": "instinctual_subtype:type-1/social",
+          "label": "九型人格1号社交本能亚型",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-1/social"
         },
         {
           "href": "/zh/personality/enneagram/type-1/instincts/one-to-one",
-          "label": "instinctual_subtype:type-1/one-to-one",
+          "label": "九型人格1号一对一本能亚型",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-1/one-to-one"
         }
@@ -265,14 +265,14 @@
       ],
       "seo": {
         "description": "一号是九型人格传统中关于注意力反复落在标准、偏差与负责修订上的观察假设。观察一号标准修订，需要同时记录先看见了什么、实际改了什么、何时愿意停止，以及同样做法能否跨情境出现；认真、守规或挑错本身都不能证明固定类型。",
-        "title": "一号观察假设：标准、责任与修订节奏"
+        "title": "九型人格1号（第一型）观察假设：标准、责任与修订节奏"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/type-1",
       "source_hash": "849cfe385e1ce12d681967a4b9641f58181fc3f8ee072505726aac0a3450f5b4",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "一号是九型人格传统中关于注意力反复落在标准、偏差与负责修订上的观察假设。观察一号标准修订，需要同时记录先看见了什么、实际改了什么、何时愿意停止，以及同样做法能否跨情境出现；认真、守规或挑错本身都不能证明固定类型。",
-      "title": "一号观察假设：标准、责任与修订节奏"
+      "summary": "九型人格1号（第一型）是九型人格传统中关于注意力反复落在标准、偏差与负责修订上的观察假设。观察一号标准修订，需要同时记录先看见了什么、实际改了什么、何时愿意停止，以及同样做法能否跨情境出现；认真、守规或挑错本身都不能证明固定类型。",
+      "title": "九型人格1号（第一型）观察假设：标准、责任与修订节奏"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -369,5 +369,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "e7961913045ccf9e0dc94426f92eb2c66c74a6bbb31b9498ffb5c9e1591bcb6f"
+  "source_content_sha256": "420de8cc659ca4f6ab03f3d64cdfe0e6337251069574888df9781d087ed97b31"
 }

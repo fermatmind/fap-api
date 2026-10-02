@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/type-3",
@@ -133,43 +133,43 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/centers/heart",
-          "label": "center:heart",
+          "label": "情感中心",
           "relationship": "center_membership",
           "target_identity_key": "center:heart"
         },
         {
           "href": "/zh/personality/enneagram/wings/3w2",
-          "label": "wing:3w2",
+          "label": "3w2翼型",
           "relationship": "wing_variant",
           "target_identity_key": "wing:3w2"
         },
         {
           "href": "/zh/personality/enneagram/wings/3w4",
-          "label": "wing:3w4",
+          "label": "3w4翼型",
           "relationship": "wing_variant",
           "target_identity_key": "wing:3w4"
         },
         {
           "href": "/zh/personality/enneagram/type-3/instincts/self-preservation",
-          "label": "instinctual_subtype:type-3/self-preservation",
+          "label": "九型人格3号自保本能亚型",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-3/self-preservation"
         },
         {
           "href": "/zh/personality/enneagram/type-3/instincts/social",
-          "label": "instinctual_subtype:type-3/social",
+          "label": "九型人格3号社交本能亚型",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-3/social"
         },
         {
           "href": "/zh/personality/enneagram/type-3/instincts/one-to-one",
-          "label": "instinctual_subtype:type-3/one-to-one",
+          "label": "九型人格3号一对一本能亚型",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-3/one-to-one"
         }
@@ -210,7 +210,7 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "记录一项任务开始前，谁定义了“做得好”、什么结果被优先看见、换了受众后哪些表达发生变化。第三型假设关注反复出现的取向，但不能从忙碌、精干、升职或表达流畅直接推断人格动机。",
+          "body_md": "记录一项任务开始前，谁定义了“做得好”、什么结果被优先看见、换了受众后哪些表达发生变化。九型人格3号（第三型）假设关注反复出现的取向，但不能从忙碌、精干、升职或表达流畅直接推断人格动机。",
           "key": "motivation_attention",
           "title": "先追踪评价标准如何进入注意力"
         },
@@ -265,14 +265,14 @@
       ],
       "seo": {
         "description": "第三型是一种传统九型观察假设：注意力可能反复回到可见成果、被认可的价值，以及如何适配当前情境的评价标准。完成目标本身不能证明动机；岗位责任、生计压力、训练、竞赛和资源限制都可能产生相同行为。",
-        "title": "第三型：从目标、认可与情境适配提出可修正假设"
+        "title": "九型人格3号（第三型）：从目标、认可与情境适配提出可修正假设"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/type-3",
       "source_hash": "35cf569d1d770c365462ee50b230983c9c60bb0e19666fde3dc8d57a6246fba4",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "第三型是一种传统九型观察假设：注意力可能反复回到可见成果、被认可的价值，以及如何适配当前情境的评价标准。完成目标本身不能证明动机；岗位责任、生计压力、训练、竞赛和资源限制都可能产生相同行为。",
-      "title": "第三型：从目标、认可与情境适配提出可修正假设"
+      "summary": "九型人格3号（第三型）是一种传统九型观察假设：注意力可能反复回到可见成果、被认可的价值，以及如何适配当前情境的评价标准。完成目标本身不能证明动机；岗位责任、生计压力、训练、竞赛和资源限制都可能产生相同行为。",
+      "title": "九型人格3号（第三型）：从目标、认可与情境适配提出可修正假设"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -369,5 +369,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "c7f8b5b39810d592832eb4e9a8421ed07439fc878a16da49e6b72e945daaeb92"
+  "source_content_sha256": "56ed56e8db85de4dc7c69828c4a5ce967a05c34bbe7bbb2b0c2a0353378b0c74"
 }

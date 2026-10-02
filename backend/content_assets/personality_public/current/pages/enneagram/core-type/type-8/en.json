@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-8",
@@ -53,6 +53,13 @@
               "riso_hudson_1999_wisdom",
               "hook_2021_systematic_review"
             ]
+          },
+          {
+            "claim_id": "claim.nickname.practitioner_label",
+            "limitation": "Practitioner naming only; not independent psychometric validation, a diagnosis, or an MBTI identity.",
+            "source_ids": [
+              "enneagram_institute_type_eight"
+            ]
           }
         ],
         "limitations": [
@@ -103,6 +110,20 @@
             "source_type": "peer_reviewed_research",
             "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
             "year": 2013
+          },
+          {
+            "accessed_at": "2026-10-02",
+            "author_or_organization": "The Enneagram Institute",
+            "claim_ids": [
+              "claim.nickname.practitioner_label"
+            ],
+            "doi": null,
+            "id": "enneagram_institute_type_eight",
+            "limitation": "Practitioner naming only; not independent psychometric validation, a diagnosis, or an MBTI identity.",
+            "public_url": "https://www.enneagraminstitute.com/type-8/",
+            "source_type": "other_public_source",
+            "title": "Enneagram Type 8: The Challenger",
+            "year": null
           }
         ]
       },
@@ -133,43 +154,43 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/centers/gut",
-          "label": "center:gut",
+          "label": "Gut center",
           "relationship": "center_membership",
           "target_identity_key": "center:gut"
         },
         {
           "href": "/en/personality/enneagram/wings/8w7",
-          "label": "wing:8w7",
+          "label": "8w7 wing",
           "relationship": "wing_variant",
           "target_identity_key": "wing:8w7"
         },
         {
           "href": "/en/personality/enneagram/wings/8w9",
-          "label": "wing:8w9",
+          "label": "8w9 wing",
           "relationship": "wing_variant",
           "target_identity_key": "wing:8w9"
         },
         {
           "href": "/en/personality/enneagram/type-8/instincts/self-preservation",
-          "label": "instinctual_subtype:type-8/self-preservation",
+          "label": "Type 8 self preservation subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-8/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-8/instincts/social",
-          "label": "instinctual_subtype:type-8/social",
+          "label": "Type 8 social subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-8/social"
         },
         {
           "href": "/en/personality/enneagram/type-8/instincts/one-to-one",
-          "label": "instinctual_subtype:type-8/one-to-one",
+          "label": "Type 8 one to one subtype",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-8/one-to-one"
         }
@@ -210,7 +231,7 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "Track which situations trigger direct intervention, what loss of autonomy is anticipated, and whether strength is used to protect choice or to avoid relying on others. Keep the observations tied to events and consequences.",
+          "body_md": "Track which situations trigger direct intervention, what loss of autonomy is anticipated, and whether strength is used to protect choice or to avoid relying on others. Keep the observations tied to events and consequences.\n\nIn Enneagram writing, Type 8 is often called “The Challenger”. This is a practitioner nickname, not a diagnosis, an MBTI type, or validation of a personal result. See [Enneagram Institute Type 8](https://www.enneagraminstitute.com/type-8/) for this naming convention.",
           "key": "motivation_attention",
           "title": "Observe where control and vulnerability enter attention"
         },
@@ -265,14 +286,14 @@
       ],
       "seo": {
         "description": "Type Eight is a traditional Enneagram hypothesis about attention returning to autonomy, direct impact, protection, control, vulnerability, and clear boundaries. Assertiveness or leadership does not establish motive because authority, crisis duty, advocacy, real danger, discrimination, culture, training, and unequal access to power may require similar behavior.",
-        "title": "Type Eight: autonomy, direct impact, and a revisable protection hypothesis"
+        "title": "Enneagram Type 8 (The Challenger): Boundaries and Autonomy"
       },
       "sitemap_eligible": true,
       "slug": "enneagram/type-8",
       "source_hash": "58f58838915538a83f874289339db5efb0e6e2243a67d268c44e3f5ba60810f2",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Type Eight is a traditional Enneagram hypothesis about attention returning to autonomy, direct impact, protection, control, vulnerability, and clear boundaries. Assertiveness or leadership does not establish motive because authority, crisis duty, advocacy, real danger, discrimination, culture, training, and unequal access to power may require similar behavior.",
-      "title": "Type Eight: autonomy, direct impact, and a revisable protection hypothesis"
+      "summary": "Type Eight is a traditional Enneagram hypothesis about attention returning to autonomy, direct impact, protection, control, vulnerability, and clear boundaries. Assertiveness or leadership does not establish motive because authority, crisis duty, advocacy, real danger, discrimination, culture, training, and unequal access to power may require similar behavior. In Enneagram writing, Type 8 is often called “The Challenger”. This is a practitioner nickname, not a diagnosis, an MBTI type, or validation of a personal result.",
+      "title": "Enneagram Type 8: autonomy, direct impact, and a revisable protection hypothesis"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -369,5 +390,5 @@
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "2564ab07a7ae7cacd0777fe6e786fa51502130f718ad665802adaa28c1469b3b"
+  "source_content_sha256": "6424e34b66d07929654cb0d6353b9b7abd51aba2e0ef2fe2c002cfbdd0d659f2"
 }
