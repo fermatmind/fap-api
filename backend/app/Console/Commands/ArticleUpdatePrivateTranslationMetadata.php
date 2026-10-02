@@ -220,7 +220,7 @@ final class ArticleUpdatePrivateTranslationMetadata extends Command
         }
         $w = $t->workingRevision;
         if ($w === null || (int) $w->org_id !== 0 || (int) $w->source_article_id !== (int) $s->id
-            || $w->revision_status !== 'machine_draft' || $w->reviewed_by !== null || $w->reviewed_at !== null
+            || ! in_array($w->revision_status, ['machine_draft', 'human_review'], true) || $w->reviewed_by !== null || $w->reviewed_at !== null
             || $w->approved_at !== null || $w->published_at !== null
             || ($w->authority_metadata_json['draft_origin'] ?? null) !== 'operator_supplied_ai_draft') {
             throw new RuntimeException('unreviewed_ai_draft_required');

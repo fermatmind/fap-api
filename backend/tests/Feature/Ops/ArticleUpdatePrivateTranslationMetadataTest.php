@@ -91,12 +91,35 @@ final class ArticleUpdatePrivateTranslationMetadataTest extends TestCase
         }
     }
 
+    public function test_queued_unreviewed_revision_metadata_update_preserves_revision_and_review_state(): void
+    {
+        [$s, $t, $p] = $this->fixture();
+        $t->workingRevision->forceFill(['revision_status' => 'human_review'])->saveQuietly();
+        $p['target_snapshot_hash'] = ArticleForkPrivateTranslationLinks::targetHash($s->fresh());
+        $history = ArticleSourceTargetSnapshot::sourceRevisions($t->fresh());
+        $source = ArticleForkPrivateTranslationLinks::sourceHash($s);
+
+        $this->assertSame(0, $this->runCommand($p), Artisan::output());
+        $this->assertSame(0, AuditLog::count());
+        $this->assertSame(0, $this->runCommand($p, true), Artisan::output());
+        $this->assertSame($history, ArticleSourceTargetSnapshot::sourceRevisions($t->fresh()));
+        $this->assertSame($source, ArticleForkPrivateTranslationLinks::sourceHash($s->fresh()));
+        $this->assertSame('human_review', $t->fresh()->workingRevision->revision_status);
+        $this->assertNull($t->fresh()->workingRevision->reviewed_at);
+        $this->assertNull($t->fresh()->published_revision_id);
+        $this->assertFalse(AuditLog::firstOrFail()->meta_json['human_review_completed']);
+    }
+
     public function test_public_reviewed_cross_tenant_and_unverified_media_are_rejected_with_current_locks(): void
     {
         [$s, $t, $p] = $this->fixture();
         $mutations = [
             fn () => $t->forceFill(['is_public' => true])->saveQuietly(),
             fn () => $t->workingRevision->forceFill(['reviewed_at' => now()])->saveQuietly(),
+            fn () => $t->workingRevision->forceFill(['revision_status' => 'approved'])->saveQuietly(),
+            fn () => $t->workingRevision->forceFill(['revision_status' => 'published'])->saveQuietly(),
+            fn () => $t->workingRevision->forceFill(['reviewed_by' => 1])->saveQuietly(),
+            fn () => $t->workingRevision->forceFill(['approved_at' => now()])->saveQuietly(),
             fn () => MediaAsset::withoutGlobalScopes()->whereKey($p['media_asset_id'])->update(['org_id' => 9]),
             fn () => MediaVariant::where('media_asset_id', $p['media_asset_id'])->update(['cdn_status' => 'not_verified']),
             fn () => ArticleTag::whereKey($p['tag_ids'][0])->update(['name' => '中文标签']),
