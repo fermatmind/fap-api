@@ -10,11 +10,13 @@ use App\Services\SeoCouncil\Platform12\Platform12DailyScheduler;
 use App\Services\SeoCouncil\Platform12\Platform12EvidenceReader;
 use App\Services\SeoCouncil\Platform12\Platform12FrozenMission;
 use App\Services\SeoCouncil\Platform12\Platform12RuntimeControl;
+use App\Services\SeoCouncil\Platform12\Platform12SchedulerStore;
 use App\Services\SeoCouncil\Platform12\Platform12SourceCheck;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Sleep;
 use Tests\TestCase;
 
 final class SeoPlatform12A08DailyWiringTest extends TestCase
@@ -41,6 +43,7 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
 
     protected function tearDown(): void
     {
+        Sleep::fake(false);
         CarbonImmutable::setTestNow();
         \Carbon\Carbon::setTestNow();
         DB::purge('seo_intel');
@@ -171,6 +174,54 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
         } finally {
             unlink($revision);
         }
+    }
+
+    public function test_controlled_m2_waits_for_natural_lease_without_repeating_a_mission(): void
+    {
+        $this->startAtSlot();
+        $reader = $this->fixtureReader();
+        $store = app(Platform12SchedulerStore::class);
+        $owner = str_repeat('c', 48);
+        $lease = $store->acquire('platform12:daily:serial', $owner, 180);
+        Sleep::fake();
+        Sleep::whenFakingSleep(function () use ($store, $owner, $lease): void {
+            $store->release('platform12:daily:serial', $owner, $lease['fencing_token']);
+        });
+        $result = app(Platform12DailyScheduler::class)->tick(Platform12DailyMissionSet::IDS[1]);
+        $this->assertSame('TERMINAL_COMMITTED', $result['status'], json_encode($result));
+        $this->assertTrue($result['terminal_committed']);
+        Sleep::assertSleptTimes(1);
+        $this->assertSame(1, $reader->reads);
+        $this->assertSame(1, DB::connection('seo_intel')->table('seo_council_run_receipts')->count());
+        $this->assertSame('ACCEPTANCE_ALREADY_RECORDED', app(Platform12DailyScheduler::class)->tick(Platform12DailyMissionSet::IDS[1])['status']);
+    }
+
+    public function test_controlled_lease_wait_is_bounded_and_natural_ticks_never_wait(): void
+    {
+        $this->startAtSlot();
+        $reader = $this->fixtureReader();
+        app(Platform12SchedulerStore::class)->acquire('platform12:daily:serial', str_repeat('c', 48), 180);
+        Sleep::fake();
+        $scheduler = app(Platform12DailyScheduler::class);
+        $this->assertSame('LOCK_HELD', $scheduler->tick()['status']);
+        Sleep::assertSleptTimes(0);
+        $this->assertSame('LOCK_HELD', $scheduler->tick(Platform12DailyMissionSet::IDS[1])['status']);
+        Sleep::assertSleptTimes(40);
+        $this->assertSame(0, $reader->reads);
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_council_schedule_deliveries')->count());
+    }
+
+    public function test_operator_change_during_lease_wait_prevents_controlled_reservation(): void
+    {
+        $this->startAtSlot();
+        $reader = $this->fixtureReader();
+        app(Platform12SchedulerStore::class)->acquire('platform12:daily:serial', str_repeat('c', 48), 180);
+        Sleep::fake();
+        Sleep::whenFakingSleep(fn () => app(Platform12RuntimeControl::class)->change(true));
+        $this->assertSame('PAUSED_BEFORE_RESERVATION', app(Platform12DailyScheduler::class)->tick(Platform12DailyMissionSet::IDS[1])['status']);
+        Sleep::assertSleptTimes(1);
+        $this->assertSame(0, $reader->reads);
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_council_schedule_deliveries')->count());
     }
 
     public function test_transaction_failure_recovers_frozen_input_once_without_partial_audit(): void

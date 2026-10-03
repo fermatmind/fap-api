@@ -12,6 +12,7 @@ use App\Services\SeoCouncil\Platform12\Notification\Platform12DailyNotifications
 use App\Services\SeoCouncil\SeoCouncilOrchestrator;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Sleep;
 use Throwable;
 
 final readonly class Platform12DailyScheduler
@@ -46,6 +47,17 @@ final readonly class Platform12DailyScheduler
         }
         $owner = bin2hex(random_bytes(24));
         $lease = $this->store->acquire(self::LEASE, $owner, 180);
+        // Wait only before reservation. This never repeats a Mission, steals a
+        // live fence or retries a terminal failure; natural ticks stay nonblocking.
+        for ($wait = 0; $acceptanceMission !== null && ! $lease['acquired']
+            && $lease['status'] === 'LOCK_HELD' && $wait < 40; $wait++) {
+            Sleep::usleep(250_000);
+            if (! $this->sameGeneration($state)
+                || ! $this->control->allowsMission($acceptanceMission, true, $state['generation'])) {
+                return $this->result('PAUSED_BEFORE_RESERVATION');
+            }
+            $lease = $this->store->acquire(self::LEASE, $owner, 180);
+        }
         if (! $lease['acquired']) {
             return $this->result($lease['status']);
         }

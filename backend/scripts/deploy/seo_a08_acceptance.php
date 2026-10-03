@@ -78,9 +78,19 @@ try {
         throw new RuntimeException('CONTROLLED_PHASE_ALREADY_COMPLETE');
     }
     $exit = Artisan::call('seo:council-scheduled', ['--acceptance' => $id, '--json' => true]);
-    $result = json_decode(trim(Artisan::output()), true, 32, JSON_THROW_ON_ERROR);
+    $result = json_decode(trim(Artisan::output()), true, 32);
+    $result = is_array($result) ? $result : [];
+    $observedGeneration = $control->status()['generation'];
     if ($exit !== 0 || ($result['terminal_committed'] ?? null) !== true
-        || $control->status()['generation'] !== $state['generation']) {
+        || $observedGeneration !== $state['generation']) {
+        // Emit only bounded control diagnostics, never the raw command output,
+        // exception, evidence payload or environment. Keep every hold fail-closed.
+        $status = $result['status'] ?? null;
+        fwrite(STDERR, json_encode(['status' => 'A08_CONTROLLED_TERMINAL_HOLD',
+            'command_exit' => $exit,
+            'command_status' => is_string($status) && preg_match('/^[A-Z_]{1,64}$/D', $status) === 1 ? $status : 'INVALID',
+            'terminal_committed' => ($result['terminal_committed'] ?? null) === true,
+            'generation_unchanged' => $observedGeneration === $state['generation']], JSON_THROW_ON_ERROR)."\n");
         throw new RuntimeException('A08_CONTROLLED_TERMINAL_HOLD');
     }
     if ($index === 2 && ($result['mission_verdict'] ?? null) !== 'READY') {
