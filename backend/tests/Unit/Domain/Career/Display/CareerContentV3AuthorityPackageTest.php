@@ -220,6 +220,7 @@ final class CareerContentV3AuthorityPackageTest extends TestCase
             self::write($root.'/careers/actors/en.json', $page);
             $this->refreshManifest($root);
             self::assertTrue($reader->hasPublicBody('actors', 'en'));
+            self::assertSame($page['subject']['name'], $reader->subjectName('actors', 'en'));
             try {
                 CareerContentV3Contract::assert($page);
                 self::fail('The invalid display must still fail full publication validation.');

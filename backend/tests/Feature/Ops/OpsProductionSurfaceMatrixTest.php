@@ -15,7 +15,9 @@ final class OpsProductionSurfaceMatrixTest extends TestCase
         $pageFiles = glob(app_path('Filament/Ops/Pages/*.php')) ?: [];
 
         $this->assertCount(33, $resourceFiles, 'The production Resource inventory changed.');
-        $this->assertCount(35, $pageFiles, 'The production Page inventory changed.');
+        $this->assertCount(36, $pageFiles, 'The production Page inventory changed.');
+
+        $this->assertContains(app_path('Filament/Ops/Pages/AccessTestStatisticsPage.php'), $pageFiles);
 
         foreach ($resourceFiles as $resourceFile) {
             $source = (string) file_get_contents($resourceFile);

@@ -67,6 +67,15 @@ final class SeoOpportunityCardGeneratorTest extends TestCase
         return [[0, 0], [1, 1], [5, 5], [7, 5]];
     }
 
+    public function test_missing_source_tables_hold_natural_planning_without_schema_probes(): void
+    {
+        DB::connection('seo_intel')->getSchemaBuilder()->drop('seo_gsc_daily');
+        $result = $this->record();
+        $this->assertSame(['source_schema_unavailable' => 1], $result['generation_summary']['hold_reasons']);
+        $this->assertSame(0, $result['generation_summary']['created']);
+        $this->assertSame(0, $this->table('seo_decision_cards')->count());
+    }
+
     public function test_natural_discovery_finishes_before_writer_transaction(): void
     {
         $this->seedPage(1);

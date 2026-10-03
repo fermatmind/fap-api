@@ -55,7 +55,7 @@ final class CareerCurrentIdentity
 
     public function name(string $slug, string $locale): ?string
     {
-        return $this->definition($slug) === null ? null : $this->reader->page($slug, $locale)['subject']['name'];
+        return $this->definition($slug) === null ? null : $this->reader->subjectName($slug, $locale);
     }
 
     /** Apply Current identity to public transports; never change stored compatibility rows. */
@@ -154,7 +154,7 @@ final class CareerCurrentIdentity
             }
             $terms[] = $alias;
             foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
-                $terms[] = $this->reader->page($alias, $locale)['subject']['name'];
+                $terms[] = $this->reader->subjectName($alias, $locale);
             }
         }
 

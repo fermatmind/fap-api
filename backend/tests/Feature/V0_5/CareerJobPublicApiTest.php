@@ -590,19 +590,27 @@ final class CareerJobPublicApiTest extends TestCase
 
     public function test_seo_endpoint_uses_each_locale_file_without_database_metadata(): void
     {
-        foreach (['en', 'zh-CN'] as $locale) {
-            $page = app(\App\Domain\Career\Display\CareerPageProjector::class)->read('actors', $locale);
-            $segment = $locale === 'en' ? 'en' : 'zh';
-            $this->getJson('/api/v0.5/career-jobs/actors/seo?locale='.$locale)
-                ->assertOk()
-                ->assertJsonPath('meta.title', $page['subject']['name'])
-                ->assertJsonPath('meta.description', $page['seo']['description']['text'])
-                ->assertJsonPath('meta.canonical', '/'.$segment.'/career/jobs/actors')
-                ->assertJsonPath('meta.alternates.en', '/en/career/jobs/actors')
-                ->assertJsonPath('meta.alternates.zh-CN', '/zh/career/jobs/actors')
-                ->assertJsonPath('meta.robots', 'index,follow')
-                ->assertJsonPath('seo_surface_v1.indexability_state', 'indexable')
-                ->assertJsonPath('jsonld', null);
+        foreach (['actors' => ['en' => false, 'zh-CN' => true], 'accountants-and-auditors' => ['en' => true, 'zh-CN' => true]] as $slug => $eligibility) {
+            foreach (['en', 'zh-CN'] as $locale) {
+                $indexable = $eligibility[$locale];
+                $alternates = [];
+                foreach ($eligibility as $alternateLocale => $qualified) {
+                    if ($indexable && $qualified) {
+                        $alternates[$alternateLocale] = '/'.($alternateLocale === 'en' ? 'en' : 'zh').'/career/jobs/'.$slug;
+                    }
+                }
+                $page = app(\App\Domain\Career\Display\CareerPageProjector::class)->read($slug, $locale);
+                $segment = $locale === 'en' ? 'en' : 'zh';
+                $this->getJson('/api/v0.5/career-jobs/'.$slug.'/seo?locale='.$locale)
+                    ->assertOk()
+                    ->assertJsonPath('meta.title', $page['subject']['name'])
+                    ->assertJsonPath('meta.description', $page['seo']['description']['text'])
+                    ->assertJsonPath('meta.canonical', '/'.$segment.'/career/jobs/'.$slug)
+                    ->assertJsonPath('meta.alternates', $alternates)
+                    ->assertJsonPath('meta.robots', $indexable ? 'index,follow' : 'noindex,follow')
+                    ->assertJsonPath('seo_surface_v1.indexability_state', $indexable ? 'indexable' : 'noindex')
+                    ->assertJsonPath('jsonld', null);
+            }
         }
     }
 

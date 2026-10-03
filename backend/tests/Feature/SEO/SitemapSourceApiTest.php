@@ -28,7 +28,16 @@ class SitemapSourceApiTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->installCareerDetailCacheFixture();
+        // Synthetic body-qualified identities isolate sitemap publication/host contracts
+        // from installed Current placeholder pages; cache hydration still uses the fixture.
+        $this->app->instance(\App\Domain\Career\Display\CareerContentV3CanonicalReader::class,
+            new class(app(\App\Domain\Career\Compilation\CareerContentV3Projector::class)) extends \Tests\Support\DynamicCareerContentV3CanonicalReader
+            {
+                public function hasPublicBody(string $slug, string $locale, ?string $backendRoot = null): bool
+                {
+                    return str_starts_with($slug, 'fixture-') || parent::hasPublicBody($slug, $locale, $backendRoot);
+                }
+            });
 
         Cache::flush();
         File::deleteDirectory(storage_path('app/private/career_generation_authority'));

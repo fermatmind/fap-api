@@ -24,7 +24,8 @@ final class SeoPlatform10ProductionCloseoutContractTest extends TestCase
         $this->assertStringContainsString("task('seo:platform-10-public-closeout'", $deployer);
         $this->assertStringContainsString("after('guard:no-pending-seo-intel-migrations', 'seo:council-runtime-db-access')", $deployer);
         $this->assertStringContainsString("after('seo:council-runtime-db-access', 'seo:platform-10-material-backfill')", $deployer);
-        $this->assertStringContainsString("after('seo:url-truth-reconciliation-receipt', 'seo:platform-10-public-closeout')", $deployer);
+        $this->assertStringContainsString("after('seo:url-truth-reconciliation-receipt', 'seo:url-truth-controlled-reconcile')", $deployer);
+        $this->assertStringContainsString("after('seo:url-truth-controlled-reconcile', 'seo:platform-10-public-closeout')", $deployer);
         $this->assertStringContainsString('idempotent_rerun', $deployer);
         $this->assertStringContainsString('projection_digest', $deployer);
         $this->assertStringContainsString('unknown_legacy_action', $deployer);
@@ -33,7 +34,9 @@ final class SeoPlatform10ProductionCloseoutContractTest extends TestCase
         $this->assertSame('measurement_hold_no_write', $operation['staging_disabled_policy']);
         $this->assertStringContainsString('dry_run_rc=$?', $deployer);
         $this->assertStringContainsString('test "$dry_run_rc" = 0', $deployer);
-        $this->assertSame(2, substr_count($deployer, 'deploySeoPlatform10SkipsDisabledStaging(') - 1);
+        $this->assertStringContainsString("deploySeoPlatform10SkipsDisabledStaging('material_backfill')", $deployer);
+        $this->assertStringContainsString("deploySeoPlatform10SkipsDisabledStaging('public_closeout')", $deployer);
+        $this->assertStringContainsString("deploySeoPlatform10SkipsDisabledStaging('URL Truth reconciliation')", $deployer);
         $this->assertStringContainsString("currentHost()->getAlias() !== 'staging'", $deployer);
         $this->assertStringContainsString('seo-platform-10-staging-measurement-hold.v1', $deployer);
         $this->assertStringContainsString("'writes_committed' => false", $deployer);

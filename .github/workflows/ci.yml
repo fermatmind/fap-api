@@ -649,6 +649,8 @@ jobs:
         run: composer install --no-interaction --prefer-dist --no-progress
       - name: Verify contracts, fresh SQLite schema, boundaries, and closeout
         working-directory: backend
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           php scripts/seo/export_seo_council_contracts.php --check
@@ -670,7 +672,9 @@ jobs:
           touch "$RUNNER_TEMP/seo-council.sqlite"
           php artisan migrate --database=seo_intel --path=database/migrations/seo_intel --force --no-interaction --ansi
           rm -f "$APP_CONFIG_CACHE"
-          php artisan test --compact --log-junit="$RUNNER_TEMP/a08-scoped-junit.xml" \
+          node ../.github/trunk/seo-platform-12a08-evidence-download.mjs --nightly-revalidation-paths "$RUNNER_TEMP/a08-nightly-paths.txt" "$RUNNER_TEMP/a08-nightly-source.json"
+          mapfile -t a08_nightly_paths < "$RUNNER_TEMP/a08-nightly-paths.txt"
+          php artisan test --compact --log-junit="$RUNNER_TEMP/a08-scoped-junit.xml" "${a08_nightly_paths[@]}" \
             tests/Feature/SeoIntel/SeoPlatform11D*.php \
             tests/Feature/SeoIntel/SeoPlatform11E*.php \
             tests/Feature/SeoIntel/SeoPlatform11F*.php \
@@ -971,7 +975,7 @@ jobs:
           retention-days: 90
 
       - name: Bind completed A08 scoped test results
-        run: node .github/trunk/seo-platform-12a08-activation.mjs scoped-receipt "$RUNNER_TEMP/a08-scoped-junit.xml" "$GITHUB_SHA" a08-scoped-checks.json
+        run: node .github/trunk/seo-platform-12a08-activation.mjs scoped-receipt "$RUNNER_TEMP/a08-scoped-junit.xml" "$GITHUB_SHA" a08-scoped-checks.json "$RUNNER_TEMP/a08-nightly-source.json"
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: a08-scoped-checks-${{ github.sha }}

@@ -134,6 +134,10 @@ export function scopedReceipt(junit, sha, root = process.cwd()) {
 if (import.meta.url === `file://${process.argv[1]}`) {
   const [cmd, input, sha, output] = process.argv.slice(2);
   if (cmd === 'fingerprint') process.stdout.write(JSON.stringify(fingerprint(input))+'\n');
-  else if (cmd === 'scoped-receipt') writeFileSync(output, JSON.stringify(scopedReceipt(readFileSync(input, 'utf8'), sha))+'\n');
+  else if (cmd === 'scoped-receipt') {
+    const receipt = scopedReceipt(readFileSync(input, 'utf8'), sha);
+    if (process.argv[6]) receipt.nightly_source = JSON.parse(readFileSync(process.argv[6], 'utf8'));
+    writeFileSync(output, JSON.stringify(receipt)+'\n');
+  }
   else throw new Error('SEO_COUNCIL_A08_COMMAND_DENIED');
 }

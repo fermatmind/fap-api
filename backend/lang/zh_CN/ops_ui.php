@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 return [
+    'Production SHA:' => '生产版本 SHA：',
+    'Readback SHA:' => '读回版本 SHA：',
     'Access model' => '访问模型',
     'Action' => '操作',
     'Actions' => '操作',

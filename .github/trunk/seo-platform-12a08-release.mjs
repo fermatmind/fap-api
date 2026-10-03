@@ -175,6 +175,20 @@ export function selectNightlyArtifact(artifacts, run) {
   if (matching.length !== 1 || matching[0].expired || !/^sha256:[a-f0-9]{64}$/.test(matching[0].digest ?? '')) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
   return matching[0];
 }
+// Revalidate only the failures in the same immutable Nightly evidence used at closeout.
+// This is a temporary selection from evidence, not a permanent expansion of scoped CI.
+export function nightlyRevalidationPaths(run, jobs, evidence, availablePaths) {
+  const failed = jobs.filter(job => job.conclusion === 'failure' && job.name !== 'Final failure-domain receipt');
+  if (failed.some(job => job.name !== 'Full PHPUnit regression and performance contracts')) throw new Error('NIGHTLY_HIGH_RISK_FOCUSED_REVALIDATION_REQUIRED');
+  const failures = evidence.junit !== undefined ? parseJUnitNightlyFailures(evidence.junit)
+    : failed.length ? parseLegacyNightlyFailures(evidence.log) : [];
+  if ((!failed.length && failures.length) || (failed.length && !failures.length)) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+  return [...new Set(failures.map(item => {
+    const matches = availablePaths.filter(path => path.endsWith(`/${item.focused_test}.php`));
+    if (matches.length !== 1) throw new Error('NIGHTLY_REVALIDATION_PATH_HOLD');
+    return matches[0];
+  }))].sort();
+}
 export function assessNightly(run, jobs, evidence, checks) {
   const failed = jobs.filter(job=>job.conclusion==='failure' && job.name !== 'Final failure-domain receipt');
   const structured = typeof evidence === 'object' && evidence !== null ? evidence : {log:evidence};

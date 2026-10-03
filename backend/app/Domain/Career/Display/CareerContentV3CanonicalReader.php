@@ -19,6 +19,9 @@ class CareerContentV3CanonicalReader
     /** @var array<string,bool> Request-local, source-bound eligibility; never a publication pointer. */
     private array $publicBodies = [];
 
+    /** @var array<string,string> Request-local names from hash-verified source envelopes. */
+    private array $subjectNames = [];
+
     public function __construct(
         private readonly CareerContentV3AuthorityPackage $package,
         private readonly ?string $backendRoot = null,
@@ -52,6 +55,22 @@ class CareerContentV3CanonicalReader
         }
 
         return CareerAuthoringStructure::publicContent($this->pages[$key]);
+    }
+
+    /** Identity transport does not need body/display resolution. The file hash still binds the subject. */
+    public function subjectName(string $slug, string $locale, ?string $backendRoot = null): string
+    {
+        $slug = strtolower(trim($slug));
+        $locale = $this->locale($locale);
+        $index = $this->authority($backendRoot);
+        $key = $index['root'].'|'.$slug.'|'.$locale;
+        if (! isset($this->subjectNames[$key])) {
+            $source = $this->package->pageFromIndexForRuntime($index, $slug, $locale);
+            CareerContentV3Contract::assertEnvelope($source);
+            $this->subjectNames[$key] = $source['subject']['name'];
+        }
+
+        return $this->subjectNames[$key];
     }
 
     /** @return array<string,mixed> */
@@ -223,12 +242,14 @@ class CareerContentV3CanonicalReader
     {
         $this->indexes = [];
         $this->pages = [];
+        $this->subjectNames = [];
         $this->publicBodies = [];
     }
 
     public function forgetLoadedPages(): void
     {
         $this->pages = [];
+        $this->subjectNames = [];
     }
 
     private function locale(string $locale): string

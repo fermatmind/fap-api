@@ -32,14 +32,6 @@ final class SeoOpportunityCardGenerator
             'hold_reasons' => [], 'cap_unprocessed_pages' => 0, 'discovery_limited' => false,
             'count_unit' => 'candidates_are_signals;validation_and_cap_are_pages;writes_are_cards',
         ];
-        // Missing source schemas are an explicit HOLD, including installations with historical cards only.
-        foreach (['seo_gsc_daily', 'seo_gsc_sync_runs', 'seo_urls', 'seo_url_entities'] as $table) {
-            if (! $db->getSchemaBuilder()->hasTable($table)) {
-                $summary['hold_reasons']['source_schema_unavailable'] = 1;
-
-                return $summary;
-            }
-        }
         if ($discovery === null) {
             $summary['hold_reasons']['source_schema_unavailable'] = 1;
 

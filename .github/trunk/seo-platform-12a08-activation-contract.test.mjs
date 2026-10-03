@@ -100,7 +100,7 @@ test('existing workflows publish completed scoped evidence without runtime opera
  assert.match(nightly,/steps\.full-tests\.outcome != 'success'/);
  const evidence=readFileSync(new URL('./seo-platform-12a08-evidence-download.mjs',import.meta.url),'utf8');
  assert.match(evidence,/actions\/jobs\/\$\{fullJob\.id\}\/logs/);
- assert.match(evidence,/\['api','--allow-escape-sequences',`repos\/\$\{repo\}\/actions\/jobs/);
+ assert.match(evidence,/\['api',\s*'--allow-escape-sequences',\s*`repos\/\$\{repo\}\/actions\/jobs/);
  assert.doesNotMatch(evidence,/--log-failed/);
  assert.match(evidence,/nightly\.yml\/runs\?status=completed&per_page=100/);
 });
@@ -357,4 +357,22 @@ test('Current fingerprints retain exact semantics above the former 128 MiB packa
   writeFileSync(`${root}/${path}`,JSON.stringify(value));git('add','.');git('commit','-qm','change internal authority');
   assert.notEqual(fingerprint(root).public,result.public);
  } finally {rmSync(root,{recursive:true,force:true});}
+});
+
+test('Nightly revalidation selects actual failed classes and preserves domain holds', async () => {
+ const {nightlyRevalidationPaths}=await import('./seo-platform-12a08-release.mjs');
+ const run={id:1,head_sha:'a'.repeat(40)};
+ const jobs=[{name:'Full PHPUnit regression and performance contracts',conclusion:'failure'}];
+ const evidence={junit:'<testsuites><testcase file="tests/Architecture/PolicyTest.php"><failure>failed</failure></testcase></testsuites>'};
+ assert.deepEqual(nightlyRevalidationPaths(run,jobs,evidence,['tests/Architecture/PolicyTest.php','tests/Feature/UnrelatedTest.php']),['tests/Architecture/PolicyTest.php']);
+ assert.throws(()=>nightlyRevalidationPaths(run,jobs,evidence,[]),/PATH_HOLD/);
+ assert.throws(()=>nightlyRevalidationPaths(run,[...jobs,{name:'Security scan',conclusion:'failure'}],evidence,['tests/Architecture/PolicyTest.php']),/HIGH_RISK/);
+ assert.throws(()=>nightlyRevalidationPaths(run,[],evidence,['tests/Architecture/PolicyTest.php']),/UNKNOWN/);
+ assert.deepEqual(nightlyRevalidationPaths(run,[],{junit:'<testsuites><testcase file="tests/Feature/PassTest.php"/></testsuites>'},[]),[]);
+ const ci=readFileSync(new URL('../workflows/ci.yml',import.meta.url),'utf8');
+ assert.match(ci,/--nightly-revalidation-paths/);
+ assert.match(ci,/\$\{a08_nightly_paths\[@\]\}/);
+ const downloader=readFileSync(new URL('./seo-platform-12a08-evidence-download.mjs',import.meta.url),'utf8');
+ assert.match(downloader,/checks\?\.nightly_source/);
+ assert.match(downloader,/JSON.stringify\(loaded.source\)/);
 });

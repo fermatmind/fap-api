@@ -7,6 +7,7 @@ namespace App\Services\SeoIntel\Decision;
 use App\Services\SeoIntel\OpsDashboard\SeoOpportunityQueueReadService;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\ConnectionInterface;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
@@ -91,8 +92,20 @@ final class SeoWeeklyDecisionReceiptService
             $week = $slot->format('o-\WW');
             if (! $this->db()->table('seo_weekly_decision_capability_receipts')->where('iso_week', $week)->exists()) {
                 $sourceTables = ['seo_gsc_daily', 'seo_gsc_sync_runs', 'seo_urls', 'seo_url_entities'];
-                if (collect($sourceTables)->every(fn (string $table): bool => $this->db()->getSchemaBuilder()->hasTable($table))) {
+                try {
+                    // Read required sources before opening the writer transaction. Missing
+                    // installations hold planning; connection and permission failures still fail.
+                    foreach ($sourceTables as $table) {
+                        $this->db()->table($table)->limit(0)->get();
+                    }
                     $discovery = (new SeoOpportunityQueueReadService($this->connection))->planningDiscovery();
+                } catch (QueryException $error) {
+                    if (($error->errorInfo[0] ?? null) !== '42S02'
+                        && ! (($error->errorInfo[0] ?? null) === 'HY000'
+                            && ($error->errorInfo[1] ?? null) === 1
+                            && str_contains($error->getMessage(), 'no such table:'))) {
+                        throw $error;
+                    }
                 }
             }
             $this->assertWithinDeadline($deadline);

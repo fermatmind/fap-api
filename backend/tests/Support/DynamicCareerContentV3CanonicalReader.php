@@ -8,7 +8,7 @@ use App\Domain\Career\Compilation\CareerContentV3Projector;
 use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 
 /** Test-only reader for legacy surface tests that do not install a manifest-bound compatibility row. */
-final class DynamicCareerContentV3CanonicalReader extends CareerContentV3CanonicalReader
+class DynamicCareerContentV3CanonicalReader extends CareerContentV3CanonicalReader
 {
     public function __construct(private readonly CareerContentV3Projector $projector)
     {
