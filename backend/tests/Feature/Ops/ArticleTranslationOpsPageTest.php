@@ -240,6 +240,59 @@ final class ArticleTranslationOpsPageTest extends TestCase
         $this->assertStringNotContainsString('references/citations presence check failed', (string) $publishAction['reason']);
     }
 
+    public function test_console_publishes_approved_replacement_without_changing_source_or_prior_public_version(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+        $this->createOrganization();
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $group = $this->createPublishedTranslationGroup('approved-replacement');
+        $target = $group['translation'];
+        $previous = $group['translationRevision']->fresh()->getAttributes();
+        $sourceBefore = $group['source']->fresh()->getAttributes();
+        $replacement = $this->createRevision($target, [
+            'revision_number' => 2,
+            'revision_status' => ArticleTranslationRevision::STATUS_APPROVED,
+            'title' => 'Reviewed replacement title',
+            'content_md' => '## Reviewed replacement body',
+            'seo_title' => 'Reviewed replacement SEO',
+            'seo_description' => 'Reviewed replacement description',
+            'reviewed_by' => $admin->id,
+            'reviewed_at' => now(),
+            'approved_at' => now(),
+        ]);
+        $target->seoMeta->forceFill(['canonical_url' => 'https://fermatmind.com/en/articles/approved-replacement', 'robots' => 'index,follow'])->save();
+        $target->forceFill(['working_revision_id' => $replacement->id])->saveQuietly();
+        $dashboard = app(ArticleTranslationOpsService::class)->dashboard(['slug' => 'approved-replacement']);
+        $english = collect($dashboard['groups'][0]['locales'])->firstWhere('locale', 'en');
+        $action = collect($english['actions'])->firstWhere('wire_action', 'publishCurrentRevision');
+        $this->assertTrue($english['preflight']['ok'], json_encode($english['preflight']));
+        $this->assertTrue($action['enabled']);
+        $this->assertSame($previous, $group['translationRevision']->fresh()->getAttributes());
+        $this->assertSame($previous['content_md'], $target->fresh()->content_md);
+
+        Livewire::test(ArticleTranslationOpsPage::class)
+            ->call('publishCurrentRevision', 'article', (int) $target->id)
+            ->assertHasNoErrors();
+        $target = $target->fresh(['publishedRevision']);
+        $this->assertSame($replacement->id, $target->published_revision_id);
+        $this->assertSame('## Reviewed replacement body', $target->content_md);
+        $this->assertSame('Reviewed replacement SEO', $target->fresh()->seoMeta->seo_title);
+        $this->assertSame('Reviewed replacement description', $target->fresh()->seoMeta->seo_description);
+        $this->assertSame('https://fermatmind.com/en/articles/approved-replacement', $target->seoMeta->canonical_url);
+        $this->assertSame('index,follow', $target->seoMeta->robots);
+        $this->assertTrue((bool) $target->seoMeta->is_indexable);
+        $this->assertSame($sourceBefore, $group['source']->fresh()->getAttributes());
+        $this->assertSame($previous, $group['translationRevision']->fresh()->getAttributes());
+        $this->assertTrue(AuditLog::withoutGlobalScopes()->where('action', 'article_translation_published')
+            ->where('target_id', (string) $target->id)->exists());
+        $dashboard = app(ArticleTranslationOpsService::class)->dashboard(['slug' => 'approved-replacement']);
+        $english = collect($dashboard['groups'][0]['locales'])->firstWhere('locale', 'en');
+        $this->assertFalse(collect($english['actions'])->firstWhere('wire_action', 'publishCurrentRevision')['enabled']);
+    }
+
     public function test_translation_ops_service_flags_stale_translation_and_source_update_alert(): void
     {
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);

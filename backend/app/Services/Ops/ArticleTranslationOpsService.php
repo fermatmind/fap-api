@@ -507,7 +507,8 @@ final class ArticleTranslationOpsService
                 'enabled' => ContentAccess::canRelease()
                     && ! $isSource
                     && ! $isStale
-                    && $article->status !== 'published'
+                    && ($article->published_revision_id === null
+                        || (int) $article->working_revision_id !== (int) $article->published_revision_id)
                     && $article->workingRevision instanceof ArticleTranslationRevision
                     && $article->workingRevision->revision_status === ArticleTranslationRevision::STATUS_APPROVED
                     && (bool) $preflight['ok'],

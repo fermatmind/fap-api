@@ -457,6 +457,23 @@ final class ArticleTranslationWorkflowService
                 'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED,
             ])->saveQuietly();
 
+            $seoUpdates = [];
+            if (filled($revision->seo_title)) {
+                $seoUpdates['seo_title'] = (string) $revision->seo_title;
+                $seoUpdates['og_title'] = (string) $revision->seo_title;
+            }
+            if (filled($revision->seo_description)) {
+                $seoUpdates['seo_description'] = (string) $revision->seo_description;
+                $seoUpdates['og_description'] = (string) $revision->seo_description;
+            }
+            if ($seoUpdates !== []) {
+                ArticleSeoMeta::withoutGlobalScopes()
+                    ->where('org_id', (int) $locked->org_id)
+                    ->where('article_id', (int) $locked->id)
+                    ->where('locale', (string) $locked->locale)
+                    ->update($seoUpdates);
+            }
+
             $this->materialDecisions->recordPublished(
                 $locked,
                 $revision,
