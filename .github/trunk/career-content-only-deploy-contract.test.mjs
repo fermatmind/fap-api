@@ -194,6 +194,29 @@ test('synchronous repair timeout cannot become successful coverage or continue a
   assert.equal(result.coverage, null);
 });
 
+test('full Current production budget composes complete preactivation checks without narrowing mixed scopes', () => {
+  const start = workflow.indexOf('          deploy_timeout=30m', workflow.indexOf('          lkg_sha='));
+  assert.notEqual(start, -1);
+  const end = workflow.indexOf('          set +e', start);
+  const budget = workflow.slice(start, end);
+  for (const [current, competitive, council, expected] of [
+    [false, false, false, '30m'], [false, true, false, '35m'],
+    [true, false, false, '60m'], [true, true, false, '60m'],
+    [false, false, true, '60m'], [true, true, true, '60m'],
+  ]) {
+    const script = budget.replaceAll('${{ needs.policy.outputs.career_current }}', String(current));
+    const actual = execFileSync('bash', ['-c', `${script}\nprintf '%s' "$deploy_timeout"`], {
+      encoding: 'utf8',
+      env: { ...process.env, competitive_evidence: String(competitive), production_council_closeout: String(council) },
+    });
+    assert.equal(actual, expected);
+  }
+  const production = workflow.slice(start);
+  assert.match(production, /timeout --signal=TERM --kill-after=30s "\$deploy_timeout"/);
+  assert.match(production, /deploy_rc=\$\?[\s\S]*?if \[ "\$deploy_rc" -eq 0 \]; then exit 0; fi/);
+  assert.match(production, /if \[ "\$current" = "\$DEPLOY_SHA" \]; then[\s\S]*?deploy:code-only production/);
+});
+
 test('incomplete or differently bound post-repair coverage fails closed', () => {
   for (const change of [
     { contract_version: 'wrong' }, { status: 'sync_repair_incomplete' }, { coverage_status: 'incomplete' },
